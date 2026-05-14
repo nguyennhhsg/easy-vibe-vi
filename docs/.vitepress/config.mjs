@@ -2808,16 +2808,24 @@ Sitemap: ${siteUrl}/sitemap.xml
 })
 
 // === Phiên bản tiếng Việt: kế thừa cấu trúc sidebar/nav từ zh-cn ===
-// Mục tiêu: cho người Việt điều hướng được toàn bộ khóa học. Labels sidebar
-// tạm thời vẫn là tiếng Trung cho đến khi dịch sidebar (đợt sau). Nội dung
-// trang đã được dịch sang tiếng Việt qua scripts/translate-zh-to-vi.sh.
+// - Đổi mọi đường dẫn /zh-cn/ -> /vi-vn/
+// - Dịch text labels sidebar/nav sang tiếng Việt (qua sidebar-labels-zh-to-vi.json)
+import __viLabelsModule from '../../scripts/sidebar-labels-zh-to-vi.json' with { type: 'json' }
+const __viLabels = __viLabelsModule
+
 const __remapZhToVi = (s) =>
   typeof s === 'string' ? s.replace(/\/zh-cn\//g, '/vi-vn/') : s
-const __deepRemap = (val) => {
-  if (Array.isArray(val)) return val.map(__deepRemap)
+const __translateLabel = (s) =>
+  typeof s === 'string' && __viLabels[s] ? __viLabels[s] : s
+const __deepTransform = (val, translateText) => {
+  if (Array.isArray(val)) return val.map((x) => __deepTransform(x, translateText))
   if (val && typeof val === 'object') {
     const out = {}
-    for (const [k, v] of Object.entries(val)) out[k] = __deepRemap(v)
+    for (const [k, v] of Object.entries(val)) {
+      if (k === 'text' && translateText) out[k] = __translateLabel(v)
+      else if (typeof v === 'string') out[k] = __remapZhToVi(v)
+      else out[k] = __deepTransform(v, translateText)
+    }
     return out
   }
   return __remapZhToVi(val)
@@ -2826,15 +2834,15 @@ const __deepRemap = (val) => {
 const __zhTheme = config.locales['zh-cn'].themeConfig
 const __viTheme = config.locales['vi-vn'].themeConfig
 
-// Clone toàn bộ sidebar zh-cn, đổi mọi /zh-cn/ thành /vi-vn/
+// Clone sidebar zh-cn, đổi /zh-cn/ -> /vi-vn/, dịch text labels
 __viTheme.sidebar = Object.fromEntries(
   Object.entries(__zhTheme.sidebar).map(([k, v]) => [
     __remapZhToVi(k),
-    __deepRemap(v)
+    __deepTransform(v, true)
   ])
 )
 
-// Nav vi-vn: giữ labels tiếng Việt đã có, nhưng đổi links /zh-cn/ -> /vi-vn/
-__viTheme.nav = __deepRemap(__viTheme.nav)
+// Nav vi-vn: giữ labels VI đã có, chỉ đổi link /zh-cn/ -> /vi-vn/
+__viTheme.nav = __deepTransform(__viTheme.nav, false)
 
 export default config
