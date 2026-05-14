@@ -5,6 +5,13 @@
   "outputDirectory": "docs/.vitepress/dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/zh-cn/:path*",
+      "destination": "/vi-vn/:path*",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
