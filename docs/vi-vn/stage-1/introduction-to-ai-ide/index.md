@@ -1,26 +1,24 @@
-
-# 初级二：学会 AI 编程工具
-
-## 本章导读
+# Sơ cấp 2: Làm Quen Với Công Cụ Lập Trình AI
+## Giới thiệu chương
 
 <script setup>
 import { relatedArticlesMap } from '@theme/data/relatedArticles'
 
-const duration = '约 <strong>1 天</strong>，可分多次完成'
+const duration = 'Khoảng <strong>1 ngày</strong>, có thể chia thành nhiều lần'
 const relatedArticles =
-  relatedArticlesMap['zh-cn/stage-1/introduction-to-ai-ide'] ?? []
+  relatedArticlesMap['vi-vn/stage-1/introduction-to-ai-ide'] ?? []
 </script>
 
-<ChapterIntroduction :duration="duration" :tags="['本地开发环境搭建', 'IDE 与 AI IDE', '高效开发技巧']" coreOutput="1 个自创小游戏" expectedOutput="使用 Trae 产出">
+<ChapterIntroduction :duration="duration" :tags="['Thiết lập môi trường phát triển cục bộ', 'IDE và AI IDE', 'Kỹ thuật phát triển hiệu quả']" coreOutput="1 trò chơi tự sáng tạo" expectedOutput="Tạo ra bằng Trae">
 
-前面我们在 z.ai 上体验了 AI 编程，但网页版有很多限制——<strong>不能随时保存</strong>、<strong>不好管理文件</strong>、也<strong>没法做复杂项目</strong>。这一章就是帮你把开发环境搬到自己的电脑上，让你能<strong>真正独立做东西</strong>。
+Trước đây bạn đã trải nghiệm lập trình AI trên z.ai, nhưng phiên bản web có rất nhiều hạn chế — <strong>không thể lưu bất cứ lúc nào</strong>, <strong>khó quản lý tệp</strong>, và <strong>không thể làm các dự án phức tạp</strong>. Chương này sẽ giúp bạn chuyển môi trường phát triển về máy tính của mình, để bạn có thể <strong>thực sự tự làm ra sản phẩm một cách độc lập</strong>.
 
-我们会先搞清楚 <strong>IDE 和 AI IDE 到底有什么区别</strong>，为什么后者能让你<strong>效率翻倍</strong>；然后<strong>手把手教你</strong>用 Trae 在本地做一个贪吃蛇游戏，走完从安装到运行的<strong>完整流程</strong>；最后还会分享一些和 AI 对话的<strong>实用技巧</strong>，让你少走弯路。
+Chúng ta sẽ tìm hiểu rõ <strong>sự khác biệt giữa IDE và AI IDE</strong>, tại sao cái sau có thể giúp bạn <strong>tăng gấp đôi hiệu suất</strong>; sau đó <strong>hướng dẫn từng bước</strong> để bạn dùng Trae làm trò chơi rắn săn mồi trên máy cục bộ, đi qua <strong>toàn bộ quy trình</strong> từ cài đặt đến chạy thử; cuối cùng còn chia sẻ một số <strong>kỹ thuật thực dụng</strong> khi trò chuyện với AI, giúp bạn tránh đi đường vòng.
 
-学完这一章，你将会<strong>掌握和程序员相似的开发流程</strong>。
+Sau khi học xong chương này, bạn sẽ <strong>nắm vững quy trình phát triển tương tự như lập trình viên chuyên nghiệp</strong>.
 
-::: tip 💡 进阶提示
-如果你有一定的编程基础，想要提前使用更强大的工具，可以结合参考 [现代 CLI Coding 工具](../../stage-2/backend/modern-cli/) 使用命令行方式进行开发。
+::: tip 💡 Gợi ý nâng cao
+Nếu bạn có nền tảng lập trình nhất định và muốn sử dụng sớm các công cụ mạnh hơn, có thể tham khảo thêm [Công cụ CLI Coding hiện đại](../../stage-2/backend/modern-cli/) để phát triển theo phương thức dòng lệnh.
 :::
 
 </ChapterIntroduction>
@@ -28,125 +26,122 @@ const relatedArticles =
 <div style="margin: 50px 0;">
   <ClientOnly>
     <StepBar :active="0" :items="[
-      { title: '环境认知', description: '理解 IDE 与 AI IDE' },
-      { title: '本地实战', description: 'Trae 打造贪吃蛇' },
-      { title: '工具详解', description: '熟悉 IDE 界面' },
-      { title: '沟通技巧', description: '高效与 AI 对话' }
+      { title: 'Nhận thức môi trường', description: 'Hiểu về IDE và AI IDE' },
+      { title: 'Thực chiến cục bộ', description: 'Trae tạo rắn săn mồi' },
+      { title: 'Giới thiệu công cụ', description: 'Làm quen giao diện IDE' },
+      { title: 'Kỹ năng giao tiếp', description: 'Trò chuyện hiệu quả với AI' }
     ]" />
   </ClientOnly>
 </div>
+## 1. Cần môi trường và công cụ gì để viết code
 
-## 1. 写代码需要什么环境和工具
+### 1.1 Thay đổi tư duy: Gặp vấn đề, hỏi AI trước
 
-### 1.1 思维转变：遇到问题，先问 AI
+Trước khi giới thiệu các môi trường và công cụ, điều đầu tiên cần nhắc bạn là hãy **thay đổi thói quen tư duy của mình**.
 
-在开始介绍各种环境和工具之前，首先提示你需要**转变你的思维习惯**。
+Trong cách học lập trình truyền thống, nếu bạn muốn cài Python, cấu hình Conda, hoặc xử lý lỗi cài npm, bạn thường mở trình tìm kiếm, tìm một bài hướng dẫn, rồi làm theo từng bước. Nếu giữa chừng bị lỗi, bạn lại phải tìm thêm thông tin lỗi, thử đi thử lại nhiều lần.
 
-在传统的编程学习中，如果你要安装 Python、配置 Conda、或者解决 npm 安装失败的问题，你通常会打开搜索引擎，找到一篇教程，然后按照步骤一步步操作。如果中间报错了，你可能需要再搜报错信息，反复尝试。
+Sai rồi! ❌
 
-错！❌
+Trong thời đại AI, đặc biệt khi sử dụng AI IDE, hãy ghi nhớ một nguyên tắc cốt lõi: **Bất kỳ thao tác nào, đều có thể hỏi AI trước, thậm chí để AI làm trực tiếp cho bạn.**
 
-在 AI 时代，特别是在使用 AI IDE 时，请记住一个核心原则：**任何操作，都可以先问一遍 AI，甚至让它直接帮你做。**
+- **Không biết cách cài môi trường?** Hỏi thẳng AI trong thanh sidebar: "Tôi muốn viết Python, giúp tôi kiểm tra xem đã cài Python chưa, nếu chưa thì hãy cài giúp tôi."
+- **Mạng bị treo?** Nếu cài các gói dependency cứ xoay vòng hoặc báo lỗi, hãy ném lỗi thẳng cho AI: "Tải xuống thất bại rồi, có phải vấn đề mạng không? Có thể giúp tôi đổi sang mirror trong nước không?"
+- **Không nhớ lệnh?** Không cần học thuộc lòng các lệnh Git hay Conda, cứ nói thẳng với AI: "Giúp tôi tạo một môi trường ảo mới, đặt tên là demo."
 
-- **不知道怎么安装环境？** 直接在侧边栏问 AI：“我想写 Python，帮我检查一下有没有安装 Python，如果没有请帮我安装。”
-- **网络卡住了？** 如果安装依赖包时一直转圈或报错，直接把错误丢给 AI：“下载失败了，是不是网络问题？能不能帮我换个国内的镜像源？”
-- **命令记不住？** 不需要死记硬背 Git 命令或 Conda 命令，直接告诉 AI：“帮我创建一个新的虚拟环境，名字叫 demo。”
+### 1.2 Tại sao cần môi trường và công cụ
 
-### 1.2 为什么需要环境和工具
+Từ "thử viết vài dòng code" đến "làm dự án có thể duy trì lâu dài", yêu cầu về môi trường và công cụ hoàn toàn khác nhau.
 
-从"试着写几行代码"到"做可长期维护的项目"，对环境和工具的要求完全不同。
+Về lý thuyết, dùng Notepad có sẵn của hệ thống cũng có thể viết code, nhưng vấn đề sẽ nhanh chóng xuất hiện:
 
-理论上用系统自带的记事本也能写代码，但问题很快会出现：
+- **Code toàn chữ đen**, từ khóa, chuỗi ký tự, chú thích lẫn lộn nhau, rất khó nhìn ra cấu trúc ngay
+- **Không có gợi ý thông minh**, mỗi từ đều phải gõ đầy đủ bằng tay, sai một chữ cái là phải kiểm tra đi kiểm tra lại
+- **File nhiều là loạn**, chuyển qua chuyển lại hàng chục file, thường xuyên không tìm ra dòng cần sửa ở đâu
+- **Lỗi chỉ biết đoán**, chương trình crash mà không biết chỗ nào sai, chỉ có thể in log từng dòng để thử
 
-- **代码全是黑色文字**，关键字、字符串、注释混在一起，很难一眼看出结构
-- **没有智能提示**，每个单词都要完整手敲，拼错一个字母就要反复检查
-- **文件多了就乱套**，十几个文件来回切换，经常找不到要改的那一行在哪
-- **出错只能猜**，程序崩了不知道哪里出问题，只能一行行打印日志试错
+Vì vậy, bạn cần một IDE (Môi trường Phát triển Tích hợp). IDE hiển thị code bằng nhiều màu sắc khác nhau, tự động gợi ý khi nhập, tổ chức file theo dự án, và có thể theo dõi lỗi từng bước, giúp việc phát triển hiệu quả hơn và ít sai sót hơn.
+## 2. IDE là gì, tại sao cần IDE
 
-因此，你需要一款 IDE（集成开发环境）。它会把代码用不同颜色显示、输入时自动提示、文件按项目整理、还能一步步追踪错误，让开发更高效、更少出错。
-
-## 2. 什么是 IDE，为什么需要 IDE
-
-::: info 预习提示
-如果你还不熟悉 IDE 是什么、各个界面元素有什么作用，建议先阅读 [IDE 简介](/vi-vn/appendix/2-development-tools/ide-basics) 进行预习，了解 IDE 的基本概念和常见功能。
+::: info Gợi ý đọc trước
+Nếu bạn chưa quen với IDE là gì, các thành phần giao diện có vai trò như thế nào, hãy đọc trước [Giới thiệu về IDE](/vi-vn/appendix/2-development-tools/ide-basics) để nắm được các khái niệm cơ bản và tính năng phổ biến của IDE.
 :::
 
-在早期编程时代，我们只需要简单文本编辑器和语言处理器即可。但随着项目复杂度增加，开发者迫切需要一种能高效管理文件、支持语法高亮和调试的工具，于是集成开发环境（IDE）应运而生。
+Trong thời kỳ đầu của lập trình, chúng ta chỉ cần một trình soạn thảo văn bản đơn giản và bộ xử lý ngôn ngữ là đủ. Nhưng khi độ phức tạp của dự án tăng lên, các nhà phát triển cần một công cụ có thể quản lý file hiệu quả, hỗ trợ tô sáng cú pháp và gỡ lỗi — đó là lúc Môi trường Phát triển Tích hợp (IDE) ra đời.
 
-你可以把 IDE 理解成专门用来“编辑、管理、运行和调试”代码的程序。早期的 IDE 外观非常“原始”，几乎完全通过键盘操作。
+Bạn có thể hiểu IDE là chương trình chuyên dùng để "chỉnh sửa, quản lý, chạy và gỡ lỗi" code. Các IDE thời kỳ đầu trông rất "thô sơ", gần như hoàn toàn phải thao tác bằng bàn phím.
 
 ![](images/image1.png)![](images/image2.png)
 
-终端界面（Terminal） 图片来源：https://en.wikipedia.org/wiki/File:Emacs-screenshot.png
+Giao diện Terminal — Nguồn ảnh: https://en.wikipedia.org/wiki/File:Emacs-screenshot.png
 
-知名且功能成熟的“内置 IDE”如 `Vim`，常用于服务器远程操作。
+IDE tích hợp nổi tiếng và hoàn thiện như `Vim` thường được dùng để thao tác từ xa trên server.
 
 ![](images/image3.png)
 
-为了更高效，我们需要支持鼠标操作的现代 IDE，通常包含：
+Để làm việc hiệu quả hơn, chúng ta cần IDE hiện đại hỗ trợ thao tác chuột, thường bao gồm:
 
-- **源代码编辑器**：语法高亮、自动补全。
-- **构建与运行工具**：内置编译器/解释器。
-- **调试器**：断点调试、变量查看。
+- **Trình soạn thảo mã nguồn**: tô sáng cú pháp, tự động hoàn thành.
+- **Công cụ build và chạy**: trình biên dịch/thông dịch tích hợp sẵn.
+- **Debugger**: đặt breakpoint, xem giá trị biến.
 
-现代 IDE 往往还内置 Git 等工具。最流行的是微软的 **[Visual Studio Code (VS Code)](https://code.visualstudio.com/)**，它轻量且可扩展。虽然也有 JetBrains 全家桶等专业 IDE，但 VS Code 对初学者最友好。
+IDE hiện đại thường tích hợp sẵn các công cụ như Git. Phổ biến nhất là **[Visual Studio Code (VS Code)](https://code.visualstudio.com/)** của Microsoft — nhẹ và có thể mở rộng linh hoạt. Dù có các IDE chuyên nghiệp như bộ JetBrains, VS Code vẫn là lựa chọn thân thiện nhất với người mới.
 
 ![](images/image4.png)
 
-VS Code 的核心理念是“一切皆插件”。它通过插件机制支持各种语言，安装 Python 插件就是 Python IDE，安装 C++ 插件就是 C++ IDE。不装插件时，它只是个高级文本编辑器。
+Triết lý cốt lõi của VS Code là "mọi thứ đều là plugin". Nó hỗ trợ nhiều ngôn ngữ thông qua cơ chế plugin — cài plugin Python thì thành Python IDE, cài plugin C++ thì thành C++ IDE. Không cài plugin, nó chỉ là một trình soạn thảo văn bản cao cấp.
 
 ![](images/image5.png)
 
-甚至可以用来编辑 Markdown 文档。
+Thậm chí có thể dùng để chỉnh sửa tài liệu Markdown.
 
 ![](images/image6.png)
 
-总之，IDE 是一套帮助开发者高效写代码和运行程序的工具集。
+Tóm lại, IDE là bộ công cụ giúp bạn viết code và chạy chương trình một cách hiệu quả.
 
-更具体的详细内容解释，请查看[附录中的 虚拟 IDE 可视化 IDE 原理部分](/vi-vn/appendix/2-development-tools/ide-basics)。
+Để xem giải thích chi tiết hơn, hãy tham khảo [phần IDE ảo — trực quan hóa nguyên lý IDE trong phụ lục](/vi-vn/appendix/2-development-tools/ide-basics).
+## 3. AI IDE và IDE thông thường khác nhau như thế nào
 
-## 3. AI IDE 和普通 IDE 有什么不同
+IDE thông thường (ví dụ như VS Code gốc) về bản chất là một "hộp công cụ":  
+Bạn có thể mở dự án, viết code, chạy và debug, cũng có thể cài plugin, nhưng điều kiện là bạn phải tự biết mình cần làm gì và làm như thế nào:
 
-普通 IDE（比如原版 VS Code）本质上是一套“工具箱”：  
-可以打开项目、写代码、运行和调试，也能装插件，但前提是你需要自己知道要做什么、怎么做：
+- Khi có lỗi, tự đọc thông báo, tự tìm dòng nào có vấn đề;
+- Muốn thêm trang mới hoặc API mới, tự tìm file tương ứng, tự viết code;
+- Muốn cấu hình môi trường hoặc đóng gói, tự tra tài liệu, thực hiện từng bước.
 
-- 报错时，自己读提示、自己查哪一行有问题；
-- 想加新页面或新接口，自己找对应文件、自己写代码；
-- 想配置环境或打包，自己查文档、按步骤操作。
+Nhưng trong AI IDE, bạn có thể trực tiếp sử dụng LLM để hỗ trợ viết code và chỉnh sửa file:
 
-但在 AI IDE 里，你可以直接使用大语言模型帮助你进行编码和修改文件：
+- Nói thẳng "làm một trang đăng nhập", nó sẽ tạo ra cấu trúc code cơ bản trước;
+- Ném thông báo lỗi và code liên quan cho nó, để nó phân tích nguyên nhân và đưa ra gợi ý chỉnh sửa;
+- Sau khi bạn xác nhận, để nó tự động tạo file mới, sửa code hàng loạt, xử lý những việc thủ công qua nhiều file.
 
-- 直接说“做一个登录页”，它先生成基础代码结构；
-- 把报错信息和相关代码丢给它，让它先分析原因并给出修改建议；
-- 在你确认后，让它自动新建文件、批量改代码，处理跨文件的体力活。
+Ví dụ, bạn có thể chọn một đoạn code, bảo nó "refactor lại" hoặc "thêm comment"; cũng có thể hỏi trong thanh bên "dự án này được thiết kế như thế nào?", dùng `@tên-file` hoặc `@toàn-bộ-dự-án` để chỉ định phạm vi tham chiếu, dùng một câu để tự động hoàn thành các thao tác tẻ nhạt như tạo file mới, viết code và chạy chương trình.
 
-例如，你可以选中一段代码，让它“重构一下”或“加注释”；也可以在侧栏里问“这个项目是怎么设计的？”，通过 `@文件名` 或 `@整个项目` 指定参考范围，用一句话自动完成新建文件、写代码和运行的繁琐操作。
+Trong phiên bản VS Code mới nhất, đã tích hợp sẵn một trợ lý LLM. Bạn có thể trực tiếp trò chuyện với model về toàn bộ code repository, một file cụ thể, thậm chí một hàm cụ thể. Bạn cũng có thể giống như khi trước dùng công cụ tự động viết code trên web, gửi yêu cầu dưới dạng prompt cho coding Agent tích hợp sẵn, để nó tự động giúp bạn thực hiện tính năng cần thiết, tạo file, chỉnh sửa code, cấu hình môi trường, v.v.
 
-在最新版 VS Code 中，已经内置了一个大语言模型助手。你可以直接针对整个代码仓库、某个文件，甚至某个函数与模型对话。你也可以像之前在 Web 端使用自动写代码工具一样，将需求以提示词的形式发给内置的编码 Agent，让它自动帮你实现所需功能、创建文件、修改代码、配置环境等。
-
-你可以下载安装 VS Code，在点击右上角的侧边栏入口，打开 AI 功能区域，体验这些能力。
+Bạn có thể tải và cài đặt VS Code, nhấp vào lối vào thanh bên góc trên bên phải, mở khu vực tính năng AI để trải nghiệm những khả năng này.
 
 ![](images/image7.png)
 
-不过，VS Code 并不是 AI 能力最强的 IDE。对于需要大量 AI 辅助编码的场景，我们往往希望使用“更聪明、效率更高”的工具——好的 AI IDE 能显著节省写代码和改 Bug 的时间。下面我们会介绍几款目前比较流行的 AI IDE，你可以根据个人喜好选择任意一款 AI IDE 使用。
+Tuy nhiên, VS Code không phải là IDE có khả năng AI mạnh nhất. Đối với các tình huống cần nhiều hỗ trợ AI trong lập trình, chúng ta thường muốn sử dụng những công cụ "thông minh hơn, hiệu quả hơn" — một AI IDE tốt có thể tiết kiệm đáng kể thời gian viết code và sửa bug. Dưới đây chúng ta sẽ giới thiệu một số AI IDE phổ biến hiện nay, bạn có thể chọn bất kỳ AI IDE nào phù hợp với sở thích cá nhân.
 
-由于 VS Code 是开源的（任何人都可以下载源码并自行编译），目前市面上绝大多数 AI IDE 都是在 VS Code 基础上二次开发而来。所以你不必担心要“学习很多种 IDE”——**只要你熟悉了 VS Code 的基本用法**，迁移到这些 AI IDE 并不需要重新学习。
+Vì VS Code là mã nguồn mở (bất kỳ ai cũng có thể tải mã nguồn về và tự biên dịch), hầu hết các AI IDE trên thị trường hiện nay đều được phát triển dựa trên VS Code. Vì vậy bạn không cần lo lắng về việc phải "học nhiều loại IDE" — **miễn là bạn đã quen với cách dùng cơ bản của VS Code**, việc chuyển sang các AI IDE này không cần học lại từ đầu.
 
-一般而言，对于不同 AI IDE 之间的差异，主要集中在四个方面：价格；可使用的模型种类（部分高级模型在某些地区可能受限）；Agent 的能力（在协助写代码时的智能程度和执行能力）；以及运行速度与性能。你可以根据实际测试效果进行选用，适合自己的才是最好的。
+Nhìn chung, sự khác biệt giữa các AI IDE chủ yếu tập trung ở bốn khía cạnh: giá cả; các loại model có thể sử dụng (một số model cao cấp có thể bị hạn chế ở một số khu vực); khả năng của Agent (mức độ thông minh và khả năng thực thi khi hỗ trợ viết code); và tốc độ chạy cùng hiệu năng. Bạn có thể chọn dựa trên kết quả thử nghiệm thực tế, cái phù hợp với bạn mới là tốt nhất.
 
-> 典型的 AI IDE 一般具备以下核心能力：
+> Một AI IDE điển hình thường có các khả năng cốt lõi sau:
 >
-> - 智能代码生成与补全：在传统 IDE 中，我们通常是输入几个字符来补全变量名或函数名；在现代 AI IDE 中，你可以写几行伪代码或者简单说明需求，让 IDE 自动补全完整的逻辑，甚至根据指令直接生成一大段甚至整块代码。
-> - 代码理解与问答：IDE 能够理解并回答关于某段代码、某个文件，甚至整个工程目录结构的问题。
-> - 代码重构与优化：IDE 可以根据你的意图，重写或优化指定代码片段的实现逻辑。
-> - 自动生成测试：IDE 可以自动生成针对不同函数和模块的测试代码，方便你进行有针对性的测试。
-> - Agent 式任务执行：智能 Agent 可以自动生成、打包、安装、运行和修改代码，在很多任务上可以部分替代初级软件工程师的工作。
+> - Tạo và hoàn thiện code thông minh: Trong IDE truyền thống, chúng ta thường nhập vài ký tự để hoàn thiện tên biến hoặc tên hàm; trong AI IDE hiện đại, bạn có thể viết vài dòng pseudocode hoặc mô tả yêu cầu đơn giản, để IDE tự động hoàn thiện toàn bộ logic, thậm chí trực tiếp tạo ra một đoạn lớn thậm chí toàn bộ khối code theo chỉ dẫn.
+> - Hiểu và hỏi đáp về code: IDE có thể hiểu và trả lời các câu hỏi về một đoạn code, một file, thậm chí toàn bộ cấu trúc thư mục của dự án.
+> - Refactor và tối ưu hóa code: IDE có thể viết lại hoặc tối ưu logic triển khai của đoạn code được chỉ định theo ý định của bạn.
+> - Tự động tạo test: IDE có thể tự động tạo code test cho các hàm và module khác nhau, tiện cho bạn thực hiện kiểm thử có mục tiêu.
+> - Thực thi tác vụ kiểu Agent: Agent thông minh có thể tự động tạo, đóng gói, cài đặt, chạy và chỉnh sửa code, trong nhiều tác vụ có thể thay thế một phần công việc của kỹ sư phần mềm junior.
 
 ::: details Antigravity
 
 ### [Antigravity](https://antigravity.google/)
 
-Antigravity 是 Google 在 2025 年 11 月与 Gemini 3 一同发布的全新 AI IDE，采用"Agent-First"（智能体优先）开发模式。与传统 AI 辅助编码不同，Antigravity 让 AI 代理成为"主动执行者"，可直接操作编辑器、终端、浏览器等工具，承担更多"执行""策划""验证"的工作。开发者只需提出高层意图，代理便会自动拆分任务、制定计划、执行代码、运行测试、生成成果。它支持多模型切换，包括 Gemini 3 Pro、Claude Sonnet 4.5 等，目前以公开预览形式提供，支持 Windows、macOS、Linux 全平台。
+Antigravity là AI IDE hoàn toàn mới do Google ra mắt vào tháng 11 năm 2025 cùng với Gemini 3, áp dụng mô hình phát triển "Agent-First" (ưu tiên intelligent agent). Khác với hỗ trợ viết code AI truyền thống, Antigravity biến AI agent thành "người thực thi chủ động", có thể trực tiếp thao tác với editor, terminal, trình duyệt và các công cụ khác, đảm nhận nhiều công việc "thực thi", "lên kế hoạch", "xác minh" hơn. Nhà phát triển chỉ cần đưa ra ý định cấp cao, agent sẽ tự động phân chia tác vụ, lập kế hoạch, thực thi code, chạy test, tạo ra kết quả. Nó hỗ trợ chuyển đổi đa model, bao gồm Gemini 3 Pro, Claude Sonnet 4.5, v.v., hiện cung cấp dưới dạng preview công khai, hỗ trợ toàn nền tảng Windows, macOS, Linux.
 :::
 
 ::: details Trae
@@ -155,16 +150,16 @@ Antigravity 是 Google 在 2025 年 11 月与 Gemini 3 一同发布的全新 AI 
 
 ![](images/image8.png)
 
-Trae 是字节跳动推出的一款 AI 编程助手，支持 100 多种编程语言，并能集成到主流 IDE 中。它的功能包括：用自然语言生成代码、自动调试、把设计稿转换为 React/Vue 组件等。在 2025 年 8 月的更新之后，Trae 新增了智能依赖导入、重命名建议、任务清单管理等功能；SOLO 模式也开始支持后端代码生成和技术架构文档编辑。
+Trae là một trợ lý lập trình AI do ByteDance ra mắt, hỗ trợ hơn 100 ngôn ngữ lập trình và có thể tích hợp vào các IDE phổ biến. Các tính năng của nó bao gồm: tạo code bằng ngôn ngữ tự nhiên, tự động debug, chuyển đổi bản thiết kế thành component React/Vue, v.v. Sau bản cập nhật tháng 8 năm 2025, Trae bổ sung thêm các tính năng như nhập dependency thông minh, gợi ý đổi tên, quản lý danh sách tác vụ; chế độ SOLO cũng bắt đầu hỗ trợ tạo code backend và chỉnh sửa tài liệu kiến trúc kỹ thuật.
 :::
 
 ::: details Cursor
 
 ### [Cursor](https://cursor.com/)
 
-Cursor 是 Anysphere 开发的一款 AI 代码编辑器，基于 VS Code 定制，重点优化了大规模代码仓库和多文件协同的场景。它支持 GPT-4o、Claude 3.7 等模型；2025 年推出的 Claude Max 模式可以处理数百万行代码级别的项目。专业版取消了请求次数限制，非常适合复杂的企业级项目。
+Cursor là một AI code editor do Anysphere phát triển, tùy chỉnh dựa trên VS Code, tập trung tối ưu hóa cho các tình huống code repository quy mô lớn và cộng tác đa file. Nó hỗ trợ các model GPT-4o, Claude 3.7, v.v.; chế độ Claude Max ra mắt năm 2025 có thể xử lý các dự án ở cấp độ hàng triệu dòng code. Phiên bản chuyên nghiệp bỏ giới hạn số lần request, rất phù hợp cho các dự án enterprise phức tạp.
 
-目前，Cursor 可以说是“带前端界面的 AI IDE”中综合体验最好的一款之一，用户数量庞大，功能迭代频率也很高。它最大的缺点是价格较高——专业版大约需要每月 20 美元。
+Hiện tại, Cursor có thể nói là một trong những AI IDE "có giao diện frontend" mang lại trải nghiệm tổng thể tốt nhất, lượng người dùng lớn, tần suất cập nhật tính năng cũng rất cao. Nhược điểm lớn nhất của nó là giá khá cao — phiên bản chuyên nghiệp khoảng 20 USD mỗi tháng.
 
 ![](images/image9.png)
 :::
@@ -173,7 +168,7 @@ Cursor 是 Anysphere 开发的一款 AI 代码编辑器，基于 VS Code 定制�
 
 ### [Qoder](https://qoder.com/)
 
-Qoder 是阿里巴巴推出的一款强调“透明协作”和“增强上下文工程能力”的 AI IDE。它通过 Action Flow 支持把任务拆解成多个步骤，并实时跟踪 AI 的执行过程；还支持多模型动态路由和任务状态机管理，非常适合在中大型项目中做架构治理和对遗留系统进行“反向工程”分析。
+Qoder là một AI IDE do Alibaba ra mắt, nhấn mạnh "cộng tác minh bạch" và "tăng cường khả năng context engineering". Nó hỗ trợ phân chia tác vụ thành nhiều bước qua Action Flow và theo dõi quá trình thực thi của AI theo thời gian thực; còn hỗ trợ định tuyến đa model động và quản lý state machine tác vụ, rất phù hợp để quản trị kiến trúc trong các dự án vừa và lớn cũng như phân tích "reverse engineering" các hệ thống legacy.
 
 ![](images/image10.png)
 :::
@@ -182,7 +177,7 @@ Qoder 是阿里巴巴推出的一款强调“透明协作”和“增强上下�
 
 ### [CodeBuddy](https://www.codebuddy.com/)
 
-CodeBuddy 是腾讯云推出的一款 AI 编程工具，强调对中文指令的支持以及企业级合规能力。它提供代码补全、批量代码审查和多模型切换等功能；其中的 Craft 智能体可以实现多文件代码生成和 API 集成。企业版支持私有化部署，并通过了三级等保认证，适合金融、医疗等对数据安全要求较高的行业。
+CodeBuddy là một công cụ lập trình AI do Tencent Cloud ra mắt, nhấn mạnh hỗ trợ lệnh tiếng Trung và khả năng tuân thủ cấp enterprise. Nó cung cấp các tính năng hoàn thiện code, review code hàng loạt và chuyển đổi đa model; Craft agent trong đó có thể thực hiện tạo code đa file và tích hợp API. Phiên bản enterprise hỗ trợ triển khai riêng tư và đã vượt qua chứng nhận bảo mật cấp 3, phù hợp với các ngành có yêu cầu bảo mật dữ liệu cao như tài chính, y tế.
 
 ![](images/image11.png)
 :::
@@ -191,7 +186,7 @@ CodeBuddy 是腾讯云推出的一款 AI 编程工具，强调对中文指令的
 
 ### VS Code + [Cline](https://cline.bot/)
 
-Cline 是 VS Code（Visual Studio Code）的一款 AI 编程 Agent 插件，可以通过配置不同的 API 端点来灵活切换所使用的大模型。Cline 支持多模态输入、MCP 工具扩展以及成本监控，所有操作都需要用户确认后才会执行。它非常适合用于快速验证想法，或与现有开发流程集成。基础功能是免费的，企业版则支持在私有环境中部署模型。
+Cline là một plugin AI coding Agent cho VS Code (Visual Studio Code), có thể linh hoạt chuyển đổi LLM được sử dụng thông qua cấu hình các API endpoint khác nhau. Cline hỗ trợ đầu vào đa phương thức, mở rộng công cụ MCP và giám sát chi phí, tất cả các thao tác đều cần người dùng xác nhận trước khi thực thi. Nó rất phù hợp để nhanh chóng xác minh ý tưởng hoặc tích hợp với quy trình phát triển hiện có. Tính năng cơ bản miễn phí, phiên bản enterprise hỗ trợ triển khai model trong môi trường riêng tư.
 
 ![](images/image13.png)
 
@@ -202,770 +197,762 @@ Cline 是 VS Code（Visual Studio Code）的一款 AI 编程 Agent 插件，可�
 
 ### [Kiro](https://kiro.dev/)
 
-Kiro 是 AWS（亚马逊云科技）推出的 AI 编程 IDE，深度集成 Amazon Bedrock 和 AWS 云服务生态。它支持 Claude、Nova 等多种大模型，特别适合需要与 AWS 云服务紧密集成的开发场景。Kiro 提供了智能代码生成、自动化测试、以及与 AWS 资源（如 Lambda、S3、DynamoDB）的无缝对接能力，对于云原生应用开发具有独特优势。
+Kiro là AI coding IDE do AWS (Amazon Web Services) ra mắt, tích hợp sâu với Amazon Bedrock và hệ sinh thái dịch vụ đám mây AWS. Nó hỗ trợ nhiều LLM như Claude, Nova, đặc biệt phù hợp cho các tình huống phát triển cần tích hợp chặt chẽ với dịch vụ đám mây AWS. Kiro cung cấp khả năng tạo code thông minh, kiểm thử tự động và kết nối liền mạch với các tài nguyên AWS (như Lambda, S3, DynamoDB), có ưu thế độc đáo cho việc phát triển ứng dụng cloud-native.
 
-> **备注**：如果你想使用 Anthropic Claude 相关的模型，需要使用 Cursor、Kiro 或 Antigravity 作为 IDE 才行。这些 IDE 与 Anthropic 有官方合作或深度集成，能够提供更稳定、更完整的 Claude 模型体验。
+> **Ghi chú**: Nếu bạn muốn sử dụng các model liên quan đến Anthropic Claude, bạn cần dùng Cursor, Kiro hoặc Antigravity làm IDE. Các IDE này có hợp tác chính thức hoặc tích hợp sâu với Anthropic, có thể cung cấp trải nghiệm model Claude ổn định và đầy đủ hơn.
 :::
 
 <div style="margin: 50px 0;">
   <ClientOnly>
     <StepBar :active="1" :items="[
-      { title: '环境认知', description: '理解 IDE 与 AI IDE' },
-      { title: '本地实战', description: 'Trae 打造贪吃蛇' },
-      { title: '工具详解', description: '熟悉 IDE 界面' },
-      { title: '沟通技巧', description: '高效与 AI 对话' }
+      { title: 'Nhận thức môi trường', description: 'Hiểu IDE và AI IDE' },
+      { title: 'Thực chiến cục bộ', description: 'Trae tạo game Snake' },
+      { title: 'Chi tiết công cụ', description: 'Làm quen giao diện IDE' },
+      { title: 'Kỹ năng giao tiếp', description: 'Trò chuyện hiệu quả với AI' }
     ]" />
   </ClientOnly>
 </div>
+## 4. Thực chiến: Dùng AI IDE tạo game Rắn Săn Mồi trên máy tính
 
-## 4. 实战：用 AI IDE 在本地生成贪吃蛇游戏
+Phần trước chủ yếu nói về "khái niệm" và "sự khác biệt". Trong mục này, chúng ta sẽ thực hiện một bài thực chiến hoàn chỉnh, biến các khái niệm trừu tượng thành thao tác cụ thể: **tạo một thư mục trống → mở bằng AI IDE → chat ở thanh sidebar, nhờ nó dùng React tạo từ đầu một game Rắn Săn Mồi cho bạn.** Ví dụ ở đây sử dụng Trae đã giới thiệu ở trên, trước tiên bạn cần cài đặt và hiểu sơ qua Trae là gì.
 
-前面讲的主要是"概念"和"差异"。这一小节，我们通过一次完整的实战，把抽象概念落到具体操作上：**新建一个空文件夹 → 用 AI IDE 打开 → 在侧边栏聊天，让它用 React 帮你从零生成一个贪吃蛇游戏。** 这里以上面介绍的 Trae 为例，首先需要安装和简单理解什么是 Trae。
+::: tip 💡 Gợi ý nhỏ: Chuyển liền mạch từ web sang máy tính
+Nếu bạn đã từng phát triển dự án trên z.ai hoặc các nền tảng AI lập trình web khác, bạn có thể tải code về máy rồi mở bằng AI IDE để tiếp tục phát triển. Như vậy vừa giữ được thành quả trước đó, vừa tận dụng được khả năng hỗ trợ AI mạnh hơn của IDE trên máy tính.
 
-::: tip 💡 小提示：从网页到本地的无缝衔接
-如果你之前已经在 z.ai 或其他网页端 AI 编程平台上开发过项目，可以直接将代码下载到本地，然后用 AI IDE 打开继续开发。这样既能保留之前的成果，又能享受本地 IDE 更强大的 AI 辅助能力。
-
-操作步骤很简单：
-1. 在 z.ai 等平台点击下载按钮，将项目保存到本地
-2. 解压后用 Trae/Cursor 等 AI IDE 打开该文件夹
-3. 在侧边栏继续与 AI 对话，迭代优化你的项目
+Các bước rất đơn giản:
+1. Trên z.ai hoặc các nền tảng tương tự, nhấn nút tải về để lưu dự án về máy
+2. Giải nén rồi mở thư mục đó bằng AI IDE như Trae/Cursor
+3. Tiếp tục chat với AI ở sidebar để lặp lại và tối ưu dự án của bạn
 :::
 
-### 4.1 准备工作：安装并了解 Trae
+### 4.1 Chuẩn bị: Cài đặt và tìm hiểu Trae
 
-#### 4.1.1 什么是 Trae
+#### 4.1.1 Trae là gì
 
-Trae 的全称可以理解为 “The Real AI Engineer”，是一款由字节跳动开发的自适应 AI 集成开发环境（IDE）。它是在流行的 VS Code 基础之上构建的，这意味着，如果你之前已经习惯了 VS Code，那么在使用 Trae 时，无论是界面布局还是基础操作都会感到非常熟悉、舒适。
+Tên đầy đủ của Trae có thể hiểu là "The Real AI Engineer" — một môi trường phát triển tích hợp (IDE) AI thích ứng do ByteDance phát triển. Nó được xây dựng trên nền tảng VS Code phổ biến, nghĩa là nếu bạn đã quen với VS Code, khi dùng Trae bạn sẽ thấy bố cục giao diện và các thao tác cơ bản rất quen thuộc và thoải mái.
 
-Trae 的核心目标是成为开发者的“智能编程伙伴”。通过深度集成 AI 能力，它可以自动处理大量重复性工作，为你提供更直观、更高效的开发体验。它并不仅仅是一个“代码补全工具”，而是希望贯穿整个开发工作流，从创建项目、编写代码、调试、测试到部署都提供帮助。
+Mục tiêu cốt lõi của Trae là trở thành "người đồng hành lập trình thông minh" cho developer. Nhờ tích hợp sâu khả năng AI, nó có thể tự động xử lý lượng lớn công việc lặp đi lặp lại, mang đến trải nghiệm phát triển trực quan và hiệu quả hơn. Đây không chỉ là một "công cụ gợi ý code" đơn thuần, mà hướng tới việc xuyên suốt toàn bộ quy trình phát triển — từ tạo dự án, viết code, debug, kiểm thử cho đến triển khai.
 
-#### 4.1.2 安装 Trae
+#### 4.1.2 Cài đặt Trae
 
-Trae 分为国际版和中国版。国际版需要能够访问海外网络，但可以使用 GPT-5 等最新的海外模型；中国版则主要支持国内最新的大模型，例如 GLM、Qwen、Kimi 等。
+Trae có hai phiên bản: bản quốc tế và bản Trung Quốc. Bản quốc tế cần truy cập được mạng nước ngoài nhưng có thể dùng các model mới nhất như GPT-5; bản Trung Quốc chủ yếu hỗ trợ các LLM nội địa mới nhất như GLM, Qwen, Kimi, v.v.
 
-国际版下载地址：https://www.trae.ai/
-中国版下载地址：https://www.trae.cn/
+Tải bản quốc tế: https://www.trae.ai/
+Tải bản Trung Quốc: https://www.trae.cn/
 
-##### Trae 定价与使用方式
+##### Giá và cách sử dụng Trae
 
-::: info 💡 版本选择提示（零基础推荐 CN 版）
-- **零基础入门强烈推荐下载中国版（CN 版，trae.cn）**，目前使用体验更好，且基础功能免费，无需海外网络
-- 如果你需要使用 GPT-5 等海外模型，且网络条件允许，可以选择国际版
-- 如果已有第三方模型的 API Key，接入第三方模型可以灵活控制成本
+::: info 💡 Gợi ý chọn phiên bản (Khuyến nghị bản CN cho người mới bắt đầu)
+- **Người mới bắt đầu từ đầu rất nên tải bản Trung Quốc (CN, trae.cn)** — trải nghiệm hiện tại tốt hơn, các tính năng cơ bản miễn phí, không cần mạng nước ngoài
+- Nếu bạn cần dùng các model nước ngoài như GPT-5 và điều kiện mạng cho phép, có thể chọn bản quốc tế
+- Nếu bạn đã có API Key của model bên thứ ba, có thể kết nối linh hoạt để kiểm soát chi phí
 :::
 
-> 💡 **目前推荐使用 OpenRouter 免费模型进行测试**
-> 
-> 截至教程编写时间（2026-02-12），目前仍可免费试用 StepFun 的模型。具体可以参考下面 4.2 章节部分的模型接入方式，接入 `stepfun/step-3.5-flash:free`。
+> 💡 **Hiện tại khuyến nghị dùng model miễn phí trên OpenRouter để thử nghiệm**
+>
+> Tính đến thời điểm viết hướng dẫn này (2026-02-12), vẫn có thể dùng miễn phí model của StepFun. Bạn có thể tham khảo phần 4.2 bên dưới về cách kết nối model, kết nối `stepfun/step-3.5-flash:free`.
 
-关于 Trae 的费用和使用方式，有以下几个选项可供选择：
+Về chi phí và cách sử dụng Trae, có các lựa chọn sau:
 
-- **国内版 CN 版（强烈推荐）**：基础使用免费，目前整体使用效果优于国际版，非常适合零基础入门。由于用户较多可能偶尔需要排队等待。
-- **国际版**：订阅价格大约为每月 3 美元左右，可以访问 GPT-5 等海外模型，但需要能够访问海外网络。
-- **第三方模型接入**：如果你已经有国内大模型的 Token API（如 DeepSeek、通义千问、Kimi 等），可以通过 Trae 的第三方模型配置功能将这些 API 接入使用。各大云服务厂商（如阿里云、腾讯云、百度云等）通常提供 Coding Plan 订阅计划，购买后可以以更优惠的价格使用其大模型 API。这样你可以自由选择自己喜欢的模型，同时控制使用成本。
+- **Bản nội địa CN (Rất khuyến nghị)**: Sử dụng cơ bản miễn phí, hiện tại trải nghiệm tổng thể tốt hơn bản quốc tế, rất phù hợp cho người mới bắt đầu từ đầu. Do có nhiều người dùng nên đôi khi có thể cần xếp hàng chờ.
+- **Bản quốc tế**: Giá đăng ký khoảng 3 USD/tháng, có thể truy cập các model nước ngoài như GPT-5, nhưng cần mạng có thể truy cập nước ngoài.
+- **Kết nối model bên thứ ba**: Nếu bạn đã có Token API của các LLM nội địa (như DeepSeek, Qwen, Kimi, v.v.), có thể kết nối qua tính năng cấu hình model bên thứ ba của Trae. Các nhà cung cấp dịch vụ đám mây lớn thường cung cấp Coding Plan, mua xong có thể dùng API LLM với giá ưu đãi hơn. Như vậy bạn có thể tự do chọn model mình thích và kiểm soát chi phí sử dụng.
 
-建议初学者从国内 CN 版免费版开始体验（下载地址：https://www.trae.cn/ ），目前 CN 版的使用效果更好且完全免费。如果遇到排队问题或需要更稳定的服务，可以考虑接入第三方模型并购买对应云厂商的 Coding Plan 计划。
+Khuyến nghị người mới bắt đầu từ bản CN miễn phí (tải tại: https://www.trae.cn/ ) — hiện tại bản CN hoạt động tốt hơn và hoàn toàn miễn phí. Nếu gặp vấn đề xếp hàng hoặc cần dịch vụ ổn định hơn, có thể cân nhắc kết nối model bên thứ ba và mua Coding Plan của nhà cung cấp đám mây tương ứng.
 
-#### 4.1.3 Trae 界面简介
+#### 4.1.3 Giới thiệu giao diện Trae
 
-从界面形态上看，Trae 与我们日常使用的 VS Code 高度相似：同样是左侧资源管理器、中间编辑区、右侧扩展面板的经典三栏布局。
+Về hình thức giao diện, Trae rất giống VS Code mà chúng ta dùng hàng ngày: cùng bố cục ba cột kinh điển — trình quản lý tài nguyên bên trái, khu vực chỉnh sửa ở giữa, panel mở rộng bên phải.
 
 ![](images/image17.png)
 
-右侧的侧边栏就是 Copilot 交互窗口，也可以理解为 Agent 窗口。如果你暂时看不到它，可以点击 Trae 右上角的侧边栏图标将其打开。
+Sidebar bên phải là cửa sổ tương tác Copilot, cũng có thể hiểu là cửa sổ Agent. Nếu bạn chưa thấy nó, hãy nhấn vào icon sidebar ở góc trên bên phải Trae để mở ra.
 
 ![](images/image18.png)
 
-打开侧边栏之后，你会看到一个 `Builder` 选项，这就是 Agent 模式。简单理解，它相当于 z.ai 的“本地版”，可以帮你操作本机环境，安装运行环境、打开网页等。
+Sau khi mở sidebar, bạn sẽ thấy tùy chọn `Builder` — đây chính là chế độ Agent. Hiểu đơn giản, nó tương đương "bản local" của z.ai, có thể giúp bạn thao tác trên môi trường máy tính của mình: cài đặt môi trường chạy, mở trang web, v.v.
 
 ![](images/image19.png)
 
-点击 “Builder” 后，你会看到 “Chat” 模式和 “Builder with MCP” 模式：
+Sau khi nhấn "Builder", bạn sẽ thấy chế độ "Chat" và chế độ "Builder with MCP":
 
-- **Chat 模式**：主要用于和当前文件夹里的代码对话，或者当作普通聊天模型来使用。（你可以通过左上角的 “File” 菜单打开一个文件夹，在这个文件夹中进行编辑操作。在这种情况下，Builder 创建或修改的文件都只会发生在这个文件夹内部。）
-- **Builder with MCP 模式**：为 Agent 提供了更多可用工具（例如把语言模型和其他软件联通起来、查询天气等）。你可以简单理解为：MCP 能让语言模型更方便地调用各种外部工具。
+- **Chế độ Chat**: Chủ yếu dùng để chat với code trong thư mục hiện tại, hoặc dùng như một model chat thông thường. (Bạn có thể mở một thư mục qua menu "File" ở góc trên bên trái; các file Builder tạo hoặc chỉnh sửa sẽ chỉ nằm trong thư mục đó.)
+- **Chế độ Builder with MCP**: Cung cấp thêm nhiều công cụ cho Agent (ví dụ kết nối LLM với các phần mềm khác, tra thời tiết, v.v.). Bạn có thể hiểu đơn giản: MCP giúp LLM gọi các công cụ bên ngoài tiện hơn.
 
 ![](images/image20.png)
 
-在下面的区域，你还会看到模型选择选项，点击即可修改当前使用的大模型。在中国版中，你可以选择使用 Kimi k2 或 GLM 等国内模型；如果你使用的是国际版 Trae，还可以选择 ChatGPT 或 Claude 等海外模型。不过，由于国内大模型发展非常快，Kimi、Qwen、GLM 等在很多任务上的实际体验已经接近 Claude 3.5 或 3.7，对日常开发来说已经完全够用，这里不强制要求使用国际版或者国内版进行操作。
+Ở khu vực bên dưới, bạn cũng sẽ thấy tùy chọn chọn model — nhấn vào để thay đổi LLM đang dùng. Trong bản Trung Quốc, bạn có thể chọn các model nội địa như Kimi k2 hoặc GLM; nếu dùng bản quốc tế Trae, bạn còn có thể chọn ChatGPT hoặc Claude. Tuy nhiên, vì LLM nội địa phát triển rất nhanh, Kimi, Qwen, GLM, v.v. trên nhiều tác vụ đã có trải nghiệm thực tế gần bằng Claude 3.5 hoặc 3.7, đã hoàn toàn đủ dùng cho phát triển hàng ngày — bạn không bắt buộc phải dùng bản quốc tế hay nội địa.
 
-**需要注意的是，这里不推荐使用 Auto 模式（自动选择模型），如果是国际版，我们推荐使用 Gemini 或者 GPT 模型， 如果是国内版，我们推荐你尝试 Kimi k2 或 Minimax、GLM 等国内模型，** 不同模型有不同的使用场景，没有教条式的一定谁比谁好在哪，你可以在不同任务遇到困难无法解决时换一个模型，通过多次测试得到属于自己的最佳实验结果。
+**Cần lưu ý: ở đây không khuyến nghị dùng chế độ Auto (tự động chọn model). Nếu dùng bản quốc tế, khuyến nghị dùng model Gemini hoặc GPT; nếu dùng bản nội địa, khuyến nghị bạn thử Kimi k2, Minimax, GLM, v.v.** Mỗi model có use case khác nhau, không có quy tắc cứng nhắc cái nào tốt hơn cái nào — bạn có thể thử đổi model khi gặp khó khăn không giải quyết được, qua nhiều lần thử để tìm ra kết quả tốt nhất cho bản thân.
 
 ![](images/image21.png)
 
-以上就是对 Trae 的一个简单介绍。接下来，我们可以回顾一下之前在 z.ai 中做过的操作，并尝试在 Trae 中做同样的事情。
+Trên đây là phần giới thiệu sơ lược về Trae. Tiếp theo, chúng ta có thể nhìn lại những gì đã làm trên z.ai và thử làm điều tương tự trong Trae.
 
-### 4.2 第一步：新建空文件夹并用 AI IDE 打开
+### 4.2 Bước 1: Tạo thư mục trống và mở bằng AI IDE
 
-在正式动手之前，我们首先需要准备一个干净的项目工作目录。
-以本小节示例为例，可以在本地新建一个名为 snake-game-react 的空文件夹。
+Trước khi bắt tay vào làm, chúng ta cần chuẩn bị một thư mục làm việc dự án sạch sẽ.
+Lấy ví dụ trong mục này, bạn có thể tạo một thư mục trống tên `snake-game-react` trên máy tính.
 
-随后，打开已安装好的 AI IDE，在启动界面选择打开文件夹或Open Folder，将该空文件夹作为项目根目录导入；也可以直接将文件夹拖入 IDE 窗口完成打开。此时，左侧资源管理器中不会出现任何代码文件，表示我们正从一个完全空白的项目状态开始。
+Sau đó, mở AI IDE đã cài đặt, ở màn hình khởi động chọn mở thư mục hoặc Open Folder, nhập thư mục trống đó làm thư mục gốc dự án; hoặc kéo thẳng thư mục vào cửa sổ IDE để mở. Lúc này, trình quản lý tài nguyên bên trái sẽ không có file code nào — cho thấy chúng ta đang bắt đầu từ một dự án hoàn toàn trắng.
 
-::: details 📚 可选：接入云服务厂商的 API 或 Coding Plan
+::: details 📚 Tùy chọn: Kết nối API hoặc Coding Plan của nhà cung cấp dịch vụ đám mây
 
-本节将介绍如何接入云服务厂商的 API 或 Coding Plan，以获得更稳定、更频繁的模型调用。结尾部分会给出 Trae 中接入的截图。
+Phần này sẽ giới thiệu cách kết nối API hoặc Coding Plan của nhà cung cấp dịch vụ đám mây để có được lượt gọi model ổn định và thường xuyên hơn. Cuối phần sẽ có ảnh chụp màn hình minh họa việc kết nối trong Trae.
 
-**什么是 Coding Plan**
+**Coding Plan là gì**
 
-Coding Plan 是各大云服务厂商推出的订阅计划，购买后你可以在一定时期内**无限制或高频次地使用**该厂商的大模型 API。相比于按 Token 计费的方式，Coding Plan 更像是"包月套餐"——你付一笔固定的费用，就能放心大胆地一直用，不用担心每次调用都要计费。
+Coding Plan là gói đăng ký do các nhà cung cấp dịch vụ đám mây lớn cung cấp — sau khi mua, bạn có thể **sử dụng không giới hạn hoặc tần suất cao** API LLM của nhà cung cấp đó trong một khoảng thời gian. So với tính phí theo Token, Coding Plan giống "gói tháng" hơn — bạn trả một khoản cố định và dùng thoải mái mà không lo bị tính phí từng lần gọi.
 
-**为什么需要购买 Coding Plan**
+**Tại sao cần mua Coding Plan**
 
-你可能会问：既然可以直接使用 API 调用大模型，为什么还要购买 Coding Plan 呢？主要有以下原因：**可以一直用**：Coding Plan 最核心的优势就是你可以随时、频繁地调用大模型，不用担心用多了费用爆炸，也不需要频繁看计费表
+Bạn có thể tự hỏi: đã có thể gọi LLM trực tiếp qua API rồi, sao còn cần mua Coding Plan? Lý do chính: **dùng được liên tục** — ưu điểm cốt lõi của Coding Plan là bạn có thể gọi LLM bất cứ lúc nào và thường xuyên mà không lo chi phí bùng nổ, không cần liên tục theo dõi bảng tính phí.
 
-**推荐的国内云服务 Coding Plan**
+**Coding Plan nội địa được khuyến nghị**
 
-以下是国内主流云服务厂商提供的 Coding Plan 推荐选项：
+Dưới đây là các lựa chọn Coding Plan được khuyến nghị từ các nhà cung cấp dịch vụ đám mây nội địa phổ biến:
 
-- 智谱 AI（BigModel Plan）：https://bigmodel.cn/glm-coding  
-- 火山引擎（字节云 AI Plan）：https://www.volcengine.com/activity/codingplan
+- Zhipu AI (BigModel Plan): https://bigmodel.cn/glm-coding
+- Volcano Engine (ByteDance Cloud AI Plan): https://www.volcengine.com/activity/codingplan
 
-> 💡 **也可以直接接入大模型 API**
-> 除了 Coding Plan，你也可以直接通过 Add Model 接入各大模型的 API。你可以参考下文接入 OpenRouter StepFun 免费 API 的方式，将 API 接入 Trae 进行使用。经测试可满足基本的编程需求。
-> 如果需要充值，建议先充值 10 元感受一下能用多久，比如 DeepSeek 等性价比较高的模型
+> 💡 **Cũng có thể kết nối trực tiếp API LLM**
+> Ngoài Coding Plan, bạn cũng có thể kết nối API của các model lớn trực tiếp qua Add Model. Bạn có thể tham khảo cách kết nối OpenRouter StepFun API miễn phí bên dưới để đưa API vào Trae sử dụng. Qua kiểm thử có thể đáp ứng nhu cầu lập trình cơ bản.
+> Nếu cần nạp tiền, khuyến nghị nạp trước một khoản nhỏ để trải nghiệm xem dùng được bao lâu — ví dụ các model có giá/hiệu năng tốt như DeepSeek.
 
-**如何接入 Coding Plan**
+**Cách kết nối Coding Plan**
 
-接入 Coding Plan 的步骤非常简单，只需几分钟即可完成：
+Các bước kết nối Coding Plan rất đơn giản, chỉ mất vài phút:
 
-1. 访问你选择的云服务厂商官网（如智谱 AI：https://bigmodel.cn/glm-coding ，火山引擎：https://www.volcengine.com/activity/codingplan）
-2. 注册账号并登录
-3. 找到 "定价" 或 "Coding Plan" 页面
-4. 选择适合你的套餐并完成支付
-5. 支付成功后，你会获得一个 API Key 或 Plan ID
+1. Truy cập trang web chính thức của nhà cung cấp bạn chọn (ví dụ Zhipu AI: https://bigmodel.cn/glm-coding , Volcano Engine: https://www.volcengine.com/activity/codingplan)
+2. Đăng ký tài khoản và đăng nhập
+3. Tìm trang "Pricing" hoặc "Coding Plan"
+4. Chọn gói phù hợp và hoàn tất thanh toán
+5. Sau khi thanh toán thành công, bạn sẽ nhận được API Key hoặc Plan ID
 
-::: tip 🎯 自定义模型推荐
+::: tip 🎯 Khuyến nghị model tùy chỉnh
 
-在 Trae 中接入自定义模型时，我们**默认推荐使用 OpenRouter 方案**。OpenRouter 提供了统一的 API 接口，可以方便地接入多种大语言模型。
+Khi kết nối model tùy chỉnh trong Trae, chúng ta **mặc định khuyến nghị dùng phương án OpenRouter**. OpenRouter cung cấp giao diện API thống nhất, giúp kết nối nhiều LLM một cách tiện lợi.
 
-**截至 2026 年 2 月 12 日，你还可以使用 StepFun 的免费 API：**
+**Tính đến ngày 12 tháng 2 năm 2026, bạn vẫn có thể dùng API miễn phí của StepFun:**
 
-- **`stepfun/step-3.5-flash:free`**：StepFun（阶跃星辰）提供的免费模型，同样支持在 Trae 中直接接入使用。
+- **`stepfun/step-3.5-flash:free`**: Model miễn phí do StepFun cung cấp, cũng hỗ trợ kết nối trực tiếp vào Trae.
 
-**其它免费模型：**
+**Các model miễn phí khác:**
 
-- **`openrouter/free`**：这是一个默认使用免费 LLM API 的模型选项，可以直接在 Trae 的 Custom Model 接入中使用（直接写进模型 ID 即可），无需付费即可体验 AI 编程功能。
+- **`openrouter/free`**: Đây là tùy chọn model mặc định dùng LLM API miễn phí, có thể dùng trực tiếp trong phần kết nối Custom Model của Trae (gõ thẳng vào ô Model ID), không cần trả phí để trải nghiệm tính năng AI lập trình.
 
-这些免费选项非常适合初学者体验，在正式投入生产环境前，可以先通过这些免费方案熟悉 AI IDE 的工作流程。
+Các lựa chọn miễn phí này rất phù hợp để người mới trải nghiệm — trước khi đưa vào môi trường sản xuất thực tế, bạn có thể dùng các phương án miễn phí này để làm quen với quy trình làm việc của AI IDE.
 
-**可选：接入大模型调用 API（以 DeepSeek 为例）**
+**Tùy chọn: Kết nối API LLM (lấy DeepSeek làm ví dụ)**
 
-1. 访问 DeepSeek 平台：https://platform.deepseek.com/usage
-2. 注册账号并登录
-3. 在充值页面购买 10 元的 Token 包
-4. 充值成功后，在 API Keys 页面创建并复制 API Key
-5. 在 Trae 中点击 **"Add Model"**，找到 DeepSeek，选择对应模型，输入 API Key 即可使用
+1. Truy cập nền tảng DeepSeek: https://platform.deepseek.com/usage
+2. Đăng ký tài khoản và đăng nhập
+3. Mua gói Token trên trang nạp tiền
+4. Sau khi nạp thành công, tạo và sao chép API Key trên trang API Keys
+5. Trong Trae nhấn **"Add Model"**, tìm DeepSeek, chọn model tương ứng, nhập API Key là có thể dùng
 
-通过下列界面，你可以成功添加（注意看选择模型的选项后【一定要滑动到最底部】，下面有一个“自定义模型“，点击后才可以输入模型 ID，此时可以输入上述推荐的模型 ID 如 `stepfun/step-3.5-flash:free` 直接写入即可，同时点击下方的获取 Key 前往官网获得对应的 API Key 写入即可正常使用。）
+Qua giao diện bên dưới, bạn có thể thêm thành công (lưu ý xem tùy chọn chọn model — **nhất định phải kéo xuống tận cùng**, bên dưới có mục "Custom Model", nhấn vào mới có thể nhập Model ID; lúc này bạn có thể nhập Model ID được khuyến nghị ở trên như `stepfun/step-3.5-flash:free` trực tiếp, đồng thời nhấn "Get Key" bên dưới để đến trang web chính thức lấy API Key tương ứng điền vào là có thể dùng bình thường.)
 
 ![](images/index-2026-02-12-14-14-51.png)
 
 ![](images/index-2026-02-12-14-15-29.png)
 :::
 
-### 4.3 第二步：在侧边栏聊天，让 AI 用 React 设计贪吃蛇游戏
+### 4.3 Bước 2: Chat ở sidebar, nhờ AI dùng React thiết kế game Rắn Săn Mồi
 
-接下来，打开 AI 聊天侧边栏：一般是按 `Ctrl+L` 或点击右侧聊天图标。然后在聊天里输入一个足够清晰的提示：
+Tiếp theo, mở sidebar chat AI: thường là nhấn `Ctrl+L` hoặc nhấn icon chat bên phải. Sau đó nhập một prompt đủ rõ ràng vào cửa sổ chat:
 
-> 请你用 React 架构实现贪吃蛇游戏，包含键盘控制、吃到食物变长加分、撞墙或撞到自己时显示“游戏结束”并支持重新开始。实现后帮我启动这个项目。如果遇到没安装的程序环境就自动安装没安装的环境。
+> Hãy dùng kiến trúc React để tạo game Rắn Săn Mồi, bao gồm điều khiển bằng bàn phím, ăn thức ăn thì rắn dài thêm và tăng điểm, va tường hoặc tự cắn thân thì hiển thị "Trò chơi kết thúc" và hỗ trợ chơi lại. Sau khi tạo xong hãy khởi động dự án cho tôi. Nếu gặp môi trường chương trình chưa cài đặt thì tự động cài đặt.
 
-在这个过程中，你需要意识到 AI 不只是聊天模型，它能够帮助你操作本机环境：创建文件、安装依赖、执行启动命令等。你可以直接用自然语言描述想要达成的目标，由 AI 来决定具体执行哪些命令、如何组织代码。
+Trong quá trình này, bạn cần nhận ra rằng AI không chỉ là model chat — nó có thể giúp bạn thao tác trên môi trường máy tính: tạo file, cài đặt dependency, thực thi lệnh khởi động, v.v. Bạn có thể dùng ngôn ngữ tự nhiên để mô tả mục tiêu muốn đạt được, để AI quyết định cụ thể thực thi lệnh nào, tổ chức code như thế nào.
 
-如果执行过程中遇到问题，AI 会在对话里展示报错和处理方案，你可以继续通过对话让它调整，而不必自己记住所有命令细节。
+Nếu trong quá trình thực thi gặp vấn đề, AI sẽ hiển thị lỗi và phương án xử lý trong hội thoại — bạn có thể tiếp tục chat để yêu cầu nó điều chỉnh mà không cần tự nhớ tất cả chi tiết lệnh.
 
-::: warning ⚠️ 需要注意
-例如下图所示，**有时候 AI Agent 会在执行的过程中暂停，这是因为它需要等待你输入一些信息进行交互**，比如输入创建的名字，或者回车确认指令执行。或者点击指令进行执行。一般情况我们直接回车即可，如果你不确定这步需要做什么，你可以截图当前界面询问大模型应该如何操作。
+::: warning ⚠️ Cần lưu ý
+Ví dụ như hình dưới đây, **đôi khi AI Agent sẽ tạm dừng trong quá trình thực thi vì nó cần chờ bạn nhập một số thông tin tương tác**, ví dụ nhập tên tạo, hoặc nhấn Enter để xác nhận thực thi lệnh, hoặc nhấn vào lệnh để chạy. Thông thường chúng ta nhấn Enter trực tiếp là được; nếu bạn không chắc bước này cần làm gì, bạn có thể chụp màn hình giao diện hiện tại và hỏi LLM nên thao tác như thế nào.
 :::
 
-如图所示，这里我们需要点击 Run 进行确认：
+Như hình, ở đây chúng ta cần nhấn Run để xác nhận:
 ![](images/index-2026-01-09-10-52-55.png)
 
-如图所示，这里我们只需要输入 y 即可确认：
+Như hình, ở đây chúng ta chỉ cần nhập y để xác nhận:
 ![](images/index-2026-01-09-10-53-24.png)
 
 ![](images/index-2026-01-09-10-26-33.png)
 
-如图所示，这里我们正在创建模板，但不知道如何操作，我们可以截图该部分对大模型进行询问：
+Như hình, ở đây chúng ta đang tạo template nhưng không biết phải thao tác thế nào — chúng ta có thể chụp màn hình phần này và hỏi LLM:
 
 ![](images/index-2026-01-09-10-29-12.png)
 
-AI Agent 在执行过程中暂停的还有一部分原因是因为此时启动了一个“服务”，我们的贪吃蛇本身属于一种“服务”，如果你看到如下命令的网址，则表示 Agent 帮我们执行了一个本地的电脑服务，我们可以访问对应的网址访问我们的贪吃蛇，由于服务需要持续启动，这里会陷入暂停。我们只需要点击 `Skip` 按钮即可。
+Một phần khác khiến AI Agent tạm dừng trong quá trình thực thi là vì lúc này một "service" đã khởi động — bản thân game Rắn Săn Mồi của chúng ta là một loại "service". Nếu bạn thấy địa chỉ web trong lệnh dưới đây, có nghĩa là Agent đã giúp chúng ta chạy một service cục bộ trên máy tính, bạn có thể truy cập địa chỉ tương ứng để vào game Rắn Săn Mồi của mình. Vì service cần chạy liên tục nên ở đây sẽ bị tạm dừng. Chúng ta chỉ cần nhấn nút `Skip` là được.
 
 ![](images/index-2026-01-09-10-30-51.png)
 
-在这个过程中，如果你遇到一些术语和看不懂的内容，不用担心，你可以查阅附录中的“计算机术语解释”部分，或者直接向 AI 咨询，或者及时提问！
+Trong quá trình này, nếu bạn gặp một số thuật ngữ và nội dung không hiểu, đừng lo — bạn có thể tra cứu phần "Giải thích thuật ngữ máy tính" trong phụ lục, hoặc hỏi trực tiếp AI, hoặc đặt câu hỏi kịp thời!
 
-如果你在过程中遇到不符预期的现象，例如贪吃蛇撞墙后不会结束游戏，贪吃蛇点击开始后不会移动，这时你只需要把现象描述给侧边栏 Agent 即可。如果遇到报错问题，记得截图或者复制错误到侧边栏 Agent，如果多次仍然不能解决问题，请你尝试更换模型操作。
+Nếu trong quá trình bạn gặp hiện tượng không như kỳ vọng — ví dụ rắn va tường không kết thúc game, rắn nhấn bắt đầu không di chuyển — bạn chỉ cần mô tả hiện tượng đó cho Agent ở sidebar. Nếu gặp lỗi, nhớ chụp màn hình hoặc copy lỗi vào Agent ở sidebar; nếu nhiều lần vẫn không giải quyết được, bạn hãy thử đổi sang model khác.
 
-稍作片刻，我们即可得到类似 z.ai 一样的结果：
+Chỉ một lúc, chúng ta sẽ nhận được kết quả tương tự như trên z.ai:
 
 ![](images/index-2026-01-09-10-33-37.png)
 
-我们可以点击右下角的打勾进行确定代码的变更，也可以点击 `Cancel` 按钮取消变更。或者点击 2 files need review 的地方展开查看变动后的代码。
+Bạn có thể nhấn dấu tích ở góc dưới bên phải để xác nhận thay đổi code, hoặc nhấn nút `Cancel` để hủy thay đổi. Hoặc nhấn vào "2 files need review" để xem chi tiết code đã thay đổi.
 
-这里还值得注意的是，由于修改代码并不一定正确，我们还需要知道所有的 IDE 的 Agent 都支持代码回退，例如，假设我这里不小心做了个错误的修改操作，或者这次操作的结果让你感到不满意，在修改结束后我们可以返回输入框的部分，点击 Revert 按钮将操作回退到修改前的状态，你可以修改输入的文字进行再一次操作：
+Điều đáng chú ý ở đây là: vì chỉnh sửa code chưa chắc đã đúng, bạn cần biết rằng tất cả Agent của IDE đều hỗ trợ hoàn tác code. Ví dụ, nếu bạn lỡ thực hiện một thao tác chỉnh sửa sai, hoặc kết quả lần thao tác này khiến bạn không hài lòng, sau khi chỉnh sửa xong bạn có thể quay lại phần ô nhập liệu, nhấn nút Revert để hoàn tác về trạng thái trước khi chỉnh sửa, rồi sửa lại nội dung đã nhập để thực hiện lại:
 
 ![](images/index-2026-01-09-10-42-53.png)
 
-### 4.4 第三步（可选）：向 AI 追问代码实现细节
+### 4.4 Bước 3 (Tùy chọn): Hỏi thêm AI về chi tiết triển khai code
 
-当贪吃蛇游戏已经可以正常运行时，如果你对前端或 React 还不熟，可以继续在同一个聊天窗口里，请 AI 用尽量口语化的方式帮你导览代码。你不需要切换工具，也不必刻意去翻文档，只要围绕当前项目持续发问即可。
+Khi game Rắn Săn Mồi đã có thể chạy bình thường, nếu bạn chưa quen với frontend hoặc React, bạn có thể tiếp tục trong cùng cửa sổ chat, nhờ AI giải thích code theo cách càng gần với ngôn ngữ hàng ngày càng tốt. Bạn không cần chuyển công cụ hay cố tình tra tài liệu — chỉ cần tiếp tục đặt câu hỏi xoay quanh dự án hiện tại.
 
-一个比较实用的做法是，让 AI 先整体讲一遍“游戏是怎么动起来的”，再拆到具体细节。比如你可以直接提问：
+Một cách thực tế là nhờ AI giải thích tổng quan trước "game chuyển động như thế nào", rồi mới đi vào chi tiết cụ thể. Ví dụ bạn có thể hỏi thẳng:
 
-> “请从上到下讲一遍，这个贪吃蛇游戏每一步是怎么动起来的？尽量少用专业术语。”
+> "Hãy giải thích từ đầu đến cuối, game Rắn Săn Mồi này chuyển động từng bước như thế nào? Hãy dùng ít thuật ngữ chuyên môn nhất có thể."
 
 ![](images/index-2026-01-09-10-44-36.png)
 
-然后再顺着它的回答继续追问关键点，例如：
+Sau đó tiếp tục hỏi thêm về các điểm mấu chốt theo câu trả lời của nó, ví dụ:
 
-> “蛇在屏幕上的每一节身体，是用什么数据结构来记的？能打个比方吗？”  
-> “你是怎么控制‘隔一段时间动一下’的？这在代码里是哪一段？”  
-> “蛇吃到食物时，你做了哪几步操作？在哪一段逻辑里判断吃到了？”  
-> “撞墙和撞到自己，分别是在哪些代码里判断出来的？”
+> "Mỗi đốt thân rắn trên màn hình được lưu bằng cấu trúc dữ liệu gì? Có thể cho một ví dụ so sánh không?"
+> "Bạn kiểm soát 'cứ một khoảng thời gian lại di chuyển một lần' như thế nào? Đoạn đó ở đâu trong code?"
+> "Khi rắn ăn thức ăn, bạn thực hiện những bước nào? Logic phán đoán đã ăn được ở đoạn nào?"
+> "Va tường và tự cắn thân, tương ứng được phán đoán trong đoạn code nào?"
 
-如果你看到某个文件（比如 `SnakeGame.tsx`）但完全不知道它在干什么，也可以直接请 AI 分块说明：
+Nếu bạn thấy một file nào đó (ví dụ `SnakeGame.tsx`) mà hoàn toàn không hiểu nó làm gì, cũng có thể nhờ AI giải thích theo từng khối:
 
-> “请把 `SnakeGame.tsx` 按功能分几块讲一下：每一块大概负责什么，用通俗一点的说法。”
+> "Hãy chia `SnakeGame.tsx` thành vài phần theo chức năng: mỗi phần chịu trách nhiệm gì, dùng cách diễn đạt thông dụng nhé."
 
-在这一轮对话中，你可以把不懂的词一律当成追问入口，比如：
+Trong vòng hội thoại này, bạn có thể biến bất kỳ từ nào không hiểu thành câu hỏi tiếp theo, ví dụ:
 
-> “你刚才说的‘状态’具体指什么？能用一个生活中的例子解释吗？”  
-> “你说的‘定时器’在这里主要是干嘛的？如果把它去掉，会发生什么？”
+> "'State' mà bạn vừa nói cụ thể là gì? Có thể giải thích bằng một ví dụ trong cuộc sống hàng ngày không?"
+> "'Timer' ở đây chủ yếu dùng để làm gì? Nếu bỏ nó đi, điều gì sẽ xảy ra?"
 
-通过这种方式，你的目标不是一下子记住所有概念，而是先搞清三件事：这款游戏里有哪些核心数据（蛇、食物、分数、游戏状态等），这些数据在什么时机会发生变化（移动、吃到食物、游戏结束等），以及每一种变化对应的是哪一小段代码。只要这三点理顺了，你就基本可以看懂这份代码的主干逻辑。
+Qua cách này, mục tiêu của bạn không phải ghi nhớ hết tất cả khái niệm ngay, mà là hiểu rõ ba điều trước: game này có những dữ liệu cốt lõi nào (rắn, thức ăn, điểm số, trạng thái game, v.v.), những dữ liệu đó thay đổi vào thời điểm nào (di chuyển, ăn thức ăn, kết thúc game, v.v.), và mỗi loại thay đổi tương ứng với đoạn code nhỏ nào. Chỉ cần nắm rõ ba điều này, bạn về cơ bản có thể đọc hiểu logic chính của đoạn code này.
 
-### 4.5 第四步：让 AI 把画面变好看一点
+### 4.5 Bước 4: Nhờ AI làm cho giao diện đẹp hơn
 
-这里先提醒一件对小白很重要的事情：不要只对 AI 说一句“我要把这个画面变好看”。这种说法对人类设计师都太模糊，更别说对模型了——“好看”是什么风格、哪些地方需要调整、是排版问题还是配色问题，AI 都无法从你这一句里读出来。为了让 AI 真正做出接近你心里预期的效果，你需要学会把“我想要好看”这种模糊目标拆成一串具体、可执行的小要求。
+Ở đây trước tiên cần nhắc một điều rất quan trọng với người mới: đừng chỉ nói với AI một câu "tôi muốn giao diện này đẹp hơn". Cách nói này ngay cả với designer con người cũng quá mơ hồ, chứ chưa nói đến model — "đẹp" là phong cách gì, phần nào cần điều chỉnh, vấn đề bố cục hay màu sắc, AI không thể đọc ra từ một câu của bạn. Để AI thực sự tạo ra hiệu quả gần với kỳ vọng trong đầu bạn, bạn cần học cách chia mục tiêu mơ hồ "tôi muốn đẹp hơn" thành một loạt yêu cầu cụ thể, có thể thực thi.
 
-比如，很多人一开始会这样说：
+Ví dụ, nhiều người lúc đầu sẽ nói thế này:
 
-> “我要把这个画面变好看一点。”
+> "Tôi muốn giao diện này đẹp hơn một chút."
 
-例如，你可以先给出一组整体需求：
+Ví dụ, bạn có thể đưa ra trước một nhóm yêu cầu tổng thể:
 
-> “请帮我把游戏界面整体美化一下：
+> "Hãy giúp tôi làm đẹp tổng thể giao diện game:
 >
-> - 游戏区域居中显示，不要贴在左上角；
-> - 换成较浅的背景色，让蛇和食物更醒目；
-> - 把分数放大，放在明显的位置；
-> - 以蓝色为主色调，美化一下整体配色和按钮。”
+> - Khu vực game hiển thị ở giữa, không dán vào góc trên bên trái;
+> - Đổi sang màu nền sáng hơn, để rắn và thức ăn nổi bật hơn;
+> - Phóng to điểm số, đặt ở vị trí nổi bật;
+> - Lấy màu xanh dương làm màu chủ đạo, làm đẹp tổng thể màu sắc và nút bấm."
 
-如果你希望在“游戏结束”时有更清晰的反馈，可以进一步补充：
+Nếu bạn muốn có phản hồi rõ ràng hơn khi "kết thúc game", có thể bổ sung thêm:
 
-> “当游戏结束时，请在画面中央显示‘游戏结束’，下面有一个‘重新开始’按钮，可以重置游戏。”
+> "Khi kết thúc game, hãy hiển thị 'Trò chơi kết thúc' ở giữa màn hình, bên dưới có nút 'Chơi lại' để reset game."
 
-AI 会根据你的描述，直接修改 React 组件和样式。保存后刷新浏览器，你就能看到新的界面。如果效果和你想象的还有差距，可以继续做小步调整，例如：
+AI sẽ dựa vào mô tả của bạn để chỉnh sửa trực tiếp component React và style. Sau khi lưu, làm mới trình duyệt, bạn sẽ thấy giao diện mới. Nếu hiệu quả vẫn còn khoảng cách so với tưởng tượng, bạn có thể tiếp tục điều chỉnh nhỏ, ví dụ:
 
-> “分数再大一点，颜色更醒目一些。”  
-> “游戏区域再紧凑一点，四周预留一点留白。”  
-> “重新开始按钮改成蓝色圆角风格，放在提示下方居中。”
+> "Điểm số to thêm nữa, màu nổi bật hơn."
+> "Khu vực game gọn lại, để trắng một chút xung quanh."
+> "Nút chơi lại đổi thành kiểu bo tròn màu xanh dương, đặt căn giữa bên dưới thông báo."
 
-在这个阶段，如果某次修改导致报错，也不需要自己硬查。直接把错误信息复制到聊天窗口，或者配合一段简要描述，比如“这是我刚才美化界面后出现的错误”，让 AI 在当前项目上下文里帮你定位和修复。这样你就可以在“不断对话、不断刷新”的循环中，把一个能跑的 Demo 逐步打磨成界面清晰、交互顺畅的小型成品。
+Ở giai đoạn này, nếu một lần chỉnh sửa nào đó gây ra lỗi, bạn cũng không cần tự tra. Chỉ cần copy thông báo lỗi vào cửa sổ chat, hoặc kèm một đoạn mô tả ngắn như "đây là lỗi xuất hiện sau khi tôi vừa làm đẹp giao diện", để AI xác định và sửa trong ngữ cảnh dự án hiện tại. Như vậy bạn có thể trong vòng lặp "liên tục chat, liên tục làm mới" từng bước mài giũa một Demo chạy được thành sản phẩm nhỏ có giao diện rõ ràng, tương tác mượt mà.
 
-### 4.6 （可选）参考 z.ai 架构修改贪吃蛇结果
+### 4.6 (Tùy chọn) Tham khảo kiến trúc z.ai để chỉnh sửa kết quả game Rắn Săn Mồi
 
-对于 vibe coding 小白来说，最难的事情反而是不知道什么才算是“最佳实践“，不知道怎么样的架构才是最适合的；因为不知道计算机基础，所以没办法很好的引导 AI，解决这个难题的方法是”直接参考“；还记得我们之前说过的 z.ai 中可以查看代码吗？其实对应 README（项目中用于介绍功能和技术架构的部分）中已经给出了一个最佳架构参考：
+Với người mới vibe coding, điều khó nhất thường là không biết thế nào mới là "best practice", không biết kiến trúc nào mới phù hợp nhất — vì không có nền tảng máy tính, nên không thể hướng dẫn AI tốt. Cách giải quyết vấn đề này là "tham khảo trực tiếp"; bạn có nhớ trước đây chúng ta nói trên z.ai có thể xem code không? Thực ra trong README tương ứng (phần trong dự án dùng để giới thiệu tính năng và kiến trúc kỹ thuật) đã có một tham khảo kiến trúc tốt nhất:
 
 ![](images/index-2026-01-09-10-49-33.png)
 
-我们想要让本地的结果尽量符合 z.ai 的结果，我们可以复制这个 README 的全部内容，粘贴到 Trae 的侧边栏中，让他根据 README 的架构，修改本地的代码。
+Chúng ta muốn kết quả trên máy tính càng gần với kết quả trên z.ai càng tốt — chúng ta có thể copy toàn bộ nội dung README này, paste vào sidebar của Trae, nhờ nó dựa theo kiến trúc trong README để chỉnh sửa code trên máy tính.
 
 ![](images/index-2026-01-09-10-50-31.png)
 
-最后我们能得到与 z.ai 高度相似的页面设计风格：
+Cuối cùng chúng ta sẽ có được phong cách thiết kế trang rất giống với z.ai:
 
 ![](images/index-2026-01-09-11-00-57.png)
 
 <div style="margin: 50px 0;">
   <ClientOnly>
     <StepBar :active="2" :items="[
-      { title: '环境认知', description: '理解 IDE 与 AI IDE' },
-      { title: '本地实战', description: 'Trae 打造贪吃蛇' },
-      { title: '工具详解', description: '熟悉 IDE 界面' },
-      { title: '沟通技巧', description: '高效与 AI 对话' }
+      { title: 'Nhận thức môi trường', description: 'Hiểu IDE và AI IDE' },
+      { title: 'Thực chiến trên máy', description: 'Trae tạo Rắn Săn Mồi' },
+      { title: 'Khám phá công cụ', description: 'Làm quen giao diện IDE' },
+      { title: 'Kỹ năng giao tiếp', description: 'Chat hiệu quả với AI' }
     ]" />
   </ClientOnly>
 </div>
+## 5. Từng nút trên giao diện dùng để làm gì
 
-## 5. 界面上每个按钮是干什么的
-
-在上述操作中，我们已经快速跑通了最小程序生成闭环，但我们仍然对 IDE 不能说得上熟悉。为了彻底熟悉这个之后与我们长期相处的工具。我们会在这一节中对 IDE 的每个细节环节进行深入解释，首先从界面开始，不同 AI IDE 的界面略有差异，但大部分都延续了 [VS Code 的布局](https://code.visualstudio.com/docs/getstarted/getting-started)。
+Trong các thao tác trên, chúng ta đã nhanh chóng chạy thông vòng lặp tạo chương trình tối giản, nhưng bạn vẫn chưa thể nói là thực sự quen thuộc với IDE. Để hoàn toàn làm chủ công cụ sẽ đồng hành lâu dài với bạn, trong phần này chúng ta sẽ giải thích chi tiết từng thành phần giao diện của IDE. Các AI IDE khác nhau có giao diện đôi chút khác biệt, nhưng hầu hết đều kế thừa [bố cục của VS Code](https://code.visualstudio.com/docs/getstarted/getting-started).
 
 ![](images/image32.webp)
 
-其中每个部分的具体作用为：
+Chức năng cụ thể của từng phần như sau:
 
-- **Title Bar（标题栏）**：显示文件名和窗口控制按钮。
-- **Activity Bar（活动栏）**：切换文件、搜索等功能视图。
-- **Side Bar（侧边栏）**：展示文件列表等具体内容。
-- **Editor Groups（编辑区）**：编写代码的核心区域。
-- **Breadcrumbs（路径导航）**：显示文件路径，支持跳转。
-- **Minimap（代码缩略图）**：快速预览和定位代码。
-- **Panel（底部面板）**：包含终端和输出窗口。
-- **Status Bar（状态栏）**：显示当前环境状态。
+- **Title Bar (Thanh tiêu đề)**: Hiển thị tên file và các nút điều khiển cửa sổ.
+- **Activity Bar (Thanh hoạt động)**: Chuyển đổi giữa các chế độ xem như file, tìm kiếm, v.v.
+- **Side Bar (Thanh bên)**: Hiển thị danh sách file và nội dung cụ thể.
+- **Editor Groups (Vùng soạn thảo)**: Khu vực cốt lõi để viết code.
+- **Breadcrumbs (Điều hướng đường dẫn)**: Hiển thị đường dẫn file, hỗ trợ nhảy nhanh đến vị trí cần thiết.
+- **Minimap (Bản đồ thu nhỏ của code)**: Xem trước và định vị code nhanh chóng.
+- **Panel (Bảng phía dưới)**: Bao gồm terminal và cửa sổ output.
+- **Status Bar (Thanh trạng thái)**: Hiển thị trạng thái môi trường hiện tại.
 
-更具体的详细内容解释，请查看[附录中的 虚拟 IDE 可视化 IDE 原理部分](/vi-vn/appendix/2-development-tools/ide-basics)。
+Để xem giải thích chi tiết hơn, vui lòng tham khảo [phần Nguyên lý IDE trực quan hóa trong phụ lục](/vi-vn/appendix/2-development-tools/ide-basics).
 
 <div style="margin: 50px 0;">
   <ClientOnly>
     <StepBar :active="3" :items="[
-      { title: '环境认知', description: '理解 IDE 与 AI IDE' },
-      { title: '本地实战', description: 'Trae 打造贪吃蛇' },
-      { title: '工具详解', description: '熟悉 IDE 界面' },
-      { title: '沟通技巧', description: '高效与 AI 对话' }
+      { title: 'Nhận thức môi trường', description: 'Hiểu IDE và AI IDE' },
+      { title: 'Thực chiến tại máy', description: 'Dùng Trae tạo game Snake' },
+      { title: 'Giải thích công cụ', description: 'Làm quen giao diện IDE' },
+      { title: 'Kỹ năng giao tiếp', description: 'Trò chuyện hiệu quả với AI' }
     ]" />
   </ClientOnly>
 </div>
+## 6. Cách nói chuyện với AI sao cho hiệu quả
 
-## 6. 怎么跟 AI 说话才有效
+Khi khả năng của AI ngày càng mạnh mẽ hơn, chúng ta đã có thể giao cho AI nhiều công việc "nhờ lập trình viên viết code" trước đây.
+Nhưng trong thực tế sử dụng, bạn sẽ nhận ra: cùng dùng một AI, có người chỉ vài câu là lấy được một dự án nhỏ chạy được, có người nói cả buổi nhưng kết quả lại hoàn toàn không phải thứ mình muốn. Sự khác biệt thường không nằm ở chỗ "ai thông minh hơn", mà nằm ở chỗ — cách bạn nói chuyện với AI có đủ cụ thể, đủ có bước hay không.
+Trong phần này, chúng ta sẽ xuất phát từ một vài tình huống phổ biến, giới thiệu một số cách đặt câu hỏi phù hợp với người hoàn toàn mới, giúp bạn ổn định hơn trong việc để AI đưa ra kết quả có thể dùng được.
 
-随着 AI 能力越来越强，我们已经可以把很多“让程序员写代码”的工作交给 AI 来完成。  
-但是，在实际使用中你会发现：同样是用同一个 AI，有的人几句话就能要到能跑起来的小项目，有的人聊了半天，结果却完全不是自己想要的，其差别往往不在于“谁更聪明”，而在于——你跟 AI 说话的方式，是不是足够具体、足够有步骤。  
-本节我们从几个常见场景出发，介绍一些适合完全小白的提问方式，帮助你更稳定地让 AI 给出可用的结果。
+### 6.1 Nói rõ nhu cầu của bạn: Từ "ý tưởng mơ hồ" đến "mô tả cụ thể"
 
-### 6.1 说清楚你的需求：从“模糊想法”到“具体说明”
+Nhiều người lần đầu dùng AI thường chỉ nói một câu rất chung chung, ví dụ:
 
-很多人第一次用 AI 时，习惯只说一句非常笼统的话，比如：
+> "Làm cho tôi một trang web."
+> "Viết cho tôi một ứng dụng nhỏ."
 
-> “帮我做个网页。”  
-> “帮我写个小程序。”
+Trong trường hợp này, AI chỉ có thể tự "tưởng tượng" bạn muốn gì, rồi tùy tiện đưa cho bạn thứ gì đó trông có vẻ khá hoàn chỉnh, nhưng thường lại rất khác so với thứ bạn thực sự muốn làm.
+Để AI hiểu bạn hơn, bạn cần tháo rời "ý tưởng trong đầu" ra, dùng vài câu để nói rõ từng bước.
 
-在这种情况下，AI 只能自己“脑补”你想要什么，于是它会随便给你一个看上去挺完整的东西，但往往和你真正想做的差很多。  
-要让 AI 更听得懂你的意思，需要把“脑子里的想法”拆开，用几句话一步步说清楚。
+Bạn có thể bổ sung theo những khía cạnh sau:
 
-可以从这几个方面来补充：
+1. **Nói cho AI biết bạn dùng thứ đó để làm gì**
+   Ví dụ, đừng chỉ nói "trang web cá nhân", mà hãy nói:
+   - "Tôi muốn làm một trang web giới thiệu bản thân chỉ có một trang, dùng để gửi cho nhà tuyển dụng xem."
 
-1. **告诉它，你拿这个东西来干嘛**  
-   比如，不要只说“个人网站”，而是说：
-   - “我想做一个只包含一页内容的个人简介网页，用来发给招聘的人看。”
+2. **Nói cho AI biết cần có những phần nội dung nào**
+   Không cần dùng từ chuyên môn, chỉ cần mô tả bạn muốn trang có gì, ví dụ:
+   - "Trang cần có ba phần: trên cùng là tên và một câu giới thiệu bản thân, ở giữa liệt kê vài dòng kinh nghiệm làm việc, dưới cùng để email và số Zalo."
 
-2. **告诉它，大概需要哪几块内容**  
-   不用说专业词，只要描述你希望页面上出现什么，比如：
-   - “页面要有三个部分：最上面是名字和一句自我介绍，中间列出几条工作经历，最下面放邮箱和微信号。”
+3. **Nói cho AI biết trình độ và giới hạn của bạn**
+   Để AI làm theo cách phù hợp với người mới, ví dụ:
+   - "Tôi hoàn toàn không biết viết code, hãy dùng cách viết đơn giản nhất để tôi có thể copy thẳng vào một file và mở bằng trình duyệt."
 
-3. **告诉它，你的水平和限制**  
-   让 AI 按照小白能接受的方式来做，比如：
-   - “我完全不会写代码，请只用最简单的写法，让我可以直接复制到一个文件里，在浏览器里打开。”
+4. **Nói cho AI biết bạn muốn nhận kết quả như thế nào**
+   Ví dụ:
+   - "Hãy cho tôi một đoạn code hoàn chỉnh có thể lưu thẳng thành `index.html` và mở bằng trình duyệt."
 
-4. **告诉它，你希望怎么拿到结果**  
-   例如：
-   - “请给我一份可以直接保存为 `index.html` 并在浏览器里打开的完整代码。”
+Tổng hợp lại, bạn có thể nói với AI như sau:
 
-综合起来，可以让你对 AI 这样说：
+> "Tôi hoàn toàn không biết viết code, muốn làm một trang web giới thiệu bản thân chỉ có một trang, dùng để gửi cho nhà tuyển dụng xem.
+> Trang cần có ba phần: trên là tên và một câu giới thiệu bản thân, ở giữa là vài dòng kinh nghiệm làm việc, dưới là email và số Zalo."
 
-> “我完全不会写代码，想做一个只包含一页内容的个人简介网页，用来发给招聘的人看。  
-> 页面需要三个部分：上面一行是名字和一句自我介绍，中间是几条工作经历，下面是邮箱和微信号。
+Khi bạn nói rõ những thông tin này, AI sẽ có thể đáp ứng gần hơn với nhu cầu thực sự của bạn, thay vì tùy tiện đưa cho bạn "thứ gì đó trông hoành tráng nhưng không dùng được".
 
-当你把这些信息说清楚之后，AI 就能更接近你真正的需求，而不是随便给你一个“看起来很厉害但用不上的东西”。
+### 6.2 Dùng đúng nhịp: Trước tiên "chạy được đã", rồi từng bước phức tạp hơn
 
-### 6.2 用对节奏：先“能跑起来”，再一点点变复杂
+Đối với người hoàn toàn mới, cái bẫy phổ biến nhất là: vừa bắt đầu đã muốn làm một thứ "cực kỳ hoàn chỉnh" với "rất nhiều tính năng".
+Ví dụ:
 
-对完全小白来说，最常见的坑是：一上来就想做一个“非常完整”“功能很多”的东西。  
-比如：
+> "Làm cho tôi một trang web như Shopee."
+> "Làm cho tôi một hệ thống có thể đăng ký, đăng nhập, đặt hàng."
 
-> “帮我做一个像淘宝那样的网站。”  
-> “帮我做一个可以注册、登录、下单的系统。”
+Kết quả thường là: AI đưa cho bạn một đống code, bạn copy vào thì không mở được hoặc báo lỗi tứ tung; bạn cũng không hiểu lỗi ở đâu, cuối cùng đành bỏ cuộc.
 
-结果往往是：AI 给你一大团代码，你复制之后不是打不开，就是到处报错；你也看不懂哪里出了问题，最后只能放弃。
+Cách làm phù hợp hơn là **chủ động kiểm soát nhịp độ**, để AI đi theo bạn từng bước một, thay vì ném tất cả mọi thứ cho bạn cùng một lúc. Bạn có thể đặt yêu cầu theo thứ tự sau:
 
-更适合的做法，是**主动控制节奏**，让 AI 跟着你一步一步来，而不是一次性把所有东西都砸给你。可以按下面这个顺序提要求：
+1. **Bước 1: Trước tiên hãy xin một "ví dụ tối giản"**
+   Chỉ kiểm tra một điều: có nhìn thấy gì trong trình duyệt không.
+   Ví dụ:
 
-1. **第一步：先要一个“最小的例子”**  
-   只检查一件事：能不能在浏览器里看到东西。  
-   例如：
+   > "Hãy cho tôi một ví dụ đơn giản nhất, chỉ cần hiện được dòng chữ 'Đây là trang chủ của tôi' trong trình duyệt là được.
+   > Rồi hướng dẫn tôi từng bước: file nên đặt tên gì, lưu như thế nào, mở như thế nào."
 
-   > “请先给我一个最简单的示例，只要在浏览器里能看到一行‘这是我的主页’就行。  
-   > 再一步步告诉我：文件名该叫什么，应该怎么保存，怎么打开。”
+2. **Bước 2: Dựa trên nền đó, từ từ bổ sung nội dung**
+   Khi bạn xác nhận "đúng là thấy dòng chữ đó rồi", mới nói tiếp:
 
-2. **第二步：在这个基础上，慢慢把内容加完整**  
-   当你确认“确实能看到那一行字”之后，再说：
+   > "Dựa trên nền vừa rồi, giúp tôi thêm một khu vực 'Kinh nghiệm làm việc', và gửi lại cho tôi toàn bộ code hoàn chỉnh. Đừng chỉ gửi phần thay đổi."
 
-   > “在刚才的基础上，帮我增加一个‘工作经历’区域，把完整代码重新发给我。不要只发改动的部分。”
+3. **Bước 3: Sau khi bố cục ổn rồi, mới nghĩ đến chuyện có đẹp không**
+   Ví dụ:
+   > "Bây giờ trang đã hiển thị nội dung bình thường rồi. Tiếp theo hãy giúp tôi làm đẹp một chút: căn giữa toàn bộ, tiêu đề to hơn, dùng font chữ dễ nhìn. Hãy cho tôi code hoàn chỉnh đã cập nhật."
 
-3. **第三步：结构差不多之后，再考虑好不好看**  
-   例如：
-   > “现在页面已经能正常显示内容了。接下来请帮我稍微美化一下：整体居中，标题大一点，用一个比较舒服的字体。请给出更新后的完整代码。”
+Mỗi khi thêm một bước, bạn chạy thử một lần, xác nhận có thay đổi thật sự, rồi mới để AI làm tiếp. Như vậy, dù bước nào có vấn đề, bạn cũng có thể quay lại "phiên bản trước còn bình thường" rất nhanh, thay vì phải làm lại từ đầu.
 
-每加一步，你都先运行一次，确认真的有变化，再让 AI 往下加。这样就算哪一步出问题，你也可以很快回到“上一版还正常”的状态，而不用完全推倒重来。
+### 6.3 Tận dụng ảnh chụp màn hình và copy: Không biết nói thì "ném màn hình cho AI"
 
-### 6.3 善用截图和复制：不会说就“把画面扔给 AI”
+Điểm khó mà nhiều người hoàn toàn mới gặp phải không phải là "không biết sửa code", mà là **không biết cách nói ra vấn đề**.
+Ví dụ:
 
-很多完全小白遇到的难点，不在于“不会改代码”，而是在于**不知道怎么把问题说出来**。  
-比如：
+- Trình duyệt đột nhiên hiện ra một đống chữ tiếng Anh báo lỗi, bạn hoàn toàn không hiểu.
+- Bố cục trang web không như bạn nghĩ, nhưng bạn cũng không biết dùng từ gì để diễn đạt.
 
-- 浏览器里突然弹出一大堆英文报错，你完全看不懂。
-- 网页的排版和你想的不一样，但你也不知道该用什么词来形容。
+Trong những tình huống này, bạn không cần cố ép mình dùng thuật ngữ chuyên môn. Cách đơn giản nhất là — **đưa nguyên xi thứ bạn thấy cho AI**.
 
-在这些情况下，不需要硬挤专业术语，最简单的方式就是——**把你看到的东西原样丢给 AI**。
+Bạn có thể làm như sau:
 
-可以这样做：
+1. **Copy nội dung lỗi**
+   Khi bạn thấy một chuỗi thông báo lỗi màu đỏ, có thể copy thẳng ra rồi nói:
 
-1. **复制报错文字**  
-   当你看到一串红色错误消息时，可以直接复制出来，然后说：
+   > "Đây là toàn bộ thông báo lỗi xuất hiện khi tôi chạy. Tôi không hiểu tiếng Anh này, hãy giải thích bằng lời bình thường trước — đây đại khái là lỗi gì.
+   > Rồi nói cho tôi biết, cách đơn giản nhất bây giờ là sửa như thế nào."
 
-   > “这是我运行后出现的完整错误信息。我看不懂这些英文，请先用普通人能听懂的话解释一下，这大概是什么意思。  
-   > 然后告诉我，我现在最简单应该怎么改。”
+2. **Cho AI xem ảnh chụp màn hình**
+   Nếu bạn thấy "trang này trông không ổn" nhưng không mô tả được, bạn có thể:
+   - Chụp ảnh màn hình trang hiện tại;
+   - Copy toàn bộ đoạn code bạn đang dùng gửi cho AI;
+   - Rồi nói rõ:
+     > "Đây là giao diện trang hiện tại, đây là toàn bộ code của tôi.
+     > Tôi muốn nó hiển thị 3 cột nhưng giờ thành 1 cột rồi. Hãy giúp tôi xem nguyên nhân và cho tôi code đã sửa xong hoàn chỉnh."
 
-2. **给 AI 看截图**
-   如果你觉得"这个页面看着就是不对"，但又不会描述，可以：
-   - 截一张当前页面的图；
-   - 把你正在用的那份代码，一整段复制给 AI；
-   - 然后说明：
-     > "这是现在页面的样子，这是我现在的完整代码。
-     > 我原本希望它是三列排版，现在变成一列了。请你帮我看一下原因，并给我一份改好后的完整代码。"
+   ::: tip 💡 Lưu ý bổ sung về tính năng chụp màn hình
 
-   ::: tip 💡 关于截图功能的补充说明
+   Cần lưu ý rằng, **không phải tất cả mọi AI model đều hỗ trợ "xem ảnh"**. Đây liên quan đến hai khái niệm khác nhau:
 
-   需要注意的是，**并非所有 AI 模型都支持"看图片"**。这涉及到两个不同的概念：
+   - **LLM thuần văn bản**: Chỉ xử lý được đầu vào là chữ, không nhận dạng được nội dung ảnh. Nếu bạn gửi ảnh chụp màn hình, nó sẽ từ chối hoặc không hiểu đúng thông tin trong ảnh.
 
-   - **纯文本大模型（LLM）**：只能处理文字输入，无法识别图片内容。如果你给它发截图，它要么拒绝处理，要么无法正确理解图片中的信息。
+   - **Model đa phương thức (multimodal)**: Có thể xử lý đồng thời nhiều loại đầu vào như chữ, ảnh — có thể "đọc hiểu" ảnh chụp màn hình bạn gửi và đưa ra gợi ý dựa trên nội dung ảnh.
 
-   - **多模态模型**：能够同时处理文字、图片等多种类型的输入，可以"看懂"你发的截图，并根据图片内容给出建议。
+   **Tham khảo khả năng của một số model phổ biến** (ví dụ các model có thể chọn trong Trae):
 
-   **常见模型的能力参考**（以 Trae 中可选的模型为例）：
-
-   | 模型 | 是否支持图片输入 |
+   | Model | Có hỗ trợ đầu vào ảnh không |
    |------|-----------------|
-   | Doubao-Seed 系列 | ✅ 支持 |
-   | GLM-4.7 / 4.6 | ❌ 不支持 |
-   | MiniMax-M2.7 / M2.5 | ❌ 不支持 |
-   | DeepSeek-V3.1 | ❌ 不支持 |
-   | Kimi-K2.5 | ✅ 支持 |
-   | Kimi-K2-0905 | ❌ 不支持 |
-   | Qwen-3-Coder | ❌ 不支持 |
-   | Gemini 系列 | ✅ 支持 |
-   | GPT 系列 | ✅ 支持 |
+   | Doubao-Seed series | ✅ Có hỗ trợ |
+   | GLM-4.7 / 4.6 | ❌ Không hỗ trợ |
+   | MiniMax-M2.7 / M2.5 | ❌ Không hỗ trợ |
+   | DeepSeek-V3.1 | ❌ Không hỗ trợ |
+   | Kimi-K2.5 | ✅ Có hỗ trợ |
+   | Kimi-K2-0905 | ❌ Không hỗ trợ |
+   | Qwen-3-Coder | ❌ Không hỗ trợ |
+   | Gemini series | ✅ Có hỗ trợ |
+   | GPT series | ✅ Có hỗ trợ |
 
-   **使用建议**：如果你想通过截图让 AI 帮你排查界面问题，请先确认你使用的模型支持图像输入。如果不支持，你可以改用文字描述问题，或者将错误信息复制粘贴给 AI。
+   **Khuyến nghị sử dụng**: Nếu bạn muốn dùng ảnh chụp màn hình để AI giúp kiểm tra vấn đề giao diện, hãy xác nhận trước rằng model bạn đang dùng có hỗ trợ đầu vào hình ảnh. Nếu không hỗ trợ, bạn có thể chuyển sang mô tả vấn đề bằng chữ, hoặc copy thông báo lỗi gửi cho AI.
 
    :::
 
-3. **遇到喜欢的网页，想做个类似的**  
-   不需要说“这个布局叫什么”，直接：
-   - 截图或复制那页的主要标题、段落；
-   - 再说：
-     > “我想做一个结构和这个差不多的页面，不需要一模一样。  
-     > 请帮我用简单一点的代码，搭一个类似的框架出来，然后我再自己把文字换成我的。”
+3. **Gặp trang web bạn thích, muốn làm thứ gì đó tương tự**
+   Không cần nói "bố cục này tên là gì", cứ thẳng thắn:
+   - Chụp ảnh hoặc copy tiêu đề chính, đoạn văn của trang đó;
+   - Rồi nói:
+     > "Tôi muốn làm một trang có cấu trúc tương tự cái này, không cần giống y hệt.
+     > Hãy giúp tôi dựng một khung tương tự bằng code đơn giản, rồi tôi sẽ tự thay chữ thành của mình."
 
-简单来说：你负责“把看到的东西搬给 AI”，再用最朴素的话说“我希望它变成什么样”；剩下的“翻译成代码、解释名词、找问题”，交给 AI 来做。
+Nói ngắn gọn: bạn chỉ cần "chuyển thứ bạn thấy sang cho AI", rồi dùng lời bình dị nhất để nói "tôi muốn nó thành như thế này"; còn lại "dịch sang code, giải thích khái niệm, tìm lỗi" — giao cho AI làm.
 
-### 6.4 当 AI 生成的代码不工作时：一套通用应对方法
+### 6.4 Khi code AI tạo ra không chạy được: Một quy trình xử lý chung
 
-在实际练习中，你一定会遇到这种情况：  
-AI 很认真地给了你一段代码，你也老老实实地复制进去了，但结果要么是浏览器一片空白，要么完全不是它说的那个效果。  
-这并不代表你“学不会”，也不代表 AI 完全错了，而是你们之间还缺少几轮“来回确认”。
+Trong quá trình thực hành, bạn chắc chắn sẽ gặp tình huống này:
+AI đã rất nghiêm túc đưa cho bạn một đoạn code, bạn cũng cẩn thận copy vào, nhưng kết quả thì trình duyệt trắng toát, hoặc hoàn toàn không phải hiệu ứng nó nói.
+Điều này không có nghĩa là bạn "không học được", cũng không có nghĩa là AI hoàn toàn sai, mà là giữa hai bên vẫn còn thiếu vài vòng "xác nhận qua lại".
 
-当代码“不工作”时，可以按下面这套固定流程来跟 AI 说：
+Khi code "không chạy được", bạn có thể nói với AI theo quy trình cố định sau:
 
-1. **先把“你做了什么 + 现在什么样”说清楚**  
-   避免只说“打不开”“不行”。可以这样描述：
+1. **Trước tiên nói rõ "bạn đã làm gì + hiện tại trông như thế nào"**
+   Tránh chỉ nói "không mở được" hay "không được". Có thể mô tả như này:
 
-   > 打开之后，页面是完全空白的，没有显示你说的那句欢迎文字。
-   > 我打开了 xxxx 页面，其中没有刚才我说的部分啊，这不能用
+   > Sau khi mở ra, trang hoàn toàn trắng, không hiển thị câu chào bạn nói.
+   > Tôi mở trang xxxx rồi, nhưng không thấy phần tôi vừa nói, dùng không được.
 
-2. **把你现在的完整代码发给 AI**  
-   很多时候问题出在：复制少了一行、或者上一次和这一次的内容混在一起了。  
-   你可以说：
+2. **Gửi cho AI toàn bộ code hiện tại của bạn**
+   Nhiều khi vấn đề nằm ở chỗ: copy thiếu một dòng, hoặc nội dung lần này và lần trước trộn lẫn vào nhau.
+   Bạn có thể nói:
 
-   > “下面是我现在这个文件里的全部代码。  
-   > 请你对比一下有没有哪里少了、写错了，或者顺序不对。  
-   > 请直接给我一份修正后的完整代码，不要只发一小段。”
+   > "Dưới đây là toàn bộ code trong file của tôi hiện tại.
+   > Hãy đối chiếu xem có chỗ nào thiếu, viết sai, hoặc sai thứ tự không.
+   > Hãy trực tiếp cho tôi code hoàn chỉnh đã sửa, đừng chỉ gửi một đoạn nhỏ."
 
-3. **如果有错误提示，一并给出**  
-   比如浏览器右上角弹出的错误，或者底部的一些红字。你可以：
-   - 把错误文字复制出来；
-   - 或者截一张图；
-   - 然后说：
-     > “这是我看到的错误提示。我完全看不懂，请先用简单的方式说明这大概是什么问题，再告诉我现在最需要改哪几行。”
+3. **Nếu có thông báo lỗi, gửi kèm luôn**
+   Ví dụ lỗi bật lên ở góc phải trình duyệt, hoặc một số chữ đỏ ở phía dưới. Bạn có thể:
+   - Copy nội dung lỗi ra;
+   - Hoặc chụp một tấm ảnh;
+   - Rồi nói:
+     > "Đây là thông báo lỗi tôi thấy. Tôi hoàn toàn không hiểu, hãy giải thích đơn giản đây là vấn đề gì, rồi nói cho tôi cần sửa mấy dòng nào nhất."
 
-4. **要求对方用“小白模式”一步一步讲**  
-   你可以直接把自己的情况说清楚，让它别省略中间步骤：
+4. **Yêu cầu giải thích theo "chế độ người mới" từng bước một**
+   Bạn có thể nói thẳng tình huống của mình, để AI đừng bỏ qua các bước trung gian:
 
-   > “我完全不会写代码，请你一步一步告诉我：  
-   > 第 1 步要改哪一行，  
-   > 第 2 步要怎么保存，  
-   > 第 3 步要怎么重新打开或者刷新页面。  
-   > 每一步都请用完整的句子写出来。”
+   > "Tôi hoàn toàn không biết viết code, hãy nói cho tôi từng bước:
+   > Bước 1 sửa dòng nào,
+   > Bước 2 lưu như thế nào,
+   > Bước 3 mở lại hoặc làm mới trang như thế nào.
+   > Mỗi bước hãy viết thành câu hoàn chỉnh."
 
-5. **最后，请它帮你做“应该看到什么”的对照**  
-   例如：
-   > 请先说一下，按照你改好的代码，正常情况下我打开网页应该看到什么内容。
+5. **Cuối cùng, nhờ AI đối chiếu "đáng lẽ phải thấy gì"**
+   Ví dụ:
+   > Hãy nói trước, theo code bạn đã sửa, trong điều kiện bình thường tôi mở trang web ra sẽ thấy nội dung gì.
 
-只要你按照这套流程来和 AI 交互，大部分“代码不工作”的情况，都可以在几轮来回中解决掉。  
-同时，你也会逐渐熟悉常见的问题类型，下次再遇到类似情况就能直接解决。
+Chỉ cần bạn làm theo quy trình này để tương tác với AI, phần lớn trường hợp "code không chạy" đều có thể giải quyết trong vài vòng qua lại.
+Đồng thời, bạn cũng sẽ dần quen với các loại vấn đề thường gặp, lần sau gặp tình huống tương tự là có thể tự xử lý được ngay.
+## 7. Tổng kết và Bước tiếp theo
 
-## 7. 小结与下一步
+Trong chương này, bạn đã hoàn thành một bước nâng cấp từ "có thể chơi một trò Snake do AI tạo ra trên trình duyệt" lên "có thể tự dựng một trò chơi nhỏ bằng AI IDE trên máy tính cá nhân". Bạn đã nắm rõ ba điều: tại sao viết code không thể thiếu một IDE như VS Code; khi thêm AI (Trae, Cursor, v.v.) vào nền tảng đó, IDE không còn chỉ là hộp công cụ nữa, mà có thêm một "thực tập sinh kỹ sư" hiểu ngôn ngữ tự nhiên, giúp bạn tạo file mới, cài môi trường, chỉnh sửa code; và mỗi khu vực trên giao diện IDE (cây file bên trái, terminal bên dưới, vùng chỉnh sửa ở giữa, panel AI bên phải) quản lý những gì, để bạn không còn bỡ ngỡ khi sử dụng.
 
-这一章里，你完成了一次从“能在网页里玩一个 AI 生成的贪吃蛇”，到“能在本地用 AI IDE 自己搭出一个小游戏”的升级。你大致搞清了三件事：写代码为什么离不开一个像 VS Code 这样的 IDE；在这个基础上，再加上 AI（Trae、Cursor 等）之后，IDE 不再只是工具箱，而是多了一个能听懂自然语言、帮你新建文件、装环境、改代码的“实习工程师”；以及 IDE 界面上每一块区域（左侧文件、底部终端、中间编辑区、右侧 AI 面板）分别管什么，用起来就不再一头雾水。
+Quan trọng hơn, bạn đã thực sự chạy thông một quy trình hoàn chỉnh: tạo thư mục trống trên máy → mở bằng AI IDE → mô tả yêu cầu trong hộp thoại sidebar → để AI tạo project và khởi động development server → khi gặp vấn đề, gửi "hiện tượng + toàn bộ code + ảnh chụp màn hình lỗi" cho AI, yêu cầu nó sửa từng bước theo "chế độ người mới". Trong quá trình đó, bạn cũng đã luyện tập cách viết prompt hiệu quả hơn: nêu rõ mục tiêu, cấu trúc nội dung và trình độ của bản thân, kiểm soát nhịp độ, từ "chạy được đã" rồi mới đến "làm cho đẹp hơn, thú vị hơn".
 
-更重要的是，你已经实际跑通了一次完整流程：在本地新建空文件夹 → 用 AI IDE 打开 → 在侧边栏对话里描述需求 → 让 AI 生成项目并启动开发服务器 → 出现问题时，把“现象 + 全部代码 + 报错截图”一起丢给 AI，请它用“小白模式”一步步修。这个过程中，你也练习了如何写更有效的提示词：说清目标、内容结构和自己的水平，控制好节奏，从“先能跑起来”到“再变好看、变好玩”。
-
-下一章，我们会把重点从“会用工具”转向“做一个真正有人愿意用的原型”：从用户视角出发，设计规则、交互和反馈，然后再让 AI 帮你把这些想法落成产品雏形。
-
-## 8. 📚 作业：用本地 AI IDE 做一个更复杂的游戏
+Chương tiếp theo, chúng ta sẽ chuyển trọng tâm từ "biết dùng công cụ" sang "xây dựng một prototype thực sự có người muốn dùng": xuất phát từ góc nhìn người dùng, thiết kế quy tắc, tương tác và phản hồi, rồi để AI giúp bạn hiện thực hóa những ý tưởng đó thành hình hài sản phẩm.
+## 8. 📚 Bài tập: Dùng AI IDE cục bộ làm một trò chơi phức tạp hơn
 
 <el-card shadow="hover" style="margin: 20px 0; border-radius: 12px;">
   <template #header>
-    <div style="font-weight: bold; font-size: 16px;">🚀 挑战任务：打造你的专属游戏</div>
+    <div style="font-weight: bold; font-size: 16px;">🚀 Thử thách: Tạo trò chơi riêng của bạn</div>
   </template>
 
   <p>
-    你已经用本地 AI IDE 做过一个贪吃蛇。现在请你再挑战一个更复杂一点的小游戏，完整走一遍“描述需求 →
-    生成项目 → 本地运行 → 调试迭代”的流程。
+    Bạn đã dùng AI IDE cục bộ để làm một trò Snake. Bây giờ hãy thử thách bản thân với một trò chơi nhỏ phức tạp hơn, đi qua toàn bộ quy trình "mô tả yêu cầu →
+    tạo dự án → chạy cục bộ → debug và cải tiến".
   </p>
 
   <ol>
     <li>
-      <strong>选择一个比贪吃蛇更复杂的游戏</strong>
+      <strong>Chọn một trò chơi phức tạp hơn Snake</strong>
       <ul>
-        <li>可以是“俄罗斯方块”“打地鼠”“扫雷”“2048”“飞机大战”之类</li>
-        <li>或者你自己想象的一个简单原创游戏</li>
+        <li>Có thể là "Tetris", "Đập chuột chũi", "Dò mìn", "2048", "Bắn máy bay", v.v.</li>
+        <li>Hoặc một trò chơi đơn giản do bạn tự sáng tạo</li>
       </ul>
     </li>
     <li>
-      <strong>必须用本地 AI IDE 来完成整个过程</strong>
+      <strong>Bắt buộc dùng AI IDE cục bộ để hoàn thành toàn bộ quá trình</strong>
       <ul>
-        <li>新建一个空文件夹，用 AI IDE 打开</li>
-        <li>在侧边栏聊天里描述清楚你的游戏需求</li>
-        <li>让 AI 负责创建文件、搭建项目结构和实现主要逻辑</li>
-        <li>在本地启动开发服务器，确保游戏可以正常运行</li>
+        <li>Tạo một thư mục trống, mở bằng AI IDE</li>
+        <li>Mô tả rõ yêu cầu trò chơi trong cửa sổ chat bên cạnh</li>
+        <li>Để AI phụ trách tạo file, dựng cấu trúc dự án và hiện thực logic chính</li>
+        <li>Khởi động development server cục bộ, đảm bảo trò chơi chạy được bình thường</li>
       </ul>
     </li>
     <li>
-      <strong>有基本的“可玩性”和反馈</strong>
+      <strong>Có tính "chơi được" cơ bản và phản hồi</strong>
       <ul>
-        <li>至少包含开始、进行中、结束三种状态</li>
-        <li>玩家有明确的操作方式（键盘或鼠标）</li>
-        <li>屏幕上有清晰的得分或进度反馈</li>
+        <li>Ít nhất bao gồm ba trạng thái: bắt đầu, đang chơi, kết thúc</li>
+        <li>Người chơi có cách thao tác rõ ràng (bàn phím hoặc chuột)</li>
+        <li>Màn hình hiển thị điểm số hoặc tiến độ rõ ràng</li>
       </ul>
     </li>
     <li>
-      <strong>至少进行 2 轮以上的迭代</strong>
+      <strong>Thực hiện ít nhất 2 vòng cải tiến</strong>
       <ul>
-        <li>第一轮让 AI 做出“能玩”的版本</li>
-        <li>第二轮以后，逐步提出具体改进（样式、难度、交互优化等）</li>
+        <li>Vòng đầu để AI tạo ra phiên bản "chơi được"</li>
+        <li>Từ vòng hai trở đi, dần đề xuất các cải tiến cụ thể (giao diện, độ khó, tối ưu tương tác, v.v.)</li>
       </ul>
     </li>
   </ol>
 </el-card>
 
 <RelatedArticlesSection
-  title="继续学习"
-  description="建议先进入原型实战，再逐步接入 AI 能力。"
+  title="Tiếp tục học"
+  description="Nên bắt đầu với thực chiến prototype trước, rồi dần tích hợp các tính năng AI."
   :items="relatedArticles"
 />
 
-# 附录
+# Phụ lục
 
 <el-card id="appendix-nav" shadow="hover" style="margin-top: 40px; margin-bottom: 24px; border-left: 5px solid #E6A23C;">
-  <div style="font-weight: bold; margin-bottom: 8px;">附录导航</div>
+  <div style="font-weight: bold; margin-bottom: 8px;">Điều hướng Phụ lục</div>
   <div style="color: #606266; font-size: 14px; line-height: 1.6; margin-bottom: 12px;">
-    这里是“随查随用”的补充资料：遇到术语看不懂、界面找不到入口时再回来。
+    Đây là tài liệu tham khảo "tra khi cần": khi gặp thuật ngữ khó hiểu hoặc không tìm được chỗ vào trong giao diện thì quay lại đây.
   </div>
   <el-row :gutter="16">
     <el-col :span="12">
-      <a href="#appendix-1-map" style="text-decoration: none; color: inherit;"><b>附录一：常见计算机术语速查表</b></a><br/>
-      <span style="font-size: 12px; color: #909399">看到不懂的计算机名词时，来这里快速查含义，推荐通读一遍。</span>
+      <a href="#appendix-1-map" style="text-decoration: none; color: inherit;"><b>Phụ lục 1: Bảng tra nhanh các thuật ngữ máy tính phổ biến</b></a><br/>
+      <span style="font-size: 12px; color: #909399">Khi gặp từ chuyên ngành máy tính không hiểu, tra nghĩa nhanh tại đây. Nên đọc lướt qua một lần.</span>
     </el-col>
     <el-col :span="12">
-      <a href="/vi-vn/appendix/2-development-tools/ide-basics" style="text-decoration: none; color: inherit;"><b>附录二：Visual Studio Code 菜单栏解析</b></a><br/>
-      <span style="font-size: 12px; color: #909399">不知道 AI IDE 的界面有什么用的时候，拿以下内容和 AI 对话进行查阅，或者直接查看。</span>
+      <a href="/vi-vn/appendix/2-development-tools/ide-basics" style="text-decoration: none; color: inherit;"><b>Phụ lục 2: Phân tích thanh menu Visual Studio Code</b></a><br/>
+      <span style="font-size: 12px; color: #909399">Khi không biết giao diện AI IDE dùng để làm gì, hãy lấy nội dung bên dưới hỏi AI hoặc xem trực tiếp.</span>
     </el-col>
   </el-row>
   <div style="margin-top: 12px; font-size: 12px; color: #909399;">
-    支持：按 Ctrl/⌘+F 搜索关键词；遇到新词可复制报错让 AI 用“小白模式”解释。
+    Hỗ trợ: nhấn Ctrl/⌘+F để tìm kiếm từ khóa; gặp từ mới có thể copy thông báo lỗi để AI giải thích theo "chế độ người mới".
   </div>
 </el-card>
 
-# 附录一：常见计算机术语速查表
+# Phụ lục 1: Bảng tra nhanh các thuật ngữ máy tính phổ biến
 
 <el-card id="appendix-1-map" shadow="hover" style="margin-top: 40px; margin-bottom: 20px; border-left: 5px solid #409EFF;">
-  <div style="font-weight: bold; margin-bottom: 10px;">🗺️ 术语地图：你将在这里遇到...</div>
+  <div style="font-weight: bold; margin-bottom: 10px;">🗺️ Bản đồ thuật ngữ: Bạn sẽ gặp ở đây...</div>
   <el-row :gutter="20">
     <el-col :span="6">
-      <a href="#term-tool-ui" style="text-decoration: none; color: inherit;">🖥️ <b>工具界面</b></a><br/>
-      <span style="font-size: 12px; color: #909399">IDE / 终端 / 面板</span>
+      <a href="#term-tool-ui" style="text-decoration: none; color: inherit;">🖥️ <b>Giao diện công cụ</b></a><br/>
+      <span style="font-size: 12px; color: #909399">IDE / Terminal / Panel</span>
     </el-col>
     <el-col :span="6">
-      <a href="#term-network" style="text-decoration: none; color: inherit;">🌐 <b>网络服务</b></a><br/>
-      <span style="font-size: 12px; color: #909399">URL / 端口 / 本地</span>
+      <a href="#term-network" style="text-decoration: none; color: inherit;">🌐 <b>Dịch vụ mạng</b></a><br/>
+      <span style="font-size: 12px; color: #909399">URL / Cổng / Cục bộ</span>
     </el-col>
     <el-col :span="6">
-      <a href="#term-frontend-backend" style="text-decoration: none; color: inherit;">⚙️ <b>前后端</b></a><br/>
-      <span style="font-size: 12px; color: #909399">API / JSON / 接口</span>
+      <a href="#term-frontend-backend" style="text-decoration: none; color: inherit;">⚙️ <b>Frontend & Backend</b></a><br/>
+      <span style="font-size: 12px; color: #909399">API / JSON / Interface</span>
     </el-col>
     <el-col :span="6">
-      <a href="#term-code-basic" style="text-decoration: none; color: inherit;">📝 <b>代码基础</b></a><br/>
-      <span style="font-size: 12px; color: #909399">变量 / 函数 / 组件</span>
+      <a href="#term-code-basic" style="text-decoration: none; color: inherit;">📝 <b>Cơ bản lập trình</b></a><br/>
+      <span style="font-size: 12px; color: #909399">Biến / Hàm / Component</span>
     </el-col>
   </el-row>
   <el-row :gutter="20" style="margin-top: 10px;">
     <el-col :span="6">
-      <a href="#term-debug" style="text-decoration: none; color: inherit;">🐞 <b>调试查错</b></a><br/>
-      <span style="font-size: 12px; color: #909399">Bug / 断点 / 日志</span>
+      <a href="#term-debug" style="text-decoration: none; color: inherit;">🐞 <b>Debug & Tìm lỗi</b></a><br/>
+      <span style="font-size: 12px; color: #909399">Bug / Breakpoint / Log</span>
     </el-col>
     <el-col :span="6">
-      <a href="#term-project" style="text-decoration: none; color: inherit;">📂 <b>项目管理</b></a><br/>
-      <span style="font-size: 12px; color: #909399">Git / 仓库 / 提交</span>
+      <a href="#term-project" style="text-decoration: none; color: inherit;">📂 <b>Quản lý dự án</b></a><br/>
+      <span style="font-size: 12px; color: #909399">Git / Repository / Commit</span>
     </el-col>
     <el-col :span="6">
-      <a href="#term-ai-tool" style="text-decoration: none; color: inherit;">🤖 <b>AI 工具</b></a><br/>
-      <span style="font-size: 12px; color: #909399">Agent / 模型 / Key</span>
+      <a href="#term-ai-tool" style="text-decoration: none; color: inherit;">🤖 <b>Công cụ AI</b></a><br/>
+      <span style="font-size: 12px; color: #909399">Agent / Model / Key</span>
     </el-col>
     <el-col :span="6">
-      <a href="#term-browser" style="text-decoration: none; color: inherit;">🛠️ <b>浏览器</b></a><br/>
-      <span style="font-size: 12px; color: #909399">DevTools / 控制台</span>
+      <a href="#term-browser" style="text-decoration: none; color: inherit;">🛠️ <b>Trình duyệt</b></a><br/>
+      <span style="font-size: 12px; color: #909399">DevTools / Console</span>
     </el-col>
   </el-row>
 </el-card>
 
-这一部分不需要刻意背诵，更重要的是先在脑子里建立一个印象。
+Phần này không cần học thuộc lòng, điều quan trọng hơn là xây dựng một ấn tượng ban đầu trong đầu bạn.
+## <span id="term-tool-ui">[Một、Các từ liên quan đến "giao diện công cụ"](#appendix-1-map)</span>
 
-## <span id="term-tool-ui">[一、和“工具界面”有关的词](#appendix-1-map)</span>
+### 1. IDE, Editor, Terminal
 
-### 1. IDE、编辑器、终端
+**IDE (Môi trường phát triển tích hợp)**
+Bạn có thể hình dung IDE như "bàn làm việc của lập trình viên":
 
-**IDE（集成开发环境）**  
-可以把 IDE 想象成“程序员的工作台”：
+- Một bên là mặt bàn để viết (editor),
+- Một bên có ổ cắm điện và các nút bấm (chạy, debug),
+- Trong ngăn kéo có đủ loại công cụ nhỏ (tìm kiếm, quản lý phiên bản).
+  VS Code, Trae, Cursor đều thuộc IDE hoặc là công cụ được phát triển dựa trên IDE.
 
-- 一边是写字的桌面（编辑器），
-- 一边有电源插座和按钮（运行、调试），
-- 抽屉里有各种小工具（搜索、版本管理）。  
-  VS Code、Trae、Cursor 都属于 IDE 或基于 IDE 改的工具。
+**Trình soạn thảo code (Editor)**
+Giống như "notepad cao cấp" hơn, chỉ đảm nhiệm:
 
-**代码编辑器（Editor）**  
-更像是“高级记事本”，只负责：
+- Cho bạn gõ và viết code;
+- Dùng màu sắc để phân biệt các nội dung khác nhau (syntax highlighting);
+- Tự động gợi ý hoàn thành code.
+  Vùng viết code bên trong IDE chính là trình soạn thảo code.
 
-- 让你打字写代码；
-- 用颜色区分不同内容（语法高亮）；
-- 给你自动补全。  
-  IDE 里那块写代码的区域，就是代码编辑器。
+**Terminal / Command Line (Cửa sổ dòng lệnh)**
+Một cửa sổ nền đen chữ trắng, bạn **nhập lệnh** ở đây để máy tính thực hiện công việc:
 
-**终端 / 命令行（Terminal / 命令行窗口）**  
-一个黑底白字的窗口，你在里面**输入命令**让电脑干活：
+- Ví dụ: `npm run dev` nghĩa là "hãy khởi động development server cho tôi";
+- `python main.py` nghĩa là "chạy file Python này".
+  Bạn có thể hình dung như: "bạn gửi từng tin nhắn lệnh cho máy tính, và nó trả lời bằng văn bản kết quả thực thi".
 
-- 比如：`npm run dev` 表示“帮我启动开发服务器”；
-- `python main.py` 表示“运行这个 Python 文件”。  
-  可以把它想象成：“你给电脑发一条条短信命令，它用文字回复执行结果”。
+### 2. Một số vùng phổ biến trong IDE
 
-### 2. IDE 中几个常见区域
+**Activity Bar (Thanh hoạt động)**
+Hàng icon nhỏ xếp dọc ở ngoài cùng bên trái, giống như "các tab chức năng":
 
-**活动栏（Activity Bar）**  
-最左边一排竖着的小图标，像“功能选项卡”：
+- Nhấn icon file → bên trái hiển thị danh sách file;
+- Nhấn icon kính lúp → bên trái chuyển thành tìm kiếm;
+- Nhấn icon Git → bên trái hiển thị quản lý phiên bản.
 
-- 点文件图标 → 左边显示文件列表；
-- 点放大镜图标 → 左边变成搜索；
-- 点 Git 图标 → 左边显示版本管理。
+**Side Bar (Thanh bên)**
+Vùng lớn nằm bên phải Activity Bar, chuyên hiển thị nội dung theo chế độ hiện tại:
 
-**侧边栏（Side Bar）**  
-活动栏右边那一大块区域，专门显示当前模式下的内容：
+- Chế độ file: hiển thị các file và thư mục trong dự án;
+- Chế độ tìm kiếm: hiển thị danh sách kết quả tìm kiếm;
+- Chế độ quản lý source code: hiển thị những file nào đã bị thay đổi.
 
-- 文件模式：展示项目里的文件和文件夹；
-- 搜索模式：展示搜索结果列表；
-- 源代码管理模式：展示有哪些文件被改动。
+**Editor Area (Vùng soạn thảo)**
+Vùng lớn nhất ở giữa, chính là nơi bạn xem và chỉnh sửa nội dung sau khi mở file;
+Các tab phía trên là "những file đang được mở hiện tại".
 
-**编辑区（Editor）**  
-中间最大的区域，就是你打开文件后实际看到和修改内容的地方；  
-上方的标签页（Tab）是“当前打开了哪些文件”。
+**Panel (Bảng phía dưới)**
+Thường nằm ở phần dưới cùng, có một số loại phổ biến:
 
-**底部面板（Panel）**  
-一般在最下方，常见几种：
+- Terminal (Cửa sổ lệnh): nhập lệnh để chạy dự án;
+- Problems (Vấn đề): liệt kê các file và số dòng bị lỗi;
+- Output (Đầu ra): thông tin chạy được in ra từ một số công cụ;
+- Debug Console (Bảng điều khiển debug): đầu ra khi debug.
 
-- Terminal（终端）：输入命令跑项目；
-- Problems（问题）：列出出错的文件和行号；
-- Output（输出）：一些工具打印出来的运行信息；
-- Debug Console（调试控制台）：调试时的输出。
+**Status Bar (Thanh trạng thái)**
+Thanh mỏng ở tận dưới cùng:
 
-**状态栏（Status Bar）**  
-最下面那条细细的栏：
+- Hiển thị file hiện tại đang dùng ngôn ngữ gì (JS, HTML, Python, v.v.);
+- Hiển thị căn lề là "2 dấu cách" hay "4 dấu cách";
+- Hiển thị có lỗi không, nhánh Git hiện tại là gì.
+  Bạn có thể coi nó như "một tờ phiếu kiểm tra sức khỏe nhỏ của môi trường chỉnh sửa hiện tại".
+## <span id="term-network">[II. Các từ liên quan đến "trang web / mạng / dịch vụ"](#appendix-1-map)</span>
 
-- 显示当前文件是什么语言（JS、HTML、Python 等）；
-- 显示缩进是“2 个空格”还是“4 个空格”；
-- 显示有没有错误、当前 Git 分支是什么。  
-  可以把它当作“当前编辑环境的一张小体检单”。
+### 1. URL、http、cổng kết nối、dịch vụ cục bộ
 
-## <span id="term-network">[二、和“网页 / 网络 / 服务”有关的词](#appendix-1-map)</span>
-
-### 1. URL、http、端口、本地服务
-
-**URL（网址）**  
-就是浏览器地址栏那一串东西，比如：
+**URL（địa chỉ web）**
+Chính là chuỗi ký tự trên thanh địa chỉ trình duyệt, ví dụ:
 
 - `https://www.trae.cn/`
-- `http://localhost:3000/`  
-  它就像“互联网世界里某个房间的完整地址”。
+- `http://localhost:3000/`
+  Nó giống như "địa chỉ đầy đủ của một căn phòng trong thế giới internet".
 
-**HTTP / HTTPS**  
-在 URL 开头看到的 `http://` 或 `https://`：
+**HTTP / HTTPS**
+`http://` hoặc `https://` xuất hiện ở đầu URL:
 
-- HTTP：普通传输方式；
-- HTTPS：多了一层加密，更安全。  
-  你可以先记成：“写网页地址时，通常以 `http` 或 `https` 开头”。
+- HTTP: phương thức truyền tải thông thường;
+- HTTPS: có thêm một lớp mã hóa, bảo mật hơn.
+  Bạn có thể nhớ đơn giản là: "khi viết địa chỉ web, thường bắt đầu bằng `http` hoặc `https`".
 
-**端口（Port）**  
-可以把一台电脑想象成一栋大楼，端口就是**每个房间的门牌号**：
+**Cổng kết nối（Port）**
+Hãy tưởng tượng một máy tính như một tòa nhà, thì cổng kết nối chính là **số phòng của từng căn phòng**:
 
-- `:3000` 表示 3000 号房间；
-- 同一台电脑上，可以同时开多个服务，各占一个端口。  
-  `http://localhost:3000` 就是“访问我自己电脑上 3000 号房间里跑着的那个服务”。
+- `:3000` nghĩa là phòng số 3000;
+- Trên cùng một máy tính, có thể chạy nhiều dịch vụ cùng lúc, mỗi dịch vụ chiếm một cổng riêng.
+  `http://localhost:3000` có nghĩa là "truy cập dịch vụ đang chạy trong phòng số 3000 trên máy tính của mình".
 
-**本地（Local / localhost）**  
-指的就是你自己的电脑。
+**Cục bộ（Local / localhost）**
+Chính là máy tính của bạn.
 
-- `localhost` 可以理解为“这台机器自己”。  
-  当你访问 `http://localhost:3000`，其实是在跟自己电脑上运行的程序打交道，而不是上网访问别人家的服务器。
+- `localhost` có thể hiểu là "chính máy này".
+  Khi bạn truy cập `http://localhost:3000`, thực ra bạn đang tương tác với chương trình đang chạy trên máy tính của mình, chứ không phải truy cập vào máy chủ của người khác qua mạng internet.
 
-**服务（Service / Server）**  
-“服务”就是一个**一直在后台运行、随时听你指令**的程序：
+**Dịch vụ（Service / Server）**
+"Dịch vụ" là một chương trình **chạy liên tục trong nền, sẵn sàng lắng nghe lệnh của bạn bất cứ lúc nào**:
 
-- 网页服务：浏览器访问一个地址时，它返回网页内容；
-- 游戏服务：负责管理对局、存档、排行榜等。  
-  在终端里执行 `npm run dev` 启动项目，本质上就是“在本地开了一个网页服务”。
+- Dịch vụ web: khi trình duyệt truy cập một địa chỉ, nó trả về nội dung trang web;
+- Dịch vụ game: chịu trách nhiệm quản lý trận đấu, lưu tiến trình, bảng xếp hạng, v.v.
+  Khi bạn chạy `npm run dev` trong terminal để khởi động dự án, về bản chất đó chính là "mở một dịch vụ web trên máy cục bộ".
+## <span id="term-frontend-backend">[Ba、Các từ liên quan đến "Frontend / Backend / Dữ liệu"](#appendix-1-map)</span>
 
-## <span id="term-frontend-backend">[三、和“前端 / 后端 / 数据”有关的词](#appendix-1-map)</span>
+### 1. Frontend, Backend
 
-### 1. 前端、后端
+**Frontend**  
+Phần người dùng **nhìn thấy và tương tác được**:
 
-**前端（Frontend）**  
-用户**看得见、点得到**的部分：
+- Các nút bấm, văn bản, hình ảnh, animation trên trang web;
+- Các trang giao diện được viết bằng React / Vue.  
+  Chịu trách nhiệm hiển thị giao diện và phản hồi thao tác của người dùng (nhấp chuột, nhập liệu, kéo thả, v.v.).
 
-- 网页上的按钮、文字、图片、动画；
-- React / Vue 写出来的页面。  
-  负责展示界面和响应用户操作（点击、输入、拖拽等）。
+**Backend**  
+Phần người dùng **không nhìn thấy**, chạy trên máy chủ:
 
-**后端（Backend）**  
-用户**看不见**、在服务器上跑的那部分：
+- Lưu trữ và đọc dữ liệu (thông tin người dùng, đơn hàng, điểm số, v.v.);
+- Thực thi các quy tắc nghiệp vụ (xác thực đăng nhập, kiểm tra quyền truy cập).  
+  Bạn có thể hình dung frontend như "mặt tiền cửa hàng và nhân viên bán hàng", còn backend như "kho hàng và hệ thống sổ sách".
 
-- 存和读数据（用户信息、订单、分数等）；
-- 执行业务规则（登录验证、权限判断）。  
-  你可以把前端比作“店面和店员”，后端比作“仓库和账本系统”。
+### 2. Interface, Request, Response, JSON
 
-### 2. 接口、请求、响应、JSON
+**Interface / API**  
+Bộ quy tắc "hỏi và trả lời" được frontend và backend thỏa thuận trước với nhau.
 
-**接口 / API**  
-前端和后端事先约定好的一套“问问题 + 回答案”的规则。
+- Frontend nói: "Tôi sẽ hỏi bạn theo địa chỉ và định dạng này";
+- Backend nói: "Tôi sẽ trả kết quả cho bạn theo định dạng này".
 
-- 前端说：“我用这个地址、这个格式来问你”；
-- 后端说：“我用这个格式把结果回给你”。
+**Request (Yêu cầu)**  
+Một "câu hỏi" mà frontend gửi đến backend:
 
-**请求（Request）**  
-前端发给后端的一次“提问”：
+- Gửi đến đâu (URL);
+- Dùng phương thức gì (GET, POST, v.v.);
+- Kèm theo tham số gì (ví dụ: ID người dùng).
 
-- 请求去哪（URL）；
-- 用什么方式（GET、POST 等）；
-- 带了什么参数（比如用户 ID）。
+**Response (Phản hồi)**  
+"Câu trả lời" mà backend gửi lại cho frontend:
 
-**响应（Response）**  
-后端给前端的“答复”：
-
-- 状态码（200 成功，404 找不到，500 服务器出错）；
-- 实际数据（多半是 JSON）。
+- Mã trạng thái (200 thành công, 404 không tìm thấy, 500 lỗi máy chủ);
+- Dữ liệu thực tế (thường là JSON).
 
 **JSON**  
-一种用**很像 JavaScript 代码的写法**来表示数据的格式，比如：
+Một định dạng biểu diễn dữ liệu **có cú pháp rất giống JavaScript**, ví dụ:
 
 ```json
 {
@@ -974,43 +961,42 @@ AI 很认真地给了你一段代码，你也老老实实地复制进去了，�
 }
 ```
 
-可以理解成“机器版的键值对记事本”，前后端经常用它来交换数据。
+Bạn có thể hiểu đây là "sổ ghi chú cặp key-value dành cho máy tính" — frontend và backend thường dùng nó để trao đổi dữ liệu với nhau.
+## <span id="term-code-basic">[Bốn、Các từ liên quan đến "viết code"](#appendix-1-map)</span>
 
-## <span id="term-code-basic">[四、和“写代码本身”有关的词](#appendix-1-map)</span>
+### 1. Biến, định danh, trạng thái
 
-### 1. 变量、标识符、状态
+**Biến (Variable)**  
+"Nhãn dán lên một dữ liệu".
 
-**变量（Variable）**  
-“给一块数据贴上的标签”。
-
-- 例如把分数这件事记作 `score`；
-- 以后用 `score` 这个名字，就能读写这块数据：
+- Ví dụ ghi lại điểm số bằng `score`;
+- Sau đó dùng tên `score`, bạn có thể đọc và ghi dữ liệu đó:
 
 ```js
 let score = 0
 score = score + 10
 ```
 
-**标识符（Identifier）**  
-“你自己起的各种名字”的统称：
+**Định danh (Identifier)**  
+Tên gọi chung cho "các tên bạn tự đặt":
 
-- 变量名：`score`
-- 函数名：`moveSnake`
-- 组件名：`SnakeGame`  
-  就像给文件夹起名“照片”“工作”“账单”，方便在代码里区分不同“东西”。
+- Tên biến: `score`
+- Tên hàm: `moveSnake`
+- Tên component: `SnakeGame`  
+  Giống như đặt tên thư mục "Ảnh", "Công việc", "Hóa đơn", giúp bạn phân biệt các "thứ" khác nhau trong code.
 
-**状态（State）**  
-程序当前的“关键情况记录”：
+**Trạng thái (State)**  
+"Bản ghi tình huống hiện tại" của chương trình:
 
-- 游戏是不是已经结束；
-- 蛇现在在第几格；
-- 当前分数是多少。  
-  在 React 里，一般会这么理解：**状态一改，界面就要跟着更新**。
+- Game đã kết thúc chưa;
+- Con rắn đang ở ô thứ mấy;
+- Điểm số hiện tại là bao nhiêu.  
+  Trong React, bạn thường hiểu theo nghĩa: **state thay đổi thì giao diện phải cập nhật theo**.
 
-### 2. 函数、组件、模块
+### 2. Hàm, component, module
 
-**函数（Function）**  
-把一件“可以反复做的事”打包起来，起个名字：
+**Hàm (Function)**  
+Đóng gói một "việc có thể làm đi làm lại nhiều lần" và đặt cho nó một cái tên:
 
 ```js
 function sayHello(name) {
@@ -1018,230 +1004,227 @@ function sayHello(name) {
 }
 ```
 
-以后只要写 `sayHello('Bob')`，就等于把里面那几行再次执行一遍。
+Sau đó chỉ cần viết `sayHello('Bob')`, là những dòng bên trong sẽ được thực thi lại một lần nữa.
 
-**组件（Component）**  
-前端里的“可以重复用的一块小界面 + 小逻辑”：
+**Component**  
+"Một mảnh giao diện nhỏ + logic nhỏ có thể tái sử dụng" trong frontend:
 
-- 一个按钮可以是组件；
-- 一个顶部导航可以是组件；
-- 整个游戏区域也可以是一个组件。  
-  组件之间可以拼装，就像搭乐高。
+- Một nút bấm có thể là component;
+- Một thanh điều hướng phía trên có thể là component;
+- Toàn bộ khu vực game cũng có thể là một component.  
+  Các component có thể lắp ghép với nhau, giống như xếp LEGO.
 
-**模块（Module）**  
-“一组相关代码组成的文件”：
+**Module**  
+"File bao gồm một nhóm code có liên quan":
 
-- `snakeLogic.ts` 专门放和“蛇怎么动”相关的代码；
-- `score.ts` 专门放算分数的代码。  
-  模块之间可以互相“导入 / 导出”，像不同抽屉里的工具。
+- `snakeLogic.ts` chuyên chứa code liên quan đến "con rắn di chuyển thế nào";
+- `score.ts` chuyên chứa code tính điểm.  
+  Các module có thể "import / export" qua lại, giống như các công cụ trong những ngăn kéo khác nhau.
 
-### 3. 语法、编程语言、框架
+### 3. Cú pháp, ngôn ngữ lập trình, framework
 
-**语法（Syntax）**  
-某门编程语言的“语法规则”和“标点习惯”：
+**Cú pháp (Syntax)**  
+"Quy tắc ngữ pháp" và "thói quen dấu câu" của một ngôn ngữ lập trình:
 
-- 字符串要加引号；
-- 每条语句末尾要不要写分号；
-- 代码块要用 `{}` 包起来。  
-  写错语法，编译器 / 解释器会直接报“语法错误”。
+- Chuỗi phải thêm dấu nháy;
+- Cuối mỗi câu lệnh có cần viết dấu chấm phẩy hay không;
+- Khối code phải được bọc bằng `{}`.  
+  Viết sai cú pháp, compiler / interpreter sẽ báo "lỗi cú pháp" ngay lập tức.
 
-**编程语言（Programming Language）**  
-和计算机沟通的一整套规则和词汇，比如：
+**Ngôn ngữ lập trình (Programming Language)**  
+Toàn bộ quy tắc và từ vựng để giao tiếp với máy tính, ví dụ:
 
-- JavaScript、Python、Java、C++、Go……  
-  不同语言适合做的事情、写法和工具生态不同。
+- JavaScript, Python, Java, C++, Go…  
+  Các ngôn ngữ khác nhau phù hợp với những việc khác nhau, cách viết và hệ sinh thái công cụ cũng khác nhau.
 
-**框架（Framework）**  
-别人帮你“先搭好骨架”的一大套代码和套路：
+**Framework**  
+Một bộ code và quy ước lớn mà người khác đã "dựng sẵn bộ khung" cho bạn:
 
-- 前端：React、Vue（帮你处理界面更新、状态管理等）；
-- 后端：Django、Spring Boot 等。  
-  你等于是在“现成的骨架上填内容”，比从头造轮子轻松很多。
+- Frontend: React, Vue (giúp bạn xử lý cập nhật giao diện, quản lý state, v.v.);
+- Backend: Django, Spring Boot, v.v.  
+  Bạn chỉ việc "điền nội dung vào bộ khung sẵn có", nhẹ nhàng hơn rất nhiều so với tự tạo từ đầu.
+## <span id="term-debug">[Năm、Các từ liên quan đến "Debug / Tìm lỗi"](#appendix-1-map)</span>
 
-## <span id="term-debug">[五、和“调试 / 查错”有关的词](#appendix-1-map)</span>
+### 1. Bug、Thông báo lỗi、Log / console.log
 
-### 1. Bug、报错、日志 / console.log
+**Bug**
+Khi chương trình hoạt động khác với những gì bạn mong đợi, đó là bug:
 
-**Bug**  
-程序表现和你想的不一样，就是 bug：
+- Đáng lẽ phải hiển thị nút bấm, nhưng không thấy đâu;
+- Đáng lẽ cộng thêm 10 điểm, nhưng lại cộng thêm một đống;
+- Vừa mở trang là màn hình trắng tinh.
 
-- 本来应该出现按钮，结果没有；
-- 本来应该加 10 分，结果多加了一堆；
-- 页面一打开就白屏。
+**Thông báo lỗi (Error Message)**
+Đoạn chữ tiếng Anh "trông có vẻ đáng sợ" xuất hiện trên màn hình / terminal sau khi chương trình bị crash.
+Tuy xấu xí, nhưng thường sẽ cho bạn biết:
 
-**报错信息（Error Message）**  
-程序崩了之后，屏幕上 / 终端里那段“看起来很吓人”的英文。  
-虽然难看，但通常会告诉你：
+- Đại khái lỗi xảy ra ở đâu;
+- File nào, gần dòng thứ mấy cần kiểm tra.
+  Bạn có thể copy thẳng rồi ném cho AI để nó dịch và phân tích.
 
-- 大致是哪里错了；
-- 哪个文件、第几行附近需要检查。  
-  你可以直接复制它，丢给 AI 让它翻译和分析。
-
-**日志（Log）**  
-程序在运行过程中自己“说的话”。  
-最常见的就是前端里的：
+**Log (Nhật ký)**
+Những "lời tự nói" của chương trình trong quá trình chạy.
+Phổ biến nhất trong frontend là:
 
 ```js
-console.log('当前分数', score)
+console.log('Điểm hiện tại', score)
 ```
 
-你可以把它理解成：**在关键步骤主动报个数，方便你确认程序是不是按你想的在走**。
+Bạn có thể hiểu đơn giản như sau: **chủ động báo cáo một con số tại bước quan trọng, để bạn xác nhận chương trình có đang chạy đúng ý bạn không**.
 
-> **console.log 是什么？**
+> **console.log là gì?**
 >
-> - `console` 可以理解为“调试用的小黑板”；
-> - `.log` 是“在小黑板上写一行字”；
-> - 浏览器按 F12 打开开发者工具里的 Console 面板，就能看到这些输出。
+> - `console` có thể hiểu là "bảng đen dùng để debug";
+> - `.log` là "viết một dòng lên bảng đen đó";
+> - Nhấn F12 trên trình duyệt, mở panel Console trong Developer Tools, bạn sẽ thấy toàn bộ output.
 
-### 2. 调试、断点、单步执行、快照
+### 2. Debug、Breakpoint、Thực thi từng bước、Snapshot
 
-**调试（Debug / 调试程序）**  
-当程序出问题时，不是上来就乱改，而是：
+**Debug (Gỡ lỗi)**
+Khi chương trình có vấn đề, đừng vào sửa loạn ngay, mà hãy:
 
-- 让程序在某一行停一下（断点）；
-- 看一看当前每个变量的值；
-- 一步一步往下走，观察“从哪里开始不对劲”。
+- Cho chương trình dừng lại ở một dòng nào đó (breakpoint);
+- Xem giá trị của từng biến tại thời điểm đó;
+- Đi từng bước một, quan sát "bắt đầu sai từ đâu".
 
-**断点（Breakpoint）**  
-可以把断点想成“在这行插了一个暂停按钮”：
+**Breakpoint (Điểm dừng)**
+Hãy hình dung breakpoint như "cắm một nút tạm dừng vào dòng đó":
 
-- 程序平时是一路往下跑；
-- 跑到你插断点的那一行，会暂时停住，等你检查。
+- Bình thường chương trình chạy thẳng một mạch xuống dưới;
+- Khi chạy đến dòng bạn đặt breakpoint, nó sẽ tạm dừng, chờ bạn kiểm tra.
 
-**单步执行（Step）**  
-从断点停下来之后，你可以选择：
+**Thực thi từng bước (Step)**
+Sau khi dừng tại breakpoint, bạn có thể chọn:
 
-- 一行一行往下执行（step over）；
-- 进入某个函数内部详细看（step into）。  
-  就像看一段舞蹈分解动作一样，而不是直接看快放视频。
+- Thực thi từng dòng một (step over);
+- Đi vào bên trong một hàm nào đó để xem chi tiết (step into).
+  Giống như xem phân tích từng động tác vũ đạo, thay vì xem video tua nhanh.
 
-**快照（Snapshot）——简化理解**  
-这里的“快照”可以理解为：
+**Snapshot (Ảnh chụp trạng thái) — Hiểu theo nghĩa đơn giản**
+"Snapshot" ở đây có thể hiểu là:
 
-> **在某个时间点，把“当前状态”拍一张照片，方便以后对比。**  
-> 在实际工具里，“快照”可能指：
+> **Tại một thời điểm nào đó, chụp lại "trạng thái hiện tại" như một tấm ảnh, để tiện so sánh về sau.**
+> Trong các công cụ thực tế, "snapshot" có thể chỉ:
 
-- 一次提交时刻项目的完整状态；
-- 调试时某个时间点内存 / 变量的整体情况。  
-  你先记住这个比喻就够用：**快照 ≈ 某一刻状态的留影**。
+- Toàn bộ trạng thái dự án tại một thời điểm commit;
+- Toàn bộ bộ nhớ / biến tại một thời điểm nào đó khi debug.
+  Bạn chỉ cần nhớ hình ảnh ví von này là đủ dùng: **snapshot ≈ lưu lại hình ảnh trạng thái tại một khoảnh khắc**.
+## <span id="term-project">[VI. Các thuật ngữ liên quan đến "Quản lý dự án"](#appendix-1-map)</span>
 
-## <span id="term-project">[六、和“项目管理”有关的词](#appendix-1-map)</span>
+### 1. Dự án, Workspace, Thư mục
 
-### 1. 项目、工作区、文件夹
+**Dự án (Project)**
+Tập hợp các tệp được đặt trong cùng một thư mục để xây dựng một ứng dụng:
 
-**项目（Project）**  
-为实现一个应用而放在同一个文件夹里的：
+- Tệp mã nguồn
+- Tệp cấu hình
+- Tài nguyên (hình ảnh, âm thanh, v.v.)
 
-- 源代码文件
-- 配置文件
-- 素材（图片、音频等）
+**Workspace**
+Khái niệm mà VS Code / Trae dùng để mô tả "lần này bạn đang mở những gì":
 
-**工作区（Workspace）**  
-VS Code / Trae 用来描述“当前这一次打开了一组什么东西”的概念：
+- Mở một thư mục → một workspace đơn giản;
+- Đôi khi có thể gộp nhiều thư mục thành một workspace đa dự án.
 
-- 打开一个文件夹 → 一个简单工作区；
-- 有时也会把多个文件夹合并成一个多项目工作区。
+### 2. Git, Repository, Commit
 
-### 2. Git、仓库、提交（Commit）
+**Git (Công cụ quản lý phiên bản)**
+Bạn có thể hiểu đây là "cỗ máy thời gian" của dự án:
 
-**Git（版本控制工具）**  
-可以理解成项目的“时光机”：
+- Mỗi lần chỉnh sửa xong một loạt nội dung, bạn có thể "chụp một bức ảnh phiên bản";
+- Khi cần, bạn có thể quay lại trạng thái lịch sử bất kỳ.
 
-- 每次改完一批内容，可以“拍一张版本合照”；
-- 以后需要时，可以回到某个历史状态。
+**Kho lưu trữ (Repository / Repo)**
+Sau khi bật Git, thư mục dự án có kèm theo "lịch sử phiên bản" đó được gọi là "repository".
 
-**仓库（Repository / Repo）**  
-开启 Git 之后，那个带“版本记录”的项目文件夹，就叫“仓库”。
+**Commit**
+Mỗi khi bạn cảm thấy "đợt thay đổi này là một thành quả giai đoạn", bạn có thể:
 
-**提交（Commit）**  
-每次你觉得“这波改动算一个阶段性成果”，就可以：
+- Viết một dòng mô tả (ví dụ: `Add score panel`);
+- Đóng gói toàn bộ thay đổi hiện tại thành một phiên bản;
+- Git sẽ lưu lại trạng thái tại thời điểm đó.
 
-- 写一条说明（比如：`Add score panel`）；
-- 把当前全部修改打包成一个版本；
-- Git 会把这一刻的状态存下来。  
-  这一次动作就叫“做了一次 commit”。
+Hành động này được gọi là "thực hiện một commit".
+## <span id="term-ai-tool">[VII. Các thuật ngữ liên quan đến "Công cụ phát triển AI"](#appendix-1-map)</span>
 
-## <span id="term-ai-tool">[七、和“AI 开发工具”有关的词](#appendix-1-map)</span>
+### 1. AI IDE, Agent, Chế độ SOLO
 
-### 1. AI IDE、Agent、SOLO 模式
+**AI IDE**
+Dựa trên nền tảng của một IDE thông thường, có thêm một lớp AI "hiểu được ngôn ngữ tự nhiên và có thể tự động làm việc":
 
-**AI IDE**  
-在普通 IDE 的基础上，多了一层“能听懂人话、能自己动手”的 AI：
+- Bạn nói "làm một game rắn săn mồi", nó có thể giúp bạn dựng project, viết code;
+- Bạn chụp ảnh màn hình lỗi và gửi cho nó, nó có thể giải thích trước rồi thử sửa;
+- Nó có thể chỉnh sửa đồng thời nhiều file, chứ không chỉ gợi ý hoàn thành từng dòng một.
 
-- 你说“做个贪吃蛇”，它能帮你搭项目、写代码；
-- 你把报错截图给它，它能先解释再尝试修复；
-- 它能跨多个文件一起改，而不仅仅是一行一行补全。
+**Agent (Tác nhân thông minh)**
+Bạn có thể hình dung Agent như một **kỹ sư AI luôn túc trực sẵn sàng**:
 
-**Agent（智能体）**  
-可以把 Agent 想象成一个**长期待命的 AI 小工程师**：
+- Biết đọc cấu trúc project của bạn;
+- Biết phân rã nhiệm vụ (cài dependencies trước, rồi sinh code, rồi chạy project);
+- Khi gặp lỗi, sẽ tự điều chỉnh phương án dựa trên thông tin lỗi.
 
-- 会读你的项目结构；
-- 会拆解任务（先装依赖、再生成代码、再跑项目）；
-- 跑出错之后，会根据错误信息自己调整方案。
+**Chế độ SOLO (lấy Trae làm ví dụ)**
+Có nghĩa là:
 
-**SOLO 模式（以 Trae 为例）**  
-表示：
+> Bạn chỉ cần nói rõ "đích đến",
+> nó tự lên kế hoạch "lộ trình",
+> thực thi từng bước trên máy local,
+> chỉ dừng lại hỏi bạn có muốn tiếp tục không ở những điểm quan trọng.
 
-> 你只需要把“终点”说清楚，  
-> 它自己规划“路线”，  
-> 在本地一步步执行，  
-> 中途才在关键节点问你要不要继续。
+### 2. Model, Khóa API (API Key)
 
-### 2. 模型、密钥（API Key）
+**Model (ở đây đặc chỉ mô hình ngôn ngữ lớn - LLM)**
+Từ này có thể hiểu đơn giản là "bộ não AI khổng lồ ở phía sau":
 
-**模型（Model，这里特指大语言模型）**  
-这个词可以简单理解为“背后那一大坨 AI 大脑”：
+- Ví dụ như GPT, Claude, Kimi, GLM, v.v.;
+- Các model khác nhau có năng lực khác nhau về "hiểu tiếng Việt", "viết code", "suy luận";
+- Trong AI IDE thường có thể chọn đổi model khác nhau qua menu thả xuống.
 
-- 比如 GPT、Claude、Kimi、GLM 等；
-- 不同模型在“理解中文”“写代码”“推理”上水平不一样；
-- AI IDE 里通常可以在下拉菜单里换不同模型使用。
+**Khóa / API Key**
+Bạn có thể hiểu API Key như một **"mật khẩu cao cấp + số chứng minh thư" rất dài**,
+và nó chỉ có một tác dụng duy nhất:
 
-**密钥 / API Key**  
-你可以把 API Key 理解为**一个很长的“高级密码 + 身份证号”**，  
-它的作用只有一个：
+> Thông báo với server của người khác: "Tôi là người dùng nào, xin hãy cho phép tôi sử dụng dịch vụ AI của bạn và ghi nợ vào tài khoản của tôi."
 
-> 告诉别人的服务器：“我是哪个用户，请允许我使用你们的 AI 服务，并帮我记账。”
+Một vài điểm quan trọng:
 
-几个要点：
+- Chuỗi này thường là một dãy chữ và số ngẫu nhiên rất dài;
+- Không được đưa lên nơi công khai (repository, ảnh chụp màn hình, nhóm chat), vì người khác lấy được có thể mạo danh tài khoản của bạn;
+- Điền API Key vào công cụ cũng giống như "cắm chìa vào ổ khóa", sau đó công cụ có thể giúp bạn gọi dịch vụ AI tương ứng.
+## <span id="term-browser">[VIII. Các từ liên quan đến "Trình duyệt / Công cụ Developer"](#appendix-1-map)</span>
 
-- 这串东西通常是一长串随机字母数字；
-- 不能发到公开的地方（仓库、截图、群聊），别人拿到就可以冒用你的账号；
-- 在工具里填 API Key，就等于“把钥匙插进锁里”，之后工具就能帮你调用对应的 AI 服务。
+**Chrome（Trình duyệt Google）**  
+Một trong những trình duyệt được dùng phổ biến nhất trong frontend hiện nay:
 
-## <span id="term-browser">[八、和“浏览器 / 开发者工具”有关的词](#appendix-1-map)</span>
+- Mở trang web nhanh;
+- Tích hợp sẵn "DevTools" khá mạnh, tiện cho việc tìm lỗi.
 
-**Chrome（谷歌浏览器）**  
-现在前端开发最常用的浏览器之一：
+**Làm mới（Refresh / Reload）**  
+Tải lại trang web hiện tại:
 
-- 打开网页快；
-- 自带比较强的“开发者工具”，方便查问题。
+- Sau khi sửa code frontend, nếu không có công cụ tự động làm mới, bạn cần nhấn làm mới thủ công để thấy hiệu quả.
 
-**刷新（Refresh / Reload）**  
-重新加载当前网页：
+**Công cụ Developer（DevTools）**  
+Một bộ bảng công cụ tích hợp trong trình duyệt, dành riêng cho developer:
 
-- 修改前端代码后，如果没有自动刷新工具，手动按刷新才能看到效果。
+- Xem cấu trúc trang web（Elements）;
+- Xem style（Styles）;
+- Xem lỗi và log（Console）;
+- Xem các network request（Network）.  
+  Trong Chrome thường nhấn `F12` hoặc `Ctrl+Shift+I` để mở.
 
-**开发者工具（DevTools）**  
-浏览器里专门给开发者用的一组工具面板：
+**Console（Bảng điều khiển）**  
+Một tab trong DevTools, chuyên hiển thị:
 
-- 查看网页结构（Elements）；
-- 查看样式（Styles）；
-- 查错误和日志（Console）；
-- 查网络请求（Network）。  
-  在 Chrome 里通常按 `F12` 或 `Ctrl+Shift+I` 打开。
+- Output từ `console.log(...)` bạn viết;
+- Các lỗi xảy ra trong quá trình chạy（chữ đỏ）.  
+  Bạn có thể coi nó như "hộp chat của chương trình":
+- Chương trình có gì muốn nói, sẽ hiện ở đây;
+- Đây cũng là nơi bạn nhìn vào nhiều nhất khi debug.
 
-**Console（控制台）**  
-开发者工具里的一个标签页，专门展示：
+Nếu trong quá trình học bạn gặp thêm từ mới, cũng có thể theo phong cách này để nhờ AI bổ sung toàn bộ nội dung:
 
-- 你写的 `console.log(...)` 输出；
-- 运行过程中发生的错误（红字）。  
-  你可以当它是“程序的聊天框”：
-- 程序有话要说，就写在这里；
-- 你调试时最常看的就是这一块。
-
-如果后面你在学习过程中又遇到新的词，也可以按这个风格让 AI 协助你补充全部内容：
-
-- 先写一句“它是干嘛的”；
-- 再写一句“可以把它想象成什么”；
-- 最后给一个特别简单的小例子。  
-  这样你的“个人术语表”会越长越实用，逐渐能够更好的与计算机进行沟通。
+- Trước tiên viết một câu "nó dùng để làm gì";
+- Tiếp theo viết một câu "có thể hình dung nó như thế nào";
+- Cuối cùng đưa ra một ví dụ nhỏ thật đơn giản.  
+  Như vậy "bảng thuật ngữ cá nhân" của bạn sẽ ngày càng dài và hữu ích hơn, dần dần giúp bạn giao tiếp với máy tính tốt hơn.
