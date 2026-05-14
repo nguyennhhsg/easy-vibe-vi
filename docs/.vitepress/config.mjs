@@ -1330,7 +1330,7 @@ const productManagerSidebar = [
   }
 ]
 
-export default defineConfig({
+const config = defineConfig({
   markdown: {
     config: (md) => {
       md.use(markdownItKatex)
@@ -2806,3 +2806,35 @@ Sitemap: ${siteUrl}/sitemap.xml
     }
   }
 })
+
+// === Phiên bản tiếng Việt: kế thừa cấu trúc sidebar/nav từ zh-cn ===
+// Mục tiêu: cho người Việt điều hướng được toàn bộ khóa học. Labels sidebar
+// tạm thời vẫn là tiếng Trung cho đến khi dịch sidebar (đợt sau). Nội dung
+// trang đã được dịch sang tiếng Việt qua scripts/translate-zh-to-vi.sh.
+const __remapZhToVi = (s) =>
+  typeof s === 'string' ? s.replace(/\/zh-cn\//g, '/vi-vn/') : s
+const __deepRemap = (val) => {
+  if (Array.isArray(val)) return val.map(__deepRemap)
+  if (val && typeof val === 'object') {
+    const out = {}
+    for (const [k, v] of Object.entries(val)) out[k] = __deepRemap(v)
+    return out
+  }
+  return __remapZhToVi(val)
+}
+
+const __zhTheme = config.locales['zh-cn'].themeConfig
+const __viTheme = config.locales['vi-vn'].themeConfig
+
+// Clone toàn bộ sidebar zh-cn, đổi mọi /zh-cn/ thành /vi-vn/
+__viTheme.sidebar = Object.fromEntries(
+  Object.entries(__zhTheme.sidebar).map(([k, v]) => [
+    __remapZhToVi(k),
+    __deepRemap(v)
+  ])
+)
+
+// Nav vi-vn: giữ labels tiếng Việt đã có, nhưng đổi links /zh-cn/ -> /vi-vn/
+__viTheme.nav = __deepRemap(__viTheme.nav)
+
+export default config
