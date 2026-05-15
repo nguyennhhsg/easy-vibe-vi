@@ -29,14 +29,9 @@ const locales = [
   'vi-vn'
 ]
 
-// 基础 URL (根据部署环境动态确定)
+// URL gốc: luôn dùng alias ổn định (không phải deployment-specific VERCEL_URL).
+// VERCEL_URL thay đổi mỗi lần deploy, không phù hợp cho sitemap được Google crawl.
 const getBaseUrl = () => {
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
-  }
-  if (process.env.EDGEONE_URL) {
-    return `https://${process.env.EDGEONE_URL}`
-  }
   if (process.env.SITE_URL) {
     return process.env.SITE_URL
   }
