@@ -1,7 +1,7 @@
 <template>
   <div class="demo ab-testing-demo">
     <div class="header">
-      <span class="title">A/B 测试演示</span>
+      <span class="title">Demo A/B testing</span>
     </div>
 
     <div v-if="!props.tab" class="tabs">
@@ -15,22 +15,22 @@
       </button>
     </div>
 
-    <!-- 流量分配演示 -->
+    <!-- Demo phân bổ traffic -->
     <div v-if="activeTab === 'traffic'" class="content">
-      <h4>流量分配可视化</h4>
-      <p class="desc">观察用户如何被随机分配到对照组（A组）和实验组（B组）</p>
+      <h4>Trực quan phân bổ traffic</h4>
+      <p class="desc">Quan sát cách người dùng được phân bổ ngẫu nhiên vào nhóm đối chứng (A) và nhóm thử nghiệm (B)</p>
 
       <div class="traffic-split">
         <div class="split-container">
           <div class="group group-a" :style="{ width: trafficSplit + '%' }">
-            <div class="group-label">A组 (对照组)</div>
+            <div class="group-label">Nhóm A (đối chứng)</div>
             <div class="group-percent">{{ trafficSplit }}%</div>
           </div>
           <div
             class="group group-b"
             :style="{ width: 100 - trafficSplit + '%' }"
           >
-            <div class="group-label">B组 (实验组)</div>
+            <div class="group-label">Nhóm B (thử nghiệm)</div>
             <div class="group-percent">{{ 100 - trafficSplit }}%</div>
           </div>
         </div>
@@ -40,32 +40,32 @@
 
       <div class="traffic-stats">
         <div class="stat-item">
-          <span class="stat-label">总用户数</span>
+          <span class="stat-label">Tổng số người dùng</span>
           <span class="stat-value">{{ totalUsers }}</span>
         </div>
         <div class="stat-item">
-          <span class="stat-label">A组用户</span>
+          <span class="stat-label">Người dùng nhóm A</span>
           <span class="stat-value">{{ groupAUsers }}</span>
         </div>
         <div class="stat-item">
-          <span class="stat-label">B组用户</span>
+          <span class="stat-label">Người dùng nhóm B</span>
           <span class="stat-value">{{ groupBUsers }}</span>
         </div>
       </div>
 
       <div class="tips">
-        <span class="tips-text">50/50分配能最快检测出差异，确保两组样本量足够大以获得统计显著性</span>
+        <span class="tips-text">Tỉ lệ 50/50 phát hiện khác biệt nhanh nhất, đảm bảo cỡ mẫu hai nhóm đủ lớn để có ý nghĩa thống kê</span>
       </div>
     </div>
 
-    <!-- 结果对比演示 -->
+    <!-- Demo so sánh kết quả -->
     <div v-if="activeTab === 'results'" class="content">
-      <h4>A/B组结果对比</h4>
-      <p class="desc">比较两组的转化率和统计显著性</p>
+      <h4>So sánh kết quả nhóm A và B</h4>
+      <p class="desc">So sánh tỉ lệ chuyển đổi và mức ý nghĩa thống kê của hai nhóm</p>
 
       <div class="comparison-settings">
         <div class="setting-item">
-          <label>A组转化率（基准）</label>
+          <label>Tỉ lệ chuyển đổi nhóm A (baseline)</label>
           <input
             v-model.number="conversionA"
             type="number"
@@ -77,7 +77,7 @@
           <span class="unit">%</span>
         </div>
         <div class="setting-item">
-          <label>B组转化率</label>
+          <label>Tỉ lệ chuyển đổi nhóm B</label>
           <input
             v-model.number="conversionB"
             type="number"
@@ -89,7 +89,7 @@
           <span class="unit">%</span>
         </div>
         <div class="setting-item">
-          <label>每组样本量</label>
+          <label>Cỡ mẫu mỗi nhóm</label>
           <input
             v-model.number="sampleSize"
             type="number"
@@ -103,17 +103,17 @@
 
       <div class="results-comparison">
         <div class="result-card result-a">
-          <div class="card-header">A组（对照组）</div>
+          <div class="card-header">Nhóm A (đối chứng)</div>
           <div class="card-metric">
-            <span class="metric-label">转化率</span>
+            <span class="metric-label">Tỉ lệ chuyển đổi</span>
             <span class="metric-value">{{ conversionA }}%</span>
           </div>
           <div class="card-metric">
-            <span class="metric-label">转化数</span>
+            <span class="metric-label">Số lượt chuyển đổi</span>
             <span class="metric-value">{{ conversionsA }}</span>
           </div>
           <div class="card-metric">
-            <span class="metric-label">样本量</span>
+            <span class="metric-label">Cỡ mẫu</span>
             <span class="metric-value">{{ sampleSize }}</span>
           </div>
         </div>
@@ -121,17 +121,17 @@
         <div class="vs-divider">VS</div>
 
         <div class="result-card result-b">
-          <div class="card-header">B组（实验组）</div>
+          <div class="card-header">Nhóm B (thử nghiệm)</div>
           <div class="card-metric">
-            <span class="metric-label">转化率</span>
+            <span class="metric-label">Tỉ lệ chuyển đổi</span>
             <span class="metric-value">{{ conversionB }}%</span>
           </div>
           <div class="card-metric">
-            <span class="metric-label">转化数</span>
+            <span class="metric-label">Số lượt chuyển đổi</span>
             <span class="metric-value">{{ conversionsB }}</span>
           </div>
           <div class="card-metric">
-            <span class="metric-label">样本量</span>
+            <span class="metric-label">Cỡ mẫu</span>
             <span class="metric-value">{{ sampleSize }}</span>
           </div>
         </div>
@@ -139,7 +139,7 @@
 
       <div class="statistical-summary">
         <div class="summary-item">
-          <span class="summary-label">相对提升</span>
+          <span class="summary-label">Mức tăng tương đối</span>
           <span
             class="summary-value"
             :class="{
@@ -152,15 +152,15 @@
           </span>
         </div>
         <div class="summary-item">
-          <span class="summary-label">Z值</span>
+          <span class="summary-label">Z-score</span>
           <span class="summary-value">{{ zScore.toFixed(3) }}</span>
         </div>
         <div class="summary-item">
-          <span class="summary-label">P值</span>
+          <span class="summary-label">P-value</span>
           <span class="summary-value">{{ pValue.toFixed(5) }}</span>
         </div>
         <div class="summary-item">
-          <span class="summary-label">统计显著性</span>
+          <span class="summary-label">Ý nghĩa thống kê</span>
           <span
             class="summary-value significance"
             :class="{
@@ -168,34 +168,34 @@
               'not-significant': !isSignificant
             }"
           >
-            {{ isSignificant ? '显著' : '不显著' }}
+            {{ isSignificant ? 'Có ý nghĩa' : 'Không có ý nghĩa' }}
           </span>
         </div>
       </div>
 
       <div class="confidence-interval">
-        <div class="ci-header">95%置信区间</div>
+        <div class="ci-header">Khoảng tin cậy 95%</div>
         <div class="ci-values">
           <span class="ci-bound">{{ ciLower.toFixed(2) }}%</span>
-          <span class="ci-arrow">← 真实差异 →</span>
+          <span class="ci-arrow">← Khác biệt thật sự →</span>
           <span class="ci-bound">{{ ciUpper.toFixed(2) }}%</span>
         </div>
-        <div class="ci-note">我们有95%的信心认为，真实差异在这个区间内</div>
+        <div class="ci-note">Có 95% niềm tin rằng khác biệt thật sự nằm trong khoảng này</div>
       </div>
 
       <div class="tips">
-        <span class="tips-text">P值 &lt; 0.05 表示结果统计显著，说明差异不太可能是随机产生的</span>
+        <span class="tips-text">P-value &lt; 0.05 cho thấy kết quả có ý nghĩa thống kê, khác biệt khó có khả năng do ngẫu nhiên</span>
       </div>
     </div>
 
-    <!-- 样本量计算器 -->
+    <!-- Bộ tính cỡ mẫu -->
     <div v-if="activeTab === 'calculator'" class="content">
-      <h4>样本量计算器</h4>
-      <p class="desc">计算达到统计显著性所需的最小样本量</p>
+      <h4>Bộ tính cỡ mẫu</h4>
+      <p class="desc">Tính cỡ mẫu tối thiểu cần thiết để đạt ý nghĩa thống kê</p>
 
       <div class="calc-inputs">
         <div class="input-group">
-          <label>基准转化率</label>
+          <label>Tỉ lệ chuyển đổi baseline</label>
           <div class="input-wrapper">
             <input
               v-model.number="baselineRate"
@@ -207,11 +207,11 @@
             />
             <span class="unit">%</span>
           </div>
-          <span class="input-hint">当前版本的转化率</span>
+          <span class="input-hint">Tỉ lệ chuyển đổi của phiên bản hiện tại</span>
         </div>
 
         <div class="input-group">
-          <label>最小检测提升</label>
+          <label>Mức tăng nhỏ nhất muốn phát hiện</label>
           <div class="input-wrapper">
             <input
               v-model.number="minimumDetectable"
@@ -223,37 +223,37 @@
             />
             <span class="unit">%</span>
           </div>
-          <span class="input-hint">希望检测到的最小相对提升（相对值）</span>
+          <span class="input-hint">Mức tăng tương đối tối thiểu muốn phát hiện</span>
         </div>
 
         <div class="input-group">
-          <label>显著性水平 (α)</label>
+          <label>Mức ý nghĩa (α)</label>
           <select v-model.number="alpha" class="select-input">
-            <option :value="0.01">0.01 (99%置信度)</option>
-            <option :value="0.05">0.05 (95%置信度) - 推荐</option>
-            <option :value="0.1">0.1 (90%置信度)</option>
+            <option :value="0.01">0.01 (độ tin cậy 99%)</option>
+            <option :value="0.05">0.05 (độ tin cậy 95%) - khuyến nghị</option>
+            <option :value="0.1">0.1 (độ tin cậy 90%)</option>
           </select>
-          <span class="input-hint">犯第一类错误的概率</span>
+          <span class="input-hint">Xác suất mắc sai số loại I</span>
         </div>
 
         <div class="input-group">
-          <label>统计功效 (1-β)</label>
+          <label>Statistical power (1-β)</label>
           <select v-model.number="power" class="select-input">
             <option :value="0.7">70%</option>
-            <option :value="0.8">80% - 推荐</option>
+            <option :value="0.8">80% - khuyến nghị</option>
             <option :value="0.9">90%</option>
           </select>
-          <span class="input-hint">检测到真实效应的概率</span>
+          <span class="input-hint">Xác suất phát hiện được hiệu ứng thật</span>
         </div>
       </div>
 
       <button class="btn-primary btn-calc" @click="calculateSampleSize">
-        计算所需样本量
+        Tính cỡ mẫu cần thiết
       </button>
 
       <div v-if="calculatedSampleSize > 0" class="calc-results">
         <div class="result-highlight">
-          <div class="highlight-label">每组所需样本量</div>
+          <div class="highlight-label">Cỡ mẫu cần thiết mỗi nhóm</div>
           <div class="highlight-value">
             {{ calculatedSampleSize.toLocaleString() }}
           </div>
@@ -261,34 +261,34 @@
 
         <div class="result-details">
           <div class="detail-row">
-            <span class="detail-label">总样本量（A+B组）</span>
+            <span class="detail-label">Tổng cỡ mẫu (A+B)</span>
             <span class="detail-value">{{
               (calculatedSampleSize * 2).toLocaleString()
             }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">目标转化率（实验组）</span>
+            <span class="detail-label">Tỉ lệ chuyển đổi mục tiêu (nhóm thử nghiệm)</span>
             <span class="detail-value">{{ targetRate }}%</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">绝对差异</span>
+            <span class="detail-label">Chênh lệch tuyệt đối</span>
             <span class="detail-value">{{ absoluteDifference }}%</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">检测时长估算</span>
+            <span class="detail-label">Ước tính thời gian</span>
             <span class="detail-value">{{ estimatedDays }}</span>
           </div>
         </div>
       </div>
 
       <div class="tips">
-        <span class="tips-text">提升目标越小，所需样本量越大。5%的提升比20%的提升需要更多样本</span>
+        <span class="tips-text">Mục tiêu tăng càng nhỏ, cỡ mẫu càng lớn. Tăng 5% cần nhiều mẫu hơn tăng 20%</span>
       </div>
     </div>
 
-    <!-- 常见误区 -->
+    <!-- Sai lầm thường gặp -->
     <div v-if="activeTab === 'pitfalls'" class="content">
-      <h4>A/B测试常见误区</h4>
+      <h4>Sai lầm thường gặp khi A/B testing</h4>
 
       <div class="pitfall-list">
         <div v-for="pitfall in pitfalls" :key="pitfall.id" class="pitfall-card">
@@ -297,10 +297,10 @@
           </div>
           <div class="pitfall-desc">{{ pitfall.description }}</div>
           <div class="pitfall-example">
-            <strong>示例：</strong>{{ pitfall.example }}
+            <strong>Ví dụ:</strong> {{ pitfall.example }}
           </div>
           <div class="pitfall-solution">
-            <strong>解决方案：</strong>{{ pitfall.solution }}
+            <strong>Giải pháp:</strong> {{ pitfall.solution }}
           </div>
         </div>
       </div>
@@ -321,13 +321,13 @@ const props = defineProps({
 const activeTab = ref(props.tab || 'traffic')
 
 const tabs = [
-  { id: 'traffic', name: '流量分配' },
-  { id: 'results', name: '结果对比' },
-  { id: 'calculator', name: '样本量计算' },
-  { id: 'pitfalls', name: '常见误区' }
+  { id: 'traffic', name: 'Phân bổ traffic' },
+  { id: 'results', name: 'So sánh kết quả' },
+  { id: 'calculator', name: 'Tính cỡ mẫu' },
+  { id: 'pitfalls', name: 'Sai lầm thường gặp' }
 ]
 
-// 流量分配相关
+// Liên quan tới phân bổ traffic
 const groupAUsers = ref(500)
 const groupBUsers = ref(500)
 
@@ -356,7 +356,7 @@ function resetTraffic() {
   groupBUsers.value = 500
 }
 
-// 结果对比相关
+// Liên quan tới so sánh kết quả
 const conversionA = ref(5.0)
 const conversionB = ref(6.0)
 const sampleSize = ref(10000)
@@ -373,7 +373,7 @@ const relativeLift = computed(() => {
   return ((conversionB.value - conversionA.value) / conversionA.value) * 100
 })
 
-// Z-score计算
+// Tính Z-score
 const zScore = computed(() => {
   const p1 = conversionA.value / 100
   const p2 = conversionB.value / 100
@@ -389,12 +389,12 @@ const zScore = computed(() => {
 
 const pValue = computed(() => {
   const z = Math.abs(zScore.value)
-  // 使用标准正态分布的近似
+  // Dùng xấp xỉ phân phối chuẩn
   return 2 * (1 - normalCDF(z))
 })
 
 function normalCDF(x) {
-  // 标准正态分布累积分布函数近似
+  // Xấp xỉ CDF của phân phối chuẩn
   const a1 = 0.254829592
   const a2 = -0.284496736
   const a3 = 1.421413741
@@ -415,7 +415,7 @@ function normalCDF(x) {
 
 const isSignificant = computed(() => pValue.value < 0.05)
 
-// 95%置信区间
+// Khoảng tin cậy 95%
 const ciLower = computed(() => {
   const diff = conversionB.value - conversionA.value
   const p1 = conversionA.value / 100
@@ -423,7 +423,7 @@ const ciLower = computed(() => {
   const n = sampleSize.value
 
   const se = Math.sqrt((p1 * (1 - p1)) / n + (p2 * (1 - p2)) / n)
-  const margin = 1.96 * se * 100 // 1.95996是95%置信区间的z值
+  const margin = 1.96 * se * 100 // 1.95996 là z-value cho khoảng tin cậy 95%
 
   return diff - margin
 })
@@ -440,7 +440,7 @@ const ciUpper = computed(() => {
   return diff + margin
 })
 
-// 样本量计算器相关
+// Liên quan tới bộ tính cỡ mẫu
 const baselineRate = ref(5.0)
 const minimumDetectable = ref(20)
 const alpha = ref(0.05)
@@ -456,80 +456,80 @@ const absoluteDifference = computed(
 )
 
 const estimatedDays = computed(() => {
-  const dailyVisitors = 5000 // 假设每日5000访客
+  const dailyVisitors = 5000 // Giả sử 5000 khách/ngày
   const totalNeeded = calculatedSampleSize.value * 2
   const days = Math.ceil(totalNeeded / dailyVisitors)
-  return `约 ${days} 天`
+  return `khoảng ${days} ngày`
 })
 
 function calculateSampleSize() {
   const p1 = baselineRate.value / 100
   const p2 = targetRate.value / 100
-  const constZa = 1.96 // alpha = 0.05对应的z值
-  const constZb = 0.84 // power = 0.8对应的z值
+  const constZa = 1.96 // z-value tương ứng alpha = 0.05
+  const constZb = 0.84 // z-value tương ứng power = 0.8
 
-  // 合并标准差
+  // Độ lệch chuẩn gộp
   const pBar = (p1 + p2) / 2
   const sd1 = Math.sqrt(2 * pBar * (1 - pBar))
   const sd2 = Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))
 
-  // 简化的样本量公式
+  // Công thức cỡ mẫu rút gọn
   const n =
     (Math.pow(constZa * sd1 + constZb * sd2, 2)) / Math.pow(p2 - p1, 2)
 
   calculatedSampleSize.value = Math.ceil(n)
 }
 
-// 常见误区数据
+// Dữ liệu các sai lầm thường gặp
 const pitfalls = [
   {
     id: 'early-stop',
-    title: '过早停止实验',
+    title: 'Dừng thí nghiệm quá sớm',
     description:
-      '看到结果"显著"就立即停止实验，实际上只是随机波动',
+      'Thấy kết quả "có ý nghĩa" là dừng ngay, thực ra chỉ là dao động ngẫu nhiên',
     example:
-      '运行2天后发现B组领先，立即宣布胜利。但继续运行一周后，差异消失。',
-    solution: '预先计算所需样本量，运行完整周期（至少2周）后再做决策'
+      'Sau 2 ngày thấy nhóm B dẫn trước, tuyên bố thắng cuộc. Nhưng chạy tiếp một tuần thì khác biệt biến mất.',
+    solution: 'Tính trước cỡ mẫu cần thiết, chạy đủ chu kỳ (ít nhất 2 tuần) rồi mới ra quyết định'
   },
   {
     id: 'peeking',
-    title: '频繁窥探结果',
-    description: '每天查看数据，一旦"显著"就停止，这会大幅增加假阳性率',
+    title: 'Liên tục dòm kết quả',
+    description: 'Mỗi ngày xem dữ liệu, hễ "có ý nghĩa" là dừng, làm tăng mạnh tỉ lệ false positive',
     example:
-      '每天检查p值，看到<0.05就停止。这种做法会让假阳性率从5%飙升到30%+。',
-    solution: '使用序贯检验方法，或预先设定唯一的检查点'
+      'Mỗi ngày kiểm tra p-value, thấy <0.05 là dừng. Cách này nâng tỉ lệ false positive từ 5% lên tới 30%+.',
+    solution: 'Dùng phương pháp sequential testing, hoặc đặt sẵn các điểm kiểm tra duy nhất'
   },
   {
     id: 'simpson',
-    title: '辛普森悖论',
-    description: '分组看B组更差，但合并后B组反而更好（或相反）',
+    title: 'Nghịch lý Simpson',
+    description: 'Khi tách nhóm thấy B kém hơn, nhưng gộp lại B lại tốt hơn (hoặc ngược lại)',
     example:
-      '移动端转化率B>A，桌面端也是B>A，但合并后却A>B。原因：流量分配不均。',
-    solution: '按流量来源、设备、用户群体等维度分别分析，验证随机化是否正确'
+      'Mobile B>A, desktop cũng B>A, nhưng gộp lại A>B. Nguyên nhân: phân bổ traffic không đồng đều.',
+    solution: 'Phân tích riêng theo nguồn traffic, thiết bị, nhóm người dùng, kiểm tra tính ngẫu nhiên'
   },
   {
     id: 'p-hacking',
-    title: 'P值操纵（P-hacking）',
-    description: '通过尝试不同指标、不同子群体，直到找到"显著"结果',
+    title: 'P-hacking (thao túng p-value)',
+    description: 'Thử nhiều chỉ số, nhiều nhóm con cho tới khi tìm được kết quả "có ý nghĩa"',
     example:
-      '主指标不显著，就按年龄、地区、设备细分，发现某个子群显著就宣称成功。',
-    solution: '预先注册假设和指标，只分析预先设定的指标'
+      'Chỉ số chính không có ý nghĩa, tách theo tuổi, vùng miền, thiết bị, thấy một nhóm có ý nghĩa là tuyên bố thành công.',
+    solution: 'Đăng ký giả thuyết và chỉ số từ trước, chỉ phân tích các chỉ số đã định trước'
   },
   {
     id: 'novelty',
-    title: '新奇效应',
-    description: '用户因好奇点击新功能，导致短期数据虚高',
+    title: 'Hiệu ứng mới lạ (novelty effect)',
+    description: 'User tò mò bấm vào tính năng mới, làm số liệu ngắn hạn cao giả tạo',
     example:
-      '新按钮上线首周点击率提升30%，但三周后回落到原水平甚至更低。',
-    solution: '运行足够长的时间（至少2-4周），让新奇效应消退'
+      'Nút mới ra tuần đầu CTR tăng 30%, nhưng 3 tuần sau quay về mức cũ thậm chí thấp hơn.',
+    solution: 'Chạy đủ thời gian (ít nhất 2-4 tuần) để hiệu ứng mới lạ phai nhạt'
   },
   {
     id: 'underpowered',
-    title: '样本量不足',
-    description: '样本量太小，即使有真实差异也检测不出来',
+    title: 'Cỡ mẫu không đủ',
+    description: 'Cỡ mẫu quá nhỏ, kể cả có khác biệt thật cũng không phát hiện được',
     example:
-      '预期提升5%，但只运行了1000样本，结果"不显著"就放弃，实际上需要30000样本。',
-    solution: '实验前计算所需样本量，确保统计功效≥80%'
+      'Kỳ vọng tăng 5% nhưng chỉ chạy 1000 mẫu, kết quả "không có ý nghĩa" rồi bỏ; thực ra cần 30000 mẫu.',
+    solution: 'Trước thí nghiệm tính cỡ mẫu cần thiết, đảm bảo statistical power ≥ 80%'
   }
 ]
 </script>
@@ -602,7 +602,7 @@ const pitfalls = [
   margin-bottom: 16px;
 }
 
-/* 流量分配样式 */
+/* Style phần phân bổ traffic */
 .traffic-split {
   margin-bottom: 20px;
 }
@@ -724,7 +724,7 @@ const pitfalls = [
   color: #1e293b;
 }
 
-/* 结果对比样式 */
+/* Style so sánh kết quả */
 .comparison-settings {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -921,7 +921,7 @@ const pitfalls = [
   margin-top: 12px;
 }
 
-/* 样本量计算器样式 */
+/* Style bộ tính cỡ mẫu */
 .calc-inputs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1026,7 +1026,7 @@ const pitfalls = [
   color: #1e293b;
 }
 
-/* 常见误区样式 */
+/* Style sai lầm thường gặp */
 .pitfall-list {
   display: flex;
   flex-direction: column;
@@ -1083,7 +1083,7 @@ const pitfalls = [
   line-height: 1.6;
 }
 
-/* 提示框样式 */
+/* Style hộp gợi ý */
 .tips {
   display: flex;
   gap: 12px;
@@ -1104,7 +1104,7 @@ const pitfalls = [
   line-height: 1.6;
 }
 
-/* 响应式 */
+/* Responsive */
 @media (max-width: 768px) {
   .results-comparison {
     flex-direction: column;

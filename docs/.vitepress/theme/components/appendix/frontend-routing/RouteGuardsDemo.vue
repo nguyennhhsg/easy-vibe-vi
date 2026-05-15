@@ -2,12 +2,12 @@
   <div class="route-guards-demo">
     <div class="demo-header">
       <span class="icon">🛡️</span>
-      <span class="title">路由守卫</span>
-      <span class="subtitle">导航流程的安检员</span>
+      <span class="title">Route guard</span>
+      <span class="subtitle">Nhân viên an ninh trong quá trình điều hướng</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">机场过安检</span>：登机前要检查身份、行李，登机后可能还要确认信息。路由守卫就像这些安检员，在导航的各个阶段进行检查和拦截。
+      Hãy tưởng tượng bạn đang <span class="highlight">qua trạm an ninh sân bay</span>: trước khi lên máy bay phải kiểm tra giấy tờ, hành lý, sau khi lên có khi còn xác nhận thông tin. Route guard chính là những nhân viên an ninh đó, kiểm tra và chặn ở từng giai đoạn điều hướng.
     </div>
 
     <div class="demo-content">
@@ -42,7 +42,7 @@
           </div>
           <div class="detail-example">
             <div class="example-label">
-              💻 代码示例：
+              💻 Ví dụ code:
             </div>
             <pre class="code-block">{{ currentGuard?.example }}</pre>
           </div>
@@ -51,7 +51,7 @@
     </div>
 
     <div class="execution-flow">
-      <h5>📋 守卫执行顺序</h5>
+      <h5>📋 Thứ tự chạy các guard</h5>
       <div class="flow-steps">
         <div
           v-for="(step, index) in executionSteps"
@@ -75,7 +75,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心用途：</strong>路由守卫常用于权限验证（检查用户是否登录）、页面预加载（获取数据）、防止误操作（离开前提示保存）等场景。
+      <strong>Công dụng cốt lõi:</strong> Route guard thường dùng cho xác thực quyền (kiểm tra user đã đăng nhập chưa), preload trang (lấy dữ liệu trước), tránh thao tác nhầm (nhắc save trước khi rời) và các tình huống tương tự.
     </div>
   </div>
 </template>
@@ -90,8 +90,8 @@ const guardTypes = [
     name: 'beforeEach',
     type: 'global',
     icon: '🌍',
-    shortDesc: '全局前置守卫',
-    description: '在路由跳转前执行，常用于权限验证、登录检查等',
+    shortDesc: 'Guard toàn cục chạy trước',
+    description: 'Chạy trước khi chuyển route, thường dùng để xác thực quyền, kiểm tra đăng nhập...',
     example: `router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !isLoggedIn()) {
     next('/login')
@@ -104,10 +104,10 @@ const guardTypes = [
     name: 'beforeResolve',
     type: 'global',
     icon: '🔍',
-    shortDesc: '全局解析守卫',
-    description: '在导航被确认之前、组件内守卫和异步路由组件被解析之后调用',
+    shortDesc: 'Guard toàn cục lúc resolve',
+    description: 'Chạy trước khi điều hướng được xác nhận, sau khi guard trong component và route async đã được resolve',
     example: `router.beforeResolve((to, from, next) => {
-  // 数据预加载
+  // Preload dữ liệu
   next()
 })`
   },
@@ -115,8 +115,8 @@ const guardTypes = [
     name: 'afterEach',
     type: 'global',
     icon: '✅',
-    shortDesc: '全局后置钩子',
-    description: '在导航完成后执行，不能改变导航，常用于页面统计',
+    shortDesc: 'Hook toàn cục chạy sau',
+    description: 'Chạy sau khi điều hướng xong, không thể thay đổi điều hướng, thường dùng cho thống kê trang',
     example: `router.afterEach((to, from) => {
   document.title = to.meta.title
   analytics.track(to.path)
@@ -126,8 +126,8 @@ const guardTypes = [
     name: 'beforeEnter',
     type: 'route',
     icon: '🛣️',
-    shortDesc: '路由独享守卫',
-    description: '在单个路由配置中定义，只在进入该路由时触发',
+    shortDesc: 'Guard riêng cho từng route',
+    description: 'Định nghĩa trong cấu hình của một route cụ thể, chỉ chạy khi vào route đó',
     example: `{
   path: '/admin',
   beforeEnter: (to, from, next) => {
@@ -140,25 +140,25 @@ const guardTypes = [
     name: 'beforeRouteEnter',
     type: 'component',
     icon: '🔧',
-    shortDesc: '组件内守卫-进入',
-    description: '在渲染该组件的对应路由被验证前调用，不能访问组件实例',
+    shortDesc: 'Guard trong component - khi vào',
+    description: 'Chạy trước khi route render component được xác thực, chưa truy cập được instance của component',
     example: `beforeRouteEnter(to, from, next) {
   next(vm => {
-    // 通过 vm 访问组件实例
+    // Truy cập instance qua vm
   })
 }`
   }
 ]
 
 const executionSteps = [
-  { name: '触发导航', description: '用户点击链接或调用 router.push()' },
-  { name: 'beforeRouteLeave', description: '离开组件的守卫' },
-  { name: 'beforeEach', description: '全局前置守卫' },
-  { name: 'beforeEnter', description: '路由独享守卫' },
-  { name: 'beforeRouteEnter', description: '组件内守卫' },
-  { name: 'beforeResolve', description: '全局解析守卫' },
-  { name: 'afterEach', description: '全局后置钩子' },
-  { name: 'DOM 更新', description: '渲染新页面' }
+  { name: 'Kích hoạt điều hướng', description: 'User bấm link hoặc gọi router.push()' },
+  { name: 'beforeRouteLeave', description: 'Guard khi rời component' },
+  { name: 'beforeEach', description: 'Guard toàn cục trước' },
+  { name: 'beforeEnter', description: 'Guard riêng cho route' },
+  { name: 'beforeRouteEnter', description: 'Guard trong component' },
+  { name: 'beforeResolve', description: 'Guard toàn cục lúc resolve' },
+  { name: 'afterEach', description: 'Hook toàn cục sau' },
+  { name: 'Cập nhật DOM', description: 'Render trang mới' }
 ]
 
 const currentGuard = computed(() => {

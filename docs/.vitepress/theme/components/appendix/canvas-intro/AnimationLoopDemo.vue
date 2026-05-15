@@ -1,15 +1,15 @@
 <!--
   AnimationLoopDemo.vue
-  Canvas 动画循环演示组件
+  Component demo animation loop trên Canvas
 
-  用途：
-  展示 Canvas 动画的基本原理，包括 requestAnimationFrame、清除重绘、动画循环
+  Mục đích:
+  Trình bày nguyên lý animation trên Canvas: requestAnimationFrame, clear-redraw, animation loop
 
-  交互功能：
-  - 播放控制：播放/暂停动画
-  - 速度调整：控制动画速度
-  - 显示帧率：实时显示 FPS
-  - 多种动画：不同的动画效果示例
+  Tính năng tương tác:
+  - Điều khiển phát: play/pause animation
+  - Điều chỉnh tốc độ: thay đổi tốc độ animation
+  - Hiển thị FPS theo thời gian thực
+  - Nhiều loại animation khác nhau
 -->
 <template>
   <div class="animation-demo">
@@ -28,28 +28,28 @@
           @click="resetAnimation"
         >
           <span class="icon">🔄</span>
-          Reset / 重置
+          Reset / Đặt lại
         </button>
       </div>
 
       <div class="animation-selector">
-        <label>Animation / 动画类型</label>
+        <label>Animation / Loại animation</label>
         <select v-model="animationType">
           <option value="bounce">
-            Bouncing Ball / 弹跳球
+            Bouncing Ball / Bóng nảy
           </option>
           <option value="rotate">
-            Rotating Square / 旋转方块
+            Rotating Square / Hình vuông xoay
           </option>
           <option value="wave">
-            Wave / 波浪
+            Wave / Sóng
           </option>
         </select>
       </div>
 
       <div class="parameters">
         <div class="param-row">
-          <label>Speed / 速度: {{ speed }}x</label>
+          <label>Speed / Tốc độ: {{ speed }}x</label>
           <input
             v-model.number="speed"
             type="range"
@@ -60,7 +60,7 @@
         </div>
 
         <div class="param-row">
-          <label>Object Count / 对象数量: {{ objectCount }}</label>
+          <label>Object Count / Số object: {{ objectCount }}</label>
           <input
             v-model.number="objectCount"
             type="range"
@@ -114,29 +114,29 @@ let lastTime = 0
 let frameCount = 0
 let fpsTime = 0
 
-// 动画对象状态
+// Trạng thái của các object trong animation
 const balls = ref([])
 const angle = ref(0)
 
 const animationCode = computed(() => {
   const templates = {
-    bounce: `// 弹跳球动画
+    bounce: `// Animation bóng nảy
 let balls = [
   { x: 100, y: 100, vx: 2, vy: 3, radius: 20 },
-  // ... 更多球
+  // ... thêm bóng
 ]
 
 function animate(timestamp) {
-  // 清除画布
+  // Xoá canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 更新和绘制每个球
+  // Cập nhật và vẽ từng bóng
   balls.forEach(ball => {
-    // 更新位置
+    // Cập nhật vị trí
     ball.x += ball.vx * ${speed.value}
     ball.y += ball.vy * ${speed.value}
 
-    // 边界碰撞检测
+    // Va chạm biên
     if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
       ball.vx = -ball.vx
     }
@@ -144,48 +144,48 @@ function animate(timestamp) {
       ball.vy = -ball.vy
     }
 
-    // 绘制
+    // Vẽ
     ctx.beginPath()
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2)
     ctx.fill()
   })
 
-  // 请求下一帧
+  // Yêu cầu frame tiếp theo
   requestAnimationFrame(animate)
 }
 
-// 启动动画
+// Khởi động animation
 requestAnimationFrame(animate)`,
 
-    rotate: `// 旋转方块动画
+    rotate: `// Animation hình vuông xoay
 let angle = 0
 
 function animate(timestamp) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 更新角度
+  // Cập nhật góc
   angle += 0.02 * ${speed.value}
 
-  // 保存当前状态
+  // Lưu state hiện tại
   ctx.save()
 
-  // 移动到中心点
+  // Dời gốc về trung tâm
   ctx.translate(canvas.width / 2, canvas.height / 2)
 
-  // 旋转
+  // Xoay
   ctx.rotate(angle)
 
-  // 绘制方块
+  // Vẽ hình vuông
   ctx.fillStyle = '#3498db'
   ctx.fillRect(-50, -50, 100, 100)
 
-  // 恢复状态
+  // Khôi phục state
   ctx.restore()
 
   requestAnimationFrame(animate)
 }`,
 
-    wave: `// 波浪动画
+    wave: `// Animation sóng
 let offset = 0
 
 function animate(timestamp) {
@@ -193,7 +193,7 @@ function animate(timestamp) {
 
   offset += 0.05 * ${speed.value}
 
-  // 绘制波浪
+  // Vẽ sóng
   ctx.beginPath()
   ctx.moveTo(0, canvas.height / 2)
 
@@ -231,11 +231,11 @@ const initBalls = () => {
 
 const drawBouncingBall = (ctx) => {
   balls.value.forEach((ball) => {
-    // 更新位置
+    // Cập nhật vị trí
     ball.x += ball.vx * speed.value
     ball.y += ball.vy * speed.value
 
-    // 边界碰撞
+    // Va chạm biên
     if (ball.x + ball.radius > 600 || ball.x - ball.radius < 0) {
       ball.vx = -ball.vx
     }
@@ -243,13 +243,13 @@ const drawBouncingBall = (ctx) => {
       ball.vy = -ball.vy
     }
 
-    // 绘制
+    // Vẽ
     ctx.fillStyle = ball.color
     ctx.beginPath()
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2)
     ctx.fill()
 
-    // 高光效果
+    // Hiệu ứng highlight
     ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
     ctx.beginPath()
     ctx.arc(
@@ -310,14 +310,14 @@ const draw = () => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')
 
-  // 清除画布
+  // Xoá canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 绘制背景
+  // Vẽ nền
   ctx.fillStyle = '#fafafa'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  // 根据类型绘制
+  // Vẽ theo loại animation
   switch (animationType.value) {
     case 'bounce':
       drawBouncingBall(ctx)
@@ -337,7 +337,7 @@ const animate = (timestamp) => {
   if (!lastTime) lastTime = timestamp
   const deltaTime = timestamp - lastTime
 
-  // 计算 FPS
+  // Tính FPS
   frameCount++
   fpsTime += deltaTime
   if (fpsTime >= 1000) {

@@ -1,12 +1,12 @@
 <!--
   DashboardLayoutDemo.vue
-  仪表盘布局演示：展示仪表盘的常见布局模式
+  Demo bố cục dashboard: minh hoạ các kiểu layout dashboard thường gặp
 -->
 <template>
   <div class="dashboard-demo">
     <div class="header">
-      <div class="title">仪表盘布局模式</div>
-      <div class="subtitle">点击查看不同类型的仪表盘布局</div>
+      <div class="title">Các kiểu bố cục dashboard</div>
+      <div class="subtitle">Bấm vào để xem các kiểu layout dashboard khác nhau</div>
     </div>
 
     <div class="layout-tabs">
@@ -32,7 +32,7 @@
           <div class="widget-label">{{ widget.label }}</div>
         </div>
       </div>
-      <div class="use-case">适用场景：{{ current.useCase }}</div>
+      <div class="use-case">Tình huống áp dụng: {{ current.useCase }}</div>
     </div>
   </div>
 </template>
@@ -45,54 +45,54 @@ const activeLayout = ref('overview')
 const layouts = [
   {
     key: 'overview',
-    name: '全局概览型',
-    desc: '顶部核心指标卡片 + 中间趋势图 + 底部明细表',
-    useCase: '管理层日报、运营大盘',
+    name: 'Tổng quan',
+    desc: 'KPI card ở trên + chart xu hướng ở giữa + bảng chi tiết ở dưới',
+    useCase: 'Báo cáo hàng ngày cho ban lãnh đạo, dashboard vận hành',
     widgets: [
-      { type: 'kpi', label: 'DAU 12.5万' },
-      { type: 'kpi', label: '收入 ¥85万' },
-      { type: 'kpi', label: '转化率 3.2%' },
-      { type: 'kpi', label: '客单价 ¥268' },
-      { type: 'chart-wide', label: '趋势折线图' },
-      { type: 'table', label: '明细数据表' }
+      { type: 'kpi', label: 'DAU 125k' },
+      { type: 'kpi', label: 'Doanh thu 850tr' },
+      { type: 'kpi', label: 'Conversion 3.2%' },
+      { type: 'kpi', label: 'AOV 268k' },
+      { type: 'chart-wide', label: 'Chart xu hướng' },
+      { type: 'table', label: 'Bảng chi tiết' }
     ]
   },
   {
     key: 'comparison',
-    name: '对比分析型',
-    desc: '左右对比布局，适合 A/B 测试或同环比分析',
-    useCase: 'A/B 测试报告、竞品分析',
+    name: 'So sánh',
+    desc: 'Bố cục đối chiếu trái-phải, hợp với A/B test hoặc phân tích YoY/MoM',
+    useCase: 'Báo cáo A/B test, phân tích đối thủ',
     widgets: [
-      { type: 'half', label: '实验组指标' },
-      { type: 'half', label: '对照组指标' },
-      { type: 'chart-wide', label: '差异对比图' },
-      { type: 'table', label: '统计显著性检验' }
+      { type: 'half', label: 'Chỉ số nhóm thí nghiệm' },
+      { type: 'half', label: 'Chỉ số nhóm đối chứng' },
+      { type: 'chart-wide', label: 'Chart so sánh chênh lệch' },
+      { type: 'table', label: 'Kiểm định ý nghĩa thống kê' }
     ]
   },
   {
     key: 'drill',
-    name: '下钻分析型',
-    desc: '从汇总到明细逐层下钻，支持交互式探索',
-    useCase: '销售分析、用户行为分析',
+    name: 'Drill-down',
+    desc: 'Khoan từ tổng hợp xuống chi tiết theo từng lớp, hỗ trợ khám phá tương tác',
+    useCase: 'Phân tích bán hàng, phân tích hành vi user',
     widgets: [
-      { type: 'chart-wide', label: '全国销售地图（点击省份下钻）' },
-      { type: 'half', label: '省份排名柱状图' },
-      { type: 'half', label: '城市明细饼图' },
-      { type: 'table', label: '门店级明细表' }
+      { type: 'chart-wide', label: 'Bản đồ doanh số toàn quốc (bấm tỉnh để drill)' },
+      { type: 'half', label: 'Chart xếp hạng theo tỉnh' },
+      { type: 'half', label: 'Pie chi tiết theo thành phố' },
+      { type: 'table', label: 'Bảng chi tiết cấp cửa hàng' }
     ]
   },
   {
     key: 'realtime',
-    name: '实时监控型',
-    desc: '大屏展示，数据自动刷新，适合投屏',
-    useCase: '双十一大屏、服务器监控',
+    name: 'Giám sát real-time',
+    desc: 'Hiển thị màn hình lớn, dữ liệu tự refresh, hợp để chiếu lên TV',
+    useCase: 'Màn hình sự kiện sale lớn, giám sát server',
     widgets: [
-      { type: 'big-number', label: '实时 GMV ¥1.2亿' },
-      { type: 'half', label: '订单量实时曲线' },
-      { type: 'half', label: '地域热力图' },
-      { type: 'kpi', label: '支付成功率' },
-      { type: 'kpi', label: '平均响应时间' },
-      { type: 'kpi', label: '在线用户数' }
+      { type: 'big-number', label: 'GMV real-time 12 tỷ' },
+      { type: 'half', label: 'Đường cong lượng đơn real-time' },
+      { type: 'half', label: 'Heatmap theo khu vực' },
+      { type: 'kpi', label: 'Tỉ lệ thanh toán thành công' },
+      { type: 'kpi', label: 'Response time trung bình' },
+      { type: 'kpi', label: 'Số user online' }
     ]
   }
 ]

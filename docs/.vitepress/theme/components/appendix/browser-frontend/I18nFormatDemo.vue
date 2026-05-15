@@ -1,23 +1,23 @@
 <template>
   <div class="demo-wrapper" :dir="layoutDirection">
-    <div class="demo-header" dir="ltr">i18n / 布局与本地化 API 演示</div>
+    <div class="demo-header" dir="ltr">i18n / Demo layout và localization API</div>
 
-    <!-- 控制面板 -->
+    <!-- Bảng điều khiển -->
     <div class="controls" dir="ltr">
       <div class="lang-selector">
-        <label>选择环境 (Locale)：</label>
+        <label>Chọn locale:</label>
         <select v-model="currentLocale">
           <option value="zh-CN">🇨🇳 简体中文 (zh-CN)</option>
           <option value="en-US">🇺🇸 English (en-US)</option>
-          <option value="de-DE">🇩🇪 Deutsch (de-DE) [测试超长文本]</option>
-          <option value="ar-SA">🇸🇦 العربية (ar-SA) [测试从右到左]</option>
+          <option value="de-DE">🇩🇪 Deutsch (de-DE) [test văn bản dài]</option>
+          <option value="ar-SA">🇸🇦 العربية (ar-SA) [test layout right-to-left]</option>
         </select>
       </div>
     </div>
 
-    <!-- 演示应用 -->
+    <!-- App demo -->
     <div class="app-ui">
-      <!-- 头部导航栏 -->
+      <!-- Header navigation -->
       <nav class="app-nav">
         <div class="nav-brand">
           <span class="logo">⚡</span>
@@ -29,7 +29,7 @@
         </div>
       </nav>
 
-      <!-- 主要内容区 -->
+      <!-- Khu vực nội dung chính -->
       <main class="app-body">
         <div class="card">
           <h2 class="card-title">{{ t('payment_title') }}</h2>
@@ -46,7 +46,7 @@
           </div>
 
           <div class="actions">
-            <!-- 演示按钮超长溢出防护 -->
+            <!-- Test xử lý văn bản nút quá dài -->
             <button class="btn btn-primary">
               {{ t('confirm_btn') }}
             </button>
@@ -65,7 +65,7 @@ import { ref, computed } from 'vue'
 
 const currentLocale = ref('zh-CN')
 
-// 极其简易的字典
+// Từ điển tối giản
 const dictionary = {
   'zh-CN': {
     app_name: '随星流界',
@@ -97,7 +97,7 @@ const dictionary = {
     payment_desc: 'Bitte schließen Sie Ihre Zahlung vor dem Fälligkeitsdatum ab, um eine Unterbrechung des Dienstes zu vermeiden.',
     date_label: 'Ausstellungsdatum',
     amount_label: 'Fälliger Gesamtbetrag',
-    confirm_btn: 'Zahlungsvorgang jetzt bestätigen', // 超长按钮文本
+    confirm_btn: 'Zahlungsvorgang jetzt bestätigen', // Văn bản nút rất dài
     cancel_btn: 'Zurück zur vorherigen Seite'
   },
   'ar-SA': {
@@ -113,18 +113,18 @@ const dictionary = {
   }
 }
 
-// 模拟的原始数据
+// Dữ liệu gốc giả lập
 const rawDate = new Date()
 const rawAmount = 14590.5
 
 const t = (key) => dictionary[currentLocale.value][key]
 
-// 核心特性：自动计算布局方向
+// Tính năng cốt lõi: tự tính direction của layout
 const layoutDirection = computed(() => {
   return currentLocale.value === 'ar-SA' ? 'rtl' : 'ltr'
 })
 
-// 核心特性：使用浏览器原生 Intl API 进行本地化格式，告别手写正则
+// Tính năng cốt lõi: dùng Intl API native của browser để format localization, không cần viết regex thủ công
 const formattedDate = computed(() => {
   return new Intl.DateTimeFormat(currentLocale.value, {
     year: 'numeric',
@@ -187,7 +187,7 @@ select {
   color: var(--vp-c-text-1);
 }
 
-/* 内部 APP 模拟容器 */
+/* Container giả lập app bên trong */
 .app-ui {
   background: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
@@ -196,7 +196,7 @@ select {
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* 如果是 RTL，Flex 的 start 自动会贴到右边！ */
+/* Nếu là RTL, start của Flex tự động bám sang bên phải! */
 .app-nav {
   display: flex;
   justify-content: space-between;
@@ -268,7 +268,7 @@ select {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
-  flex-wrap: wrap; /* 关键：德文过长时允许换行，保护布局 */
+  flex-wrap: wrap; /* Then chốt: cho phép xuống dòng khi văn bản tiếng Đức quá dài, bảo vệ layout */
 }
 
 .btn {
@@ -279,7 +279,7 @@ select {
   cursor: pointer;
   border: none;
   min-width: fit-content;
-  flex: 1; /* 按钮自动填满空间 */
+  flex: 1; /* Nút tự lấp đầy chỗ trống */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -292,7 +292,7 @@ select {
 .btn-ghost { background: #f1f5f9; color: #475569; }
 .btn-ghost:hover { background: #e2e8f0; }
 
-/* 暗黑模式适配 */
+/* Tương thích dark mode */
 .dark .app-body { background: var(--vp-c-bg-alt); }
 .dark .card { background: var(--vp-c-bg); border: 1px solid var(--vp-c-divider); }
 .dark .card-title { color: var(--vp-c-text-1); }

@@ -65,7 +65,7 @@ const clearAll = () => {
   >
     <template #header>
       <div class="header">
-        <span class="title">Application (应用面板)</span>
+        <span class="title">Application (Tab ứng dụng)</span>
         <el-button
           type="danger"
           size="small"
@@ -168,19 +168,19 @@ const clearAll = () => {
           v-if="activeTab === 'local'"
           class="info-bar"
         >
-          持久化存储：即便关闭浏览器，数据也会保留。
+          Lưu trữ lâu dài: dù đóng browser dữ liệu vẫn được giữ.
         </div>
         <div
           v-else-if="activeTab === 'session'"
           class="info-bar"
         >
-          临时存储：关闭标签页后，数据会被清空。
+          Lưu tạm thời: khi đóng tab dữ liệu sẽ bị xóa.
         </div>
         <div
           v-else
           class="info-bar"
         >
-          Cookies：通常用于身份验证，会随请求发送给服务器。
+          Cookies: thường dùng cho xác thực, được gửi kèm khi request server.
         </div>
       </div>
     </div>

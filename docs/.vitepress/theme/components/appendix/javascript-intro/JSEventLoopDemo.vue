@@ -14,13 +14,13 @@ const taskQueue = ref([])
 const outputLog = ref([])
 
 const steps = [
-  { description: '执行 console.log("1")', output: '1' },
-  { description: '遇到 setTimeout，把回调贴到便签栏', output: null },
-  { description: '执行 console.log("3")', output: '3' },
-  { description: '遇到 fetch，把回调贴到便签栏', output: null },
-  { description: '执行 console.log("5")', output: '5' },
-  { description: '执行 setTimeout 的回调', output: '2' },
-  { description: '执行 fetch 的回调', output: '4' }
+  { description: 'Chạy console.log("1")', output: '1' },
+  { description: 'Gặp setTimeout, dán callback lên bảng note', output: null },
+  { description: 'Chạy console.log("3")', output: '3' },
+  { description: 'Gặp fetch, dán callback lên bảng note', output: null },
+  { description: 'Chạy console.log("5")', output: '5' },
+  { description: 'Chạy callback của setTimeout', output: '2' },
+  { description: 'Chạy callback của fetch', output: '4' }
 ]
 
 const reset = () => {
@@ -50,7 +50,7 @@ const nextStep = () => {
   }
 
   if (step.output) {
-    outputLog.value.push({ output: step.output, source: '同步代码' })
+    outputLog.value.push({ output: step.output, source: 'Sync code' })
   }
 
   currentStep.value++
@@ -75,12 +75,12 @@ const stop = () => {
 
 <template>
   <div class="event-loop-demo">
-    <h3>事件循环：JavaScript 的执行机制</h3>
+    <h3>Event loop: cách JavaScript thực thi</h3>
 
     <div class="workspace">
-      <!-- 代码队列 -->
+      <!-- Hàng đợi code -->
       <div class="code-queue-section">
-        <h4>代码队列</h4>
+        <h4>Hàng đợi code</h4>
         <div class="queue">
           <div
             v-for="(item, index) in codeQueue"
@@ -101,21 +101,21 @@ const stop = () => {
               v-if="currentStep === index"
               class="executing"
             >
-              执行中
+              Đang chạy
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 工位 -->
+      <!-- Worker -->
       <div class="worker-section">
-        <h4>工位（单线程）</h4>
+        <h4>Worker (single thread)</h4>
         <div class="worker">
           <div class="worker-emoji">
             👨‍💻
           </div>
           <div class="worker-status">
-            {{ currentStep < steps.length ? '正在执行' : '执行完成' }}
+            {{ currentStep < steps.length ? 'Đang chạy' : 'Đã chạy xong' }}
           </div>
           <div
             v-if="currentStep < steps.length"
@@ -126,9 +126,9 @@ const stop = () => {
         </div>
       </div>
 
-      <!-- 便签栏 -->
+      <!-- Bảng note -->
       <div class="task-queue-section">
-        <h4>便签栏（任务队列）</h4>
+        <h4>Bảng note (task queue)</h4>
         <div class="task-queue">
           <div
             v-for="task in taskQueue"
@@ -140,28 +140,28 @@ const stop = () => {
               {{ task.code }}
             </div>
             <div class="task-status">
-              {{ task.status === 'ready' ? '✅ 就绪' : '⏳ 等待中...' }}
+              {{ task.status === 'ready' ? 'Sẵn sàng' : 'Đang chờ...' }}
             </div>
           </div>
           <div
             v-if="taskQueue.length === 0"
             class="empty-queue"
           >
-            暂无待办任务
+            Chưa có task
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 输出日志 -->
+    <!-- Output log -->
     <div class="output-section">
-      <h4>输出日志</h4>
+      <h4>Output log</h4>
       <div class="output-log">
         <div
           v-if="outputLog.length === 0"
           class="empty-log"
         >
-          等待输出...
+          Đang chờ output...
         </div>
         <div
           v-for="(log, index) in outputLog"
@@ -174,43 +174,43 @@ const stop = () => {
       </div>
     </div>
 
-    <!-- 控制按钮 -->
+    <!-- Nút điều khiển -->
     <div class="controls">
       <button
         :disabled="isPlaying || currentStep >= steps.length"
         class="btn-play"
         @click="play"
       >
-        {{ isPlaying ? '执行中...' : '▶ 自动播放' }}
+        {{ isPlaying ? 'Đang chạy...' : 'Tự chạy' }}
       </button>
       <button
         :disabled="isPlaying || currentStep >= steps.length"
         class="btn-step"
         @click="nextStep"
       >
-        ⏭ 单步执行
+        Chạy từng bước
       </button>
       <button
         :disabled="!isPlaying"
         class="btn-stop"
         @click="stop"
       >
-        ⏸ 停止
+        Dừng
       </button>
       <button
         class="btn-reset"
         @click="reset"
       >
-        🔄 重置
+        Reset
       </button>
     </div>
 
-    <!-- 说明 -->
+    <!-- Giải thích -->
     <div class="explanation">
-      <p><strong>执行顺序：</strong>{{ outputLog.map(l => l.output).join(', ') || '还未开始' }}</p>
-      <p><strong>代码书写顺序：</strong>1, 2, 3, 4, 5</p>
+      <p><strong>Thứ tự thực thi:</strong> {{ outputLog.map(l => l.output).join(', ') || 'Chưa bắt đầu' }}</p>
+      <p><strong>Thứ tự viết code:</strong> 1, 2, 3, 4, 5</p>
       <p class="highlight">
-        代码从上到下写的，但执行顺序不一定从上到下——因为异步操作会被"推迟"到当前代码执行完之后。
+        Code viết từ trên xuống, nhưng thứ tự chạy không nhất thiết từ trên xuống - vì các thao tác async sẽ bị "trì hoãn" tới khi code hiện tại chạy xong.
       </p>
     </div>
   </div>

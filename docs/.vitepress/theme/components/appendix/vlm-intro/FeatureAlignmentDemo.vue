@@ -2,11 +2,11 @@
   <div class="feature-alignment-demo">
     <div class="header">
       <div class="title">
-        阶段一：特征对齐 (Feature Alignment / Pre-training)
+        Giai đoạn 1: Căn chỉnh đặc trưng (Feature Alignment / Pre-training)
       </div>
       <div class="desc">
-        目标：让 Projector 学会“翻译”图像语言。
-        <br>做法：冻结 ViT 和 LLM，只训练 Projector。
+        Mục tiêu: giúp Projector học cách "dịch" ngôn ngữ hình ảnh.
+        <br>Cách làm: đóng băng ViT và LLM, chỉ huấn luyện Projector.
       </div>
     </div>
 
@@ -18,7 +18,7 @@
             🖼️
           </div>
           <div class="data-label">
-            图片<br>(猫)
+            Hình ảnh<br>(con mèo)
           </div>
         </div>
         <div class="data-item text-data">
@@ -26,7 +26,7 @@
             📝
           </div>
           <div class="data-label">
-            标题<br>("一只猫")
+            Chú thích<br>("một con mèo")
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <!-- Vision Branch -->
         <div class="model-block frozen">
           <div class="status-badge">
-            ❄️ 冻结
+            ❄️ Đóng băng
           </div>
           <div class="block-icon">
             👁️
@@ -62,7 +62,7 @@
 
         <div class="model-block training">
           <div class="status-badge fire">
-            🔥 训练
+            🔥 Huấn luyện
           </div>
           <div class="block-icon">
             🔌
@@ -75,7 +75,7 @@
         <!-- Text Branch -->
         <div class="model-block frozen text-model">
           <div class="status-badge">
-            ❄️ 冻结
+            ❄️ Đóng băng
           </div>
           <div class="block-icon">
             🧠
@@ -103,7 +103,7 @@
             🟢
           </div>
           <div class="vector-label">
-            向量 V
+            Vector V
           </div>
         </div>
 
@@ -128,7 +128,7 @@
             🔵
           </div>
           <div class="vector-label">
-            向量 T
+            Vector T
           </div>
         </div>
       </div>
@@ -164,28 +164,28 @@ const nextStep = () => {
 const buttonText = computed(() => {
   switch (step.value) {
     case 0:
-      return '开始训练演示'
+      return 'Bắt đầu mô phỏng huấn luyện'
     case 1:
-      return '下一步：计算 Loss'
+      return 'Bước tiếp: tính Loss'
     case 2:
-      return '下一步：反向传播'
+      return 'Bước tiếp: lan truyền ngược'
     case 3:
-      return '完成并重置'
+      return 'Hoàn tất và reset'
     default:
-      return '开始'
+      return 'Bắt đầu'
   }
 })
 
 const currentStepDesc = computed(() => {
   switch (step.value) {
     case 0:
-      return '准备就绪。点击按钮开始模拟一次训练迭代。'
+      return 'Sẵn sàng. Nhấn nút để bắt đầu mô phỏng một lần lặp huấn luyện.'
     case 1:
-      return '前向传播：图片经过 ViT (冻结) 和 Projector (训练) 得到向量 V；文本经过 LLM (冻结) 得到向量 T。'
+      return 'Lan truyền xuôi: hình ảnh đi qua ViT (đóng băng) và Projector (huấn luyện) cho ra vector V; văn bản đi qua LLM (đóng băng) cho ra vector T.'
     case 2:
-      return '计算 Loss：比较向量 V 和向量 T 的相似度。目标是让它们尽可能接近。'
+      return 'Tính Loss: so sánh độ tương đồng giữa vector V và vector T. Mục tiêu là kéo chúng càng gần nhau càng tốt.'
     case 3:
-      return '反向传播：根据 Loss 更新 Projector 的参数。注意 ViT 和 LLM 不会更新！'
+      return 'Lan truyền ngược: cập nhật tham số của Projector dựa trên Loss. Lưu ý ViT và LLM sẽ KHÔNG được cập nhật!'
     default:
       return ''
   }

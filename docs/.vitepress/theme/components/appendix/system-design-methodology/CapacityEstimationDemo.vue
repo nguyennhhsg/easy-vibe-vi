@@ -1,58 +1,58 @@
 <!--
   CapacityEstimationDemo.vue
-  容量估算计算器：信封背面估算交互演示
+  Bộ tính ước lượng capacity: demo tương tác kiểu back-of-the-envelope
 -->
 <template>
   <div class="capacity-demo">
     <div class="header">
-      <div class="title">信封背面估算器</div>
-      <div class="subtitle">输入基础数据，自动计算系统容量需求</div>
+      <div class="title">Bộ tính back-of-the-envelope</div>
+      <div class="subtitle">Nhập các số liệu cơ bản, tự động tính nhu cầu capacity của hệ thống</div>
     </div>
 
     <div class="inputs">
       <div class="input-group">
-        <label>日活用户（万）</label>
+        <label>DAU (chục nghìn)</label>
         <input v-model.number="dau" type="number" min="1" max="100000" />
       </div>
       <div class="input-group">
-        <label>人均请求数/天</label>
+        <label>Request mỗi user/ngày</label>
         <input v-model.number="reqPerUser" type="number" min="1" max="1000" />
       </div>
       <div class="input-group">
-        <label>单次响应大小（KB）</label>
+        <label>Kích thước response (KB)</label>
         <input v-model.number="responseSize" type="number" min="0.1" max="1000" />
       </div>
       <div class="input-group">
-        <label>峰值系数</label>
+        <label>Hệ số đỉnh (peak factor)</label>
         <input v-model.number="peakFactor" type="number" min="1" max="10" step="0.5" />
       </div>
     </div>
 
     <div class="results">
       <div class="result-card">
-        <div class="result-label">日请求量</div>
+        <div class="result-label">Request/ngày</div>
         <div class="result-value">{{ formatNumber(dailyRequests) }}</div>
       </div>
       <div class="result-card">
-        <div class="result-label">平均 QPS</div>
+        <div class="result-label">QPS trung bình</div>
         <div class="result-value">{{ formatNumber(avgQps) }}</div>
       </div>
       <div class="result-card">
-        <div class="result-label">峰值 QPS</div>
+        <div class="result-label">QPS đỉnh</div>
         <div class="result-value">{{ formatNumber(peakQps) }}</div>
       </div>
       <div class="result-card">
-        <div class="result-label">日带宽</div>
+        <div class="result-label">Băng thông/ngày</div>
         <div class="result-value">{{ formatBandwidth(dailyBandwidth) }}</div>
       </div>
       <div class="result-card">
-        <div class="result-label">峰值带宽</div>
+        <div class="result-label">Băng thông đỉnh</div>
         <div class="result-value">{{ formatBandwidth(peakBandwidthPerSec) }}/s</div>
       </div>
     </div>
 
     <div class="reference">
-      <div class="ref-title">常用估算参考值</div>
+      <div class="ref-title">Các giá trị tham chiếu thường dùng</div>
       <div class="ref-grid">
         <div class="ref-item" v-for="r in references" :key="r.label">
           <span class="ref-label">{{ r.label }}</span>
@@ -78,17 +78,17 @@ const dailyBandwidth = computed(() => dailyRequests.value * responseSize.value *
 const peakBandwidthPerSec = computed(() => peakQps.value * responseSize.value * 1024)
 
 const references = [
-  { label: '1 天', value: '86,400 秒' },
-  { label: '1 月', value: '≈ 250 万秒' },
-  { label: 'QPS 1000', value: '≈ 1 台 8 核服务器' },
-  { label: '1 亿/天', value: '≈ 1,200 QPS' },
-  { label: 'MySQL 单机', value: '≈ 5,000 QPS' },
-  { label: 'Redis 单机', value: '≈ 100,000 QPS' }
+  { label: '1 ngày', value: '86,400 giây' },
+  { label: '1 tháng', value: '≈ 2.5 triệu giây' },
+  { label: 'QPS 1000', value: '≈ 1 server 8 nhân' },
+  { label: '100 triệu/ngày', value: '≈ 1,200 QPS' },
+  { label: 'MySQL 1 máy', value: '≈ 5,000 QPS' },
+  { label: 'Redis 1 máy', value: '≈ 100,000 QPS' }
 ]
 
 function formatNumber(n) {
-  if (n >= 1e8) return (n / 1e8).toFixed(1) + ' 亿'
-  if (n >= 1e4) return (n / 1e4).toFixed(1) + ' 万'
+  if (n >= 1e9) return (n / 1e9).toFixed(1) + ' tỷ'
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + ' triệu'
   return n.toLocaleString()
 }
 

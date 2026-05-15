@@ -1,15 +1,15 @@
 <!--
   VueReactComparisonDemo.vue
-  用可视化方式对比 Vue vs React：语法、状态更新、渲染心智模型
+  So sánh trực quan Vue vs React: cú pháp, cập nhật state, mental model render
 -->
 <template>
   <div class="vr-demo">
     <div class="header">
       <div class="title">
-        Vue vs React：它们哪里像？哪里不一样？
+        Vue vs React: chúng giống và khác nhau ở đâu?
       </div>
       <div class="subtitle">
-        选一个标签页，然后点“+1”，看看背后发生了什么（示意）。
+        Chọn một tab, rồi bấm "+1" để xem điều gì xảy ra phía sau (minh hoạ).
       </div>
     </div>
 
@@ -43,7 +43,7 @@
         </div>
         <div class="code">
           <div class="code-title">
-            典型写法（示意）
+            Cách viết tiêu biểu (minh hoạ)
           </div>
           <pre><code class="language-vue">{{ vueCode }}</code></pre>
         </div>
@@ -66,7 +66,7 @@
         </div>
         <div class="code">
           <div class="code-title">
-            典型写法（示意）
+            Cách viết tiêu biểu (minh hoạ)
           </div>
           <pre><code class="language-jsx">{{ reactCode }}</code></pre>
         </div>
@@ -75,7 +75,7 @@
 
     <div class="what">
       <div class="what-title">
-        点击 “+1” 时发生了什么？
+        Khi bấm "+1" thì điều gì xảy ra?
       </div>
       <div class="steps">
         <div
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="note">
-        说明：这是为了建立心智模型的<strong>简化示意</strong>，真实框架内部更复杂。
+        Lưu ý: đây là <strong>minh hoạ đơn giản hoá</strong> để giúp bạn xây dựng mental model, framework thật bên trong phức tạp hơn nhiều.
       </div>
     </div>
   </div>
@@ -99,9 +99,9 @@
 import { ref, computed } from 'vue'
 
 const tabs = [
-  { key: 'syntax', label: '语法（Template vs JSX）' },
-  { key: 'state', label: '状态更新（ref vs useState）' },
-  { key: 'render', label: '渲染心智模型' }
+  { key: 'syntax', label: 'Cú pháp (Template vs JSX)' },
+  { key: 'state', label: 'Cập nhật state (ref vs useState)' },
+  { key: 'render', label: 'Mental model render' }
 ]
 
 const currentTab = ref('syntax')
@@ -112,7 +112,7 @@ const lastStepIndex = ref(-1)
 const inc = (who) => {
   lastClicked.value = who
   count.value += 1
-  // 简单动画：把最后一步高亮一下
+  // Hiệu ứng đơn giản: làm nổi bước cuối cùng
   lastStepIndex.value = 2
   setTimeout(() => (lastStepIndex.value = -1), 600)
 }
@@ -141,8 +141,8 @@ function inc() {
   count.value++
 }`
   }
-  return `// Vue：响应式系统会“追踪依赖”
-// count 变了 -> 用到 count 的地方自动更新`
+  return `// Vue: hệ thống reactivity sẽ "theo dõi dependency"
+// count thay đổi -> nơi nào dùng count sẽ tự cập nhật`
 })
 
 const reactCode = computed(() => {
@@ -164,31 +164,31 @@ function inc() {
   setCount(count + 1)
 }`
   }
-  return `// React：state 变了 -> 组件函数重新执行（重新渲染）
-// 然后 React 决定哪些 DOM 需要更新`
+  return `// React: state thay đổi -> hàm component chạy lại (re-render)
+// Sau đó React quyết định DOM nào cần cập nhật`
 })
 
 const steps = computed(() => {
   if (currentTab.value === 'syntax') {
     return [
-      '你写 UI 的方式：Vue 常用 Template；React 常用 JSX',
-      '点击按钮触发事件处理函数',
-      'count 更新后，界面显示跟着变'
+      'Cách bạn viết UI: Vue thường dùng Template; React thường dùng JSX',
+      'Bấm nút sẽ kích hoạt hàm xử lý sự kiện',
+      'Sau khi count cập nhật, giao diện thay đổi theo'
     ]
   }
   if (currentTab.value === 'state') {
     return [
-      'Vue：用 ref/ reactive 保存状态；React：用 useState 保存状态',
+      'Vue: dùng ref/ reactive để lưu state; React: dùng useState để lưu state',
       lastClicked.value === 'vue'
-        ? '你修改了 count.value'
-        : '你调用 setCount(...)',
-      '框架把变化反映到界面'
+        ? 'Bạn sửa count.value'
+        : 'Bạn gọi setCount(...)',
+      'Framework đưa thay đổi lên giao diện'
     ]
   }
   return [
-    'Vue：更偏“依赖追踪”，谁用到了 count，就更新谁',
-    'React：更偏“重新执行组件函数”，得到新的 UI 描述',
-    '最终都会只更新需要变化的 DOM（避免全量重画）'
+    'Vue: thiên về "theo dõi dependency", chỗ nào dùng count thì cập nhật chỗ đó',
+    'React: thiên về "chạy lại hàm component" để lấy mô tả UI mới',
+    'Cuối cùng cả hai chỉ cập nhật DOM cần thay đổi (tránh vẽ lại toàn bộ)'
   ]
 })
 </script>

@@ -1,22 +1,22 @@
 <!--
   SlidingWindowDemo.vue
-  滑动窗口机制演示
+  Mô phỏng cơ chế sliding window
 
-  用途：
-  展示 "Sliding Window" (滑动窗口) 如何处理长对话。
-  当新消息进入时，最旧的消息被移除上下文，演示遗忘机制。
+  Mục đích:
+  Cho thấy cách "Sliding Window" xử lý các cuộc hội thoại dài.
+  Khi tin mới tới, tin cũ nhất sẽ bị đẩy khỏi context, minh hoạ cơ chế "quên".
 
-  交互功能：
-  - 发送消息：用户可发送消息，AI 自动回复。
-  - 自动演示：一键模拟长对话，观察窗口滑动。
-  - 视觉反馈：清晰展示哪些消息在"窗口内"（活跃），哪些在"窗口外"（遗忘）。
+  Tính năng tương tác:
+  - Gửi tin: bạn có thể gửi tin, AI tự động trả lời.
+  - Mô phỏng tự động: bấm một nút để xem cuộc hội thoại dài và quan sát cửa sổ trượt.
+  - Phản hồi trực quan: chỉ rõ tin nào còn trong "cửa sổ" (đang dùng), tin nào ngoài "cửa sổ" (đã quên).
 -->
 <template>
   <div class="sliding-window-demo">
     <div class="control-panel">
       <div class="info-stat">
-        <span class="label">窗口里最多能记住几条对话</span>
-        <span class="value">最多 {{ windowSize }} 条</span>
+        <span class="label">Cửa sổ nhớ tối đa được bao nhiêu tin</span>
+        <span class="value">Tối đa {{ windowSize }} tin</span>
       </div>
       <div class="actions">
         <button
@@ -24,13 +24,13 @@
           :disabled="isAutoPlaying"
           @click="autoPlay"
         >
-          ▶ 自动演示
+          ▶ Mô phỏng tự động
         </button>
         <button
           class="action-btn outline"
           @click="reset"
         >
-          ↺ 重新开始
+          ↺ Bắt đầu lại
         </button>
       </div>
     </div>
@@ -40,7 +40,7 @@
         <!-- Forgotten / History Zone -->
         <div class="zone history-zone">
           <div class="zone-label">
-            <span class="icon">🗑️</span> 已被遗忘的内容
+            <span class="icon">🗑️</span> Nội dung đã quên
           </div>
           <transition-group name="fade-list">
             <div
@@ -66,21 +66,21 @@
             v-if="historyMessages.length === 0"
             class="empty-placeholder"
           >
-            这里暂时还没有被“挤出去”的对话
+            Chưa có tin nào bị "đẩy ra" cả
           </div>
         </div>
 
         <!-- Divider -->
         <div class="window-divider">
-          <span>⬆ 窗口外（模型已经看不到）</span>
+          <span>⬆ Ngoài cửa sổ (mô hình không thấy)</span>
           <div class="divider-line" />
-          <span>⬇ 窗口内（模型还能看到）</span>
+          <span>⬇ Trong cửa sổ (mô hình vẫn nhìn thấy)</span>
         </div>
 
         <!-- Active Window Zone -->
         <div class="zone active-zone">
           <div class="zone-label">
-            <span class="icon">🖼️</span> 当前还在记忆里的对话
+            <span class="icon">🖼️</span> Các tin vẫn còn trong bộ nhớ
           </div>
           <transition-group name="slide-list">
             <div
@@ -106,7 +106,7 @@
             v-if="activeMessages.length === 0"
             class="empty-placeholder"
           >
-            从这里开始聊天，看看旧对话是怎么被“挤出去”的
+            Bạn bắt đầu chat từ đây, xem các tin cũ bị "đẩy ra" thế nào
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
     <div class="input-section">
       <input
         v-model="newMessage"
-        placeholder="在这里输入一条消息，然后点发送"
+        placeholder="Bạn gõ một tin nhắn ở đây rồi nhấn gửi"
         :disabled="isAutoPlaying"
         @keyup.enter="sendMessage"
       >
@@ -124,16 +124,16 @@
         :disabled="!newMessage.trim() || isAutoPlaying"
         @click="sendMessage"
       >
-        发送消息
+        Gửi
       </button>
     </div>
 
     <div class="info-box">
       <p>
         <span class="icon">💡</span>
-        <strong>说明：</strong>
-        滑动窗口是最简单的记忆管理方式：新的进来，旧的出去。
-        好处是永远不会“撑爆脑子”，代价就是——一旦滑出窗口（上面灰色区域），模型就完全忘了它存在过。
+        <strong>Giải thích:</strong>
+        Sliding window là cách quản lý bộ nhớ đơn giản nhất: tin mới vào, tin cũ ra.
+        Ưu điểm là không bao giờ "vỡ não", cái giá phải trả là — một khi đã trượt khỏi cửa sổ (vùng xám phía trên), mô hình sẽ hoàn toàn quên tin đó từng tồn tại.
       </p>
     </div>
   </div>
@@ -180,18 +180,18 @@ const addMessage = (role, content) => {
 const autoPlay = async () => {
   isAutoPlaying.value = true
   const script = [
-    '你好，我是张三。',
-    '你好呀，我是你的 AI 助手。',
-    '我今天有点累，帮我记录一下待办吧。',
-    '没问题，你可以把待办一条条发给我。',
-    '第一件事：给客户发邮件。',
-    '好的，已经记下来了。',
-    '第二件事：晚上去买菜做饭。',
-    '收到，也帮你记住了。',
-    '第三件事：记得给女朋友买花。',
-    '这条也帮你写在“小黑板”上了。',
-    '现在还记得我第一句话说了什么吗？',
-    '呃……我只看得到窗口里的几条，最早那句已经被挤出去了。'
+    'Xin chào, mình là Nam.',
+    'Chào bạn, mình là trợ lý AI của bạn đây.',
+    'Hôm nay mình hơi mệt, ghi giúp mình mấy việc cần làm nhé.',
+    'Không vấn đề, bạn gửi từng việc cho mình.',
+    'Việc 1: gửi email cho khách hàng.',
+    'OK, đã ghi lại rồi nhé.',
+    'Việc 2: chiều đi chợ nấu cơm.',
+    'Nhận rồi, mình cũng đã ghi nhớ.',
+    'Việc 3: nhớ mua hoa tặng bạn gái.',
+    'Tin này cũng đã được viết lên "bảng đen nhỏ" rồi.',
+    'Bây giờ bạn còn nhớ câu đầu tiên mình nói không?',
+    'Ơ... mình chỉ thấy được vài tin trong cửa sổ thôi, câu đầu tiên đã bị đẩy ra mất rồi.'
   ]
 
   for (const line of script) {

@@ -1,6 +1,6 @@
 <template>
   <div class="tcp-handshake-demo custom-demo-base">
-    <div class="demo-label">TCP 三次握手 ── 建立可靠通话渠道</div>
+    <div class="demo-label">TCP bắt tay ba bước - thiết lập kênh truyền tin cậy</div>
     <div class="demo-panel">
       
       <!-- Sequence Diagram area -->
@@ -9,9 +9,9 @@
         <!-- Computer Left -->
         <div class="endpoint client">
           <div class="icon">💻</div>
-          <div class="name">浏览器 (你)</div>
+          <div class="name">Trình duyệt (bạn)</div>
           <div class="state" :class="{ established: step >= 3 }">
-            {{ step >= 3 ? '连接成功' : '等待连接' }}
+            {{ step >= 3 ? 'Kết nối thành công' : 'Đang chờ kết nối' }}
           </div>
         </div>
 
@@ -24,8 +24,8 @@
           <transition name="msg-right">
             <div v-if="step >= 1" class="message msg-syn">
               <div class="msg-box">
-                <div class="msg-title">第1次握手: SYN</div>
-                <div class="msg-desc">"喂，服务器老哥在吗？我能发信息，你能收到吗？"</div>
+                <div class="msg-title">Bắt tay lần 1: SYN</div>
+                <div class="msg-desc">"Này, anh server có đó không? Em gửi tin được, anh nhận được không?"</div>
               </div>
             </div>
           </transition>
@@ -34,8 +34,8 @@
           <transition name="msg-left">
             <div v-if="step >= 2" class="message msg-syn-ack">
               <div class="msg-box">
-                <div class="msg-title">第2次握手: SYN-ACK</div>
-                <div class="msg-desc">"在！我收到了！那你现在能听到我说话吗？"</div>
+                <div class="msg-title">Bắt tay lần 2: SYN-ACK</div>
+                <div class="msg-desc">"Có nè! Anh nhận được rồi! Giờ em có nghe anh nói được không?"</div>
               </div>
             </div>
           </transition>
@@ -44,8 +44,8 @@
           <transition name="msg-right">
             <div v-if="step >= 3" class="message msg-ack">
               <div class="msg-box">
-                <div class="msg-title">第3次握手: ACK</div>
-                <div class="msg-desc">"我就知道你听到了，证实通道没问题，准备聊正事！"</div>
+                <div class="msg-title">Bắt tay lần 3: ACK</div>
+                <div class="msg-desc">"Em nghe được rồi, xác nhận kênh thông suốt, chuẩn bị nói chuyện chính thức!"</div>
               </div>
             </div>
           </transition>
@@ -54,16 +54,16 @@
         <!-- Server Right -->
         <div class="endpoint server">
           <div class="icon">🖥️</div>
-          <div class="name">Google 服务器</div>
+          <div class="name">Server Google</div>
           <div class="state" :class="{ established: step >= 3 }">
-            {{ step >= 3 ? '连接成功' : '等待连接' }}
+            {{ step >= 3 ? 'Kết nối thành công' : 'Đang chờ kết nối' }}
           </div>
         </div>
       </div>
 
       <div class="action-bar">
-        <button v-if="step === 0" class="action-btn" @click="startHandshake">发起连接</button>
-        <button v-if="step >= 3" class="action-btn outline" @click="reset">断开重连</button>
+        <button v-if="step === 0" class="action-btn" @click="startHandshake">Bắt đầu kết nối</button>
+        <button v-if="step >= 3" class="action-btn outline" @click="reset">Ngắt và kết nối lại</button>
       </div>
 
     </div>
@@ -78,10 +78,10 @@ import { ref, computed } from 'vue'
 
 const step = ref(0)
 const statusList = [
-  '点击【发起连接】模拟 TCP 三次握手过程',
-  '发送 SYN 包: 浏览器试探服务器接收能力...',
-  '回复 SYN-ACK 包: 服务器确认接收并试探浏览器...',
-  '回复 ACK 包: 浏览器再次确认。双方通道建立完毕，可以正式发请求！'
+  'Bấm [Bắt đầu kết nối] để mô phỏng quá trình TCP bắt tay ba bước',
+  'Gửi gói SYN: trình duyệt thăm dò khả năng nhận của server...',
+  'Trả lời gói SYN-ACK: server xác nhận đã nhận và thăm dò trình duyệt...',
+  'Trả lời gói ACK: trình duyệt xác nhận lần nữa. Kênh hai phía đã sẵn sàng, có thể gửi request chính thức!'
 ]
 
 const statusText = computed(() => statusList[step.value])

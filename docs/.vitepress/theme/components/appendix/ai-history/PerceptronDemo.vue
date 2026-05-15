@@ -18,7 +18,7 @@
           <div class="n-sym">Σ</div>
           <div class="n-val">{{ sum }}</div>
         </div>
-        <span class="bias-tag">{{ t('perceptron.biasLabel') }} {{ bias }}</span>
+        <span class="bias-tag">{{ biasLabel }} {{ bias }}</span>
       </div>
       <div class="act-col">
         <span class="arrow big">→</span>
@@ -28,21 +28,22 @@
       <div class="output-col">
         <div class="output-node" :class="{ on: output === 1 }">
           <span class="out-val">{{ output }}</span>
-          <span class="out-lbl">{{ output ? t('perceptron.activated') : t('perceptron.silent') }}</span>
+          <span class="out-lbl">{{ output ? activatedLabel : silentLabel }}</span>
         </div>
       </div>
     </div>
-    <div class="caption">{{ t('perceptron.caption') }}</div>
+    <div class="caption">{{ caption }}</div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { useI18n } from '../../../composables/useI18n.js'
-import { aiHistoryLocale } from '../../../locales/ai-history/index.js'
 
-const { t, messages } = useI18n(aiHistoryLocale)
-const featureLabels = computed(() => messages.value.perceptron?.features ?? [])
+const featureLabels = ['Đặc trưng x₁', 'Đặc trưng x₂']
+const biasLabel = 'Bias'
+const activatedLabel = 'Kích hoạt'
+const silentLabel = 'Im lặng'
+const caption = '(1) Đầu vào đặc trưng   (2) Nhân với weight (độ quan trọng)   (3) Tổng + bias   (4) Vượt ngưỡng thì kích hoạt output 1, ngược lại output 0'
 
 const inputs = [{ val: 1, weight: 0.6 }, { val: 0, weight: 0.4 }]
 const bias = -0.3

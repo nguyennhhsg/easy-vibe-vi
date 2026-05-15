@@ -3,11 +3,11 @@
     <div class="demo-header">
       <span class="icon">🐻</span>
       <span class="title">Zustand & Jotai</span>
-      <span class="subtitle">React 轻量级状态管理</span>
+      <span class="subtitle">State management nhẹ cho React</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">便利店</span>工作：Zustand 就像整个仓库统一管理，Jotai 就像把商品拆成一个个小格子（Atom），每个格子独立管理，按需取用。
+      Hãy hình dung bạn làm trong <span class="highlight">cửa hàng tiện lợi</span>: Zustand giống như cả kho hàng quản lý tập trung, còn Jotai giống như chia hàng thành từng ô nhỏ (Atom), mỗi ô tự quản, lấy khi cần.
     </div>
 
     <div class="demo-content">
@@ -38,18 +38,18 @@
           >
             <div class="feature-card">
               <span class="feature-icon">📦</span>
-              <span class="feature-title">单一 Store</span>
-              <span class="feature-desc">所有状态集中管理</span>
+              <span class="feature-title">Một Store duy nhất</span>
+              <span class="feature-desc">Tất cả state quản lý tập trung</span>
             </div>
             <div class="feature-card">
               <span class="feature-icon">⚡</span>
-              <span class="feature-title">极简 API</span>
-              <span class="feature-desc">无需 Provider 包裹</span>
+              <span class="feature-title">API cực gọn</span>
+              <span class="feature-desc">Không cần Provider bao ngoài</span>
             </div>
             <div class="feature-card">
               <span class="feature-icon">🎯</span>
-              <span class="feature-title">细粒度订阅</span>
-              <span class="feature-desc">只重渲染需要的组件</span>
+              <span class="feature-title">Subscribe chi tiết</span>
+              <span class="feature-desc">Chỉ re-render component cần thiết</span>
             </div>
           </div>
 
@@ -67,7 +67,7 @@ const useStore = create((set) => ({
   }))
 }))
 
-// 在组件中使用
+// Dùng trong component
 function BearCounter() {
   const bears = useStore((state) => state.bears)
   return <div>{bears} bears around here</div>
@@ -80,18 +80,18 @@ function BearCounter() {
           >
             <div class="feature-card">
               <span class="feature-icon">⚛️</span>
-              <span class="feature-title">原子化</span>
-              <span class="feature-desc">状态拆分成独立 Atom</span>
+              <span class="feature-title">Phân nhỏ (Atomic)</span>
+              <span class="feature-desc">Tách state thành các Atom độc lập</span>
             </div>
             <div class="feature-card">
               <span class="feature-icon">🔗</span>
-              <span class="feature-title">自动依赖</span>
-              <span class="feature-desc">派生状态自动追踪</span>
+              <span class="feature-title">Auto dependency</span>
+              <span class="feature-desc">State dẫn xuất tự được track</span>
             </div>
             <div class="feature-card">
               <span class="feature-icon">📝</span>
               <span class="feature-title">TypeScript</span>
-              <span class="feature-desc">原生类型支持</span>
+              <span class="feature-desc">Hỗ trợ type native</span>
             </div>
           </div>
 
@@ -102,13 +102,13 @@ function BearCounter() {
             <pre class="code-block"><code>// Jotai Atom
 import { atom } from 'jotai'
 
-// 基础 Atom
+// Atom cơ bản
 const countAtom = atom(0)
 
-// 派生 Atom
+// Atom dẫn xuất
 const doubleAtom = atom((get) => get(countAtom) * 2)
 
-// 在组件中使用
+// Dùng trong component
 function Counter() {
   const [count, setCount] = useAtom(countAtom)
   const [double] = useAtom(doubleAtom)
@@ -126,7 +126,7 @@ function Counter() {
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选择建议：</strong>Zustand 适合中小项目，API 简洁直观；Jotai 适合需要细粒度控制的场景，状态更模块化。两个都支持 TypeScript，不需要 Provider。
+      <strong>Gợi ý lựa chọn:</strong> Zustand hợp với project nhỏ và vừa, API gọn và trực quan. Jotai hợp khi cần điều khiển chi tiết, state mô-đun hơn. Cả hai đều hỗ trợ TypeScript, không cần Provider.
     </div>
   </div>
 </template>

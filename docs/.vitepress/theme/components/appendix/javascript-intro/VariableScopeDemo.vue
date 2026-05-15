@@ -2,15 +2,15 @@
   <div class="variable-scope-demo">
     <div class="demo-header">
       <span class="icon">📦</span>
-      <span class="title">变量与作用域</span>
-      <span class="subtitle">理解 let、const、var 的区别</span>
+      <span class="title">Biến và scope</span>
+      <span class="subtitle">Hiểu sự khác nhau giữa let, const, var</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">家里</span>和<span class="highlight">公司</span>放东西：
-      <span class="highlight">var</span>像是把东西贴在脑门上（哪都能看见），
-      <span class="highlight">let</span>像是放在抽屉里（当前房间能用），
-      <span class="highlight">const</span>像是焊死在地上的柜子（不能移动）
+      Hãy hình dung bạn để đồ ở <span class="highlight">nhà</span> và <span class="highlight">công ty</span>:
+      <span class="highlight">var</span> giống như dán đồ lên trán (đi đâu cũng thấy),
+      <span class="highlight">let</span> giống như cất trong ngăn kéo (chỉ phòng đó dùng được),
+      <span class="highlight">const</span> giống như tủ hàn chết xuống nền (không thể di chuyển).
     </div>
 
     <div class="code-display">
@@ -32,7 +32,7 @@
       <div class="visualization">
         <div class="scope-area global-scope">
           <div class="scope-title">
-            全局作用域（房子外）
+            Global scope (ngoài nhà)
           </div>
           <div class="scope-vars">
             <div
@@ -42,7 +42,7 @@
             >
               <span class="var-type">var</span>
               <span class="var-name">globalVar</span>
-              <span class="var-value">= "外面"</span>
+              <span class="var-value">= "ngoài"</span>
             </div>
           </div>
 
@@ -51,7 +51,7 @@
             class="scope-area block-scope"
           >
             <div class="scope-title">
-              块级作用域（房间内）
+              Block scope (trong phòng)
             </div>
             <div class="scope-vars">
               <div
@@ -61,7 +61,7 @@
               >
                 <span class="var-type">var</span>
                 <span class="var-name">blockVar</span>
-                <span class="var-value">= "房间里"</span>
+                <span class="var-value">= "trong phòng"</span>
               </div>
               <div
                 v-if="step >= 3"
@@ -69,7 +69,7 @@
               >
                 <span class="var-type">let</span>
                 <span class="var-name">blockLet</span>
-                <span class="var-value">= "只有房间内能用"</span>
+                <span class="var-value">= "chỉ trong phòng"</span>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
 
         <div class="console-output">
           <div class="console-title">
-            控制台输出
+            Output console
           </div>
           <div class="console-lines">
             <div
@@ -99,7 +99,7 @@
         class="control-btn"
         @click="prevStep"
       >
-        ← 上一步
+        Bước trước
       </button>
       <span class="step-indicator">{{ step + 1 }} / {{ maxSteps }}</span>
       <button
@@ -107,24 +107,24 @@
         class="control-btn"
         @click="nextStep"
       >
-        下一步 →
+        Bước sau
       </button>
       <button
         class="control-btn secondary"
         @click="reset"
       >
-        重置
+        Reset
       </button>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      <span v-if="step === 0">var 没有块级作用域，会"泄漏"到外部；let 和 const 有块级作用域，只在声明的作用域内有效。</span>
-      <span v-else-if="step === 1">var 声明的变量可以在全局作用域访问，容易造成命名冲突。</span>
-      <span v-else-if="step === 2">var 可以重复声明，这在大型项目中容易导致难以排查的 bug。</span>
-      <span v-else-if="step === 3">let 和 const 有块级作用域，在 if 块外部无法访问，更安全。</span>
-      <span v-else>const 声明的变量不能重新赋值，let 可以。推荐优先使用 const，需要重新赋值时用 let。</span>
+      <strong>Ý chính:</strong>
+      <span v-if="step === 0">var không có block scope, bị "rò" ra ngoài; let và const có block scope, chỉ có hiệu lực trong scope khai báo.</span>
+      <span v-else-if="step === 1">Biến khai báo bằng var có thể truy cập ở global scope, dễ gây xung đột tên.</span>
+      <span v-else-if="step === 2">var cho phép khai báo lại nhiều lần, dễ gây bug khó tìm trong project lớn.</span>
+      <span v-else-if="step === 3">let và const có block scope, không truy cập được ngoài if block, an toàn hơn.</span>
+      <span v-else>const khai báo biến không thể gán lại, let thì có thể. Ưu tiên const, khi cần gán lại thì dùng let.</span>
     </div>
   </div>
 </template>
@@ -136,12 +136,12 @@ const step = ref(0)
 const maxSteps = 5
 
 const codeLines = [
-  'var globalVar = "外面"',
+  'var globalVar = "ngoài"',
   'if (true) {',
-  '  var blockVar = "房间里"',
-  '  let blockLet = "只有房间内能用"',
+  '  var blockVar = "trong phòng"',
+  '  let blockLet = "chỉ trong phòng"',
   '}',
-  '// 尝试访问这些变量'
+  '// Thử truy cập các biến này'
 ]
 
 const currentLine = computed(() => {
@@ -153,11 +153,11 @@ const consoleOutput = ref([])
 
 const scenarios = {
   0: { output: [] },
-  1: { output: [{ text: 'globalVar = "外面"', error: false }] },
-  2: { output: [{ text: 'globalVar = "外面"', error: false }, { text: 'blockVar = "房间里"', error: false }] },
-  3: { output: [{ text: 'globalVar = "外面"', error: false }, { text: 'blockVar = "房间里"', error: false }, { text: 'blockLet = "只有房间内能用"', error: false }] },
-  4: { output: [{ text: 'globalVar = "外面" ✓', error: false }, { text: 'blockVar = "房间里" ✓ (var 泄漏了！)', error: true }, { text: 'blockLet = 报错！let 不在块外部', error: true }] },
-  5: { output: [{ text: '推荐：const name = "值" (不能改)', error: false }, { text: '需要改：let count = 0 (可以改)', error: false }, { text: '避免：var old = "过时了"', error: true }] }
+  1: { output: [{ text: 'globalVar = "ngoài"', error: false }] },
+  2: { output: [{ text: 'globalVar = "ngoài"', error: false }, { text: 'blockVar = "trong phòng"', error: false }] },
+  3: { output: [{ text: 'globalVar = "ngoài"', error: false }, { text: 'blockVar = "trong phòng"', error: false }, { text: 'blockLet = "chỉ trong phòng"', error: false }] },
+  4: { output: [{ text: 'globalVar = "ngoài" OK', error: false }, { text: 'blockVar = "trong phòng" OK (var bị rò!)', error: true }, { text: 'blockLet = Lỗi! let không ra ngoài block', error: true }] },
+  5: { output: [{ text: 'Nên dùng: const name = "value" (không đổi)', error: false }, { text: 'Khi cần đổi: let count = 0 (có thể đổi)', error: false }, { text: 'Tránh: var old = "lỗi thời"', error: true }] }
 }
 
 const nextStep = () => {

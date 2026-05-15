@@ -1,24 +1,24 @@
 <!--
   MelSpectrogramDemo.vue
-  梅尔频谱图交互演示组件
+  Component tương tác minh hoạ mel-spectrogram
 
-  用途：
-  让用户直观理解音频如何从波形转换为梅尔频谱图，以及梅尔刻度的原理。
+  Mục đích:
+  Giúp người dùng hình dung cách audio đi từ sóng âm sang mel-spectrogram và hiểu nguyên lý mel-scale.
 
-  交互功能：
-  - 选择不同音频类型（语音/音乐/噪声）
-  - 实时查看波形和频谱对比
-  - 调整 FFT 参数观察变化
-  - 理解梅尔刻度 vs 线性刻度
+  Tính năng tương tác:
+  - Chọn các loại âm thanh khác nhau (giọng nói / nhạc / nhiễu)
+  - Xem sóng và phổ theo thời gian thực
+  - Chỉnh các tham số FFT để quan sát thay đổi
+  - Hiểu mel-scale vs thang tuyến tính
 -->
 <template>
   <div class="mel-spec-demo">
     <div class="header">
       <div class="title">
-        📊 梅尔频谱：AI 如何"看懂"声音
+        📊 Mel-spectrogram: cách AI "nhìn" thấy âm thanh
       </div>
       <div class="subtitle">
-        声音是波，但 AI 看到的是频谱图。探索波形如何变成 AI 能理解的"图像"
+        Âm thanh là sóng, nhưng AI lại thấy nó qua phổ. Cùng xem sóng âm được biến thành "hình ảnh" mà AI hiểu được như thế nào
       </div>
     </div>
 
@@ -38,7 +38,7 @@
 
       <div class="param-controls">
         <div class="param">
-          <label>FFT 窗口</label>
+          <label>Cửa sổ FFT</label>
           <input
             v-model="fftSize"
             type="range"
@@ -49,7 +49,7 @@
           <span class="value">{{ fftSize }}</span>
         </div>
         <div class="param">
-          <label>梅尔滤波器</label>
+          <label>Bộ lọc mel</label>
           <input
             v-model="melBins"
             type="range"
@@ -63,11 +63,11 @@
     </div>
 
     <div class="visualization">
-      <!-- 波形图 -->
+      <!-- Đồ thị sóng -->
       <div class="viz-section">
         <div class="viz-header">
-          <span class="viz-title">🔊 波形 (时域)</span>
-          <span class="viz-desc">原始音频振幅随时间变化</span>
+          <span class="viz-title">🔊 Sóng (miền thời gian)</span>
+          <span class="viz-desc">Biên độ audio gốc thay đổi theo thời gian</span>
         </div>
         <canvas
           ref="waveformCanvas"
@@ -77,16 +77,16 @@
       </div>
 
       <div class="transform-arrow">
-        <span>STFT 变换</span>
+        <span>Biến đổi STFT</span>
         <span class="arrow">⬇</span>
       </div>
 
-      <!-- 频谱对比 -->
+      <!-- So sánh phổ -->
       <div class="spec-comparison">
         <div class="viz-section">
           <div class="viz-header">
-            <span class="viz-title">📈 线性频谱</span>
-            <span class="viz-tag">高频分辨率低</span>
+            <span class="viz-title">📈 Phổ tuyến tính</span>
+            <span class="viz-tag">Phân giải kém ở tần số cao</span>
           </div>
           <canvas
             ref="linearCanvas"
@@ -101,8 +101,8 @@
 
         <div class="viz-section highlight">
           <div class="viz-header">
-            <span class="viz-title">🎯 梅尔频谱</span>
-            <span class="viz-tag success">符合人耳感知</span>
+            <span class="viz-title">🎯 Mel-spectrogram</span>
+            <span class="viz-tag success">Sát với cảm nhận của tai người</span>
           </div>
           <canvas
             ref="melCanvas"
@@ -115,7 +115,7 @@
 
     <div class="explanation">
       <div class="exp-title">
-        🎧 为什么用梅尔刻度？
+        🎧 Vì sao dùng mel-scale?
       </div>
       <div class="exp-content">
         <div class="exp-item">
@@ -140,8 +140,8 @@
             </div>
           </div>
           <div class="exp-text">
-            <strong>人耳感知</strong><br>
-            100Hz→200Hz 与 10000Hz→10100Hz 感知差异相同
+            <strong>Cảm nhận của tai người</strong><br>
+            100Hz→200Hz và 10000Hz→10100Hz được tai cảm nhận khác nhau ở cùng mức độ
           </div>
         </div>
         <div class="exp-item">
@@ -166,8 +166,8 @@
             </div>
           </div>
           <div class="exp-text">
-            <strong>线性刻度</strong><br>
-            等距频率间隔，不符合人耳感知
+            <strong>Thang tuyến tính</strong><br>
+            Khoảng cách tần số đều nhau, không khớp với cảm nhận của tai người
           </div>
         </div>
       </div>
@@ -176,9 +176,9 @@
     <div class="info-box">
       <span class="icon">💡</span>
       <p>
-        <strong>梅尔频谱原理：</strong>
-        梅尔刻度模拟了人耳对频率的非线性感知。人耳对低频变化更敏感，对高频变化较迟钝。
-        梅尔频谱将频率映射到梅尔刻度，使 AI 更关注人耳敏感的部分。
+        <strong>Nguyên lý mel-spectrogram:</strong>
+        Mel-scale mô phỏng cách tai người cảm nhận tần số một cách phi tuyến. Tai người nhạy với thay đổi ở tần số thấp và kém nhạy hơn ở tần số cao.
+        Mel-spectrogram ánh xạ tần số sang mel-scale, giúp AI tập trung vào những vùng tai người nhạy cảm.
       </p>
     </div>
   </div>
@@ -188,9 +188,9 @@
 import { ref, onMounted, watch } from 'vue'
 
 const audioTypes = [
-  { id: 'speech', name: '语音', icon: '🗣️' },
-  { id: 'music', name: '音乐', icon: '🎵' },
-  { id: 'noise', name: '噪声', icon: '📢' }
+  { id: 'speech', name: 'Giọng nói', icon: '🗣️' },
+  { id: 'music', name: 'Âm nhạc', icon: '🎵' },
+  { id: 'noise', name: 'Nhiễu', icon: '📢' }
 ]
 
 const selectedType = ref('speech')
@@ -205,7 +205,7 @@ const selectType = (type) => {
   selectedType.value = type
 }
 
-// 生成波形数据
+// Sinh dữ liệu sóng
 const generateWaveform = (type) => {
   const samples = 600
   const data = []
@@ -233,7 +233,7 @@ const generateWaveform = (type) => {
   return data
 }
 
-// 绘制波形
+// Vẽ dạng sóng
 const drawWaveform = () => {
   const canvas = waveformCanvas.value
   if (!canvas) return
@@ -261,7 +261,7 @@ const drawWaveform = () => {
 
   ctx.stroke()
 
-  // 中心线
+  // Đường tâm
   ctx.strokeStyle = '#e0e0e0'
   ctx.lineWidth = 1
   ctx.beginPath()
@@ -270,7 +270,7 @@ const drawWaveform = () => {
   ctx.stroke()
 }
 
-// 生成频谱数据
+// Sinh dữ liệu phổ
 const generateSpectrogram = (isMel = false) => {
   const timeBins = 60
   const freqBins = isMel ? melBins.value : 80
@@ -305,7 +305,7 @@ const generateSpectrogram = (isMel = false) => {
   return data
 }
 
-// 绘制频谱图
+// Vẽ spectrogram
 const drawSpectrogram = (canvas, data) => {
   if (!canvas) return
 

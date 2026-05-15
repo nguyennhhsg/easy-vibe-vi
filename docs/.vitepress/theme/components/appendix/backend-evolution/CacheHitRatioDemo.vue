@@ -1,21 +1,21 @@
 <!--
   CacheHitRatioDemo.vue
-  缓存命中率与延迟/数据库压力演示
+  Demo cache hit ratio và độ trễ / áp lực database
 -->
 <template>
   <div class="cache-demo">
     <div class="header">
       <div class="title">
-        缓存命中率：速度与成本的杠杆
+        Tỉ lệ cache hit: đòn bẩy giữa tốc độ và chi phí
       </div>
       <div class="subtitle">
-        调整命中率，观察平均延迟与数据库压力
+        Điều chỉnh hit ratio, quan sát độ trễ trung bình và áp lực database
       </div>
     </div>
 
     <div class="controls">
       <label>
-        缓存命中率：<strong>{{ hitRatio }}%</strong>
+        Tỉ lệ cache hit: <strong>{{ hitRatio }}%</strong>
       </label>
       <input
         v-model="hitRatio"
@@ -29,14 +29,14 @@
           v-model="cacheEnabled"
           type="checkbox"
         >
-        启用缓存
+        Bật cache
       </label>
     </div>
 
     <div class="metrics">
       <div class="metric-card">
         <div class="label">
-          平均延迟
+          Độ trễ trung bình
         </div>
         <div class="value">
           {{ avgLatency }} ms
@@ -50,7 +50,7 @@
       </div>
       <div class="metric-card">
         <div class="label">
-          数据库请求比例
+          Tỉ lệ request tới database
         </div>
         <div class="value">
           {{ dbRate }}%
@@ -66,10 +66,10 @@
 
     <div class="legend">
       <div class="item">
-        <span class="dot cache" />缓存命中
+        <span class="dot cache" />Cache hit
       </div>
       <div class="item">
-        <span class="dot db" />数据库读取
+        <span class="dot db" />Đọc từ database
       </div>
     </div>
   </div>

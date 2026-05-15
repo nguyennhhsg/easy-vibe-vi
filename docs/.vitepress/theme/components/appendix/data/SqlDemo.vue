@@ -2,7 +2,7 @@
   <div class="sql-root">
     <div class="sql-header">
       <span class="sql-icon">🗄️</span>
-      <span class="sql-title">SQL 演示</span>
+      <span class="sql-title">Demo SQL</span>
     </div>
 
     <div class="sql-tabs">
@@ -17,11 +17,11 @@
     </div>
 
     <div class="sql-content">
-      <!-- CRUD 演示 -->
+      <!-- Demo CRUD -->
       <div v-if="activeTab === 'crud'" class="sql-section">
         <div class="sql-editor">
           <div class="sql-editor-header">
-            <span class="sql-editor-title">SQL 编辑器</span>
+            <span class="sql-editor-title">SQL editor</span>
           </div>
           <div class="sql-editor-body">
             <div class="sql-code" contenteditable="true" @blur="updateQuery">
@@ -30,26 +30,26 @@
           </div>
           <div class="sql-editor-footer">
             <button class="sql-btn sql-btn-run" @click="runQuery">
-              ▶ 运行
+              ▶ Chạy
             </button>
             <select
               v-model="selectedQuery"
               class="sql-select"
               @change="selectQuery"
             >
-              <option value="">选择示例...</option>
-              <option value="select">SELECT 查询</option>
-              <option value="insert">INSERT 插入</option>
-              <option value="update">UPDATE 更新</option>
-              <option value="delete">DELETE 删除</option>
+              <option value="">Chọn ví dụ...</option>
+              <option value="select">SELECT (truy vấn)</option>
+              <option value="insert">INSERT (chèn)</option>
+              <option value="update">UPDATE (cập nhật)</option>
+              <option value="delete">DELETE (xóa)</option>
             </select>
           </div>
         </div>
 
         <div class="sql-result">
           <div class="sql-result-header">
-            <span class="sql-result-title">查询结果</span>
-            <span class="sql-result-count">{{ result.length }} 行</span>
+            <span class="sql-result-title">Kết quả query</span>
+            <span class="sql-result-count">{{ result.length }} dòng</span>
           </div>
           <div class="sql-result-body">
             <table class="sql-table">
@@ -68,10 +68,10 @@
         </div>
       </div>
 
-      <!-- JOIN 演示 -->
+      <!-- Demo JOIN -->
       <div v-else-if="activeTab === 'join'" class="sql-section">
         <div class="join-diagram">
-          <div class="join-title">JOIN 类型对比</div>
+          <div class="join-title">So sánh các loại JOIN</div>
           <div class="join-grid">
             <div
               v-for="join in joins"
@@ -93,11 +93,11 @@
 
         <div class="join-result">
           <div class="join-sql">
-            <div class="join-sql-title">SQL 示例</div>
+            <div class="join-sql-title">SQL ví dụ</div>
             <pre class="join-code">{{ currentJoin.sql }}</pre>
           </div>
           <div class="join-table">
-            <div class="join-table-title">查询结果</div>
+            <div class="join-table-title">Kết quả query</div>
             <table class="sql-table">
               <thead>
                 <tr>
@@ -118,13 +118,13 @@
         </div>
       </div>
 
-      <!-- 索引演示 -->
+      <!-- Demo index -->
       <div v-else-if="activeTab === 'index'" class="sql-section">
         <div class="index-demo">
-          <div class="index-title">索引原理</div>
+          <div class="index-title">Nguyên lý index</div>
           <div class="index-comparison">
             <div class="index-side">
-              <div class="index-side-title">无索引</div>
+              <div class="index-side-title">Không có index</div>
               <div class="index-visual index-no-index">
                 <div v-for="i in 8" :key="i" class="index-item">
                   {{ indexData[i - 1] }}
@@ -132,14 +132,14 @@
               </div>
               <div class="index-stats">
                 <div class="index-stat">
-                  <span class="index-stat-label">查找 ID=5:</span>
-                  <span class="index-stat-value">需要扫描 5 次</span>
+                  <span class="index-stat-label">Tìm ID=5:</span>
+                  <span class="index-stat-value">Cần quét 5 lần</span>
                 </div>
               </div>
             </div>
 
             <div class="index-side">
-              <div class="index-side-title">有索引 (B+树)</div>
+              <div class="index-side-title">Có index (B+ Tree)</div>
               <div class="index-visual index-tree">
                 <div class="index-tree-level">
                   <div class="index-tree-node">1-8</div>
@@ -156,8 +156,8 @@
               </div>
               <div class="index-stats">
                 <div class="index-stat">
-                  <span class="index-stat-label">查找 ID=5:</span>
-                  <span class="index-stat-value index-fast">只需 3 次比较</span>
+                  <span class="index-stat-label">Tìm ID=5:</span>
+                  <span class="index-stat-value index-fast">Chỉ cần 3 lần so sánh</span>
                 </div>
               </div>
             </div>
@@ -165,20 +165,20 @@
         </div>
 
         <div class="index-tips">
-          <div class="index-tip-title">索引使用建议</div>
+          <div class="index-tip-title">Khuyến nghị khi dùng index</div>
           <ul class="index-tips-list">
-            <li>✓ 在 WHERE、JOIN、ORDER BY 列上创建索引</li>
-            <li>✓ 选择性高的列适合建索引（如手机号、用户名）</li>
-            <li>✗ 避免在低选择性列上建索引（如性别、状态）</li>
-            <li>✗ 索引会降低写入性能，不要过度索引</li>
+            <li>✓ Tạo index cho cột dùng trong WHERE, JOIN, ORDER BY</li>
+            <li>✓ Cột có độ chọn lọc cao thì phù hợp đánh index (như số điện thoại, username)</li>
+            <li>✗ Tránh đánh index trên cột chọn lọc thấp (như giới tính, trạng thái)</li>
+            <li>✗ Index làm giảm hiệu năng ghi, không nên đánh quá nhiều</li>
           </ul>
         </div>
       </div>
 
-      <!-- 事务演示 -->
+      <!-- Demo transaction -->
       <div v-else-if="activeTab === 'transaction'" class="sql-section">
         <div class="transaction-demo">
-          <div class="transaction-title">ACID 特性</div>
+          <div class="transaction-title">Đặc tính ACID</div>
           <div class="acid-grid">
             <div
               v-for="acid in acids"
@@ -196,19 +196,19 @@
         </div>
 
         <div class="transaction-flow">
-          <div class="transaction-flow-title">转账示例</div>
+          <div class="transaction-flow-title">Ví dụ chuyển khoản</div>
           <div class="transaction-steps">
             <div class="transaction-step">
               <div class="transaction-step-number">1</div>
               <div class="transaction-step-content">
-                <div class="transaction-step-title">开始事务</div>
+                <div class="transaction-step-title">Bắt đầu transaction</div>
                 <code>BEGIN;</code>
               </div>
             </div>
             <div class="transaction-step">
               <div class="transaction-step-number">2</div>
               <div class="transaction-step-content">
-                <div class="transaction-step-title">扣款</div>
+                <div class="transaction-step-title">Trừ tiền</div>
                 <code>UPDATE accounts SET balance = balance - 100 WHERE user_id =
                   1;</code>
               </div>
@@ -216,7 +216,7 @@
             <div class="transaction-step">
               <div class="transaction-step-number">3</div>
               <div class="transaction-step-content">
-                <div class="transaction-step-title">收款</div>
+                <div class="transaction-step-title">Cộng tiền</div>
                 <code>UPDATE accounts SET balance = balance + 100 WHERE user_id =
                   2;</code>
               </div>
@@ -224,13 +224,13 @@
             <div class="transaction-step">
               <div class="transaction-step-number">4</div>
               <div class="transaction-step-content">
-                <div class="transaction-step-title">提交事务</div>
+                <div class="transaction-step-title">Commit transaction</div>
                 <code>COMMIT;</code>
               </div>
             </div>
           </div>
           <div class="transaction-note">
-            如果步骤 2 或 3 失败，整个事务会回滚（ROLLBACK），保证原子性
+            Nếu bước 2 hoặc 3 thất bại, toàn bộ transaction sẽ rollback (ROLLBACK) để đảm bảo tính nguyên tử
           </div>
         </div>
       </div>
@@ -248,16 +248,16 @@ const selectedQuery = ref('')
 const currentQuery = ref('SELECT * FROM users;')
 
 const tabs = [
-  { id: 'crud', name: 'CRUD 操作', icon: '📝' },
-  { id: 'join', name: 'JOIN 查询', icon: '🔗' },
-  { id: 'index', name: '索引', icon: '📇' },
-  { id: 'transaction', name: '事务', icon: '🔄' }
+  { id: 'crud', name: 'Thao tác CRUD', icon: '📝' },
+  { id: 'join', name: 'Truy vấn JOIN', icon: '🔗' },
+  { id: 'index', name: 'Index', icon: '📇' },
+  { id: 'transaction', name: 'Transaction', icon: '🔄' }
 ]
 
 const queries = {
   select: 'SELECT id, name, email FROM users WHERE age > 18;',
   insert:
-    "INSERT INTO users (name, email, age) VALUES ('王五', 'wangwu@example.com', 25);",
+    "INSERT INTO users (name, email, age) VALUES ('Le Van C', 'levanc@example.com', 25);",
   update: 'UPDATE users SET age = 26 WHERE id = 1;',
   delete: 'DELETE FROM users WHERE id = 3;'
 }
@@ -266,69 +266,69 @@ const indexData = ref([1, 2, 3, 4, 5, 6, 7, 8])
 
 const columns = ref(['id', 'name', 'email', 'age'])
 const result = ref([
-  { id: 1, name: '张三', email: 'zhangsan@example.com', age: 28 },
-  { id: 2, name: '李四', email: 'lisi@example.com', age: 32 },
-  { id: 3, name: '王五', email: 'wangwu@example.com', age: 25 }
+  { id: 1, name: 'Nguyen Van A', email: 'nguyenvana@example.com', age: 28 },
+  { id: 2, name: 'Tran Van B', email: 'tranvanb@example.com', age: 32 },
+  { id: 3, name: 'Le Van C', email: 'levanc@example.com', age: 25 }
 ])
 
 const joins = {
   inner: {
     type: 'inner',
     name: 'INNER JOIN',
-    desc: '只返回两个表中匹配的行',
+    desc: 'Chỉ trả về các dòng khớp ở cả hai bảng',
     highlight: 'join-highlight-intersect',
     sql: `SELECT users.name, orders.order_id
 FROM users
 INNER JOIN orders ON users.id = orders.user_id;`,
     columns: ['name', 'order_id'],
     data: [
-      { name: '张三', order_id: 'ORD001' },
-      { name: '李四', order_id: 'ORD002' }
+      { name: 'Nguyen Van A', order_id: 'ORD001' },
+      { name: 'Tran Van B', order_id: 'ORD002' }
     ]
   },
   left: {
     type: 'left',
     name: 'LEFT JOIN',
-    desc: '返回左表所有行，右表不匹配的填 NULL',
+    desc: 'Trả về mọi dòng của bảng trái, bảng phải không khớp thì NULL',
     highlight: 'join-highlight-left',
     sql: `SELECT users.name, orders.order_id
 FROM users
 LEFT JOIN orders ON users.id = orders.user_id;`,
     columns: ['name', 'order_id'],
     data: [
-      { name: '张三', order_id: 'ORD001' },
-      { name: '李四', order_id: 'ORD002' },
-      { name: '王五', order_id: 'NULL' }
+      { name: 'Nguyen Van A', order_id: 'ORD001' },
+      { name: 'Tran Van B', order_id: 'ORD002' },
+      { name: 'Le Van C', order_id: 'NULL' }
     ]
   },
   right: {
     type: 'right',
     name: 'RIGHT JOIN',
-    desc: '返回右表所有行，左表不匹配的填 NULL',
+    desc: 'Trả về mọi dòng của bảng phải, bảng trái không khớp thì NULL',
     highlight: 'join-highlight-right',
     sql: `SELECT users.name, orders.order_id
 FROM users
 RIGHT JOIN orders ON users.id = orders.user_id;`,
     columns: ['name', 'order_id'],
     data: [
-      { name: '张三', order_id: 'ORD001' },
-      { name: '李四', order_id: 'ORD002' },
+      { name: 'Nguyen Van A', order_id: 'ORD001' },
+      { name: 'Tran Van B', order_id: 'ORD002' },
       { name: 'NULL', order_id: 'ORD003' }
     ]
   },
   full: {
     type: 'full',
     name: 'FULL OUTER JOIN',
-    desc: '返回两个表所有行，不匹配的填 NULL',
+    desc: 'Trả về mọi dòng của cả hai bảng, không khớp thì NULL',
     highlight: 'join-highlight-full',
     sql: `SELECT users.name, orders.order_id
 FROM users
 FULL OUTER JOIN orders ON users.id = orders.user_id;`,
     columns: ['name', 'order_id'],
     data: [
-      { name: '张三', order_id: 'ORD001' },
-      { name: '李四', order_id: 'ORD002' },
-      { name: '王五', order_id: 'NULL' },
+      { name: 'Nguyen Van A', order_id: 'ORD001' },
+      { name: 'Tran Van B', order_id: 'ORD002' },
+      { name: 'Le Van C', order_id: 'NULL' },
       { name: 'NULL', order_id: 'ORD003' }
     ]
   }
@@ -338,30 +338,30 @@ const acids = {
   atomicity: {
     id: 'atomicity',
     letter: 'A',
-    name: '原子性',
-    desc: '事务中的操作要么全部成功，要么全部失败',
-    example: '转账：要么同时成功，要么同时回滚'
+    name: 'Nguyên tử',
+    desc: 'Các thao tác trong transaction hoặc cùng thành công hoặc cùng thất bại',
+    example: 'Chuyển khoản: cùng thành công hoặc cùng rollback'
   },
   consistency: {
     id: 'consistency',
     letter: 'C',
-    name: '一致性',
-    desc: '事务前后数据库状态一致，满足约束',
-    example: '转账前后总金额不变'
+    name: 'Nhất quán',
+    desc: 'Trước và sau transaction, trạng thái database nhất quán, thỏa ràng buộc',
+    example: 'Trước và sau chuyển khoản, tổng số dư không đổi'
   },
   isolation: {
     id: 'isolation',
     letter: 'I',
-    name: '隔离性',
-    desc: '并发事务之间互不干扰',
-    example: '两个用户同时转账，不会相互影响'
+    name: 'Cô lập',
+    desc: 'Các transaction đồng thời không ảnh hưởng lẫn nhau',
+    example: 'Hai người dùng cùng chuyển khoản, không can thiệp lẫn nhau'
   },
   durability: {
     id: 'durability',
     letter: 'D',
-    name: '持久性',
-    desc: '事务提交后，永久保存，即使系统故障',
-    example: '转账成功后，断电也不会丢失'
+    name: 'Bền vững',
+    desc: 'Transaction đã commit thì lưu vĩnh viễn, dù hệ thống sự cố',
+    example: 'Chuyển khoản thành công thì mất điện cũng không mất dữ liệu'
   }
 }
 
@@ -378,7 +378,7 @@ function selectQuery() {
 }
 
 function runQuery() {
-  // 模拟查询执行
+  // Mô phỏng thực thi query
   console.log('Running query:', currentQuery.value)
 }
 </script>
@@ -445,7 +445,7 @@ function runQuery() {
   padding: 20px;
 }
 
-/* CRUD 演示 */
+/* Demo CRUD */
 .sql-section {
   display: flex;
   flex-direction: column;
@@ -563,7 +563,7 @@ function runQuery() {
   background: var(--vp-c-bg-soft);
 }
 
-/* JOIN 演示 */
+/* Demo JOIN */
 .join-diagram {
   margin-bottom: 20px;
 }
@@ -692,7 +692,7 @@ function runQuery() {
   overflow-x: auto;
 }
 
-/* 索引演示 */
+/* Demo index */
 .index-demo {
   margin-bottom: 16px;
 }
@@ -825,7 +825,7 @@ function runQuery() {
   color: var(--vp-c-text-2);
 }
 
-/* 事务演示 */
+/* Demo transaction */
 .transaction-demo {
   margin-bottom: 16px;
 }

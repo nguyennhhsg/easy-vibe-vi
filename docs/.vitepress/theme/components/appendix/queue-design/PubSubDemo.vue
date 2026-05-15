@@ -1,37 +1,37 @@
 <!--
   PubSubDemo.vue
-  发布订阅模式演示 - 一条消息多消费者
+  Demo pattern pub/sub - một message nhiều consumer
 -->
 <template>
   <div class="pubsub-demo">
     <div class="header">
       <div class="title">
-        发布订阅模式：一条消息，多处消费
+        Pattern pub/sub: một message, nhiều nơi consume
       </div>
       <div class="subtitle">
-        发布一次事件，多个订阅者独立处理
+        Publish một event, nhiều subscriber xử lý độc lập
       </div>
     </div>
 
     <div class="main-flow">
       <div class="publisher-section">
         <div class="section-title">
-          📤 发布者 Publisher
+          📤 Publisher
         </div>
         <div class="event-selector">
-          <label>选择事件：</label>
+          <label>Chọn event:</label>
           <select
             v-model="selectedEvent"
             @change="onEventChange"
           >
             <option value="order.created">
-              订单创建成功
+              Tạo đơn thành công
             </option>
             <option value="user.registered">
-              用户注册成功
+              Đăng ký user thành công
             </option>
             <option value="product.updated">
-              商品信息更新
+              Cập nhật thông tin sản phẩm
             </option>
           </select>
         </div>
@@ -48,13 +48,13 @@
           :disabled="publishing"
           @click="publishEvent"
         >
-          {{ publishing ? '发布中...' : '🚀 发布事件' }}
+          {{ publishing ? 'Đang publish...' : '🚀 Publish event' }}
         </button>
       </div>
 
       <div class="topic-section">
         <div class="section-title">
-          📡 主题 Topic
+          📡 Topic
         </div>
         <div
           class="topic-box"
@@ -70,17 +70,17 @@
             v-if="hasMessage"
             class="message-indicator"
           >
-            消息已发布
+            Đã publish message
           </div>
         </div>
         <div class="topic-desc">
-          所有订阅者都会收到这条消息
+          Tất cả subscriber đều nhận được message này
         </div>
       </div>
 
       <div class="subscribers-section">
         <div class="section-title">
-          📥 订阅者 Subscribers
+          📥 Subscriber
         </div>
         <div class="subscribers-grid">
           <div
@@ -99,12 +99,12 @@
               {{ sub.action }}
             </div>
             <div class="sub-status">
-              <span v-if="sub.processing">⏳ 处理中...</span>
-              <span v-else-if="sub.completed">✅ 已完成</span>
-              <span v-else>💤 等待消息</span>
+              <span v-if="sub.processing">⏳ Đang xử lý...</span>
+              <span v-else-if="sub.completed">✅ Đã xong</span>
+              <span v-else>💤 Đợi message</span>
             </div>
             <div class="sub-count">
-              已处理: {{ sub.count }} 条
+              Đã xử lý: {{ sub.count }} msg
             </div>
           </div>
         </div>
@@ -114,13 +114,13 @@
     <div class="real-time-log">
       <div class="log-header">
         <div class="log-title">
-          📋 实时日志
+          📋 Log realtime
         </div>
         <button
           class="clear-btn"
           @click="clearLog"
         >
-          清空
+          Xóa
         </button>
       </div>
       <div class="log-content">
@@ -128,7 +128,7 @@
           v-if="logs.length === 0"
           class="log-empty"
         >
-          暂无日志
+          Chưa có log
         </div>
         <div
           v-for="(log, index) in logs"
@@ -144,7 +144,7 @@
 
     <div class="use-cases">
       <div class="case-title">
-        💡 典型应用场景
+        💡 Use case tiêu biểu
       </div>
       <div class="case-grid">
         <div class="case-card">
@@ -152,10 +152,10 @@
             🛒
           </div>
           <div class="case-name">
-            电商订单
+            Đơn hàng e-commerce
           </div>
           <div class="case-desc">
-            订单创建 → 库存服务、积分服务、通知服务、数据仓库同时处理
+            Tạo đơn → service kho, service điểm thưởng, service thông báo, data warehouse xử lý đồng thời
           </div>
         </div>
         <div class="case-card">
@@ -163,10 +163,10 @@
             👤
           </div>
           <div class="case-name">
-            用户注册
+            Đăng ký user
           </div>
           <div class="case-desc">
-            用户注册 → 欢迎邮件、短信验证、发放优惠券、创建用户画像
+            User đăng ký → email chào mừng, SMS xác thực, phát voucher, tạo user profile
           </div>
         </div>
         <div class="case-card">
@@ -174,10 +174,10 @@
             📊
           </div>
           <div class="case-name">
-            数据分析
+            Phân tích dữ liệu
           </div>
           <div class="case-desc">
-            用户行为 → 推荐系统、实时统计、数据仓库、风控系统
+            Hành vi user → hệ thống đề xuất, thống kê realtime, data warehouse, hệ thống quản trị rủi ro
           </div>
         </div>
       </div>
@@ -195,50 +195,50 @@ const logs = ref([])
 
 const eventConfigs = {
   'order.created': {
-    name: '订单创建成功',
-    description: '用户完成支付，订单创建成功',
+    name: 'Tạo đơn thành công',
+    description: 'User thanh toán xong, đơn hàng được tạo thành công',
     subscribers: [
       {
         id: 1,
-        name: '库存服务',
+        name: 'Service kho',
         icon: '📦',
-        action: '扣减库存',
+        action: 'Trừ tồn kho',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 2,
-        name: '积分服务',
+        name: 'Service điểm thưởng',
         icon: '💎',
-        action: '增加积分',
+        action: 'Cộng điểm',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 3,
-        name: '短信服务',
+        name: 'Service SMS',
         icon: '📱',
-        action: '发送短信',
+        action: 'Gửi SMS',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 4,
-        name: '邮件服务',
+        name: 'Service email',
         icon: '📧',
-        action: '发送邮件',
+        action: 'Gửi email',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 5,
-        name: '数据仓库',
+        name: 'Data warehouse',
         icon: '📊',
-        action: '记录订单数据',
+        action: 'Ghi dữ liệu đơn',
         processing: false,
         completed: false,
         count: 0
@@ -246,41 +246,41 @@ const eventConfigs = {
     ]
   },
   'user.registered': {
-    name: '用户注册成功',
-    description: '新用户完成注册流程',
+    name: 'Đăng ký user thành công',
+    description: 'User mới hoàn tất quy trình đăng ký',
     subscribers: [
       {
         id: 1,
-        name: '欢迎邮件',
+        name: 'Email chào mừng',
         icon: '📧',
-        action: '发送欢迎邮件',
+        action: 'Gửi email chào mừng',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 2,
-        name: '短信验证',
+        name: 'SMS xác thực',
         icon: '📱',
-        action: '发送验证短信',
+        action: 'Gửi SMS xác thực',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 3,
-        name: '优惠券服务',
+        name: 'Service voucher',
         icon: '🎫',
-        action: '发放新用户券',
+        action: 'Phát voucher cho user mới',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 4,
-        name: '用户画像',
+        name: 'User profile',
         icon: '👤',
-        action: '创建用户档案',
+        action: 'Tạo hồ sơ user',
         processing: false,
         completed: false,
         count: 0
@@ -288,32 +288,32 @@ const eventConfigs = {
     ]
   },
   'product.updated': {
-    name: '商品信息更新',
-    description: '商家更新商品信息',
+    name: 'Cập nhật thông tin sản phẩm',
+    description: 'Người bán cập nhật thông tin sản phẩm',
     subscribers: [
       {
         id: 1,
-        name: '搜索服务',
+        name: 'Service tìm kiếm',
         icon: '🔍',
-        action: '更新搜索索引',
+        action: 'Cập nhật search index',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 2,
-        name: '推荐服务',
+        name: 'Service đề xuất',
         icon: '⭐',
-        action: '更新推荐列表',
+        action: 'Cập nhật danh sách đề xuất',
         processing: false,
         completed: false,
         count: 0
       },
       {
         id: 3,
-        name: '缓存服务',
+        name: 'Service cache',
         icon: '⚡',
-        action: '刷新缓存',
+        action: 'Refresh cache',
         processing: false,
         completed: false,
         count: 0
@@ -347,22 +347,22 @@ const publishEvent = () => {
   publishing.value = true
   hasMessage.value = true
 
-  addLog('info', `📤 发布事件: ${eventDetails.value.name}`)
+  addLog('info', `📤 Publish event: ${eventDetails.value.name}`)
 
-  // 所有订阅者都收到消息
+  // Tất cả subscriber đều nhận message
   subscribers.value.forEach((sub, index) => {
     setTimeout(() => {
       sub.processing = true
       sub.completed = false
-      addLog('info', `📥 ${sub.name} 开始处理`)
+      addLog('info', `📥 ${sub.name} bắt đầu xử lý`)
 
-      // 模拟处理时间
+      // Mô phỏng thời gian xử lý
       setTimeout(
         () => {
           sub.processing = false
           sub.completed = true
           sub.count++
-          addLog('success', `✅ ${sub.name} 处理完成: ${sub.action}`)
+          addLog('success', `✅ ${sub.name} xử lý xong: ${sub.action}`)
 
           setTimeout(() => {
             sub.completed = false

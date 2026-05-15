@@ -1,12 +1,12 @@
 <!--
   TaskRetryDemo.vue
-  任务重试机制演示：展示失败重试和退避策略
+  Demo cơ chế retry task: trình bày retry khi thất bại và chiến lược backoff
 -->
 <template>
   <div class="retry-demo">
     <div class="header">
-      <div class="title">任务重试与退避策略</div>
-      <div class="subtitle">模拟任务失败后的重试过程</div>
+      <div class="title">Retry task và chiến lược backoff</div>
+      <div class="subtitle">Mô phỏng quá trình retry sau khi task thất bại</div>
     </div>
 
     <div class="strategy-tabs">
@@ -20,7 +20,7 @@
 
     <div class="retry-area">
       <button class="start-btn" @click="startRetry" :disabled="running">
-        {{ running ? '重试中...' : '执行任务（模拟失败）' }}
+        {{ running ? 'Đang retry...' : 'Chạy task (mô phỏng thất bại)' }}
       </button>
 
       <div class="attempts">
@@ -30,13 +30,13 @@
           :class="['attempt', attempt.status]"
         >
           <div class="attempt-header">
-            <span class="attempt-num">第 {{ i + 1 }} 次{{ i === 0 ? '执行' : '重试' }}</span>
+            <span class="attempt-num">{{ i === 0 ? 'Chạy' : 'Retry' }} lần thứ {{ i + 1 }}</span>
             <span :class="['status-badge', attempt.status]">
-              {{ attempt.status === 'success' ? '成功' : attempt.status === 'fail' ? '失败' : attempt.status === 'waiting' ? '等待中' : '执行中' }}
+              {{ attempt.status === 'success' ? 'Thành công' : attempt.status === 'fail' ? 'Thất bại' : attempt.status === 'waiting' ? 'Đang đợi' : 'Đang chạy' }}
             </span>
           </div>
           <div class="attempt-detail">
-            <span v-if="attempt.delay > 0">等待 {{ attempt.delay }}s 后重试</span>
+            <span v-if="attempt.delay > 0">Đợi {{ attempt.delay }}s rồi retry</span>
             <span v-if="attempt.error" class="error-msg">{{ attempt.error }}</span>
           </div>
         </div>
@@ -47,7 +47,7 @@
       <div class="info-title">{{ currentStrategy.label }}</div>
       <div class="info-desc">{{ currentStrategy.desc }}</div>
       <div class="info-formula">
-        延迟公式：<code>{{ currentStrategy.formula }}</code>
+        Công thức delay: <code>{{ currentStrategy.formula }}</code>
       </div>
     </div>
   </div>
@@ -61,9 +61,9 @@ const running = ref(false)
 const attempts = ref([])
 
 const strategies = [
-  { key: 'fixed', label: '固定间隔', desc: '每次重试等待相同的时间，简单但可能造成"重试风暴"', formula: 'delay = 2s' },
-  { key: 'exponential', label: '指数退避', desc: '每次重试等待时间翻倍，有效避免服务端过载', formula: 'delay = 2^n 秒 (1s, 2s, 4s, 8s...)' },
-  { key: 'jitter', label: '指数退避+抖动', desc: '在指数退避基础上加随机偏移，防止多个客户端同时重试', formula: 'delay = 2^n + random(0, 1s)' }
+  { key: 'fixed', label: 'Khoảng cố định', desc: 'Mỗi lần retry đợi cùng một thời gian, đơn giản nhưng có thể gây "bão retry"', formula: 'delay = 2s' },
+  { key: 'exponential', label: 'Exponential backoff', desc: 'Mỗi lần retry thời gian đợi nhân đôi, hiệu quả tránh quá tải server', formula: 'delay = 2^n giây (1s, 2s, 4s, 8s...)' },
+  { key: 'jitter', label: 'Exponential backoff + jitter', desc: 'Trên nền exponential backoff thêm offset ngẫu nhiên để tránh nhiều client retry cùng lúc', formula: 'delay = 2^n + random(0, 1s)' }
 ]
 
 const currentStrategy = computed(() => strategies.find(s => s.key === strategy.value))
@@ -103,7 +103,7 @@ async function startRetry() {
 
     if (i < failUntil) {
       attempt.status = 'fail'
-      attempt.error = ['连接超时', '服务不可用', '网络错误'][i % 3]
+      attempt.error = ['Timeout kết nối', 'Service không khả dụng', 'Lỗi mạng'][i % 3]
     } else {
       attempt.status = 'success'
       running.value = false

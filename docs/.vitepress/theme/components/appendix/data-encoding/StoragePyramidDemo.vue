@@ -25,7 +25,7 @@
       <div class="detail-stats">
         <div class="stat-item">
           <div class="stat-bar-label">
-            <span>访问速度</span>
+            <span>Tốc độ truy cập</span>
             <span class="stat-val">{{ currentLayer.speed }}</span>
           </div>
           <div class="stat-bar-bg">
@@ -34,7 +34,7 @@
         </div>
         <div class="stat-item">
           <div class="stat-bar-label">
-            <span>典型容量</span>
+            <span>Dung lượng điển hình</span>
             <span class="stat-val">{{ currentLayer.capacity }}</span>
           </div>
           <div class="stat-bar-bg">
@@ -43,7 +43,7 @@
         </div>
         <div class="stat-item">
           <div class="stat-bar-label">
-            <span>单价（每GB）</span>
+            <span>Giá mỗi GB</span>
             <span class="stat-val">{{ currentLayer.price }}</span>
           </div>
         </div>
@@ -51,17 +51,17 @@
 
       <div class="analogy-box">
         <div>
-          <strong>生活类比：</strong>{{ currentLayer.analogy }}
+          <strong>Ví von đời thường:</strong> {{ currentLayer.analogy }}
         </div>
       </div>
 
       <div class="use-case-box">
-        <strong>实际用途：</strong>{{ currentLayer.useCase }}
+        <strong>Dùng thực tế:</strong> {{ currentLayer.useCase }}
       </div>
     </div>
 
     <div class="insight-bar">
-      <strong>提示：</strong>越快越贵，越慢越大。CPU 缓存极快但只有几 MB；机械硬盘虽慢但便宜又能存 TB。操作系统会自动在各层之间搬运数据——这叫<strong>存储层次结构</strong>。
+      <strong>Mẹo:</strong> Càng nhanh càng đắt, càng chậm càng to. CPU cache cực nhanh nhưng chỉ vài MB, ổ HDD cơ học tuy chậm nhưng rẻ và chứa được tới TB. Hệ điều hành sẽ tự động đưa dữ liệu qua lại giữa các tầng, đó là <strong>kiến trúc phân tầng lưu trữ (storage hierarchy)</strong>.
     </div>
   </div>
 </template>
@@ -71,69 +71,69 @@ import { ref, computed } from 'vue'
 
 const layers = [
   {
-    name: 'CPU 寄存器',
+    name: 'Thanh ghi CPU',
     icon: 'L0',
-    speedLabel: '极快',
+    speedLabel: 'Cực nhanh',
     colorClass: 'tier-0',
-    speed: '< 1 纳秒',
+    speed: '< 1 nano giây',
     speedPct: 98,
-    capacity: '几百字节',
+    capacity: 'Vài trăm byte',
     capacityPct: 2,
-    price: '极贵（集成在CPU）',
-    analogy: '你大脑里当前正在「想」的那个数字——随取随用，但只能记住一两个。',
-    useCase: 'CPU 内部运算时临时存放操作数和指令，程序员几乎不需要直接管理它。'
+    price: 'Cực đắt (tích hợp trong CPU)',
+    analogy: 'Như con số bạn đang "nghĩ" trong đầu, lấy ra dùng tức thì, nhưng chỉ nhớ được một hai cái.',
+    useCase: 'Dùng tạm thời để chứa toán hạng và lệnh khi CPU tính toán, lập trình viên gần như không cần quản lý trực tiếp.'
   },
   {
-    name: 'CPU 缓存（Cache）',
+    name: 'CPU Cache',
     icon: 'L1',
-    speedLabel: '很快',
+    speedLabel: 'Rất nhanh',
     colorClass: 'tier-1',
-    speed: '5–50 纳秒',
+    speed: '5-50 nano giây',
     speedPct: 82,
-    capacity: '几 KB ~ 几十 MB',
+    capacity: 'Vài KB đến vài chục MB',
     capacityPct: 5,
-    price: '贵',
-    analogy: '你办公桌上的便签纸——放最近用过的东西，翻找极快，但桌面面积有限。',
-    useCase: '缓存最近频繁访问的内存数据，减少 CPU 等待时间。大多数性能敏感程序都会考虑「缓存友好」写法。'
+    price: 'Đắt',
+    analogy: 'Như tờ giấy note trên bàn làm việc, đặt mấy thứ vừa dùng gần đây, lấy ra cực nhanh, nhưng diện tích bàn có hạn.',
+    useCase: 'Cache lại dữ liệu RAM truy cập thường xuyên gần đây, giảm thời gian CPU phải chờ. Hầu hết chương trình nhạy về hiệu năng đều quan tâm cách viết "thân thiện với cache".'
   },
   {
-    name: '内存（RAM）',
+    name: 'RAM',
     icon: 'L2',
-    speedLabel: '快',
+    speedLabel: 'Nhanh',
     colorClass: 'tier-2',
-    speed: '几十 ~ 100 纳秒',
+    speed: 'Vài chục đến 100 nano giây',
     speedPct: 60,
-    capacity: '几 GB ~ 几百 GB',
+    capacity: 'Vài GB đến vài trăm GB',
     capacityPct: 25,
-    price: '适中（约 ¥30/GB）',
-    analogy: '你打开的浏览器标签页——断电就没了，但当前工作全在这里。',
-    useCase: '运行中的程序、操作系统、当前打开的文件都住在内存里。内存不够了→程序卡顿甚至崩溃。'
+    price: 'Trung bình (khoảng 100k VND/GB)',
+    analogy: 'Như mấy tab trình duyệt đang mở, mất điện là bay hết, nhưng toàn bộ công việc hiện tại đều ở đây.',
+    useCase: 'Các chương trình đang chạy, hệ điều hành, file đang mở đều nằm trong RAM. Hết RAM thì chương trình lag, thậm chí crash.'
   },
   {
-    name: 'SSD（固态硬盘）',
+    name: 'SSD',
     icon: 'L3',
-    speedLabel: '较快',
+    speedLabel: 'Khá nhanh',
     colorClass: 'tier-3',
-    speed: '~100 微秒',
+    speed: '~100 micro giây',
     speedPct: 35,
-    capacity: '几百 GB ~ 几 TB',
+    capacity: 'Vài trăm GB đến vài TB',
     capacityPct: 60,
-    price: '便宜（约 ¥0.5/GB）',
-    analogy: '你电脑里的文件夹——关机后数据还在，但比内存慢上千倍。',
-    useCase: '存储操作系统、应用程序、用户文件。现在的 NVMe SSD 已经非常快了。'
+    price: 'Rẻ (khoảng 2k VND/GB)',
+    analogy: 'Như thư mục trong máy tính của bạn, tắt máy đi dữ liệu vẫn còn, nhưng chậm hơn RAM cả nghìn lần.',
+    useCase: 'Lưu hệ điều hành, ứng dụng, file người dùng. NVMe SSD hiện nay đã rất nhanh rồi.'
   },
   {
-    name: '机械硬盘（HDD）',
+    name: 'Ổ cứng HDD',
     icon: 'L4',
-    speedLabel: '慢',
+    speedLabel: 'Chậm',
     colorClass: 'tier-4',
-    speed: '~10 毫秒',
+    speed: '~10 mili giây',
     speedPct: 15,
-    capacity: '几 TB ~ 几十 TB',
+    capacity: 'Vài TB đến vài chục TB',
     capacityPct: 90,
-    price: '最便宜（约 ¥0.1/GB）',
-    analogy: '仓库里的档案柜——容量巨大、便宜，但找东西要走过去翻，慢。',
-    useCase: '存储大量冷数据、备份、视频录像。现在大多数笔记本已经换成 SSD 了。'
+    price: 'Rẻ nhất (khoảng 400 VND/GB)',
+    analogy: 'Như tủ hồ sơ trong kho, dung lượng to, rẻ, nhưng tìm gì cũng phải đi tới lục, chậm.',
+    useCase: 'Lưu dữ liệu lạnh số lượng lớn, backup, file video giám sát. Đa số laptop hiện nay đã chuyển sang dùng SSD.'
   }
 ]
 

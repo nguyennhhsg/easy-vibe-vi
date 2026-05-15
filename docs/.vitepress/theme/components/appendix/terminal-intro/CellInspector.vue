@@ -1,14 +1,14 @@
 <!--
   CellInspector.vue
-  单元格检查器组件
-  
-  用途：
-  深入展示单个终端单元格（Cell）的内部结构。
-  说明一个单元格不仅仅包含字符，还包含前景色、背景色、加粗、下划线等属性。
-  
-  交互功能：
-  - 属性切换：用户可以修改字符、颜色和样式。
-  - 实时预览：左侧大图实时反映右侧属性的修改结果。
+  Component khám phá cell
+
+  Mục đích:
+  Trình bày sâu cấu trúc bên trong của một cell trong terminal.
+  Mỗi cell không chỉ chứa ký tự mà còn có màu chữ, màu nền, in đậm, gạch chân...
+
+  Tính năng tương tác:
+  - Đổi thuộc tính: user có thể đổi ký tự, màu và style.
+  - Xem trước thời gian thực: ảnh lớn bên trái phản ánh ngay thay đổi thuộc tính bên phải.
 -->
 <template>
   <div class="cell-inspector">

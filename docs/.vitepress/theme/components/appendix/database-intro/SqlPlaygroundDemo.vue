@@ -2,12 +2,12 @@
   <div class="sql-playground-demo">
     <div class="demo-header">
       <span class="icon">💻</span>
-      <span class="title">SQL 练习场</span>
-      <span class="subtitle">体验 SQL 的 CRUD 操作</span>
+      <span class="title">Sân chơi SQL</span>
+      <span class="subtitle">Trải nghiệm thao tác CRUD với SQL</span>
     </div>
 
     <div class="intro-text">
-      SQL 就像和数据库<span class="highlight">对话</span>：你说"给我找所有年龄大于 25 的用户"，数据库就会执行查询并返回结果。即使不会编程，也能很快上手。
+      SQL giống như <span class="highlight">trò chuyện</span> với database: bạn nói "tìm cho tôi tất cả user trên 25 tuổi", database sẽ thực hiện query và trả kết quả. Không cần biết lập trình bạn cũng có thể bắt đầu nhanh.
     </div>
 
     <div class="playground-container">
@@ -28,7 +28,7 @@
       <div class="content-area">
         <div class="example-section">
           <div class="section-title">
-            📝 示例 SQL
+            📝 SQL ví dụ
           </div>
           <div class="code-block">
             <pre><code>{{ currentOperation.example }}</code></pre>
@@ -37,7 +37,7 @@
 
         <div class="explanation-section">
           <div class="section-title">
-            💡 逐词翻译
+            💡 Dịch nghĩa từng phần
           </div>
           <div class="explanation-list">
             <div
@@ -54,7 +54,7 @@
 
       <div class="result-section">
         <div class="section-title">
-          📊 返回结果
+          📊 Kết quả trả về
         </div>
         <div class="result-table">
           <div class="table-header">
@@ -95,7 +95,7 @@
 
     <div class="info-box">
       <span class="icon">🎯</span>
-      <strong>核心概念：</strong>CRUD 涵盖了所有数据管理的基本需求。无论是淘宝、微信、抖音，它们的数据库操作本质上就是这四种：增、删、改、查。
+      <strong>Khái niệm cốt lõi:</strong> CRUD bao trùm mọi nhu cầu quản lý dữ liệu cơ bản. Dù là Shopee, Zalo hay TikTok, thao tác database về bản chất cũng chỉ có 4 loại: Create, Read, Update, Delete.
     </div>
   </div>
 </template>
@@ -108,72 +108,72 @@ const currentOp = ref('SELECT')
 const operations = {
   SELECT: {
     key: 'SELECT',
-    name: '查询',
+    name: 'Truy vấn',
     icon: '🔍',
     keyword: 'SELECT ... FROM',
     example: "SELECT name, age FROM users WHERE age > 25;",
     explanation: [
-      { keyword: 'SELECT name, age', meaning: '选择 name 和 age 这两列' },
-      { keyword: 'FROM users', meaning: '从 users 这张表' },
-      { keyword: 'WHERE age > 25', meaning: '在 age 大于 25 的条件下' }
+      { keyword: 'SELECT name, age', meaning: 'Chọn 2 cột name và age' },
+      { keyword: 'FROM users', meaning: 'Từ bảng users' },
+      { keyword: 'WHERE age > 25', meaning: 'Với điều kiện age lớn hơn 25' }
     ],
     result: {
       columns: ['name', 'age'],
       rows: [
-        ['李四', 30],
-        ['王五', 28]
+        ['Tran Van B', 30],
+        ['Le Thi C', 28]
       ]
     }
   },
   INSERT: {
     key: 'INSERT',
-    name: '插入',
+    name: 'Thêm',
     icon: '➕',
     keyword: 'INSERT INTO',
-    example: "INSERT INTO users (name, age, city) VALUES ('赵六', 35, '广州');",
+    example: "INSERT INTO users (name, age, city) VALUES ('Pham Van D', 35, 'Da Nang');",
     explanation: [
-      { keyword: 'INSERT INTO users', meaning: '插入到 users 表' },
-      { keyword: '(name, age, city)', meaning: '这几列' },
-      { keyword: "VALUES ('赵六', 35, '广州')", meaning: '值分别是...' }
+      { keyword: 'INSERT INTO users', meaning: 'Chèn vào bảng users' },
+      { keyword: '(name, age, city)', meaning: 'Các cột này' },
+      { keyword: "VALUES ('Pham Van D', 35, 'Da Nang')", meaning: 'Giá trị tương ứng...' }
     ],
     result: {
-      columns: ['结果'],
-      rows: [['✅ 成功插入 1 行']]
+      columns: ['Kết quả'],
+      rows: [['✅ Đã chèn thành công 1 dòng']]
     },
-    warning: '<strong>注意：</strong>字符串要用单引号包围，数字不需要引号。'
+    warning: '<strong>Lưu ý:</strong> Chuỗi phải đặt trong dấu nháy đơn, số thì không cần.'
   },
   UPDATE: {
     key: 'UPDATE',
-    name: '更新',
+    name: 'Cập nhật',
     icon: '✏️',
     keyword: 'UPDATE ... SET',
-    example: "UPDATE users SET age = age + 1 WHERE city = '北京';",
+    example: "UPDATE users SET age = age + 1 WHERE city = 'Ha Noi';",
     explanation: [
-      { keyword: 'UPDATE users', meaning: '更新 users 表' },
-      { keyword: 'SET age = age + 1', meaning: '把 age 设为 age + 1' },
-      { keyword: "WHERE city = '北京'", meaning: '只修改城市为北京的行' }
+      { keyword: 'UPDATE users', meaning: 'Cập nhật bảng users' },
+      { keyword: 'SET age = age + 1', meaning: 'Đặt age thành age + 1' },
+      { keyword: "WHERE city = 'Ha Noi'", meaning: 'Chỉ sửa các dòng có thành phố là Hà Nội' }
     ],
     result: {
-      columns: ['结果'],
-      rows: [['✅ 成功更新 2 行']]
+      columns: ['Kết quả'],
+      rows: [['✅ Đã cập nhật thành công 2 dòng']]
     },
-    warning: '<strong>重要警告：</strong>如果忘记写 WHERE，会修改<strong>所有行</strong>！这是最危险的操作之一。'
+    warning: '<strong>Cảnh báo quan trọng:</strong> Nếu quên viết WHERE sẽ sửa <strong>toàn bộ bảng</strong>! Đây là một trong những thao tác nguy hiểm nhất.'
   },
   DELETE: {
     key: 'DELETE',
-    name: '删除',
+    name: 'Xóa',
     icon: '🗑️',
     keyword: 'DELETE FROM',
     example: 'DELETE FROM users WHERE user_id = 4;',
     explanation: [
-      { keyword: 'DELETE FROM users', meaning: '从 users 表删除' },
-      { keyword: 'WHERE user_id = 4', meaning: '只删除 user_id 为 4 的行' }
+      { keyword: 'DELETE FROM users', meaning: 'Xóa từ bảng users' },
+      { keyword: 'WHERE user_id = 4', meaning: 'Chỉ xóa dòng có user_id bằng 4' }
     ],
     result: {
-      columns: ['结果'],
-      rows: [['✅ 成功删除 1 行']]
+      columns: ['Kết quả'],
+      rows: [['✅ Đã xóa thành công 1 dòng']]
     },
-    warning: '<strong>重要警告：</strong>和 UPDATE 一样，如果忘记写 WHERE，会删除<strong>整张表</strong>的所有数据！'
+    warning: '<strong>Cảnh báo quan trọng:</strong> Giống như UPDATE, nếu quên WHERE sẽ xóa <strong>toàn bộ bảng</strong>!'
   }
 }
 

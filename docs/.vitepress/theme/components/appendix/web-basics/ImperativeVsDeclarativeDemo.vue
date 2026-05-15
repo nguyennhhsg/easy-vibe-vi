@@ -2,8 +2,8 @@
   <div class="imperative-declarative-demo">
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">命令式 vs 声明式</span>
-      <span class="subtitle">两种编程思维的对比（通俗说：手动操作 vs 自动响应）</span>
+      <span class="title">Imperative vs Declarative</span>
+      <span class="subtitle">So sánh hai tư duy lập trình (nói dễ hiểu: thao tác thủ công vs phản hồi tự động)</span>
     </div>
 
     <div class="demo-content">
@@ -11,12 +11,12 @@
         <!-- Imperative (jQuery Style) -->
         <div class="panel imperative">
           <div class="panel-header">
-            <span class="badge yellow">命令式 (Imperative)</span>
-            <span class="sub-text">jQuery Style - 手动操作</span>
+            <span class="badge yellow">Imperative (mệnh lệnh)</span>
+            <span class="sub-text">jQuery Style - thao tác thủ công</span>
           </div>
           <div class="code-preview">
             <code>
-              // 手动操作 DOM<br>
+              // Sửa DOM thủ công<br>
               $('#count').text(val);<br>
               if (val > 5) $('#msg').show();
             </code>
@@ -62,12 +62,12 @@
         <!-- Declarative (Vue Style) -->
         <div class="panel declarative">
           <div class="panel-header">
-            <span class="badge green">声明式 (Declarative)</span>
-            <span class="sub-text">Vue/React Style - 自动响应</span>
+            <span class="badge green">Declarative (khai báo)</span>
+            <span class="sub-text">Vue/React Style - phản hồi tự động</span>
           </div>
           <div class="code-preview">
             <code v-pre>
-              // 只需要绑定数据
+              // Chỉ cần bind dữ liệu
               {{ count }}
               &lt;div v-if="count > 5"&gt;...&lt;/div&gt;
             </code>
@@ -100,7 +100,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>命令式像"手把手教电脑怎么做"，声明式像"告诉电脑要什么，它自己搞定"。
+      <strong>Ý tưởng cốt lõi:</strong> Imperative giống như "cầm tay chỉ việc cho máy tính", còn declarative thì "nói cho máy biết bạn muốn gì, nó tự lo phần còn lại".
     </div>
   </div>
 </template>

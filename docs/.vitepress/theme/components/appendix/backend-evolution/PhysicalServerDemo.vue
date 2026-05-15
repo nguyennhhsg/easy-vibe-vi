@@ -2,14 +2,14 @@
   <div class="physical-server-demo">
     <div class="demo-header">
       <span class="icon">🖥️</span>
-      <span class="title">物理服务器时代演示</span>
-      <span class="subtitle">观察早期 CGI 服务器的处理瓶颈</span>
+      <span class="title">Demo thời đại máy chủ vật lý</span>
+      <span class="subtitle">Quan sát điểm nghẽn xử lý của máy chủ CGI thuở ban đầu</span>
     </div>
 
     <div class="demo-stage">
       <div class="client-zone">
         <div class="zone-title">
-          👤 用户浏览器
+          👤 Trình duyệt người dùng
         </div>
         <div class="request-queue">
           <div
@@ -27,7 +27,7 @@
           :disabled="isProcessing"
           @click="sendRequest"
         >
-          {{ isProcessing ? '处理中...' : '🚀 发起请求' }}
+          {{ isProcessing ? 'Đang xử lý...' : '🚀 Gửi request' }}
         </button>
       </div>
 
@@ -58,7 +58,7 @@
 
       <div class="server-zone">
         <div class="zone-title">
-          🖥️ CGI 服务器
+          🖥️ Máy chủ CGI
         </div>
         <div class="server-status">
           <div
@@ -101,7 +101,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>进程级隔离带来了稳定性，但也带来了巨大的性能开销。
+      <strong>Tư tưởng cốt lõi:</strong> Cô lập ở cấp độ process mang lại sự ổn định, nhưng cũng kéo theo chi phí hiệu năng rất lớn.
     </div>
   </div>
 </template>
@@ -119,8 +119,8 @@ const requestCounter = ref(0)
 const packetCounter = ref(0)
 
 const serverStatus = computed(() => {
-  if (isProcessing.value) return '处理中...'
-  return '等待请求'
+  if (isProcessing.value) return 'Đang xử lý...'
+  return 'Đang chờ request'
 })
 
 const sendRequest = async () => {

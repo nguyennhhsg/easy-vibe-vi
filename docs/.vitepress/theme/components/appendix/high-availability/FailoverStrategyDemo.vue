@@ -1,12 +1,12 @@
 <!--
   FailoverStrategyDemo.vue
-  故障转移策略演示：展示主备、主主、多活等高可用架构
+  Demo các chiến lược failover: minh hoạ kiến trúc HA active-standby, active-active, multi-AZ, multi-region
 -->
 <template>
   <div class="failover-demo">
     <div class="header">
-      <div class="title">故障转移策略对比</div>
-      <div class="subtitle">点击查看不同高可用架构的工作方式</div>
+      <div class="title">So sánh các chiến lược failover</div>
+      <div class="subtitle">Bấm vào để xem cách hoạt động của các kiến trúc HA khác nhau</div>
     </div>
 
     <div class="strategy-tabs">
@@ -37,11 +37,11 @@
 
       <div class="pros-cons">
         <div class="pros">
-          <div class="pc-title">优点</div>
+          <div class="pc-title">Ưu điểm</div>
           <div v-for="p in current.pros" :key="p" class="pc-item good">{{ p }}</div>
         </div>
         <div class="cons">
-          <div class="pc-title">缺点</div>
+          <div class="pc-title">Nhược điểm</div>
           <div v-for="c in current.cons" :key="c" class="pc-item bad">{{ c }}</div>
         </div>
       </div>
@@ -57,49 +57,49 @@ const activeStrategy = ref('active-standby')
 const strategies = [
   {
     key: 'active-standby',
-    name: '主备模式',
-    desc: '一个主节点处理所有请求，备节点待命。主节点故障时，备节点接管。',
+    name: 'Active-Standby',
+    desc: 'Một node master xử lý mọi request, node standby chờ sẵn. Khi master lỗi, standby tiếp quản.',
     nodes: [
-      { label: '主节点', status: '处理请求', role: 'primary' },
-      { label: '备节点', status: '待命同步', role: 'standby' }
+      { label: 'Master', status: 'Xử lý request', role: 'primary' },
+      { label: 'Standby', status: 'Chờ và đồng bộ', role: 'standby' }
     ],
-    pros: ['架构简单，易于理解', '数据一致性好保证'],
-    cons: ['备节点资源浪费', '切换有短暂中断（秒级）']
+    pros: ['Kiến trúc đơn giản, dễ hiểu', 'Consistency dữ liệu dễ đảm bảo'],
+    cons: ['Standby lãng phí tài nguyên', 'Lúc chuyển đổi có downtime ngắn (vài giây)']
   },
   {
     key: 'active-active',
-    name: '主主模式',
-    desc: '两个节点都处理请求，互相同步数据。任一节点故障，另一个继续服务。',
+    name: 'Active-Active',
+    desc: 'Cả hai node đều xử lý request, đồng bộ dữ liệu cho nhau. Node nào lỗi thì node kia vẫn tiếp tục phục vụ.',
     nodes: [
-      { label: '节点 A', status: '处理请求', role: 'primary' },
-      { label: '节点 B', status: '处理请求', role: 'primary' }
+      { label: 'Node A', status: 'Xử lý request', role: 'primary' },
+      { label: 'Node B', status: 'Xử lý request', role: 'primary' }
     ],
-    pros: ['资源利用率高', '无切换中断'],
-    cons: ['数据冲突处理复杂', '需要解决写冲突']
+    pros: ['Tận dụng tài nguyên cao', 'Không bị downtime khi chuyển đổi'],
+    cons: ['Xử lý xung đột dữ liệu phức tạp', 'Phải giải quyết write conflict']
   },
   {
     key: 'multi-az',
-    name: '多可用区',
-    desc: '在同一地域的不同数据中心部署，防止单个机房故障。',
+    name: 'Multi-AZ',
+    desc: 'Triển khai ở nhiều data center khác nhau trong cùng một khu vực, phòng khi một data center bị lỗi.',
     nodes: [
-      { label: 'AZ-1 主', status: '读写', role: 'primary' },
-      { label: 'AZ-2 从', status: '只读', role: 'secondary' },
-      { label: 'AZ-3 从', status: '只读', role: 'secondary' }
+      { label: 'AZ-1 master', status: 'Đọc/ghi', role: 'primary' },
+      { label: 'AZ-2 replica', status: 'Chỉ đọc', role: 'secondary' },
+      { label: 'AZ-3 replica', status: 'Chỉ đọc', role: 'secondary' }
     ],
-    pros: ['机房级容灾', '读性能可扩展'],
-    cons: ['跨 AZ 延迟（1-2ms）', '成本增加']
+    pros: ['Chống chịu lỗi cấp data center', 'Hiệu năng đọc có thể scale'],
+    cons: ['Latency cross-AZ (1-2ms)', 'Chi phí tăng']
   },
   {
     key: 'multi-region',
-    name: '异地多活',
-    desc: '在不同地域部署完整的服务，每个地域独立处理本地流量。',
+    name: 'Multi-region',
+    desc: 'Triển khai dịch vụ hoàn chỉnh ở nhiều khu vực địa lý, mỗi vùng xử lý lưu lượng cục bộ độc lập.',
     nodes: [
-      { label: '北京', status: '独立服务', role: 'primary' },
-      { label: '上海', status: '独立服务', role: 'primary' },
-      { label: '广州', status: '独立服务', role: 'primary' }
+      { label: 'Hà Nội', status: 'Dịch vụ độc lập', role: 'primary' },
+      { label: 'Đà Nẵng', status: 'Dịch vụ độc lập', role: 'primary' },
+      { label: 'TP.HCM', status: 'Dịch vụ độc lập', role: 'primary' }
     ],
-    pros: ['地域级容灾', '就近访问延迟低'],
-    cons: ['架构极其复杂', '数据同步挑战大']
+    pros: ['Chống chịu lỗi cấp vùng', 'Truy cập gần, latency thấp'],
+    cons: ['Kiến trúc cực kỳ phức tạp', 'Đồng bộ dữ liệu là thách thức lớn']
   }
 ]
 

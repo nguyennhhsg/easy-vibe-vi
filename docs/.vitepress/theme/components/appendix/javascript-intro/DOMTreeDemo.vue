@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('我的网页')
-const items = ref(['项目1', '项目2'])
+const title = ref('Trang của tôi')
+const items = ref(['Mục 1', 'Mục 2'])
 const paragraphColor = ref('black')
 
 const modifyTitle = () => {
@@ -11,7 +11,7 @@ const modifyTitle = () => {
 
 const addItem = () => {
   const id = items.value.length + 1
-  items.value.push(`新项目${id}`)
+  items.value.push(`Mục mới ${id}`)
 }
 
 const changeColor = () => {
@@ -27,10 +27,10 @@ const removeItem = () => {
 
 <template>
   <div class="dom-tree-demo">
-    <h3>DOM 树：JavaScript 看到的网页</h3>
+    <h3>DOM tree: trang web mà JavaScript nhìn thấy</h3>
 
     <div class="demo-container">
-      <!-- 左侧：迷你网页 -->
+      <!-- Bên trái: mini webpage -->
       <div class="webpage-preview">
         <div class="browser-bar">
           <div class="dots">
@@ -42,7 +42,7 @@ const removeItem = () => {
         <div class="webpage-content">
           <h1>{{ title }}</h1>
           <p :style="{ color: paragraphColor }">
-            欢迎光临
+            Chào mừng bạn
           </p>
           <ul>
             <li
@@ -55,7 +55,7 @@ const removeItem = () => {
         </div>
       </div>
 
-      <!-- 右侧：DOM 树 -->
+      <!-- Bên phải: DOM tree -->
       <div class="dom-tree">
         <div class="tree-node">
           <span class="tag">&lt;html&gt;</span>
@@ -75,7 +75,7 @@ const removeItem = () => {
                   :class="{ 'active': paragraphColor === 'red' }"
                 >
                   <span class="tag">&lt;p&gt;</span>
-                  <span class="text">欢迎光临</span>
+                  <span class="text">Chào mừng bạn</span>
                 </div>
                 <div class="tree-node">
                   <span class="tag">&lt;ul&gt;</span>
@@ -102,33 +102,33 @@ const removeItem = () => {
         class="btn-primary"
         @click="modifyTitle"
       >
-        修改标题
+        Sửa tiêu đề
       </button>
       <button
         class="btn-secondary"
         @click="addItem"
       >
-        添加列表项
+        Thêm mục
       </button>
       <button
         class="btn-secondary"
         @click="changeColor"
       >
-        改变段落颜色
+        Đổi màu đoạn văn
       </button>
       <button
         class="btn-danger"
         @click="removeItem"
       >
-        删除列表项
+        Xoá mục
       </button>
     </div>
 
     <div class="code-display">
-      <h4>对应代码</h4>
+      <h4>Code tương ứng</h4>
       <pre><code v-if="title === 'Hello World!'">document.querySelector('h1').textContent = '{{ title }}'</code>
       <code v-else-if="paragraphColor === 'red'">document.querySelector('p').style.color = '{{ paragraphColor }}'</code>
-      <code v-else>点击上方按钮查看对应代码</code></pre>
+      <code v-else>Bấm nút phía trên để xem code tương ứng</code></pre>
     </div>
   </div>
 </template>

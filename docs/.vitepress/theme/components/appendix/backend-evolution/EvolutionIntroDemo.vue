@@ -2,8 +2,8 @@
   <div class="evolution-intro-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">后端架构进化之旅</span>
-      <span class="subtitle">用餐厅比喻理解 30 年架构演进</span>
+      <span class="title">Hành trình tiến hóa kiến trúc backend</span>
+      <span class="subtitle">Hiểu 30 năm tiến hóa kiến trúc qua ví von nhà hàng</span>
     </div>
 
     <div class="timeline-cards">
@@ -47,15 +47,15 @@
           </div>
           <div class="detail-content">
             <div class="detail-section">
-              <h5>🍽️ 餐厅场景</h5>
+              <h5>🍽️ Tình huống nhà hàng</h5>
               <p>{{ stages[currentStage].scenario }}</p>
             </div>
             <div class="detail-section">
-              <h5>💻 后端映射</h5>
+              <h5>💻 Ánh xạ vào backend</h5>
               <p>{{ stages[currentStage].mapping }}</p>
             </div>
             <div class="detail-section">
-              <h5>⚡ 核心痛点</h5>
+              <h5>⚡ Điểm đau cốt lõi</h5>
               <ul>
                 <li
                   v-for="(pain, i) in stages[currentStage].pains"
@@ -72,7 +72,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>架构演进是为了解决上一个时代的痛点，但也带来了新的复杂度。没有最好的架构，只有最适合的架构。
+      <strong>Tư tưởng cốt lõi:</strong> Tiến hóa kiến trúc nhằm giải quyết điểm đau của thời đại trước, nhưng cũng kéo theo độ phức tạp mới. Không có kiến trúc tốt nhất, chỉ có kiến trúc phù hợp nhất.
     </div>
   </div>
 </template>
@@ -86,57 +86,57 @@ const stages = [
   {
     era: '1990s',
     icon: '🏠',
-    name: '家庭小作坊',
-    arch: '物理服务器',
-    restaurant: '家庭小厨房',
-    scenario: '一位厨师在一间小厨房里，亲自去菜市场买菜、洗菜、切菜、炒菜、上菜。客人多了就忙不过来，只能让客人排队等。',
-    mapping: '一台物理服务器，处理所有请求：接收HTTP请求、读取文件、执行CGI脚本、返回响应。CPU和内存有限，请求多了只能排队。',
+    name: 'Quán gia đình nhỏ',
+    arch: 'Máy chủ vật lý',
+    restaurant: 'Bếp gia đình nhỏ',
+    scenario: 'Một đầu bếp trong một căn bếp nhỏ, tự mình đi chợ mua rau, rửa rau, thái, xào, dọn món. Khách đông là không xuể, chỉ có thể bắt khách xếp hàng chờ.',
+    mapping: 'Một máy chủ vật lý xử lý mọi request: nhận HTTP request, đọc file, chạy script CGI, trả về response. CPU và RAM có hạn, request nhiều thì chỉ còn cách xếp hàng.',
     pains: [
-      '单机性能瓶颈：客人太多时，厨师根本忙不过来',
-      '垂直扩展成本高：买更贵的机器就像换更大的厨房，治标不治本',
-      '单点故障：厨师生病了，整个餐馆必须关门'
+      'Nghẽn hiệu năng đơn máy: khách quá đông, đầu bếp không kham nổi',
+      'Mở rộng dọc đắt đỏ: mua máy mạnh hơn giống đổi bếp lớn hơn, chỉ trị triệu chứng',
+      'Single point of failure: đầu bếp ốm là cả quán phải đóng cửa'
     ]
   },
   {
     era: '2000s',
     icon: '🏢',
-    name: '大型中央厨房',
-    arch: '单体架构',
-    restaurant: '连锁餐厅中央厨房',
-    scenario: '建立了一个大型中央厨房，分工明确：有人专门洗菜、有人专门切菜、有人专门炒菜。但所有人都在一个大空间里工作，互相依赖。',
-    mapping: '单体应用架构：所有功能模块（用户、订单、支付）都在同一个进程中运行，共享同一个数据库，部署在一个大应用服务器上。',
+    name: 'Bếp trung tâm lớn',
+    arch: 'Kiến trúc monolith',
+    restaurant: 'Bếp trung tâm chuỗi nhà hàng',
+    scenario: 'Xây một bếp trung tâm lớn, phân công rõ ràng: người chuyên rửa rau, người chuyên thái, người chuyên xào. Nhưng tất cả làm việc trong cùng một không gian lớn, phụ thuộc lẫn nhau.',
+    mapping: 'Kiến trúc monolith: tất cả module (user, order, payment) chạy trong cùng một process, dùng chung một database, triển khai trên một application server lớn.',
     pains: [
-      '牵一发而动全身：切菜师傅切到手，整个厨房都要停下来',
-      '技术债务累积：老员工（老代码）越来越多，新人很难接手',
-      '部署风险高：更新一个菜品（功能）可能影响整个菜单（系统）'
+      'Sửa một chỗ ảnh hưởng toàn bộ: thợ thái rau bị đứt tay, cả bếp phải dừng',
+      'Nợ kỹ thuật chồng chất: code cũ ngày càng nhiều, người mới khó tiếp quản',
+      'Rủi ro triển khai cao: cập nhật một món (tính năng) có thể ảnh hưởng cả menu (hệ thống)'
     ]
   },
   {
     era: '2010s',
     icon: '🏭',
-    name: '专业化分工',
-    arch: '微服务架构',
-    restaurant: '餐饮集团多厨房',
-    scenario: '把中央厨房拆分成多个专业厨房：一个专门做中餐、一个专门做西餐、一个专门做甜点。每个厨房独立运营，通过标准化流程协作。',
-    mapping: '微服务架构：每个业务功能（用户服务、订单服务、支付服务）都是独立的进程，有自己的数据库，通过HTTP/gRPC通信。',
+    name: 'Chuyên môn hóa',
+    arch: 'Kiến trúc microservice',
+    restaurant: 'Tập đoàn ẩm thực nhiều bếp',
+    scenario: 'Tách bếp trung tâm thành nhiều bếp chuyên: một bếp chuyên đồ Á, một bếp chuyên đồ Âu, một bếp chuyên tráng miệng. Mỗi bếp vận hành độc lập, phối hợp qua quy trình chuẩn hóa.',
+    mapping: 'Kiến trúc microservice: mỗi business function (user service, order service, payment service) là process độc lập, có database riêng, giao tiếp qua HTTP/gRPC.',
     pains: [
-      '分布式复杂度：协调多个厨房比管理一个厨房难得多',
-      '网络依赖：中餐厨房需要西餐厨房的原料时，可能网络延迟或故障',
-      '运维成本激增：需要更多人手（运维工程师）来管理这么多厨房'
+      'Độ phức tạp phân tán: phối hợp nhiều bếp khó hơn quản lý một bếp nhiều',
+      'Phụ thuộc mạng: bếp Á cần nguyên liệu từ bếp Âu, có thể bị độ trễ mạng hoặc lỗi',
+      'Chi phí vận hành tăng vọt: cần thêm nhân lực (kỹ sư DevOps) quản lý các bếp'
     ]
   },
   {
     era: '2020s+',
     icon: '🍽️',
-    name: '外卖平台',
+    name: 'Nền tảng giao đồ ăn',
     arch: 'Serverless',
-    restaurant: '外卖/云厨房',
-    scenario: '你不再自己开厨房，而是在外卖平台上注册。有订单时，平台调度附近的厨房为你制作食物。你只管设计菜品和推广，不用关心厨房在哪、有多少厨师。',
-    mapping: 'Serverless架构：开发者只写业务代码（函数），不关心服务器在哪、有多少台、怎么扩容。云平台自动调度资源，按实际执行时间付费。',
+    restaurant: 'Đặt món/Cloud kitchen',
+    scenario: 'Bạn không tự mở bếp nữa, mà đăng ký trên nền tảng giao đồ ăn. Khi có đơn, nền tảng điều phối các bếp gần đó làm món cho bạn. Bạn chỉ lo thiết kế món và quảng bá, không cần quan tâm bếp ở đâu, có bao nhiêu đầu bếp.',
+    mapping: 'Kiến trúc Serverless: developer chỉ viết code nghiệp vụ (hàm), không quan tâm server ở đâu, có bao nhiêu máy, scale ra sao. Cloud platform tự điều phối tài nguyên, tính phí theo thời gian thực thi thực tế.',
     pains: [
-      '冷启动延迟：第一家店接单时可能需要热身（冷启动），客人要等',
-      '平台依赖：完全依赖外卖平台（云厂商），迁移成本高',
-      '资源限制：不能做太复杂的菜品（函数有时长和内存限制）'
+      'Độ trễ cold start: bếp đầu tiên nhận đơn cần thời gian khởi động (cold start), khách phải chờ',
+      'Phụ thuộc nền tảng: phụ thuộc hoàn toàn vào nhà cung cấp cloud, khó migrate',
+      'Giới hạn tài nguyên: không làm món quá phức tạp (hàm có giới hạn thời gian và RAM)'
     ]
   }
 ]

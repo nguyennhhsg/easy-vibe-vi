@@ -1,15 +1,15 @@
 <!--
   AudioTokenizationDemo.vue
-  音频 Tokenization 演示组件
+  Component mô phỏng audio tokenization
 
-  用途：
-  展示音频如何通过神经编解码器(如 EnCodec、SoundStream)被压缩成离散的 Token。
+  Mục đích:
+  Trình bày cách audio được nén thành các Token rời rạc qua neural codec (EnCodec, SoundStream, ...).
 
-  交互功能：
-  - 音频压缩/解压流程
-  - 不同码率对比
-  - Token 可视化
-  - 重建质量评估
+  Tính năng tương tác:
+  - Luồng nén/giải nén audio
+  - So sánh các bitrate khác nhau
+  - Trực quan hoá Token
+  - Đánh giá chất lượng tái tạo
 -->
 <template>
   <div class="audio-tokenization-demo">
@@ -17,16 +17,16 @@
       <template #header>
         <div class="header-title">
           <el-icon><Grid /></el-icon>
-          <span>🎵 音频 Tokenization：神经编解码器</span>
+          <span>🎵 Audio tokenization: neural codec</span>
         </div>
       </template>
 
       <div class="demo-content">
-        <!-- 流程图 -->
+        <!-- Sơ đồ luồng -->
         <div class="codec-flow">
           <div class="flow-section encode">
             <div class="section-title">
-              🔽 编码器 (Encoder)
+              🔽 Encoder
             </div>
             <div class="flow-steps">
               <div class="codec-step">
@@ -38,7 +38,7 @@
                   />
                 </div>
                 <div class="step-label">
-                  原始波形
+                  Sóng gốc
                 </div>
                 <div class="step-meta">
                   24kHz, 16-bit
@@ -61,10 +61,10 @@
                   </div>
                 </div>
                 <div class="step-label">
-                  CNN 下采样
+                  CNN downsampling
                 </div>
                 <div class="step-meta">
-                  降维 320x
+                  Giảm chiều 320x
                 </div>
               </div>
               <el-icon class="flow-arrow">
@@ -84,10 +84,10 @@
                   </div>
                 </div>
                 <div class="step-label">
-                  VQ 量化
+                  Lượng tử hoá VQ
                 </div>
                 <div class="step-meta">
-                  离散 Token
+                  Token rời rạc
                 </div>
               </div>
             </div>
@@ -96,14 +96,14 @@
           <div class="flow-divider">
             <div class="divider-line" />
             <div class="divider-label">
-              压缩后: ~1.5 kbps
+              Sau khi nén: ~1.5 kbps
             </div>
             <div class="divider-line" />
           </div>
 
           <div class="flow-section decode">
             <div class="section-title">
-              🔼 解码器 (Decoder)
+              🔼 Decoder
             </div>
             <div class="flow-steps reverse">
               <div class="codec-step">
@@ -120,10 +120,10 @@
                   </div>
                 </div>
                 <div class="step-label">
-                  离散 Token
+                  Token rời rạc
                 </div>
                 <div class="step-meta">
-                  Codebook 索引
+                  Chỉ mục Codebook
                 </div>
               </div>
               <el-icon class="flow-arrow">
@@ -143,10 +143,10 @@
                   </div>
                 </div>
                 <div class="step-label">
-                  转置卷积
+                  Transposed conv
                 </div>
                 <div class="step-meta">
-                  上采样
+                  Upsampling
                 </div>
               </div>
               <el-icon class="flow-arrow">
@@ -161,7 +161,7 @@
                   />
                 </div>
                 <div class="step-label">
-                  重建波形
+                  Sóng tái tạo
                 </div>
                 <div class="step-meta">
                   24kHz
@@ -171,10 +171,10 @@
           </div>
         </div>
 
-        <!-- 码率对比 -->
+        <!-- So sánh bitrate -->
         <div class="bitrate-comparison">
           <div class="comparison-title">
-            📊 不同码率对比
+            📊 So sánh các bitrate
           </div>
           <div class="bitrate-cards">
             <div
@@ -192,15 +192,15 @@
               </div>
               <div class="bitrate-detail">
                 <div class="detail-item">
-                  <span class="label">采样率:</span>
+                  <span class="label">Sample rate:</span>
                   <span>{{ config.sampleRate }}</span>
                 </div>
                 <div class="detail-item">
-                  <span class="label">帧率:</span>
+                  <span class="label">Frame rate:</span>
                   <span>{{ config.frameRate }}</span>
                 </div>
                 <div class="detail-item">
-                  <span class="label">码本大小:</span>
+                  <span class="label">Codebook size:</span>
                   <span>{{ config.codebookSize }}</span>
                 </div>
               </div>
@@ -214,10 +214,10 @@
           </div>
         </div>
 
-        <!-- Token 可视化 -->
+        <!-- Trực quan Token -->
         <div class="token-visualization">
           <div class="viz-title">
-            🔢 Token 序列可视化
+            🔢 Trực quan chuỗi Token
           </div>
           <div class="token-display">
             <div class="token-ruler">
@@ -246,29 +246,29 @@
                 class="legend-color"
                 style="background: #409eff"
               />
-              低频成分
+              Thành phần tần số thấp
             </span>
             <span class="legend-item">
               <span
                 class="legend-color"
                 style="background: #67c23a"
               />
-              中频成分
+              Thành phần tần số trung
             </span>
             <span class="legend-item">
               <span
                 class="legend-color"
                 style="background: #e6a23c"
               />
-              高频成分
+              Thành phần tần số cao
             </span>
           </div>
         </div>
 
-        <!-- 应用场景 -->
+        <!-- Ứng dụng -->
         <div class="applications">
           <div class="apps-title">
-            🎯 为什么需要音频 Tokenization？
+            🎯 Vì sao cần audio tokenization?
           </div>
           <div class="apps-grid">
             <div class="app-card">
@@ -276,10 +276,10 @@
                 🚀
               </div>
               <div class="app-title">
-                高效传输
+                Truyền hiệu quả
               </div>
               <div class="app-desc">
-                将音频压缩到 ~1.5 kbps，比原始音频小 256 倍，适合网络传输
+                Nén audio xuống ~1.5 kbps, nhỏ hơn audio gốc 256 lần, rất hợp để truyền qua mạng
               </div>
             </div>
             <div class="app-card">
@@ -287,10 +287,10 @@
                 🧠
               </div>
               <div class="app-title">
-                语言模型友好
+                Thân thiện với LLM
               </div>
               <div class="app-desc">
-                离散 Token 可以被 LLM 直接处理，实现文本到音频的统一建模
+                Token rời rạc có thể được LLM xử lý trực tiếp, thống nhất mô hình hoá text và audio
               </div>
             </div>
             <div class="app-card">
@@ -298,10 +298,10 @@
                 🎵
               </div>
               <div class="app-title">
-                音乐生成
+                Sinh nhạc
               </div>
               <div class="app-desc">
-                MusicGen、AudioLDM 等模型使用音频 Token 生成音乐和音效
+                Các mô hình như MusicGen, AudioLDM dùng audio Token để sinh nhạc và hiệu ứng âm thanh
               </div>
             </div>
             <div class="app-card">
@@ -309,10 +309,10 @@
                 🗣️
               </div>
               <div class="app-title">
-                语音合成
+                TTS
               </div>
               <div class="app-desc">
-                VALL-E、SoundStorm 等 TTS 模型直接生成音频 Token
+                Các mô hình TTS như VALL-E, SoundStorm sinh audio Token một cách trực tiếp
               </div>
             </div>
           </div>
@@ -322,8 +322,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>神经音频编解码器：</strong>
-          EnCodec (Meta)、SoundStream (Google)、SNAC 等模型使用 VQ-VAE 架构将音频压缩成离散 Token。这些 Token 可以被语言模型处理，实现高质量的音频生成和压缩。
+          <strong>Neural audio codec:</strong>
+          EnCodec (Meta), SoundStream (Google), SNAC, ... đều dùng kiến trúc VQ-VAE để nén audio thành Token rời rạc. Các Token này có thể được LLM xử lý, giúp sinh và nén audio chất lượng cao.
         </p>
       </div>
     </el-card>
@@ -373,10 +373,10 @@ const bitrateConfigs = [
   }
 ]
 
-// 生成模拟 Token 序列
+// Sinh chuỗi Token mô phỏng
 const tokenSequence = Array.from({ length: 50 }, () => Math.floor(Math.random() * 1024))
 
-// 绘制波形
+// Vẽ dạng sóng
 const drawWaveform = (canvas, isNoisy = false) => {
   if (!canvas) return
 
@@ -394,11 +394,11 @@ const drawWaveform = (canvas, isNoisy = false) => {
     const t = x / width
     let y = height / 2
 
-    // 基础波形
+    // Sóng cơ bản
     y += Math.sin(t * Math.PI * 8) * 15
     y += Math.sin(t * Math.PI * 16) * 10
 
-    // 添加噪声（重建版本）
+    // Thêm nhiễu (phiên bản tái tạo)
     if (isNoisy) {
       y += (Math.random() - 0.5) * 8
     }
@@ -412,7 +412,7 @@ const drawWaveform = (canvas, isNoisy = false) => {
 
   ctx.stroke()
 
-  // 中心线
+  // Đường tâm
   ctx.strokeStyle = '#e0e0e0'
   ctx.lineWidth = 1
   ctx.beginPath()

@@ -1,8 +1,8 @@
 <template>
   <div class="clean-arch-demo">
     <div class="header">
-      <div class="title">整洁架构与分层架构对比</div>
-      <div class="subtitle">分层架构是整洁架构的基础，理解两者关系有助于构建更灵活的系统</div>
+      <div class="title">So sánh Clean Architecture và Layered Architecture</div>
+      <div class="subtitle">Layered Architecture là nền tảng của Clean Architecture, hiểu mối quan hệ giúp xây hệ thống linh hoạt hơn</div>
     </div>
 
     <div class="tabs">
@@ -20,12 +20,12 @@
         </div>
       </div>
       <div class="traits">
-        <strong>传统分层架构特点</strong>
+        <strong>Đặc điểm của Layered Architecture truyền thống</strong>
         <ul>
-          <li>垂直依赖：上层直接依赖下层</li>
-          <li>简单直观：结构清晰，易于理解</li>
-          <li>适合中小型项目：快速开发，上手简单</li>
-          <li>潜在问题：底层变更可能影响上层</li>
+          <li>Phụ thuộc dọc: tầng trên phụ thuộc trực tiếp tầng dưới</li>
+          <li>Đơn giản trực quan: cấu trúc rõ, dễ hiểu</li>
+          <li>Phù hợp dự án vừa và nhỏ: phát triển nhanh, dễ bắt đầu</li>
+          <li>Vấn đề tiềm ẩn: thay đổi tầng dưới có thể ảnh hưởng tầng trên</li>
         </ul>
       </div>
     </div>
@@ -36,21 +36,21 @@
           <strong>{{ l.name }}</strong> <span>{{ l.items }}</span>
         </div>
       </div>
-      <div class="dep-rule">依赖方向：外层 → 内层，内层不知道外层的存在</div>
+      <div class="dep-rule">Hướng phụ thuộc: tầng ngoài → tầng trong, tầng trong không biết tới tầng ngoài</div>
       <div class="traits">
-        <strong>整洁架构特点</strong>
+        <strong>Đặc điểm Clean Architecture</strong>
         <ul>
-          <li>依赖倒置：依赖方向从外到内，通过接口隔离</li>
-          <li>领域为核心：业务逻辑位于中心，独立于框架</li>
-          <li>可测试性强：核心业务可脱离框架单元测试</li>
-          <li>技术无关：可轻松切换数据库、框架等</li>
+          <li>Đảo ngược phụ thuộc: hướng phụ thuộc từ ngoài vào trong, cách ly qua interface</li>
+          <li>Domain làm trung tâm: business logic nằm ở trung tâm, độc lập với framework</li>
+          <li>Khả năng test cao: core business có thể unit test tách khỏi framework</li>
+          <li>Độc lập công nghệ: dễ dàng thay đổi database, framework</li>
         </ul>
       </div>
     </div>
 
     <div v-else class="panel">
       <table>
-        <thead><tr><th>特性</th><th>传统分层</th><th>整洁架构</th></tr></thead>
+        <thead><tr><th>Đặc điểm</th><th>Layered truyền thống</th><th>Clean Architecture</th></tr></thead>
         <tbody>
           <tr v-for="r in compareRows" :key="r.feature">
             <td>{{ r.feature }}</td><td>{{ r.layered }}</td><td>{{ r.clean }}</td>
@@ -59,19 +59,19 @@
       </table>
       <div class="rec-grid">
         <div class="rec-card">
-          <strong>选择传统分层当...</strong>
+          <strong>Chọn Layered truyền thống khi...</strong>
           <ul>
-            <li>项目规模较小，业务简单</li>
-            <li>团队对 DDD 不熟悉</li>
-            <li>需要快速上线验证市场</li>
+            <li>Dự án nhỏ, nghiệp vụ đơn giản</li>
+            <li>Team chưa quen DDD</li>
+            <li>Cần ra mắt nhanh để kiểm chứng thị trường</li>
           </ul>
         </div>
         <div class="rec-card recommended">
-          <strong>选择整洁架构当...</strong>
+          <strong>Chọn Clean Architecture khi...</strong>
           <ul>
-            <li>业务复杂，领域模型丰富</li>
-            <li>需要长期维护和演进</li>
-            <li>需要频繁切换技术栈</li>
+            <li>Nghiệp vụ phức tạp, domain model phong phú</li>
+            <li>Cần bảo trì và tiến hóa dài hạn</li>
+            <li>Cần thường xuyên đổi tech stack</li>
           </ul>
         </div>
       </div>
@@ -84,32 +84,32 @@ import { ref } from 'vue'
 
 const current = ref('layered')
 const tabs = [
-  { id: 'layered', name: '传统分层' },
-  { id: 'clean', name: '整洁架构' },
-  { id: 'compare', name: '对比总结' }
+  { id: 'layered', name: 'Layered truyền thống' },
+  { id: 'clean', name: 'Clean Architecture' },
+  { id: 'compare', name: 'Tổng kết so sánh' }
 ]
 
 const layeredLayers = [
-  { name: 'Controller 层', desc: '接收请求、参数校验', cls: 'green' },
-  { name: 'Service 层', desc: '业务逻辑、事务管理', cls: 'orange' },
-  { name: 'Repository 层', desc: '数据访问、ORM 映射', cls: 'blue' },
-  { name: 'Domain 层', desc: '实体定义、业务规则', cls: 'teal' }
+  { name: 'Tầng Controller', desc: 'Nhận request, kiểm tra tham số', cls: 'green' },
+  { name: 'Tầng Service', desc: 'Business logic, quản lý transaction', cls: 'orange' },
+  { name: 'Tầng Repository', desc: 'Truy cập dữ liệu, ORM mapping', cls: 'blue' },
+  { name: 'Tầng Domain', desc: 'Định nghĩa entity, business rule', cls: 'teal' }
 ]
 
 const cleanLayers = [
-  { name: '领域层（核心）', items: 'Entity / ValueObject / DomainService', cls: 'teal' },
-  { name: '应用层', items: 'Service / UseCase / DTO', cls: 'orange' },
-  { name: '接口适配层', items: 'Controller / Gateway / Presenter', cls: 'blue' },
-  { name: '框架与驱动层', items: 'Web / DB / UI / 外部接口', cls: 'gray' }
+  { name: 'Tầng Domain (lõi)', items: 'Entity / ValueObject / DomainService', cls: 'teal' },
+  { name: 'Tầng Application', items: 'Service / UseCase / DTO', cls: 'orange' },
+  { name: 'Tầng Interface Adapter', items: 'Controller / Gateway / Presenter', cls: 'blue' },
+  { name: 'Tầng Framework & Driver', items: 'Web / DB / UI / Interface bên ngoài', cls: 'gray' }
 ]
 
 const compareRows = [
-  { feature: '依赖方向', layered: '从上到下', clean: '从外到内' },
-  { feature: '核心业务位置', layered: 'Service 层', clean: 'Domain 层（中心）' },
-  { feature: '框架依赖', layered: '较深', clean: '较浅（接口隔离）' },
-  { feature: '可测试性', layered: '需要集成测试', clean: '核心可单元测试' },
-  { feature: '学习曲线', layered: '平缓', clean: '较陡' },
-  { feature: '适用场景', layered: '中小型、快速迭代', clean: '大型复杂、长期维护' }
+  { feature: 'Hướng phụ thuộc', layered: 'Trên xuống dưới', clean: 'Ngoài vào trong' },
+  { feature: 'Vị trí core business', layered: 'Tầng Service', clean: 'Tầng Domain (trung tâm)' },
+  { feature: 'Phụ thuộc framework', layered: 'Sâu', clean: 'Nông (cách ly qua interface)' },
+  { feature: 'Khả năng test', layered: 'Cần integration test', clean: 'Core có thể unit test' },
+  { feature: 'Đường cong học tập', layered: 'Thoải', clean: 'Khá dốc' },
+  { feature: 'Tình huống áp dụng', layered: 'Vừa và nhỏ, lặp nhanh', clean: 'Lớn, phức tạp, bảo trì dài hạn' }
 ]
 </script>
 

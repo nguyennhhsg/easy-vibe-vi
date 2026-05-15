@@ -4,7 +4,7 @@
       <!-- 1. Transformer Output Grid -->
       <div class="stage">
         <div class="stage-label">
-          1. Patch Tokens (Shown as Grid) (Patch Token 网格示意)
+          1. Patch Tokens (Shown as Grid) (minh hoạ lưới Patch Token)
         </div>
         <div class="grid-container">
           <div
@@ -22,14 +22,14 @@
       <div class="arrow-section">
         <div class="arrow-line" />
         <div class="arrow-text">
-          Reshape for View: Grid ⇄ Sequence (重排显示：网格⇄序列)
+          Reshape for View: Grid ⇄ Sequence (xếp lại để xem: lưới ⇄ chuỗi)
         </div>
       </div>
 
       <!-- 2. Feature Vector Sequence -->
       <div class="stage">
         <div class="stage-label">
-          2. Output Token Sequence (N×D) (输出序列)
+          2. Output Token Sequence (N×D) (chuỗi đầu ra)
         </div>
         <div class="vector-sequence">
           <div
@@ -110,7 +110,7 @@
         class="placeholder"
       >
         <span class="hint-icon">👆</span>
-        <span class="hint-text">悬停在上方方块或向量上，查看 ViT 输出的“语义特征”</span>
+        <span class="hint-text">Rê chuột lên ô hoặc vector phía trên để xem "đặc trưng ngữ nghĩa" mà ViT xuất ra</span>
       </div>
     </div>
   </div>

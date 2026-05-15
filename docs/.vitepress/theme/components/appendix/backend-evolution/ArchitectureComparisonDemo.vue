@@ -2,8 +2,8 @@
   <div class="architecture-comparison-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">架构演进对比</span>
-      <span class="subtitle">四个时代的核心架构特征</span>
+      <span class="title">So sánh tiến hóa kiến trúc</span>
+      <span class="subtitle">Đặc điểm cốt lõi của 4 thời đại kiến trúc</span>
     </div>
 
     <div class="comparison-grid">
@@ -40,7 +40,7 @@
 
       <div class="detail-content">
         <div class="feature-section">
-          <h6>🏗️ 架构特征</h6>
+          <h6>🏗️ Đặc điểm kiến trúc</h6>
           <ul>
             <li
               v-for="(feat, i) in currentEra.features"
@@ -52,7 +52,7 @@
         </div>
 
         <div class="feature-section">
-          <h6>✅ 优点</h6>
+          <h6>✅ Ưu điểm</h6>
           <ul>
             <li
               v-for="(pro, i) in currentEra.pros"
@@ -64,7 +64,7 @@
         </div>
 
         <div class="feature-section">
-          <h6>❌ 痛点</h6>
+          <h6>❌ Điểm đau</h6>
           <ul>
             <li
               v-for="(con, i) in currentEra.cons"
@@ -76,7 +76,7 @@
         </div>
 
         <div class="tech-stack">
-          <h6>🔧 典型技术</h6>
+          <h6>🔧 Công nghệ điển hình</h6>
           <div class="tech-tags">
             <span
               v-for="(tech, i) in currentEra.techs"
@@ -90,7 +90,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想:</strong>架构演进是为了解决上一个时代的痛点,但也带来了新的复杂度。
+      <strong>Tư tưởng cốt lõi:</strong> Tiến hóa kiến trúc nhằm giải quyết điểm đau của thời đại trước, nhưng cũng mang lại độ phức tạp mới.
     </div>
   </div>
 </template>
@@ -98,38 +98,38 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const selectedEra = ref('单体')
+const selectedEra = ref('Monolith')
 
 const eras = [
-  { name: '物理机', icon: '🖥️', year: '1990s', tag: '单机' },
-  { name: '单体', icon: '🏢', year: '2000s', tag: '集中' },
-  { name: '微服务', icon: '🏭', year: '2010s', tag: '分布' },
-  { name: 'Serverless', icon: '☁️', year: '2020s+', tag: '无服' }
+  { name: 'Máy vật lý', icon: '🖥️', year: '1990s', tag: 'Đơn máy' },
+  { name: 'Monolith', icon: '🏢', year: '2000s', tag: 'Tập trung' },
+  { name: 'Microservice', icon: '🏭', year: '2010s', tag: 'Phân tán' },
+  { name: 'Serverless', icon: '☁️', year: '2020s+', tag: 'Không server' }
 ]
 
 const eraDetails = {
-  '物理机': {
-    features: ['单机部署，无冗余', 'FTP 手动上传代码', '垂直扩展（买更强的机器）', '无服务治理概念'],
-    pros: ['部署简单，无需复杂配置', '单机性能好，无网络延迟', '易于调试和排查问题'],
-    cons: ['单点故障，服务不可用', '扩展困难，只能垂直扩容', '手动运维，效率低下'],
-    techs: ['Apache/Nginx', 'CGI/Perl', 'FTP/SFTP', '物理服务器']
+  'Máy vật lý': {
+    features: ['Triển khai đơn máy, không dự phòng', 'Upload code thủ công qua FTP', 'Mở rộng dọc (mua máy mạnh hơn)', 'Chưa có khái niệm quản trị dịch vụ'],
+    pros: ['Triển khai đơn giản, không cần cấu hình phức tạp', 'Hiệu năng đơn máy tốt, không có độ trễ mạng', 'Dễ debug và truy vết sự cố'],
+    cons: ['Lỗi single point, dịch vụ ngừng hoạt động', 'Khó mở rộng, chỉ có thể scale dọc', 'Vận hành thủ công, hiệu suất thấp'],
+    techs: ['Apache/Nginx', 'CGI/Perl', 'FTP/SFTP', 'Máy chủ vật lý']
   },
-  '单体': {
-    features: ['单一代码库，统一技术栈', '共享数据库，事务一致性', '统一部署，整体发布', '进程内通信，无网络开销'],
-    pros: ['开发简单，易于上手', '测试方便，本地启动即可', '部署简单，一个包搞定'],
-    cons: ['代码耦合，牵一发而动全身', '技术栈单一，难以引入新技术', '团队扩张后协作困难'],
+  'Monolith': {
+    features: ['Một codebase duy nhất, tech stack thống nhất', 'Dùng chung database, transaction nhất quán', 'Triển khai thống nhất, release tổng thể', 'Giao tiếp trong process, không có overhead mạng'],
+    pros: ['Phát triển đơn giản, dễ bắt đầu', 'Test thuận tiện, chạy local là được', 'Triển khai đơn giản, một gói là xong'],
+    cons: ['Code coupling cao, sửa một chỗ ảnh hưởng toàn bộ', 'Tech stack đơn nhất, khó đưa vào công nghệ mới', 'Khó cộng tác khi team mở rộng'],
     techs: ['Spring/Django/Rails', 'Tomcat/Gunicorn', 'MySQL/PostgreSQL', 'Maven/Gradle']
   },
-  '微服务': {
-    features: ['服务拆分，独立部署', '技术栈异构，自由选择', '数据库独立，最终一致性', '服务间网络通信'],
-    pros: ['服务独立，团队自治', '技术栈灵活，选择最适合的', '故障隔离，不影响全局'],
-    cons: ['分布式复杂度，调试困难', '网络延迟，性能损耗', '运维成本激增'],
+  'Microservice': {
+    features: ['Tách dịch vụ, triển khai độc lập', 'Tech stack đa dạng, tự do lựa chọn', 'Database độc lập, nhất quán cuối cùng', 'Giao tiếp mạng giữa các dịch vụ'],
+    pros: ['Dịch vụ độc lập, team tự chủ', 'Tech stack linh hoạt, chọn thứ phù hợp nhất', 'Cô lập lỗi, không ảnh hưởng toàn cục'],
+    cons: ['Độ phức tạp phân tán, khó debug', 'Độ trễ mạng, hao tổn hiệu năng', 'Chi phí vận hành tăng vọt'],
     techs: ['Docker/Kubernetes', 'gRPC/REST', 'Kafka/RabbitMQ', 'Prometheus/Grafana']
   },
   'Serverless': {
-    features: ['函数粒度，事件驱动', '自动扩缩容，按需计费', '无服务器管理，平台托管', '冷启动，有延迟'],
-    pros: ['无需运维，专注业务', '自动扩展，应对流量高峰', '按调用付费，成本低'],
-    cons: ['冷启动延迟', '平台锁定，迁移困难', '调试困难，本地难复现'],
+    features: ['Đơn vị là hàm, event-driven', 'Auto scale, tính phí theo nhu cầu', 'Không quản lý server, nền tảng host', 'Cold start, có độ trễ'],
+    pros: ['Không cần vận hành, tập trung vào business', 'Tự động mở rộng, ứng phó peak traffic', 'Trả phí theo lần gọi, chi phí thấp'],
+    cons: ['Độ trễ cold start', 'Lock-in nền tảng, khó migrate', 'Khó debug, khó tái hiện local'],
     techs: ['AWS Lambda', 'Vercel/Cloudflare', 'Supabase/Firebase', 'EventBridge']
   }
 }

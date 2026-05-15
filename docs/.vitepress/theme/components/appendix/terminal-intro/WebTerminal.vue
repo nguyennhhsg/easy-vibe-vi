@@ -1,15 +1,15 @@
 <!--
   WebTerminal.vue
-  Web 模拟终端组件
-  
-  用途：
-  提供一个在浏览器中可交互的简易终端环境，作为本章节的综合练习场。
-  让用户在学完所有理论后，能够在一个受控环境中实际体验输入输出、命令执行等操作。
-  
-  交互功能：
-  - 命令执行：支持简单的模拟命令（如 help, clear, echo 等）。
-  - 历史记录：支持上下键翻阅命令历史。
-  - 真实反馈：模拟真实的终端响应延迟和输出格式。
+  Component mô phỏng terminal trên web
+
+  Mục đích:
+  Cung cấp môi trường terminal tương tác đơn giản trong trình duyệt làm sân chơi tổng hợp cho chương này.
+  Sau khi học xong lý thuyết, user có thể thử input/output, chạy lệnh trong môi trường có kiểm soát.
+
+  Tính năng tương tác:
+  - Chạy lệnh: hỗ trợ các lệnh mô phỏng đơn giản (help, clear, echo...).
+  - Lịch sử: dùng phím lên/xuống để duyệt lịch sử lệnh.
+  - Phản hồi như thật: mô phỏng độ trễ và định dạng output của terminal thật.
 -->
 <template>
   <div class="web-terminal-wrapper">
@@ -68,7 +68,7 @@
         <span class="icon">📖</span>
         <span class="en">Command Cheat Sheet</span>
         <span class="divider">|</span>
-        <span class="zh">命令速查表</span>
+        <span class="zh">Cheat sheet command</span>
       </div>
       <div class="sheet-content">
         <div
@@ -112,12 +112,12 @@ const history = ref([
   {
     type: 'output',
     content:
-      'Welcome to the interactive terminal simulator! / 欢迎使用交互式终端模拟器！'
+      'Welcome to the interactive terminal simulator! / Chào mừng đến với trình mô phỏng terminal tương tác!'
   },
   {
     type: 'output',
     content:
-      'Type "help" to see available commands. / 输入 "help" 查看可用命令。'
+      'Type "help" to see available commands. / Gõ "help" để xem các lệnh khả dụng.'
   }
 ])
 const currentInput = ref('')
@@ -126,7 +126,7 @@ const terminalBody = ref(null)
 const commandHistory = ref([])
 const historyIndex = ref(-1)
 
-// 模拟文件系统
+// File system giả lập
 const fileSystem = {
   name: '/',
   type: 'dir',
@@ -143,7 +143,7 @@ const fileSystem = {
               name: 'hello.txt',
               type: 'file',
               content:
-                'Hello World! This is a mock file.\n你好！这是一个模拟文件。'
+                'Hello World! This is a mock file.\nXin chào! Đây là file giả lập.'
             },
             'notes.md': {
               name: 'notes.md',
@@ -277,71 +277,71 @@ const navigateTo = (target) => {
 
 const cheatSheet = [
   {
-    category: 'Navigation / 导航',
+    category: 'Navigation / Điều hướng',
     commands: [
       {
         name: 'ls',
         descEn: 'List directory contents',
-        descZh: '列出当前目录下的文件和文件夹'
+        descZh: 'Liệt kê file và thư mục trong thư mục hiện tại'
       },
       {
         name: 'cd <dir>',
         descEn: 'Change directory',
-        descZh: '进入指定目录 (例如: cd projects)'
+        descZh: 'Vào thư mục chỉ định (vd: cd projects)'
       },
       {
         name: 'pwd',
         descEn: 'Print working directory',
-        descZh: '显示当前所在的完整路径'
+        descZh: 'Hiển thị đường dẫn đầy đủ hiện tại'
       }
     ]
   },
   {
-    category: 'File Operations / 文件操作',
+    category: 'File Operations / Thao tác file',
     commands: [
       {
         name: 'cat <file>',
         descEn: 'Show file contents',
-        descZh: '查看文件内容 (例如: cat hello.txt)'
+        descZh: 'Xem nội dung file (vd: cat hello.txt)'
       },
       {
         name: 'touch <file>',
         descEn: 'Create empty file',
-        descZh: '创建一个新文件'
+        descZh: 'Tạo file mới'
       },
       {
         name: 'mkdir <dir>',
         descEn: 'Make directory',
-        descZh: '创建一个新文件夹'
+        descZh: 'Tạo thư mục mới'
       },
-      { name: 'rm <file>', descEn: 'Remove file', descZh: '删除文件' }
+      { name: 'rm <file>', descEn: 'Remove file', descZh: 'Xóa file' }
     ]
   },
   {
-    category: 'System / 系统',
+    category: 'System / Hệ thống',
     commands: [
       {
         name: 'echo <text>',
         descEn: 'Print text',
-        descZh: '在屏幕上打印一段文字'
+        descZh: 'In một đoạn chữ ra màn hình'
       },
-      { name: 'whoami', descEn: 'Current user', descZh: '显示当前用户名' },
-      { name: 'date', descEn: 'Show date/time', descZh: '显示当前日期和时间' },
-      { name: 'clear', descEn: 'Clear screen', descZh: '清空屏幕内容' }
+      { name: 'whoami', descEn: 'Current user', descZh: 'Hiển thị user hiện tại' },
+      { name: 'date', descEn: 'Show date/time', descZh: 'Hiển thị ngày giờ hiện tại' },
+      { name: 'clear', descEn: 'Clear screen', descZh: 'Xóa nội dung màn hình' }
     ]
   },
   {
-    category: 'Package Manager / 软件包 (Mock)',
+    category: 'Package Manager / Package (Mock)',
     commands: [
       {
         name: 'apt update',
         descEn: 'Update package list',
-        descZh: '更新软件包列表'
+        descZh: 'Cập nhật danh sách package'
       },
       {
         name: 'apt install <pkg>',
         descEn: 'Install package',
-        descZh: '安装软件 (例如: apt install git)'
+        descZh: 'Cài phần mềm (vd: apt install git)'
       }
     ]
   }

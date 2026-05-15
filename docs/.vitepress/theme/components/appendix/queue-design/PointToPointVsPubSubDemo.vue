@@ -1,15 +1,15 @@
 <!--
   PointToPointVsPubSubDemo.vue
-  点对点 vs 发布订阅对比演示
+  Demo so sánh point-to-point vs pub/sub
 -->
 <template>
   <div class="messaging-patterns-demo">
     <div class="header">
       <div class="title">
-        消息模式：点对点 vs 发布订阅
+        Pattern message: point-to-point vs pub/sub
       </div>
       <div class="subtitle">
-        选择模式，观察消息如何分发
+        Chọn pattern và quan sát cách message được phân phối
       </div>
     </div>
 
@@ -19,14 +19,14 @@
         :class="{ active: mode === 'p2p' }"
         @click="setMode('p2p')"
       >
-        点对点 (P2P)
+        Point-to-point (P2P)
       </button>
       <button
         class="mode-btn"
         :class="{ active: mode === 'pubsub' }"
         @click="setMode('pubsub')"
       >
-        发布订阅 (Pub/Sub)
+        Pub/Sub
       </button>
     </div>
 
@@ -35,27 +35,27 @@
         v-if="mode === 'p2p'"
         class="desc-text"
       >
-        <strong>点对点模式：</strong>一条消息只能被<strong>一个消费者</strong>消费。适合任务分配、负载均衡场景。
+        <strong>Pattern point-to-point:</strong> một message chỉ được <strong>một consumer</strong> consume. Phù hợp cho phân phối task, load balancing.
       </div>
       <div
         v-else
         class="desc-text"
       >
-        <strong>发布订阅模式：</strong>一条消息可以被<strong>多个消费者</strong>同时接收。适合事件通知、广播场景。
+        <strong>Pattern pub/sub:</strong> một message có thể được <strong>nhiều consumer</strong> nhận cùng lúc. Phù hợp cho event notification, broadcast.
       </div>
     </div>
 
     <div class="demo-area">
       <div class="producer-section">
         <div class="section-title">
-          生产者 Producer
+          Producer
         </div>
         <div class="producer-box">
           <div class="icon">
             📤
           </div>
           <div class="label">
-            订单服务
+            Service đơn hàng
           </div>
         </div>
         <button
@@ -63,36 +63,36 @@
           :disabled="sending"
           @click="sendMessage"
         >
-          {{ sending ? '发送中...' : '发送消息' }}
+          {{ sending ? 'Đang gửi...' : 'Gửi message' }}
         </button>
       </div>
 
       <div class="broker-section">
         <div class="section-title">
-          {{ mode === 'p2p' ? '队列 Queue' : '主题 Topic' }}
+          {{ mode === 'p2p' ? 'Queue' : 'Topic' }}
         </div>
         <div class="broker-box">
           <div class="broker-icon">
             {{ mode === 'p2p' ? '📦' : '📡' }}
           </div>
           <div class="broker-label">
-            {{ mode === 'p2p' ? '消息队列' : '发布主题' }}
+            {{ mode === 'p2p' ? 'Message queue' : 'Topic publish' }}
           </div>
           <div
             v-if="lastMessage"
             class="message-indicator"
           >
-            消息 #{{ lastMessage }}
+            Message #{{ lastMessage }}
           </div>
         </div>
         <div class="mode-badge">
-          {{ mode === 'p2p' ? '竞争消费' : '广播' }}
+          {{ mode === 'p2p' ? 'Cạnh tranh consume' : 'Broadcast' }}
         </div>
       </div>
 
       <div class="consumer-section">
         <div class="section-title">
-          消费者 Consumers
+          Consumer
         </div>
         <div class="consumers-grid">
           <div
@@ -108,10 +108,10 @@
               {{ consumer.name }}
             </div>
             <div class="consumer-count">
-              已处理: {{ consumer.count }}
+              Đã xử lý: {{ consumer.count }}
             </div>
             <div class="consumer-status">
-              {{ consumer.active ? '处理中' : '空闲' }}
+              {{ consumer.active ? 'Đang xử lý' : 'Rảnh' }}
             </div>
           </div>
         </div>
@@ -122,31 +122,31 @@
       <table>
         <thead>
           <tr>
-            <th>特性</th>
-            <th>点对点 (P2P)</th>
-            <th>发布订阅 (Pub/Sub)</th>
+            <th>Đặc tính</th>
+            <th>Point-to-point (P2P)</th>
+            <th>Pub/Sub</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>消息消费</td>
-            <td>一个消费者</td>
-            <td>多个消费者</td>
+            <td>Consume message</td>
+            <td>Một consumer</td>
+            <td>Nhiều consumer</td>
           </tr>
           <tr>
-            <td>典型场景</td>
-            <td>任务分配、负载均衡</td>
-            <td>事件通知、数据广播</td>
+            <td>Use case tiêu biểu</td>
+            <td>Phân phối task, load balancing</td>
+            <td>Event notification, broadcast data</td>
           </tr>
           <tr>
-            <td>消费关系</td>
-            <td>竞争消费</td>
-            <td>独立订阅</td>
+            <td>Quan hệ consume</td>
+            <td>Cạnh tranh consume</td>
+            <td>Subscribe độc lập</td>
           </tr>
           <tr>
-            <td>例子</td>
-            <td>Excel 导出任务分发给工作节点</td>
-            <td>用户注册后发邮件+短信+优惠券</td>
+            <td>Ví dụ</td>
+            <td>Phân phối task export Excel cho các worker node</td>
+            <td>Sau khi user đăng ký, gửi email + SMS + voucher</td>
           </tr>
         </tbody>
       </table>
@@ -154,28 +154,28 @@
 
     <div class="example-scenario">
       <div class="scenario-title">
-        📌 实际场景
+        📌 Use case thực tế
       </div>
       <div
         v-if="mode === 'p2p'"
         class="scenario-content"
       >
         <div>
-          <strong>任务分配：</strong>批量导入 10000 条用户数据，分发给 3
-          个工作节点并行处理
+          <strong>Phân phối task:</strong> import hàng loạt 10000 user, phân phối cho 3
+          worker node xử lý song song
         </div>
         <div class="flow">
-          任务入队 → [Worker1, Worker2, Worker3] 竞争抢任务 →
-          每个任务只被处理一次
+          Task enqueue → [Worker1, Worker2, Worker3] cạnh tranh giành task →
+          mỗi task chỉ được xử lý một lần
         </div>
       </div>
       <div
         v-else
         class="scenario-content"
       >
-        <div><strong>事件通知：</strong>用户下单成功后，同时通知多个系统</div>
+        <div><strong>Event notification:</strong> sau khi user đặt đơn thành công, thông báo đồng thời nhiều hệ thống</div>
         <div class="flow">
-          发布事件 → [库存服务, 积分服务, 通知服务, 数据仓库] 各自独立处理
+          Publish event → [Service kho, service điểm thưởng, service thông báo, data warehouse] xử lý độc lập
         </div>
       </div>
     </div>
@@ -191,9 +191,9 @@ const lastMessage = ref(null)
 let messageId = 0
 
 const consumers = ref([
-  { id: 1, name: '消费者 A', count: 0, active: false },
-  { id: 2, name: '消费者 B', count: 0, active: false },
-  { id: 3, name: '消费者 C', count: 0, active: false }
+  { id: 1, name: 'Consumer A', count: 0, active: false },
+  { id: 2, name: 'Consumer B', count: 0, active: false },
+  { id: 3, name: 'Consumer C', count: 0, active: false }
 ])
 
 const setMode = (newMode) => {
@@ -214,7 +214,7 @@ const sendMessage = () => {
 
   setTimeout(() => {
     if (mode.value === 'p2p') {
-      // P2P: 随机选择一个消费者
+      // P2P: chọn ngẫu nhiên một consumer
       const availableConsumers = consumers.value.filter((c) => !c.active)
       if (availableConsumers.length > 0) {
         const consumer =
@@ -224,7 +224,7 @@ const sendMessage = () => {
         processMessage(consumer)
       }
     } else {
-      // Pub/Sub: 所有消费者都接收
+      // Pub/Sub: tất cả consumer đều nhận
       consumers.value.forEach((consumer) => {
         setTimeout(() => {
           processMessage(consumer)

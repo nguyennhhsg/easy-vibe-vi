@@ -66,7 +66,7 @@ const addFailedRequest = () => {
   >
     <template #header>
       <div class="header">
-        <span class="title">Network (网络面板)</span>
+        <span class="title">Network (Tab mạng)</span>
         <div class="actions">
           <el-button
             type="primary"
@@ -74,7 +74,7 @@ const addFailedRequest = () => {
             icon="Refresh"
             @click="refresh"
           >
-            刷新页面
+            Tải lại trang
           </el-button>
           <el-button
             type="danger"
@@ -82,7 +82,7 @@ const addFailedRequest = () => {
             icon="Warning"
             @click="addFailedRequest"
           >
-            模拟请求失败
+            Giả lập request lỗi
           </el-button>
         </div>
       </div>
@@ -153,7 +153,7 @@ const addFailedRequest = () => {
     </el-table>
 
     <div class="footer-tip">
-      💡 点击某一行可以查看请求详情
+      Mẹo: bấm vào một dòng để xem chi tiết request
     </div>
 
     <!-- Detail Drawer -->

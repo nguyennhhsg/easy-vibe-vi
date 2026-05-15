@@ -12,35 +12,35 @@ import { ref, computed } from 'vue'
 
 const currentStep = ref(0)
 const steps = [
-  { 
+  {
     id: 'base',
-    title: '第一层：地基 (System)',
-    desc: '系统设定、身份、原则',
-    detail: '✅ 永远不变，利用 KV Cache 实现 0 成本背诵',
+    title: 'Tầng 1: Móng nhà (System)',
+    desc: 'Cài đặt hệ thống, danh tính, nguyên tắc',
+    detail: '✅ Không đổi, tận dụng KV Cache để "thuộc bài" gần như 0 chi phí',
     color: 'var(--vp-c-brand)',
     icon: '🏛️'
   },
-  { 
+  {
     id: 'task',
-    title: '第二层：支柱 (Task)',
-    desc: '当前任务目标、用户画像',
-    detail: '📌 任务期内“钉死”，保证方向不偏',
+    title: 'Tầng 2: Cột trụ (Task)',
+    desc: 'Mục tiêu nhiệm vụ hiện tại, hồ sơ người dùng',
+    detail: '📌 "Đóng đinh" trong suốt nhiệm vụ, đảm bảo không lệch hướng',
     color: '#8e44ad',
     icon: '📌'
   },
-  { 
+  {
     id: 'chat',
-    title: '第三层：客厅 (Chat)',
-    desc: '最近 5-10 轮对话',
-    detail: '🔄 滑动窗口，旧的自动腾出空间',
+    title: 'Tầng 3: Phòng khách (Chat)',
+    desc: '5-10 lượt hội thoại gần nhất',
+    detail: '🔄 Sliding window, lượt cũ tự nhường chỗ',
     color: '#e67e22',
     icon: '💬'
   },
-  { 
+  {
     id: 'rag',
-    title: '第四层：图书馆 (RAG)',
-    desc: '按需检索的知识',
-    detail: '📚 不占脑子，用时再查，无限扩展',
+    title: 'Tầng 4: Thư viện (RAG)',
+    desc: 'Tri thức truy hồi theo nhu cầu',
+    detail: '📚 Không chiếm bộ não, cần mới tra, mở rộng không giới hạn',
     color: '#27ae60',
     icon: '🔍'
   }
@@ -163,7 +163,7 @@ const isComplete = computed(() => currentStep.value === 4)
           v-if="currentStep === 0"
           class="empty-placeholder"
         >
-          🚧 空地：点击下方按钮开始建造记忆宫殿
+          🚧 Đất trống: bạn nhấn nút phía dưới để bắt đầu xây Memory Palace
         </div>
       </div>
     </div>
@@ -171,14 +171,14 @@ const isComplete = computed(() => currentStep.value === 4)
     <!-- Control Area -->
     <div class="control-area">
       <div class="step-indicator">
-        当前进度: {{ currentStep }}/4
+        Tiến độ hiện tại: {{ currentStep }}/4
       </div>
       <button
         class="build-btn"
         :class="{ 'reset-mode': isComplete }"
         @click="nextStep"
       >
-        {{ isComplete ? '🔄 重置重建' : (currentStep === 0 ? '🏗️ 开始建造' : '➕ 添加下一层') }}
+        {{ isComplete ? '🔄 Reset và xây lại' : (currentStep === 0 ? '🏗️ Bắt đầu xây' : '➕ Thêm tầng tiếp') }}
       </button>
     </div>
 
@@ -188,31 +188,31 @@ const isComplete = computed(() => currentStep.value === 4)
       class="explanation-box"
     >
       <div class="exp-title">
-        为什么这样设计？
+        Vì sao thiết kế thế này?
       </div>
       <div
         v-if="currentStep === 1"
         class="exp-content"
       >
-        **地基最稳**：把 System Prompt 放在最前面，利用 KV Cache 机制，让 AI "背下来"，后续请求**速度快且免费**。
+        **Móng vững nhất**: bạn đặt System Prompt ngay phía trên cùng, tận dụng cơ chế KV Cache để AI "thuộc lòng", các request sau **vừa nhanh vừa miễn phí**.
       </div>
       <div
         v-if="currentStep === 2"
         class="exp-content"
       >
-        **目标明确**：无论聊得多嗨，任务目标（如“写一个 Python 爬虫”）必须**钉死**，防止 AI 聊偏了。
+        **Mục tiêu rõ ràng**: dù chat hăng đến đâu, mục tiêu nhiệm vụ (ví dụ "viết một con crawler Python") cũng phải **đóng đinh** lại để AI không bị lệch chủ đề.
       </div>
       <div
         v-if="currentStep === 3"
         class="exp-content"
       >
-        **保持鲜活**：最近的对话最重要，用滑动窗口保留，**旧的自动忘掉**，给新信息腾地方。
+        **Luôn tươi mới**: các lượt hội thoại gần đây quan trọng nhất, ta dùng sliding window để giữ lại, **phần cũ tự động quên đi** để nhường chỗ cho thông tin mới.
       </div>
       <div
         v-if="currentStep === 4"
         class="exp-content"
       >
-        **无限外脑**：遇到不懂的，不要瞎编，去“图书馆”查资料。**用完即走**，不占宝贵的脑容量。
+        **Bộ não ngoại mở rộng**: gặp gì không biết thì đừng "phịa", hãy ghé "thư viện" tra tài liệu. **Dùng xong là đi**, không chiếm dung lượng não quý giá.
       </div>
     </div>
   </div>

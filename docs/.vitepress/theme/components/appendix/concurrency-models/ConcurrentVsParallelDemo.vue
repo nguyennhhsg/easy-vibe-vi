@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>并发 (Concurrency) vs 并行 (Parallelism) 演示</h4>
+    <h4>Demo concurrency vs parallelism</h4>
 
     <div class="controls">
       <el-radio-group
@@ -8,13 +8,13 @@
         size="small"
       >
         <el-radio-button label="concurrent">
-          单核并发
+          Concurrency 1 core
         </el-radio-button>
         <el-radio-button label="parallel">
-          多核并行
+          Parallelism nhiều core
         </el-radio-button>
         <el-radio-button label="hybrid">
-          混合模式
+          Chế độ hỗn hợp
         </el-radio-button>
       </el-radio-group>
 
@@ -24,14 +24,14 @@
         :disabled="isRunning"
         @click="startDemo"
       >
-        {{ isRunning ? '运行中...' : '开始演示' }}
+        {{ isRunning ? 'Đang chạy...' : 'Bắt đầu demo' }}
       </el-button>
 
       <el-button
         size="small"
         @click="reset"
       >
-        重置
+        Reset
       </el-button>
 
       <el-slider
@@ -46,10 +46,10 @@
     </div>
 
     <div class="demo-grid">
-      <!-- CPU 核心显示 -->
+      <!-- Hiển thị CPU core -->
       <div class="section">
         <div class="section-title">
-          {{ demoMode === 'concurrent' ? 'CPU 核心 (单核)' : 'CPU 核心 (' + cpuCores.length + '核)' }}
+          {{ demoMode === 'concurrent' ? 'CPU core (1 core)' : 'CPU core (' + cpuCores.length + ' core)' }}
         </div>
 
         <div
@@ -77,16 +77,16 @@
               {{ core.task }}
             </div>
             <div class="core-status">
-              {{ core.active ? '运行中' : '空闲' }}
+              {{ core.active ? 'Đang chạy' : 'Rảnh' }}
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 任务视图 -->
+      <!-- View task -->
       <div class="section">
         <div class="section-title">
-          任务执行
+          Thực thi task
         </div>
 
         <div class="task-timeline">
@@ -97,7 +97,7 @@
           >
             <div class="task-info">
               <div class="task-name">
-                任务 {{ task.id }}
+                Task {{ task.id }}
               </div>
               <div class="task-duration">
                 {{ task.duration }}ms
@@ -116,7 +116,7 @@
                   v-if="segment.width > 5"
                   class="segment-text"
                 >
-                  {{ segment.type === 'execution' ? '执行' : '等待' }}
+                  {{ segment.type === 'execution' ? 'Chạy' : 'Đợi' }}
                 </span>
               </div>
             </div>
@@ -127,7 +127,7 @@
 
     <div class="comparison-table">
       <div class="table-header">
-        并发 vs 并行 对比
+        So sánh concurrency vs parallelism
       </div>
 
       <div class="comparison-grid">
@@ -136,13 +136,13 @@
             🔄
           </div>
           <div class="item-title">
-            并发 (Concurrency)
+            Concurrency
           </div>
           <div class="item-desc">
-            多个任务交替执行，宏观上同时推进
+            Nhiều task chạy xen kẽ, tổng thể cùng tiến triển
           </div>
           <div class="item-examples">
-            <strong>例子:</strong> 单核CPU多线程、协程调度、异步I/O
+            <strong>Ví dụ:</strong> đa luồng trên CPU 1 core, schedule coroutine, async I/O
           </div>
         </div>
 
@@ -151,31 +151,31 @@
             ⚡
           </div>
           <div class="item-title">
-            并行 (Parallelism)
+            Parallelism
           </div>
           <div class="item-desc">
-            多个任务真正同时执行
+            Nhiều task thực sự chạy đồng thời
           </div>
           <div class="item-examples">
-            <strong>例子:</strong> 多核CPU计算、GPU并行计算、分布式处理
+            <strong>Ví dụ:</strong> tính toán CPU đa core, tính song song GPU, xử lý phân tán
           </div>
         </div>
       </div>
 
       <div class="need-table">
         <div class="need-title">
-          需要什么条件?
+          Cần điều kiện gì?
         </div>
 
         <div class="need-items">
           <div class="need-item">
             <span class="need-check">✓</span>
-            <span class="need-text"><strong>并发:</strong> 单核 CPU 即可实现</span>
+            <span class="need-text"><strong>Concurrency:</strong> CPU 1 core là đủ</span>
           </div>
 
           <div class="need-item">
             <span class="need-check need-multi">✓</span>
-            <span class="need-text"><strong>并行:</strong> 需要多核 CPU 或多台机器</span>
+            <span class="need-text"><strong>Parallelism:</strong> cần CPU đa core hoặc nhiều máy</span>
           </div>
         </div>
       </div>
@@ -190,7 +190,7 @@ const demoMode = ref('concurrent')
 const isRunning = ref(false)
 const workerCount = ref(4)
 
-// CPU 核心
+// CPU core
 const cpuCores = ref([
   { active: false, color: '#409eff', task: null },
   { active: false, color: '#67c23a', task: null },
@@ -198,7 +198,7 @@ const cpuCores = ref([
   { active: false, color: '#f56c6c', task: null },
 ])
 
-// 演示任务
+// Task demo
 const demoTasks = ref([
   { id: 1, duration: 40, segments: [] },
   { id: 2, duration: 30, segments: [] },
@@ -211,10 +211,10 @@ function startDemo() {
 
   isRunning.value = true
 
-  // 生成任务时间线
+  // Sinh timeline task
   generateTaskTimeline()
 
-  // 模拟执行
+  // Mô phỏng chạy
   setTimeout(() => {
     isRunning.value = false
   }, 3000)
@@ -227,7 +227,7 @@ function generateTaskTimeline() {
     const colors = ['#409eff', '#67c23a', '#e6a23c', '#f56c6c']
 
     if (mode === 'concurrent') {
-      // 单核并发：任务交替执行
+      // Concurrency 1 core: task chạy xen kẽ
       const baseStart = 5 + idx * 3
       segments.push({
         type: 'execution',
@@ -248,7 +248,7 @@ function generateTaskTimeline() {
         color: colors[idx % colors.length]
       })
     } else if (mode === 'parallel') {
-      // 多核并行：任务同时执行
+      // Parallelism đa core: task chạy đồng thời
       segments.push({
         type: 'execution',
         start: 5,
@@ -256,7 +256,7 @@ function generateTaskTimeline() {
         color: colors[idx % colors.length]
       })
     } else {
-      // 混合模式
+      // Chế độ hỗn hợp
       if (idx < workerCount.value) {
         segments.push({
           type: 'execution',

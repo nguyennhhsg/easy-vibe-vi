@@ -11,7 +11,7 @@
         type="info"
         :closable="false"
       >
-        消息队列对比演示组件占位符 - 待实现具体交互
+        Placeholder demo so sánh message queue - chờ triển khai tương tác cụ thể
       </el-alert>
     </div>
   </div>
@@ -20,8 +20,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('消息队列对比演示')
-const description = ref('对比主流消息队列产品（RabbitMQ、Kafka、RocketMQ等）的特性、适用场景和性能差异')
+const title = ref('Demo so sánh message queue')
+const description = ref('So sánh các sản phẩm message queue phổ biến (RabbitMQ, Kafka, RocketMQ...) về đặc tính, use case phù hợp và khác biệt hiệu năng')
 </script>
 
 <style scoped>

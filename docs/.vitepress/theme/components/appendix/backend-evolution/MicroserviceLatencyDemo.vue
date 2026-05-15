@@ -1,20 +1,20 @@
 <!--
   MicroserviceLatencyDemo.vue
-  微服务架构中的网络延迟累积演示
+  Demo độ trễ mạng tích lũy trong kiến trúc microservice
 -->
 <template>
   <div class="microservice-latency-demo">
     <div class="header">
       <div class="title">
-        微服务延迟：网络调用的代价
+        Độ trễ microservice: cái giá của lời gọi qua mạng
       </div>
       <div class="subtitle">
-        每次服务间调用都增加网络延迟，累积后响应时间变长
+        Mỗi lần gọi giữa các dịch vụ đều thêm độ trễ mạng, tích lũy lại làm thời gian phản hồi tăng lên
       </div>
     </div>
 
     <div class="controls">
-      <label>服务间调用次数：<strong>{{ callCount }}</strong></label>
+      <label>Số lần gọi giữa các dịch vụ: <strong>{{ callCount }}</strong></label>
       <input
         v-model="callCount"
         type="range"
@@ -23,7 +23,7 @@
         step="1"
       >
 
-      <label>网络延迟：<strong>{{ networkLatency }} ms</strong></label>
+      <label>Độ trễ mạng: <strong>{{ networkLatency }} ms</strong></label>
       <input
         v-model="networkLatency"
         type="range"
@@ -36,7 +36,7 @@
     <div class="comparison">
       <div class="architecture monolith">
         <div class="arch-title">
-          单体架构
+          Kiến trúc monolith
         </div>
         <div class="arch-box">
           <div class="single-process">
@@ -56,14 +56,14 @@
             {{ monolithLatency }} ms
           </div>
           <div class="latency-label">
-            内存调用（~0ms）
+            Gọi trong bộ nhớ (~0ms)
           </div>
         </div>
       </div>
 
       <div class="architecture microservices">
         <div class="arch-title">
-          微服务架构
+          Kiến trúc microservice
         </div>
         <div class="arch-box">
           <div class="services">
@@ -95,7 +95,7 @@
             {{ microLatency }} ms
           </div>
           <div class="latency-label">
-            网络调用累积
+            Tích lũy do gọi qua mạng
           </div>
         </div>
       </div>
@@ -128,9 +128,9 @@ const microLatency = computed(() =>
 
 const insight = computed(() => {
   const ratio = Math.round(microLatency.value / monolithLatency.value)
-  if (ratio <= 2) return '微服务架构的延迟还可以接受，但比单体慢'
-  if (ratio <= 5) return '服务拆分越多，网络延迟累积越明显'
-  return '过多的服务间调用会导致性能严重下降！'
+  if (ratio <= 2) return 'Độ trễ của kiến trúc microservice còn chấp nhận được, nhưng chậm hơn monolith'
+  if (ratio <= 5) return 'Càng tách nhiều dịch vụ, độ trễ mạng tích lũy càng rõ rệt'
+  return 'Quá nhiều lời gọi giữa các dịch vụ sẽ khiến hiệu năng suy giảm nghiêm trọng!'
 })
 
 const insightIcon = computed(() => {

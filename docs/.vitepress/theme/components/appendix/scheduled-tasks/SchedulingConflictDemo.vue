@@ -1,13 +1,13 @@
 <template>
   <div class="conflict-demo">
     <div class="header">
-      <div class="title">调度冲突演示</div>
-      <div class="subtitle">多个任务计划在同一时间执行</div>
+      <div class="title">Demo xung đột scheduling</div>
+      <div class="subtitle">Nhiều task được lên lịch chạy cùng một thời điểm</div>
     </div>
     <div class="controls">
-      <button @click="addTask" class="add-btn">添加任务</button>
-      <button @click="detectConflicts" class="detect-btn">检测冲突</button>
-      <button @click="resolve" class="resolve-btn">解决冲突</button>
+      <button @click="addTask" class="add-btn">Thêm task</button>
+      <button @click="detectConflicts" class="detect-btn">Phát hiện xung đột</button>
+      <button @click="resolve" class="resolve-btn">Giải quyết xung đột</button>
     </div>
     <div class="schedule">
       <div class="time-axis">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="conflicts" v-if="conflicts.length > 0">
-      <div class="conflict-title">检测到冲突：</div>
+      <div class="conflict-title">Phát hiện xung đột:</div>
       <div v-for="(c, i) in conflicts" :key="i" class="conflict-item">
         {{ c }}
       </div>
@@ -35,21 +35,21 @@
 import { ref } from 'vue'
 
 const tasks = ref([
-  { name: '备份', start: 2, end: 4 },
-  { name: '报表', start: 3, end: 5 },
+  { name: 'Backup', start: 2, end: 4 },
+  { name: 'Báo cáo', start: 3, end: 5 },
 ])
 const conflicts = ref([])
 const logs = ref([])
 let taskId = 3
 
 function addTask() {
-  const names = ['同步', '清洗', '分析', '通知']
-  const name = names[taskId - 3] || `任务${taskId}`
+  const names = ['Đồng bộ', 'Làm sạch', 'Phân tích', 'Thông báo']
+  const name = names[taskId - 3] || `Task ${taskId}`
   const start = Math.floor(Math.random() * 20)
   const end = start + Math.floor(Math.random() * 3) + 1
   tasks.value.push({ name, start: Math.min(start, 23), end: Math.min(end, 24) })
   taskId++
-  logs.value.unshift(`添加任务: ${name} (${start}:00 - ${end}:00)`)
+  logs.value.unshift(`Thêm task: ${name} (${start}:00 - ${end}:00)`)
 }
 
 function detectConflicts() {
@@ -59,14 +59,14 @@ function detectConflicts() {
       const a = tasks.value[i]
       const b = tasks.value[j]
       if (a.start < b.end && b.start < a.end) {
-        conflicts.value.push(`${a.name} 与 ${b.name} 时间冲突！`)
+        conflicts.value.push(`${a.name} và ${b.name} xung đột thời gian!`)
       }
     }
   }
   if (conflicts.value.length === 0) {
-    logs.value.unshift('未检测到冲突')
+    logs.value.unshift('Không phát hiện xung đột')
   } else {
-    logs.value.unshift(`检测到 ${conflicts.value.length} 个冲突`)
+    logs.value.unshift(`Phát hiện ${conflicts.value.length} xung đột`)
   }
 }
 
@@ -76,11 +76,11 @@ function resolve() {
     if (tasks.value[i].start < tasks.value[i - 1].end) {
       tasks.value[i].start = tasks.value[i - 1].end
       tasks.value[i].end = Math.max(tasks.value[i].end, tasks.value[i].start + 1)
-      logs.value.unshift(`调整 ${tasks.value[i].name} 到 ${tasks.value[i].start}:00 开始`)
+      logs.value.unshift(`Điều chỉnh ${tasks.value[i].name} bắt đầu lúc ${tasks.value[i].start}:00`)
     }
   }
   conflicts.value = []
-  logs.value.unshift('冲突已解决')
+  logs.value.unshift('Đã giải quyết xung đột')
 }
 </script>
 

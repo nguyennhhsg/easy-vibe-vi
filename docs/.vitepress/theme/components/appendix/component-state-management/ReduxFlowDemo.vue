@@ -2,22 +2,22 @@
   <div class="redux-flow-demo">
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">Redux 数据流</span>
-      <span class="subtitle">单向循环的数据管道</span>
+      <span class="title">Luồng dữ liệu Redux</span>
+      <span class="subtitle">Đường ống dữ liệu một chiều</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">图书馆</span>工作：读者（View）填写借书单（Action），管理员（Reducer）审核后更新库存记录（Store），新通知（View更新）就会显示在公告栏。
+      Hãy hình dung bạn làm trong <span class="highlight">thư viện</span>: bạn đọc (View) điền phiếu mượn (Action), thủ thư (Reducer) duyệt rồi cập nhật sổ kho (Store), thông báo mới (View update) hiện trên bảng tin.
     </div>
 
     <div class="demo-content">
       <div class="counter-display">
-        <span class="counter-label">当前库存：</span>
+        <span class="counter-label">Tồn kho hiện tại:</span>
         <span
           class="counter-value"
           :class="{ changed: countChanged }"
         >{{ count }}</span>
-        <span class="counter-unit">本书</span>
+        <span class="counter-unit">quyển</span>
       </div>
 
       <div class="action-buttons">
@@ -26,21 +26,21 @@
           @click="dispatchAction('INCREMENT')"
         >
           <span class="btn-icon">➕</span>
-          进货 (+1)
+          Nhập kho (+1)
         </button>
         <button
           class="action-btn"
           @click="dispatchAction('DECREMENT')"
         >
           <span class="btn-icon">➖</span>
-          出货 (-1)
+          Xuất kho (-1)
         </button>
         <button
           class="action-btn reset"
           @click="dispatchAction('RESET')"
         >
           <span class="btn-icon">🔄</span>
-          重置库存
+          Reset kho
         </button>
       </div>
 
@@ -64,7 +64,7 @@
             :class="{ active: flowStage === 'reducer' }"
           >
             <span class="stage-icon">⚙️</span>
-            <span class="stage-text">Reducer 处理中...</span>
+            <span class="stage-text">Reducer đang xử lý...</span>
           </div>
           <div class="flow-arrow">
             →
@@ -74,7 +74,7 @@
             :class="{ active: flowStage === 'store' }"
           >
             <span class="stage-icon">📦</span>
-            <span class="stage-text">Store 已更新</span>
+            <span class="stage-text">Store đã update</span>
           </div>
         </div>
       </Transition>
@@ -82,7 +82,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>Redux 是单向数据流循环：View 触发 Action → Reducer 纯函数处理 → 更新 Store → 通知 View 重新渲染。状态可预测，易于调试。
+      <strong>Ý chính:</strong> Redux dùng luồng dữ liệu một chiều: View phát Action → Reducer (pure function) xử lý → cập nhật Store → thông báo View re-render. State có thể dự đoán, dễ debug.
     </div>
   </div>
 </template>

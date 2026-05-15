@@ -1,32 +1,32 @@
 <!--
   ASRvsTTSDemo.vue
-  ASR 与 TTS 双向转换演示组件
+  Component mô phỏng chuyển đổi hai chiều ASR và TTS
 
-  用途：
-  展示语音识别(ASR)和语音合成(TTS)的互逆过程。
+  Mục đích:
+  Trình bày hai quy trình ngược nhau là ASR (nhận dạng giọng nói) và TTS (tổng hợp giọng nói).
 -->
 <template>
   <div class="asr-tts-demo">
     <div class="header">
       <div class="title">
-        🔄 ASR ↔ TTS：语音的双向转换
+        🔄 ASR ↔ TTS: chuyển đổi hai chiều của giọng nói
       </div>
       <div class="subtitle">
-        探索语音识别和语音合成的互逆过程
+        Cùng khám phá hai quy trình ngược nhau giữa ASR và TTS
       </div>
     </div>
 
     <div class="conversion-flow">
-      <!-- ASR 区域 -->
+      <!-- Khu vực ASR -->
       <div class="flow-section">
         <div class="section-header">
           <span class="section-icon">🎙️</span>
           <div>
             <div class="section-name">
-              ASR 语音识别
+              ASR - nhận dạng giọng nói
             </div>
             <div class="section-desc">
-              音频 → 文本
+              Âm thanh → văn bản
             </div>
           </div>
         </div>
@@ -39,16 +39,16 @@
               @click="toggleRecording"
             >
               <span class="record-icon">{{ isRecording ? '⏹' : '🎤' }}</span>
-              <span>{{ isRecording ? '停止录音' : '开始录音' }}</span>
+              <span>{{ isRecording ? 'Dừng ghi âm' : 'Bắt đầu ghi âm' }}</span>
             </button>
             <div class="or-text">
-              或
+              hoặc
             </div>
             <button
               class="upload-audio-btn"
               @click="uploadAudio"
             >
-              📁 上传音频
+              📁 Tải audio
             </button>
           </div>
 
@@ -72,7 +72,7 @@
               v-if="isProcessingASR"
               class="spinner"
             />
-            <span v-else>🔍 识别语音</span>
+            <span v-else>🔍 Nhận dạng giọng nói</span>
           </button>
 
           <div
@@ -80,20 +80,20 @@
             class="result-box"
           >
             <div class="result-label">
-              识别结果
+              Kết quả nhận dạng
             </div>
             <div class="result-text">
               {{ asrResult }}
             </div>
             <div class="result-meta">
-              <span>置信度: {{ asrConfidence }}%</span>
-              <span>耗时: {{ asrTime }}ms</span>
+              <span>Độ tin cậy: {{ asrConfidence }}%</span>
+              <span>Thời gian: {{ asrTime }}ms</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 中间转换 -->
+      <!-- Vùng chuyển đổi ở giữa -->
       <div class="flow-arrow">
         <div class="arrow-line" />
         <div class="arrow-btns">
@@ -114,16 +114,16 @@
         </div>
       </div>
 
-      <!-- TTS 区域 -->
+      <!-- Khu vực TTS -->
       <div class="flow-section">
         <div class="section-header">
           <span class="section-icon">🔊</span>
           <div>
             <div class="section-name">
-              TTS 语音合成
+              TTS - tổng hợp giọng nói
             </div>
             <div class="section-desc">
-              文本 → 音频
+              Văn bản → âm thanh
             </div>
           </div>
         </div>
@@ -132,13 +132,13 @@
           <div class="input-area">
             <textarea
               v-model="ttsInput"
-              placeholder="输入要合成的文本..."
+              placeholder="Bạn nhập văn bản cần tổng hợp..."
               rows="3"
             />
           </div>
 
           <div class="voice-select">
-            <label>选择声音:</label>
+            <label>Chọn giọng đọc:</label>
             <div class="voice-options">
               <button
                 v-for="voice in voices"
@@ -161,7 +161,7 @@
               v-if="isProcessingTTS"
               class="spinner"
             />
-            <span v-else>🗣 合成语音</span>
+            <span v-else>🗣 Tổng hợp giọng nói</span>
           </button>
 
           <div
@@ -169,7 +169,7 @@
             class="result-box audio-result"
           >
             <div class="result-label">
-              合成结果
+              Kết quả tổng hợp
             </div>
             <canvas
               ref="outputWaveform"
@@ -197,7 +197,7 @@
 
     <div class="comparison-section">
       <div class="comp-title">
-        📊 ASR vs TTS 对比
+        📊 So sánh ASR vs TTS
       </div>
       <div class="comp-grid">
         <div class="comp-card">
@@ -209,16 +209,16 @@
           </div>
           <div class="comp-items">
             <div class="comp-item">
-              <span class="label">输入:</span>
-              <span>音频波形</span>
+              <span class="label">Đầu vào:</span>
+              <span>Sóng âm</span>
             </div>
             <div class="comp-item">
-              <span class="label">输出:</span>
-              <span>文本序列</span>
+              <span class="label">Đầu ra:</span>
+              <span>Chuỗi văn bản</span>
             </div>
             <div class="comp-item">
-              <span class="label">难点:</span>
-              <span>噪声、口音、同音词</span>
+              <span class="label">Khó khăn:</span>
+              <span>Tiếng ồn, giọng vùng, từ đồng âm</span>
             </div>
           </div>
         </div>
@@ -232,16 +232,16 @@
           </div>
           <div class="comp-items">
             <div class="comp-item">
-              <span class="label">输入:</span>
-              <span>文本序列</span>
+              <span class="label">Đầu vào:</span>
+              <span>Chuỗi văn bản</span>
             </div>
             <div class="comp-item">
-              <span class="label">输出:</span>
-              <span>音频波形</span>
+              <span class="label">Đầu ra:</span>
+              <span>Sóng âm</span>
             </div>
             <div class="comp-item">
-              <span class="label">难点:</span>
-              <span>韵律、情感、自然度</span>
+              <span class="label">Khó khăn:</span>
+              <span>Ngữ điệu, cảm xúc, độ tự nhiên</span>
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@
 
     <div class="pipeline-comparison">
       <div class="pipe-title">
-        🔀 架构对比
+        🔀 So sánh kiến trúc
       </div>
       <div class="pipeline-diagram">
         <div class="pipeline asr-pipe">
@@ -259,11 +259,11 @@
           </div>
           <div class="pipe-flow">
             <div class="pipe-step">
-              音频
+              Âm thanh
             </div>
             <span>→</span>
             <div class="pipe-step">
-              特征
+              Đặc trưng
             </div>
             <span>→</span>
             <div class="pipe-step">
@@ -275,7 +275,7 @@
             </div>
             <span>→</span>
             <div class="pipe-step output">
-              文本
+              Văn bản
             </div>
           </div>
         </div>
@@ -286,7 +286,7 @@
           </div>
           <div class="pipe-flow">
             <div class="pipe-step">
-              文本
+              Văn bản
             </div>
             <span>→</span>
             <div class="pipe-step">
@@ -298,11 +298,11 @@
             </div>
             <span>→</span>
             <div class="pipe-step">
-              声码器
+              vocoder
             </div>
             <span>→</span>
             <div class="pipe-step output">
-              音频
+              Âm thanh
             </div>
           </div>
         </div>
@@ -312,10 +312,10 @@
     <div class="info-box">
       <span class="icon">💡</span>
       <p>
-        <strong>互逆关系：</strong>
-        ASR 和 TTS 是语音技术的两个核心方向，互为逆过程。
-        ASR 将连续的音频信号转换为离散的文本，TTS 则将离散的文本转换为连续的音频信号。
-        两者都依赖于声学模型和语言模型。
+        <strong>Mối quan hệ ngược:</strong>
+        ASR và TTS là hai hướng cốt lõi của công nghệ giọng nói, đảo ngược lẫn nhau.
+        ASR biến tín hiệu âm thanh liên tục thành văn bản rời rạc, còn TTS biến văn bản rời rạc thành tín hiệu âm thanh liên tục.
+        Cả hai đều dựa trên mô hình âm học và mô hình ngôn ngữ.
       </p>
     </div>
   </div>
@@ -340,10 +340,10 @@ const playing = ref(false)
 const playProgress = ref(0)
 
 const voices = [
-  { id: 'default', name: '默认', icon: '🎙️' },
-  { id: 'male', name: '男声', icon: '👨' },
-  { id: 'female', name: '女声', icon: '👩' },
-  { id: 'child', name: '童声', icon: '🧒' }
+  { id: 'default', name: 'Mặc định', icon: '🎙️' },
+  { id: 'male', name: 'Giọng nam', icon: '👨' },
+  { id: 'female', name: 'Giọng nữ', icon: '👩' },
+  { id: 'child', name: 'Giọng trẻ em', icon: '🧒' }
 ]
 
 const inputWaveform = ref(null)
@@ -388,7 +388,7 @@ const processASR = () => {
 
   setTimeout(() => {
     isProcessingASR.value = false
-    asrResult.value = '这是一段示例语音识别结果，展示了 ASR 的工作效果。'
+    asrResult.value = 'Đây là một đoạn kết quả nhận dạng giọng nói minh hoạ cho cách ASR hoạt động.'
     asrConfidence.value = 94
     asrTime.value = 320
     ttsInput.value = asrResult.value

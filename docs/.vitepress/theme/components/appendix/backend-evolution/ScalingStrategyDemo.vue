@@ -1,8 +1,8 @@
 <template>
   <div class="scaling-strategy-demo">
     <div class="demo-header">
-      <h4>📈 扩展策略对比</h4>
-      <p>垂直扩展 vs 水平扩展</p>
+      <h4>📈 So sánh chiến lược mở rộng</h4>
+      <p>Vertical scaling vs Horizontal scaling</p>
     </div>
 
     <div class="strategies">
@@ -15,10 +15,10 @@
           📦
         </div>
         <div class="strategy-name">
-          垂直扩展
+          Vertical scaling
         </div>
         <div class="strategy-desc">
-          买更强的机器
+          Mua máy mạnh hơn
         </div>
         <div class="visual-vertical">
           <div
@@ -29,7 +29,7 @@
               CPU
             </div>
             <div class="memory">
-              内存
+              RAM
             </div>
           </div>
         </div>
@@ -44,10 +44,10 @@
           🔄
         </div>
         <div class="strategy-name">
-          水平扩展
+          Horizontal scaling
         </div>
         <div class="strategy-desc">
-          加更多机器
+          Thêm nhiều máy hơn
         </div>
         <div class="visual-horizontal">
           <div class="servers">
@@ -65,9 +65,9 @@
 
     <div class="comparison-table">
       <div class="table-row header">
-        <span>维度</span>
-        <span>垂直扩展</span>
-        <span>水平扩展</span>
+        <span>Tiêu chí</span>
+        <span>Vertical scaling</span>
+        <span>Horizontal scaling</span>
       </div>
       <div
         v-for="item in comparisonData"
@@ -89,10 +89,10 @@ const activeStrategy = ref('horizontal')
 const serverCount = ref(3)
 
 const comparisonData = [
-  { dim: '成本', vertical: '硬件贵', horizontal: '机器多', verticalBetter: false, horizontalBetter: true },
-  { dim: '上限', vertical: '有瓶颈', horizontal: '理论上无限', verticalBetter: false, horizontalBetter: true },
-  { dim: '复杂度', vertical: '简单', horizontal: '需要分布式', verticalBetter: true, horizontalBetter: false },
-  { dim: '数据', vertical: '一致性好', horizontal: '需要同步', verticalBetter: true, horizontalBetter: false }
+  { dim: 'Chi phí', vertical: 'Phần cứng đắt', horizontal: 'Nhiều máy', verticalBetter: false, horizontalBetter: true },
+  { dim: 'Giới hạn', vertical: 'Có điểm nghẽn', horizontal: 'Lý thuyết vô hạn', verticalBetter: false, horizontalBetter: true },
+  { dim: 'Độ phức tạp', vertical: 'Đơn giản', horizontal: 'Cần distributed', verticalBetter: true, horizontalBetter: false },
+  { dim: 'Dữ liệu', vertical: 'Nhất quán tốt', horizontal: 'Cần đồng bộ', verticalBetter: true, horizontalBetter: false }
 ]
 </script>
 

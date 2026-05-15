@@ -2,10 +2,10 @@
   <div class="vlm-quick-start">
     <div class="header">
       <div class="title">
-        👁️ VLM 初体验：不只是看图说话
+        👁️ Trải nghiệm VLM: hơn cả "nhìn ảnh kể chuyện"
       </div>
       <div class="subtitle">
-        选择不同场景，体验多模态模型的多种能力。
+        Bạn chọn các kịch bản khác nhau để trải nghiệm các năng lực đa phương thức của mô hình.
       </div>
     </div>
 
@@ -39,7 +39,7 @@
               class="upload-btn"
               @click="loadImage"
             >
-              上传图片 (模拟)
+              Tải ảnh lên (mô phỏng)
             </button>
           </div>
 
@@ -95,7 +95,7 @@
               class="factory-image"
             >
               <div class="safety-sign">
-                ⚠️ 安全生产
+                ⚠️ An toàn lao động
               </div>
               <div class="worker-container">
                 <span class="worker">👷</span>
@@ -150,7 +150,7 @@
             v-if="messages.length === 0"
             class="empty-text"
           >
-            {{ hasImage ? '图片已就绪，请选择指令' : '请先上传图片' }}
+            {{ hasImage ? 'Ảnh đã sẵn sàng, mời bạn chọn câu lệnh' : 'Bạn vui lòng tải ảnh lên trước' }}
           </div>
           <div
             v-for="(msg, index) in messages"
@@ -196,13 +196,13 @@
             v-else-if="isGenerating"
             class="status-text"
           >
-            AI 正在观察图片并思考...
+            AI đang quan sát ảnh và suy nghĩ...
           </div>
           <div
             v-else
             class="status-text"
           >
-            等待图片上传...
+            Đang chờ bạn tải ảnh lên...
           </div>
         </div>
       </div>
@@ -214,10 +214,10 @@
 import { ref, computed, nextTick } from 'vue'
 
 const scenarios = [
-  { id: 'chat', name: '通用对话' },
-  { id: 'detection', name: '目标检测' },
-  { id: 'ocr', name: 'OCR 提取' },
-  { id: 'analysis', name: '业务风控' }
+  { id: 'chat', name: 'Hội thoại chung' },
+  { id: 'detection', name: 'Phát hiện đối tượng' },
+  { id: 'ocr', name: 'Trích xuất OCR' },
+  { id: 'analysis', name: 'Giám sát rủi ro' }
 ]
 
 const currentScenario = ref('chat')
@@ -228,23 +228,23 @@ const messages = ref([])
 const messagesRef = ref(null)
 
 const questionsMap = {
-  chat: ['这里是哪里？', '描述一下天气', '写首关于这座山的诗'],
-  detection: ['检测图中的水果', '数数有几个苹果', '输出检测框坐标'],
-  ocr: ['提取所有文字', '总金额是多少？', '消费日期是哪天？'],
-  analysis: ['工人是否佩戴安全帽？', '检测现场安全隐患', '输出风险评估报告']
+  chat: ['Đây là đâu vậy?', 'Mô tả thời tiết giúp mình', 'Viết một bài thơ về ngọn núi này'],
+  detection: ['Phát hiện các loại trái cây trong ảnh', 'Đếm xem có bao nhiêu quả táo', 'Xuất toạ độ bounding box'],
+  ocr: ['Trích xuất toàn bộ chữ', 'Tổng số tiền là bao nhiêu?', 'Ngày giao dịch là ngày nào?'],
+  analysis: ['Công nhân có đội mũ bảo hộ không?', 'Phát hiện nguy cơ an toàn tại hiện trường', 'Xuất báo cáo đánh giá rủi ro']
 }
 
 const answersMap = {
   chat: {
-    '这里是哪里？':
-      '这是一张高山风景照。远处是覆盖着皑皑白雪的山峰，可能是阿尔卑斯山或喜马拉雅山脉。山脚下有郁郁葱葱的松树林。',
-    描述一下天气:
-      '天气看起来非常晴朗，阳光明媚（☀️），能见度很高。蓝天白云，是一个适合登山或滑雪的好天气。',
-    写首关于这座山的诗:
-      '🏔️ 雪岭插云天，\n🌲 松涛响翠烟。\n☀️ 金阳融冷色，\n🏞️ 壮丽入心田。'
+    'Đây là đâu vậy?':
+      'Đây là một bức ảnh phong cảnh núi cao. Xa xa là những đỉnh núi phủ tuyết trắng xoá, có thể là dãy Alps hoặc Himalaya. Dưới chân núi là rừng thông xanh mướt.',
+    'Mô tả thời tiết giúp mình':
+      'Thời tiết trông rất quang đãng, nắng đẹp (☀️), tầm nhìn xa. Trời xanh mây trắng, là điều kiện tốt để leo núi hoặc trượt tuyết.',
+    'Viết một bài thơ về ngọn núi này':
+      '🏔️ Đỉnh tuyết chạm trời mây,\n🌲 Rừng thông reo gió rậy.\n☀️ Nắng vàng tan giá lạnh,\n🏞️ Hùng vĩ in lòng người.'
   },
   detection: {
-    检测图中的水果: {
+    'Phát hiện các loại trái cây trong ảnh': {
       type: 'json',
       text: JSON.stringify(
         { objects: ['apple', 'banana', 'grape'], count: 3 },
@@ -253,8 +253,8 @@ const answersMap = {
       ),
       action: 'showBox'
     },
-    数数有几个苹果: '图中检测到 1 个苹果（🍎）。',
-    输出检测框坐标: {
+    'Đếm xem có bao nhiêu quả táo': 'Phát hiện 1 quả táo (🍎) trong ảnh.',
+    'Xuất toạ độ bounding box': {
       type: 'json',
       text: JSON.stringify(
         {
@@ -270,7 +270,7 @@ const answersMap = {
     }
   },
   ocr: {
-    提取所有文字: {
+    'Trích xuất toàn bộ chữ': {
       type: 'json',
       text: JSON.stringify(
         {
@@ -286,13 +286,13 @@ const answersMap = {
         2
       )
     },
-    '总金额是多少？': '这张小票的总金额是 $7.50。',
-    '消费日期是哪天？': '消费日期是 2023年10月24日。'
+    'Tổng số tiền là bao nhiêu?': 'Tổng số tiền của hoá đơn là $7.50.',
+    'Ngày giao dịch là ngày nào?': 'Ngày giao dịch là 24/10/2023.'
   },
   analysis: {
-    '工人是否佩戴安全帽？':
-      '检测到画面中有一名工人（👷），已正确佩戴红色安全帽（⛑️）。',
-    检测现场安全隐患: {
+    'Công nhân có đội mũ bảo hộ không?':
+      'Phát hiện một công nhân (👷) trong ảnh, đã đội mũ bảo hộ màu đỏ (⛑️) đúng quy cách.',
+    'Phát hiện nguy cơ an toàn tại hiện trường': {
       type: 'json',
       text: JSON.stringify(
         { hazards: [], safety_score: 100, status: 'SAFE' },
@@ -300,17 +300,17 @@ const answersMap = {
         2
       )
     },
-    输出风险评估报告:
-      '✅ **安全合规**\n- 人员：1人\n- 防护装备：齐全\n- 机械设备：正常运行中\n- 风险等级：低'
+    'Xuất báo cáo đánh giá rủi ro':
+      '✅ **Đạt chuẩn an toàn**\n- Nhân sự: 1 người\n- Trang bị bảo hộ: đầy đủ\n- Thiết bị máy: vận hành bình thường\n- Mức rủi ro: thấp'
   }
 }
 
 const getImageLabel = () => {
   const map = {
-    chat: '已上传：雪山风景.jpg',
-    detection: '已上传：水果果盘.jpg',
-    ocr: '已上传：购物小票.jpg',
-    analysis: '已上传：车间监控.jpg'
+    chat: 'Đã tải lên: nui-tuyet.jpg',
+    detection: 'Đã tải lên: dia-trai-cay.jpg',
+    ocr: 'Đã tải lên: hoa-don.jpg',
+    analysis: 'Đã tải lên: giam-sat-xuong.jpg'
   }
   return map[currentScenario.value]
 }
@@ -339,7 +339,7 @@ const ask = async (question) => {
   await wait(800) // Simulate vision encoding time
 
   const scenarioAnswers = answersMap[currentScenario.value]
-  const rawAnswer = scenarioAnswers[question] || '我还在学习这个任务...'
+  const rawAnswer = scenarioAnswers[question] || 'Mình vẫn đang học nhiệm vụ này...'
 
   let content = ''
   let isJson = false

@@ -1,9 +1,9 @@
 <template>
   <div class="gcc-root">
-    <p class="gcc-desc">把这张表存起来，遇到忘了的命令随时查：</p>
+    <p class="gcc-desc">Lưu bảng này lại, lúc nào quên lệnh thì xem ngay:</p>
     <div class="gcc-chart-wrap">
       <div class="chart-header">
-        <span class="y-axis-label">使用频率</span>
+        <span class="y-axis-label">Tần suất dùng</span>
         <div class="chart-area">
           <svg class="chart-svg" :viewBox="`0 0 ${chartWidth} ${height}`" preserveAspectRatio="none" :width="chartWidth" :height="height">
             <!-- Grid lines (horizontal) -->
@@ -14,7 +14,7 @@
             <rect v-for="(row, i) in rows" :key="i" :x="barX(i)" :y="barY(row)" :width="barW" :height="barHeight(row)" class="bar-rect">
               <title>{{ row.cmd }} — {{ row.freqLabel || levelLabel(row.level) }}</title>
             </rect>
-            <!-- X axis: 命令名 + 下方一行简短功能描述，旋转 -45° -->
+            <!-- X axis: tên command + dòng mô tả ngắn bên dưới, xoay -45° -->
             <g v-for="(row, i) in rows" :key="'label-'+i">
               <text
                 :x="barX(i) + barW / 2"
@@ -37,7 +37,7 @@
             </g>
           </svg>
         </div>
-        <div class="x-axis-label">命令 <span class="scroll-hint">（可左右滑动查看）</span></div>
+        <div class="x-axis-label">Command <span class="scroll-hint">(có thể trượt ngang để xem)</span></div>
       </div>
     </div>
   </div>
@@ -47,31 +47,31 @@
 import { computed } from 'vue'
 
 const rawRows = [
-  { cmd: 'git init', desc: '在当前目录初始化 Git 仓库', level: 0, freqLabel: '项目开始时一次' },
-  { cmd: 'git status', desc: '查看工作区和暂存区的状态', level: 5, freqLabel: '极高频' },
-  { cmd: 'git add <文件>', desc: '把指定文件放入暂存区', level: 5, freqLabel: '每次提交前' },
-  { cmd: 'git add .', desc: '把所有修改放入暂存区', level: 5, freqLabel: '' },
-  { cmd: 'git commit -m "..."', desc: '提交暂存区内容，附上说明', level: 5, freqLabel: '' },
-  { cmd: 'git push', desc: '推送到远程仓库', level: 5, freqLabel: '' },
-  { cmd: 'git pull', desc: '拉取远程最新内容', level: 5, freqLabel: '' },
-  { cmd: 'git log --oneline', desc: '查看简洁的提交历史', level: 4, freqLabel: '' },
-  { cmd: 'git checkout -b <分支名>', desc: '创建并切换到新分支', level: 4, freqLabel: '' },
-  { cmd: 'git checkout <分支名>', desc: '切换到已有分支', level: 4, freqLabel: '' },
-  { cmd: 'git clone <url>', desc: '克隆远程仓库到本地', level: 4, freqLabel: '' },
-  { cmd: 'git branch', desc: '查看所有本地分支', level: 3, freqLabel: '' },
-  { cmd: 'git merge <分支名>', desc: '将指定分支合并到当前分支', level: 3, freqLabel: '' },
-  { cmd: 'git stash', desc: '临时保存未提交的改动（切换任务时用）', level: 3, freqLabel: '' },
-  { cmd: 'git stash pop', desc: '恢复之前 stash 的改动', level: 3, freqLabel: '' },
-  { cmd: 'git reset HEAD~1', desc: '撤销最近一次提交（保留改动）', level: 3, freqLabel: '' },
-  { cmd: 'git diff', desc: '查看工作区和暂存区的具体差异', level: 3, freqLabel: '' },
-  { cmd: 'git branch -d <分支名>', desc: '删除已合并的分支', level: 2, freqLabel: '' },
-  { cmd: 'git remote add origin <url>', desc: '关联远程仓库（只做一次）', level: 0, freqLabel: '项目初始时' },
+  { cmd: 'git init', desc: 'Khởi tạo Git repository trong thư mục hiện tại', level: 0, freqLabel: 'Một lần khi bắt đầu dự án' },
+  { cmd: 'git status', desc: 'Xem trạng thái working area và staging area', level: 5, freqLabel: 'Cực kỳ thường xuyên' },
+  { cmd: 'git add <file>', desc: 'Thêm file chỉ định vào staging area', level: 5, freqLabel: 'Mỗi lần trước khi commit' },
+  { cmd: 'git add .', desc: 'Thêm tất cả thay đổi vào staging area', level: 5, freqLabel: '' },
+  { cmd: 'git commit -m "..."', desc: 'Commit nội dung staging area kèm message', level: 5, freqLabel: '' },
+  { cmd: 'git push', desc: 'Push lên remote repository', level: 5, freqLabel: '' },
+  { cmd: 'git pull', desc: 'Pull nội dung mới nhất từ remote', level: 5, freqLabel: '' },
+  { cmd: 'git log --oneline', desc: 'Xem lịch sử commit dạng rút gọn', level: 4, freqLabel: '' },
+  { cmd: 'git checkout -b <branch>', desc: 'Tạo và chuyển sang branch mới', level: 4, freqLabel: '' },
+  { cmd: 'git checkout <branch>', desc: 'Chuyển sang branch đã có', level: 4, freqLabel: '' },
+  { cmd: 'git clone <url>', desc: 'Clone remote repository về máy', level: 4, freqLabel: '' },
+  { cmd: 'git branch', desc: 'Xem tất cả branch local', level: 3, freqLabel: '' },
+  { cmd: 'git merge <branch>', desc: 'Merge branch chỉ định vào branch hiện tại', level: 3, freqLabel: '' },
+  { cmd: 'git stash', desc: 'Tạm lưu các thay đổi chưa commit (khi đổi task)', level: 3, freqLabel: '' },
+  { cmd: 'git stash pop', desc: 'Khôi phục thay đổi đã stash trước đó', level: 3, freqLabel: '' },
+  { cmd: 'git reset HEAD~1', desc: 'Hủy commit gần nhất (giữ thay đổi)', level: 3, freqLabel: '' },
+  { cmd: 'git diff', desc: 'Xem khác biệt cụ thể giữa working area và staging', level: 3, freqLabel: '' },
+  { cmd: 'git branch -d <branch>', desc: 'Xóa branch đã merge', level: 2, freqLabel: '' },
+  { cmd: 'git remote add origin <url>', desc: 'Liên kết remote repository (chỉ một lần)', level: 0, freqLabel: 'Lúc khởi tạo dự án' },
 ]
 
 const rows = computed(() => [...rawRows].sort((a, b) => b.level - a.level))
 
 function levelLabel(level) {
-  const map = { 5: '极高频', 4: '高频', 3: '中频', 2: '低频', 1: '很少', 0: '一次性' }
+  const map = { 5: 'Cực kỳ thường xuyên', 4: 'Thường xuyên', 3: 'Vừa', 2: 'Ít', 1: 'Rất ít', 0: 'Một lần' }
   return map[level] || ''
 }
 

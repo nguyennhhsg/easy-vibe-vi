@@ -1,15 +1,15 @@
 <!--
   ArchitectureDemo.vue
-  终端架构演示组件
-  
-  用途：
-  可视化展示 Terminal（终端）、Shell（壳）和 Kernel（内核）之间的交互流程。
-  通过模拟 "ls" 命令的执行过程，帮助用户理解输入传输、解析、系统调用、数据返回和渲染显示的完整链路。
-  
-  交互功能：
-  - 逐步演示 (Step-by-Step)：用户点击按钮一步步观察数据包流转。
-  - 中英双语说明：适应不同语言背景的读者。
-  - 状态反馈：实时显示各组件（终端/Shell/内核）的当前状态（空闲/忙碌）。
+  Component demo kiến trúc terminal
+
+  Mục đích:
+  Trực quan hóa luồng tương tác giữa Terminal, Shell và Kernel.
+  Thông qua mô phỏng thực thi lệnh "ls", giúp user hiểu toàn bộ chu trình: input → parse → syscall → trả dữ liệu → render.
+
+  Tính năng tương tác:
+  - Step-by-Step: user bấm để xem từng gói dữ liệu di chuyển qua các bước.
+  - Song ngữ Anh-Việt: phục vụ nhiều đối tượng.
+  - Phản hồi trạng thái: hiển thị trạng thái các thành phần (idle/busy) theo thời gian thực.
 -->
 <template>
   <div class="arch-demo">
@@ -20,10 +20,10 @@
         </div>
         <div class="text">
           <div class="role">
-            Terminal (终端)
+            Terminal
           </div>
           <div class="desc">
-            传声筒 / 窗口
+            Cửa sổ / loa truyền tiếng
           </div>
         </div>
       </div>
@@ -33,10 +33,10 @@
         </div>
         <div class="text">
           <div class="role">
-            Shell (壳)
+            Shell
           </div>
           <div class="desc">
-            翻译官 / 助手
+            Thông dịch viên / trợ lý
           </div>
         </div>
       </div>
@@ -46,10 +46,10 @@
         </div>
         <div class="text">
           <div class="role">
-            Kernel (内核)
+            Kernel
           </div>
           <div class="desc">
-            大管家 / 芯片
+            Quản gia / chip
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
       >
         <div class="click-hint">
           <span class="icon">👆</span>
-          <span class="text">不断点击屏幕演示 / Keep Clicking</span>
+          <span class="text">Click liên tục vào màn hình để demo / Keep Clicking</span>
         </div>
       </div>
 
@@ -81,7 +81,7 @@
           @click.stop="reset"
         >
           <span class="icon">✅</span>
-          <span class="text">演示结束，点击重置 / Finished (Reset)</span>
+          <span class="text">Demo kết thúc, click để reset / Finished (Reset)</span>
         </div>
       </div>
 
@@ -89,7 +89,7 @@
       <div class="spaces-bg">
         <div class="space user-space">
           <div class="space-header">
-            User Space (用户空间)
+            User Space
           </div>
         </div>
         <div class="barrier">
@@ -97,7 +97,7 @@
         </div>
         <div class="space kernel-space">
           <div class="space-header">
-            Kernel Space (内核空间)
+            Kernel Space
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
         :class="{ active: activeNode === 'terminal' }"
       >
         <div class="node-title">
-          TERMINAL (终端)
+          TERMINAL
         </div>
         <div class="screen">
           <div
@@ -163,7 +163,7 @@
         :class="{ active: activeNode === 'shell' }"
       >
         <div class="node-title">
-          SHELL (壳)
+          SHELL
         </div>
         <div class="process-box">
           <div class="status-icon">
@@ -209,7 +209,7 @@
         :class="{ active: activeNode === 'kernel' }"
       >
         <div class="node-title">
-          KERNEL (内核)
+          KERNEL
         </div>
         <div class="process-box">
           <div class="status-icon">
@@ -232,16 +232,16 @@
           :disabled="currentStep >= totalSteps"
           @click="nextStep"
         >
-          <span v-if="currentStep === 0">▶️ Start Simulation / 开始演示</span>
-          <span v-else-if="currentStep < totalSteps">Next Step / 下一步 ({{ currentStep }}/{{ totalSteps }}) ➡️</span>
-          <span v-else>✅ Done / 完成 (Reset)</span>
+          <span v-if="currentStep === 0">▶️ Start Simulation / Bắt đầu demo</span>
+          <span v-else-if="currentStep < totalSteps">Next Step / Bước tiếp ({{ currentStep }}/{{ totalSteps }}) ➡️</span>
+          <span v-else>✅ Done / Hoàn tất (Reset)</span>
         </button>
         <button
           v-if="currentStep > 0"
           class="btn secondary"
           @click="reset"
         >
-          Reset / 重置
+          Reset
         </button>
       </div>
 
@@ -263,7 +263,7 @@
           </div>
         </div>
         <div class="step-tech">
-          <span class="tech-label">Technical / 技术原理:</span>
+          <span class="tech-label">Technical / Nguyên lý kỹ thuật:</span>
           <div class="tech-content">
             <div class="en">
               {{ steps[currentStep - 1].techEn }}
@@ -284,7 +284,7 @@
             the system.
           </div>
           <div class="zh">
-            点击“开始演示”查看 'ls' 命令如何在系统中流转。
+            Click "Start Simulation" để xem lệnh 'ls' di chuyển trong hệ thống.
           </div>
         </div>
       </div>
@@ -308,12 +308,12 @@ const kernelIcon = ref('💤')
 const steps = [
   {
     titleEn: '1. User Input',
-    titleZh: '1. 用户输入',
+    titleZh: '1. User input',
     descEn:
       "You type 'ls' in the terminal window. The terminal captures your keystrokes.",
-    descZh: "你在终端窗口输入 'ls'。终端会捕获你的按键操作。",
+    descZh: "Bạn gõ 'ls' vào terminal. Terminal sẽ bắt giữ các phím bấm.",
     techEn: "Terminal buffers input in 'Cooked Mode' until you press Enter.",
-    techZh: '终端在“加工模式 (Cooked Mode)”下缓冲输入，直到你按下回车键。',
+    techZh: 'Terminal buffer input ở chế độ "cooked mode" cho đến khi bạn bấm Enter.',
     action: async () => {
       activeNode.value = 'terminal'
       currentInput.value = 'l'
@@ -323,12 +323,12 @@ const steps = [
   },
   {
     titleEn: '2. Transmission',
-    titleZh: '2. 传输',
+    titleZh: '2. Truyền tải',
     descEn:
       "The Terminal sends the characters 'l', 's', and 'Enter' to the Shell.",
-    descZh: "终端将字符 'l'、's' 和 '回车' 发送给 Shell。",
+    descZh: "Terminal gửi các ký tự 'l', 's' và 'Enter' sang shell.",
     techEn: 'Data travels via standard input (stdin) as a byte stream.',
-    techZh: '数据通过标准输入 (stdin) 以字节流的形式传输。',
+    techZh: 'Dữ liệu đi qua stdin dưới dạng byte stream.',
     action: async () => {
       packetState.value = 't-to-s'
       await wait(1000)
@@ -337,11 +337,11 @@ const steps = [
   },
   {
     titleEn: '3. Shell Parsing',
-    titleZh: '3. Shell 解析',
+    titleZh: '3. Shell parse',
     descEn: 'The Shell (Waiter) translates your command for the Kernel.',
-    descZh: 'Shell（服务员）接收指令，并将其翻译成内核能听懂的请求。',
+    descZh: 'Shell (giống bồi bàn) nhận lệnh và dịch sang yêu cầu kernel hiểu được.',
     techEn: "Shell tokenizes input, finds the 'ls' executable in $PATH.",
-    techZh: "Shell 对输入进行分词，并在 $PATH 环境变量中查找 'ls' 可执行文件。",
+    techZh: "Shell phân tách input thành token, tìm file thực thi 'ls' trong $PATH.",
     action: async () => {
       activeNode.value = 'shell'
       shellIcon.value = '🧠'
@@ -350,11 +350,11 @@ const steps = [
   },
   {
     titleEn: '4. System Call',
-    titleZh: '4. 系统调用',
+    titleZh: '4. System call',
     descEn: 'The Shell asks the Kernel to read the file list from the disk.',
-    descZh: 'Shell 请求内核从磁盘读取文件列表。',
+    descZh: 'Shell yêu cầu kernel đọc danh sách file từ ổ đĩa.',
     techEn: 'Shell invokes `execve()` and `getdents()` system calls.',
-    techZh: 'Shell 调用 `execve()` 和 `getdents()` 等系统调用。',
+    techZh: 'Shell gọi các system call như `execve()` và `getdents()`.',
     action: async () => {
       packetState.value = 's-to-k'
       await wait(1000)
@@ -363,11 +363,11 @@ const steps = [
   },
   {
     titleEn: '5. Kernel Execution',
-    titleZh: '5. 内核执行',
+    titleZh: '5. Kernel thực thi',
     descEn: 'The Kernel (Kitchen) executes the request by accessing hardware.',
-    descZh: '内核（后厨）直接操作硬件（如磁盘）来执行实际任务。',
+    descZh: 'Kernel (giống nhà bếp) trực tiếp thao tác phần cứng (vd ổ đĩa) để chạy task.',
     techEn: 'Kernel driver accesses the file system (APFS/ext4).',
-    techZh: '内核驱动程序访问文件系统 (APFS/ext4)。',
+    techZh: 'Driver kernel truy cập file system (APFS/ext4).',
     action: async () => {
       activeNode.value = 'kernel'
       kernelIcon.value = '💾'
@@ -378,11 +378,11 @@ const steps = [
   },
   {
     titleEn: '6. Returning Data',
-    titleZh: '6. 返回数据',
+    titleZh: '6. Trả dữ liệu',
     descEn: 'The Kernel gives the raw file list back to the Shell.',
-    descZh: '内核将原始文件列表数据返回给 Shell。',
+    descZh: 'Kernel trả dữ liệu danh sách file thô về cho shell.',
     techEn: 'System call returns with file descriptors/structs.',
-    techZh: '系统调用返回文件描述符或结构体数据。',
+    techZh: 'System call trả về file descriptor hoặc struct dữ liệu.',
     action: async () => {
       kernelStatus.value = 'Idle'
       kernelIcon.value = '💤'
@@ -393,12 +393,12 @@ const steps = [
   },
   {
     titleEn: '7. Formatting',
-    titleZh: '7. 格式化',
+    titleZh: '7. Định dạng',
     descEn:
       'The Shell formats the raw list into text, adding colors if needed.',
-    descZh: 'Shell 将原始列表格式化为文本，并根据需要添加颜色。',
+    descZh: 'Shell định dạng danh sách thô thành văn bản, thêm màu khi cần.',
     techEn: 'Shell formats output buffer, adding ANSI color codes.',
-    techZh: 'Shell 格式化输出缓冲区，并添加 ANSI 颜色代码。',
+    techZh: 'Shell định dạng output buffer và thêm mã màu ANSI.',
     action: async () => {
       activeNode.value = 'shell'
       shellIcon.value = '🎨'
@@ -408,11 +408,11 @@ const steps = [
   },
   {
     titleEn: '8. Display Output',
-    titleZh: '8. 显示输出',
+    titleZh: '8. Hiển thị output',
     descEn: 'The Shell sends the final text back to the Terminal to show you.',
-    descZh: 'Shell 将最终文本发送回终端以供显示。',
+    descZh: 'Shell gửi văn bản cuối cùng về terminal để hiển thị cho bạn.',
     techEn: 'Data travels via standard output (stdout) to the TTY.',
-    techZh: '数据通过标准输出 (stdout) 传输到 TTY。',
+    techZh: 'Dữ liệu đi qua stdout đến TTY.',
     action: async () => {
       shellStatus.value = 'Idle'
       shellIcon.value = '💤'
@@ -423,11 +423,11 @@ const steps = [
   },
   {
     titleEn: '9. Render',
-    titleZh: '9. 渲染',
+    titleZh: '9. Render',
     descEn: 'The Terminal draws the text on the screen grid.',
-    descZh: '终端在屏幕网格上绘制文本。',
+    descZh: 'Terminal vẽ văn bản lên lưới màn hình.',
     techEn: 'Terminal emulator renders glyphs into the frame buffer.',
-    techZh: '终端模拟器将字形渲染到帧缓冲区中。',
+    techZh: 'Trình mô phỏng terminal render glyph vào frame buffer.',
     action: async () => {
       activeNode.value = 'terminal'
       terminalLines.value = ['file1.txt  photo.jpg', 'notes.md']

@@ -1,42 +1,42 @@
 <template>
   <div class="compute-topology-demo">
-    <!-- 控制面板 -->
+    <!-- Bảng điều khiển -->
     <div class="control-panel">
       <el-radio-group
         v-model="viewMode"
         size="small"
       >
         <el-radio-button label="overview">
-          概览
+          Tổng quan
         </el-radio-button>
         <el-radio-button label="vm">
-          虚拟机
+          Máy ảo
         </el-radio-button>
         <el-radio-button label="container">
-          容器
+          Container
         </el-radio-button>
         <el-radio-button label="serverless">
-          无服务器
+          Serverless
         </el-radio-button>
       </el-radio-group>
 
       <el-switch
         v-model="showMetrics"
-        active-text="显示指标"
+        active-text="Hiện chỉ số"
         style="margin-left: 20px"
       />
     </div>
 
-    <!-- 计算架构图 -->
+    <!-- Sơ đồ kiến trúc compute -->
     <div class="compute-architecture">
-      <!-- 物理基础设施层 -->
+      <!-- Tầng hạ tầng vật lý -->
       <div
         v-if="viewMode === 'overview' || viewMode === 'vm'"
         class="layer physical-layer"
       >
         <div class="layer-header">
           <span class="layer-icon">🏭</span>
-          <span class="layer-title">物理基础设施</span>
+          <span class="layer-title">Hạ tầng vật lý</span>
         </div>
         <div class="layer-content">
           <div
@@ -63,14 +63,14 @@
         </div>
       </div>
 
-      <!-- 虚拟化层 -->
+      <!-- Tầng ảo hóa -->
       <div
         v-if="viewMode === 'overview' || viewMode === 'vm'"
         class="layer virtualization-layer"
       >
         <div class="layer-header">
           <span class="layer-icon">🔧</span>
-          <span class="layer-title">虚拟化层</span>
+          <span class="layer-title">Tầng ảo hóa</span>
         </div>
         <div class="layer-content">
           <div class="hypervisor-cluster">
@@ -113,7 +113,7 @@
                           :style="{ width: vm.memory + '%' }"
                         />
                       </div>
-                      <span class="metric-label">内存</span>
+                      <span class="metric-label">RAM</span>
                     </div>
                   </div>
                 </div>
@@ -123,21 +123,21 @@
         </div>
       </div>
 
-      <!-- 容器层 -->
+      <!-- Tầng container -->
       <div
         v-if="viewMode === 'overview' || viewMode === 'container'"
         class="layer container-layer"
       >
         <div class="layer-header">
           <span class="layer-icon">📦</span>
-          <span class="layer-title">容器编排层 (Kubernetes)</span>
+          <span class="layer-title">Tầng điều phối container (Kubernetes)</span>
         </div>
         <div class="layer-content">
           <div class="k8s-cluster">
-            <!-- 控制平面 -->
+            <!-- Control Plane -->
             <div class="control-plane">
               <div class="cp-title">
-                控制平面
+                Control Plane
               </div>
               <div class="cp-components">
                 <div
@@ -155,10 +155,10 @@
               </div>
             </div>
 
-            <!-- 工作节点 -->
+            <!-- Worker nodes -->
             <div class="worker-nodes">
               <div class="nodes-title">
-                工作节点
+                Worker nodes
               </div>
               <div class="nodes-grid">
                 <div
@@ -194,21 +194,21 @@
         </div>
       </div>
 
-      <!-- 无服务器层 -->
+      <!-- Tầng serverless -->
       <div
         v-if="viewMode === 'overview' || viewMode === 'serverless'"
         class="layer serverless-layer"
       >
         <div class="layer-header">
           <span class="layer-icon">⚡</span>
-          <span class="layer-title">无服务器计算 (Function Compute)</span>
+          <span class="layer-title">Serverless Computing (Function Compute)</span>
         </div>
         <div class="layer-content">
           <div class="serverless-arch">
-            <!-- 触发器 -->
+            <!-- Trigger -->
             <div class="triggers-section">
               <div class="section-title">
-                触发器
+                Trigger
               </div>
               <div class="triggers-list">
                 <div
@@ -226,10 +226,10 @@
               </div>
             </div>
 
-            <!-- 函数计算 -->
+            <!-- Function compute -->
             <div class="functions-section">
               <div class="section-title">
-                函数计算实例
+                Instance function compute
               </div>
               <div class="functions-list">
                 <div
@@ -246,7 +246,7 @@
                     class="func-metrics"
                   >
                     <div class="metric-row">
-                      <span class="metric-label">并发：</span>
+                      <span class="metric-label">Concurrency:</span>
                       <div class="concurrency-bar">
                         <div
                           class="concurrency-fill"
@@ -256,7 +256,7 @@
                       <span class="metric-value">{{ func.concurrency }}</span>
                     </div>
                     <div class="metric-row">
-                      <span class="metric-label">冷启动：</span>
+                      <span class="metric-label">Cold start:</span>
                       <span class="metric-value">{{ func.coldStart }}ms</span>
                     </div>
                   </div>
@@ -264,10 +264,10 @@
               </div>
             </div>
 
-            <!-- 后端服务 -->
+            <!-- Backend services -->
             <div class="backend-section">
               <div class="section-title">
-                后端服务
+                Dịch vụ backend
               </div>
               <div class="backend-services">
                 <div
@@ -289,23 +289,23 @@
       </div>
     </div>
 
-    <!-- 说明 -->
+    <!-- Chú thích -->
     <div class="architecture-legend">
       <div class="legend-title">
-        计算资源类型说明：
+        Các loại tài nguyên compute:
       </div>
       <div class="legend-items">
         <div class="legend-item">
           <span class="legend-icon">🔧</span>
-          <span class="legend-text">虚拟机 (ECS)：完整 OS 控制，适合传统应用</span>
+          <span class="legend-text">Máy ảo (ECS): toàn quyền điều khiển OS, phù hợp ứng dụng truyền thống</span>
         </div>
         <div class="legend-item">
           <span class="legend-icon">📦</span>
-          <span class="legend-text">容器 (K8s)：轻量级隔离，适合微服务</span>
+          <span class="legend-text">Container (K8s): cách ly nhẹ, phù hợp microservice</span>
         </div>
         <div class="legend-item">
           <span class="legend-icon">⚡</span>
-          <span class="legend-text">无服务器 (FC)：事件驱动，按需付费</span>
+          <span class="legend-text">Serverless (FC): điều khiển bằng sự kiện, trả tiền theo lượt dùng</span>
         </div>
       </div>
     </div>
@@ -318,11 +318,11 @@ import { ref } from 'vue'
 const viewMode = ref('overview')
 const showMetrics = ref(false)
 
-// 物理服务器
+// Server vật lý
 const serverRacks = [
   {
     id: 'rack-1',
-    name: '机柜 A',
+    name: 'Rack A',
     servers: Array(8).fill(null).map((_, i) => ({
       id: `srv-a-${i}`,
       status: i < 6 ? 'online' : 'offline'
@@ -330,7 +330,7 @@ const serverRacks = [
   },
   {
     id: 'rack-2',
-    name: '机柜 B',
+    name: 'Rack B',
     servers: Array(8).fill(null).map((_, i) => ({
       id: `srv-b-${i}`,
       status: i < 7 ? 'online' : 'standby'
@@ -338,7 +338,7 @@ const serverRacks = [
   }
 ]
 
-// 虚拟化层
+// Tầng ảo hóa
 const hypervisors = [
   {
     id: 'hv-1',
@@ -360,7 +360,7 @@ const hypervisors = [
   }
 ]
 
-// K8s 控制平面
+// K8s Control Plane
 const controlPlaneComponents = [
   { name: 'API Server', icon: '🔌' },
   { name: 'etcd', icon: '📚' },
@@ -368,7 +368,7 @@ const controlPlaneComponents = [
   { name: 'Controller', icon: '🎮' }
 ]
 
-// 工作节点
+// Worker nodes
 const workerNodes = [
   {
     name: 'Node-1',
@@ -398,27 +398,27 @@ const workerNodes = [
   }
 ]
 
-// Serverless 触发器
+// Serverless trigger
 const triggers = [
-  { name: 'HTTP 请求', icon: '🌐' },
-  { name: '定时任务', icon: '⏰' },
-  { name: 'OSS 事件', icon: '📦' },
-  { name: '消息队列', icon: '📨' }
+  { name: 'HTTP request', icon: '🌐' },
+  { name: 'Tác vụ định kỳ', icon: '⏰' },
+  { name: 'Sự kiện OSS', icon: '📦' },
+  { name: 'Message queue', icon: '📨' }
 ]
 
-// 函数列表
+// Danh sách function
 const functions = [
   { name: 'user-service', runtime: 'Node.js', concurrency: 45, coldStart: 120 },
   { name: 'order-processor', runtime: 'Python', concurrency: 32, coldStart: 85 },
   { name: 'image-resizer', runtime: 'Go', concurrency: 18, coldStart: 45 }
 ]
 
-// 后端服务
+// Dịch vụ backend
 const backendServices = [
-  { name: 'API 网关', icon: '🚪' },
-  { name: '对象存储', icon: '🪣' },
-  { name: '数据库', icon: '🗄️' },
-  { name: '缓存', icon: '⚡' }
+  { name: 'API Gateway', icon: '🚪' },
+  { name: 'Object storage', icon: '🪣' },
+  { name: 'Database', icon: '🗄️' },
+  { name: 'Cache', icon: '⚡' }
 ]
 </script>
 

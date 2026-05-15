@@ -1,13 +1,13 @@
 <template>
   <div class="dom-cost-demo">
     <div class="demo-header">
-      <span class="title">DOM 操作耗时对比</span>
-      <span class="subtitle">逐个操作 vs 批量操作</span>
+      <span class="title">So sánh chi phí thao tác DOM</span>
+      <span class="subtitle">Thao tác từng lần vs gom theo lô</span>
     </div>
 
     <div class="control-panel">
       <div class="control-group">
-        <label>修改次数</label>
+        <label>Số lần sửa</label>
         <div class="radio-group">
           <button
             v-for="n in counts"
@@ -15,12 +15,12 @@
             :class="['radio-btn', { active: selectedCount === n }]"
             @click="selectedCount = n"
           >
-            {{ n }} 次
+            {{ n }} lần
           </button>
         </div>
       </div>
       <button class="action-btn" :disabled="isRunning" @click="runComparison">
-        {{ isRunning ? '执行中...' : '开始对比' }}
+        {{ isRunning ? 'Đang chạy...' : 'Bắt đầu so sánh' }}
       </button>
     </div>
 
@@ -28,10 +28,10 @@
       <div class="comparison-row">
         <div class="method-card">
           <div class="method-header">
-            <span class="method-badge slow">逐个操作 DOM</span>
+            <span class="method-badge slow">Thao tác DOM từng lần</span>
           </div>
           <div class="method-desc">
-            每修改一次数据 → 立刻操作一次真实 DOM → 浏览器每次都要重新布局和绘制
+            Mỗi lần sửa dữ liệu → thao tác trên DOM thật ngay → trình duyệt mỗi lần đều phải layout và paint lại
           </div>
           <div class="progress-container">
             <div class="progress-bar-bg">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="result-row">
-            <span class="result-label">模拟耗时</span>
+            <span class="result-label">Thời gian mô phỏng</span>
             <span class="result-value" :class="{ highlight: showResults }">
               {{ showResults ? slowTime + 'ms' : '—' }}
             </span>
@@ -50,20 +50,20 @@
           <div class="step-list">
             <div v-for="i in Math.min(selectedCount, 4)" :key="i" class="step-item">
               <span class="step-num">{{ i }}</span>
-              <span class="step-text">修改 → 布局 → 绘制</span>
+              <span class="step-text">Sửa → layout → paint</span>
             </div>
             <div v-if="selectedCount > 4" class="step-item ellipsis">
-              <span class="step-text">... 重复 {{ selectedCount - 4 }} 次 ...</span>
+              <span class="step-text">... lặp lại {{ selectedCount - 4 }} lần ...</span>
             </div>
           </div>
         </div>
 
         <div class="method-card">
           <div class="method-header">
-            <span class="method-badge fast">批量计算后一次性操作</span>
+            <span class="method-badge fast">Tính toán xong rồi gom thao tác một lần</span>
           </div>
           <div class="method-desc">
-            所有修改先在内存中计算好 → 最后只操作一次真实 DOM → 浏览器只需要重新布局和绘制一次
+            Mọi thay đổi tính sẵn trong bộ nhớ → cuối cùng chỉ thao tác DOM thật một lần → trình duyệt chỉ phải layout và paint một lần
           </div>
           <div class="progress-container">
             <div class="progress-bar-bg">
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="result-row">
-            <span class="result-label">模拟耗时</span>
+            <span class="result-label">Thời gian mô phỏng</span>
             <span class="result-value" :class="{ highlight: showResults }">
               {{ showResults ? fastTime + 'ms' : '—' }}
             </span>
@@ -82,25 +82,25 @@
           <div class="step-list">
             <div class="step-item">
               <span class="step-num">1</span>
-              <span class="step-text">内存中计算 {{ selectedCount }} 次变化</span>
+              <span class="step-text">Tính {{ selectedCount }} thay đổi trong bộ nhớ</span>
             </div>
             <div class="step-item">
               <span class="step-num">2</span>
-              <span class="step-text">一次性提交 → 布局 → 绘制</span>
+              <span class="step-text">Commit một lần → layout → paint</span>
             </div>
           </div>
         </div>
       </div>
 
       <div v-if="showResults" class="savings-banner">
-        批量操作节省了 <strong>{{ savingsPercent }}%</strong> 的耗时
-        （{{ slowTime }}ms → {{ fastTime }}ms）
+        Thao tác gom lô tiết kiệm được <strong>{{ savingsPercent }}%</strong> thời gian
+        ({{ slowTime }}ms → {{ fastTime }}ms)
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>DOM 操作的真正代价不是"修改值"本身，而是每次修改后浏览器必须执行的"重新布局 + 重新绘制"。减少 DOM 操作次数，就是减少这些昂贵的计算。虚拟 DOM 的作用就是先在内存中算好所有变化，最后一次性提交。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Chi phí thật sự của thao tác DOM không nằm ở việc "đổi giá trị" mà là ở việc trình duyệt phải "layout lại + paint lại" sau mỗi lần đổi. Giảm số lần thao tác DOM nghĩa là giảm những phép tính đắt đỏ đó. Vai trò của Virtual DOM chính là tính sẵn mọi thay đổi trong bộ nhớ, rồi commit một lần cuối.</span>
     </div>
   </div>
 </template>

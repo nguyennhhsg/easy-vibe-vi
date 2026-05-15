@@ -1,12 +1,12 @@
 <!--
   StorageTypeDemo.vue (file-storage)
-  文件存储类型对比演示
+  Demo so sánh các kiểu file storage
 -->
 <template>
   <div class="storage-type-demo">
     <div class="header">
-      <div class="title">存储类型对比</div>
-      <div class="subtitle">点击查看不同存储方式的特点</div>
+      <div class="title">So sánh các kiểu storage</div>
+      <div class="subtitle">Bấm vào để xem đặc điểm từng kiểu storage</div>
     </div>
 
     <div class="type-cards">
@@ -26,19 +26,19 @@
       <div class="detail-desc">{{ current.desc }}</div>
       <div class="detail-grid">
         <div class="detail-item">
-          <div class="item-label">访问方式</div>
+          <div class="item-label">Cách truy cập</div>
           <div class="item-value">{{ current.access }}</div>
         </div>
         <div class="detail-item">
-          <div class="item-label">典型场景</div>
+          <div class="item-label">Tình huống điển hình</div>
           <div class="item-value">{{ current.scenario }}</div>
         </div>
         <div class="detail-item">
-          <div class="item-label">代表产品</div>
+          <div class="item-label">Sản phẩm tiêu biểu</div>
           <div class="item-value">{{ current.products }}</div>
         </div>
         <div class="detail-item">
-          <div class="item-label">扩展性</div>
+          <div class="item-label">Khả năng mở rộng</div>
           <div class="item-value">{{ current.scalability }}</div>
         </div>
       </div>
@@ -53,28 +53,28 @@ const selected = ref('object')
 
 const types = [
   {
-    key: 'block', icon: '🧱', name: '块存储',
-    desc: '将数据切分为固定大小的"块"，像硬盘一样提供原始存储空间。操作系统可以在上面创建文件系统。性能最高，但不能直接通过网络共享。',
-    access: 'iSCSI / FC 协议，挂载为磁盘设备',
-    scenario: '数据库存储、虚拟机磁盘',
-    products: 'AWS EBS、阿里云云盘、Ceph RBD',
-    scalability: '单卷有容量上限，需要手动扩容'
+    key: 'block', icon: '🧱', name: 'Block storage',
+    desc: 'Chia dữ liệu thành các "block" có kích thước cố định, cung cấp không gian lưu trữ thô giống ổ cứng. Hệ điều hành có thể tạo file system bên trên. Hiệu năng cao nhất nhưng không chia sẻ trực tiếp qua mạng được.',
+    access: 'Giao thức iSCSI / FC, mount như thiết bị đĩa',
+    scenario: 'Lưu database, đĩa máy ảo',
+    products: 'AWS EBS, Google Persistent Disk, Ceph RBD',
+    scalability: 'Mỗi volume có dung lượng tối đa, cần mở rộng thủ công'
   },
   {
-    key: 'file', icon: '📁', name: '文件存储',
-    desc: '提供传统的文件系统接口（目录 + 文件），支持多台服务器同时挂载和读写。就像一个网络共享文件夹。',
-    access: 'NFS / SMB / CIFS 协议，挂载为目录',
-    scenario: '共享配置文件、CMS 媒体文件、日志收集',
-    products: 'AWS EFS、阿里云 NAS、NFS Server',
-    scalability: '容量可弹性伸缩，但性能受限于协议开销'
+    key: 'file', icon: '📁', name: 'File storage',
+    desc: 'Cung cấp giao diện file system truyền thống (thư mục + file), hỗ trợ nhiều máy chủ cùng mount và đọc/ghi. Giống một thư mục chia sẻ qua mạng.',
+    access: 'Giao thức NFS / SMB / CIFS, mount như thư mục',
+    scenario: 'Chia sẻ file config, media của CMS, thu thập log',
+    products: 'AWS EFS, Azure Files, NFS Server',
+    scalability: 'Dung lượng co giãn được, nhưng hiệu năng bị giới hạn bởi overhead của giao thức'
   },
   {
-    key: 'object', icon: '☁️', name: '对象存储',
-    desc: '通过 HTTP API 存取文件（对象），每个对象有唯一 Key。扁平结构，无目录层级。容量几乎无限，成本最低，是互联网应用的首选。',
-    access: 'HTTP/HTTPS RESTful API（PUT/GET/DELETE）',
-    scenario: '图片、视频、备份、静态网站托管、数据湖',
-    products: 'AWS S3、阿里云 OSS、MinIO、Cloudflare R2',
-    scalability: '近乎无限扩展，自动分布式存储'
+    key: 'object', icon: '☁️', name: 'Object storage',
+    desc: 'Lưu/lấy file (object) qua HTTP API, mỗi object có một key duy nhất. Cấu trúc phẳng, không có cây thư mục. Dung lượng gần như vô hạn, chi phí thấp nhất, là lựa chọn ưu tiên cho ứng dụng internet.',
+    access: 'HTTP/HTTPS RESTful API (PUT/GET/DELETE)',
+    scenario: 'Hình ảnh, video, backup, hosting site tĩnh, data lake',
+    products: 'AWS S3, Google Cloud Storage, MinIO, Cloudflare R2',
+    scalability: 'Mở rộng gần như vô hạn, tự động phân tán'
   }
 ]
 

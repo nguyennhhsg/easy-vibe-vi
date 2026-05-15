@@ -1,12 +1,12 @@
 <!--
   DataGovernanceFrameworkDemo.vue
-  数据治理框架演示：展示数据治理的核心流程
+  Demo data governance framework: minh hoạ quy trình data governance cốt lõi
 -->
 <template>
   <div class="governance-demo">
     <div class="header">
-      <div class="title">数据治理框架</div>
-      <div class="subtitle">点击各阶段查看详情</div>
+      <div class="title">Khung Data Governance</div>
+      <div class="subtitle">Bấm vào từng giai đoạn để xem chi tiết</div>
     </div>
 
     <div class="pipeline">
@@ -46,52 +46,52 @@ const activeStage = ref('define')
 const stages = [
   {
     key: 'define',
-    name: '定义标准',
-    desc: '制定数据标准、命名规范、数据字典',
+    name: 'Định nghĩa chuẩn',
+    desc: 'Soạn chuẩn dữ liệu, quy ước đặt tên, data dictionary',
     activities: [
-      { icon: '📖', name: '数据字典', desc: '定义每个字段的含义、类型、取值范围' },
-      { icon: '📏', name: '命名规范', desc: '统一字段命名：snake_case、驼峰、前缀约定' },
-      { icon: '🏷️', name: '分类分级', desc: '按敏感度分级：公开、内部、机密、绝密' }
+      { icon: '📖', name: 'Data dictionary', desc: 'Định nghĩa ý nghĩa, kiểu, miền giá trị của từng field' },
+      { icon: '📏', name: 'Quy ước đặt tên', desc: 'Thống nhất tên field: snake_case, camelCase, quy ước tiền tố' },
+      { icon: '🏷️', name: 'Phân loại phân cấp', desc: 'Phân theo độ nhạy cảm: công khai, nội bộ, mật, tuyệt mật' }
     ]
   },
   {
     key: 'collect',
-    name: '采集接入',
-    desc: '规范数据采集流程，确保源头质量',
+    name: 'Thu thập tiếp nhận',
+    desc: 'Chuẩn hoá quy trình thu thập dữ liệu, đảm bảo chất lượng từ nguồn',
     activities: [
-      { icon: '🔌', name: '接入规范', desc: '定义数据接入的格式、协议、频率要求' },
-      { icon: '✅', name: '入库校验', desc: '数据写入前进行格式、完整性、合规性校验' },
-      { icon: '📝', name: '血缘记录', desc: '记录数据来源、加工链路、依赖关系' }
+      { icon: '🔌', name: 'Chuẩn tiếp nhận', desc: 'Định nghĩa format, giao thức, tần suất cho dữ liệu đầu vào' },
+      { icon: '✅', name: 'Validate khi nạp', desc: 'Kiểm tra format, tính toàn vẹn, tính tuân thủ trước khi ghi' },
+      { icon: '📝', name: 'Ghi data lineage', desc: 'Ghi lại nguồn gốc, đường đi xử lý, các quan hệ phụ thuộc' }
     ]
   },
   {
     key: 'store',
-    name: '存储管理',
-    desc: '合理存储数据，控制成本和访问权限',
+    name: 'Quản lý lưu trữ',
+    desc: 'Lưu trữ dữ liệu hợp lý, kiểm soát chi phí và quyền truy cập',
     activities: [
-      { icon: '🗄️', name: '分层存储', desc: 'ODS → DWD → DWS → ADS 数仓分层' },
-      { icon: '🔒', name: '权限控制', desc: '按角色和数据分级控制读写权限' },
-      { icon: '♻️', name: '生命周期', desc: '热数据 → 温数据 → 冷数据 → 归档/删除' }
+      { icon: '🗄️', name: 'Lưu trữ phân tầng', desc: 'Data warehouse phân tầng ODS → DWD → DWS → ADS' },
+      { icon: '🔒', name: 'Phân quyền', desc: 'Kiểm soát quyền đọc/ghi theo vai trò và mức độ phân loại dữ liệu' },
+      { icon: '♻️', name: 'Vòng đời', desc: 'Dữ liệu nóng → ấm → lạnh → lưu kho/xoá' }
     ]
   },
   {
     key: 'use',
-    name: '使用消费',
-    desc: '让数据安全、高效地被业务使用',
+    name: 'Sử dụng',
+    desc: 'Cho phép business dùng dữ liệu an toàn và hiệu quả',
     activities: [
-      { icon: '🔍', name: '数据目录', desc: '提供可搜索的数据资产目录，降低找数成本' },
-      { icon: '🎭', name: '脱敏处理', desc: '对敏感字段进行掩码、加密、泛化处理' },
-      { icon: '📊', name: '质量监控', desc: '持续监控数据质量指标，异常时告警' }
+      { icon: '🔍', name: 'Data catalog', desc: 'Cung cấp catalog tài sản dữ liệu có thể tìm kiếm, giảm công sức tìm dữ liệu' },
+      { icon: '🎭', name: 'Mask dữ liệu', desc: 'Mask, mã hoá, generalize các field nhạy cảm' },
+      { icon: '📊', name: 'Giám sát chất lượng', desc: 'Liên tục theo dõi chỉ số chất lượng dữ liệu, cảnh báo khi bất thường' }
     ]
   },
   {
     key: 'retire',
-    name: '归档销毁',
-    desc: '按合规要求归档或安全销毁数据',
+    name: 'Lưu kho/Huỷ',
+    desc: 'Lưu kho hoặc huỷ dữ liệu an toàn theo yêu cầu tuân thủ',
     activities: [
-      { icon: '📦', name: '归档策略', desc: '超过保留期的数据迁移到低成本存储' },
-      { icon: '🗑️', name: '安全删除', desc: '按 GDPR/个保法要求彻底删除用户数据' },
-      { icon: '📋', name: '审计日志', desc: '记录数据删除操作，满足合规审计要求' }
+      { icon: '📦', name: 'Chiến lược lưu kho', desc: 'Chuyển dữ liệu quá hạn giữ sang storage chi phí thấp' },
+      { icon: '🗑️', name: 'Xoá an toàn', desc: 'Xoá hoàn toàn dữ liệu người dùng theo GDPR/Luật bảo vệ dữ liệu cá nhân' },
+      { icon: '📋', name: 'Audit log', desc: 'Ghi lại thao tác xoá dữ liệu, đáp ứng yêu cầu audit tuân thủ' }
     ]
   }
 ]

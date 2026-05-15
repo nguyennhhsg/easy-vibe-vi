@@ -1,15 +1,15 @@
 <!--
   DelayedMessageDemo.vue
-  延迟消息演示 - 定时任务可视化
+  Demo delayed message - trực quan hóa scheduled task
 -->
 <template>
   <div class="delayed-message-demo">
     <div class="header">
       <div class="title">
-        延迟消息：让消息"定时送达"
+        Delayed message: cho message "giao đúng giờ"
       </div>
       <div class="subtitle">
-        实现订单超时取消、定时提醒等功能
+        Triển khai hủy đơn hàng quá hạn, nhắc nhở định kỳ và nhiều tính năng khác
       </div>
     </div>
 
@@ -28,7 +28,7 @@
     <div class="demo-area">
       <div class="sender-section">
         <div class="section-title">
-          📤 发送延迟消息
+          📤 Gửi delayed message
         </div>
         <div class="scenario-info">
           <div class="scenario-name">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="delay-setting">
-          <label>延迟时间：</label>
+          <label>Thời gian delay:</label>
           <div class="delay-presets">
             <button
               v-for="preset in delayPresets"
@@ -59,7 +59,7 @@
               min="1"
               max="3600"
             >
-            <span>秒</span>
+            <span>giây</span>
           </div>
         </div>
 
@@ -68,18 +68,18 @@
           :disabled="sending"
           @click="sendDelayedMessage"
         >
-          {{ sending ? '发送中...' : '📨 发送延迟消息' }}
+          {{ sending ? 'Đang gửi...' : '📨 Gửi delayed message' }}
         </button>
       </div>
 
       <div class="timeline-section">
         <div class="section-title">
-          ⏰ 延迟队列时间轴
+          ⏰ Timeline queue delay
         </div>
         <div class="timeline">
           <div class="timeline-now">
             <div class="now-marker">
-              现在
+              Bây giờ
             </div>
           </div>
 
@@ -95,7 +95,7 @@
                   #{{ msg.id }}
                 </div>
                 <div class="msg-time">
-                  {{ msg.remaining }}s 后
+                  Sau {{ msg.remaining }}s
                 </div>
               </div>
               <div
@@ -122,14 +122,14 @@
 
       <div class="result-section">
         <div class="section-title">
-          📥 到期消息
+          📥 Message đến hạn
         </div>
         <div class="result-box">
           <div
             v-if="deliveredMessages.length === 0"
             class="empty"
           >
-            等待消息到期...
+            Đang đợi message đến hạn...
           </div>
           <div
             v-for="msg in deliveredMessages"
@@ -150,7 +150,7 @@
 
     <div class="use-cases">
       <div class="cases-title">
-        💡 典型应用场景
+        💡 Use case tiêu biểu
       </div>
       <div class="cases-grid">
         <div class="case-card">
@@ -158,10 +158,10 @@
             🛒
           </div>
           <div class="case-name">
-            订单超时取消
+            Hủy đơn quá hạn
           </div>
           <div class="case-desc">
-            下单后 30 分钟未支付，自动取消订单
+            Sau khi đặt 30 phút chưa thanh toán, tự động hủy đơn
           </div>
         </div>
         <div class="case-card">
@@ -169,10 +169,10 @@
             🔔
           </div>
           <div class="case-name">
-            定时提醒
+            Nhắc nhở định kỳ
           </div>
           <div class="case-desc">
-            会议开始前 15 分钟，发送提醒通知
+            Gửi thông báo nhắc 15 phút trước cuộc họp
           </div>
         </div>
         <div class="case-card">
@@ -180,10 +180,10 @@
             🎁
           </div>
           <div class="case-name">
-            会员过期提醒
+            Nhắc gia hạn member
           </div>
           <div class="case-desc">
-            会员到期前 3 天，发送续费提醒
+            Gửi nhắc gia hạn 3 ngày trước khi member hết hạn
           </div>
         </div>
         <div class="case-card">
@@ -191,10 +191,10 @@
             📊
           </div>
           <div class="case-name">
-            数据统计
+            Thống kê dữ liệu
           </div>
           <div class="case-desc">
-            每天凌晨 2 点，统计前一天的日报数据
+            Mỗi ngày 2 giờ sáng, thống kê báo cáo ngày hôm trước
           </div>
         </div>
       </div>
@@ -202,36 +202,36 @@
 
     <div class="implementation">
       <div class="impl-title">
-        🔧 实现方式对比
+        🔧 So sánh các cách triển khai
       </div>
       <div class="impl-table">
         <table>
           <thead>
             <tr>
-              <th>方式</th>
-              <th>优点</th>
-              <th>缺点</th>
-              <th>适用场景</th>
+              <th>Cách</th>
+              <th>Ưu điểm</th>
+              <th>Nhược điểm</th>
+              <th>Use case phù hợp</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>RocketMQ 延迟消息</td>
-              <td>原生支持，精度高</td>
-              <td>只能固定延迟级别</td>
-              <td>电商、金融</td>
+              <td>RocketMQ delayed message</td>
+              <td>Hỗ trợ native, độ chính xác cao</td>
+              <td>Chỉ có các mức delay cố định</td>
+              <td>E-commerce, tài chính</td>
             </tr>
             <tr>
               <td>RabbitMQ TTL + DLQ</td>
-              <td>灵活，可精确控制</td>
-              <td>实现复杂</td>
-              <td>传统业务</td>
+              <td>Linh hoạt, điều khiển chính xác</td>
+              <td>Triển khai phức tạp</td>
+              <td>Nghiệp vụ truyền thống</td>
             </tr>
             <tr>
-              <td>Redis + 定时扫描</td>
-              <td>简单，易于理解</td>
-              <td>精度依赖扫描间隔</td>
-              <td>小规模应用</td>
+              <td>Redis + scan định kỳ</td>
+              <td>Đơn giản, dễ hiểu</td>
+              <td>Độ chính xác phụ thuộc khoảng scan</td>
+              <td>Ứng dụng quy mô nhỏ</td>
             </tr>
           </tbody>
         </table>
@@ -256,28 +256,28 @@ const scenarios = [
   {
     id: 'order',
     icon: '🛒',
-    name: '订单超时取消',
-    description: '下单后 30 分钟未支付，自动取消订单'
+    name: 'Hủy đơn quá hạn',
+    description: 'Sau khi đặt 30 phút chưa thanh toán, tự động hủy đơn'
   },
   {
     id: 'reminder',
     icon: '🔔',
-    name: '定时提醒',
-    description: '会议开始前 15 分钟，发送提醒通知'
+    name: 'Nhắc nhở định kỳ',
+    description: 'Gửi thông báo nhắc 15 phút trước cuộc họp'
   },
   {
     id: 'vip',
     icon: '🎁',
-    name: '会员过期',
-    description: '会员到期前 3 天，发送续费提醒'
+    name: 'Member hết hạn',
+    description: 'Gửi nhắc gia hạn 3 ngày trước khi member hết hạn'
   }
 ]
 
 const delayPresets = [
-  { label: '10秒', value: 10 },
-  { label: '30秒', value: 30 },
-  { label: '1分钟', value: 60 },
-  { label: '5分钟', value: 300 }
+  { label: '10 giây', value: 10 },
+  { label: '30 giây', value: 30 },
+  { label: '1 phút', value: 60 },
+  { label: '5 phút', value: 300 }
 ]
 
 const currentScenario = computed(() => {
@@ -326,20 +326,20 @@ const updateTimers = () => {
   delayedMessages.value.forEach((msg, index) => {
     msg.remaining--
 
-    // 更新位置和高度
+    // Cập nhật vị trí và chiều cao
     const maxTime = Math.max(...delayPresets.map((p) => p.value))
     msg.position = 10 + ((msg.total - msg.remaining) / msg.total) * 80
     msg.timerHeight = (msg.remaining / msg.total) * 100
 
     if (msg.remaining <= 0) {
-      // 消息到期
+      // Message đến hạn
       delayedMessages.value.splice(index, 1)
 
       const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
 
       deliveredMessages.value.unshift({
         id: msg.id,
-        content: `${msg.scenario.name} - 消息已触发`,
+        content: `${msg.scenario.name} - đã trigger message`,
         deliveredAt: timeStr
       })
 

@@ -11,7 +11,7 @@
         type="info"
         :closable="false"
       >
-        生产者消费者模式演示组件占位符 - 待实现具体交互
+        Placeholder demo pattern producer-consumer - chờ triển khai tương tác cụ thể
       </el-alert>
     </div>
   </div>
@@ -20,8 +20,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('生产者消费者模式演示')
-const description = ref('演示生产者如何将消息放入队列，消费者如何从队列取出消息处理')
+const title = ref('Demo pattern producer-consumer')
+const description = ref('Trình bày cách producer đẩy message vào queue và cách consumer lấy message từ queue ra để xử lý')
 </script>
 
 <style scoped>

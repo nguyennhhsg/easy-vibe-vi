@@ -1,8 +1,8 @@
 <template>
   <div class="service-demo">
     <div class="header">
-      <div class="title">Service 层：业务逻辑的"指挥家"</div>
-      <div class="subtitle">选择业务场景，查看 Service 层如何编排逻辑</div>
+      <div class="title">Tầng Service: "nhạc trưởng" của business logic</div>
+      <div class="subtitle">Chọn tình huống nghiệp vụ để xem cách tầng Service điều phối logic</div>
     </div>
 
     <div class="tabs">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="principles">
-      <div class="principles-title">Service 层设计原则</div>
+      <div class="principles-title">Nguyên tắc thiết kế tầng Service</div>
       <div class="principle-grid">
         <div v-for="p in principles" :key="p.title" class="principle">
           <div class="p-title">{{ p.title }}</div>
@@ -65,24 +65,24 @@ const current = ref('order')
 const expanded = ref([])
 
 const scenarios = [
-  { id: 'order', name: '下单流程' },
-  { id: 'refund', name: '退款处理' },
-  { id: 'report', name: '报表生成' }
+  { id: 'order', name: 'Quy trình đặt hàng' },
+  { id: 'refund', name: 'Xử lý hoàn tiền' },
+  { id: 'report', name: 'Sinh báo cáo' }
 ]
 
 const allData = {
   order: {
-    title: '电商下单流程',
-    desc: '用户下单涉及库存扣减、订单创建、支付记录，需保证事务一致性',
+    title: 'Quy trình đặt hàng e-commerce',
+    desc: 'Đặt hàng liên quan trừ tồn kho, tạo đơn, ghi nhận thanh toán, cần đảm bảo nhất quán transaction',
     steps: [
-      { name: '参数校验与DTO转换', layer: 'Controller',
+      { name: 'Validate tham số & chuyển DTO', layer: 'Controller',
         code: `@PostMapping("/orders")
 public ResponseEntity<OrderDTO> createOrder(
     @RequestBody @Valid CreateOrderRequest request) {
     OrderDTO order = orderService.createOrder(request);
     return ResponseEntity.ok(order);
 }` },
-      { name: '业务逻辑编排（事务管理）', layer: 'Service',
+      { name: 'Điều phối business logic (quản lý transaction)', layer: 'Service',
         code: `@Transactional
 public OrderDTO createOrder(CreateOrderRequest request) {
     inventoryService.checkAndDeduct(request.getSkuId(), request.getQuantity());
@@ -95,33 +95,33 @@ public OrderDTO createOrder(CreateOrderRequest request) {
     return convertToDTO(order);
 }`,
         subs: [
-          { icon: '✅', name: '检查并扣减库存', desc: '确保库存充足', status: '成功' },
-          { icon: '📝', name: '创建订单记录', desc: '生成订单主表', status: '成功' },
-          { icon: '💳', name: '创建支付记录', desc: '初始化待支付', status: '成功' },
-          { icon: '🔄', name: '事务提交', desc: '原子性提交', status: '已提交' }
+          { icon: '✅', name: 'Kiểm tra và trừ tồn kho', desc: 'Đảm bảo còn hàng', status: 'Thành công' },
+          { icon: '📝', name: 'Tạo bản ghi đơn hàng', desc: 'Sinh bảng đơn chính', status: 'Thành công' },
+          { icon: '💳', name: 'Tạo bản ghi thanh toán', desc: 'Khởi tạo trạng thái chờ thanh toán', status: 'Thành công' },
+          { icon: '🔄', name: 'Commit transaction', desc: 'Commit nguyên tử', status: 'Đã commit' }
         ] },
-      { name: '数据持久化', layer: 'Repository',
+      { name: 'Persist dữ liệu', layer: 'Repository',
         code: `public interface OrderRepository extends JpaRepository<Order, Long> {
-    // 基本 CRUD 已内置
+    // CRUD cơ bản đã có sẵn
 }` }
     ]
   },
   refund: {
-    title: '退款处理流程',
-    desc: '退款涉及订单状态变更、支付原路返回、库存回滚',
+    title: 'Quy trình xử lý hoàn tiền',
+    desc: 'Hoàn tiền liên quan đổi trạng thái đơn, trả tiền theo đường thanh toán, hoàn tồn kho',
     steps: [
-      { name: '接收退款申请', layer: 'Controller',
+      { name: 'Nhận yêu cầu hoàn tiền', layer: 'Controller',
         code: `@PostMapping("/orders/{orderId}/refund")
 public ResponseEntity<RefundDTO> applyRefund(
     @PathVariable Long orderId, @RequestBody @Valid RefundRequest request) {
     return ResponseEntity.ok(refundService.processRefund(orderId, request));
 }` },
-      { name: '退款业务处理', layer: 'Service',
+      { name: 'Xử lý nghiệp vụ hoàn tiền', layer: 'Service',
         code: `@Transactional
 public RefundDTO processRefund(Long orderId, RefundRequest request) {
     Order order = orderRepository.findById(orderId).orElseThrow();
     if (order.getStatus() != OrderStatus.PAID)
-        throw new InvalidOrderStateException("不允许退款");
+        throw new InvalidOrderStateException("Khong cho phep hoan tien");
     BigDecimal amount = calculateRefundAmount(order, request);
     paymentService.refund(order.getPaymentNo(), amount, request.getReason());
     order.setStatus(OrderStatus.REFUNDING);
@@ -130,26 +130,26 @@ public RefundDTO processRefund(Long orderId, RefundRequest request) {
     return convertToDTO(saveRefundRecord(orderId, amount, request));
 }`,
         subs: [
-          { icon: '🔍', name: '验证订单状态', desc: '检查是否可退款', status: '通过' },
-          { icon: '💰', name: '计算退款金额', desc: '根据规则计算', status: '完成' },
-          { icon: '🏦', name: '调用支付渠道', desc: '请求第三方退款', status: '处理中' },
-          { icon: '📝', name: '更新订单状态', desc: '标记为退款中', status: '已更新' },
-          { icon: '🔄', name: '异步恢复库存', desc: '后台恢复库存', status: '已提交' }
+          { icon: '🔍', name: 'Kiểm tra trạng thái đơn', desc: 'Xem có cho hoàn tiền không', status: 'Hợp lệ' },
+          { icon: '💰', name: 'Tính số tiền hoàn', desc: 'Tính theo quy tắc', status: 'Hoàn tất' },
+          { icon: '🏦', name: 'Gọi kênh thanh toán', desc: 'Yêu cầu bên thứ ba hoàn tiền', status: 'Đang xử lý' },
+          { icon: '📝', name: 'Cập nhật trạng thái đơn', desc: 'Đánh dấu đang hoàn tiền', status: 'Đã cập nhật' },
+          { icon: '🔄', name: 'Hoàn tồn kho bất đồng bộ', desc: 'Hoàn tồn kho ở nền', status: 'Đã gửi' }
         ] }
     ]
   },
   report: {
-    title: '报表生成流程',
-    desc: '复杂报表涉及多数据源查询、数据聚合、异步导出',
+    title: 'Quy trình sinh báo cáo',
+    desc: 'Báo cáo phức tạp gồm truy vấn nhiều nguồn dữ liệu, gộp dữ liệu, export bất đồng bộ',
     steps: [
-      { name: '接收报表请求', layer: 'Controller',
+      { name: 'Nhận yêu cầu báo cáo', layer: 'Controller',
         code: `@GetMapping("/reports/sales")
 public ResponseEntity<ReportTaskDTO> generateSalesReport(
     @RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
     ReportTaskDTO task = reportService.createReportTask(startDate, endDate);
     return ResponseEntity.accepted().body(task);
 }` },
-      { name: '异步报表编排', layer: 'Service',
+      { name: 'Điều phối báo cáo bất đồng bộ', layer: 'Service',
         code: `@Async("reportExecutor")
 public void generateReportAsync(Long taskId) {
     ReportTask task = reportTaskRepository.findById(taskId).orElseThrow();
@@ -163,10 +163,10 @@ public void generateReportAsync(Long taskId) {
     reportTaskRepository.save(task);
 }`,
         subs: [
-          { icon: '📥', name: '多数据源查询', desc: 'Orders/Payments/Refunds', status: '已查询' },
-          { icon: '🔄', name: '数据聚合清洗', desc: '关联数据、处理缺失值', status: '已完成' },
-          { icon: '📊', name: '计算业务指标', desc: 'GMV、订单数、客单价', status: '已计算' },
-          { icon: '📄', name: '导出 Excel', desc: '生成并上传至 OSS', status: '已完成' }
+          { icon: '📥', name: 'Truy vấn nhiều nguồn dữ liệu', desc: 'Orders/Payments/Refunds', status: 'Đã truy vấn' },
+          { icon: '🔄', name: 'Gộp và làm sạch dữ liệu', desc: 'Join dữ liệu, xử lý giá trị thiếu', status: 'Hoàn tất' },
+          { icon: '📊', name: 'Tính các chỉ số nghiệp vụ', desc: 'GMV, số đơn, giá trị đơn TB', status: 'Đã tính' },
+          { icon: '📄', name: 'Export Excel', desc: 'Sinh file và upload lên OSS', status: 'Hoàn tất' }
         ] }
     ]
   }
@@ -181,10 +181,10 @@ const toggleStep = (i) => {
 }
 
 const principles = [
-  { title: '单一职责', desc: '一个 Service 只负责一块业务领域', example: 'UserService 只管用户，OrderService 只管订单' },
-  { title: '事务边界', desc: '在 Service 层声明式管理事务', example: '@Transactional 放在 Service 方法上' },
-  { title: '避免循环依赖', desc: 'Service 之间不要互相调用', example: 'A→B→A 会导致循环' },
-  { title: 'DTO 转换', desc: '返回前转换为 DTO，不暴露实体', example: 'return new UserDTO(user)' }
+  { title: 'Trách nhiệm đơn', desc: 'Một Service chỉ phụ trách một mảng nghiệp vụ', example: 'UserService chỉ lo user, OrderService chỉ lo order' },
+  { title: 'Ranh giới transaction', desc: 'Khai báo quản lý transaction ở tầng Service', example: 'Đặt @Transactional ở method Service' },
+  { title: 'Tránh phụ thuộc vòng', desc: 'Các Service không nên gọi lẫn nhau', example: 'A→B→A sẽ tạo vòng lặp' },
+  { title: 'Chuyển sang DTO', desc: 'Chuyển sang DTO trước khi trả về, không lộ entity', example: 'return new UserDTO(user)' }
 ]
 </script>
 

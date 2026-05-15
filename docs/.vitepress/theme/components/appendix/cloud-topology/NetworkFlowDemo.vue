@@ -1,42 +1,42 @@
 <template>
   <div class="network-flow-demo">
-    <!-- 控制面板 -->
+    <!-- Bảng điều khiển -->
     <div class="control-panel">
       <el-radio-group
         v-model="flowMode"
         size="small"
       >
         <el-radio-button label="inbound">
-          入向流量
+          Inbound
         </el-radio-button>
         <el-radio-button label="outbound">
-          出向流量
+          Outbound
         </el-radio-button>
         <el-radio-button label="east-west">
-          东西向流量
+          East-West
         </el-radio-button>
         <el-radio-button label="full">
-          完整拓扑
+          Toàn bộ topology
         </el-radio-button>
       </el-radio-group>
 
       <el-switch
         v-model="showMetrics"
-        active-text="显示流量数据"
+        active-text="Hiện số liệu lưu lượng"
         style="margin-left: 20px"
       />
     </div>
 
-    <!-- 网络拓扑图 -->
+    <!-- Sơ đồ network topology -->
     <div class="network-topology">
-      <!-- 互联网区域 -->
+      <!-- Vùng Internet -->
       <div
         v-if="showInternet"
         class="zone internet-zone"
       >
         <div class="zone-header">
           <span class="zone-icon">🌐</span>
-          <span class="zone-title">互联网 (Internet)</span>
+          <span class="zone-title">Internet</span>
         </div>
         <div class="zone-content">
           <div class="internet-entities">
@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <!-- 流量箭头 -->
+      <!-- Flow arrows -->
       <div
         v-if="showFlowArrows"
         class="flow-arrows"
@@ -85,7 +85,7 @@
         >
           <div class="stat-item">
             <div class="stat-label">
-              带宽
+              Băng thông
             </div>
             <div class="stat-value">
               2.5 Gbps
@@ -93,15 +93,15 @@
           </div>
           <div class="stat-item">
             <div class="stat-label">
-              流量
+              Lưu lượng
             </div>
             <div class="stat-value">
-              1.2 TB/天
+              1.2 TB/ngày
             </div>
           </div>
           <div class="stat-item">
             <div class="stat-label">
-              延迟
+              Độ trễ
             </div>
             <div class="stat-value">
               15 ms
@@ -110,14 +110,14 @@
         </div>
       </div>
 
-      <!-- VPC 区域 -->
+      <!-- Vùng VPC -->
       <div class="zone vpc-zone">
         <div class="zone-header">
           <span class="zone-icon">🏠</span>
-          <span class="zone-title">VPC 网络 (172.16.0.0/12)</span>
+          <span class="zone-title">VPC network (172.16.0.0/12)</span>
         </div>
         <div class="zone-content">
-          <!-- 网络设备层 -->
+          <!-- Tầng thiết bị mạng -->
           <div class="network-devices">
             <div
               v-for="device in networkDevices"
@@ -137,18 +137,18 @@
                 class="device-stats"
               >
                 <div class="stat">
-                  <span class="stat-label">吞吐</span>
+                  <span class="stat-label">Throughput</span>
                   <span class="stat-value">{{ device.throughput }}</span>
                 </div>
                 <div class="stat">
-                  <span class="stat-label">并发</span>
+                  <span class="stat-label">Concurrency</span>
                   <span class="stat-value">{{ device.connections }}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 子网层 -->
+          <!-- Tầng subnet -->
           <div class="subnets-container">
             <div
               v-for="subnet in subnets"
@@ -201,23 +201,23 @@
       </div>
     </div>
 
-    <!-- 图例说明 -->
+    <!-- Chú thích -->
     <div class="network-legend">
       <div class="legend-title">
-        流量类型说明：
+        Các loại lưu lượng:
       </div>
       <div class="legend-items">
         <div class="legend-item">
           <span class="legend-color inbound" />
-          <span>入向流量：用户 → 服务器</span>
+          <span>Inbound: user → server</span>
         </div>
         <div class="legend-item">
           <span class="legend-color outbound" />
-          <span>出向流量：服务器 → 外部</span>
+          <span>Outbound: server → bên ngoài</span>
         </div>
         <div class="legend-item">
           <span class="legend-color east-west" />
-          <span>东西向流量：服务间通信</span>
+          <span>East-West: giao tiếp giữa các service</span>
         </div>
       </div>
     </div>
@@ -230,25 +230,25 @@ import { ref, computed } from 'vue'
 const flowMode = ref('inbound')
 const showMetrics = ref(false)
 
-// 显示互联网
+// Hiển thị Internet
 const showInternet = computed(() => {
   return ['inbound', 'outbound', 'full'].includes(flowMode.value)
 })
 
-// 显示流量箭头
+// Hiển thị flow arrows
 const showFlowArrows = computed(() => {
   return ['inbound', 'outbound', 'east-west', 'full'].includes(flowMode.value)
 })
 
-// 互联网实体
+// Các thực thể Internet
 const internetEntities = [
-  { name: '移动用户', icon: '📱' },
-  { name: 'PC 用户', icon: '💻' },
-  { name: '企业网络', icon: '🏢' },
-  { name: '第三方 API', icon: '🔗' }
+  { name: 'User mobile', icon: '📱' },
+  { name: 'User PC', icon: '💻' },
+  { name: 'Mạng doanh nghiệp', icon: '🏢' },
+  { name: 'Third-party API', icon: '🔗' }
 ]
 
-// 网络设备
+// Thiết bị mạng
 const networkDevices = [
   { name: 'Internet Gateway', icon: '🌐', type: 'igw', throughput: '10 Gbps', connections: '10M' },
   { name: 'NAT Gateway', icon: '🔄', type: 'nat', throughput: '5 Gbps', connections: '1M' },
@@ -256,7 +256,7 @@ const networkDevices = [
   { name: 'VPN Gateway', icon: '🔒', type: 'vpn', throughput: '1 Gbps', connections: '1K' }
 ]
 
-// 子网
+// Subnet
 const subnets = [
   {
     name: 'Public-Subnet-A',

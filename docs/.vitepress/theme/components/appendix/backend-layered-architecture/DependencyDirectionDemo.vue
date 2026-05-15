@@ -1,31 +1,31 @@
 <template>
   <div class="dep-demo">
     <div class="header">
-      <div class="title">依赖方向：分层架构的核心规则</div>
-      <div class="subtitle">理解依赖方向，才能真正掌握分层架构</div>
+      <div class="title">Hướng phụ thuộc: quy tắc cốt lõi của Layered Architecture</div>
+      <div class="subtitle">Hiểu hướng phụ thuộc mới thực sự nắm được Layered Architecture</div>
     </div>
 
     <div class="content-box">
       <div class="layers">
         <div class="layer outer">
-          <div class="layer-label">外层（UI / 外部系统）</div>
+          <div class="layer-label">Tầng ngoài (UI / hệ thống ngoài)</div>
           <div class="layer-box">Controller</div>
         </div>
-        <div class="dep-arrow">↓ 依赖</div>
+        <div class="dep-arrow">↓ Phụ thuộc</div>
         <div class="layer middle">
-          <div class="layer-label">中层（应用层）</div>
+          <div class="layer-label">Tầng giữa (Application)</div>
           <div class="layer-box">Service</div>
         </div>
-        <div class="dep-arrow">↓ 依赖</div>
+        <div class="dep-arrow">↓ Phụ thuộc</div>
         <div class="layer inner">
-          <div class="layer-label">内层（领域层）</div>
+          <div class="layer-label">Tầng trong (Domain)</div>
           <div class="layer-box">Domain / Repository</div>
         </div>
       </div>
 
       <div class="principle-box">
-        <div class="p-title">核心原则：依赖倒置（DIP）</div>
-        <p>上层模块不应该依赖下层模块的具体实现，而应该依赖于抽象。</p>
+        <div class="p-title">Nguyên tắc cốt lõi: Dependency Inversion (DIP)</div>
+        <p>Module tầng trên không nên phụ thuộc vào implementation cụ thể của tầng dưới, mà phải phụ thuộc vào abstraction.</p>
         <div class="rules">
           <div v-for="r in rules" :key="r.title" class="rule">
             <strong>{{ r.title }}</strong>
@@ -39,9 +39,9 @@
 
 <script setup>
 const rules = [
-  { title: 'Controller → Service 接口', desc: 'Controller 只依赖 Service 的接口，不依赖实现类' },
-  { title: 'Service → Repository 接口', desc: 'Service 只依赖 Repository 接口，不关心数据怎么存' },
-  { title: '所有层依赖 Domain', desc: 'Domain 是核心，被所有上层依赖，但 Domain 不依赖任何层' }
+  { title: 'Controller → Interface của Service', desc: 'Controller chỉ phụ thuộc interface của Service, không phụ thuộc lớp cài đặt' },
+  { title: 'Service → Interface của Repository', desc: 'Service chỉ phụ thuộc interface Repository, không quan tâm dữ liệu được lưu thế nào' },
+  { title: 'Mọi tầng phụ thuộc Domain', desc: 'Domain là lõi, được mọi tầng trên phụ thuộc vào, nhưng Domain không phụ thuộc tầng nào' }
 ]
 </script>
 

@@ -2,17 +2,17 @@
   <div class="route-matching-demo">
     <div class="demo-header">
       <span class="icon">🎯</span>
-      <span class="title">路由匹配</span>
-      <span class="subtitle">URL如何找到对应组件</span>
+      <span class="title">Khớp route</span>
+      <span class="subtitle">URL tìm component tương ứng như thế nào</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">查字典</span>：输入一个词，字典会帮你找到对应的解释。路由匹配也是这样，浏览器根据URL路径，在路由配置中找到最匹配的那一项，然后渲染对应组件。
+      Hãy tưởng tượng bạn đang <span class="highlight">tra từ điển</span>: nhập một từ, từ điển tìm phần giải thích tương ứng. Route matching cũng tương tự, trình duyệt dựa vào path của URL để tìm route khớp nhất trong cấu hình, rồi render component tương ứng.
     </div>
 
     <div class="demo-content">
       <div class="input-section">
-        <h5>📍 测试路径</h5>
+        <h5>📍 Path thử nghiệm</h5>
         <div class="input-group">
           <span class="input-prefix">/</span>
           <input
@@ -24,12 +24,12 @@
           >
         </div>
         <div class="hint-text">
-          试试：user/123 或 products/electronics/456
+          Thử: user/123 hoặc products/electronics/456
         </div>
       </div>
 
       <div class="result-section">
-        <h5>🎯 匹配结果</h5>
+        <h5>🎯 Kết quả khớp</h5>
         <div
           v-if="matchResult && matchResult.matched"
           class="match-success"
@@ -39,14 +39,14 @@
           </div>
           <div class="result-details">
             <div class="result-row">
-              <span class="label">匹配路由:</span>
+              <span class="label">Route khớp:</span>
               <code class="value">{{ matchResult.route.path }}</code>
             </div>
             <div
               v-if="Object.keys(matchResult.params).length"
               class="params-box"
             >
-              <span class="label">提取参数:</span>
+              <span class="label">Tham số trích xuất:</span>
               <div class="params-list">
                 <span
                   v-for="(value, key) in matchResult.params"
@@ -66,13 +66,13 @@
           <div class="fail-icon">
             ❌
           </div>
-          <div>未找到匹配的路由</div>
+          <div>Không tìm thấy route khớp</div>
         </div>
       </div>
     </div>
 
     <div class="routes-list">
-      <h5>📋 已定义的路由</h5>
+      <h5>📋 Các route đã định nghĩa</h5>
       <div class="routes-grid">
         <div
           v-for="route in routes"
@@ -87,7 +87,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>匹配规则：</strong>路由按定义顺序匹配，先定义的优先。动态参数（:id）可以匹配任意值，但精确匹配优先级更高。
+      <strong>Quy tắc khớp:</strong> Route được khớp theo thứ tự định nghĩa, cái định nghĩa trước được ưu tiên. Tham số động (:id) khớp với mọi giá trị, nhưng khớp chính xác có độ ưu tiên cao hơn.
     </div>
   </div>
 </template>
@@ -100,12 +100,12 @@ const matchResult = ref(null)
 const matchedRoute = ref(null)
 
 const routes = [
-  { path: '/', name: '首页', hasParams: false },
-  { path: '/user', name: '用户列表', hasParams: false },
-  { path: '/user/:id', name: '用户详情', hasParams: true },
-  { path: '/user/:id/posts', name: '用户文章', hasParams: true },
-  { path: '/products/:category/:id', name: '产品详情', hasParams: true },
-  { path: '/:path(.*)*', name: '404页面', hasParams: true }
+  { path: '/', name: 'Trang chủ', hasParams: false },
+  { path: '/user', name: 'Danh sách user', hasParams: false },
+  { path: '/user/:id', name: 'Chi tiết user', hasParams: true },
+  { path: '/user/:id/posts', name: 'Bài viết của user', hasParams: true },
+  { path: '/products/:category/:id', name: 'Chi tiết sản phẩm', hasParams: true },
+  { path: '/:path(.*)*', name: 'Trang 404', hasParams: true }
 ]
 
 const parsePath = (path) => {

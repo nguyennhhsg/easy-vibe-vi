@@ -1,8 +1,8 @@
 <template>
   <div class="deployment-flow-demo">
     <div class="demo-header">
-      <h4>🚀 部署方式演进</h4>
-      <p>从手工部署到自动化流水线的变化</p>
+      <h4>🚀 Tiến hóa cách thức triển khai</h4>
+      <p>Hành trình từ triển khai thủ công đến pipeline tự động</p>
     </div>
 
     <div class="flow-timeline">
@@ -40,20 +40,20 @@
       <h5>{{ steps[currentStep].title }}</h5>
       <div class="detail-grid">
         <div class="detail-item">
-          <span class="label">部署方式:</span>
+          <span class="label">Cách triển khai:</span>
           <span class="value">{{ steps[currentStep].deploy }}</span>
         </div>
         <div class="detail-item">
-          <span class="label">耗时:</span>
+          <span class="label">Thời gian:</span>
           <span class="value">{{ steps[currentStep].time }}</span>
         </div>
         <div class="detail-item">
-          <span class="label">风险:</span>
+          <span class="label">Rủi ro:</span>
           <span class="value">{{ steps[currentStep].risk }}</span>
         </div>
       </div>
       <div class="tools-list">
-        <span class="tools-label">代表工具:</span>
+        <span class="tools-label">Công cụ tiêu biểu:</span>
         <span
           v-for="tool in steps[currentStep].tools"
           :key="tool"
@@ -73,37 +73,37 @@ const steps = [
   {
     icon: '👤',
     era: '1990s',
-    title: '手工部署',
-    deploy: 'FTP 上传文件',
-    time: '30分钟-2小时',
-    risk: '人为错误率高',
+    title: 'Triển khai thủ công',
+    deploy: 'Upload file qua FTP',
+    time: '30 phút - 2 giờ',
+    risk: 'Tỉ lệ lỗi con người cao',
     tools: ['FTP', 'SSH', 'SCP']
   },
   {
     icon: '📦',
     era: '2000s',
-    title: '脚本部署',
-    deploy: '自动化脚本',
-    time: '10-30分钟',
-    risk: '脚本维护成本',
+    title: 'Triển khai bằng script',
+    deploy: 'Script tự động',
+    time: '10-30 phút',
+    risk: 'Chi phí bảo trì script',
     tools: ['Shell', 'Ansible', 'Puppet']
   },
   {
     icon: '🔄',
     era: '2010s',
-    title: 'CI/CD 流水线',
-    deploy: '自动化流水线',
-    time: '5-15分钟',
-    risk: '流水线配置复杂',
+    title: 'Pipeline CI/CD',
+    deploy: 'Pipeline tự động',
+    time: '5-15 phút',
+    risk: 'Cấu hình pipeline phức tạp',
     tools: ['Jenkins', 'GitLab CI', 'GitHub Actions']
   },
   {
     icon: '🚀',
     era: '2020s+',
     title: 'GitOps',
-    deploy: '声明式部署',
-    time: '秒级',
-    risk: '学习曲线陡峭',
+    deploy: 'Triển khai khai báo',
+    time: 'Vài giây',
+    risk: 'Đường cong học tập dốc',
     tools: ['ArgoCD', 'Flux', 'Kubernetes']
   }
 ]

@@ -1,8 +1,8 @@
 <template>
   <div class="microservices-demo">
     <div class="demo-header">
-      <h4>🏭 微服务架构演示</h4>
-      <p>观察多个独立服务如何协作，以及服务间通信方式</p>
+      <h4>🏭 Demo kiến trúc microservice</h4>
+      <p>Quan sát cách nhiều dịch vụ độc lập phối hợp và phương thức giao tiếp giữa các dịch vụ</p>
     </div>
 
     <div class="services-grid">
@@ -23,23 +23,23 @@
         </div>
         <div class="service-details">
           <div class="detail-row">
-            <span class="label">端口:</span>
+            <span class="label">Port:</span>
             <span class="value">{{ service.port }}</span>
           </div>
           <div class="detail-row">
-            <span class="label">数据库:</span>
+            <span class="label">Database:</span>
             <span class="value">{{ service.database }}</span>
           </div>
           <div class="detail-row">
-            <span class="label">依赖:</span>
-            <span class="value deps">{{ service.dependencies.join(', ') || '无' }}</span>
+            <span class="label">Phụ thuộc:</span>
+            <span class="value deps">{{ service.dependencies.join(', ') || 'Không' }}</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="communication-flow">
-      <h5>服务间通信链路</h5>
+      <h5>Luồng giao tiếp giữa các dịch vụ</h5>
       <div class="flow-visualization">
         <div
           v-for="(step, idx) in flowSteps"
@@ -66,13 +66,13 @@
           :disabled="isFlowRunning"
           @click="startFlow"
         >
-          开始流程
+          Bắt đầu flow
         </button>
         <button
           class="flow-btn"
           @click="resetFlow"
         >
-          重置
+          Reset
         </button>
       </div>
     </div>
@@ -84,40 +84,40 @@ import { ref, computed } from 'vue'
 
 const services = ref([
   {
-    name: '用户服务',
+    name: 'User Service',
     icon: '👤',
     status: 'healthy',
-    statusText: '健康',
+    statusText: 'Khỏe',
     port: '8081',
     database: 'MySQL',
     dependencies: []
   },
   {
-    name: '订单服务',
+    name: 'Order Service',
     icon: '📦',
     status: 'healthy',
-    statusText: '健康',
+    statusText: 'Khỏe',
     port: '8082',
     database: 'PostgreSQL',
-    dependencies: ['用户服务']
+    dependencies: ['User Service']
   },
   {
-    name: '支付服务',
+    name: 'Payment Service',
     icon: '💳',
     status: 'healthy',
-    statusText: '健康',
+    statusText: 'Khỏe',
     port: '8083',
     database: 'MongoDB',
-    dependencies: ['用户服务', '订单服务']
+    dependencies: ['User Service', 'Order Service']
   },
   {
-    name: '库存服务',
+    name: 'Inventory Service',
     icon: '🏭',
     status: 'healthy',
-    statusText: '健康',
+    statusText: 'Khỏe',
     port: '8084',
     database: 'Redis',
-    dependencies: ['订单服务']
+    dependencies: ['Order Service']
   }
 ])
 
@@ -126,11 +126,11 @@ const currentFlowStep = ref(-1)
 const isFlowRunning = ref(false)
 
 const flowSteps = [
-  { service: '用户服务', action: '验证用户身份' },
-  { service: '订单服务', action: '创建订单记录' },
-  { service: '库存服务', action: '检查库存数量' },
-  { service: '支付服务', action: '处理支付请求' },
-  { service: '订单服务', action: '更新订单状态' }
+  { service: 'User Service', action: 'Xác thực danh tính người dùng' },
+  { service: 'Order Service', action: 'Tạo bản ghi đơn hàng' },
+  { service: 'Inventory Service', action: 'Kiểm tra số lượng tồn kho' },
+  { service: 'Payment Service', action: 'Xử lý yêu cầu thanh toán' },
+  { service: 'Order Service', action: 'Cập nhật trạng thái đơn hàng' }
 ]
 
 const selectService = (name) => {

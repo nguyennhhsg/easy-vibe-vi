@@ -1,85 +1,85 @@
 <template>
   <div class="a2a-detailed-demo">
     <div class="demo-header">
-      <span class="title">A2A 内部实现</span>
-      <span class="subtitle">对等网络架构的通信细节</span>
+      <span class="title">Bên trong A2A</span>
+      <span class="subtitle">Chi tiết giao tiếp trong kiến trúc mạng ngang hàng</span>
     </div>
 
     <div class="intro-section">
-      <div class="section-title">A2A 可以做什么？</div>
+      <div class="section-title">A2A có thể làm gì?</div>
       <p class="intro-text">
-        A2A 让多个 AI Agent 可以相互协作，不再是单打独斗。一个复杂任务可以分配给多个专业 Agent，每个 Agent 做自己擅长的事。
+        A2A cho phép nhiều AI Agent cộng tác với nhau, không còn "đơn thương độc mã". Một nhiệm vụ phức tạp có thể được chia cho nhiều agent chuyên trách, mỗi agent làm việc mình giỏi nhất.
       </p>
       <div class="popular-uses">
         <div class="use-item">
-          <div class="use-title">软件开发流水线</div>
-          <div class="use-desc">需求分析 Agent → 代码 Agent → 测试 Agent → 部署 Agent</div>
+          <div class="use-title">Pipeline phát triển phần mềm</div>
+          <div class="use-desc">Agent phân tích yêu cầu → agent code → agent kiểm thử → agent triển khai</div>
         </div>
         <div class="use-item">
-          <div class="use-title">多厂商 Agent 集成</div>
-          <div class="use-desc">Google、Anthropic、OpenAI 的 Agent 可以相互调用</div>
+          <div class="use-title">Tích hợp agent đa nhà cung cấp</div>
+          <div class="use-desc">Agent của Google, Anthropic, OpenAI có thể gọi lẫn nhau</div>
         </div>
         <div class="use-item">
-          <div class="use-title">企业工作流</div>
-          <div class="use-desc">HR Agent、财务 Agent、审批 Agent 协同处理业务流程</div>
+          <div class="use-title">Quy trình doanh nghiệp</div>
+          <div class="use-desc">Agent HR, agent tài chính, agent phê duyệt phối hợp xử lý quy trình nghiệp vụ</div>
         </div>
         <div class="use-item">
-          <div class="use-title">智能客服升级</div>
-          <div class="use-desc">接待 Agent → 业务 Agent → 人工 Agent 逐级转接</div>
+          <div class="use-title">Nâng cấp trợ lý CSKH</div>
+          <div class="use-desc">Agent tiếp nhận → agent nghiệp vụ → agent chuyển nhân viên thật theo cấp</div>
         </div>
         <div class="use-item">
-          <div class="use-title">科研协作</div>
-          <div class="use-desc">文献 Agent → 实验 Agent → 分析 Agent → 报告 Agent</div>
+          <div class="use-title">Cộng tác nghiên cứu</div>
+          <div class="use-desc">Agent tra cứu tài liệu → agent thí nghiệm → agent phân tích → agent viết báo cáo</div>
         </div>
         <div class="use-item">
-          <div class="use-title">自动化运维</div>
-          <div class="use-desc">监控 Agent → 诊断 Agent → 修复 Agent → 通知 Agent</div>
+          <div class="use-title">Vận hành tự động</div>
+          <div class="use-desc">Agent giám sát → agent chẩn đoán → agent sửa lỗi → agent thông báo</div>
         </div>
       </div>
     </div>
 
     <div class="usage-section">
-      <div class="section-title">如何使用 A2A？</div>
+      <div class="section-title">Dùng A2A như thế nào?</div>
       <p class="usage-intro">
-        A2A 目前还在早期阶段，主要由 Google 推动。如果你想尝试 A2A，需要开发支持 A2A 协议的 Agent 服务。
+        A2A vẫn đang ở giai đoạn đầu, chủ yếu do Google thúc đẩy. Nếu bạn muốn thử A2A, bạn cần phát triển dịch vụ agent hỗ trợ giao thức A2A.
       </p>
-      
+
       <div class="usage-steps">
         <div class="usage-step">
           <div class="step-num">1</div>
           <div class="step-content">
-            <div class="step-title">实现 Agent Card 端点</div>
+            <div class="step-title">Triển khai endpoint Agent Card</div>
             <div class="step-desc">
-              在你的 Agent 服务中暴露 <code>/.well-known/agent.json</code>，声明 Agent 的能力和版本
+              Bạn mở endpoint <code>/.well-known/agent.json</code> trong dịch vụ agent để khai báo khả năng và phiên bản
             </div>
           </div>
         </div>
-        
+
         <div class="usage-step">
           <div class="step-num">2</div>
           <div class="step-content">
-            <div class="step-title">实现 A2A API</div>
+            <div class="step-title">Triển khai A2A API</div>
             <div class="step-desc">
-              实现 <code>agents/get</code>、<code>tasks/send</code>、<code>tasks/get</code> 等核心 API
+              Hiện thực các API lõi như <code>agents/get</code>, <code>tasks/send</code>, <code>tasks/get</code>
             </div>
           </div>
         </div>
-        
+
         <div class="usage-step">
           <div class="step-num">3</div>
           <div class="step-content">
-            <div class="step-title">部署并注册 Agent</div>
+            <div class="step-title">Triển khai và đăng ký agent</div>
             <div class="step-desc">
-              将 Agent 部署到服务器，并在 Agent 注册表中登记，让其他 Agent 可以发现它
+              Bạn deploy agent lên server và đăng ký trong agent registry để các agent khác có thể phát hiện
             </div>
           </div>
         </div>
       </div>
-      
+
       <div class="usage-note">
-        <div class="note-title">当前状态</div>
+        <div class="note-title">Trạng thái hiện tại</div>
         <div class="note-content">
-          A2A 协议于 2025 年 4 月发布，目前还在快速发展中。Google 提供了参考实现，但生态还在建设中。建议关注 <a href="https://google.github.io/A2A" target="_blank">官方文档</a> 获取最新进展。
+          Giao thức A2A được công bố tháng 4/2025 và đang phát triển rất nhanh. Google cung cấp implementation tham khảo, nhưng hệ sinh thái vẫn đang xây dựng. Bạn nên theo dõi <a href="https://google.github.io/A2A" target="_blank">tài liệu chính thức</a> để cập nhật tiến độ.
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
       <div class="flow-section">
         <div class="flow-title">
           
-          通信流程（5 步）
+          Luồng giao tiếp (5 bước)
         </div>
         
         <div class="flow-steps">
@@ -116,19 +116,19 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：Agent Card 名片格式</span>
+          <span class="summary-text">Đào sâu kỹ thuật: định dạng "name card" Agent Card</span>
         </summary>
         <div class="tech-content">
           <div class="tech-intro">
-            Agent Card 是一个 JSON 文件，通常放在 <code>/.well-known/agent.json</code> 路径
+            Agent Card là một file JSON, thường đặt ở đường dẫn <code>/.well-known/agent.json</code>
           </div>
           <div class="tech-section">
-            <div class="tech-title">Agent Card 示例</div>
+            <div class="tech-title">Ví dụ Agent Card</div>
             <pre class="tech-code"><code>{{ agentCardExample }}</code></pre>
           </div>
           <div class="tech-note">
             
-            <span>通过 Agent Card，Agent 之间可以相互发现，了解对方的能力和版本，实现互操作</span>
+            <span>Thông qua Agent Card, các agent có thể tìm thấy nhau, hiểu được khả năng và phiên bản của nhau để cùng vận hành</span>
           </div>
         </div>
       </details>
@@ -136,19 +136,19 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：HTTP + SSE 通信</span>
+          <span class="summary-text">Đào sâu kỹ thuật: giao tiếp HTTP + SSE</span>
         </summary>
         <div class="tech-content">
           <div class="tech-section">
-            <div class="tech-title">任务发送（HTTP POST）</div>
+            <div class="tech-title">Gửi nhiệm vụ (HTTP POST)</div>
             <pre class="tech-code"><code>{{ taskSendExample }}</code></pre>
           </div>
           <div class="tech-section">
-            <div class="tech-title">实时推送（SSE）</div>
+            <div class="tech-title">Đẩy realtime (SSE)</div>
             <pre class="tech-code"><code>{{ sseExample }}</code></pre>
           </div>
           <div class="tech-note">
-            <span>SSE（Server-Sent Events）允许服务器主动推送消息，适合长时任务的状态更新</span>
+            <span>SSE (Server-Sent Events) cho phép server chủ động đẩy tin về client, phù hợp để cập nhật trạng thái cho các tác vụ dài</span>
           </div>
         </div>
       </details>
@@ -156,7 +156,7 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：A2A 核心 API</span>
+          <span class="summary-text">Đào sâu kỹ thuật: các API lõi của A2A</span>
         </summary>
         <div class="tech-content">
           <div class="api-list">
@@ -174,7 +174,7 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：认证机制</span>
+          <span class="summary-text">Đào sâu kỹ thuật: cơ chế xác thực</span>
         </summary>
         <div class="tech-content">
           <div class="auth-grid">
@@ -184,7 +184,7 @@
                 <span class="auth-name">API Key</span>
               </div>
               <div class="auth-desc">
-                简单的认证方式，适合内部 Agent 通信
+                Cách xác thực đơn giản, phù hợp cho giao tiếp giữa các agent nội bộ
               </div>
               <pre class="auth-example"><code>{{ apiKeyExample }}</code></pre>
             </div>
@@ -194,7 +194,7 @@
                 <span class="auth-name">OAuth 2.0</span>
               </div>
               <div class="auth-desc">
-                企业级认证，支持令牌刷新和权限控制
+                Xác thực cấp doanh nghiệp, hỗ trợ refresh token và kiểm soát quyền
               </div>
               <pre class="auth-example"><code>{{ oauthExample }}</code></pre>
             </div>
@@ -216,18 +216,18 @@ const toggleStep = (index) => {
 
 const a2aFlowSteps = [
   {
-    name: '发现（agents/get）',
-    desc: 'Agent 之间通过 HTTP 请求获取对方的 Agent Card，了解对方的能力和版本',
+    name: 'Khám phá (agents/get)',
+    desc: 'Các agent gọi HTTP request để lấy Agent Card của nhau, từ đó biết khả năng và phiên bản của đối phương',
     example: {
-      title: 'HTTP 请求',
-      code: `// Agent A 获取 Agent B 的 Agent Card
+      title: 'HTTP request',
+      code: `// Agent A lấy Agent Card của Agent B
 GET /.well-known/agent.json HTTP/1.1
 Host: agent-b.company.com
 
-// 响应
+// Phản hồi
 {
   "name": "Code Agent",
-  "description": "专业代码生成 Agent",
+  "description": "Agent sinh code chuyên nghiệp",
   "url": "https://agent-b.company.com",
   "version": "1.0.0",
   "capabilities": {
@@ -235,18 +235,18 @@ Host: agent-b.company.com
     "pushNotifications": true
   },
   "skills": [
-    {"id": "code-gen", "name": "代码生成"},
-    {"id": "code-review", "name": "代码审查"}
+    {"id": "code-gen", "name": "Sinh code"},
+    {"id": "code-review", "name": "Review code"}
   ]
 }`
     }
   },
   {
-    name: '发任务（tasks/send）',
-    desc: 'Agent A 调用 tasks/send 向 Agent B 发送任务，包含任务ID、描述、上下文等',
+    name: 'Gửi nhiệm vụ (tasks/send)',
+    desc: 'Agent A gọi tasks/send để gửi nhiệm vụ cho Agent B, kèm theo task ID, mô tả, ngữ cảnh, ...',
     example: {
       title: 'HTTP POST',
-      code: `// Agent A 发送任务给 Agent B
+      code: `// Agent A gửi nhiệm vụ cho Agent B
 POST /tasks/send HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer xxx
@@ -259,7 +259,7 @@ Authorization: Bearer xxx
     "parts": [
       {
         "type": "text",
-        "text": "请帮我写一个登录 API"
+        "text": "Bạn giúp mình viết một API đăng nhập"
       },
       {
         "type": "resource",
@@ -271,40 +271,40 @@ Authorization: Bearer xxx
     }
   },
   {
-    name: '执行（Task Processing）',
-    desc: 'Agent B 接收任务后，可能调用自己的 LLM 或 MCP 工具来执行任务',
+    name: 'Thực thi (Task Processing)',
+    desc: 'Sau khi nhận nhiệm vụ, Agent B có thể gọi LLM nội bộ hoặc dùng công cụ qua MCP để thực thi',
     example: {
-      title: 'Agent B 内部处理',
-      code: `// Agent B 内部处理流程
-1. 解析任务请求
-2. 分析需要的技能（从 skills 中匹配）
-3. 调用内部 LLM 生成代码
-4. 可选：通过 MCP 调用外部工具验证代码
-5. 生成最终结果
+      title: 'Xử lý nội bộ tại Agent B',
+      code: `// Luồng xử lý nội bộ của Agent B
+1. Phân tích yêu cầu nhiệm vụ
+2. Xác định kỹ năng cần dùng (khớp với skills)
+3. Gọi LLM nội bộ để sinh code
+4. Tuỳ chọn: gọi tool ngoài qua MCP để xác minh code
+5. Sinh kết quả cuối cùng
 
-// 整个过程可能耗时较长，通过 SSE 推送进度`
+// Cả quá trình có thể kéo dài, đẩy tiến độ qua SSE`
     }
   },
   {
-    name: '推送（SSE）',
-    desc: 'Agent B 通过 SSE（Server-Sent Events）实时推送任务进度和中间结果',
+    name: 'Đẩy realtime (SSE)',
+    desc: 'Agent B dùng SSE (Server-Sent Events) để đẩy realtime tiến độ và kết quả trung gian',
     example: {
-      title: 'SSE 推送',
-      code: `// 服务器持续推送
+      title: 'Đẩy qua SSE',
+      code: `// Server liên tục đẩy
 event: taskProgress
 data: {
   "taskId": "task-12345",
   "status": "processing",
   "progress": 30,
-  "message": "正在生成登录逻辑..."
+  "message": "Đang sinh logic đăng nhập..."
 }
 
-event: taskProgress  
+event: taskProgress
 data: {
-  "taskId": "task-12345", 
+  "taskId": "task-12345",
   "status": "processing",
   "progress": 60,
-  "message": "正在生成数据库操作..."
+  "message": "Đang sinh thao tác cơ sở dữ liệu..."
 }
 
 event: taskCompleted
@@ -316,15 +316,15 @@ data: {
     }
   },
   {
-    name: '返回结果（tasks/get）',
-    desc: '任务完成后，Agent A 可以通过 tasks/get 获取最终结果',
+    name: 'Trả kết quả (tasks/get)',
+    desc: 'Sau khi nhiệm vụ hoàn tất, Agent A gọi tasks/get để lấy kết quả cuối cùng',
     example: {
       title: 'HTTP GET',
-      code: `// Agent A 获取任务结果
+      code: `// Agent A lấy kết quả nhiệm vụ
 GET /tasks/task-12345 HTTP/1.1
 Authorization: Bearer xxx
 
-// 响应
+// Phản hồi
 {
   "id": "task-12345",
   "status": "completed",
@@ -334,7 +334,7 @@ Authorization: Bearer xxx
       "parts": [
         {
           "type": "text",
-          "text": "登录 API 已生成..."
+          "text": "API đăng nhập đã được sinh xong..."
         },
         {
           "type": "file",
@@ -353,8 +353,8 @@ Authorization: Bearer xxx
 ]
 
 const agentCardExample = `{
-  "name": "代码生成 Agent",
-  "description": "专业的前后端代码生成 Agent",
+  "name": "Agent sinh code",
+  "description": "Agent chuyên sinh code cả frontend và backend",
   "url": "https://code-agent.company.com",
   "version": "1.0.0",
   "capabilities": {
@@ -364,12 +364,12 @@ const agentCardExample = `{
   "skills": [
     {
       "id": "frontend",
-      "name": "前端开发",
+      "name": "Frontend",
       "description": "React/Vue/Angular"
     },
     {
-      "id": "backend", 
-      "name": "后端开发",
+      "id": "backend",
+      "name": "Backend",
       "description": "Node/Python/Go"
     }
   ],
@@ -387,7 +387,7 @@ Authorization: Bearer {token}
   "id": "task-001",
   "message": {
     "role": "user",
-    "parts": [{ "type": "text", "text": "写一个登录接口" }]
+    "parts": [{ "type": "text", "text": "Viết một API đăng nhập giúp mình" }]
   }
 }`
 
@@ -401,19 +401,19 @@ event: completed
 data: {"status": "completed", "result": {...}}`
 
 const a2aApis = [
-  { method: 'GET', name: 'agents/get', desc: '获取指定 Agent 的 Agent Card，了解其能力' },
-  { method: 'POST', name: 'tasks/send', desc: '发送任务给目标 Agent，同步等待结果' },
-  { method: 'POST', name: 'tasks/sendSubscribe', desc: '发送任务并订阅 SSE 推送，实时获取进度' },
-  { method: 'GET', name: 'tasks/get', desc: '根据任务 ID 获取任务状态和结果' },
-  { method: 'GET', name: 'tasks/cancel', desc: '取消正在执行的任务' }
+  { method: 'GET', name: 'agents/get', desc: 'Lấy Agent Card của một agent cụ thể để biết khả năng của họ' },
+  { method: 'POST', name: 'tasks/send', desc: 'Gửi nhiệm vụ cho agent đích, chờ kết quả đồng bộ' },
+  { method: 'POST', name: 'tasks/sendSubscribe', desc: 'Gửi nhiệm vụ kèm subscribe SSE để lấy tiến độ realtime' },
+  { method: 'GET', name: 'tasks/get', desc: 'Lấy trạng thái và kết quả nhiệm vụ theo task ID' },
+  { method: 'GET', name: 'tasks/cancel', desc: 'Huỷ một nhiệm vụ đang chạy' }
 ]
 
 const apiKeyExample = `Authorization: Bearer sk-xxxxx
-# 或
+# hoặc
 Authorization: ApiKey sk-xxxxx`
 
 const oauthExample = `Authorization: Bearer {access_token}
-# 支持刷新令牌
+# Hỗ trợ refresh token
 POST /oauth/token
 {
   "grant_type": "refresh_token",

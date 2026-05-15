@@ -1,12 +1,12 @@
 <!--
   LinuxFileSystemDemo.vue
-  Linux 文件系统层级演示
+  Cây thư mục Linux
 -->
 <template>
   <div class="linux-fs-demo">
     <div class="header">
-      <div class="title">Linux 文件系统层级</div>
-      <div class="subtitle">点击目录查看用途说明</div>
+      <div class="title">Cây thư mục Linux</div>
+      <div class="subtitle">Bấm vào thư mục để xem mô tả</div>
     </div>
 
     <div class="tree">
@@ -26,7 +26,7 @@
       <div class="detail-title">{{ current.path }}</div>
       <div class="detail-desc">{{ current.desc }}</div>
       <div v-if="current.examples.length" class="examples">
-        <div class="ex-label">常见内容：</div>
+        <div class="ex-label">Thường gặp:</div>
         <div class="ex-list">
           <span v-for="(ex, i) in current.examples" :key="i" class="ex-tag">{{ ex }}</span>
         </div>
@@ -41,15 +41,15 @@ import { ref, computed } from 'vue'
 const activeDir = ref('/')
 
 const dirs = [
-  { path: '/', icon: '📁', brief: '根目录', desc: '整个文件系统的起点，所有目录和文件都从这里开始。Linux 中一切皆文件，所有设备、进程信息都以文件形式存在于这棵目录树中。', examples: [] },
-  { path: '/bin', icon: '⚙️', brief: '基础命令', desc: '存放系统启动和单用户模式下必需的基础命令二进制文件。这些命令所有用户都可以使用。', examples: ['ls', 'cp', 'mv', 'cat', 'grep', 'chmod'] },
-  { path: '/etc', icon: '📋', brief: '配置文件', desc: '存放系统和应用的配置文件。几乎所有软件的配置都在这里，修改配置是 Linux 运维的日常。', examples: ['nginx.conf', 'hosts', 'passwd', 'ssh/sshd_config', 'crontab'] },
-  { path: '/home', icon: '🏠', brief: '用户目录', desc: '普通用户的家目录。每个用户在这里有一个以用户名命名的子目录，存放个人文件和配置。', examples: ['/home/alice', '/home/bob', '~/.bashrc', '~/.ssh/'] },
-  { path: '/var', icon: '📊', brief: '可变数据', desc: '存放运行时会变化的数据：日志、缓存、邮件、数据库文件等。排查问题时经常需要查看这里的日志。', examples: ['/var/log/', '/var/cache/', '/var/lib/mysql/', '/var/www/'] },
-  { path: '/tmp', icon: '🗑️', brief: '临时文件', desc: '存放临时文件，系统重启后通常会被清空。所有用户都有写权限，适合存放不需要持久化的中间文件。', examples: ['编译中间文件', '下载缓存', '会话临时数据'] },
-  { path: '/usr', icon: '📦', brief: '用户程序', desc: '存放用户安装的程序、库和文档。可以理解为 "Unix System Resources"，是最大的目录之一。', examples: ['/usr/bin/', '/usr/lib/', '/usr/local/', '/usr/share/'] },
-  { path: '/proc', icon: '🔍', brief: '进程信息', desc: '虚拟文件系统，不占磁盘空间。内核将进程和系统信息以文件形式暴露在这里，是监控和调试的重要数据源。', examples: ['/proc/cpuinfo', '/proc/meminfo', '/proc/[pid]/status'] },
-  { path: '/dev', icon: '🔌', brief: '设备文件', desc: '存放设备文件。Linux 中硬件设备也是文件，通过读写这些文件与硬件交互。', examples: ['/dev/sda', '/dev/null', '/dev/zero', '/dev/tty'] }
+  { path: '/', icon: '📁', brief: 'Thư mục gốc', desc: 'Điểm bắt đầu của toàn bộ filesystem, mọi thư mục và file đều bắt nguồn từ đây. Trong Linux mọi thứ đều là file - thiết bị và thông tin tiến trình đều xuất hiện dưới dạng file trong cây thư mục này.', examples: [] },
+  { path: '/bin', icon: '⚙️', brief: 'Lệnh cơ bản', desc: 'Chứa binary của các lệnh cơ bản cần thiết khi boot và ở chế độ single user. Mọi user đều dùng được.', examples: ['ls', 'cp', 'mv', 'cat', 'grep', 'chmod'] },
+  { path: '/etc', icon: '📋', brief: 'File cấu hình', desc: 'Chứa file cấu hình của hệ thống và ứng dụng. Gần như mọi phần mềm đặt cấu hình ở đây, sửa cấu hình là việc hằng ngày của Linux admin.', examples: ['nginx.conf', 'hosts', 'passwd', 'ssh/sshd_config', 'crontab'] },
+  { path: '/home', icon: '🏠', brief: 'Home user', desc: 'Thư mục home của user thường. Mỗi user có một thư mục con đặt theo tên user để chứa file và cấu hình cá nhân.', examples: ['/home/alice', '/home/bob', '~/.bashrc', '~/.ssh/'] },
+  { path: '/var', icon: '📊', brief: 'Dữ liệu biến đổi', desc: 'Chứa dữ liệu thay đổi khi chạy: log, cache, mail, file database... Khi debug bạn rất hay phải xem log ở đây.', examples: ['/var/log/', '/var/cache/', '/var/lib/mysql/', '/var/www/'] },
+  { path: '/tmp', icon: '🗑️', brief: 'File tạm', desc: 'Chứa file tạm, thường bị xóa khi reboot. Mọi user đều có quyền ghi, thích hợp lưu file trung gian không cần giữ lại.', examples: ['File trung gian khi build', 'Cache tải về', 'Dữ liệu tạm của session'] },
+  { path: '/usr', icon: '📦', brief: 'Chương trình user', desc: 'Chứa chương trình, library và tài liệu do user cài. Hiểu là "Unix System Resources", một trong những thư mục lớn nhất.', examples: ['/usr/bin/', '/usr/lib/', '/usr/local/', '/usr/share/'] },
+  { path: '/proc', icon: '🔍', brief: 'Thông tin tiến trình', desc: 'Filesystem ảo, không chiếm disk. Kernel phơi thông tin tiến trình và hệ thống dưới dạng file ở đây, là nguồn dữ liệu quan trọng để monitor và debug.', examples: ['/proc/cpuinfo', '/proc/meminfo', '/proc/[pid]/status'] },
+  { path: '/dev', icon: '🔌', brief: 'File thiết bị', desc: 'Chứa file thiết bị. Trong Linux phần cứng cũng là file, bạn đọc/ghi vào file này để giao tiếp với phần cứng.', examples: ['/dev/sda', '/dev/null', '/dev/zero', '/dev/tty'] }
 ]
 
 const current = computed(() => dirs.find(d => d.path === activeDir.value))

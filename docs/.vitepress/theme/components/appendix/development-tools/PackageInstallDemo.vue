@@ -1,8 +1,8 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">npm install 全过程模拟</span>
-      <span class="subtitle">观察一个包从命令行到磁盘的完整安装旅程</span>
+      <span class="title">Mô phỏng toàn bộ quá trình npm install</span>
+      <span class="subtitle">Quan sát hành trình cài đặt đầy đủ của một package từ command line đến ổ đĩa</span>
     </div>
 
     <div class="control-panel">
@@ -12,17 +12,17 @@
           <option v-for="p in packages" :key="p.name" :value="p.name">{{ p.name }}</option>
         </select>
         <button class="install-btn" :disabled="installing" @click="runInstall">
-          {{ installing ? '安装中…' : '运行' }}
+          {{ installing ? 'Đang cài...' : 'Chạy' }}
         </button>
-        <button class="reset-btn" :disabled="installing" @click="resetAll">重置</button>
+        <button class="reset-btn" :disabled="installing" @click="resetAll">Reset</button>
       </div>
     </div>
 
     <div class="visualization-area">
       <div class="two-col">
-        <!-- 左侧：安装日志 -->
+        <!-- Trái: log cài đặt -->
         <div class="log-panel">
-          <div class="panel-title">📟 安装日志</div>
+          <div class="panel-title">📟 Log cài đặt</div>
           <div ref="logRef" class="log-body">
             <div
               v-for="(line, i) in logs"
@@ -32,13 +32,13 @@
               <span class="log-time">{{ line.time }}</span>
               <span class="log-text">{{ line.text }}</span>
             </div>
-            <div v-if="!logs.length" class="log-empty">等待运行…</div>
+            <div v-if="!logs.length" class="log-empty">Chờ chạy...</div>
           </div>
         </div>
 
-        <!-- 右侧：文件结构 + package.json -->
+        <!-- Phải: cấu trúc file + package.json -->
         <div class="right-panel">
-          <div class="panel-title">📁 文件结构变化</div>
+          <div class="panel-title">📁 Thay đổi cấu trúc file</div>
           <div class="file-tree">
             <div class="tree-line">my-project/</div>
             <div class="tree-line">├── package.json</div>
@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <!-- 阶段进度条 -->
+      <!-- Thanh tiến trình các giai đoạn -->
       <div class="phases">
         <div
           v-for="ph in phases"
@@ -77,7 +77,7 @@
     </div>
 
     <div class="info-box">
-      <strong>核心机制：</strong>安装时先解析依赖树 → 去注册表下载 → 解压到 node_modules → 写入锁文件，锁文件确保团队所有人安装完全一致的版本。
+      <strong>Cơ chế cốt lõi:</strong> Khi cài, trước hết phân giải cây dependency → tải xuống từ registry → giải nén vào node_modules → ghi lock file. Lock file đảm bảo mọi người trong team đều cài cùng version giống hệt nhau.
     </div>
   </div>
 </template>
@@ -128,10 +128,10 @@ const showLock = ref(false)
 const logRef = ref(null)
 
 const phases = ref([
-  { id: 'resolve', name: '依赖解析', desc: '分析所有需要的包', status: 'pending' },
-  { id: 'fetch', name: '下载 & 解压', desc: '从 registry 拉取 tarball', status: 'pending' },
-  { id: 'link', name: '链接模块', desc: '写入 node_modules/', status: 'pending' },
-  { id: 'lockfile', name: '写锁文件', desc: '固化精确版本', status: 'pending' }
+  { id: 'resolve', name: 'Phân giải dependency', desc: 'Phân tích tất cả package cần thiết', status: 'pending' },
+  { id: 'fetch', name: 'Tải & giải nén', desc: 'Lấy tarball từ registry', status: 'pending' },
+  { id: 'link', name: 'Liên kết module', desc: 'Ghi vào node_modules/', status: 'pending' },
+  { id: 'lockfile', name: 'Ghi lock file', desc: 'Cố định version chính xác', status: 'pending' }
 ])
 
 const baseJson = {
@@ -146,7 +146,7 @@ const jsonData = ref(JSON.parse(JSON.stringify(baseJson)))
 const packageJsonStr = computed(() => JSON.stringify(jsonData.value, null, 2))
 
 function getTime() {
-  return new Date().toLocaleTimeString('zh-CN', { hour12: false })
+  return new Date().toLocaleTimeString('vi-VN', { hour12: false })
 }
 
 function addLog(text, type = 'info') {
@@ -181,21 +181,21 @@ async function runInstall() {
 
   // Phase 1: resolve
   setPhase('resolve', 'active')
-  addLog(`正在解析 ${pkg.name}@${pkg.version} 的依赖…`, 'info')
+  addLog(`Đang phân giải dependency của ${pkg.name}@${pkg.version}...`, 'info')
   await sleep(500)
   const allPkgs = [pkg, ...pkg.deps]
   for (const dep of pkg.deps) {
-    addLog(`  找到依赖: ${dep.name}@${dep.version}`, 'dep')
+    addLog(`  Tìm thấy dependency: ${dep.name}@${dep.version}`, 'dep')
     await sleep(200)
   }
-  addLog(`共需安装 ${allPkgs.length} 个包`, 'success')
+  addLog(`Tổng cộng cần cài ${allPkgs.length} package`, 'success')
   setPhase('resolve', 'done')
   await sleep(300)
 
   // Phase 2: fetch
   setPhase('fetch', 'active')
   for (const dep of allPkgs) {
-    addLog(`↓ 下载 ${dep.name}-${dep.version}.tgz`, 'fetch')
+    addLog(`↓ Tải ${dep.name}-${dep.version}.tgz`, 'fetch')
     await sleep(300)
   }
   setPhase('fetch', 'done')
@@ -205,7 +205,7 @@ async function runInstall() {
   setPhase('link', 'active')
   for (let i = 0; i < allPkgs.length; i++) {
     const dep = allPkgs[i]
-    addLog(`📂 解压 → node_modules/${dep.name}/`, 'link')
+    addLog(`📂 Giải nén → node_modules/${dep.name}/`, 'link')
     installedDeps.value.push({
       name: dep.name,
       version: dep.version,
@@ -219,7 +219,7 @@ async function runInstall() {
   // Phase 4: lockfile
   setPhase('lockfile', 'active')
   showLock.value = true
-  addLog('✏️ 写入 package-lock.json', 'lock')
+  addLog('✏️ Ghi vào package-lock.json', 'lock')
   await sleep(300)
 
   // Update package.json
@@ -232,7 +232,7 @@ async function runInstall() {
   jsonData.value = updated
   setPhase('lockfile', 'done')
 
-  addLog(`✅ 完成！新增 ${pkg.name}@${pkg.version}`, 'success')
+  addLog(`✅ Hoàn tất! Đã thêm ${pkg.name}@${pkg.version}`, 'success')
   installing.value = false
 }
 

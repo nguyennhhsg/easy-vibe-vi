@@ -2,8 +2,8 @@
   <div class="journey-demo">
     <!-- Header -->
     <div class="demo-header">
-      <span class="title">📸 照片上传的完整旅程</span>
-      <span class="subtitle">从按下快门到云端备份，数据经历了什么？</span>
+      <span class="title">📸 Hành trình upload một bức ảnh</span>
+      <span class="subtitle">Từ lúc bấm máy đến khi backup lên cloud, dữ liệu đã trải qua những gì?</span>
     </div>
 
     <!-- Progress Steps -->
@@ -96,7 +96,7 @@
         :disabled="currentStep === 0 && stepPhase === 'idle'" 
         @click="handlePrev"
       >
-        ← 上一步
+        ← Bước trước
       </button>
       
       <button 
@@ -117,28 +117,28 @@
         :disabled="currentStep >= steps.length - 1 && stepPhase === 'completed'" 
         @click="handleNext"
       >
-        {{ currentStep >= steps.length - 1 && stepPhase === 'completed' ? '完成 ✓' : '下一步 →' }}
+        {{ currentStep >= steps.length - 1 && stepPhase === 'completed' ? 'Xong ✓' : 'Bước kế →' }}
       </button>
     </div>
 
     <!-- Summary Panel (shown when all completed) -->
     <div v-if="allCompleted" class="summary-panel">
-      <div class="summary-title">🎯 三步协同，完成数据旅程</div>
+      <div class="summary-title">🎯 Ba bước phối hợp, trọn vẹn hành trình dữ liệu</div>
       <div class="summary-grid">
         <div class="summary-item">
           <span class="summary-icon">🔢</span>
-          <span class="summary-label">编码</span>
-          <span class="summary-desc">把光信号翻译成数字</span>
+          <span class="summary-label">Encoding</span>
+          <span class="summary-desc">Dịch tín hiệu ánh sáng thành con số</span>
         </div>
         <div class="summary-item">
           <span class="summary-icon">💾</span>
-          <span class="summary-label">存储</span>
-          <span class="summary-desc">先内存缓冲，再持久写入</span>
+          <span class="summary-label">Lưu trữ</span>
+          <span class="summary-desc">Đệm vào RAM trước, rồi ghi xuống bộ nhớ</span>
         </div>
         <div class="summary-item">
           <span class="summary-icon">📡</span>
-          <span class="summary-label">传输</span>
-          <span class="summary-desc">分包加密，可靠送达</span>
+          <span class="summary-label">Truyền tải</span>
+          <span class="summary-desc">Chia gói, mã hoá, gửi đi tin cậy</span>
         </div>
       </div>
     </div>
@@ -156,60 +156,60 @@ const allCompleted = ref(false)
 
 const steps = [
   {
-    label: '编码',
-    stageName: '编码阶段',
+    label: 'Encoding',
+    stageName: 'Giai đoạn encoding',
     icon: '🔢',
-    title: '第一步：编码 — 把光变成数字',
+    title: 'Bước 1: Encoding - biến ánh sáng thành con số',
     color: '#7c3aed',
     actors: [
-      { icon: '☀️', name: '光线', value: '物理信号' },
-      { icon: '📷', name: '传感器', value: 'CMOS/CCD' },
-      { icon: '📊', name: 'RAW 数据', value: '24MB / 4860万像素' },
-      { icon: '🗜️', name: 'JPEG 压缩', value: '有损压缩' },
-      { icon: '📄', name: 'JPEG 文件', value: '3.2MB' }
+      { icon: '☀️', name: 'Ánh sáng', value: 'Tín hiệu vật lý' },
+      { icon: '📷', name: 'Cảm biến', value: 'CMOS/CCD' },
+      { icon: '📊', name: 'Dữ liệu RAW', value: '24MB / 48.6 triệu pixel' },
+      { icon: '🗜️', name: 'Nén JPEG', value: 'Nén có mất dữ liệu' },
+      { icon: '📄', name: 'File JPEG', value: '3.2MB' }
     ],
     points: [
-      '相机传感器把光信号转换成 RGB 数值（每个像素 3 × 8 bit = 24 bit）',
-      '整张照片 4860 万像素 × 24 bit ≈ 140 MB 的原始数据',
-      'JPEG 算法分析像素相似性，去掉人眼不敏感的信息，压缩到 3 MB'
+      'Cảm biến máy ảnh chuyển tín hiệu ánh sáng thành giá trị RGB (mỗi pixel 3 × 8 bit = 24 bit)',
+      'Cả bức ảnh 48.6 triệu pixel × 24 bit ≈ 140 MB dữ liệu gốc',
+      'Thuật toán JPEG phân tích sự tương đồng giữa các pixel, bỏ đi phần mắt người ít nhạy, nén còn 3 MB'
     ],
-    insight: '压缩 ≠ 降质，好的压缩算法让你几乎看不出差别，但文件小了 97%。'
+    insight: 'Nén không có nghĩa là giảm chất lượng đâu bạn, thuật toán nén tốt khiến bạn gần như không nhận ra khác biệt, mà file lại nhỏ đi đến 97%.'
   },
   {
-    label: '存储',
-    stageName: '存储阶段',
+    label: 'Lưu trữ',
+    stageName: 'Giai đoạn lưu trữ',
     icon: '💾',
-    title: '第二步：存储 — 先内存后闪存',
+    title: 'Bước 2: Lưu trữ - vào RAM trước rồi mới sang Flash',
     color: '#059669',
     actors: [
-      { icon: '📄', name: 'JPEG（已编码）', value: '3.2 MB' },
-      { icon: '🧠', name: 'RAM（内存）', value: '写入 ~1 ms' },
-      { icon: '💾', name: '闪存（Flash）', value: '写入 ~10 ms' }
+      { icon: '📄', name: 'JPEG (đã encode)', value: '3.2 MB' },
+      { icon: '🧠', name: 'RAM (bộ nhớ)', value: 'Ghi ~1 ms' },
+      { icon: '💾', name: 'Flash', value: 'Ghi ~10 ms' }
     ],
     points: [
-      '⚡ 图像先写进内存（RAM）——速度极快，但断电消失',
-      '💾 内存中的数据再异步写入闪存（手机存储）——速度慢一些，但永久保存',
-      '🔒 写完后操作系统标记文件"安全"，你才能看到相册里的新照片'
+      '⚡ Ảnh được ghi vào RAM trước, tốc độ cực nhanh nhưng mất điện là bay',
+      '💾 Sau đó dữ liệu trong RAM được ghi bất đồng bộ xuống bộ nhớ Flash (bộ nhớ điện thoại), chậm hơn nhưng lưu vĩnh viễn',
+      '🔒 Ghi xong, hệ điều hành mới đánh dấu file "an toàn" thì bạn mới thấy ảnh mới trong album'
     ],
-    insight: '为什么拍完不能马上拔电池？因为数据可能还在内存里，还没写进闪存！'
+    insight: 'Vì sao vừa chụp xong không nên rút pin liền? Vì dữ liệu có thể vẫn đang nằm trong RAM, chưa kịp ghi xuống Flash đó bạn!'
   },
   {
-    label: '传输',
-    stageName: '传输阶段',
+    label: 'Truyền tải',
+    stageName: 'Giai đoạn truyền tải',
     icon: '📡',
-    title: '第三步：传输 — 数据"旅行"到云端',
+    title: 'Bước 3: Truyền tải - dữ liệu "lên đường" tới cloud',
     color: '#d97706',
     actors: [
-      { icon: '💾', name: '闪存（JPEG）', value: '3.2 MB' },
-      { icon: '📶', name: 'Wi-Fi / 4G', value: 'TCP 分包传输' },
-      { icon: '☁️', name: '云端服务器', value: '写入云存储' }
+      { icon: '💾', name: 'Flash (JPEG)', value: '3.2 MB' },
+      { icon: '📶', name: 'Wi-Fi / 4G', value: 'TCP chia gói' },
+      { icon: '☁️', name: 'Máy chủ cloud', value: 'Ghi vào cloud storage' }
     ],
     points: [
-      '📦 3.2 MB 的 JPEG 文件被 TCP 协议切成数千个小"数据包"',
-      '🔐 每个包都有序号和校验码，丢了会自动重传——所以传输是可靠的',
-      '☁️ 云端收齐所有包，重新拼成完整 JPEG，写入对象存储（如 OSS/S3）'
+      '📦 File JPEG 3.2 MB được giao thức TCP chia thành hàng nghìn "gói dữ liệu" nhỏ',
+      '🔐 Mỗi gói đều có số thứ tự và checksum, mất gói nào sẽ tự động gửi lại nên truyền rất tin cậy',
+      '☁️ Cloud nhận đủ các gói, ghép lại thành file JPEG hoàn chỉnh, ghi vào object storage (như OSS/S3)'
     ],
-    insight: '上传时你以为数据是"整个发过去"的，其实是"切碎了一片片送过去"。'
+    insight: 'Lúc upload bạn cứ tưởng dữ liệu được "gửi nguyên cả khối", thực ra nó được "cắt nhỏ thành từng mảnh rồi mới đưa đi" đấy.'
   }
 ]
 
@@ -218,15 +218,15 @@ const currentStepData = computed(() => steps[currentStep.value])
 const isAnimating = computed(() => stepPhase.value === 'animating')
 
 const stageStatus = computed(() => {
-  if (stepPhase.value === 'idle') return '等待执行'
-  if (stepPhase.value === 'animating') return '执行中...'
-  return '已完成'
+  if (stepPhase.value === 'idle') return 'Chờ chạy'
+  if (stepPhase.value === 'animating') return 'Đang chạy...'
+  return 'Đã xong'
 })
 
 const mainButtonText = computed(() => {
-  if (allCompleted.value) return '🔄 重新演示'
-  if (stepPhase.value === 'completed') return '✓ 已完成，点击下一步'
-  return '▶ 执行这一步'
+  if (allCompleted.value) return '🔄 Chạy lại'
+  if (stepPhase.value === 'completed') return '✓ Đã xong, bấm bước kế'
+  return '▶ Chạy bước này'
 })
 
 const currentInsight = computed(() => {

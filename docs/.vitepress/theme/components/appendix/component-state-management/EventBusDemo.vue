@@ -2,12 +2,12 @@
   <div class="event-bus-demo">
     <div class="demo-header">
       <span class="icon">📡</span>
-      <span class="title">Event Bus 事件总线</span>
-      <span class="subtitle">像广播站一样的消息传递</span>
+      <span class="title">Event Bus</span>
+      <span class="subtitle">Truyền tin như đài phát thanh</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">广播电台</span>工作：任何部门（组件）都可以通过广播站（Event Bus）发布消息，所有收音机（监听器）都能收到广播。不需要知道对方是谁！
+      Hãy hình dung bạn làm ở một <span class="highlight">đài phát thanh</span>: bất kỳ bộ phận (component) nào cũng có thể phát tin qua đài (Event Bus), mọi radio (listener) đang mở đều nhận được. Không cần biết bên kia là ai!
     </div>
 
     <div class="demo-content">
@@ -16,7 +16,7 @@
           📻
         </div>
         <div class="bus-label">
-          广播站 (Event Bus)
+          Đài phát thanh (Event Bus)
         </div>
       </div>
 
@@ -38,7 +38,7 @@
             class="comp-status"
             :class="{ listening: comp.isListening }"
           >
-            {{ comp.isListening ? '📻 收音中' : '🔇 未开机' }}
+            {{ comp.isListening ? 'Đang nghe' : 'Tắt' }}
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
           class="event-log"
         >
           <div class="log-title">
-            📨 消息记录
+            Lịch sử message
           </div>
           <div class="log-list">
             <div
@@ -58,7 +58,7 @@
               class="log-item"
               :class="log.type"
             >
-              <span class="log-type">{{ log.type === 'emit' ? '🎤 广播' : '📻 收听' }}</span>
+              <span class="log-type">{{ log.type === 'emit' ? 'Phát' : 'Nghe' }}</span>
               <span class="log-text">{{ log.text }}</span>
             </div>
           </div>
@@ -67,12 +67,12 @@
     </div>
 
     <div class="hint-text">
-      👆 点击上方任意部门，模拟发送广播消息，其他开机的部门会收到
+      Bấm vào bộ phận bất kỳ ở trên để mô phỏng phát message, các bộ phận đang bật sẽ nhận được
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>Event Bus 像广播站，任何组件都可以发送和接收消息，不需要知道对方存在。适合简单的跨组件通信，但要记得组件销毁时关闭收音机（取消监听）。
+      <strong>Ý chính:</strong> Event Bus giống đài phát thanh, mọi component đều có thể gửi và nhận message, không cần biết bên kia tồn tại hay không. Phù hợp cho giao tiếp cross-component đơn giản, nhưng nhớ tắt radio (gỡ listener) khi component bị hủy.
     </div>
   </div>
 </template>
@@ -90,21 +90,21 @@ const components = reactive([
 const logs = ref([])
 
 const sendEvent = (comp) => {
-  // 发送动画
+  // Animation gửi
   comp.isActive = true
   logs.value.unshift({
     type: 'emit',
-    text: `${comp.name} 发布广播: 有新消息！`
+    text: `${comp.name} phát message: có tin mới!`
   })
 
-  // 其他组件接收
+  // Các component khác nhận
   components.forEach(target => {
     if (target.id !== comp.id && target.isListening) {
       setTimeout(() => {
         target.isActive = true
         logs.value.unshift({
           type: 'receive',
-          text: `${target.name} 收到广播`
+          text: `${target.name} nhận được message`
         })
         setTimeout(() => {
           target.isActive = false

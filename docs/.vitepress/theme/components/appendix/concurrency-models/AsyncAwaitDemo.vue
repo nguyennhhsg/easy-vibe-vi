@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>async/await 机制演示</h4>
+    <h4>Demo cơ chế async/await</h4>
 
     <div class="controls">
       <el-button
@@ -9,37 +9,37 @@
         :disabled="isRunning"
         @click="runExample"
       >
-        {{ isRunning ? '运行中...' : '运行示例' }}
+        {{ isRunning ? 'Đang chạy...' : 'Chạy ví dụ' }}
       </el-button>
       <el-button
         size="small"
         @click="reset"
       >
-        重置
+        Reset
       </el-button>
       <el-checkbox
         v-model="showDetails"
         size="small"
       >
-        显示详细信息
+        Hiển thị chi tiết
       </el-checkbox>
     </div>
 
     <div class="code-section">
       <div class="code-block">
         <div class="code-header">
-          <span class="code-title">Python asyncio 示例</span>
+          <span class="code-title">Ví dụ asyncio trong Python</span>
         </div>
         <pre class="code-content"><code><span class="keyword">import</span> asyncio
 
 <span class="keyword">async def</span> <span class="function">fetch_data</span>(url):
-    <span class="comment"># await 挂起，让出 CPU</span>
+    <span class="comment"># await tạm dừng, nhường CPU</span>
     response = <span class="keyword">await</span> aiohttp.get(url)
-    <span class="comment"># I/O 完成后继续执行</span>
+    <span class="comment"># Tiếp tục chạy khi I/O xong</span>
     <span class="keyword">return</span> response.json()
 
 <span class="keyword">async def</span> <span class="function">main</span>():
-    <span class="comment"># 并发执行</span>
+    <span class="comment"># Chạy concurrent</span>
     tasks = [fetch_data(url) <span class="keyword">for</span> url <span class="keyword">in</span> urls]
     results = <span class="keyword">await</span> asyncio.gather(*tasks)</code></pre>
       </div>
@@ -47,7 +47,7 @@
 
     <div class="visualization">
       <div class="timeline-container">
-        <h5>执行时间线</h5>
+        <h5>Timeline thực thi</h5>
         <div class="timeline">
           <div class="time-axis">
             <div class="axis-label">
@@ -70,14 +70,14 @@
           <div class="thread-rows">
             <div class="thread-row">
               <div class="row-label">
-                事件循环
+                Event loop
               </div>
               <div class="row-track">
                 <div
                   class="execution-segment event-loop"
                   style="width: 100%;"
                 >
-                  调度中
+                  Đang schedule
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@
               class="thread-row"
             >
               <div class="row-label">
-                任务 {{ task.id }}
+                Task {{ task.id }}
               </div>
               <div class="row-track">
                 <template
@@ -104,7 +104,7 @@
                       v-if="segment.width > 8"
                       class="segment-label"
                     >
-                      {{ segment.type === 'active' ? '执行' : 'I/O' }}
+                      {{ segment.type === 'active' ? 'Chạy' : 'I/O' }}
                     </span>
                   </div>
                 </template>
@@ -117,7 +117,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-title">
-            并发任务数
+            Số task concurrent
           </div>
           <div class="stat-value">
             {{ tasks.length }}
@@ -125,7 +125,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-title">
-            总执行时间
+            Tổng thời gian chạy
           </div>
           <div class="stat-value">
             {{ totalTime }}ms
@@ -133,7 +133,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-title">
-            I/O 等待时间
+            Thời gian đợi I/O
           </div>
           <div class="stat-value">
             {{ ioWaitTime }}ms
@@ -141,7 +141,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-title">
-            CPU 利用率
+            Tỷ lệ dùng CPU
           </div>
           <div class="stat-value">
             {{ cpuUtilization }}%
@@ -152,9 +152,9 @@
 
     <div class="explanation">
       <el-alert
-        title="async/await 的优势"
+        title="Ưu điểm của async/await"
         type="success"
-        description="当一个任务遇到 I/O 操作(如网络请求)时，await 会让出 CPU，事件循环调度其他任务执行。I/O 完成后，任务从断点恢复。这种方式让单个线程可以并发处理数千个任务。"
+        description="Khi một task gặp thao tác I/O (như network request), await sẽ nhường CPU và event loop schedule task khác chạy. Khi I/O xong, task tiếp tục từ điểm dừng. Cách này cho phép một luồng xử lý concurrent hàng nghìn task."
         show-icon
         :closable="false"
       />
@@ -171,13 +171,13 @@ const showDetails = ref(false)
 
 const tasks = ref([])
 
-// 颜色
+// Màu sắc
 const colors = ['#409eff', '#67c23a', '#e6a23c', '#f56c6c', '#909399']
 
-// 计算统计数据
+// Tính thống kê
 const totalTime = computed(() => {
   if (tasks.value.length === 0) return 0
-  // 模拟总时间
+  // Mô phỏng tổng thời gian
   return Math.round(50 + tasks.value.length * 10)
 })
 
@@ -189,7 +189,7 @@ const cpuUtilization = computed(() => {
   return Math.round(100 - (ioWaitTime.value / totalTime.value) * 100)
 })
 
-// 生成任务数据
+// Sinh dữ liệu task
 function generateTasks() {
   const count = Math.min(Math.floor(coroutineCount.value / 200), 5)
   const newTasks = []
@@ -198,9 +198,9 @@ function generateTasks() {
     const segments = []
     let currentPos = 5
 
-    // 生成交替的执行和I/O段
+    // Sinh xen kẽ đoạn chạy và đoạn I/O
     for (let j = 0; j < 3; j++) {
-      // 执行段
+      // Đoạn chạy
       const execWidth = 10 + Math.random() * 10
       segments.push({
         type: 'active',
@@ -210,7 +210,7 @@ function generateTasks() {
       })
       currentPos += execWidth
 
-      // I/O段
+      // Đoạn I/O
       const ioWidth = 15 + Math.random() * 10
       segments.push({
         type: 'io',
@@ -231,32 +231,32 @@ function generateTasks() {
   tasks.value = newTasks
 }
 
-// 运行示例
+// Chạy ví dụ
 function runExample() {
   isRunning.value = true
   generateTasks()
 
-  // 模拟运行
+  // Mô phỏng chạy
   setTimeout(() => {
     isRunning.value = false
   }, 2000)
 }
 
-// 重置
+// Reset
 function reset() {
   tasks.value = []
   isRunning.value = false
   coroutineCount.value = 1000
 }
 
-// 监听协程数量变化
+// Theo dõi thay đổi số coroutine
 watch(coroutineCount, () => {
   if (tasks.value.length > 0) {
     generateTasks()
   }
 })
 
-// 初始化
+// Khởi tạo
 generateTasks()
 </script>
 

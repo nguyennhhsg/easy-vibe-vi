@@ -2,7 +2,7 @@
   <div class="lost-in-middle-demo">
     <div class="control-panel">
       <div class="control-group">
-        <label>关键信息大概在整段话的哪个位置：{{ needlePosition }}%</label>
+        <label>Thông tin then chốt nằm ở vị trí nào trong cả đoạn: {{ needlePosition }}%</label>
         <input 
           v-model.number="needlePosition" 
           type="range" 
@@ -36,7 +36,7 @@
             📍
           </div>
           <div class="needle-tooltip">
-            关键事实
+            Sự kiện then chốt
           </div>
         </div>
       </div>
@@ -65,10 +65,10 @@
           />
         </svg>
         <div class="chart-label y-axis">
-          被记住的概率
+          Xác suất được nhớ
         </div>
         <div class="chart-label x-axis">
-          在上下文里的位置
+          Vị trí trong context
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
           {{ retrievalProb.toFixed(1) }}%
         </div>
         <div class="metric-label">
-          检索成功率
+          Tỷ lệ truy hồi thành công
         </div>
       </div>
       <div class="metric-card">
@@ -90,7 +90,7 @@
           {{ positionLabel }}
         </div>
         <div class="metric-label">
-          位置描述
+          Mô tả vị trí
         </div>
       </div>
     </div>
@@ -98,9 +98,9 @@
     <div class="info-box">
       <p>
         <span class="icon">🔍</span>
-        <strong>实验观察：</strong>当关键信息藏在整段话的<strong>中间位置</strong>时，模型最容易“漏看掉”（Lost in the Middle）。
+        <strong>Quan sát thực nghiệm:</strong> khi thông tin then chốt nằm ở <strong>khúc giữa</strong> của cả đoạn, mô hình dễ "bỏ sót" nhất (Lost in the Middle).
         <br>
-        最靠谱的做法：把重要指令放在<strong>最前面的 System Prompt</strong>，或者<strong>最后的用户问题里</strong>。
+        Cách an toàn nhất: bạn đặt chỉ thị quan trọng ở <strong>System Prompt phía trên cùng</strong>, hoặc ngay trong <strong>câu hỏi cuối cùng của người dùng</strong>.
       </p>
     </div>
   </div>
@@ -122,9 +122,9 @@ const retrievalProb = computed(() => {
 
 const positionLabel = computed(() => {
   const p = needlePosition.value
-  if (p < 20) return '偏开头'
-  if (p > 80) return '偏结尾'
-  return '中间区域（最危险）'
+  if (p < 20) return 'Gần đầu'
+  if (p > 80) return 'Gần cuối'
+  return 'Khu vực giữa (nguy hiểm nhất)'
 })
 
 const getScoreClass = (score) => {

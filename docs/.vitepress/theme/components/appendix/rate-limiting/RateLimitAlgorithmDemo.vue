@@ -1,12 +1,12 @@
 <!--
   RateLimitAlgorithmDemo.vue
-  限流算法演示：令牌桶、漏桶、滑动窗口
+  Demo thuật toán rate-limit: Token Bucket, Leaky Bucket, Sliding Window
 -->
 <template>
   <div class="rate-limit-demo">
     <div class="header">
-      <div class="title">限流算法对比</div>
-      <div class="subtitle">选择算法，点击"发送请求"观察效果</div>
+      <div class="title">So sánh thuật toán rate-limit</div>
+      <div class="subtitle">Chọn thuật toán, bấm "Gửi request" để quan sát</div>
     </div>
 
     <div class="algo-tabs">
@@ -20,30 +20,30 @@
 
     <div class="sim-area">
       <div class="controls">
-        <button class="send-btn" @click="sendRequest">发送请求</button>
-        <button class="burst-btn" @click="burstRequests">突发 10 个请求</button>
-        <button class="reset-btn" @click="reset">重置</button>
+        <button class="send-btn" @click="sendRequest">Gửi request</button>
+        <button class="burst-btn" @click="burstRequests">Burst 10 request</button>
+        <button class="reset-btn" @click="reset">Reset</button>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <span class="stat-label">通过</span>
+          <span class="stat-label">Cho qua</span>
           <span class="stat-value ok">{{ passed }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">拒绝</span>
+          <span class="stat-label">Từ chối</span>
           <span class="stat-value reject">{{ rejected }}</span>
         </div>
         <div class="stat" v-if="algo === 'token'">
-          <span class="stat-label">剩余令牌</span>
+          <span class="stat-label">Token còn lại</span>
           <span class="stat-value">{{ tokens }}</span>
         </div>
         <div class="stat" v-if="algo === 'leaky'">
-          <span class="stat-label">桶中排队</span>
+          <span class="stat-label">Đang xếp hàng trong bucket</span>
           <span class="stat-value">{{ bucketQueue }}</span>
         </div>
         <div class="stat" v-if="algo === 'sliding'">
-          <span class="stat-label">窗口内请求</span>
+          <span class="stat-label">Request trong cửa sổ</span>
           <span class="stat-value">{{ windowCount }}</span>
         </div>
       </div>
@@ -79,9 +79,9 @@ const windowCount = ref(0)
 const logs = ref([])
 
 const algorithms = [
-  { key: 'token', label: '令牌桶', desc: '以固定速率往桶里放令牌，每个请求消耗一个令牌。桶满时多余令牌丢弃。允许一定程度的突发流量（桶里有存量令牌时）。' },
-  { key: 'leaky', label: '漏桶', desc: '请求先进入桶中排队，以固定速率从桶底"漏出"处理。桶满时新请求被拒绝。输出速率恒定，完全平滑流量。' },
-  { key: 'sliding', label: '滑动窗口', desc: '统计最近 N 秒内的请求数，超过阈值则拒绝。比固定窗口更精确，避免窗口边界的突发问题。' }
+  { key: 'token', label: 'Token Bucket', desc: 'Bỏ token vào bucket với tốc độ cố định, mỗi request tiêu thụ một token. Bucket đầy thì token thừa bị bỏ. Cho phép burst nhất định (khi bucket còn token dự trữ).' },
+  { key: 'leaky', label: 'Leaky Bucket', desc: 'Request vào bucket xếp hàng, "rò" ra với tốc độ cố định để xử lý. Bucket đầy thì request mới bị từ chối. Tốc độ đầu ra ổn định, làm mượt traffic hoàn toàn.' },
+  { key: 'sliding', label: 'Sliding Window', desc: 'Đếm số request trong N giây gần nhất, vượt ngưỡng thì từ chối. Chính xác hơn fixed window, tránh được vấn đề burst ở biên cửa sổ.' }
 ]
 
 const currentAlgo = computed(() => algorithms.find(a => a.key === algo.value))
@@ -103,7 +103,7 @@ function startLeakyDrain() {
     if (bucketQueue.value > 0) {
       bucketQueue.value--
       passed.value++
-      addLog('ok', '漏桶处理了一个排队请求')
+      addLog('ok', 'Leaky bucket xử lý một request từ hàng đợi')
     }
   }, 1000)
 }
@@ -135,19 +135,19 @@ function sendRequest() {
     if (tokens.value > 0) {
       tokens.value--
       passed.value++
-      addLog('ok', `请求通过（剩余令牌: ${tokens.value}）`)
+      addLog('ok', `Request được cho qua (token còn lại: ${tokens.value})`)
     } else {
       rejected.value++
-      addLog('reject', '令牌不足，请求被拒绝 (429)')
+      addLog('reject', 'Không đủ token, request bị từ chối (429)')
     }
     if (!tokenTimer) startTokenRefill()
   } else if (algo.value === 'leaky') {
     if (bucketQueue.value < 5) {
       bucketQueue.value++
-      addLog('ok', `请求进入排队（队列: ${bucketQueue.value}/5）`)
+      addLog('ok', `Request vào hàng đợi (queue: ${bucketQueue.value}/5)`)
     } else {
       rejected.value++
-      addLog('reject', '桶已满，请求被拒绝 (429)')
+      addLog('reject', 'Bucket đầy, request bị từ chối (429)')
     }
     if (!leakyTimer) startLeakyDrain()
   } else {
@@ -158,10 +158,10 @@ function sendRequest() {
       windowRequests.value.push(now)
       windowCount.value++
       passed.value++
-      addLog('ok', `请求通过（窗口内: ${windowCount.value}/5）`)
+      addLog('ok', `Request được cho qua (trong cửa sổ: ${windowCount.value}/5)`)
     } else {
       rejected.value++
-      addLog('reject', '窗口内请求数超限 (429)')
+      addLog('reject', 'Vượt giới hạn request trong cửa sổ (429)')
     }
   }
 }

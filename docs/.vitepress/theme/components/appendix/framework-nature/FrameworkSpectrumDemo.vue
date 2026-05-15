@@ -1,15 +1,15 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">框架光谱</span>
-      <span class="subtitle">运行时 ↔ 编译时</span>
+      <span class="title">Phổ các framework</span>
+      <span class="subtitle">Runtime ↔ Compile-time</span>
     </div>
 
     <div class="visualization-area">
       <div class="spectrum-wrapper">
         <div class="spectrum-labels">
-          <span class="spectrum-label-left">更多运行时</span>
-          <span class="spectrum-label-right">更多编译时</span>
+          <span class="spectrum-label-left">Thiên về runtime</span>
+          <span class="spectrum-label-right">Thiên về compile-time</span>
         </div>
         <div class="spectrum-bar">
           <button
@@ -43,7 +43,7 @@
         <div class="detail-summary">{{ selected.summary }}</div>
         <div class="work-bars">
           <div class="work-bar-row">
-            <span class="work-label">运行时工作量</span>
+            <span class="work-label">Khối lượng runtime</span>
             <div class="work-bar-track">
               <div
                 class="work-bar-fill runtime"
@@ -53,7 +53,7 @@
             <span class="work-value">{{ selected.runtimePercent }}%</span>
           </div>
           <div class="work-bar-row">
-            <span class="work-label">编译时工作量</span>
+            <span class="work-label">Khối lượng compile-time</span>
             <div class="work-bar-track">
               <div
                 class="work-bar-fill compile"
@@ -65,11 +65,11 @@
         </div>
         <div class="detail-meta">
           <span class="meta-item">
-            <span class="meta-label">打包体积</span>
+            <span class="meta-label">Bundle size</span>
             <span class="meta-value">{{ selected.bundleSize }}</span>
           </span>
           <span class="meta-item">
-            <span class="meta-label">开发体验</span>
+            <span class="meta-label">Trải nghiệm dev</span>
             <span class="meta-value">{{ selected.devExperience }}</span>
           </span>
         </div>
@@ -77,7 +77,7 @@
     </div>
 
     <div class="info-box">
-      <strong>趋势：</strong>
+      <strong>Xu hướng:</strong>
       {{ selected.trendMessage }}
     </div>
   </div>
@@ -95,11 +95,11 @@ const FRAMEWORKS = {
     percent: 20,
     runtimePercent: 80,
     compilePercent: 20,
-    bundleSize: '中等',
+    bundleSize: 'Trung bình',
     devExperience: '★★★★☆',
-    summary: '运行时为主：虚拟 DOM + Reconciliation',
+    summary: 'Chủ yếu runtime: Virtual DOM + Reconciliation',
     trendMessage:
-      '趋势很明确：框架在不断将工作从运行时移向编译时，目标是同时实现更好的开发体验和更优的运行性能。'
+      'Xu hướng rất rõ: framework đang dần chuyển công việc từ runtime sang compile-time, mục tiêu là vừa có trải nghiệm dev tốt hơn vừa có hiệu năng chạy mượt hơn.'
   },
   vue3: {
     id: 'vue3',
@@ -109,11 +109,11 @@ const FRAMEWORKS = {
     percent: 40,
     runtimePercent: 60,
     compilePercent: 40,
-    bundleSize: '中等',
+    bundleSize: 'Trung bình',
     devExperience: '★★★★★',
-    summary: '混合：编译优化模板 + 运行时虚拟 DOM',
+    summary: 'Lai: tối ưu template lúc compile + Virtual DOM ở runtime',
     trendMessage:
-      '趋势很明确：框架在不断将工作从运行时移向编译时，目标是同时实现更好的开发体验和更优的运行性能。'
+      'Xu hướng rất rõ: framework đang dần chuyển công việc từ runtime sang compile-time, mục tiêu là vừa có trải nghiệm dev tốt hơn vừa có hiệu năng chạy mượt hơn.'
   },
   vapor: {
     id: 'vapor',
@@ -123,11 +123,11 @@ const FRAMEWORKS = {
     percent: 60,
     runtimePercent: 40,
     compilePercent: 60,
-    bundleSize: '较小',
+    bundleSize: 'Nhỏ',
     devExperience: '★★★★☆',
-    summary: '编译时为主：跳过虚拟 DOM，编译生成直接操作',
+    summary: 'Chủ yếu compile-time: bỏ qua Virtual DOM, compile thẳng thành thao tác trực tiếp',
     trendMessage:
-      '趋势很明确：框架在不断将工作从运行时移向编译时，目标是同时实现更好的开发体验和更优的运行性能。'
+      'Xu hướng rất rõ: framework đang dần chuyển công việc từ runtime sang compile-time, mục tiêu là vừa có trải nghiệm dev tốt hơn vừa có hiệu năng chạy mượt hơn.'
   },
   svelte: {
     id: 'svelte',
@@ -137,11 +137,11 @@ const FRAMEWORKS = {
     percent: 80,
     runtimePercent: 20,
     compilePercent: 80,
-    bundleSize: '最小',
+    bundleSize: 'Rất nhỏ',
     devExperience: '★★★★☆',
-    summary: '编译时为主：编译时生成精确 DOM 更新代码',
+    summary: 'Chủ yếu compile-time: sinh sẵn code cập nhật DOM chính xác lúc compile',
     trendMessage:
-      '趋势很明确：框架在不断将工作从运行时移向编译时，目标是同时实现更好的开发体验和更优的运行性能。'
+      'Xu hướng rất rõ: framework đang dần chuyển công việc từ runtime sang compile-time, mục tiêu là vừa có trải nghiệm dev tốt hơn vừa có hiệu năng chạy mượt hơn.'
   },
   solid: {
     id: 'solid',
@@ -151,11 +151,11 @@ const FRAMEWORKS = {
     percent: 90,
     runtimePercent: 10,
     compilePercent: 90,
-    bundleSize: '最小',
+    bundleSize: 'Rất nhỏ',
     devExperience: '★★★★☆',
-    summary: '纯编译时：细粒度响应式，无虚拟 DOM',
+    summary: 'Hoàn toàn compile-time: reactivity mịn, không có Virtual DOM',
     trendMessage:
-      '趋势很明确：框架在不断将工作从运行时移向编译时，目标是同时实现更好的开发体验和更优的运行性能。'
+      'Xu hướng rất rõ: framework đang dần chuyển công việc từ runtime sang compile-time, mục tiêu là vừa có trải nghiệm dev tốt hơn vừa có hiệu năng chạy mượt hơn.'
   }
 }
 

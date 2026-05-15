@@ -1,19 +1,19 @@
 <template>
   <div class="https-handshake-demo">
     <h4 style="margin: 0 0 12px 0; color: #1a1a2e">
-      🤝 TLS 握手过程演示
+      🤝 Quá trình TLS handshake
     </h4>
     <div class="control-row">
       <button class="start-btn" :disabled="isRunning" @click="startHandshake">
-        {{ isRunning ? '握手进行中...' : '开始 TLS 握手' }}
+        {{ isRunning ? 'Đang handshake...' : 'Bắt đầu TLS handshake' }}
       </button>
-      <button class="reset-btn" @click="reset">重置</button>
+      <button class="reset-btn" @click="reset">Reset</button>
     </div>
 
     <div class="handshake-area">
       <div class="side client-side">
         <div class="side-icon">💻</div>
-        <div class="side-label">客户端（浏览器）</div>
+        <div class="side-label">Client (Trình duyệt)</div>
       </div>
 
       <div class="message-lane">
@@ -43,7 +43,7 @@
 
       <div class="side server-side">
         <div class="side-icon">🖥️</div>
-        <div class="side-label">服务器</div>
+        <div class="side-label">Server</div>
       </div>
     </div>
 
@@ -57,7 +57,7 @@
     </div>
 
     <div v-if="handshakeDone" class="success-box">
-      ✅ TLS 握手完成！后续所有 HTTP 数据都将通过对称加密传输，第三方无法窃听。
+      ✅ TLS handshake hoàn tất! Mọi dữ liệu HTTP sau đó đều được truyền qua mã hóa đối xứng, bên thứ ba không nghe lén được.
     </div>
   </div>
 </template>
@@ -73,37 +73,37 @@ const messages = [
   {
     name: 'Client Hello',
     direction: 'right',
-    desc: '发送支持的 TLS 版本、加密套件列表、随机数',
+    desc: 'Gửi version TLS được hỗ trợ, danh sách cipher suite, số random',
     detail:
-      '浏览器向服务器发起连接请求，告知自己支持的 TLS 版本（如 TLS 1.3）、可用的加密算法列表（如 AES-256-GCM）以及一个客户端随机数（Client Random）。这就像自我介绍："我会这些加密方式，你选一个吧。"'
+      'Trình duyệt mở kết nối tới server, thông báo các version TLS mình hỗ trợ (ví dụ TLS 1.3), danh sách thuật toán mã hóa khả dụng (ví dụ AES-256-GCM) và một số random của client (Client Random). Giống như tự giới thiệu: &quot;Tôi biết các kiểu mã hóa này, anh chọn một cái đi.&quot;'
   },
   {
     name: 'Server Hello',
     direction: 'left',
-    desc: '选定 TLS 版本、加密套件、服务器随机数',
+    desc: 'Chọn version TLS, cipher suite, gửi số random của server',
     detail:
-      '服务器从客户端提供的列表中选择一个最优的加密套件，并返回自己的随机数（Server Random）。相当于回应："好的，我们就用 TLS 1.3 + AES-256-GCM 来通信。"'
+      'Server chọn cipher suite tối ưu từ danh sách client gửi và trả về số random của mình (Server Random). Tương đương: &quot;OK, mình sẽ dùng TLS 1.3 + AES-256-GCM để giao tiếp.&quot;'
   },
   {
     name: 'Certificate',
     direction: 'left',
-    desc: '服务器发送数字证书（含公钥）',
+    desc: 'Server gửi chứng chỉ số (chứa public key)',
     detail:
-      '服务器将自己的数字证书发送给浏览器。证书中包含服务器的公钥、域名信息以及 CA 的签名。浏览器会验证证书是否由受信任的 CA 签发、是否过期、域名是否匹配。'
+      'Server gửi chứng chỉ số của mình cho trình duyệt. Chứng chỉ chứa public key, thông tin domain và chữ ký của CA. Trình duyệt kiểm tra chứng chỉ được CA tin cậy ký, còn hạn không, domain có khớp không.'
   },
   {
     name: 'Key Exchange',
     direction: 'right',
-    desc: '双方协商生成会话密钥',
+    desc: 'Hai bên thỏa thuận session key',
     detail:
-      '在 TLS 1.3 中，客户端和服务器通过 ECDHE（椭圆曲线 Diffie-Hellman）算法交换密钥材料。双方各自生成临时密钥对，交换公钥后独立计算出相同的"预主密钥"，再结合之前的随机数推导出最终的对称会话密钥。'
+      'Trong TLS 1.3, client và server trao đổi key material qua ECDHE (Elliptic Curve Diffie-Hellman). Mỗi bên tạo cặp khóa tạm thời, sau khi trao đổi public key thì tự tính ra cùng một &quot;pre-master secret&quot;, rồi kết hợp với số random trước đó để suy ra session key đối xứng cuối cùng.'
   },
   {
     name: 'Finished',
     direction: 'right',
-    desc: '双方确认握手成功，开始加密通信',
+    desc: 'Cả hai xác nhận handshake thành công, bắt đầu mã hóa',
     detail:
-      '双方各自发送 Finished 消息，其中包含之前所有握手消息的摘要（用刚协商好的密钥加密）。如果对方能正确解密并验证，说明密钥协商成功，后续所有数据都将使用对称加密传输。'
+      'Hai bên gửi message Finished, chứa digest của toàn bộ các message handshake trước đó (mã hóa bằng khóa vừa thỏa thuận). Nếu đối phương giải mã và kiểm tra đúng nghĩa là key exchange thành công, từ giờ mọi dữ liệu sẽ truyền bằng mã hóa đối xứng.'
   }
 ]
 

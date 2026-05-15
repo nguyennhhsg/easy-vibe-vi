@@ -1,22 +1,22 @@
 <!--
   MonolithReleaseRiskDemo.vue
-  单体发布的影响面与风险演示
+  Demo phạm vi ảnh hưởng và rủi ro khi release monolith
 -->
 <template>
   <div class="release-demo">
     <div class="header">
       <div class="title">
-        单体发布：牵一发而动全身
+        Release monolith: sửa một chỗ ảnh hưởng toàn bộ
       </div>
       <div class="subtitle">
-        选择修改范围，看看“爆炸半径”
+        Chọn phạm vi thay đổi, xem "bán kính tác động"
       </div>
     </div>
 
     <div class="content">
       <div class="modules">
         <div class="section-title">
-          本次改动涉及
+          Lần này thay đổi liên quan tới
         </div>
         <div class="module-grid">
           <button
@@ -32,7 +32,7 @@
 
         <div class="slider">
           <label>
-            改动规模：<strong>{{ changeSizeLabel }}</strong>
+            Quy mô thay đổi: <strong>{{ changeSizeLabel }}</strong>
           </label>
           <input
             v-model="changeSize"
@@ -47,7 +47,7 @@
       <div class="result">
         <div class="risk-meter">
           <div class="risk-title">
-            故障概率
+            Xác suất xảy ra lỗi
           </div>
           <div class="risk-value">
             {{ riskPercent }}%
@@ -64,7 +64,7 @@
           class="deploy-btn"
           @click="deployRelease"
         >
-          模拟发布
+          Mô phỏng release
         </button>
         <div
           class="status"
@@ -75,7 +75,7 @@
 
         <div class="history">
           <div class="section-title">
-            最近 3 次发布
+            3 lần release gần nhất
           </div>
           <ul>
             <li
@@ -85,7 +85,7 @@
               {{ item }}
             </li>
             <li v-if="deployHistory.length === 0">
-              暂无记录
+              Chưa có lịch sử
             </li>
           </ul>
         </div>
@@ -98,15 +98,15 @@
 import { ref, computed } from 'vue'
 
 const modules = ref([
-  { key: 'user', label: '用户', active: true },
-  { key: 'order', label: '订单', active: true },
-  { key: 'payment', label: '支付', active: false },
-  { key: 'product', label: '商品', active: false }
+  { key: 'user', label: 'User', active: true },
+  { key: 'order', label: 'Order', active: true },
+  { key: 'payment', label: 'Payment', active: false },
+  { key: 'product', label: 'Product', active: false }
 ])
 
 const changeSize = ref(3)
 const deployHistory = ref([])
-const deployStatus = ref('等待发布...')
+const deployStatus = ref('Đang chờ release...')
 const deployStatusClass = ref('idle')
 
 const activeModules = computed(
@@ -121,8 +121,8 @@ const riskPercent = computed(() => {
 })
 
 const changeSizeLabel = computed(() => {
-  const labels = ['很小', '小', '中等', '大', '特大']
-  return labels[changeSize.value - 1] || '中等'
+  const labels = ['Rất nhỏ', 'Nhỏ', 'Vừa', 'Lớn', 'Rất lớn']
+  return labels[changeSize.value - 1] || 'Vừa'
 })
 
 const toggleModule = (key) => {
@@ -134,14 +134,14 @@ const toggleModule = (key) => {
 const deployRelease = () => {
   const roll = Math.random() * 100
   if (roll < riskPercent.value) {
-    deployStatus.value = `发布失败：全站回滚，用时 ${8 + changeSize.value * 4} 分钟`
+    deployStatus.value = `Release thất bại: rollback toàn site, mất ${8 + changeSize.value * 4} phút`
     deployStatusClass.value = 'fail'
   } else {
-    deployStatus.value = '发布成功：流量切换完成'
+    deployStatus.value = 'Release thành công: đã chuyển traffic xong'
     deployStatusClass.value = 'success'
   }
 
-  const summary = `${new Date().toLocaleTimeString('zh-CN', {
+  const summary = `${new Date().toLocaleTimeString('vi-VN', {
     hour: '2-digit',
     minute: '2-digit'
   })} - ${deployStatus.value}`

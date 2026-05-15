@@ -8,22 +8,22 @@ const activeStep = ref('') // 'start' | 'error-editor' | 'extension' | 'error-en
 
 const scenarios = {
   editor: {
-    tab: '1. 仅编辑器',
-    title: '场景 1: 只有 VS Code (纯文本模式)',
-    desc: '就像用 Windows 记事本写代码。虽然能打字，但它根本不懂什么是 Python。',
-    result: '❌ 失败：VS Code 把代码当成普通文本，不知道该怎么运行。'
+    tab: '1. Chỉ có editor',
+    title: 'Tình huống 1: Chỉ có VS Code (chế độ plain text)',
+    desc: 'Giống như dùng Notepad của Windows để viết code. Gõ chữ thì được nhưng nó không hiểu Python là gì.',
+    result: '❌ Thất bại: VS Code coi code như văn bản thường, không biết chạy thế nào.'
   },
   extension: {
-    tab: '2. +插件',
-    title: '场景 2: 安装了插件 (缺环境)',
-    desc: '你安装了 Python 插件。插件知道“运行”意味着要找 Python 程序，但你的电脑里并没有安装 Python。',
-    result: '⚠️ 报错：插件生成了指令，但在系统里找不到 "python.exe"。'
+    tab: '2. + extension',
+    title: 'Tình huống 2: Đã cài extension (thiếu môi trường)',
+    desc: 'Bạn đã cài extension Python. Extension biết "run" nghĩa là phải tìm chương trình Python, nhưng máy bạn chưa cài Python.',
+    result: '⚠️ Lỗi: extension đã tạo lệnh nhưng hệ thống không tìm thấy "python.exe".'
   },
   full: {
-    tab: '3. +环境 (完整)',
-    title: '场景 3: 完整形态 (IDE + 插件 + 环境)',
-    desc: '你安装了 Python 解释器。插件生成指令，解释器接收并执行，完美配合。',
-    result: '✅ 成功：Hello World'
+    tab: '3. + môi trường (đầy đủ)',
+    title: 'Tình huống 3: Đầy đủ (IDE + extension + môi trường)',
+    desc: 'Bạn đã cài Python interpreter. Extension tạo lệnh, interpreter nhận và chạy, phối hợp hoàn hảo.',
+    result: '✅ Thành công: Hello World'
   }
 }
 
@@ -36,8 +36,8 @@ const run = async () => {
   await wait(600)
 
   if (currentScenario.value === 'editor') {
-    logs.value.push('VS Code: "这是什么文件？我不认识。"')
-    logs.value.push('VS Code: "我只是个打字机，无法运行。"')
+    logs.value.push('VS Code: "File gì đây? Mình không biết."')
+    logs.value.push('VS Code: "Mình chỉ là máy gõ chữ, không chạy được."')
     activeStep.value = 'error-editor'
   } else {
     // Has extension
@@ -48,7 +48,7 @@ const run = async () => {
       logs.value.push('> python main.py')
       await wait(600)
       logs.value.push("Error: command 'python' not found")
-      logs.value.push('系统: 找不到 Python 解释器')
+      logs.value.push('Hệ thống: không tìm thấy Python interpreter')
       activeStep.value = 'error-env'
     } else {
       // Full
@@ -77,10 +77,10 @@ const setScenario = (key) => {
   <div class="arch-demo">
     <div class="demo-header">
       <div class="title">
-        🛠️ IDE 核心机制模拟器
+        🛠️ Trình mô phỏng cơ chế cốt lõi của IDE
       </div>
       <div class="subtitle">
-        点击下方标签，体验不同配置下的运行结果，理解为什么缺一不可。
+        Click vào các tab bên dưới để xem kết quả với từng cấu hình, hiểu vì sao thiếu một thành phần là không chạy được.
       </div>
     </div>
 
@@ -109,7 +109,7 @@ const setScenario = (key) => {
         :class="{ dim: activeStep === 'env' }"
       >
         <div class="comp-label">
-          1. 外壳 (VS Code)
+          1. Vỏ ngoài (VS Code)
         </div>
         <div class="editor-window">
           <div class="file-tab">
@@ -123,17 +123,17 @@ const setScenario = (key) => {
           <button
             class="run-btn-small"
             :disabled="isRunning"
-            title="点击运行"
+            title="Click để chạy"
             @click="run"
           >
-            {{ isRunning ? '...' : '▶ 运行' }}
+            {{ isRunning ? '...' : '▶ Run' }}
           </button>
         </div>
         <div
           v-if="activeStep === 'error-editor'"
           class="status-badge error"
         >
-          🚫 不懂怎么运行
+          🚫 Không biết cách chạy
         </div>
       </div>
 
@@ -168,14 +168,14 @@ const setScenario = (key) => {
         }"
       >
         <div class="comp-label">
-          2. 中介 (插件)
+          2. Trung gian (extension)
         </div>
         <div class="comp-box">
           <div
             v-if="currentScenario === 'editor'"
             class="missing-content"
           >
-            <span class="icon">❌</span> 未安装插件
+            <span class="icon">❌</span> Chưa cài extension
           </div>
           <div
             v-else
@@ -185,7 +185,7 @@ const setScenario = (key) => {
               🧩
             </div>
             <div class="text">
-              Python 插件
+              Extension Python
             </div>
             <div
               v-if="
@@ -195,7 +195,7 @@ const setScenario = (key) => {
               "
               class="action"
             >
-              生成指令: <code>python main.py</code>
+              Tạo lệnh: <code>python main.py</code>
             </div>
           </div>
         </div>
@@ -224,14 +224,14 @@ const setScenario = (key) => {
         }"
       >
         <div class="comp-label">
-          3. 引擎 (环境)
+          3. Động cơ (môi trường)
         </div>
         <div class="comp-box">
           <div
             v-if="currentScenario !== 'full'"
             class="missing-content"
           >
-            <span class="icon">❌</span> 未安装环境
+            <span class="icon">❌</span> Chưa cài môi trường
           </div>
           <div
             v-else
@@ -241,19 +241,19 @@ const setScenario = (key) => {
               ⚙️
             </div>
             <div class="text">
-              Python 解释器
+              Python interpreter
             </div>
             <div
               v-if="activeStep === 'env'"
               class="action"
             >
-              <span class="spin">⚙️</span> 正在计算...
+              <span class="spin">⚙️</span> Đang tính toán...
             </div>
             <div
               v-if="activeStep === 'result'"
               class="action success"
             >
-              ✅ 计算完成
+              ✅ Hoàn tất tính toán
             </div>
           </div>
         </div>
@@ -261,7 +261,7 @@ const setScenario = (key) => {
           v-if="activeStep === 'error-env'"
           class="status-badge error"
         >
-          🚫 找不到程序
+          🚫 Không tìm thấy chương trình
         </div>
       </div>
     </div>
@@ -269,14 +269,14 @@ const setScenario = (key) => {
     <!-- Output Console -->
     <div class="terminal-box">
       <div class="term-header">
-        <span class="term-icon">_</span> 终端 (Terminal)
+        <span class="term-icon">_</span> Terminal
       </div>
       <div class="term-body">
         <div
           v-for="(l, i) in logs"
           :key="i"
           class="log-line"
-          :class="{ error: l.includes('Error') || l.includes('失败') }"
+          :class="{ error: l.includes('Error') || l.includes('Thất bại') }"
         >
           {{ l }}
         </div>
@@ -284,7 +284,7 @@ const setScenario = (key) => {
           v-if="logs.length === 0"
           class="placeholder"
         >
-          点击上方“运行”按钮开始...
+          Click nút "Run" phía trên để bắt đầu...
         </div>
       </div>
     </div>
@@ -293,8 +293,8 @@ const setScenario = (key) => {
       v-if="!isRunning && logs.length > 0"
       class="result-bar"
       :class="{
-        success: scenarios[currentScenario].result.includes('成功'),
-        error: !scenarios[currentScenario].result.includes('成功')
+        success: scenarios[currentScenario].result.includes('Thành công'),
+        error: !scenarios[currentScenario].result.includes('Thành công')
       }"
     >
       {{ scenarios[currentScenario].result }}

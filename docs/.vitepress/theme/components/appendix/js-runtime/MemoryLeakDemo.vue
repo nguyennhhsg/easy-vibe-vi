@@ -9,14 +9,14 @@ const scenarios = [
   { value: 'closures', label: 'Closure tham chiếu', icon: '🔒' }
 ]
 
-// 全局变量场景
+// Kịch bản biến toàn cục
 const globalMemory = ref([])
 
-// 事件监听场景
+// Kịch bản event listener
 const eventListeners = ref([])
 const eventCount = ref(0)
 
-// 闭包场景
+// Kịch bản closure
 const closureItems = ref([])
 
 const memoryUsage = ref(0)
@@ -37,7 +37,7 @@ const clearGlobalVariables = () => {
   updateMemory()
 }
 
-// 事件监听场景
+// Kịch bản event listener
 const addEventListener = () => {
   const handler = () => console.log('event listener')
   eventListeners.value.push({
@@ -55,7 +55,7 @@ const removeAllListeners = () => {
   updateMemory()
 }
 
-// 闭包场景
+// Kịch bản closure
 const createClosure = () => {
   const largeData = new Array(10000).fill('Dữ liệu closure')
   const closure = () => {

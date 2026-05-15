@@ -1,13 +1,13 @@
 <template>
   <div class="audio-encoding-demo">
     <div class="demo-header">
-      <span class="demo-title">声音是如何变成数字的？</span>
-      <span class="demo-subtitle">（拖拽滑块调整采样率）</span>
+      <span class="demo-title">Âm thanh được biến thành số như thế nào?</span>
+      <span class="demo-subtitle">(Kéo thanh trượt để chỉnh tần số lấy mẫu)</span>
     </div>
 
     <div class="controls-panel">
       <div class="slider-group">
-        <label>采样频率：{{ sampleRate }} 次/秒</label>
+        <label>Tần số lấy mẫu: {{ sampleRate }} lần/giây</label>
         <input 
           v-model="sliderValue" 
           type="range" 
@@ -17,8 +17,8 @@
           class="range-slider"
         >
         <div class="scale-marks">
-          <span>低音质 (严重失真)</span>
-          <span>高音质 (贴近原声)</span>
+          <span>Chất lượng thấp (méo nặng)</span>
+          <span>Chất lượng cao (gần với âm gốc)</span>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
     </div>
 
     <div class="data-stream">
-      <div class="stream-label">转译后的数字(高度)：</div>
+      <div class="stream-label">Các con số sau khi chuyển đổi (độ cao):</div>
       <div class="stream-numbers">
         <span v-for="(s, i) in displayedNumbers" :key="i" class="num">{{ s }}</span>
         <span v-if="samples.length > 15" class="num">...</span>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="demo-insight">
-      说明：灰色的虚线是真实的连贯声波（大自然的模拟信号）。蓝色柱子是我们每隔一段时间去测量它的高度（数字信号）。采样频率越密集，记录下来的数字就越多，恢复出来的声音就越清晰逼真，但产生的文件也随之飙升。
+      Giải thích: Đường đứt nét màu xám là sóng âm liên tục thật (tín hiệu analog từ tự nhiên). Các thanh màu xanh là độ cao bạn đo được sau từng khoảng thời gian (tín hiệu số). Tần số lấy mẫu càng dày thì số lượng con số ghi lại càng nhiều, âm thanh khôi phục lại càng rõ và chân thật, nhưng kích thước file cũng tăng theo.
     </div>
   </div>
 </template>

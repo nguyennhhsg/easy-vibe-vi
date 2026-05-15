@@ -25,10 +25,10 @@
         :disabled="isAnimating"
         @click="modifyData"
       >
-        修改数据
+        Sửa dữ liệu
       </button>
 
-      <div class="steps-title">引擎盖下</div>
+      <div class="steps-title">Bên dưới nắp ca-pô</div>
       <div class="steps-list">
         <div
           v-for="(step, idx) in currentSteps"
@@ -44,7 +44,7 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
+      <strong>Ý tưởng cốt lõi:</strong>
       {{ infoMessage }}
     </div>
   </div>
@@ -59,36 +59,36 @@ const TABS = {
     label: 'Vue (Proxy)',
     color: 'var(--vp-c-green-1)',
     steps: [
-      'count = 1 → Proxy 的 set 陷阱被触发',
-      '通知依赖收集器："count 变了"',
-      '找到所有依赖 count 的组件',
-      '自动更新 DOM'
+      'count = 1 → set trap của Proxy bị kích hoạt',
+      'Báo cho bộ thu thập dependency: "count đã đổi"',
+      'Tìm mọi component đang phụ thuộc count',
+      'Tự cập nhật DOM'
     ],
-    info: 'Vue 通过 Proxy 自动拦截数据读写，开发者无需额外操作——写法最自然。'
+    info: 'Vue dùng Proxy để chặn việc đọc và ghi dữ liệu tự động, lập trình viên không cần làm gì thêm - cách viết tự nhiên nhất.'
   },
   react: {
     id: 'react',
     label: 'React (setState)',
     color: 'var(--vp-c-brand)',
     steps: [
-      '调用 setCount(count + 1)',
-      'React 将更新加入队列',
-      '批量处理队列，触发 re-render',
-      '虚拟 DOM Diff → 更新真实 DOM'
+      'Gọi setCount(count + 1)',
+      'React đưa update vào queue',
+      'Xử lý queue theo lô, trigger re-render',
+      'Diff Virtual DOM → cập nhật DOM thật'
     ],
-    info: 'React 要求显式调用 setState，虽然多一步，但数据流更可预测。'
+    info: 'React yêu cầu gọi setState một cách tường minh, tuy thêm một bước nhưng luồng dữ liệu dễ đoán hơn.'
   },
   svelte: {
     id: 'svelte',
-    label: 'Svelte (编译器)',
+    label: 'Svelte (compiler)',
     color: 'var(--vp-c-warning-1)',
     steps: [
-      'count += 1 被编译器识别为赋值',
-      '编译时已生成 $$invalidate(count)',
-      '直接更新对应的 DOM 节点（无 Diff）',
-      '零运行时开销'
+      'count += 1 được compiler nhận diện là phép gán',
+      'Lúc compile đã tạo sẵn $$invalidate(count)',
+      'Cập nhật trực tiếp node DOM tương ứng (không cần diff)',
+      'Zero runtime overhead'
     ],
-    info: 'Svelte 在编译时完成分析，运行时零开销——但依赖编译器魔法。'
+    info: 'Svelte phân tích xong ở thời điểm compile nên runtime gần như không tốn gì - nhưng phải tin vào "phép màu" của compiler.'
   }
 }
 

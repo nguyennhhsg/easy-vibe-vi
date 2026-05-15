@@ -1,8 +1,8 @@
 <template>
   <div class="prompt-demo">
     <div class="header">
-      <div class="title">Prompt 工程实验室</div>
-      <div class="subtitle">修改 Prompt 结构，观察输出质量的变化</div>
+      <div class="title">Phòng thí nghiệm Prompt Engineering</div>
+      <div class="subtitle">Bạn chỉnh cấu trúc prompt và quan sát chất lượng đầu ra thay đổi ra sao</div>
     </div>
 
     <div class="template-tabs">
@@ -19,43 +19,43 @@
 
     <div class="editor-grid">
       <div class="editor-panel">
-        <div class="panel-label">System Prompt（系统指令）</div>
+        <div class="panel-label">System Prompt (chỉ thị hệ thống)</div>
         <textarea
           v-model="systemPrompt"
           class="prompt-input"
           rows="3"
-          placeholder="设定 AI 的角色和行为规则..."
+          placeholder="Bạn đặt vai trò và quy tắc hành vi cho AI..."
         />
 
-        <div class="panel-label">User Prompt（用户输入）</div>
+        <div class="panel-label">User Prompt (đầu vào người dùng)</div>
         <textarea
           v-model="userPrompt"
           class="prompt-input"
           rows="3"
-          placeholder="用户的具体问题或指令..."
+          placeholder="Câu hỏi hoặc chỉ thị cụ thể của người dùng..."
         />
 
         <button class="run-btn" @click="runPrompt">
-          ▶ 模拟生成
+          ▶ Mô phỏng sinh
         </button>
       </div>
 
       <div class="output-panel">
-        <div class="panel-label">模拟输出</div>
+        <div class="panel-label">Đầu ra mô phỏng</div>
         <div class="output-box">
           <div v-if="isGenerating" class="generating">
-            <span class="dot-anim">●●●</span> 生成中...
+            <span class="dot-anim">●●●</span> Đang sinh...
           </div>
           <div v-else-if="output" class="output-text">
             {{ output }}
           </div>
           <div v-else class="output-placeholder">
-            点击"模拟生成"查看效果
+            Bạn nhấn "Mô phỏng sinh" để xem kết quả
           </div>
         </div>
 
         <div v-if="output" class="quality-bar">
-          <div class="quality-label">输出质量评估</div>
+          <div class="quality-label">Đánh giá chất lượng đầu ra</div>
           <div class="quality-metrics">
             <div
               v-for="m in currentQuality"
@@ -77,7 +77,7 @@
     </div>
 
     <div class="tips-bar">
-      <span class="tips-label">💡 Prompt 技巧：</span>
+      <span class="tips-label">💡 Mẹo viết prompt:</span>
       <span class="tips-text">{{ currentTip }}</span>
     </div>
   </div>
@@ -87,9 +87,9 @@
 import { ref, computed } from 'vue'
 
 const templates = [
-  { id: 'bad', icon: '❌', name: '模糊提问' },
-  { id: 'basic', icon: '📝', name: '基础结构' },
-  { id: 'good', icon: '✅', name: '最佳实践' }
+  { id: 'bad', icon: '❌', name: 'Câu hỏi mơ hồ' },
+  { id: 'basic', icon: '📝', name: 'Cấu trúc cơ bản' },
+  { id: 'good', icon: '✅', name: 'Best practice' }
 ]
 
 const currentTemplate = ref('bad')
@@ -101,36 +101,36 @@ const isGenerating = ref(false)
 const templateData = {
   bad: {
     system: '',
-    user: '帮我写个介绍',
-    output: '好的，这是一个介绍：\n\n大家好，我是一个人，我喜欢很多东西。我觉得生活很有趣。谢谢大家。\n\n（输出模糊、缺乏方向、没有实际价值）',
+    user: 'Viết giúp mình một đoạn giới thiệu',
+    output: 'Được rồi, đây là phần giới thiệu:\n\nXin chào, mình là một con người, mình thích nhiều thứ. Mình thấy cuộc sống thú vị. Cảm ơn mọi người.\n\n(Đầu ra mơ hồ, thiếu định hướng, không có giá trị thực tế)',
     quality: [
-      { name: '相关性', score: 20, color: '#ef4444' },
-      { name: '具体性', score: 10, color: '#ef4444' },
-      { name: '可用性', score: 15, color: '#ef4444' }
+      { name: 'Liên quan', score: 20, color: '#ef4444' },
+      { name: 'Cụ thể', score: 10, color: '#ef4444' },
+      { name: 'Hữu dụng', score: 15, color: '#ef4444' }
     ],
-    tip: '没有 System Prompt，没有上下文，问题过于模糊 —— AI 只能猜测你的意图。'
+    tip: 'Không có System Prompt, không có ngữ cảnh, câu hỏi quá mơ hồ — AI chỉ có thể đoán ý của bạn.'
   },
   basic: {
-    system: '你是一个技术文档写手。',
-    user: '帮我写一段关于 React 的介绍，大约100字。',
-    output: 'React 是由 Meta（原 Facebook）开发的开源 JavaScript 库，用于构建用户界面。它采用组件化开发模式和虚拟 DOM 技术，能够高效地更新和渲染页面。React 的声明式编程风格让开发者可以更直观地描述 UI 状态，广泛应用于现代 Web 开发中。',
+    system: 'Bạn là một technical writer.',
+    user: 'Viết giúp mình một đoạn giới thiệu về React, khoảng 100 chữ.',
+    output: 'React là thư viện JavaScript mã nguồn mở do Meta (trước là Facebook) phát triển, dùng để xây dựng giao diện người dùng. Nó sử dụng mô hình component và Virtual DOM để cập nhật và render trang hiệu quả. Phong cách lập trình khai báo của React giúp lập trình viên mô tả trạng thái UI một cách trực quan và được dùng rộng rãi trong phát triển web hiện đại.',
     quality: [
-      { name: '相关性', score: 70, color: '#f59e0b' },
-      { name: '具体性', score: 65, color: '#f59e0b' },
-      { name: '可用性', score: 60, color: '#f59e0b' }
+      { name: 'Liên quan', score: 70, color: '#f59e0b' },
+      { name: 'Cụ thể', score: 65, color: '#f59e0b' },
+      { name: 'Hữu dụng', score: 60, color: '#f59e0b' }
     ],
-    tip: '有了角色设定和基本约束（字数），输出质量明显提升，但仍缺少格式和受众定义。'
+    tip: 'Có vai trò và ràng buộc cơ bản (số chữ), chất lượng đầu ra đã tốt hơn rõ rệt nhưng vẫn thiếu định nghĩa về format và đối tượng đọc.'
   },
   good: {
-    system: '你是一位资深前端技术博主。写作风格：简洁专业，善用类比。目标读者：编程初学者。输出格式：先用一句话总结，再展开说明，最后给出一个生活类比。',
-    user: '请介绍 React 是什么，以及为什么它如此流行。控制在150字以内。',
-    output: '一句话总结：React 是一个帮你高效搭建网页界面的 JavaScript 工具库。\n\n展开说明：React 由 Meta 团队开发，核心理念是"组件化"——把复杂页面拆成独立的小积木，每个积木管理自己的状态和外观。它的虚拟 DOM 机制能智能计算最小更新范围，避免不必要的页面重绘。\n\n生活类比：如果网页是一面乐高墙，React 就是那套标准化的乐高积木系统——你可以独立替换任何一块，而不用推倒重来。',
+    system: 'Bạn là một blogger frontend kỳ cựu. Phong cách viết: ngắn gọn, chuyên nghiệp, giỏi dùng phép so sánh. Đối tượng đọc: người mới học lập trình. Format đầu ra: bắt đầu bằng một câu tóm tắt, sau đó triển khai chi tiết, cuối cùng đưa ra một phép so sánh đời thường.',
+    user: 'Bạn giới thiệu giúp mình React là gì và vì sao nó phổ biến đến vậy. Giới hạn trong khoảng 150 chữ.',
+    output: 'Tóm tắt một câu: React là một thư viện JavaScript giúp bạn dựng giao diện web nhanh và hiệu quả.\n\nTriển khai chi tiết: React do team Meta phát triển, ý tưởng cốt lõi là "component hoá" — tách trang phức tạp thành các viên gạch độc lập, mỗi viên tự quản lý state và giao diện của mình. Cơ chế Virtual DOM của nó tính toán phạm vi cập nhật nhỏ nhất, tránh việc render lại không cần thiết.\n\nSo sánh đời thường: nếu trang web là một bức tường Lego, React giống như bộ Lego chuẩn hoá — bạn có thể thay từng viên gạch độc lập mà không phải đập đi xây lại từ đầu.',
     quality: [
-      { name: '相关性', score: 95, color: '#10b981' },
-      { name: '具体性', score: 90, color: '#10b981' },
-      { name: '可用性', score: 95, color: '#10b981' }
+      { name: 'Liên quan', score: 95, color: '#10b981' },
+      { name: 'Cụ thể', score: 90, color: '#10b981' },
+      { name: 'Hữu dụng', score: 95, color: '#10b981' }
     ],
-    tip: '角色 + 风格 + 受众 + 格式 + 约束 = 高质量输出。好的 Prompt 就是好的需求文档。'
+    tip: 'Vai trò + phong cách + đối tượng + format + ràng buộc = đầu ra chất lượng cao. Một prompt tốt chính là một bản đặc tả yêu cầu tốt.'
   }
 }
 

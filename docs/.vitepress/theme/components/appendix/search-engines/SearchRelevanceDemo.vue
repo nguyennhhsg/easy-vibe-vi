@@ -1,17 +1,17 @@
 <!--
   SearchRelevanceDemo.vue
-  搜索相关性评分演示：展示 TF-IDF 和 BM25 评分原理
+  Demo điểm relevance: minh hoạ nguyên lý chấm điểm TF-IDF và BM25
 -->
 <template>
   <div class="relevance-demo">
     <div class="header">
-      <div class="title">搜索相关性评分</div>
-      <div class="subtitle">输入查询词，观察不同文档的相关性得分</div>
+      <div class="title">Chấm điểm relevance khi search</div>
+      <div class="subtitle">Nhập từ khoá để xem điểm relevance của các document</div>
     </div>
 
     <div class="search-box">
-      <input v-model="query" placeholder="输入搜索词，如：数据库" class="search-input" />
-      <button class="search-btn" @click="calcScores">计算得分</button>
+      <input v-model="query" placeholder="Nhập từ khoá, ví dụ: database" class="search-input" />
+      <button class="search-btn" @click="calcScores">Tính điểm</button>
     </div>
 
     <div v-if="results.length > 0" class="results">
@@ -35,19 +35,19 @@
     </div>
 
     <div class="scoring-info">
-      <div class="info-title">BM25 评分因子</div>
+      <div class="info-title">Các yếu tố chấm điểm BM25</div>
       <div class="factor-grid">
         <div class="factor">
-          <div class="factor-name">词频 (TF)</div>
-          <div class="factor-desc">关键词在文档中出现的次数越多，得分越高（但有上限）</div>
+          <div class="factor-name">Term frequency (TF)</div>
+          <div class="factor-desc">Từ khoá xuất hiện trong document càng nhiều thì điểm càng cao (có chặn trên)</div>
         </div>
         <div class="factor">
-          <div class="factor-name">逆文档频率 (IDF)</div>
-          <div class="factor-desc">越稀有的词权重越高，"的"这种常见词权重很低</div>
+          <div class="factor-name">Inverse document frequency (IDF)</div>
+          <div class="factor-desc">Từ càng hiếm thì trọng số càng cao, các từ phổ biến kiểu "là", "của" có trọng số rất thấp</div>
         </div>
         <div class="factor">
-          <div class="factor-name">文档长度</div>
-          <div class="factor-desc">较短文档中出现关键词，比长文档中出现更有意义</div>
+          <div class="factor-name">Độ dài document</div>
+          <div class="factor-desc">Từ khoá xuất hiện trong document ngắn có ý nghĩa hơn trong document dài</div>
         </div>
       </div>
     </div>
@@ -61,11 +61,11 @@ const query = ref('')
 const results = ref([])
 
 const documents = [
-  { title: 'MySQL 数据库入门', snippet: '数据库是存储和管理数据的系统，MySQL 是最流行的关系型数据库之一', keywords: { '数据库': 3, '数据': 2, 'MySQL': 2, '存储': 1 } },
-  { title: 'Redis 缓存设计', snippet: 'Redis 是内存数据库，常用作缓存层，提升数据读取性能', keywords: { 'Redis': 2, '缓存': 2, '数据库': 1, '数据': 1, '性能': 1 } },
-  { title: 'Python 数据分析', snippet: '使用 Python 进行数据清洗、分析和可视化', keywords: { 'Python': 2, '数据': 3, '分析': 2, '可视化': 1 } },
-  { title: '分布式数据库架构', snippet: '分布式数据库通过分片和复制实现高可用和水平扩展', keywords: { '分布式': 2, '数据库': 2, '分片': 1, '高可用': 1 } },
-  { title: 'API 接口设计', snippet: 'RESTful API 设计规范与最佳实践', keywords: { 'API': 3, '设计': 2, 'RESTful': 1 } }
+  { title: 'Nhập môn database MySQL', snippet: 'Database là hệ thống lưu trữ và quản lý dữ liệu, MySQL là một trong những database quan hệ phổ biến nhất', keywords: { 'database': 3, 'dữ liệu': 2, 'MySQL': 2, 'lưu trữ': 1 } },
+  { title: 'Thiết kế cache Redis', snippet: 'Redis là database trong bộ nhớ, thường dùng làm tầng cache để tăng hiệu năng đọc dữ liệu', keywords: { 'Redis': 2, 'cache': 2, 'database': 1, 'dữ liệu': 1, 'hiệu năng': 1 } },
+  { title: 'Phân tích dữ liệu với Python', snippet: 'Dùng Python để làm sạch, phân tích và trực quan hoá dữ liệu', keywords: { 'Python': 2, 'dữ liệu': 3, 'phân tích': 2, 'trực quan hoá': 1 } },
+  { title: 'Kiến trúc database phân tán', snippet: 'Database phân tán dùng sharding và replication để đạt high availability và mở rộng ngang', keywords: { 'phân tán': 2, 'database': 2, 'sharding': 1, 'high availability': 1 } },
+  { title: 'Thiết kế API', snippet: 'Quy chuẩn thiết kế RESTful API và best practice', keywords: { 'API': 3, 'thiết kế': 2, 'RESTful': 1 } }
 ]
 
 function calcScores() {

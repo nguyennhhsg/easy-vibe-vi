@@ -4,7 +4,7 @@
       <!-- Step 1: Sound Wave -->
       <div class="step-box">
         <div class="label">
-          🌊 声波
+          🌊 Sóng âm
         </div>
         <div class="wave-visual">
           <svg
@@ -20,7 +20,7 @@
           </svg>
         </div>
         <div class="desc">
-          连续模拟信号
+          Tín hiệu analog liên tục
         </div>
       </div>
 
@@ -31,7 +31,7 @@
       <!-- Step 2: Sampling -->
       <div class="step-box">
         <div class="label">
-          📊 采样
+          📊 Lấy mẫu
         </div>
         <div class="sample-visual">
           <div
@@ -41,7 +41,7 @@
           />
         </div>
         <div class="desc">
-          44100 点/秒
+          44100 mẫu/giây
         </div>
       </div>
 
@@ -52,7 +52,7 @@
       <!-- Step 3: Digital -->
       <div class="step-box">
         <div class="label">
-          🔢 数字化
+          🔢 Số hoá
         </div>
         <div class="digital-visual">
           <div
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="desc">
-          PCM 数据
+          Dữ liệu PCM
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <div class="explanation">
       <p>
         <span class="icon">💡</span>
-        计算机无法直接处理连续的声波，需要把它转换成数字。 这个过程叫<strong>模数转换 (ADC)</strong>：每隔一小段时间测量一次声音的强度，记录成数字。
+        Máy tính không xử lý trực tiếp được sóng âm liên tục mà cần chuyển nó thành số. Quá trình này gọi là <strong>chuyển analog sang số (ADC)</strong>: cứ sau một khoảng thời gian ngắn, ta đo cường độ âm thanh một lần rồi ghi lại thành số.
       </p>
     </div>
   </div>

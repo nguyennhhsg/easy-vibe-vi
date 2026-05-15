@@ -2,10 +2,10 @@
 import { computed } from 'vue'
 
 const steps = [
-  { name: '访问商品页', count: 10000 },
-  { name: '加入购物车', count: 6000 },
-  { name: '进入结算页', count: 4000 },
-  { name: '完成支付', count: 2500 }
+  { name: 'Vào trang sản phẩm', count: 10000 },
+  { name: 'Thêm vào giỏ hàng', count: 6000 },
+  { name: 'Vào trang thanh toán', count: 4000 },
+  { name: 'Hoàn tất thanh toán', count: 2500 }
 ]
 
 const total = steps[0].count
@@ -45,14 +45,14 @@ const overallConversion = computed(() =>
   <div class="funnel-demo">
     <div class="demo-header">
       <span class="icon">🔻</span>
-      <span class="title">漏斗分析演示</span>
-      <span class="subtitle">定位转化链的"出血点"</span>
+      <span class="title">Demo phân tích funnel</span>
+      <span class="subtitle">Tìm "điểm rò" trong chuỗi chuyển đổi</span>
     </div>
 
     <div class="intro-text">
-      用户从进入到完成目标是一个层层筛选的过程。漏斗模型不只看最终转化率，更要找到
-      <span class="hl">在哪里丢了人</span>
-      ——在最窄的地方投入优化，收益通常最大。
+      Hành trình người dùng từ lúc vào đến khi đạt mục tiêu là một quá trình sàng lọc dần. Mô hình funnel không chỉ nhìn tỉ lệ chuyển đổi cuối, mà cần tìm
+      <span class="hl">chỗ rớt người</span>
+      - tối ưu ở chỗ hẹp nhất thường mang lại lợi ích lớn nhất.
     </div>
 
     <div class="funnel-body">
@@ -64,33 +64,33 @@ const overallConversion = computed(() =>
       >
         <div class="step-top">
           <span class="step-name">{{ step.name }}</span>
-          <span class="step-count">{{ step.count.toLocaleString() }} 人</span>
+          <span class="step-count">{{ step.count.toLocaleString() }} người</span>
         </div>
         <div class="step-bar"></div>
         <div class="step-rates">
-          <span>总转化 {{ overallRate(i) }}</span>
+          <span>Tỉ lệ tổng {{ overallRate(i) }}</span>
           <span v-if="i > 0" class="step-conv">
-            步骤转化 {{ stepRate(i) }}
+            Tỉ lệ giữa bước {{ stepRate(i) }}
           </span>
         </div>
       </div>
     </div>
 
     <div class="insights">
-      <div class="insight-title">洞察</div>
+      <div class="insight-title">Nhận xét</div>
       <div class="insight-items">
         <div class="insight-item">
-          最低转化步骤：
+          Bước có tỉ lệ chuyển đổi thấp nhất:
           <strong>{{ steps[worstIdx].name }}</strong>
-          （{{ stepRate(worstIdx) }}）
+          ({{ stepRate(worstIdx) }})
         </div>
         <div class="insight-item">
-          整体转化率：<strong>{{ overallConversion }}%</strong>
+          Tỉ lệ chuyển đổi tổng thể: <strong>{{ overallConversion }}%</strong>
         </div>
         <div class="insight-item">
-          建议：优先优化
+          Đề xuất: ưu tiên tối ưu bước
           <strong>{{ steps[worstIdx].name }}</strong>
-          环节，减少体验摩擦
+          , giảm friction trải nghiệm
         </div>
       </div>
     </div>

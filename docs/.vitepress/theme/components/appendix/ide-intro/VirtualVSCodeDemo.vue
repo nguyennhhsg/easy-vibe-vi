@@ -173,55 +173,55 @@ const togglePanel = () => {
 const activeMenu = ref(null)
 const menus = {
   File: [
-    { label: 'New File', info: '新建文件：创建空文件' },
-    { label: 'Open File...', info: '打开文件：选择文件' },
-    { label: 'Save', info: '保存：保存修改' },
-    { label: 'Save As...', info: '另存为：保存为新文件' },
-    { label: 'Auto Save', info: '自动保存：开启自动保存' },
-    { label: 'Preferences', info: '首选项：设置主题等' },
-    { label: 'Exit', info: '退出：关闭 VS Code' }
+    { label: 'New File', info: 'New File: tạo file rỗng' },
+    { label: 'Open File...', info: 'Open File: chọn file' },
+    { label: 'Save', info: 'Save: lưu thay đổi' },
+    { label: 'Save As...', info: 'Save As: lưu thành file mới' },
+    { label: 'Auto Save', info: 'Auto Save: bật tự động lưu' },
+    { label: 'Preferences', info: 'Preferences: cài đặt theme...' },
+    { label: 'Exit', info: 'Exit: đóng VS Code' }
   ],
   Edit: [
-    { label: 'Undo', info: '撤销：撤回操作' },
-    { label: 'Redo', info: '重做：恢复操作' },
-    { label: 'Cut', info: '剪切：剪切选中' },
-    { label: 'Copy', info: '复制：复制选中' },
-    { label: 'Paste', info: '粘贴：粘贴内容' },
-    { label: 'Find', info: '查找：搜索内容' },
-    { label: 'Replace', info: '替换：替换内容' }
+    { label: 'Undo', info: 'Undo: hoàn tác' },
+    { label: 'Redo', info: 'Redo: làm lại' },
+    { label: 'Cut', info: 'Cut: cắt phần đã chọn' },
+    { label: 'Copy', info: 'Copy: sao chép phần đã chọn' },
+    { label: 'Paste', info: 'Paste: dán nội dung' },
+    { label: 'Find', info: 'Find: tìm kiếm nội dung' },
+    { label: 'Replace', info: 'Replace: thay thế nội dung' }
   ],
   Selection: [
-    { label: 'Select All', info: '全选：选中所有' },
-    { label: 'Expand Selection', info: '扩展选区：扩大范围' },
-    { label: 'Shrink Selection', info: '缩小选区：缩小范围' }
+    { label: 'Select All', info: 'Select All: chọn tất cả' },
+    { label: 'Expand Selection', info: 'Expand Selection: mở rộng vùng chọn' },
+    { label: 'Shrink Selection', info: 'Shrink Selection: thu hẹp vùng chọn' }
   ],
   View: [
-    { label: 'Command Palette...', info: '命令面板：执行命令' },
-    { label: 'Open View...', info: '打开视图：显示窗口' },
-    { label: 'Appearance', info: '外观：调整显示' },
-    { label: 'Editor Layout', info: '布局：调整分屏' }
+    { label: 'Command Palette...', info: 'Command Palette: chạy lệnh' },
+    { label: 'Open View...', info: 'Open View: hiển thị panel' },
+    { label: 'Appearance', info: 'Appearance: điều chỉnh hiển thị' },
+    { label: 'Editor Layout', info: 'Editor Layout: chỉnh chia màn hình' }
   ],
   Go: [
-    { label: 'Back', info: '后退：上个位置' },
-    { label: 'Forward', info: '前进：下个位置' },
-    { label: 'Go to File...', info: '转到文件：快速打开' },
-    { label: 'Go to Symbol...', info: '转到符号：跳转定义' }
+    { label: 'Back', info: 'Back: vị trí trước' },
+    { label: 'Forward', info: 'Forward: vị trí kế' },
+    { label: 'Go to File...', info: 'Go to File: mở file nhanh' },
+    { label: 'Go to Symbol...', info: 'Go to Symbol: nhảy đến định nghĩa' }
   ],
   Debug: [
-    { label: 'Start Debugging', info: '开始调试：运行并调试' },
-    { label: 'Run Without Debugging', info: '运行：直接运行' },
-    { label: 'Stop Debugging', info: '停止：结束调试' }
+    { label: 'Start Debugging', info: 'Start Debugging: chạy và debug' },
+    { label: 'Run Without Debugging', info: 'Run: chạy trực tiếp' },
+    { label: 'Stop Debugging', info: 'Stop: kết thúc debug' }
   ],
   Terminal: [
-    { label: 'New Terminal', info: '新建终端：打开命令行' },
-    { label: 'Split Terminal', info: '拆分终端：并排显示' },
-    { label: 'Run Task...', info: '运行任务：执行任务' }
+    { label: 'New Terminal', info: 'New Terminal: mở terminal mới' },
+    { label: 'Split Terminal', info: 'Split Terminal: hiển thị song song' },
+    { label: 'Run Task...', info: 'Run Task: chạy task' }
   ],
   Help: [
-    { label: 'Welcome', info: '欢迎页：入门指南' },
-    { label: 'Documentation', info: '文档：查看文档' },
-    { label: 'Show Release Notes', info: '发行说明：版本更新' },
-    { label: 'About', info: '关于：版本信息' }
+    { label: 'Welcome', info: 'Welcome: hướng dẫn nhập môn' },
+    { label: 'Documentation', info: 'Documentation: xem tài liệu' },
+    { label: 'Show Release Notes', info: 'Release Notes: thông tin update' },
+    { label: 'About', info: 'About: thông tin phiên bản' }
   ]
 }
 
@@ -254,7 +254,7 @@ onUnmounted(() => {
 
 const hoverInfo = ref('')
 const showInfo = (text) => {
-  if (isAutoPlaying.value) return // 自动播放时禁止鼠标干扰
+  if (isAutoPlaying.value) return // Khóa chuột khi tự chạy demo
   hoverInfo.value = text
 }
 const clearInfo = () => {
@@ -280,11 +280,11 @@ const highlightStyle = ref({
 const highlightVisible = ref(false)
 
 const tourOptions = [
-  { label: '全功能演示 (Full Tour)', value: 'all' },
-  { label: '界面导航 (Interface Navigation)', value: 'navigation' },
-  { label: '插件安装 (Extensions)', value: 'extensions' },
-  { label: '代码编辑 (Code Editing)', value: 'editor' },
-  { label: '调试与终端 (Debug & Terminal)', value: 'debug' }
+  { label: 'Demo toàn bộ (Full Tour)', value: 'all' },
+  { label: 'Điều hướng giao diện (Interface Navigation)', value: 'navigation' },
+  { label: 'Cài extension (Extensions)', value: 'extensions' },
+  { label: 'Code editing', value: 'editor' },
+  { label: 'Debug & Terminal', value: 'debug' }
 ]
 const selectedTour = ref('all')
 const selectOpen = ref(false)
@@ -292,7 +292,7 @@ const selectOpen = ref(false)
 const currentTourLabel = computed(() => {
   return (
     tourOptions.find((o) => o.value === selectedTour.value)?.label ||
-    '选择演示模式'
+    'Chọn chế độ demo'
   )
 })
 
@@ -387,66 +387,66 @@ const startTour = async () => {
 
   const runTitleBarTour = async () => {
     // --- 1. Top Title Bar Area ---
-    await moveCursorTo('.vscode-logo', 'VS Code 徽标：主菜单')
+    await moveCursorTo('.vscode-logo', 'Logo VS Code: menu chính')
     if (!isAutoPlaying.value) return
 
     // Menus
-    await moveCursorTo('.menu-bar-container', '菜单栏：所有功能')
+    await moveCursorTo('.menu-bar-container', 'Menu bar: tất cả chức năng')
     if (!isAutoPlaying.value) return
 
     // Demonstrate clicking a menu
-    await moveCursorTo('.menu-item:nth-child(1)', '文件菜单：文件操作', () =>
+    await moveCursorTo('.menu-item:nth-child(1)', 'Menu File: thao tác file', () =>
       toggleMenu('File')
     )
     if (!isAutoPlaying.value) return
 
     // Show a specific item in the dropdown
-    await moveCursorTo('.dropdown-item:nth-child(1)', '新建文件：创建空文件')
+    await moveCursorTo('.dropdown-item:nth-child(1)', 'New File: tạo file rỗng')
     if (!isAutoPlaying.value) return
 
     // Close menu
     activeMenu.value = null
     await new Promise((r) => setTimeout(r, 500))
 
-    await moveCursorTo('.nav-arrows', '导航按钮：后退/前进')
+    await moveCursorTo('.nav-arrows', 'Nút điều hướng: back/forward')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.search-box', '命令中心：快速搜索')
+    await moveCursorTo('.search-box', 'Command center: tìm kiếm nhanh')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.layout-controls', '布局控制：切换视图')
+    await moveCursorTo('.layout-controls', 'Layout: chuyển view')
   }
 
   const runActivityBarTour = async () => {
     // --- 2. Activity Bar (Left) ---
-    await moveCursorTo('.activity-bar', '活动栏：切换视图')
+    await moveCursorTo('.activity-bar', 'Activity bar: chuyển view')
     if (!isAutoPlaying.value) return
 
     await moveCursorTo(
       '.icon[title="Explorer"]',
-      '资源管理器：管理文件',
+      'Explorer: quản lý file',
       () => {
         sidebarVisible.value = true
       }
     )
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.icon[title="Search"]', '全局搜索：查找替换')
+    await moveCursorTo('.icon[title="Search"]', 'Search toàn cục: tìm và thay thế')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.icon[title="Source Control"]', '源代码管理：Git')
+    await moveCursorTo('.icon[title="Source Control"]', 'Source Control: Git')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.icon[title="Run and Debug"]', '运行和调试：调试代码')
+    await moveCursorTo('.icon[title="Run and Debug"]', 'Run and Debug: debug code')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.icon[title="Extensions"]', '扩展商店：安装插件')
+    await moveCursorTo('.icon[title="Extensions"]', 'Extension store: cài extension')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.icon[title="Accounts"]', '账户：同步设置')
+    await moveCursorTo('.icon[title="Accounts"]', 'Accounts: đồng bộ cài đặt')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.icon[title="Manage"]', '管理：全局设置')
+    await moveCursorTo('.icon[title="Manage"]', 'Manage: cài đặt chung')
   }
 
   const runSidebarTour = async () => {
@@ -456,16 +456,16 @@ const startTour = async () => {
       await new Promise((r) => setTimeout(r, 300))
     }
 
-    await moveCursorTo('.sidebar', '侧边栏：详细内容')
+    await moveCursorTo('.sidebar', 'Sidebar: nội dung chi tiết')
     if (!isAutoPlaying.value) return
 
     await moveCursorTo(
       '.sidebar-section:nth-child(2)',
-      '打开的编辑器：编辑中文件'
+      'Open Editors: các file đang mở'
     )
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.sidebar-section:nth-child(3)', '项目文件树：项目结构')
+    await moveCursorTo('.sidebar-section:nth-child(3)', 'Cây file dự án: cấu trúc dự án')
   }
 
   const runEditorTour = async () => {
@@ -479,38 +479,38 @@ const startTour = async () => {
     }
 
     // --- 4. Editor Area ---
-    await moveCursorTo('.tabs', '标签页：已打开文件')
+    await moveCursorTo('.tabs', 'Tabs: các file đã mở')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.breadcrumbs', '路径导航：文件路径')
+    await moveCursorTo('.breadcrumbs', 'Breadcrumbs: đường dẫn file')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.code-wrapper', '编辑区：编写代码')
+    await moveCursorTo('.code-wrapper', 'Editor: viết code')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.minimap', '缩略图：预览代码')
+    await moveCursorTo('.minimap', 'Minimap: xem trước code')
   }
 
   const runPanelTour = async () => {
     // --- 5. Bottom Panel ---
-    await moveCursorTo('.bottom-panel', '底部面板：集成工具')
+    await moveCursorTo('.bottom-panel', 'Panel dưới: công cụ tích hợp')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.panel-tabs', '面板切换：切换工具')
+    await moveCursorTo('.panel-tabs', 'Chuyển panel: đổi công cụ')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.terminal-content', '终端：运行命令')
+    await moveCursorTo('.terminal-content', 'Terminal: chạy lệnh')
   }
 
   const runStatusTour = async () => {
     // --- 6. Status Bar ---
-    await moveCursorTo('.status-bar', '状态栏：全局信息')
+    await moveCursorTo('.status-bar', 'Status bar: thông tin tổng quan')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.status-left', '左侧信息：Git/错误')
+    await moveCursorTo('.status-left', 'Bên trái: Git/lỗi')
     if (!isAutoPlaying.value) return
 
-    await moveCursorTo('.status-right', '右侧信息：环境信息')
+    await moveCursorTo('.status-right', 'Bên phải: thông tin môi trường')
   }
 
   try {
@@ -527,14 +527,14 @@ const startTour = async () => {
       // --- Extensions Tour ---
       await moveCursorTo(
         '.icon[title="Extensions"]',
-        '扩展商店：安装插件',
+        'Extension store: cài extension',
         () => toggleSidebarView('EXTENSIONS')
       )
       if (!isAutoPlaying.value) return
 
       await moveCursorTo(
         '.sidebar-search input',
-        '搜索插件：输入 python',
+        'Tìm extension: gõ python',
         async () => {
           await typeText('python', (v) => (searchQuery.value = v))
         }
@@ -543,14 +543,14 @@ const startTour = async () => {
 
       await moveCursorTo(
         '.extension-item:first-child .install-btn',
-        '点击安装：一键安装插件',
+        'Click Install: cài extension',
         () => installExtension('python')
       )
       if (!isAutoPlaying.value) return
 
       // Switch back to explorer for next steps if in 'all' mode
       if (mode === 'all') {
-        await moveCursorTo('.icon[title="Explorer"]', '返回资源管理器', () => {
+        await moveCursorTo('.icon[title="Explorer"]', 'Quay về Explorer', () => {
           toggleSidebarView('EXPLORER')
           searchQuery.value = '' // Clear search when leaving
         })
@@ -584,7 +584,7 @@ const stopTour = () => {
   cursorVisible.value = false
   highlightVisible.value = false
   activeMenu.value = null
-  hoverInfo.value = '演示结束'
+  hoverInfo.value = 'Demo kết thúc'
   if (tourTimeout) clearTimeout(tourTimeout)
 }
 
@@ -599,7 +599,7 @@ onUnmounted(() => {
     <!-- External Controls -->
     <div class="demo-controls">
       <h3 class="demo-title">
-        虚拟 IDE 交互演示
+        Demo tương tác IDE ảo
       </h3>
 
       <div
@@ -637,7 +637,7 @@ onUnmounted(() => {
           class="tour-btn"
           @click="startTour"
         >
-          ▶ 开始自动导览
+          ▶ Bắt đầu tour tự động
         </button>
       </div>
       <button
@@ -645,7 +645,7 @@ onUnmounted(() => {
         class="tour-btn stop"
         @click="stopTour"
       >
-        ■ 停止演示
+        ■ Dừng demo
       </button>
     </div>
 
@@ -653,7 +653,7 @@ onUnmounted(() => {
     <div class="info-bar">
       <div class="info-content">
         <span class="info-icon">ℹ️</span>
-        {{ hoverInfo || '悬停查看功能说明' }}
+        {{ hoverInfo || 'Di chuột để xem mô tả chức năng' }}
       </div>
     </div>
 
@@ -692,13 +692,13 @@ onUnmounted(() => {
       <!-- Combined Title Bar -->
       <div
         class="title-bar"
-        @mouseenter.stop="showInfo('标题栏：全局控制')"
+        @mouseenter.stop="showInfo('Title bar: điều khiển tổng quan')"
         @mouseleave="clearInfo"
       >
         <div class="title-bar-left">
           <div
             class="vscode-logo"
-            @mouseenter.stop="showInfo('VS Code 徽标')"
+            @mouseenter.stop="showInfo('Logo VS Code')"
             @mouseleave="clearInfo"
           >
             <svg
@@ -720,7 +720,7 @@ onUnmounted(() => {
           </div>
           <div
             class="menu-bar-container"
-            @mouseenter.stop="showInfo('菜单栏：功能入口')"
+            @mouseenter.stop="showInfo('Menu bar: entry vào các chức năng')"
             @mouseleave="clearInfo"
           >
             <div
@@ -757,7 +757,7 @@ onUnmounted(() => {
         <div class="title-bar-center">
           <div
             class="nav-arrows"
-            @mouseenter.stop="showInfo('导航：后退/前进')"
+            @mouseenter.stop="showInfo('Điều hướng: back/forward')"
             @mouseleave="clearInfo"
           >
             <span class="nav-arrow">←</span>
@@ -765,7 +765,7 @@ onUnmounted(() => {
           </div>
           <div
             class="search-box"
-            @mouseenter.stop="showInfo('命令中心：搜索')"
+            @mouseenter.stop="showInfo('Command center: tìm kiếm')"
             @mouseleave="clearInfo"
           >
             <span class="search-icon">🔍</span>
@@ -776,7 +776,7 @@ onUnmounted(() => {
         <div class="title-bar-right">
           <div
             class="layout-controls"
-            @mouseenter.stop="showInfo('布局控制：切换视图')"
+            @mouseenter.stop="showInfo('Layout: chuyển view')"
             @mouseleave="clearInfo"
           >
             <span
@@ -812,7 +812,7 @@ onUnmounted(() => {
           </div>
           <div
             class="window-controls"
-            @mouseenter.stop="showInfo('窗口控制')"
+            @mouseenter.stop="showInfo('Điều khiển cửa sổ')"
             @mouseleave="clearInfo"
           >
             <span class="win-btn minimize">─</span>
@@ -826,7 +826,7 @@ onUnmounted(() => {
         <!-- Activity Bar -->
         <div
           class="activity-bar"
-          @mouseenter.stop="showInfo('活动栏：切换视图')"
+          @mouseenter.stop="showInfo('Activity bar: chuyển view')"
           @mouseleave="clearInfo"
         >
           <div class="top-icons">
@@ -837,7 +837,7 @@ onUnmounted(() => {
               }"
               title="Explorer"
               @click="toggleSidebarView('EXPLORER')"
-              @mouseenter.stop="showInfo('资源管理器：文件管理')"
+              @mouseenter.stop="showInfo('Explorer: quản lý file')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -859,7 +859,7 @@ onUnmounted(() => {
             <div
               class="icon"
               title="Search"
-              @mouseenter.stop="showInfo('全局搜索：查找替换')"
+              @mouseenter.stop="showInfo('Search toàn cục: tìm và thay thế')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -888,7 +888,7 @@ onUnmounted(() => {
             <div
               class="icon"
               title="Source Control"
-              @mouseenter.stop="showInfo('源代码管理：Git')"
+              @mouseenter.stop="showInfo('Source Control: Git')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -931,7 +931,7 @@ onUnmounted(() => {
             <div
               class="icon"
               title="Run and Debug"
-              @mouseenter.stop="showInfo('运行和调试：调试')"
+              @mouseenter.stop="showInfo('Run and Debug')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -992,7 +992,7 @@ onUnmounted(() => {
               }"
               title="Extensions"
               @click="toggleSidebarView('EXTENSIONS')"
-              @mouseenter.stop="showInfo('扩展：插件')"
+              @mouseenter.stop="showInfo('Extensions')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -1045,7 +1045,7 @@ onUnmounted(() => {
             <div
               class="icon"
               title="Accounts"
-              @mouseenter.stop="showInfo('账户：同步')"
+              @mouseenter.stop="showInfo('Accounts: đồng bộ')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -1076,7 +1076,7 @@ onUnmounted(() => {
             <div
               class="icon"
               title="Manage"
-              @mouseenter.stop="showInfo('管理：设置')"
+              @mouseenter.stop="showInfo('Manage: cài đặt')"
               @mouseleave="clearInfo"
             >
               <svg
@@ -1109,7 +1109,7 @@ onUnmounted(() => {
         <div
           v-show="sidebarVisible"
           class="sidebar"
-          @mouseenter.stop="showInfo('侧边栏：详细内容')"
+          @mouseenter.stop="showInfo('Sidebar: nội dung chi tiết')"
           @mouseleave="clearInfo"
         >
           <div
@@ -1253,7 +1253,7 @@ onUnmounted(() => {
           <!-- Tabs -->
           <div
             class="tabs-container"
-            @mouseenter.stop="showInfo('标签页：切换文件')"
+            @mouseenter.stop="showInfo('Tabs: chuyển file')"
             @mouseleave="clearInfo"
           >
             <div class="tabs">
@@ -1303,7 +1303,7 @@ onUnmounted(() => {
           <div
             v-if="activeFile.language !== 'welcome'"
             class="breadcrumbs"
-            @mouseenter.stop="showInfo('路径导航：文件路径')"
+            @mouseenter.stop="showInfo('Breadcrumbs: đường dẫn file')"
             @mouseleave="clearInfo"
           >
             <span>pyeval</span>
@@ -1315,7 +1315,7 @@ onUnmounted(() => {
 
           <div
             class="editor-main"
-            @mouseenter.stop="showInfo('编辑区：编写代码')"
+            @mouseenter.stop="showInfo('Editor: viết code')"
             @mouseleave="clearInfo"
           >
             <!-- Welcome Content -->
@@ -1414,7 +1414,7 @@ onUnmounted(() => {
               <!-- Minimap -->
               <div
                 class="minimap"
-                @mouseenter.stop="showInfo('缩略图：快速跳转')"
+                @mouseenter.stop="showInfo('Minimap: nhảy nhanh')"
                 @mouseleave="clearInfo"
               >
                 <div class="minimap-slider" />
@@ -1437,7 +1437,7 @@ onUnmounted(() => {
       <div
         v-if="panelVisible"
         class="bottom-panel"
-        @mouseenter.stop="showInfo('底部面板：集成工具')"
+        @mouseenter.stop="showInfo('Panel dưới: công cụ tích hợp')"
         @mouseleave="clearInfo"
       >
         <div class="panel-header">
@@ -1446,34 +1446,34 @@ onUnmounted(() => {
               class="panel-tab"
               :class="{ active: activePanel === 'PROBLEMS' }"
               @click="activePanel = 'PROBLEMS'"
-              @mouseenter.stop="showInfo('问题面板：错误警告')"
+              @mouseenter.stop="showInfo('Problems: lỗi và cảnh báo')"
               @mouseleave="clearInfo"
             >PROBLEMS <span class="badge">0</span></span>
             <span
               class="panel-tab"
               :class="{ active: activePanel === 'OUTPUT' }"
               @click="activePanel = 'OUTPUT'"
-              @mouseenter.stop="showInfo('输出面板：日志')"
+              @mouseenter.stop="showInfo('Output: log')"
               @mouseleave="clearInfo"
             >OUTPUT</span>
             <span
               class="panel-tab"
               :class="{ active: activePanel === 'DEBUG CONSOLE' }"
               @click="activePanel = 'DEBUG CONSOLE'"
-              @mouseenter.stop="showInfo('调试控制台')"
+              @mouseenter.stop="showInfo('Debug Console')"
               @mouseleave="clearInfo"
             >DEBUG CONSOLE</span>
             <span
               class="panel-tab"
               :class="{ active: activePanel === 'TERMINAL' }"
               @click="activePanel = 'TERMINAL'"
-              @mouseenter.stop="showInfo('终端：命令行')"
+              @mouseenter.stop="showInfo('Terminal: dòng lệnh')"
               @mouseleave="clearInfo"
             >TERMINAL</span>
           </div>
           <div
             class="panel-actions"
-            @mouseenter.stop="showInfo('面板操作')"
+            @mouseenter.stop="showInfo('Thao tác panel')"
             @mouseleave="clearInfo"
           >
             <span class="action-btn">➕</span>
@@ -1512,7 +1512,7 @@ onUnmounted(() => {
       <!-- Status Bar -->
       <div
         class="status-bar"
-        @mouseenter.stop="showInfo('状态栏：环境信息')"
+        @mouseenter.stop="showInfo('Status bar: thông tin môi trường')"
         @mouseleave="clearInfo"
       >
         <div class="status-left">

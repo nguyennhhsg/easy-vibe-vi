@@ -40,7 +40,7 @@
       </div>
       <div class="detail-functions">
         <div class="function-title">
-          主要功能
+          Chức năng chính
         </div>
         <div class="function-list">
           <div
@@ -54,7 +54,7 @@
       </div>
       <div class="detail-examples">
         <div class="example-title">
-          常见设备
+          Thiết bị thường gặp
         </div>
         <div class="example-list">
           <div
@@ -70,7 +70,7 @@
 
     <div class="data-flow">
       <div class="flow-title">
-        数据封装过程（发送）
+        Quá trình đóng gói dữ liệu (khi gửi)
       </div>
       <div class="flow-steps">
         <div
@@ -88,7 +88,7 @@
             v-if="index < 4"
             class="step-arrow"
           >
-            ↓ 添加头部
+            ↓ Thêm header
           </div>
         </div>
       </div>
@@ -103,81 +103,81 @@ const selectedLayer = ref(0)
 
 const layers = [
   {
-    name: '应用层',
+    name: 'Tầng ứng dụng',
     english: 'Application Layer',
     protocols: 'HTTP, HTTPS, FTP, SMTP, DNS, SSH',
     icon: '📱',
-    dataUnit: '数据',
+    dataUnit: 'Data',
     description:
-      '直接为用户的应用程序（如浏览器、邮件客户端）提供网络服务接口。',
+      'Cung cấp interface dịch vụ mạng trực tiếp cho các chương trình của người dùng (trình duyệt, email client...).',
     functions: [
-      '为应用程序提供网络接口',
-      '定义应用程序间通信的协议',
-      '处理数据格式和加密',
-      '用户认证和授权'
+      'Cung cấp interface mạng cho ứng dụng',
+      'Định nghĩa giao thức giao tiếp giữa các ứng dụng',
+      'Xử lý định dạng và mã hoá dữ liệu',
+      'Xác thực và phân quyền người dùng'
     ],
-    devices: ['网关', '防火墙', '代理服务器']
+    devices: ['Gateway', 'Firewall', 'Proxy server']
   },
   {
-    name: '传输层',
+    name: 'Tầng giao vận',
     english: 'Transport Layer',
     protocols: 'TCP, UDP',
     icon: '🚚',
-    dataUnit: '段/数据报',
-    description: '负责端到端的通信，确保数据可靠地从源端传输到目的端。',
+    dataUnit: 'Segment / Datagram',
+    description: 'Đảm nhận giao tiếp đầu cuối, đảm bảo dữ liệu được truyền tin cậy từ nguồn đến đích.',
     functions: [
-      '分段和重组数据',
-      '端口号寻址（进程间通信）',
-      '流量控制和拥塞控制',
-      '错误检测和纠正（TCP）'
+      'Phân đoạn và gom lại dữ liệu',
+      'Đánh địa chỉ port (giao tiếp giữa các process)',
+      'Kiểm soát luồng và tắc nghẽn',
+      'Phát hiện và sửa lỗi (TCP)'
     ],
-    devices: ['防火墙', '负载均衡器']
+    devices: ['Firewall', 'Load balancer']
   },
   {
-    name: '网络层',
+    name: 'Tầng mạng',
     english: 'Network Layer',
     protocols: 'IP, ICMP, IGMP, ARP',
     icon: '🌐',
-    dataUnit: '包',
-    description: '负责数据包的路由选择，通过网络将数据从源主机传输到目的主机。',
+    dataUnit: 'Packet',
+    description: 'Đảm nhận việc định tuyến gói tin, đưa dữ liệu từ máy nguồn đến máy đích qua mạng.',
     functions: [
-      '逻辑寻址（IP 地址）',
-      '路由选择和转发',
-      '分组交换',
-      '拥塞控制'
+      'Định địa chỉ logic (địa chỉ IP)',
+      'Định tuyến và chuyển tiếp',
+      'Chuyển mạch gói',
+      'Kiểm soát tắc nghẽn'
     ],
-    devices: ['路由器', '三层交换机']
+    devices: ['Router', 'Switch lớp 3']
   },
   {
-    name: '数据链路层',
+    name: 'Tầng liên kết dữ liệu',
     english: 'Data Link Layer',
     protocols: 'Ethernet, Wi-Fi, PPP',
     icon: '🔗',
-    dataUnit: '帧',
-    description: '负责在直连的两个节点间传输数据，处理物理层的错误。',
+    dataUnit: 'Frame',
+    description: 'Đảm nhận truyền dữ liệu giữa hai node nối trực tiếp, xử lý lỗi của tầng vật lý.',
     functions: [
-      '物理地址寻址（MAC 地址）',
-      '帧的封装和解封装',
-      '错误检测（CRC）',
-      '流量控制',
-      '介质访问控制（MAC）'
+      'Định địa chỉ vật lý (địa chỉ MAC)',
+      'Đóng và mở frame',
+      'Phát hiện lỗi (CRC)',
+      'Kiểm soát luồng',
+      'Điều khiển truy cập đường truyền (MAC)'
     ],
-    devices: ['交换机', '网桥', '网卡']
+    devices: ['Switch', 'Bridge', 'Card mạng']
   },
   {
-    name: '物理层',
+    name: 'Tầng vật lý',
     english: 'Physical Layer',
     protocols: 'Ethernet PHY, Wi-Fi Radio, USB',
     icon: '⚡',
-    dataUnit: '比特',
-    description: '负责在物理介质上传输原始的比特流（0 和 1）。',
+    dataUnit: 'Bit',
+    description: 'Đảm nhận truyền dòng bit thô (0 và 1) trên môi trường vật lý.',
     functions: [
-      '定义物理设备标准',
-      '传输介质规范',
-      '比特传输和同步',
-      '电气特性和机械特性'
+      'Định nghĩa chuẩn thiết bị vật lý',
+      'Quy cách môi trường truyền',
+      'Truyền bit và đồng bộ',
+      'Đặc tính điện và cơ học'
     ],
-    devices: ['中继器', '集线器', '网线', '光纤']
+    devices: ['Repeater', 'Hub', 'Dây mạng', 'Cáp quang']
   }
 ]
 </script>

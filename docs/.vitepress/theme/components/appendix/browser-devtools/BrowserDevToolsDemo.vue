@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 
-const activeTab = ref('elements') // 默认改为 Elements，匹配截图
+const activeTab = ref('elements') // mặc định Elements để khớp với screenshot
 const hoverInfo = ref('')
 const isDark = ref(false)
 const isAutoPlaying = ref(false)
@@ -13,58 +13,58 @@ const highlightStyle = ref({})
 let tourTimeout = null
 const demoRef = ref(null)
 
-// 导览选项
+// Lựa chọn tour hướng dẫn
 const tourOptions = [
-  { value: '', label: '选择导览场景...', disabled: true },
-  { value: 'elements', label: '1. 元素面板 (Elements)' },
-  { value: 'console', label: '2. 控制台 (Console)' },
-  { value: 'sources', label: '3. 源代码 (Sources)' },
-  { value: 'network', label: '4. 网络 (Network)' },
-  { value: 'application', label: '5. 应用 (Application)' }
+  { value: '', label: 'Chọn kịch bản hướng dẫn...', disabled: true },
+  { value: 'elements', label: '1. Tab Elements' },
+  { value: 'console', label: '2. Tab Console' },
+  { value: 'sources', label: '3. Tab Sources' },
+  { value: 'network', label: '4. Tab Network' },
+  { value: 'application', label: '5. Tab Application' }
 ]
 const selectedTour = ref('')
 
 const tabs = [
   {
     id: 'elements',
-    label: '元素',
-    desc: '查看和修改页面 HTML 结构与 CSS 样式'
+    label: 'Elements',
+    desc: 'Xem và chỉnh sửa cấu trúc HTML và CSS của trang'
   },
   {
     id: 'console',
-    label: '控制台',
-    desc: '查看日志、错误信息，执行 JavaScript 代码'
+    label: 'Console',
+    desc: 'Xem log, lỗi và chạy code JavaScript'
   },
   {
     id: 'sources',
-    label: '源代码/来源',
-    desc: '查看源代码，设置断点调试 JavaScript'
+    label: 'Sources',
+    desc: 'Xem mã nguồn, đặt breakpoint để debug JavaScript'
   },
   {
     id: 'network',
-    label: '网络',
-    desc: '监控网络请求，查看接口数据和加载性能'
+    label: 'Network',
+    desc: 'Theo dõi network request, xem dữ liệu API và hiệu năng tải'
   },
-  { id: 'performance', label: '性能', desc: '分析页面运行性能' },
-  { id: 'memory', label: '内存', desc: '检测内存泄漏' },
+  { id: 'performance', label: 'Performance', desc: 'Phân tích hiệu năng trang' },
+  { id: 'memory', label: 'Memory', desc: 'Phát hiện memory leak' },
   {
     id: 'application',
-    label: '应用',
-    desc: '查看本地存储(Storage)、Cookies、缓存等'
+    label: 'Application',
+    desc: 'Xem local storage, cookies, cache, v.v.'
   },
-  { id: 'security', label: '隐私与安全', desc: '查看证书和安全问题' },
-  { id: 'lighthouse', label: 'Lighthouse', desc: '页面质量审计' },
-  { id: 'recorder', label: '记录器', desc: '录制用户操作' }
+  { id: 'security', label: 'Privacy & Security', desc: 'Xem chứng chỉ và vấn đề bảo mật' },
+  { id: 'lighthouse', label: 'Lighthouse', desc: 'Đánh giá chất lượng trang' },
+  { id: 'recorder', label: 'Recorder', desc: 'Ghi lại thao tác người dùng' }
 ]
 
 // --- Console Data ---
 const consoleSidebarItems = [
-  { label: '6 条消息', icon: 'list', count: 6, type: 'all' },
-  { label: '6 条用户消息', icon: 'user', count: 6, type: 'user' },
-  { label: '无错误', icon: 'error', count: 0, type: 'error' },
-  { label: '无警告', icon: 'warn', count: 0, type: 'warn' },
-  { label: '无信息', icon: 'info', count: 0, type: 'info' },
-  { label: '6 条详细消息', icon: 'verbose', count: 6, type: 'verbose' }
+  { label: '6 message', icon: 'list', count: 6, type: 'all' },
+  { label: '6 message của bạn', icon: 'user', count: 6, type: 'user' },
+  { label: 'Không có lỗi', icon: 'error', count: 0, type: 'error' },
+  { label: 'Không có warning', icon: 'warn', count: 0, type: 'warn' },
+  { label: 'Không có info', icon: 'info', count: 0, type: 'info' },
+  { label: '6 message chi tiết', icon: 'verbose', count: 6, type: 'verbose' }
 ]
 const consoleLogs = ref([
   { type: 'log', msg: '[vite] connecting...', source: 'client:733' },
@@ -331,16 +331,16 @@ const handleTourSelect = async () => {
   if (!selectedTour.value) return
   const target = selectedTour.value
 
-  // 如果已经在播放，先停止
+  // Nếu đang chạy thì dừng trước
   if (isAutoPlaying.value) {
     stopTour()
     await new Promise((r) => setTimeout(r, 100))
   }
 
-  // 切换到目标 Tab
+  // Chuyển sang tab đích
   activeTab.value = target
 
-  // 启动导览
+  // Bắt đầu tour
   startTour(target)
 }
 
@@ -423,94 +423,94 @@ const startTour = async (targetTab) => {
 const runConsoleTour = async () => {
   await moveCursorTo(
     '.tab[data-id="console"]',
-    '控制台 (Console)：查看日志、交互式运行代码'
+    'Console: xem log, chạy code tương tác'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.console-toolbar',
-    '工具栏：可清空日志、设置 Log 级别、过滤内容'
+    'Toolbar: xoá log, đặt log level, lọc nội dung'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.console-sidebar',
-    '侧边栏：按类型聚合消息 (Errors, Warnings)'
+    'Sidebar: gom message theo loại (Errors, Warnings)'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.log-line:nth-child(1)',
-    '日志流：显示代码输出，点击右侧链接可跳转源码'
+    'Log stream: hiển thị output của code, bấm vào link bên phải để nhảy tới mã nguồn'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.bottom-drawer-header',
-    '抽屉 (Drawer)：查看搜索结果、Issues 等辅助信息'
+    'Drawer: xem kết quả tìm kiếm, Issues và các thông tin phụ trợ khác'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.console-input-area',
-    '即时执行：在这里输入 JS 表达式并回车运行'
+    'Chạy tức thì: nhập biểu thức JS rồi Enter để chạy'
   )
 }
 
 const runElementsTour = async () => {
   await moveCursorTo(
     '.tab[data-id="elements"]',
-    '元素面板 (Elements)：实时查看和修改 DOM/CSS'
+    'Tab Elements: xem và chỉnh sửa DOM/CSS theo thời gian thực'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.dom-tree-panel',
-    'DOM 树：页面的 HTML 结构，可折叠/展开/拖拽'
+    'DOM tree: cấu trúc HTML của trang, có thể thu/mở/kéo thả'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.dom-node[data-tag="div"]',
-    '选中元素：点击元素以在右侧查看其样式'
+    'Chọn phần tử: bấm vào phần tử để xem style ở bên phải'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.styles-panel',
-    '样式面板 (Styles)：查看计算后的样式和 CSS 规则'
+    'Tab Styles: xem style đã tính và các rule CSS'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.style-rule:first-child',
-    'CSS 规则：可直接修改属性值，实时预览效果'
+    'Rule CSS: có thể chỉnh giá trị trực tiếp, xem trước theo thời gian thực'
   )
 }
 
 const runSourcesTour = async () => {
   await moveCursorTo(
     '.tab[data-id="sources"]',
-    '源代码 (Sources)：文件浏览与断点调试'
+    'Sources: duyệt file và đặt breakpoint debug'
   )
   if (!isAutoPlaying.value) return
-  await moveCursorTo('.file-navigator', '文件系统：查看加载的所有资源文件')
+  await moveCursorTo('.file-navigator', 'File system: xem tất cả file resource đã tải')
   if (!isAutoPlaying.value) return
-  await moveCursorTo('.code-editor', '编辑器：查看源码，点击行号设置断点')
+  await moveCursorTo('.code-editor', 'Editor: xem mã nguồn, bấm số dòng để đặt breakpoint')
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.debugger-sidebar',
-    '调试器：查看变量 (Watch)、调用栈 (Call Stack)'
+    'Debugger: xem biến (Watch), call stack'
   )
 }
 
 const runNetworkTour = async () => {
-  await moveCursorTo('.tab[data-id="network"]', '网络 (Network)：抓包分析')
+  await moveCursorTo('.tab[data-id="network"]', 'Network: bắt và phân tích request')
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.network-toolbar',
-    '过滤器：按类型筛选请求 (XHR/Fetch, CSS, JS)'
+    'Filter: lọc request theo loại (XHR/Fetch, CSS, JS)'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.network-grid-header',
-    '请求列表：查看状态码、类型、大小、耗时'
+    'Danh sách request: xem status code, type, size, thời gian'
   )
   if (!isAutoPlaying.value) return
 
   // Simulate clicking the API request
-  await moveCursorTo('.network-row:nth-child(4)', '点击请求行查看详情')
+  await moveCursorTo('.network-row:nth-child(4)', 'Bấm vào dòng request để xem chi tiết')
   if (!isAutoPlaying.value) return
 
   // Trigger selection
@@ -518,7 +518,7 @@ const runNetworkTour = async () => {
 
   await moveCursorTo(
     '.detail-header',
-    '详情面板：查看 Headers, Preview, Response'
+    'Panel chi tiết: xem Headers, Preview, Response'
   )
   if (!isAutoPlaying.value) return
 
@@ -526,67 +526,67 @@ const runNetworkTour = async () => {
   activeDetailTab.value = 'headers'
   await moveCursorTo(
     '.detail-title:nth-child(1)',
-    'Headers: 查看请求/响应头信息'
+    'Headers: xem header của request/response'
   )
   if (!isAutoPlaying.value) return
 
   await moveCursorTo(
     '.detail-section:nth-child(1)',
-    'General：查看 URL、Method (GET/POST) 和状态码 (200)'
+    'General: xem URL, method (GET/POST) và status code (200)'
   )
   if (!isAutoPlaying.value) return
 
   await moveCursorTo(
     '.detail-section:nth-child(2)',
-    'Response Headers：服务器返回的头信息 (Content-Type)'
+    'Response Headers: header server trả về (Content-Type, v.v.)'
   )
   if (!isAutoPlaying.value) return
 
   await moveCursorTo(
     '.detail-section:nth-child(3)',
-    'Request Headers：浏览器发送的头信息 (User-Agent, Cookies)'
+    'Request Headers: header browser gửi đi (User-Agent, Cookies)'
   )
   if (!isAutoPlaying.value) return
 
   // 2. Preview Tab
   await moveCursorTo(
     '.detail-title:nth-child(2)',
-    'Preview: 格式化预览接口返回的数据'
+    'Preview: xem trước dữ liệu API trả về sau khi format'
   )
   if (!isAutoPlaying.value) return
   activeDetailTab.value = 'preview'
 
-  await moveCursorTo('.preview-content', 'Preview Content: 查看 JSON 结构')
+  await moveCursorTo('.preview-content', 'Preview Content: xem cấu trúc JSON')
   if (!isAutoPlaying.value) return
 
   // 3. Response Tab
-  await moveCursorTo('.detail-title:nth-child(3)', 'Response: 查看原始响应数据')
+  await moveCursorTo('.detail-title:nth-child(3)', 'Response: xem dữ liệu response thô')
   if (!isAutoPlaying.value) return
   activeDetailTab.value = 'response'
 
-  await moveCursorTo('.preview-content', 'Response Body: 原始文本内容')
+  await moveCursorTo('.preview-content', 'Response Body: nội dung dạng text gốc')
   if (!isAutoPlaying.value) return
 
   await moveCursorTo(
     '.waterfall-cell',
-    '瀑布流 (Waterfall)：请求生命周期耗时分析'
+    'Waterfall: phân tích thời gian các bước của request'
   )
 }
 
 const runApplicationTour = async () => {
   await moveCursorTo(
     '.tab[data-id="application"]',
-    '应用 (Application)：存储与缓存管理'
+    'Application: quản lý storage và cache'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.storage-sidebar',
-    '存储类型：Local Storage, Cookies, IndexedDB'
+    'Các kiểu storage: Local Storage, Cookies, IndexedDB'
   )
   if (!isAutoPlaying.value) return
   await moveCursorTo(
     '.storage-content',
-    '数据视图：查看 Key-Value 数据，支持增删改查'
+    'View dữ liệu: xem dữ liệu Key-Value, hỗ trợ CRUD'
   )
 }
 
@@ -604,7 +604,7 @@ onUnmounted(() => {
     <!-- Top Controls (Custom for Demo) -->
     <div class="demo-controls">
       <div class="control-label">
-        Chrome DevTools 模拟器
+        Mô phỏng Chrome DevTools
       </div>
       <div class="control-actions">
         <select
@@ -627,7 +627,7 @@ onUnmounted(() => {
           class="stop-btn"
           @click="stopTour"
         >
-          停止演示
+          Dừng demo
         </button>
       </div>
     </div>
@@ -666,7 +666,7 @@ onUnmounted(() => {
         <div class="header-left">
           <div
             class="icon-btn element-picker"
-            title="选择页面中的元素以进行检查"
+            title="Chọn phần tử trên trang để inspect"
           >
             <svg
               width="16"
@@ -681,7 +681,7 @@ onUnmounted(() => {
           </div>
           <div
             class="icon-btn device-toggle"
-            title="切换设备工具栏"
+            title="Bật/tắt thanh thiết bị"
           >
             <svg
               width="16"
@@ -713,13 +713,13 @@ onUnmounted(() => {
         <div class="header-right">
           <div
             class="icon-btn settings"
-            title="设置"
+            title="Cài đặt"
           >
             ⚙️
           </div>
           <div
             class="icon-btn close"
-            title="关闭"
+            title="Đóng"
           >
             ×
           </div>
@@ -735,11 +735,11 @@ onUnmounted(() => {
         >
           <div
             class="console-toolbar"
-            @mouseenter="showInfo('控制台工具栏')"
+            @mouseenter="showInfo('Toolbar của console')"
           >
             <div
               class="icon-btn clear"
-              title="清除控制台"
+              title="Xoá console"
             >
               🚫
             </div>
@@ -749,15 +749,15 @@ onUnmounted(() => {
             </div>
             <div
               class="icon-btn eye"
-              title="创建实时表达式"
+              title="Tạo biểu thức theo dõi"
             >
               👁️
             </div>
             <div class="filter-box">
-              <span class="filter-icon">🔍</span><input placeholder="过滤">
+              <span class="filter-icon">🔍</span><input placeholder="Lọc">
             </div>
             <div class="dropdown-trigger">
-              默认级别 ▼
+              Mức mặc định ▼
             </div>
           </div>
           <div class="console-main-area">
@@ -840,19 +840,19 @@ onUnmounted(() => {
                 ⋮
               </div>
               <div class="drawer-tab">
-                控制台
+                Console
               </div>
               <div class="drawer-tab">
-                AI 辅助
+                AI Assist
               </div>
               <div class="drawer-tab">
-                新变化
+                Mới
               </div>
               <div class="drawer-tab">
-                问题
+                Issues
               </div>
               <div class="drawer-tab active">
-                搜索 <span class="close-icon">×</span>
+                Search <span class="close-icon">×</span>
               </div>
             </div>
             <div class="drawer-content">
@@ -870,10 +870,10 @@ onUnmounted(() => {
                 <div class="search-results">
                   <div class="no-results">
                     <div class="no-results-title">
-                      未找到匹配项
+                      Không tìm thấy kết quả nào
                     </div>
                     <div class="no-results-desc">
-                      没有与您的搜索查询相符的结果
+                      Không có kết quả nào khớp với truy vấn của bạn
                     </div>
                   </div>
                 </div>
@@ -1012,19 +1012,19 @@ onUnmounted(() => {
                   ⋮
                 </div>
                 <div class="drawer-tab">
-                  控制台
+                  Console
                 </div>
                 <div class="drawer-tab">
-                  AI 辅助
+                  AI Assist
                 </div>
                 <div class="drawer-tab">
-                  新变化
+                  Mới
                 </div>
                 <div class="drawer-tab">
-                  问题
+                  Issues
                 </div>
                 <div class="drawer-tab active">
-                  搜索 <span class="close-icon">×</span>
+                  Search <span class="close-icon">×</span>
                 </div>
               </div>
               <div class="drawer-content">
@@ -1042,10 +1042,10 @@ onUnmounted(() => {
                   <div class="search-results">
                     <div class="no-results">
                       <div class="no-results-title">
-                        未找到匹配项
+                        Không tìm thấy kết quả nào
                       </div>
                       <div class="no-results-desc">
-                        没有与您的搜索查询相符的结果
+                        Không có kết quả nào khớp với truy vấn của bạn
                       </div>
                     </div>
                   </div>
@@ -1056,16 +1056,16 @@ onUnmounted(() => {
           <div class="styles-panel">
             <div class="styles-tabs">
               <div class="style-tab active">
-                样式
+                Styles
               </div>
               <div class="style-tab">
-                计算样式
+                Computed
               </div>
               <div class="style-tab">
-                布局
+                Layout
               </div>
               <div class="style-tab">
-                事件监听器
+                Event Listeners
               </div>
               <div class="style-tab">
                 »
@@ -1133,7 +1133,7 @@ onUnmounted(() => {
               </div>
 
               <div class="filter-bar">
-                <input placeholder="过滤">
+                <input placeholder="Lọc">
                 <span class="filter-opt">:hov</span>
                 <span class="filter-opt">.cls</span>
                 <span class="filter-opt">+</span>

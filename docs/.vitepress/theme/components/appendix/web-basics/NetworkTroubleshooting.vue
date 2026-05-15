@@ -2,7 +2,7 @@
   <div class="network-troubleshooting">
     <div class="problem-selector">
       <div class="selector-title">
-        选择问题类型
+        Chọn loại sự cố
       </div>
       <div class="problem-list">
         <button
@@ -33,7 +33,7 @@
 
       <div class="solution-steps">
         <div class="steps-title">
-          🔧 解决步骤
+          🔧 Các bước xử lý
         </div>
         <div class="steps-list">
           <div
@@ -69,7 +69,7 @@
 
       <div class="related-tools">
         <div class="tools-title">
-          🛠️ 相关工具
+          🛠️ Công cụ liên quan
         </div>
         <div class="tools-list">
           <div
@@ -90,7 +90,7 @@
 
     <div class="common-commands">
       <div class="commands-title">
-        📋 常用诊断命令
+        📋 Câu lệnh chẩn đoán thường dùng
       </div>
       <div class="commands-grid">
         <div
@@ -113,7 +113,7 @@
 
     <div class="troubleshooting-tips">
       <div class="tips-title">
-        💡 故障排查技巧
+        💡 Mẹo xử lý sự cố
       </div>
       <div class="tips-list">
         <div class="tip-item">
@@ -121,8 +121,8 @@
             1
           </div>
           <div class="tip-content">
-            <strong>从底层到顶层</strong>
-            <br>物理层 → 链路层 → 网络层 → 传输层 → 应用层
+            <strong>Từ tầng thấp lên tầng cao</strong>
+            <br>Tầng vật lý → tầng liên kết → tầng mạng → tầng giao vận → tầng ứng dụng
           </div>
         </div>
         <div class="tip-item">
@@ -130,8 +130,8 @@
             2
           </div>
           <div class="tip-content">
-            <strong>分层排查</strong>
-            <br>先确定问题发生在哪一层，再针对性解决
+            <strong>Tìm theo từng tầng</strong>
+            <br>Xác định sự cố ở tầng nào trước rồi xử lý đúng chỗ
           </div>
         </div>
         <div class="tip-item">
@@ -139,9 +139,9 @@
             3
           </div>
           <div class="tip-content">
-            <strong>二分法定位</strong>
+            <strong>Khoanh vùng kiểu chia đôi</strong>
             <br>
-            ping 本机 → ping 网关 → ping 外网 → ping 域名
+            ping localhost → ping gateway → ping mạng ngoài → ping domain
           </div>
         </div>
         <div class="tip-item">
@@ -149,8 +149,8 @@
             4
           </div>
           <div class="tip-content">
-            <strong>查看日志</strong>
-            <br>系统日志、应用日志、防火墙日志记录关键信息
+            <strong>Xem log</strong>
+            <br>Log hệ thống, log ứng dụng, log firewall ghi lại thông tin quan trọng
           </div>
         </div>
       </div>
@@ -167,187 +167,187 @@ const completedSteps = ref(new Set())
 const problems = [
   {
     icon: '🌐',
-    name: '无法访问网页',
-    description: '浏览器无法打开网站，显示连接错误',
+    name: 'Không truy cập được web',
+    description: 'Trình duyệt không mở được trang, báo lỗi kết nối',
     steps: [
       {
-        action: '检查网络连接',
+        action: 'Kiểm tra kết nối mạng',
         command: 'ping 8.8.8.8',
-        explanation: '测试是否能够连接到互联网（8.8.8.8 是 Google DNS）'
+        explanation: 'Kiểm tra xem có kết nối được Internet không (8.8.8.8 là DNS của Google)'
       },
       {
-        action: '检查 DNS 解析',
+        action: 'Kiểm tra phân giải DNS',
         command: 'nslookup google.com',
-        explanation: '测试域名是否能正确解析为 IP 地址'
+        explanation: 'Kiểm tra xem domain có phân giải đúng thành địa chỉ IP không'
       },
       {
-        action: '清除 DNS 缓存',
+        action: 'Xoá cache DNS',
         command: 'ipconfig /flushdns (Windows)',
-        explanation: '清除本地 DNS 缓存，可能解决 DNS 污染或过期问题'
+        explanation: 'Xoá cache DNS cục bộ, có thể khắc phục lỗi DNS sai hoặc hết hạn'
       },
       {
-        action: '检查代理设置',
-        command: '查看浏览器代理设置',
-        explanation: '确认没有配置错误的代理服务器'
+        action: 'Kiểm tra cấu hình proxy',
+        command: 'Xem proxy của trình duyệt',
+        explanation: 'Đảm bảo không cấu hình proxy sai'
       },
       {
-        action: '测试其他网站',
-        command: '尝试访问不同网站',
-        explanation: '确定是单个网站问题还是全局网络问题'
+        action: 'Thử trang khác',
+        command: 'Truy cập một trang khác',
+        explanation: 'Xác định lỗi chỉ ở một trang hay toàn bộ mạng'
       }
     ],
     tools: [
-      { name: 'ping', usage: '测试网络连通性' },
-      { name: 'nslookup', usage: '查询 DNS 记录' },
-      { name: 'traceroute', usage: '追踪网络路由' }
+      { name: 'ping', usage: 'Kiểm tra thông mạng' },
+      { name: 'nslookup', usage: 'Tra cứu bản ghi DNS' },
+      { name: 'traceroute', usage: 'Truy vết đường đi của gói' }
     ]
   },
   {
     icon: '📶',
-    name: 'Wi-Fi 连接问题',
-    description: 'Wi-Fi 信号弱、频繁断开或无法连接',
+    name: 'Sự cố Wi-Fi',
+    description: 'Sóng Wi-Fi yếu, hay rớt mạng hoặc không kết nối được',
     steps: [
       {
-        action: '检查 Wi-Fi 开关',
-        command: '检查物理开关或系统设置',
-        explanation: '确认 Wi-Fi 功能已开启'
+        action: 'Kiểm tra công tắc Wi-Fi',
+        command: 'Kiểm tra công tắc vật lý hoặc settings hệ thống',
+        explanation: 'Đảm bảo Wi-Fi đã bật'
       },
       {
-        action: '重启网络设备',
-        command: '重启路由器和光猫',
-        explanation: '电源重启可以解决大部分临时故障'
+        action: 'Khởi động lại thiết bị mạng',
+        command: 'Khởi động lại router và modem',
+        explanation: 'Tắt mở nguồn có thể khắc phục đa số lỗi tạm thời'
       },
       {
-        action: '忘记网络重新连接',
-        command: '删除 Wi-Fi 配置后重新输入密码',
-        explanation: '清除错误的配置信息'
+        action: 'Quên mạng và kết nối lại',
+        command: 'Xoá cấu hình Wi-Fi rồi nhập lại mật khẩu',
+        explanation: 'Xoá thông tin cấu hình sai'
       },
       {
-        action: '更新网卡驱动',
-        command: '设备管理器 → 网络适配器 → 更新驱动',
-        explanation: '过时的驱动可能导致兼容性问题'
+        action: 'Cập nhật driver card mạng',
+        command: 'Device Manager → Network adapters → Update driver',
+        explanation: 'Driver cũ có thể gây ra lỗi tương thích'
       },
       {
-        action: '更改 DNS 服务器',
-        command: '设置为 8.8.8.8 或 114.114.114.114',
-        explanation: 'ISP 的 DNS 可能不稳定'
+        action: 'Đổi DNS server',
+        command: 'Đặt thành 8.8.8.8 hoặc 1.1.1.1',
+        explanation: 'DNS của ISP có thể không ổn định'
       }
     ],
     tools: [
-      { name: 'wifi-menu (macOS)', usage: '查看 Wi-Fi 信息' },
-      { name: 'netsh wlan (Windows)', usage: '管理无线网络' },
-      { name: 'iwconfig (Linux)', usage: '配置无线接口' }
+      { name: 'wifi-menu (macOS)', usage: 'Xem thông tin Wi-Fi' },
+      { name: 'netsh wlan (Windows)', usage: 'Quản lý mạng không dây' },
+      { name: 'iwconfig (Linux)', usage: 'Cấu hình giao diện không dây' }
     ]
   },
   {
     icon: '🐌',
-    name: '网速很慢',
-    description: '网络连接正常但速度很慢',
+    name: 'Mạng chậm',
+    description: 'Kết nối mạng bình thường nhưng tốc độ rất chậm',
     steps: [
       {
-        action: '测试实际带宽',
-        command: '访问 speedtest.net',
-        explanation: '测试当前网络的上传和下载速度'
+        action: 'Đo băng thông thực tế',
+        command: 'Truy cập speedtest.net',
+        explanation: 'Đo tốc độ upload và download hiện tại'
       },
       {
-        action: '检查网络占用',
+        action: 'Kiểm tra mức chiếm dụng mạng',
         command: 'netstat -an | grep ESTABLISHED',
-        explanation: '查看是否有大量连接占用带宽'
+        explanation: 'Xem có nhiều kết nối đang chiếm băng thông không'
       },
       {
-        action: '关闭后台应用',
-        command: '检查下载、更新、云同步等',
-        explanation: '后台应用可能占用大量带宽'
+        action: 'Tắt ứng dụng chạy nền',
+        command: 'Kiểm tra download, update, đồng bộ cloud...',
+        explanation: 'Ứng dụng chạy nền có thể ngốn nhiều băng thông'
       },
       {
-        action: '更换信道',
-        command: '路由器管理后台 → 无线设置',
-        explanation: '拥挤的信道会严重影响 Wi-Fi 速度'
+        action: 'Đổi kênh Wi-Fi',
+        command: 'Trang quản trị router → cấu hình không dây',
+        explanation: 'Kênh bị nghẽn sẽ làm Wi-Fi chậm đi nhiều'
       },
       {
-        action: '联系 ISP',
-        command: '检查运营商是否有故障或限速',
-        explanation: '可能是运营商线路问题'
+        action: 'Liên hệ ISP',
+        command: 'Kiểm tra xem nhà mạng có sự cố hay bóp băng thông không',
+        explanation: 'Có thể là sự cố đường truyền của nhà mạng'
       }
     ],
     tools: [
-      { name: 'speedtest-cli', usage: '命令行测速' },
-      { name: 'nethogs', usage: '查看进程流量' },
-      { name: 'iftop', usage: '实时监控带宽' }
+      { name: 'speedtest-cli', usage: 'Đo tốc độ qua CLI' },
+      { name: 'nethogs', usage: 'Xem traffic theo process' },
+      { name: 'iftop', usage: 'Giám sát băng thông realtime' }
     ]
   },
   {
     icon: '⏱️',
-    name: '延迟很高',
-    description: '网络响应慢，游戏卡顿',
+    name: 'Độ trễ cao',
+    description: 'Mạng phản hồi chậm, chơi game bị giật',
     steps: [
       {
-        action: '测试 ping 值',
+        action: 'Đo giá trị ping',
         command: 'ping -c 100 google.com',
-        explanation: '发送 100 个包，统计平均延迟和丢包率'
+        explanation: 'Gửi 100 gói, thống kê độ trễ trung bình và tỉ lệ mất gói'
       },
       {
-        action: '追踪路由',
+        action: 'Truy vết route',
         command: 'traceroute google.com',
-        explanation: '查看哪一跳延迟过高'
+        explanation: 'Xem hop nào có độ trễ quá cao'
       },
       {
-        action: '检查本地网络',
-        command: 'ping 局域网其他设备',
-        explanation: '排除本地网络问题'
+        action: 'Kiểm tra mạng nội bộ',
+        command: 'ping các thiết bị khác trong LAN',
+        explanation: 'Loại trừ sự cố mạng nội bộ'
       },
       {
-        action: '使用有线连接',
-        command: '插入网线测试',
-        explanation: 'Wi-Fi 可能不稳定或有干扰'
+        action: 'Dùng kết nối có dây',
+        command: 'Cắm dây mạng để thử',
+        explanation: 'Wi-Fi có thể không ổn định hoặc bị nhiễu'
       },
       {
-        action: '检查 QoS 设置',
-        command: '路由器 QoS 配置',
-        explanation: '可能被其他设备或应用占用优先级'
+        action: 'Kiểm tra cấu hình QoS',
+        command: 'Cấu hình QoS trên router',
+        explanation: 'Có thể bị thiết bị hoặc ứng dụng khác chiếm độ ưu tiên'
       }
     ],
     tools: [
-      { name: 'ping', usage: '测试延迟和丢包' },
-      { name: 'traceroute', usage: '追踪路由路径' },
-      { name: 'mtr', usage: '结合 ping 和 traceroute' }
+      { name: 'ping', usage: 'Đo độ trễ và mất gói' },
+      { name: 'traceroute', usage: 'Truy vết đường đi' },
+      { name: 'mtr', usage: 'Kết hợp ping và traceroute' }
     ]
   },
   {
     icon: '🔌',
-    name: '端口无法访问',
-    description: '服务正常运行但外部无法访问',
+    name: 'Không truy cập được port',
+    description: 'Service vẫn chạy nhưng bên ngoài không truy cập được',
     steps: [
       {
-        action: '检查服务监听',
+        action: 'Kiểm tra service đang listen',
         command: 'netstat -tuln | grep :80',
-        explanation: '确认服务正在监听正确的端口'
+        explanation: 'Xác nhận service đang lắng nghe đúng port'
       },
       {
-        action: '检查防火墙',
-        command: 'iptables -L (Linux) 或 firewall-cmd (CentOS)',
-        explanation: '防火墙可能阻止了端口'
+        action: 'Kiểm tra firewall',
+        command: 'iptables -L (Linux) hoặc firewall-cmd (CentOS)',
+        explanation: 'Firewall có thể đang chặn port'
       },
       {
-        action: '测试本地访问',
+        action: 'Thử truy cập từ máy local',
         command: 'curl http://localhost:8080',
-        explanation: '确认服务本身运行正常'
+        explanation: 'Xác nhận bản thân service hoạt động bình thường'
       },
       {
-        action: '检查云服务商安全组',
-        command: '控制台 → 安全组规则',
-        explanation: '云服务器需要额外配置安全组'
+        action: 'Kiểm tra security group trên cloud',
+        command: 'Console → Security group rules',
+        explanation: 'Máy chủ trên cloud cần cấu hình security group thêm'
       },
       {
-        action: '检查端口占用',
+        action: 'Kiểm tra port đang bị chiếm',
         command: 'lsof -i :8080',
-        explanation: '确认端口没有被其他程序占用'
+        explanation: 'Đảm bảo port không bị process khác chiếm'
       }
     ],
     tools: [
-      { name: 'netstat', usage: '查看网络连接' },
-      { name: 'telnet', usage: '测试端口连通性' },
-      { name: 'nmap', usage: '端口扫描工具' }
+      { name: 'netstat', usage: 'Xem các kết nối mạng' },
+      { name: 'telnet', usage: 'Kiểm tra thông port' },
+      { name: 'nmap', usage: 'Công cụ quét port' }
     ]
   }
 ]
@@ -356,32 +356,32 @@ const commands = [
   {
     name: 'ping',
     syntax: 'ping [host]',
-    description: '测试到目标主机的连通性和延迟'
+    description: 'Kiểm tra thông mạng và độ trễ đến host đích'
   },
   {
     name: 'traceroute',
     syntax: 'traceroute [host]',
-    description: '显示数据包到达目标的路由路径'
+    description: 'Hiển thị đường đi của gói tin đến đích'
   },
   {
     name: 'nslookup',
     syntax: 'nslookup [domain]',
-    description: '查询域名的 DNS 记录'
+    description: 'Tra cứu bản ghi DNS của một domain'
   },
   {
     name: 'netstat',
     syntax: 'netstat -tuln',
-    description: '显示网络连接和监听端口'
+    description: 'Hiển thị kết nối mạng và các port đang lắng nghe'
   },
   {
     name: 'curl',
     syntax: 'curl -v [url]',
-    description: '测试 HTTP 请求并查看详细信息'
+    description: 'Thử request HTTP và xem thông tin chi tiết'
   },
   {
     name: 'tcpdump',
     syntax: 'tcpdump -i eth0',
-    description: '抓取网络数据包进行分析'
+    description: 'Bắt gói tin mạng để phân tích'
   }
 ]
 

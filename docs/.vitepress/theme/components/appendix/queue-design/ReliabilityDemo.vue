@@ -1,24 +1,24 @@
 <!--
   ReliabilityDemo.vue
-  消息可靠性演示 - 三道防线
+  Demo độ tin cậy message - ba lớp phòng vệ
 -->
 <template>
   <div class="reliability-demo">
     <div class="demo-header">
       <span class="icon">🛡️</span>
-      <span class="title">消息可靠性演示</span>
-      <span class="subtitle">三道防线保证消息不丢失</span>
+      <span class="title">Demo độ tin cậy message</span>
+      <span class="subtitle">Ba lớp phòng vệ đảm bảo message không bị mất</span>
     </div>
 
     <div class="defense-system">
-      <!-- 防线1: 生产者确认 -->
+      <!-- Lớp 1: producer ACK -->
       <div class="defense-line">
         <div class="defense-header">
           <div class="defense-badge line1">
-            防线 1
+            Lớp 1
           </div>
           <div class="defense-title">
-            生产者确认 (Producer ACK)
+            Producer ACK
           </div>
         </div>
         <div class="defense-content">
@@ -28,10 +28,10 @@
                 📤
               </div>
               <div class="comp-label">
-                生产者
+                Producer
               </div>
               <div class="comp-desc">
-                发送消息
+                Gửi message
               </div>
             </div>
 
@@ -44,7 +44,7 @@
                   📨
                 </div>
                 <div class="msg-label">
-                  消息
+                  Message
                 </div>
                 <div
                   v-if="step === 1"
@@ -62,7 +62,7 @@
                   ✓
                 </div>
                 <div class="ack-label">
-                  ACK确认
+                  Xác nhận ACK
                 </div>
                 <div
                   v-if="step === 2"
@@ -81,38 +81,38 @@
                 Broker
               </div>
               <div class="comp-desc">
-                接收并存储
+                Nhận và lưu trữ
               </div>
             </div>
           </div>
 
           <div class="control-panel">
             <div class="control-item">
-              <label>发送消息</label>
+              <label>Gửi message</label>
               <button
                 class="action-btn"
                 :disabled="step > 0"
                 @click="sendWithAck"
               >
-                发送并等待确认
+                Gửi và đợi xác nhận
               </button>
             </div>
             <div class="info-text">
               <span class="info-icon">💡</span>
-              如果没收到ACK,生产者会重试或记录本地日志
+              Nếu không nhận được ACK, producer sẽ retry hoặc ghi log local
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 防线2: Broker持久化 -->
+      <!-- Lớp 2: persist broker -->
       <div class="defense-line">
         <div class="defense-header">
           <div class="defense-badge line2">
-            防线 2
+            Lớp 2
           </div>
           <div class="defense-title">
-            Broker持久化
+            Persist broker
           </div>
         </div>
         <div class="defense-content">
@@ -126,13 +126,13 @@
                   ⚡
                 </div>
                 <div class="option-label">
-                  内存存储
+                  Lưu trên RAM
                 </div>
                 <div class="option-desc">
-                  速度快,但重启丢失
+                  Nhanh, nhưng mất khi restart
                 </div>
                 <div class="option-risk">
-                  ❌ 高风险
+                  ❌ Rủi ro cao
                 </div>
               </div>
 
@@ -148,13 +148,13 @@
                   💾
                 </div>
                 <div class="option-label">
-                  磁盘存储
+                  Lưu trên đĩa
                 </div>
                 <div class="option-desc">
-                  落盘保证不丢失
+                  Persist để đảm bảo không mất
                 </div>
                 <div class="option-risk">
-                  ✅ 推荐
+                  ✅ Khuyến nghị
                 </div>
               </div>
             </div>
@@ -162,31 +162,31 @@
             <div class="replication-info">
               <div class="replication-title">
                 <span class="icon">🔄</span>
-                多副本同步
+                Đồng bộ nhiều replica
               </div>
               <div class="replication-detail">
-                消息同步到3个节点,即使1个节点宕机也不丢数据
+                Message sync đến 3 node, kể cả 1 node hỏng cũng không mất dữ liệu
               </div>
             </div>
           </div>
 
           <div class="control-panel">
             <div class="control-item">
-              <label>存储方式</label>
+              <label>Cách lưu trữ</label>
               <div class="btn-group">
                 <button
                   class="toggle-btn"
                   :class="{ active: storageType === 'memory' }"
                   @click="storageType = 'memory'"
                 >
-                  内存
+                  RAM
                 </button>
                 <button
                   class="toggle-btn"
                   :class="{ active: storageType === 'disk' }"
                   @click="storageType = 'disk'"
                 >
-                  磁盘
+                  Đĩa
                 </button>
               </div>
             </div>
@@ -195,20 +195,20 @@
               :class="{ warning: storageType === 'memory' }"
             >
               <span class="info-icon">{{ storageType === 'disk' ? '✅' : '⚠️' }}</span>
-              {{ storageType === 'disk' ? '消息已落盘,安全可靠' : '消息仅在内存,重启丢失' }}
+              {{ storageType === 'disk' ? 'Message đã persist xuống đĩa, an toàn' : 'Message chỉ ở RAM, mất khi restart' }}
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 防线3: 消费者确认 -->
+      <!-- Lớp 3: consumer ACK -->
       <div class="defense-line">
         <div class="defense-header">
           <div class="defense-badge line3">
-            防线 3
+            Lớp 3
           </div>
           <div class="defense-title">
-            消费者确认 (Consumer ACK)
+            Consumer ACK
           </div>
         </div>
         <div class="defense-content">
@@ -222,10 +222,10 @@
               </div>
               <div class="step-content">
                 <div class="step-title">
-                  拉取消息
+                  Pull message
                 </div>
                 <div class="step-desc">
-                  从Broker获取消息
+                  Lấy message từ broker
                 </div>
               </div>
             </div>
@@ -246,10 +246,10 @@
               </div>
               <div class="step-content">
                 <div class="step-title">
-                  处理消息
+                  Xử lý message
                 </div>
                 <div class="step-desc">
-                  执行业务逻辑
+                  Chạy logic nghiệp vụ
                 </div>
               </div>
             </div>
@@ -270,10 +270,10 @@
               </div>
               <div class="step-content">
                 <div class="step-title">
-                  手动ACK
+                  ACK thủ công
                 </div>
                 <div class="step-desc">
-                  确认处理完成
+                  Xác nhận đã xử lý xong
                 </div>
               </div>
             </div>
@@ -282,43 +282,43 @@
           <div class="ack-comparison">
             <div class="ack-option">
               <div class="ack-type">
-                自动 ACK
+                ACK tự động
               </div>
               <div class="ack-desc">
-                高效但可能丢消息
+                Hiệu quả nhưng có thể mất message
               </div>
               <div class="ack-risk">
-                ⚠️ 不推荐
+                ⚠️ Không khuyến nghị
               </div>
             </div>
 
             <div class="ack-option recommended">
               <div class="ack-type">
-                手动 ACK
+                ACK thủ công
               </div>
               <div class="ack-desc">
-                可靠,处理完才确认
+                Tin cậy, xử lý xong mới xác nhận
               </div>
               <div class="ack-risk">
-                ✅ 推荐
+                ✅ Khuyến nghị
               </div>
             </div>
           </div>
 
           <div class="control-panel">
             <div class="control-item">
-              <label>模拟消费</label>
+              <label>Mô phỏng consume</label>
               <button
                 class="action-btn"
                 :disabled="consumerStep > 0"
                 @click="simulateConsume"
               >
-                开始消费流程
+                Bắt đầu consume
               </button>
             </div>
             <div class="info-text">
               <span class="info-icon">💡</span>
-              如果处理失败,不发送ACK,Broker会重新投递
+              Nếu xử lý thất bại, không gửi ACK, broker sẽ chuyển lại message
             </div>
           </div>
         </div>
@@ -330,7 +330,7 @@
         🎯
       </div>
       <div class="summary-content">
-        <strong>三道防线,缺一不可：</strong>生产者确认 → Broker持久化 → 消费者确认
+        <strong>Ba lớp phòng vệ, không thiếu lớp nào:</strong> producer ACK → persist broker → consumer ACK
       </div>
     </div>
   </div>
@@ -339,25 +339,25 @@
 <script setup>
 import { ref } from 'vue'
 
-// 防线1: 生产者确认
+// Lớp 1: producer ACK
 const step = ref(0)
 const ackStatus = ref('')
 const ackMessage = ref('')
 
-// 防线2: 存储方式
+// Lớp 2: cách lưu trữ
 const storageType = ref('disk')
 
-// 防线3: 消费者确认
+// Lớp 3: consumer ACK
 const consumerStep = ref(0)
 
 const sendWithAck = () => {
   step.value = 1
-  ackStatus.value = '发送中...'
+  ackStatus.value = 'Đang gửi...'
 
   setTimeout(() => {
     step.value = 2
-    ackStatus.value = '已发送'
-    ackMessage.value = '收到ACK,消息安全'
+    ackStatus.value = 'Đã gửi'
+    ackMessage.value = 'Nhận ACK, message an toàn'
 
     setTimeout(() => {
       step.value = 0

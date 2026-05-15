@@ -5,13 +5,13 @@
         :class="{ active: stage === 1 }"
         @click="stage = 1"
       >
-        阶段一：特征对齐
+        Giai đoạn 1: căn chỉnh đặc trưng
       </button>
       <button
         :class="{ active: stage === 2 }"
         @click="stage = 2"
       >
-        阶段二：指令微调
+        Giai đoạn 2: fine-tuning theo chỉ dẫn
       </button>
     </div>
 
@@ -121,22 +121,22 @@
 
     <div class="data-example">
       <div class="data-title">
-        当前训练数据示例：
+        Ví dụ dữ liệu huấn luyện hiện tại:
       </div>
       <div
         v-if="stage === 1"
         class="data-content"
       >
-        <code>&lt;Image: 🐱&gt;, &lt;Text: "一只猫"&gt;</code>
-        <p>任务：让图像向量与文本向量距离变近。</p>
+        <code>&lt;Image: 🐱&gt;, &lt;Text: "một con mèo"&gt;</code>
+        <p>Nhiệm vụ: kéo vector hình ảnh và vector văn bản lại gần nhau.</p>
       </div>
       <div
         v-else
         class="data-content"
       >
-        <code>User: &lt;Image: 🐱&gt; 这只猫在干嘛？<br>Assistant:
-          它在睡觉。</code>
-        <p>任务：根据图像和问题生成回答。</p>
+        <code>User: &lt;Image: 🐱&gt; Con mèo này đang làm gì?<br>Assistant:
+          Nó đang ngủ.</code>
+        <p>Nhiệm vụ: sinh câu trả lời dựa trên hình ảnh và câu hỏi.</p>
       </div>
     </div>
   </div>

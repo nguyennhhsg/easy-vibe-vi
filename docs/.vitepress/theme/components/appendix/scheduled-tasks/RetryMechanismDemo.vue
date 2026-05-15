@@ -1,30 +1,30 @@
 <template>
   <div class="retry-demo">
     <div class="header">
-      <div class="title">重试机制演示</div>
-      <div class="subtitle">观察指数退避重试策略</div>
+      <div class="title">Demo cơ chế retry</div>
+      <div class="subtitle">Quan sát chiến lược exponential backoff</div>
     </div>
     <div class="controls">
-      <button @click="execute" class="execute-btn" :disabled="running">执行任务</button>
-      <button @click="reset" class="reset-btn">重置</button>
+      <button @click="execute" class="execute-btn" :disabled="running">Chạy task</button>
+      <button @click="reset" class="reset-btn">Reset</button>
     </div>
     <div class="config">
       <div class="config-item">
-        <span class="label">最大重试次数：</span>
+        <span class="label">Số lần retry tối đa:</span>
         <span class="value">{{ maxRetries }}</span>
       </div>
       <div class="config-item">
-        <span class="label">基础延迟：</span>
+        <span class="label">Delay cơ sở:</span>
         <span class="value">{{ baseDelay }}ms</span>
       </div>
     </div>
     <div class="attempts">
-      <div class="attempt-label">重试次数：{{ attempts.length }}</div>
+      <div class="attempt-label">Số lần retry: {{ attempts.length }}</div>
       <div class="attempt-list">
         <div v-for="(a, i) in attempts" :key="i" :class="['attempt-item', a.success ? 'success' : 'fail']">
-          <span class="attempt-num">第 {{ i + 1 }} 次</span>
-          <span class="attempt-delay" v-if="a.delay">延迟 {{ a.delay }}ms</span>
-          <span class="attempt-status">{{ a.success ? '成功' : '失败' }}</span>
+          <span class="attempt-num">Lần {{ i + 1 }}</span>
+          <span class="attempt-delay" v-if="a.delay">Delay {{ a.delay }}ms</span>
+          <span class="attempt-status">{{ a.success ? 'Thành công' : 'Thất bại' }}</span>
         </div>
       </div>
     </div>
@@ -54,10 +54,10 @@ async function execute() {
     const success = Math.random() > 0.3 || i === maxRetries
     
     attempts.value.push({ success, delay: i > 0 ? delay : 0 })
-    logs.value.unshift(`尝试 ${i + 1}/${maxRetries + 1}: ${success ? '成功' : '失败'}${i > 0 ? ` (延迟 ${delay}ms)` : ''}`)
-    
+    logs.value.unshift(`Lần thử ${i + 1}/${maxRetries + 1}: ${success ? 'Thành công' : 'Thất bại'}${i > 0 ? ` (delay ${delay}ms)` : ''}`)
+
     if (success) {
-      logs.value.unshift('任务执行成功！')
+      logs.value.unshift('Task chạy thành công!')
       break
     }
     if (i < maxRetries) {

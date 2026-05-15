@@ -2,19 +2,19 @@
   <div class="mobx-reactivity-demo">
     <div class="demo-header">
       <span class="icon">⚡</span>
-      <span class="title">MobX 响应式原理</span>
-      <span class="subtitle">自动追踪依赖的魔法</span>
+      <span class="title">Nguyên lý reactive của MobX</span>
+      <span class="subtitle">Phép màu tự động theo dõi dependency</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">魔术表演</span>现场：魔术师（Observable）改变物品，所有盯着看的观众（Reaction）都会自动注意到变化，不需要一个个去通知他们。
+      Hãy hình dung bạn đang ở một <span class="highlight">buổi diễn ảo thuật</span>: ảo thuật gia (Observable) thay đổi đồ vật, mọi khán giả đang chú ý (Reaction) đều tự nhận ra thay đổi mà không cần thông báo từng người.
     </div>
 
     <div class="demo-content">
       <div class="state-display">
         <div class="state-header">
           <span class="state-icon">📦</span>
-          <span class="state-title">Observable 状态</span>
+          <span class="state-title">State Observable</span>
         </div>
         <div class="todo-list">
           <div
@@ -33,16 +33,16 @@
       <div class="reaction-display">
         <div class="reaction-header">
           <span class="reaction-icon">🔄</span>
-          <span class="reaction-title">自动响应</span>
+          <span class="reaction-title">Tự phản hồi (Reaction)</span>
         </div>
         <div class="reaction-stats">
           <div class="stat-item">
-            <span class="stat-label">总计：</span>
-            <span class="stat-value">{{ todos.length }} 项</span>
+            <span class="stat-label">Tổng:</span>
+            <span class="stat-value">{{ todos.length }} mục</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">已完成：</span>
-            <span class="stat-value completed">{{ completedCount }} 项</span>
+            <span class="stat-label">Đã xong:</span>
+            <span class="stat-value completed">{{ completedCount }} mục</span>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
       <div class="interaction-area">
         <input
           v-model="newTodoText"
-          placeholder="输入待办事项..."
+          placeholder="Nhập việc cần làm..."
           class="todo-input"
           @keyup.enter="addTodo"
         >
@@ -58,14 +58,14 @@
           class="add-btn"
           @click="addTodo"
         >
-          ➕ 添加
+          Thêm
         </button>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>MobX 自动追踪状态和响应的关系，状态变化时自动触发相关更新。就像魔术，你只管改变数据，UI 会自动更新。
+      <strong>Ý chính:</strong> MobX tự động theo dõi quan hệ giữa state và reaction, khi state đổi thì các phần liên quan tự cập nhật. Giống như ảo thuật, bạn chỉ cần thay dữ liệu là UI tự update.
     </div>
   </div>
 </template>
@@ -74,8 +74,8 @@
 import { ref, computed, watch } from 'vue'
 
 const todos = ref([
-  { id: 1, text: '学习 MobX', completed: false },
-  { id: 2, text: '理解响应式原理', completed: true }
+  { id: 1, text: 'Học MobX', completed: false },
+  { id: 2, text: 'Hiểu nguyên lý reactive', completed: true }
 ])
 
 const newTodoText = ref('')

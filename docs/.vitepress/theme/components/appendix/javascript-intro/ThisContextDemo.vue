@@ -2,14 +2,14 @@
   <div class="this-context-demo">
     <div class="demo-header">
       <span class="icon">🎯</span>
-      <span class="title">this 与执行上下文</span>
-      <span class="subtitle">理解 this 的指向规则</span>
+      <span class="title">this và execution context</span>
+      <span class="subtitle">Hiểu quy tắc this trỏ tới đâu</span>
     </div>
 
     <div class="intro-text">
-      想象<span class="highlight">this</span>就像一个<span class="highlight">指针</span>，
-      指向"当前正在执行的主角"。不同场景下，主角会变化——
-      有时是<span class="highlight">对象自己</span>，有时是<span class="highlight">全局环境</span>，还有时完全取决于<span class="highlight">谁在调用</span>
+      Hãy hình dung <span class="highlight">this</span> như một <span class="highlight">con trỏ</span>,
+      trỏ tới "nhân vật chính đang được thực thi". Tùy bối cảnh, nhân vật chính sẽ khác nhau:
+      có khi là <span class="highlight">chính object đó</span>, có khi là <span class="highlight">môi trường toàn cục</span>, có khi hoàn toàn tùy vào <span class="highlight">ai gọi hàm</span>.
     </div>
 
     <div class="scenario-selector">
@@ -24,7 +24,7 @@
       </button>
     </div>
 
-    <!-- 方法调用 -->
+    <!-- Gọi method -->
     <div
       v-if="activeScenario === 'method'"
       class="scenario-content"
@@ -32,20 +32,20 @@
       <div class="split-view">
         <div class="code-panel">
           <div class="code-title">
-            对象方法调用
+            Gọi method của object
           </div>
           <div class="code-block">
             <div class="code-line">
               const person = {
             </div>
             <div class="code-line indent">
-              name: "张三",
+              name: "An",
             </div>
             <div class="code-line indent">
               greet: function() {
             </div>
             <div class="code-line indent indent">
-              return "你好，我是" + this.name
+              return "Xin chào, tôi là " + this.name
             </div>
             <div class="code-line indent">
               }
@@ -64,11 +64,11 @@
           <div class="object-visual">
             <div class="object-box">
               <div class="object-title">
-                person 对象
+                Object person
               </div>
               <div class="object-content">
                 <div class="property">
-                  name: "张三"
+                  name: "An"
                 </div>
                 <div
                   class="method"
@@ -95,17 +95,17 @@
 
           <div class="rule-box">
             <div class="rule-title">
-              规则：对象方法
+              Quy tắc: object method
             </div>
             <div class="rule-content">
-              通过对象调用方法时，<code>this</code> 指向该对象
+              Khi gọi method qua object, <code>this</code> trỏ vào object đó
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 普通函数 -->
+    <!-- Hàm thường -->
     <div
       v-else-if="activeScenario === 'function'"
       class="scenario-content"
@@ -113,7 +113,7 @@
       <div class="split-view">
         <div class="code-panel">
           <div class="code-title">
-            普通函数调用
+            Gọi hàm thường
           </div>
           <div class="code-block">
             <div class="code-line">
@@ -127,11 +127,11 @@
             </div>
             <div class="code-line" />
             <div class="code-line">
-              show() <span class="comment">// this → window (浏览器)</span>
+              show() <span class="comment">// this → window (trên browser)</span>
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 严格模式下是 undefined
+              // Trong strict mode là undefined
             </div>
           </div>
         </div>
@@ -140,11 +140,11 @@
           <div class="function-visual">
             <div class="global-window">
               <div class="window-title">
-                window (全局对象)
+                window (global object)
               </div>
               <div class="window-content">
                 <div class="global-item">
-                  show 函数在这里
+                  Hàm show ở đây
                 </div>
                 <div class="global-item">
                   this → window
@@ -158,7 +158,7 @@
               class="toggle-btn"
               @click="strictMode = !strictMode"
             >
-              {{ strictMode ? '严格模式：开' : '严格模式：关' }}
+              {{ strictMode ? 'Strict mode: ON' : 'Strict mode: OFF' }}
             </button>
             <div class="mode-result">
               this = {{ strictMode ? 'undefined' : 'window' }}
@@ -167,18 +167,18 @@
 
           <div class="rule-box">
             <div class="rule-title">
-              规则：普通函数
+              Quy tắc: hàm thường
             </div>
             <div class="rule-content">
-              非严格模式：<code>this</code> 指向全局对象<br>
-              严格模式：<code>this</code> 是 <code>undefined</code>
+              Không strict mode: <code>this</code> trỏ tới global object<br>
+              Strict mode: <code>this</code> là <code>undefined</code>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 构造函数 -->
+    <!-- Constructor function -->
     <div
       v-else-if="activeScenario === 'constructor'"
       class="scenario-content"
@@ -186,7 +186,7 @@
       <div class="split-view">
         <div class="code-panel">
           <div class="code-title">
-            构造函数调用
+            Gọi constructor
           </div>
           <div class="code-block">
             <div class="code-line">
@@ -200,17 +200,17 @@
             </div>
             <div class="code-line" />
             <div class="code-line">
-              const p1 = new Person("李四")
+              const p1 = new Person("Bình")
             </div>
             <div class="code-line">
-              const p2 = new Person("王五")
+              const p2 = new Person("Cường")
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // p1.name = "李四"
+              // p1.name = "Bình"
             </div>
             <div class="code-line comment">
-              // p2.name = "王五"
+              // p2.name = "Cường"
             </div>
           </div>
         </div>
@@ -220,28 +220,28 @@
             <div class="constructor-process">
               <div class="process-step">
                 <span class="step-num">1</span>
-                <span>创建新对象</span>
+                <span>Tạo object mới</span>
               </div>
               <div class="process-arrow">
                 ↓
               </div>
               <div class="process-step">
                 <span class="step-num">2</span>
-                <span>this 指向新对象</span>
+                <span>this trỏ vào object mới</span>
               </div>
               <div class="process-arrow">
                 ↓
               </div>
               <div class="process-step">
                 <span class="step-num">3</span>
-                <span>执行构造函数</span>
+                <span>Chạy constructor</span>
               </div>
               <div class="process-arrow">
                 ↓
               </div>
               <div class="process-step">
                 <span class="step-num">4</span>
-                <span>返回新对象</span>
+                <span>Trả về object mới</span>
               </div>
             </div>
 
@@ -251,7 +251,7 @@
                   p1
                 </div>
                 <div class="obj-content">
-                  name: "李四"
+                  name: "Bình"
                 </div>
               </div>
               <div class="obj-instance">
@@ -259,7 +259,7 @@
                   p2
                 </div>
                 <div class="obj-content">
-                  name: "王五"
+                  name: "Cường"
                 </div>
               </div>
             </div>
@@ -267,10 +267,10 @@
 
           <div class="rule-box">
             <div class="rule-title">
-              规则：new 调用
+              Quy tắc: gọi với new
             </div>
             <div class="rule-content">
-              使用 <code>new</code> 调用函数时，<code>this</code> 指向新创建的对象
+              Khi gọi hàm với <code>new</code>, <code>this</code> trỏ vào object mới tạo
             </div>
           </div>
         </div>
@@ -285,25 +285,25 @@
       <div class="split-view">
         <div class="code-panel">
           <div class="code-title">
-            显式绑定 (call/apply/bind)
+            Explicit binding (call/apply/bind)
           </div>
           <div class="code-block">
             <div class="code-line">
               function greet() {
             </div>
             <div class="code-line indent">
-              return "我是" + this.name
+              return "Tôi là " + this.name
             </div>
             <div class="code-line">
               }
             </div>
             <div class="code-line" />
             <div class="code-line">
-              const person = { name: "小明" }
+              const person = { name: "Minh" }
             </div>
             <div class="code-line" />
             <div class="code-line">
-              greet.call(person) <span class="comment">// 显式指定 this</span>
+              greet.call(person) <span class="comment">// Chỉ định this</span>
             </div>
             <div class="code-line">
               greet.apply(person)
@@ -318,7 +318,7 @@
           <div class="binding-visual">
             <div class="function-box">
               <div class="box-title">
-                greet 函数
+                Hàm greet
               </div>
               <div class="box-content">
                 this.name
@@ -335,7 +335,7 @@
                   call(person)
                 </div>
                 <div class="method-desc">
-                  立即调用，this → person
+                  Gọi ngay, this → person
                 </div>
               </div>
               <div
@@ -347,7 +347,7 @@
                   apply(person)
                 </div>
                 <div class="method-desc">
-                  同 call，参数为数组
+                  Giống call, tham số dạng array
                 </div>
               </div>
               <div
@@ -359,7 +359,7 @@
                   bind(person)
                 </div>
                 <div class="method-desc">
-                  返回新函数，this 固定
+                  Trả về hàm mới, this cố định
                 </div>
               </div>
             </div>
@@ -374,17 +374,17 @@
 
           <div class="rule-box">
             <div class="rule-title">
-              规则：显式绑定
+              Quy tắc: explicit binding
             </div>
             <div class="rule-content">
-              <code>call/apply/bind</code> 可以显式指定 <code>this</code> 的指向
+              <code>call/apply/bind</code> cho phép chỉ định rõ <code>this</code> trỏ vào đâu
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 箭头函数 -->
+    <!-- Arrow function -->
     <div
       v-else
       class="scenario-content"
@@ -392,14 +392,14 @@
       <div class="split-view">
         <div class="code-panel">
           <div class="code-title">
-            箭头函数的 this
+            this trong arrow function
           </div>
           <div class="code-block">
             <div class="code-line">
               const person = {
             </div>
             <div class="code-line indent">
-              name: "小红",
+              name: "Hồng",
             </div>
             <div class="code-line indent">
               greet: function() {
@@ -421,7 +421,7 @@
             </div>
             <div class="code-line" />
             <div class="code-line">
-              person.greet() <span class="comment">// 输出 "小红"</span>
+              person.greet() <span class="comment">// In ra "Hồng"</span>
             </div>
           </div>
         </div>
@@ -430,31 +430,31 @@
           <div class="arrow-function-visual">
             <div class="outer-context">
               <div class="context-title">
-                外层作用域 (person)
+                Scope ngoài (person)
               </div>
               <div class="context-content">
                 <div class="context-item">
-                  this.name = "小红"
+                  this.name = "Hồng"
                 </div>
               </div>
             </div>
 
             <div class="arrow-capture">
               <div class="capture-title">
-                箭头函数捕获外层 this
+                Arrow function capture this từ scope ngoài
               </div>
               <div class="capture-arrow">
-                ↑ 继承 this
+                Kế thừa this
               </div>
             </div>
 
             <div class="inner-context">
               <div class="context-title">
-                箭头函数内部
+                Bên trong arrow function
               </div>
               <div class="context-content">
                 <div class="context-item">
-                  this → 外层的 this
+                  this trỏ tới this của scope ngoài
                 </div>
               </div>
             </div>
@@ -462,10 +462,10 @@
 
           <div class="rule-box">
             <div class="rule-title">
-              规则：箭头函数
+              Quy tắc: arrow function
             </div>
             <div class="rule-content">
-              箭头函数没有自己的 <code>this</code>，它继承外层作用域的 <code>this</code>
+              Arrow function không có <code>this</code> riêng, nó kế thừa <code>this</code> từ scope bao quanh
             </div>
           </div>
         </div>
@@ -474,12 +474,12 @@
 
     <div class="quick-reference">
       <div class="reference-title">
-        📋 this 指向速查表
+        Cheatsheet this trỏ vào đâu
       </div>
       <div class="reference-table">
         <div class="ref-row header">
-          <span>调用方式</span>
-          <span>this 指向</span>
+          <span>Cách gọi</span>
+          <span>this trỏ tới</span>
         </div>
         <div class="ref-row">
           <span>obj.method()</span>
@@ -491,23 +491,23 @@
         </div>
         <div class="ref-row">
           <span>new Func()</span>
-          <span>新创建的对象</span>
+          <span>Object mới tạo</span>
         </div>
         <div class="ref-row">
           <span>func.call(obj)</span>
           <span>obj</span>
         </div>
         <div class="ref-row">
-          <span>箭头函数</span>
-          <span>外层作用域的 this</span>
+          <span>Arrow function</span>
+          <span>this của scope ngoài</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      <span>this 的值是在函数调用时确定的，不是定义时确定的。关键要看"函数是如何被调用的"，而不是"函数在哪里定义"。箭头函数是例外——它没有自己的 this，从外层作用域继承。</span>
+      <strong>Ý chính:</strong>
+      <span>Giá trị this được xác định khi hàm được gọi, không phải khi hàm được định nghĩa. Then chốt là xem "hàm được gọi như thế nào", chứ không phải "hàm được định nghĩa ở đâu". Arrow function là ngoại lệ - nó không có this riêng và kế thừa từ scope ngoài.</span>
     </div>
   </div>
 </template>
@@ -522,15 +522,15 @@ const methodCallResult = ref('')
 const bindingResult = ref('')
 
 const scenarios = [
-  { id: 'method', label: '对象方法' },
-  { id: 'function', label: '普通函数' },
-  { id: 'constructor', label: '构造函数' },
+  { id: 'method', label: 'Object method' },
+  { id: 'function', label: 'Hàm thường' },
+  { id: 'constructor', label: 'Constructor' },
   { id: 'explicit', label: 'call/apply/bind' },
-  { id: 'arrow', label: '箭头函数' }
+  { id: 'arrow', label: 'Arrow function' }
 ]
 
 const simulateMethodCall = () => {
-  methodCallResult.value = '你好，我是张三'
+  methodCallResult.value = 'Xin chào, tôi là An'
   setTimeout(() => {
     methodCallResult.value = ''
   }, 2000)
@@ -538,17 +538,17 @@ const simulateMethodCall = () => {
 
 const simulateCall = () => {
   bindingMethod.value = 'call'
-  bindingResult.value = '我是小明 (通过 call 绑定)'
+  bindingResult.value = 'Tôi là Minh (bind bằng call)'
 }
 
 const simulateApply = () => {
   bindingMethod.value = 'apply'
-  bindingResult.value = '我是小明 (通过 apply 绑定)'
+  bindingResult.value = 'Tôi là Minh (bind bằng apply)'
 }
 
 const simulateBind = () => {
   bindingMethod.value = 'bind'
-  bindingResult.value = '我是小明 (通过 bind 绑定，返回新函数)'
+  bindingResult.value = 'Tôi là Minh (bind bằng bind, trả về hàm mới)'
 }
 </script>
 

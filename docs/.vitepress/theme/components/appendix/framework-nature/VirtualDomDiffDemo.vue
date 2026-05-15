@@ -1,8 +1,8 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">虚拟 DOM Diff 过程</span>
-      <span class="subtitle">最小化 DOM 更新的核心机制</span>
+      <span class="title">Quá trình diff Virtual DOM</span>
+      <span class="subtitle">Cơ chế cốt lõi giúp giảm thiểu cập nhật DOM</span>
     </div>
 
     <div class="control-panel">
@@ -11,14 +11,14 @@
         :disabled="isModified"
         @click="modifyData"
       >
-        修改数据
+        Sửa dữ liệu
       </button>
       <button
         class="outline-btn"
         :disabled="!isModified"
         @click="reset"
       >
-        重置
+        Reset
       </button>
     </div>
 
@@ -29,12 +29,12 @@
           <div class="tree-container">
             <div class="tree-node tree-root">div.app</div>
             <div class="tree-children">
-              <div class="tree-node">h1: 待办清单</div>
+              <div class="tree-node">h1: Danh sách việc cần làm</div>
               <div class="tree-node">ul.list</div>
               <div class="tree-children">
-                <div class="tree-node">li: 学习 Vue</div>
-                <div class="tree-node">li: 写作业</div>
-                <div class="tree-node">li: 打游戏</div>
+                <div class="tree-node">li: Học Vue</div>
+                <div class="tree-node">li: Làm bài tập</div>
+                <div class="tree-node">li: Chơi game</div>
               </div>
             </div>
           </div>
@@ -42,13 +42,13 @@
         <div class="column">
           <div class="column-title">Diff Result</div>
           <div v-if="isModified" class="diff-badges">
-            <span class="badge badge-modified">修改: 1 个节点</span>
-            <span class="badge badge-new">新增: 1 个节点</span>
+            <span class="badge badge-modified">Sửa: 1 node</span>
+            <span class="badge badge-new">Thêm: 1 node</span>
           </div>
           <div class="tree-container">
             <div class="tree-node tree-root">div.app</div>
             <div class="tree-children">
-              <div class="tree-node node-unchanged">h1: 待办清单</div>
+              <div class="tree-node node-unchanged">h1: Danh sách việc cần làm</div>
               <div class="tree-node node-unchanged">ul.list</div>
               <div class="tree-children">
                 <div
@@ -57,7 +57,7 @@
                     isModified && 'node-unchanged'
                   ]"
                 >
-                  li: 学习 Vue
+                  li: Học Vue
                 </div>
                 <div
                   :class="[
@@ -65,7 +65,7 @@
                     isModified && 'node-modified'
                   ]"
                 >
-                  li: {{ isModified ? '写代码' : '写作业' }}
+                  li: {{ isModified ? 'Viết code' : 'Làm bài tập' }}
                 </div>
                 <div
                   :class="[
@@ -73,13 +73,13 @@
                     isModified && 'node-unchanged'
                   ]"
                 >
-                  li: 打游戏
+                  li: Chơi game
                 </div>
                 <div
                   v-if="isModified"
                   class="tree-node node-new"
                 >
-                  li: 看电影
+                  li: Xem phim
                 </div>
               </div>
             </div>
@@ -91,18 +91,18 @@
             <div class="dom-root">
               <div class="dom-node">div.app</div>
               <div class="dom-children">
-                <div class="dom-node">h1: 待办清单</div>
+                <div class="dom-node">h1: Danh sách việc cần làm</div>
                 <ul class="dom-list">
-                  <li>学习 Vue</li>
+                  <li>Học Vue</li>
                   <li :class="{ 'dom-changed': isModified }">
-                    {{ isModified ? '写代码' : '写作业' }}
+                    {{ isModified ? 'Viết code' : 'Làm bài tập' }}
                   </li>
-                  <li>打游戏</li>
+                  <li>Chơi game</li>
                   <li
                     v-if="isModified"
                     class="dom-new"
                   >
-                    看电影
+                    Xem phim
                   </li>
                 </ul>
               </div>
@@ -114,22 +114,22 @@
       <div class="metrics-row">
         <div class="metric-card">
           <div class="metric-value">7</div>
-          <div class="metric-label">虚拟 DOM 节点总数</div>
+          <div class="metric-label">Tổng số node Virtual DOM</div>
         </div>
         <div class="metric-card">
           <div class="metric-value">{{ isModified ? '2' : '0' }}</div>
-          <div class="metric-label">需要更新的真实 DOM</div>
+          <div class="metric-label">Số DOM thật cần cập nhật</div>
         </div>
         <div class="metric-card">
           <div class="metric-value">{{ isModified ? '71%' : '—' }}</div>
-          <div class="metric-label">节省的 DOM 操作</div>
+          <div class="metric-label">Số thao tác DOM tiết kiệm được</div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      虚拟 DOM 先在内存中对比新旧两棵树，找出最小差异，然后只更新必要的真实 DOM 节点——避免了大量无效操作。
+      <strong>Ý tưởng cốt lõi:</strong>
+      Virtual DOM so sánh hai cây cũ và mới trong bộ nhớ trước, tìm ra khác biệt tối thiểu, rồi chỉ cập nhật những node DOM thật cần thiết - tránh được rất nhiều thao tác vô ích.
     </div>
   </div>
 </template>

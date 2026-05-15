@@ -2,31 +2,31 @@
   <div class="architecture-comparison-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">前后端项目架构对比</span>
-      <span class="subtitle">点击切换查看不同架构层次</span>
+      <span class="title">So sánh kiến trúc dự án frontend và backend</span>
+      <span class="subtitle">Bấm để chuyển giữa các tầng kiến trúc</span>
     </div>
 
-    <!-- 切换按钮 -->
+    <!-- Nút chuyển -->
     <div class="toggle-buttons">
       <button
         :class="['toggle-btn', { active: activeType === 'frontend' }]"
         @click="activeType = 'frontend'"
       >
         <span class="btn-icon">🎨</span>
-        前端架构
+        Kiến trúc frontend
       </button>
       <button
         :class="['toggle-btn', { active: activeType === 'backend' }]"
         @click="activeType = 'backend'"
       >
         <span class="btn-icon">⚙️</span>
-        后端架构
+        Kiến trúc backend
       </button>
     </div>
 
-    <!-- 架构展示 -->
+    <!-- Hiển thị kiến trúc -->
     <div class="architecture-display">
-      <!-- 前端架构 -->
+      <!-- Kiến trúc frontend -->
       <div v-if="activeType === 'frontend'" class="architecture-layers">
         <div
           v-for="(layer, index) in frontendLayers"
@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <!-- 后端架构 -->
+      <!-- Kiến trúc backend -->
       <div v-else class="architecture-layers">
         <div
           v-for="(layer, index) in backendLayers"
@@ -79,7 +79,7 @@
       </div>
     </div>
 
-    <!-- 详情面板 -->
+    <!-- Panel chi tiết -->
     <Transition name="slide">
       <div v-if="currentLayer" class="detail-panel">
         <div class="detail-header">
@@ -88,13 +88,13 @@
         </div>
         <div class="detail-content">
           <div class="detail-section">
-            <div class="section-title">📁 典型文件</div>
+            <div class="section-title">📁 File điển hình</div>
             <div class="file-list">
               <code v-for="file in currentLayer.files" :key="file" class="file-tag">{{ file }}</code>
             </div>
           </div>
           <div class="detail-section">
-            <div class="section-title">✅ 设计原则</div>
+            <div class="section-title">✅ Nguyên tắc thiết kế</div>
             <ul class="principle-list">
               <li v-for="principle in currentLayer.principles" :key="principle">{{ principle }}</li>
             </ul>
@@ -105,7 +105,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>好的架构就像整理好的空间——前端像衣柜（按功能分类展示），后端像厨房（按流程分工协作）。点击上方层次查看详情！
+      <strong>Tư tưởng cốt lõi:</strong> Kiến trúc tốt giống như không gian được sắp xếp gọn gàng. Frontend giống tủ quần áo (phân loại theo chức năng để trưng bày), backend giống căn bếp (phân công theo quy trình). Bấm vào các tầng phía trên để xem chi tiết bạn nhé!
     </div>
   </div>
 </template>
@@ -121,61 +121,61 @@ const frontendLayers = [
     id: 'views',
     name: 'Views / Pages',
     icon: '📄',
-    badge: '页面层',
+    badge: 'Tầng trang',
     class: 'views-layer',
-    duty: '职责：页面组件，对应路由',
-    example: 'Home.vue、UserProfile.vue',
-    arrow: '组合',
+    duty: 'Vai trò: component trang, gắn với route',
+    example: 'Home.vue, UserProfile.vue',
+    arrow: 'Kết hợp',
     files: ['Home/index.vue', 'User/Profile.vue', 'pages/about.tsx'],
-    principles: ['保持"薄"，逻辑下沉到 hooks', '页面级状态管理', '路由懒加载']
+    principles: ['Giữ "mỏng", đưa logic xuống hooks', 'Quản state cấp trang', 'Lazy load route']
   },
   {
     id: 'components',
     name: 'Components',
     icon: '🧩',
-    badge: '组件层',
+    badge: 'Tầng component',
     class: 'components-layer',
-    duty: '职责：可复用的 UI 组件',
-    example: 'Button.vue、Modal.vue、UserCard.vue',
-    arrow: '调用',
+    duty: 'Vai trò: component UI tái sử dụng được',
+    example: 'Button.vue, Modal.vue, UserCard.vue',
+    arrow: 'Gọi',
     files: ['common/Button/', 'business/UserCard/', 'layout/Header/'],
-    principles: ['单一职责，一个组件只做一件事', 'Props 清晰可预测', '样式隔离（scoped/css-modules）']
+    principles: ['Single responsibility, mỗi component chỉ làm một việc', 'Props rõ ràng, dễ đoán', 'Tách style (scoped/css-modules)']
   },
   {
     id: 'hooks',
     name: 'Hooks / Composables',
     icon: '🎣',
-    badge: '逻辑层',
+    badge: 'Tầng logic',
     class: 'hooks-layer',
-    duty: '职责：可复用的业务逻辑',
-    example: 'useAuth()、useLoading()、useForm()',
-    arrow: '使用',
+    duty: 'Vai trò: logic nghiệp vụ tái sử dụng',
+    example: 'useAuth(), useLoading(), useForm()',
+    arrow: 'Sử dụng',
     files: ['useAuth.js', 'usePagination.ts', 'composables/useFetch.js'],
-    principles: ['纯函数优先', '单一功能，便于测试', '命名以 use 开头']
+    principles: ['Ưu tiên pure function', 'Một chức năng, dễ test', 'Đặt tên bắt đầu bằng use']
   },
   {
     id: 'services',
     name: 'Services / API',
     icon: '🌐',
-    badge: '服务层',
+    badge: 'Tầng service',
     class: 'services-layer',
-    duty: '职责：API 调用，数据获取',
-    example: 'userApi.getProfile()、orderApi.create()',
-    arrow: '请求',
+    duty: 'Vai trò: gọi API, lấy dữ liệu',
+    example: 'userApi.getProfile(), orderApi.create()',
+    arrow: 'Request',
     files: ['services/user.js', 'api/request.ts', 'clients/http.js'],
-    principles: ['统一错误处理', '请求/响应拦截', '接口统一管理']
+    principles: ['Xử lý lỗi thống nhất', 'Interceptor request/response', 'Quản lý endpoint tập trung']
   },
   {
     id: 'utils',
     name: 'Utils / Helpers',
     icon: '🛠️',
-    badge: '工具层',
+    badge: 'Tầng utility',
     class: 'utils-layer',
-    duty: '职责：通用工具函数',
-    example: 'formatDate()、storage.set()、validator.email()',
+    duty: 'Vai trò: hàm tiện ích dùng chung',
+    example: 'formatDate(), storage.set(), validator.email()',
     arrow: '',
     files: ['utils/format.js', 'helpers/storage.ts', 'lib/validator.js'],
-    principles: ['纯函数，无副作用', '单一职责', '完善的 JSDoc 注释']
+    principles: ['Pure function, không side-effect', 'Single responsibility', 'JSDoc đầy đủ']
   }
 ]
 
@@ -184,49 +184,49 @@ const backendLayers = [
     id: 'controller',
     name: 'Controller',
     icon: '🎮',
-    badge: '入口层',
+    badge: 'Tầng entry',
     class: 'controller-layer',
-    duty: '职责：接收 HTTP 请求，返回响应',
-    example: 'UserController.getById()、OrderController.create()',
-    arrow: '调用',
+    duty: 'Vai trò: nhận HTTP request, trả response',
+    example: 'UserController.getById(), OrderController.create()',
+    arrow: 'Gọi',
     files: ['userController.js', 'routes/api.js', 'handlers/order.ts'],
-    principles: ['只处理 HTTP 相关逻辑', '参数校验', '不直接操作数据库']
+    principles: ['Chỉ xử lý logic liên quan HTTP', 'Validate tham số', 'Không thao tác trực tiếp database']
   },
   {
     id: 'service',
     name: 'Service',
     icon: '⚙️',
-    badge: '业务层',
+    badge: 'Tầng business',
     class: 'service-layer',
-    duty: '职责：核心业务逻辑，事务管理',
-    example: 'UserService.createUser()、OrderService.process()',
-    arrow: '调用',
+    duty: 'Vai trò: logic nghiệp vụ cốt lõi, quản lý transaction',
+    example: 'UserService.createUser(), OrderService.process()',
+    arrow: 'Gọi',
     files: ['userService.js', 'services/order.ts', 'business/user.js'],
-    principles: ['包含核心业务规则', '协调多个 Repository', '管理事务边界']
+    principles: ['Chứa các quy tắc nghiệp vụ cốt lõi', 'Phối hợp nhiều Repository', 'Quản lý ranh giới transaction']
   },
   {
     id: 'repository',
     name: 'Repository',
     icon: '🗄️',
-    badge: '数据层',
+    badge: 'Tầng data',
     class: 'repository-layer',
-    duty: '职责：数据持久化，数据库操作',
-    example: 'UserRepository.findById()、OrderRepository.save()',
-    arrow: '查询',
+    duty: 'Vai trò: lưu trữ dữ liệu, thao tác database',
+    example: 'UserRepository.findById(), OrderRepository.save()',
+    arrow: 'Query',
     files: ['userRepository.js', 'dao/order.ts', 'models/user.js'],
-    principles: ['只负责数据存取', 'ORM 封装', '不包含业务逻辑']
+    principles: ['Chỉ lo lưu/lấy dữ liệu', 'Bọc ORM', 'Không chứa logic nghiệp vụ']
   },
   {
     id: 'model',
     name: 'Model / Entity',
     icon: '📊',
-    badge: '模型层',
+    badge: 'Tầng model',
     class: 'model-layer',
-    duty: '职责：数据结构和业务规则定义',
-    example: 'User 类、Order 实体、DTO 定义',
+    duty: 'Vai trò: định nghĩa cấu trúc dữ liệu và quy tắc business',
+    example: 'Class User, entity Order, định nghĩa DTO',
     arrow: '',
     files: ['models/User.js', 'entities/order.ts', 'dto/userDto.js'],
-    principles: ['定义数据结构', '字段验证规则', '与其他层解耦']
+    principles: ['Định nghĩa cấu trúc dữ liệu', 'Quy tắc validate field', 'Tách rời với các tầng khác']
   }
 ]
 
@@ -273,7 +273,7 @@ function setActiveLayer(id) {
   margin-left: 0.5rem;
 }
 
-/* 切换按钮 */
+/* Nút chuyển */
 .toggle-buttons {
   display: flex;
   gap: 0.5rem;
@@ -310,7 +310,7 @@ function setActiveLayer(id) {
   font-size: 1.1rem;
 }
 
-/* 架构层 */
+/* Tầng kiến trúc */
 .architecture-layers {
   display: flex;
   flex-direction: column;
@@ -346,7 +346,7 @@ function setActiveLayer(id) {
   background: var(--vp-c-brand-soft);
 }
 
-/* 不同层的颜色 */
+/* Màu sắc các tầng */
 .views-layer {
   border-left: 4px solid #3498db;
 }
@@ -438,7 +438,7 @@ function setActiveLayer(id) {
   font-size: 1rem;
 }
 
-/* 详情面板 */
+/* Panel chi tiết */
 .detail-panel {
   margin-top: 1rem;
   padding: 1rem;
@@ -517,7 +517,7 @@ function setActiveLayer(id) {
   margin-bottom: 0.25rem;
 }
 
-/* 信息框 */
+/* Hộp thông tin */
 .info-box {
   background: var(--vp-c-bg-alt);
   padding: 0.75rem;
@@ -533,7 +533,7 @@ function setActiveLayer(id) {
   flex-shrink: 0;
 }
 
-/* 响应式 */
+/* Responsive */
 @media (max-width: 640px) {
   .toggle-btn {
     font-size: 0.8rem;

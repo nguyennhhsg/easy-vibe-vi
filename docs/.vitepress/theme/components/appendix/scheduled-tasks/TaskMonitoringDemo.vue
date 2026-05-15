@@ -1,31 +1,31 @@
 <template>
   <div class="monitor-demo">
     <div class="header">
-      <div class="title">任务监控面板</div>
-      <div class="subtitle">实时监控任务执行状态</div>
+      <div class="title">Dashboard giám sát task</div>
+      <div class="subtitle">Giám sát trạng thái chạy task realtime</div>
     </div>
     <div class="controls">
-      <button @click="start" class="start-btn">启动监控</button>
-      <button @click="stop" class="stop-btn">停止</button>
+      <button @click="start" class="start-btn">Bắt đầu giám sát</button>
+      <button @click="stop" class="stop-btn">Dừng</button>
     </div>
     <div class="metrics">
       <div class="metric-card">
         <div class="metric-value">{{ running }}</div>
-        <div class="metric-label">运行中</div>
+        <div class="metric-label">Đang chạy</div>
       </div>
       <div class="metric-card success">
         <div class="metric-value">{{ completed }}</div>
-        <div class="metric-label">已完成</div>
+        <div class="metric-label">Đã xong</div>
       </div>
       <div class="metric-card error">
         <div class="metric-value">{{ failed }}</div>
-        <div class="metric-label">失败</div>
+        <div class="metric-label">Thất bại</div>
       </div>
     </div>
     <div class="tasks">
       <div v-for="t in tasks" :key="t.id" :class="['task-row', t.status]">
         <span class="task-name">{{ t.name }}</span>
-        <span class="task-status">{{ t.status === 'running' ? '运行中' : t.status === 'completed' ? '完成' : '失败' }}</span>
+        <span class="task-status">{{ t.status === 'running' ? 'Đang chạy' : t.status === 'completed' ? 'Hoàn thành' : 'Thất bại' }}</span>
       </div>
     </div>
   </div>

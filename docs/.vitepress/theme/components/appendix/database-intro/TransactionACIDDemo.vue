@@ -2,12 +2,12 @@
   <div class="acid-demo">
     <div class="demo-header">
       <span class="icon">🔒</span>
-      <span class="title">事务 ACID 特性演示</span>
-      <span class="subtitle">理解事务如何保证数据安全</span>
+      <span class="title">Demo đặc tính ACID của transaction</span>
+      <span class="subtitle">Hiểu cách transaction đảm bảo an toàn dữ liệu</span>
     </div>
 
     <div class="intro-text">
-      想象<span class="highlight">银行转账</span>：A 转给 B 100 元。这个操作包含两步：从 A 扣 100，给 B 加 100。如果只扣了钱但没到账，就是灾难。事务保证这两步<span class="highlight">要么全成功，要么全失败</span>。
+      Hãy hình dung <span class="highlight">chuyển khoản ngân hàng</span>: A chuyển cho B 100k. Thao tác này gồm hai bước: trừ 100k của A, cộng 100k cho B. Nếu chỉ trừ tiền mà không vào tài khoản kia thì là thảm họa. Transaction đảm bảo hai bước này <span class="highlight">cùng thành công hoặc cùng thất bại</span>.
     </div>
 
     <div class="acid-cards">
@@ -44,11 +44,11 @@
         </div>
         <div class="detail-content">
           <div class="explanation">
-            <strong>含义：</strong>{{ currentItem?.explanation }}
+            <strong>Ý nghĩa:</strong> {{ currentItem?.explanation }}
           </div>
           <div class="example">
             <div class="example-label">
-              🌰 银行转账例子：
+              🌰 Ví dụ chuyển khoản ngân hàng:
             </div>
             <div class="example-text">
               {{ currentItem?.example }}
@@ -62,23 +62,23 @@
       v-if="!activeItem"
       class="hint-text"
     >
-      👆 点击上方任意特性，查看详细解释
+      👆 Bấm vào bất kỳ đặc tính nào ở trên để xem giải thích chi tiết
     </div>
 
     <div class="scenario-box">
       <div class="scenario-title">
-        🎯 12306 抢票场景
+        🎯 Tình huống đặt vé tàu trên hệ thống bán vé
       </div>
       <div class="scenario-content">
-        <p><strong>场景：</strong>用户 A 和 B 同时看到还剩 1 张票，同时点击购买。</p>
-        <p><strong>没有事务：</strong>A 扣库存，B 也扣库存，同一张票卖给了两个人！</p>
-        <p><strong>有事务（隔离性）：</strong>A 的操作加锁，B 必须等待。A 买完后，库存变为 0，B 看到的是"已售罄"。</p>
+        <p><strong>Tình huống:</strong> User A và B cùng thấy còn 1 vé, cùng bấm mua.</p>
+        <p><strong>Không có transaction:</strong> A trừ tồn kho, B cũng trừ tồn kho, cùng một vé bán cho hai người!</p>
+        <p><strong>Có transaction (isolation):</strong> Thao tác của A khóa lại, B phải chờ. Sau khi A mua xong, tồn kho về 0, B nhìn thấy "hết vé".</p>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>ACID 四个特性共同保证了数据在高并发环境下的<span class="highlight">不丢、不乱、不冲突</span>。这就是为什么所有涉及资金、订单的系统都必须使用数据库事务。
+      <strong>Tư tưởng cốt lõi:</strong> Bốn đặc tính ACID cùng đảm bảo dữ liệu trong môi trường concurrency cao <span class="highlight">không mất, không loạn, không xung đột</span>. Đây là lý do mọi hệ thống liên quan tiền, đơn hàng đều phải dùng transaction.
     </div>
   </div>
 </template>
@@ -93,37 +93,37 @@ const acidItems = ref([
     key: 'atomicity',
     letter: 'A',
     icon: '⚛️',
-    name: '原子性',
+    name: 'Nguyên tử',
     meaning: 'Atomicity',
-    explanation: '事务中的操作要么全部成功，要么全部失败，不会出现"做了一半"的情况。',
-    example: '转账时，扣款和入账必须同时成功。如果扣款成功但入账失败，系统会自动回滚，把钱退回去。'
+    explanation: 'Các thao tác trong transaction hoặc cùng thành công hoặc cùng thất bại, không xảy ra cảnh "làm dở dang".',
+    example: 'Khi chuyển khoản, trừ tiền và ghi có phải cùng thành công. Nếu trừ tiền thành công nhưng ghi có thất bại, hệ thống tự rollback và trả lại tiền.'
   },
   {
     key: 'consistency',
     letter: 'C',
     icon: '⚖️',
-    name: '一致性',
+    name: 'Nhất quán',
     meaning: 'Consistency',
-    explanation: '事务执行前后，数据都必须处于合法状态，满足所有约束条件。',
-    example: '转账前后，A 和 B 的余额总和必须不变。票卖完了，库存必须是 0，不能是负数。'
+    explanation: 'Trước và sau khi transaction thực thi, dữ liệu phải ở trạng thái hợp lệ, thỏa các ràng buộc.',
+    example: 'Trước và sau chuyển khoản, tổng số dư của A và B phải không đổi. Hết vé thì tồn kho phải bằng 0, không thể âm.'
   },
   {
     key: 'isolation',
     letter: 'I',
     icon: '🔒',
-    name: '隔离性',
+    name: 'Cô lập',
     meaning: 'Isolation',
-    explanation: '多个事务同时执行时，互不干扰，每个事务都感觉不到其他事务的存在。',
-    example: 'A 在买票时，B 看到的结果应该是"已售罄"或"还剩 1 张"，不会看到 A 买了一半的中间状态（比如库存变成了 0.5）。'
+    explanation: 'Khi nhiều transaction chạy đồng thời, chúng không ảnh hưởng lẫn nhau, mỗi transaction không cảm nhận được transaction khác.',
+    example: 'Khi A đang mua vé, B sẽ chỉ thấy "hết vé" hoặc "còn 1 vé", không thấy trạng thái nửa chừng của A (như kho còn 0.5 vé).'
   },
   {
     key: 'durability',
     letter: 'D',
     icon: '💾',
-    name: '持久性',
+    name: 'Bền vững',
     meaning: 'Durability',
-    explanation: '事务一旦提交，结果就会永久保存，即使断电、宕机也不会丢失。',
-    example: '订单成功后，即使服务器立刻断电，已售出的票记录也不会消失。重启服务器后，数据依然在。'
+    explanation: 'Transaction đã commit thì kết quả được lưu vĩnh viễn, kể cả mất điện, sập server cũng không mất.',
+    example: 'Sau khi đơn hàng thành công, dù server mất điện ngay lập tức, bản ghi vé đã bán cũng không biến mất. Khởi động lại server, dữ liệu vẫn còn.'
   }
 ])
 

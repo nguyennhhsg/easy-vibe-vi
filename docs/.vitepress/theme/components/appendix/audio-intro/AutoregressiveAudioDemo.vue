@@ -8,7 +8,7 @@
           icon="VideoPlay"
           @click="playDemo"
         >
-          开始对比演示
+          Bắt đầu so sánh demo
         </el-button>
       </div>
 
@@ -26,7 +26,7 @@
               >
                 <Timer />
               </el-icon>
-              <span class="method-title">自回归 (Autoregressive)</span>
+              <span class="method-title">Tự hồi quy (Autoregressive)</span>
             </div>
           </template>
           <div class="method-body">
@@ -51,15 +51,15 @@
                 size="small"
                 border
               >
-                <el-descriptions-item label="生成方式">
-                  串行 (Serial)
+                <el-descriptions-item label="Cách sinh">
+                  Tuần tự (Serial)
                 </el-descriptions-item>
-                <el-descriptions-item label="速度">
+                <el-descriptions-item label="Tốc độ">
                   <el-tag
                     type="danger"
                     size="small"
                   >
-                    慢 (Slow)
+                    Chậm (Slow)
                   </el-tag>
                 </el-descriptions-item>
               </el-descriptions>
@@ -80,7 +80,7 @@
               >
                 <Lightning />
               </el-icon>
-              <span class="method-title">流匹配 (Flow Matching)</span>
+              <span class="method-title">Flow Matching</span>
             </div>
           </template>
           <div class="method-body">
@@ -115,15 +115,15 @@
                 size="small"
                 border
               >
-                <el-descriptions-item label="生成方式">
-                  并行 (Parallel)
+                <el-descriptions-item label="Cách sinh">
+                  Song song (Parallel)
                 </el-descriptions-item>
-                <el-descriptions-item label="速度">
+                <el-descriptions-item label="Tốc độ">
                   <el-tag
                     type="success"
                     size="small"
                   >
-                    极快 (Fast)
+                    Rất nhanh (Fast)
                   </el-tag>
                 </el-descriptions-item>
               </el-descriptions>
@@ -135,18 +135,18 @@
       <el-divider />
 
       <el-alert
-        title="技术演进"
+        title="Tiến hoá công nghệ"
         type="success"
         :closable="false"
         show-icon
       >
         <template #default>
           <p>
-            <strong>自回归</strong> (如 VALL-E)
-            像人说话一样，必须说完上一个字才能说下一个字，所以很慢。
+            <strong>Tự hồi quy</strong> (như VALL-E)
+            giống cách con người nói: phải nói xong từ trước mới sang được từ sau nên rất chậm.
             <br>
-            <strong>流匹配</strong> (如 F5-TTS)
-            像画画一样，可以同时在画布的所有角落开始上色，效率提升了 10-20 倍。
+            <strong>Flow Matching</strong> (như F5-TTS)
+            giống vẽ tranh: có thể tô đồng thời ở mọi góc canvas, hiệu suất tăng 10-20 lần.
           </p>
         </template>
       </el-alert>

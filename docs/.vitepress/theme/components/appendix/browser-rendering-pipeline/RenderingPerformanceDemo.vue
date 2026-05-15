@@ -2,23 +2,23 @@
   <div class="rendering-performance-demo">
     <div class="demo-header">
       <span class="icon">⚡</span>
-      <span class="title">渲染性能优化</span>
-      <span class="subtitle">让页面丝滑流畅的秘诀</span>
+      <span class="title">Tối ưu rendering performance</span>
+      <span class="subtitle">Bí quyết để trang chạy mượt mà</span>
     </div>
 
     <div class="intro-text">
-      渲染性能优化的目标是<span class="highlight">每秒60帧</span>（16.67ms/帧）。就像拍电影，每秒帧数越多，画面越流畅。超过这个时间，用户就会感觉卡顿。
+      Mục tiêu tối ưu rendering là <span class="highlight">60 frame mỗi giây</span> (16.67ms/frame). Giống như quay phim, FPS càng cao thì hình càng mượt. Vượt quá thời gian này người dùng sẽ thấy giật.
     </div>
 
     <div class="demo-content">
       <div class="performance-comparison">
         <div class="comparison-section">
           <div class="section-title">
-            ❌ 不好的做法
+            Cách không tốt
           </div>
           <div class="code-block">
             <div class="code-line">
-              <span class="code-comment">// 触发重排和重绘</span>
+              <span class="code-comment">// Trigger reflow và repaint</span>
             </div>
             <div class="code-line">
               <span class="code-keyword">function</span> <span class="code-func">animate</span>() {
@@ -38,7 +38,7 @@
           </div>
           <div class="performance-meter bad">
             <div class="meter-label">
-              性能开销
+              Chi phí hiệu năng
             </div>
             <div class="meter-bar">
               <div
@@ -55,11 +55,11 @@
 
         <div class="comparison-section">
           <div class="section-title good">
-            ✅ 优化做法
+            Cách tối ưu
           </div>
           <div class="code-block">
             <div class="code-line">
-              <span class="code-comment">/* 只触发合成 */</span>
+              <span class="code-comment">/* Chỉ trigger composite */</span>
             </div>
             <div class="code-line">
               <span class="code-keyword">function</span> <span class="code-func">animate</span>() {
@@ -76,7 +76,7 @@
           </div>
           <div class="performance-meter good">
             <div class="meter-label">
-              性能开销
+              Chi phí hiệu năng
             </div>
             <div class="meter-bar">
               <div
@@ -90,20 +90,20 @@
 
       <div class="optimization-tips">
         <div class="tips-title">
-          黄金法则：
+          Quy tắc vàng:
         </div>
         <div class="tips-list">
           <div class="tip-item">
             <span class="tip-icon">1️⃣</span>
-            <span class="tip-text">优先使用 <code>transform</code> 和 <code>opacity</code> 做动画</span>
+            <span class="tip-text">Ưu tiên dùng <code>transform</code> và <code>opacity</code> cho animation</span>
           </div>
           <div class="tip-item">
             <span class="tip-icon">2️⃣</span>
-            <span class="tip-text">避免频繁读取布局属性（如 offsetWidth）</span>
+            <span class="tip-text">Tránh đọc thuộc tính layout (như offsetWidth) quá thường xuyên</span>
           </div>
           <div class="tip-item">
             <span class="tip-icon">3️⃣</span>
-            <span class="tip-text">使用 <code>will-change</code> 提前告知浏览器</span>
+            <span class="tip-text">Dùng <code>will-change</code> để báo trước cho browser</span>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心要点：</strong>渲染路径越长，性能越差。最佳路径是：合成（Composite）> 重绘（Paint）> 布局（Layout）> 样式计算（Style）。尽量让动画停留在"合成"阶段，在 GPU 上完成。
+      <strong>Ý chính:</strong> Đường rendering càng dài thì hiệu năng càng tệ. Đường tốt nhất là: composite > paint > layout > tính style. Cố gắng giữ animation ở giai đoạn "composite", chạy trên GPU.
     </div>
   </div>
 </template>

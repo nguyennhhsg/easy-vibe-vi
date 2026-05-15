@@ -1,14 +1,14 @@
 <!--
   CoordinateSystemDemo.vue
-  Canvas 坐标系统演示组件
+  Component demo hệ toạ độ Canvas
 
-  用途：
-  展示 Canvas 的坐标系统，包括原点位置、坐标方向、网格绘制等
+  Mục đích:
+  Minh hoạ hệ toạ độ Canvas: vị trí gốc, chiều trục, vẽ lưới...
 
-  交互功能：
-  - 网格显示：开关网格线和坐标轴
-  - 点位置拖拽：拖动点查看坐标变化
-  - 坐标显示：实时显示鼠标位置和选中点坐标
+  Tính năng tương tác:
+  - Hiển thị lưới: bật/tắt lưới và trục toạ độ
+  - Kéo điểm: kéo điểm để xem toạ độ thay đổi
+  - Hiện toạ độ: hiển thị toạ độ chuột và điểm đang chọn theo thời gian thực
 -->
 <template>
   <div class="coordinate-demo">
@@ -19,7 +19,7 @@
             v-model="showGrid"
             type="checkbox"
           >
-          <span>Show Grid / 显示网格</span>
+          <span>Show Grid / Hiện lưới</span>
         </label>
 
         <label class="toggle-option">
@@ -27,7 +27,7 @@
             v-model="showAxis"
             type="checkbox"
           >
-          <span>Show Axis / 显示坐标轴</span>
+          <span>Show Axis / Hiện trục toạ độ</span>
         </label>
 
         <label class="toggle-option">
@@ -35,7 +35,7 @@
             v-model="showCoordinates"
             type="checkbox"
           >
-          <span>Show Coordinates / 显示坐标</span>
+          <span>Show Coordinates / Hiện toạ độ</span>
         </label>
       </div>
 
@@ -106,7 +106,7 @@ const drawGrid = (ctx) => {
   ctx.strokeStyle = '#f0f0f0'
   ctx.lineWidth = 1
 
-  // 垂直线
+  // Đường dọc
   for (let x = 0; x <= 600; x += 50) {
     ctx.beginPath()
     ctx.moveTo(x, 0)
@@ -114,7 +114,7 @@ const drawGrid = (ctx) => {
     ctx.stroke()
   }
 
-  // 水平线
+  // Đường ngang
   for (let y = 0; y <= 400; y += 50) {
     ctx.beginPath()
     ctx.moveTo(0, y)
@@ -128,21 +128,21 @@ const drawAxis = (ctx) => {
 
   ctx.lineWidth = 2
 
-  // X 轴
+  // Trục X
   ctx.strokeStyle = '#e74c3c'
   ctx.beginPath()
   ctx.moveTo(0, 0)
   ctx.lineTo(600, 0)
   ctx.stroke()
 
-  // Y 轴
+  // Trục Y
   ctx.strokeStyle = '#3498db'
   ctx.beginPath()
   ctx.moveTo(0, 0)
   ctx.lineTo(0, 400)
   ctx.stroke()
 
-  // 原点标记
+  // Đánh dấu gốc toạ độ
   ctx.fillStyle = '#2c3e50'
   ctx.font = '12px Arial'
   ctx.fillText('(0,0)', 5, 15)
@@ -150,14 +150,14 @@ const drawAxis = (ctx) => {
 
 const drawPoints = (ctx) => {
   points.forEach((point, index) => {
-    // 绘制点
+    // Vẽ điểm
     ctx.fillStyle =
       index === 0 ? '#e74c3c' : index === 1 ? '#3498db' : '#2ecc71'
     ctx.beginPath()
     ctx.arc(point.x, point.y, 8, 0, Math.PI * 2)
     ctx.fill()
 
-    // 绘制坐标
+    // Vẽ toạ độ
     if (showCoordinates.value) {
       ctx.fillStyle = '#2c3e50'
       ctx.font = '12px Arial'
@@ -175,14 +175,14 @@ const draw = () => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')
 
-  // 清除画布
+  // Xoá canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 绘制背景
+  // Vẽ nền
   ctx.fillStyle = '#fafafa'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  // 绘制各层
+  // Vẽ các layer
   drawGrid(ctx)
   drawAxis(ctx)
   drawPoints(ctx)
@@ -196,7 +196,7 @@ const handleMouseMove = (e) => {
   mouseX.value = Math.round(e.clientX - rect.left)
   mouseY.value = Math.round(e.clientY - rect.top)
 
-  // 拖拽逻辑
+  // Logic kéo thả
   if (isDragging.value && selectedPoint.value) {
     selectedPoint.value.x = mouseX.value
     selectedPoint.value.y = mouseY.value
@@ -212,7 +212,7 @@ const handleMouseDown = (e) => {
   const x = e.clientX - rect.left
   const y = e.clientY - rect.top
 
-  // 检查是否点击了某个点
+  // Kiểm tra xem có click vào điểm nào không
   points.forEach((point) => {
     const distance = Math.sqrt((x - point.x) ** 2 + (y - point.y) ** 2)
     if (distance < 15) {

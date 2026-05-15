@@ -1,37 +1,37 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 类型推断演示
+// Demo suy luận kiểu (type inference)
 const codeExamples = ref([
   {
     id: 1,
-    code: 'let name = "张三"',
+    code: 'let name = "An"',
     inferredType: 'string',
-    explanation: 'TypeScript 根据赋值的字符串推断出 name 的类型是 string'
+    explanation: 'TypeScript dựa vào chuỗi gán để suy ra kiểu của name là string'
   },
   {
     id: 2,
     code: 'let age = 25',
     inferredType: 'number',
-    explanation: 'TypeScript 根据数字字面量推断出 age 的类型是 number'
+    explanation: 'TypeScript dựa vào số literal để suy ra kiểu của age là number'
   },
   {
     id: 3,
     code: 'let isActive = true',
     inferredType: 'boolean',
-    explanation: 'TypeScript 根据布尔值推断出 isActive 的类型是 boolean'
+    explanation: 'TypeScript dựa vào giá trị boolean để suy ra kiểu của isActive là boolean'
   },
   {
     id: 4,
     code: 'let numbers = [1, 2, 3]',
     inferredType: 'number[]',
-    explanation: 'TypeScript 推断出这是一个数字数组'
+    explanation: 'TypeScript suy luận đây là một mảng số'
   }
 ])
 
 const currentExample = ref(codeExamples.value[0])
 
-// 显示类型错误
+// Hiển thị lỗi kiểu
 const showError = ref(false)
 const errorMessage = ref('')
 
@@ -44,87 +44,87 @@ const setMessage = (msg, isError = false) => {
   }, 3000)
 }
 
-// 切换示例
+// Chuyển ví dụ
 const selectExample = (example) => {
   currentExample.value = example
   errorMessage.value = ''
   showError.value = false
 }
 
-// 尝试类型错误
+// Thử lỗi kiểu
 const tryTypeError = () => {
   showError.value = true
-  errorMessage.value = `❌ TypeScript 错误：不能将类型 "number" 分配给类型 "${currentExample.value.inferredType}"`
+  errorMessage.value = `Lỗi TypeScript: không thể gán kiểu "number" cho kiểu "${currentExample.value.inferredType}"`
   setTimeout(() => {
     showError.value = false
     errorMessage.value = ''
   }, 3000)
 }
 
-// 最佳实践示例
+// Best practices
 const bestPractices = ref([
   {
-    title: '何时使用类型推断',
+    title: 'Khi nào nên dùng type inference',
     items: [
-      '变量初始化时有明确的值',
-      '函数返回值可以明显推断',
-      '简单的字面量赋值'
+      'Khi khởi tạo biến với giá trị rõ ràng',
+      'Khi giá trị trả về của hàm dễ suy luận',
+      'Khi gán literal đơn giản'
     ]
   },
   {
-    title: '何时需要显式注解',
+    title: 'Khi nào cần annotation tường minh',
     items: [
-      '函数参数（必须）',
-      '对象或数组的复杂结构',
-      '无法从初始值推断类型',
-      '需要明确的类型约束'
+      'Tham số hàm (bắt buộc)',
+      'Cấu trúc object hoặc array phức tạp',
+      'Khi không thể suy luận kiểu từ giá trị khởi tạo',
+      'Khi cần ràng buộc kiểu rõ ràng'
     ]
   }
 ])
 
-// 代码对比
+// So sánh code
 const codeComparisons = ref([
   {
-    scenario: '函数返回值',
+    scenario: 'Giá trị trả về của hàm',
     withInference:
-      'function add(a: number, b: number) {\n  return a + b  // 推断为 number\n}',
+      'function add(a: number, b: number) {\n  return a + b  // suy luận là number\n}',
     withAnnotation:
       'function add(a: number, b: number): number {\n  return a + b\n}',
-    recommendation: '推荐使用推断'
+    recommendation: 'Nên dùng suy luận'
   },
   {
-    scenario: '复杂对象',
+    scenario: 'Object phức tạp',
     withInference:
-      'const user = {\n  name: "张三",\n  age: 25,\n  email: "test@example.com"\n}  // 类型自动推断',
+      'const user = {\n  name: "An",\n  age: 25,\n  email: "test@example.com"\n}  // kiểu tự động suy luận',
     withAnnotation:
       'interface User {\n  name: string\n  age: number\n  email: string\n}\n\nconst user: User = { ... }',
-    recommendation: '复杂结构建议用接口'
+    recommendation: 'Cấu trúc phức tạp nên dùng interface'
   }
 ])
 </script>
 
 <template>
   <div class="type-inference-demo">
-    <h3>🔮 类型推断演示</h3>
+    <h3>Demo type inference</h3>
 
     <div class="demo-container">
-      <!-- 概念说明 -->
+      <!-- Giải thích khái niệm -->
       <div class="concept-section">
         <div class="concept-card">
           <div class="concept-icon">🧠</div>
           <div class="concept-content">
-            <h4>什么是类型推断？</h4>
+            <h4>Type inference là gì?</h4>
             <p>
-              TypeScript
-              很聪明，它能根据你写的代码自动推断出变量的类型，不需要每次都手动标注。
+              TypeScript khá thông minh, nó có thể tự suy luận kiểu của biến dựa
+              vào code bạn viết, không cần phải khai báo kiểu mỗi lần.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- 示例选择器 -->
+      <!-- Bộ chọn ví dụ -->
       <div class="example-selector">
-        <h4>选择一个示例看看类型推断是如何工作的：</h4>
+        <h4>Chọn một ví dụ để xem type inference hoạt động như thế nào:</h4>
         <div class="examples-grid">
           <div
             v-for="example in codeExamples"
@@ -143,13 +143,13 @@ const codeComparisons = ref([
         </div>
       </div>
 
-      <!-- 当前示例详情 -->
+      <!-- Chi tiết ví dụ hiện tại -->
       <div class="current-example">
         <div class="example-display">
           <div class="code-panel">
             <div class="panel-header">
               <span class="code-icon">💻</span>
-              <span>代码</span>
+              <span>Code</span>
             </div>
             <pre><code class="typescript">{{ currentExample.code }}</code></pre>
           </div>
@@ -159,7 +159,7 @@ const codeComparisons = ref([
           <div class="type-panel">
             <div class="panel-header">
               <span class="type-icon">🏷️</span>
-              <span>推断的类型</span>
+              <span>Kiểu được suy luận</span>
             </div>
             <div class="inferred-type">
               {{ currentExample.inferredType }}
@@ -175,7 +175,7 @@ const codeComparisons = ref([
         </div>
       </div>
 
-      <!-- 错误消息 -->
+      <!-- Thông báo lỗi -->
       <div
         v-if="errorMessage"
         :class="['message-box', showError ? 'error' : 'success']"
@@ -183,17 +183,17 @@ const codeComparisons = ref([
         {{ errorMessage }}
       </div>
 
-      <!-- 操作按钮 -->
+      <!-- Nút thao tác -->
       <div class="controls">
-        <button class="btn-danger" @click="tryTypeError">尝试类型错误</button>
+        <button class="btn-danger" @click="tryTypeError">Thử lỗi kiểu</button>
         <button class="btn-secondary" @click="showError = false; errorMessage = ''">
-          清除消息
+          Xoá thông báo
         </button>
       </div>
 
-      <!-- 最佳实践 -->
+      <!-- Best practices -->
       <div class="best-practices">
-        <h4>📚 最佳实践</h4>
+        <h4>Best practices</h4>
         <div class="practices-grid">
           <div
             v-for="(practice, index) in bestPractices"
@@ -212,9 +212,9 @@ const codeComparisons = ref([
         </div>
       </div>
 
-      <!-- 代码对比 -->
+      <!-- So sánh code -->
       <div class="comparisons">
-        <h4>🔄 类型推断 vs 显式注解</h4>
+        <h4>Type inference vs annotation tường minh</h4>
         <div
           v-for="(comparison, index) in codeComparisons"
           :key="index"
@@ -225,11 +225,11 @@ const codeComparisons = ref([
           </div>
           <div class="comparison-codes">
             <div class="comparison-code">
-              <div class="code-label">使用推断</div>
+              <div class="code-label">Dùng inference</div>
               <pre><code class="typescript">{{ comparison.withInference }}</code></pre>
             </div>
             <div class="comparison-code">
-              <div class="code-label">显式注解</div>
+              <div class="code-label">Annotation tường minh</div>
               <pre><code class="typescript">{{ comparison.withAnnotation }}</code></pre>
             </div>
           </div>

@@ -53,7 +53,7 @@
 
           <div class="be-info-section">
             <h3 class="be-section-title">
-              💡 核心特点
+              💡 Đặc điểm cốt lõi
             </h3>
             <ul class="be-feature-list">
               <li
@@ -67,7 +67,7 @@
             </ul>
 
             <div class="be-analogy-box">
-              <h4>🏪 餐厅类比</h4>
+              <h4>🏪 Ví von nhà hàng</h4>
               <p>{{ currentStageData.analogy }}</p>
             </div>
           </div>
@@ -90,19 +90,19 @@ import { ref, computed } from 'vue'
 const currentStage = ref(0)
 
 const stages = [
-  { name: '物理时代', year: '1990s', icon: '🖥️' },
-  { name: '单体架构', year: '2000s', icon: '🏢' },
-  { name: '微服务', year: '2010s', icon: '🐜' },
+  { name: 'Thời đại vật lý', year: '1990s', icon: '🖥️' },
+  { name: 'Kiến trúc Monolith', year: '2000s', icon: '🏢' },
+  { name: 'Microservice', year: '2010s', icon: '🐜' },
   { name: 'Serverless', year: '2020s', icon: '☁️' }
 ]
 
 const stageData = [
   {
     nodes: [
-      { icon: '🌐', label: '用户请求', type: 'user', style: { left: '20px', top: '120px' } },
-      { icon: '🖥️', label: '物理服务器', type: 'server', style: { left: '220px', top: '80px' } },
-      { icon: '📁', label: '静态文件', type: 'file', style: { left: '420px', top: '60px' } },
-      { icon: '⚙️', label: 'CGI脚本', type: 'script', style: { left: '420px', top: '160px' } }
+      { icon: '🌐', label: 'Request người dùng', type: 'user', style: { left: '20px', top: '120px' } },
+      { icon: '🖥️', label: 'Máy chủ vật lý', type: 'server', style: { left: '220px', top: '80px' } },
+      { icon: '📁', label: 'File tĩnh', type: 'file', style: { left: '420px', top: '60px' } },
+      { icon: '⚙️', label: 'Script CGI', type: 'script', style: { left: '420px', top: '160px' } }
     ],
     connections: [
       { path: 'M 80 140 Q 150 140 220 120', type: 'http' },
@@ -110,42 +110,42 @@ const stageData = [
       { path: 'M 320 130 Q 370 160 420 180', type: 'exec' }
     ],
     features: [
-      { icon: '🐢', text: '手动部署，更新慢', type: 'con' },
-      { icon: '💰', text: '扩容只能买更大的机器', type: 'con' },
-      { icon: '🔧', text: 'FTP上传，配置复杂', type: 'con' }
+      { icon: '🐢', text: 'Triển khai thủ công, update chậm', type: 'con' },
+      { icon: '💰', text: 'Mở rộng chỉ có thể mua máy lớn hơn', type: 'con' },
+      { icon: '🔧', text: 'Upload FTP, cấu hình phức tạp', type: 'con' }
     ],
-    analogy: '像一家小餐馆，只有一个大厨。所有活都要他自己干：洗菜、切菜、炒菜。客人多了就忙不过来，只能买更大的厨房。'
+    analogy: 'Giống như một quán ăn nhỏ chỉ có một bếp trưởng. Mọi việc anh ta phải tự làm: rửa rau, thái thịt, xào nấu. Khách đông là không xuể, chỉ có thể mua bếp lớn hơn.'
   },
   {
     nodes: [
-      { icon: '🌐', label: '用户请求', type: 'user', style: { left: '20px', top: '120px' } },
-      { icon: '🏢', label: '单体应用', type: 'app', style: { left: '200px', top: '100px', width: '140px', height: '100px' } },
-      { icon: '👤', label: '用户模块', type: 'module', style: { left: '220px', top: '115px', transform: 'scale(0.7)' } },
-      { icon: '🛒', label: '订单模块', type: 'module', style: { left: '270px', top: '115px', transform: 'scale(0.7)' } },
-      { icon: '💳', label: '支付模块', type: 'module', style: { left: '245px', top: '155px', transform: 'scale(0.7)' } },
-      { icon: '🗄️', label: '数据库', type: 'db', style: { left: '420px', top: '120px' } }
+      { icon: '🌐', label: 'Request người dùng', type: 'user', style: { left: '20px', top: '120px' } },
+      { icon: '🏢', label: 'Ứng dụng Monolith', type: 'app', style: { left: '200px', top: '100px', width: '140px', height: '100px' } },
+      { icon: '👤', label: 'Module User', type: 'module', style: { left: '220px', top: '115px', transform: 'scale(0.7)' } },
+      { icon: '🛒', label: 'Module Order', type: 'module', style: { left: '270px', top: '115px', transform: 'scale(0.7)' } },
+      { icon: '💳', label: 'Module Payment', type: 'module', style: { left: '245px', top: '155px', transform: 'scale(0.7)' } },
+      { icon: '🗄️', label: 'Database', type: 'db', style: { left: '420px', top: '120px' } }
     ],
     connections: [
       { path: 'M 80 140 Q 140 140 200 150', type: 'http' },
       { path: 'M 340 150 Q 380 150 420 150', type: 'sql' }
     ],
     features: [
-      { icon: '✅', text: '开发简单，部署方便', type: 'pro' },
-      { icon: '❌', text: '牵一发而动全身', type: 'con' },
-      { icon: '🐌', text: '代码膨胀，启动慢', type: 'con' }
+      { icon: '✅', text: 'Phát triển đơn giản, dễ triển khai', type: 'pro' },
+      { icon: '❌', text: 'Sửa một chỗ ảnh hưởng toàn bộ', type: 'con' },
+      { icon: '🐌', text: 'Code phình to, khởi động chậm', type: 'con' }
     ],
-    analogy: '像一个大型中央厨房，所有工序都在一个地方完成。好处是管理简单，坏处是如果洗菜区水管爆了，整个厨房都得停工。'
+    analogy: 'Giống như một bếp trung tâm lớn, mọi công đoạn đều diễn ra ở một nơi. Cái lợi là quản lý đơn giản, cái hại là nếu khu rửa rau bị vỡ ống nước thì cả bếp phải dừng.'
   },
   {
     nodes: [
-      { icon: '🌐', label: '用户请求', type: 'user', style: { left: '10px', top: '130px' } },
-      { icon: '⚖️', label: '网关/负载均衡', type: 'gateway', style: { left: '120px', top: '130px' } },
-      { icon: '👤', label: '用户服务', type: 'service', style: { left: '260px', top: '50px' } },
-      { icon: '🛒', label: '订单服务', type: 'service', style: { left: '380px', top: '50px' } },
-      { icon: '💳', label: '支付服务', type: 'service', style: { left: '320px', top: '130px' } },
-      { icon: '📦', label: '库存服务', type: 'service', style: { left: '440px', top: '130px' } },
-      { icon: '📊', label: '消息队列', type: 'mq', style: { left: '320px', top: '210px' } },
-      { icon: '🗄️', label: '数据库集群', type: 'db-cluster', style: { left: '440px', top: '210px' } }
+      { icon: '🌐', label: 'Request người dùng', type: 'user', style: { left: '10px', top: '130px' } },
+      { icon: '⚖️', label: 'Gateway/Load Balancer', type: 'gateway', style: { left: '120px', top: '130px' } },
+      { icon: '👤', label: 'User Service', type: 'service', style: { left: '260px', top: '50px' } },
+      { icon: '🛒', label: 'Order Service', type: 'service', style: { left: '380px', top: '50px' } },
+      { icon: '💳', label: 'Payment Service', type: 'service', style: { left: '320px', top: '130px' } },
+      { icon: '📦', label: 'Inventory Service', type: 'service', style: { left: '440px', top: '130px' } },
+      { icon: '📊', label: 'Message Queue', type: 'mq', style: { left: '320px', top: '210px' } },
+      { icon: '🗄️', label: 'Cụm Database', type: 'db-cluster', style: { left: '440px', top: '210px' } }
     ],
     connections: [
       { path: 'M 70 150 L 120 150', type: 'http' },
@@ -158,21 +158,21 @@ const stageData = [
       { path: 'M 480 170 Q 480 190 480 210', type: 'sql' }
     ],
     features: [
-      { icon: '✅', text: '故障隔离，独立部署', type: 'pro' },
-      { icon: '✅', text: '团队自治，技术异构', type: 'pro' },
-      { icon: '❌', text: '分布式复杂度，治理难', type: 'con' }
+      { icon: '✅', text: 'Cô lập lỗi, triển khai độc lập', type: 'pro' },
+      { icon: '✅', text: 'Team tự chủ, công nghệ đa dạng', type: 'pro' },
+      { icon: '❌', text: 'Độ phức tạp phân tán, khó quản trị', type: 'con' }
     ],
-    analogy: '像一条流水线，每个环节都是一个独立的工作站。一个工作站坏了，其他还能继续工作。但要协调这么多工作站，需要复杂的管理系统（Kubernetes）。'
+    analogy: 'Giống một dây chuyền sản xuất, mỗi mắt xích là một trạm làm việc độc lập. Một trạm hỏng, các trạm khác vẫn chạy. Nhưng để phối hợp nhiều trạm như vậy, cần hệ thống quản lý phức tạp (Kubernetes).'
   },
   {
     nodes: [
-      { icon: '🌐', label: '用户请求', type: 'user', style: { left: '20px', top: '130px' } },
-      { icon: '🔀', label: 'API 网关', type: 'gateway', style: { left: '150px', top: '130px' } },
-      { icon: '⚡', label: '函数1\n验证', type: 'function', style: { left: '300px', top: '60px' } },
-      { icon: '⚡', label: '函数2\n处理', type: 'function', style: { left: '420px', top: '60px' } },
-      { icon: '⚡', label: '函数3\n存储', type: 'function', style: { left: '360px', top: '160px' } },
-      { icon: '☁️', label: '托管服务', type: 'managed', style: { left: '520px', top: '100px', width: '70px', height: '80px' } },
-      { icon: '🗄️', label: '云数据库', type: 'cloud-db', style: { left: '480px', top: '210px' } }
+      { icon: '🌐', label: 'Request người dùng', type: 'user', style: { left: '20px', top: '130px' } },
+      { icon: '🔀', label: 'API Gateway', type: 'gateway', style: { left: '150px', top: '130px' } },
+      { icon: '⚡', label: 'Hàm 1\nXác thực', type: 'function', style: { left: '300px', top: '60px' } },
+      { icon: '⚡', label: 'Hàm 2\nXử lý', type: 'function', style: { left: '420px', top: '60px' } },
+      { icon: '⚡', label: 'Hàm 3\nLưu trữ', type: 'function', style: { left: '360px', top: '160px' } },
+      { icon: '☁️', label: 'Dịch vụ host', type: 'managed', style: { left: '520px', top: '100px', width: '70px', height: '80px' } },
+      { icon: '🗄️', label: 'Cloud Database', type: 'cloud-db', style: { left: '480px', top: '210px' } }
     ],
     connections: [
       { path: 'M 80 150 L 150 150', type: 'http' },
@@ -183,11 +183,11 @@ const stageData = [
       { path: 'M 440 190 Q 460 200 480 220', type: 'db' }
     ],
     features: [
-      { icon: '✅', text: '零运维，自动扩缩容', type: 'pro' },
-      { icon: '✅', text: '按量付费，成本优化', type: 'pro' },
-      { icon: '❌', text: '冷启动延迟，vendor锁定', type: 'con' }
+      { icon: '✅', text: 'Zero ops, auto scale', type: 'pro' },
+      { icon: '✅', text: 'Trả theo lượng dùng, tối ưu chi phí', type: 'pro' },
+      { icon: '❌', text: 'Độ trễ cold start, lock-in vendor', type: 'con' }
     ],
-    analogy: '像外卖平台。你不用自己开餐厅（维护服务器），只需要提供菜谱（写函数）。平台负责找厨师、准备食材、送餐。有人点餐就现做，没人点餐就不花钱。'
+    analogy: 'Giống nền tảng giao đồ ăn. Bạn không cần tự mở quán (bảo trì server), chỉ cần cung cấp công thức (viết hàm). Nền tảng lo việc tìm đầu bếp, chuẩn bị nguyên liệu, giao hàng. Có khách đặt thì mới làm, không có ai đặt thì không tốn tiền.'
   }
 ]
 

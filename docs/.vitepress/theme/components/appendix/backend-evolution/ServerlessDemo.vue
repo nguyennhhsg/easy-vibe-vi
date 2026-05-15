@@ -1,8 +1,8 @@
 <template>
   <div class="serverless-demo">
     <div class="demo-header">
-      <h4>⚡ Serverless 架构演示</h4>
-      <p>观察 Serverless 如何按需执行函数、自动扩缩容</p>
+      <h4>⚡ Demo kiến trúc Serverless</h4>
+      <p>Quan sát cách Serverless thực thi hàm theo nhu cầu và auto scale</p>
     </div>
 
     <div class="serverless-visualization">
@@ -30,27 +30,27 @@
             v-if="func.invocations > 0"
             class="function-metrics"
           >
-            <span>调用: {{ func.invocations }}</span>
-            <span>平均: {{ func.avgDuration }}ms</span>
+            <span>Số lần gọi: {{ func.invocations }}</span>
+            <span>TB: {{ func.avgDuration }}ms</span>
           </div>
         </div>
       </div>
 
       <div class="auto-scaling-panel">
         <div class="scaling-title">
-          自动扩缩容状态
+          Trạng thái auto scale
         </div>
         <div class="scaling-metrics">
           <div class="metric">
-            <span class="metric-label">并发请求:</span>
+            <span class="metric-label">Concurrent request:</span>
             <span class="metric-value">{{ concurrentRequests }}</span>
           </div>
           <div class="metric">
-            <span class="metric-label">运行实例:</span>
+            <span class="metric-label">Instance đang chạy:</span>
             <span class="metric-value">{{ runningInstances }}</span>
           </div>
           <div class="metric">
-            <span class="metric-label">冷启动:</span>
+            <span class="metric-label">Cold start:</span>
             <span class="metric-value">{{ coldStarts }}</span>
           </div>
         </div>
@@ -68,7 +68,7 @@
 
     <div class="traffic-simulator">
       <div class="simulator-title">
-        流量模拟器
+        Trình mô phỏng traffic
       </div>
       <div class="traffic-patterns">
         <button
@@ -86,12 +86,12 @@
     </div>
 
     <div class="demo-explanation">
-      <h5>💡 Serverless 核心特性</h5>
+      <h5>💡 Đặc trưng cốt lõi của Serverless</h5>
       <ul>
-        <li><strong>按需执行</strong>：函数只在被调用时运行，不调用不产生费用</li>
-        <li><strong>自动扩缩容</strong>：从 0 到数千实例自动扩展，无需人工干预</li>
-        <li><strong>冷启动</strong>：长时间未调用后首次调用会有延迟，需要预热策略</li>
-        <li><strong>事件驱动</strong>：响应 HTTP 请求、消息队列、定时任务等多种事件源</li>
+        <li><strong>Thực thi theo yêu cầu</strong>: hàm chỉ chạy khi được gọi, không gọi không tốn phí</li>
+        <li><strong>Auto scale</strong>: tự động mở rộng từ 0 đến hàng nghìn instance, không cần can thiệp thủ công</li>
+        <li><strong>Cold start</strong>: lần gọi đầu sau thời gian dài không dùng sẽ có độ trễ, cần chiến lược warm-up</li>
+        <li><strong>Event-driven</strong>: phản hồi nhiều nguồn sự kiện như HTTP request, message queue, scheduled task</li>
       </ul>
     </div>
   </div>
@@ -101,10 +101,10 @@
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 
 const functions = reactive([
-  { name: '用户登录', icon: '🔐', state: 'cold', invocations: 0, avgDuration: 0 },
-  { name: '订单处理', icon: '📦', state: 'cold', invocations: 0, avgDuration: 0 },
-  { name: '图片处理', icon: '🖼️', state: 'cold', invocations: 0, avgDuration: 0 },
-  { name: '数据备份', icon: '💾', state: 'cold', invocations: 0, avgDuration: 0 }
+  { name: 'Đăng nhập user', icon: '🔐', state: 'cold', invocations: 0, avgDuration: 0 },
+  { name: 'Xử lý đơn hàng', icon: '📦', state: 'cold', invocations: 0, avgDuration: 0 },
+  { name: 'Xử lý ảnh', icon: '🖼️', state: 'cold', invocations: 0, avgDuration: 0 },
+  { name: 'Backup dữ liệu', icon: '💾', state: 'cold', invocations: 0, avgDuration: 0 }
 ])
 
 const concurrentRequests = ref(0)
@@ -115,13 +115,13 @@ const currentPattern = ref(null)
 const isFlowRunning = ref(false)
 
 const trafficPatterns = [
-  { name: '正常流量', icon: '📊', desc: '平稳的请求速率' },
-  { name: '突发流量', icon: '🚀', desc: '突然的流量激增' },
-  { name: '潮汐流量', icon: '🌊', desc: '周期性的高低峰' }
+  { name: 'Traffic bình thường', icon: '📊', desc: 'Tốc độ request ổn định' },
+  { name: 'Traffic đột biến', icon: '🚀', desc: 'Traffic tăng đột ngột' },
+  { name: 'Traffic theo chu kỳ', icon: '🌊', desc: 'Cao điểm/thấp điểm tuần hoàn' }
 ]
 
 const stateText = (state) => {
-  const map = { cold: '冷状态', warming: '预热中', running: '运行中' }
+  const map = { cold: 'Trạng thái lạnh', warming: 'Đang khởi động', running: 'Đang chạy' }
   return map[state] || state
 }
 
@@ -159,15 +159,15 @@ const triggerFunction = async (name) => {
 
 const applyPattern = (pattern) => {
   currentPattern.value = pattern.name
-  // 模拟流量模式
-  if (pattern.name === '突发流量') {
+  // Mô phỏng pattern traffic
+  if (pattern.name === 'Traffic đột biến') {
     for (let i = 0; i < 5; i++) {
       setTimeout(() => {
         const fn = functions[Math.floor(Math.random() * functions.length)]
         triggerFunction(fn.name)
       }, i * 200)
     }
-  } else if (pattern.name === '潮汐流量') {
+  } else if (pattern.name === 'Traffic theo chu kỳ') {
     const interval = setInterval(() => {
       const fn = functions[Math.floor(Math.random() * functions.length)]
       triggerFunction(fn.name)

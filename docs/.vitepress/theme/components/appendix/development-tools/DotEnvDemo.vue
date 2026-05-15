@@ -1,8 +1,8 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">.env 文件 + 代码读取</span>
-      <span class="subtitle">左边写配置，右边读取——两者之间只有变量名这一条线</span>
+      <span class="title">File .env + code đọc giá trị</span>
+      <span class="subtitle">Bên trái viết cấu hình, bên phải đọc — chỉ có tên biến nối giữa hai bên</span>
     </div>
 
     <div class="lang-tabs">
@@ -22,7 +22,7 @@
       <div class="file-panel">
         <div class="file-title">
           <span class="file-icon">📄</span> .env
-          <span class="file-badge no-commit">不提交 Git</span>
+          <span class="file-badge no-commit">Không commit vào Git</span>
         </div>
         <div class="code-area">
           <div v-for="(line, i) in envLines" :key="i" class="code-line" :class="line.type">
@@ -40,13 +40,13 @@
         </div>
         <div class="file-title example">
           <span class="file-icon">📋</span> .env.example
-          <span class="file-badge can-commit">可以提交 Git</span>
+          <span class="file-badge can-commit">Có thể commit vào Git</span>
         </div>
         <div class="code-area dim">
           <div v-for="(line, i) in exampleLines" :key="i" class="code-line" :class="line.type">
             <span v-if="line.key" class="env-key">{{ line.key }}</span>
             <span v-if="line.key" class="env-eq">=</span>
-            <span v-if="line.key" class="env-val empty">（值留空）</span>
+            <span v-if="line.key" class="env-val empty">(để trống giá trị)</span>
             <span v-else class="env-comment">{{ line.text }}</span>
           </div>
         </div>
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="read-result">
-          <div class="result-title">程序实际读到的值</div>
+          <div class="result-title">Giá trị thực tế chương trình đọc được</div>
           <div v-for="kv in readResults" :key="kv.key" class="result-row">
             <span
               class="result-key"
@@ -79,7 +79,7 @@
     </div>
 
     <div class="info-box">
-      <strong>工作流程：</strong><code>load_dotenv()</code> / <code>import 'dotenv/config'</code> 在启动时读取 <code>.env</code> 文件，把里面的键值注入到进程环境变量中，代码里再用 <code>os.environ</code> 或 <code>process.env</code> 读取，两端只靠变量名连接。
+      <strong>Cách hoạt động:</strong> <code>load_dotenv()</code> / <code>import 'dotenv/config'</code> đọc file <code>.env</code> lúc khởi động, đưa các cặp key/value vào biến môi trường của tiến trình, sau đó code dùng <code>os.environ</code> hoặc <code>process.env</code> để đọc, hai bên chỉ kết nối với nhau qua tên biến.
     </div>
   </div>
 </template>
@@ -96,7 +96,7 @@ const langs = [
 ]
 
 const envLines = [
-  { type: 'comment', text: '# 本地开发配置，不提交到 Git' },
+  { type: 'comment', text: '# Cấu hình dev cục bộ, không commit vào Git' },
   { key: 'OPENAI_API_KEY', value: 'sk-proj-abc123...' },
   { key: 'DATABASE_URL', value: 'postgresql://localhost/dev' },
   { key: 'PORT', value: '3000' },
@@ -104,7 +104,7 @@ const envLines = [
 ]
 
 const exampleLines = [
-  { type: 'comment', text: '# 复制为 .env，填入真实值' },
+  { type: 'comment', text: '# Copy thành .env, điền giá trị thật vào' },
   { key: 'OPENAI_API_KEY', value: '' },
   { key: 'DATABASE_URL', value: '' },
   { key: 'PORT', value: '' },
@@ -122,7 +122,7 @@ const pythonLines = [
   { type: 'normal', text: 'from dotenv import load_dotenv' },
   { type: 'normal', text: 'import os, openai' },
   { type: 'normal', text: '&nbsp;' },
-  { type: 'highlight', text: 'load_dotenv()  <span class="comment-inline"># 读取 .env 文件</span>' },
+  { type: 'highlight', text: 'load_dotenv()  <span class="comment-inline"># Đọc file .env</span>' },
   { type: 'normal', text: '&nbsp;' },
   { type: 'normal', text: 'client = openai.OpenAI(' },
   { type: 'highlight', text: '  api_key=os.environ.get(<span class="key-ref">"OPENAI_API_KEY"</span>)' },
@@ -134,7 +134,7 @@ const pythonLines = [
 
 const nodeLines = [
   { type: 'comment', text: '# npm install dotenv openai' },
-  { type: 'highlight', text: "import 'dotenv/config'  <span class=\"comment-inline\">// 读取 .env 文件</span>" },
+  { type: 'highlight', text: "import 'dotenv/config'  <span class=\"comment-inline\">// Đọc file .env</span>" },
   { type: 'normal', text: "import OpenAI from 'openai'" },
   { type: 'normal', text: '&nbsp;' },
   { type: 'normal', text: 'const client = new OpenAI({' },

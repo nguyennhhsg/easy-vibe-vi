@@ -2,20 +2,20 @@
   <div class="relation-demo">
     <div class="demo-header">
       <span class="icon">🔗</span>
-      <span class="title">外键关系演示</span>
-      <span class="subtitle">理解表与表之间如何关联</span>
+      <span class="title">Demo quan hệ foreign key</span>
+      <span class="subtitle">Hiểu cách các bảng liên kết với nhau</span>
     </div>
 
     <div class="intro-text">
-      想象你在管理一个<span class="highlight">家族谱系</span>：有"家谱表"记录每个人，有"婚姻表"记录谁和谁结婚了。两张表通过"人名"关联起来，这就是<span class="highlight">外键</span>的作用。
+      Hãy hình dung bạn quản lý một <span class="highlight">cây gia phả</span>: có bảng "gia phả" ghi từng người, có bảng "hôn nhân" ghi ai cưới ai. Hai bảng liên kết qua "tên người" - đây chính là vai trò của <span class="highlight">foreign key</span>.
     </div>
 
     <div class="tables-container">
       <div class="table-card users-table">
         <div class="table-header">
           <span class="table-icon">👥</span>
-          <span class="table-name">用户表 (users)</span>
-          <span class="table-badge">主表</span>
+          <span class="table-name">Bảng users</span>
+          <span class="table-badge">Bảng chính</span>
         </div>
         <div class="table-content">
           <div class="table-row header">
@@ -62,15 +62,15 @@
           ➤
         </div>
         <div class="relation-label">
-          user_id (外键) → user_id (主键)
+          user_id (foreign key) → user_id (primary key)
         </div>
       </div>
 
       <div class="table-card orders-table">
         <div class="table-header">
           <span class="table-icon">📦</span>
-          <span class="table-name">订单表 (orders)</span>
-          <span class="table-badge">从表</span>
+          <span class="table-name">Bảng orders</span>
+          <span class="table-badge">Bảng phụ</span>
         </div>
         <div class="table-content">
           <div class="table-row header">
@@ -112,18 +112,18 @@
 
     <div class="explanation-box">
       <div class="explanation-title">
-        💡 核心概念
+        💡 Khái niệm cốt lõi
       </div>
       <div class="explanation-content">
-        <p><strong>主键（Primary Key）</strong>：用户表的 <code>user_id</code> 是主键，唯一标识每个用户。</p>
-        <p><strong>外键（Foreign Key）</strong>：订单表的 <code>user_id</code> 是外键，指向用户表的主键。</p>
-        <p><strong>关联查询</strong>：通过外键，数据库可以快速找到"订单 001 是用户 101 买的"，然后去用户表查到"用户 101 是张三"。</p>
+        <p><strong>Primary Key</strong>: <code>user_id</code> trong bảng users là primary key, định danh duy nhất mỗi user.</p>
+        <p><strong>Foreign Key</strong>: <code>user_id</code> trong bảng orders là foreign key, trỏ tới primary key của bảng users.</p>
+        <p><strong>Join</strong>: qua foreign key, database nhanh chóng biết "đơn 001 do user 101 đặt", rồi tra bảng users thấy "user 101 là Nguyen Van A".</p>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">🎯</span>
-      <strong>核心优势：</strong>外键消除了数据冗余。张三的地址只存一次，无论他买多少本书。如果要修改地址，只需改用户表的一行，所有订单自动关联到新地址。
+      <strong>Ưu điểm cốt lõi:</strong> Foreign key loại bỏ data redundancy. Địa chỉ của Nguyen Van A chỉ lưu một lần, dù anh ấy mua bao nhiêu sách. Khi sửa địa chỉ, chỉ cần sửa một dòng trong bảng users, mọi đơn hàng tự động liên kết tới địa chỉ mới.
     </div>
   </div>
 </template>
@@ -134,18 +134,18 @@ import { ref, computed } from 'vue'
 const highlightedUserId = ref(null)
 
 const users = ref([
-  { user_id: 101, name: '张三', phone: '138xxxx', address: '北京' },
-  { user_id: 102, name: '李四', phone: '139xxxx', address: '上海' },
-  { user_id: 103, name: '王五', phone: '137xxxx', address: '广州' }
+  { user_id: 101, name: 'Nguyen Van A', phone: '090xxxx', address: 'Ha Noi' },
+  { user_id: 102, name: 'Tran Van B', phone: '091xxxx', address: 'TP HCM' },
+  { user_id: 103, name: 'Le Thi C', phone: '092xxxx', address: 'Da Nang' }
 ])
 
 const orders = ref([
-  { order_id: '001', book_name: '百年孤独', user_id: 101, price: 59 },
-  { order_id: '002', book_name: '活着', user_id: 101, price: 39 },
-  { order_id: '003', book_name: '三体', user_id: 101, price: 99 },
-  { order_id: '004', book_name: '百年孤独', user_id: 102, price: 59 },
-  { order_id: '005', book_name: '红楼梦', user_id: 102, price: 79 },
-  { order_id: '006', book_name: '西游记', user_id: 103, price: 69 }
+  { order_id: '001', book_name: 'Trăm năm cô đơn', user_id: 101, price: 59 },
+  { order_id: '002', book_name: 'Sống', user_id: 101, price: 39 },
+  { order_id: '003', book_name: 'Tam thể', user_id: 101, price: 99 },
+  { order_id: '004', book_name: 'Trăm năm cô đơn', user_id: 102, price: 59 },
+  { order_id: '005', book_name: 'Hồng lâu mộng', user_id: 102, price: 79 },
+  { order_id: '006', book_name: 'Tây du ký', user_id: 103, price: 69 }
 ])
 
 const filteredOrders = computed(() => {

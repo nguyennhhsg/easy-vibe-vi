@@ -1,25 +1,25 @@
 <template>
   <div class="repo-demo">
     <div class="header">
-      <div class="title">Repository 层：数据的"仓库管理员"</div>
-      <div class="subtitle">Repository 封装数据访问逻辑，让上层无需关心数据库细节</div>
+      <div class="title">Tầng Repository: "thủ kho" của dữ liệu</div>
+      <div class="subtitle">Repository đóng gói logic truy cập dữ liệu, để tầng trên không cần quan tâm chi tiết database</div>
     </div>
 
     <div class="toggle-group">
-      <button :class="['toggle', { active: view === 'bad' }]" @click="view = 'bad'">糟糕的做法</button>
-      <button :class="['toggle', { active: view === 'good' }]" @click="view = 'good'">优雅的做法</button>
+      <button :class="['toggle', { active: view === 'bad' }]" @click="view = 'bad'">Cách làm dở</button>
+      <button :class="['toggle', { active: view === 'good' }]" @click="view = 'good'">Cách làm hay</button>
     </div>
 
     <div :class="['panel', view]">
       <div class="panel-head">
-        <span class="panel-title">{{ view === 'bad' ? '在 Service 里直接写 SQL' : '使用 Repository 封装数据访问' }}</span>
-        <span class="panel-badge">{{ view === 'bad' ? '耦合严重' : '清晰解耦' }}</span>
+        <span class="panel-title">{{ view === 'bad' ? 'Viết SQL trực tiếp trong Service' : 'Dùng Repository đóng gói truy cập dữ liệu' }}</span>
+        <span class="panel-badge">{{ view === 'bad' ? 'Coupling cao' : 'Tách bạch rõ ràng' }}</span>
       </div>
 
       <pre class="code-block"><code>{{ view === 'bad' ? badCode : goodCode }}</code></pre>
 
       <div :class="['result-box', view]">
-        <strong>{{ view === 'bad' ? '这种做法的问题' : '这样做的好处' }}</strong>
+        <strong>{{ view === 'bad' ? 'Vấn đề của cách này' : 'Lợi ích của cách này' }}</strong>
         <ul>
           <li v-for="item in (view === 'bad' ? problems : benefits)" :key="item">{{ item }}</li>
         </ul>
@@ -27,10 +27,10 @@
     </div>
 
     <div class="compare-table">
-      <div class="table-title">不同 Repository 实现方式对比</div>
+      <div class="table-title">So sánh các cách triển khai Repository</div>
       <table>
         <thead>
-          <tr><th>实现方式</th><th>优点</th><th>缺点</th><th>适用场景</th></tr>
+          <tr><th>Cách triển khai</th><th>Ưu điểm</th><th>Nhược điểm</th><th>Tình huống áp dụng</th></tr>
         </thead>
         <tbody>
           <tr v-for="r in repos" :key="r.name">
@@ -55,9 +55,9 @@ public class OrderService {
     @Autowired private JdbcTemplate jdbcTemplate;
 
     public List<Order> getUserOrders(Long userId) {
-        // ❌ SQL 硬编码在 Service 里
-        // ❌ 更换数据库需要改业务代码
-        // ❌ 无法单元测试，必须连真实数据库
+        // SQL hard-code trong Service
+        // Đổi database phải sửa code business
+        // Không unit test được, buộc phải nối database thật
         String sql = "SELECT * FROM orders WHERE user_id = ? AND deleted = 0";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Order order = new Order();
@@ -68,22 +68,22 @@ public class OrderService {
     }
 }`
 
-const goodCode = `// Repository 接口定义
+const goodCode = `// Định nghĩa interface Repository
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    // ✅ 自动生成查询
+    // Tự sinh query từ tên method
     List<Order> findByUserIdAndDeletedFalse(Long userId);
 
-    // ✅ 自定义 JPQL
+    // JPQL tùy biến
     @Query("SELECT o FROM Order o WHERE o.createdAt BETWEEN :start AND :end")
     List<Order> findByDateRange(@Param("start") LocalDateTime start,
                                 @Param("end") LocalDateTime end);
 }
 
-// Service 层（纯业务逻辑）
+// Tầng Service (business logic thuần)
 @Service
 public class OrderService {
-    @Autowired private OrderRepository orderRepository; // ✅ 依赖接口
+    @Autowired private OrderRepository orderRepository; // Phụ thuộc interface
 
     public List<OrderDTO> getUserOrders(Long userId) {
         List<Order> orders = orderRepository.findByUserIdAndDeletedFalse(userId);
@@ -92,23 +92,23 @@ public class OrderService {
 }`
 
 const problems = [
-  '数据库耦合：业务代码里到处都是 SQL，换数据库等于重写',
-  '难以测试：必须连真实数据库，单元测试变成集成测试',
-  '代码重复：同样的查询条件在每个方法里重复写',
-  '安全隐患：手写 SQL 容易漏掉防注入处理'
+  'Coupling với database: SQL rải khắp code business, đổi DB như viết lại',
+  'Khó test: phải nối DB thật, unit test thành integration test',
+  'Code trùng lặp: cùng một điều kiện query lặp trong nhiều method',
+  'Rủi ro bảo mật: viết SQL tay dễ bỏ sót chống SQL injection'
 ]
 
 const benefits = [
-  '关注点分离：Service 专注业务，Repository 专注数据',
-  '可测试性高：单元测试可用 Mock 替代真实数据库',
-  '代码复用：通用查询方法定义一次，到处复用',
-  '切换成本低：换数据库只需改 Repository 实现'
+  'Tách bạch mối quan tâm: Service lo nghiệp vụ, Repository lo dữ liệu',
+  'Khả năng test cao: unit test có thể mock thay cho DB thật',
+  'Tái sử dụng code: method query chung định nghĩa một lần, dùng mọi nơi',
+  'Chi phí đổi thấp: đổi DB chỉ cần sửa implementation Repository'
 ]
 
 const repos = [
-  { name: 'Spring Data JPA', tag: '主流方案', tagClass: '', pros: '方法名自动推导、分页内置', cons: '复杂查询性能一般', scene: '快速开发、标准 CRUD' },
-  { name: 'MyBatis / MyBatis-Plus', tag: '国内主流', tagClass: 'blue', pros: 'SQL 完全可控、动态 SQL 强大', cons: '需要手写 SQL', scene: '复杂查询、性能敏感' },
-  { name: 'Spring Data JDBC', tag: '轻量', tagClass: 'green', pros: '简单轻量、启动快速', cons: '无复杂映射', scene: '微服务、简单聚合根' }
+  { name: 'Spring Data JPA', tag: 'Phổ biến nhất', tagClass: '', pros: 'Suy luận tên method, paging tích hợp', cons: 'Query phức tạp hiệu năng trung bình', scene: 'Phát triển nhanh, CRUD chuẩn' },
+  { name: 'MyBatis / MyBatis-Plus', tag: 'Phổ biến tại Châu Á', tagClass: 'blue', pros: 'Kiểm soát SQL hoàn toàn, dynamic SQL mạnh', cons: 'Phải viết SQL tay', scene: 'Query phức tạp, nhạy cảm hiệu năng' },
+  { name: 'Spring Data JDBC', tag: 'Nhẹ', tagClass: 'green', pros: 'Đơn giản, nhẹ, khởi động nhanh', cons: 'Không hỗ trợ mapping phức tạp', scene: 'Microservice, aggregate root đơn giản' }
 ]
 </script>
 

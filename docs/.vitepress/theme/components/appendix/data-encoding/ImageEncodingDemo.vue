@@ -1,8 +1,8 @@
 <template>
   <div class="image-encoding-demo">
     <div class="demo-header">
-      <span class="demo-title">🖼️ 图片是如何变成数字的？</span>
-      <span class="demo-subtitle">（悬停在像素方块上看看）</span>
+      <span class="demo-title">🖼️ Hình ảnh được biến thành số như thế nào?</span>
+      <span class="demo-subtitle">(Di chuột vào ô pixel để xem)</span>
     </div>
 
     <div class="visualization-area">
@@ -19,7 +19,7 @@
 
       <!-- The Code (Data) -->
       <div class="data-panel">
-        <div class="data-label">💻 计算机实际看到的：</div>
+        <div class="data-label">💻 Máy tính thực sự nhìn thấy:</div>
         <div class="hex-stream">
           <span
             v-for="(pixel, i) in pixels"
@@ -35,23 +35,23 @@
           <div class="preview-color" :style="{ backgroundColor: hoveredPixel.color }"></div>
           <div class="preview-info">
             <div class="info-row">
-              <span class="info-label">像素位置:</span>
-              <span class="info-val">第 {{ hoveredPixel.index + 1 }} 个方块</span>
+              <span class="info-label">Vị trí pixel:</span>
+              <span class="info-val">Ô thứ {{ hoveredPixel.index + 1 }}</span>
             </div>
             <div class="info-row">
-              <span class="info-label">十六进制:</span>
+              <span class="info-label">Hex code:</span>
               <span class="info-val highlight">{{ hoveredPixel.color }}</span>
             </div>
           </div>
         </div>
         <div v-else class="inspection-box empty">
-          将鼠标悬停在左侧画布的方块上
+          Di chuột vào một ô vuông ở khung bên trái
         </div>
       </div>
     </div>
 
     <div class="demo-insight">
-      💡 <strong>原理解析</strong>：一张 1080p 的高清壁纸，其实就是 <strong>207 万</strong> 个像左边这样密密麻麻的小色块组成的。计算机把这两百多万个颜色的编号（如 #FF0000）按顺序记录下来，图片就变成了几百万个数字的集合。
+      💡 <strong>Giải thích nguyên lý</strong>: Một bức hình nền 1080p độ phân giải cao thực ra là tập hợp <strong>2,07 triệu</strong> ô màu nhỏ xíu giống như bên trái này. Máy tính ghi lại mã màu của hơn hai triệu ô đó (kiểu #FF0000) theo đúng thứ tự, và thế là hình ảnh trở thành tập hợp của vài triệu con số.
     </div>
   </div>
 </template>

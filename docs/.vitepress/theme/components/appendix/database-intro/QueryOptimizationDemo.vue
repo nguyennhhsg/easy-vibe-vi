@@ -2,12 +2,12 @@
   <div class="optimization-demo">
     <div class="demo-header">
       <span class="icon">⚡</span>
-      <span class="title">查询优化演示</span>
-      <span class="subtitle">常见错误与正确做法对比</span>
+      <span class="title">Demo tối ưu truy vấn</span>
+      <span class="subtitle">So sánh sai lầm thường gặp và cách viết đúng</span>
     </div>
 
     <div class="intro-text">
-      很多时候，查询慢不是因为<span class="highlight">数据库性能差</span>，而是因为 SQL 写错了。下面这些错误，你可能每天都在犯。
+      Phần lớn trường hợp, query chậm không phải do <span class="highlight">database yếu</span>, mà do SQL viết sai. Những lỗi dưới đây có thể bạn vẫn mắc hàng ngày.
     </div>
 
     <div class="pitfalls-list">
@@ -40,7 +40,7 @@
             <div class="code-comparison">
               <div class="code-section wrong">
                 <div class="section-label">
-                  ❌ 错误写法
+                  ❌ Cách viết sai
                 </div>
                 <pre><code>{{ pitfall.wrong }}</code></pre>
                 <div class="impact">
@@ -49,7 +49,7 @@
               </div>
               <div class="code-section correct">
                 <div class="section-label">
-                  ✅ 正确写法
+                  ✅ Cách viết đúng
                 </div>
                 <pre><code>{{ pitfall.correct }}</code></pre>
                 <div class="benefit">
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="explanation">
-              <strong>原理：</strong>{{ pitfall.explanation }}
+              <strong>Nguyên lý:</strong> {{ pitfall.explanation }}
             </div>
           </div>
         </Transition>
@@ -67,7 +67,7 @@
 
     <div class="tips-box">
       <div class="tips-title">
-        📝 优化建议清单
+        📝 Checklist gợi ý tối ưu
       </div>
       <div class="tips-list">
         <div
@@ -83,7 +83,7 @@
 
     <div class="info-box">
       <span class="icon">🎯</span>
-      <strong>核心原则：</strong>不要让数据库做"多余的工作"。索引失效、全表扫描、返回不必要的数据，这些都是最常见的性能杀手。写出高效 SQL 的关键，是<span class="highlight">理解数据库如何执行你的查询</span>。
+      <strong>Nguyên tắc cốt lõi:</strong> Đừng bắt database làm "việc thừa". Index mất tác dụng, full table scan, trả về dữ liệu thừa - đây là những kẻ giết hiệu năng phổ biến nhất. Bí quyết viết SQL hiệu quả là <span class="highlight">hiểu database thực thi query của bạn như thế nào</span>.
     </div>
   </div>
 </template>
@@ -95,46 +95,46 @@ const expandedIndex = ref(0)
 
 const pitfalls = ref([
   {
-    title: '在索引列上使用函数',
+    title: 'Dùng hàm trên cột index',
     wrong: "SELECT * FROM users WHERE YEAR(created_at) = 2024;",
     correct: "SELECT * FROM users WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01';",
-    impact: '索引失效，全表扫描',
-    benefit: '可以使用索引，查询速度提升 1000 倍',
-    explanation: '当对列使用函数时，数据库必须先计算每一行的函数值，无法使用索引。把函数移到等号右边，或用范围查询代替。'
+    impact: 'Index mất tác dụng, full table scan',
+    benefit: 'Dùng được index, query nhanh hơn 1000 lần',
+    explanation: 'Khi áp hàm lên cột, database phải tính giá trị hàm cho từng dòng, không dùng được index. Hãy chuyển hàm sang vế phải hoặc dùng range query.'
   },
   {
-    title: '隐式类型转换',
-    wrong: "SELECT * FROM users WHERE user_id = '123';  -- user_id 是 int",
+    title: 'Implicit type conversion',
+    wrong: "SELECT * FROM users WHERE user_id = '123';  -- user_id là int",
     correct: "SELECT * FROM users WHERE user_id = 123;",
-    impact: '索引失效，每次都要类型转换',
-    benefit: '直接使用索引',
-    explanation: '字符串和数字比较时，数据库会隐式转换，导致索引失效。确保比较的类型和列定义的类型一致。'
+    impact: 'Index mất tác dụng, mỗi lần phải convert type',
+    benefit: 'Dùng được index trực tiếp',
+    explanation: 'Khi so sánh chuỗi với số, database sẽ implicit convert, khiến index mất tác dụng. Đảm bảo type so sánh khớp với type cột.'
   },
   {
-    title: 'LIKE 以 % 开头',
-    wrong: "SELECT * FROM users WHERE name LIKE '%张三%';",
-    correct: "SELECT * FROM users WHERE name LIKE '张三%';",
-    impact: '无法使用索引，全表扫描',
-    benefit: '可以使用索引进行前缀匹配',
-    explanation: '索引是按照顺序存储的，% 开头的模糊查询无法利用顺序。如果只需要前缀匹配，把 % 放到后面。'
+    title: 'LIKE bắt đầu bằng %',
+    wrong: "SELECT * FROM users WHERE name LIKE '%Nguyen%';",
+    correct: "SELECT * FROM users WHERE name LIKE 'Nguyen%';",
+    impact: 'Không dùng được index, full table scan',
+    benefit: 'Dùng được index cho prefix matching',
+    explanation: 'Index lưu theo thứ tự, LIKE bắt đầu bằng % không tận dụng được. Nếu chỉ cần prefix match, đặt % ở cuối.'
   },
   {
-    title: 'SELECT * 返回所有列',
+    title: 'SELECT * trả về mọi cột',
     wrong: "SELECT * FROM users WHERE user_id = 1;",
     correct: "SELECT user_id, name, email FROM users WHERE user_id = 1;",
-    impact: '增加网络传输和内存消耗，无法使用覆盖索引',
-    benefit: '减少传输量，可能使用覆盖索引',
-    explanation: '只查询需要的列。如果索引包含了所有需要的列，数据库可以直接从索引返回数据，不需要查表（覆盖索引）。'
+    impact: 'Tăng dữ liệu truyền và RAM, không dùng được covering index',
+    benefit: 'Giảm dữ liệu truyền, có thể dùng covering index',
+    explanation: 'Chỉ select cột cần thiết. Nếu index đã chứa mọi cột cần, database có thể trả dữ liệu trực tiếp từ index (covering index), không cần đọc bảng.'
   }
 ])
 
 const tips = ref([
-  '为 WHERE、JOIN、ORDER BY 的列创建索引',
-  '避免在索引列上使用函数或表达式',
-  '用 EXPLAIN 分析查询执行计划',
-  '只查询需要的列，避免 SELECT *',
-  '批量操作代替单条操作',
-  '考虑使用覆盖索引减少回表'
+  'Tạo index cho các cột trong WHERE, JOIN, ORDER BY',
+  'Tránh dùng hàm hoặc biểu thức trên cột index',
+  'Dùng EXPLAIN để phân tích execution plan',
+  'Chỉ select cột cần dùng, tránh SELECT *',
+  'Thao tác hàng loạt thay cho từng record',
+  'Cân nhắc dùng covering index để giảm lookup bảng'
 ])
 </script>
 

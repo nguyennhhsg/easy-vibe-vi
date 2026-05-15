@@ -4,7 +4,7 @@
       <!-- Left Panel: Task Guide -->
       <div class="task-panel">
         <div class="panel-header">
-          <span class="panel-title">🎯 实操任务 ({{ currentTaskIndex + 1 }}/{{ tasks.length }})</span>
+          <span class="panel-title">🎯 Bài thực hành ({{ currentTaskIndex + 1 }}/{{ tasks.length }})</span>
           <div class="os-selector">
             <select
               v-model="currentOS"
@@ -35,7 +35,7 @@
           <div class="ai-helper">
             <div class="ai-header">
               <span class="ai-icon">🤖</span>
-              <span class="ai-title">不知道怎么写？问问 AI</span>
+              <span class="ai-title">Không biết viết sao? Hỏi AI thử</span>
             </div>
             <div
               v-show="isAiOpen"
@@ -62,7 +62,7 @@
                     class="copy-btn"
                     @click="copyCommand(cmdItem.cmd)"
                   >
-                    {{ cmdItem.label || '复制命令' }}
+                    {{ cmdItem.label || 'Sao chép lệnh' }}
                   </button>
                 </div>
                 <!-- Fallback for Single Command -->
@@ -71,7 +71,7 @@
                   class="copy-btn"
                   @click="copyCurrentTaskCommand"
                 >
-                  复制命令
+                  Sao chép lệnh
                 </button>
               </div>
             </div>
@@ -81,7 +81,7 @@
             v-if="!isTaskCompleted"
             class="expected-result"
           >
-            <span class="label">预期目标：</span>
+            <span class="label">Mục tiêu:</span>
             <span class="value">{{ currentTask.goal }}</span>
           </div>
 
@@ -90,20 +90,20 @@
             class="success-message"
           >
             <span class="icon">🎉</span>
-            <span>太棒了！任务完成！</span>
+            <span>Tuyệt vời! Hoàn thành nhiệm vụ!</span>
             <button
               v-if="currentTaskIndex < tasks.length - 1"
               class="next-btn"
               @click="nextTask"
             >
-              下一关
+              Màn tiếp theo
             </button>
             <button
               v-else
               class="reset-btn"
               @click="resetAll"
             >
-              重新开始
+              Chơi lại
             </button>
           </div>
         </div>
@@ -160,7 +160,7 @@
             <span
               v-if="inputCmd.length > 0"
               class="enter-hint"
-            >⏎ 按回车执行</span>
+            >⏎ Bấm Enter để chạy</span>
           </div>
         </div>
       </div>
@@ -193,16 +193,16 @@ const terminalTitle = computed(() => osConfig[currentOS.value].title)
 // Tasks Definition
 const tasks = [
   {
-    title: '第一步：看看这里有什么',
-    description: '在对文件进行操作之前，我们首先需要知道当前目录下有哪些文件。',
-    goal: '列出当前目录下的所有文件。',
-    aiQuery: '我想查看当前目录下的文件，应该用什么命令？',
+    title: 'Bước 1: Xem ở đây có gì',
+    description: 'Trước khi thao tác với file, ta cần biết thư mục hiện tại có những file gì.',
+    goal: 'Liệt kê tất cả file trong thư mục hiện tại.',
+    aiQuery: 'Mình muốn xem các file trong thư mục hiện tại, nên dùng lệnh gì?',
     aiResponse: {
-      mac: '在 macOS 和 Linux 中，查看文件列表使用 `ls` 命令 (List)。',
-      linux: '在 macOS 和 Linux 中，查看文件列表使用 `ls` 命令 (List)。',
-      'win-ps': '在 PowerShell 中，你可以使用 `ls` 或 `dir` 命令。',
-      'win-cmd': '在 Windows CMD 中，查看文件列表使用 `dir` 命令 (Directory)。',
-      common: '通常使用 ls 或 dir。'
+      mac: 'Trên macOS và Linux, xem danh sách file dùng lệnh `ls` (List).',
+      linux: 'Trên macOS và Linux, xem danh sách file dùng lệnh `ls` (List).',
+      'win-ps': 'Trên PowerShell, bạn có thể dùng `ls` hoặc `dir`.',
+      'win-cmd': 'Trên Windows CMD, xem danh sách file dùng lệnh `dir` (Directory).',
+      common: 'Thường dùng ls hoặc dir.'
     },
     expectedCmd: {
       mac: 'ls',
@@ -229,14 +229,14 @@ d----           1/15/2026  9:00 AM                Downloads
     }
   },
   {
-    title: '第二步：创建一个新家',
+    title: 'Bước 2: Tạo "nhà" mới',
     description:
-      '文件太多会很乱，我们创建一个专门的文件夹来存放今天的练习文件。',
-    goal: '创建一个名为 "demo" 的文件夹。',
-    aiQuery: '怎么创建一个新的文件夹？名字叫 demo。',
+      'Nhiều file quá sẽ rối, hãy tạo một thư mục riêng để chứa file thực hành hôm nay.',
+    goal: 'Tạo một thư mục tên "demo".',
+    aiQuery: 'Làm sao tạo thư mục mới? Đặt tên là demo nhé.',
     aiResponse: {
       common:
-        '创建文件夹（目录）的命令是 `mkdir` (Make Directory)。你可以输入 `mkdir demo`。'
+        'Lệnh tạo thư mục là `mkdir` (Make Directory). Bạn gõ `mkdir demo`.'
     },
     expectedCmd: {
       common: 'mkdir demo'
@@ -245,12 +245,12 @@ d----           1/15/2026  9:00 AM                Downloads
     output: () => '' // mkdir usually has no output on success
   },
   {
-    title: '第三步：进入新家',
-    description: '文件夹建好了，但我们现在还在外面。我们需要“走”进去。',
-    goal: '进入 "demo" 文件夹。',
-    aiQuery: '怎么进入刚才建好的 demo 文件夹？',
+    title: 'Bước 3: Đi vào "nhà" mới',
+    description: 'Thư mục đã có rồi nhưng ta vẫn đang ở ngoài. Cần "đi" vào trong.',
+    goal: 'Vào thư mục "demo".',
+    aiQuery: 'Làm sao vào thư mục demo vừa tạo?',
     aiResponse: {
-      common: '切换目录使用 `cd` 命令 (Change Directory)。输入 `cd demo` 即可。'
+      common: 'Đổi thư mục dùng lệnh `cd` (Change Directory). Chỉ cần gõ `cd demo`.'
     },
     expectedCmd: {
       common: 'cd demo'
@@ -259,17 +259,17 @@ d----           1/15/2026  9:00 AM                Downloads
     output: () => '' // cd usually has no output, but prompt changes
   },
   {
-    title: '第四步：新建一个文件',
-    description: '现在我们在 demo 文件夹里了。来创建一个简单的文本文件吧。',
-    goal: '创建一个名为 "hello.txt" 的文件。',
-    aiQuery: '我想新建一个空文件叫 hello.txt，怎么做？',
+    title: 'Bước 4: Tạo file mới',
+    description: 'Giờ ta đang ở trong thư mục demo. Hãy tạo một file văn bản đơn giản.',
+    goal: 'Tạo file tên "hello.txt".',
+    aiQuery: 'Mình muốn tạo file rỗng tên hello.txt, làm sao?',
     aiResponse: {
-      mac: '在 Mac/Linux 上，使用 `touch hello.txt` 可以快速创建一个空文件。',
-      linux: '在 Mac/Linux 上，使用 `touch hello.txt` 可以快速创建一个空文件。',
+      mac: 'Trên Mac/Linux, dùng `touch hello.txt` để tạo nhanh file rỗng.',
+      linux: 'Trên Mac/Linux, dùng `touch hello.txt` để tạo nhanh file rỗng.',
       'win-ps':
-        '在 PowerShell 中，可以使用 `ni hello.txt` 或 `echo "" > hello.txt`。',
+        'Trên PowerShell, có thể dùng `ni hello.txt` hoặc `echo "" > hello.txt`.',
       'win-cmd':
-        '在 CMD 中，可以使用 `type nul > hello.txt` 或 `echo. > hello.txt`。'
+        'Trên CMD, có thể dùng `type nul > hello.txt` hoặc `echo. > hello.txt`.'
     },
     expectedCmd: {
       mac: 'touch hello.txt',
@@ -291,37 +291,37 @@ d----           1/15/2026  9:00 AM                Downloads
     output: () => ''
   },
   {
-    title: '第五步：安装程序 (系统软件 & Python库)',
+    title: 'Bước 5: Cài chương trình (phần mềm hệ thống & thư viện Python)',
     description:
-      '终端不仅能管理文件，还能安装软件。我们来尝试两种常见的安装场景：安装系统工具（如 wget/git）和安装 Python 库（如 requests）。',
-    goal: '任选其一：安装系统工具或 Python 库。',
-    aiQuery: '怎么用命令行安装软件？我想装 git 或者 python 的 requests 库。',
+      'Terminal không chỉ quản lý file mà còn cài được phần mềm. Hãy thử hai tình huống thường gặp: cài công cụ hệ thống (như wget/git) và cài thư viện Python (như requests).',
+    goal: 'Chọn một: cài công cụ hệ thống hoặc thư viện Python.',
+    aiQuery: 'Làm sao cài phần mềm bằng command line? Mình muốn cài git hoặc thư viện requests của Python.',
     aiResponse: {
-      mac: 'macOS 推荐使用 Homebrew 安装系统软件，使用 pip 安装 Python 库。',
+      mac: 'macOS khuyến nghị dùng Homebrew để cài phần mềm hệ thống, dùng pip để cài thư viện Python.',
       linux:
-        'Linux (Ubuntu/Debian) 使用 apt 安装系统软件，使用 pip 安装 Python 库。',
+        'Linux (Ubuntu/Debian) dùng apt để cài phần mềm hệ thống, dùng pip để cài thư viện Python.',
       'win-ps':
-        'Windows PowerShell 推荐使用 winget 安装系统软件，使用 pip 安装 Python 库。',
+        'Windows PowerShell khuyến nghị winget cho phần mềm hệ thống, dùng pip cho thư viện Python.',
       'win-cmd':
-        'Windows CMD 推荐使用 winget 安装系统软件，使用 pip 安装 Python 库。',
-      common: '不同系统有不同的包管理器。'
+        'Windows CMD khuyến nghị winget cho phần mềm hệ thống, dùng pip cho thư viện Python.',
+      common: 'Mỗi hệ điều hành có package manager khác nhau.'
     },
     commands: {
       mac: [
-        { label: '安装 wget (系统)', cmd: 'brew install wget' },
-        { label: '安装 requests (Python)', cmd: 'pip install requests' }
+        { label: 'Cài wget (hệ thống)', cmd: 'brew install wget' },
+        { label: 'Cài requests (Python)', cmd: 'pip install requests' }
       ],
       linux: [
-        { label: '安装 git (系统)', cmd: 'sudo apt install git' },
-        { label: '安装 requests (Python)', cmd: 'pip install requests' }
+        { label: 'Cài git (hệ thống)', cmd: 'sudo apt install git' },
+        { label: 'Cài requests (Python)', cmd: 'pip install requests' }
       ],
       'win-ps': [
-        { label: '安装 git (系统)', cmd: 'winget install git.git' },
-        { label: '安装 requests (Python)', cmd: 'pip install requests' }
+        { label: 'Cài git (hệ thống)', cmd: 'winget install git.git' },
+        { label: 'Cài requests (Python)', cmd: 'pip install requests' }
       ],
       'win-cmd': [
-        { label: '安装 git (系统)', cmd: 'winget install git.git' },
-        { label: '安装 requests (Python)', cmd: 'pip install requests' }
+        { label: 'Cài git (hệ thống)', cmd: 'winget install git.git' },
+        { label: 'Cài requests (Python)', cmd: 'pip install requests' }
       ]
     },
     expectedCmd: {
@@ -399,16 +399,16 @@ Setting up git (1:2.34.1-1ubuntu1.9) ...`
     }
   },
   {
-    title: '第六步：打扫战场',
-    description: '练习结束了，我们把刚才创建的文件删除掉，保持环境整洁。',
-    goal: '删除 "hello.txt" 文件。',
-    aiQuery: '我不想要 hello.txt 了，怎么删除它？',
+    title: 'Bước 6: Dọn dẹp',
+    description: 'Đã thực hành xong, hãy xóa các file vừa tạo để giữ môi trường gọn gàng.',
+    goal: 'Xóa file "hello.txt".',
+    aiQuery: 'Mình không cần hello.txt nữa, làm sao xóa?',
     aiResponse: {
-      mac: '删除文件使用 `rm` 命令 (Remove)。小心，这个操作通常不可撤销！输入 `rm hello.txt`。',
+      mac: 'Xóa file dùng lệnh `rm` (Remove). Cẩn thận, thao tác này thường không undo được! Gõ `rm hello.txt`.',
       linux:
-        '删除文件使用 `rm` 命令 (Remove)。小心，这个操作通常不可撤销！输入 `rm hello.txt`。',
-      'win-ps': '在 PowerShell 中使用 `rm` 或 `del`。输入 `rm hello.txt`。',
-      'win-cmd': '在 CMD 中使用 `del` 命令 (Delete)。输入 `del hello.txt`。'
+        'Xóa file dùng lệnh `rm` (Remove). Cẩn thận, thao tác này thường không undo được! Gõ `rm hello.txt`.',
+      'win-ps': 'Trên PowerShell dùng `rm` hoặc `del`. Gõ `rm hello.txt`.',
+      'win-cmd': 'Trên CMD dùng lệnh `del` (Delete). Gõ `del hello.txt`.'
     },
     expectedCmd: {
       mac: 'rm hello.txt',
@@ -516,7 +516,7 @@ const executeCommand = () => {
       })
       history.value.push({
         type: 'info',
-        content: `💡 提示：试试点击左侧的“问问 AI”？`
+        content: `💡 Gợi ý: thử click vào "Hỏi AI" bên trái nhé?`
       })
     }
   }
@@ -531,7 +531,7 @@ const nextTask = () => {
     // Clear history to keep it clean? Or keep it? Let's keep it but maybe add a separator
     history.value.push({
       type: 'info',
-      content: `--- 进入下一关: ${currentTask.value.title} ---`
+      content: `--- Vào màn tiếp theo: ${currentTask.value.title} ---`
     })
     scrollToBottom()
   }

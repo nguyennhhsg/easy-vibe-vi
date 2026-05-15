@@ -1,12 +1,12 @@
 <!--
   ArchEvolutionDemo.vue
-  架构演进演示：展示从单体到微服务的演进过程
+  Demo tiến hoá kiến trúc: từ monolith đến microservice
 -->
 <template>
   <div class="arch-evolution-demo">
     <div class="header">
-      <div class="title">架构演进路径</div>
-      <div class="subtitle">点击查看每个阶段的架构特点</div>
+      <div class="title">Lộ trình tiến hoá kiến trúc</div>
+      <div class="subtitle">Bấm vào để xem đặc điểm kiến trúc từng giai đoạn</div>
     </div>
 
     <div class="stages">
@@ -36,10 +36,10 @@
       </div>
 
       <div class="detail-row">
-        <span class="label">适用规模：</span>{{ current.scale }}
+        <span class="label">Quy mô phù hợp:</span> {{ current.scale }}
       </div>
       <div class="detail-row">
-        <span class="label">核心挑战：</span>{{ current.challenge }}
+        <span class="label">Thách thức cốt lõi:</span> {{ current.challenge }}
       </div>
     </div>
   </div>
@@ -53,62 +53,62 @@ const activeStage = ref('monolith')
 const stages = [
   {
     key: 'monolith',
-    name: '单体架构',
-    desc: '所有功能打包在一个应用中，共享一个数据库。简单直接，适合早期快速迭代。',
-    scale: '团队 < 10 人，日活 < 10 万',
-    challenge: '代码耦合严重，一个模块的 Bug 可能拖垮整个系统',
+    name: 'Kiến trúc monolith',
+    desc: 'Toàn bộ chức năng đóng gói trong một ứng dụng, chia sẻ một database. Đơn giản, phù hợp cho giai đoạn đầu cần iterate nhanh.',
+    scale: 'Team < 10 người, DAU < 100k',
+    challenge: 'Code coupling nặng, bug ở một module có thể kéo sập cả hệ thống',
     boxes: [
-      { label: '用户模块', type: 'module' },
-      { label: '订单模块', type: 'module' },
-      { label: '支付模块', type: 'module' },
-      { label: '商品模块', type: 'module' },
-      { label: '单体应用（一个进程）', type: 'container' },
+      { label: 'Module user', type: 'module' },
+      { label: 'Module order', type: 'module' },
+      { label: 'Module payment', type: 'module' },
+      { label: 'Module product', type: 'module' },
+      { label: 'Monolith app (1 process)', type: 'container' },
       { label: 'MySQL', type: 'db' }
     ]
   },
   {
     key: 'modular',
-    name: '模块化单体',
-    desc: '在单体内部按业务域划分模块，模块间通过接口通信。是微服务的前置步骤。',
-    scale: '团队 10-30 人',
-    challenge: '模块边界容易被打破，需要纪律性',
+    name: 'Modular monolith',
+    desc: 'Chia module trong monolith theo business domain, giao tiếp giữa các module qua interface. Là bước đệm để chuyển sang microservice.',
+    scale: 'Team 10-30 người',
+    challenge: 'Ranh giới module dễ bị phá vỡ, đòi hỏi kỷ luật cao',
     boxes: [
-      { label: '用户域', type: 'domain' },
-      { label: '订单域', type: 'domain' },
-      { label: '支付域', type: 'domain' },
-      { label: '内部 API 边界', type: 'boundary' },
+      { label: 'Domain user', type: 'domain' },
+      { label: 'Domain order', type: 'domain' },
+      { label: 'Domain payment', type: 'domain' },
+      { label: 'Ranh giới API nội bộ', type: 'boundary' },
       { label: 'MySQL', type: 'db' }
     ]
   },
   {
     key: 'soa',
-    name: '服务化（SOA）',
-    desc: '按业务能力拆分为独立服务，通过 ESB 或 API 网关通信。每个服务可以独立部署。',
-    scale: '团队 30-100 人',
-    challenge: '服务间调用链变长，需要服务治理',
+    name: 'Service oriented (SOA)',
+    desc: 'Tách thành các service độc lập theo năng lực business, giao tiếp qua ESB hoặc API gateway. Mỗi service có thể deploy độc lập.',
+    scale: 'Team 30-100 người',
+    challenge: 'Chuỗi gọi giữa các service dài thêm, cần service governance',
     boxes: [
-      { label: '用户服务', type: 'service' },
-      { label: '订单服务', type: 'service' },
-      { label: '支付服务', type: 'service' },
-      { label: 'API 网关', type: 'gateway' },
-      { label: '各自数据库', type: 'db' }
+      { label: 'User service', type: 'service' },
+      { label: 'Order service', type: 'service' },
+      { label: 'Payment service', type: 'service' },
+      { label: 'API gateway', type: 'gateway' },
+      { label: 'Database riêng từng service', type: 'db' }
     ]
   },
   {
     key: 'microservices',
-    name: '微服务架构',
-    desc: '更细粒度的服务拆分，每个服务独立开发、部署、扩缩容。配合容器化和 K8s。',
-    scale: '团队 100+ 人，日活百万+',
-    challenge: '分布式复杂性、数据一致性、运维成本',
+    name: 'Kiến trúc microservice',
+    desc: 'Tách service mịn hơn, mỗi service phát triển, deploy, scale độc lập. Kết hợp containerization và K8s.',
+    scale: 'Team 100+ người, DAU vài triệu trở lên',
+    challenge: 'Sự phức tạp của distributed, đồng nhất dữ liệu, chi phí vận hành',
     boxes: [
-      { label: '用户服务', type: 'service' },
-      { label: '认证服务', type: 'service' },
-      { label: '订单服务', type: 'service' },
-      { label: '库存服务', type: 'service' },
-      { label: '支付服务', type: 'service' },
-      { label: '通知服务', type: 'service' },
+      { label: 'User service', type: 'service' },
+      { label: 'Auth service', type: 'service' },
+      { label: 'Order service', type: 'service' },
+      { label: 'Inventory service', type: 'service' },
+      { label: 'Payment service', type: 'service' },
+      { label: 'Notification service', type: 'service' },
       { label: 'API Gateway + Service Mesh', type: 'gateway' },
-      { label: '独立数据库 x N', type: 'db' }
+      { label: 'Database riêng x N', type: 'db' }
     ]
   }
 ]

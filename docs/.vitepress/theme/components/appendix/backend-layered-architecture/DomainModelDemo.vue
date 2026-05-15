@@ -1,8 +1,8 @@
 <template>
   <div class="domain-demo">
     <div class="header">
-      <div class="title">Domain 层：领域模型设计</div>
-      <div class="subtitle">Domain 是业务概念的载体，所有层的依赖基础</div>
+      <div class="title">Tầng Domain: thiết kế domain model</div>
+      <div class="subtitle">Domain là vật mang khái niệm nghiệp vụ, là nền tảng phụ thuộc của mọi tầng</div>
     </div>
 
     <div class="tabs">
@@ -16,35 +16,35 @@
     <div v-if="current === 'comparison'" class="cards">
       <div class="card bad">
         <div class="card-head">
-          <span class="card-title">贫血模型 (Anemic)</span>
-          <span class="card-badge bad">传统做法</span>
+          <span class="card-title">Anemic Model</span>
+          <span class="card-badge bad">Cách làm truyền thống</span>
         </div>
         <pre class="code"><code>{{ anemicEntity }}</code></pre>
         <pre class="code"><code>{{ anemicService }}</code></pre>
         <div class="result-box bad">
-          <strong>贫血模型的问题</strong>
+          <strong>Vấn đề của anemic model</strong>
           <ul>
-            <li>违背面向对象：对象只有数据没有行为</li>
-            <li>逻辑分散：同样的规则可能在多个 Service 重复</li>
-            <li>难以维护：改一个规则要找所有用到的地方</li>
+            <li>Trái với OOP: object chỉ có dữ liệu, không có hành vi</li>
+            <li>Logic phân tán: cùng một quy tắc có thể lặp ở nhiều Service</li>
+            <li>Khó bảo trì: sửa một quy tắc phải đi tìm tất cả nơi dùng</li>
           </ul>
         </div>
       </div>
 
       <div class="card good">
         <div class="card-head">
-          <span class="card-title">充血模型 (Rich Domain)</span>
-          <span class="card-badge good">推荐做法</span>
+          <span class="card-title">Rich Domain Model</span>
+          <span class="card-badge good">Cách làm được khuyến nghị</span>
         </div>
         <pre class="code"><code>{{ richEntity }}</code></pre>
         <pre class="code"><code>{{ richService }}</code></pre>
         <div class="result-box good">
-          <strong>充血模型的优势</strong>
+          <strong>Ưu điểm của rich domain model</strong>
           <ul>
-            <li>符合面向对象：数据和行为封装在一起</li>
-            <li>业务内聚：规则跟着对象走，改一处处处生效</li>
-            <li>可测试：领域对象是纯内存对象，不需要数据库</li>
-            <li>表达力强：order.cancel() 比 orderService.cancel(order) 更自然</li>
+            <li>Hợp với OOP: dữ liệu và hành vi được đóng gói cùng nhau</li>
+            <li>Nghiệp vụ cô đọng: quy tắc đi theo object, sửa một chỗ là có hiệu lực mọi nơi</li>
+            <li>Dễ test: domain object thuần trong bộ nhớ, không cần database</li>
+            <li>Diễn đạt tốt: order.cancel() tự nhiên hơn orderService.cancel(order)</li>
           </ul>
         </div>
       </div>
@@ -52,16 +52,16 @@
 
     <div v-else class="vo-section">
       <div class="vo-intro">
-        <strong>什么是值对象（Value Object）？</strong>
-        <p>没有唯一标识、不可变的对象，描述某种特征或属性。两个值对象所有属性相等就被认为是同一个。</p>
+        <strong>Value Object là gì?</strong>
+        <p>Object không có định danh duy nhất, bất biến, mô tả một đặc điểm hoặc thuộc tính. Hai value object có tất cả thuộc tính bằng nhau được coi là cùng một.</p>
       </div>
       <div class="vo-examples">
         <div class="vo-card">
-          <div class="vo-name">地址 Address</div>
+          <div class="vo-name">Address</div>
           <pre class="code"><code>{{ addressVO }}</code></pre>
         </div>
         <div class="vo-card">
-          <div class="vo-name">金钱 Money</div>
+          <div class="vo-name">Money</div>
           <pre class="code"><code>{{ moneyVO }}</code></pre>
         </div>
       </div>
@@ -74,8 +74,8 @@ import { ref } from 'vue'
 
 const current = ref('comparison')
 const tabs = [
-  { id: 'comparison', name: '贫血 vs 充血' },
-  { id: 'valueobject', name: '值对象设计' }
+  { id: 'comparison', name: 'Anemic vs Rich' },
+  { id: 'valueobject', name: 'Thiết kế Value Object' }
 ]
 
 const anemicEntity = `@Entity
@@ -83,7 +83,7 @@ public class Order {
     @Id private Long id;
     private BigDecimal totalAmount;
     private OrderStatus status;
-    // 只有 getter/setter，没有业务逻辑
+    // Chỉ có getter/setter, không có business logic
     public Long getId() { return id; }
     public void setStatus(OrderStatus s) { this.status = s; }
 }`
@@ -92,9 +92,9 @@ const anemicService = `@Service
 public class OrderService {
     public void cancelOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow();
-        // 贫血模型：业务逻辑散落在 Service 里
+        // Anemic model: business logic nằm rải rác trong Service
         if (order.getStatus() == OrderStatus.SHIPPED)
-            throw new IllegalStateException("已发货不能取消");
+            throw new IllegalStateException("Da giao hang khong huy duoc");
         order.setStatus(OrderStatus.CANCELLED);
         orderRepository.save(order);
     }
@@ -106,17 +106,17 @@ public class Order {
     private BigDecimal totalAmount;
     private OrderStatus status;
 
-    // 业务行为封装在实体里
+    // Hành vi nghiệp vụ được đóng gói trong entity
     public void cancel() {
         if (this.status == OrderStatus.SHIPPED)
-            throw new IllegalStateException("已发货不能取消");
+            throw new IllegalStateException("Da giao hang khong huy duoc");
         this.status = OrderStatus.CANCELLED;
         registerEvent(new OrderCancelledEvent(this.id));
     }
 
     public void pay(Payment payment) {
         if (this.status != OrderStatus.PENDING_PAYMENT)
-            throw new IllegalStateException("状态不正确");
+            throw new IllegalStateException("Trang thai khong dung");
         this.status = OrderStatus.PAID;
     }
 }`
@@ -126,36 +126,36 @@ public class OrderService {
     @Transactional
     public void cancelOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow();
-        order.cancel(); // 调用领域对象的业务方法
+        order.cancel(); // Gọi method nghiệp vụ trên domain object
         orderRepository.save(order);
     }
 }`
 
-const addressVO = `// 值对象：不可变、无 ID
+const addressVO = `// Value object: bất biến, không có ID
 public record Address(String province, String city, String district, String street) {
     public String toDisplayString() {
         return String.format("%s%s%s%s", province, city, district, street);
     }
 }
-// 地址相等只要属性相同
-Address a1 = new Address("广东", "深圳", "南山", "科技园");
-Address a2 = new Address("广东", "深圳", "南山", "科技园");
+// Hai địa chỉ bằng nhau chỉ cần các thuộc tính giống nhau
+Address a1 = new Address("Ha Noi", "Cau Giay", "Dich Vong", "Pham Hung");
+Address a2 = new Address("Ha Noi", "Cau Giay", "Dich Vong", "Pham Hung");
 a1.equals(a2); // true`
 
 const moneyVO = `public record Money(BigDecimal amount, Currency currency) {
-    public static Money yuan(BigDecimal amount) {
-        return new Money(amount, Currency.getInstance("CNY"));
+    public static Money vnd(BigDecimal amount) {
+        return new Money(amount, Currency.getInstance("VND"));
     }
-    // 运算返回新的值对象（不可变）
+    // Phép toán trả về value object mới (bất biến)
     public Money add(Money other) {
         if (!this.currency.equals(other.currency))
             throw new IllegalArgumentException("Cannot add different currencies");
         return new Money(this.amount.add(other.amount), this.currency);
     }
 }
-Money price = Money.yuan(new BigDecimal("199.99"));
-Money shipping = Money.yuan(new BigDecimal("10.00"));
-Money total = price.add(shipping); // ¥209.99`
+Money price = Money.vnd(new BigDecimal("199000"));
+Money shipping = Money.vnd(new BigDecimal("10000"));
+Money total = price.add(shipping); // 209000 VND`
 </script>
 
 <style scoped>

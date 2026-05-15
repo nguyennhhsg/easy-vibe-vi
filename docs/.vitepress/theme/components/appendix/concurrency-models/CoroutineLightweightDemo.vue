@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>协程轻量级对比演示</h4>
+    <h4>Demo so sánh tính nhẹ của coroutine</h4>
 
     <div class="controls">
       <el-radio-group
@@ -8,13 +8,13 @@
         size="small"
       >
         <el-radio-button label="memory">
-          内存占用对比
+          So sánh dùng RAM
         </el-radio-button>
         <el-radio-button label="switch">
-          切换开销对比
+          So sánh chi phí chuyển ngữ cảnh
         </el-radio-button>
         <el-radio-button label="creation">
-          创建速度对比
+          So sánh tốc độ tạo
         </el-radio-button>
       </el-radio-group>
 
@@ -26,16 +26,16 @@
         show-input
         style="width: 300px;"
       />
-      <span class="slider-label">{{ coroutineCount }} 个协程</span>
+      <span class="slider-label">{{ coroutineCount }} coroutine</span>
     </div>
 
     <div class="comparison-view">
       <div class="comparison-column">
-        <h5>线程模型</h5>
+        <h5>Mô hình thread</h5>
         <div class="resource-visualization">
           <div class="resource-bar">
             <div class="bar-label">
-              内存占用
+              Dùng RAM
             </div>
             <div class="bar-container">
               <div
@@ -49,7 +49,7 @@
 
           <div class="resource-bar">
             <div class="bar-label">
-              创建时间
+              Thời gian tạo
             </div>
             <div class="bar-container">
               <div
@@ -63,7 +63,7 @@
 
           <div class="resource-bar">
             <div class="bar-label">
-              上下文切换
+              Context switch
             </div>
             <div class="bar-container">
               <div
@@ -88,7 +88,7 @@
               v-if="coroutineCount / 100 > 50"
               class="more-indicator"
             >
-              +{{ Math.floor(coroutineCount / 100 - 50) }} 更多...
+              +{{ Math.floor(coroutineCount / 100 - 50) }} thêm...
             </div>
           </div>
         </div>
@@ -101,11 +101,11 @@
       </div>
 
       <div class="comparison-column">
-        <h5>协程模型</h5>
+        <h5>Mô hình coroutine</h5>
         <div class="resource-visualization">
           <div class="resource-bar">
             <div class="bar-label">
-              内存占用
+              Dùng RAM
             </div>
             <div class="bar-container">
               <div
@@ -119,7 +119,7 @@
 
           <div class="resource-bar">
             <div class="bar-label">
-              创建时间
+              Thời gian tạo
             </div>
             <div class="bar-container">
               <div
@@ -133,7 +133,7 @@
 
           <div class="resource-bar">
             <div class="bar-label">
-              上下文切换
+              Context switch
             </div>
             <div class="bar-container">
               <div
@@ -158,7 +158,7 @@
               v-if="coroutineCount / 10 > 100"
               class="more-indicator"
             >
-              +{{ Math.floor(coroutineCount / 10 - 100) }} 更多...
+              +{{ Math.floor(coroutineCount / 10 - 100) }} thêm...
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@
             effect="dark"
             size="large"
           >
-            🚀 节省 {{ savingsPercent }}% 内存
+            🚀 Tiết kiệm {{ savingsPercent }}% RAM
           </el-tag>
         </div>
       </div>
@@ -245,14 +245,14 @@ const savingsPercent = computed(() => {
   return Math.round((1 - coroutineMemory.value / threadMemory.value) * 100)
 })
 
-// 洞察信息
+// Thông tin insight
 const insightTitle = computed(() => {
   if (coroutineCount.value < 100) {
-    return '小规模场景'
+    return 'Use case quy mô nhỏ'
   } else if (coroutineCount.value < 5000) {
-    return '中等规模场景'
+    return 'Use case quy mô trung bình'
   } else {
-    return '大规模高并发场景'
+    return 'Use case concurrency cao quy mô lớn'
   }
 })
 
@@ -267,11 +267,11 @@ const insightDescription = computed(() => {
   const memSaved = threadMemory.value - coroutineMemory.value
 
   if (coroutineCount.value < 100) {
-    return `当前 ${coroutineCount.value} 个并发单元，线程和协程的差别还不明显。建议增加到 1000+ 来观察显著差异。`
+    return `Hiện ${coroutineCount.value} đơn vị concurrent, khác biệt thread vs coroutine chưa rõ. Nên tăng lên 1000+ để thấy rõ.`
   } else if (coroutineCount.value < 5000) {
-    return `使用协程可以节省 ${savings}% 的内存（约 ${memSaved}MB），创建速度快 ${Math.round(threadCreationTime.value / coroutineCreationTime.value)} 倍。`
+    return `Dùng coroutine tiết kiệm ${savings}% RAM (khoảng ${memSaved}MB), tốc độ tạo nhanh ${Math.round(threadCreationTime.value / coroutineCreationTime.value)} lần.`
   } else {
-    return `🚀 在高并发场景下，协程优势巨大！节省 ${savings}% 内存（${memSaved}MB），${threadMemory.value}MB vs ${coroutineMemory.value}MB。这是 C10K/C10M 问题的关键解决方案。`
+    return `🚀 Trong use case concurrency cao, coroutine có lợi thế lớn! Tiết kiệm ${savings}% RAM (${memSaved}MB), ${threadMemory.value}MB vs ${coroutineMemory.value}MB. Đây là giải pháp then chốt cho bài toán C10K/C10M.`
   }
 })
 

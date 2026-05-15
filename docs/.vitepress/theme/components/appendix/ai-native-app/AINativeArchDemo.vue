@@ -1,8 +1,8 @@
 <template>
   <div class="arch-demo">
     <div class="header">
-      <div class="title">传统应用 vs AI 原生应用</div>
-      <div class="subtitle">切换视图，对比两种架构的核心差异</div>
+      <div class="title">Ứng dụng truyền thống vs ứng dụng AI-native</div>
+      <div class="subtitle">Bạn chuyển chế độ để so sánh hai kiến trúc về mặt cốt lõi</div>
     </div>
 
     <div class="toggle-bar">
@@ -11,14 +11,14 @@
         @click="mode = 'traditional'"
       >
         <span>🏗️</span>
-        <span>传统应用</span>
+        <span>Ứng dụng truyền thống</span>
       </button>
       <button
         :class="['toggle-btn', { active: mode === 'ai-native' }]"
         @click="mode = 'ai-native'"
       >
         <span>🤖</span>
-        <span>AI 原生应用</span>
+        <span>Ứng dụng AI-native</span>
       </button>
     </div>
 
@@ -50,7 +50,7 @@
             {{ currentArch.layers[selectedLayer].detail }}
           </div>
           <div class="detail-example">
-            <div class="example-label">典型技术</div>
+            <div class="example-label">Công nghệ tiêu biểu</div>
             <div class="tech-tags">
               <span
                 v-for="t in currentArch.layers[selectedLayer].techs"
@@ -61,16 +61,16 @@
           </div>
         </div>
         <div v-else class="detail-placeholder">
-          👆 点击左侧层级查看详情
+          👆 Bạn bấm vào tầng bên trái để xem chi tiết
         </div>
       </div>
     </div>
 
     <div class="comparison-bar">
-      <span class="compare-label">💡 核心区别：</span>
+      <span class="compare-label">💡 Khác biệt cốt lõi:</span>
       <span class="compare-text">{{ mode === 'traditional'
-        ? '传统应用的逻辑由开发者用 if/else 硬编码，行为完全确定。'
-        : 'AI 原生应用的核心逻辑由模型驱动，行为具有概率性，需要全新的设计思维。' }}</span>
+        ? 'Ứng dụng truyền thống: logic do lập trình viên hard-code bằng if/else, hành vi hoàn toàn xác định.'
+        : 'Ứng dụng AI-native: logic cốt lõi do mô hình điều khiển, hành vi mang tính xác suất và đòi hỏi tư duy thiết kế hoàn toàn mới.' }}</span>
     </div>
   </div>
 </template>
@@ -83,66 +83,66 @@ const selectedLayer = ref(0)
 
 const architectures = {
   traditional: {
-    label: '传统应用架构',
+    label: 'Kiến trúc ứng dụng truyền thống',
     layers: [
       {
-        icon: '🖥️', name: '前端 UI', color: '#3b82f6',
-        brief: '用户界面与交互',
-        detail: '基于确定性的表单、按钮、页面路由。用户操作触发固定的业务流程，所有交互路径在开发时已经确定。',
+        icon: '🖥️', name: 'Frontend UI', color: '#3b82f6',
+        brief: 'Giao diện và tương tác người dùng',
+        detail: 'Dựa trên form, nút bấm, page routing có tính xác định. Thao tác của người dùng kích hoạt luồng nghiệp vụ cố định, mọi đường tương tác đã được định nghĩa lúc phát triển.',
         techs: ['React', 'Vue', 'HTML/CSS']
       },
       {
-        icon: '⚙️', name: '业务逻辑层', color: '#8b5cf6',
-        brief: '硬编码的规则引擎',
-        detail: '开发者用 if/else、switch/case 编写所有业务规则。每一条路径都需要人工预设，无法处理规则之外的情况。',
+        icon: '⚙️', name: 'Tầng business logic', color: '#8b5cf6',
+        brief: 'Rule engine hard-code',
+        detail: 'Lập trình viên viết toàn bộ quy tắc nghiệp vụ bằng if/else, switch/case. Mọi nhánh đều phải khai báo sẵn, không xử lý được tình huống nằm ngoài quy tắc.',
         techs: ['Node.js', 'Java', 'Python']
       },
       {
-        icon: '🗄️', name: '数据存储', color: '#06b6d4',
-        brief: '结构化数据管理',
-        detail: '关系型数据库存储结构化数据，Schema 固定。数据的读写遵循严格的 CRUD 模式。',
+        icon: '🗄️', name: 'Lưu trữ dữ liệu', color: '#06b6d4',
+        brief: 'Quản lý dữ liệu có cấu trúc',
+        detail: 'Cơ sở dữ liệu quan hệ lưu dữ liệu có cấu trúc, schema cố định. Việc đọc/ghi tuân theo mô hình CRUD nghiêm ngặt.',
         techs: ['MySQL', 'PostgreSQL', 'Redis']
       },
       {
-        icon: '🔌', name: 'API 接口', color: '#10b981',
-        brief: '固定的请求/响应',
-        detail: '每个 API 端点返回确定性的结果。相同的输入永远产生相同的输出，行为完全可预测。',
+        icon: '🔌', name: 'API', color: '#10b981',
+        brief: 'Request/response cố định',
+        detail: 'Mỗi API endpoint trả về kết quả xác định. Cùng đầu vào luôn cho ra cùng đầu ra, hành vi hoàn toàn dự đoán được.',
         techs: ['REST', 'GraphQL', 'gRPC']
       }
     ]
   },
   'ai-native': {
-    label: 'AI 原生应用架构',
+    label: 'Kiến trúc ứng dụng AI-native',
     layers: [
       {
-        icon: '💬', name: '自然语言交互层', color: '#f59e0b',
-        brief: '对话式 + 流式输出',
-        detail: '用户通过自然语言表达意图，系统以流式方式逐步生成响应。交互不再是固定的表单，而是开放式的对话。',
-        techs: ['Streaming UI', 'Markdown 渲染', 'SSE']
+        icon: '💬', name: 'Tầng tương tác ngôn ngữ tự nhiên', color: '#f59e0b',
+        brief: 'Hội thoại + streaming output',
+        detail: 'Người dùng dùng ngôn ngữ tự nhiên để bày tỏ ý định, hệ thống trả lời theo dạng streaming. Tương tác không còn là form cố định mà là một cuộc đối thoại mở.',
+        techs: ['Streaming UI', 'Markdown render', 'SSE']
       },
       {
-        icon: '🧠', name: '模型推理层', color: '#ef4444',
-        brief: 'LLM 驱动的决策引擎',
-        detail: '核心逻辑不再是 if/else，而是由大语言模型根据 Prompt 和上下文进行推理。输出具有概率性，同样的输入可能产生不同的结果。',
-        techs: ['GPT-4', 'Claude', 'Prompt 工程']
+        icon: '🧠', name: 'Tầng suy luận mô hình', color: '#ef4444',
+        brief: 'Decision engine do LLM điều khiển',
+        detail: 'Logic cốt lõi không còn là if/else mà là LLM suy luận dựa trên prompt và ngữ cảnh. Đầu ra có tính xác suất, cùng đầu vào có thể cho ra kết quả khác nhau.',
+        techs: ['GPT-4', 'Claude', 'Prompt engineering']
       },
       {
-        icon: '🔗', name: '编排与工具层', color: '#8b5cf6',
-        brief: 'Agent 编排 + 工具调用',
-        detail: '模型可以调用外部工具（搜索、数据库、API）来获取实时信息。编排层负责管理多步推理、工具选择和结果整合。',
+        icon: '🔗', name: 'Tầng điều phối & công cụ', color: '#8b5cf6',
+        brief: 'Điều phối agent + gọi tool',
+        detail: 'Mô hình có thể gọi tool ngoài (search, database, API) để lấy thông tin thời gian thực. Tầng điều phối quản lý suy luận nhiều bước, chọn tool và hợp nhất kết quả.',
         techs: ['LangChain', 'Function Calling', 'RAG']
       },
       {
-        icon: '📦', name: '上下文管理层', color: '#06b6d4',
-        brief: '向量数据库 + 记忆系统',
-        detail: '使用向量数据库存储和检索非结构化知识。通过 Embedding 将文本转化为语义向量，实现基于含义的搜索而非关键词匹配。',
+        icon: '📦', name: 'Tầng quản lý context', color: '#06b6d4',
+        brief: 'Vector DB + hệ thống bộ nhớ',
+        detail: 'Dùng vector database để lưu và truy hồi tri thức phi cấu trúc. Embedding chuyển văn bản thành vector ngữ nghĩa, giúp tìm theo ý nghĩa thay vì khớp từ khoá.',
         techs: ['Pinecone', 'ChromaDB', 'Embedding']
       },
       {
-        icon: '🛡️', name: '安全与护栏层', color: '#10b981',
-        brief: '输出过滤 + 幻觉检测',
-        detail: 'AI 输出不可完全信任，需要护栏机制：内容过滤、事实核查、幻觉检测、敏感信息脱敏等。这是传统应用不需要的全新层级。',
-        techs: ['Guardrails', '内容审核', '事实校验']
+        icon: '🛡️', name: 'Tầng an toàn & guardrail', color: '#10b981',
+        brief: 'Lọc đầu ra + phát hiện ảo giác',
+        detail: 'Không thể tin tưởng tuyệt đối đầu ra của AI, cần các guardrail: lọc nội dung, kiểm chứng sự thật, phát hiện ảo giác, ẩn thông tin nhạy cảm, v.v. Đây là tầng hoàn toàn mới mà ứng dụng truyền thống không cần.',
+        techs: ['Guardrails', 'Kiểm duyệt nội dung', 'Kiểm chứng sự thật']
       }
     ]
   }

@@ -1,8 +1,8 @@
 <template>
   <div class="cron-demo">
     <div class="header">
-      <div class="title">Cron 表达式解析</div>
-      <div class="subtitle">选择或输入 Cron 表达式，查看下次执行时间</div>
+      <div class="title">Parse biểu thức cron</div>
+      <div class="subtitle">Chọn hoặc nhập biểu thức cron để xem thời gian chạy kế tiếp</div>
     </div>
     <div class="presets">
       <button v-for="p in presets" :key="p.expr" :class="['preset-btn', { active: expr === p.expr }]" @click="expr = p.expr">
@@ -11,20 +11,20 @@
     </div>
     <div class="input-row">
       <input v-model="expr" class="cron-input" placeholder="* * * * *" />
-      <button class="calc-btn" @click="calculate">计算</button>
+      <button class="calc-btn" @click="calculate">Tính</button>
     </div>
     <div class="result" v-if="nextRun">
-      <div class="next-label">下次执行时间：</div>
+      <div class="next-label">Thời gian chạy kế tiếp:</div>
       <div class="next-time">{{ nextRun }}</div>
     </div>
     <div class="desc">
-      <div class="desc-title">字段说明：</div>
+      <div class="desc-title">Giải thích các trường:</div>
       <div class="desc-grid">
-        <div class="desc-item"><span class="field">分</span> 0-59</div>
-        <div class="desc-item"><span class="field">时</span> 0-23</div>
-        <div class="desc-item"><span class="field">日</span> 1-31</div>
-        <div class="desc-item"><span class="field">月</span> 1-12</div>
-        <div class="desc-item"><span class="field">周</span> 0-6</div>
+        <div class="desc-item"><span class="field">Phút</span> 0-59</div>
+        <div class="desc-item"><span class="field">Giờ</span> 0-23</div>
+        <div class="desc-item"><span class="field">Ngày</span> 1-31</div>
+        <div class="desc-item"><span class="field">Tháng</span> 1-12</div>
+        <div class="desc-item"><span class="field">Thứ</span> 0-6</div>
       </div>
     </div>
   </div>
@@ -37,23 +37,23 @@ const expr = ref('0 * * * *')
 const nextRun = ref('')
 
 const presets = [
-  { label: '每小时', expr: '0 * * * *' },
-  { label: '每天午夜', expr: '0 0 * * *' },
-  { label: '每周一', expr: '0 0 * * 1' },
-  { label: '每月1号', expr: '0 0 1 * *' },
-  { label: '每5分钟', expr: '*/5 * * * *' },
+  { label: 'Mỗi giờ', expr: '0 * * * *' },
+  { label: 'Mỗi nửa đêm', expr: '0 0 * * *' },
+  { label: 'Mỗi thứ Hai', expr: '0 0 * * 1' },
+  { label: 'Ngày 1 mỗi tháng', expr: '0 0 1 * *' },
+  { label: 'Mỗi 5 phút', expr: '*/5 * * * *' },
 ]
 
 function calculate() {
   const parts = expr.value.trim().split(/\s+/)
   if (parts.length !== 5) {
-    nextRun.value = '请输入 5 个字段的 Cron 表达式'
+    nextRun.value = 'Vui lòng nhập biểu thức cron 5 trường'
     return
   }
   const now = new Date()
-  const fieldNames = ['分钟', '小时', '日', '月', '星期']
-  let desc = parts.map((p, i) => `${fieldNames[i]}: ${p}`).join('，')
-  nextRun.value = `${now.toLocaleString()} 开始，${desc}`
+  const fieldNames = ['Phút', 'Giờ', 'Ngày', 'Tháng', 'Thứ']
+  let desc = parts.map((p, i) => `${fieldNames[i]}: ${p}`).join(', ')
+  nextRun.value = `Bắt đầu từ ${now.toLocaleString()}, ${desc}`
 }
 </script>
 

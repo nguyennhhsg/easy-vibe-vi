@@ -1,12 +1,12 @@
 <!--
   SystemDesignStepsDemo.vue
-  系统设计步骤交互演示：展示系统设计面试/实战的标准流程
+  Demo các bước system design: minh hoạ quy trình chuẩn cho phỏng vấn/thực tế
 -->
 <template>
   <div class="design-steps-demo">
     <div class="header">
-      <div class="title">系统设计四步法</div>
-      <div class="subtitle">点击每个步骤查看详细内容</div>
+      <div class="title">Quy trình 4 bước system design</div>
+      <div class="subtitle">Bấm vào từng bước để xem chi tiết</div>
     </div>
 
     <div class="steps">
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="detail-example">
-        <span class="label">示例（设计短链服务）：</span>
+        <span class="label">Ví dụ (thiết kế dịch vụ short link):</span>
         <div class="example-text">{{ current.example }}</div>
       </div>
     </div>
@@ -47,61 +47,61 @@ const activeStep = ref('requirements')
 const steps = [
   {
     key: 'requirements',
-    name: '需求澄清',
-    time: '~5 分钟',
-    desc: '不要急着画架构图。先搞清楚：系统要解决什么问题？用户规模多大？有哪些核心功能？有哪些非功能需求？',
+    name: 'Làm rõ yêu cầu',
+    time: '~5 phút',
+    desc: 'Đừng vội vẽ kiến trúc. Trước hết hãy hiểu rõ: hệ thống giải quyết vấn đề gì? Quy mô user bao nhiêu? Có những chức năng cốt lõi nào? Yêu cầu phi chức năng nào?',
     checklist: [
-      '核心功能有哪些？（MVP 范围）',
-      '用户规模？DAU / QPS 预估',
-      '读写比例？读多写少还是写多读少？',
-      '数据量级？需要存多少数据？',
-      '可用性要求？几个 9？',
-      '延迟要求？P99 要多少毫秒？'
+      'Có những chức năng cốt lõi nào (phạm vi MVP)?',
+      'Quy mô user? Ước tính DAU/QPS',
+      'Tỉ lệ đọc/ghi? Đọc nhiều hay ghi nhiều?',
+      'Quy mô dữ liệu? Cần lưu bao nhiêu?',
+      'Yêu cầu availability? Mấy số 9?',
+      'Yêu cầu latency? P99 bao nhiêu ms?'
     ],
-    example: '短链服务：生成短链（写）+ 重定向（读），读写比约 100:1，日均 1 亿次重定向，短链永不过期。'
+    example: 'Dịch vụ short link: tạo short link (ghi) + redirect (đọc), tỉ lệ đọc/ghi khoảng 100:1, trung bình 100 triệu lượt redirect/ngày, short link không hết hạn.'
   },
   {
     key: 'estimation',
-    name: '容量估算',
-    time: '~5 分钟',
-    desc: '用"信封背面估算"（Back-of-envelope estimation）快速计算系统需要的资源量级，为后续架构决策提供数据支撑。',
+    name: 'Ước lượng capacity',
+    time: '~5 phút',
+    desc: 'Dùng kiểu "back-of-the-envelope estimation" để ước tính nhanh các con số tài nguyên hệ thống cần, làm cơ sở cho quyết định kiến trúc sau này.',
     checklist: [
-      'QPS 估算：日请求量 / 86400',
-      '存储估算：单条数据大小 × 总量',
-      '带宽估算：QPS × 单次响应大小',
-      '缓存估算：热点数据量（通常 20% 数据承载 80% 请求）',
-      '峰值估算：平均 QPS × 峰值系数（通常 2-5 倍）'
+      'Ước tính QPS: request/ngày / 86400',
+      'Ước tính storage: kích thước 1 bản ghi × tổng số',
+      'Ước tính băng thông: QPS × kích thước response',
+      'Ước tính cache: lượng dữ liệu nóng (thường 20% dữ liệu gánh 80% request)',
+      'Ước tính đỉnh: QPS trung bình × peak factor (thường 2-5 lần)'
     ],
-    example: '1 亿次/天 ≈ 1200 QPS，峰值 ≈ 3600 QPS。每条短链 100 字节，5 年 = 1.8 亿条 ≈ 18GB。缓存热点 20% ≈ 3.6GB，一台 Redis 足够。'
+    example: '100 triệu/ngày ≈ 1200 QPS, đỉnh ≈ 3600 QPS. Mỗi short link 100 byte, 5 năm = 180 triệu bản ghi ≈ 18GB. Cache hot 20% ≈ 3.6GB, một Redis là đủ.'
   },
   {
     key: 'design',
-    name: '架构设计',
-    time: '~15 分钟',
-    desc: '画出核心组件和数据流。先画最简单的版本（单机），再根据需求逐步演进（加缓存、分库分表、CDN 等）。',
+    name: 'Thiết kế kiến trúc',
+    time: '~15 phút',
+    desc: 'Vẽ các thành phần cốt lõi và dòng dữ liệu. Bắt đầu phiên bản đơn giản nhất (đơn máy), rồi mở rộng dần theo yêu cầu (thêm cache, sharding, CDN...).',
     checklist: [
-      'API 设计：定义核心接口的输入输出',
-      '数据模型：设计核心表结构',
-      '核心组件：Web 服务、数据库、缓存、消息队列',
-      '数据流：请求从用户到数据库的完整路径',
-      '读写分离：读路径和写路径分开考虑'
+      'Thiết kế API: định nghĩa input/output các endpoint chính',
+      'Data model: thiết kế cấu trúc bảng cốt lõi',
+      'Thành phần cốt lõi: web service, database, cache, message queue',
+      'Data flow: đường đi đầy đủ của request từ user đến database',
+      'Tách đọc/ghi: cân nhắc đường đọc và đường ghi riêng'
     ],
-    example: '写路径：客户端 → API → 生成短码（Base62） → 写入 MySQL + Redis。读路径：客户端 → CDN → API → Redis 查询 → 302 重定向。'
+    example: 'Đường ghi: client → API → tạo short code (Base62) → ghi vào MySQL + Redis. Đường đọc: client → CDN → API → query Redis → redirect 302.'
   },
   {
     key: 'deep-dive',
-    name: '深入优化',
-    time: '~10 分钟',
-    desc: '针对系统的瓶颈和关键问题进行深入讨论。这是展示技术深度的环节。',
+    name: 'Tối ưu sâu',
+    time: '~10 phút',
+    desc: 'Bàn sâu vào các nút thắt và vấn đề then chốt của hệ thống. Đây là lúc thể hiện chiều sâu kỹ thuật.',
     checklist: [
-      '如何保证短码唯一性？（哈希冲突处理）',
-      '如何应对热点？（缓存、CDN）',
-      '如何水平扩展？（分库分表策略）',
-      '如何保证高可用？（主备、多可用区）',
-      '如何监控和告警？（关键指标）',
-      '安全考虑？（防刷、恶意链接检测）'
+      'Làm sao đảm bảo short code là duy nhất (xử lý hash collision)?',
+      'Làm sao chống hot key (cache, CDN)?',
+      'Làm sao scale ngang (chiến lược sharding)?',
+      'Làm sao đảm bảo HA (active-standby, multi-AZ)?',
+      'Làm sao giám sát và cảnh báo (các chỉ số quan trọng)?',
+      'Bảo mật như nào (chống spam, phát hiện link độc)?'
     ],
-    example: '短码生成：用分布式 ID 生成器（Snowflake）+ Base62 编码，避免哈希冲突。热点短链用多级缓存（本地缓存 + Redis + CDN）。'
+    example: 'Tạo short code: dùng bộ sinh ID distributed (Snowflake) + Base62 encoding để tránh hash collision. Short link hot dùng cache đa tầng (local cache + Redis + CDN).'
   }
 ]
 

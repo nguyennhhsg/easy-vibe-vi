@@ -8,58 +8,58 @@ const excelData = [
   {
     id: 1,
     date: '2023-10-01',
-    book: 'AI 入门',
+    book: 'Nhập môn AI',
     price: 59,
-    user: '张三',
-    phone: '13800138000'
+    user: 'Nguyen Van A',
+    phone: '0901234567'
   },
   {
     id: 2,
     date: '2023-10-02',
-    book: 'Python 编程',
+    book: 'Lập trình Python',
     price: 89,
-    user: '李四',
-    phone: '13900139000'
+    user: 'Tran Van B',
+    phone: '0912345678'
   },
   {
     id: 3,
     date: '2023-10-03',
-    book: '算法导论',
+    book: 'Giáo trình thuật toán',
     price: 120,
-    user: '张三',
-    phone: '13800138000'
+    user: 'Nguyen Van A',
+    phone: '0901234567'
   },
   {
     id: 4,
     date: '2023-10-03',
-    book: '数据库原理',
+    book: 'Nguyên lý CSDL',
     price: 45,
-    user: '王五',
-    phone: '13700137000'
+    user: 'Le Thi C',
+    phone: '0923456789'
   },
   {
     id: 5,
     date: '2023-10-04',
-    book: 'Vue.js 实战',
+    book: 'Vue.js thực chiến',
     price: 78,
-    user: '张三',
-    phone: '13800138000'
+    user: 'Nguyen Van A',
+    phone: '0901234567'
   }
 ]
 
 // DB Data (Normalized)
 const usersTable = [
-  { id: 101, name: '张三', phone: '13800138000' },
-  { id: 102, name: '李四', phone: '13900139000' },
-  { id: 103, name: '王五', phone: '13700137000' }
+  { id: 101, name: 'Nguyen Van A', phone: '0901234567' },
+  { id: 102, name: 'Tran Van B', phone: '0912345678' },
+  { id: 103, name: 'Le Thi C', phone: '0923456789' }
 ]
 
 const ordersTable = [
-  { id: 1, date: '2023-10-01', book: 'AI 入门', price: 59, user_id: 101 },
-  { id: 2, date: '2023-10-02', book: 'Python 编程', price: 89, user_id: 102 },
-  { id: 3, date: '2023-10-03', book: '算法导论', price: 120, user_id: 101 },
-  { id: 4, date: '2023-10-03', book: '数据库原理', price: 45, user_id: 103 },
-  { id: 5, date: '2023-10-04', book: 'Vue.js 实战', price: 78, user_id: 101 }
+  { id: 1, date: '2023-10-01', book: 'Nhập môn AI', price: 59, user_id: 101 },
+  { id: 2, date: '2023-10-02', book: 'Lập trình Python', price: 89, user_id: 102 },
+  { id: 3, date: '2023-10-03', book: 'Giáo trình thuật toán', price: 120, user_id: 101 },
+  { id: 4, date: '2023-10-03', book: 'Nguyên lý CSDL', price: 45, user_id: 103 },
+  { id: 5, date: '2023-10-04', book: 'Vue.js thực chiến', price: 78, user_id: 101 }
 ]
 
 const hoveredUserId = ref(null)
@@ -73,12 +73,12 @@ const setHover = (id) => {
   <div class="relational-demo">
     <div class="demo-header">
       <span class="icon">📊</span>
-      <span class="title">关系型数据演示</span>
-      <span class="subtitle">Excel 模式 vs 数据库模式</span>
+      <span class="title">Demo dữ liệu quan hệ</span>
+      <span class="subtitle">Kiểu Excel vs kiểu database</span>
     </div>
 
     <div class="intro-text">
-      想象你在管理一个<span class="highlight">书店订单</span>。用 Excel 时，每个订单都重复写顾客信息；用关系型数据库时，顾客信息单独存一张表，订单表只存顾客 ID。就像把<span class="highlight">通讯录和订单分开</span>，而不是每笔订单都抄一遍地址。
+      Hãy hình dung bạn quản lý <span class="highlight">đơn hàng của nhà sách</span>. Khi dùng Excel, mỗi đơn lặp lại thông tin khách. Khi dùng RDBMS, thông tin khách lưu một bảng riêng, bảng đơn chỉ lưu ID khách. Giống như <span class="highlight">tách danh bạ và sổ đơn</span> thay vì chép địa chỉ cho từng đơn.
     </div>
 
     <div class="tabs">
@@ -87,14 +87,14 @@ const setHover = (id) => {
         :class="{ active: activeTab === 'excel' }"
         @click="activeTab = 'excel'"
       >
-        📋 Excel 模式 (单表)
+        📋 Kiểu Excel (bảng đơn)
       </button>
       <button
         class="tab"
         :class="{ active: activeTab === 'db' }"
         @click="activeTab = 'db'"
       >
-        🗄️ 数据库模式 (多表关联)
+        🗄️ Kiểu database (đa bảng có liên kết)
       </button>
     </div>
 
@@ -108,15 +108,15 @@ const setHover = (id) => {
           <table>
             <thead>
               <tr>
-                <th>订单号</th>
-                <th>日期</th>
-                <th>书名</th>
-                <th>价格</th>
+                <th>Số đơn</th>
+                <th>Ngày</th>
+                <th>Tên sách</th>
+                <th>Giá</th>
                 <th class="highlight-col">
-                  购买者
+                  Người mua
                 </th>
                 <th class="highlight-col">
-                  电话
+                  Điện thoại
                 </th>
               </tr>
             </thead>
@@ -140,8 +140,8 @@ const setHover = (id) => {
           </table>
         </div>
         <div class="note error">
-          <p>❌ <strong>问题：</strong> "张三"的信息重复存储了 3 次。</p>
-          <p>如果张三换了电话，你需要修改 3 行数据，很容易漏改！这叫<span class="highlight">数据冗余</span>。</p>
+          <p>❌ <strong>Vấn đề:</strong> Thông tin của "Nguyen Van A" được lưu trùng lặp 3 lần.</p>
+          <p>Nếu anh ấy đổi số điện thoại, bạn phải sửa 3 dòng dữ liệu, rất dễ sót! Đây gọi là <span class="highlight">data redundancy</span>.</p>
         </div>
       </div>
 
@@ -154,14 +154,14 @@ const setHover = (id) => {
           <!-- Users Table -->
           <div class="db-table users-table">
             <div class="table-title">
-              👥 用户表 (Users)
+              👥 Bảng Users
             </div>
             <table>
               <thead>
                 <tr>
-                  <th>ID (主键)</th>
-                  <th>姓名</th>
-                  <th>电话</th>
+                  <th>ID (primary key)</th>
+                  <th>Tên</th>
+                  <th>Điện thoại</th>
                 </tr>
               </thead>
               <tbody>
@@ -185,7 +185,7 @@ const setHover = (id) => {
           <!-- Connection Lines (Visual only, simplified) -->
           <div class="connector">
             <div class="arrow-label">
-              🔗 外键关联
+              🔗 Liên kết qua foreign key
             </div>
             <div class="arrow">
               ⬅️ Join ➡️
@@ -195,16 +195,16 @@ const setHover = (id) => {
           <!-- Orders Table -->
           <div class="db-table orders-table">
             <div class="table-title">
-              📦 订单表 (Orders)
+              📦 Bảng Orders
             </div>
             <table>
               <thead>
                 <tr>
-                  <th>订单号</th>
-                  <th>书名</th>
-                  <th>价格</th>
+                  <th>Số đơn</th>
+                  <th>Tên sách</th>
+                  <th>Giá</th>
                   <th class="highlight-col">
-                    用户 ID (外键)
+                    User ID (foreign key)
                   </th>
                 </tr>
               </thead>
@@ -228,9 +228,9 @@ const setHover = (id) => {
           </div>
         </div>
         <div class="note success">
-          <p>✅ <strong>优势：</strong> 订单表只存 "用户 ID"，不重复存用户信息。</p>
+          <p>✅ <strong>Lợi ích:</strong> Bảng đơn chỉ lưu "User ID", không lặp lại thông tin người dùng.</p>
           <p>
-            鼠标悬停在用户表或订单表的某一行，看看它们是如何通过 <span class="highlight">外键自动关联</span>的。修改用户表一次，所有订单都会自动更新！
+            Đưa chuột lên một dòng trong bảng Users hoặc Orders để xem chúng <span class="highlight">tự liên kết qua foreign key</span> như thế nào. Chỉ cần sửa bảng Users một lần, mọi đơn đều tự cập nhật!
           </p>
         </div>
       </div>
@@ -238,7 +238,7 @@ const setHover = (id) => {
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>关系型数据库通过<span class="highlight">拆表 + 外键</span>消除冗余。就像把通讯录和记账本分开，记账本只写"姓名"，查账时再去通讯录找详细信息。这样改一次电话，所有记录都更新。
+      <strong>Tư tưởng cốt lõi:</strong> RDBMS dùng <span class="highlight">tách bảng + foreign key</span> để loại bỏ redundancy. Giống như tách danh bạ và sổ ghi chép: sổ chỉ ghi "tên", khi cần thì tra danh bạ. Đổi số điện thoại một lần, mọi bản ghi đều cập nhật.
     </div>
   </div>
 </template>

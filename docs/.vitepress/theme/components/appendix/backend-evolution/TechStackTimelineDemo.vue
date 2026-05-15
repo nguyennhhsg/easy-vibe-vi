@@ -2,8 +2,8 @@
   <div class="tech-stack-timeline-demo">
     <div class="demo-header">
       <span class="icon">📚</span>
-      <span class="title">技术栈演进时间线</span>
-      <span class="subtitle">每个时代的主流技术栈</span>
+      <span class="title">Timeline tiến hóa tech stack</span>
+      <span class="subtitle">Tech stack chủ đạo của mỗi thời đại</span>
     </div>
 
     <div class="timeline">
@@ -61,35 +61,35 @@ const activeEra = ref(0)
 const eras = [
   {
     icon: '🖥️',
-    name: '物理机时代',
+    name: 'Thời máy vật lý',
     period: '1990s',
     categories: [
-      { name: 'Web服务器', techs: ['Apache', 'Nginx', 'IIS'] },
-      { name: '后端语言', techs: ['Perl', 'PHP', 'ASP'] },
-      { name: '数据库', techs: ['MySQL', 'PostgreSQL', 'Oracle'] },
-      { name: '部署方式', techs: ['FTP', 'SSH', '手动'] }
+      { name: 'Web server', techs: ['Apache', 'Nginx', 'IIS'] },
+      { name: 'Ngôn ngữ backend', techs: ['Perl', 'PHP', 'ASP'] },
+      { name: 'Database', techs: ['MySQL', 'PostgreSQL', 'Oracle'] },
+      { name: 'Cách triển khai', techs: ['FTP', 'SSH', 'Thủ công'] }
     ]
   },
   {
     icon: '🏢',
-    name: '单体架构',
+    name: 'Kiến trúc monolith',
     period: '2000s',
     categories: [
-      { name: '后端框架', techs: ['Spring', 'Django', 'Rails', 'Laravel'] },
-      { name: '前端技术', techs: ['jQuery', 'Bootstrap', 'JSP'] },
-      { name: '数据库', techs: ['MySQL', 'Redis', 'MongoDB'] },
-      { name: '构建工具', techs: ['Maven', 'Gradle', 'Ant'] }
+      { name: 'Framework backend', techs: ['Spring', 'Django', 'Rails', 'Laravel'] },
+      { name: 'Công nghệ frontend', techs: ['jQuery', 'Bootstrap', 'JSP'] },
+      { name: 'Database', techs: ['MySQL', 'Redis', 'MongoDB'] },
+      { name: 'Build tool', techs: ['Maven', 'Gradle', 'Ant'] }
     ]
   },
   {
     icon: '🏭',
-    name: '微服务',
+    name: 'Microservice',
     period: '2010s',
     categories: [
-      { name: '容器化', techs: ['Docker', 'Kubernetes', 'Helm'] },
-      { name: '服务框架', techs: ['Spring Cloud', 'gRPC', 'Dubbo'] },
-      { name: '数据存储', techs: ['Redis', 'MongoDB', 'Kafka', 'ES'] },
-      { name: '可观测', techs: ['Prometheus', 'Grafana', 'Jaeger'] }
+      { name: 'Container hóa', techs: ['Docker', 'Kubernetes', 'Helm'] },
+      { name: 'Framework dịch vụ', techs: ['Spring Cloud', 'gRPC', 'Dubbo'] },
+      { name: 'Lưu trữ dữ liệu', techs: ['Redis', 'MongoDB', 'Kafka', 'ES'] },
+      { name: 'Observability', techs: ['Prometheus', 'Grafana', 'Jaeger'] }
     ]
   },
   {
@@ -97,10 +97,10 @@ const eras = [
     name: 'Serverless',
     period: '2020s+',
     categories: [
-      { name: '函数计算', techs: ['Lambda', 'Vercel', 'Cloudflare'] },
+      { name: 'Function compute', techs: ['Lambda', 'Vercel', 'Cloudflare'] },
       { name: 'BaaS', techs: ['Supabase', 'Firebase', 'Auth0'] },
-      { name: '前端框架', techs: ['Next.js', 'Nuxt', 'SvelteKit'] },
-      { name: '数据库', techs: ['PlanetScale', 'Neon', 'Turso'] }
+      { name: 'Framework frontend', techs: ['Next.js', 'Nuxt', 'SvelteKit'] },
+      { name: 'Database', techs: ['PlanetScale', 'Neon', 'Turso'] }
     ]
   }
 ]

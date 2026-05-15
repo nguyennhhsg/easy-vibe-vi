@@ -5,7 +5,7 @@
         Self-Attention Mechanism
       </div>
       <div class="subtitle">
-        自注意力机制：全局信息交互
+        Cơ chế self-attention: tương tác thông tin toàn cục
       </div>
     </div>
 
@@ -92,14 +92,14 @@
           class="placeholder-text"
         >
           <span class="cursor-icon">👆</span>
-          把鼠标悬停在任意方块上，<br>观察它在"关注"谁
+          Bạn rê chuột lên bất kỳ ô nào,<br>quan sát xem nó đang "chú ý" tới ai
         </div>
         <div
           v-else
           class="active-info"
         >
           <div class="source-info">
-            <span class="label">当前 Patch:</span>
+            <span class="label">Patch hiện tại:</span>
             <div class="patch-tag">
               {{ items[hoverIndex].icon }} {{ items[hoverIndex].label }}
             </div>
@@ -107,7 +107,7 @@
 
           <div class="attn-list">
             <div class="list-header">
-              Attention Weights (注意力权重)
+              Attention Weights (trọng số chú ý)
             </div>
             <div
               v-for="(score, idx) in getTopAttentions(hoverIndex)"
@@ -149,15 +149,15 @@ const hoverIndex = ref(-1)
 
 // 3x3 Grid Data (Cat in grass)
 const items = [
-  { icon: '🌿', label: '草地' }, // 0
-  { icon: '🌿', label: '草地' }, // 1
-  { icon: '🦋', label: '蝴蝶' }, // 2
-  { icon: '🌿', label: '草地' }, // 3
-  { icon: '🐱', label: '猫头' }, // 4
-  { icon: '🌿', label: '草地' }, // 5
-  { icon: '🧶', label: '毛球' }, // 6
-  { icon: '🐾', label: '猫爪' }, // 7
-  { icon: '🌿', label: '草地' } // 8
+  { icon: '🌿', label: 'Cỏ' }, // 0
+  { icon: '🌿', label: 'Cỏ' }, // 1
+  { icon: '🦋', label: 'Bướm' }, // 2
+  { icon: '🌿', label: 'Cỏ' }, // 3
+  { icon: '🐱', label: 'Đầu mèo' }, // 4
+  { icon: '🌿', label: 'Cỏ' }, // 5
+  { icon: '🧶', label: 'Cuộn len' }, // 6
+  { icon: '🐾', label: 'Chân mèo' }, // 7
+  { icon: '🌿', label: 'Cỏ' } // 8
 ]
 
 // Layout Logic
@@ -242,13 +242,13 @@ const getTopAttentions = (source) => {
 }
 
 const getInsightText = (idx) => {
-  if (idx === 4) return '猫头最关注猫爪（组成身体）和蝴蝶（捕猎目标）。'
-  if (idx === 7) return '猫爪最关注毛球（正在玩耍）和猫头。'
-  if (idx === 2) return '蝴蝶关注到了猫，可能是因为它是个威胁。'
+  if (idx === 4) return 'Đầu mèo chú ý nhất tới chân mèo (cùng cơ thể) và bướm (mục tiêu săn).'
+  if (idx === 7) return 'Chân mèo chú ý nhất tới cuộn len (đang chơi) và đầu mèo.'
+  if (idx === 2) return 'Bướm chú ý tới mèo, có thể vì mèo là mối đe doạ.'
   if ([0, 1, 3, 5, 8].includes(idx))
-    return '草地主要关注周围的草地，确认背景纹理。'
-  if (idx === 6) return '毛球和猫爪有很强的互动关系。'
-  return 'Self-Attention 让每个部分找到它的上下文关联。'
+    return 'Cỏ chủ yếu chú ý tới các vùng cỏ xung quanh để xác nhận kết cấu nền.'
+  if (idx === 6) return 'Cuộn len và chân mèo có mối liên hệ tương tác rất mạnh.'
+  return 'Self-Attention giúp mỗi phần tìm ra mối liên hệ ngữ cảnh của mình.'
 }
 </script>
 

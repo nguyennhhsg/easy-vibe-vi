@@ -9,8 +9,8 @@ const customerB = ref({ time: 3, status: 'waiting' })
 const customerC = ref({ time: 5, status: 'waiting' })
 
 const modes = [
-  { value: 'sync', label: '同步模式 🐢' },
-  { value: 'async', label: '异步模式 ⚡' }
+  { value: 'sync', label: 'Đồng bộ (Sync)' },
+  { value: 'async', label: 'Bất đồng bộ (Async)' }
 ]
 
 const reset = () => {
@@ -26,12 +26,12 @@ const start = async () => {
   reset()
 
   if (mode.value === 'sync') {
-    // 同步模式：依次执行
+    // Đồng bộ: chạy lần lượt
     await processCustomer(customerA, 2000)
     await processCustomer(customerB, 3000)
     await processCustomer(customerC, 5000)
   } else {
-    // 异步模式：同时执行
+    // Bất đồng bộ: chạy song song
     await Promise.all([
       processCustomer(customerA, 2000),
       processCustomer(customerB, 3000),
@@ -51,7 +51,7 @@ const processCustomer = async (customer, realTime) => {
 
 <template>
   <div class="async-restaurant-demo">
-    <h3>异步：同步 vs 异步</h3>
+    <h3>Async: đồng bộ vs bất đồng bộ</h3>
 
     <div class="mode-selector">
       <button
@@ -67,35 +67,35 @@ const processCustomer = async (customer, realTime) => {
     </div>
 
     <div class="restaurant-scene">
-      <!-- 厨房 -->
+      <!-- Bếp -->
       <div class="kitchen">
-        <h4>厨房</h4>
+        <h4>Bếp</h4>
         <div class="stoves">
           <div
             class="stove"
             :class="{ 'cooking': customerA.status === 'cooking', 'done': customerA.status === 'done' }"
           >
             <div class="stove-label">
-              灶位 1
+              Bếp 1
             </div>
             <div class="stove-content">
               <div
                 v-if="customerA.status === 'cooking'"
                 class="cooking-text"
               >
-                煮面 {{ customerA.time }}s
+                Nấu mì {{ customerA.time }}s
               </div>
               <div
                 v-if="customerA.status === 'done'"
                 class="done-text"
               >
-                ✅ 完成
+                Xong
               </div>
               <div
                 v-if="customerA.status === 'waiting'"
                 class="waiting-text"
               >
-                空闲
+                Rỗi
               </div>
             </div>
           </div>
@@ -104,26 +104,26 @@ const processCustomer = async (customer, realTime) => {
             :class="{ 'cooking': customerB.status === 'cooking', 'done': customerB.status === 'done' }"
           >
             <div class="stove-label">
-              灶位 2
+              Bếp 2
             </div>
             <div class="stove-content">
               <div
                 v-if="customerB.status === 'cooking'"
                 class="cooking-text"
               >
-                炒饭 {{ customerB.time }}s
+                Cơm chiên {{ customerB.time }}s
               </div>
               <div
                 v-if="customerB.status === 'done'"
                 class="done-text"
               >
-                ✅ 完成
+                Xong
               </div>
               <div
                 v-if="customerB.status === 'waiting'"
                 class="waiting-text"
               >
-                空闲
+                Rỗi
               </div>
             </div>
           </div>
@@ -132,35 +132,35 @@ const processCustomer = async (customer, realTime) => {
             :class="{ 'cooking': customerC.status === 'cooking', 'done': customerC.status === 'done' }"
           >
             <div class="stove-label">
-              灶位 3
+              Bếp 3
             </div>
             <div class="stove-content">
               <div
                 v-if="customerC.status === 'cooking'"
                 class="cooking-text"
               >
-                烤鱼 {{ customerC.time }}s
+                Cá nướng {{ customerC.time }}s
               </div>
               <div
                 v-if="customerC.status === 'done'"
                 class="done-text"
               >
-                ✅ 完成
+                Xong
               </div>
               <div
                 v-if="customerC.status === 'waiting'"
                 class="waiting-text"
               >
-                空闲
+                Rỗi
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 顾客 -->
+      <!-- Khách -->
       <div class="customers">
-        <h4>顾客</h4>
+        <h4>Khách</h4>
         <div class="customer-list">
           <div
             class="customer"
@@ -171,10 +171,10 @@ const processCustomer = async (customer, realTime) => {
             </div>
             <div class="customer-info">
               <div class="customer-name">
-                顾客 A
+                Khách A
               </div>
               <div class="customer-order">
-                煮面 ({{ customerA.time }}秒)
+                Nấu mì ({{ customerA.time }}s)
               </div>
             </div>
             <div
@@ -193,10 +193,10 @@ const processCustomer = async (customer, realTime) => {
             </div>
             <div class="customer-info">
               <div class="customer-name">
-                顾客 B
+                Khách B
               </div>
               <div class="customer-order">
-                炒饭 ({{ customerB.time }}秒)
+                Cơm chiên ({{ customerB.time }}s)
               </div>
             </div>
             <div
@@ -215,10 +215,10 @@ const processCustomer = async (customer, realTime) => {
             </div>
             <div class="customer-info">
               <div class="customer-name">
-                顾客 C
+                Khách C
               </div>
               <div class="customer-order">
-                烤鱼 ({{ customerC.time }}秒)
+                Cá nướng ({{ customerC.time }}s)
               </div>
             </div>
             <div
@@ -238,14 +238,14 @@ const processCustomer = async (customer, realTime) => {
         class="btn-start"
         @click="start"
       >
-        {{ isRunning ? '执行中...' : '开始' }}
+        {{ isRunning ? 'Đang chạy...' : 'Bắt đầu' }}
       </button>
       <button
         :disabled="isRunning"
         class="btn-reset"
         @click="reset"
       >
-        重置
+        Reset
       </button>
     </div>
 
@@ -254,32 +254,32 @@ const processCustomer = async (customer, realTime) => {
       class="comparison"
     >
       <div class="comparison-item">
-        <strong>同步模式：</strong> 10 秒（依次执行）
+        <strong>Đồng bộ:</strong> 10 giây (chạy lần lượt)
       </div>
       <div class="comparison-item">
-        <strong>异步模式：</strong> 约 5 秒（同时执行）
+        <strong>Bất đồng bộ:</strong> khoảng 5 giây (chạy song song)
       </div>
       <div class="tip">
-        JavaScript 用的就是异步模式——遇到耗时操作（如网络请求），不会傻等，而是先去做别的事。
+        JavaScript dùng mô hình bất đồng bộ - khi gặp thao tác tốn thời gian (như network request) sẽ không chờ ngu mà đi làm việc khác trước.
       </div>
     </div>
 
     <div class="code-display">
-      <h4>代码对比</h4>
+      <h4>So sánh code</h4>
       <div class="code-comparison">
         <div class="code-block">
-          <h5>同步（阻塞）</h5>
+          <h5>Đồng bộ (blocking)</h5>
           <pre><code>console.log("1")
-console.log("2")  // 等上面执行完
+console.log("2")  // chờ dòng trên xong
 console.log("3")
-// 输出：1, 2, 3</code></pre>
+// Output: 1, 2, 3</code></pre>
         </div>
         <div class="code-block">
-          <h5>异步（不阻塞）</h5>
+          <h5>Bất đồng bộ (non-blocking)</h5>
           <pre><code>console.log("1")
 setTimeout(() => console.log("2"), 1000)
 console.log("3")
-// 输出：1, 3, 2</code></pre>
+// Output: 1, 3, 2</code></pre>
         </div>
       </div>
     </div>

@@ -2,12 +2,12 @@
   <div class="memory-management-demo">
     <div class="demo-header">
       <span class="icon">🧠</span>
-      <span class="title">内存管理</span>
-      <span class="subtitle">不同语言的内存处理方式</span>
+      <span class="title">Quản lý bộ nhớ</span>
+      <span class="subtitle">Cách xử lý bộ nhớ của các ngôn ngữ</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">收拾房间</span>：有的房间有自动扫地机器人定期清理（GC），有的需要自己动手整理（手动管理），有的房间设计得不会变乱（所有权系统）。
+      Hãy tưởng tượng bạn <span class="highlight">dọn phòng</span>: có phòng có robot hút bụi tự động dọn định kỳ (GC), có phòng phải tự tay sắp xếp (quản lý thủ công), có phòng được thiết kế để không thể bừa bộn (ownership system).
     </div>
 
     <div class="models-container">
@@ -39,7 +39,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>GC 语言（Java、Go、Python）让开发者省心，但有性能开销。手动管理（C、C++）性能最好但容易内存泄漏。Rust 的所有权系统编译时保证安全，无运行时开销。
+      <strong>Tư tưởng cốt lõi:</strong> Ngôn ngữ có GC (Java, Go, Python) giúp dev đỡ lo, nhưng có overhead hiệu năng. Quản lý thủ công (C, C++) hiệu năng tốt nhất nhưng dễ rò rỉ bộ nhớ. Ownership system của Rust đảm bảo an toàn ở compile time, không có chi phí runtime.
     </div>
   </div>
 </template>
@@ -47,21 +47,21 @@
 <script setup>
 const models = [
   {
-    name: '垃圾回收 (GC)',
+    name: 'Garbage Collection (GC)',
     icon: '♻️',
-    description: '运行时自动回收不再使用的内存',
+    description: 'Runtime tự động thu hồi bộ nhớ không còn dùng',
     languages: ['Java', 'Go', 'Python', 'Node.js']
   },
   {
-    name: '手动管理',
+    name: 'Quản lý thủ công',
     icon: '🔧',
-    description: '开发者显式申请和释放内存',
+    description: 'Developer cấp phát và giải phóng bộ nhớ tường minh',
     languages: ['C', 'C++']
   },
   {
-    name: '所有权系统',
+    name: 'Ownership system',
     icon: '🔒',
-    description: '编译时通过规则保证内存安全',
+    description: 'Đảm bảo memory safety ở compile time qua các quy tắc',
     languages: ['Rust']
   }
 ]

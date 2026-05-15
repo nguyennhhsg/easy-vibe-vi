@@ -2,32 +2,32 @@
   <div class="developer-efficiency-demo">
     <div class="demo-header">
       <span class="icon">⏱️</span>
-      <span class="title">开发效率</span>
-      <span class="subtitle">不同语言完成相同任务的时间成本</span>
+      <span class="title">Hiệu suất phát triển</span>
+      <span class="subtitle">Chi phí thời gian khi các ngôn ngữ hoàn thành cùng một tác vụ</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">装修房子</span>：有的装修队能快速完工但质量一般（Python、Ruby），有的慢工出细活（Rust、C++），有的速度和质量都不错（Go、Node.js）。
+      Hãy tưởng tượng bạn <span class="highlight">đang sửa nhà</span>: có đội thi công nhanh nhưng chất lượng trung bình (Python, Ruby), có đội chậm mà tỉ mỉ (Rust, C++), có đội vừa nhanh vừa chất lượng (Go, Node.js).
     </div>
 
     <div class="task-selector">
-      <label>选择任务：</label>
+      <label>Chọn tác vụ:</label>
       <select v-model="selectedTask">
         <option value="rest">
           REST API
         </option>
         <option value="web">
-          Web 应用
+          Ứng dụng web
         </option>
         <option value="script">
-          数据处理脚本
+          Script xử lý dữ liệu
         </option>
       </select>
     </div>
 
     <div class="efficiency-chart">
       <div class="chart-header">
-        <span>开发时间（小时）</span>
+        <span>Thời gian phát triển (giờ)</span>
       </div>
       <div class="bars">
         <div
@@ -52,7 +52,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>初创公司选 Python/Ruby 快速验证想法，大厂选 Java/Go 平衡速度和质量。开发效率不只是写代码的速度，还包括调试、测试、维护的时间成本。
+      <strong>Tư tưởng cốt lõi:</strong> Startup chọn Python/Ruby để kiểm chứng ý tưởng nhanh, công ty lớn chọn Java/Go để cân bằng giữa tốc độ và chất lượng. Hiệu suất phát triển không chỉ là tốc độ viết code, mà còn gồm chi phí debug, test, bảo trì.
     </div>
   </div>
 </template>

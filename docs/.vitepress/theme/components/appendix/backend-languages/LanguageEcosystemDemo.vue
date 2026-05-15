@@ -2,12 +2,12 @@
   <div class="language-ecosystem-demo">
     <div class="demo-header">
       <span class="icon">🌐</span>
-      <span class="title">生态系统</span>
-      <span class="subtitle">不同语言的社区和包管理器</span>
+      <span class="title">Hệ sinh thái</span>
+      <span class="subtitle">Cộng đồng và package manager của các ngôn ngữ</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">逛超市</span>：有的超市商品种类多但质量参差（NPM），有的商品质量高但价格贵（Java Maven），有的商品精挑细选（Go Modules）。
+      Hãy tưởng tượng bạn <span class="highlight">đi siêu thị</span>: có nơi nhiều hàng nhưng chất lượng không đồng đều (NPM), có nơi hàng chất lượng cao nhưng đắt (Java Maven), có nơi hàng được tuyển chọn kỹ (Go Modules).
     </div>
 
     <div class="ecosystem-grid">
@@ -27,11 +27,11 @@
         </div>
         <div class="eco-stats">
           <div class="stat">
-            <span class="stat-label">包数量</span>
+            <span class="stat-label">Số package</span>
             <span class="stat-value">{{ eco.packages }}</span>
           </div>
           <div class="stat">
-            <span class="stat-label">特点</span>
+            <span class="stat-label">Đặc điểm</span>
             <span class="stat-value">{{ eco.feature }}</span>
           </div>
         </div>
@@ -40,7 +40,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>JavaScript/Node.js 的 NPM 是世界最大的包仓库，几乎任何功能都有现成方案。Python 的 PyPI 在 AI 领域无敌。Go 的 Go Modules 简洁可靠，没有依赖地狱。
+      <strong>Tư tưởng cốt lõi:</strong> NPM của JavaScript/Node.js là kho package lớn nhất thế giới, hầu như mọi tính năng đều có sẵn. PyPI của Python vô địch trong lĩnh vực AI. Go Modules của Go gọn gàng đáng tin, không có dependency hell.
     </div>
   </div>
 </template>
@@ -51,43 +51,43 @@ const ecosystems = [
     name: 'NPM',
     icon: '💚',
     language: 'Node.js',
-    packages: '200万+',
-    feature: '最大生态'
+    packages: '2 triệu+',
+    feature: 'Hệ sinh thái lớn nhất'
   },
   {
     name: 'PyPI',
     icon: '🐍',
     language: 'Python',
-    packages: '50万+',
-    feature: 'AI 霸主'
+    packages: '500 nghìn+',
+    feature: 'Bá chủ AI'
   },
   {
     name: 'Maven',
     icon: '☕',
     language: 'Java',
-    packages: '30万+',
-    feature: '企业级'
+    packages: '300 nghìn+',
+    feature: 'Enterprise'
   },
   {
     name: 'Go Modules',
     icon: '🐹',
     language: 'Go',
-    packages: '10万+',
-    feature: '简洁可靠'
+    packages: '100 nghìn+',
+    feature: 'Gọn, đáng tin'
   },
   {
     name: 'Cargo',
     icon: '🦀',
     language: 'Rust',
-    packages: '10万+',
-    feature: '现代化'
+    packages: '100 nghìn+',
+    feature: 'Hiện đại'
   },
   {
     name: 'RubyGems',
     icon: '💎',
     language: 'Ruby',
-    packages: '15万+',
-    feature: '优雅'
+    packages: '150 nghìn+',
+    feature: 'Thanh lịch'
   }
 ]
 </script>

@@ -15,18 +15,18 @@ const macroTaskQueue = ref([])
 const outputLog = ref([])
 
 const executionSteps = [
-  { description: '执行 console.log("1")', action: 'execute', output: '1', source: '同步' },
-  { description: '遇到 setTimeout,将回调加入宏任务队列', action: 'add-macro', task: 'console.log("2")' },
-  { description: '遇到 Promise.then,将回调加入微任务队列', action: 'add-micro', task: 'console.log("3")' },
-  { description: '执行 console.log("4")', action: 'execute', output: '4', source: '同步' },
-  { description: '遇到 setTimeout,将回调加入宏任务队列', action: 'add-macro', task: 'console.log("5")' },
-  { description: '同步代码执行完毕,检查微任务队列', action: 'check-micro' },
-  { description: '执行微任务: console.log("3")', action: 'execute-micro', output: '3', source: '微任务' },
-  { description: '微任务队列为空,检查宏任务队列', action: 'check-macro' },
-  { description: '执行宏任务: console.log("2")', action: 'execute-macro', output: '2', source: '宏任务' },
-  { description: '检查微任务队列(空)', action: 'check-micro' },
-  { description: '执行宏任务: console.log("5")', action: 'execute-macro', output: '5', source: '宏任务' },
-  { description: '所有任务执行完毕', action: 'done' }
+  { description: 'Thực thi console.log("1")', action: 'execute', output: '1', source: 'Sync' },
+  { description: 'Gặp setTimeout, đưa callback vào macrotask queue', action: 'add-macro', task: 'console.log("2")' },
+  { description: 'Gặp Promise.then, đưa callback vào microtask queue', action: 'add-micro', task: 'console.log("3")' },
+  { description: 'Thực thi console.log("4")', action: 'execute', output: '4', source: 'Sync' },
+  { description: 'Gặp setTimeout, đưa callback vào macrotask queue', action: 'add-macro', task: 'console.log("5")' },
+  { description: 'Code sync chạy xong, kiểm tra microtask queue', action: 'check-micro' },
+  { description: 'Thực thi microtask: console.log("3")', action: 'execute-micro', output: '3', source: 'Microtask' },
+  { description: 'Microtask queue rỗng, kiểm tra macrotask queue', action: 'check-macro' },
+  { description: 'Thực thi macrotask: console.log("2")', action: 'execute-macro', output: '2', source: 'Macrotask' },
+  { description: 'Kiểm tra microtask queue (rỗng)', action: 'check-micro' },
+  { description: 'Thực thi macrotask: console.log("5")', action: 'execute-macro', output: '5', source: 'Macrotask' },
+  { description: 'Tất cả task đã chạy xong', action: 'done' }
 ]
 
 const reset = () => {
@@ -99,11 +99,11 @@ const stop = () => {
 
 <template>
   <div class="task-queue-demo">
-    <h3>任务队列:宏任务 vs 微任务</h3>
+    <h3>Task queue: macrotask vs microtask</h3>
 
-    <!-- 代码展示 -->
+    <!-- Hiển thị code -->
     <div class="code-section">
-      <h4>代码示例</h4>
+      <h4>Ví dụ code</h4>
       <div class="code-display">
         <div
           v-for="(item, index) in syncCode"
@@ -122,24 +122,24 @@ const stop = () => {
           <span
             v-if="item.type === 'sync'"
             class="item-tag"
-          >同步</span>
+          >Sync</span>
           <span
             v-else-if="item.type === 'micro'"
             class="item-tag micro"
-          >微任务</span>
+          >Microtask</span>
           <span
             v-else-if="item.type === 'macro'"
             class="item-tag macro"
-          >宏任务</span>
+          >Macrotask</span>
         </div>
       </div>
     </div>
 
-    <!-- 执行过程可视化 -->
+    <!-- Trực quan hoá quá trình thực thi -->
     <div class="visualization">
-      <!-- 调用栈 -->
+      <!-- Call stack -->
       <div class="stack-panel">
-        <h4>调用栈 (正在执行)</h4>
+        <h4>Call stack (đang thực thi)</h4>
         <div class="stack-content">
           <div
             v-if="currentStep < executionSteps.length"
@@ -151,15 +151,15 @@ const stop = () => {
             v-else
             class="current-action done"
           >
-            执行完成
+            Đã thực thi xong
           </div>
         </div>
       </div>
 
-      <!-- 微任务队列 -->
+      <!-- Microtask queue -->
       <div class="queue-panel micro">
         <h4>
-          微任务队列
+          Microtask queue
           <span class="badge">Microtask</span>
         </h4>
         <div class="queue-content">
@@ -177,13 +177,13 @@ const stop = () => {
                 v-if="task.status === 'ready'"
                 class="task-status"
               >
-                ✅ 就绪
+                Sẵn sàng
               </div>
               <div
                 v-else
                 class="task-status"
               >
-                ⏳ 等待
+                Đang chờ
               </div>
             </div>
           </transition-group>
@@ -191,15 +191,15 @@ const stop = () => {
             v-if="microTaskQueue.length === 0"
             class="empty-queue"
           >
-            队列为空
+            Hàng đợi rỗng
           </div>
         </div>
       </div>
 
-      <!-- 宏任务队列 -->
+      <!-- Macrotask queue -->
       <div class="queue-panel macro">
         <h4>
-          宏任务队列
+          Macrotask queue
           <span class="badge">Macrotask</span>
         </h4>
         <div class="queue-content">
@@ -217,13 +217,13 @@ const stop = () => {
                 v-if="task.status === 'ready'"
                 class="task-status"
               >
-                ✅ 就绪
+                Sẵn sàng
               </div>
               <div
                 v-else
                 class="task-status"
               >
-                ⏳ 等待
+                Đang chờ
               </div>
             </div>
           </transition-group>
@@ -231,21 +231,21 @@ const stop = () => {
             v-if="macroTaskQueue.length === 0"
             class="empty-queue"
           >
-            队列为空
+            Hàng đợi rỗng
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 输出日志 -->
+    <!-- Output log -->
     <div class="output-section">
-      <h4>输出日志 (执行顺序)</h4>
+      <h4>Output log (thứ tự thực thi)</h4>
       <div class="output-log">
         <div
           v-if="outputLog.length === 0"
           class="empty-log"
         >
-          等待输出...
+          Đang chờ output...
         </div>
         <transition-group name="output">
           <div
@@ -260,61 +260,61 @@ const stop = () => {
       </div>
     </div>
 
-    <!-- 控制按钮 -->
+    <!-- Nút điều khiển -->
     <div class="controls">
       <button
         :disabled="isAnimating"
         class="btn-play"
         @click="play"
       >
-        {{ isAnimating ? '执行中...' : '▶ 自动演示' }}
+        {{ isAnimating ? 'Đang chạy...' : 'Tự chạy demo' }}
       </button>
       <button
         :disabled="isAnimating || currentStep >= executionSteps.length"
         class="btn-step"
         @click="nextStep"
       >
-        ⏭ 单步执行
+        Chạy từng bước
       </button>
       <button
         :disabled="!isAnimating"
         class="btn-stop"
         @click="stop"
       >
-        ⏸ 停止
+        Dừng
       </button>
       <button
         :disabled="isAnimating"
         class="btn-reset"
         @click="reset"
       >
-        🔄 重置
+        Reset
       </button>
     </div>
 
-    <!-- 执行规则 -->
+    <!-- Quy tắc thực thi -->
     <div class="rules-box">
-      <h4>执行顺序规则</h4>
+      <h4>Quy tắc thứ tự thực thi</h4>
       <div class="rule-list">
         <div class="rule-item">
           <span class="rule-number">1</span>
-          <span class="rule-text">执行所有同步代码</span>
+          <span class="rule-text">Chạy hết code đồng bộ (sync)</span>
         </div>
         <div class="rule-item">
           <span class="rule-number">2</span>
-          <span class="rule-text">执行微任务队列中的所有任务</span>
+          <span class="rule-text">Chạy hết các task trong microtask queue</span>
         </div>
         <div class="rule-item">
           <span class="rule-number">3</span>
-          <span class="rule-text">执行一个宏任务</span>
+          <span class="rule-text">Chạy một macrotask</span>
         </div>
         <div class="rule-item">
           <span class="rule-number">4</span>
-          <span class="rule-text">重复步骤 2-3</span>
+          <span class="rule-text">Lặp lại bước 2-3</span>
         </div>
       </div>
       <p class="highlight">
-        <strong>核心要点:</strong> 微任务优先级高于宏任务。每次执行完一个宏任务后,都会检查并执行所有微任务,然后再执行下一个宏任务。
+        <strong>Điểm cốt lõi:</strong> Microtask có ưu tiên cao hơn macrotask. Sau khi chạy xong một macrotask, runtime sẽ kiểm tra và chạy hết microtask trước khi sang macrotask tiếp theo.
       </p>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="comparison-demo">
     <h4 style="margin: 0 0 12px 0; color: #1a1a2e">
-      🔐 HTTP vs HTTPS 数据传输对比
+      🔐 So sánh truyền dữ liệu HTTP vs HTTPS
     </h4>
     <div class="control-row">
       <button
@@ -9,26 +9,26 @@
         :class="{ active: mode === 'http' }"
         @click="mode = 'http'"
       >
-        HTTP（明文）
+        HTTP (plain text)
       </button>
       <button
         class="mode-btn https"
         :class="{ active: mode === 'https' }"
         @click="mode = 'https'"
       >
-        HTTPS（加密）
+        HTTPS (mã hóa)
       </button>
       <button class="send-btn" :disabled="isSending" @click="sendData">
-        {{ isSending ? '传输中...' : '发送数据' }}
+        {{ isSending ? 'Đang truyền...' : 'Gửi dữ liệu' }}
       </button>
     </div>
 
     <div class="flow-area">
       <div class="endpoint">
         <div class="ep-icon">💻</div>
-        <div class="ep-label">浏览器</div>
+        <div class="ep-label">Trình duyệt</div>
         <div class="ep-data original">
-          <div class="data-title">原始数据</div>
+          <div class="data-title">Dữ liệu gốc</div>
           <code>{{ originalData }}</code>
         </div>
       </div>
@@ -36,7 +36,7 @@
       <div class="transmission">
         <div class="wire" :class="mode">
           <div class="wire-label">
-            {{ mode === 'http' ? '🔓 明文传输' : '🔒 加密传输' }}
+            {{ mode === 'http' ? '🔓 Truyền plain text' : '🔒 Truyền có mã hóa' }}
           </div>
           <div
             class="packet"
@@ -47,14 +47,14 @@
         </div>
         <div v-if="mode === 'http'" class="hacker-box">
           <div class="hacker-icon">🕵️</div>
-          <div class="hacker-label">中间人可窃听</div>
+          <div class="hacker-label">Man-in-the-middle nghe lén được</div>
           <div v-if="sendDone" class="hacker-sees">
             <code>{{ originalData }}</code>
           </div>
         </div>
         <div v-else class="hacker-box blocked">
           <div class="hacker-icon">🕵️</div>
-          <div class="hacker-label">中间人无法解密</div>
+          <div class="hacker-label">MITM không giải mã được</div>
           <div v-if="sendDone" class="hacker-sees encrypted">
             <code>{{ encryptedData }}</code>
           </div>
@@ -63,9 +63,9 @@
 
       <div class="endpoint">
         <div class="ep-icon">🖥️</div>
-        <div class="ep-label">服务器</div>
+        <div class="ep-label">Server</div>
         <div v-if="sendDone" class="ep-data received">
-          <div class="data-title">收到数据</div>
+          <div class="data-title">Đã nhận</div>
           <code>{{ originalData }}</code>
         </div>
       </div>
@@ -75,7 +75,7 @@
       <table>
         <thead>
           <tr>
-            <th>对比项</th>
+            <th>Tiêu chí</th>
             <th>HTTP</th>
             <th>HTTPS</th>
           </tr>
@@ -99,18 +99,18 @@ const mode = ref('http')
 const isSending = ref(false)
 const sendDone = ref(false)
 
-const originalData = 'password=MySecret123&user=zhangsan'
-const encryptedData = 'a7f2c9...3b8e1d（密文）'
+const originalData = 'password=MySecret123&user=nguyenvana'
+const encryptedData = 'a7f2c9...3b8e1d (ciphertext)'
 
 const transmittedData = ref('')
 
 const compareRows = [
-  { label: '端口', http: '80', https: '443' },
-  { label: '数据加密', http: '无（明文传输）', https: 'TLS 对称加密' },
-  { label: '身份验证', http: '无', https: 'CA 证书验证服务器身份' },
-  { label: '数据完整性', http: '无保障', https: 'MAC 校验防篡改' },
-  { label: 'SEO 影响', http: '搜索引擎降权', https: '搜索引擎优先收录' },
-  { label: '性能开销', http: '无额外开销', https: 'TLS 握手增加约 1-2 RTT' }
+  { label: 'Port', http: '80', https: '443' },
+  { label: 'Mã hóa dữ liệu', http: 'Không (plain text)', https: 'TLS mã hóa đối xứng' },
+  { label: 'Xác thực danh tính', http: 'Không có', https: 'Chứng chỉ CA xác thực server' },
+  { label: 'Toàn vẹn dữ liệu', http: 'Không bảo đảm', https: 'MAC chống chỉnh sửa' },
+  { label: 'Ảnh hưởng SEO', http: 'Bị search engine hạ rank', https: 'Được search engine ưu tiên' },
+  { label: 'Chi phí hiệu năng', http: 'Không tốn thêm', https: 'TLS handshake tốn thêm 1-2 RTT' }
 ]
 
 async function sendData() {

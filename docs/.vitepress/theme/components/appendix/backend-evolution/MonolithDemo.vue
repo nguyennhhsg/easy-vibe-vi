@@ -2,8 +2,8 @@
   <div class="monolith-demo">
     <div class="demo-header">
       <span class="icon">🏢</span>
-      <span class="title">单体架构演示</span>
-      <span class="subtitle">观察单体应用如何处理请求</span>
+      <span class="title">Demo kiến trúc monolith</span>
+      <span class="subtitle">Quan sát cách ứng dụng monolith xử lý request</span>
     </div>
 
     <div class="monolith-diagram">
@@ -12,7 +12,7 @@
         :class="{ crashed: hasCrashed }"
       >
         <div class="monolith-header">
-          单体应用进程
+          Process ứng dụng monolith
         </div>
         <div class="modules-container">
           <div
@@ -41,7 +41,7 @@
             🗄️
           </div>
           <div class="db-label">
-            共享数据库
+            Database dùng chung
           </div>
         </div>
       </div>
@@ -65,25 +65,25 @@
         class="control-btn"
         @click="simulateNormalRequest"
       >
-        正常请求
+        Request bình thường
       </button>
       <button
         class="control-btn danger"
         @click="simulateCrash"
       >
-        模拟模块故障
+        Mô phỏng module lỗi
       </button>
       <button
         class="control-btn"
         @click="reset"
       >
-        重置
+        Reset
       </button>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>所有模块在同一个进程中运行，内存共享，但一个模块崩溃可能导致整个进程挂掉（雪崩效应）。
+      <strong>Tư tưởng cốt lõi:</strong> Tất cả module chạy trong cùng một process, dùng chung bộ nhớ, nhưng một module crash có thể kéo cả process sập (hiệu ứng dây chuyền).
     </div>
   </div>
 </template>
@@ -92,10 +92,10 @@
 import { ref } from 'vue'
 
 const modules = ref([
-  { name: '用户模块', icon: '👤', status: 'healthy', statusText: '健康' },
-  { name: '订单模块', icon: '📦', status: 'healthy', statusText: '健康' },
-  { name: '支付模块', icon: '💳', status: 'healthy', statusText: '健康' },
-  { name: '库存模块', icon: '🏭', status: 'healthy', statusText: '健康' }
+  { name: 'Module User', icon: '👤', status: 'healthy', statusText: 'Khỏe' },
+  { name: 'Module Order', icon: '📦', status: 'healthy', statusText: 'Khỏe' },
+  { name: 'Module Payment', icon: '💳', status: 'healthy', statusText: 'Khỏe' },
+  { name: 'Module Inventory', icon: '🏭', status: 'healthy', statusText: 'Khỏe' }
 ])
 
 const requests = ref([])
@@ -105,7 +105,7 @@ const activeModule = ref(null)
 const requestId = ref(0)
 
 const simulateNormalRequest = () => {
-  const targets = ['用户模块', '订单模块', '支付模块', '库存模块']
+  const targets = ['Module User', 'Module Order', 'Module Payment', 'Module Inventory']
   const target = targets[Math.floor(Math.random() * targets.length)]
 
   activeModule.value = target
@@ -127,14 +127,14 @@ const simulateNormalRequest = () => {
 }
 
 const simulateCrash = () => {
-  const targetModule = '订单模块'
+  const targetModule = 'Module Order'
   hasCrashed.value = true
   crashedModule.value = targetModule
 
   const module = modules.value.find(m => m.name === targetModule)
   if (module) {
     module.status = 'crashed'
-    module.statusText = '已崩溃'
+    module.statusText = 'Đã crash'
   }
 
   // Cascade effect - other modules become unavailable
@@ -142,7 +142,7 @@ const simulateCrash = () => {
     modules.value.forEach(m => {
       if (m.name !== targetModule) {
         m.status = 'affected'
-        m.statusText = '受影响'
+        m.statusText = 'Bị ảnh hưởng'
       }
     })
   }, 500)
@@ -156,7 +156,7 @@ const reset = () => {
 
   modules.value.forEach(m => {
     m.status = 'healthy'
-    m.statusText = '健康'
+    m.statusText = 'Khỏe'
   })
 }
 </script>

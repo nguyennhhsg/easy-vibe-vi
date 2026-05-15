@@ -1,10 +1,10 @@
 <template>
   <div class="cert-chain-demo">
     <h4 style="margin: 0 0 12px 0; color: #1a1a2e">
-      🔗 证书信任链可视化
+      🔗 Trực quan chain of trust chứng chỉ
     </h4>
     <p class="intro-text">
-      点击每一层证书，查看它的详细信息和在信任链中的角色。
+      Bấm vào từng tầng chứng chỉ để xem chi tiết và vai trò của nó trong chain of trust.
     </p>
 
     <div class="chain-container">
@@ -20,7 +20,7 @@
         <div class="cert-title">{{ cert.title }}</div>
         <div class="cert-subtitle">{{ cert.subtitle }}</div>
         <div v-if="idx < certs.length - 1" class="chain-arrow">
-          <span class="arrow-text">签发</span>
+          <span class="arrow-text">Ký phát</span>
           <span class="arrow-symbol">↓</span>
         </div>
       </div>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="verify-box">
-      <div class="verify-title">🔍 浏览器验证流程</div>
+      <div class="verify-title">🔍 Quy trình xác thực của trình duyệt</div>
       <div class="verify-steps">
         <div v-for="(s, i) in verifySteps" :key="i" class="verify-step">
           <span class="verify-num">{{ i + 1 }}</span>
@@ -65,56 +65,56 @@ const selectedIdx = ref(0)
 const certs = [
   {
     icon: '🏛️',
-    title: '根证书（Root CA）',
-    subtitle: '信任的起点',
+    title: 'Chứng chỉ gốc (Root CA)',
+    subtitle: 'Điểm neo niềm tin',
     color: '#c62828',
     explain:
-      '根证书是整个信任链的锚点。它由根证书颁发机构自签名，预装在操作系统和浏览器中。全球只有少数几十个根 CA，它们的安全性由严格的审计和物理安全措施保障。根 CA 的私钥通常存储在离线的硬件安全模块（HSM）中。',
+      'Root CA là điểm neo của toàn bộ chain of trust. Nó được CA gốc tự ký và preinstall sẵn trong hệ điều hành, trình duyệt. Trên thế giới chỉ có vài chục root CA, độ an toàn được bảo đảm bằng audit nghiêm ngặt và các biện pháp bảo vệ vật lý. Private key của root CA thường được lưu offline trong HSM.',
     details: [
-      { label: '签发者', value: 'DigiCert Global Root G2（自签名）' },
-      { label: '有效期', value: '25 年（2013 - 2038）' },
-      { label: '密钥长度', value: 'RSA 2048 位' },
-      { label: '存储位置', value: '操作系统 / 浏览器内置信任库' },
-      { label: '数量级', value: '全球约 150 个受信根证书' }
+      { label: 'Người ký', value: 'DigiCert Global Root G2 (tự ký)' },
+      { label: 'Thời hạn', value: '25 năm (2013 - 2038)' },
+      { label: 'Độ dài khóa', value: 'RSA 2048 bit' },
+      { label: 'Nơi lưu', value: 'Trust store sẵn trong OS / trình duyệt' },
+      { label: 'Số lượng', value: 'Trên thế giới có khoảng 150 root CA được tin' }
     ]
   },
   {
     icon: '🏢',
-    title: '中间证书（Intermediate CA）',
-    subtitle: '信任的桥梁',
+    title: 'Chứng chỉ trung gian (Intermediate CA)',
+    subtitle: 'Cầu nối niềm tin',
     color: '#e65100',
     explain:
-      '中间证书由根 CA 签发，作为根证书和服务器证书之间的桥梁。这种分层设计的好处是：即使中间证书被泄露，也可以单独吊销它而不影响根证书。中间 CA 负责日常的证书签发工作，根 CA 的私钥因此可以保持离线状态。',
+      'Intermediate CA do root CA ký, đóng vai trò cầu nối giữa root và server certificate. Lợi ích của thiết kế phân tầng: nếu intermediate bị lộ vẫn có thể revoke riêng mà không ảnh hưởng root. Intermediate lo cấp chứng chỉ hằng ngày, còn private key của root có thể luôn ở trạng thái offline.',
     details: [
-      { label: '签发者', value: 'DigiCert Global Root G2' },
-      { label: '持有者', value: 'DigiCert SHA2 Extended Validation Server CA' },
-      { label: '有效期', value: '10 年' },
-      { label: '用途', value: '签发终端实体（服务器）证书' },
-      { label: '可吊销', value: '是（通过 CRL 或 OCSP）' }
+      { label: 'Người ký', value: 'DigiCert Global Root G2' },
+      { label: 'Chủ sở hữu', value: 'DigiCert SHA2 Extended Validation Server CA' },
+      { label: 'Thời hạn', value: '10 năm' },
+      { label: 'Mục đích', value: 'Ký phát chứng chỉ end-entity (server)' },
+      { label: 'Có thể revoke', value: 'Có (qua CRL hoặc OCSP)' }
     ]
   },
   {
     icon: '🌐',
-    title: '服务器证书（Server Certificate）',
-    subtitle: '网站的身份证',
+    title: 'Chứng chỉ server',
+    subtitle: 'CMND của website',
     color: '#1565c0',
     explain:
-      '服务器证书是网站向浏览器证明自己身份的凭证。它由中间 CA 签发，包含网站的域名、公钥和有效期等信息。当浏览器收到这张证书后，会沿着信任链向上验证，直到找到一个已经信任的根证书为止。',
+      'Server certificate là thứ website dùng để chứng minh danh tính với trình duyệt. Nó do intermediate CA ký, chứa domain, public key và thời hạn của website. Khi trình duyệt nhận được certificate, nó lần ngược chain để xác thực cho tới khi gặp một root certificate đã tin cậy.',
     details: [
-      { label: '签发者', value: 'DigiCert SHA2 Extended Validation Server CA' },
-      { label: '持有者', value: 'www.example.com' },
-      { label: '有效期', value: '1 年（行业标准）' },
-      { label: '包含公钥', value: 'ECDSA P-256 公钥' },
-      { label: '验证级别', value: 'EV（扩展验证）/ DV（域名验证）' }
+      { label: 'Người ký', value: 'DigiCert SHA2 Extended Validation Server CA' },
+      { label: 'Chủ sở hữu', value: 'www.example.com' },
+      { label: 'Thời hạn', value: '1 năm (chuẩn ngành)' },
+      { label: 'Public key', value: 'Public key ECDSA P-256' },
+      { label: 'Mức xác thực', value: 'EV (Extended Validation) / DV (Domain Validation)' }
     ]
   }
 ]
 
 const verifySteps = [
-  '浏览器收到服务器证书，读取其签发者信息',
-  '找到中间证书，用中间 CA 的公钥验证服务器证书的签名',
-  '再用根 CA 的公钥验证中间证书的签名',
-  '确认根证书在本地信任库中 → 整条链验证通过'
+  'Trình duyệt nhận server certificate, đọc thông tin người ký',
+  'Tìm intermediate certificate, dùng public key của intermediate CA để verify chữ ký của server cert',
+  'Tiếp tục dùng public key của root CA để verify chữ ký của intermediate cert',
+  'Xác nhận root cert có trong trust store local → cả chain hợp lệ'
 ]
 </script>
 

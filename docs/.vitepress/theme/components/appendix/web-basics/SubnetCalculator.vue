@@ -2,17 +2,17 @@
   <div class="subnet-calculator">
     <div class="calculator-input">
       <div class="input-group">
-        <label class="input-label">IP 地址</label>
+        <label class="input-label">Địa chỉ IP</label>
         <input
           v-model="ipAddress"
           type="text"
-          placeholder="例如: 192.168.1.0"
+          placeholder="Ví dụ: 192.168.1.0"
           class="ip-input"
         >
       </div>
 
       <div class="input-group">
-        <label class="input-label">子网掩码</label>
+        <label class="input-label">Subnet mask</label>
         <select
           v-model="cidr"
           class="cidr-select"
@@ -31,7 +31,7 @@
         class="calculate-btn"
         @click="calculate"
       >
-        计算
+        Tính toán
       </button>
     </div>
 
@@ -41,12 +41,12 @@
     >
       <div class="result-section">
         <div class="section-title">
-          基本信息
+          Thông tin cơ bản
         </div>
         <div class="result-grid">
           <div class="result-item">
             <div class="result-label">
-              网络地址
+              Network address
             </div>
             <div class="result-value">
               {{ results.network }}
@@ -54,7 +54,7 @@
           </div>
           <div class="result-item">
             <div class="result-label">
-              广播地址
+              Broadcast address
             </div>
             <div class="result-value">
               {{ results.broadcast }}
@@ -62,7 +62,7 @@
           </div>
           <div class="result-item">
             <div class="result-label">
-              子网掩码
+              Subnet mask
             </div>
             <div class="result-value">
               {{ results.mask }}
@@ -70,7 +70,7 @@
           </div>
           <div class="result-item">
             <div class="result-label">
-              可用主机数
+              Số host khả dụng
             </div>
             <div class="result-value">
               {{ results.hosts }}
@@ -81,12 +81,12 @@
 
       <div class="result-section">
         <div class="section-title">
-          IP 范围
+          Dải IP
         </div>
         <div class="range-display">
           <div class="range-item">
             <div class="range-label">
-              起始 IP
+              IP đầu
             </div>
             <div class="range-value">
               {{ results.firstHost }}
@@ -97,7 +97,7 @@
           </div>
           <div class="range-item">
             <div class="range-label">
-              结束 IP
+              IP cuối
             </div>
             <div class="range-value">
               {{ results.lastHost }}
@@ -108,12 +108,12 @@
 
       <div class="result-section">
         <div class="section-title">
-          二进制表示
+          Biểu diễn nhị phân
         </div>
         <div class="binary-display">
           <div class="binary-row">
             <div class="binary-label">
-              IP 地址
+              Địa chỉ IP
             </div>
             <div class="binary-value">
               {{ results.binaryIp }}
@@ -121,7 +121,7 @@
           </div>
           <div class="binary-row">
             <div class="binary-label">
-              子网掩码
+              Subnet mask
             </div>
             <div class="binary-value">
               {{ results.binaryMask }}
@@ -129,7 +129,7 @@
           </div>
           <div class="binary-row">
             <div class="binary-label">
-              网络地址
+              Network address
             </div>
             <div class="binary-value">
               {{ results.binaryNetwork }}
@@ -140,7 +140,7 @@
 
       <div class="result-section">
         <div class="section-title">
-          子网类型
+          Loại subnet
         </div>
         <div class="subnet-info">
           <div
@@ -158,7 +158,7 @@
 
     <div class="example-presets">
       <div class="presets-title">
-        常见子网示例
+        Ví dụ subnet thường gặp
       </div>
       <div class="presets-grid">
         <button
@@ -174,25 +174,25 @@
 
     <div class="info-box">
       <div class="info-title">
-        💡 子网划分知识点
+        💡 Kiến thức về subnetting
       </div>
       <div class="info-content">
         <div class="info-item">
-          <strong>什么是子网？</strong>
-          将一个大网络分割成更小的网络，提高地址利用率和网络性能。
+          <strong>Subnet là gì?</strong>
+          Chia một mạng lớn thành các mạng nhỏ hơn để nâng cao hiệu suất sử dụng địa chỉ và hiệu năng mạng.
         </div>
         <div class="info-item">
-          <strong>CIDR 表示法</strong>
-          /24 表示前 24 位是网络位，后 8 位是主机位。
+          <strong>Ký hiệu CIDR</strong>
+          /24 nghĩa là 24 bit đầu là phần network, 8 bit sau là phần host.
         </div>
         <div class="info-item">
-          <strong>常用子网掩码</strong>
+          <strong>Subnet mask thường gặp</strong>
           <br>
-          /8 = 255.0.0.0 (A 类网络)
+          /8 = 255.0.0.0 (mạng lớp A)
           <br>
-          /16 = 255.255.0.0 (B 类网络)
+          /16 = 255.255.0.0 (mạng lớp B)
           <br>
-          /24 = 255.255.255.0 (C 类网络)
+          /24 = 255.255.255.0 (mạng lớp C)
         </div>
       </div>
     </div>
@@ -207,17 +207,17 @@ const cidr = ref(24)
 const results = ref(null)
 
 const presets = [
-  { name: '小型网络 /24', ip: '192.168.1.0', cidr: 24 },
-  { name: '家庭网络 /26', ip: '192.168.1.0', cidr: 26 },
-  { name: '大型网络 /16', ip: '192.168.0.0', cidr: 16 },
-  { name: '超大型网络 /8', ip: '10.0.0.0', cidr: 8 }
+  { name: 'Mạng nhỏ /24', ip: '192.168.1.0', cidr: 24 },
+  { name: 'Mạng gia đình /26', ip: '192.168.1.0', cidr: 26 },
+  { name: 'Mạng lớn /16', ip: '192.168.0.0', cidr: 16 },
+  { name: 'Mạng siêu lớn /8', ip: '10.0.0.0', cidr: 8 }
 ]
 
 const calculate = () => {
   const ip = ipAddress.value.split('.').map(Number)
   const mask = cidr.value
 
-  // 计算子网掩码
+  // Tính subnet mask
   const maskBits = Array(32)
     .fill(0)
     .map((_, i) => (i < mask ? 1 : 0))
@@ -228,10 +228,10 @@ const calculate = () => {
     )
   }
 
-  // 计算网络地址
+  // Tính network address
   const networkBytes = ip.map((byte, i) => byte & maskBytes[i])
 
-  // 计算广播地址
+  // Tính broadcast address
   const hostBits = 32 - mask
   const broadcastBytes = [...networkBytes]
   if (hostBits <= 8) {
@@ -250,17 +250,17 @@ const calculate = () => {
     broadcastBytes[3] = 255
   }
 
-  // 计算可用主机范围
+  // Tính dải host khả dụng
   const firstHost = [...broadcastBytes]
   firstHost[3] = networkBytes[3] + 1
 
   const lastHost = [...broadcastBytes]
   lastHost[3] = broadcastBytes[3] - 1
 
-  // 可用主机数
+  // Số host khả dụng
   const hosts = Math.pow(2, hostBits) - 2
 
-  // 二进制表示
+  // Biểu diễn nhị phân
   const toBinary = (bytes) =>
     bytes.map((b) => b.toString(2).padStart(8, '0')).join('.')
 
@@ -284,10 +284,10 @@ const applyPreset = (preset) => {
 }
 
 const getSubnetType = (mask) => {
-  if (mask <= 8) return 'A 类网络'
-  if (mask <= 16) return 'B 类网络'
-  if (mask <= 24) return 'C 类网络'
-  return '小型子网'
+  if (mask <= 8) return 'Mạng lớp A'
+  if (mask <= 16) return 'Mạng lớp B'
+  if (mask <= 24) return 'Mạng lớp C'
+  return 'Subnet nhỏ'
 }
 
 const getSubnetClass = (mask) => {
@@ -298,13 +298,13 @@ const getSubnetClass = (mask) => {
 }
 
 const getSubnetDescription = (mask) => {
-  if (mask <= 8) return '超大型网络，适合互联网服务提供商'
-  if (mask <= 16) return '大型网络，适合公司或机构'
-  if (mask <= 24) return '标准网络，适合小型企业或家庭'
-  return '小型子网，适合特定部门或用途'
+  if (mask <= 8) return 'Mạng siêu lớn, phù hợp cho nhà cung cấp dịch vụ internet'
+  if (mask <= 16) return 'Mạng lớn, phù hợp cho công ty hoặc tổ chức'
+  if (mask <= 24) return 'Mạng chuẩn, phù hợp cho doanh nghiệp nhỏ hoặc gia đình'
+  return 'Subnet nhỏ, phù hợp cho phòng ban hoặc mục đích cụ thể'
 }
 
-// 初始计算
+// Tính lần đầu
 calculate()
 </script>
 

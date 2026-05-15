@@ -1,16 +1,16 @@
 <!--
   JQueryVsStateDemo.vue
-  用可视化方式解释：jQuery = 手动改 DOM；框架 = 改 State 自动同步
+  Trực quan: jQuery = sửa DOM thủ công; framework = sửa state, tự động đồng bộ
 -->
 <template>
   <div class="jq-demo">
     <div class="header">
       <div class="title">
-        什么是 jQuery？用“购物车数量”秒懂
+        jQuery là gì? Hiểu ngay qua "số lượng giỏ hàng"
       </div>
       <div class="subtitle">
-        左边：像 jQuery 一样手动改页面（容易漏）。右边：像 Vue/React
-        一样只改状态。
+        Bên trái: như jQuery, sửa trang thủ công (dễ quên). Bên phải: như Vue/React,
+        chỉ sửa state.
       </div>
     </div>
 
@@ -18,11 +18,11 @@
       <!-- jQuery-like -->
       <div class="pane">
         <div class="pane-title">
-          jQuery 思路：到处改 DOM
+          Tư duy jQuery: sửa DOM khắp nơi
         </div>
         <div class="mock-app">
           <div class="topbar">
-            <span>🛒 角标：</span>
+            <span>🛒 Badge:</span>
             <span
               class="badge"
               :class="{ wrong: jqBadgeWrong }"
@@ -32,7 +32,7 @@
           </div>
           <div class="content">
             <div class="row">
-              购物车页数量：
+              Số lượng trong trang giỏ hàng:
               <span
                 class="num"
                 :class="{ wrong: jqPageWrong }"
@@ -41,9 +41,9 @@
               }}</span>
             </div>
             <div class="row">
-              结算按钮：
+              Nút thanh toán:
               <button class="checkout">
-                去结算 ({{ jqButtonLabel }})
+                Thanh toán ({{ jqButtonLabel }})
               </button>
             </div>
           </div>
@@ -51,20 +51,20 @@
 
         <div class="controls">
           <div class="control-title">
-            模拟“你写的命令”
+            Mô phỏng "các lệnh bạn viết"
           </div>
           <div class="btns">
             <button @click="jqIncreaseData">
-              数据 +1（但还没改页面）
+              Dữ liệu +1 (nhưng chưa sửa trang)
             </button>
             <button @click="jqUpdateBadge">
-              改角标
+              Sửa badge
             </button>
             <button @click="jqUpdateCartPage">
-              改购物车页
+              Sửa trang giỏ hàng
             </button>
             <button @click="jqUpdateCheckoutButton">
-              改结算按钮
+              Sửa nút thanh toán
             </button>
           </div>
 
@@ -77,13 +77,13 @@
 
           <div class="log">
             <div class="log-title">
-              命令日志
+              Log lệnh
             </div>
             <div
               v-if="jqLogs.length === 0"
               class="log-empty"
             >
-              （还没有操作）
+              (chưa có thao tác nào)
             </div>
             <div
               v-else
@@ -104,21 +104,21 @@
       <!-- State-driven -->
       <div class="pane">
         <div class="pane-title">
-          Vue/React 思路：只改 State
+          Tư duy Vue/React: chỉ sửa State
         </div>
         <div class="mock-app">
           <div class="topbar">
-            <span>🛒 角标：</span>
+            <span>🛒 Badge:</span>
             <span class="badge">{{ state }}</span>
           </div>
           <div class="content">
             <div class="row">
-              购物车页数量： <span class="num">{{ state }}</span>
+              Số lượng trong trang giỏ hàng: <span class="num">{{ state }}</span>
             </div>
             <div class="row">
-              结算按钮：
+              Nút thanh toán:
               <button class="checkout">
-                去结算 ({{ state }} 件)
+                Thanh toán ({{ state }} sản phẩm)
               </button>
             </div>
           </div>
@@ -126,7 +126,7 @@
 
         <div class="controls">
           <div class="control-title">
-            你只需要做一件事
+            Bạn chỉ cần làm một việc duy nhất
           </div>
           <div class="btns">
             <button
@@ -139,22 +139,22 @@
               class="secondary"
               @click="resetAll"
             >
-              重置
+              Reset
             </button>
           </div>
           <div class="hint ok">
-            State 变了，界面三处会自动同步，不需要你“手动找 DOM 去改”。
+            State đổi, ba chỗ trên giao diện tự đồng bộ, không cần bạn "tìm DOM để sửa thủ công".
           </div>
 
           <div class="mini">
             <div class="mini-title">
-              这里的两个新词
+              Hai từ mới ở đây
             </div>
             <div class="mini-item">
-              <strong>DOM</strong>：浏览器里的页面结构（按钮/文字/图片都在里面）
+              <strong>DOM</strong>: cấu trúc trang trong trình duyệt (nút, chữ, hình đều ở trong đó)
             </div>
             <div class="mini-item">
-              <strong>State</strong>：页面的数据（比如购物车数量）
+              <strong>State</strong>: dữ liệu của trang (ví dụ như số lượng giỏ hàng)
             </div>
           </div>
         </div>
@@ -172,12 +172,12 @@ const state = ref(1)
 const jqData = ref(1)
 const jqBadge = ref(1)
 const jqPage = ref(1)
-const jqButtonLabel = ref('1 件')
+const jqButtonLabel = ref('1 sản phẩm')
 const jqLogs = ref([])
 
 const log = (txt) => {
   jqLogs.value.unshift(
-    `${new Date().toLocaleTimeString('zh-CN', {
+    `${new Date().toLocaleTimeString('vi-VN', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit'
@@ -188,26 +188,26 @@ const log = (txt) => {
 
 const jqIncreaseData = () => {
   jqData.value += 1
-  log(`数据 +1（现在真实数据 = ${jqData.value}）`)
+  log(`Dữ liệu +1 (dữ liệu thật giờ = ${jqData.value})`)
 }
 const jqUpdateBadge = () => {
   jqBadge.value = jqData.value
-  log(`更新角标 DOM = ${jqBadge.value}`)
+  log(`Cập nhật DOM badge = ${jqBadge.value}`)
 }
 const jqUpdateCartPage = () => {
   jqPage.value = jqData.value
-  log(`更新购物车页 DOM = ${jqPage.value}`)
+  log(`Cập nhật DOM trang giỏ hàng = ${jqPage.value}`)
 }
 const jqUpdateCheckoutButton = () => {
-  jqButtonLabel.value = `${jqData.value} 件`
-  log(`更新结算按钮 DOM = ${jqButtonLabel.value}`)
+  jqButtonLabel.value = `${jqData.value} sản phẩm`
+  log(`Cập nhật DOM nút thanh toán = ${jqButtonLabel.value}`)
 }
 
 const jqInconsistent = computed(() => {
   return (
     jqBadge.value !== jqData.value ||
     jqPage.value !== jqData.value ||
-    jqButtonLabel.value !== `${jqData.value} 件`
+    jqButtonLabel.value !== `${jqData.value} sản phẩm`
   )
 })
 
@@ -215,8 +215,8 @@ const jqBadgeWrong = computed(() => jqBadge.value !== jqData.value)
 const jqPageWrong = computed(() => jqPage.value !== jqData.value)
 
 const jqHint = computed(() => {
-  if (!jqInconsistent.value) return '✅ 三处显示一致（恭喜你都改对了）'
-  return '⚠️ 数据和页面不一致：你可能漏更新了某一处 DOM（真实项目里这就是 bug）'
+  if (!jqInconsistent.value) return '✅ Ba chỗ hiển thị đồng nhất (xin chúc mừng, bạn đã sửa hết)'
+  return '⚠️ Dữ liệu và trang không khớp: có thể bạn quên cập nhật một chỗ DOM nào đó (trong dự án thật đây chính là bug)'
 })
 
 const resetAll = () => {
@@ -224,7 +224,7 @@ const resetAll = () => {
   jqData.value = 1
   jqBadge.value = 1
   jqPage.value = 1
-  jqButtonLabel.value = '1 件'
+  jqButtonLabel.value = '1 sản phẩm'
   jqLogs.value = []
 }
 </script>

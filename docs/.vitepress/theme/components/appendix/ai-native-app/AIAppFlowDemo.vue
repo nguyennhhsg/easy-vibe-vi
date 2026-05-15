@@ -1,8 +1,8 @@
 <template>
   <div class="flow-demo">
     <div class="header">
-      <div class="title">AI 应用请求处理流程</div>
-      <div class="subtitle">点击"发送请求"，观察一次 AI 请求的完整生命周期</div>
+      <div class="title">Luồng xử lý request của ứng dụng AI</div>
+      <div class="subtitle">Bạn bấm "Gửi request" để quan sát toàn bộ vòng đời của một request AI</div>
     </div>
 
     <div class="pipeline">
@@ -29,17 +29,17 @@
         class="action-btn"
         @click="startFlow"
       >
-        ▶ 发送请求
+        ▶ Gửi request
       </button>
       <button
         v-else-if="!isRunning && currentStep >= steps.length"
         class="action-btn reset"
         @click="resetFlow"
       >
-        🔄 重置
+        🔄 Reset
       </button>
       <div v-else-if="isRunning" class="running-hint">
-        ⏳ 处理中...
+        ⏳ Đang xử lý...
       </div>
     </div>
 
@@ -52,17 +52,17 @@
 
         <div class="io-section">
           <div class="io-block">
-            <div class="io-label">输入</div>
+            <div class="io-label">Đầu vào</div>
             <pre class="io-code"><code>{{ activeStep.input }}</code></pre>
           </div>
           <div class="io-block">
-            <div class="io-label">输出</div>
+            <div class="io-label">Đầu ra</div>
             <pre class="io-code"><code>{{ activeStep.output }}</code></pre>
           </div>
         </div>
 
         <div class="latency-bar">
-          <span class="latency-label">耗时</span>
+          <span class="latency-label">Thời gian</span>
           <div class="latency-track">
             <div
               class="latency-fill"
@@ -75,10 +75,10 @@
     </div>
 
     <div class="insight-bar">
-      <span class="insight-label">💡 关键洞察：</span>
+      <span class="insight-label">💡 Insight quan trọng:</span>
       <span class="insight-text">
-        AI 应用的请求链路比传统应用更长，模型推理通常占总耗时的 60-80%。
-        优化重点在于：Prompt 缓存、流式输出、异步处理。
+        Chuỗi xử lý request của ứng dụng AI dài hơn ứng dụng truyền thống, riêng phần model inference thường chiếm 60-80% tổng thời gian.
+        Bạn nên tập trung tối ưu vào: cache prompt, streaming output và xử lý bất đồng bộ.
       </span>
     </div>
   </div>
@@ -89,39 +89,39 @@ import { ref, computed } from 'vue'
 
 const steps = [
   {
-    id: 'input', icon: '👤', name: '用户输入', en: 'User Input',
-    detail: '用户通过自然语言输入请求。系统需要处理多种输入形式：文本、语音转文字、图片描述等。与传统应用的表单提交不同，输入是开放式的、非结构化的。',
-    input: '"帮我总结这篇文章的核心观点"',
-    output: '{ text: "帮我总结...", type: "text", lang: "zh" }',
+    id: 'input', icon: '👤', name: 'Đầu vào người dùng', en: 'User Input',
+    detail: 'Người dùng nhập yêu cầu bằng ngôn ngữ tự nhiên. Hệ thống phải xử lý nhiều dạng đầu vào: văn bản, giọng nói chuyển sang text, mô tả ảnh, v.v. Khác với form trong ứng dụng truyền thống, đầu vào ở đây mở và phi cấu trúc.',
+    input: '"Tóm tắt giúp mình các ý chính của bài viết này"',
+    output: '{ text: "Tóm tắt giúp mình...", type: "text", lang: "vi" }',
     latency: '~0ms', latencyPct: 2
   },
   {
-    id: 'preprocess', icon: '🔧', name: '预处理', en: 'Preprocessing',
-    detail: '对用户输入进行清洗和增强：意图识别、关键词提取、上下文拼接、RAG 检索相关文档片段、构建完整的 Prompt。这一步决定了模型能获得多少有效信息。',
-    input: '{ text: "帮我总结...", context: [...历史对话] }',
-    output: '{ system_prompt: "你是...", user_prompt: "...", retrieved_docs: [...] }',
+    id: 'preprocess', icon: '🔧', name: 'Tiền xử lý', en: 'Preprocessing',
+    detail: 'Làm sạch và bổ sung đầu vào: nhận diện ý định, trích xuất từ khoá, ghép ngữ cảnh, RAG để lấy đoạn tài liệu liên quan, dựng prompt hoàn chỉnh. Bước này quyết định mô hình nhận được bao nhiêu thông tin hữu ích.',
+    input: '{ text: "Tóm tắt giúp mình...", context: [...lịch sử hội thoại] }',
+    output: '{ system_prompt: "Bạn là...", user_prompt: "...", retrieved_docs: [...] }',
     latency: '~200ms', latencyPct: 15
   },
   {
-    id: 'model', icon: '🧠', name: '模型推理', en: 'Model Inference',
-    detail: '将构建好的 Prompt 发送给大语言模型进行推理。这是整个链路中耗时最长的环节。模型会根据 Prompt 中的指令、上下文和检索到的知识，生成回答。',
+    id: 'model', icon: '🧠', name: 'Suy luận mô hình', en: 'Model Inference',
+    detail: 'Gửi prompt đã dựng cho LLM để suy luận. Đây là khâu tốn thời gian nhất trong toàn bộ chuỗi. Mô hình sẽ sinh câu trả lời dựa vào chỉ thị trong prompt, ngữ cảnh và tri thức đã truy hồi.',
     input: '{ messages: [...], model: "gpt-4", temperature: 0.7 }',
-    output: '{ content: "这篇文章的核心观点有三个...", tokens: 256 }',
+    output: '{ content: "Bài viết có ba ý chính...", tokens: 256 }',
     latency: '~2-8s', latencyPct: 75
   },
   {
-    id: 'postprocess', icon: '🛡️', name: '后处理', en: 'Post-processing',
-    detail: '对模型输出进行安全检查和格式化：内容审核过滤、幻觉检测、格式转换（Markdown 渲染）、引用来源标注、敏感信息脱敏等。',
-    input: '{ raw_output: "这篇文章的核心观点有三个..." }',
-    output: '{ safe: true, formatted: "## 核心观点\\n1. ...", sources: [...] }',
+    id: 'postprocess', icon: '🛡️', name: 'Hậu xử lý', en: 'Post-processing',
+    detail: 'Kiểm tra an toàn và định dạng đầu ra của mô hình: kiểm duyệt nội dung, phát hiện ảo giác, chuyển đổi định dạng (render Markdown), gắn nguồn trích dẫn, ẩn thông tin nhạy cảm, v.v.',
+    input: '{ raw_output: "Bài viết có ba ý chính..." }',
+    output: '{ safe: true, formatted: "## Ý chính\\n1. ...", sources: [...] }',
     latency: '~100ms', latencyPct: 8
   },
   {
-    id: 'response', icon: '💬', name: '响应输出', en: 'Response',
-    detail: '将处理后的结果以流式方式返回给用户。前端逐步渲染 Markdown 内容，同时展示引用来源和置信度。用户可以在生成过程中随时中断或追问。',
-    input: '{ formatted: "## 核心观点\\n1. ...", stream: true }',
-    output: '用户看到逐字出现的回答 + 来源引用',
-    latency: '~50ms (首字节)', latencyPct: 5
+    id: 'response', icon: '💬', name: 'Trả response', en: 'Response',
+    detail: 'Trả kết quả đã xử lý cho người dùng theo dạng streaming. Frontend render Markdown dần dần và hiển thị thêm nguồn trích dẫn, mức độ tin cậy. Người dùng có thể ngắt hoặc hỏi tiếp ngay khi mô hình đang sinh.',
+    input: '{ formatted: "## Ý chính\\n1. ...", stream: true }',
+    output: 'Người dùng thấy câu trả lời hiện dần kèm trích dẫn nguồn',
+    latency: '~50ms (TTFB)', latencyPct: 5
   }
 ]
 

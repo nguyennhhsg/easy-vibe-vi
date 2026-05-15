@@ -1,14 +1,14 @@
 <!--
   AdvancedTUIDemo.vue
-  高级 TUI 布局演示组件
-  
-  用途：
-  展示复杂的终端用户界面（Text User Interface）是如何构建的。
-  说明如何利用备用缓冲区（Alternate Buffer）和全屏绘制技术来实现类似 vim/htop 的界面。
-  
-  交互功能：
-  - 布局展示：模拟一个包含侧边栏、主内容区和状态栏的 TUI 应用。
-  - 动态更新：演示界面元素如何响应窗口大小变化或用户操作。
+  Component demo TUI layout nâng cao
+
+  Mục đích:
+  Trình bày cách xây dựng giao diện terminal phức tạp (Text User Interface).
+  Giải thích cách dùng alternate buffer và kỹ thuật vẽ toàn màn hình để dựng các app giống vim/htop.
+
+  Tính năng tương tác:
+  - Hiển thị layout: mô phỏng một app TUI có sidebar, main content và status bar.
+  - Cập nhật động: cho thấy các phần tử phản ứng theo thay đổi kích thước cửa sổ hoặc thao tác user.
 -->
 <template>
   <div class="advanced-tui">

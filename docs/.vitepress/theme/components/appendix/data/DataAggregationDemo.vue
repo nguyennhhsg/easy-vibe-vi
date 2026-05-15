@@ -14,33 +14,33 @@ const rawOrders = [
 
 const ops = {
   groupBy: {
-    name: '按用户分组',
+    name: 'Group theo user',
     sql: `SELECT user_id, COUNT(*) as order_count, SUM(amount) as total
 FROM orders GROUP BY user_id;`,
-    columns: ['用户 ID', '订单数', '总金额'],
+    columns: ['User ID', 'Số đơn', 'Tổng tiền'],
     data: [
-      { '用户 ID': 'U001', 订单数: 3, 总金额: 480 },
-      { '用户 ID': 'U002', 订单数: 2, 总金额: 450 },
-      { '用户 ID': 'U003', 订单数: 1, 总金额: 250 }
+      { 'User ID': 'U001', 'Số đơn': 3, 'Tổng tiền': 480 },
+      { 'User ID': 'U002', 'Số đơn': 2, 'Tổng tiền': 450 },
+      { 'User ID': 'U003', 'Số đơn': 1, 'Tổng tiền': 250 }
     ]
   },
   sum: {
-    name: '总销售额',
+    name: 'Tổng doanh thu',
     sql: `SELECT SUM(amount) as total_sales FROM orders;`,
-    columns: ['总销售额'],
-    data: [{ 总销售额: 1180 }]
+    columns: ['Tổng doanh thu'],
+    data: [{ 'Tổng doanh thu': 1180 }]
   },
   avg: {
-    name: '平均订单额',
+    name: 'Giá trị đơn trung bình',
     sql: `SELECT AVG(amount) as avg_amount FROM orders;`,
-    columns: ['平均订单额'],
-    data: [{ 平均订单额: 196.67 }]
+    columns: ['Giá trị đơn TB'],
+    data: [{ 'Giá trị đơn TB': 196.67 }]
   },
   max: {
-    name: '最大订单额',
+    name: 'Đơn lớn nhất',
     sql: `SELECT MAX(amount) as max_amount FROM orders;`,
-    columns: ['最大订单额'],
-    data: [{ 最大订单额: 300 }]
+    columns: ['Đơn lớn nhất'],
+    data: [{ 'Đơn lớn nhất': 300 }]
   }
 }
 
@@ -52,28 +52,28 @@ const currentOp = computed(() => ops[activeOp.value])
   <div class="agg-demo">
     <div class="demo-header">
       <span class="icon">🧮</span>
-      <span class="title">数据聚合演示</span>
-      <span class="subtitle">拆分-计算-组合</span>
+      <span class="title">Demo gộp dữ liệu</span>
+      <span class="subtitle">Tách - tính - gộp</span>
     </div>
 
     <div class="intro-text">
-      "所有用户平均转化率 5%" 往往毫无意义。通过
-      <span class="hl">分组聚合</span>
-      把数据"切开"，才能发现不同用户之间的真实差异。点击下方操作，观察同一份原始数据如何产生不同的
-      <span class="hl">聚合视角</span>。
+      "Tỉ lệ chuyển đổi trung bình của mọi user là 5%" thường không có ý nghĩa. Qua
+      <span class="hl">group + aggregate</span>
+      để "cắt" dữ liệu ra, mới thấy khác biệt thật giữa các user. Bấm các nút bên dưới để xem cùng một dữ liệu thô sinh ra nhiều
+      <span class="hl">góc nhìn gộp</span>.
     </div>
 
-    <!-- 原始数据表 -->
+    <!-- Bảng dữ liệu gốc -->
     <div class="section">
-      <div class="section-label">原始订单数据</div>
+      <div class="section-label">Dữ liệu đơn hàng gốc</div>
       <div class="table-wrap">
         <table class="data-table">
           <thead>
             <tr>
-              <th>用户 ID</th>
-              <th>订单号</th>
-              <th>金额（元）</th>
-              <th>日期</th>
+              <th>User ID</th>
+              <th>Mã đơn</th>
+              <th>Giá trị (k VND)</th>
+              <th>Ngày</th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +88,7 @@ const currentOp = computed(() => ops[activeOp.value])
       </div>
     </div>
 
-    <!-- 操作按钮 -->
+    <!-- Nút thao tác -->
     <div class="ops-row">
       <button
         v-for="k in opKeys"
@@ -100,9 +100,9 @@ const currentOp = computed(() => ops[activeOp.value])
       </button>
     </div>
 
-    <!-- 聚合结果 -->
+    <!-- Kết quả gộp -->
     <div class="section result-section">
-      <div class="section-label">{{ currentOp.name }} 结果</div>
+      <div class="section-label">Kết quả: {{ currentOp.name }}</div>
       <div class="table-wrap">
         <table class="data-table">
           <thead>
@@ -121,7 +121,7 @@ const currentOp = computed(() => ops[activeOp.value])
       </div>
 
       <div class="sql-block">
-        <div class="sql-label">SQL 示例</div>
+        <div class="sql-label">SQL ví dụ</div>
         <pre class="sql-code">{{ currentOp.sql }}</pre>
       </div>
     </div>

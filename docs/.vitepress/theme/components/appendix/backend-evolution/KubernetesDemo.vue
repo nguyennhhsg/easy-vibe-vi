@@ -1,14 +1,14 @@
 <template>
   <div class="kubernetes-demo">
     <div class="demo-header">
-      <h4>☸️ Kubernetes 编排演示</h4>
-      <p>观察 K8s 如何自动调度容器、实现负载均衡和故障恢复</p>
+      <h4>☸️ Demo orchestration với Kubernetes</h4>
+      <p>Quan sát cách K8s tự lập lịch container, cân bằng tải và phục hồi sau lỗi</p>
     </div>
 
     <div class="k8s-architecture">
       <div class="control-plane">
         <div class="plane-title">
-          控制平面 (Control Plane)
+          Control Plane
         </div>
         <div class="components">
           <div
@@ -33,7 +33,7 @@
 
       <div class="worker-nodes">
         <div class="plane-title">
-          工作节点 (Worker Nodes)
+          Worker Nodes
         </div>
         <div class="nodes-container">
           <div
@@ -68,7 +68,7 @@
                 <span class="res-value">{{ node.cpu }}%</span>
               </div>
               <div class="resource">
-                <span class="res-label">内存:</span>
+                <span class="res-label">RAM:</span>
                 <div class="res-bar">
                   <div
                     class="res-fill"
@@ -81,7 +81,7 @@
             </div>
             <div class="node-pods">
               <div class="pods-label">
-                运行 Pod: {{ node.pods }} 个
+                Pod đang chạy: {{ node.pods }}
               </div>
               <div class="pods-grid">
                 <div
@@ -113,27 +113,27 @@
         :disabled="isScheduling"
         @click="simulateScheduling"
       >
-        {{ isScheduling ? '调度中...' : '🚀 模拟 Pod 调度' }}
+        {{ isScheduling ? 'Đang lập lịch...' : '🚀 Mô phỏng lập lịch Pod' }}
       </button>
       <button
         class="control-btn"
         :disabled="isScaling"
         @click="simulateScaling"
       >
-        {{ isScaling ? '扩容中...' : '📈 自动扩容' }}
+        {{ isScaling ? 'Đang mở rộng...' : '📈 Auto scale' }}
       </button>
       <button
         class="control-btn danger"
         :disabled="isFailing"
         @click="simulateFailure"
       >
-        {{ isFailing ? '故障注入中...' : '💥 模拟节点故障' }}
+        {{ isFailing ? 'Đang inject lỗi...' : '💥 Mô phỏng node lỗi' }}
       </button>
       <button
         class="control-btn"
         @click="resetCluster"
       >
-        🔄 重置集群
+        🔄 Reset cluster
       </button>
     </div>
 
@@ -153,12 +153,12 @@
     </div>
 
     <div class="demo-explanation">
-      <h5>💡 Kubernetes 核心概念</h5>
+      <h5>💡 Khái niệm cốt lõi của Kubernetes</h5>
       <ul>
-        <li><strong>Pod</strong>：最小的部署单元，一个 Pod 可以包含一个或多个容器</li>
-        <li><strong>Deployment</strong>：管理 Pod 的副本数量和滚动更新</li>
-        <li><strong>Service</strong>：提供稳定的网络访问入口，实现负载均衡</li>
-        <li><strong>Scheduler</strong>：根据资源需求和策略，自动将 Pod 调度到合适的节点</li>
+        <li><strong>Pod</strong>: đơn vị triển khai nhỏ nhất, một Pod có thể chứa một hoặc nhiều container</li>
+        <li><strong>Deployment</strong>: quản lý số replica của Pod và rolling update</li>
+        <li><strong>Service</strong>: cung cấp endpoint truy cập mạng ổn định, thực hiện cân bằng tải</li>
+        <li><strong>Scheduler</strong>: dựa trên nhu cầu tài nguyên và chính sách, tự lập lịch Pod tới node phù hợp</li>
       </ul>
     </div>
   </div>
@@ -168,10 +168,10 @@
 import { ref, reactive } from 'vue'
 
 const controlPlane = [
-  { name: 'API Server', icon: '🌐', desc: '集群的统一入口' },
-  { name: 'etcd', icon: '🗄️', desc: '分布式键值存储' },
-  { name: 'Scheduler', icon: '📋', desc: 'Pod 调度器' },
-  { name: 'Controller', icon: '🎮', desc: '控制器管理器' }
+  { name: 'API Server', icon: '🌐', desc: 'Đầu vào thống nhất của cluster' },
+  { name: 'etcd', icon: '🗄️', desc: 'Lưu trữ key-value phân tán' },
+  { name: 'Scheduler', icon: '📋', desc: 'Bộ lập lịch Pod' },
+  { name: 'Controller', icon: '🎮', desc: 'Trình quản lý các controller' }
 ]
 
 const workerNodes = reactive([
@@ -179,7 +179,7 @@ const workerNodes = reactive([
     name: 'Node-1',
     icon: '🖥️',
     status: 'active',
-    statusText: '运行中',
+    statusText: 'Đang chạy',
     cpu: 45,
     memory: 60,
     pods: 5
@@ -188,7 +188,7 @@ const workerNodes = reactive([
     name: 'Node-2',
     icon: '🖥️',
     status: 'active',
-    statusText: '运行中',
+    statusText: 'Đang chạy',
     cpu: 30,
     memory: 40,
     pods: 3
@@ -197,7 +197,7 @@ const workerNodes = reactive([
     name: 'Node-3',
     icon: '🖥️',
     status: 'pending',
-    statusText: '准备中',
+    statusText: 'Đang chuẩn bị',
     cpu: 0,
     memory: 0,
     pods: 0
@@ -224,19 +224,19 @@ const selectNode = (name) => {
 
 const simulateScheduling = async () => {
   isScheduling.value = true
-  addLog('开始调度新 Pod...', 'info')
+  addLog('Bắt đầu lập lịch Pod mới...', 'info')
 
   await new Promise(r => setTimeout(r, 800))
-  addLog('Scheduler: 评估节点资源...', 'info')
+  addLog('Scheduler: đang đánh giá tài nguyên các node...', 'info')
 
   await new Promise(r => setTimeout(r, 800))
   const targetNode = workerNodes.find(n => n.status === 'active' && n.cpu < 70)
   if (targetNode) {
     targetNode.pods++
     targetNode.cpu += 10
-    addLog(`Pod 已调度到 ${targetNode.name}`, 'success')
+    addLog(`Đã lập lịch Pod tới ${targetNode.name}`, 'success')
   } else {
-    addLog('警告: 没有合适的节点可调度', 'warning')
+    addLog('Cảnh báo: không có node phù hợp để lập lịch', 'warning')
   }
 
   isScheduling.value = false
@@ -244,18 +244,18 @@ const simulateScheduling = async () => {
 
 const simulateScaling = async () => {
   isScaling.value = true
-  addLog('检测到高负载，开始水平扩容...', 'info')
+  addLog('Phát hiện tải cao, bắt đầu mở rộng ngang...', 'info')
 
   const pendingNode = workerNodes.find(n => n.status === 'pending')
   if (pendingNode) {
     await new Promise(r => setTimeout(r, 1500))
     pendingNode.status = 'active'
-    pendingNode.statusText = '运行中'
+    pendingNode.statusText = 'Đang chạy'
     pendingNode.cpu = 20
     pendingNode.memory = 30
-    addLog(`${pendingNode.name} 已启动并加入集群`, 'success')
+    addLog(`${pendingNode.name} đã khởi động và gia nhập cluster`, 'success')
   } else {
-    addLog('已达到最大节点数', 'warning')
+    addLog('Đã đạt số node tối đa', 'warning')
   }
 
   isScaling.value = false
@@ -266,18 +266,18 @@ const simulateFailure = async () => {
   const targetNode = workerNodes.find(n => n.status === 'active')
 
   if (targetNode) {
-    addLog(`警告: ${targetNode.name} 失去连接!`, 'error')
+    addLog(`Cảnh báo: ${targetNode.name} mất kết nối!`, 'error')
     targetNode.status = 'failed'
-    targetNode.statusText = '故障'
+    targetNode.statusText = 'Lỗi'
 
     await new Promise(r => setTimeout(r, 1000))
-    addLog('Controller: 开始重新调度 Pod...', 'info')
+    addLog('Controller: bắt đầu lập lịch lại Pod...', 'info')
 
     await new Promise(r => setTimeout(r, 1500))
     const healthyNode = workerNodes.find(n => n.status === 'active' && n.name !== targetNode.name)
     if (healthyNode) {
       healthyNode.pods += targetNode.pods
-      addLog(`Pod 已成功迁移到 ${healthyNode.name}`, 'success')
+      addLog(`Pod đã migrate thành công tới ${healthyNode.name}`, 'success')
     }
 
     targetNode.pods = 0
@@ -292,20 +292,20 @@ const resetCluster = () => {
   workerNodes.forEach((node, index) => {
     if (index < 2) {
       node.status = 'active'
-      node.statusText = '运行中'
+      node.statusText = 'Đang chạy'
       node.cpu = 30 + index * 15
       node.memory = 40 + index * 20
       node.pods = 3 + index * 2
     } else {
       node.status = 'pending'
-      node.statusText = '准备中'
+      node.statusText = 'Đang chuẩn bị'
       node.cpu = 0
       node.memory = 0
       node.pods = 0
     }
   })
   logs.value = []
-  addLog('集群已重置', 'info')
+  addLog('Cluster đã được reset', 'info')
 }
 </script>
 

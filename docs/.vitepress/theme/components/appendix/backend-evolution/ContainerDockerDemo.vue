@@ -2,8 +2,8 @@
   <div class="container-docker-demo">
     <div class="demo-header">
       <span class="icon">🐳</span>
-      <span class="title">Docker 容器化演示</span>
-      <span class="subtitle">理解容器如何让应用"一次打包，到处运行"</span>
+      <span class="title">Demo container hóa với Docker</span>
+      <span class="subtitle">Hiểu cách container giúp ứng dụng "đóng gói một lần, chạy mọi nơi"</span>
     </div>
 
     <div class="docker-visualization">
@@ -12,13 +12,13 @@
         :class="{ active: showTraditional }"
         @click="showTraditional = true; showDocker = false"
       >
-        <h5>传统部署</h5>
+        <h5>Triển khai truyền thống</h5>
         <div class="server-stack">
-          <div class="layer-item app">应用 A</div>
-          <div v-if="showConflict" class="layer-item conflict">依赖冲突!</div>
-          <div class="layer-item deps">依赖库 v1.0</div>
-          <div class="layer-item os">操作系统</div>
-          <div class="layer-item hardware">物理服务器</div>
+          <div class="layer-item app">Ứng dụng A</div>
+          <div v-if="showConflict" class="layer-item conflict">Xung đột dependency!</div>
+          <div class="layer-item deps">Thư viện phụ thuộc v1.0</div>
+          <div class="layer-item os">Hệ điều hành</div>
+          <div class="layer-item hardware">Máy chủ vật lý</div>
         </div>
       </div>
 
@@ -29,21 +29,21 @@
         :class="{ active: showDocker }"
         @click="showDocker = true; showTraditional = false"
       >
-        <h5>Docker 容器</h5>
+        <h5>Container Docker</h5>
         <div class="docker-stack">
           <div class="containers">
             <div class="container-box">
-              <div class="container-app">应用 A</div>
-              <div class="container-deps">依赖 v1.0</div>
+              <div class="container-app">Ứng dụng A</div>
+              <div class="container-deps">Dependency v1.0</div>
             </div>
             <div class="container-box">
-              <div class="container-app">应用 B</div>
-              <div class="container-deps">依赖 v2.0</div>
+              <div class="container-app">Ứng dụng B</div>
+              <div class="container-deps">Dependency v2.0</div>
             </div>
           </div>
           <div class="docker-engine">Docker Engine</div>
-          <div class="host-os">宿主机操作系统</div>
-          <div class="hardware">物理服务器</div>
+          <div class="host-os">Hệ điều hành máy chủ host</div>
+          <div class="hardware">Máy chủ vật lý</div>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>容器化让应用"一次构建，到处运行"，解决了环境一致性和快速部署的问题。
+      <strong>Tư tưởng cốt lõi:</strong> Container hóa giúp ứng dụng "build một lần, chạy mọi nơi", giải quyết vấn đề nhất quán môi trường và triển khai nhanh.
     </div>
   </div>
 </template>
@@ -83,16 +83,16 @@ const showConflict = ref(false)
 const benefits = [
   {
     icon: '📦',
-    title: '环境一致性',
-    desc: '开发、测试、生产环境完全一致，告别"在我机器上能跑"'
+    title: 'Nhất quán môi trường',
+    desc: 'Môi trường dev, test, production hoàn toàn giống nhau, hết cảnh "máy mình chạy được"'
   },
-  { icon: '🚀', title: '快速部署', desc: '秒级启动，镜像分发，滚动更新无停机' },
+  { icon: '🚀', title: 'Triển khai nhanh', desc: 'Khởi động trong vài giây, phát hành image, rolling update không downtime' },
   {
     icon: '📊',
-    title: '资源隔离',
-    desc: 'CPU/内存限制，互不干扰，一台机器跑多个应用'
+    title: 'Cô lập tài nguyên',
+    desc: 'Giới hạn CPU/RAM, không can thiệp lẫn nhau, một máy chạy nhiều ứng dụng'
   },
-  { icon: '🔄', title: '版本管理', desc: '镜像版本化，随时回滚，灰度发布' }
+  { icon: '🔄', title: 'Quản lý phiên bản', desc: 'Image có version, rollback bất cứ lúc nào, canary release' }
 ]
 </script>
 

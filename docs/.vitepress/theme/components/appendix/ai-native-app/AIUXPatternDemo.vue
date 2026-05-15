@@ -1,8 +1,8 @@
 <template>
   <div class="ux-demo">
     <div class="header">
-      <div class="title">AI 原生交互模式</div>
-      <div class="subtitle">点击卡片，体验每种 AI 交互模式的效果</div>
+      <div class="title">Mẫu tương tác AI-native</div>
+      <div class="subtitle">Bạn bấm vào từng thẻ để trải nghiệm hiệu ứng của từng mẫu tương tác AI</div>
     </div>
 
     <div class="pattern-grid">
@@ -20,20 +20,20 @@
 
     <div v-if="activePattern" class="preview-area">
       <div class="preview-header">
-        <span>{{ currentPattern.icon }} {{ currentPattern.name }} 演示</span>
-        <button class="replay-btn" @click="replayDemo">🔄 重播</button>
+        <span>{{ currentPattern.icon }} Demo: {{ currentPattern.name }}</span>
+        <button class="replay-btn" @click="replayDemo">🔄 Phát lại</button>
       </div>
 
-      <!-- 流式输出演示 -->
+      <!-- Demo streaming output -->
       <div v-if="activePattern === 'streaming'" class="demo-box">
         <div class="chat-bubble ai">
           <span class="stream-text">{{ streamText }}</span>
           <span v-if="isStreaming" class="cursor-blink">|</span>
         </div>
-        <div class="demo-note">逐字输出，用户无需等待完整响应</div>
+        <div class="demo-note">Sinh từng chữ một, người dùng không phải chờ trả lời đầy đủ</div>
       </div>
 
-      <!-- 加载状态演示 -->
+      <!-- Demo trạng thái loading -->
       <div v-if="activePattern === 'loading'" class="demo-box">
         <div class="loading-stages">
           <div
@@ -47,10 +47,10 @@
             <span>{{ s }}</span>
           </div>
         </div>
-        <div class="demo-note">分阶段展示进度，而非单一的"加载中"</div>
+        <div class="demo-note">Hiển thị tiến độ theo từng giai đoạn thay vì chỉ ghi "đang tải"</div>
       </div>
 
-      <!-- 置信度指示器演示 -->
+      <!-- Demo confidence indicator -->
       <div v-if="activePattern === 'confidence'" class="demo-box">
         <div class="confidence-list">
           <div v-for="c in confidenceItems" :key="c.text" class="conf-item">
@@ -65,32 +65,32 @@
             <div class="conf-text">{{ c.text }}</div>
           </div>
         </div>
-        <div class="demo-note">让用户知道 AI 对自己的回答有多"确定"</div>
+        <div class="demo-note">Cho người dùng biết AI "tự tin" với câu trả lời của mình đến đâu</div>
       </div>
 
-      <!-- 降级处理演示 -->
+      <!-- Demo xử lý suy giảm -->
       <div v-if="activePattern === 'fallback'" class="demo-box">
         <div class="fallback-flow">
           <div :class="['fb-step', { active: fallbackStep >= 0 }]">
             <span class="fb-icon">🤖</span>
-            <span>AI 尝试回答...</span>
+            <span>AI cố gắng trả lời...</span>
           </div>
-          <div class="fb-arrow" v-if="fallbackStep >= 1">↓ 检测到不确定</div>
+          <div class="fb-arrow" v-if="fallbackStep >= 1">↓ Phát hiện không chắc chắn</div>
           <div :class="['fb-step warn', { active: fallbackStep >= 1 }]">
             <span class="fb-icon">⚠️</span>
-            <span>提示用户：此回答可能不准确</span>
+            <span>Báo người dùng: câu trả lời này có thể chưa chính xác</span>
           </div>
-          <div class="fb-arrow" v-if="fallbackStep >= 2">↓ 提供替代方案</div>
+          <div class="fb-arrow" v-if="fallbackStep >= 2">↓ Cung cấp phương án thay thế</div>
           <div :class="['fb-step safe', { active: fallbackStep >= 2 }]">
             <span class="fb-icon">🔄</span>
-            <span>转接人工 / 推荐文档 / 换个方式提问</span>
+            <span>Chuyển sang nhân viên thật / gợi ý tài liệu / mời người dùng hỏi lại theo cách khác</span>
           </div>
         </div>
-        <div class="demo-note">AI 不确定时，优雅降级而非强行回答</div>
+        <div class="demo-note">Khi AI không chắc, hãy suy giảm khéo léo thay vì trả lời gượng ép</div>
       </div>
 
       <div class="pattern-detail">
-        <div class="detail-label">设计要点</div>
+        <div class="detail-label">Điểm thiết kế quan trọng</div>
         <div class="detail-text">{{ currentPattern.detail }}</div>
       </div>
     </div>
@@ -102,24 +102,24 @@ import { ref, computed } from 'vue'
 
 const patterns = [
   {
-    id: 'streaming', icon: '💬', name: '流式输出',
-    brief: '逐字生成，即时反馈',
-    detail: '流式输出让用户在 AI 思考时就能看到部分结果，大幅降低感知等待时间。技术上通过 SSE（Server-Sent Events）或 WebSocket 实现，前端逐步渲染 Markdown 内容。'
+    id: 'streaming', icon: '💬', name: 'Streaming output',
+    brief: 'Sinh từng chữ, phản hồi tức thì',
+    detail: 'Streaming output cho phép người dùng thấy ngay phần kết quả khi AI vẫn đang nghĩ, giúp giảm mạnh thời gian chờ cảm nhận. Về kỹ thuật thường dùng SSE (Server-Sent Events) hoặc WebSocket, frontend render Markdown dần dần.'
   },
   {
-    id: 'loading', icon: '⏳', name: '智能加载态',
-    brief: '分阶段展示处理进度',
-    detail: 'AI 请求通常需要数秒，传统的转圈加载会让用户焦虑。智能加载态将处理过程拆解为可见的步骤（理解问题 → 检索知识 → 生成回答），让等待变得可预期。'
+    id: 'loading', icon: '⏳', name: 'Loading thông minh',
+    brief: 'Hiển thị tiến độ theo giai đoạn',
+    detail: 'Một request AI thường mất vài giây, vòng quay loading truyền thống dễ làm người dùng sốt ruột. Loading thông minh chia tiến trình thành các bước nhìn thấy được (hiểu yêu cầu → truy hồi tri thức → sinh câu trả lời), giúp thời gian chờ trở nên dễ đoán.'
   },
   {
-    id: 'confidence', icon: '📊', name: '置信度指示',
-    brief: '展示 AI 的确定程度',
-    detail: 'AI 的输出具有概率性，不同回答的可靠程度不同。通过置信度指示器，用户可以判断哪些信息可以直接采纳，哪些需要二次验证。这是 AI 原生应用透明性的核心体现。'
+    id: 'confidence', icon: '📊', name: 'Hiển thị độ tin cậy',
+    brief: 'Cho thấy AI tự tin tới đâu',
+    detail: 'Đầu ra của AI mang tính xác suất, mỗi câu trả lời có mức độ tin cậy khác nhau. Confidence indicator giúp người dùng biết thông tin nào dùng được ngay, thông tin nào cần kiểm chứng lại. Đây là biểu hiện cốt lõi của tính minh bạch trong ứng dụng AI-native.'
   },
   {
-    id: 'fallback', icon: '🛡️', name: '优雅降级',
-    brief: '不确定时的兜底策略',
-    detail: '当 AI 无法给出可靠回答时，不应该硬编一个答案。优雅降级策略包括：坦诚告知不确定性、提供替代信息源、转接人工服务、引导用户换个方式提问。'
+    id: 'fallback', icon: '🛡️', name: 'Suy giảm khéo léo',
+    brief: 'Chiến lược "đỡ" khi không chắc',
+    detail: 'Khi AI không thể đưa ra câu trả lời đáng tin cậy, đừng cố nặn ra một đáp án. Chiến lược suy giảm khéo léo gồm: thẳng thắn báo độ không chắc chắn, gợi ý nguồn thông tin thay thế, chuyển sang nhân viên thật, hoặc mời người dùng hỏi lại theo cách khác.'
   }
 ]
 
@@ -129,17 +129,17 @@ const currentPattern = computed(() => patterns.find(p => p.id === activePattern.
 // Streaming demo
 const streamText = ref('')
 const isStreaming = ref(false)
-const fullText = 'React 是一个用于构建用户界面的 JavaScript 库。它采用组件化的开发模式，让你可以将复杂的 UI 拆分成独立的、可复用的小模块。'
+const fullText = 'React là thư viện JavaScript để xây dựng giao diện người dùng. Nó dùng mô hình phát triển component, giúp bạn tách UI phức tạp thành các module nhỏ độc lập và có thể tái sử dụng.'
 
 // Loading demo
-const loadingStages = ['理解用户意图...', '检索相关知识...', '组织回答内容...', '生成最终响应']
+const loadingStages = ['Hiểu ý định người dùng...', 'Truy hồi tri thức liên quan...', 'Sắp xếp nội dung trả lời...', 'Sinh phản hồi cuối']
 const loadingStep = ref(-1)
 
 // Confidence demo
 const confidenceItems = [
-  { text: 'React 由 Meta 开发', score: 98, level: '高置信', color: '#10b981' },
-  { text: '全球约 40% 的网站使用 React', score: 72, level: '中置信', color: '#f59e0b' },
-  { text: 'React 19 将在下月发布', score: 35, level: '低置信', color: '#ef4444' }
+  { text: 'React do Meta phát triển', score: 98, level: 'Tin cậy cao', color: '#10b981' },
+  { text: 'Khoảng 40% website trên thế giới dùng React', score: 72, level: 'Tin cậy vừa', color: '#f59e0b' },
+  { text: 'React 19 sẽ ra mắt tháng tới', score: 35, level: 'Tin cậy thấp', color: '#ef4444' }
 ]
 
 // Fallback demo

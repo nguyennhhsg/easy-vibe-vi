@@ -1,12 +1,12 @@
 <!--
   DataLineageDemo.vue
-  数据血缘追踪演示：展示数据从源头到消费的流转路径
+  Demo data lineage: minh hoạ đường đi của dữ liệu từ nguồn đến nơi tiêu thụ
 -->
 <template>
   <div class="lineage-demo">
     <div class="header">
-      <div class="title">数据血缘追踪</div>
-      <div class="subtitle">点击任意节点，查看上下游依赖关系</div>
+      <div class="title">Theo dõi Data Lineage</div>
+      <div class="subtitle">Bấm vào một node bất kỳ để xem quan hệ upstream/downstream</div>
     </div>
 
     <div class="lineage-graph">
@@ -28,9 +28,9 @@
 
     <div v-if="activeNode && activeInfo" class="info-panel">
       <div class="info-title">{{ activeInfo.name }}</div>
-      <div class="info-row"><span class="info-label">上游依赖：</span>{{ activeInfo.upstreamNames || '无（数据源头）' }}</div>
-      <div class="info-row"><span class="info-label">下游消费：</span>{{ activeInfo.downstreamNames || '无（最终消费）' }}</div>
-      <div class="info-row"><span class="info-label">负责人：</span>{{ activeInfo.owner }}</div>
+      <div class="info-row"><span class="info-label">Phụ thuộc upstream:</span> {{ activeInfo.upstreamNames || 'Không có (nguồn gốc dữ liệu)' }}</div>
+      <div class="info-row"><span class="info-label">Tiêu thụ downstream:</span> {{ activeInfo.downstreamNames || 'Không có (đích cuối)' }}</div>
+      <div class="info-row"><span class="info-label">Người phụ trách:</span> {{ activeInfo.owner }}</div>
     </div>
   </div>
 </template>
@@ -41,26 +41,26 @@ import { ref, computed } from 'vue'
 const activeNode = ref(null)
 
 const nodes = {
-  mysql_user: { name: 'MySQL 用户表', icon: '🗄️', upstream: [], downstream: ['ods_user'], owner: '业务开发组' },
-  mysql_order: { name: 'MySQL 订单表', icon: '🗄️', upstream: [], downstream: ['ods_order'], owner: '业务开发组' },
-  log_click: { name: '点击日志', icon: '📝', upstream: [], downstream: ['ods_click'], owner: '前端团队' },
-  ods_user: { name: 'ODS 用户', icon: '📥', upstream: ['mysql_user'], downstream: ['dwd_user'], owner: '数据工程师' },
-  ods_order: { name: 'ODS 订单', icon: '📥', upstream: ['mysql_order'], downstream: ['dwd_order'], owner: '数据工程师' },
-  ods_click: { name: 'ODS 点击', icon: '📥', upstream: ['log_click'], downstream: ['dwd_click'], owner: '数据工程师' },
-  dwd_user: { name: 'DWD 用户明细', icon: '🔧', upstream: ['ods_user'], downstream: ['dws_user_profile'], owner: '数据开发' },
-  dwd_order: { name: 'DWD 订单明细', icon: '🔧', upstream: ['ods_order'], downstream: ['dws_gmv'], owner: '数据开发' },
-  dwd_click: { name: 'DWD 点击明细', icon: '🔧', upstream: ['ods_click'], downstream: ['dws_user_profile'], owner: '数据开发' },
-  dws_user_profile: { name: 'DWS 用户画像', icon: '📊', upstream: ['dwd_user', 'dwd_click'], downstream: ['ads_report'], owner: '数据分析师' },
-  dws_gmv: { name: 'DWS GMV 汇总', icon: '📊', upstream: ['dwd_order'], downstream: ['ads_report'], owner: '数据分析师' },
-  ads_report: { name: 'ADS 经营报表', icon: '📈', upstream: ['dws_user_profile', 'dws_gmv'], downstream: [], owner: '数据产品' }
+  mysql_user: { name: 'MySQL bảng user', icon: '🗄️', upstream: [], downstream: ['ods_user'], owner: 'Nhóm dev business' },
+  mysql_order: { name: 'MySQL bảng order', icon: '🗄️', upstream: [], downstream: ['ods_order'], owner: 'Nhóm dev business' },
+  log_click: { name: 'Log click', icon: '📝', upstream: [], downstream: ['ods_click'], owner: 'Team frontend' },
+  ods_user: { name: 'ODS user', icon: '📥', upstream: ['mysql_user'], downstream: ['dwd_user'], owner: 'Data engineer' },
+  ods_order: { name: 'ODS order', icon: '📥', upstream: ['mysql_order'], downstream: ['dwd_order'], owner: 'Data engineer' },
+  ods_click: { name: 'ODS click', icon: '📥', upstream: ['log_click'], downstream: ['dwd_click'], owner: 'Data engineer' },
+  dwd_user: { name: 'DWD chi tiết user', icon: '🔧', upstream: ['ods_user'], downstream: ['dws_user_profile'], owner: 'Data dev' },
+  dwd_order: { name: 'DWD chi tiết order', icon: '🔧', upstream: ['ods_order'], downstream: ['dws_gmv'], owner: 'Data dev' },
+  dwd_click: { name: 'DWD chi tiết click', icon: '🔧', upstream: ['ods_click'], downstream: ['dws_user_profile'], owner: 'Data dev' },
+  dws_user_profile: { name: 'DWS user profile', icon: '📊', upstream: ['dwd_user', 'dwd_click'], downstream: ['ads_report'], owner: 'Data analyst' },
+  dws_gmv: { name: 'DWS tổng hợp GMV', icon: '📊', upstream: ['dwd_order'], downstream: ['ads_report'], owner: 'Data analyst' },
+  ads_report: { name: 'ADS báo cáo kinh doanh', icon: '📈', upstream: ['dws_user_profile', 'dws_gmv'], downstream: [], owner: 'Data product' }
 }
 
 const layers = [
-  { label: '数据源', nodes: [{ id: 'mysql_user', ...nodes.mysql_user }, { id: 'mysql_order', ...nodes.mysql_order }, { id: 'log_click', ...nodes.log_click }] },
-  { label: 'ODS 层', nodes: [{ id: 'ods_user', ...nodes.ods_user }, { id: 'ods_order', ...nodes.ods_order }, { id: 'ods_click', ...nodes.ods_click }] },
-  { label: 'DWD 层', nodes: [{ id: 'dwd_user', ...nodes.dwd_user }, { id: 'dwd_order', ...nodes.dwd_order }, { id: 'dwd_click', ...nodes.dwd_click }] },
-  { label: 'DWS 层', nodes: [{ id: 'dws_user_profile', ...nodes.dws_user_profile }, { id: 'dws_gmv', ...nodes.dws_gmv }] },
-  { label: 'ADS 层', nodes: [{ id: 'ads_report', ...nodes.ads_report }] }
+  { label: 'Nguồn', nodes: [{ id: 'mysql_user', ...nodes.mysql_user }, { id: 'mysql_order', ...nodes.mysql_order }, { id: 'log_click', ...nodes.log_click }] },
+  { label: 'Tầng ODS', nodes: [{ id: 'ods_user', ...nodes.ods_user }, { id: 'ods_order', ...nodes.ods_order }, { id: 'ods_click', ...nodes.ods_click }] },
+  { label: 'Tầng DWD', nodes: [{ id: 'dwd_user', ...nodes.dwd_user }, { id: 'dwd_order', ...nodes.dwd_order }, { id: 'dwd_click', ...nodes.dwd_click }] },
+  { label: 'Tầng DWS', nodes: [{ id: 'dws_user_profile', ...nodes.dws_user_profile }, { id: 'dws_gmv', ...nodes.dws_gmv }] },
+  { label: 'Tầng ADS', nodes: [{ id: 'ads_report', ...nodes.ads_report }] }
 ]
 
 function getAllUpstream(id, visited = new Set()) {
@@ -91,8 +91,8 @@ const activeInfo = computed(() => {
   const n = nodes[activeNode.value]
   return {
     ...n,
-    upstreamNames: n.upstream.map(id => nodes[id]?.name).join('、'),
-    downstreamNames: n.downstream.map(id => nodes[id]?.name).join('、')
+    upstreamNames: n.upstream.map(id => nodes[id]?.name).join(', '),
+    downstreamNames: n.downstream.map(id => nodes[id]?.name).join(', ')
   }
 })
 

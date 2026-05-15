@@ -2,7 +2,7 @@
   <div class="transmission-demo">
     <!-- Mode selector -->
     <div class="mode-panel">
-      <div class="mode-label">选择传输方式，然后点"发送数据包"</div>
+      <div class="mode-label">Chọn phương thức truyền, rồi bấm "Gửi gói dữ liệu"</div>
       <div class="mode-buttons">
         <button
           :class="['mode-btn', { active: mode === 'serial' }]"
@@ -11,7 +11,7 @@
             reset()
           "
         >
-          串行传输（现代）
+          Truyền nối tiếp - Serial (hiện đại)
         </button>
         <button
           :class="['mode-btn', { active: mode === 'parallel' }]"
@@ -20,7 +20,7 @@
             reset()
           "
         >
-          并行传输（旧时代）
+          Truyền song song - Parallel (kiểu cũ)
         </button>
       </div>
     </div>
@@ -30,7 +30,7 @@
       <!-- Sender -->
       <div class="device sender">
         <div class="device-icon">Tx</div>
-        <div class="device-label">发送方</div>
+        <div class="device-label">Bên gửi</div>
         <div class="data-bits">
           <span
             v-for="(bit, i) in dataBits"
@@ -44,7 +44,7 @@
       <!-- Wire(s) -->
       <div class="wire-container" :class="mode">
         <div v-if="mode === 'serial'" class="wire-group serial">
-          <div class="wire-label">1 条线</div>
+          <div class="wire-label">1 đường dây</div>
           <div class="wire">
             <span
               v-for="(p, i) in particles"
@@ -55,7 +55,7 @@
           </div>
         </div>
         <div v-if="mode === 'parallel'" class="wire-group parallel-group">
-          <div class="wire-label">8 条线</div>
+          <div class="wire-label">8 đường dây</div>
           <div v-for="l in 8" :key="l" class="wire">
             <span
               v-if="parallelParticle && parallelParticle.lane === l - 1"
@@ -69,7 +69,7 @@
       <!-- Receiver -->
       <div class="device receiver">
         <div class="device-icon">Rx</div>
-        <div class="device-label">接收方</div>
+        <div class="device-label">Bên nhận</div>
         <div class="received-bits">
           <span
             v-for="(bit, i) in receivedBits"
@@ -82,7 +82,7 @@
           class="checksum-badge"
           :class="checksumResult ? 'ok' : 'fail'"
         >
-          {{ checksumResult ? '✓ 校验通过' : '✕ 校验失败' }}
+          {{ checksumResult ? '✓ Checksum OK' : '✕ Checksum lỗi' }}
         </div>
       </div>
     </div>
@@ -90,31 +90,31 @@
     <!-- Status bar -->
     <div class="status-bar">
       <div class="status-item">
-        <span class="s-label">已发送</span>
-        <span class="s-val">{{ sentBits.length }} / {{ dataBits.length }} 位</span>
+        <span class="s-label">Đã gửi</span>
+        <span class="s-val">{{ sentBits.length }} / {{ dataBits.length }} bit</span>
       </div>
       <div class="status-item">
-        <span class="s-label">传输速率</span>
+        <span class="s-label">Tốc độ truyền</span>
         <span class="s-val">{{
-          mode === 'serial' ? '1 位/次' : '8 位/次'
+          mode === 'serial' ? '1 bit/lần' : '8 bit/lần'
         }}</span>
       </div>
       <div class="status-item">
-        <span class="s-label">状态</span>
+        <span class="s-label">Trạng thái</span>
         <span class="s-val" :class="statusColor">{{ statusText }}</span>
       </div>
     </div>
 
     <!-- Send button -->
     <button class="send-btn" :disabled="isSending" @click="send">
-      {{ isSending ? '传输中...' : '发送数据包' }}
+      {{ isSending ? 'Đang truyền...' : 'Gửi gói dữ liệu' }}
     </button>
 
     <div class="note-box">
-      <strong>提示：等等，串行不是更慢吗？</strong><br />
-      表面上是的——但现代串行接口（USB 4、PCIe）传输频率高达每秒
-      <strong>数百亿次</strong>，而并行线路之间会产生
-      <em>信号串扰（Crosstalk）</em>，反而限制了速度。所以高速接口全面转向了串行。
+      <strong>Mẹo: Khoan đã, truyền nối tiếp chẳng phải chậm hơn sao?</strong><br />
+      Nhìn bề ngoài thì đúng vậy, nhưng các cổng nối tiếp hiện đại (USB 4, PCIe) có tần số truyền lên tới
+      <strong>hàng chục tỷ lần mỗi giây</strong>, trong khi các đường truyền song song lại bị
+      <em>nhiễu chéo (Crosstalk)</em> giữa các dây, khiến tốc độ bị giới hạn. Vì thế hầu hết các cổng tốc độ cao bây giờ đều chuyển sang dùng nối tiếp.
     </div>
   </div>
 </template>
@@ -143,10 +143,10 @@ function reset() {
 }
 
 const statusText = computed(() => {
-  if (isSending.value) return '传输中...'
-  if (receivedBits.value.length === dataBits.value.length) return '传输完成 ✓'
-  if (receivedBits.value.length > 0) return '接收中...'
-  return '就绪'
+  if (isSending.value) return 'Đang truyền...'
+  if (receivedBits.value.length === dataBits.value.length) return 'Hoàn tất ✓'
+  if (receivedBits.value.length > 0) return 'Đang nhận...'
+  return 'Sẵn sàng'
 })
 
 const statusColor = computed(() => {

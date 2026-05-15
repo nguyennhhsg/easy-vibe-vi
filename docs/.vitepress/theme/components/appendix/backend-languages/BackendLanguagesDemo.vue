@@ -2,12 +2,12 @@
   <div class="backend-languages-demo">
     <div class="demo-header">
       <span class="icon">🛠️</span>
-      <span class="title">后端语言工具箱</span>
-      <span class="subtitle">选择合适的工具完成工作</span>
+      <span class="title">Hộp công cụ ngôn ngữ backend</span>
+      <span class="subtitle">Chọn đúng công cụ cho công việc</span>
     </div>
 
     <div class="intro-text">
-      想象你是一名<span class="highlight">建筑工人</span>：搬砖用铁铲，砌墙用瓦刀，装修用刷子。后端语言也一样，不同场景适合不同的"工具"。没有最好的语言，只有最合适的选择。
+      Hãy tưởng tượng bạn là <span class="highlight">thợ xây</span>: vác gạch dùng xẻng, xây tường dùng bay, hoàn thiện dùng cọ. Ngôn ngữ backend cũng vậy, mỗi tình huống phù hợp với những "công cụ" khác nhau. Không có ngôn ngữ tốt nhất, chỉ có lựa chọn phù hợp nhất.
     </div>
 
     <div class="language-grid">
@@ -45,7 +45,7 @@
 
         <div class="detail-sections">
           <div class="detail-section">
-            <h6>🎯 适用场景</h6>
+            <h6>🎯 Tình huống phù hợp</h6>
             <ul>
               <li
                 v-for="scenario in getCurrentLang().scenarios"
@@ -57,7 +57,7 @@
           </div>
 
           <div class="detail-section">
-            <h6>✅ 优势</h6>
+            <h6>✅ Ưu điểm</h6>
             <ul>
               <li
                 v-for="pro in getCurrentLang().pros"
@@ -69,7 +69,7 @@
           </div>
 
           <div class="detail-section">
-            <h6>❌ 劣势</h6>
+            <h6>❌ Nhược điểm</h6>
             <ul>
               <li
                 v-for="con in getCurrentLang().cons"
@@ -87,12 +87,12 @@
       v-if="!selectedLang"
       class="hint-text"
     >
-      👆 点击上方任意语言，查看详细说明
+      👆 Bấm vào bất kỳ ngôn ngữ nào ở trên để xem chi tiết
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>选择语言时，先想清楚"我要解决什么问题"，而不是"哪个语言最火"。初创公司选 Python/Node.js 快速验证，大厂选 Java/Go 保证稳定，游戏开发选 C++ 追求极致性能。
+      <strong>Tư tưởng cốt lõi:</strong> Khi chọn ngôn ngữ, hãy xác định rõ "bạn cần giải quyết vấn đề gì", đừng chạy theo "ngôn ngữ nào đang hot". Startup chọn Python/Node.js để kiểm chứng nhanh, doanh nghiệp lớn chọn Java/Go để đảm bảo ổn định, game dev chọn C++ để đạt hiệu năng tối đa.
     </div>
   </div>
 </template>
@@ -106,145 +106,145 @@ const languages = [
   {
     name: 'Go',
     icon: '🐹',
-    metaphor: '电动螺丝刀',
-    description: '云原生时代的高效工具',
+    metaphor: 'Tua-vít điện',
+    description: 'Công cụ hiệu quả thời cloud-native',
     scenarios: [
-      '微服务架构（Docker、K8s 都是 Go 写的）',
-      '高并发 API 服务',
-      'DevOps 工具开发',
-      '区块链基础设施'
+      'Kiến trúc microservice (Docker, K8s đều viết bằng Go)',
+      'API service concurrency cao',
+      'Phát triển công cụ DevOps',
+      'Hạ tầng blockchain'
     ],
     pros: [
-      '并发性能优秀（Goroutine 轻量级协程）',
-      '编译快，部署简单（单一可执行文件）',
-      '语法简洁，学习曲线平缓',
-      '内存占用低，性能接近 C++'
+      'Hiệu năng concurrency tốt (Goroutine - coroutine nhẹ)',
+      'Biên dịch nhanh, triển khai đơn giản (file thực thi đơn lẻ)',
+      'Cú pháp gọn, đường cong học tập thoải',
+      'Tốn ít RAM, hiệu năng gần C++'
     ],
     cons: [
-      '生态不如 Java/Python 成熟',
-      '错误处理繁琐（if err != nil）',
-      '泛型支持较弱（Go 1.18+ 引入）',
-      '不适合 CPU 密集型任务'
+      'Hệ sinh thái chưa bằng Java/Python',
+      'Xử lý lỗi rườm rà (if err != nil)',
+      'Generic hỗ trợ yếu (mới có từ Go 1.18+)',
+      'Không phù hợp tác vụ CPU-intensive'
     ]
   },
   {
     name: 'Python',
     icon: '🐍',
-    metaphor: '瑞士军刀',
-    description: '什么都能干的全能工具',
+    metaphor: 'Dao Thụy Sĩ',
+    description: 'Công cụ đa năng, làm gì cũng được',
     scenarios: [
-      'AI/机器学习（PyTorch、TensorFlow）',
-      '数据分析和处理',
-      '快速原型开发',
-      '自动化脚本'
+      'AI/Machine learning (PyTorch, TensorFlow)',
+      'Phân tích và xử lý dữ liệu',
+      'Phát triển prototype nhanh',
+      'Script tự động hóa'
     ],
     pros: [
-      '语法极简，学习曲线平缓',
-      'AI 生态无与伦比',
-      '开发速度快，代码量少',
-      '库丰富，几乎任何功能都有现成方案'
+      'Cú pháp cực gọn, đường cong học tập thoải',
+      'Hệ sinh thái AI không đối thủ',
+      'Tốc độ phát triển nhanh, ít code',
+      'Thư viện phong phú, gần như mọi tính năng đều có sẵn'
     ],
     cons: [
-      '运行速度慢（比 Go/Java 慢 10-100 倍）',
-      'GIL 限制多线程性能',
-      '打包部署复杂（依赖地狱）',
-      '动态类型，运行时错误多'
+      'Chạy chậm (chậm hơn Go/Java 10-100 lần)',
+      'GIL giới hạn hiệu năng multi-thread',
+      'Đóng gói triển khai phức tạp (dependency hell)',
+      'Dynamic typing, lỗi runtime nhiều'
     ]
   },
   {
     name: 'Java',
     icon: '☕',
-    metaphor: '重型挖掘机',
-    description: '企业级开发的稳定选择',
+    metaphor: 'Máy xúc hạng nặng',
+    description: 'Lựa chọn ổn định cho enterprise',
     scenarios: [
-      '大型企业系统（银行、保险、电商）',
-      'Android 应用开发',
-      '大数据处理（Hadoop、Spark）',
-      '微服务架构（Spring Cloud）'
+      'Hệ thống doanh nghiệp lớn (ngân hàng, bảo hiểm, e-commerce)',
+      'Phát triển ứng dụng Android',
+      'Xử lý big data (Hadoop, Spark)',
+      'Kiến trúc microservice (Spring Cloud)'
     ],
     pros: [
-      '生态极其成熟，框架完备',
-      '强类型，编译时检查',
-      '多线程模型成熟',
-      '跨平台，JVM 优化强大'
+      'Hệ sinh thái rất trưởng thành, framework đầy đủ',
+      'Strong typing, kiểm tra ở compile time',
+      'Mô hình multi-thread trưởng thành',
+      'Cross-platform, JVM tối ưu mạnh'
     ],
     cons: [
-      '代码冗长，样板代码多',
-      '启动慢，内存占用高',
-      '学习曲线陡峭（Spring 全家桶）',
-      '版本更新快，兼容性问题'
+      'Code dài dòng, nhiều boilerplate',
+      'Khởi động chậm, ngốn RAM',
+      'Đường cong học tập dốc (Spring full stack)',
+      'Cập nhật version nhanh, vấn đề tương thích'
     ]
   },
   {
     name: 'Node.js',
     icon: '💚',
-    metaphor: '万能扳手',
-    description: '前后端统一的利器',
+    metaphor: 'Cờ-lê vạn năng',
+    description: 'Vũ khí thống nhất frontend và backend',
     scenarios: [
-      '全栈 Web 应用（React + Node.js）',
-      '实时系统（聊天应用、协作工具）',
-      'Serverless（AWS Lambda、Vercel）',
-      'I/O 密集型 API'
+      'Web app full-stack (React + Node.js)',
+      'Hệ thống realtime (chat, công cụ cộng tác)',
+      'Serverless (AWS Lambda, Vercel)',
+      'API I/O-intensive'
     ],
     pros: [
-      '前后端统一语言，减少切换成本',
-      'NPM 生态庞大，世界最大包仓库',
-      '适合 I/O 密集型应用',
-      '事件驱动，非阻塞 I/O'
+      'Frontend và backend cùng ngôn ngữ, giảm chi phí context-switch',
+      'NPM ecosystem khổng lồ, kho package lớn nhất thế giới',
+      'Phù hợp ứng dụng I/O-intensive',
+      'Event-driven, non-blocking I/O'
     ],
     cons: [
-      '单线程，CPU 密集型性能差',
-      '回调地狱（虽然 async/await 有改善）',
-      '动态类型，运行时错误多',
-      '版本兼容性问题多'
+      'Single-thread, hiệu năng CPU-intensive kém',
+      'Callback hell (dù async/await đã cải thiện)',
+      'Dynamic typing, lỗi runtime nhiều',
+      'Vấn đề tương thích version nhiều'
     ]
   },
   {
     name: 'Rust',
     icon: '🦀',
-    metaphor: '激光切割机',
-    description: '内存安全的系统级工具',
+    metaphor: 'Máy cắt laser',
+    description: 'Công cụ hệ thống với memory safety',
     scenarios: [
-      '系统编程（操作系统、数据库）',
-      '区块链（Solana、Polkadot）',
-      'WebAssembly（前端高性能计算）',
-      '基础设施（AWS Firecracker）'
+      'Lập trình hệ thống (OS, database)',
+      'Blockchain (Solana, Polkadot)',
+      'WebAssembly (tính toán hiệu năng cao ở frontend)',
+      'Hạ tầng (AWS Firecracker)'
     ],
     pros: [
-      '内存安全，编译时保证无泄漏',
-      '性能接近 C++',
-      '现代化语法，零成本抽象',
-      '无 GC，运行时开销低'
+      'Memory safety, đảm bảo không rò rỉ ở compile time',
+      'Hiệu năng gần C++',
+      'Cú pháp hiện đại, zero-cost abstraction',
+      'Không có GC, runtime overhead thấp'
     ],
     cons: [
-      '学习曲线极其陡峭',
-      '编译时间长',
-      '生态不如 Go/Java 成熟',
-      '开发速度慢'
+      'Đường cong học tập cực dốc',
+      'Thời gian biên dịch lâu',
+      'Hệ sinh thái chưa bằng Go/Java',
+      'Tốc độ phát triển chậm'
     ]
   },
   {
     name: 'C++',
     icon: '⚡',
-    metaphor: '工业电钻',
-    description: '高性能计算的基石',
+    metaphor: 'Khoan điện công nghiệp',
+    description: 'Nền tảng cho tính toán hiệu năng cao',
     scenarios: [
-      '游戏开发（Unreal Engine）',
-      '高频交易（金融系统）',
-      '浏览器引擎（Chrome V8）',
-      'AI 框架底层（PyTorch、TF）'
+      'Phát triển game (Unreal Engine)',
+      'High-frequency trading (hệ thống tài chính)',
+      'Engine trình duyệt (Chrome V8)',
+      'Lớp dưới của AI framework (PyTorch, TF)'
     ],
     pros: [
-      '性能极致，无语言能超越',
-      '底层控制力强，直接操作内存',
-      '游戏开发标准',
-      '生态成熟'
+      'Hiệu năng đỉnh cao, không ngôn ngữ nào vượt qua',
+      'Khả năng kiểm soát mức thấp mạnh, thao tác trực tiếp bộ nhớ',
+      'Chuẩn cho phát triển game',
+      'Hệ sinh thái trưởng thành'
     ],
     cons: [
-      '学习曲线极其陡峭',
-      '内存管理复杂（易泄漏）',
-      '开发效率低',
-      '不适合 Web 开发'
+      'Đường cong học tập cực dốc',
+      'Quản lý bộ nhớ phức tạp (dễ rò rỉ)',
+      'Hiệu suất phát triển thấp',
+      'Không phù hợp phát triển web'
     ]
   }
 ]

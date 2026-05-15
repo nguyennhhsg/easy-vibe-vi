@@ -2,12 +2,12 @@
   <div class="macro-micro-task-demo">
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">宏任务与微任务</span>
-      <span class="subtitle">事件循环中的任务优先级</span>
+      <span class="title">Macrotask và microtask</span>
+      <span class="subtitle">Ưu tiên task trong event loop</span>
     </div>
 
     <div class="intro-text">
-      JavaScript 是单线程的，但可以通过<span class="highlight">任务队列</span>实现异步。就像餐厅只有一个厨师，但他可以同时处理多个订单：先做VIP订单（微任务），再做普通订单（宏任务）。
+      JavaScript là single-threaded, nhưng có thể chạy async qua <span class="highlight">task queue</span>. Giống như một nhà hàng chỉ có một đầu bếp, nhưng anh ấy có thể xử lý nhiều đơn cùng lúc: làm đơn VIP trước (microtask), rồi mới làm đơn thường (macrotask).
     </div>
 
     <div class="demo-content">
@@ -15,26 +15,26 @@
         <div class="flow-container">
           <div class="flow-section main-thread">
             <div class="section-title">
-              主线程（执行栈）
+              Main thread (call stack)
             </div>
             <div class="execution-box">
               <div
                 class="exec-item"
                 :class="{ active: currentStep === 'script' }"
               >
-                <span class="exec-label">同步代码</span>
+                <span class="exec-label">Code đồng bộ</span>
               </div>
             </div>
           </div>
 
           <div class="flow-section task-queues">
             <div class="section-title">
-              任务队列
+              Task queue
             </div>
             <div class="queues-container">
               <div class="queue-box micro">
                 <div class="queue-title">
-                  微任务队列（优先级高）
+                  Microtask queue (ưu tiên cao)
                 </div>
                 <div class="queue-items">
                   <div
@@ -50,7 +50,7 @@
 
               <div class="queue-box macro">
                 <div class="queue-title">
-                  宏任务队列（优先级低）
+                  Macrotask queue (ưu tiên thấp)
                 </div>
                 <div class="queue-items">
                   <div
@@ -70,17 +70,17 @@
 
       <div class="code-example">
         <div class="example-title">
-          代码示例
+          Ví dụ code
         </div>
         <pre class="code-block"><code>console.log('1')
 
-setTimeout(() => console.log('2'), 0)  // 宏任务
+setTimeout(() => console.log('2'), 0)  // Macrotask
 
-Promise.resolve().then(() => console.log('3'))  // 微任务
+Promise.resolve().then(() => console.log('3'))  // Microtask
 
 console.log('4')
 
-<span class="code-comment">// 输出顺序：1 → 4 → 3 → 2</span></code></pre>
+<span class="code-comment">// Thứ tự output: 1 -> 4 -> 3 -> 2</span></code></pre>
       </div>
 
       <div class="control-panel">
@@ -88,14 +88,14 @@ console.log('4')
           class="run-btn"
           @click="runDemo"
         >
-          {{ isRunning ? '🔄 运行中...' : '▶️ 运行演示' }}
+          {{ isRunning ? 'Đang chạy...' : 'Chạy demo' }}
         </button>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心要点：</strong>每次宏任务执行完后，会清空所有微任务，然后再执行下一个宏任务。这就是为什么 Promise.then() 比 setTimeout() 先执行。
+      <strong>Ý chính:</strong> Sau khi mỗi macrotask chạy xong, runtime sẽ clear toàn bộ microtask rồi mới chạy macrotask kế tiếp. Đó là lý do Promise.then() chạy trước setTimeout().
     </div>
   </div>
 </template>
@@ -114,7 +114,7 @@ const microTasks = ref([
 const macroTasks = ref([
   { id: 1, name: 'setTimeout()', isActive: false, isProcessing: false },
   { id: 2, name: 'setInterval()', isActive: false, isProcessing: false },
-  { id: 3, name: 'I/O 操作', isActive: false, isProcessing: false }
+  { id: 3, name: 'I/O', isActive: false, isProcessing: false }
 ])
 
 async function runDemo() {

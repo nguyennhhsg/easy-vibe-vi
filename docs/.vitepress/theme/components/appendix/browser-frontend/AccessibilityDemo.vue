@@ -2,81 +2,81 @@
   <div class="demo-wrapper">
     <div class="demo-header">
       <span class="icon">🔍</span> 
-      <span>无障碍对象模型 (AOM) 视角对比演示</span>
+      <span>So sánh hai góc nhìn Accessibility Object Model (AOM)</span>
     </div>
-    
+
     <div class="intro-text">
-      请尝试使用<strong>纯键盘（Tab 键与 Enter 键）</strong>分别操作下方两个面板中的元素，并观察右侧“屏幕阅读器”捕获到的 AOM 层解析结果。
+      Hãy thử dùng <strong>chỉ bàn phím (Tab và Enter)</strong> để thao tác với các phần tử ở hai panel bên dưới, rồi quan sát kết quả parse AOM mà "screen reader" bắt được ở bên phải.
     </div>
 
     <div class="comparison-container">
-      <!-- 案例 A：仅仅是看起来像按钮 -->
+      <!-- Case A: chỉ trông giống button -->
       <div class="case-panel bad-case">
-        <h3 class="case-title">❌ 案例 A：纯粹的视觉欺骗</h3>
-        <p class="case-desc">使用 <code>&lt;div&gt;</code> 结合 CSS 绘制。在渲染树上很完美，但在 AOM 树中缺失语义。</p>
-        
+        <h3 class="case-title">Case A: chỉ giống về mặt thị giác</h3>
+        <p class="case-desc">Dùng <code>&lt;div&gt;</code> kết hợp CSS để vẽ. Trên render tree thì đẹp, nhưng trong AOM tree lại thiếu semantic.</p>
+
         <div class="interactive-area">
-          <div class="label">操作确认：</div>
-          <!-- 伪造的 input -->
-          <div 
-            class="fake-input" 
-            @click="simulateFocus('bad', '文本：请输入验证码')"
+          <div class="label">Xác nhận thao tác:</div>
+          <!-- input giả -->
+          <div
+            class="fake-input"
+            @click="simulateFocus('bad', 'Text: nhập mã xác thực')"
           >
-            请输入验证码
+            Nhập mã xác thực
           </div>
-          <!-- 伪造的 button -->
-          <div 
-            class="fake-button" 
-            @mouseenter="simulateFocus('bad', '文本：确认提交')"
+          <!-- button giả -->
+          <div
+            class="fake-button"
+            @mouseenter="simulateFocus('bad', 'Text: xác nhận gửi')"
             @mouseleave="clearFocus('bad')"
             @click="handleClick('bad')"
           >
-            确认提交
+            Xác nhận gửi
           </div>
         </div>
 
         <div class="aom-monitor">
-          <div class="monitor-header">💻 屏幕阅读器解析 (AOM)：</div>
+          <div class="monitor-header">Screen reader parse (AOM):</div>
           <div class="monitor-screen" :class="{ 'has-content': badCaseOutput }">
-            {{ badCaseOutput || '（视障用户无法通过 Tab 键选中此区域的任何元素）' }}
+            {{ badCaseOutput || '(người dùng khiếm thị không thể dùng Tab để chọn bất kỳ phần tử nào ở đây)' }}
           </div>
         </div>
       </div>
 
-      <!-- 案例 B：语义化与 ARIA 规范 -->
+      <!-- Case B: semantic + ARIA -->
       <div class="case-panel good-case">
-        <h3 class="case-title">✅ 案例 B：语义化 + ARIA 护航</h3>
-        <p class="case-desc">使用 <code>&lt;input&gt;</code>、<code>&lt;button&gt;</code> 等原生标签，补充 <code>aria-label</code>。在 AOM 树中拥有完整交互属性。</p>
-        
+        <h3 class="case-title">Case B: semantic + ARIA</h3>
+        <p class="case-desc">Dùng các thẻ native như <code>&lt;input&gt;</code>, <code>&lt;button&gt;</code> kết hợp <code>aria-label</code>. Trong AOM tree sẽ có đầy đủ thuộc tính tương tác.</p>
+
         <div class="interactive-area">
-          <label for="a11y-input" class="label">操作确认：</label>
-          <input 
+          <label for="a11y-input" class="label">Xác nhận thao tác:</label>
+          <input
             id="a11y-input"
-            type="text" 
-            placeholder="请输入验证码"
-            @focus="simulateFocus('good', '输入框：操作确认，请输入验证码')"
+            type="text"
+            placeholder="Nhập mã xác thực"
+            @focus="simulateFocus('good', 'Input: xác nhận thao tác, nhập mã xác thực')"
             @blur="clearFocus('good')"
-            @mouseenter="simulateFocus('good', '输入框：操作确认，请输入验证码')"
+            @mouseenter="simulateFocus('good', 'Input: xác nhận thao tác, nhập mã xác thực')"
             @mouseleave="clearFocus('good')"
           />
-          <button 
+          <button
             type="button"
             class="real-button"
-            aria-label="提交确认验证码"
-            @focus="simulateFocus('good', '按钮：提交确认验证码。按下回车键激活。')"
+            aria-label="Gửi mã xác thực"
+            @focus="simulateFocus('good', 'Nút: gửi mã xác thực. Bấm Enter để kích hoạt.')"
             @blur="clearFocus('good')"
-            @mouseenter="simulateFocus('good', '按钮：提交确认验证码。')"
+            @mouseenter="simulateFocus('good', 'Nút: gửi mã xác thực.')"
             @mouseleave="clearFocus('good')"
             @click="handleClick('good')"
           >
-            确认提交
+            Xác nhận gửi
           </button>
         </div>
 
         <div class="aom-monitor">
-          <div class="monitor-header">💻 屏幕阅读器解析 (AOM)：</div>
+          <div class="monitor-header">Screen reader parse (AOM):</div>
           <div class="monitor-screen" :class="{ 'has-content': goodCaseOutput }">
-            {{ goodCaseOutput || '（鼠标悬停或按 Tab 键切入以查看解析）' }}
+            {{ goodCaseOutput || '(hover hoặc Tab vào để xem kết quả parse)' }}
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@ const simulateFocus = (type, text) => {
     badCaseOutput.value = text
   } else {
     if (timerGood) clearTimeout(timerGood)
-    goodCaseOutput.value = '🗣️ 正在朗读：' + text
+    goodCaseOutput.value = 'Đang đọc: ' + text
   }
 }
 
@@ -112,9 +112,9 @@ const clearFocus = (type) => {
 
 const handleClick = (type) => {
   if (type === 'bad') {
-    alert('【系统提示】普通 div 虽然能绑定点击事件，但键盘用户无法使用 Tab 聚焦它，也无法用 Enter 键触发它。这对肢体障碍人士是灾难。')
+    alert('[Thông báo] div thường có thể gắn click event, nhưng người dùng bàn phím không Tab focus được, cũng không kích hoạt được bằng Enter. Với người khuyết tật vận động thì đây là thảm hoạ.')
   } else {
-    alert('【系统提示】原生 button 点击触发成功！无论你是用鼠标点击，还是用键盘 Enter 键，都能完美触发。')
+    alert('[Thông báo] Nút native đã trigger thành công! Dù bạn click chuột hay bấm Enter trên bàn phím, đều chạy đúng.')
   }
 }
 </script>
@@ -220,7 +220,7 @@ const handleClick = (type) => {
   color: var(--vp-c-text-1);
 }
 
-/* 伪造元素的样式 */
+/* Style cho các phần tử giả */
 .fake-input {
   background: #fff;
   border: 1px solid #ccc;
@@ -240,9 +240,9 @@ const handleClick = (type) => {
   cursor: pointer;
   border: 1px solid var(--vp-c-brand-soft);
 }
-/* 注意：这里故意不写 :focus 样式，以反映一般野路子开发的现状 */
+/* Lưu ý: cố tình không viết style :focus để mô phỏng cách code cẩu thả thông thường */
 
-/* 真实原生元素的样式 */
+/* Style cho các phần tử native thật */
 #a11y-input {
   background: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
@@ -276,7 +276,7 @@ const handleClick = (type) => {
   box-shadow: 0 0 0 3px var(--vp-c-brand-soft);
 }
 
-/* 屏幕阅读器模拟面板 */
+/* Panel mô phỏng screen reader */
 .aom-monitor {
   margin-top: auto;
   background: #1e293b;
@@ -301,7 +301,7 @@ const handleClick = (type) => {
 }
 
 .monitor-screen.has-content {
-  color: #34d399; /* 绿色亮起，表示正确读出语义 */
+  color: #34d399; /* sáng lên màu xanh, biểu thị đã đọc đúng semantic */
   font-weight: bold;
 }
 

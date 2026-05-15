@@ -1,51 +1,51 @@
 <template>
   <div class="dto-demo">
     <div class="header">
-      <div class="title">DTO 流转：数据在不同层之间的转换</div>
-      <div class="subtitle">DTO（Data Transfer Object）是层与层之间传递数据的载体</div>
+      <div class="title">Luồng DTO: chuyển đổi dữ liệu giữa các tầng</div>
+      <div class="subtitle">DTO (Data Transfer Object) là vật mang dữ liệu giữa các tầng</div>
     </div>
 
     <div class="flow-box">
       <div class="flow-step green">
-        <div class="step-label">Controller 层</div>
-        <pre class="step-code"><code>// 接收 Request DTO
+        <div class="step-label">Tầng Controller</div>
+        <pre class="step-code"><code>// Nhận Request DTO
 public ResponseEntity&lt;UserDTO&gt; createUser(
     @RequestBody @Valid UserCreateRequest request) { ... }</code></pre>
       </div>
 
-      <div class="arrow">↓ 转换为 Service 需要的参数</div>
+      <div class="arrow">↓ Chuyển đổi thành tham số cho Service</div>
 
       <div class="flow-step orange">
-        <div class="step-label">Service 层</div>
+        <div class="step-label">Tầng Service</div>
         <pre class="step-code"><code>public UserDTO createUser(UserCreateParam param) {
-    User user = param.toEntity();   // 转换为 Entity
+    User user = param.toEntity();   // Chuyển thành Entity
     userRepository.save(user);
     return UserDTO.from(user);      // Entity → DTO
 }</code></pre>
       </div>
 
-      <div class="arrow">↓ 转换为 Repository 需要的 Entity</div>
+      <div class="arrow">↓ Chuyển thành Entity mà Repository cần</div>
 
       <div class="flow-step blue">
-        <div class="step-label">Repository 层</div>
+        <div class="step-label">Tầng Repository</div>
         <pre class="step-code"><code>public interface UserRepository
     extends JpaRepository&lt;User, Long&gt; { }</code></pre>
       </div>
 
-      <div class="arrow">↑ 返回 Entity，转换为 DTO</div>
+      <div class="arrow">↑ Trả về Entity, chuyển thành DTO</div>
 
       <div class="flow-step">
-        <div class="step-label">返回给客户端</div>
-        <pre class="step-code"><code>{ "id": 10001, "username": "张三",
-  "email": "zhangsan@example.com", "createdAt": "2024-01-15T10:30:00Z" }</code></pre>
+        <div class="step-label">Trả về cho client</div>
+        <pre class="step-code"><code>{ "id": 10001, "username": "Nguyen Van A",
+  "email": "nguyenvana@example.com", "createdAt": "2024-01-15T10:30:00Z" }</code></pre>
       </div>
     </div>
 
     <div class="table-box">
-      <div class="table-title">不同层的 DTO 职责</div>
+      <div class="table-title">Trách nhiệm DTO theo từng tầng</div>
       <table>
         <thead>
-          <tr><th>层级</th><th>DTO 类型</th><th>职责</th><th>示例</th></tr>
+          <tr><th>Tầng</th><th>Loại DTO</th><th>Trách nhiệm</th><th>Ví dụ</th></tr>
         </thead>
         <tbody>
           <tr v-for="r in rows" :key="r.layer">
@@ -62,9 +62,9 @@ public ResponseEntity&lt;UserDTO&gt; createUser(
 
 <script setup>
 const rows = [
-  { layer: 'Controller', cls: 'green', type: 'Request / Response DTO', purpose: '定义 API 契约、参数校验', example: 'UserCreateRequest' },
-  { layer: 'Service', cls: 'orange', type: 'Param / Result DTO', purpose: '封装业务方法参数，解耦层间依赖', example: 'UserCreateParam' },
-  { layer: 'Repository', cls: 'blue', type: 'Entity / DO', purpose: '映射数据库表结构', example: 'UserEntity' }
+  { layer: 'Controller', cls: 'green', type: 'Request / Response DTO', purpose: 'Định nghĩa API contract, validate tham số', example: 'UserCreateRequest' },
+  { layer: 'Service', cls: 'orange', type: 'Param / Result DTO', purpose: 'Đóng gói tham số method nghiệp vụ, decouple giữa các tầng', example: 'UserCreateParam' },
+  { layer: 'Repository', cls: 'blue', type: 'Entity / DO', purpose: 'Ánh xạ cấu trúc bảng database', example: 'UserEntity' }
 ]
 </script>
 

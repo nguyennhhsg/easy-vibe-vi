@@ -3,12 +3,12 @@
     <div class="comparison-container">
       <div class="side manual-side">
         <div class="side-header">
-          <span class="badge manual">手动同步 / jQuery 风格</span>
+          <span class="badge manual">Đồng bộ thủ công / phong cách jQuery</span>
         </div>
 
         <div class="cart-control">
-          <button class="action-btn" @click="addManual">添加商品</button>
-          <button class="action-btn outline" @click="resetManual">重置</button>
+          <button class="action-btn" @click="addManual">Thêm sản phẩm</button>
+          <button class="action-btn outline" @click="resetManual">Reset</button>
         </div>
 
         <div class="sync-areas">
@@ -22,7 +22,7 @@
               <span class="area-icon">{{ area.icon }}</span>
               <span class="area-name">{{ area.name }}</span>
               <span class="sync-badge" :class="{ synced: area.synced }">
-                {{ area.synced ? '已同步' : '未同步' }}
+                {{ area.synced ? 'Đã đồng bộ' : 'Chưa đồng bộ' }}
               </span>
             </div>
             <div class="area-value">{{ area.synced ? area.actual : area.stale }}</div>
@@ -31,13 +31,13 @@
               class="sync-btn"
               @click="syncArea(area)"
             >
-              手动同步
+              Đồng bộ thủ công
             </button>
           </div>
         </div>
 
         <div class="miss-counter">
-          <span class="miss-label">遗漏次数：</span>
+          <span class="miss-label">Số lần bỏ sót:</span>
           <span class="miss-value" :class="{ danger: missCount > 0 }">{{ missCount }}</span>
         </div>
       </div>
@@ -48,12 +48,12 @@
 
       <div class="side auto-side">
         <div class="side-header">
-          <span class="badge auto">自动同步 / 框架风格</span>
+          <span class="badge auto">Đồng bộ tự động / phong cách framework</span>
         </div>
 
         <div class="cart-control">
-          <button class="action-btn" @click="addAuto">添加商品</button>
-          <button class="action-btn outline" @click="resetAuto">重置</button>
+          <button class="action-btn" @click="addAuto">Thêm sản phẩm</button>
+          <button class="action-btn outline" @click="resetAuto">Reset</button>
         </div>
 
         <div class="sync-areas">
@@ -65,22 +65,22 @@
             <div class="area-header">
               <span class="area-icon">{{ area.icon }}</span>
               <span class="area-name">{{ area.name }}</span>
-              <span class="sync-badge synced">已同步</span>
+              <span class="sync-badge synced">Đã đồng bộ</span>
             </div>
             <div class="area-value">{{ area.value }}</div>
           </div>
         </div>
 
         <div class="miss-counter">
-          <span class="miss-label">遗漏次数：</span>
+          <span class="miss-label">Số lần bỏ sót:</span>
           <span class="miss-value">0</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>前端框架的本质价值在于"自动同步"——你只需修改数据，框架保证所有依赖该数据的 UI 自动更新，不会遗漏。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Giá trị bản chất của framework frontend nằm ở "đồng bộ tự động" - bạn chỉ cần sửa dữ liệu, framework đảm bảo mọi UI phụ thuộc dữ liệu đó được tự cập nhật, không bỏ sót chỗ nào.</span>
     </div>
   </div>
 </template>
@@ -88,7 +88,7 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 
-const products = ['耳机 ¥99', '键盘 ¥199', '鼠标 ¥59', '显示器 ¥1299', '摄像头 ¥149', '音箱 ¥79']
+const products = ['Tai nghe 99k', 'Bàn phím 199k', 'Chuột 59k', 'Màn hình 1299k', 'Webcam 149k', 'Loa 79k']
 let productIndex = ref(0)
 
 const manualCount = ref(0)
@@ -100,34 +100,34 @@ const manualAreas = reactive([
   {
     id: 'count',
     icon: '🔴',
-    name: '购物车数量',
+    name: 'Số lượng giỏ hàng',
     synced: true,
-    stale: '0 件',
-    actual: '0 件'
+    stale: '0 sản phẩm',
+    actual: '0 sản phẩm'
   },
   {
     id: 'list',
     icon: '📋',
-    name: '商品列表',
+    name: 'Danh sách sản phẩm',
     synced: true,
-    stale: '（空）',
-    actual: '（空）'
+    stale: '(trống)',
+    actual: '(trống)'
   },
   {
     id: 'total',
     icon: '💰',
-    name: '总价',
+    name: 'Tổng tiền',
     synced: true,
-    stale: '¥0',
-    actual: '¥0'
+    stale: '0k',
+    actual: '0k'
   },
   {
     id: 'status',
     icon: '⚠️',
-    name: '状态提示',
+    name: 'Trạng thái',
     synced: true,
-    stale: '正常',
-    actual: '正常'
+    stale: 'Bình thường',
+    actual: 'Bình thường'
   }
 ])
 
@@ -138,21 +138,21 @@ function addManual() {
   manualItems.value.push(name)
   pendingManualCount = manualCount.value
 
-  const price = parseInt(name.match(/¥(\d+)/)[1])
+  const price = parseInt(name.match(/(\d+)k$/)[1])
   const totalPrice = manualItems.value.reduce((sum, item) => {
-    return sum + parseInt(item.match(/¥(\d+)/)[1])
+    return sum + parseInt(item.match(/(\d+)k$/)[1])
   }, 0)
 
-  manualAreas[0].actual = `${manualCount.value} 件`
+  manualAreas[0].actual = `${manualCount.value} sản phẩm`
   manualAreas[0].synced = false
 
-  manualAreas[1].actual = manualItems.value.join('、')
+  manualAreas[1].actual = manualItems.value.join(', ')
   manualAreas[1].synced = false
 
-  manualAreas[2].actual = `¥${totalPrice}`
+  manualAreas[2].actual = `${totalPrice}k`
   manualAreas[2].synced = false
 
-  manualAreas[3].actual = manualCount.value > 5 ? '⚠️ 商品过多！' : '正常'
+  manualAreas[3].actual = manualCount.value > 5 ? '⚠️ Quá nhiều sản phẩm!' : 'Bình thường'
   manualAreas[3].synced = false
 
   const unsyncedBefore = manualAreas.filter(a => !a.synced).length
@@ -173,7 +173,7 @@ function resetManual() {
   pendingManualCount = 0
   manualAreas.forEach(a => {
     a.synced = true
-    a.stale = a.id === 'count' ? '0 件' : a.id === 'list' ? '（空）' : a.id === 'total' ? '¥0' : '正常'
+    a.stale = a.id === 'count' ? '0 sản phẩm' : a.id === 'list' ? '(trống)' : a.id === 'total' ? '0k' : 'Bình thường'
     a.actual = a.stale
   })
 }
@@ -183,13 +183,13 @@ const autoItems = ref([])
 
 const autoAreas = computed(() => {
   const totalPrice = autoItems.value.reduce((sum, item) => {
-    return sum + parseInt(item.match(/¥(\d+)/)[1])
+    return sum + parseInt(item.match(/(\d+)k$/)[1])
   }, 0)
   return [
-    { id: 'count', icon: '🔴', name: '购物车数量', value: `${autoCount.value} 件` },
-    { id: 'list', icon: '📋', name: '商品列表', value: autoItems.value.length ? autoItems.value.join('、') : '（空）' },
-    { id: 'total', icon: '💰', name: '总价', value: `¥${totalPrice}` },
-    { id: 'status', icon: '⚠️', name: '状态提示', value: autoCount.value > 5 ? '⚠️ 商品过多！' : '正常' }
+    { id: 'count', icon: '🔴', name: 'Số lượng giỏ hàng', value: `${autoCount.value} sản phẩm` },
+    { id: 'list', icon: '📋', name: 'Danh sách sản phẩm', value: autoItems.value.length ? autoItems.value.join(', ') : '(trống)' },
+    { id: 'total', icon: '💰', name: 'Tổng tiền', value: `${totalPrice}k` },
+    { id: 'status', icon: '⚠️', name: 'Trạng thái', value: autoCount.value > 5 ? '⚠️ Quá nhiều sản phẩm!' : 'Bình thường' }
   ]
 })
 

@@ -119,7 +119,7 @@ const getUrlSuffix = () => {
     case 'history':
       return path
     case 'memory':
-      return ' (URL不变)'
+      return ' (URL không đổi)'
     default:
       return path
   }

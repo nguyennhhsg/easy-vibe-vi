@@ -1,6 +1,6 @@
 <template>
   <div class="demo-card">
-    <div class="demo-label">{{ t('foundation.label') }}</div>
+    <div class="demo-label">{{ label }}</div>
     <div class="code-block">
       <div v-for="(line, i) in foundationLines" :key="i" class="code-line" :class="{ indent: line.indent }">
         <template v-for="(p, j) in line.parts" :key="j">
@@ -9,19 +9,50 @@
           <template v-else>{{ p.text }}</template>
         </template>
       </div>
-      <div class="code-line comment">{{ t('foundation.comment') }}</div>
+      <div class="code-line comment">{{ comment }}</div>
     </div>
-    <div class="demo-caption">{{ t('foundation.caption') }}</div>
+    <div class="demo-caption">{{ caption }}</div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useI18n } from '../../../composables/useI18n.js'
-import { aiHistoryLocale } from '../../../locales/ai-history/index.js'
+const label = 'Tư tưởng cốt lõi của chủ nghĩa ký hiệu — viết tri thức thành quy tắc'
 
-const { t, messages } = useI18n(aiHistoryLocale)
-const foundationLines = computed(() => messages.value.foundation?.lines ?? [])
+const foundationLines = [
+  {
+    parts: [
+      { kw: 'IF' },
+      { text: '  nhiệt độ cơ thể > 38.5°C  ' },
+      { kw: 'AND' },
+      { text: '  số lượng bạch cầu > 11000' }
+    ]
+  },
+  {
+    indent: true,
+    parts: [{ kw: 'THEN' }, { text: '  chẩn đoán = ' }, { str: '"nhiễm khuẩn"' }]
+  },
+  {
+    parts: [
+      { kw: 'IF' },
+      { text: '  chẩn đoán = ' },
+      { str: '"nhiễm khuẩn"' },
+      { text: '  ' },
+      { kw: 'AND' },
+      { text: '  không dị ứng với penicillin' }
+    ]
+  },
+  {
+    indent: true,
+    parts: [
+      { kw: 'THEN' },
+      { text: '  phác đồ điều trị = ' },
+      { str: '"penicillin 400mg / 2 lần mỗi ngày"' }
+    ]
+  }
+]
+
+const comment = '// Hệ chuyên gia y tế thời kỳ đầu (MYCIN, 1977) được tạo thành từ hơn 450 quy tắc kiểu này'
+const caption = 'Chuyên gia con người dịch kinh nghiệm thành từng quy tắc IF-THEN, máy khớp và thực thi từng quy tắc'
 </script>
 
 <style scoped>

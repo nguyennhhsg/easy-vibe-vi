@@ -6,38 +6,38 @@ const isPlaying = ref(false)
 
 const steps = [
   {
-    title: '1. 你执行 npm run dev',
-    terminal: '$ npm run dev\n\n> vite\n\n  准备就绪...',
-    desc: '你在终端里敲下启动命令',
+    title: '1. Bạn chạy npm run dev',
+    terminal: '$ npm run dev\n\n> vite\n\n  Đang chuẩn bị...',
+    desc: 'Bạn gõ lệnh khởi động trong terminal',
     highlight: 'terminal'
   },
   {
-    title: '2. Vite 启动 HTTP 服务器',
+    title: '2. Vite khởi động HTTP server',
     terminal: '$ npm run dev\n\n> vite\n\n  VITE v5.4.0  ready in 200 ms\n\n  ➜  Local:   http://localhost:5173/\n  ➜  Network: http://192.168.1.10:5173/',
-    desc: 'Vite 在本机的 5173 端口启动了一个 HTTP 服务器，等待连接',
+    desc: 'Vite mở một HTTP server ở port 5173 trên máy, chờ kết nối',
     highlight: 'server'
   },
   {
-    title: '3. 你打开浏览器访问',
+    title: '3. Bạn mở trình duyệt và truy cập',
     terminal: '$ npm run dev\n\n> vite\n\n  VITE v5.4.0  ready in 200 ms\n\n  ➜  Local:   http://localhost:5173/\n  ➜  Network: http://192.168.1.10:5173/',
     browser: 'http://localhost:5173',
-    desc: '浏览器向 localhost:5173 发起 HTTP 请求',
+    desc: 'Trình duyệt gửi HTTP request tới localhost:5173',
     highlight: 'browser'
   },
   {
-    title: '4. 服务器返回页面',
+    title: '4. Server trả về trang',
     terminal: '$ npm run dev\n\n> vite\n\n  VITE v5.4.0  ready in 200 ms\n\n  ➜  Local:   http://localhost:5173/\n  ➜  Network: http://192.168.1.10:5173/\n\n  10:30:01 [200] /\n  10:30:01 [200] /src/main.js\n  10:30:01 [200] /src/App.vue',
     browser: 'http://localhost:5173',
-    page: '🎉 你的页面出现了！',
-    desc: 'Vite 处理请求，返回 HTML/JS/CSS，浏览器渲染页面',
+    page: '🎉 Trang của bạn đã xuất hiện!',
+    desc: 'Vite xử lý request, trả về HTML/JS/CSS, trình duyệt render trang',
     highlight: 'page'
   },
   {
-    title: '5. 热更新（HMR）',
+    title: '5. Hot reload (HMR)',
     terminal: '$ npm run dev\n\n  VITE v5.4.0  ready in 200 ms\n\n  ➜  Local:   http://localhost:5173/\n\n  10:30:01 [200] /\n  10:35:22 [vite] hmr update /src/App.vue',
     browser: 'http://localhost:5173',
-    page: '🔄 页面自动刷新了！',
-    desc: '你修改代码后，Vite 通过 WebSocket 通知浏览器，页面自动更新',
+    page: '🔄 Trang đã tự cập nhật!',
+    desc: 'Khi bạn sửa code, Vite báo cho trình duyệt qua WebSocket và trang tự cập nhật',
     highlight: 'hmr'
   }
 ]
@@ -78,9 +78,9 @@ function reset() {
       </div>
       <div class="control-btns">
         <button class="action-btn" :disabled="isPlaying" @click="playAll">
-          {{ isPlaying ? '播放中...' : '▶ 自动演示' }}
+          {{ isPlaying ? 'Đang chạy...' : '▶ Tự chạy demo' }}
         </button>
-        <button class="action-btn ghost" @click="reset">重置</button>
+        <button class="action-btn ghost" @click="reset">Reset</button>
       </div>
     </div>
 
@@ -91,14 +91,14 @@ function reset() {
         <div :class="['panel terminal-panel', { highlight: steps[currentStep].highlight === 'terminal' }]">
           <div class="panel-header">
             <span class="dot red" /><span class="dot yellow" /><span class="dot green" />
-            <span class="panel-title">终端</span>
+            <span class="panel-title">Terminal</span>
           </div>
           <pre class="terminal-content">{{ steps[currentStep].terminal }}</pre>
         </div>
 
         <div class="arrow-col">
           <div :class="['flow-arrow', { active: currentStep >= 1 }]">
-            <span class="arrow-label">监听</span>
+            <span class="arrow-label">Listen</span>
             <span class="arrow-char">↕</span>
           </div>
         </div>
@@ -109,13 +109,13 @@ function reset() {
 >
           <div class="panel-header">
             <span class="dot red" /><span class="dot yellow" /><span class="dot green" />
-            <span class="panel-title">浏览器</span>
+            <span class="panel-title">Trình duyệt</span>
           </div>
           <div class="browser-content">
             <div v-if="steps[currentStep].browser" class="browser-url-bar">
               {{ steps[currentStep].browser }}
             </div>
-            <div v-else class="browser-empty">等待你打开浏览器...</div>
+            <div v-else class="browser-empty">Đang chờ bạn mở trình duyệt...</div>
             <div v-if="steps[currentStep].page" class="browser-page">
               {{ steps[currentStep].page }}
             </div>
@@ -129,34 +129,34 @@ function reset() {
     </div>
 
     <div class="http-explain">
-      <div class="http-title">什么是 HTTP 服务器？</div>
+      <div class="http-title">HTTP server là gì?</div>
       <div class="http-analogy">
         <div class="analogy-item">
           <span class="analogy-icon">🏪</span>
           <div class="analogy-text">
-            <strong>想象一个前台窗口</strong>
-            <span>HTTP 服务器就像一个"永远开着的服务窗口"——它一直等在那里，有人来问就回答，没人来就静静等着。</span>
+            <strong>Hình dung như một quầy lễ tân</strong>
+            <span>HTTP server giống &quot;một quầy luôn mở cửa&quot; - nó đợi sẵn ở đó, ai hỏi thì trả lời, không có ai thì lặng lẽ chờ.</span>
           </div>
         </div>
         <div class="analogy-item">
           <span class="analogy-icon">📋</span>
           <div class="analogy-text">
-            <strong>只懂一种"暗号"</strong>
-            <span>这个窗口只听得懂 HTTP 协议的请求格式（比如 <code>GET /index.html</code>），然后把对应的文件内容返回给你。</span>
+            <strong>Chỉ hiểu một loại &quot;mật mã&quot;</strong>
+            <span>Quầy này chỉ hiểu format request của giao thức HTTP (ví dụ <code>GET /index.html</code>), rồi trả lại nội dung file tương ứng.</span>
           </div>
         </div>
         <div class="analogy-item">
           <span class="analogy-icon">⚙️</span>
           <div class="analogy-text">
-            <strong>开发服务器 = 加强版窗口</strong>
-            <span>Vite、Webpack 的开发服务器不只是"原样返回文件"，它还会即时编译你的代码（Vue → JS、TS → JS、Sass → CSS），然后再返回给浏览器。</span>
+            <strong>Dev server = quầy phiên bản nâng cấp</strong>
+            <span>Dev server của Vite, Webpack không chỉ &quot;trả file thô&quot; mà còn compile code của bạn ngay lập tức (Vue → JS, TS → JS, Sass → CSS) rồi mới trả về trình duyệt.</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>一句话总结：</strong>开发服务器 = 一个运行在 localhost 上的 HTTP 服务器 + 即时代码编译器。它监听某个端口，浏览器来请求，它就把编译好的代码返回。
+      <strong>Tóm lại:</strong> dev server = một HTTP server chạy trên localhost + bộ compile code on-the-fly. Nó listen một port, trình duyệt request, nó trả code đã compile xong.
     </div>
   </div>
 </template>

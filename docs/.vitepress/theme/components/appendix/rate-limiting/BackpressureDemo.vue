@@ -1,41 +1,41 @@
 <!--
   BackpressureDemo.vue
-  背压控制演示：展示生产者速度 > 消费者速度时的处理策略
+  Demo backpressure: cách xử lý khi producer nhanh hơn consumer
 -->
 <template>
   <div class="backpressure-demo">
     <div class="header">
-      <div class="title">背压控制 (Backpressure)</div>
-      <div class="subtitle">当生产速度超过消费速度时会发生什么？</div>
+      <div class="title">Backpressure</div>
+      <div class="subtitle">Điều gì xảy ra khi tốc độ sản xuất vượt tốc độ tiêu thụ?</div>
     </div>
 
     <div class="controls">
       <div class="speed-control">
-        <span class="ctrl-label">生产速率：</span>
+        <span class="ctrl-label">Tốc độ sản xuất:</span>
         <input type="range" min="1" max="10" v-model.number="produceRate" />
         <span class="ctrl-value">{{ produceRate }}/s</span>
       </div>
       <div class="speed-control">
-        <span class="ctrl-label">消费速率：</span>
+        <span class="ctrl-label">Tốc độ tiêu thụ:</span>
         <input type="range" min="1" max="10" v-model.number="consumeRate" />
         <span class="ctrl-value">{{ consumeRate }}/s</span>
       </div>
       <div class="btn-group">
-        <button class="ctrl-btn primary" @click="start" :disabled="running">开始</button>
-        <button class="ctrl-btn" @click="stop">停止</button>
+        <button class="ctrl-btn primary" @click="start" :disabled="running">Bắt đầu</button>
+        <button class="ctrl-btn" @click="stop">Dừng</button>
       </div>
     </div>
 
     <div class="buffer-visual">
       <div class="producer-side">
-        <div class="side-label">生产者</div>
+        <div class="side-label">Producer</div>
         <div class="rate-indicator" :class="{ fast: produceRate > consumeRate }">
           {{ produceRate }}/s
         </div>
       </div>
 
       <div class="buffer-section">
-        <div class="buffer-label">缓冲区 ({{ bufferSize }}/{{ maxBuffer }})</div>
+        <div class="buffer-label">Buffer ({{ bufferSize }}/{{ maxBuffer }})</div>
         <div class="buffer-bar">
           <div
             class="buffer-fill"
@@ -47,13 +47,13 @@
       </div>
 
       <div class="consumer-side">
-        <div class="side-label">消费者</div>
+        <div class="side-label">Consumer</div>
         <div class="rate-indicator">{{ consumeRate }}/s</div>
       </div>
     </div>
 
     <div class="strategies">
-      <div class="strat-title">背压处理策略：</div>
+      <div class="strat-title">Chiến lược xử lý backpressure:</div>
       <div class="strat-grid">
         <div v-for="s in strategies" :key="s.name" class="strat-card">
           <div class="strat-name">{{ s.name }}</div>
@@ -84,10 +84,10 @@ const bufferLevel = computed(() => {
 
 const statusText = computed(() => {
   const ratio = bufferSize.value / maxBuffer
-  if (ratio >= 1) return '缓冲区溢出！数据丢失'
-  if (ratio >= 0.8) return '即将溢出，需要背压控制'
-  if (ratio >= 0.5) return '缓冲区压力较大'
-  return '正常运行'
+  if (ratio >= 1) return 'Buffer tràn! Mất dữ liệu'
+  if (ratio >= 0.8) return 'Sắp tràn, cần backpressure'
+  if (ratio >= 0.5) return 'Áp lực buffer khá lớn'
+  return 'Đang chạy bình thường'
 })
 
 function start() {
@@ -107,10 +107,10 @@ function stop() {
 }
 
 const strategies = [
-  { name: '丢弃策略', desc: '缓冲区满时直接丢弃新数据', example: '如：日志采集、实时监控指标' },
-  { name: '阻塞策略', desc: '缓冲区满时让生产者等待', example: '如：Go channel、Java BlockingQueue' },
-  { name: '采样策略', desc: '只处理部分数据，跳过其余', example: '如：高频传感器数据降采样' },
-  { name: '弹性扩容', desc: '动态增加消费者数量', example: '如：K8s HPA 自动扩缩容' }
+  { name: 'Drop', desc: 'Khi buffer đầy thì bỏ dữ liệu mới', example: 'Ví dụ: thu thập log, metrics realtime' },
+  { name: 'Block', desc: 'Khi buffer đầy thì cho producer chờ', example: 'Ví dụ: Go channel, Java BlockingQueue' },
+  { name: 'Sampling', desc: 'Chỉ xử lý một phần dữ liệu, bỏ phần còn lại', example: 'Ví dụ: lấy mẫu dữ liệu cảm biến tần số cao' },
+  { name: 'Elastic scaling', desc: 'Tự động tăng số consumer', example: 'Ví dụ: K8s HPA auto scale' }
 ]
 
 onUnmounted(() => { if (timer) clearInterval(timer) })

@@ -1,15 +1,15 @@
 <!--
   EscapeSequences.vue
-  转义序列演示组件
-  
-  用途：
-  解释终端如何通过“不可见字符”来控制颜色、光标位置和清屏操作。
-  揭示 ANSI 转义序列（如 `\033[31m`）的工作原理。
-  
-  交互功能：
-  - 颜色/样式按钮：点击后发送对应的转义序列。
-  - 序列显示：实时显示当前发送的原始序列代码（如 `^[[31m`）。
-  - 终端反馈：下方模拟终端根据接收到的序列改变文字颜色或清除内容。
+  Component demo escape sequence
+
+  Mục đích:
+  Giải thích cách terminal dùng "ký tự vô hình" để điều khiển màu, vị trí con trỏ và xóa màn hình.
+  Phân tích nguyên lý của escape sequence ANSI (như `\033[31m`).
+
+  Tính năng tương tác:
+  - Nút màu/style: bấm vào sẽ gửi escape sequence tương ứng.
+  - Hiển thị sequence: cho thấy mã sequence gốc đang gửi (vd `^[[31m`).
+  - Phản hồi terminal: terminal mô phỏng bên dưới đổi màu chữ hoặc xóa nội dung theo sequence nhận được.
 -->
 <template>
   <div class="escape-demo">
@@ -18,7 +18,7 @@
         <div class="section-title">
           <span class="en">16-COLOR PALETTE</span>
           <span class="divider">|</span>
-          <span class="zh">16 色调色板</span>
+          <span class="zh">Bảng màu 16 màu</span>
         </div>
         <div class="palette-grid">
           <div
@@ -43,7 +43,7 @@
         <div class="section-title">
           <span class="en">STYLE SEQUENCES</span>
           <span class="divider">|</span>
-          <span class="zh">样式序列</span>
+          <span class="zh">Sequence style</span>
         </div>
         <div class="btn-group">
           <button
@@ -51,14 +51,14 @@
             @click="applyStyle('1')"
           >
             <span class="btn-code">^[[1m</span>
-            <span class="btn-label">Bold / 加粗</span>
+            <span class="btn-label">Bold / In đậm</span>
           </button>
           <button
             :class="{ active: isUnderline }"
             @click="applyStyle('4')"
           >
             <span class="btn-code">^[[4m</span>
-            <span class="btn-label">Underline / 下划线</span>
+            <span class="btn-label">Underline / Gạch chân</span>
           </button>
         </div>
         <div
@@ -70,7 +70,7 @@
             @click="resetStyle"
           >
             <span class="btn-code">^[[0m</span>
-            <span class="btn-label">Reset / 重置所有样式</span>
+            <span class="btn-label">Reset / Reset tất cả style</span>
           </button>
         </div>
       </div>
@@ -79,20 +79,20 @@
         <div class="section-title">
           <span class="en">CURSOR SEQUENCES</span>
           <span class="divider">|</span>
-          <span class="zh">光标控制序列</span>
+          <span class="zh">Sequence điều khiển cursor</span>
         </div>
         <div class="btn-stack">
           <button @click="clearScreen">
             <span class="code">^[[2J</span>
-            <span class="desc">Clear Screen / 清屏</span>
+            <span class="desc">Clear Screen / Xóa màn hình</span>
           </button>
           <button @click="moveHome">
             <span class="code">^[[H</span>
-            <span class="desc">Move Home / 回到原点 (0,0)</span>
+            <span class="desc">Move Home / Về vị trí gốc (0,0)</span>
           </button>
           <button @click="moveTo">
             <span class="code">^[[5;10H</span>
-            <span class="desc">Move to 5,10 / 移动到 (5,10)</span>
+            <span class="desc">Move to 5,10 / Di chuyển tới (5,10)</span>
           </button>
         </div>
       </div>

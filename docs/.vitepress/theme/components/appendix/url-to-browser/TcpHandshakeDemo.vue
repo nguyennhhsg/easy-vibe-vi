@@ -1,47 +1,47 @@
 <template>
   <div class="tcp-handshake-demo">
     <div class="demo-header">
-      <span class="title">TCP 三次握手</span>
-      <span class="subtitle">建立可靠连接的过程</span>
+      <span class="title">TCP three-way handshake</span>
+      <span class="subtitle">Quá trình thiết lập kết nối tin cậy</span>
     </div>
 
     <div class="handshake-flow">
       <div class="actor client">
         <span class="actor-icon">🧑‍💻</span>
-        <span class="actor-name">客户端</span>
+        <span class="actor-name">Client</span>
       </div>
 
       <div class="messages">
         <div class="message-row">
           <span class="msg-label">SYN</span>
           <span class="msg-arrow">→</span>
-          <span class="msg-desc">"我能连你吗？"</span>
+          <span class="msg-desc">Tớ kết nối với bạn được không?</span>
         </div>
         <div class="message-row">
-          <span class="msg-desc">"能，你也能收到我吗？"</span>
+          <span class="msg-desc">Được, bạn có nhận được tớ không?</span>
           <span class="msg-arrow">←</span>
           <span class="msg-label">SYN-ACK</span>
         </div>
         <div class="message-row">
           <span class="msg-label">ACK</span>
           <span class="msg-arrow">→</span>
-          <span class="msg-desc">"能，开始吧！"</span>
+          <span class="msg-desc">Có, mình bắt đầu nhé!</span>
         </div>
       </div>
 
       <div class="actor server">
         <span class="actor-icon">🖥️</span>
-        <span class="actor-name">服务器</span>
+        <span class="actor-name">Server</span>
       </div>
     </div>
 
     <div class="status-bar">
-      <span class="status-badge success">✓ 连接已建立</span>
+      <span class="status-badge success">Đã thiết lập kết nối</span>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      三次握手确保双方都能收发数据，就像打电话时互相确认"能听到吗"。
+      <strong>Ý chính:</strong>
+      Three-way handshake đảm bảo cả hai bên đều có thể gửi và nhận dữ liệu, giống như khi gọi điện thoại hai bên xác nhận "nghe rõ chưa".
     </div>
   </div>
 </template>

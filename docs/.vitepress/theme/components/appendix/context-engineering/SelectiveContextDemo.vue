@@ -1,15 +1,15 @@
 <!--
   SelectiveContextDemo.vue
-  选择性上下文保留演示
+  Mô phỏng giữ context theo chọn lọc
 
-  用途：
-  展示如何通过 "Pinning" (钉住) 机制来保护关键信息不被滑动窗口移除。
-  演示 System Prompt 和关键用户指令如何长期保留。
+  Mục đích:
+  Trình bày cơ chế "Pinning" (ghim) giúp bảo vệ thông tin then chốt khỏi bị sliding window đẩy đi.
+  Cho thấy System Prompt và các chỉ thị quan trọng của người dùng được giữ lâu dài thế nào.
 
-  交互功能：
-  - 发送消息：添加新内容。
-  - 钉住/取消钉住：手动选择要保留的消息。
-  - 自动管理：演示当窗口满时，未钉住的消息优先被移除。
+  Tính năng tương tác:
+  - Gửi tin nhắn: thêm nội dung mới.
+  - Ghim/bỏ ghim: bạn chủ động chọn tin nhắn cần giữ lại.
+  - Tự động quản lý: minh hoạ khi cửa sổ đầy, các tin chưa ghim sẽ bị bỏ trước.
 -->
 <template>
   <div class="selective-context-demo">
@@ -17,14 +17,14 @@
       <div class="stat-group">
         <div class="stat-item">
           <span class="value">{{ totalMessages }}</span>
-          <span class="label">现在一共记了几条</span>
+          <span class="label">Hiện đang nhớ bao nhiêu tin</span>
         </div>
         <div class="stat-divider">
           /
         </div>
         <div class="stat-item">
           <span class="value">{{ maxSlots }}</span>
-          <span class="label">黑板最多能记几条</span>
+          <span class="label">Bảng đen nhớ tối đa được bao nhiêu tin</span>
         </div>
       </div>
       <div class="usage-bar">
@@ -41,8 +41,8 @@
       <div class="context-section pinned-section">
         <div class="section-header">
           <span class="icon">📌</span>
-          <span class="title">钉住区（永远保留的重要信息）</span>
-          <span class="count">当前 {{ pinnedMessages.length }} 条</span>
+          <span class="title">Khu ghim (thông tin quan trọng luôn giữ lại)</span>
+          <span class="count">Hiện có {{ pinnedMessages.length }} tin</span>
         </div>
         <div class="message-list">
           <transition-group name="list">
@@ -57,11 +57,11 @@
                 <button 
                   class="pin-btn active" 
                   :disabled="msg.role === 'System'"
-                  title="取消钉住"
+                  title="Bỏ ghim"
                   @click="togglePin(msg)"
                 >
-                  <span v-if="msg.role === 'System'">🔒 系统信息固定在这</span>
-                  <span v-else>📌 取消钉住</span>
+                  <span v-if="msg.role === 'System'">🔒 System được cố định ở đây</span>
+                  <span v-else>📌 Bỏ ghim</span>
                 </button>
               </div>
               <div class="card-content">
@@ -76,8 +76,8 @@
       <div class="context-section scrolling-section">
         <div class="section-header">
           <span class="icon">📜</span>
-          <span class="title">会被“挤走”的普通对话（先进先出）</span>
-          <span class="count">当前 {{ scrollingMessages.length }} 条</span>
+          <span class="title">Hội thoại thường (FIFO, có thể bị đẩy đi)</span>
+          <span class="count">Hiện có {{ scrollingMessages.length }} tin</span>
         </div>
         <div class="message-list">
           <transition-group name="list">
@@ -91,10 +91,10 @@
                 <span class="role-badge">{{ msg.role }}</span>
                 <button
                   class="pin-btn"
-                  title="把这条钉在黑板上"
+                  title="Ghim tin này lên bảng"
                   @click="togglePin(msg)"
                 >
-                  📌 钉住这条
+                  📌 Ghim tin này
                 </button>
               </div>
               <div class="card-content">
@@ -106,7 +106,7 @@
             v-if="scrollingMessages.length === 0"
             class="empty-state"
           >
-            这里是“普通对话区”，暂时还空着
+            Đây là "khu hội thoại thường", hiện đang trống
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@
       <div class="input-group">
         <input
           v-model="newMessage"
-          placeholder="在这里输入一条新的信息，比如“我叫小明”"
+          placeholder="Bạn gõ một tin mới ở đây, ví dụ &quot;Mình tên là Nam&quot;"
           @keyup.enter="sendMessage"
         >
         <button
@@ -124,21 +124,21 @@
           :disabled="!newMessage.trim()"
           @click="sendMessage"
         >
-          添加到黑板
+          Thêm lên bảng
         </button>
       </div>
       <div class="presets">
         <button
           class="preset-btn"
-          @click="addPreset('我的名字叫 Alice。')"
+          @click="addPreset('Tên mình là Alice.')"
         >
-          用户：我的名字叫 Alice
+          User: Tên mình là Alice
         </button>
         <button
           class="preset-btn"
-          @click="addPreset('系统密码是 1234。')"
+          @click="addPreset('Mật khẩu hệ thống là 1234.')"
         >
-          用户：系统密码是 1234
+          User: Mật khẩu hệ thống là 1234
         </button>
       </div>
     </div>
@@ -146,9 +146,9 @@
     <div class="info-box">
       <p>
         <span class="icon">💡</span>
-        <strong>说明：</strong>
-        “选择性保留”就是：重要的就钉在黑板上，普通的让它自己滑走。
-        系统提示通常会永久钉住，用户的关键信息（比如名字、账号、重要偏好）也可以通过记忆模块或 RAG 钉在这里，避免被新对话挤掉。
+        <strong>Giải thích:</strong>
+        "Giữ chọn lọc" tức là: phần quan trọng thì ghim lên bảng, phần thường thì cứ để nó tự trôi đi.
+        System Prompt thường được ghim vĩnh viễn. Các thông tin then chốt của người dùng (tên, tài khoản, sở thích quan trọng) cũng có thể được ghim ở đây qua module memory hoặc RAG, tránh bị các hội thoại mới đẩy đi.
       </p>
     </div>
   </div>

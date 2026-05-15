@@ -22,19 +22,19 @@ const references = ref([
 ])
 
 const phases = [
-  { name: 'mark', label: '标记阶段', description: '从根对象开始,标记所有可达对象' },
-  { name: 'sweep', label: '清除阶段', description: '回收未标记的对象' }
+  { name: 'mark', label: 'Pha mark', description: 'Bắt đầu từ root object, đánh dấu mọi object còn truy cập được' },
+  { name: 'sweep', label: 'Pha sweep', description: 'Thu hồi những object chưa được đánh dấu' }
 ]
 
 const steps = [
-  { phase: 'mark', action: 'mark-root', description: '从根对象开始标记' },
-  { phase: 'mark', action: 'mark-1', description: '标记 obj1 (根对象引用)' },
-  { phase: 'mark', action: 'mark-2', description: '标记 obj2 (obj1 引用)' },
-  { phase: 'mark', action: 'mark-3', description: '标记 obj3 (obj1 引用)' },
-  { phase: 'mark', action: 'mark-4', description: '标记 obj4 (obj3 引用)' },
-  { phase: 'sweep', action: 'collect-5', description: '回收 obj5 (未标记)' },
-  { phase: 'sweep', action: 'collect-6', description: '回收 obj6 (未标记)' },
-  { phase: 'done', action: 'finish', description: '垃圾回收完成' }
+  { phase: 'mark', action: 'mark-root', description: 'Bắt đầu mark từ root object' },
+  { phase: 'mark', action: 'mark-1', description: 'Mark obj1 (root tham chiếu)' },
+  { phase: 'mark', action: 'mark-2', description: 'Mark obj2 (obj1 tham chiếu)' },
+  { phase: 'mark', action: 'mark-3', description: 'Mark obj3 (obj1 tham chiếu)' },
+  { phase: 'mark', action: 'mark-4', description: 'Mark obj4 (obj3 tham chiếu)' },
+  { phase: 'sweep', action: 'collect-5', description: 'Thu hồi obj5 (chưa mark)' },
+  { phase: 'sweep', action: 'collect-6', description: 'Thu hồi obj6 (chưa mark)' },
+  { phase: 'done', action: 'finish', description: 'Garbage collection hoàn tất' }
 ]
 
 const reset = () => {
@@ -110,9 +110,9 @@ const stop = () => {
 
 <template>
   <div class="garbage-collection-demo">
-    <h3>垃圾回收机制</h3>
+    <h3>Cơ chế garbage collection</h3>
 
-    <!-- 阶段指示器 -->
+    <!-- Chỉ báo pha -->
     <div class="phase-indicator">
       <div class="phase-tabs">
         <div
@@ -127,28 +127,28 @@ const stop = () => {
       </div>
     </div>
 
-    <!-- 对象关系图 -->
+    <!-- Sơ đồ quan hệ object -->
     <div class="graph-container">
       <div class="graph-header">
-        <h4>对象引用关系</h4>
+        <h4>Quan hệ tham chiếu giữa các object</h4>
         <div class="legend">
           <div class="legend-item">
             <span class="legend-color unmarked" />
-            <span>未标记</span>
+            <span>Chưa mark</span>
           </div>
           <div class="legend-item">
             <span class="legend-color marked" />
-            <span>已标记(可达)</span>
+            <span>Đã mark (còn truy cập được)</span>
           </div>
           <div class="legend-item">
             <span class="legend-color collected" />
-            <span>已回收</span>
+            <span>Đã thu hồi</span>
           </div>
         </div>
       </div>
 
       <div class="object-graph">
-        <!-- 根对象 -->
+        <!-- Root object -->
         <div class="root-object">
           <div class="object-box root">
             <div class="object-icon">
@@ -160,7 +160,7 @@ const stop = () => {
           </div>
         </div>
 
-        <!-- 对象节点 -->
+        <!-- Object node -->
         <div class="objects-grid">
           <div
             v-for="obj in objects"
@@ -188,19 +188,19 @@ const stop = () => {
                 v-if="obj.marked"
                 class="object-status"
               >
-                ✓ 可达
+                Truy cập được
               </div>
               <div
                 v-if="obj.collected"
                 class="object-status collected"
               >
-                ✗ 回收
+                Đã thu hồi
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 引用连线 (用SVG绘制) -->
+        <!-- Đường tham chiếu (vẽ bằng SVG) -->
         <svg
           class="connections"
           viewBox="0 0 600 400"
@@ -260,100 +260,100 @@ const stop = () => {
       </div>
     </div>
 
-    <!-- 当前步骤说明 -->
+    <!-- Mô tả bước hiện tại -->
     <div class="step-description">
       <div class="step-content">
-        <strong>当前操作:</strong>
+        <strong>Thao tác hiện tại:</strong>
         <span v-if="currentStep < steps.length">
           {{ steps[currentStep].description }}
         </span>
         <span v-else>
-          垃圾回收完成
+          Garbage collection hoàn tất
         </span>
       </div>
     </div>
 
-    <!-- 控制按钮 -->
+    <!-- Nút điều khiển -->
     <div class="controls">
       <button
         :disabled="isAnimating"
         class="btn-play"
         @click="play"
       >
-        {{ isAnimating ? '执行中...' : '▶ 自动演示' }}
+        {{ isAnimating ? 'Đang chạy...' : 'Tự chạy demo' }}
       </button>
       <button
         :disabled="isAnimating || currentStep >= steps.length"
         class="btn-step"
         @click="nextStep"
       >
-        ⏭ 单步执行
+        Chạy từng bước
       </button>
       <button
         :disabled="!isAnimating"
         class="btn-stop"
         @click="stop"
       >
-        ⏸ 停止
+        Dừng
       </button>
       <button
         :disabled="isAnimating"
         class="btn-reset"
         @click="reset"
       >
-        🔄 重置
+        Reset
       </button>
     </div>
 
-    <!-- 算法说明 -->
+    <!-- Mô tả thuật toán -->
     <div class="algorithm-box">
-      <h4>标记-清除算法 (Mark-and-Sweep)</h4>
+      <h4>Thuật toán Mark-and-Sweep</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-number">1</span>
           <div class="step-content">
-            <strong>标记阶段</strong>
-            <p>从根对象(Root)开始,遍历所有可达对象,标记为"活动对象"</p>
+            <strong>Pha mark</strong>
+            <p>Bắt đầu từ root object, duyệt mọi object truy cập được và đánh dấu là "active object"</p>
           </div>
         </div>
         <div class="algorithm-step">
           <span class="step-number">2</span>
           <div class="step-content">
-            <strong>清除阶段</strong>
-            <p>遍历整个堆内存,回收所有未被标记的对象</p>
+            <strong>Pha sweep</strong>
+            <p>Duyệt toàn bộ heap, thu hồi mọi object chưa được mark</p>
           </div>
         </div>
         <div class="algorithm-step">
           <span class="step-number">3</span>
           <div class="step-content">
-            <strong>重置标记</strong>
-            <p>清除所有标记位,为下一次垃圾回收做准备</p>
+            <strong>Reset mark</strong>
+            <p>Xoá tất cả mark bit, chuẩn bị cho lần garbage collection kế tiếp</p>
           </div>
         </div>
       </div>
 
       <div class="key-points">
-        <h5>核心要点</h5>
+        <h5>Điểm cốt lõi</h5>
         <ul>
-          <li><strong>根对象(Root):</strong> 全局变量、栈上的变量等,总是被认为是可达的</li>
-          <li><strong>可达对象:</strong> 从根对象出发,通过引用链能访问到的对象</li>
-          <li><strong>垃圾对象:</strong> 无法从根对象访问到的对象,会被回收</li>
-          <li><strong>循环引用:</strong> 如果两个对象互相引用但都不可达,仍会被回收</li>
+          <li><strong>Root object:</strong> Biến toàn cục, biến trên stack... luôn được coi là truy cập được</li>
+          <li><strong>Object truy cập được:</strong> Object mà từ root có thể đi tới qua chuỗi tham chiếu</li>
+          <li><strong>Object rác:</strong> Object không thể truy cập từ root, sẽ bị thu hồi</li>
+          <li><strong>Circular reference:</strong> Nếu hai object tham chiếu lẫn nhau nhưng không truy cập được từ root, vẫn bị thu hồi</li>
         </ul>
       </div>
     </div>
 
-    <!-- 实际应用 -->
+    <!-- Ứng dụng thực tế -->
     <div class="practical-tips">
-      <h4>实际应用技巧</h4>
+      <h4>Mẹo áp dụng thực tế</h4>
       <div class="tips-grid">
         <div class="tip-card">
           <div class="tip-icon">
             💡
           </div>
           <div class="tip-content">
-            <strong>及时解除引用</strong>
-            <p>对象不再使用时,将其设为 null</p>
+            <strong>Bỏ tham chiếu đúng lúc</strong>
+            <p>Khi không dùng object nữa thì gán nó về null</p>
           </div>
         </div>
         <div class="tip-card">
@@ -361,8 +361,8 @@ const stop = () => {
             🔒
           </div>
           <div class="tip-content">
-            <strong>避免意外的全局变量</strong>
-            <p>使用 const/let 代替 var</p>
+            <strong>Tránh biến toàn cục vô tình</strong>
+            <p>Dùng const/let thay cho var</p>
           </div>
         </div>
         <div class="tip-card">
@@ -370,8 +370,8 @@ const stop = () => {
             🧹
           </div>
           <div class="tip-content">
-            <strong>清理事件监听</strong>
-            <p>组件销毁时移除所有监听器</p>
+            <strong>Dọn event listener</strong>
+            <p>Khi component bị hủy thì gỡ hết listener</p>
           </div>
         </div>
         <div class="tip-card">
@@ -379,8 +379,8 @@ const stop = () => {
             📊
           </div>
           <div class="tip-content">
-            <strong>定期检查内存</strong>
-            <p>用 DevTools Memory 面板监控</p>
+            <strong>Kiểm tra bộ nhớ định kỳ</strong>
+            <p>Dùng panel Memory trong devtools để theo dõi</p>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@
         <!-- Left: Waveform -->
         <div class="viz-box">
           <div class="viz-header">
-            <span class="viz-title">🌊 波形 (Waveform)</span>
+            <span class="viz-title">🌊 Sóng (Waveform)</span>
             <el-tag
               size="small"
               type="success"
@@ -26,17 +26,17 @@
               />
             </div>
             <div class="axis-label x-axis">
-              时间 (Time) →
+              Thời gian (Time) →
             </div>
             <div class="axis-label y-axis">
-              振幅 (Amplitude) ↑
+              Biên độ (Amplitude) ↑
             </div>
           </div>
         </div>
 
         <div class="transform-arrow">
           <div class="arrow-content">
-            <span class="fft-text">FFT 变换</span>
+            <span class="fft-text">Biến đổi FFT</span>
             <el-icon><Right /></el-icon>
           </div>
         </div>
@@ -44,7 +44,7 @@
         <!-- Right: Spectrogram -->
         <div class="viz-box">
           <div class="viz-header">
-            <span class="viz-title">🎨 频谱图 (Spectrogram)</span>
+            <span class="viz-title">🎨 Spectrogram</span>
             <el-tag
               size="small"
               type="warning"
@@ -59,10 +59,10 @@
               height="100"
             />
             <div class="axis-label x-axis">
-              时间 (Time) →
+              Thời gian (Time) →
             </div>
             <div class="axis-label y-axis">
-              频率 (Freq) ↑
+              Tần số (Freq) ↑
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
       <el-divider />
 
       <el-alert
-        title="像看乐谱一样看声音"
+        title="Nhìn âm thanh như đọc bản nhạc"
         type="info"
         :closable="false"
         show-icon
@@ -80,16 +80,16 @@
           <div class="legend">
             <div class="legend-item">
               <div class="color-box low" />
-              低能量 (安静)
+              Năng lượng thấp (yên tĩnh)
             </div>
             <div class="legend-item">
               <div class="color-box high" />
-              高能量 (响亮)
+              Năng lượng cao (to)
             </div>
           </div>
           <p>
-            频谱图将一维的声音信号变成了二维图像，这样我们就可以用
-            <strong>CNN (卷积神经网络)</strong> 等图像模型来处理声音了！
+            Spectrogram biến tín hiệu âm thanh một chiều thành hình ảnh hai chiều, từ đó ta có thể dùng các mô hình hình ảnh như
+            <strong>CNN (Convolutional Neural Network)</strong> để xử lý âm thanh!
           </p>
         </template>
       </el-alert>

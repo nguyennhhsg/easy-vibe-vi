@@ -1,12 +1,12 @@
 <!--
   AvailabilityCalculatorDemo.vue
-  可用性计算器：展示不同 SLA 级别对应的停机时间
+  Bộ tính availability: minh hoạ downtime tương ứng với từng mức SLA
 -->
 <template>
   <div class="availability-demo">
     <div class="header">
-      <div class="title">可用性等级计算器</div>
-      <div class="subtitle">点击查看不同"几个 9"对应的停机时间</div>
+      <div class="title">Bộ tính mức availability</div>
+      <div class="subtitle">Bấm vào để xem downtime tương ứng với mỗi mức "số chín"</div>
     </div>
 
     <div class="sla-cards">
@@ -22,23 +22,23 @@
     </div>
 
     <div v-if="current" class="detail-panel">
-      <div class="detail-title">{{ current.label }}（{{ current.percent }}）</div>
+      <div class="detail-title">{{ current.label }} ({{ current.percent }})</div>
       <div class="downtime-grid">
         <div class="downtime-item">
-          <div class="dt-label">每年停机</div>
+          <div class="dt-label">Downtime/năm</div>
           <div class="dt-value">{{ current.yearly }}</div>
         </div>
         <div class="downtime-item">
-          <div class="dt-label">每月停机</div>
+          <div class="dt-label">Downtime/tháng</div>
           <div class="dt-value">{{ current.monthly }}</div>
         </div>
         <div class="downtime-item">
-          <div class="dt-label">每周停机</div>
+          <div class="dt-label">Downtime/tuần</div>
           <div class="dt-value">{{ current.weekly }}</div>
         </div>
       </div>
       <div class="detail-examples">
-        <span class="label">典型场景：</span>{{ current.examples }}
+        <span class="label">Tình huống điển hình:</span> {{ current.examples }}
       </div>
     </div>
   </div>
@@ -50,10 +50,10 @@ import { ref, computed } from 'vue'
 const activeSla = ref('3')
 
 const slaLevels = [
-  { nines: '2', label: '2 个 9', percent: '99%', yearly: '3.65 天', monthly: '7.3 小时', weekly: '1.68 小时', examples: '内部工具、非关键系统' },
-  { nines: '3', label: '3 个 9', percent: '99.9%', yearly: '8.76 小时', monthly: '43.8 分钟', weekly: '10.1 分钟', examples: '普通 Web 应用、企业系统' },
-  { nines: '4', label: '4 个 9', percent: '99.99%', yearly: '52.6 分钟', monthly: '4.38 分钟', weekly: '1.01 分钟', examples: '电商平台、SaaS 服务' },
-  { nines: '5', label: '5 个 9', percent: '99.999%', yearly: '5.26 分钟', monthly: '26.3 秒', weekly: '6.05 秒', examples: '金融交易、电信核心网' }
+  { nines: '2', label: '2 số 9', percent: '99%', yearly: '3.65 ngày', monthly: '7.3 giờ', weekly: '1.68 giờ', examples: 'Công cụ nội bộ, hệ thống không quan trọng' },
+  { nines: '3', label: '3 số 9', percent: '99.9%', yearly: '8.76 giờ', monthly: '43.8 phút', weekly: '10.1 phút', examples: 'Web app thông thường, hệ thống doanh nghiệp' },
+  { nines: '4', label: '4 số 9', percent: '99.99%', yearly: '52.6 phút', monthly: '4.38 phút', weekly: '1.01 phút', examples: 'Sàn e-commerce, dịch vụ SaaS' },
+  { nines: '5', label: '5 số 9', percent: '99.999%', yearly: '5.26 phút', monthly: '26.3 giây', weekly: '6.05 giây', examples: 'Giao dịch tài chính, mạng lõi viễn thông' }
 ]
 
 const current = computed(() => slaLevels.find(s => s.nines === activeSla.value))

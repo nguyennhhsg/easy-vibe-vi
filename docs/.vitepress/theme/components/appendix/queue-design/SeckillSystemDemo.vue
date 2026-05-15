@@ -1,24 +1,24 @@
 <!--
   SeckillSystemDemo.vue
-  秒杀系统架构演示 - 完整的 MQ 应用场景
+  Demo kiến trúc hệ thống flash sale - use case MQ đầy đủ
 -->
 <template>
   <div class="seckill-demo">
     <div class="header">
       <div class="title">
-        秒杀系统：消息队列的典型应用
+        Hệ thống flash sale: use case tiêu biểu của message queue
       </div>
       <div class="subtitle">
-        处理 10 万/秒的并发请求，保证不超卖
+        Xử lý 100K request/giây, đảm bảo không bán quá tồn
       </div>
     </div>
 
     <div class="scenario-settings">
       <div class="setting">
         <label>
-          商品库存：
+          Tồn kho sản phẩm:
           <strong>{{ stock }}</strong>
-          件
+          món
         </label>
         <input
           v-model="stock"
@@ -30,9 +30,9 @@
       </div>
       <div class="setting">
         <label>
-          请求速率：
+          Tốc độ request:
           <strong>{{ requestRate }}</strong>
-          请求/秒
+          req/giây
         </label>
         <input
           v-model="requestRate"
@@ -44,9 +44,9 @@
       </div>
       <div class="setting">
         <label>
-          订单处理：
+          Xử lý đơn:
           <strong>{{ processRate }}</strong>
-          订单/秒
+          đơn/giây
         </label>
         <input
           v-model="processRate"
@@ -64,25 +64,25 @@
         :disabled="running"
         @click="startSeckill"
       >
-        🚀 开始秒杀
+        🚀 Bắt đầu flash sale
       </button>
       <button
         class="reset-btn"
         @click="reset"
       >
-        🔄 重置
+        🔄 Reset
       </button>
     </div>
 
     <div class="architecture">
       <div class="arch-layer gateway">
         <div class="layer-title">
-          🌐 网关层 - 限流
+          🌐 Lớp gateway - rate limit
         </div>
         <div class="layer-content">
           <div class="stat-box">
             <div class="stat-label">
-              总请求数
+              Tổng request
             </div>
             <div class="stat-value">
               {{ totalRequests.toLocaleString() }}
@@ -90,7 +90,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-label">
-              限流通过
+              Vượt rate limit
             </div>
             <div class="stat-value success">
               {{ passedRequests.toLocaleString() }}
@@ -98,7 +98,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-label">
-              被拒绝
+              Bị từ chối
             </div>
             <div class="stat-value error">
               {{ rejectedRequests.toLocaleString() }}
@@ -113,7 +113,7 @@
 
       <div class="arch-layer redis">
         <div class="layer-title">
-          ⚡ Redis 预扣库存
+          ⚡ Redis trừ tồn kho trước
         </div>
         <div class="layer-content">
           <div class="stock-display">
@@ -124,7 +124,7 @@
               />
             </div>
             <div class="stock-text">
-              剩余: {{ remainingStock }} / {{ stock }}
+              Còn: {{ remainingStock }} / {{ stock }}
             </div>
           </div>
           <div
@@ -142,13 +142,13 @@
 
       <div class="arch-layer queue">
         <div class="layer-title">
-          📦 消息队列缓冲
+          📦 Buffer message queue
         </div>
         <div class="layer-content">
           <div class="queue-visual">
             <div class="queue-box">
               <div class="queue-header">
-                <span>秒杀订单队列</span>
+                <span>Queue đơn flash sale</span>
                 <span class="queue-count">{{ queueLength }}</span>
               </div>
               <div class="queue-bar-container">
@@ -169,12 +169,12 @@
 
       <div class="arch-layer consumer">
         <div class="layer-title">
-          ⚙️ 订单服务处理
+          ⚙️ Service đơn hàng xử lý
         </div>
         <div class="layer-content">
           <div class="stat-box">
             <div class="stat-label">
-              处理中
+              Đang xử lý
             </div>
             <div class="stat-value">
               {{ processing }}
@@ -182,7 +182,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-label">
-              成功订单
+              Đơn thành công
             </div>
             <div class="stat-value success">
               {{ successOrders }}
@@ -190,7 +190,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-label">
-              失败订单
+              Đơn thất bại
             </div>
             <div class="stat-value error">
               {{ failedOrders }}
@@ -202,12 +202,12 @@
 
     <div class="real-time-stats">
       <div class="stats-title">
-        📊 实时监控
+        📊 Monitor realtime
       </div>
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-label">
-            平均响应时间
+            Thời gian phản hồi trung bình
           </div>
           <div class="stat-value">
             {{ avgLatency }}ms
@@ -215,7 +215,7 @@
         </div>
         <div class="stat-item">
           <div class="stat-label">
-            订单成功率
+            Tỷ lệ đơn thành công
           </div>
           <div class="stat-value">
             {{ orderSuccessRate }}%
@@ -223,7 +223,7 @@
         </div>
         <div class="stat-item">
           <div class="stat-label">
-            队列积压
+            Tồn queue
           </div>
           <div class="stat-value">
             {{ queueLength }}
@@ -231,7 +231,7 @@
         </div>
         <div class="stat-item">
           <div class="stat-label">
-            预计清空时间
+            Thời gian xử lý hết
           </div>
           <div class="stat-value">
             {{ estimatedTime }}
@@ -243,13 +243,13 @@
     <div class="log-section">
       <div class="log-header">
         <div class="log-title">
-          📋 事件日志
+          📋 Log sự kiện
         </div>
         <button
           class="clear-log"
           @click="clearLogs"
         >
-          清空
+          Xóa
         </button>
       </div>
       <div class="log-content">
@@ -257,7 +257,7 @@
           v-if="logs.length === 0"
           class="log-empty"
         >
-          暂无日志
+          Chưa có log
         </div>
         <div
           v-for="(log, index) in logs.slice(0, 15)"
@@ -273,32 +273,32 @@
 
     <div class="key-points">
       <div class="point-title">
-        🎯 核心设计要点
+        🎯 Điểm thiết kế cốt lõi
       </div>
       <div class="point-list">
         <div class="point-item">
           <span class="point-icon">1️⃣</span>
           <div>
-            <strong>网关限流：</strong>只放行系统能处理的请求数（如 1
-            万/秒），避免打爆后端
+            <strong>Rate limit gateway:</strong> chỉ cho qua số request mà hệ thống có thể xử lý (ví dụ 10K
+            req/giây), tránh quá tải backend
           </div>
         </div>
         <div class="point-item">
           <span class="point-icon">2️⃣</span>
           <div>
-            <strong>Redis 预扣：</strong>原子操作扣减库存，快速判断是否有货，避免无效请求
+            <strong>Redis trừ trước:</strong> thao tác atomic trừ tồn kho, kiểm tra nhanh còn hàng hay không để tránh request vô ích
           </div>
         </div>
         <div class="point-item">
           <span class="point-icon">3️⃣</span>
           <div>
-            <strong>消息队列：</strong>将成功的扣库存请求放入队列，异步处理，削峰填谷
+            <strong>Message queue:</strong> đẩy request trừ kho thành công vào queue, xử lý async, peak shaving
           </div>
         </div>
         <div class="point-item">
           <span class="point-icon">4️⃣</span>
           <div>
-            <strong>异步处理：</strong>订单服务慢慢消费队列，创建订单，保证不超卖
+            <strong>Xử lý async:</strong> service đơn hàng consume queue từ từ, tạo đơn, đảm bảo không bán quá tồn
           </div>
         </div>
       </div>
@@ -334,12 +334,12 @@ const stockPercent = computed(() => {
 
 const redisStatus = computed(() => {
   if (remainingStock.value === 0) {
-    return { text: '🔴 已售罄', class: 'soldout' }
+    return { text: '🔴 Đã hết hàng', class: 'soldout' }
   }
   if (stockPercent.value < 20) {
-    return { text: '⚠️ 库存紧张', class: 'low' }
+    return { text: '⚠️ Tồn kho thấp', class: 'low' }
   }
-  return { text: '✅ 库存充足', class: 'normal' }
+  return { text: '✅ Tồn kho đủ', class: 'normal' }
 })
 
 const queuePercent = computed(() => {
@@ -380,21 +380,21 @@ const startSeckill = () => {
 
   addLog(
     'info',
-    `🚀 秒杀开始！库存: ${stock.value}, 请求速率: ${requestRate.value}/s`
+    `🚀 Flash sale bắt đầu! Tồn kho: ${stock.value}, tốc độ request: ${requestRate.value}/s`
   )
 
   simulationInterval = setInterval(() => {
     const requests = Math.floor(requestRate.value / 10)
     totalRequests.value += requests
 
-    // 网关限流：只放行 80%
+    // Rate limit gateway: chỉ cho qua 80%
     const passed = Math.floor(requests * 0.8)
     const rejected = requests - passed
 
     passedRequests.value += passed
     rejectedRequests.value += rejected
 
-    // Redis 预扣库存
+    // Redis trừ tồn kho trước
     let successfulPreDeduct = 0
     for (let i = 0; i < passed; i++) {
       if (remainingStock.value > 0) {
@@ -405,11 +405,11 @@ const startSeckill = () => {
     }
 
     if (remainingStock.value === 0 && stock.value > 0) {
-      addLog('error', '🔴 商品已售罄！')
+      addLog('error', '🔴 Sản phẩm đã hết hàng!')
     }
 
     if (successfulPreDeduct > 0 && Math.random() < 0.1) {
-      addLog('info', `✅ ${successfulPreDeduct} 个请求预扣成功，进入队列`)
+      addLog('info', `✅ ${successfulPreDeduct} request trừ tồn trước thành công, vào queue`)
     }
   }, 100)
 
@@ -424,7 +424,7 @@ const startSeckill = () => {
 
       setTimeout(() => {
         processing.value = 0
-        // 90% 成功率
+        // Tỷ lệ thành công 90%
         const success = Math.floor(toProcess * 0.9)
         const failed = toProcess - success
 
@@ -432,10 +432,10 @@ const startSeckill = () => {
         failedOrders.value += failed
 
         if (success > 0) {
-          addLog('success', `✅ 创建 ${success} 个订单`)
+          addLog('success', `✅ Tạo ${success} đơn hàng`)
         }
         if (failed > 0) {
-          addLog('warning', `⚠️ ${failed} 个订单创建失败（库存不足）`)
+          addLog('warning', `⚠️ ${failed} đơn tạo thất bại (hết tồn kho)`)
         }
       }, 200)
     }

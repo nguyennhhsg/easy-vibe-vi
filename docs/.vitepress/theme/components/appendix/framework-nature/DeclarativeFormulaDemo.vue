@@ -2,23 +2,23 @@
   <div class="declarative-formula-demo">
     <div class="formula-row">
       <div class="formula-box state-box">
-        <div class="formula-label">State（数据）</div>
+        <div class="formula-label">State (dữ liệu)</div>
       </div>
       <div class="formula-arrow">→ f →</div>
       <div class="formula-box ui-box">
-        <div class="formula-label">UI（界面）</div>
+        <div class="formula-label">UI (giao diện)</div>
       </div>
     </div>
 
     <div class="demo-body">
       <div class="input-panel">
-        <div class="panel-title">修改数据（State）</div>
+        <div class="panel-title">Chỉnh dữ liệu (State)</div>
         <div class="input-group">
-          <label>用户名</label>
-          <input v-model="username" type="text" placeholder="输入名字" />
+          <label>Tên người dùng</label>
+          <input v-model="username" type="text" placeholder="Nhập tên" />
         </div>
         <div class="input-group">
-          <label>商品数量</label>
+          <label>Số sản phẩm</label>
           <div class="stepper">
             <button @click="count = Math.max(0, count - 1)">-</button>
             <span class="stepper-value">{{ count }}</span>
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="input-group">
-          <label>深色模式</label>
+          <label>Dark mode</label>
           <label class="toggle-switch">
             <input v-model="darkMode" type="checkbox" />
             <span class="slider" />
@@ -35,35 +35,35 @@
       </div>
 
       <div class="output-panel" :class="{ dark: darkMode }">
-        <div class="panel-title">渲染结果（UI）</div>
+        <div class="panel-title">Kết quả render (UI)</div>
         <div class="preview-card">
           <div class="preview-greeting">
-            {{ username ? `你好，${username}！` : '你好，访客！' }}
+            {{ username ? `Xin chào, ${username}!` : 'Xin chào, khách!' }}
           </div>
           <div class="preview-cart">
-            购物车：{{ count }} 件商品
+            Giỏ hàng: {{ count }} sản phẩm
           </div>
           <div class="preview-total">
-            总价：¥{{ count * 99 }}
+            Tổng tiền: {{ count * 99 }}k
           </div>
           <div v-if="count > 5" class="preview-warning">
-            商品数量较多，请确认订单
+            Số lượng sản phẩm khá nhiều, vui lòng kiểm tra đơn hàng
           </div>
           <div class="preview-theme">
-            当前主题：{{ darkMode ? '深色' : '浅色' }}
+            Theme hiện tại: {{ darkMode ? 'Tối' : 'Sáng' }}
           </div>
         </div>
       </div>
     </div>
 
     <div class="state-snapshot">
-      <div class="snapshot-title">当前 State 快照</div>
+      <div class="snapshot-title">Snapshot State hiện tại</div>
       <code class="snapshot-code">{{ stateSnapshot }}</code>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>你只需要修改数据（State），框架会根据数据自动渲染出对应的界面（UI）。同样的数据永远渲染出同样的界面，这就是 UI = f(State)。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Bạn chỉ cần sửa dữ liệu (State), framework sẽ tự render giao diện (UI) tương ứng. Cùng một dữ liệu luôn render ra cùng một giao diện - đó chính là UI = f(State).</span>
     </div>
   </div>
 </template>
@@ -77,7 +77,7 @@ const darkMode = ref(false)
 
 const stateSnapshot = computed(() =>
   JSON.stringify(
-    { username: username.value || '(空)', count: count.value, darkMode: darkMode.value },
+    { username: username.value || '(trống)', count: count.value, darkMode: darkMode.value },
     null,
     2
   )

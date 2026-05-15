@@ -5,33 +5,33 @@ const searchQuery = ref('')
 const selectedCategory = ref('all')
 
 const categories = [
-  { id: 'all', label: '全部' },
-  { id: 'web', label: '网页' },
-  { id: 'data', label: '数据库' },
-  { id: 'dev', label: '开发常用' },
-  { id: 'remote', label: '远程/传输' }
+  { id: 'all', label: 'Tất cả' },
+  { id: 'web', label: 'Web' },
+  { id: 'data', label: 'Database' },
+  { id: 'dev', label: 'Dev hay dùng' },
+  { id: 'remote', label: 'Remote / Truyền' }
 ]
 
 const ports = [
-  { port: 80, name: 'HTTP', desc: '网页访问（未加密）', category: 'web', risk: 'low', example: 'http://example.com' },
-  { port: 443, name: 'HTTPS', desc: '网页访问（加密）', category: 'web', risk: 'low', example: 'https://example.com' },
-  { port: 22, name: 'SSH', desc: '安全远程登录', category: 'remote', risk: 'medium', example: 'ssh user@server' },
-  { port: 21, name: 'FTP', desc: '文件传输', category: 'remote', risk: 'high', example: 'ftp://server/file.zip' },
-  { port: 3306, name: 'MySQL', desc: 'MySQL 数据库', category: 'data', risk: 'high', example: 'mysql -h localhost -P 3306' },
-  { port: 5432, name: 'PostgreSQL', desc: 'PostgreSQL 数据库', category: 'data', risk: 'high', example: 'psql -h localhost -p 5432' },
-  { port: 27017, name: 'MongoDB', desc: 'MongoDB 数据库', category: 'data', risk: 'high', example: 'mongosh localhost:27017' },
-  { port: 6379, name: 'Redis', desc: 'Redis 缓存', category: 'data', risk: 'high', example: 'redis-cli -p 6379' },
-  { port: 3000, name: 'Node/React', desc: 'Node.js / React 开发服务器', category: 'dev', risk: 'low', example: 'npm start → localhost:3000' },
-  { port: 5173, name: 'Vite', desc: 'Vite 开发服务器', category: 'dev', risk: 'low', example: 'npm run dev → localhost:5173' },
-  { port: 8080, name: '通用 HTTP', desc: 'HTTP 备用端口 / 代理', category: 'dev', risk: 'low', example: 'localhost:8080/api' },
-  { port: 8000, name: 'Django/Python', desc: 'Django / Python HTTP 服务', category: 'dev', risk: 'low', example: 'python manage.py runserver' },
-  { port: 5000, name: 'Flask', desc: 'Flask 开发服务器', category: 'dev', risk: 'low', example: 'flask run → localhost:5000' },
-  { port: 4200, name: 'Angular', desc: 'Angular 开发服务器', category: 'dev', risk: 'low', example: 'ng serve → localhost:4200' },
-  { port: 53, name: 'DNS', desc: '域名解析', category: 'remote', risk: 'medium', example: 'dig @8.8.8.8 example.com' },
-  { port: 25, name: 'SMTP', desc: '邮件发送', category: 'remote', risk: 'medium', example: '邮件服务器发信端口' },
+  { port: 80, name: 'HTTP', desc: 'Truy cập web (chưa mã hóa)', category: 'web', risk: 'low', example: 'http://example.com' },
+  { port: 443, name: 'HTTPS', desc: 'Truy cập web (đã mã hóa)', category: 'web', risk: 'low', example: 'https://example.com' },
+  { port: 22, name: 'SSH', desc: 'Đăng nhập remote an toàn', category: 'remote', risk: 'medium', example: 'ssh user@server' },
+  { port: 21, name: 'FTP', desc: 'Truyền file', category: 'remote', risk: 'high', example: 'ftp://server/file.zip' },
+  { port: 3306, name: 'MySQL', desc: 'Database MySQL', category: 'data', risk: 'high', example: 'mysql -h localhost -P 3306' },
+  { port: 5432, name: 'PostgreSQL', desc: 'Database PostgreSQL', category: 'data', risk: 'high', example: 'psql -h localhost -p 5432' },
+  { port: 27017, name: 'MongoDB', desc: 'Database MongoDB', category: 'data', risk: 'high', example: 'mongosh localhost:27017' },
+  { port: 6379, name: 'Redis', desc: 'Cache Redis', category: 'data', risk: 'high', example: 'redis-cli -p 6379' },
+  { port: 3000, name: 'Node/React', desc: 'Dev server Node.js / React', category: 'dev', risk: 'low', example: 'npm start → localhost:3000' },
+  { port: 5173, name: 'Vite', desc: 'Dev server Vite', category: 'dev', risk: 'low', example: 'npm run dev → localhost:5173' },
+  { port: 8080, name: 'HTTP phụ', desc: 'Port HTTP dự phòng / proxy', category: 'dev', risk: 'low', example: 'localhost:8080/api' },
+  { port: 8000, name: 'Django/Python', desc: 'HTTP service Django / Python', category: 'dev', risk: 'low', example: 'python manage.py runserver' },
+  { port: 5000, name: 'Flask', desc: 'Dev server Flask', category: 'dev', risk: 'low', example: 'flask run → localhost:5000' },
+  { port: 4200, name: 'Angular', desc: 'Dev server Angular', category: 'dev', risk: 'low', example: 'ng serve → localhost:4200' },
+  { port: 53, name: 'DNS', desc: 'Phân giải tên miền', category: 'remote', risk: 'medium', example: 'dig @8.8.8.8 example.com' },
+  { port: 25, name: 'SMTP', desc: 'Gửi email', category: 'remote', risk: 'medium', example: 'Port gửi mail của mail server' },
 ]
 
-const riskLabels = { low: '安全', medium: '注意', high: '敏感' }
+const riskLabels = { low: 'An toàn', medium: 'Lưu ý', high: 'Nhạy cảm' }
 const riskColors = { low: '#10b981', medium: '#f59e0b', high: '#ef4444' }
 
 const filteredPorts = computed(() => {
@@ -60,7 +60,7 @@ function toggleExpand(port) {
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="搜索端口号或服务名..."
+          placeholder="Tìm theo port hoặc tên dịch vụ..."
           class="search-input"
         >
       </div>
@@ -79,10 +79,10 @@ function toggleExpand(port) {
     <div class="visualization-area">
       <div class="port-table">
         <div class="table-header">
-          <span class="col-port">端口</span>
-          <span class="col-name">服务</span>
-          <span class="col-desc">说明</span>
-          <span class="col-risk">暴露风险</span>
+          <span class="col-port">Port</span>
+          <span class="col-name">Dịch vụ</span>
+          <span class="col-desc">Mô tả</span>
+          <span class="col-risk">Mức rủi ro</span>
         </div>
         <div
           v-for="p in filteredPorts"
@@ -103,13 +103,13 @@ function toggleExpand(port) {
           </div>
           <transition name="expand">
             <div v-if="expandedPort === p.port" class="row-detail">
-              <span class="detail-label">使用示例：</span>
+              <span class="detail-label">Ví dụ sử dụng:</span>
               <code>{{ p.example }}</code>
             </div>
           </transition>
         </div>
         <div v-if="filteredPorts.length === 0" class="empty-state">
-          没有匹配的端口，试试其他关键词？
+          Không có port nào khớp, thử từ khóa khác nhé?
         </div>
       </div>
     </div>
@@ -118,28 +118,28 @@ function toggleExpand(port) {
       <div class="range-item">
         <div class="range-header well-known">0 – 1023</div>
         <div class="range-body">
-          <strong>系统端口</strong>
-          <span>预留给标准服务（HTTP、SSH 等），普通用户不能随便占用。</span>
+          <strong>Port hệ thống</strong>
+          <span>Dành cho dịch vụ chuẩn (HTTP, SSH...), user thường không được tùy tiện chiếm.</span>
         </div>
       </div>
       <div class="range-item">
         <div class="range-header registered">1024 – 49151</div>
         <div class="range-body">
-          <strong>注册端口</strong>
-          <span>留给常见应用（MySQL 3306、Redis 6379 等），开发中最常遇到的范围。</span>
+          <strong>Port đã đăng ký</strong>
+          <span>Dành cho ứng dụng phổ biến (MySQL 3306, Redis 6379...), dải bạn hay gặp nhất khi code.</span>
         </div>
       </div>
       <div class="range-item">
         <div class="range-header dynamic">49152 – 65535</div>
         <div class="range-body">
-          <strong>动态端口</strong>
-          <span>操作系统临时分配的端口，比如你的浏览器发请求时，系统会随机给你一个。</span>
+          <strong>Port động</strong>
+          <span>Port hệ điều hành cấp tạm, ví dụ trình duyệt khi gửi request sẽ được hệ thống cấp ngẫu nhiên một port trong dải này.</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>安全提醒：</strong>数据库端口（3306、5432、27017、6379）绝对不要直接暴露到公网！生产环境应只允许内网访问或通过 SSH 隧道连接。
+      <strong>Lưu ý bảo mật:</strong> các port database (3306, 5432, 27017, 6379) tuyệt đối không phơi trực tiếp ra Internet! Môi trường production chỉ nên cho truy cập nội bộ hoặc qua SSH tunnel.
     </div>
   </div>
 </template>

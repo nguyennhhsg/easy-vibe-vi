@@ -1,13 +1,13 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">export 决定子进程能不能"看见"变量</span>
-      <span class="subtitle">切换开关，观察子进程是否能读到父进程设置的变量</span>
+      <span class="title">export quyết định child process có "thấy" được biến hay không</span>
+      <span class="subtitle">Bật/tắt công tắc để xem child process có đọc được biến do parent process đặt hay không</span>
     </div>
 
     <div class="control-panel">
       <label class="toggle-wrap">
-        <span class="toggle-label">使用 <code>export</code></span>
+        <span class="toggle-label">Dùng <code>export</code></span>
         <button class="toggle-btn" :class="{ on: useExport }" @click="useExport = !useExport">
           <span class="thumb" />
         </button>
@@ -17,7 +17,7 @@
     <div class="two-col">
       <!-- Parent shell -->
       <div class="shell-box parent">
-        <div class="shell-title">父进程（Shell）</div>
+        <div class="shell-title">Parent process (shell)</div>
         <div class="shell-body">
           <div class="cmd-line">
             <span class="prompt">$</span>
@@ -39,36 +39,36 @@
 
       <!-- Arrow -->
       <div class="arrow-col">
-        <div class="arrow-label">启动子进程</div>
+        <div class="arrow-label">Khởi chạy child process</div>
         <div class="arrow-icon">→</div>
         <div class="inherit-tag" :class="useExport ? 'yes' : 'no'">
-          {{ useExport ? '变量已继承' : '变量未继承' }}
+          {{ useExport ? 'Biến đã được kế thừa' : 'Biến không được kế thừa' }}
         </div>
       </div>
 
       <!-- Child shell -->
       <div class="shell-box child" :class="{ has: useExport, missing: !useExport }">
-        <div class="shell-title">子进程（bash -c ...）</div>
+        <div class="shell-title">Child process (bash -c ...)</div>
         <div class="shell-body">
           <div class="cmd-line">
             <span class="prompt">$</span>
             <span class="cmd">echo $MY_VAR</span>
           </div>
           <div v-if="useExport" class="output success">hello</div>
-          <div v-else class="output empty">（空，什么都没有）</div>
+          <div v-else class="output empty">(trống, không có gì)</div>
           <div class="cmd-line muted">
             <span class="prompt">#</span>
-            <span class="cmd muted-text">子进程无法修改父进程的变量</span>
+            <span class="cmd muted-text">Child process không thể sửa biến của parent process</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>{{ useExport ? '有 export：' : '没有 export：' }}</strong>
+      <strong>{{ useExport ? 'Có export:' : 'Không có export:' }}</strong>
       {{ useExport
-        ? '变量被标记为"可导出"，子进程启动时自动继承一份副本。'
-        : '变量只存在于当前 Shell，子进程读到的是空字符串。' }}
+        ? 'Biến được đánh dấu "có thể export", child process khi khởi chạy sẽ tự kế thừa một bản sao.'
+        : 'Biến chỉ tồn tại trong shell hiện tại, child process đọc được chuỗi rỗng.' }}
     </div>
   </div>
 </template>

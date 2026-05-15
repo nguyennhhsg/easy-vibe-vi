@@ -1,18 +1,18 @@
 <!--
   InvertedIndexDemo.vue
-  倒排索引演示：展示搜索引擎的核心数据结构
+  Demo inverted index: minh hoạ cấu trúc dữ liệu cốt lõi của search engine
 -->
 <template>
   <div class="inverted-index-demo">
     <div class="header">
-      <div class="title">倒排索引 (Inverted Index)</div>
-      <div class="subtitle">输入搜索词，观察倒排索引如何工作</div>
+      <div class="title">Inverted Index</div>
+      <div class="subtitle">Nhập từ khoá để xem inverted index hoạt động ra sao</div>
     </div>
 
     <div class="search-box">
       <input
         v-model="query"
-        placeholder="试试搜索：苹果、手机、水果..."
+        placeholder="Thử tìm: táo, điện thoại, trái cây..."
         class="search-input"
         @input="search"
       />
@@ -20,7 +20,7 @@
 
     <div class="index-layout">
       <div class="docs-section">
-        <div class="section-title">原始文档</div>
+        <div class="section-title">Document gốc</div>
         <div
           v-for="doc in docs"
           :key="doc.id"
@@ -32,7 +32,7 @@
       </div>
 
       <div class="index-section">
-        <div class="section-title">倒排索引表</div>
+        <div class="section-title">Bảng inverted index</div>
         <div class="index-table">
           <div
             v-for="(entry, word) in invertedIndex"
@@ -50,10 +50,10 @@
     </div>
 
     <div v-if="query && matchedDocs.length > 0" class="result">
-      命中文档：{{ matchedDocs.map(id => 'Doc ' + id).join('、') }}
+      Document khớp: {{ matchedDocs.map(id => 'Doc ' + id).join(', ') }}
     </div>
     <div v-else-if="query" class="result no-match">
-      未找到匹配文档
+      Không tìm thấy document khớp
     </div>
   </div>
 </template>
@@ -66,25 +66,25 @@ const matchedDocs = ref([])
 const matchedWords = ref([])
 
 const docs = [
-  { id: 1, text: '苹果是一种常见的水果' },
-  { id: 2, text: '苹果公司发布了新款手机' },
-  { id: 3, text: '我喜欢吃水果和蔬菜' },
-  { id: 4, text: '这款手机的价格很实惠' },
-  { id: 5, text: '水果店里有苹果和香蕉' }
+  { id: 1, text: 'Táo là một loại trái cây phổ biến' },
+  { id: 2, text: 'Hãng táo Apple ra mắt mẫu điện thoại mới' },
+  { id: 3, text: 'Tôi thích ăn trái cây và rau xanh' },
+  { id: 4, text: 'Mẫu điện thoại này có giá khá rẻ' },
+  { id: 5, text: 'Cửa hàng trái cây có táo và chuối' }
 ]
 
 const invertedIndex = {
-  '苹果': [1, 2, 5],
-  '水果': [1, 3, 5],
-  '手机': [2, 4],
-  '公司': [2],
-  '发布': [2],
-  '喜欢': [3],
-  '蔬菜': [3],
-  '价格': [4],
-  '实惠': [4],
-  '香蕉': [5],
-  '常见': [1]
+  'táo': [1, 2, 5],
+  'trái cây': [1, 3, 5],
+  'điện thoại': [2, 4],
+  'Apple': [2],
+  'ra mắt': [2],
+  'thích': [3],
+  'rau': [3],
+  'giá': [4],
+  'rẻ': [4],
+  'chuối': [5],
+  'phổ biến': [1]
 }
 
 function search() {

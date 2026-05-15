@@ -1,18 +1,18 @@
 <!--
   TTSPipelineDemo.vue
-  TTS 流程演示组件
+  Component mô phỏng luồng TTS
 
-  用途：
-  展示文本转语音的完整流程，对比不同架构（自回归/非自回归/流匹配）。
+  Mục đích:
+  Trình bày luồng đầy đủ của tổng hợp giọng nói và so sánh các kiến trúc (autoregressive / non-autoregressive / flow matching).
 -->
 <template>
   <div class="tts-pipeline-demo">
     <div class="header">
       <div class="title">
-        🔄 TTS 架构演进：从慢到快
+        🔄 Tiến hoá kiến trúc TTS: từ chậm đến nhanh
       </div>
       <div class="subtitle">
-        探索文本如何变成语音，以及不同架构的优劣对比
+        Cùng khám phá cách văn bản biến thành giọng nói và so sánh ưu nhược điểm của từng kiến trúc
       </div>
     </div>
 
@@ -88,15 +88,15 @@
       </div>
       <div class="detail-meta">
         <div class="meta-item">
-          <span class="label">输入:</span>
+          <span class="label">Đầu vào:</span>
           <span>{{ currentStage.input }}</span>
         </div>
         <div class="meta-item">
-          <span class="label">输出:</span>
+          <span class="label">Đầu ra:</span>
           <span>{{ currentStage.output }}</span>
         </div>
         <div class="meta-item">
-          <span class="label">技术:</span>
+          <span class="label">Công nghệ:</span>
           <span>{{ currentStage.tech }}</span>
         </div>
       </div>
@@ -104,21 +104,21 @@
 
     <div class="comparison-table">
       <div class="table-title">
-        📊 架构对比
+        📊 So sánh kiến trúc
       </div>
       <div class="table">
         <div class="table-header">
           <div class="cell">
-            特性
+            Đặc tính
           </div>
           <div class="cell">
-            自回归
+            Tự hồi quy
           </div>
           <div class="cell">
-            非自回归
+            Phi tự hồi quy
           </div>
           <div class="cell">
-            流匹配
+            Flow matching
           </div>
         </div>
         <div
@@ -153,7 +153,7 @@
 
     <div class="models-section">
       <div class="models-title">
-        🏆 代表模型
+        🏆 Mô hình tiêu biểu
       </div>
       <div class="models-grid">
         <div
@@ -179,9 +179,9 @@
     <div class="info-box">
       <span class="icon">💡</span>
       <p>
-        <strong>TTS 演进趋势：</strong>
-        从早期的自回归模型（如 Tacotron）到非自回归（如 FastSpeech），再到最新的流匹配模型（如 F5-TTS），
-        TTS 技术正在向更快、更稳定、更高质量的方向发展。
+        <strong>Xu hướng tiến hoá của TTS:</strong>
+        Từ các mô hình tự hồi quy thời đầu (như Tacotron) sang phi tự hồi quy (như FastSpeech) rồi đến flow matching mới nhất (như F5-TTS),
+        công nghệ TTS đang đi theo hướng nhanh hơn, ổn định hơn và chất lượng cao hơn.
       </p>
     </div>
   </div>
@@ -191,44 +191,44 @@
 import { ref, computed, onMounted, watch } from 'vue'
 
 const architectures = [
-  { id: 'ar', name: '自回归', icon: '📝', tag: 'AR', tagClass: 'primary' },
-  { id: 'nar', name: '非自回归', icon: '⚡', tag: 'NAR', tagClass: 'success' },
-  { id: 'flow', name: '流匹配', icon: '🌊', tag: 'Flow', tagClass: 'warning' }
+  { id: 'ar', name: 'Tự hồi quy', icon: '📝', tag: 'AR', tagClass: 'primary' },
+  { id: 'nar', name: 'Phi tự hồi quy', icon: '⚡', tag: 'NAR', tagClass: 'success' },
+  { id: 'flow', name: 'Flow matching', icon: '🌊', tag: 'Flow', tagClass: 'warning' }
 ]
 
 const pipelineStages = {
   ar: [
-    { id: 'text', name: '文本处理', icon: '📝', shortDesc: '分词 & 音素', description: '将输入文本转换为音素序列', input: '原始文本', output: '音素序列', tech: 'G2P' },
-    { id: 'encoder', name: '文本编码', icon: '🔢', shortDesc: '提取特征', description: '使用 Encoder 编码文本', input: '音素序列', output: '文本特征', tech: 'Transformer' },
-    { id: 'decoder', name: '自回归解码', icon: '🎯', shortDesc: '逐帧生成', description: '逐个时间步生成梅尔频谱', input: '文本特征', output: '梅尔频谱', tech: 'AR Decoder' },
-    { id: 'vocoder', name: '声码器', icon: '🔊', shortDesc: '频谱转波形', description: '将频谱转换为音频波形', input: '梅尔频谱', output: '音频波形', tech: 'HiFi-GAN' }
+    { id: 'text', name: 'Tiền xử lý văn bản', icon: '📝', shortDesc: 'Tách từ & phonemes', description: 'Chuyển văn bản đầu vào thành chuỗi phonemes', input: 'Văn bản gốc', output: 'Chuỗi phonemes', tech: 'G2P' },
+    { id: 'encoder', name: 'Encode văn bản', icon: '🔢', shortDesc: 'Trích đặc trưng', description: 'Dùng Encoder để mã hoá văn bản', input: 'Chuỗi phonemes', output: 'Đặc trưng văn bản', tech: 'Transformer' },
+    { id: 'decoder', name: 'Giải mã tự hồi quy', icon: '🎯', shortDesc: 'Sinh từng frame', description: 'Sinh mel-spectrogram theo từng bước thời gian', input: 'Đặc trưng văn bản', output: 'Mel-spectrogram', tech: 'AR Decoder' },
+    { id: 'vocoder', name: 'Vocoder', icon: '🔊', shortDesc: 'Phổ sang sóng', description: 'Chuyển spectrogram sang sóng âm', input: 'Mel-spectrogram', output: 'Sóng âm', tech: 'HiFi-GAN' }
   ],
   nar: [
-    { id: 'text', name: '文本处理', icon: '📝', shortDesc: '分词 & 音素', description: '将输入文本转换为音素序列', input: '原始文本', output: '音素序列', tech: 'G2P' },
-    { id: 'duration', name: '时长预测', icon: '⏱️', shortDesc: '预测时长', description: '预测每个音素的帧数', input: '音素序列', output: '时长信息', tech: 'Duration Predictor' },
-    { id: 'decoder', name: '并行解码', icon: '⚡', shortDesc: '一次性生成', description: '并行生成完整梅尔频谱', input: '文本特征', output: '梅尔频谱', tech: 'Non-AR Transformer' },
-    { id: 'vocoder', name: '声码器', icon: '🔊', shortDesc: '频谱转波形', description: '将频谱转换为音频波形', input: '梅尔频谱', output: '音频波形', tech: 'HiFi-GAN' }
+    { id: 'text', name: 'Tiền xử lý văn bản', icon: '📝', shortDesc: 'Tách từ & phonemes', description: 'Chuyển văn bản đầu vào thành chuỗi phonemes', input: 'Văn bản gốc', output: 'Chuỗi phonemes', tech: 'G2P' },
+    { id: 'duration', name: 'Dự đoán độ dài', icon: '⏱️', shortDesc: 'Dự đoán duration', description: 'Dự đoán số frame cho mỗi phoneme', input: 'Chuỗi phonemes', output: 'Thông tin duration', tech: 'Duration Predictor' },
+    { id: 'decoder', name: 'Giải mã song song', icon: '⚡', shortDesc: 'Sinh một lần', description: 'Sinh mel-spectrogram đầy đủ song song', input: 'Đặc trưng văn bản', output: 'Mel-spectrogram', tech: 'Non-AR Transformer' },
+    { id: 'vocoder', name: 'Vocoder', icon: '🔊', shortDesc: 'Phổ sang sóng', description: 'Chuyển spectrogram sang sóng âm', input: 'Mel-spectrogram', output: 'Sóng âm', tech: 'HiFi-GAN' }
   ],
   flow: [
-    { id: 'text', name: '文本处理', icon: '📝', shortDesc: '分词 & 音素', description: '将输入文本转换为音素序列', input: '原始文本', output: '音素序列', tech: 'G2P' },
-    { id: 'embedding', name: '文本嵌入', icon: '🔢', shortDesc: '特征提取', description: '将音素转换为向量', input: '音素序列', output: '文本嵌入', tech: 'DiT' },
-    { id: 'flow', name: '流匹配', icon: '🌊', shortDesc: '最优传输', description: '使用流匹配生成频谱', input: '文本嵌入', output: '梅尔频谱', tech: 'Flow Matching' },
-    { id: 'vocoder', name: '声码器', icon: '🔊', shortDesc: '频谱转波形', description: '将频谱转换为音频波形', input: '梅尔频谱', output: '音频波形', tech: 'Vocoder' }
+    { id: 'text', name: 'Tiền xử lý văn bản', icon: '📝', shortDesc: 'Tách từ & phonemes', description: 'Chuyển văn bản đầu vào thành chuỗi phonemes', input: 'Văn bản gốc', output: 'Chuỗi phonemes', tech: 'G2P' },
+    { id: 'embedding', name: 'Text embedding', icon: '🔢', shortDesc: 'Trích đặc trưng', description: 'Chuyển phonemes thành vector', input: 'Chuỗi phonemes', output: 'Text embedding', tech: 'DiT' },
+    { id: 'flow', name: 'Flow matching', icon: '🌊', shortDesc: 'Optimal transport', description: 'Dùng flow matching để sinh spectrogram', input: 'Text embedding', output: 'Mel-spectrogram', tech: 'Flow Matching' },
+    { id: 'vocoder', name: 'Vocoder', icon: '🔊', shortDesc: 'Phổ sang sóng', description: 'Chuyển spectrogram sang sóng âm', input: 'Mel-spectrogram', output: 'Sóng âm', tech: 'Vocoder' }
   ]
 }
 
 const comparisonRows = [
-  { feature: '生成速度', ar: '慢', nar: '快', flow: '很快' },
-  { feature: '音质', ar: '高', nar: '中高', flow: '高' },
-  { feature: '稳定性', ar: '中', nar: '高', flow: '高' },
-  { feature: '可控性', ar: '中', nar: '高', flow: '高' }
+  { feature: 'Tốc độ sinh', ar: 'Chậm', nar: 'Nhanh', flow: 'Rất nhanh' },
+  { feature: 'Chất lượng giọng', ar: 'Cao', nar: 'Trung-cao', flow: 'Cao' },
+  { feature: 'Độ ổn định', ar: 'Trung bình', nar: 'Cao', flow: 'Cao' },
+  { feature: 'Khả năng điều khiển', ar: 'Trung bình', nar: 'Cao', flow: 'Cao' }
 ]
 
 const models = [
-  { name: 'Tacotron 2', arch: 'ar', type: 'AR', tagClass: 'primary', desc: '经典 AR 模型，音质优秀' },
-  { name: 'FastSpeech 2', arch: 'nar', type: 'NAR', tagClass: 'success', desc: '并行生成，速度快' },
-  { name: 'F5-TTS', arch: 'flow', type: 'Flow', tagClass: 'warning', desc: '最新 SOTA，10 步生成' },
-  { name: 'CosyVoice', arch: 'flow', type: 'Flow', tagClass: 'warning', desc: '阿里开源，支持多语言' }
+  { name: 'Tacotron 2', arch: 'ar', type: 'AR', tagClass: 'primary', desc: 'Mô hình AR kinh điển, chất giọng tốt' },
+  { name: 'FastSpeech 2', arch: 'nar', type: 'NAR', tagClass: 'success', desc: 'Sinh song song, tốc độ nhanh' },
+  { name: 'F5-TTS', arch: 'flow', type: 'Flow', tagClass: 'warning', desc: 'SOTA mới nhất, sinh chỉ trong 10 bước' },
+  { name: 'CosyVoice', arch: 'flow', type: 'Flow', tagClass: 'warning', desc: 'Open-source bởi Alibaba, hỗ trợ đa ngôn ngữ' }
 ]
 
 const selectedArch = ref('flow')
@@ -255,9 +255,9 @@ const drawVisualization = () => {
   const stage = currentStage.value
   if (!stage) return
 
-  // 根据阶段绘制不同的可视化
+  // Vẽ trực quan khác nhau tuỳ giai đoạn
   if (stage.id === 'text') {
-    // 文本到音素
+    // Văn bản sang phonemes
     ctx.font = '16px sans-serif'
     ctx.fillStyle = '#333'
     ctx.fillText('"Hello"', 50, h/2)
@@ -279,7 +279,7 @@ const drawVisualization = () => {
       x += 40
     })
   } else if (stage.id === 'decoder' && selectedArch.value === 'ar') {
-    // 自回归解码
+    // Giải mã tự hồi quy
     for (let i = 0; i < 5; i++) {
       const x = 80 + i * 80
       for (let j = 0; j < 8; j++) {
@@ -296,9 +296,9 @@ const drawVisualization = () => {
       }
     }
     ctx.fillStyle = '#666'
-    ctx.fillText('逐个时间步生成', 50, 30)
+    ctx.fillText('Sinh theo từng bước thời gian', 50, 30)
   } else if (stage.id === 'flow') {
-    // 流匹配
+    // Flow matching
     ctx.strokeStyle = '#409eff'
     ctx.lineWidth = 3
     ctx.beginPath()

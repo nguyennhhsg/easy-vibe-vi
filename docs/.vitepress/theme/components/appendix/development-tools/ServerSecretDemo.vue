@@ -1,8 +1,8 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">生产环境如何注入密钥</span>
-      <span class="subtitle">.env 是开发工具，服务器上不能靠它</span>
+      <span class="title">Cách inject khóa bí mật ở môi trường production</span>
+      <span class="subtitle">.env là công cụ dev, trên server không thể chỉ trông cậy vào nó</span>
     </div>
 
     <div class="tab-bar">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="info-box">
-      <strong>原则：</strong>.env 文件是本地开发便利工具，生产环境应由运行平台负责注入环境变量——代码完全不感知密钥存在哪、怎么来的。
+      <strong>Nguyên tắc:</strong> File .env là công cụ tiện lợi cho dev local, ở production nên để nền tảng vận hành chịu trách nhiệm inject biến môi trường — code hoàn toàn không cần biết khóa nằm ở đâu hay đến từ đâu.
     </div>
   </div>
 </template>
@@ -52,8 +52,8 @@ import { ref, computed } from 'vue'
 const current = ref('systemd')
 
 const scenarios = [
-  { id: 'systemd', icon: '🖥️', label: '服务器 (systemd)' },
-  { id: 'cloud', icon: '☁️', label: '云平台 (Vercel 等)' },
+  { id: 'systemd', icon: '🖥️', label: 'Server (systemd)' },
+  { id: 'cloud', icon: '☁️', label: 'Nền tảng cloud (Vercel...)' },
   { id: 'docker', icon: '🐳', label: 'Docker' }
 ]
 
@@ -61,64 +61,64 @@ const scenarioData = {
   systemd: {
     codeTitle: '/etc/systemd/system/myapp.service',
     lines: [
-      { type: 'comment', text: '# 推荐：用独立密钥文件，权限可控' },
+      { type: 'comment', text: '# Khuyến nghị: dùng file khóa riêng, có thể kiểm soát quyền' },
       { type: 'normal', text: '[Service]' },
       { type: 'highlight', text: 'EnvironmentFile=/etc/myapp/secrets.env' },
       { type: 'normal', text: 'ExecStart=/usr/bin/node /app/index.js' },
       { type: 'normal', text: '' },
-      { type: 'comment', text: '# 设置文件权限：只有所有者可读' },
+      { type: 'comment', text: '# Đặt quyền file: chỉ chủ sở hữu mới đọc được' },
       { type: 'good', text: 'sudo chmod 600 /etc/myapp/secrets.env' },
       { type: 'good', text: 'sudo chown deploy:deploy /etc/myapp/secrets.env' },
       { type: 'normal', text: '' },
-      { type: 'comment', text: '# 应用配置后重启服务' },
+      { type: 'comment', text: '# Áp dụng cấu hình rồi khởi động lại service' },
       { type: 'normal', text: 'sudo systemctl daemon-reload' },
       { type: 'normal', text: 'sudo systemctl restart myapp' }
     ],
     tips: [
-      { level: 'safe', text: '密钥文件 chmod 600 后，只有 deploy 用户可读，其他账号无法访问' },
-      { level: 'safe', text: '密钥和代码完全分离，更新密钥不需要重新部署代码' },
-      { level: 'warn', text: '不要直接在 systemd 文件里写 Environment="KEY=val"——改动需要 reload，且明文在配置里' }
+      { level: 'safe', text: 'Sau khi chmod 600, chỉ user deploy đọc được file khóa, các tài khoản khác không truy cập được' },
+      { level: 'safe', text: 'Khóa và code tách biệt hoàn toàn, đổi khóa không cần deploy lại code' },
+      { level: 'warn', text: 'Đừng ghi trực tiếp Environment="KEY=val" trong file systemd — đổi phải reload và giá trị nằm dạng plain text trong cấu hình' }
     ]
   },
   cloud: {
-    codeTitle: '云平台控制台（Vercel / Railway / Render / Netlify）',
+    codeTitle: 'Dashboard nền tảng cloud (Vercel / Railway / Render / Netlify)',
     lines: [
-      { type: 'comment', text: '# 在平台控制台界面操作，无需写配置文件' },
+      { type: 'comment', text: '# Thao tác trên giao diện dashboard, không cần viết file cấu hình' },
       { type: 'normal', text: '' },
-      { type: 'comment', text: '# 平台会自动将变量注入到运行时环境' },
-      { type: 'normal', text: '# 代码不变，照常读取：' },
+      { type: 'comment', text: '# Nền tảng sẽ tự inject biến vào môi trường runtime' },
+      { type: 'normal', text: '# Code không đổi, vẫn đọc như thường:' },
       { type: 'highlight', text: 'const key = process.env.OPENAI_API_KEY' },
       { type: 'highlight', text: 'api_key = os.environ.get("OPENAI_API_KEY")' },
       { type: 'normal', text: '' },
-      { type: 'comment', text: '# 通常支持按环境设置不同的值：' },
+      { type: 'comment', text: '# Thường hỗ trợ đặt giá trị khác nhau theo môi trường:' },
       { type: 'normal', text: '# Preview  → OPENAI_API_KEY = sk-test-...' },
       { type: 'normal', text: '# Production → OPENAI_API_KEY = sk-prod-...' }
     ],
     tips: [
-      { level: 'safe', text: '平台加密存储密钥，你自己都不能再次查看原始值（只能重新生成）' },
-      { level: 'safe', text: '支持 Preview / Production 分环境设置，测试和生产用不同密钥' },
-      { level: 'info', text: '不要把 .env 文件提交到 Git 再让平台读取——这样密钥就进代码仓库了' }
+      { level: 'safe', text: 'Nền tảng lưu khóa được mã hóa, ngay cả bạn cũng không xem lại được giá trị gốc (chỉ có thể tạo mới)' },
+      { level: 'safe', text: 'Hỗ trợ tách Preview / Production, test và production dùng khóa khác nhau' },
+      { level: 'info', text: 'Đừng commit file .env vào Git rồi để nền tảng đọc — như vậy khóa lại lọt vào repository' }
     ]
   },
   docker: {
     codeTitle: 'docker run / docker-compose.yml',
     lines: [
-      { type: 'comment', text: '# ❌ 错误：写在 Dockerfile ENV 里会固化到镜像层' },
-      { type: 'bad', text: 'ENV OPENAI_API_KEY=sk-xxx  <span class="warn-inline">← 任何人都能 docker inspect 取到</span>' },
+      { type: 'comment', text: '# ❌ Sai: ghi vào ENV của Dockerfile sẽ bị cố định trong layer của image' },
+      { type: 'bad', text: 'ENV OPENAI_API_KEY=sk-xxx  <span class="warn-inline">← Bất kỳ ai cũng có thể docker inspect để lấy</span>' },
       { type: 'normal', text: '' },
-      { type: 'comment', text: '# ✅ 正确：运行时从宿主机环境注入' },
+      { type: 'comment', text: '# ✅ Đúng: inject từ env của host khi runtime' },
       { type: 'highlight', text: 'docker run \\' },
       { type: 'highlight', text: '  -e OPENAI_API_KEY="$OPENAI_API_KEY" \\' },
       { type: 'highlight', text: '  -e DATABASE_URL="$DATABASE_URL" \\' },
       { type: 'highlight', text: '  myapp:latest' },
       { type: 'normal', text: '' },
-      { type: 'comment', text: '# 或用 --env-file（文件不进 Git）' },
+      { type: 'comment', text: '# Hoặc dùng --env-file (file không commit vào Git)' },
       { type: 'good', text: 'docker run --env-file .env myapp:latest' }
     ],
     tips: [
-      { level: 'safe', text: '镜像本身不含任何密钥，可以安全上传到公开 Registry' },
-      { level: 'safe', text: '--env-file 在运行时读取，文件不需要进入镜像' },
-      { level: 'warn', text: 'docker history 可以查看所有镜像层内容——写在 Dockerfile ENV 里就永远泄露了' }
+      { level: 'safe', text: 'Bản thân image không chứa khóa nào, có thể an toàn upload lên Registry công khai' },
+      { level: 'safe', text: '--env-file đọc khi runtime, file không cần đưa vào image' },
+      { level: 'warn', text: 'docker history có thể xem nội dung mọi layer — ghi vào ENV trong Dockerfile là khóa bị lộ vĩnh viễn' }
     ]
   }
 }

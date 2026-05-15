@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>Go 协程 (Goroutine) 与 GMP 调度演示</h4>
+    <h4>Demo goroutine và scheduling GMP</h4>
 
     <div class="controls">
       <el-radio-group
@@ -8,13 +8,13 @@
         size="small"
       >
         <el-radio-button label="overview">
-          整体视图
+          View tổng quan
         </el-radio-button>
         <el-radio-button label="gmp">
-          GMP 调度
+          Scheduling GMP
         </el-radio-button>
         <el-radio-button label="channel">
-          Channel 通信
+          Giao tiếp channel
         </el-radio-button>
       </el-radio-group>
 
@@ -24,7 +24,7 @@
         :disabled="isRunning"
         @click="startDemo"
       >
-        {{ isRunning ? '运行中...' : '开始演示' }}
+        {{ isRunning ? 'Đang chạy...' : 'Bắt đầu demo' }}
       </el-button>
 
       <el-button
@@ -39,7 +39,7 @@
         size="small"
         @click="reset"
       >
-        重置
+        Reset
       </el-button>
     </div>
 
@@ -73,7 +73,7 @@
               v-if="globalQueue.length === 0"
               class="empty-queue"
             >
-              空
+              Trống
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
         <!-- P (Processors) -->
         <div class="processors-section">
           <div class="section-header">
-            <span class="section-name">P (Processors) - {{ processors.length }} 个</span>
+            <span class="section-name">P (Processors) - {{ processors.length }}</span>
           </div>
 
           <div class="processors-grid">
@@ -97,12 +97,12 @@
                 <span
                   class="processor-status"
                   :class="{ 'running': p.active }"
-                >{{ p.active ? '运行中' : '空闲' }}</span>
+                >{{ p.active ? 'Đang chạy' : 'Rảnh' }}</span>
               </div>
 
               <div class="local-queue">
                 <div class="queue-label">
-                  本地队列
+                  Local queue
                 </div>
                 <div class="local-g-list">
                   <div
@@ -126,7 +126,7 @@
                 v-if="p.m"
                 class="m-binding"
               >
-                <span class="m-label">绑定 M{{ p.m.id }}</span>
+                <span class="m-label">Bind M{{ p.m.id }}</span>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@
         <!-- M (Machine Threads) -->
         <div class="machines-section">
           <div class="section-header">
-            <span class="section-name">M (Machine Threads) - {{ machines.length }} 个</span>
+            <span class="section-name">M (Machine threads) - {{ machines.length }}</span>
           </div>
 
           <div class="machines-list">
@@ -147,7 +147,7 @@
               :style="{ borderColor: m.active ? '#67c23a' : '#e4e7ed' }"
             >
               <span class="machine-id">M{{ m.id }}</span>
-              <span class="machine-status">{{ m.active ? '运行中' : '休眠' }}</span>
+              <span class="machine-status">{{ m.active ? 'Đang chạy' : 'Ngủ' }}</span>
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@
 
     <div class="explanation">
       <el-alert
-        title="GMP 调度模型"
+        title="Mô hình scheduling GMP"
         type="success"
         :description="gmpDescription"
         show-icon
@@ -169,7 +169,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 
-const gmpDescription = 'G (Goroutine): 待执行的任务。M (Machine): 操作系统线程，执行 G 的载体。P (Processor): 逻辑处理器，提供执行上下文。G 先放入 P 的本地队列，P 与 M 绑定后，M 从 P 获取 G 执行。当本地队列空时，会从全局队列或其他 P 偷任务。'
+const gmpDescription = 'G (Goroutine): task chờ chạy. M (Machine): luồng hệ điều hành, chỗ chạy của G. P (Processor): processor logic, cung cấp context thực thi. G được đẩy vào local queue của P, sau khi P bind với M, M lấy G từ P để chạy. Khi local queue trống, sẽ lấy task từ global queue hoặc steal từ P khác.'
 
 const viewMode = ref('gmp')
 const isRunning = ref(false)

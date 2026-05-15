@@ -2,28 +2,28 @@
   <div class="state-management-comparison">
     <div class="demo-header">
       <span class="icon">📊</span>
-      <span class="title">状态管理方案对比</span>
-      <span class="subtitle">不同工具的适用场景</span>
+      <span class="title">So sánh các giải pháp state management</span>
+      <span class="subtitle">Tình huống phù hợp của mỗi công cụ</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">超市</span>采购：小买小卖用购物篮（Zustand），大采购用手推车（Pinia），企业级采购用专业物流（Redux）。根据需求选对工具！
+      Hãy hình dung bạn đi mua sắm ở <span class="highlight">siêu thị</span>: mua ít thì xách giỏ (Zustand), mua nhiều thì đẩy xe đẩy (Pinia), mua quy mô doanh nghiệp thì dùng logistics chuyên nghiệp (Redux). Chọn đúng công cụ theo nhu cầu!
     </div>
 
     <div class="demo-content">
       <div class="comparison-table">
         <div class="table-header">
           <div class="header-col first">
-            工具
+            Công cụ
           </div>
           <div class="header-col">
-            难度
+            Độ khó
           </div>
           <div class="header-col">
-            大小
+            Bundle size
           </div>
           <div class="header-col">
-            框架
+            Framework
           </div>
         </div>
         <div class="table-body">
@@ -78,28 +78,28 @@
           <div class="detail-grid">
             <div class="detail-section compact">
               <div class="section-title">
-                🎯 适用场景
+                Tình huống phù hợp
               </div>
               <div class="section-content">
-                {{ selectedLibrary.scenarios.join('、') }}
+                {{ selectedLibrary.scenarios.join(', ') }}
               </div>
             </div>
 
             <div class="detail-section compact">
               <div class="section-title green">
-                ✅ 优点
+                Ưu điểm
               </div>
               <div class="section-content">
-                {{ selectedLibrary.pros.slice(0, 2).join('；') }}
+                {{ selectedLibrary.pros.slice(0, 2).join('; ') }}
               </div>
             </div>
 
             <div class="detail-section compact">
               <div class="section-title red">
-                ❌ 缺点
+                Nhược điểm
               </div>
               <div class="section-content">
-                {{ selectedLibrary.cons.slice(0, 2).join('；') }}
+                {{ selectedLibrary.cons.slice(0, 2).join('; ') }}
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选择建议：</strong>Vue 3 新项目推荐 Pinia，React 中小型项目推荐 Zustand，大型企业级应用推荐 Redux Toolkit。根据项目规模选择最合适的工具。
+      <strong>Gợi ý lựa chọn:</strong> Project Vue 3 mới nên chọn Pinia, project React nhỏ và vừa chọn Zustand, ứng dụng doanh nghiệp lớn chọn Redux Toolkit. Chọn công cụ phù hợp với quy mô project.
     </div>
   </div>
 </template>
@@ -124,10 +124,10 @@ const libraries = [
     id: 'redux',
     name: 'Redux',
     icon: '🔄',
-    tagline: 'JavaScript 应用的可预测状态容器',
-    scenarios: ['大型企业级应用', '需要严格数据流控制', '复杂的状态逻辑'],
-    pros: ['严格的数据流，易于调试', '强大的中间件生态'],
-    cons: ['学习曲线陡峭', '样板代码较多'],
+    tagline: 'Container state có thể dự đoán cho ứng dụng JavaScript',
+    scenarios: ['Ứng dụng quy mô doanh nghiệp', 'Cần kiểm soát data flow chặt chẽ', 'State logic phức tạp'],
+    pros: ['Data flow chặt, dễ debug', 'Hệ sinh thái middleware mạnh'],
+    cons: ['Đường cong học dốc', 'Khá nhiều boilerplate'],
     learningCurve: 80,
     bundleSize: '7KB',
     framework: 'React/Vue/Angular'
@@ -136,10 +136,10 @@ const libraries = [
     id: 'vuex',
     name: 'Vuex',
     icon: '🌿',
-    tagline: 'Vue.js 的官方状态管理库',
-    scenarios: ['Vue 2/3 中大型项目', '需要模块化管理状态', '团队成员熟悉 Vue 生态'],
-    pros: ['与 Vue 深度集成', '响应式系统'],
-    cons: ['仅适用于 Vue', 'Vue 3 中被 Pinia 取代'],
+    tagline: 'Thư viện state management chính thức của Vue.js',
+    scenarios: ['Project Vue 2/3 vừa và lớn', 'Cần quản lý state theo module', 'Team đã quen hệ sinh thái Vue'],
+    pros: ['Tích hợp sâu với Vue', 'Hệ thống reactive'],
+    cons: ['Chỉ dùng cho Vue', 'Đã được Pinia thay thế trong Vue 3'],
     learningCurve: 60,
     bundleSize: '4KB',
     framework: 'Vue Only'
@@ -148,10 +148,10 @@ const libraries = [
     id: 'pinia',
     name: 'Pinia',
     icon: '🍍',
-    tagline: '直观、类型安全、灵活的 Vue Store',
-    scenarios: ['Vue 3 新项目首选', '重视 TypeScript 支持', '希望简化状态管理'],
-    pros: ['轻量级设计', '原生 TypeScript 支持'],
-    cons: ['Vue 3 专属', '生态系统相对年轻'],
+    tagline: 'Vue Store trực quan, type-safe, linh hoạt',
+    scenarios: ['Lựa chọn ưu tiên cho project Vue 3 mới', 'Coi trọng hỗ trợ TypeScript', 'Muốn đơn giản hoá state management'],
+    pros: ['Thiết kế nhẹ', 'Hỗ trợ TypeScript native'],
+    cons: ['Chỉ dành cho Vue 3', 'Hệ sinh thái còn khá trẻ'],
     learningCurve: 30,
     bundleSize: '2KB',
     framework: 'Vue 3 Only'
@@ -160,10 +160,10 @@ const libraries = [
     id: 'zustand',
     name: 'Zustand',
     icon: '🐻',
-    tagline: '极简的 React 状态管理',
-    scenarios: ['React 中小型项目', '追求简洁 API', '不需要复杂中间件'],
-    pros: ['极简 API', '无需 Provider'],
-    cons: ['生态相对较小', '调试工具不如 Redux'],
+    tagline: 'State management cực gọn cho React',
+    scenarios: ['Project React nhỏ và vừa', 'Muốn API gọn nhẹ', 'Không cần middleware phức tạp'],
+    pros: ['API cực gọn', 'Không cần Provider'],
+    cons: ['Hệ sinh thái còn nhỏ', 'Devtools kém Redux hơn'],
     learningCurve: 25,
     bundleSize: '1KB',
     framework: 'React Only'
@@ -181,9 +181,9 @@ function getCurveColor(value) {
 }
 
 function getCurveLabel(value) {
-  if (value <= 30) return '简单'
-  if (value <= 60) return '中等'
-  return '复杂'
+  if (value <= 30) return 'Dễ'
+  if (value <= 60) return 'Trung bình'
+  return 'Khó'
 }
 
 function getSizeClass(size) {

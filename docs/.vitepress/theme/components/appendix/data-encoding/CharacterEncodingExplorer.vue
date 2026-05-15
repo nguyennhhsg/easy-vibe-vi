@@ -1,11 +1,11 @@
 <template>
   <div class="encoding-explorer">
     <div class="input-row">
-      <label class="input-label">输入任意文字，看看它在计算机里长什么样</label>
+      <label class="input-label">Nhập một đoạn text bất kỳ để xem nó trông như thế nào trong máy tính</label>
       <input
         v-model="inputText"
         class="text-input"
-        placeholder="输入文字，如：你好 Hello 🎉"
+        placeholder="Nhập text, ví dụ: Xin chào Hello 🎉"
         maxlength="20"
       />
       <div class="quick-btns">
@@ -17,12 +17,12 @@
 
     <div v-if="inputText" class="char-breakdown">
       <div class="breakdown-header">
-        <span class="col-char">字符</span>
+        <span class="col-char">Ký tự</span>
         <span class="col-arrow">→</span>
-        <span class="col-unicode">Unicode 码点</span>
+        <span class="col-unicode">Code point Unicode</span>
         <span class="col-arrow">→</span>
-        <span class="col-utf8">UTF-8 字节</span>
-        <span class="col-bytes">字节数</span>
+        <span class="col-utf8">Byte UTF-8</span>
+        <span class="col-bytes">Số byte</span>
       </div>
       <transition-group name="fade" tag="div">
         <div
@@ -38,28 +38,28 @@
           <div class="col-utf8 bytes-grid">
             <span v-for="(b, j) in item.utf8Bytes" :key="j" class="hex-byte">{{ b }}</span>
           </div>
-          <span class="col-bytes byte-count">{{ item.byteCount }} 字节</span>
+          <span class="col-bytes byte-count">{{ item.byteCount }} byte</span>
         </div>
       </transition-group>
     </div>
 
     <div v-if="inputText" class="summary-row">
       <div class="summary-item">
-        <span class="s-label">字符数</span>
+        <span class="s-label">Số ký tự</span>
         <span class="s-value">{{ charData.length }}</span>
       </div>
       <div class="summary-item">
-        <span class="s-label">UTF-8 总字节数</span>
+        <span class="s-label">Tổng số byte UTF-8</span>
         <span class="s-value highlight">{{ totalBytes }}</span>
       </div>
       <div class="summary-item">
-        <span class="s-label">平均每字符</span>
-        <span class="s-value">{{ avgBytes }} 字节</span>
+        <span class="s-label">Trung bình mỗi ký tự</span>
+        <span class="s-value">{{ avgBytes }} byte</span>
       </div>
     </div>
 
     <div class="tip-box">
-      <span><strong>提示：</strong>英文字母在 UTF-8 中只占 <strong>1 字节</strong>，常用汉字占 <strong>3 字节</strong>，Emoji 占 <strong>4 字节</strong>。这就是为什么处理中文文本时，“字符数”和“字节数”是两个完全不同的概念。</span>
+      <span><strong>Mẹo:</strong> Chữ cái tiếng Anh trong UTF-8 chỉ chiếm <strong>1 byte</strong>, ký tự tiếng Việt có dấu thường chiếm <strong>2-3 byte</strong>, chữ Hán chiếm <strong>3 byte</strong>, còn Emoji chiếm <strong>4 byte</strong>. Đó là lý do khi xử lý text tiếng Việt hoặc tiếng Trung, "số ký tự" và "số byte" là hai khái niệm hoàn toàn khác nhau bạn nhé.</span>
     </div>
   </div>
 </template>
@@ -67,8 +67,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const inputText = ref('你好 Hello')
-const presets = ['你好', 'Hello', '你好 Hello', '🎉', 'AI助手']
+const inputText = ref('Xin chào Hello')
+const presets = ['Xin chào', 'Hello', 'Xin chào Hello', '🎉', 'Trợ lý AI']
 
 function toUtf8Bytes(char) {
   const bytes = []

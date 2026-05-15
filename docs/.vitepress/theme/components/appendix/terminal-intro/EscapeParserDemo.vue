@@ -2,7 +2,7 @@
   <div class="parser-demo">
     <div class="demo-header">
       <div class="title">
-        转义序列解析原理 (Parser Mechanism)
+        Nguyên lý parse escape sequence (Parser Mechanism)
       </div>
       <div class="controls">
         <button
@@ -22,10 +22,10 @@
       </div>
     </div>
 
-    <!-- 1. 字节流传送带 -->
+    <!-- 1. Băng chuyền byte stream -->
     <div class="stream-container">
       <div class="label">
-        Input Byte Stream / 输入字节流
+        Input Byte Stream
       </div>
       <div class="stream-track">
         <div class="stream-window-mask">
@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-        <!-- 指针 -->
+        <!-- Con trỏ -->
         <div class="pointer">
           <div class="arrow">
             ⬆
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <!-- 2. 解析器状态机 -->
+    <!-- 2. State machine của parser -->
     <div class="parser-state-machine">
       <div
         class="state-box"
@@ -89,7 +89,7 @@
         </div>
       </div>
 
-      <!-- 指令说明框 -->
+      <!-- Hộp giải thích lệnh -->
       <div
         v-if="lastAction"
         class="action-log"
@@ -99,10 +99,10 @@
       </div>
     </div>
 
-    <!-- 3. 终端屏幕 -->
+    <!-- 3. Màn hình terminal -->
     <div class="terminal-screen">
       <div class="label">
-        Terminal Screen / 屏幕显示
+        Terminal Screen
       </div>
       <div class="screen-content">
         <span
@@ -115,11 +115,11 @@
 
     <div class="explanation">
       <p>
-        <span class="badge normal">Normal</span> 模式下，字符直接上屏。
-        <span class="badge escape">Escape</span> 模式下（遇到
-        <code>ESC</code>
-        后），终端<strong>停止输出</strong>，开始收集字符作为指令，直到指令结束（如
-        <code>m</code>）并执行。
+        Ở chế độ <span class="badge normal">Normal</span>, ký tự đi thẳng lên màn hình.
+        Ở chế độ <span class="badge escape">Escape</span> (sau khi gặp
+        <code>ESC</code>),
+        terminal <strong>ngừng output</strong>, bắt đầu gom các ký tự thành một lệnh, đến khi gặp ký tự kết thúc (ví dụ
+        <code>m</code>) thì thực thi.
       </p>
     </div>
   </div>
@@ -128,7 +128,7 @@
 <script setup>
 import { ref } from 'vue'
 
-// 原始字符串: Hello [RED]World[RESET]!
+// Chuỗi gốc: Hello [RED]World[RESET]!
 // \x1B [ 3 1 m
 const RAW_DATA = [
   { val: 'H', display: 'H', hex: '48' },
@@ -205,9 +205,9 @@ const play = async () => {
         lastAction.value = 'Print Char'
       }
     } else if (parserState.value === 'ESCAPE') {
-      // 简单模拟：遇到 'm' 结束
+      // Mô phỏng đơn giản: gặp 'm' là kết thúc
       if (char.val === 'm') {
-        // 解析指令 (Hardcoded for demo)
+        // Parse lệnh (hardcoded cho demo)
         const prevChar = charStream.value[currentIndex.value - 1]
         if (prevChar.val === '1') {
           currentStyle.value = { color: '#ff5f56', fontWeight: 'bold' }

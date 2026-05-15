@@ -110,7 +110,7 @@
       </div>
     </div>
 
-    <!-- 闭包演示 -->
+    <!-- Demo closure -->
     <div
       v-else-if="activeTab === 'closure'"
       class="tab-content"
@@ -121,13 +121,13 @@
             :class="{ active: closureScenario === 'counter' }"
             @click="closureScenario = 'counter'"
           >
-            计数器
+            Counter
           </button>
           <button
             :class="{ active: closureScenario === 'config' }"
             @click="closureScenario = 'config'"
           >
-            配置器
+            Config
           </button>
         </div>
 
@@ -140,7 +140,7 @@
               function createCounter() {
             </div>
             <div class="code-line indent">
-              let count = 0 <span class="comment">// 私有变量</span>
+              let count = 0 <span class="comment">// Biến private</span>
             </div>
             <div class="code-line indent">
               return function() {
@@ -166,7 +166,7 @@
           <div class="closure-animation">
             <div class="closure-box">
               <div class="box-title">
-                闭包环境
+                Môi trường closure
               </div>
               <div class="closure-var">
                 <span class="var-label">count = </span>
@@ -179,17 +179,17 @@
                 class="action-btn primary"
                 @click="incrementCounter"
               >
-                调用 counter()
+                Gọi counter()
               </button>
             </div>
 
             <div class="explanation">
-              <p><strong>发生了什么？</strong></p>
+              <p><strong>Chuyện gì đã xảy ra?</strong></p>
               <ul>
-                <li><code>createCounter()</code> 执行后，局部变量 <code>count</code> 本该消失</li>
-                <li>但返回的函数"记住"了这个变量（形成了闭包）</li>
-                <li>每次调用 <code>counter()</code> 都在访问同一个 <code>count</code></li>
-                <li>外部无法直接访问 <code>count</code>（实现了数据私有化）</li>
+                <li>Sau khi <code>createCounter()</code> chạy xong, biến cục bộ <code>count</code> lẽ ra phải biến mất</li>
+                <li>Nhưng hàm được trả về vẫn "nhớ" biến đó (đó là closure)</li>
+                <li>Mỗi lần gọi <code>counter()</code> đều truy cập cùng một <code>count</code></li>
+                <li>Bên ngoài không truy cập trực tiếp được <code>count</code> (data private)</li>
               </ul>
             </div>
           </div>
@@ -235,7 +235,7 @@
                   double = makeMultiplier(2)
                 </div>
                 <div class="func-desc">
-                  闭包捕获 times = 2
+                  Closure capture times = 2
                 </div>
               </div>
               <div
@@ -247,7 +247,7 @@
                   triple = makeMultiplier(3)
                 </div>
                 <div class="func-desc">
-                  闭包捕获 times = 3
+                  Closure capture times = 3
                 </div>
               </div>
             </div>
@@ -256,10 +256,10 @@
               <input
                 v-model.number="multiplyNumber"
                 type="number"
-                placeholder="输入数字"
+                placeholder="Nhập số"
               >
               <button @click="doMultiply">
-                计算
+                Tính
               </button>
             </div>
 
@@ -274,7 +274,7 @@
       </div>
     </div>
 
-    <!-- 作用域链 -->
+    <!-- Scope chain -->
     <div
       v-else
       class="tab-content"
@@ -283,26 +283,26 @@
         <div class="nested-visual">
           <div class="scope-level global">
             <div class="level-title">
-              全局作用域
+              Global scope
             </div>
             <div class="level-vars">
-              <span class="var-tag">globalVar = "全局"</span>
+              <span class="var-tag">globalVar = "global"</span>
             </div>
 
             <div class="scope-level outer">
               <div class="level-title">
-                外层函数作用域
+                Scope hàm ngoài
               </div>
               <div class="level-vars">
-                <span class="var-tag">outerVar = "外层"</span>
+                <span class="var-tag">outerVar = "outer"</span>
               </div>
 
               <div class="scope-level inner">
                 <div class="level-title">
-                  内层函数作用域
+                  Scope hàm trong
                 </div>
                 <div class="level-vars">
-                  <span class="var-tag">innerVar = "内层"</span>
+                  <span class="var-tag">innerVar = "inner"</span>
                 </div>
               </div>
             </div>
@@ -311,7 +311,7 @@
 
         <div class="lookup-demo">
           <div class="lookup-title">
-            🔍 变量查找过程（作用域链）
+            Quá trình tìm biến (scope chain)
           </div>
           <div class="lookup-steps">
             <div
@@ -329,8 +329,8 @@
           </div>
 
           <div class="lookup-rule">
-            <strong>查找规则：</strong>
-            从当前作用域开始，逐层向外查找，直到全局作用域。找不到则报错 ReferenceError。
+            <strong>Quy tắc tìm kiếm:</strong>
+            Bắt đầu từ scope hiện tại, tìm dần ra ngoài cho tới global scope. Không tìm thấy thì báo lỗi ReferenceError.
           </div>
         </div>
       </div>
@@ -338,10 +338,10 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      <span v-if="activeTab === 'basic'">函数是 JavaScript 中的一等公民，可以赋值给变量、作为参数传递、作为返回值。箭头函数更简洁，且不绑定自己的 this。</span>
-      <span v-else-if="activeTab === 'closure'">闭包是函数和声明该函数的词法环境的组合。它让函数可以访问外部作用域的变量，即使外部函数已经执行完毕。闭包常用于数据私有化、函数工厂、模块化等场景。</span>
-      <span v-else>作用域链是 JavaScript 查找变量的机制。当访问一个变量时，引擎会先在当前作用域查找，找不到就去外层作用域找，直到全局作用域。这种机制让内层函数可以访问外层变量，形成了闭包的基础。</span>
+      <strong>Ý chính:</strong>
+      <span v-if="activeTab === 'basic'">Hàm là first-class citizen trong JavaScript, có thể gán cho biến, truyền làm tham số, trả về như giá trị. Arrow function gọn hơn và không có this riêng.</span>
+      <span v-else-if="activeTab === 'closure'">Closure là tổ hợp của hàm và môi trường lexical nơi nó được khai báo. Nó cho phép hàm truy cập biến của scope ngoài, ngay cả khi hàm ngoài đã thực thi xong. Closure thường dùng cho data private, function factory, module hóa, v.v.</span>
+      <span v-else>Scope chain là cơ chế JavaScript tìm biến. Khi truy cập một biến, engine sẽ tìm ở scope hiện tại trước, không thấy thì ra scope ngoài, cho tới global. Cơ chế này giúp hàm trong truy cập biến của hàm ngoài, là nền tảng của closure.</span>
     </div>
   </div>
 </template>
@@ -359,16 +359,16 @@ const multiplyNumber = ref(null)
 const multiplyResult = ref('')
 
 const tabs = [
-  { id: 'basic', label: '函数基础' },
-  { id: 'closure', label: '闭包' },
-  { id: 'scope', label: '作用域链' }
+  { id: 'basic', label: 'Hàm cơ bản' },
+  { id: 'closure', label: 'Closure' },
+  { id: 'scope', label: 'Scope chain' }
 ]
 
 const lookupSteps = ref([
-  '内层函数访问 innerVar → 在当前作用域找到 ✓',
-  '内层函数访问 outerVar → 当前找不到，向外层查找 ✓',
-  '内层函数访问 globalVar → 继续向外，在全局作用域找到 ✓',
-  '内层函数访问 unknownVar → 所有作用域都找不到 ✗ ReferenceError'
+  'Hàm trong truy cập innerVar - tìm thấy ngay ở scope hiện tại',
+  'Hàm trong truy cập outerVar - scope hiện tại không có, tìm ra ngoài thấy',
+  'Hàm trong truy cập globalVar - tiếp tục ra ngoài, tìm thấy ở global scope',
+  'Hàm trong truy cập unknownVar - không scope nào có, báo lỗi ReferenceError'
 ])
 
 const callFunction = () => {

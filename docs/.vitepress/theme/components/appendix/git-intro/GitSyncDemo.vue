@@ -29,7 +29,7 @@
       >
         <code>{{ op.cmd }}</code>
       </button>
-      <button class="gs-btn gs-btn--reset" :disabled="running" @click="reset">重置</button>
+      <button class="gs-btn gs-btn--reset" :disabled="running" @click="reset">Reset</button>
     </div>
 
     <!-- Dual-repo visual -->
@@ -37,11 +37,11 @@
       <div class="repo-card" :class="{ 'repo-pulse': pulse === 'local' }">
         <div class="repo-header">
           <span class="repo-icon">💻</span>
-          <span class="repo-name">本地仓库</span>
+          <span class="repo-name">Repository local</span>
           <span class="repo-path">~/project</span>
         </div>
         <div class="commit-col">
-          <div v-if="!localLog.length" class="no-commits">（空）</div>
+          <div v-if="!localLog.length" class="no-commits">(trống)</div>
           <div
             v-for="(c, i) in localLog"
             :key="i"
@@ -54,8 +54,8 @@
           </div>
         </div>
         <div class="repo-footer">
-          <span v-if="localAhead > 0" class="badge-ahead">↑ {{ localAhead }} 个未推送</span>
-          <span v-else-if="localLog.length" class="badge-sync">✓ 已同步</span>
+          <span v-if="localAhead > 0" class="badge-ahead">↑ {{ localAhead }} commit chưa push</span>
+          <span v-else-if="localLog.length" class="badge-sync">✓ Đã đồng bộ</span>
         </div>
       </div>
 
@@ -72,11 +72,11 @@
       <div class="repo-card repo-remote" :class="{ 'repo-pulse-remote': pulse === 'remote' }">
         <div class="repo-header">
           <span class="repo-icon">☁️</span>
-          <span class="repo-name">远程仓库</span>
+          <span class="repo-name">Remote repository</span>
           <span class="repo-path">github.com/you/project</span>
         </div>
         <div class="commit-col">
-          <div v-if="!remoteLog.length" class="no-commits">（空）</div>
+          <div v-if="!remoteLog.length" class="no-commits">(trống)</div>
           <div
             v-for="(c, i) in remoteLog"
             :key="i"
@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="repo-footer">
-          <span v-if="remoteLog.length" class="badge-online">🌐 在线</span>
+          <span v-if="remoteLog.length" class="badge-online">🌐 Online</span>
         </div>
       </div>
     </div>
@@ -102,16 +102,16 @@
 import { ref, nextTick } from 'vue'
 
 const termEl = ref(null)
-const lines = ref([{ kind: 'dim', text: '# 本地 2 次提交，还没关联远程仓库' }])
+const lines = ref([{ kind: 'dim', text: '# Local có 2 commit, chưa liên kết remote repository' }])
 const typing = ref('')
 const running = ref(false)
 const active = ref(null)
-const hint = ref('点击下方命令按钮，按顺序执行')
+const hint = ref('Click vào các nút command bên dưới theo thứ tự')
 const pulse = ref('')
 
 const localLog = ref([
-  { hash: '9f3e1b2', msg: 'init: 初始化项目', isNew: false },
-  { hash: 'c4d8a31', msg: 'feat: 首页布局', isNew: false },
+  { hash: '9f3e1b2', msg: 'init: khởi tạo dự án', isNew: false },
+  { hash: 'c4d8a31', msg: 'feat: layout trang chủ', isNew: false },
 ])
 const remoteLog = ref([])
 const localAhead = ref(2)
@@ -123,11 +123,11 @@ const ops = [
     cmd: 'git remote add origin https://github.com/you/project.git',
     ok: () => !s.linked,
     output: [
-      { kind: 'dim', text: '# 建立本地与远程的关联（只做一次）' },
+      { kind: 'dim', text: '# Tạo liên kết giữa local và remote (chỉ một lần)' },
       { kind: 'grn', text: 'origin  https://github.com/you/project.git (fetch)' },
       { kind: 'grn', text: 'origin  https://github.com/you/project.git (push)' },
     ],
-    hint: '"origin" 是远程仓库的别名，相当于给 GitHub 地址起个简短的联系人名字。',
+    hint: '"origin" là alias của remote repository, giống như đặt tên ngắn gọn cho địa chỉ GitHub trong danh bạ.',
     do: () => { s.linked = true },
     p: '',
   },
@@ -140,7 +140,7 @@ const ops = [
       { kind: 'grn', text: 'To https://github.com/you/project.git' },
       { kind: 'grn', text: ' * [new branch]  main -> main' },
     ],
-    hint: '第一次 push 加 -u，以后直接 git push 就行。本地提交现在上传到 GitHub 了。',
+    hint: 'Lần push đầu cần -u, sau này chỉ cần git push. Commit local giờ đã được đẩy lên GitHub.',
     do: () => {
       s.pushed = true; localAhead.value = 0
       remoteLog.value = localLog.value.map(c => ({ ...c, isNew: true }))
@@ -150,16 +150,16 @@ const ops = [
   },
   {
     id: 'commit',
-    cmd: 'git commit -m "fix: 修复登录 Bug"',
+    cmd: 'git commit -m "fix: sửa bug đăng nhập"',
     ok: () => s.pushed && !s.committed,
     output: [
-      { kind: 'dim', text: '[main b5e6f7a] fix: 修复登录 Bug' },
+      { kind: 'dim', text: '[main b5e6f7a] fix: sửa bug đăng nhập' },
       { kind: 'yel', text: "Your branch is 1 commit ahead of 'origin/main'." },
     ],
-    hint: '本地新增一个 commit，但还没 push。远程还是旧的，本地比它"快了一步"。',
+    hint: 'Local có thêm một commit nhưng chưa push. Remote vẫn là phiên bản cũ, local "đi trước một bước".',
     do: () => {
       s.committed = true; localAhead.value = 1
-      localLog.value.unshift({ hash: 'b5e6f7a', msg: 'fix: 修复登录 Bug', isNew: true })
+      localLog.value.unshift({ hash: 'b5e6f7a', msg: 'fix: sửa bug đăng nhập', isNew: true })
       setTimeout(() => localLog.value.forEach(c => c.isNew = false), 900)
     },
     p: 'local',
@@ -172,7 +172,7 @@ const ops = [
       { kind: 'grn', text: 'To https://github.com/you/project.git' },
       { kind: 'grn', text: '   c4d8a31..b5e6f7a  main -> main' },
     ],
-    hint: '第二次 push 不需要 -u，直接推。远程和本地又同步了。',
+    hint: 'Lần push thứ hai không cần -u, push thẳng. Remote và local lại đồng bộ.',
     do: () => {
       s.pushed2 = true; localAhead.value = 0
       remoteLog.value = localLog.value.map(c => ({ ...c, isNew: true }))
@@ -189,9 +189,9 @@ const ops = [
       { kind: 'grn', text: '   b5e6f7a..d8c9e0f  main -> origin/main' },
       { kind: 'dim', text: 'Fast-forward: readme.md | 5 +++++ 1 file changed' },
     ],
-    hint: 'pull = fetch + merge。队友推上去的提交，现在也同步到你本地了。',
+    hint: 'pull = fetch + merge. Commit mà đồng đội đã push, giờ cũng được đồng bộ về local của bạn.',
     do: () => {
-      const c = { hash: 'd8c9e0f', msg: '队友: 更新 README', isNew: true }
+      const c = { hash: 'd8c9e0f', msg: 'teammate: cập nhật README', isNew: true }
       remoteLog.value.unshift({ ...c })
       localLog.value.unshift({ ...c })
       setTimeout(() => {
@@ -222,14 +222,14 @@ async function run(op) {
 }
 
 function reset() {
-  lines.value = [{ kind: 'dim', text: '# 本地 2 次提交，还没关联远程仓库' }]
+  lines.value = [{ kind: 'dim', text: '# Local có 2 commit, chưa liên kết remote repository' }]
   localLog.value = [
-    { hash: '9f3e1b2', msg: 'init: 初始化项目', isNew: false },
-    { hash: 'c4d8a31', msg: 'feat: 首页布局', isNew: false },
+    { hash: '9f3e1b2', msg: 'init: khởi tạo dự án', isNew: false },
+    { hash: 'c4d8a31', msg: 'feat: layout trang chủ', isNew: false },
   ]
   remoteLog.value = []; localAhead.value = 2
   s = { linked: false, pushed: false, committed: false, pushed2: false }
-  active.value = null; hint.value = '点击下方命令按钮，按顺序执行'
+  active.value = null; hint.value = 'Click vào các nút command bên dưới theo thứ tự'
   typing.value = ''; running.value = false; pulse.value = ''
 }
 </script>
@@ -277,7 +277,7 @@ function reset() {
 .gs-btn--on code { color: var(--vp-c-brand); }
 .gs-btn--dim { opacity: 0.3; cursor: not-allowed; }
 .gs-btn--reset { background: transparent; border-color: #313244; margin-left: auto; }
-.gs-btn--reset::after { content: '重置'; font-size: 0.7rem; color: #585b70; }
+.gs-btn--reset::after { content: 'Reset'; font-size: 0.7rem; color: #585b70; }
 
 /* Repos */
 .gs-repos {

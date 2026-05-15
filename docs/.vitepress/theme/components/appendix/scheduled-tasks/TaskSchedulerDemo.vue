@@ -1,25 +1,25 @@
 <template>
   <div class="scheduler-demo">
     <div class="header">
-      <div class="title">任务调度器模拟</div>
-      <div class="subtitle">观察任务按照调度策略执行的顺序</div>
+      <div class="title">Mô phỏng task scheduler</div>
+      <div class="subtitle">Quan sát thứ tự task được chạy theo chiến lược scheduling</div>
     </div>
     <div class="controls">
-      <button @click="addTask" class="add-btn">添加任务</button>
-      <button @click="run" class="run-btn" :disabled="tasks.length === 0">执行调度</button>
-      <button @click="reset" class="reset-btn">重置</button>
+      <button @click="addTask" class="add-btn">Thêm task</button>
+      <button @click="run" class="run-btn" :disabled="tasks.length === 0">Chạy scheduling</button>
+      <button @click="reset" class="reset-btn">Reset</button>
     </div>
     <div class="queue-area">
-      <div class="queue-label">任务队列</div>
+      <div class="queue-label">Task queue</div>
       <div class="queue-list">
         <div v-for="(t, i) in tasks" :key="i" class="queue-item">
           <span class="task-name">{{ t.name }}</span>
-          <span class="task-prio" :class="'p' + t.priority">优先级{{ t.priority }}</span>
+          <span class="task-prio" :class="'p' + t.priority">Priority {{ t.priority }}</span>
         </div>
       </div>
     </div>
     <div class="log-area">
-      <div class="log-label">执行日志</div>
+      <div class="log-label">Log thực thi</div>
       <div class="log-list">
         <div v-for="(log, i) in logs" :key="i" class="log-item">{{ log }}</div>
       </div>
@@ -32,18 +32,18 @@ import { ref } from 'vue'
 
 const tasks = ref([])
 const logs = ref([])
-const taskNames = ['数据同步', '报表生成', '缓存清理', '日志归档', '健康检查']
+const taskNames = ['Đồng bộ dữ liệu', 'Tạo báo cáo', 'Dọn cache', 'Lưu trữ log', 'Health check']
 
 function addTask() {
   if (tasks.value.length >= 5) return
-  const name = taskNames[tasks.value.length] || `任务${tasks.value.length + 1}`
+  const name = taskNames[tasks.value.length] || `Task ${tasks.value.length + 1}`
   tasks.value.push({ name, priority: Math.floor(Math.random() * 3) + 1 })
 }
 
 function run() {
   logs.value = []
   const sorted = [...tasks.value].sort((a, b) => b.priority - a.priority)
-  sorted.forEach((t, i) => logs.value.push(`[${i + 1}] 执行: ${t.name} (优先级${t.priority})`))
+  sorted.forEach((t, i) => logs.value.push(`[${i + 1}] Chạy: ${t.name} (priority ${t.priority})`))
 }
 
 function reset() {

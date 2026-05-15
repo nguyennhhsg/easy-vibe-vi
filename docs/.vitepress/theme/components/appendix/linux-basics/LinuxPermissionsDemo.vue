@@ -1,17 +1,17 @@
 <!--
   LinuxPermissionsDemo.vue
-  Linux 权限系统演示
+  Hệ thống quyền Linux
 -->
 <template>
   <div class="linux-perm-demo">
     <div class="header">
-      <div class="title">Linux 权限解读器</div>
-      <div class="subtitle">输入权限字符串或数字，查看含义</div>
+      <div class="title">Bóc tách quyền Linux</div>
+      <div class="subtitle">Gõ số quyền hoặc tích checkbox để xem ý nghĩa</div>
     </div>
 
     <div class="input-row">
       <div class="input-group">
-        <label>权限数字（如 755）</label>
+        <label>Số quyền (ví dụ 755)</label>
         <input v-model="permNum" type="text" maxlength="3" placeholder="755" @input="onNumInput" />
       </div>
       <div class="perm-string">{{ permString }}</div>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="examples">
-      <div class="ex-title">常见权限组合</div>
+      <div class="ex-title">Tổ hợp quyền hay gặp</div>
       <div class="ex-grid">
         <div v-for="ex in examples" :key="ex.num" class="ex-item" @click="setPermNum(ex.num)">
           <code>{{ ex.num }}</code>
@@ -47,27 +47,27 @@ import { ref, computed, reactive } from 'vue'
 
 const groups = reactive([
   {
-    label: '所有者（Owner）',
+    label: 'Owner (Chủ sở hữu)',
     bits: [
-      { char: 'r', name: '读', on: true },
-      { char: 'w', name: '写', on: true },
-      { char: 'x', name: '执行', on: true }
+      { char: 'r', name: 'Đọc', on: true },
+      { char: 'w', name: 'Ghi', on: true },
+      { char: 'x', name: 'Chạy', on: true }
     ]
   },
   {
-    label: '所属组（Group）',
+    label: 'Group (Nhóm)',
     bits: [
-      { char: 'r', name: '读', on: true },
-      { char: 'w', name: '写', on: false },
-      { char: 'x', name: '执行', on: true }
+      { char: 'r', name: 'Đọc', on: true },
+      { char: 'w', name: 'Ghi', on: false },
+      { char: 'x', name: 'Chạy', on: true }
     ]
   },
   {
-    label: '其他人（Others）',
+    label: 'Others (Người khác)',
     bits: [
-      { char: 'r', name: '读', on: true },
-      { char: 'w', name: '写', on: false },
-      { char: 'x', name: '执行', on: true }
+      { char: 'r', name: 'Đọc', on: true },
+      { char: 'w', name: 'Ghi', on: false },
+      { char: 'x', name: 'Chạy', on: true }
     ]
   }
 ])
@@ -113,10 +113,10 @@ function setPermNum(num) {
 }
 
 const examples = [
-  { num: '644', desc: '普通文件（owner 读写，其他只读）' },
-  { num: '755', desc: '可执行文件/目录（owner 全权限）' },
-  { num: '600', desc: '私密文件（仅 owner 读写）' },
-  { num: '777', desc: '完全开放（不推荐）' }
+  { num: '644', desc: 'File thường (owner đọc/ghi, người khác chỉ đọc)' },
+  { num: '755', desc: 'File chạy/Thư mục (owner đủ quyền)' },
+  { num: '600', desc: 'File riêng tư (chỉ owner đọc/ghi)' },
+  { num: '777', desc: 'Mở hoàn toàn (không khuyến nghị)' }
 ]
 </script>
 

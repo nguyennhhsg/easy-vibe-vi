@@ -1,14 +1,14 @@
 <!--
   FlowDiagram.vue
-  输入输出流程图组件
-  
-  用途：
-  可视化展示一次按键从物理键盘到屏幕显示的完整“往返旅程” (Round Trip)。
-  将复杂的系统流程（键盘 -> 操作系统 -> 终端 -> 程序 -> 终端 -> 屏幕）抽象为清晰的图表。
-  
-  交互功能：
-  - 静态展示：清晰的 SVG 或 CSS 流程图。
-  - 节点说明：鼠标悬停可查看每个环节的具体解释。
+  Component sơ đồ luồng input/output
+
+  Mục đích:
+  Trực quan hóa "hành trình khứ hồi" (Round Trip) đầy đủ của một phím bấm từ bàn phím vật lý đến hiển thị trên màn hình.
+  Trừu tượng hóa luồng hệ thống phức tạp (bàn phím -> OS -> terminal -> chương trình -> terminal -> màn hình) thành sơ đồ rõ ràng.
+
+  Tính năng tương tác:
+  - Hiển thị tĩnh: sơ đồ SVG/CSS rõ ràng.
+  - Mô tả node: di chuột để xem giải thích chi tiết từng bước.
 -->
 <template>
   <div class="flow-diagram">

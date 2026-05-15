@@ -5,41 +5,41 @@ const round = ref(1)
 const maxRound = 20
 const windowLimit = 4000 
 
-// 模拟数据配置
-const systemPromptTokens = 1000 
-const tokensPerRound = 300 
-const costPer1kTokens = 0.002 
+// Cấu hình dữ liệu mô phỏng
+const systemPromptTokens = 1000
+const tokensPerRound = 300
+const costPer1kTokens = 0.002
 
-// 计算属性
+// Computed properties
 const historyTokens = computed(() => (round.value - 1) * tokensPerRound)
-const currentInputTokens = 200 
+const currentInputTokens = 200
 const totalTokens = computed(() => systemPromptTokens + historyTokens.value + currentInputTokens)
 
-// 是否溢出
+// Kiểm tra tràn cửa sổ
 const isOverflow = computed(() => totalTokens.value > windowLimit)
 const overflowAmount = computed(() => Math.max(0, totalTokens.value - windowLimit))
 const forgottenRounds = computed(() => Math.floor(overflowAmount.value / tokensPerRound))
 
-// 成本计算
+// Tính chi phí
 const currentCost = computed(() => (totalTokens.value / 1000 * costPer1kTokens).toFixed(4))
 
-// 高度计算 (相对于 windowLimit)
+// Tính chiều cao (tương đối so với windowLimit)
 const systemHeight = computed(() => (systemPromptTokens / windowLimit) * 100)
 const inputHeight = computed(() => (currentInputTokens / windowLimit) * 100)
-// History 高度展示逻辑：
-// 我们希望展示"总高度"，即使超过 100%。
-// 父容器会限制显示区域，溢出部分通过视觉暗示。
+// Logic hiển thị chiều cao History:
+// Chúng ta muốn hiển thị "tổng chiều cao", ngay cả khi vượt 100%.
+// Container cha sẽ giới hạn vùng hiển thị, phần tràn được biểu thị bằng hình ảnh.
 const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
 </script>
 
 <template>
   <div class="agent-context-flow">
-    <!-- 1. 顶部统计栏 -->
+    <!-- 1. Thanh thống kê đầu trang -->
     <div class="control-panel">
       <div class="stat-group">
         <div class="stat-item">
           <span class="value">{{ round }}</span>
-          <span class="label">当前轮次</span>
+          <span class="label">Lượt hiện tại</span>
         </div>
         <div class="stat-divider" />
         <div class="stat-item">
@@ -47,19 +47,19 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
             class="value"
             :class="{ error: isOverflow }"
           >{{ totalTokens }}</span>
-          <span class="label">Token 占用</span>
+          <span class="label">Token đang dùng</span>
         </div>
         <div class="stat-divider" />
         <div class="stat-item">
           <span class="value">${{ currentCost }}</span>
-          <span class="label">本轮成本</span>
+          <span class="label">Chi phí lượt này</span>
         </div>
       </div>
     </div>
 
-    <!-- 2. 可视化区域 -->
+    <!-- 2. Khu vực trực quan -->
     <div class="visualization-area">
-      <!-- 上方预留空间给溢出提示 -->
+      <!-- Chừa khoảng trống phía trên cho thông báo tràn -->
       <div class="overflow-zone">
         <transition name="fade">
           <div
@@ -67,28 +67,28 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
             class="overflow-badge"
           >
             <span class="icon">🗑️</span>
-            <span>溢出截断：前 {{ forgottenRounds }} 轮对话已被遗忘！</span>
+            <span>Tràn cửa sổ: {{ forgottenRounds }} lượt hội thoại đầu đã bị quên!</span>
           </div>
           <div
             v-else
             class="safe-badge"
           >
             <span class="icon">✅</span>
-            <span>记忆完整</span>
+            <span>Trí nhớ còn nguyên</span>
           </div>
         </transition>
       </div>
 
-      <!-- 窗口容器 -->
+      <!-- Khung context window -->
       <div class="window-frame">
         <div class="limit-line">
           <span>Context Window Limit ({{ windowLimit }})</span>
         </div>
 
-        <!-- 堆叠内容容器 -->
-        <!-- 使用 flex-direction: column-reverse 让底部对齐 -->
+        <!-- Container xếp chồng nội dung -->
+        <!-- Dùng flex-direction: column-reverse để căn đáy -->
         <div class="stack-container">
-          <!-- System (基座) -->
+          <!-- System (lớp nền) -->
           <div
             class="block system"
             :style="{ height: `${systemHeight}%` }"
@@ -96,7 +96,7 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
             <span class="block-text">System Prompt ({{ systemPromptTokens }})</span>
           </div>
 
-          <!-- History (中间) -->
+          <!-- History (ở giữa) -->
           <div
             class="block history"
             :style="{ height: `${historyHeight}%` }"
@@ -107,17 +107,17 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
             >
               History ({{ round - 1 }} rounds)
             </span>
-            <!-- 溢出遮罩：当溢出时，History 的底部实际上是被“挤出去”的 -->
-            <!-- 但为了可视化简单，我们让顶部溢出。或者，我们让整个 stack 向上移动？ -->
-            <!-- 修正逻辑：Context Window 只有那么大。内容是先进先出。 -->
-            <!-- 所以 System 永远在。History 的旧内容被挤出。New 在最上。 -->
-            <!-- 这里的可视化：如果不溢出，自底向上堆叠。 -->
-            <!-- 如果溢出，System 在底，New 在顶，History 中间部分被挤压/溢出？ -->
-            <!-- 不，真实的 LLM 是滑动窗口。System 通常是 Pinned。 -->
-            <!-- 让我们展示“总量”超过“窗口”。 -->
+            <!-- Mặt nạ tràn: khi tràn, phần đáy của History thực ra bị "đẩy ra ngoài" -->
+            <!-- Nhưng để trực quan đơn giản, ta cho phần đỉnh tràn. Hoặc đẩy cả stack lên? -->
+            <!-- Logic chuẩn: Context Window chỉ có vậy. Nội dung vào trước, ra trước. -->
+            <!-- Nên System luôn còn. Phần cũ của History bị đẩy ra. New ở trên cùng. -->
+            <!-- Trực quan ở đây: nếu không tràn, xếp từ dưới lên. -->
+            <!-- Nếu tràn, System ở đáy, New ở đỉnh, phần History ở giữa bị ép/tràn? -->
+            <!-- Không, LLM thật là sliding window. System thường được ghim. -->
+            <!-- Hãy minh hoạ "tổng dung lượng" vượt "kích thước cửa sổ". -->
           </div>
 
-          <!-- Input (最新) -->
+          <!-- Input (mới nhất) -->
           <div
             class="block input"
             :style="{ height: `${inputHeight}%` }"
@@ -126,17 +126,17 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
           </div>
         </div>
         
-        <!-- 溢出遮罩层：如果 totalHeight > 100%，显示一个红色的遮罩在顶部，表示这部分虽然生成了但塞不进去/或者旧的被挤走了 -->
-        <!-- 为了简化，我们让 stack-container 的高度允许超过 100%，然后 window-frame overflow: hidden -->
-        <!-- 但这样用户看不到溢出了多少。 -->
-        <!-- 更好的方式：window-frame 是视口。stack-container 绝对定位。 -->
+        <!-- Lớp mặt nạ tràn: nếu totalHeight > 100%, hiển thị một lớp phủ đỏ ở phía trên để cho thấy phần đó đã sinh ra nhưng không nhét được, hoặc phần cũ bị đẩy đi. -->
+        <!-- Cho đơn giản, ta cho phép chiều cao của stack-container vượt 100%, rồi đặt window-frame overflow: hidden. -->
+        <!-- Nhưng như vậy người dùng không thấy bị tràn bao nhiêu. -->
+        <!-- Cách tốt hơn: window-frame là viewport, stack-container đặt position: absolute. -->
       </div>
     </div>
 
-    <!-- 3. 底部控制 -->
+    <!-- 3. Khu vực điều khiển phía dưới -->
     <div class="input-section">
       <div class="slider-wrapper">
-        <span class="slider-hint">拖动滑块增加对话轮次：</span>
+        <span class="slider-hint">Bạn kéo thanh trượt để tăng số lượt hội thoại:</span>
         <input 
           v-model.number="round" 
           type="range" 
@@ -145,21 +145,21 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
           class="custom-slider"
         >
         <div class="slider-labels">
-          <span>第 1 轮</span>
-          <span>第 {{ maxRound }} 轮</span>
+          <span>Lượt 1</span>
+          <span>Lượt {{ maxRound }}</span>
         </div>
       </div>
       
       <div class="info-box">
         <p v-if="!isOverflow">
-          💡 <strong>一切正常</strong>：当前 Token 数 ({{ totalTokens }}) 未超过窗口限制。模型能完美回忆起所有对话细节。
+          💡 <strong>Vẫn ổn nhé bạn</strong>: tổng số Token hiện tại ({{ totalTokens }}) chưa vượt context window. Mô hình vẫn nhớ trọn vẹn mọi chi tiết của cuộc hội thoại.
         </p>
         <p
           v-else
           class="warning-text"
         >
-          ⚠️ <strong>发生遗忘</strong>：Token 总量 ({{ totalTokens }}) 已超过窗口限制 ({{ windowLimit }})。
-          为了放入新对话，系统被迫丢弃了最早的 <strong>{{ forgottenRounds }}</strong> 轮历史记录。
+          ⚠️ <strong>Đã xảy ra "quên"</strong>: tổng số Token ({{ totalTokens }}) đã vượt context window ({{ windowLimit }}).
+          Để nhồi thêm hội thoại mới, hệ thống buộc phải bỏ đi <strong>{{ forgottenRounds }}</strong> lượt lịch sử cũ nhất.
         </p>
       </div>
     </div>
@@ -175,7 +175,7 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
   margin: 0.5rem 0;
 }
 
-/* 1. 顶部统计栏 */
+/* 1. Thanh thống kê đầu */
 .control-panel {
   padding: 1.25rem;
   background: var(--vp-c-bg);
@@ -217,10 +217,10 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
   background-color: var(--vp-c-divider);
 }
 
-/* 2. 可视化区域 */
+/* 2. Khu vực trực quan */
 .visualization-area {
   padding: 1rem 2rem;
-  background-color: var(--vp-c-bg-alt); /* 稍微深一点的背景 */
+  background-color: var(--vp-c-bg-alt); /* Nền hơi đậm hơn một chút */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -256,16 +256,16 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
 
 .window-frame {
   width: 100%;
-  max-width: 300px; /* 限制宽度，像手机屏幕 */
+  max-width: 300px; /* Giới hạn chiều rộng cho giống màn hình điện thoại */
   height: 300px;
   border: 2px solid var(--vp-c-divider);
-  border-top: 2px dashed var(--vp-c-red); /* 顶部虚线表示 Limit */
+  border-top: 2px dashed var(--vp-c-red); /* Đường nét đứt phía trên biểu thị Limit */
   border-radius: 0 0 8px 8px;
   background: var(--vp-c-bg);
   position: relative;
   display: flex;
-  flex-direction: column-reverse; /* 底部对齐 */
-  overflow: visible; /* 允许溢出显示 */
+  flex-direction: column-reverse; /* Căn theo đáy */
+  overflow: visible; /* Cho phép hiển thị phần tràn */
 }
 
 .limit-line {
@@ -289,8 +289,8 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column-reverse; /* 让 System 在最底 */
-  /* 这里不设 overflow: hidden，让它自然溢出，但是我们通过高度控制 */
+  flex-direction: column-reverse; /* Để System nằm dưới cùng */
+  /* Không đặt overflow: hidden ở đây, để nó tràn tự nhiên, ta kiểm soát qua chiều cao */
 }
 
 .block {
@@ -313,12 +313,12 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
 
 .block.system {
   background-color: #10b981; /* Green */
-  flex-shrink: 0; /* System 不会被压缩 */
+  flex-shrink: 0; /* System không bao giờ bị nén */
 }
 
 .block.history {
   background-color: #3b82f6; /* Blue */
-  /* 溢出逻辑：当高度增加时，history 会向上顶 */
+  /* Logic tràn: khi chiều cao tăng, history sẽ bị đẩy lên trên */
 }
 
 .block.input {
@@ -326,11 +326,11 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
   flex-shrink: 0;
 }
 
-/* 溢出样式处理 */
-/* 当总高度超过 100% 时，stack-container 会溢出 window-frame */
-/* 我们希望溢出的部分变红或者虚化 */
+/* Xử lý style khi tràn */
+/* Khi tổng chiều cao vượt 100%, stack-container sẽ tràn ra ngoài window-frame */
+/* Mong muốn phần tràn được tô đỏ hoặc mờ đi */
 
-/* 3. 底部控制 */
+/* 3. Khu vực điều khiển phía dưới */
 .input-section {
   padding: 1.25rem;
   background: var(--vp-c-bg);
@@ -381,7 +381,7 @@ const historyHeight = computed(() => (historyTokens.value / windowLimit) * 100)
   color: var(--vp-c-red-text);
 }
 
-/* 移动端适配 */
+/* Tương thích thiết bị di động */
 @media (max-width: 640px) {
   .stat-group {
     gap: 0.5rem;

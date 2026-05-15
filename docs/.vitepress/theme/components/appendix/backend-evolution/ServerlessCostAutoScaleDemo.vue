@@ -1,22 +1,22 @@
 <!--
   ServerlessCostAutoScaleDemo.vue
-  Serverless 成本与弹性对比演示
+  Demo so sánh chi phí và độ co giãn của Serverless
 -->
 <template>
   <div class="serverless-demo">
     <div class="header">
       <div class="title">
-        Serverless：按需付费 + 自动扩缩
+        Serverless: trả phí theo nhu cầu + auto scale
       </div>
       <div class="subtitle">
-        调整调用量与耗时，比较固定服务器成本
+        Điều chỉnh số lần gọi và thời gian, so sánh với chi phí server cố định
       </div>
     </div>
 
     <div class="controls">
       <div class="control">
         <label>
-          日请求量：<strong>{{ dailyRequests.toLocaleString() }}</strong>
+          Số request/ngày: <strong>{{ dailyRequests.toLocaleString() }}</strong>
         </label>
         <input
           v-model="dailyRequests"
@@ -28,7 +28,7 @@
       </div>
       <div class="control">
         <label>
-          平均耗时：<strong>{{ durationMs }} ms</strong>
+          Thời gian xử lý trung bình: <strong>{{ durationMs }} ms</strong>
         </label>
         <input
           v-model="durationMs"
@@ -40,7 +40,7 @@
       </div>
       <div class="control">
         <label>
-          峰值并发：<strong>{{ peakRps }}</strong> rps
+          Concurrency đỉnh: <strong>{{ peakRps }}</strong> rps
         </label>
         <input
           v-model="peakRps"
@@ -55,31 +55,31 @@
     <div class="cards">
       <div class="card">
         <div class="card-title">
-          Serverless 估算
+          Ước tính Serverless
         </div>
         <div class="card-value">
           ${{ serverlessCost }}
         </div>
         <div class="card-desc">
-          按量计费（示意）
+          Tính phí theo lượng dùng (minh họa)
         </div>
       </div>
       <div class="card">
         <div class="card-title">
-          固定服务器
+          Server cố định
         </div>
         <div class="card-value">
           ${{ serverCost }}
         </div>
         <div class="card-desc">
-          需预留 {{ requiredServers }} 台服务器
+          Cần dự trữ {{ requiredServers }} server
         </div>
       </div>
     </div>
 
     <div class="autoscale">
       <div class="label">
-        扩缩容状态
+        Trạng thái auto scale
       </div>
       <div class="scale-bar">
         <div
@@ -119,9 +119,9 @@ const scalePercent = computed(() =>
 )
 
 const scaleHint = computed(() => {
-  if (peakRps.value < 500) return '流量低：几乎不需要常驻资源'
-  if (peakRps.value < 2500) return '流量中：自动扩缩更省钱'
-  return '流量高：Serverless 仍可弹性扩展'
+  if (peakRps.value < 500) return 'Traffic thấp: gần như không cần tài nguyên thường trực'
+  if (peakRps.value < 2500) return 'Traffic vừa: auto scale tiết kiệm hơn'
+  return 'Traffic cao: Serverless vẫn co giãn linh hoạt được'
 })
 </script>
 

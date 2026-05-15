@@ -1,23 +1,23 @@
 <!--
   FileUploadFlowDemo.vue
-  文件上传流程演示：直传 vs 服务端中转
+  Demo luồng upload file: direct upload vs upload qua server
 -->
 <template>
   <div class="upload-flow-demo">
     <div class="header">
-      <div class="title">文件上传方式对比</div>
-      <div class="subtitle">点击切换查看两种上传方式的流程差异</div>
+      <div class="title">So sánh các cách upload file</div>
+      <div class="subtitle">Bấm để xem khác biệt giữa hai cách upload</div>
     </div>
 
     <div class="mode-tabs">
       <button
         :class="['tab', { active: mode === 'proxy' }]"
         @click="mode = 'proxy'; reset()"
-      >服务端中转</button>
+      >Qua server</button>
       <button
         :class="['tab', { active: mode === 'direct' }]"
         @click="mode = 'direct'; reset()"
-      >客户端直传</button>
+      >Client upload thẳng</button>
     </div>
 
     <div class="flow-steps">
@@ -36,15 +36,15 @@
     </div>
 
     <button class="play-btn" @click="playFlow" :disabled="playing">
-      {{ playing ? '演示中...' : '播放流程' }}
+      {{ playing ? 'Đang chạy...' : 'Chạy luồng' }}
     </button>
 
     <div :class="['verdict', mode]" v-if="currentStep >= currentSteps.length">
       <template v-if="mode === 'proxy'">
-        ⚠️ 服务端中转：文件经过你的服务器，占用带宽和内存，大文件容易超时
+        ⚠️ Upload qua server: file đi qua server của bạn, tốn băng thông và RAM, file lớn dễ bị timeout
       </template>
       <template v-else>
-        ✅ 客户端直传：文件直接上传到 OSS，服务器只负责签发凭证，高效且省资源
+        ✅ Client upload thẳng: file đi thẳng lên object storage, server chỉ cấp credential, hiệu quả và tiết kiệm tài nguyên
       </template>
     </div>
   </div>
@@ -58,18 +58,18 @@ const currentStep = ref(-1)
 const playing = ref(false)
 
 const proxySteps = [
-  { title: '客户端 → 服务器', desc: '用户选择文件，上传到你的后端服务器', note: '大文件会占用服务器带宽和内存' },
-  { title: '服务器接收文件', desc: '后端将文件暂存到本地磁盘或内存', note: '可能触发 Nginx 的 body size 限制' },
-  { title: '服务器 → OSS', desc: '后端再将文件转发到对象存储', note: '文件传输了两次，效率低' },
-  { title: 'OSS 返回 URL', desc: '对象存储返回文件的访问地址', note: '' },
-  { title: '服务器 → 客户端', desc: '后端将文件 URL 返回给前端', note: '' }
+  { title: 'Client → Server', desc: 'User chọn file rồi upload lên backend của bạn', note: 'File lớn sẽ chiếm băng thông và RAM của server' },
+  { title: 'Server nhận file', desc: 'Backend lưu tạm file vào disk hoặc RAM', note: 'Có thể đụng giới hạn body size của Nginx' },
+  { title: 'Server → Object storage', desc: 'Backend forward file lên object storage', note: 'File truyền hai lần, kém hiệu quả' },
+  { title: 'Object storage trả URL', desc: 'Object storage trả về địa chỉ truy cập file', note: '' },
+  { title: 'Server → Client', desc: 'Backend trả URL file về cho frontend', note: '' }
 ]
 
 const directSteps = [
-  { title: '客户端 → 服务器', desc: '前端请求一个临时上传凭证（Pre-signed URL）', note: '只传少量 JSON 数据，毫秒级' },
-  { title: '服务器签发凭证', desc: '后端用 OSS SDK 生成带签名的临时上传 URL', note: '凭证有效期通常 5-15 分钟' },
-  { title: '客户端 → OSS', desc: '前端直接将文件上传到对象存储', note: '文件不经过你的服务器，节省带宽' },
-  { title: 'OSS 回调通知', desc: '上传完成后 OSS 回调你的服务器确认', note: '服务器记录文件元信息到数据库' }
+  { title: 'Client → Server', desc: 'Frontend xin một credential upload tạm (Pre-signed URL)', note: 'Chỉ truyền vài JSON nhỏ, mất vài ms' },
+  { title: 'Server cấp credential', desc: 'Backend dùng SDK của object storage để tạo URL upload có chữ ký', note: 'Credential thường có hạn 5-15 phút' },
+  { title: 'Client → Object storage', desc: 'Frontend upload file thẳng lên object storage', note: 'File không đi qua server của bạn, tiết kiệm băng thông' },
+  { title: 'Object storage callback', desc: 'Upload xong, object storage callback về server để xác nhận', note: 'Server ghi metadata file vào database' }
 ]
 
 const currentSteps = computed(() => mode.value === 'proxy' ? proxySteps : directSteps)

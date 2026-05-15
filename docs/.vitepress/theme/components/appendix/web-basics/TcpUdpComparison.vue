@@ -10,7 +10,7 @@
             TCP
           </div>
           <div class="protocol-subtitle">
-            传输控制协议
+            Transmission Control Protocol
           </div>
         </div>
 
@@ -20,7 +20,7 @@
               ✓
             </div>
             <div class="feature-text">
-              可靠传输
+              Truyền tin cậy
             </div>
           </div>
           <div class="feature-item good">
@@ -28,7 +28,7 @@
               ✓
             </div>
             <div class="feature-text">
-              面向连接
+              Hướng kết nối
             </div>
           </div>
           <div class="feature-item good">
@@ -36,7 +36,7 @@
               ✓
             </div>
             <div class="feature-text">
-              流量控制
+              Kiểm soát luồng
             </div>
           </div>
           <div class="feature-item good">
@@ -44,7 +44,7 @@
               ✓
             </div>
             <div class="feature-text">
-              拥塞控制
+              Kiểm soát tắc nghẽn
             </div>
           </div>
           <div class="feature-item bad">
@@ -52,7 +52,7 @@
               ✗
             </div>
             <div class="feature-text">
-              速度较慢
+              Tốc độ chậm hơn
             </div>
           </div>
           <div class="feature-item bad">
@@ -60,25 +60,25 @@
               ✗
             </div>
             <div class="feature-text">
-              开销较大
+              Chi phí cao hơn
             </div>
           </div>
         </div>
 
         <div class="protocol-example">
           <div class="example-title">
-            应用场景
+            Trường hợp sử dụng
           </div>
           <div class="example-tags">
-            <span class="tag">网页浏览</span>
-            <span class="tag">文件传输</span>
-            <span class="tag">邮件发送</span>
+            <span class="tag">Duyệt web</span>
+            <span class="tag">Truyền file</span>
+            <span class="tag">Gửi email</span>
           </div>
         </div>
 
         <div class="handshake-demo">
           <div class="demo-title">
-            三次握手
+            Bắt tay ba bước
           </div>
           <div class="handshake-steps">
             <div
@@ -119,7 +119,7 @@
             class="demo-btn"
             @click="startTcpHandshake"
           >
-            {{ tcpStep === 0 ? '演示握手' : '重新演示' }}
+            {{ tcpStep === 0 ? 'Demo bắt tay' : 'Chạy lại demo' }}
           </button>
         </div>
       </div>
@@ -133,7 +133,7 @@
             UDP
           </div>
           <div class="protocol-subtitle">
-            用户数据报协议
+            User Datagram Protocol
           </div>
         </div>
 
@@ -143,7 +143,7 @@
               ✓
             </div>
             <div class="feature-text">
-              快速传输
+              Truyền nhanh
             </div>
           </div>
           <div class="feature-item good">
@@ -151,7 +151,7 @@
               ✓
             </div>
             <div class="feature-text">
-              开销小
+              Chi phí thấp
             </div>
           </div>
           <div class="feature-item good">
@@ -159,7 +159,7 @@
               ✓
             </div>
             <div class="feature-text">
-              无连接
+              Không cần kết nối
             </div>
           </div>
           <div class="feature-item good">
@@ -167,7 +167,7 @@
               ✓
             </div>
             <div class="feature-text">
-              支持多播
+              Hỗ trợ multicast
             </div>
           </div>
           <div class="feature-item bad">
@@ -175,7 +175,7 @@
               ✗
             </div>
             <div class="feature-text">
-              不可靠
+              Không tin cậy
             </div>
           </div>
           <div class="feature-item bad">
@@ -183,25 +183,25 @@
               ✗
             </div>
             <div class="feature-text">
-              可能丢包
+              Có thể mất gói
             </div>
           </div>
         </div>
 
         <div class="protocol-example">
           <div class="example-title">
-            应用场景
+            Trường hợp sử dụng
           </div>
           <div class="example-tags">
-            <span class="tag">视频直播</span>
-            <span class="tag">在线游戏</span>
-            <span class="tag">语音通话</span>
+            <span class="tag">Live stream</span>
+            <span class="tag">Game online</span>
+            <span class="tag">Gọi thoại</span>
           </div>
         </div>
 
         <div class="handshake-demo">
           <div class="demo-title">
-            直接发送
+            Gửi thẳng
           </div>
           <div class="handshake-steps">
             <div class="step direct">
@@ -209,7 +209,7 @@
                 →
               </div>
               <div class="step-text">
-                直接发送数据
+                Gửi dữ liệu trực tiếp
               </div>
             </div>
           </div>
@@ -217,7 +217,7 @@
             class="demo-btn"
             @click="sendUdpData"
           >
-            {{ udpSent ? '再发一次' : '发送数据' }}
+            {{ udpSent ? 'Gửi lại lần nữa' : 'Gửi dữ liệu' }}
           </button>
         </div>
       </div>
@@ -227,41 +227,41 @@
       <table>
         <thead>
           <tr>
-            <th>特性</th>
+            <th>Đặc điểm</th>
             <th>TCP</th>
             <th>UDP</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>连接</td>
-            <td>面向连接</td>
-            <td>无连接</td>
+            <td>Kết nối</td>
+            <td>Hướng kết nối</td>
+            <td>Không kết nối</td>
           </tr>
           <tr>
-            <td>可靠性</td>
-            <td>可靠（确认重传）</td>
-            <td>不可靠（尽最大努力）</td>
+            <td>Độ tin cậy</td>
+            <td>Tin cậy (ACK và gửi lại)</td>
+            <td>Không tin cậy (best-effort)</td>
           </tr>
           <tr>
-            <td>速度</td>
-            <td>较慢</td>
-            <td>很快</td>
+            <td>Tốc độ</td>
+            <td>Chậm hơn</td>
+            <td>Rất nhanh</td>
           </tr>
           <tr>
-            <td>开销</td>
-            <td>高（20字节头部）</td>
-            <td>低（8字节头部）</td>
+            <td>Chi phí</td>
+            <td>Cao (header 20 byte)</td>
+            <td>Thấp (header 8 byte)</td>
           </tr>
           <tr>
-            <td>流量控制</td>
-            <td>有（滑动窗口）</td>
-            <td>无</td>
+            <td>Kiểm soát luồng</td>
+            <td>Có (sliding window)</td>
+            <td>Không có</td>
           </tr>
           <tr>
-            <td>应用</td>
+            <td>Ứng dụng</td>
             <td>HTTP, FTP, SMTP, SSH</td>
-            <td>DNS, DHCP, 视频流</td>
+            <td>DNS, DHCP, video stream</td>
           </tr>
         </tbody>
       </table>
@@ -269,7 +269,7 @@
 
     <div class="real-world-example">
       <div class="example-title">
-        🎬 实际应用示例
+        🎬 Ví dụ ứng dụng thực tế
       </div>
       <div class="scenario-grid">
         <div class="scenario">
@@ -277,11 +277,11 @@
             📺
           </div>
           <div class="scenario-name">
-            视频直播
+            Live stream video
           </div>
           <div class="scenario-desc">
-            使用 <strong>UDP</strong>，因为： <br>• 丢几帧没关系，关键是实时
-            <br>• 重传会造成延迟和卡顿
+            Dùng <strong>UDP</strong>, vì: <br>• Mất vài frame không sao, quan trọng là realtime
+            <br>• Truyền lại sẽ gây trễ và giật lag
           </div>
         </div>
         <div class="scenario">
@@ -289,11 +289,11 @@
             🌐
           </div>
           <div class="scenario-name">
-            网页浏览
+            Duyệt web
           </div>
           <div class="scenario-desc">
-            使用 <strong>TCP</strong>，因为： <br>• 内容必须完整准确 <br>•
-            丢失任何数据都不可接受
+            Dùng <strong>TCP</strong>, vì: <br>• Nội dung phải toàn vẹn và chính xác <br>•
+            Không chấp nhận mất bất kỳ dữ liệu nào
           </div>
         </div>
         <div class="scenario">
@@ -301,11 +301,11 @@
             🎮
           </div>
           <div class="scenario-name">
-            在线游戏
+            Game online
           </div>
           <div class="scenario-desc">
-            使用 <strong>UDP</strong>，因为： <br>• 响应速度比准确更重要
-            <br>• 实时同步玩家位置
+            Dùng <strong>UDP</strong>, vì: <br>• Tốc độ phản hồi quan trọng hơn độ chính xác
+            <br>• Đồng bộ vị trí người chơi theo thời gian thực
           </div>
         </div>
         <div class="scenario">
@@ -313,11 +313,11 @@
             📧
           </div>
           <div class="scenario-name">
-            邮件发送
+            Gửi email
           </div>
           <div class="scenario-desc">
-            使用 <strong>TCP</strong>，因为： <br>• 邮件内容不能丢失 <br>•
-            可靠性是第一要务
+            Dùng <strong>TCP</strong>, vì: <br>• Nội dung email không được phép mất <br>•
+            Độ tin cậy là ưu tiên số một
           </div>
         </div>
       </div>

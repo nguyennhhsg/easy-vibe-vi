@@ -1,24 +1,24 @@
 <!--
   PeakShavingDemo.vue
-  削峰填谷演示 - 流量缓冲可视化
+  Demo peak shaving - trực quan hóa buffer traffic
 -->
 <template>
   <div class="peak-shaving-demo">
     <div class="header">
       <div class="title">
-        削峰填谷：把高峰"摊平"
+        Peak shaving: "san phẳng" đỉnh traffic
       </div>
       <div class="subtitle">
-        模拟流量突增场景，观察队列如何保护后端系统
+        Mô phỏng kịch bản traffic đột tăng, quan sát cách queue bảo vệ hệ thống backend
       </div>
     </div>
 
     <div class="main-layout">
-      <!-- 左侧：控制面板 -->
+      <!-- Bên trái: bảng điều khiển -->
       <div class="controls-panel">
         <div class="control-group">
           <div class="label-row">
-            <span class="label">处理能力 (Consumer)</span>
+            <span class="label">Năng lực xử lý (consumer)</span>
             <span class="value">{{ processRate }} req/s</span>
           </div>
           <input
@@ -30,13 +30,13 @@
             class="range-input process-range"
           >
           <div class="desc">
-            后端系统的最大处理速度
+            Tốc độ xử lý tối đa của hệ thống backend
           </div>
         </div>
 
         <div class="control-group">
           <div class="label-row">
-            <span class="label">队列容量 (Queue Size)</span>
+            <span class="label">Dung lượng queue</span>
             <span class="value">{{ queueCapacity }}</span>
           </div>
           <input
@@ -48,7 +48,7 @@
             class="range-input queue-range"
           >
           <div class="desc">
-            消息队列能暂存的最大请求数
+            Số lượng request tối đa message queue có thể giữ tạm
           </div>
         </div>
 
@@ -58,24 +58,24 @@
             :disabled="isBursting"
             @click="triggerBurst"
           >
-            ⚡️ 模拟秒杀流量突增
+            ⚡️ Mô phỏng traffic flash sale đột tăng
           </button>
           <button
             class="action-btn reset-btn"
             @click="reset"
           >
-            🔄 重置系统
+            🔄 Reset hệ thống
           </button>
         </div>
       </div>
 
-      <!-- 右侧：实时监控 -->
+      <!-- Bên phải: monitor realtime -->
       <div class="monitor-panel">
-        <!-- 状态指标卡片 -->
+        <!-- Card chỉ số trạng thái -->
         <div class="metrics-grid">
           <div class="metric-item">
             <div class="m-label">
-              当前入站流量
+              Traffic vào hiện tại
             </div>
             <div class="m-value blue">
               {{ currentRequestRate }} <span class="unit">req/s</span>
@@ -83,7 +83,7 @@
           </div>
           <div class="metric-item">
             <div class="m-label">
-              队列积压量
+              Số message tồn trong queue
             </div>
             <div class="m-value orange">
               {{ queueLength }} <span class="unit">msgs</span>
@@ -97,7 +97,7 @@
           </div>
           <div class="metric-item">
             <div class="m-label">
-              实际处理速率
+              Tốc độ xử lý thực tế
             </div>
             <div class="m-value green">
               {{ currentProcessRate }} <span class="unit">req/s</span>
@@ -105,7 +105,7 @@
           </div>
           <div class="metric-item">
             <div class="m-label">
-              丢弃请求 (限流)
+              Request bị drop (rate limit)
             </div>
             <div class="m-value red">
               {{ rejectedCount }} <span class="unit">req</span>
@@ -113,7 +113,7 @@
           </div>
         </div>
 
-        <!-- 实时图表 -->
+        <!-- Biểu đồ realtime -->
         <div class="chart-container">
           <canvas
             ref="chartCanvas"
@@ -121,9 +121,9 @@
             height="200"
           />
           <div class="chart-legend">
-            <span class="legend-item"><span class="dot blue" />入站流量 (用户请求)</span>
-            <span class="legend-item"><span class="dot green" />处理流量 (系统负载)</span>
-            <span class="legend-item"><span class="dot orange" />队列积压</span>
+            <span class="legend-item"><span class="dot blue" />Traffic vào (request người dùng)</span>
+            <span class="legend-item"><span class="dot green" />Traffic xử lý (tải hệ thống)</span>
+            <span class="legend-item"><span class="dot orange" />Tồn queue</span>
           </div>
         </div>
       </div>
@@ -134,10 +134,10 @@
         💡
       </div>
       <div class="tip-content">
-        <strong>核心原理：</strong>
-        当<strong>入站流量</strong>（蓝色）超过<strong>处理能力</strong>（绿色直线）时，多余的请求会被存入<strong>消息队列</strong>（橙色区域）。
+        <strong>Nguyên lý cốt lõi:</strong>
+        Khi <strong>traffic vào</strong> (màu xanh) vượt quá <strong>năng lực xử lý</strong> (đường xanh lá), request dư thừa sẽ được lưu vào <strong>message queue</strong> (vùng cam).
         <br>
-        一旦流量高峰过去，系统会继续全速处理队列中的积压，直到队列清空。这就是"削峰填谷"。
+        Khi đỉnh traffic qua đi, hệ thống tiếp tục xử lý toàn lực số tồn trong queue cho đến khi queue trống. Đây chính là "peak shaving".
       </div>
     </div>
   </div>
@@ -146,45 +146,45 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-// 核心状态
-const processRate = ref(200) // 消费速率 (req/s)
-const queueCapacity = ref(2000) // 队列容量
-const queueLength = ref(0) // 当前队列长度
-const rejectedCount = ref(0) // 总丢弃数
+// Trạng thái cốt lõi
+const processRate = ref(200) // Tốc độ consume (req/s)
+const queueCapacity = ref(2000) // Dung lượng queue
+const queueLength = ref(0) // Chiều dài queue hiện tại
+const rejectedCount = ref(0) // Tổng số bị drop
 
-// 实时状态（用于展示和图表）
-const currentRequestRate = ref(100) // 当前产生的请求速率
-const currentProcessRate = ref(0) // 当前实际处理的速率
+// Trạng thái realtime (dùng để hiển thị và vẽ biểu đồ)
+const currentRequestRate = ref(100) // Tốc độ tạo request hiện tại
+const currentProcessRate = ref(0) // Tốc độ xử lý thực tế hiện tại
 const isBursting = ref(false)
 
-// 图表相关
+// Liên quan biểu đồ
 const chartCanvas = ref(null)
 let ctx = null
 let animationFrameId = null
-const historyLength = 300 // 记录最近 N 帧
+const historyLength = 300 // Ghi N frame gần nhất
 const dataHistory = [] // { input, process, queue }
 
-// 模拟循环
+// Vòng lặp mô phỏng
 let lastTime = Date.now()
 const updateLoop = () => {
   const now = Date.now()
   const dt = (now - lastTime) / 1000 // delta time in seconds
   lastTime = now
 
-  // 1. 生成流量 (模拟波动的入站流量)
-  // 如果在突发模式下，流量激增；否则维持在低水位波动
+  // 1. Sinh traffic (mô phỏng traffic vào có dao động)
+  // Trong chế độ burst, traffic tăng đột biến; ngược lại dao động ở mức thấp
   let targetInput = isBursting.value ? 2000 : 100 + Math.random() * 50
 
-  // 平滑过渡入站流量
+  // Chuyển tiếp mượt traffic vào
   const smoothing = 0.1
   currentRequestRate.value = Math.round(
     currentRequestRate.value * (1 - smoothing) + targetInput * smoothing
   )
 
-  // 2. 计算本帧新增请求
-  const newRequests = Math.round(currentRequestRate.value * dt * 10) // 放大系数以便观察
+  // 2. Tính số request mới trong frame này
+  const newRequests = Math.round(currentRequestRate.value * dt * 10) // Hệ số phóng đại để dễ quan sát
 
-  // 3. 入队逻辑
+  // 3. Logic enqueue
   const availableSpace = queueCapacity.value - queueLength.value
   const accepted = Math.min(newRequests, availableSpace)
   const rejected = newRequests - accepted
@@ -192,18 +192,18 @@ const updateLoop = () => {
   queueLength.value += accepted
   rejectedCount.value += rejected
 
-  // 4. 处理逻辑 (出队)
-  // 实际处理速率取决于：队列里有多少货，以及处理能力上限
-  // 如果队列足够多，就满负荷处理；否则只处理队列里有的
+  // 4. Logic xử lý (dequeue)
+  // Tốc độ xử lý thực tế phụ thuộc: queue có bao nhiêu hàng và giới hạn năng lực xử lý
+  // Nếu queue đủ nhiều, xử lý full tải; ngược lại chỉ xử lý số có trong queue
   const maxProcessable = Math.round(processRate.value * dt * 10)
   const processed = Math.min(queueLength.value, maxProcessable)
 
   queueLength.value -= processed
 
-  // 计算瞬时处理速率 (用于显示)
+  // Tính tốc độ xử lý tức thời (để hiển thị)
   currentProcessRate.value = Math.round(processed / (dt * 10))
 
-  // 5. 记录历史数据用于绘图
+  // 5. Ghi dữ liệu lịch sử dùng cho biểu đồ
   dataHistory.push({
     input: currentRequestRate.value,
     process: currentProcessRate.value,
@@ -219,43 +219,38 @@ const updateLoop = () => {
   animationFrameId = requestAnimationFrame(updateLoop)
 }
 
-// 绘图逻辑
+// Logic vẽ
 const drawChart = () => {
   if (!ctx || !chartCanvas.value) return
 
-  // 动态调整画布大小以匹配显示尺寸（解决模糊和拉伸问题）
+  // Điều chỉnh kích thước canvas khớp kích thước hiển thị (giải quyết blur và stretch)
   const canvas = chartCanvas.value
   const dpr = window.devicePixelRatio || 1
   const rect = canvas.getBoundingClientRect()
 
-  // 只有当尺寸变化时才重置 canvas 尺寸
+  // Chỉ reset kích thước canvas khi size thay đổi
   if (
     canvas.width !== rect.width * dpr ||
     canvas.height !== rect.height * dpr
   ) {
     canvas.width = rect.width * dpr
     canvas.height = rect.height * dpr
-    // 缩放上下文以适配 DPR
+    // Scale context để khớp DPR
     ctx.scale(dpr, dpr)
   }
 
-  // 逻辑宽高（CSS像素）
+  // Width/height logic (pixel CSS)
   const width = rect.width
   const height = rect.height
 
-  // 必须清除整个物理画布区域
-  ctx.clearRect(0, 0, width, height) // 由于 scale 了，这里用逻辑宽高即可吗？
-  // 不，clearRect 受 scale 影响。所以 clearRect(0,0, width, height) 是对的。
-  // 但是为了安全，通常建议用 save/restore 或者直接重置 transform 清除。
-  // 简单起见，我们假设 ctx.scale 已经生效。
-
-  // 实际上，最好是在 resize 时只设置一次 scale。
-  // 让我们简化一下：每帧都重置 transform 并清除
+  // Phải clear toàn bộ vùng canvas vật lý
+  ctx.clearRect(0, 0, width, height)
+  // Để an toàn, tốt nhất là reset transform rồi clear
   ctx.setTransform(1, 0, 0, 1, 0, 0)
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   ctx.scale(dpr, dpr)
 
-  // 绘制网格背景
+  // Vẽ background lưới
   ctx.strokeStyle = '#eee'
   ctx.lineWidth = 1
   ctx.beginPath()
@@ -268,15 +263,15 @@ const drawChart = () => {
 
   if (dataHistory.length < 2) return
 
-  // 找出最大值用于Y轴缩放
+  // Tìm giá trị max để scale trục Y
   const maxVal = Math.max(
-    2000, // 固定最小刻度
+    2000, // Mức tối thiểu cố định
     ...dataHistory.map((d) => Math.max(d.input, d.queue))
   )
-  const yScale = (val) => height - (val / maxVal) * height * 0.9 // 留点余量
+  const yScale = (val) => height - (val / maxVal) * height * 0.9 // Chừa một chút khoảng trống
   const xScale = (index) => (index / (historyLength - 1)) * width
 
-  // 1. 绘制队列积压 (填充区域)
+  // 1. Vẽ tồn queue (vùng fill)
   ctx.fillStyle = 'rgba(249, 115, 22, 0.2)' // Orange transparent
   ctx.beginPath()
   ctx.moveTo(0, height)
@@ -286,7 +281,7 @@ const drawChart = () => {
   ctx.lineTo(width, height)
   ctx.fill()
 
-  // 队列线
+  // Đường queue
   ctx.strokeStyle = '#f97316' // Orange
   ctx.lineWidth = 2
   ctx.beginPath()
@@ -296,7 +291,7 @@ const drawChart = () => {
   })
   ctx.stroke()
 
-  // 2. 绘制入站流量 (蓝色线)
+  // 2. Vẽ traffic vào (đường xanh dương)
   ctx.strokeStyle = '#3b82f6' // Blue
   ctx.lineWidth = 2
   ctx.beginPath()
@@ -306,7 +301,7 @@ const drawChart = () => {
   })
   ctx.stroke()
 
-  // 3. 绘制处理流量 (绿色线)
+  // 3. Vẽ traffic xử lý (đường xanh lá)
   ctx.strokeStyle = '#22c55e' // Green
   ctx.lineWidth = 2
   ctx.beginPath()
@@ -317,12 +312,12 @@ const drawChart = () => {
   ctx.stroke()
 }
 
-// 模拟突发流量
+// Mô phỏng burst traffic
 const triggerBurst = () => {
   if (isBursting.value) return
   isBursting.value = true
 
-  // 3秒后恢复
+  // Khôi phục sau 3 giây
   setTimeout(() => {
     isBursting.value = false
   }, 3000)
@@ -349,10 +344,10 @@ const queueColor = computed(() => {
 onMounted(() => {
   if (chartCanvas.value) {
     ctx = chartCanvas.value.getContext('2d')
-    // 解决高清屏模糊
+    // Giải quyết blur trên màn hình HD
     const dpr = window.devicePixelRatio || 1
     const rect = chartCanvas.value.getBoundingClientRect()
-    // 简单处理：这里由于是固定width/height属性，暂时不处理resize
+    // Xử lý đơn giản: do width/height là attribute cố định, tạm thời không xử lý resize
   }
 
   lastTime = Date.now()

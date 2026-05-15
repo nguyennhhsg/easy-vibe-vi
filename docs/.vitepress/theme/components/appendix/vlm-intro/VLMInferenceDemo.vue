@@ -1,6 +1,6 @@
 <!--
   VLMInferenceDemo.vue
-  多模态推理演示
+  Mô phỏng suy luận đa phương thức
 -->
 <template>
   <div class="vlm-chat-demo">
@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="text">
-              这只猫在做什么？
+              Con mèo này đang làm gì vậy bạn?
             </div>
           </div>
         </div>
@@ -37,13 +37,13 @@
               v-if="step === 1"
               class="thinking"
             >
-              <span class="icon">👁️</span> 正在观察图片...
+              <span class="icon">👁️</span> Đang quan sát hình ảnh...
             </div>
             <div
               v-else-if="step === 2"
               class="thinking"
             >
-              <span class="icon">🧠</span> 正在思考...
+              <span class="icon">🧠</span> Đang suy nghĩ...
             </div>
             <div
               v-else
@@ -62,7 +62,7 @@
         :disabled="step > 0 && step < 3"
         @click="startInference"
       >
-        {{ step === 0 || step === 3 ? '发送 (Send)' : '生成中...' }}
+        {{ step === 0 || step === 3 ? 'Gửi (Send)' : 'Đang sinh...' }}
       </button>
     </div>
   </div>
@@ -72,7 +72,7 @@
 import { ref, watch } from 'vue'
 
 const step = ref(0)
-const fullText = '它正趴在窗台上晒太阳，看起来非常惬意。'
+const fullText = 'Nó đang nằm trên bậu cửa sổ phơi nắng, trông rất thư thái.'
 const typedText = ref('')
 
 const startInference = () => {

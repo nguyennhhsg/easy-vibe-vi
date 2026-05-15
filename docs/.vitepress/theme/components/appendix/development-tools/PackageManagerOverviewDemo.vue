@@ -1,8 +1,8 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">包管理器生态地图</span>
-      <span class="subtitle">选择一个语言生态，探索它的包管理工具</span>
+      <span class="title">Bản đồ hệ sinh thái package manager</span>
+      <span class="subtitle">Chọn một hệ sinh thái ngôn ngữ để khám phá các công cụ quản lý package của nó</span>
     </div>
 
     <div class="control-panel">
@@ -39,7 +39,7 @@
 
           <div class="detail-sections">
             <div class="detail-section">
-              <div class="section-label">安装命令</div>
+              <div class="section-label">Lệnh cài đặt</div>
               <div class="cmd-list">
                 <div v-for="(cmd, i) in currentPm.commands" :key="i" class="cmd-row">
                   <span class="cmd-op">{{ cmd.op }}</span>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="detail-section">
-              <div class="section-label">配置文件</div>
+              <div class="section-label">File cấu hình</div>
               <div class="file-list">
                 <div v-for="f in currentPm.files" :key="f.name" class="file-row">
                   <code class="file-name">{{ f.name }}</code>
@@ -59,7 +59,7 @@
             </div>
 
             <div class="detail-section">
-              <div class="section-label">核心特点</div>
+              <div class="section-label">Đặc điểm cốt lõi</div>
               <div class="feature-list">
                 <div v-for="feat in currentPm.features" :key="feat" class="feature-tag">{{ feat }}</div>
               </div>
@@ -67,13 +67,13 @@
           </div>
         </div>
         <div v-else class="pm-placeholder">
-          ← 点击上方卡片查看详情
+          ← Click vào thẻ phía trên để xem chi tiết
         </div>
       </transition>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>包管理器 = 应用商店，帮你下载、安装、管理别人写好的代码（库/包），并自动处理版本兼容问题。
+      <strong>Ý tưởng cốt lõi:</strong> Package manager = app store, giúp bạn tải về, cài đặt, quản lý code do người khác viết sẵn (thư viện/package), và tự xử lý vấn đề tương thích version.
     </div>
   </div>
 </template>
@@ -100,58 +100,58 @@ const allManagers = {
       id: 'npm',
       name: 'npm',
       fullName: 'Node Package Manager',
-      tagline: '最广泛使用，Node.js 自带',
+      tagline: 'Phổ biến nhất, đi kèm Node.js',
       color: '#cc3534',
       commands: [
-        { op: '安装依赖', cmd: 'npm install lodash' },
-        { op: '安装开发依赖', cmd: 'npm install -D typescript' },
-        { op: '运行脚本', cmd: 'npm run build' },
-        { op: '查看已安装', cmd: 'npm list --depth=0' }
+        { op: 'Cài dependency', cmd: 'npm install lodash' },
+        { op: 'Cài dev dependency', cmd: 'npm install -D typescript' },
+        { op: 'Chạy script', cmd: 'npm run build' },
+        { op: 'Xem đã cài', cmd: 'npm list --depth=0' }
       ],
       files: [
-        { name: 'package.json', desc: '项目声明文件，记录依赖和脚本' },
-        { name: 'package-lock.json', desc: '锁定精确版本，保证环境一致' },
-        { name: 'node_modules/', desc: '实际安装的包存放目录' }
+        { name: 'package.json', desc: 'File khai báo dự án, ghi dependency và script' },
+        { name: 'package-lock.json', desc: 'Khóa version chính xác, đảm bảo môi trường nhất quán' },
+        { name: 'node_modules/', desc: 'Thư mục chứa package đã cài thực tế' }
       ],
-      features: ['Node.js 内置', '最大生态(200万+包)', '支持 workspaces', 'npx 直接运行']
+      features: ['Đi kèm Node.js', 'Hệ sinh thái lớn nhất (2 triệu+ package)', 'Hỗ trợ workspaces', 'npx chạy trực tiếp']
     },
     {
       id: 'yarn',
       name: 'Yarn',
       fullName: 'Yet Another Resource Negotiator',
-      tagline: '并行下载快，Plug\'n\'Play 免 node_modules',
+      tagline: 'Tải song song nhanh, Plug\'n\'Play khỏi cần node_modules',
       color: '#2c8ebb',
       commands: [
-        { op: '安装依赖', cmd: 'yarn add lodash' },
-        { op: '安装开发依赖', cmd: 'yarn add -D typescript' },
-        { op: '运行脚本', cmd: 'yarn build' },
-        { op: '查看已安装', cmd: 'yarn list --depth=0' }
+        { op: 'Cài dependency', cmd: 'yarn add lodash' },
+        { op: 'Cài dev dependency', cmd: 'yarn add -D typescript' },
+        { op: 'Chạy script', cmd: 'yarn build' },
+        { op: 'Xem đã cài', cmd: 'yarn list --depth=0' }
       ],
       files: [
-        { name: 'package.json', desc: '与 npm 兼容的项目声明文件' },
-        { name: 'yarn.lock', desc: 'Yarn 专属锁文件，格式更易读' },
-        { name: '.yarnrc.yml', desc: 'Yarn Berry 配置文件' }
+        { name: 'package.json', desc: 'File khai báo dự án, tương thích với npm' },
+        { name: 'yarn.lock', desc: 'Lock file riêng của Yarn, định dạng dễ đọc hơn' },
+        { name: '.yarnrc.yml', desc: 'File cấu hình của Yarn Berry' }
       ],
-      features: ['并行安装更快', 'Plug\'n\'Play 零 node_modules', 'Workspace 原生支持', '离线缓存']
+      features: ['Cài song song nhanh hơn', 'Plug\'n\'Play không cần node_modules', 'Hỗ trợ Workspace gốc', 'Cache offline']
     },
     {
       id: 'pnpm',
       name: 'pnpm',
       fullName: 'Performant npm',
-      tagline: '硬链接共享，节省磁盘，速度最快',
+      tagline: 'Dùng hard link chung, tiết kiệm ổ đĩa, tốc độ nhanh nhất',
       color: '#f9ad00',
       commands: [
-        { op: '安装依赖', cmd: 'pnpm add lodash' },
-        { op: '安装开发依赖', cmd: 'pnpm add -D typescript' },
-        { op: '运行脚本', cmd: 'pnpm run build' },
-        { op: '查看已安装', cmd: 'pnpm list --depth=0' }
+        { op: 'Cài dependency', cmd: 'pnpm add lodash' },
+        { op: 'Cài dev dependency', cmd: 'pnpm add -D typescript' },
+        { op: 'Chạy script', cmd: 'pnpm run build' },
+        { op: 'Xem đã cài', cmd: 'pnpm list --depth=0' }
       ],
       files: [
-        { name: 'package.json', desc: '与 npm 兼容的项目声明文件' },
-        { name: 'pnpm-lock.yaml', desc: 'pnpm 专属锁文件' },
-        { name: '.pnpm-store/', desc: '全局内容寻址存储，跨项目共享' }
+        { name: 'package.json', desc: 'File khai báo dự án, tương thích với npm' },
+        { name: 'pnpm-lock.yaml', desc: 'Lock file riêng của pnpm' },
+        { name: '.pnpm-store/', desc: 'Kho lưu trữ toàn cục theo nội dung, chia sẻ giữa nhiều dự án' }
       ],
-      features: ['磁盘空间最省', '安装速度最快', '严格隔离防幽灵依赖', 'Monorepo 友好']
+      features: ['Tiết kiệm ổ đĩa nhất', 'Cài nhanh nhất', 'Cách ly nghiêm ngặt, chống phantom dependency', 'Thân thiện với monorepo']
     }
   ],
   python: [
@@ -159,55 +159,55 @@ const allManagers = {
       id: 'pip',
       name: 'pip',
       fullName: 'Pip Installs Packages',
-      tagline: 'Python 官方标准，简单直接',
+      tagline: 'Chuẩn chính thức của Python, đơn giản và trực tiếp',
       color: '#3776ab',
       commands: [
-        { op: '安装包', cmd: 'pip install requests' },
-        { op: '安装指定版本', cmd: 'pip install requests==2.28.0' },
-        { op: '导出依赖', cmd: 'pip freeze > requirements.txt' },
-        { op: '批量安装', cmd: 'pip install -r requirements.txt' }
+        { op: 'Cài package', cmd: 'pip install requests' },
+        { op: 'Cài version cụ thể', cmd: 'pip install requests==2.28.0' },
+        { op: 'Export dependency', cmd: 'pip freeze > requirements.txt' },
+        { op: 'Cài hàng loạt', cmd: 'pip install -r requirements.txt' }
       ],
       files: [
-        { name: 'requirements.txt', desc: '依赖列表，每行一个包和版本' },
-        { name: 'setup.py / pyproject.toml', desc: '项目元数据和打包配置' }
+        { name: 'requirements.txt', desc: 'Danh sách dependency, mỗi dòng một package và version' },
+        { name: 'setup.py / pyproject.toml', desc: 'Metadata và cấu hình đóng gói dự án' }
       ],
-      features: ['Python 内置', '使用最广泛', '配合 venv 隔离环境', '简单直接']
+      features: ['Đi kèm Python', 'Được dùng nhiều nhất', 'Kết hợp venv để cách ly môi trường', 'Đơn giản trực tiếp']
     },
     {
       id: 'conda',
       name: 'conda',
       fullName: 'Conda Package Manager',
-      tagline: '科学计算利器，同时管理 Python 版本',
+      tagline: 'Công cụ mạnh cho tính toán khoa học, đồng thời quản lý version Python',
       color: '#44a833',
       commands: [
-        { op: '创建环境', cmd: 'conda create -n myenv python=3.11' },
-        { op: '激活环境', cmd: 'conda activate myenv' },
-        { op: '安装包', cmd: 'conda install numpy' },
-        { op: '导出环境', cmd: 'conda env export > env.yml' }
+        { op: 'Tạo môi trường', cmd: 'conda create -n myenv python=3.11' },
+        { op: 'Kích hoạt môi trường', cmd: 'conda activate myenv' },
+        { op: 'Cài package', cmd: 'conda install numpy' },
+        { op: 'Export môi trường', cmd: 'conda env export > env.yml' }
       ],
       files: [
-        { name: 'environment.yml', desc: '完整环境配置，包含 Python 版本' },
-        { name: '.condarc', desc: 'conda 全局配置文件' }
+        { name: 'environment.yml', desc: 'Cấu hình môi trường đầy đủ, bao gồm version Python' },
+        { name: '.condarc', desc: 'File cấu hình toàn cục của conda' }
       ],
-      features: ['管理 Python 版本', '支持非 Python 包(CUDA等)', '科学计算首选', '跨平台环境复现']
+      features: ['Quản lý version Python', 'Hỗ trợ package non-Python (CUDA, ...)', 'Lựa chọn hàng đầu cho khoa học tính toán', 'Tái tạo môi trường đa nền tảng']
     },
     {
       id: 'uv',
       name: 'uv',
       fullName: 'Ultra-fast Python Package Manager',
-      tagline: 'Rust 编写，比 pip 快 10-100 倍',
+      tagline: 'Viết bằng Rust, nhanh hơn pip 10-100 lần',
       color: '#7c3aed',
       commands: [
-        { op: '安装包', cmd: 'uv pip install requests' },
-        { op: '创建虚拟环境', cmd: 'uv venv' },
-        { op: '同步依赖', cmd: 'uv pip sync requirements.txt' },
-        { op: '运行脚本', cmd: 'uv run python script.py' }
+        { op: 'Cài package', cmd: 'uv pip install requests' },
+        { op: 'Tạo virtual env', cmd: 'uv venv' },
+        { op: 'Đồng bộ dependency', cmd: 'uv pip sync requirements.txt' },
+        { op: 'Chạy script', cmd: 'uv run python script.py' }
       ],
       files: [
-        { name: 'requirements.txt', desc: '与 pip 完全兼容的依赖文件' },
-        { name: 'pyproject.toml', desc: '现代 Python 项目配置标准' }
+        { name: 'requirements.txt', desc: 'File dependency tương thích hoàn toàn với pip' },
+        { name: 'pyproject.toml', desc: 'Chuẩn cấu hình dự án Python hiện đại' }
       ],
-      features: ['Rust 编写极速', '与 pip 完全兼容', '内置虚拟环境管理', '2024年新秀']
+      features: ['Viết bằng Rust cực nhanh', 'Tương thích hoàn toàn với pip', 'Quản lý virtual env tích hợp', 'Tân binh năm 2024']
     }
   ],
   rust: [
@@ -215,39 +215,39 @@ const allManagers = {
       id: 'cargo',
       name: 'Cargo',
       fullName: 'Rust\'s Package Manager & Build System',
-      tagline: 'Rust 官方工具，集构建/测试/发布于一体',
+      tagline: 'Công cụ chính thức của Rust, gói gọn build/test/publish trong một',
       color: '#dea584',
       commands: [
-        { op: '添加依赖', cmd: 'cargo add serde' },
-        { op: '构建项目', cmd: 'cargo build --release' },
-        { op: '运行项目', cmd: 'cargo run' },
-        { op: '运行测试', cmd: 'cargo test' }
+        { op: 'Thêm dependency', cmd: 'cargo add serde' },
+        { op: 'Build dự án', cmd: 'cargo build --release' },
+        { op: 'Chạy dự án', cmd: 'cargo run' },
+        { op: 'Chạy test', cmd: 'cargo test' }
       ],
       files: [
-        { name: 'Cargo.toml', desc: '项目清单，声明依赖和元数据' },
-        { name: 'Cargo.lock', desc: '精确锁定版本，应用项目必须提交' }
+        { name: 'Cargo.toml', desc: 'Manifest dự án, khai báo dependency và metadata' },
+        { name: 'Cargo.lock', desc: 'Khóa version chính xác, bắt buộc commit với dự án ứng dụng' }
       ],
-      features: ['官方唯一标准', '内置构建系统', '包 = Crate', 'crates.io 生态']
+      features: ['Chuẩn duy nhất chính thức', 'Build system tích hợp', 'Package = Crate', 'Hệ sinh thái crates.io']
     }
   ],
   go: [
     {
       id: 'gomod',
       name: 'Go Modules',
-      fullName: 'Go 官方模块系统（go mod）',
-      tagline: '内置于 Go 工具链，无需额外安装',
+      fullName: 'Hệ thống module chính thức của Go (go mod)',
+      tagline: 'Tích hợp sẵn trong toolchain Go, không cần cài thêm',
       color: '#00acd7',
       commands: [
-        { op: '初始化模块', cmd: 'go mod init github.com/user/project' },
-        { op: '添加依赖', cmd: 'go get github.com/gin-gonic/gin' },
-        { op: '整理依赖', cmd: 'go mod tidy' },
-        { op: '下载到本地', cmd: 'go mod download' }
+        { op: 'Khởi tạo module', cmd: 'go mod init github.com/user/project' },
+        { op: 'Thêm dependency', cmd: 'go get github.com/gin-gonic/gin' },
+        { op: 'Dọn dependency', cmd: 'go mod tidy' },
+        { op: 'Tải về máy', cmd: 'go mod download' }
       ],
       files: [
-        { name: 'go.mod', desc: '模块声明文件，记录依赖路径和版本' },
-        { name: 'go.sum', desc: '哈希校验文件，防止依赖被篡改' }
+        { name: 'go.mod', desc: 'File khai báo module, ghi đường dẫn và version dependency' },
+        { name: 'go.sum', desc: 'File kiểm tra hash, ngăn dependency bị giả mạo' }
       ],
-      features: ['Go 工具链内置', '路径即包名', '自动校验完整性', 'pkg.go.dev 生态']
+      features: ['Tích hợp trong toolchain Go', 'Đường dẫn chính là tên package', 'Tự kiểm tra tính toàn vẹn', 'Hệ sinh thái pkg.go.dev']
     }
   ],
   mac: [
@@ -255,52 +255,52 @@ const allManagers = {
       id: 'brew',
       name: 'Homebrew',
       fullName: 'The Missing Package Manager for macOS',
-      tagline: 'macOS/Linux 必备，安装开发工具首选',
+      tagline: 'Cần có trên macOS/Linux, lựa chọn hàng đầu để cài công cụ dev',
       color: '#fbb040',
       commands: [
-        { op: '安装软件', cmd: 'brew install git' },
-        { op: '更新所有', cmd: 'brew upgrade' },
-        { op: '搜索软件', cmd: 'brew search node' },
-        { op: '查看已安装', cmd: 'brew list' }
+        { op: 'Cài phần mềm', cmd: 'brew install git' },
+        { op: 'Update tất cả', cmd: 'brew upgrade' },
+        { op: 'Tìm phần mềm', cmd: 'brew search node' },
+        { op: 'Xem đã cài', cmd: 'brew list' }
       ],
       files: [
-        { name: 'Brewfile', desc: '批量安装清单，可版本控制' }
+        { name: 'Brewfile', desc: 'Danh sách cài hàng loạt, có thể quản lý version' }
       ],
-      features: ['macOS/Linux 通用', '管理系统级工具', 'Cask 安装 GUI 应用', '社区驱动']
+      features: ['Dùng được trên macOS/Linux', 'Quản lý công cụ cấp hệ thống', 'Cask để cài app GUI', 'Cộng đồng driven']
     },
     {
       id: 'apt',
       name: 'apt',
       fullName: 'Advanced Package Tool',
-      tagline: 'Ubuntu/Debian 系统包管理器',
+      tagline: 'Package manager hệ thống của Ubuntu/Debian',
       color: '#e95420',
       commands: [
-        { op: '更新列表', cmd: 'sudo apt update' },
-        { op: '安装软件', cmd: 'sudo apt install nginx' },
-        { op: '更新系统', cmd: 'sudo apt upgrade' },
-        { op: '卸载软件', cmd: 'sudo apt remove nginx' }
+        { op: 'Cập nhật danh sách', cmd: 'sudo apt update' },
+        { op: 'Cài phần mềm', cmd: 'sudo apt install nginx' },
+        { op: 'Update hệ thống', cmd: 'sudo apt upgrade' },
+        { op: 'Gỡ phần mềm', cmd: 'sudo apt remove nginx' }
       ],
       files: [
-        { name: '/etc/apt/sources.list', desc: '软件源配置文件' }
+        { name: '/etc/apt/sources.list', desc: 'File cấu hình nguồn phần mềm' }
       ],
-      features: ['Ubuntu/Debian 官方', '系统级权限', '依赖自动解析', '服务器运维必备']
+      features: ['Chính thức của Ubuntu/Debian', 'Quyền cấp hệ thống', 'Tự phân giải dependency', 'Cần thiết cho devops server']
     },
     {
       id: 'dnf',
       name: 'dnf / yum',
-      fullName: 'Dandified YUM（Fedora / RHEL / CentOS）',
-      tagline: 'Red Hat 系 Linux 的系统包管理器',
+      fullName: 'Dandified YUM (Fedora / RHEL / CentOS)',
+      tagline: 'Package manager hệ thống cho dòng Linux Red Hat',
       color: '#e00',
       commands: [
-        { op: '安装软件', cmd: 'sudo dnf install git' },
-        { op: '更新系统', cmd: 'sudo dnf upgrade' },
-        { op: '搜索软件', cmd: 'dnf search nginx' },
-        { op: '卸载软件', cmd: 'sudo dnf remove nginx' }
+        { op: 'Cài phần mềm', cmd: 'sudo dnf install git' },
+        { op: 'Update hệ thống', cmd: 'sudo dnf upgrade' },
+        { op: 'Tìm phần mềm', cmd: 'dnf search nginx' },
+        { op: 'Gỡ phần mềm', cmd: 'sudo dnf remove nginx' }
       ],
       files: [
-        { name: '/etc/dnf/dnf.conf', desc: 'dnf 全局配置文件' }
+        { name: '/etc/dnf/dnf.conf', desc: 'File cấu hình toàn cục của dnf' }
       ],
-      features: ['Fedora/RHEL/CentOS 官方', '支持模块流', 'DNF5 大幅提速', '企业级 Linux 首选']
+      features: ['Chính thức của Fedora/RHEL/CentOS', 'Hỗ trợ module stream', 'DNF5 tăng tốc mạnh', 'Lựa chọn hàng đầu cho Linux doanh nghiệp']
     }
   ],
   windows: [
@@ -308,52 +308,52 @@ const allManagers = {
       id: 'winget',
       name: 'winget',
       fullName: 'Windows Package Manager',
-      tagline: 'Microsoft 官方出品，Win 10/11 内置',
+      tagline: 'Sản phẩm chính thức của Microsoft, có sẵn trong Win 10/11',
       color: '#0078d4',
       commands: [
-        { op: '安装软件', cmd: 'winget install Git.Git' },
-        { op: '更新所有', cmd: 'winget upgrade --all' },
-        { op: '搜索软件', cmd: 'winget search nodejs' },
-        { op: '卸载软件', cmd: 'winget uninstall Git.Git' }
+        { op: 'Cài phần mềm', cmd: 'winget install Git.Git' },
+        { op: 'Update tất cả', cmd: 'winget upgrade --all' },
+        { op: 'Tìm phần mềm', cmd: 'winget search nodejs' },
+        { op: 'Gỡ phần mềm', cmd: 'winget uninstall Git.Git' }
       ],
       files: [
-        { name: 'winget-packages.json', desc: '导出的软件清单，可用于批量恢复' }
+        { name: 'winget-packages.json', desc: 'Danh sách phần mềm xuất ra, dùng để khôi phục hàng loạt' }
       ],
-      features: ['Windows 10/11 内置', 'Microsoft Store 集成', '软件包签名验证', '官方持续更新中']
+      features: ['Có sẵn trong Windows 10/11', 'Tích hợp Microsoft Store', 'Xác thực chữ ký package', 'Đang được Microsoft cập nhật liên tục']
     },
     {
       id: 'choco',
       name: 'Chocolatey',
       fullName: 'Chocolatey Package Manager',
-      tagline: 'Windows 最成熟的第三方包管理器',
+      tagline: 'Package manager bên thứ ba trưởng thành nhất trên Windows',
       color: '#4a154b',
       commands: [
-        { op: '安装软件', cmd: 'choco install git' },
-        { op: '更新所有', cmd: 'choco upgrade all' },
-        { op: '搜索软件', cmd: 'choco search nodejs' },
-        { op: '卸载软件', cmd: 'choco uninstall git' }
+        { op: 'Cài phần mềm', cmd: 'choco install git' },
+        { op: 'Update tất cả', cmd: 'choco upgrade all' },
+        { op: 'Tìm phần mềm', cmd: 'choco search nodejs' },
+        { op: 'Gỡ phần mềm', cmd: 'choco uninstall git' }
       ],
       files: [
-        { name: 'packages.config', desc: 'XML 格式的软件清单，批量安装用' }
+        { name: 'packages.config', desc: 'Danh sách phần mềm dạng XML, dùng để cài hàng loạt' }
       ],
-      features: ['生态最成熟(10000+包)', '企业版商业支持', 'PowerShell 集成', '支持无人值守安装']
+      features: ['Hệ sinh thái trưởng thành nhất (10000+ package)', 'Bản doanh nghiệp hỗ trợ thương mại', 'Tích hợp PowerShell', 'Hỗ trợ cài không cần giám sát']
     },
     {
       id: 'scoop',
       name: 'Scoop',
       fullName: 'Scoop — A command-line installer for Windows',
-      tagline: '无需管理员权限，专为开发者设计',
+      tagline: 'Không cần quyền admin, thiết kế riêng cho developer',
       color: '#1a73e8',
       commands: [
-        { op: '安装软件', cmd: 'scoop install git' },
-        { op: '更新所有', cmd: 'scoop update *' },
-        { op: '搜索软件', cmd: 'scoop search nodejs' },
-        { op: '卸载软件', cmd: 'scoop uninstall git' }
+        { op: 'Cài phần mềm', cmd: 'scoop install git' },
+        { op: 'Update tất cả', cmd: 'scoop update *' },
+        { op: 'Tìm phần mềm', cmd: 'scoop search nodejs' },
+        { op: 'Gỡ phần mềm', cmd: 'scoop uninstall git' }
       ],
       files: [
-        { name: 'Scoopfile / apps.json', desc: '应用清单，用于环境还原' }
+        { name: 'Scoopfile / apps.json', desc: 'Danh sách app, dùng để khôi phục môi trường' }
       ],
-      features: ['无需管理员权限', '安装到用户目录', '版本共存切换', '开发者工具首选']
+      features: ['Không cần quyền admin', 'Cài vào thư mục user', 'Tồn tại song song nhiều version', 'Lựa chọn hàng đầu cho công cụ dev']
     }
   ]
 }

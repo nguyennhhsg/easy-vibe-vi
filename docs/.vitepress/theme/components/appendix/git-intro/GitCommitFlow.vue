@@ -1,7 +1,7 @@
 <template>
   <div class="gc-root">
     <div class="gc-layout">
-      <!-- 左侧：终端 + 按钮 -->
+      <!-- Trái: terminal + nút -->
       <div class="gc-left">
         <div class="gc-terminal">
           <div class="term-bar">
@@ -29,18 +29,18 @@
           >
             <code>{{ op.cmd }}</code>
           </button>
-          <button class="gc-btn gc-btn--reset" :disabled="running" @click="reset">重置</button>
+          <button class="gc-btn gc-btn--reset" :disabled="running" @click="reset">Reset</button>
         </div>
       </div>
 
-      <!-- 右侧：三区缩小展示 -->
+      <!-- Phải: 3 khu vực thu nhỏ -->
       <div class="gc-right">
         <div class="gc-three-areas">
       <div class="area-col area-work" :class="{ 'area-highlight': pulseArea === 'work' }">
         <div class="area-header">
           <span class="area-icon">📝</span>
-          <span class="area-title">工作区</span>
-          <span class="area-desc">Working Directory<br />你正在改的文件</span>
+          <span class="area-title">Working Area</span>
+          <span class="area-desc">Working Directory<br />File bạn đang sửa</span>
         </div>
         <div class="area-body">
           <div class="area-label">Changes not staged for commit:</div>
@@ -48,10 +48,10 @@
             <div v-for="f in workFiles" :key="f.name" class="file-row file-mod">
               <span class="file-badge">M</span>
               <code class="file-name">{{ f.name }}</code>
-              <span class="file-state">未暂存</span>
+              <span class="file-state">Chưa staged</span>
             </div>
           </template>
-          <div v-else class="area-empty">（无未暂存修改）</div>
+          <div v-else class="area-empty">(không có thay đổi chưa staged)</div>
         </div>
       </div>
 
@@ -64,8 +64,8 @@
       <div class="area-col area-stage" :class="{ 'area-highlight': pulseArea === 'stage' }">
         <div class="area-header">
           <span class="area-icon">📦</span>
-          <span class="area-title">暂存区</span>
-          <span class="area-desc">Staging Area<br />准备这次提交的文件</span>
+          <span class="area-title">Staging Area</span>
+          <span class="area-desc">Staging Area<br />File chuẩn bị commit lần này</span>
         </div>
         <div class="area-body">
           <div class="area-label">Changes to be committed:</div>
@@ -73,10 +73,10 @@
             <div v-for="f in stagedFiles" :key="f.name" class="file-row file-staged">
               <span class="file-badge">A</span>
               <code class="file-name">{{ f.name }}</code>
-              <span class="file-state">已暂存</span>
+              <span class="file-state">Đã staged</span>
             </div>
           </template>
-          <div v-else class="area-empty">（空）</div>
+          <div v-else class="area-empty">(trống)</div>
         </div>
       </div>
 
@@ -89,11 +89,11 @@
       <div class="area-col area-repo" :class="{ 'area-highlight': pulseArea === 'repo' }">
         <div class="area-header">
           <span class="area-icon">🗄️</span>
-          <span class="area-title">仓库</span>
-          <span class="area-desc">Repository (.git)<br />永久保存的版本</span>
+          <span class="area-title">Repository</span>
+          <span class="area-desc">Repository (.git)<br />Các phiên bản được lưu vĩnh viễn</span>
         </div>
         <div class="area-body">
-          <div class="area-label">已提交记录 (git log):</div>
+          <div class="area-label">Đã commit (git log):</div>
           <template v-if="commits.length">
             <div v-for="(c, i) in commits" :key="c.hash" class="commit-row">
               <span class="commit-badge">✓</span>
@@ -102,7 +102,7 @@
               <span v-if="i === 0" class="commit-head">HEAD</span>
             </div>
           </template>
-          <div v-else class="area-empty">（无提交）</div>
+          <div v-else class="area-empty">(chưa có commit)</div>
         </div>
       </div>
     </div>
@@ -118,11 +118,11 @@
 import { ref, computed, nextTick } from 'vue'
 
 const termEl = ref(null)
-const lines = ref([{ kind: 'dim', text: '# 你刚改了 3 个文件，现在演示 add → commit 流程' }])
+const lines = ref([{ kind: 'dim', text: '# Bạn vừa sửa 3 file, giờ mô phỏng quy trình add → commit' }])
 const typing = ref('')
 const running = ref(false)
 const active = ref(null)
-const hint = ref('点击下方命令按钮，按顺序执行。观察右侧三区里文件如何随命令移动。')
+const hint = ref('Click vào các nút command bên dưới theo thứ tự. Quan sát file di chuyển giữa 3 khu vực bên phải.')
 const pulseArea = ref(null)
 
 const files = ref([
@@ -130,13 +130,13 @@ const files = ref([
   { name: 'style.css', staged: false, committed: false },
   { name: 'debug.log', staged: false, committed: false },
 ])
-const commits = ref([{ hash: '9f3e1b2', msg: 'init: 项目初始化' }])
+const commits = ref([{ hash: '9f3e1b2', msg: 'init: khởi tạo dự án' }])
 
-// 工作区：未暂存且未提交的修改（git status 里红色的）
+// Working area: thay đổi chưa staged và chưa commit (màu đỏ trong git status)
 const workFiles = computed(() =>
   files.value.filter(f => !f.staged && !f.committed)
 )
-// 暂存区：已暂存但还没提交的（git status 里绿色的）
+// Staging area: đã staged nhưng chưa commit (màu xanh trong git status)
 const stagedFiles = computed(() =>
   files.value.filter(f => f.staged && !f.committed)
 )
@@ -158,7 +158,7 @@ const ops = [
       { kind: 'dim', text: '' },
       { kind: 'dim', text: 'no changes added to commit (use "git add")' },
     ],
-    hint: '红色 = 改了但还没暂存。三区里可以看到：3 个文件都在「工作区」，暂存区是空的。先用 git status 看清楚状态，再决定下一步。',
+    hint: 'Đỏ = đã sửa nhưng chưa staged. Trong 3 khu vực: cả 3 file đều ở Working Area, Staging Area trống. Dùng git status để xem rõ trạng thái rồi quyết định bước tiếp theo.',
     do: () => { pulseArea.value = 'work' },
   },
   {
@@ -166,7 +166,7 @@ const ops = [
     cmd: 'git add login.js style.css',
     ok: () => !addDone,
     output: [
-      { kind: 'dim', text: '# git add 只加你指定的文件，debug.log 跳过' },
+      { kind: 'dim', text: '# git add chỉ thêm file bạn chỉ định, bỏ qua debug.log' },
       { kind: 'dim', text: '' },
       { kind: 'dim', text: 'On branch main' },
       { kind: 'dim', text: '' },
@@ -175,9 +175,9 @@ const ops = [
       { kind: 'grn', text: '  modified:   style.css' },
       { kind: 'dim', text: '' },
       { kind: 'red', text: 'Untracked files:' },
-      { kind: 'red', text: '  debug.log   ← 没 add，不会提交' },
+      { kind: 'red', text: '  debug.log   ← Chưa add, sẽ không commit' },
     ],
-    hint: '绿色 = 进入暂存区。观察：login.js 和 style.css 从工作区「搬进」了暂存区；debug.log 仍留在工作区（未暂存），不会参与这次提交。',
+    hint: 'Xanh = đã vào Staging Area. Quan sát: login.js và style.css đã chuyển từ Working Area sang Staging Area; debug.log vẫn ở Working Area (chưa staged), không tham gia commit lần này.',
     do: () => {
       addDone = true
       files.value[0].staged = true
@@ -187,22 +187,22 @@ const ops = [
   },
   {
     id: 'commit',
-    cmd: 'git commit -m "feat: 添加登录功能"',
+    cmd: 'git commit -m "feat: thêm chức năng đăng nhập"',
     ok: () => addDone && !commitDone,
     output: [
-      { kind: 'dim', text: '[main a1b2c3d] feat: 添加登录功能' },
+      { kind: 'dim', text: '[main a1b2c3d] feat: thêm chức năng đăng nhập' },
       { kind: 'dim', text: ' 2 files changed, 47 insertions(+)' },
       { kind: 'dim', text: ' create mode 100644 login.js' },
       { kind: 'dim', text: ' create mode 100644 style.css' },
     ],
-    hint: 'commit 成功！暂存区里的内容被「封存」进仓库，形成新的一条提交记录。暂存区变空；debug.log 仍在工作区，不受影响。',
+    hint: 'Commit thành công! Nội dung trong Staging Area được "đóng gói" vào repository, tạo thành một bản ghi commit mới. Staging Area trống; debug.log vẫn ở Working Area, không bị ảnh hưởng.',
     do: () => {
       commitDone = true
       files.value[0].staged = false
       files.value[0].committed = true
       files.value[1].staged = false
       files.value[1].committed = true
-      commits.value.unshift({ hash: 'a1b2c3d', msg: 'feat: 添加登录功能' })
+      commits.value.unshift({ hash: 'a1b2c3d', msg: 'feat: thêm chức năng đăng nhập' })
       pulseArea.value = 'repo'
     },
   },
@@ -211,10 +211,10 @@ const ops = [
     cmd: 'git log --oneline',
     ok: () => commitDone,
     output: [
-      { kind: 'yel', text: 'a1b2c3d (HEAD -> main) feat: 添加登录功能' },
-      { kind: 'yel', text: '9f3e1b2 init: 项目初始化' },
+      { kind: 'yel', text: 'a1b2c3d (HEAD -> main) feat: thêm chức năng đăng nhập' },
+      { kind: 'yel', text: '9f3e1b2 init: khởi tạo dự án' },
     ],
-    hint: '每行一个 commit，最新的在最上面。仓库区里可以看到完整的历史时间轴；工作区里只剩 debug.log（未提交的临时文件）。',
+    hint: 'Mỗi dòng là một commit, mới nhất nằm trên cùng. Trong Repository có thể thấy toàn bộ timeline lịch sử; ở Working Area chỉ còn debug.log (file tạm chưa commit).',
     do: () => { pulseArea.value = 'repo' },
   },
   {
@@ -229,7 +229,7 @@ const ops = [
       { kind: 'dim', text: '' },
       { kind: 'dim', text: 'no changes added to commit (use "git add")' },
     ],
-    hint: '提交后：login.js 和 style.css 已进仓库，工作区里只剩 debug.log 的修改。红色 = 改了但还没暂存，下次提交前可再 git add。',
+    hint: 'Sau commit: login.js và style.css đã vào Repository, Working Area chỉ còn thay đổi của debug.log. Đỏ = đã sửa nhưng chưa staged, trước khi commit lần sau có thể git add tiếp.',
     do: () => { pulseArea.value = 'work' },
   },
 ]
@@ -274,14 +274,14 @@ function scroll() {
 }
 
 function reset() {
-  lines.value = [{ kind: 'dim', text: '# 你刚改了 3 个文件，现在演示 add → commit 流程' }]
+  lines.value = [{ kind: 'dim', text: '# Bạn vừa sửa 3 file, giờ mô phỏng quy trình add → commit' }]
   files.value.forEach(f => { f.staged = false; f.committed = false })
-  commits.value = [{ hash: '9f3e1b2', msg: 'init: 项目初始化' }]
+  commits.value = [{ hash: '9f3e1b2', msg: 'init: khởi tạo dự án' }]
   addDone = false
   commitDone = false
   active.value = null
   pulseArea.value = null
-  hint.value = '点击下方命令按钮，按顺序执行。观察右侧三区里文件如何随命令移动。'
+  hint.value = 'Click vào các nút command bên dưới theo thứ tự. Quan sát file di chuyển giữa 3 khu vực bên phải.'
   typing.value = ''
   running.value = false
 }
@@ -297,7 +297,7 @@ function reset() {
   font-size: 0.85rem;
 }
 
-/* 左右分栏：左终端+按钮，右三区缩小 */
+/* Layout chia cột: trái terminal+nút, phải 3 khu vực thu nhỏ */
 .gc-layout {
   display: flex;
   align-items: stretch;
@@ -385,9 +385,9 @@ function reset() {
   margin-left: auto;
 }
 .gc-btn--reset code { display: none; }
-.gc-btn--reset::after { content: '重置'; font-size: 0.7rem; color: #585b70; }
+.gc-btn--reset::after { content: 'Reset'; font-size: 0.7rem; color: #585b70; }
 
-/* 三区布局：右侧缩小、垂直堆叠 */
+/* Layout 3 khu vực: thu nhỏ bên phải, xếp dọc */
 .gc-three-areas {
   display: flex;
   flex-direction: column;
@@ -553,7 +553,7 @@ function reset() {
 }
 .gc-right .commit-head { font-size: 0.6rem; padding: 1px 4px; }
 
-/* 箭头：↓ + 命令 */
+/* Arrow: ↓ + command */
 .area-arrow {
   display: flex;
   flex-direction: row;

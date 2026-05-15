@@ -1,15 +1,15 @@
 <!--
   EmotionControlDemo.vue
-  情感控制演示组件
+  Component mô phỏng điều khiển cảm xúc
 
-  用途：
-  展示如何在 TTS 中控制情感、语速、语调等风格特征。
+  Mục đích:
+  Trình bày cách điều khiển cảm xúc, tốc độ, cao độ giọng, ... trong TTS.
 
-  交互功能：
-  - 情感选择器
-  - 语速和音调滑块
-  - 实时预览
-  - 情感向量可视化
+  Tính năng tương tác:
+  - Chọn cảm xúc
+  - Thanh trượt tốc độ và cao độ
+  - Xem trước realtime
+  - Trực quan hoá vector cảm xúc
 -->
 <template>
   <div class="emotion-control-demo">
@@ -17,15 +17,15 @@
       <template #header>
         <div class="header-title">
           <el-icon><MagicStick /></el-icon>
-          <span>🎭 情感与风格控制</span>
+          <span>🎭 Điều khiển cảm xúc và phong cách</span>
         </div>
       </template>
 
       <div class="demo-content">
-        <!-- 情感选择 -->
+        <!-- Chọn cảm xúc -->
         <div class="emotion-selector">
           <div class="selector-title">
-            选择情感风格
+            Chọn phong cách cảm xúc
           </div>
           <div class="emotion-grid">
             <div
@@ -48,10 +48,10 @@
           </div>
         </div>
 
-        <!-- 情感向量可视化 -->
+        <!-- Trực quan vector cảm xúc -->
         <div class="emotion-embedding">
           <div class="embedding-title">
-            情感向量空间 (Emotion Embedding)
+            Không gian vector cảm xúc (Emotion Embedding)
           </div>
           <canvas
             ref="emotionCanvas"
@@ -74,15 +74,15 @@
           </div>
         </div>
 
-        <!-- 参数控制 -->
+        <!-- Tinh chỉnh tham số -->
         <div class="parameter-controls">
           <div class="control-title">
-            🎚️ 细粒度控制
+            🎚️ Điều khiển chi tiết
           </div>
           <div class="controls-grid">
             <div class="control-item">
               <div class="control-label">
-                <span>语速</span>
+                <span>Tốc độ nói</span>
                 <el-tag size="small">
                   {{ speed }}x
                 </el-tag>
@@ -94,15 +94,15 @@
                 :step="0.1"
               />
               <div class="control-hint">
-                <span>慢</span>
-                <span>正常</span>
-                <span>快</span>
+                <span>Chậm</span>
+                <span>Bình thường</span>
+                <span>Nhanh</span>
               </div>
             </div>
 
             <div class="control-item">
               <div class="control-label">
-                <span>音调</span>
+                <span>Cao độ</span>
                 <el-tag size="small">
                   {{ pitch > 0 ? '+' : '' }}{{ pitch }}
                 </el-tag>
@@ -114,15 +114,15 @@
                 :step="1"
               />
               <div class="control-hint">
-                <span>低</span>
-                <span>正常</span>
-                <span>高</span>
+                <span>Trầm</span>
+                <span>Bình thường</span>
+                <span>Cao</span>
               </div>
             </div>
 
             <div class="control-item">
               <div class="control-label">
-                <span>音量动态</span>
+                <span>Biên độ âm lượng</span>
                 <el-tag size="small">
                   {{ energy }}%
                 </el-tag>
@@ -134,15 +134,15 @@
                 :step="5"
               />
               <div class="control-hint">
-                <span>柔和</span>
-                <span>适中</span>
-                <span>激昂</span>
+                <span>Êm dịu</span>
+                <span>Vừa phải</span>
+                <span>Sôi nổi</span>
               </div>
             </div>
 
             <div class="control-item">
               <div class="control-label">
-                <span>停顿控制</span>
+                <span>Điều khiển khoảng dừng</span>
                 <el-tag size="small">
                   {{ pause }}ms
                 </el-tag>
@@ -154,24 +154,24 @@
                 :step="50"
               />
               <div class="control-hint">
-                <span>紧凑</span>
-                <span>自然</span>
-                <span>舒缓</span>
+                <span>Gấp gáp</span>
+                <span>Tự nhiên</span>
+                <span>Thư thái</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 文本输入和预览 -->
+        <!-- Nhập văn bản và xem trước -->
         <div class="preview-section">
           <div class="preview-title">
-            🎙️ 预览合成
+            🎙️ Xem trước tổng hợp
           </div>
           <el-input
             v-model="previewText"
             type="textarea"
             :rows="2"
-            placeholder="输入要合成的文本..."
+            placeholder="Bạn nhập văn bản cần tổng hợp..."
             class="preview-input"
           />
           <div class="preview-actions">
@@ -180,41 +180,41 @@
               @click="synthesize"
             >
               <el-icon><VideoPlay /></el-icon>
-              合成预览
+              Tổng hợp xem trước
             </el-button>
             <el-button @click="resetParameters">
               <el-icon><RefreshRight /></el-icon>
-              重置参数
+              Reset tham số
             </el-button>
           </div>
         </div>
 
-        <!-- 技术说明 -->
+        <!-- Phần giải thích kỹ thuật -->
         <div class="tech-explanation">
           <el-collapse>
-            <el-collapse-item title="🔬 情感控制原理">
+            <el-collapse-item title="🔬 Nguyên lý điều khiển cảm xúc">
               <div class="tech-content">
-                <h4>全局风格 Token (Global Style Token)</h4>
+                <h4>Global Style Token (GST)</h4>
                 <p>
-                  GST (Global Style Token) 是一种从参考音频中提取风格特征的方法。模型学习将情感、语速、语调等风格信息编码成一组 Token，
-                  在推理时可以通过选择或插值这些 Token 来控制合成风格。
+                  GST là một cách trích xuất đặc trưng phong cách từ audio mẫu. Mô hình học cách mã hoá cảm xúc, tốc độ, cao độ, ... thành một nhóm Token;
+                  khi suy luận, ta chọn hoặc nội suy giữa các Token này để điều khiển phong cách tổng hợp.
                 </p>
 
-                <h4>参考音频编码</h4>
+                <h4>Mã hoá audio mẫu</h4>
                 <p>
-                  用户提供一段带有目标情感的参考音频，编码器提取其风格特征向量。这个向量作为条件输入到 TTS 模型，
-                  指导生成相似风格的语音。
+                  Bạn cung cấp một đoạn audio mẫu có cảm xúc mong muốn, encoder trích xuất vector đặc trưng phong cách. Vector này được đưa vào TTS như điều kiện,
+                  định hướng mô hình sinh giọng có phong cách tương tự.
                 </p>
 
-                <h4>细粒度控制</h4>
+                <h4>Điều khiển chi tiết</h4>
                 <p>
-                  现代 TTS 模型（如 CosyVoice、F5-TTS）支持细粒度的风格控制，包括：
+                  Các mô hình TTS hiện đại (như CosyVoice, F5-TTS) hỗ trợ điều khiển phong cách chi tiết, bao gồm:
                 </p>
                 <ul>
-                  <li><strong>速度控制：</strong>调整音频播放速度而不改变音调</li>
-                  <li><strong>音调控制：</strong>改变基频 (F0) 曲线</li>
-                  <li><strong>能量控制：</strong>调整音量包络</li>
-                  <li><strong>停顿控制：</strong>调整句间和短语间的停顿长度</li>
+                  <li><strong>Điều khiển tốc độ:</strong> thay đổi tốc độ phát mà không đổi cao độ</li>
+                  <li><strong>Điều khiển cao độ:</strong> thay đổi đường cong tần số cơ bản (F0)</li>
+                  <li><strong>Điều khiển năng lượng:</strong> điều chỉnh đường bao âm lượng</li>
+                  <li><strong>Điều khiển khoảng dừng:</strong> chỉnh độ dài khoảng lặng giữa câu và giữa cụm từ</li>
                 </ul>
               </div>
             </el-collapse-item>
@@ -225,8 +225,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>情感控制：</strong>
-          现代 TTS 系统不仅能合成自然的语音，还能精确控制情感、语速、语调等风格特征。这使得 AI 配音可以适应不同的应用场景，从平静的客服对话到激昂的演讲。
+          <strong>Điều khiển cảm xúc:</strong>
+          Các hệ thống TTS hiện đại không chỉ tổng hợp giọng tự nhiên mà còn điều khiển chính xác cảm xúc, tốc độ, cao độ, ... Nhờ đó AI lồng tiếng có thể phù hợp với nhiều tình huống, từ hội thoại CSKH nhẹ nhàng đến bài diễn thuyết đầy nhiệt huyết.
         </p>
       </div>
     </el-card>
@@ -238,12 +238,12 @@ import { ref, onMounted, watch } from 'vue'
 import { MagicStick, VideoPlay, RefreshRight } from '@element-plus/icons-vue'
 
 const emotions = [
-  { id: 'neutral', name: '中性', emoji: '😐', description: '平稳自然', color: '#909399' },
-  { id: 'happy', name: '开心', emoji: '😊', description: '轻快愉悦', color: '#67c23a' },
-  { id: 'sad', name: '悲伤', emoji: '😢', description: '低沉缓慢', color: '#409eff' },
-  { id: 'angry', name: '愤怒', emoji: '😠', description: '激昂有力', color: '#f56c6c' },
-  { id: 'excited', name: '兴奋', emoji: '🤩', description: '热情高涨', color: '#e6a23c' },
-  { id: 'calm', name: '平静', emoji: '😌', description: '舒缓放松', color: '#13c2c2' }
+  { id: 'neutral', name: 'Trung tính', emoji: '😐', description: 'Bình ổn, tự nhiên', color: '#909399' },
+  { id: 'happy', name: 'Vui vẻ', emoji: '😊', description: 'Nhẹ nhàng, vui tươi', color: '#67c23a' },
+  { id: 'sad', name: 'Buồn', emoji: '😢', description: 'Trầm, chậm', color: '#409eff' },
+  { id: 'angry', name: 'Giận dữ', emoji: '😠', description: 'Mạnh, dứt khoát', color: '#f56c6c' },
+  { id: 'excited', name: 'Phấn khích', emoji: '🤩', description: 'Hào hứng, hứng khởi', color: '#e6a23c' },
+  { id: 'calm', name: 'Thư thái', emoji: '😌', description: 'Nhẹ nhàng, thư giãn', color: '#13c2c2' }
 ]
 
 const selectedEmotion = ref('neutral')
@@ -251,7 +251,7 @@ const speed = ref(1.0)
 const pitch = ref(0)
 const energy = ref(100)
 const pause = ref(150)
-const previewText = ref('这是一段带有情感控制的语音合成演示。')
+const previewText = ref('Đây là một đoạn demo TTS có điều khiển cảm xúc.')
 
 const emotionCanvas = ref(null)
 
@@ -270,7 +270,7 @@ const resetParameters = () => {
 }
 
 const synthesize = () => {
-  // 模拟合成
+  // Mô phỏng tổng hợp
   console.log('Synthesizing with:', {
     emotion: selectedEmotion.value,
     speed: speed.value,
@@ -280,7 +280,7 @@ const synthesize = () => {
   })
 }
 
-// 绘制情感向量空间
+// Vẽ không gian vector cảm xúc
 const drawEmotionEmbedding = () => {
   const canvas = emotionCanvas.value
   if (!canvas) return
@@ -291,35 +291,35 @@ const drawEmotionEmbedding = () => {
 
   ctx.clearRect(0, 0, width, height)
 
-  // 绘制坐标轴
+  // Vẽ trục toạ độ
   ctx.strokeStyle = '#e0e0e0'
   ctx.lineWidth = 1
 
-  // X轴 (Valence: 消极 -> 积极)
+  // Trục X (Valence: tiêu cực -> tích cực)
   ctx.beginPath()
   ctx.moveTo(40, height / 2)
   ctx.lineTo(width - 20, height / 2)
   ctx.stroke()
 
-  // Y轴 (Arousal: 平静 -> 兴奋)
+  // Trục Y (Arousal: thư thái -> phấn khích)
   ctx.beginPath()
   ctx.moveTo(width / 2, height - 30)
   ctx.lineTo(width / 2, 20)
   ctx.stroke()
 
-  // 轴标签
+  // Nhãn trục
   ctx.fillStyle = '#666'
   ctx.font = '12px sans-serif'
   ctx.textAlign = 'center'
-  ctx.fillText('Valence (消极 → 积极)', width / 2, height - 10)
+  ctx.fillText('Valence (tiêu cực → tích cực)', width / 2, height - 10)
 
   ctx.save()
   ctx.translate(15, height / 2)
   ctx.rotate(-Math.PI / 2)
-  ctx.fillText('Arousal (平静 → 兴奋)', 0, 0)
+  ctx.fillText('Arousal (thư thái → phấn khích)', 0, 0)
   ctx.restore()
 
-  // 情感位置
+  // Vị trí các cảm xúc
   const emotionPositions = {
     neutral: { x: 0.5, y: 0.5 },
     happy: { x: 0.8, y: 0.7 },
@@ -329,19 +329,19 @@ const drawEmotionEmbedding = () => {
     calm: { x: 0.6, y: 0.2 }
   }
 
-  // 绘制所有情感点
+  // Vẽ tất cả điểm cảm xúc
   emotions.forEach(emotion => {
     const pos = emotionPositions[emotion.id]
     const x = 50 + pos.x * (width - 80)
     const y = height - 40 - pos.y * (height - 60)
 
-    // 绘制点
+    // Vẽ điểm
     ctx.beginPath()
     ctx.arc(x, y, emotion.id === selectedEmotion.value ? 12 : 8, 0, Math.PI * 2)
     ctx.fillStyle = emotion.color
     ctx.fill()
 
-    // 选中效果
+    // Hiệu ứng khi được chọn
     if (emotion.id === selectedEmotion.value) {
       ctx.strokeStyle = emotion.color
       ctx.lineWidth = 2
@@ -350,7 +350,7 @@ const drawEmotionEmbedding = () => {
       ctx.stroke()
     }
 
-    // 标签
+    // Nhãn
     ctx.fillStyle = '#333'
     ctx.font = emotion.id === selectedEmotion.value ? 'bold 12px sans-serif' : '12px sans-serif'
     ctx.textAlign = 'center'

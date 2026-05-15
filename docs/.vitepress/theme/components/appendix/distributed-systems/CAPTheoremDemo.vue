@@ -1,12 +1,12 @@
 <!--
   CAPTheoremDemo.vue
-  CAP 定理交互演示：展示一致性、可用性、分区容错性的权衡
+  Demo tương tác về định lý CAP: minh hoạ sự đánh đổi giữa consistency, availability, partition tolerance
 -->
 <template>
   <div class="cap-demo">
     <div class="header">
-      <div class="title">CAP 定理交互演示</div>
-      <div class="subtitle">点击选择两个属性，查看对应的系统类型</div>
+      <div class="title">Demo tương tác về CAP</div>
+      <div class="subtitle">Bấm chọn hai thuộc tính để xem kiểu hệ thống tương ứng</div>
     </div>
 
     <div class="triangle">
@@ -26,14 +26,14 @@
       <div class="result-title">{{ result.type }}</div>
       <div class="result-desc">{{ result.desc }}</div>
       <div class="result-examples">
-        <span class="label">典型系统：</span>{{ result.examples }}
+        <span class="label">Hệ thống điển hình:</span> {{ result.examples }}
       </div>
       <div class="result-tradeoff">
-        <span class="label">放弃了：</span>{{ result.sacrifice }}
+        <span class="label">Đánh đổi:</span> {{ result.sacrifice }}
       </div>
     </div>
 
-    <div v-else class="hint">请选择两个属性查看结果</div>
+    <div v-else class="hint">Chọn hai thuộc tính để xem kết quả</div>
   </div>
 </template>
 
@@ -43,29 +43,29 @@ import { ref, computed } from 'vue'
 const selected = ref(['C', 'A'])
 
 const capItems = [
-  { key: 'C', letter: 'C', name: '一致性', desc: '所有节点看到相同的数据' },
-  { key: 'A', letter: 'A', name: '可用性', desc: '每个请求都能得到响应' },
-  { key: 'P', letter: 'P', name: '分区容错', desc: '网络分区时系统仍能运行' }
+  { key: 'C', letter: 'C', name: 'Consistency', desc: 'Mọi node đều thấy cùng dữ liệu' },
+  { key: 'A', letter: 'A', name: 'Availability', desc: 'Mọi request đều được phản hồi' },
+  { key: 'P', letter: 'P', name: 'Partition tolerance', desc: 'Hệ thống vẫn chạy khi mạng bị partition' }
 ]
 
 const combinations = {
   'CA': {
-    type: 'CA 系统（放弃分区容错）',
-    desc: '在没有网络分区的情况下，同时保证一致性和可用性。但在分布式环境中，网络分区是不可避免的，所以纯 CA 系统在实际分布式场景中很少见。',
-    examples: '单机 MySQL、PostgreSQL（单节点）',
-    sacrifice: '分区容错性（P）— 网络故障时系统不可用'
+    type: 'Hệ thống CA (hy sinh partition tolerance)',
+    desc: 'Khi không có partition mạng thì vừa đảm bảo consistency vừa đảm bảo availability. Nhưng trong môi trường distributed, partition mạng là không tránh khỏi, nên hệ thống CA thuần tuý rất hiếm gặp ngoài thực tế.',
+    examples: 'MySQL đơn máy, PostgreSQL (single node)',
+    sacrifice: 'Partition tolerance (P) - khi mạng lỗi, hệ thống không khả dụng'
   },
   'CP': {
-    type: 'CP 系统（放弃可用性）',
-    desc: '网络分区时优先保证数据一致性，可能拒绝部分请求。适合对数据正确性要求极高的场景。',
-    examples: 'ZooKeeper、etcd、HBase、MongoDB（强一致模式）',
-    sacrifice: '可用性（A）— 分区时部分请求会被拒绝或超时'
+    type: 'Hệ thống CP (hy sinh availability)',
+    desc: 'Khi có partition mạng, ưu tiên đảm bảo consistency và có thể từ chối một số request. Phù hợp khi yêu cầu tính đúng đắn dữ liệu cực cao.',
+    examples: 'ZooKeeper, etcd, HBase, MongoDB (chế độ strong consistency)',
+    sacrifice: 'Availability (A) - khi partition, một số request bị từ chối hoặc timeout'
   },
   'AP': {
-    type: 'AP 系统（放弃强一致性）',
-    desc: '网络分区时优先保证可用性，允许数据暂时不一致（最终一致性）。适合对可用性要求高、能容忍短暂不一致的场景。',
-    examples: 'Cassandra、DynamoDB、DNS、CDN',
-    sacrifice: '强一致性（C）— 不同节点可能短暂返回不同数据'
+    type: 'Hệ thống AP (hy sinh strong consistency)',
+    desc: 'Khi có partition mạng, ưu tiên availability và chấp nhận dữ liệu tạm thời không nhất quán (eventual consistency). Phù hợp khi yêu cầu availability cao và chấp nhận lệch ngắn hạn.',
+    examples: 'Cassandra, DynamoDB, DNS, CDN',
+    sacrifice: 'Strong consistency (C) - các node có thể trả về dữ liệu khác nhau trong thời gian ngắn'
   }
 }
 

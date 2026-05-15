@@ -1,22 +1,22 @@
 <!--
   CgiQueueDemo.vue
-  物理服务器/CGI 时代的排队与响应时间演示
+  Demo hàng đợi và thời gian phản hồi thời máy chủ vật lý/CGI
 -->
 <template>
   <div class="cgi-demo">
     <div class="panel">
       <div class="panel-header">
         <div class="title">
-          CGI 串行处理：排队效应
+          Xử lý tuần tự CGI: hiệu ứng xếp hàng
         </div>
         <div class="subtitle">
-          请求越多，响应越慢
+          Càng nhiều request, phản hồi càng chậm
         </div>
       </div>
 
       <div class="controls">
         <label>
-          并发用户：<strong>{{ concurrentUsers }}</strong>
+          Người dùng đồng thời: <strong>{{ concurrentUsers }}</strong>
         </label>
         <input
           v-model="concurrentUsers"
@@ -32,13 +32,13 @@
               v-model="staticCache"
               type="checkbox"
             >
-            启用静态缓存 (减少脚本开销)
+            Bật cache tĩnh (giảm chi phí script)
           </label>
           <button
             class="burst"
             @click="simulateBurst"
           >
-            模拟秒杀
+            Mô phỏng flash sale
           </button>
         </div>
       </div>
@@ -46,7 +46,7 @@
       <div class="stats">
         <div class="stat">
           <div class="label">
-            平均响应时间
+            Thời gian phản hồi trung bình
           </div>
           <div class="value">
             {{ avgResponse }} ms
@@ -60,7 +60,7 @@
         </div>
         <div class="stat">
           <div class="label">
-            排队请求数
+            Số request đang xếp hàng
           </div>
           <div class="value">
             {{ queueLength }}
@@ -116,9 +116,9 @@ const statusClass = computed(() => {
 })
 
 const statusText = computed(() => {
-  if (avgResponse.value < 800) return '系统还扛得住，但已经在排队了'
-  if (avgResponse.value < 3000) return '响应变慢，用户开始抱怨'
-  return '排队爆炸，网站接近不可用'
+  if (avgResponse.value < 800) return 'Hệ thống vẫn chịu được, nhưng đã có xếp hàng'
+  if (avgResponse.value < 3000) return 'Phản hồi chậm, người dùng bắt đầu phàn nàn'
+  return 'Xếp hàng quá tải, website gần như không khả dụng'
 })
 
 const simulateBurst = () => {

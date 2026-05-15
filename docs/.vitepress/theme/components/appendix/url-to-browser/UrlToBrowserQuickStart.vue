@@ -10,7 +10,7 @@
 -->
 <template>
   <div class="quick-start-compact">
-    <!-- 顶部：极简输入栏 -->
+    <!-- Trên cùng: thanh nhập tối giản -->
     <div
       class="input-bar"
       :class="{ 'is-active': isActive }"
@@ -25,7 +25,7 @@
           @keyup.enter="handleMainAction"
         >
         
-        <!-- 主操作按钮 -->
+        <!-- Nút thao tác chính -->
         <button 
           class="start-btn" 
           :class="{ 'next-btn': isActive && !isFinished, 'reset-btn': isFinished }"
@@ -36,7 +36,7 @@
         </button>
       </div>
       
-      <!-- 步骤控制按钮组 -->
+      <!-- Nhóm nút điều khiển bước -->
       <div
         v-if="isActive"
         class="step-controls"
@@ -59,7 +59,7 @@
         </button>
       </div>
 
-      <!-- 快速体验按钮 (仅在未开始时显示) -->
+      <!-- Nút thử nhanh (chỉ hiện khi chưa bắt đầu) -->
       <div
         v-if="!isActive"
         class="quick-chips"
@@ -76,9 +76,9 @@
       </div>
     </div>
 
-    <!-- 核心舞台：横向传送带 -->
+    <!-- Sân khấu chính: băng chuyền ngang -->
     <div class="conveyor-stage">
-      <!-- 进度轨道 -->
+      <!-- Thanh tiến trình -->
       <div class="track-line">
         <div
           class="track-progress"
@@ -86,7 +86,7 @@
         />
       </div>
 
-      <!-- 站点节点 -->
+      <!-- Các trạm -->
       <div 
         v-for="(step, index) in steps" 
         :key="index"
@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <!-- 移动的包裹 (绝对定位) -->
+      <!-- Bưu kiện đang di chuyển (absolute position) -->
       <div 
         v-show="isActive"
         class="moving-package"
@@ -117,14 +117,14 @@
           📦
         </div>
         <div class="package-shadow" />
-        <!-- 动态提示气泡 -->
+        <!-- Bong bóng gợi ý động -->
         <div class="package-bubble">
           <span class="bubble-analogy">{{ steps[currentStep]?.analogyAction }}</span>
         </div>
       </div>
     </div>
 
-    <!-- 底部：动态对照条 -->
+    <!-- Phía dưới: thanh đối chiếu động -->
     <div class="dynamic-info-bar">
       <transition
         name="slide-up"
@@ -217,7 +217,7 @@ const steps = [
   }
 ]
 
-// 计算属性
+// Computed
 const isFinished = computed(() => currentStep.value === steps.length - 1)
 
 const mainButtonText = computed(() => {
@@ -226,7 +226,7 @@ const mainButtonText = computed(() => {
   return 'Bước tiếp'
 })
 
-// 包裹位置 (0-100)
+// Vị trí bưu kiện (0-100)
 const packagePosition = computed(() => {
   if (!isActive.value) return 0
   const segmentCount = steps.length - 1
@@ -234,7 +234,7 @@ const packagePosition = computed(() => {
   return currentStep.value * segmentWidth
 })
 
-// 方法
+// Methods
 const quickStart = (u) => {
   url.value = u
   handleMainAction()
@@ -244,16 +244,16 @@ const handleMainAction = () => {
   if (!url.value) return
 
   if (!isActive.value) {
-    // 开始
+    // Bắt đầu
     isActive.value = true
     currentStep.value = 0
   } else if (isFinished.value) {
-    // 重置
+    // Reset
     isActive.value = false
     currentStep.value = 0
     url.value = ''
   } else {
-    // 下一步
+    // Bước tiếp
     nextStep()
   }
 }
@@ -288,7 +288,7 @@ const jumpToStep = (index) => {
   overflow: hidden;
 }
 
-/* 顶部输入栏 */
+/* Thanh nhập trên cùng */
 .input-bar {
   display: flex;
   align-items: center;
@@ -410,14 +410,14 @@ input {
   border-color: var(--vp-c-brand);
 }
 
-/* 核心传送带舞台 */
+/* Sân khấu băng chuyền chính */
 .conveyor-stage {
   position: relative;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px; /* 留出两端空间 */
+  padding: 0 30px; /* Chừa khoảng trống hai đầu */
   margin-bottom: 20px;
 }
 
@@ -444,7 +444,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40px; /* 固定宽度以便定位 */
+  width: 40px; /* Width cố định để dễ định vị */
   cursor: pointer;
 }
 
@@ -491,7 +491,7 @@ input {
   top: 44px;
 }
 
-/* 移动包裹 */
+/* Bưu kiện di chuyển */
 .moving-package {
   position: absolute;
   top: 16px;
@@ -499,8 +499,8 @@ input {
   height: 40px;
   z-index: 2;
   pointer-events: none;
-  
-  /* 定位逻辑 */
+
+  /* Logic định vị */
   transform: translateX(-50%);
   left: calc(30px + (100% - 60px) * (var(--package-pos) / 100)); 
   transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -552,11 +552,11 @@ input {
   to { transform: scale(0.6); opacity: 0.1; }
 }
 
-/* 底部动态信息条 */
+/* Thanh thông tin động phía dưới */
 .dynamic-info-bar {
   background: var(--vp-c-bg-alt);
   border-radius: 6px;
-  height: 50px; /* 极简高度 */
+  height: 50px; /* Chiều cao tối giản */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -628,7 +628,7 @@ input {
   gap: 8px;
 }
 
-/* 动画过渡 */
+/* Hiệu ứng chuyển động */
 .slide-up-enter-active,
 .slide-up-leave-active {
   transition: all 0.3s ease;

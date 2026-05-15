@@ -1,22 +1,22 @@
 <template>
   <div class="lock-demo">
     <div class="header">
-      <div class="title">分布式锁演示</div>
-      <div class="subtitle">多节点互斥访问共享资源</div>
+      <div class="title">Demo distributed lock</div>
+      <div class="subtitle">Nhiều node truy cập độc quyền tài nguyên dùng chung</div>
     </div>
     <div class="controls">
-      <button @click="acquire" class="acquire-btn">获取锁</button>
-      <button @click="release" class="release-btn">释放锁</button>
+      <button @click="acquire" class="acquire-btn">Acquire lock</button>
+      <button @click="release" class="release-btn">Release lock</button>
     </div>
     <div class="nodes">
       <div v-for="n in nodes" :key="n.id" :class="['node', { active: n.hasLock, waiting: n.waiting }]">
         <div class="node-name">{{ n.name }}</div>
-        <div class="node-status">{{ n.hasLock ? '持有锁' : n.waiting ? '等待中' : '空闲' }}</div>
+        <div class="node-status">{{ n.hasLock ? 'Đang giữ lock' : n.waiting ? 'Đang đợi' : 'Rảnh' }}</div>
       </div>
     </div>
     <div class="resource">
-      <div class="resource-label">共享资源</div>
-      <div :class="['resource-status', { locked: locked }]">{{ locked ? '🔒 已占用' : '✅ 可访问' }}</div>
+      <div class="resource-label">Tài nguyên dùng chung</div>
+      <div :class="['resource-status', { locked: locked }]">{{ locked ? '🔒 Đang bị chiếm' : '✅ Có thể truy cập' }}</div>
     </div>
     <div class="log-area">
       <div v-for="(log, i) in logs" :key="i" class="log-item">{{ log }}</div>
@@ -42,11 +42,11 @@ function acquire() {
   
   if (locked.value) {
     idleNode.waiting = true
-    logs.value.unshift(`${idleNode.name} 等待获取锁...`)
+    logs.value.unshift(`${idleNode.name} đang đợi lấy lock...`)
   } else {
     idleNode.hasLock = true
     locked.value = true
-    logs.value.unshift(`${idleNode.name} 成功获取锁！`)
+    logs.value.unshift(`${idleNode.name} acquire lock thành công!`)
   }
 }
 
@@ -55,14 +55,14 @@ function release() {
   if (holder) {
     holder.hasLock = false
     locked.value = false
-    logs.value.unshift(`${holder.name} 释放了锁`)
-    
+    logs.value.unshift(`${holder.name} đã release lock`)
+
     const waiter = nodes.value.find(n => n.waiting)
     if (waiter) {
       waiter.waiting = false
       waiter.hasLock = true
       locked.value = true
-      logs.value.unshift(`${waiter.name} 获取到锁`)
+      logs.value.unshift(`${waiter.name} đã acquire được lock`)
     }
   }
 }

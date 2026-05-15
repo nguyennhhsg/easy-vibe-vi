@@ -5,23 +5,23 @@ const selectedBuilding = ref('web-server')
 
 const buildings = {
   'web-server': {
-    name: 'Web 服务器大楼',
+    name: 'Tòa nhà Web Server',
     ip: '192.168.1.100',
     doors: [
-      { port: 80, label: 'HTTP', status: 'open', color: '#10b981', desc: '网页访问入口' },
-      { port: 443, label: 'HTTPS', status: 'open', color: '#3b82f6', desc: '加密网页入口' },
-      { port: 22, label: 'SSH', status: 'open', color: '#f59e0b', desc: '远程管理通道' },
-      { port: 3306, label: 'MySQL', status: 'closed', color: '#ef4444', desc: '数据库（已关闭）' }
+      { port: 80, label: 'HTTP', status: 'open', color: '#10b981', desc: 'Cửa vào trang web' },
+      { port: 443, label: 'HTTPS', status: 'open', color: '#3b82f6', desc: 'Cửa vào trang web mã hóa' },
+      { port: 22, label: 'SSH', status: 'open', color: '#f59e0b', desc: 'Kênh quản lý từ xa' },
+      { port: 3306, label: 'MySQL', status: 'closed', color: '#ef4444', desc: 'Database (đã đóng)' }
     ]
   },
   'dev-machine': {
-    name: '你的开发电脑',
+    name: 'Máy dev của bạn',
     ip: '127.0.0.1',
     doors: [
-      { port: 3000, label: 'React', status: 'open', color: '#61dafb', desc: '前端开发服务' },
-      { port: 5173, label: 'Vite', status: 'open', color: '#646cff', desc: 'Vite 开发服务' },
-      { port: 8080, label: 'API', status: 'open', color: '#10b981', desc: '后端 API 服务' },
-      { port: 5432, label: 'PostgreSQL', status: 'open', color: '#336791', desc: '本地数据库' }
+      { port: 3000, label: 'React', status: 'open', color: '#61dafb', desc: 'Dev server frontend' },
+      { port: 5173, label: 'Vite', status: 'open', color: '#646cff', desc: 'Dev server Vite' },
+      { port: 8080, label: 'API', status: 'open', color: '#10b981', desc: 'Backend API' },
+      { port: 5432, label: 'PostgreSQL', status: 'open', color: '#336791', desc: 'Database local' }
     ]
   }
 }
@@ -33,9 +33,9 @@ const knockResult = ref('')
 function knockDoor(door) {
   knockingPort.value = door.port
   if (door.status === 'open') {
-    knockResult.value = `✅ 端口 ${door.port} 开着！${door.label} 服务正在监听，准备接收你的请求。`
+    knockResult.value = `✅ Port ${door.port} đang mở! Dịch vụ ${door.label} đang listen, sẵn sàng nhận request của bạn.`
   } else {
-    knockResult.value = `🚫 端口 ${door.port} 关着！没有程序在监听这个端口，连接被拒绝 (Connection Refused)。`
+    knockResult.value = `🚫 Port ${door.port} đang đóng! Không có tiến trình nào listen port này, kết nối bị từ chối (Connection Refused).`
   }
   setTimeout(() => { knockingPort.value = null }, 600)
 }
@@ -44,7 +44,7 @@ function knockDoor(door) {
 <template>
   <div class="port-analogy-demo">
     <div class="control-panel">
-      <span class="panel-label">选择一栋"大楼"：</span>
+      <span class="panel-label">Chọn một &quot;tòa nhà&quot;:</span>
       <div class="btn-group">
         <button
           v-for="(b, key) in buildings"
@@ -78,7 +78,7 @@ function knockDoor(door) {
               <span class="door-desc">{{ door.desc }}</span>
             </div>
             <div :class="['door-status', door.status]">
-              {{ door.status === 'open' ? '🟢 监听中' : '🔴 已关闭' }}
+              {{ door.status === 'open' ? '🟢 Đang listen' : '🔴 Đã đóng' }}
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ function knockDoor(door) {
     </div>
 
     <div class="info-box">
-      <strong>核心比喻：</strong>IP 地址 = 大楼地址，端口号 = 房间门牌号。一台电脑上可以同时运行多个服务，每个服务"占用"一个端口号，就像同一栋大楼里的不同房间。
+      <strong>Cách hình dung:</strong> địa chỉ IP = địa chỉ tòa nhà, port = số phòng. Một máy tính có thể chạy nhiều dịch vụ cùng lúc, mỗi dịch vụ &quot;chiếm&quot; một port, giống như các phòng khác nhau trong cùng một tòa nhà.
     </div>
   </div>
 </template>

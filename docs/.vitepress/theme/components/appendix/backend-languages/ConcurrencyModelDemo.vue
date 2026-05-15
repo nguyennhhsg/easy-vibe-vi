@@ -2,12 +2,12 @@
   <div class="concurrency-model-demo">
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">并发模型</span>
-      <span class="subtitle">不同语言处理多任务的方式</span>
+      <span class="title">Mô hình concurrency</span>
+      <span class="subtitle">Cách các ngôn ngữ xử lý đa tác vụ</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">餐厅工作</span>：有的餐厅多个服务员同时服务（多线程），有的只有一个服务员但动作极快（事件循环），有的像流水线一样分工协作（协程）。
+      Hãy tưởng tượng bạn <span class="highlight">làm việc trong nhà hàng</span>: có quán nhiều phục vụ cùng phục vụ (multi-thread), có quán chỉ một phục vụ nhưng làm cực nhanh (event loop), có quán phân công như dây chuyền (coroutine).
     </div>
 
     <div class="models-grid">
@@ -48,7 +48,7 @@
 
         <div class="stats-grid">
           <div class="stat-item">
-            <span class="stat-label">并发能力</span>
+            <span class="stat-label">Khả năng concurrency</span>
             <div class="stat-bar">
               <div
                 class="stat-fill"
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="stat-item">
-            <span class="stat-label">内存开销</span>
+            <span class="stat-label">Chi phí bộ nhớ</span>
             <div class="stat-bar">
               <div
                 class="stat-fill memory"
@@ -73,7 +73,7 @@
 
         <div class="pros-cons">
           <div class="pros">
-            <strong>✅ 优势</strong>
+            <strong>✅ Ưu điểm</strong>
             <ul>
               <li
                 v-for="pro in getModelInfo().pros"
@@ -84,7 +84,7 @@
             </ul>
           </div>
           <div class="cons">
-            <strong>❌ 劣势</strong>
+            <strong>❌ Nhược điểm</strong>
             <ul>
               <li
                 v-for="con in getModelInfo().cons"
@@ -100,7 +100,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>Go 的协程适合高并发 I/O，Java 的线程池适合稳定的企业级应用，Node.js 的事件循环适合简单的 I/O 密集型任务。根据场景选择，而不是盲目追求"并发数"。
+      <strong>Tư tưởng cốt lõi:</strong> Coroutine của Go phù hợp I/O concurrency cao, thread pool của Java phù hợp ứng dụng enterprise ổn định, event loop của Node.js phù hợp các tác vụ I/O đơn giản. Hãy chọn theo tình huống, đừng chạy theo "số concurrency" một cách mù quáng.
     </div>
   </div>
 </template>
@@ -115,60 +115,60 @@ const models = [
     name: 'Goroutine',
     icon: '🐹',
     language: 'Go',
-    description: '轻量级协程'
+    description: 'Coroutine nhẹ'
   },
   {
     name: 'Thread Pool',
     icon: '🧵',
     language: 'Java',
-    description: '线程池'
+    description: 'Pool luồng'
   },
   {
     name: 'Event Loop',
     icon: '⚡',
     language: 'Node.js',
-    description: '事件循环'
+    description: 'Vòng lặp sự kiện'
   },
   {
     name: 'Async/Await',
     icon: '🦀',
     language: 'Rust',
-    description: '异步运行时'
+    description: 'Async runtime'
   }
 ]
 
 const modelInfo = {
   Goroutine: {
-    title: 'Go Goroutine (协程)',
+    title: 'Go Goroutine (coroutine)',
     concurrency: 95,
     memory: 90,
-    code: 'go func() { /* 任务 */ }()',
-    pros: ['轻量级（2KB 栈内存）', '可创建百万级协程', '语法简洁'],
-    cons: ['需要手动管理生命周期', '错误处理繁琐']
+    code: 'go func() { /* tác vụ */ }()',
+    pros: ['Nhẹ (stack 2KB)', 'Có thể tạo hàng triệu coroutine', 'Cú pháp gọn'],
+    cons: ['Cần quản lý vòng đời thủ công', 'Xử lý lỗi rườm rà']
   },
   'Thread Pool': {
-    title: 'Java Thread Pool (线程池)',
+    title: 'Java Thread Pool (pool luồng)',
     concurrency: 70,
     memory: 40,
-    code: 'executor.submit(() -> { /* 任务 */ });',
-    pros: ['成熟稳定', '异常处理完善', '工具丰富'],
-    cons: ['线程重（1-2MB 栈）', '上下文切换开销大']
+    code: 'executor.submit(() -> { /* tác vụ */ });',
+    pros: ['Trưởng thành, ổn định', 'Xử lý exception đầy đủ', 'Công cụ phong phú'],
+    cons: ['Luồng nặng (stack 1-2MB)', 'Chi phí context-switch lớn']
   },
   'Event Loop': {
-    title: 'Node.js Event Loop (事件循环)',
+    title: 'Node.js Event Loop (vòng lặp sự kiện)',
     concurrency: 85,
     memory: 75,
-    code: 'async function task() { /* 任务 */ }',
-    pros: ['适合 I/O 密集型', '单线程无锁竞争', '语法优雅'],
-    cons: ['CPU 密集型性能差', '无法利用多核']
+    code: 'async function task() { /* tác vụ */ }',
+    pros: ['Phù hợp I/O-intensive', 'Single-thread, không tranh chấp khóa', 'Cú pháp đẹp'],
+    cons: ['Hiệu năng CPU-intensive kém', 'Không tận dụng multi-core']
   },
   'Async/Await': {
-    title: 'Rust Async/Await (零成本抽象)',
+    title: 'Rust Async/Await (zero-cost abstraction)',
     concurrency: 90,
     memory: 95,
-    code: 'task::spawn(async move { /* 任务 */ });',
-    pros: ['零成本抽象', '内存安全', '性能接近手动管理'],
-    cons: ['学习曲线陡峭', '需要运行时']
+    code: 'task::spawn(async move { /* tác vụ */ });',
+    pros: ['Zero-cost abstraction', 'Memory safety', 'Hiệu năng gần như quản lý thủ công'],
+    cons: ['Đường cong học tập dốc', 'Cần runtime']
   }
 }
 

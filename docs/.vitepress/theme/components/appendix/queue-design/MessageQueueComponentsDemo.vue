@@ -1,15 +1,15 @@
 <!--
   MessageQueueComponentsDemo.vue
-  消息队列三要素可视化 - 生产者/Broker/消费者
+  Trực quan hóa 3 thành phần của message queue - producer/broker/consumer
 -->
 <template>
   <div class="mq-components-demo">
     <div class="header">
       <div class="title">
-        消息队列的三要素
+        Ba thành phần của message queue
       </div>
       <div class="subtitle">
-        生产者、消息代理、消费者的关系
+        Mối quan hệ giữa producer, broker và consumer
       </div>
     </div>
 
@@ -20,22 +20,22 @@
             📤
           </div>
           <div class="comp-name">
-            生产者 Producer
+            Producer
           </div>
         </div>
         <div class="comp-content">
           <div class="comp-desc">
-            发送消息的一方
+            Bên gửi message
           </div>
           <div class="comp-example">
-            例子：订单服务
+            Ví dụ: service đơn hàng
           </div>
           <button
             class="action-btn"
             :disabled="producing"
             @click="produceMessage"
           >
-            {{ producing ? '发送中...' : '发送消息' }}
+            {{ producing ? 'Đang gửi...' : 'Gửi message' }}
           </button>
         </div>
       </div>
@@ -53,19 +53,19 @@
             📦
           </div>
           <div class="comp-name">
-            消息代理 Broker
+            Broker
           </div>
         </div>
         <div class="comp-content">
           <div class="comp-desc">
-            存储和转发消息
+            Lưu trữ và chuyển tiếp message
           </div>
           <div class="comp-example">
-            例子：RabbitMQ, Kafka
+            Ví dụ: RabbitMQ, Kafka
           </div>
           <div class="broker-storage">
             <div class="storage-label">
-              消息存储
+              Lưu trữ message
             </div>
             <div class="storage-box">
               <transition-group name="message">
@@ -74,14 +74,14 @@
                   :key="msg.id"
                   class="broker-msg"
                 >
-                  消息 #{{ msg.id }}
+                  Message #{{ msg.id }}
                 </div>
               </transition-group>
               <div
                 v-if="brokerMessages.length === 0"
                 class="empty"
               >
-                暂无消息
+                Chưa có message
               </div>
             </div>
           </div>
@@ -101,28 +101,28 @@
             📥
           </div>
           <div class="comp-name">
-            消费者 Consumer
+            Consumer
           </div>
         </div>
         <div class="comp-content">
           <div class="comp-desc">
-            接收并处理消息
+            Nhận và xử lý message
           </div>
           <div class="comp-example">
-            例子：库存服务
+            Ví dụ: service kho
           </div>
           <button
             class="action-btn consume"
             :disabled="brokerMessages.length === 0 || consuming"
             @click="consumeMessage"
           >
-            {{ consuming ? '处理中...' : '消费消息' }}
+            {{ consuming ? 'Đang xử lý...' : 'Consume message' }}
           </button>
           <div
             v-if="lastConsumed"
             class="last-consumed"
           >
-            已处理: #{{ lastConsumed }}
+            Đã xử lý: #{{ lastConsumed }}
           </div>
         </div>
       </div>
@@ -131,21 +131,21 @@
     <div class="component-details">
       <div class="detail-card producer">
         <div class="detail-title">
-          📤 生产者 (Producer)
+          📤 Producer
         </div>
         <div class="detail-content">
           <div class="detail-item">
-            <strong>职责：</strong>创建并发送消息到 Broker
+            <strong>Trách nhiệm:</strong> tạo và gửi message đến broker
           </div>
           <div class="detail-item">
-            <strong>特点：</strong>发送后立即返回，不等待处理完成
+            <strong>Đặc tính:</strong> gửi xong trả về ngay, không đợi xử lý xong
           </div>
           <div class="detail-item">
-            <strong>例子：</strong>
+            <strong>Ví dụ:</strong>
             <ul>
-              <li>订单服务：下单成功后发送消息</li>
-              <li>用户服务：用户注册后发送消息</li>
-              <li>支付服务：支付完成后发送消息</li>
+              <li>Service đơn hàng: gửi message sau khi đặt đơn thành công</li>
+              <li>Service người dùng: gửi message sau khi đăng ký user</li>
+              <li>Service thanh toán: gửi message sau khi thanh toán xong</li>
             </ul>
           </div>
         </div>
@@ -153,22 +153,22 @@
 
       <div class="detail-card broker">
         <div class="detail-title">
-          📦 消息代理 (Broker)
+          📦 Broker
         </div>
         <div class="detail-content">
           <div class="detail-item">
-            <strong>职责：</strong>存储、转发、管理消息
+            <strong>Trách nhiệm:</strong> lưu trữ, chuyển tiếp, quản lý message
           </div>
           <div class="detail-item">
-            <strong>特点：</strong>
+            <strong>Đặc tính:</strong>
             <ul>
-              <li>消息持久化（防止丢失）</li>
-              <li>消息确认机制（ACK）</li>
-              <li>支持多种消息模式</li>
+              <li>Persist message (tránh mất)</li>
+              <li>Cơ chế xác nhận message (ACK)</li>
+              <li>Hỗ trợ nhiều pattern message</li>
             </ul>
           </div>
           <div class="detail-item">
-            <strong>常见实现：</strong>
+            <strong>Hiện thực phổ biến:</strong>
             RabbitMQ, Kafka, RocketMQ, Redis Stream
           </div>
         </div>
@@ -176,26 +176,26 @@
 
       <div class="detail-card consumer">
         <div class="detail-title">
-          📥 消费者 (Consumer)
+          📥 Consumer
         </div>
         <div class="detail-content">
           <div class="detail-item">
-            <strong>职责：</strong>从 Broker 接收并处理消息
+            <strong>Trách nhiệm:</strong> nhận và xử lý message từ broker
           </div>
           <div class="detail-item">
-            <strong>特点：</strong>
+            <strong>Đặc tính:</strong>
             <ul>
-              <li>可以单机或集群部署</li>
-              <li>处理失败可以重试</li>
-              <li>处理完成后发送 ACK</li>
+              <li>Có thể deploy single hoặc cluster</li>
+              <li>Xử lý thất bại có thể retry</li>
+              <li>Xử lý xong gửi ACK</li>
             </ul>
           </div>
           <div class="detail-item">
-            <strong>例子：</strong>
+            <strong>Ví dụ:</strong>
             <ul>
-              <li>库存服务：扣减库存</li>
-              <li>短信服务：发送通知</li>
-              <li>积分服务：增加积分</li>
+              <li>Service kho: trừ tồn kho</li>
+              <li>Service SMS: gửi thông báo</li>
+              <li>Service điểm thưởng: cộng điểm</li>
             </ul>
           </div>
         </div>
@@ -204,7 +204,7 @@
 
     <div class="message-flow">
       <div class="flow-title">
-        🔄 完整的消息流程
+        🔄 Luồng message đầy đủ
       </div>
       <div class="flow-steps">
         <div class="flow-step">
@@ -213,10 +213,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              生产者发送消息
+              Producer gửi message
             </div>
             <div class="step-desc">
-              订单服务创建订单后，发送"订单创建"消息
+              Service đơn hàng sau khi tạo đơn sẽ gửi message "tạo đơn hàng"
             </div>
           </div>
         </div>
@@ -229,10 +229,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              Broker 存储消息
+              Broker lưu message
             </div>
             <div class="step-desc">
-              消息队列接收并存储消息（持久化到磁盘）
+              Message queue nhận và lưu trữ message (persist xuống đĩa)
             </div>
           </div>
         </div>
@@ -245,10 +245,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              消费者拉取消息
+              Consumer pull message
             </div>
             <div class="step-desc">
-              库存服务从队列中拉取消息
+              Service kho pull message từ queue
             </div>
           </div>
         </div>
@@ -261,10 +261,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              处理业务逻辑
+              Xử lý logic nghiệp vụ
             </div>
             <div class="step-desc">
-              扣减库存，创建出库记录
+              Trừ tồn kho, tạo bản ghi xuất kho
             </div>
           </div>
         </div>
@@ -277,10 +277,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              发送 ACK
+              Gửi ACK
             </div>
             <div class="step-desc">
-              告诉 Broker 消息处理成功，可以删除
+              Báo cho broker rằng message đã xử lý thành công, có thể xóa
             </div>
           </div>
         </div>

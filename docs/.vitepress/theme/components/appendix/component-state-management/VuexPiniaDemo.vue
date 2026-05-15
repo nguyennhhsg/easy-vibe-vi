@@ -3,11 +3,11 @@
     <div class="demo-header">
       <span class="icon">🍍</span>
       <span class="title">Vuex vs Pinia</span>
-      <span class="subtitle">Vue 状态管理的新老方案</span>
+      <span class="subtitle">Hai thế hệ state management của Vue</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">餐厅</span>点餐：Vuex 就像传统餐厅，需要分部门（state/mutations/actions）填写单据；Pinia 就像快餐店，直接在一个柜台（组合式 API）搞定所有流程。
+      Hãy hình dung bạn gọi món ở <span class="highlight">nhà hàng</span>: Vuex như nhà hàng truyền thống, phải điền phiếu qua nhiều bộ phận (state/mutations/actions); còn Pinia như quán fast food, đứng tại một quầy (composition API) là xong mọi việc.
     </div>
 
     <div class="demo-content">
@@ -20,21 +20,21 @@
           <div class="card-header">
             <span class="card-icon">🌿</span>
             <span class="card-title">Vuex</span>
-            <span class="card-badge">经典</span>
+            <span class="card-badge">Cổ điển</span>
           </div>
           <div class="card-body">
             <div class="feature-list">
               <div class="feature-item">
-                ✅ 选项式 API
+                Options API
               </div>
               <div class="feature-item">
-                ✅ State / Mutations / Actions 分离
+                Tách State / Mutations / Actions
               </div>
               <div class="feature-item">
-                ❌ 样板代码较多
+                Nhiều boilerplate
               </div>
               <div class="feature-item">
-                ❌ TypeScript 支持较弱
+                Hỗ trợ TypeScript yếu
               </div>
             </div>
           </div>
@@ -48,21 +48,21 @@
           <div class="card-header">
             <span class="card-icon">🍍</span>
             <span class="card-title">Pinia</span>
-            <span class="card-badge recommended">推荐</span>
+            <span class="card-badge recommended">Khuyến nghị</span>
           </div>
           <div class="card-body">
             <div class="feature-list">
               <div class="feature-item">
-                ✅ 组合式 API
+                Composition API
               </div>
               <div class="feature-item">
-                ✅ 去除 Mutations，简化代码
+                Bỏ Mutations, code gọn hơn
               </div>
               <div class="feature-item">
-                ✅ 完美 TypeScript 支持
+                Hỗ trợ TypeScript hoàn hảo
               </div>
               <div class="feature-item">
-                ✅ 自动代码分割
+                Tự động code splitting
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@
           class="code-example"
         >
           <div class="code-title">
-            Vuex 代码示例
+            Ví dụ code Vuex
           </div>
           <pre class="code-block"><code>// store/index.js
 export default createStore({
@@ -103,7 +103,7 @@ export default createStore({
           class="code-example"
         >
           <div class="code-title">
-            Pinia 代码示例
+            Ví dụ code Pinia
           </div>
           <pre class="code-block"><code>// stores/counter.js
 export const useCounterStore = defineStore('counter', () => {
@@ -121,7 +121,7 @@ export const useCounterStore = defineStore('counter', () => {
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选择建议：</strong>Vue 3 新项目直接用 Pinia，语法更简洁、TypeScript 支持更好。老项目用 Vuex 也没问题，但推荐逐步迁移到 Pinia。
+      <strong>Gợi ý lựa chọn:</strong> Project Vue 3 mới nên dùng Pinia luôn, cú pháp gọn hơn và hỗ trợ TypeScript tốt hơn. Project cũ dùng Vuex vẫn ổn, nhưng nên chuyển dần sang Pinia.
     </div>
   </div>
 </template>

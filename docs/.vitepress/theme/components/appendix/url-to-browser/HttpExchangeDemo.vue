@@ -1,14 +1,14 @@
 <template>
   <div class="http-exchange-demo">
     <div class="demo-header">
-      <span class="title">HTTP 请求/响应</span>
-      <span class="subtitle">浏览器与服务器的对话</span>
+      <span class="title">HTTP request/response</span>
+      <span class="subtitle">Cuộc đối thoại giữa browser và server</span>
     </div>
 
     <div class="exchange-flow">
       <div class="actor browser">
         <span class="actor-icon">🧑‍💻</span>
-        <span class="actor-name">浏览器</span>
+        <span class="actor-name">Browser</span>
       </div>
 
       <div class="messages">
@@ -20,32 +20,32 @@
         <div class="response-box">
           <span class="arrow">←</span>
           <span class="status">200 OK</span>
-          <span class="size">HTML 页面</span>
+          <span class="size">Trang HTML</span>
         </div>
       </div>
 
       <div class="actor server">
         <span class="actor-icon">🖥️</span>
-        <span class="actor-name">服务器</span>
+        <span class="actor-name">Server</span>
       </div>
     </div>
 
     <div class="code-preview">
       <div class="code-block">
-        <div class="code-header">请求</div>
+        <div class="code-header">Request</div>
         <code>GET /search?q=hello HTTP/1.1</code>
         <code>Host: www.google.com</code>
       </div>
       <div class="code-block">
-        <div class="code-header">响应</div>
+        <div class="code-header">Response</div>
         <code>HTTP/1.1 200 OK</code>
         <code>Content-Type: text/html</code>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      HTTP 是请求-响应模式：浏览器发送请求，服务器返回状态码和响应内容。
+      <strong>Ý chính:</strong>
+      HTTP theo mô hình request-response: browser gửi request, server trả về status code và nội dung response.
     </div>
   </div>
 </template>

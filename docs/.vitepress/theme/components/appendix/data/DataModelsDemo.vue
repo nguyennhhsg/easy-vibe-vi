@@ -2,12 +2,12 @@
   <div class="data-models-demo">
     <div class="demo-header">
       <span class="icon">🗂️</span>
-      <span class="title">数据模型全景</span>
-      <span class="subtitle">四种主流数据模型对比</span>
+      <span class="title">Toàn cảnh các mô hình dữ liệu</span>
+      <span class="subtitle">So sánh 4 mô hình dữ liệu phổ biến</span>
     </div>
 
     <div class="intro-text">
-      不是所有数据都适合塞进<span class="highlight">关系型表格</span>。社交网络的人脉关系、IoT 设备的时间流水、AI 搜索的语义向量——不同的数据形态需要不同的<span class="highlight">建模方式</span>。
+      Không phải dữ liệu nào cũng hợp với <span class="highlight">bảng quan hệ</span>. Quan hệ bạn bè trong mạng xã hội, dòng thời gian từ thiết bị IoT, vector ngữ nghĩa cho AI search... mỗi loại dữ liệu cần <span class="highlight">cách mô hình hóa</span> khác nhau.
     </div>
 
     <div v-if="!props.tab" class="tabs">
@@ -21,22 +21,22 @@
       </button>
     </div>
 
-    <!-- 文档模型 -->
+    <!-- Document model -->
     <div v-if="active === 'document'" class="model-panel">
       <div class="panel-header">
         <span class="panel-icon">📄</span>
-        <span class="panel-title">文档模型 (Document)</span>
+        <span class="panel-title">Document model</span>
         <span class="panel-badge">MongoDB / DynamoDB</span>
       </div>
-      <div class="panel-desc">数据以 JSON 文档存储，每条记录可以有不同的字段结构，天然适合<strong>嵌套、半结构化</strong>数据。</div>
+      <div class="panel-desc">Dữ liệu lưu dưới dạng JSON document, mỗi bản ghi có thể có cấu trúc field khác nhau, hợp với dữ liệu <strong>lồng nhau, bán cấu trúc</strong>.</div>
       <div class="code-block">
         <pre><code>{
   "_id": "user_1001",
-  "name": "张三",
-  "tags": ["VIP", "活跃"],
+  "name": "Nguyen Van A",
+  "tags": ["VIP", "Active"],
   "address": {
-    "city": "北京",
-    "district": "朝阳区"
+    "city": "Ha Noi",
+    "district": "Cau Giay"
   },
   "orders": [
     { "id": "o1", "amount": 299 },
@@ -45,63 +45,63 @@
 }</code></pre>
       </div>
       <div class="traits">
-        <div class="trait good">无需预定义 Schema，字段随时扩展</div>
-        <div class="trait good">嵌套数据一次读取，无需 JOIN</div>
-        <div class="trait bad">跨文档关联查询较弱</div>
+        <div class="trait good">Không cần khai báo schema trước, field mở rộng linh hoạt</div>
+        <div class="trait good">Dữ liệu lồng nhau đọc một lần, không cần JOIN</div>
+        <div class="trait bad">Liên kết qua nhiều document yếu</div>
       </div>
       <div class="use-cases">
-        <span class="use-label">典型场景：</span>
-        <span class="use-tag">用户画像</span>
-        <span class="use-tag">CMS 内容</span>
-        <span class="use-tag">商品目录</span>
-        <span class="use-tag">配置中心</span>
+        <span class="use-label">Tình huống điển hình:</span>
+        <span class="use-tag">User profile</span>
+        <span class="use-tag">Nội dung CMS</span>
+        <span class="use-tag">Catalog sản phẩm</span>
+        <span class="use-tag">Trung tâm cấu hình</span>
       </div>
     </div>
 
-    <!-- 图模型 -->
+    <!-- Graph model -->
     <div v-if="active === 'graph'" class="model-panel">
       <div class="panel-header">
         <span class="panel-icon">🕸️</span>
-        <span class="panel-title">图模型 (Graph)</span>
+        <span class="panel-title">Graph model</span>
         <span class="panel-badge">Neo4j / Neptune</span>
       </div>
-      <div class="panel-desc">数据由<strong>节点</strong>和<strong>边</strong>组成，专门表达实体之间的复杂关系网络。</div>
+      <div class="panel-desc">Dữ liệu gồm <strong>node</strong> và <strong>edge</strong>, chuyên để biểu diễn mạng quan hệ phức tạp giữa các thực thể.</div>
       <div class="graph-viz">
         <div class="graph-nodes">
-          <div class="g-node user" style="grid-area: a">张三</div>
-          <div class="g-node user" style="grid-area: b">李四</div>
-          <div class="g-node user" style="grid-area: c">王五</div>
+          <div class="g-node user" style="grid-area: a">Anh</div>
+          <div class="g-node user" style="grid-area: b">Binh</div>
+          <div class="g-node user" style="grid-area: c">Cuong</div>
           <div class="g-node item" style="grid-area: d">iPhone</div>
         </div>
         <div class="graph-edges">
-          <div class="g-edge">张三 —<span class="edge-label">关注</span>→ 李四</div>
-          <div class="g-edge">李四 —<span class="edge-label">关注</span>→ 王五</div>
-          <div class="g-edge">张三 —<span class="edge-label">购买</span>→ iPhone</div>
-          <div class="g-edge">王五 —<span class="edge-label">购买</span>→ iPhone</div>
+          <div class="g-edge">Anh —<span class="edge-label">follow</span>→ Binh</div>
+          <div class="g-edge">Binh —<span class="edge-label">follow</span>→ Cuong</div>
+          <div class="g-edge">Anh —<span class="edge-label">mua</span>→ iPhone</div>
+          <div class="g-edge">Cuong —<span class="edge-label">mua</span>→ iPhone</div>
         </div>
       </div>
       <div class="traits">
-        <div class="trait good">多跳关系查询极快（朋友的朋友）</div>
-        <div class="trait good">关系本身可以携带属性</div>
-        <div class="trait bad">不擅长大规模聚合统计</div>
+        <div class="trait good">Truy vấn nhiều cấp quan hệ rất nhanh (bạn của bạn)</div>
+        <div class="trait good">Bản thân quan hệ có thể mang thuộc tính</div>
+        <div class="trait bad">Không mạnh khi gộp/thống kê quy mô lớn</div>
       </div>
       <div class="use-cases">
-        <span class="use-label">典型场景：</span>
-        <span class="use-tag">社交网络</span>
-        <span class="use-tag">推荐系统</span>
-        <span class="use-tag">知识图谱</span>
-        <span class="use-tag">欺诈检测</span>
+        <span class="use-label">Tình huống điển hình:</span>
+        <span class="use-tag">Mạng xã hội</span>
+        <span class="use-tag">Hệ thống đề xuất</span>
+        <span class="use-tag">Knowledge graph</span>
+        <span class="use-tag">Phát hiện gian lận</span>
       </div>
     </div>
 
-    <!-- 时序模型 -->
+    <!-- Time-series model -->
     <div v-if="active === 'timeseries'" class="model-panel">
       <div class="panel-header">
         <span class="panel-icon">📈</span>
-        <span class="panel-title">时序模型 (Time-Series)</span>
+        <span class="panel-title">Time-Series model</span>
         <span class="panel-badge">InfluxDB / TimescaleDB</span>
       </div>
-      <div class="panel-desc">以<strong>时间戳</strong>为主轴，针对按时间顺序写入、按时间范围查询的场景深度优化。</div>
+      <div class="panel-desc">Lấy <strong>timestamp</strong> làm trục chính, tối ưu sâu cho ghi theo thứ tự thời gian và truy vấn theo khoảng thời gian.</div>
       <div class="ts-table">
         <div class="ts-row ts-header">
           <span>timestamp</span>
@@ -117,30 +117,30 @@
         </div>
       </div>
       <div class="traits">
-        <div class="trait good">写入吞吐极高（百万点/秒）</div>
-        <div class="trait good">内置降采样、自动过期策略</div>
-        <div class="trait bad">不支持复杂关联查询</div>
+        <div class="trait good">Throughput ghi cực cao (triệu điểm/giây)</div>
+        <div class="trait good">Tích hợp sẵn downsampling và TTL tự động</div>
+        <div class="trait bad">Không hỗ trợ truy vấn JOIN phức tạp</div>
       </div>
       <div class="use-cases">
-        <span class="use-label">典型场景：</span>
-        <span class="use-tag">服务器监控</span>
-        <span class="use-tag">IoT 传感器</span>
-        <span class="use-tag">金融行情</span>
-        <span class="use-tag">日志分析</span>
+        <span class="use-label">Tình huống điển hình:</span>
+        <span class="use-tag">Monitoring server</span>
+        <span class="use-tag">Cảm biến IoT</span>
+        <span class="use-tag">Giá tài chính</span>
+        <span class="use-tag">Phân tích log</span>
       </div>
     </div>
 
-    <!-- 向量模型 -->
+    <!-- Vector model -->
     <div v-if="active === 'vector'" class="model-panel">
       <div class="panel-header">
         <span class="panel-icon">🧠</span>
-        <span class="panel-title">向量模型 (Vector)</span>
+        <span class="panel-title">Vector model</span>
         <span class="panel-badge">Pinecone / Milvus / pgvector</span>
       </div>
-      <div class="panel-desc">将文本、图片等非结构化数据转为<strong>高维向量</strong>，通过计算向量距离实现语义相似度搜索。</div>
+      <div class="panel-desc">Chuyển dữ liệu phi cấu trúc như văn bản, ảnh thành <strong>vector nhiều chiều</strong>, tìm kiếm theo độ tương đồng ngữ nghĩa qua khoảng cách vector.</div>
       <div class="vector-viz">
         <div class="vec-query">
-          <div class="vec-label">查询："好吃的日料"</div>
+          <div class="vec-label">Truy vấn: "đồ Nhật ngon"</div>
           <div class="vec-arrow">→ Embedding →</div>
           <div class="vec-nums">[0.82, 0.15, 0.91, ...]</div>
         </div>
@@ -152,22 +152,22 @@
         </div>
       </div>
       <div class="traits">
-        <div class="trait good">语义搜索，理解"意思"而非关键词</div>
-        <div class="trait good">支持多模态（文本、图片、音频）</div>
-        <div class="trait bad">向量生成依赖 Embedding 模型质量</div>
+        <div class="trait good">Semantic search, hiểu "ý nghĩa" thay vì keyword</div>
+        <div class="trait good">Hỗ trợ multimodal (text, ảnh, audio)</div>
+        <div class="trait bad">Chất lượng vector phụ thuộc embedding model</div>
       </div>
       <div class="use-cases">
-        <span class="use-label">典型场景：</span>
-        <span class="use-tag">RAG 检索增强</span>
-        <span class="use-tag">以图搜图</span>
-        <span class="use-tag">语义搜索</span>
-        <span class="use-tag">推荐系统</span>
+        <span class="use-label">Tình huống điển hình:</span>
+        <span class="use-tag">RAG</span>
+        <span class="use-tag">Tìm bằng ảnh</span>
+        <span class="use-tag">Semantic search</span>
+        <span class="use-tag">Hệ thống đề xuất</span>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选型原则：</strong>没有万能数据库。关系型（MySQL/PostgreSQL）仍是大多数业务的基石，但当数据形态明确偏向文档、图、时序或向量时，选择专用模型能获得<span class="highlight">数量级的性能提升</span>。
+      <strong>Nguyên tắc chọn lựa:</strong> Không có database vạn năng. RDBMS (MySQL/PostgreSQL) vẫn là nền cho phần lớn nghiệp vụ, nhưng khi dữ liệu thiên hẳn về document, graph, time-series hay vector, chọn model chuyên dụng có thể đem lại <span class="highlight">cải thiện hiệu năng cả bậc</span>.
     </div>
   </div>
 </template>
@@ -179,10 +179,10 @@ const props = defineProps({ tab: { type: String, default: '' } })
 const active = ref(props.tab || 'document')
 
 const tabs = [
-  { id: 'document', name: '📄 文档' },
-  { id: 'graph', name: '🕸️ 图' },
-  { id: 'timeseries', name: '📈 时序' },
-  { id: 'vector', name: '🧠 向量' }
+  { id: 'document', name: '📄 Document' },
+  { id: 'graph', name: '🕸️ Graph' },
+  { id: 'timeseries', name: '📈 Time-series' },
+  { id: 'vector', name: '🧠 Vector' }
 ]
 
 const tsData = [
@@ -194,10 +194,10 @@ const tsData = [
 ]
 
 const vecResults = [
-  { text: '银座寿司之神 — 顶级 omakase', score: 0.96 },
-  { text: '新宿拉面一条街 — 浓厚豚骨汤底', score: 0.82 },
-  { text: '居酒屋深夜食堂 — 烤串与清酒', score: 0.75 },
-  { text: '意大利手工披萨 — 窑烤玛格丽特', score: 0.31 }
+  { text: 'Sushi cao cấp Ginza — omakase đỉnh cao', score: 0.96 },
+  { text: 'Phố ramen Shinjuku — nước dùng tonkotsu đậm đà', score: 0.82 },
+  { text: 'Izakaya quán đêm — xiên nướng và sake', score: 0.75 },
+  { text: 'Pizza thủ công Ý — margherita lò củi', score: 0.31 }
 ]
 </script>
 

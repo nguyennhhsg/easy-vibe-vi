@@ -14,16 +14,16 @@
           </div>
         </div>
         <div class="toggle-label">
-          <span :class="{ active: !isVLM }">Pure LLM (纯文本)</span>
+          <span :class="{ active: !isVLM }">Pure LLM (chỉ văn bản)</span>
           <span class="arrow">→</span>
-          <span :class="{ active: isVLM }">Multimodal VLM (多模态)</span>
+          <span :class="{ active: isVLM }">Multimodal VLM (đa phương thức)</span>
         </div>
       </div>
       <div class="status-desc">
         {{
           isVLM
-            ? 'Tokens from vision are translated and placed before text tokens. (视觉信息被翻译成 Token，放在文字 Token 之前。)'
-            : 'Text-only tokens flow into the LLM. (只有文字 Token 流入大模型。)'
+            ? 'Tokens from vision are translated and placed before text tokens. (Thông tin hình ảnh được dịch thành Token và đặt trước Token văn bản.)'
+            : 'Text-only tokens flow into the LLM. (Chỉ có Token văn bản đi vào LLM.)'
         }}
       </div>
     </div>
@@ -35,27 +35,27 @@
           class="lane lane-vision"
         >
           <div class="lane-title">
-            Vision Path (视觉路径)
+            Vision Path (luồng thị giác)
           </div>
           <div class="lane-flow">
             <div class="node input-node">
               <span class="icon">🖼️</span>
-              <span class="label">Image (图片)</span>
+              <span class="label">Image (hình ảnh)</span>
             </div>
             <span class="mini-arrow">→</span>
             <div class="node process-node vit-node">
               <span class="icon">👁️</span>
-              <span class="label">ViT (视觉模型)</span>
+              <span class="label">ViT (mô hình thị giác)</span>
             </div>
             <span class="mini-arrow">→</span>
             <div class="node adapter-node">
               <span class="icon">🔌</span>
-              <span class="label">Projector (投影器)</span>
+              <span class="label">Projector (bộ chiếu)</span>
             </div>
             <span class="mini-arrow">→</span>
             <div class="token-box token-box-vision">
               <div class="token-box-title">
-                Vision Tokens (视觉 Token)
+                Vision Tokens (Token thị giác)
               </div>
               <div class="tokens">
                 <span class="token vision">v1</span>
@@ -69,22 +69,22 @@
 
         <div class="lane lane-text">
           <div class="lane-title">
-            Text Path (文字路径)
+            Text Path (luồng văn bản)
           </div>
           <div class="lane-flow">
             <div class="node input-node">
               <span class="icon">⌨️</span>
-              <span class="label">Prompt (提示词)</span>
+              <span class="label">Prompt (câu lệnh)</span>
             </div>
             <span class="mini-arrow">→</span>
             <div class="node process-node">
               <span class="icon">🔤</span>
-              <span class="label">Embed (向量化)</span>
+              <span class="label">Embed (vector hoá)</span>
             </div>
             <span class="mini-arrow">→</span>
             <div class="token-box">
               <div class="token-box-title">
-                Text Tokens (文字 Token)
+                Text Tokens (Token văn bản)
               </div>
               <div class="tokens">
                 <span class="token text">t1</span>
@@ -98,14 +98,14 @@
 
         <div class="merge-stage">
           <div class="merge-title">
-            Token Sequence (输入序列)
+            Token Sequence (chuỗi đầu vào)
           </div>
           <div class="sequence">
             <div
               v-if="isVLM"
               class="sequence-row"
             >
-              <span class="sequence-tag vision">Vision (视觉)</span>
+              <span class="sequence-tag vision">Vision (thị giác)</span>
               <div class="tokens">
                 <span class="token vision">v1</span>
                 <span class="token vision">v2</span>
@@ -114,7 +114,7 @@
               </div>
             </div>
             <div class="sequence-row">
-              <span class="sequence-tag text">Text (文字)</span>
+              <span class="sequence-tag text">Text (văn bản)</span>
               <div class="tokens">
                 <span class="token text">t1</span>
                 <span class="token text">t2</span>
@@ -124,8 +124,8 @@
             </div>
             <div class="sequence-hint">
               <span v-if="isVLM">Concat: [Vision Tokens] + [Text Tokens]
-                (拼接：视觉在前，文字在后)</span>
-              <span v-else>Only [Text Tokens] (只有文字 Token)</span>
+                (ghép: thị giác đứng trước, văn bản theo sau)</span>
+              <span v-else>Only [Text Tokens] (chỉ có Token văn bản)</span>
             </div>
           </div>
 
@@ -133,12 +133,12 @@
             <span class="big-arrow">→</span>
             <div class="node core-node">
               <span class="icon">🧠</span>
-              <span class="label">LLM Backbone (大模型)</span>
+              <span class="label">LLM Backbone (mô hình lớn)</span>
             </div>
             <span class="big-arrow">→</span>
             <div class="node output-node">
               <span class="icon">💬</span>
-              <span class="label">Response (回复)</span>
+              <span class="label">Response (phản hồi)</span>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@
           key="llm"
           class="info-card"
         >
-          <h3>Standard LLM Flow (标准大模型流程)</h3>
+          <h3>Standard LLM Flow (luồng LLM tiêu chuẩn)</h3>
           <p>Prompt → Embedding → Token Sequence → LLM → Response。</p>
         </div>
         <div
@@ -163,16 +163,14 @@
           key="vlm"
           class="info-card vlm-info"
         >
-          <h3>VLM = LLM + Vision Encoder (视觉大模型原理)</h3>
+          <h3>VLM = LLM + Vision Encoder (nguyên lý mô hình thị giác lớn)</h3>
           <ul>
-            <li><strong>ViT (The Eye):</strong> 把图片编码成视觉特征。</li>
+            <li><strong>ViT (The Eye):</strong> mã hoá hình ảnh thành đặc trưng thị giác.</li>
             <li>
-              <strong>Projector (The Translator):</strong> 把视觉特征映射到 LLM
-              的 Token 空间。
+              <strong>Projector (The Translator):</strong> ánh xạ đặc trưng thị giác sang không gian Token của LLM.
             </li>
             <li>
-              <strong>Concatenation (拼接):</strong> 把视觉 Token 放在文字 Token
-              之前，作为同一条输入序列。
+              <strong>Concatenation (ghép nối):</strong> đặt Token thị giác đứng trước Token văn bản, tạo thành một chuỗi đầu vào duy nhất.
             </li>
           </ul>
         </div>

@@ -7,18 +7,18 @@ const requestStep = ref(0)
 const responseText = ref('')
 
 const steps = [
-  { label: '浏览器', desc: '你在地址栏输入 URL', icon: '🌐' },
-  { label: 'DNS 解析', desc: 'localhost → 127.0.0.1（不出网）', icon: '📖' },
-  { label: '网络层', desc: '数据包发往 127.0.0.1（环回接口）', icon: '🔄' },
-  { label: '本机服务', desc: '端口 3000 上的程序接收请求', icon: '⚙️' },
-  { label: '返回响应', desc: '{ "message": "Hello!" }', icon: '📨' }
+  { label: 'Trình duyệt', desc: 'Bạn gõ URL vào thanh địa chỉ', icon: '🌐' },
+  { label: 'DNS resolve', desc: 'localhost → 127.0.0.1 (không ra mạng)', icon: '📖' },
+  { label: 'Tầng network', desc: 'Gói tin gửi tới 127.0.0.1 (loopback interface)', icon: '🔄' },
+  { label: 'Dịch vụ local', desc: 'Tiến trình ở port 3000 nhận request', icon: '⚙️' },
+  { label: 'Trả response', desc: '{ "message": "Hello!" }', icon: '📨' }
 ]
 
 const aliases = reactive([
-  { name: 'localhost', ip: '127.0.0.1', desc: '标准域名别名', active: false },
-  { name: '127.0.0.1', ip: '127.0.0.1', desc: 'IPv4 环回地址', active: false },
-  { name: '::1', ip: '::1', desc: 'IPv6 环回地址', active: false },
-  { name: '0.0.0.0', ip: '0.0.0.0', desc: '监听所有网卡', active: false }
+  { name: 'localhost', ip: '127.0.0.1', desc: 'Alias tên miền chuẩn', active: false },
+  { name: '127.0.0.1', ip: '127.0.0.1', desc: 'Loopback IPv4', active: false },
+  { name: '::1', ip: '::1', desc: 'Loopback IPv6', active: false },
+  { name: '0.0.0.0', ip: '0.0.0.0', desc: 'Listen trên mọi NIC', active: false }
 ])
 
 const selectedAlias = ref(0)
@@ -61,7 +61,7 @@ function selectAlias(index) {
           :disabled="isRequesting"
           @click="simulateRequest"
         >
-          {{ isRequesting ? '请求中...' : '发送请求' }}
+          {{ isRequesting ? 'Đang gửi...' : 'Gửi request' }}
         </button>
       </div>
     </div>
@@ -87,7 +87,7 @@ function selectAlias(index) {
 
       <transition name="fade">
         <div v-if="responseText" class="response-box">
-          <span class="response-label">响应结果：</span>
+          <span class="response-label">Kết quả response:</span>
           <code>{{ responseText }}</code>
         </div>
       </transition>
@@ -95,11 +95,11 @@ function selectAlias(index) {
       <div class="loopback-explain">
         <div class="loopback-diagram">
           <div class="loopback-node app">
-            <span>你的应用</span>
-            <span class="small">（浏览器）</span>
+            <span>App của bạn</span>
+            <span class="small">(Trình duyệt)</span>
           </div>
           <div class="loopback-arrow">
-            <span class="arrow-text">请求不离开本机</span>
+            <span class="arrow-text">Request không ra khỏi máy</span>
             <svg width="80" height="60" viewBox="0 0 80 60">
               <path d="M10 10 Q40 55 70 10" stroke="var(--vp-c-brand)" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
               <defs>
@@ -110,15 +110,15 @@ function selectAlias(index) {
             </svg>
           </div>
           <div class="loopback-node server">
-            <span>本地服务</span>
-            <span class="small">（:3000）</span>
+            <span>Dịch vụ local</span>
+            <span class="small">(:3000)</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="alias-section">
-      <div class="alias-title">localhost 的"马甲"们（点击查看说明）</div>
+      <div class="alias-title">Các &quot;biệt danh&quot; của localhost (bấm để xem giải thích)</div>
       <div class="alias-grid">
         <div
           v-for="(alias, i) in aliases"
@@ -131,24 +131,24 @@ function selectAlias(index) {
         </div>
       </div>
       <div class="alias-desc">
-        {{ aliases[selectedAlias].desc }}：
+        {{ aliases[selectedAlias].desc }}:
         <template v-if="selectedAlias === 0">
-          这是写在你电脑 <code>/etc/hosts</code> 文件里的映射。浏览器看到 <code>localhost</code> 时，直接解析为 <code>127.0.0.1</code>，不会去问 DNS 服务器。
+          Đây là mapping được ghi trong file <code>/etc/hosts</code> trên máy của bạn. Khi trình duyệt thấy <code>localhost</code>, nó resolve thẳng thành <code>127.0.0.1</code>, không hỏi DNS server.
         </template>
         <template v-else-if="selectedAlias === 1">
-          <code>127.0.0.1</code> 是 IPv4 的"环回地址"。发到这个地址的数据包永远不会离开本机，操作系统直接在内部把它"折返"回来。
+          <code>127.0.0.1</code> là địa chỉ loopback của IPv4. Gói tin gửi tới đây không bao giờ rời máy, hệ điều hành quay vòng nội bộ luôn.
         </template>
         <template v-else-if="selectedAlias === 2">
-          <code>::1</code> 是 IPv6 版本的环回地址，功能和 <code>127.0.0.1</code> 完全一样，只不过是 IPv6 格式。
+          <code>::1</code> là phiên bản IPv6 của loopback, chức năng y hệt <code>127.0.0.1</code> chỉ khác định dạng IPv6.
         </template>
         <template v-else>
-          <code>0.0.0.0</code> 不是"某一个地址"，而是"所有地址"。当服务监听 <code>0.0.0.0:3000</code> 时，意味着无论从哪个网卡（包括局域网 IP 和 127.0.0.1）都能访问。
+          <code>0.0.0.0</code> không phải &quot;một địa chỉ&quot; mà là &quot;mọi địa chỉ&quot;. Khi dịch vụ listen <code>0.0.0.0:3000</code>, mọi NIC (kể cả IP LAN và 127.0.0.1) đều truy cập được.
         </template>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心概念：</strong>localhost 就是"自己找自己"。数据包通过环回接口（loopback interface）在本机内部折返，不经过网线、不经过路由器，速度极快且完全安全。
+      <strong>Ý chính:</strong> localhost chính là &quot;máy tự gọi chính nó&quot;. Gói tin đi qua loopback interface và quay vòng trong máy, không qua dây mạng, không qua router, cực nhanh và rất an toàn.
     </div>
   </div>
 </template>

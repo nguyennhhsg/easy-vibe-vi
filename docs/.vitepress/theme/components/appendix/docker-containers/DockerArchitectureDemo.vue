@@ -1,12 +1,12 @@
 <!--
   DockerArchitectureDemo.vue
-  Docker 架构对比演示：虚拟机 vs 容器
+  So sánh kiến trúc Docker: máy ảo vs container
 -->
 <template>
   <div class="docker-arch-demo">
     <div class="header">
-      <div class="title">虚拟机 vs 容器</div>
-      <div class="subtitle">点击切换查看两种虚拟化方式的架构差异</div>
+      <div class="title">Máy ảo vs Container</div>
+      <div class="subtitle">Bấm để chuyển giữa hai kiểu ảo hóa và so sánh kiến trúc</div>
     </div>
 
     <div class="tabs">
@@ -52,39 +52,39 @@ import { ref, computed } from 'vue'
 const activeTab = ref('container')
 
 const tabs = [
-  { key: 'vm', label: '虚拟机' },
-  { key: 'container', label: '容器' }
+  { key: 'vm', label: 'Máy ảo' },
+  { key: 'container', label: 'Container' }
 ]
 
 const vmLayers = [
-  { label: '应用 A / 应用 B / 应用 C', type: 'app', items: ['App A + Bins/Libs', 'App B + Bins/Libs', 'App C + Bins/Libs'] },
-  { label: '客户操作系统（Guest OS）', type: 'os', items: ['Ubuntu', 'CentOS', 'Debian'] },
-  { label: 'Hypervisor（VMware / KVM）', type: 'hypervisor' },
-  { label: '宿主操作系统（Host OS）', type: 'host' },
-  { label: '物理硬件', type: 'hardware' }
+  { label: 'App A / App B / App C', type: 'app', items: ['App A + Bins/Libs', 'App B + Bins/Libs', 'App C + Bins/Libs'] },
+  { label: 'Guest OS', type: 'os', items: ['Ubuntu', 'CentOS', 'Debian'] },
+  { label: 'Hypervisor (VMware / KVM)', type: 'hypervisor' },
+  { label: 'Host OS', type: 'host' },
+  { label: 'Phần cứng vật lý', type: 'hardware' }
 ]
 
 const containerLayers = [
-  { label: '应用 A / 应用 B / 应用 C', type: 'app', items: ['App A + Bins/Libs', 'App B + Bins/Libs', 'App C + Bins/Libs'] },
+  { label: 'App A / App B / App C', type: 'app', items: ['App A + Bins/Libs', 'App B + Bins/Libs', 'App C + Bins/Libs'] },
   { label: 'Docker Engine', type: 'docker' },
-  { label: '宿主操作系统（Host OS）', type: 'host' },
-  { label: '物理硬件', type: 'hardware' }
+  { label: 'Host OS', type: 'host' },
+  { label: 'Phần cứng vật lý', type: 'hardware' }
 ]
 
 const vmInfo = [
-  { label: '启动速度', value: '分钟级', highlight: false },
-  { label: '资源占用', value: '每个 VM 需要完整 OS（GB 级）', highlight: false },
-  { label: '隔离性', value: '强（硬件级隔离）', highlight: true },
-  { label: '密度', value: '单机通常 10-20 个 VM', highlight: false },
-  { label: '镜像大小', value: 'GB 级', highlight: false }
+  { label: 'Tốc độ khởi động', value: 'Tính bằng phút', highlight: false },
+  { label: 'Chi phí tài nguyên', value: 'Mỗi VM cần đủ một OS (cỡ GB)', highlight: false },
+  { label: 'Tính cách ly', value: 'Mạnh (cách ly ở mức phần cứng)', highlight: true },
+  { label: 'Mật độ', value: 'Mỗi máy thường 10-20 VM', highlight: false },
+  { label: 'Kích thước image', value: 'Cỡ GB', highlight: false }
 ]
 
 const containerInfo = [
-  { label: '启动速度', value: '秒级', highlight: true },
-  { label: '资源占用', value: '共享宿主 OS 内核（MB 级）', highlight: true },
-  { label: '隔离性', value: '较强（进程级隔离）', highlight: false },
-  { label: '密度', value: '单机可运行数百个容器', highlight: true },
-  { label: '镜像大小', value: 'MB 级', highlight: true }
+  { label: 'Tốc độ khởi động', value: 'Tính bằng giây', highlight: true },
+  { label: 'Chi phí tài nguyên', value: 'Dùng chung kernel host OS (cỡ MB)', highlight: true },
+  { label: 'Tính cách ly', value: 'Khá tốt (cách ly ở mức tiến trình)', highlight: false },
+  { label: 'Mật độ', value: 'Một máy có thể chạy hàng trăm container', highlight: true },
+  { label: 'Kích thước image', value: 'Cỡ MB', highlight: true }
 ]
 
 const currentLayers = computed(() => activeTab.value === 'vm' ? vmLayers : containerLayers)

@@ -1,39 +1,39 @@
 <template>
   <div class="browser-render-demo">
     <div class="demo-header">
-      <span class="title">浏览器渲染</span>
-      <span class="subtitle">代码如何变成画面</span>
+      <span class="title">Browser rendering</span>
+      <span class="subtitle">Code biến thành hình ảnh như thế nào</span>
     </div>
 
     <div class="render-pipeline">
       <div class="stage">
         <span class="stage-num">1</span>
-        <span class="stage-name">解析 HTML</span>
+        <span class="stage-name">Parse HTML</span>
         <span class="stage-icon">📄</span>
       </div>
       <div class="stage">
         <span class="stage-num">2</span>
-        <span class="stage-name">解析 CSS</span>
+        <span class="stage-name">Parse CSS</span>
         <span class="stage-icon">🎨</span>
       </div>
       <div class="stage">
         <span class="stage-num">3</span>
-        <span class="stage-name">生成渲染树</span>
+        <span class="stage-name">Tạo render tree</span>
         <span class="stage-icon">🌲</span>
       </div>
       <div class="stage">
         <span class="stage-num">4</span>
-        <span class="stage-name">布局计算</span>
+        <span class="stage-name">Layout</span>
         <span class="stage-icon">📐</span>
       </div>
       <div class="stage">
         <span class="stage-num">5</span>
-        <span class="stage-name">绘制像素</span>
+        <span class="stage-name">Paint pixel</span>
         <span class="stage-icon">✏️</span>
       </div>
       <div class="stage">
         <span class="stage-num">6</span>
-        <span class="stage-name">显示屏幕</span>
+        <span class="stage-name">Hiển thị ra màn hình</span>
         <span class="stage-icon">🖥️</span>
       </div>
     </div>
@@ -57,8 +57,8 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      浏览器将 HTML/CSS 转换为像素的过程：解析 → 合并 → 布局 → 绘制 → 显示。
+      <strong>Ý chính:</strong>
+      Quá trình browser chuyển HTML/CSS thành pixel: parse → kết hợp → layout → paint → hiển thị.
     </div>
   </div>
 </template>

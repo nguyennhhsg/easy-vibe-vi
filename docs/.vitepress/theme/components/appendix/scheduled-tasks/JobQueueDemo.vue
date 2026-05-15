@@ -1,32 +1,32 @@
 <template>
   <div class="jobqueue-demo">
     <div class="header">
-      <div class="title">任务队列演示</div>
-      <div class="subtitle">生产者-消费者模式模拟</div>
+      <div class="title">Demo job queue</div>
+      <div class="subtitle">Mô phỏng pattern producer-consumer</div>
     </div>
     <div class="controls">
-      <button @click="enqueue" class="enqueue-btn">添加任务</button>
-      <button @click="consume" class="consume-btn" :disabled="queue.length === 0">消费任务</button>
-      <button @click="reset" class="reset-btn">重置</button>
+      <button @click="enqueue" class="enqueue-btn">Thêm task</button>
+      <button @click="consume" class="consume-btn" :disabled="queue.length === 0">Consume task</button>
+      <button @click="reset" class="reset-btn">Reset</button>
     </div>
     <div class="queue-visual">
       <div class="producer">
-        <div class="role-label">生产者</div>
-        <div class="action">添加任务</div>
+        <div class="role-label">Producer</div>
+        <div class="action">Thêm task</div>
       </div>
       <div class="queue-section">
-        <div class="queue-label">队列 ({{ queue.length }}/{{ maxSize }})</div>
+        <div class="queue-label">Queue ({{ queue.length }}/{{ maxSize }})</div>
         <div class="queue-bar">
           <div class="queue-fill" :style="{ width: (queue.length / maxSize * 100) + '%' }"></div>
         </div>
         <div class="queue-items">
           <span v-for="(job, i) in queue" :key="i" class="job-item">{{ job }}</span>
-          <span v-if="queue.length === 0" class="empty-msg">队列为空</span>
+          <span v-if="queue.length === 0" class="empty-msg">Queue trống</span>
         </div>
       </div>
       <div class="consumer">
-        <div class="role-label">消费者</div>
-        <div class="action">处理任务</div>
+        <div class="role-label">Consumer</div>
+        <div class="action">Xử lý task</div>
       </div>
     </div>
     <div class="log-area">
@@ -45,20 +45,20 @@ let jobId = 1
 
 function enqueue() {
   if (queue.value.length >= maxSize) {
-    logs.value.unshift(`队列已满，无法添加！`)
+    logs.value.unshift(`Queue đã đầy, không thể thêm!`)
     return
   }
   queue.value.push(`Job-${jobId++}`)
-  logs.value.unshift(`添加任务: Job-${jobId - 1}`)
+  logs.value.unshift(`Thêm task: Job-${jobId - 1}`)
 }
 
 function consume() {
   if (queue.value.length === 0) {
-    logs.value.unshift(`队列为空，无任务可消费`)
+    logs.value.unshift(`Queue trống, không có task để consume`)
     return
   }
   const job = queue.value.shift()
-  logs.value.unshift(`消费任务: ${job}`)
+  logs.value.unshift(`Consume task: ${job}`)
 }
 
 function reset() {

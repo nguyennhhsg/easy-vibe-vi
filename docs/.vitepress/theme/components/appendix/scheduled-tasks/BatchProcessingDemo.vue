@@ -1,31 +1,31 @@
 <template>
   <div class="batch-demo">
     <div class="header">
-      <div class="title">批量处理演示</div>
-      <div class="subtitle">模拟分批处理大量数据</div>
+      <div class="title">Demo xử lý batch</div>
+      <div class="subtitle">Mô phỏng xử lý dữ liệu lớn theo từng batch</div>
     </div>
     <div class="controls">
       <div class="input-group">
-        <label>数据总量：</label>
+        <label>Tổng dữ liệu:</label>
         <input type="number" v-model.number="total" min="1" max="1000" class="num-input" />
       </div>
       <div class="input-group">
-        <label>批量大小：</label>
+        <label>Kích thước batch:</label>
         <input type="number" v-model.number="batchSize" min="1" max="100" class="num-input" />
       </div>
-      <button @click="process" class="process-btn">开始处理</button>
-      <button @click="reset" class="reset-btn">重置</button>
+      <button @click="process" class="process-btn">Bắt đầu xử lý</button>
+      <button @click="reset" class="reset-btn">Reset</button>
     </div>
     <div class="progress-bar">
       <div class="progress-fill" :style="{ width: progress + '%' }"></div>
     </div>
     <div class="stats">
       <div class="stat-item">
-        <span class="stat-label">已处理</span>
+        <span class="stat-label">Đã xử lý</span>
         <span class="stat-value">{{ processed }}/{{ total }}</span>
       </div>
       <div class="stat-item">
-        <span class="stat-label">当前批次</span>
+        <span class="stat-label">Batch hiện tại</span>
         <span class="stat-value">{{ currentBatch }}/{{ totalBatches }}</span>
       </div>
     </div>
@@ -59,10 +59,10 @@ function process() {
     processed.value += toProcess
     remaining -= toProcess
     currentBatch.value = batch
-    logs.value.push(`批次 ${batch}: 处理 ${toProcess} 条数据`)
+    logs.value.push(`Batch ${batch}: xử lý ${toProcess} record dữ liệu`)
     batch++
   }
-  logs.value.push('处理完成！')
+  logs.value.push('Đã xử lý xong!')
 }
 
 function reset() {

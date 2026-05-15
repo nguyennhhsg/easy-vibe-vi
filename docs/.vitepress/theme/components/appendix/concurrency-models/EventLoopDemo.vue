@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>事件循环 (Event Loop) 演示</h4>
+    <h4>Demo event loop</h4>
 
     <div class="controls">
       <el-button
@@ -9,27 +9,27 @@
         :disabled="isRunning"
         @click="startSimulation"
       >
-        {{ isRunning ? '运行中...' : '开始模拟' }}
+        {{ isRunning ? 'Đang chạy...' : 'Bắt đầu mô phỏng' }}
       </el-button>
       <el-button
         size="small"
         :disabled="tasks.length >= 10"
         @click="addTask"
       >
-        添加任务
+        Thêm task
       </el-button>
       <el-button
         size="small"
         :disabled="microtasks.length >= 5"
         @click="addMicrotask"
       >
-        添加微任务
+        Thêm microtask
       </el-button>
       <el-button
         size="small"
         @click="reset"
       >
-        重置
+        Reset
       </el-button>
 
       <el-select
@@ -39,32 +39,32 @@
       >
         <el-option
           :value="1"
-          label="慢速"
+          label="Chậm"
         />
         <el-option
           :value="2"
-          label="正常"
+          label="Bình thường"
         />
         <el-option
           :value="3"
-          label="快速"
+          label="Nhanh"
         />
         <el-option
           :value="4"
-          label="极快"
+          label="Rất nhanh"
         />
         <el-option
           :value="5"
-          label="即时"
+          label="Tức thì"
         />
       </el-select>
     </div>
 
     <div class="event-loop-container">
-      <!-- 调用栈 -->
+      <!-- Call stack -->
       <div class="section">
         <div class="section-title">
-          调用栈 (Call Stack)
+          Call stack
         </div>
         <div class="stack-container">
           <div
@@ -81,22 +81,22 @@
               v-if="frame.line"
               class="frame-line"
             >
-              第 {{ frame.line }} 行
+              Dòng {{ frame.line }}
             </div>
           </div>
           <div
             v-if="callStack.length === 0"
             class="empty-stack"
           >
-            栈为空
+            Stack trống
           </div>
         </div>
       </div>
 
-      <!-- 事件循环 -->
+      <!-- Event loop -->
       <div class="section event-loop">
         <div class="section-title">
-          事件循环 (Event Loop)
+          Event loop
         </div>
         <div class="loop-container">
           <div
@@ -126,7 +126,7 @@
             </svg>
           </div>
           <div class="loop-label">
-            检查
+            Check
           </div>
         </div>
 
@@ -136,41 +136,41 @@
             :class="{ active: currentStep === 1 }"
           >
             <span class="step-num">1</span>
-            <span class="step-text">执行调用栈中的同步代码</span>
+            <span class="step-text">Chạy code sync trong call stack</span>
           </div>
           <div
             class="step"
             :class="{ active: currentStep === 2 }"
           >
             <span class="step-num">2</span>
-            <span class="step-text">执行所有微任务 (microtasks)</span>
+            <span class="step-text">Chạy toàn bộ microtask</span>
           </div>
           <div
             class="step"
             :class="{ active: currentStep === 3 }"
           >
             <span class="step-num">3</span>
-            <span class="step-text">渲染 UI (如果需要)</span>
+            <span class="step-text">Render UI (nếu cần)</span>
           </div>
           <div
             class="step"
             :class="{ active: currentStep === 4 }"
           >
             <span class="step-num">4</span>
-            <span class="step-text">执行宏任务 (macrotask)</span>
+            <span class="step-text">Chạy macrotask</span>
           </div>
         </div>
       </div>
 
-      <!-- 任务队列 -->
+      <!-- Task queue -->
       <div class="section">
         <div class="section-title">
-          任务队列
+          Task queue
         </div>
 
         <div class="queue microtask-queue">
           <div class="queue-title">
-            微任务队列 (Microtasks)
+            Microtask queue
           </div>
           <div class="queue-items">
             <div
@@ -180,20 +180,20 @@
               :style="{ animationDelay: idx * 0.1 + 's' }"
             >
               <span class="task-name">{{ task.name }}</span>
-              <span class="task-priority">高优先级</span>
+              <span class="task-priority">Priority cao</span>
             </div>
             <div
               v-if="microtasks.length === 0"
               class="empty-queue"
             >
-              队列为空
+              Queue trống
             </div>
           </div>
         </div>
 
         <div class="queue macrotask-queue">
           <div class="queue-title">
-            宏任务队列 (Macrotasks)
+            Macrotask queue
           </div>
           <div class="queue-items">
             <div
@@ -209,7 +209,7 @@
               v-if="tasks.length === 0"
               class="empty-queue"
             >
-              队列为空
+              Queue trống
             </div>
           </div>
         </div>
@@ -232,10 +232,10 @@ let microtaskIdCounter = 1
 
 function addTask() {
   if (tasks.value.length >= 10) return
-  const types = ['setTimeout', 'setInterval', 'I/O', 'DOM事件']
+  const types = ['setTimeout', 'setInterval', 'I/O', 'DOM event']
   tasks.value.push({
     id: taskIdCounter++,
-    name: `任务 ${taskIdCounter - 1}`,
+    name: `Task ${taskIdCounter - 1}`,
     type: types[Math.floor(Math.random() * types.length)]
   })
 }
@@ -244,7 +244,7 @@ function addMicrotask() {
   if (microtasks.value.length >= 5) return
   microtasks.value.push({
     id: microtaskIdCounter++,
-    name: `微任务 ${microtaskIdCounter - 1}`
+    name: `Microtask ${microtaskIdCounter - 1}`
   })
 }
 

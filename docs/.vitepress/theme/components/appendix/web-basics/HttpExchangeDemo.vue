@@ -1,46 +1,46 @@
 <template>
   <div class="http-exchange-demo custom-demo-base">
-    <div class="demo-label">HTTP 请求与响应 ── 寄纸条买包裹</div>
+    <div class="demo-label">HTTP request và response - gửi giấy đặt hàng nhận gói hàng</div>
     <div class="demo-panel">
 
       <div class="exchange-container">
         <!-- Request Side -->
         <div class="card request-card" :class="{ active: state !== 'idle' }">
-          <div class="card-header">📤 【买方发纸条】 HTTP Request</div>
+          <div class="card-header">📤 [Bên mua gửi đơn] HTTP Request</div>
           <div class="card-body">
             <div class="line"><span class="hl-blue">GET</span> /search <span class="hl-gray">HTTP/1.1</span></div>
             <div class="line"><span class="hl-gray">Host:</span> www.google.com</div>
-            <div class="line"><span class="hl-gray">User-Agent:</span> Mac Chrome 浏览器</div>
-            <div class="line"><span class="hl-gray">Accept-Language:</span> zh-CN (我要中文货) </div>
+            <div class="line"><span class="hl-gray">User-Agent:</span> Mac Chrome trình duyệt</div>
+            <div class="line"><span class="hl-gray">Accept-Language:</span> vi-VN (mình muốn nội dung tiếng Việt) </div>
           </div>
         </div>
 
         <!-- Action Center -->
         <div class="action-center">
-          <button v-if="state === 'idle'" class="action-btn" @click="sendRequest">塞入通道发送 →</button>
+          <button v-if="state === 'idle'" class="action-btn" @click="sendRequest">Đẩy vào kênh và gửi →</button>
           <div v-if="state === 'loading'" class="loading-state">
              <div class="spinner"></div>
-             <div>等包裹寄回...</div>
+             <div>Chờ gói hàng quay về...</div>
           </div>
-          <button v-if="state === 'done'" class="action-btn outline" @click="reset">再试一次 ↻</button>
+          <button v-if="state === 'done'" class="action-btn outline" @click="reset">Thử lại ↻</button>
         </div>
 
         <!-- Response Side -->
         <div class="card response-card" :class="{ active: state === 'done' }">
-          <div class="card-header">📥 【卖方回包裹】 HTTP Response</div>
+          <div class="card-header">📥 [Bên bán gửi gói hàng] HTTP Response</div>
           <div class="card-body" v-if="state === 'done'">
-            <div class="line"><span class="hl-gray">HTTP/1.1</span> <span class="hl-green">200 OK</span> (交易成功)</div>
+            <div class="line"><span class="hl-gray">HTTP/1.1</span> <span class="hl-green">200 OK</span> (giao dịch thành công)</div>
             <div class="line"><span class="hl-gray">Content-Type:</span> text/html; charset=UTF-8</div>
-            <div class="divider">空行 (分隔快递单和物品正文)</div>
+            <div class="divider">Dòng trống (tách phiếu giao và nội dung)</div>
             <div class="code-block">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
-  &lt;body&gt;这里是Google搜索页面的代码&lt;/body&gt;
+  &lt;body&gt;Đây là mã của trang tìm kiếm Google&lt;/body&gt;
 &lt;/html&gt;
             </div>
           </div>
           <div class="card-body empty" v-else>
-            这里将显示服务器返回的包裹...
+            Phần này sẽ hiển thị gói hàng server trả về...
           </div>
         </div>
       </div>
@@ -57,9 +57,9 @@ import { ref, computed } from 'vue'
 
 const state = ref('idle') // idle, loading, done
 const statusList = {
-  idle: '组装好 HTTP 请求单，包含请求路径和各项补充情报。',
-  loading: '请求正在通过刚才建立好的 TCP 通道飞速传输给对方...',
-  done: '服务器找到货物 (HTML代码)，贴上 200 OK 标签原路返回送达！'
+  idle: 'Ráp xong phiếu HTTP request, gồm path và các thông tin bổ sung.',
+  loading: 'Request đang được truyền siêu nhanh qua kênh TCP vừa thiết lập...',
+  done: 'Server tìm được hàng (mã HTML), dán nhãn 200 OK và gửi ngược lại cho bạn!'
 }
 
 const statusText = computed(() => statusList[state.value])

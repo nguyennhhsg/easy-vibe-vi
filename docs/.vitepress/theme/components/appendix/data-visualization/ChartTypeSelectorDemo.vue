@@ -1,12 +1,12 @@
 <!--
   ChartTypeSelectorDemo.vue
-  图表类型选择器：根据数据特征推荐合适的图表类型
+  Bộ chọn loại chart: gợi ý loại chart phù hợp dựa trên đặc tính dữ liệu
 -->
 <template>
   <div class="chart-selector-demo">
     <div class="header">
-      <div class="title">图表类型选择器</div>
-      <div class="subtitle">选择你的数据目的，查看推荐的图表类型</div>
+      <div class="title">Bộ chọn loại chart</div>
+      <div class="subtitle">Chọn mục đích của dữ liệu để xem chart phù hợp</div>
     </div>
 
     <div class="purposes">
@@ -22,7 +22,7 @@
     </div>
 
     <div v-if="currentPurpose" class="charts-panel">
-      <div class="panel-title">{{ currentPurpose.name }}：推荐图表</div>
+      <div class="panel-title">{{ currentPurpose.name }}: Chart gợi ý</div>
       <div class="chart-list">
         <div
           v-for="chart in currentPurpose.charts"
@@ -33,7 +33,7 @@
           <div class="chart-info">
             <div class="chart-name">{{ chart.name }}</div>
             <div class="chart-desc">{{ chart.desc }}</div>
-            <div class="chart-example">示例：{{ chart.example }}</div>
+            <div class="chart-example">Ví dụ: {{ chart.example }}</div>
           </div>
         </div>
       </div>
@@ -49,52 +49,52 @@ const activePurpose = ref('comparison')
 const purposes = [
   {
     key: 'comparison',
-    name: '比较',
+    name: 'So sánh',
     icon: '📊',
     charts: [
-      { name: '柱状图', visual: '▐▐▐', desc: '比较不同类别的数值大小', example: '各部门销售额对比' },
-      { name: '分组柱状图', visual: '▐▐ ▐▐', desc: '多维度分组比较', example: '各季度各产品线收入' },
-      { name: '雷达图', visual: '◇', desc: '多维度综合对比', example: '候选人能力评估' }
+      { name: 'Biểu đồ cột', visual: '▐▐▐', desc: 'So sánh giá trị giữa các nhóm khác nhau', example: 'Đối chiếu doanh số các phòng ban' },
+      { name: 'Biểu đồ cột nhóm', visual: '▐▐ ▐▐', desc: 'So sánh đa chiều theo nhóm', example: 'Doanh thu các dòng sản phẩm theo từng quý' },
+      { name: 'Biểu đồ radar', visual: '◇', desc: 'So sánh đa chiều tổng hợp', example: 'Đánh giá năng lực ứng viên' }
     ]
   },
   {
     key: 'trend',
-    name: '趋势',
+    name: 'Xu hướng',
     icon: '📈',
     charts: [
-      { name: '折线图', visual: '╱╲╱', desc: '展示数据随时间的变化趋势', example: '月度用户增长曲线' },
-      { name: '面积图', visual: '▓▓▓', desc: '强调趋势下的累积量', example: '各渠道流量占比变化' },
-      { name: '阶梯图', visual: '┐└┐', desc: '展示离散时间点的变化', example: '价格调整历史' }
+      { name: 'Biểu đồ đường', visual: '╱╲╱', desc: 'Cho thấy dữ liệu thay đổi theo thời gian', example: 'Đường tăng trưởng user theo tháng' },
+      { name: 'Biểu đồ vùng', visual: '▓▓▓', desc: 'Nhấn mạnh lượng tích luỹ theo xu hướng', example: 'Thay đổi tỉ trọng traffic theo kênh' },
+      { name: 'Biểu đồ bậc thang', visual: '┐└┐', desc: 'Cho thấy thay đổi tại các mốc thời gian rời rạc', example: 'Lịch sử điều chỉnh giá' }
     ]
   },
   {
     key: 'proportion',
-    name: '占比',
+    name: 'Tỉ lệ',
     icon: '🍩',
     charts: [
-      { name: '饼图', visual: '◔', desc: '展示各部分占整体的比例', example: '市场份额分布' },
-      { name: '环形图', visual: '◎', desc: '饼图的变体，中间可放数字', example: '预算使用率' },
-      { name: '堆叠柱状图', visual: '▐▐▐', desc: '展示各部分的组成和总量', example: '各地区各品类销售构成' }
+      { name: 'Biểu đồ tròn', visual: '◔', desc: 'Cho thấy tỉ lệ từng phần trong tổng thể', example: 'Phân bổ thị phần' },
+      { name: 'Biểu đồ vòng', visual: '◎', desc: 'Biến thể của pie, có thể đặt số ở giữa', example: 'Tỉ lệ sử dụng ngân sách' },
+      { name: 'Biểu đồ cột chồng', visual: '▐▐▐', desc: 'Cho thấy cơ cấu các phần và tổng', example: 'Cơ cấu doanh số theo vùng và ngành hàng' }
     ]
   },
   {
     key: 'distribution',
-    name: '分布',
+    name: 'Phân bố',
     icon: '🔔',
     charts: [
-      { name: '直方图', visual: '▁▃▇▃▁', desc: '展示数据的频率分布', example: '用户年龄分布' },
-      { name: '散点图', visual: '· ·· ·', desc: '展示两个变量的关系', example: '广告投入 vs 销售额' },
-      { name: '箱线图', visual: '├─┤', desc: '展示数据的中位数、四分位数和异常值', example: '各城市房价分布' }
+      { name: 'Histogram', visual: '▁▃▇▃▁', desc: 'Cho thấy phân bố tần suất của dữ liệu', example: 'Phân bố độ tuổi người dùng' },
+      { name: 'Scatter plot', visual: '· ·· ·', desc: 'Cho thấy mối quan hệ giữa hai biến', example: 'Chi phí quảng cáo vs doanh số' },
+      { name: 'Box plot', visual: '├─┤', desc: 'Cho thấy median, tứ phân vị và outlier của dữ liệu', example: 'Phân bố giá nhà theo thành phố' }
     ]
   },
   {
     key: 'relation',
-    name: '关系',
+    name: 'Quan hệ',
     icon: '🕸️',
     charts: [
-      { name: '桑基图', visual: '≋≋≋', desc: '展示流量或能量的流向', example: '用户转化漏斗' },
-      { name: '网络图', visual: '⊙─⊙', desc: '展示节点之间的关联关系', example: '社交关系网络' },
-      { name: '热力图', visual: '▓▒░', desc: '用颜色深浅表示数值大小', example: '各时段各页面访问量' }
+      { name: 'Sankey', visual: '≋≋≋', desc: 'Cho thấy dòng chảy của lưu lượng hoặc năng lượng', example: 'Phễu chuyển đổi user' },
+      { name: 'Network graph', visual: '⊙─⊙', desc: 'Cho thấy quan hệ giữa các node', example: 'Mạng xã hội' },
+      { name: 'Heatmap', visual: '▓▒░', desc: 'Dùng độ đậm nhạt màu sắc để biểu diễn giá trị', example: 'Lượt truy cập theo trang và khung giờ' }
     ]
   }
 ]

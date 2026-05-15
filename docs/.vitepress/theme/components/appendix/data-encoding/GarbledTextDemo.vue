@@ -1,14 +1,14 @@
 <template>
   <div class="garbled-demo">
     <div class="demo-scenario">
-      <div class="scenario-label">你收到的文件内容（字节流）</div>
+      <div class="scenario-label">Nội dung file bạn nhận được (dòng byte)</div>
       <div class="bytes-display">
         <span v-for="(byte, i) in fileBytes" :key="i" class="byte-chip">0x{{ byte }}</span>
       </div>
     </div>
 
     <div class="decoder-panel">
-      <div class="decoder-label">用什么规则来「读」它？</div>
+      <div class="decoder-label">Bạn dùng luật nào để "đọc" nó?</div>
       <div class="encoding-buttons">
         <button
           v-for="enc in encodings"
@@ -23,15 +23,15 @@
 
     <div class="result-panel" :class="currentEncoding.correct ? 'correct' : 'garbled'">
       <div class="result-label">
-        <span v-if="currentEncoding.correct">正确（{{ selectedEncoding }}）</span>
-        <span v-else>乱码！（用 {{ selectedEncoding }} 读 UTF-8 文件）</span>
+        <span v-if="currentEncoding.correct">Chuẩn ({{ selectedEncoding }})</span>
+        <span v-else>Ký tự lỗi! (Dùng {{ selectedEncoding }} để đọc file UTF-8)</span>
       </div>
       <div class="result-text">{{ currentEncoding.result }}</div>
       <div class="result-explanation">{{ currentEncoding.explanation }}</div>
     </div>
 
     <div class="insight-box">
-      <strong>核心领悟</strong>：字节本身没有含义，<strong>编码规则决定了字节变成什么字</strong>。发件人用 UTF-8 存，你用 GBK 读，当然面目全非。
+      <strong>Điểm cốt lõi</strong>: Bản thân byte không mang ý nghĩa gì, <strong>chính luật encoding mới quyết định byte hiện ra thành ký tự nào</strong>. Người gửi dùng UTF-8 để lưu, bạn lại dùng GBK để đọc thì tất nhiên ra một mớ ký tự lạ.
     </div>
   </div>
 </template>
@@ -45,24 +45,24 @@ const fileBytes = ['E4', 'BD', 'A0', 'E5', 'A5', 'BD']
 const encodings = [
   {
     name: 'UTF-8',
-    label: 'UTF-8（正确）',
+    label: 'UTF-8 (chuẩn)',
     result: '你好',
     correct: true,
-    explanation: '发件人用 UTF-8 存储了「你好」，你也用 UTF-8 读，当然正确。'
+    explanation: 'Người gửi đã dùng UTF-8 để lưu chữ "你好", bạn cũng dùng UTF-8 để đọc nên hiển thị đúng.'
   },
   {
     name: 'GBK',
-    label: 'GBK（乱码）',
+    label: 'GBK (lỗi)',
     result: '浣犲ソ',
     correct: false,
-    explanation: 'GBK 用不同的规则把同样的字节解读成了另一些字，所以出现了乱码。'
+    explanation: 'GBK dùng luật khác để giải mã cùng những byte đó nên ra một chuỗi ký tự khác hẳn, sinh ra lỗi font.'
   },
   {
     name: 'Latin-1',
-    label: 'Latin-1（乱码）',
+    label: 'Latin-1 (lỗi)',
     result: 'ä½ å¥½',
     correct: false,
-    explanation: 'Latin-1（ISO-8859-1）只能表示 256 个字符，把 UTF-8 的多字节序列当成单字节，全乱了。'
+    explanation: 'Latin-1 (ISO-8859-1) chỉ biểu diễn được 256 ký tự, nó hiểu nhầm dãy nhiều byte của UTF-8 thành từng byte đơn lẻ nên hỏng hoàn toàn.'
   }
 ]
 

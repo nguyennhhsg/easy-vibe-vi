@@ -13,105 +13,105 @@ import { ref, computed } from 'vue'
 
 const scenarios = {
   coding: {
-    name: '👨‍💻 代码助手场景',
+    name: '👨‍💻 Kịch bản trợ lý code',
     steps: [
       {
-        user: '帮我写一个 Python 贪吃蛇游戏',
-        action: '初始化',
+        user: 'Giúp mình viết game Rắn săn mồi bằng Python',
+        action: 'Khởi tạo',
         layers: {
-          base: 'System: 你是资深 Python 工程师...',
-          task: 'Task: 编写贪吃蛇游戏，使用 Pygame 库...',
+          base: 'System: Bạn là kỹ sư Python kỳ cựu...',
+          task: 'Task: viết game Rắn săn mồi, dùng thư viện Pygame...',
           chat: [],
           rag: []
         },
-        desc: '初始化：装载地基(System)和任务(Task)。此时 Layer 1 & 2 建立。'
+        desc: 'Khởi tạo: nạp móng (System) và nhiệm vụ (Task). Lúc này Layer 1 & 2 được dựng.'
       },
       {
         user: null,
-        ai_thinking: '需要查询 Pygame 的最新初始化代码...',
-        action: '检索',
+        ai_thinking: 'Cần tra cứu code khởi tạo Pygame mới nhất...',
+        action: 'Truy hồi',
         layers: {
-          base: 'System: 你是资深 Python 工程师...',
-          task: 'Task: 编写贪吃蛇游戏，使用 Pygame 库...',
+          base: 'System: Bạn là kỹ sư Python kỳ cựu...',
+          task: 'Task: viết game Rắn săn mồi, dùng thư viện Pygame...',
           chat: [],
           rag: ['Docs: Pygame.init() usage...', 'Docs: Game loop pattern...']
         },
-        desc: '思考与检索：发现需要知识补充，临时调取 RAG 资料到 Layer 4。'
+        desc: 'Suy nghĩ & truy hồi: phát hiện cần bổ sung tri thức, tạm thời nạp tài liệu RAG vào Layer 4.'
       },
       {
         user: null,
-        ai: '好的，这是一个基于 Pygame 的贪吃蛇基础代码...',
-        action: '生成',
+        ai: 'Được rồi, đây là đoạn code rắn săn mồi cơ bản dùng Pygame...',
+        action: 'Sinh câu trả lời',
         layers: {
-          base: 'System: 你是资深 Python 工程师...',
-          task: 'Task: 编写贪吃蛇游戏，使用 Pygame 库...',
-          chat: ['User: 写贪吃蛇', 'AI: [Code Block]'],
+          base: 'System: Bạn là kỹ sư Python kỳ cựu...',
+          task: 'Task: viết game Rắn săn mồi, dùng thư viện Pygame...',
+          chat: ['User: viết rắn săn mồi', 'AI: [Code Block]'],
           rag: [] // RAG cleared after generation to save space
         },
-        desc: '生成回答：RAG 资料用完即扔(节省空间)，对话写入 Layer 3 (Chat)。'
+        desc: 'Sinh câu trả lời: tài liệu RAG dùng xong là bỏ (tiết kiệm chỗ), hội thoại được ghi vào Layer 3 (Chat).'
       },
       {
-        user: '蛇移动得太快了，怎么调慢点？',
-        action: '追问',
+        user: 'Con rắn chạy nhanh quá, làm sao chậm lại?',
+        action: 'Hỏi tiếp',
         layers: {
-          base: 'System: 你是资深 Python 工程师...',
-          task: 'Task: 编写贪吃蛇游戏，使用 Pygame 库...',
-          chat: ['User: 写贪吃蛇', 'AI: [Code Block]', 'User: 调慢点'],
+          base: 'System: Bạn là kỹ sư Python kỳ cựu...',
+          task: 'Task: viết game Rắn săn mồi, dùng thư viện Pygame...',
+          chat: ['User: viết rắn săn mồi', 'AI: [Code Block]', 'User: làm cho chậm lại'],
           rag: []
         },
-        desc: '用户追问：新对话追加到 Layer 3。Layer 1 & 2 保持不变(0成本)。'
+        desc: 'Người dùng hỏi tiếp: hội thoại mới nối vào Layer 3. Layer 1 & 2 giữ nguyên (chi phí 0).'
       },
       {
         user: null,
-        ai: '你可以调整 clock.tick(15) 中的数值...',
-        action: '回复',
+        ai: 'Bạn có thể chỉnh giá trị trong clock.tick(15)...',
+        action: 'Phản hồi',
         layers: {
-          base: 'System: 你是资深 Python 工程师...',
-          task: 'Task: 编写贪吃蛇游戏，使用 Pygame 库...',
-          chat: ['User: 写贪吃蛇', 'AI: [Code Block]', 'User: 调慢点', 'AI: 调整 tick 值...'],
+          base: 'System: Bạn là kỹ sư Python kỳ cựu...',
+          task: 'Task: viết game Rắn săn mồi, dùng thư viện Pygame...',
+          chat: ['User: viết rắn săn mồi', 'AI: [Code Block]', 'User: làm cho chậm lại', 'AI: chỉnh giá trị tick...'],
           rag: []
         },
-        desc: '持续对话：Layer 3 增长。如果太长，最上面的对话会被挤出去(滑动窗口)。'
+        desc: 'Hội thoại tiếp diễn: Layer 3 dài thêm. Nếu quá dài, lượt trên cùng sẽ bị đẩy ra (sliding window).'
       }
     ]
   },
   support: {
-    name: '👩‍💼 客服助手场景',
+    name: '👩‍💼 Kịch bản trợ lý chăm sóc khách hàng',
     steps: [
       {
-        user: '我的订单发货了吗？单号 12345',
-        action: '接收',
+        user: 'Đơn của mình giao chưa? Mã 12345',
+        action: 'Tiếp nhận',
         layers: {
-          base: 'System: 你是电商客服，语气温柔...',
-          task: 'Task: 处理订单查询请求...',
+          base: 'System: Bạn là CSKH thương mại điện tử, giọng dịu dàng...',
+          task: 'Task: xử lý yêu cầu tra cứu đơn hàng...',
           chat: [],
           rag: []
         },
-        desc: '接收消息：加载地基(System)。'
+        desc: 'Tiếp nhận tin nhắn: nạp móng (System).'
       },
       {
         user: null,
-        ai_thinking: '查询订单系统 API...',
-        action: '工具调用',
+        ai_thinking: 'Đang gọi API hệ thống đơn hàng...',
+        action: 'Gọi công cụ',
         layers: {
-          base: 'System: 你是电商客服，语气温柔...',
-          task: 'Task: 处理订单查询请求...',
-          chat: ['User: 查单号 12345'],
+          base: 'System: Bạn là CSKH thương mại điện tử, giọng dịu dàng...',
+          task: 'Task: xử lý yêu cầu tra cứu đơn hàng...',
+          chat: ['User: tra mã 12345'],
           rag: ['API_Result: {id:12345, status:"shipped", loc:"Beijing"}']
         },
-        desc: '调用工具/RAG：获取实时订单状态，放入 Layer 4。'
+        desc: 'Gọi tool/RAG: lấy trạng thái đơn hàng thời gian thực, đặt vào Layer 4.'
       },
       {
         user: null,
-        ai: '亲，查到了哦！您的包裹已经在北京中转了。',
-        action: '回复',
+        ai: 'Anh/chị ơi, em tra được rồi nhé! Gói hàng đang trung chuyển tại Bắc Kinh.',
+        action: 'Phản hồi',
         layers: {
-          base: 'System: 你是电商客服，语气温柔...',
-          task: 'Task: 处理订单查询请求...',
-          chat: ['User: 查单号 12345', 'AI: 在北京中转'],
+          base: 'System: Bạn là CSKH thương mại điện tử, giọng dịu dàng...',
+          task: 'Task: xử lý yêu cầu tra cứu đơn hàng...',
+          chat: ['User: tra mã 12345', 'AI: đang ở Bắc Kinh'],
           rag: []
         },
-        desc: '完成回复：Layer 4 清空，对话保留在 Layer 3。'
+        desc: 'Hoàn tất phản hồi: Layer 4 được xoá, hội thoại giữ lại tại Layer 3.'
       }
     ]
   }
@@ -163,7 +163,7 @@ const prevStep = () => {
       <!-- Left: Chat Simulator -->
       <div class="chat-panel">
         <div class="panel-header">
-          📱 用户视角 (Chat)
+          📱 Góc nhìn người dùng (Chat)
         </div>
         <div class="chat-window">
           <div
@@ -189,7 +189,7 @@ const prevStep = () => {
         </div>
         <div class="controls">
           <div class="step-info">
-            步骤 {{ currentStepIndex + 1 }} / {{ currentScenario.steps.length }}
+            Bước {{ currentStepIndex + 1 }} / {{ currentScenario.steps.length }}
           </div>
           <div class="btn-group">
             <button
@@ -197,13 +197,13 @@ const prevStep = () => {
               :disabled="currentStepIndex === 0"
               @click="prevStep"
             >
-              ⬅️ 上一步
+              ⬅️ Bước trước
             </button>
             <button
               class="nav-btn primary"
               @click="nextStep"
             >
-              {{ isLastStep ? '🔄 重新演示' : '下一步 ➡️' }}
+              {{ isLastStep ? '🔄 Chạy lại' : 'Bước tiếp ➡️' }}
             </button>
           </div>
         </div>
@@ -212,14 +212,14 @@ const prevStep = () => {
       <!-- Right: Memory Palace Internals -->
       <div class="palace-panel">
         <div class="panel-header">
-          🧠 AI 视角 (Context Construction)
+          🧠 Góc nhìn AI (Context Construction)
         </div>
         <div class="context-visualizer">
           <!-- Layer 1: Base -->
           <div class="layer-box base">
             <div class="layer-label">
               <span class="icon">🏛️</span> 
-              <span class="title">Layer 1: 地基 (System)</span>
+              <span class="title">Layer 1: Móng (System)</span>
               <span class="badge">KV Cached</span>
             </div>
             <div class="layer-content">
@@ -231,7 +231,7 @@ const prevStep = () => {
           <div class="layer-box task">
             <div class="layer-label">
               <span class="icon">📌</span> 
-              <span class="title">Layer 2: 支柱 (Task)</span>
+              <span class="title">Layer 2: Cột trụ (Task)</span>
               <span class="badge">Pinned</span>
             </div>
             <div class="layer-content">
@@ -243,7 +243,7 @@ const prevStep = () => {
           <div class="layer-box chat">
             <div class="layer-label">
               <span class="icon">💬</span> 
-              <span class="title">Layer 3: 客厅 (Chat)</span>
+              <span class="title">Layer 3: Phòng khách (Chat)</span>
               <span class="badge">Sliding</span>
             </div>
             <div class="layer-content">
@@ -258,7 +258,7 @@ const prevStep = () => {
                 v-if="currentStep.layers.chat.length === 0"
                 class="empty-hint"
               >
-                (暂无对话历史)
+                (Chưa có lịch sử hội thoại)
               </div>
             </div>
           </div>
@@ -270,7 +270,7 @@ const prevStep = () => {
           >
             <div class="layer-label">
               <span class="icon">📚</span> 
-              <span class="title">Layer 4: 图书馆 (RAG)</span>
+              <span class="title">Layer 4: Thư viện (RAG)</span>
               <span class="badge ephemeral">Temp</span>
             </div>
             <div class="layer-content">
@@ -285,7 +285,7 @@ const prevStep = () => {
                 v-if="currentStep.layers.rag.length === 0"
                 class="empty-hint"
               >
-                (当前无需检索)
+                (Hiện chưa cần truy hồi)
               </div>
             </div>
           </div>
@@ -293,7 +293,7 @@ const prevStep = () => {
         
         <!-- Explanation Footer -->
         <div class="step-desc">
-          <strong>💡 这一步发生了什么：</strong>
+          <strong>💡 Bước này đang xảy ra chuyện gì:</strong>
           {{ currentStep.desc }}
         </div>
       </div>

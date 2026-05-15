@@ -1,12 +1,12 @@
 <!--
   DataQualityDemo.vue
-  数据质量维度演示：展示数据质量的六个核心维度
+  Demo các chiều của data quality: minh hoạ 6 chiều cốt lõi của chất lượng dữ liệu
 -->
 <template>
   <div class="data-quality-demo">
     <div class="header">
-      <div class="title">数据质量检测器</div>
-      <div class="subtitle">点击不同维度，查看数据质量问题示例</div>
+      <div class="title">Trình kiểm chất lượng dữ liệu</div>
+      <div class="subtitle">Bấm vào các chiều khác nhau để xem ví dụ về vấn đề chất lượng dữ liệu</div>
     </div>
 
     <div class="dimensions">
@@ -30,7 +30,7 @@
 
       <div class="example-section">
         <div class="example bad">
-          <div class="example-label bad-label">问题数据</div>
+          <div class="example-label bad-label">Dữ liệu lỗi</div>
           <table class="data-table">
             <thead>
               <tr>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="example good">
-          <div class="example-label good-label">治理后</div>
+          <div class="example-label good-label">Sau khi xử lý</div>
           <table class="data-table">
             <thead>
               <tr>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="quality-score">
-        <div class="score-label">质量评分</div>
+        <div class="score-label">Điểm chất lượng</div>
         <div class="score-bar-bg">
           <div
             class="score-bar-fill"
@@ -87,127 +87,127 @@ const activeDim = ref('completeness')
 
 const dimensions = [
   {
-    key: 'completeness', name: '完整性', icon: '📋',
-    desc: '数据是否存在缺失值',
+    key: 'completeness', name: 'Tính đầy đủ', icon: '📋',
+    desc: 'Dữ liệu có bị thiếu giá trị hay không',
     score: 72,
     badData: {
-      cols: ['用户ID', '姓名', '邮箱', '手机号'],
+      cols: ['User ID', 'Họ tên', 'Email', 'SĐT'],
       rows: [
-        [{ value: '001' }, { value: '张三' }, { value: 'zhang@mail.com' }, { value: '138xxxx1234' }],
-        [{ value: '002' }, { value: '李四' }, { value: '', error: true }, { value: '', error: true }],
-        [{ value: '003' }, { value: '', error: true }, { value: 'wang@mail.com' }, { value: '139xxxx5678' }]
+        [{ value: '001' }, { value: 'An' }, { value: 'an@mail.com' }, { value: '090xxxx1234' }],
+        [{ value: '002' }, { value: 'Bình' }, { value: '', error: true }, { value: '', error: true }],
+        [{ value: '003' }, { value: '', error: true }, { value: 'cuong@mail.com' }, { value: '091xxxx5678' }]
       ]
     },
     goodData: {
-      cols: ['用户ID', '姓名', '邮箱', '手机号'],
+      cols: ['User ID', 'Họ tên', 'Email', 'SĐT'],
       rows: [
-        [{ value: '001' }, { value: '张三' }, { value: 'zhang@mail.com' }, { value: '138xxxx1234' }],
-        [{ value: '002' }, { value: '李四' }, { value: 'li@mail.com' }, { value: '137xxxx9012' }],
-        [{ value: '003' }, { value: '王五' }, { value: 'wang@mail.com' }, { value: '139xxxx5678' }]
+        [{ value: '001' }, { value: 'An' }, { value: 'an@mail.com' }, { value: '090xxxx1234' }],
+        [{ value: '002' }, { value: 'Bình' }, { value: 'binh@mail.com' }, { value: '093xxxx9012' }],
+        [{ value: '003' }, { value: 'Cường' }, { value: 'cuong@mail.com' }, { value: '091xxxx5678' }]
       ]
     }
   },
   {
-    key: 'accuracy', name: '准确性', icon: '🎯',
-    desc: '数据值是否正确反映真实情况',
+    key: 'accuracy', name: 'Độ chính xác', icon: '🎯',
+    desc: 'Giá trị dữ liệu có phản ánh đúng thực tế không',
     score: 65,
     badData: {
-      cols: ['订单ID', '金额', '日期', '状态'],
+      cols: ['Order ID', 'Số tiền', 'Ngày', 'Trạng thái'],
       rows: [
-        [{ value: 'ORD-101' }, { value: '-50.00', error: true }, { value: '2025-01-15' }, { value: '已完成' }],
-        [{ value: 'ORD-102' }, { value: '299.00' }, { value: '2025-13-01', error: true }, { value: '已发货' }],
-        [{ value: 'ORD-103' }, { value: '1500.00' }, { value: '2025-02-28' }, { value: '已退款', error: true }]
+        [{ value: 'ORD-101' }, { value: '-50.00', error: true }, { value: '2025-01-15' }, { value: 'Hoàn tất' }],
+        [{ value: 'ORD-102' }, { value: '299.00' }, { value: '2025-13-01', error: true }, { value: 'Đã giao' }],
+        [{ value: 'ORD-103' }, { value: '1500.00' }, { value: '2025-02-28' }, { value: 'Đã hoàn tiền', error: true }]
       ]
     },
     goodData: {
-      cols: ['订单ID', '金额', '日期', '状态'],
+      cols: ['Order ID', 'Số tiền', 'Ngày', 'Trạng thái'],
       rows: [
-        [{ value: 'ORD-101' }, { value: '50.00' }, { value: '2025-01-15' }, { value: '已完成' }],
-        [{ value: 'ORD-102' }, { value: '299.00' }, { value: '2025-01-13' }, { value: '已发货' }],
-        [{ value: 'ORD-103' }, { value: '1500.00' }, { value: '2025-02-28' }, { value: '已完成' }]
+        [{ value: 'ORD-101' }, { value: '50.00' }, { value: '2025-01-15' }, { value: 'Hoàn tất' }],
+        [{ value: 'ORD-102' }, { value: '299.00' }, { value: '2025-01-13' }, { value: 'Đã giao' }],
+        [{ value: 'ORD-103' }, { value: '1500.00' }, { value: '2025-02-28' }, { value: 'Hoàn tất' }]
       ]
     }
   },
   {
-    key: 'consistency', name: '一致性', icon: '🔗',
-    desc: '同一数据在不同系统中是否一致',
+    key: 'consistency', name: 'Tính nhất quán', icon: '🔗',
+    desc: 'Cùng một dữ liệu ở các hệ thống khác nhau có khớp không',
     score: 58,
     badData: {
-      cols: ['来源', '用户名', '手机号', '地址'],
+      cols: ['Nguồn', 'Tên user', 'SĐT', 'Địa chỉ'],
       rows: [
-        [{ value: 'CRM' }, { value: '张三' }, { value: '13812341234' }, { value: '北京市朝阳区' }],
-        [{ value: '订单系统' }, { value: '张三丰', error: true }, { value: '13812341234' }, { value: '北京朝阳', error: true }],
-        [{ value: '客服系统' }, { value: '张三' }, { value: '13899999999', error: true }, { value: '北京市朝阳区' }]
+        [{ value: 'CRM' }, { value: 'Nguyễn An' }, { value: '0938123412' }, { value: 'Quận 1, TP.HCM' }],
+        [{ value: 'Hệ thống Order' }, { value: 'Nguyễn Văn An', error: true }, { value: '0938123412' }, { value: 'Q.1 HCM', error: true }],
+        [{ value: 'Hệ thống CSKH' }, { value: 'Nguyễn An' }, { value: '0939999999', error: true }, { value: 'Quận 1, TP.HCM' }]
       ]
     },
     goodData: {
-      cols: ['来源', '用户名', '手机号', '地址'],
+      cols: ['Nguồn', 'Tên user', 'SĐT', 'Địa chỉ'],
       rows: [
-        [{ value: 'CRM' }, { value: '张三' }, { value: '13812341234' }, { value: '北京市朝阳区' }],
-        [{ value: '订单系统' }, { value: '张三' }, { value: '13812341234' }, { value: '北京市朝阳区' }],
-        [{ value: '客服系统' }, { value: '张三' }, { value: '13812341234' }, { value: '北京市朝阳区' }]
+        [{ value: 'CRM' }, { value: 'Nguyễn An' }, { value: '0938123412' }, { value: 'Quận 1, TP.HCM' }],
+        [{ value: 'Hệ thống Order' }, { value: 'Nguyễn An' }, { value: '0938123412' }, { value: 'Quận 1, TP.HCM' }],
+        [{ value: 'Hệ thống CSKH' }, { value: 'Nguyễn An' }, { value: '0938123412' }, { value: 'Quận 1, TP.HCM' }]
       ]
     }
   },
   {
-    key: 'timeliness', name: '时效性', icon: '⏰',
-    desc: '数据是否及时更新',
+    key: 'timeliness', name: 'Tính kịp thời', icon: '⏰',
+    desc: 'Dữ liệu có được cập nhật kịp thời không',
     score: 80,
     badData: {
-      cols: ['商品ID', '价格', '库存', '更新时间'],
+      cols: ['SKU ID', 'Giá', 'Tồn kho', 'Cập nhật lúc'],
       rows: [
-        [{ value: 'SKU-001' }, { value: '¥299' }, { value: '50' }, { value: '2024-06-01', error: true }],
-        [{ value: 'SKU-002' }, { value: '¥599' }, { value: '0', error: true }, { value: '2024-03-15', error: true }],
-        [{ value: 'SKU-003' }, { value: '¥199' }, { value: '200' }, { value: '2025-02-20' }]
+        [{ value: 'SKU-001' }, { value: '299k' }, { value: '50' }, { value: '2024-06-01', error: true }],
+        [{ value: 'SKU-002' }, { value: '599k' }, { value: '0', error: true }, { value: '2024-03-15', error: true }],
+        [{ value: 'SKU-003' }, { value: '199k' }, { value: '200' }, { value: '2025-02-20' }]
       ]
     },
     goodData: {
-      cols: ['商品ID', '价格', '库存', '更新时间'],
+      cols: ['SKU ID', 'Giá', 'Tồn kho', 'Cập nhật lúc'],
       rows: [
-        [{ value: 'SKU-001' }, { value: '¥259' }, { value: '35' }, { value: '2025-02-25' }],
-        [{ value: 'SKU-002' }, { value: '¥549' }, { value: '12' }, { value: '2025-02-25' }],
-        [{ value: 'SKU-003' }, { value: '¥199' }, { value: '180' }, { value: '2025-02-25' }]
+        [{ value: 'SKU-001' }, { value: '259k' }, { value: '35' }, { value: '2025-02-25' }],
+        [{ value: 'SKU-002' }, { value: '549k' }, { value: '12' }, { value: '2025-02-25' }],
+        [{ value: 'SKU-003' }, { value: '199k' }, { value: '180' }, { value: '2025-02-25' }]
       ]
     }
   },
   {
-    key: 'uniqueness', name: '唯一性', icon: '🔑',
-    desc: '数据是否存在重复记录',
+    key: 'uniqueness', name: 'Tính duy nhất', icon: '🔑',
+    desc: 'Dữ liệu có bị trùng lặp bản ghi không',
     score: 70,
     badData: {
-      cols: ['用户ID', '姓名', '邮箱', '注册时间'],
+      cols: ['User ID', 'Họ tên', 'Email', 'Đăng ký lúc'],
       rows: [
-        [{ value: '001' }, { value: '张三' }, { value: 'zhang@mail.com' }, { value: '2025-01-01' }],
-        [{ value: '005' }, { value: '张三', error: true }, { value: 'zhang@mail.com', error: true }, { value: '2025-01-15', error: true }],
-        [{ value: '002' }, { value: '李四' }, { value: 'li@mail.com' }, { value: '2025-01-10' }]
+        [{ value: '001' }, { value: 'An' }, { value: 'an@mail.com' }, { value: '2025-01-01' }],
+        [{ value: '005' }, { value: 'An', error: true }, { value: 'an@mail.com', error: true }, { value: '2025-01-15', error: true }],
+        [{ value: '002' }, { value: 'Bình' }, { value: 'binh@mail.com' }, { value: '2025-01-10' }]
       ]
     },
     goodData: {
-      cols: ['用户ID', '姓名', '邮箱', '注册时间'],
+      cols: ['User ID', 'Họ tên', 'Email', 'Đăng ký lúc'],
       rows: [
-        [{ value: '001' }, { value: '张三' }, { value: 'zhang@mail.com' }, { value: '2025-01-01' }],
-        [{ value: '002' }, { value: '李四' }, { value: 'li@mail.com' }, { value: '2025-01-10' }]
+        [{ value: '001' }, { value: 'An' }, { value: 'an@mail.com' }, { value: '2025-01-01' }],
+        [{ value: '002' }, { value: 'Bình' }, { value: 'binh@mail.com' }, { value: '2025-01-10' }]
       ]
     }
   },
   {
-    key: 'validity', name: '有效性', icon: '✅',
-    desc: '数据是否符合预定义的格式和规则',
+    key: 'validity', name: 'Tính hợp lệ', icon: '✅',
+    desc: 'Dữ liệu có tuân thủ định dạng và quy tắc đã định sẵn không',
     score: 75,
     badData: {
-      cols: ['字段', '值', '规则'],
+      cols: ['Field', 'Giá trị', 'Quy tắc'],
       rows: [
-        [{ value: '邮箱' }, { value: 'not-an-email', error: true }, { value: '需包含@' }],
-        [{ value: '年龄' }, { value: '-5', error: true }, { value: '0~150' }],
-        [{ value: '手机号' }, { value: '1234', error: true }, { value: '11位数字' }]
+        [{ value: 'Email' }, { value: 'not-an-email', error: true }, { value: 'Phải chứa @' }],
+        [{ value: 'Tuổi' }, { value: '-5', error: true }, { value: '0~150' }],
+        [{ value: 'SĐT' }, { value: '1234', error: true }, { value: '10 chữ số' }]
       ]
     },
     goodData: {
-      cols: ['字段', '值', '规则'],
+      cols: ['Field', 'Giá trị', 'Quy tắc'],
       rows: [
-        [{ value: '邮箱' }, { value: 'user@mail.com' }, { value: '需包含@' }],
-        [{ value: '年龄' }, { value: '28' }, { value: '0~150' }],
-        [{ value: '手机号' }, { value: '13812345678' }, { value: '11位数字' }]
+        [{ value: 'Email' }, { value: 'user@mail.com' }, { value: 'Phải chứa @' }],
+        [{ value: 'Tuổi' }, { value: '28' }, { value: '0~150' }],
+        [{ value: 'SĐT' }, { value: '0938123456' }, { value: '10 chữ số' }]
       ]
     }
   }

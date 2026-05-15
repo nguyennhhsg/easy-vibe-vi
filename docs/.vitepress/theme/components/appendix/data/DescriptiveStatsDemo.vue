@@ -34,7 +34,7 @@ const mode = computed(() => {
     freq[n] = (freq[n] || 0) + 1
     if (freq[n] > maxFreq) maxFreq = freq[n]
   })
-  if (maxFreq === 1) return '无'
+  if (maxFreq === 1) return 'Không có'
   return Object.keys(freq)
     .filter((k) => freq[k] === maxFreq)
     .join(', ')
@@ -50,29 +50,29 @@ const stdDev = computed(() => {
 })
 
 const stats = computed(() => [
-  { label: '样本数', value: count.value, desc: '数据点总数', color: '#3b82f6' },
+  { label: 'Cỡ mẫu', value: count.value, desc: 'Tổng số điểm dữ liệu', color: '#3b82f6' },
   {
-    label: '均值',
+    label: 'Trung bình',
     value: mean.value,
-    desc: '所有数值的平均值',
+    desc: 'Giá trị trung bình của tất cả các số',
     color: '#22c55e'
   },
   {
-    label: '中位数',
+    label: 'Trung vị',
     value: median.value,
-    desc: '排序后中间位置的值',
+    desc: 'Giá trị ở giữa sau khi sắp xếp',
     color: '#f59e0b'
   },
   {
-    label: '众数',
+    label: 'Mốt',
     value: mode.value,
-    desc: '出现次数最多的值',
+    desc: 'Giá trị xuất hiện nhiều nhất',
     color: '#8b5cf6'
   },
   {
-    label: '标准差',
+    label: 'Độ lệch chuẩn',
     value: stdDev.value,
-    desc: '数据离散程度',
+    desc: 'Mức độ phân tán dữ liệu',
     color: '#06b6d4'
   }
 ])
@@ -98,16 +98,16 @@ const barColors = ['#3b82f6', '#22c55e', '#f59e0b', '#8b5cf6', '#ec4899']
   <div class="stats-demo">
     <div class="demo-header">
       <span class="icon">📊</span>
-      <span class="title">描述性统计演示</span>
-      <span class="subtitle">输入数据，实时计算统计指标</span>
+      <span class="title">Demo thống kê mô tả</span>
+      <span class="subtitle">Nhập dữ liệu, tính chỉ số thống kê real-time</span>
     </div>
 
     <div class="intro-text">
-      面对大量数据时，我们需要用少数
-      <span class="hl">代表性指标</span>
-      来概括全貌。输入一组数字，观察均值、中位数、标准差等指标如何描述数据的
-      <span class="hl">集中趋势</span> 和
-      <span class="hl">离散程度</span>。
+      Khi đối mặt với khối dữ liệu lớn, bạn cần một vài
+      <span class="hl">chỉ số đại diện</span>
+      để khái quát toàn cảnh. Nhập một dãy số, quan sát các chỉ số như mean, median, standard deviation mô tả
+      <span class="hl">xu hướng tập trung</span> và
+      <span class="hl">mức phân tán</span> của dữ liệu.
     </div>
 
     <div class="input-area">
@@ -115,9 +115,9 @@ const barColors = ['#3b82f6', '#22c55e', '#f59e0b', '#8b5cf6', '#ec4899']
         <input
           v-model="dataInput"
           class="data-input"
-          placeholder="用逗号分隔，例如：1, 2, 3, 4, 5"
+          placeholder="Phân tách bằng dấu phẩy, ví dụ: 1, 2, 3, 4, 5"
         />
-        <button class="btn-random" @click="generateRandom">随机生成</button>
+        <button class="btn-random" @click="generateRandom">Random</button>
       </div>
     </div>
 
@@ -130,7 +130,7 @@ const barColors = ['#3b82f6', '#22c55e', '#f59e0b', '#8b5cf6', '#ec4899']
     </div>
 
     <div class="chart-area">
-      <div class="chart-title">数据分布（升序排列）</div>
+      <div class="chart-title">Phân bố dữ liệu (sắp xếp tăng dần)</div>
       <div class="bar-chart">
         <div
           v-for="(val, i) in sortedData"

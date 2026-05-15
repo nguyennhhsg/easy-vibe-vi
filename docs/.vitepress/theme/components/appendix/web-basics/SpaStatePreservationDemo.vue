@@ -1,15 +1,15 @@
 <!--
   SpaStatePreservationDemo.vue
-  SPA vs MPA：页面切换时“状态”是否保留的演示
+  SPA vs MPA: demo xem state có được giữ lại khi chuyển trang hay không
 -->
 <template>
   <div class="spa-state-demo">
     <div class="header">
       <div class="title">
-        页面切换时，输入会不会丢？
+        Khi chuyển trang, dữ liệu nhập có bị mất không?
       </div>
       <div class="subtitle">
-        同样点击“切换页面”，MPA 会像刷新一样清空；SPA 会保留状态
+        Cùng bấm "chuyển trang", MPA sẽ giống như refresh và xoá hết; SPA thì giữ lại state
       </div>
     </div>
 
@@ -19,20 +19,20 @@
         :class="{ active: mode === 'mpa' }"
         @click="switchMode('mpa')"
       >
-        MPA（整页刷新）
+        MPA (refresh toàn trang)
       </button>
       <button
         class="mode"
         :class="{ active: mode === 'spa' }"
         @click="switchMode('spa')"
       >
-        SPA（局部切换）
+        SPA (chuyển từng phần)
       </button>
       <button
         class="reset"
         @click="resetAll"
       >
-        重置
+        Reset
       </button>
     </div>
 
@@ -54,32 +54,32 @@
           v-if="loading"
           class="loading"
         >
-          加载中...
+          Đang tải...
         </div>
         <div
           v-else
           class="content"
         >
           <div class="row">
-            当前页面：<strong>{{ page }}</strong>
+            Trang hiện tại: <strong>{{ page }}</strong>
           </div>
 
           <div class="form">
             <label>
-              备注（模拟表单输入）：
+              Ghi chú (giả lập form nhập):
               <input
                 v-model="note"
                 type="text"
-                placeholder="输入点东西试试"
+                placeholder="Nhập thử cái gì đó"
               >
             </label>
             <div class="help">
-              提示：切到别的页面再回来，看看这段文字还在不在。
+              Gợi ý: chuyển sang trang khác rồi quay lại, xem đoạn này còn không nha.
             </div>
           </div>
 
           <div class="row">
-            购物车数量（模拟状态）：
+            Số lượng giỏ hàng (state giả lập):
             <button
               class="small"
               @click="cart = Math.max(0, cart - 1)"
@@ -100,7 +100,7 @@
       <div class="explain">
         <div class="card">
           <div class="label">
-            你现在看到的现象
+            Hiện tượng bạn đang thấy
           </div>
           <div class="value">
             {{ explainText }}
@@ -108,7 +108,7 @@
         </div>
         <div class="card">
           <div class="label">
-            背后的原因（一句话）
+            Lý do phía sau (một câu)
           </div>
           <div class="value">
             {{ reasonText }}
@@ -122,25 +122,25 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const pages = ['首页', '商品', '购物车']
+const pages = ['Trang chủ', 'Sản phẩm', 'Giỏ hàng']
 const mode = ref('mpa')
-const page = ref('首页')
+const page = ref('Trang chủ')
 const loading = ref(false)
 
-// 模拟用户输入/页面状态
-const note = ref('我想买两杯奶茶')
+// Giả lập input của user / state của trang
+const note = ref('Mình muốn mua hai ly trà sữa')
 const cart = ref(1)
 
 const switchMode = (next) => {
   mode.value = next
-  // 切模式时也模拟一次“回到首页”
-  go('首页')
+  // Khi đổi chế độ, mô phỏng việc "quay lại trang chủ"
+  go('Trang chủ')
 }
 
 const resetAll = () => {
   mode.value = 'mpa'
-  page.value = '首页'
-  note.value = '我想买两杯奶茶'
+  page.value = 'Trang chủ'
+  note.value = 'Mình muốn mua hai ly trà sữa'
   cart.value = 1
   loading.value = false
 }
@@ -148,7 +148,7 @@ const resetAll = () => {
 const go = (nextPage) => {
   loading.value = true
 
-  // MPA：切换 = 类似刷新，状态丢失
+  // MPA: chuyển trang = giống refresh, mất state
   if (mode.value === 'mpa') {
     note.value = ''
     cart.value = 0
@@ -163,14 +163,14 @@ const go = (nextPage) => {
 
 const explainText = computed(() =>
   mode.value === 'mpa'
-    ? 'MPA：切换页面时像刷新，输入和状态经常会丢'
-    : 'SPA：切换页面只换内容区域，输入和状态更容易保留'
+    ? 'MPA: chuyển trang giống refresh, dữ liệu nhập và state thường bị mất'
+    : 'SPA: chuyển trang chỉ đổi vùng nội dung, dữ liệu nhập và state dễ được giữ lại'
 )
 
 const reasonText = computed(() =>
   mode.value === 'mpa'
-    ? '因为浏览器加载了“新的页面”，旧页面的内存状态会被清掉'
-    : '因为还是“同一个页面”，只是 JavaScript 把内容换了一下'
+    ? 'Vì trình duyệt đã load "trang mới", state trong bộ nhớ của trang cũ bị xoá đi'
+    : 'Vì vẫn là "cùng một trang", chỉ là JavaScript đổi nội dung bên trong thôi'
 )
 </script>
 

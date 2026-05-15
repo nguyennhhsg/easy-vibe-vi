@@ -7,13 +7,13 @@
 import { ref, computed } from 'vue'
 
 const originalText = ref(
-  `上下文工程（Context Engineering）是指优化提供给大语言模型（LLM）的提示词，以确保其拥有生成准确且相关回复所需的信息。其中的一个主要挑战是 LLM 的上下文窗口有限，这限制了它们一次能处理的文本量。为了克服这个问题，开发者使用了诸如摘要生成（Summarization）等技术，将长文档浓缩为保留关键信息的短版本。另一种技术是检索增强生成（RAG），它根据用户的查询从数据库中仅获取最相关的片段。此外，通过将非结构化文本转换为 JSON 等结构化数据，也可以减少冗余字符，提高信息密度。`
+  `Context Engineering là việc tối ưu prompt cung cấp cho LLM để đảm bảo mô hình có đủ thông tin sinh câu trả lời chính xác và liên quan. Một thách thức lớn là context window của LLM bị giới hạn, kéo theo lượng văn bản xử lý mỗi lần cũng có hạn. Để khắc phục, các kỹ sư dùng những kỹ thuật như tóm tắt (Summarization) để nén tài liệu dài thành phiên bản ngắn vẫn giữ thông tin then chốt. Một kỹ thuật khác là RAG, chỉ lấy các đoạn liên quan nhất từ cơ sở dữ liệu dựa trên truy vấn người dùng. Ngoài ra, chuyển văn bản phi cấu trúc thành dữ liệu có cấu trúc như JSON cũng giúp giảm ký tự thừa và tăng mật độ thông tin.`
 )
 
 const strategies = [
-  { id: 'summary', label: '📝 摘要生成', desc: '保留大意' },
-  { id: 'extract', label: '🔑 关键词', desc: '提炼要点' },
-  { id: 'json', label: '⚙️ 结构化', desc: '转 JSON' }
+  { id: 'summary', label: '📝 Tóm tắt', desc: 'Giữ ý chính' },
+  { id: 'extract', label: '🔑 Từ khoá', desc: 'Lọc điểm chính' },
+  { id: 'json', label: '⚙️ Có cấu trúc', desc: 'Đổi sang JSON' }
 ]
 
 const currentMode = ref('')
@@ -38,9 +38,9 @@ const compress = async (mode) => {
   await new Promise(r => setTimeout(r, 800))
 
   if (mode === 'summary') {
-    compressedText.value = '上下文工程旨在优化 LLM 提示词以解决上下文窗口限制。主要技术包括摘要生成（浓缩关键信息）、RAG（按需检索相关片段）以及结构化数据转换（提高信息密度）。'
+    compressedText.value = 'Context Engineering nhằm tối ưu prompt cho LLM để vượt giới hạn context window. Các kỹ thuật chính gồm tóm tắt (nén thông tin then chốt), RAG (lấy đúng đoạn liên quan theo nhu cầu) và chuyển đổi sang dữ liệu có cấu trúc (tăng mật độ thông tin).'
   } else if (mode === 'extract') {
-    compressedText.value = '- 目标: 优化 LLM 提示词\n- 挑战: 上下文窗口有限\n- 方案1: 摘要生成 (Summarization)\n- 方案2: 检索增强生成 (RAG)\n- 方案3: 结构化数据 (JSON)'
+    compressedText.value = '- Mục tiêu: tối ưu prompt cho LLM\n- Thách thức: context window có hạn\n- Giải pháp 1: tóm tắt (Summarization)\n- Giải pháp 2: RAG (Retrieval-Augmented Generation)\n- Giải pháp 3: dữ liệu có cấu trúc (JSON)'
   } else if (mode === 'json') {
     compressedText.value = JSON.stringify({
       topic: "Context Engineering",
@@ -58,7 +58,7 @@ const compress = async (mode) => {
     <!-- 1. Strategy Selection -->
     <div class="section control-panel">
       <div class="section-label">
-        1. 选择压缩策略
+        1. Chọn chiến lược nén context
       </div>
       <div class="strategy-group">
         <button
@@ -81,13 +81,13 @@ const compress = async (mode) => {
     <!-- 2. Input Area -->
     <div class="section input-area">
       <div class="section-header">
-        <span class="label">原始文本 (Original)</span>
+        <span class="label">Văn bản gốc (Original)</span>
         <span class="token-count">{{ originalTokens }} tokens</span>
       </div>
       <textarea 
         v-model="originalText" 
         class="text-content original-input"
-        placeholder="在此输入长文本..."
+        placeholder="Bạn nhập văn bản dài tại đây..."
       />
     </div>
 
@@ -114,7 +114,7 @@ const compress = async (mode) => {
       :class="{ 'has-result': compressedText }"
     >
       <div class="section-header">
-        <span class="label">压缩后 (Compressed)</span>
+        <span class="label">Sau khi nén (Compressed)</span>
         <span
           v-if="compressedText"
           class="token-count"
@@ -126,14 +126,14 @@ const compress = async (mode) => {
           v-if="isCompressing"
           class="loading-state"
         >
-          <span class="spinner" /> 正在压缩...
+          <span class="spinner" /> Đang nén...
         </div>
         <pre v-else-if="compressedText">{{ compressedText }}</pre>
         <div
           v-else
           class="placeholder"
         >
-          请点击上方按钮开始压缩
+          Bạn nhấn nút phía trên để bắt đầu nén nhé
         </div>
       </div>
 
@@ -143,7 +143,7 @@ const compress = async (mode) => {
         class="mini-metrics"
       >
         <div class="metric-item">
-          <span class="metric-label">节省空间</span>
+          <span class="metric-label">Tiết kiệm</span>
           <span class="metric-val highlight">{{ compressionRatio }}%</span>
         </div>
         <div class="metric-bar">

@@ -42,7 +42,7 @@ const liveContent = reactive({
 const stylePresets = {
   h1: [
     {
-      name: '默认样式 (Default)',
+      name: 'Mặc định (Default)',
       style: {
         color: '#2c3e50',
         fontSize: '28px',
@@ -51,7 +51,7 @@ const stylePresets = {
       }
     },
     {
-      name: '活力红 (Vibrant Red)',
+      name: 'Đỏ rực (Vibrant Red)',
       style: {
         color: '#e74c3c',
         fontSize: '36px',
@@ -60,7 +60,7 @@ const stylePresets = {
       }
     },
     {
-      name: '科技蓝 (Tech Blue)',
+      name: 'Xanh công nghệ (Tech Blue)',
       style: {
         color: '#3498db',
         fontSize: '32px',
@@ -69,7 +69,7 @@ const stylePresets = {
       }
     },
     {
-      name: '优雅紫 (Elegant Purple)',
+      name: 'Tím thanh lịch (Elegant Purple)',
       style: {
         color: '#9b59b6',
         fontSize: '24px',
@@ -80,7 +80,7 @@ const stylePresets = {
   ],
   button: [
     {
-      name: '默认样式 (Default)',
+      name: 'Mặc định (Default)',
       style: {
         backgroundColor: '#42b983',
         color: '#ffffff',
@@ -89,7 +89,7 @@ const stylePresets = {
       }
     },
     {
-      name: '警告风格 (Warning)',
+      name: 'Cảnh báo (Warning)',
       style: {
         backgroundColor: '#f1c40f',
         color: '#333333',
@@ -98,7 +98,7 @@ const stylePresets = {
       }
     },
     {
-      name: '幽灵按钮 (Ghost)',
+      name: 'Nút Ghost',
       style: {
         backgroundColor: 'transparent',
         color: '#42b983',
@@ -107,7 +107,7 @@ const stylePresets = {
       }
     },
     {
-      name: '深黑按钮 (Dark)',
+      name: 'Nút Dark',
       style: {
         backgroundColor: '#34495e',
         color: '#ecf0f1',
@@ -118,7 +118,7 @@ const stylePresets = {
   ],
   container: [
     {
-      name: '默认卡片 (Card)',
+      name: 'Card mặc định',
       style: {
         backgroundColor: '#f9f9f9',
         borderRadius: '12px',
@@ -126,7 +126,7 @@ const stylePresets = {
       }
     },
     {
-      name: '深色模式 (Dark)',
+      name: 'Chế độ tối (Dark)',
       style: {
         backgroundColor: '#2c3e50',
         borderRadius: '8px',
@@ -134,7 +134,7 @@ const stylePresets = {
       }
     },
     {
-      name: '极简白 (Minimal)',
+      name: 'Trắng tối giản (Minimal)',
       style: {
         backgroundColor: '#ffffff',
         borderRadius: '0px',
@@ -164,11 +164,11 @@ const applyPreset = (event) => {
 
 // Tabs definition
 const tabs = [
-  { id: 'elements', label: '元素' },
-  { id: 'console', label: '控制台' },
-  { id: 'sources', label: '源代码' },
-  { id: 'network', label: '网络' },
-  { id: 'application', label: '应用' }
+  { id: 'elements', label: 'Elements' },
+  { id: 'console', label: 'Console' },
+  { id: 'sources', label: 'Sources' },
+  { id: 'network', label: 'Network' },
+  { id: 'application', label: 'Application' }
 ]
 
 const selectNode = (node) => {
@@ -209,7 +209,7 @@ const selectNode = (node) => {
         </button>
       </div>
       <div class="instruction-overlay">
-        👆 点击上方元素，下方 DevTools 实时联动
+        Bấm vào phần tử ở trên, devtools bên dưới sẽ cập nhật theo
       </div>
     </div>
 
@@ -220,7 +220,7 @@ const selectNode = (node) => {
         <div class="header-left">
           <div
             class="icon-btn element-picker"
-            title="选择页面中的元素以进行检查"
+            title="Chọn phần tử trên trang để inspect"
           >
             <svg
               width="16"
@@ -235,7 +235,7 @@ const selectNode = (node) => {
           </div>
           <div
             class="icon-btn device-toggle"
-            title="切换设备工具栏"
+            title="Bật/tắt thanh thiết bị"
           >
             <svg
               width="16"
@@ -361,10 +361,10 @@ const selectNode = (node) => {
           <div class="styles-panel">
             <div class="styles-tabs">
               <div class="style-tab active">
-                样式 (Styles)
+                Styles
               </div>
               <div class="style-tab">
-                计算 (Computed)
+                Computed
               </div>
             </div>
             <div class="styles-content">
@@ -374,7 +374,7 @@ const selectNode = (node) => {
                 class="style-section"
               >
                 <div class="style-section-title">
-                  ✨ 快速预设 (Presets)
+                  Preset nhanh (Presets)
                 </div>
                 <select
                   class="preset-select"
@@ -385,7 +385,7 @@ const selectNode = (node) => {
                     disabled
                     selected
                   >
-                    选择一种风格 (Select Preset)...
+                    Chọn một preset...
                   </option>
                   <option
                     v-for="preset in availablePresets"
@@ -429,7 +429,7 @@ const selectNode = (node) => {
           class="panel placeholder-panel"
         >
           <div class="placeholder-text">
-            此演示主要展示 Elements 面板的实时编辑功能。请切换回 "元素" 面板。
+            Demo này chủ yếu trình bày tính năng chỉnh sửa real-time của panel Elements. Vui lòng chuyển về tab Elements.
           </div>
         </div>
       </div>

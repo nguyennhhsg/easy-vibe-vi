@@ -1,18 +1,18 @@
 <!--
   VoiceCloningDemo.vue
-  声音克隆交互演示组件
+  Component tương tác mô phỏng voice cloning
 
-  用途：
-  演示零样本声音克隆的原理和流程。
+  Mục đích:
+  Trình bày nguyên lý và quy trình của zero-shot voice cloning.
 -->
 <template>
   <div class="voice-clone-demo">
     <div class="header">
       <div class="title">
-        🎭 声音克隆：让 AI 模仿任何人
+        🎭 Voice cloning: cho AI bắt chước bất kỳ ai
       </div>
       <div class="subtitle">
-        只需几秒钟的参考音频，AI 就能学会任何人的声音
+        Chỉ vài giây audio mẫu là AI có thể học giọng của bất kỳ ai
       </div>
     </div>
 
@@ -30,11 +30,11 @@
     </div>
 
     <div class="demo-area">
-      <!-- 参考音频 -->
+      <!-- Audio mẫu -->
       <div class="section">
         <div class="section-title">
           <span class="num">1</span>
-          提供参考音频
+          Cung cấp audio mẫu
         </div>
         <div class="audio-grid">
           <div
@@ -62,21 +62,21 @@
           </div>
         </div>
         <div class="or-divider">
-          或
+          hoặc
         </div>
         <button
           class="upload-btn"
           @click="uploadRef"
         >
-          📤 上传自己的音频
+          📤 Tải audio của bạn lên
         </button>
       </div>
 
-      <!-- 处理过程 -->
+      <!-- Quá trình xử lý -->
       <div class="section process-section">
         <div class="section-title">
           <span class="num">2</span>
-          AI 学习声音特征
+          AI học đặc trưng giọng nói
         </div>
         <div class="process-flow">
           <div
@@ -109,21 +109,21 @@
             height="100"
           />
           <div class="viz-label">
-            提取的声音特征向量
+            Vector đặc trưng giọng đã trích xuất
           </div>
         </div>
       </div>
 
-      <!-- 生成结果 -->
+      <!-- Kết quả sinh -->
       <div class="section">
         <div class="section-title">
           <span class="num">3</span>
-          输入文本生成语音
+          Nhập văn bản để sinh giọng
         </div>
         <div class="text-input">
           <textarea
             v-model="inputText"
-            placeholder="输入要合成的文本..."
+            placeholder="Bạn nhập văn bản cần tổng hợp..."
             rows="3"
           />
           <button
@@ -135,7 +135,7 @@
               v-if="isGenerating"
               class="spinner"
             />
-            <span v-else>🎙 生成语音</span>
+            <span v-else>🎙 Sinh giọng</span>
           </button>
         </div>
 
@@ -145,8 +145,8 @@
         >
           <div class="result-header">
             <span class="result-icon">🎵</span>
-            <span>生成结果</span>
-            <span class="similarity">相似度: {{ similarity }}%</span>
+            <span>Kết quả sinh</span>
+            <span class="similarity">Độ tương đồng: {{ similarity }}%</span>
           </div>
           <div class="waveform-mini">
             <canvas
@@ -160,13 +160,13 @@
               class="action-btn"
               @click="playResult"
             >
-              {{ playingResult ? '⏸ 暂停' : '▶ 播放' }}
+              {{ playingResult ? '⏸ Tạm dừng' : '▶ Phát' }}
             </button>
             <button
               class="action-btn secondary"
               @click="download"
             >
-              ⬇ 下载
+              ⬇ Tải về
             </button>
           </div>
         </div>
@@ -175,7 +175,7 @@
 
     <div class="tips-section">
       <div class="tips-title">
-        💡 声音克隆小贴士
+        💡 Mẹo voice cloning
       </div>
       <div class="tips-grid">
         <div class="tip-card">
@@ -183,8 +183,8 @@
             ⏱️
           </div>
           <div class="tip-text">
-            <strong>参考音频时长</strong>
-            <p>3-10 秒即可，质量比时长更重要</p>
+            <strong>Độ dài audio mẫu</strong>
+            <p>3-10 giây là đủ, chất lượng quan trọng hơn độ dài</p>
           </div>
         </div>
         <div class="tip-card">
@@ -192,8 +192,8 @@
             🔇
           </div>
           <div class="tip-text">
-            <strong>环境要求</strong>
-            <p>安静环境，避免背景噪音</p>
+            <strong>Yêu cầu môi trường</strong>
+            <p>Bạn nên ở chỗ yên tĩnh, tránh tiếng ồn nền</p>
           </div>
         </div>
         <div class="tip-card">
@@ -201,8 +201,8 @@
             🗣️
           </div>
           <div class="tip-text">
-            <strong>内容选择</strong>
-            <p>包含多种音调和语速效果更好</p>
+            <strong>Chọn nội dung</strong>
+            <p>Có nhiều cao độ và tốc độ khác nhau thì hiệu quả tốt hơn</p>
           </div>
         </div>
       </div>
@@ -211,9 +211,9 @@
     <div class="info-box">
       <span class="icon">🔬</span>
       <p>
-        <strong>技术原理：</strong>
-        声音克隆通过提取参考音频的音色、语调和说话风格特征，构建说话人嵌入向量。
-        生成时，TTS 模型结合文本内容和说话人嵌入，合成与参考声音相似的语音。
+        <strong>Nguyên lý kỹ thuật:</strong>
+        Voice cloning trích xuất đặc trưng âm sắc, ngữ điệu và phong cách nói từ audio mẫu để dựng vector embedding của người nói.
+        Khi sinh, mô hình TTS kết hợp nội dung văn bản với speaker embedding để tổng hợp giọng tương tự audio mẫu.
       </p>
     </div>
   </div>
@@ -223,23 +223,23 @@
 import { ref, computed, onMounted, watch } from 'vue'
 
 const modes = [
-  { id: 'zeroshot', name: '零样本克隆', icon: '🎯' },
-  { id: 'fewshot', name: '少样本克隆', icon: '📚' },
-  { id: 'crosslingual', name: '跨语言克隆', icon: '🌍' }
+  { id: 'zeroshot', name: 'Zero-shot cloning', icon: '🎯' },
+  { id: 'fewshot', name: 'Few-shot cloning', icon: '📚' },
+  { id: 'crosslingual', name: 'Cross-lingual cloning', icon: '🌍' }
 ]
 
 const references = [
-  { id: 'male1', name: '男声 A', avatar: '👨', desc: '低沉磁性' },
-  { id: 'female1', name: '女声 B', avatar: '👩', desc: '温柔甜美' },
-  { id: 'child', name: '童声', avatar: '🧒', desc: '活泼可爱' },
-  { id: 'elder', name: '老人', avatar: '👴', desc: '沧桑稳重' }
+  { id: 'male1', name: 'Nam A', avatar: '👨', desc: 'Trầm, ấm' },
+  { id: 'female1', name: 'Nữ B', avatar: '👩', desc: 'Dịu dàng, ngọt ngào' },
+  { id: 'child', name: 'Trẻ em', avatar: '🧒', desc: 'Lanh lảnh, đáng yêu' },
+  { id: 'elder', name: 'Người lớn tuổi', avatar: '👴', desc: 'Già dặn, trầm tĩnh' }
 ]
 
 const processSteps = [
-  { id: 'load', name: '加载音频', icon: '📂' },
-  { id: 'encode', name: '编码特征', icon: '🔢' },
-  { id: 'extract', name: '提取音色', icon: '🎨' },
-  { id: 'embed', name: '构建嵌入', icon: '💎' }
+  { id: 'load', name: 'Nạp audio', icon: '📂' },
+  { id: 'encode', name: 'Encode đặc trưng', icon: '🔢' },
+  { id: 'extract', name: 'Trích âm sắc', icon: '🎨' },
+  { id: 'embed', name: 'Dựng embedding', icon: '💎' }
 ]
 
 const selectedMode = ref('zeroshot')
@@ -275,7 +275,7 @@ const playRef = (id) => {
 }
 
 const uploadRef = () => {
-  alert('模拟：打开文件选择器')
+  alert('Mô phỏng: mở hộp thoại chọn file')
 }
 
 const simulateProcess = () => {
@@ -298,7 +298,7 @@ const drawFeatures = () => {
 
   ctx.clearRect(0, 0, w, h)
 
-  // 绘制特征向量可视化
+  // Trực quan hoá vector đặc trưng
   const features = 20
   const barW = (w - 40) / features
 
@@ -351,7 +351,7 @@ const playResult = () => {
 }
 
 const download = () => {
-  alert('模拟：下载音频文件')
+  alert('Mô phỏng: tải file audio về máy')
 }
 
 const resetDemo = () => {

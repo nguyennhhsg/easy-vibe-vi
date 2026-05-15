@@ -1,12 +1,12 @@
 <!--
   K8sWorkloadsDemo.vue
-  Kubernetes 工作负载演示：Pod、Deployment、Service 等核心资源
+  Các tài nguyên cốt lõi của Kubernetes: Pod, Deployment, Service...
 -->
 <template>
   <div class="k8s-workloads-demo">
     <div class="header">
-      <div class="title">K8s 核心资源</div>
-      <div class="subtitle">点击资源类型查看说明和 YAML 示例</div>
+      <div class="title">Tài nguyên cốt lõi của K8s</div>
+      <div class="subtitle">Bấm vào từng loại để xem mô tả và YAML mẫu</div>
     </div>
 
     <div class="resource-tabs">
@@ -27,11 +27,11 @@
       </div>
       <div class="detail-desc">{{ current.desc }}</div>
       <div class="yaml-block">
-        <div class="yaml-label">YAML 示例</div>
+        <div class="yaml-label">YAML mẫu</div>
         <pre class="yaml-code"><code>{{ current.yaml }}</code></pre>
       </div>
       <div v-if="current.tips" class="tips">
-        <span class="tip-label">要点：</span>{{ current.tips }}
+        <span class="tip-label">Lưu ý:</span> {{ current.tips }}
       </div>
     </div>
   </div>
@@ -46,8 +46,8 @@ const resources = [
   {
     key: 'pod',
     name: 'Pod',
-    category: '最小调度单元',
-    desc: 'Pod 是 K8s 中最小的部署单元，包含一个或多个紧密关联的容器。同一 Pod 内的容器共享网络和存储，可以通过 localhost 互相通信。',
+    category: 'Đơn vị schedule nhỏ nhất',
+    desc: 'Pod là đơn vị deploy nhỏ nhất trong K8s, chứa một hoặc nhiều container gắn bó chặt chẽ. Các container trong cùng Pod share chung network và storage, có thể giao tiếp với nhau qua localhost.',
     yaml: `apiVersion: v1
 kind: Pod
 metadata:
@@ -58,13 +58,13 @@ spec:
       image: my-app:1.0
       ports:
         - containerPort: 3000`,
-    tips: '生产环境中很少直接创建 Pod，通常通过 Deployment 管理。'
+    tips: 'Trong production hiếm khi tạo Pod trực tiếp, thường quản lý qua Deployment.'
   },
   {
     key: 'deployment',
     name: 'Deployment',
-    category: '工作负载',
-    desc: 'Deployment 管理 Pod 的副本数、滚动更新和回滚。你声明"我要 3 个副本运行 v1.0"，Deployment 控制器会确保始终有 3 个健康的 Pod 在运行。',
+    category: 'Workload',
+    desc: 'Deployment quản lý số replica của Pod, rolling update và rollback. Bạn khai báo &quot;muốn 3 replica chạy v1.0&quot;, controller của Deployment sẽ đảm bảo luôn có 3 Pod khỏe đang chạy.',
     yaml: `apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -82,13 +82,13 @@ spec:
       containers:
         - name: app
           image: my-app:1.0`,
-    tips: '更新镜像版本后，Deployment 会自动执行滚动更新，逐步替换旧 Pod。'
+    tips: 'Sau khi đổi version image, Deployment tự rolling update, thay từng Pod cũ.'
   },
   {
     key: 'service',
     name: 'Service',
-    category: '网络',
-    desc: 'Service 为一组 Pod 提供稳定的访问入口。Pod 的 IP 会变，但 Service 的 ClusterIP 和 DNS 名称不变。它通过 label selector 找到对应的 Pod，并做负载均衡。',
+    category: 'Network',
+    desc: 'Service cung cấp một entry ổn định cho một nhóm Pod. IP của Pod hay thay đổi, nhưng ClusterIP và DNS name của Service không đổi. Nó dùng label selector để tìm Pod tương ứng và làm load balancing.',
     yaml: `apiVersion: v1
 kind: Service
 metadata:
@@ -100,13 +100,13 @@ spec:
     - port: 80
       targetPort: 3000
   type: ClusterIP`,
-    tips: 'ClusterIP（集群内访问）、NodePort（节点端口）、LoadBalancer（云负载均衡器）是三种常用类型。'
+    tips: 'ClusterIP (truy cập trong cluster), NodePort (port trên node), LoadBalancer (load balancer của cloud) là ba loại hay dùng.'
   },
   {
     key: 'configmap',
     name: 'ConfigMap',
-    category: '配置',
-    desc: 'ConfigMap 存储非敏感的配置数据（如数据库地址、功能开关），可以作为环境变量或文件挂载到 Pod 中。修改 ConfigMap 后可以不重建镜像就更新配置。',
+    category: 'Cấu hình',
+    desc: 'ConfigMap lưu cấu hình không nhạy cảm (địa chỉ database, feature flag...) và có thể mount vào Pod dưới dạng biến môi trường hoặc file. Sửa ConfigMap có thể cập nhật cấu hình mà không cần build lại image.',
     yaml: `apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -114,13 +114,13 @@ metadata:
 data:
   DB_HOST: "db.example.com"
   LOG_LEVEL: "info"`,
-    tips: '敏感数据（密码、密钥）应该用 Secret 而不是 ConfigMap。'
+    tips: 'Dữ liệu nhạy cảm (mật khẩu, key) nên dùng Secret thay vì ConfigMap.'
   },
   {
     key: 'ingress',
     name: 'Ingress',
-    category: '网络',
-    desc: 'Ingress 管理集群的外部 HTTP/HTTPS 访问入口，支持基于域名和路径的路由规则。它是集群的"反向代理"，通常配合 Nginx Ingress Controller 使用。',
+    category: 'Network',
+    desc: 'Ingress quản lý entry HTTP/HTTPS từ bên ngoài vào cluster, hỗ trợ routing theo domain và path. Nó là &quot;reverse proxy&quot; của cluster, thường dùng cùng Nginx Ingress Controller.',
     yaml: `apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -137,7 +137,7 @@ spec:
                 name: my-app-svc
                 port:
                   number: 80`,
-    tips: 'Ingress 需要 Ingress Controller 才能工作，它本身只是路由规则的声明。'
+    tips: 'Ingress cần Ingress Controller mới chạy được, bản thân nó chỉ là khai báo routing rule.'
   }
 ]
 

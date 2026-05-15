@@ -2,7 +2,7 @@
   <div class="http-root">
     <div class="http-header">
       <span class="http-icon">🌐</span>
-      <span class="http-title">HTTP 协议演示</span>
+      <span class="http-title">Demo giao thức HTTP</span>
     </div>
 
     <div class="http-tabs">
@@ -17,13 +17,13 @@
     </div>
 
     <div class="http-content">
-      <!-- 请求响应演示 -->
+      <!-- Demo request/response -->
       <div v-if="activeTab === 'request'" class="http-section">
         <div class="http-flow">
           <div class="http-card http-request">
             <div class="http-card-header">
               <span class="http-card-icon">📤</span>
-              <span class="http-card-title">HTTP 请求</span>
+              <span class="http-card-title">HTTP Request</span>
             </div>
             <div class="http-card-body">
               <div class="http-line http-line-start">
@@ -50,13 +50,13 @@
 
           <div class="http-connection">
             <div class="http-connection-line"></div>
-            <span class="http-connection-label">TCP 连接</span>
+            <span class="http-connection-label">Kết nối TCP</span>
           </div>
 
           <div class="http-card http-response">
             <div class="http-card-header">
               <span class="http-card-icon">📥</span>
-              <span class="http-card-title">HTTP 响应</span>
+              <span class="http-card-title">HTTP Response</span>
             </div>
             <div class="http-card-body">
               <div class="http-line http-line-start">
@@ -92,15 +92,15 @@
         </div>
       </div>
 
-      <!-- HTTP 版本对比 -->
+      <!-- So sánh các phiên bản HTTP -->
       <div v-else-if="activeTab === 'versions'" class="http-section">
         <div class="version-table">
           <div class="version-row version-row-head">
-            <div class="version-cell">版本</div>
-            <div class="version-cell">年份</div>
-            <div class="version-cell">核心特性</div>
-            <div class="version-cell">传输格式</div>
-            <div class="version-cell">连接方式</div>
+            <div class="version-cell">Phiên bản</div>
+            <div class="version-cell">Năm</div>
+            <div class="version-cell">Đặc tính cốt lõi</div>
+            <div class="version-cell">Định dạng truyền</div>
+            <div class="version-cell">Kết nối</div>
           </div>
           <div
             v-for="ver in versions"
@@ -117,7 +117,7 @@
         </div>
       </div>
 
-      <!-- HTTP/2 多路复用 -->
+      <!-- HTTP/2 Multiplexing -->
       <div v-else-if="activeTab === 'http2'" class="http-section">
         <div class="http2-diagram">
           <div class="http2-header">
@@ -129,33 +129,33 @@
               <div class="http2-side-title">HTTP/1.1</div>
               <div class="http2-connection http2-connection-legacy">
                 <div class="http2-stream http2-stream-1">
-                  <div class="http2-label">请求 1</div>
+                  <div class="http2-label">Request 1</div>
                   <div class="http2-timeline">
-                    <div class="http2-block http2-block-req">发送</div>
-                    <div class="http2-block http2-block-wait">等待</div>
-                    <div class="http2-block http2-block-res">接收</div>
+                    <div class="http2-block http2-block-req">Gửi</div>
+                    <div class="http2-block http2-block-wait">Chờ</div>
+                    <div class="http2-block http2-block-res">Nhận</div>
                   </div>
                 </div>
                 <div class="http2-stream http2-stream-2">
-                  <div class="http2-label">请求 2</div>
+                  <div class="http2-label">Request 2</div>
                   <div class="http2-timeline">
-                    <div class="http2-block http2-block-wait">排队</div>
-                    <div class="http2-block http2-block-req">发送</div>
-                    <div class="http2-block http2-block-wait">等待</div>
-                    <div class="http2-block http2-block-res">接收</div>
+                    <div class="http2-block http2-block-wait">Xếp hàng</div>
+                    <div class="http2-block http2-block-req">Gửi</div>
+                    <div class="http2-block http2-block-wait">Chờ</div>
+                    <div class="http2-block http2-block-res">Nhận</div>
                   </div>
                 </div>
                 <div class="http2-stream http2-stream-3">
-                  <div class="http2-label">请求 3</div>
+                  <div class="http2-label">Request 3</div>
                   <div class="http2-timeline">
-                    <div class="http2-block http2-block-wait">排队</div>
-                    <div class="http2-block http2-block-wait">排队</div>
-                    <div class="http2-block http2-block-req">发送</div>
-                    <div class="http2-block http2-block-res">接收</div>
+                    <div class="http2-block http2-block-wait">Xếp hàng</div>
+                    <div class="http2-block http2-block-wait">Xếp hàng</div>
+                    <div class="http2-block http2-block-req">Gửi</div>
+                    <div class="http2-block http2-block-res">Nhận</div>
                   </div>
                 </div>
               </div>
-              <div class="http2-note">串行传输，需等待前一个请求完成</div>
+              <div class="http2-note">Truyền nối tiếp, phải chờ request trước hoàn tất</div>
             </div>
 
             <div class="http2-side">
@@ -164,26 +164,26 @@
                 <div class="http2-stream http2-stream-1">
                   <div class="http2-label">Stream 1</div>
                   <div class="http2-timeline">
-                    <div class="http2-block http2-block-req">发送</div>
-                    <div class="http2-block http2-block-res">接收</div>
+                    <div class="http2-block http2-block-req">Gửi</div>
+                    <div class="http2-block http2-block-res">Nhận</div>
                   </div>
                 </div>
                 <div class="http2-stream http2-stream-2">
                   <div class="http2-label">Stream 2</div>
                   <div class="http2-timeline">
-                    <div class="http2-block http2-block-req">发送</div>
-                    <div class="http2-block http2-block-res">接收</div>
+                    <div class="http2-block http2-block-req">Gửi</div>
+                    <div class="http2-block http2-block-res">Nhận</div>
                   </div>
                 </div>
                 <div class="http2-stream http2-stream-3">
                   <div class="http2-label">Stream 3</div>
                   <div class="http2-timeline">
-                    <div class="http2-block http2-block-req">发送</div>
-                    <div class="http2-block http2-block-res">接收</div>
+                    <div class="http2-block http2-block-req">Gửi</div>
+                    <div class="http2-block http2-block-res">Nhận</div>
                   </div>
                 </div>
               </div>
-              <div class="http2-note">多路复用，并发传输多个请求</div>
+              <div class="http2-note">Multiplexing, truyền song song nhiều request</div>
             </div>
           </div>
         </div>
@@ -198,14 +198,14 @@
               <span class="https-title">HTTP</span>
             </div>
             <div class="https-body">
-              <div class="https-warning">⚠️ 不安全</div>
+              <div class="https-warning">⚠️ Không an toàn</div>
               <ul class="https-list">
-                <li>明文传输，数据可被窃听</li>
-                <li>无法验证服务器身份</li>
-                <li>数据可能被篡改</li>
+                <li>Truyền plain text, dữ liệu có thể bị nghe lén</li>
+                <li>Không xác thực được danh tính server</li>
+                <li>Dữ liệu có thể bị giả mạo</li>
               </ul>
               <div class="https-example">
-                <div class="https-example-label">传输内容：</div>
+                <div class="https-example-label">Nội dung truyền:</div>
                 <code>GET /login?user=admin&pass=123456</code>
               </div>
             </div>
@@ -217,28 +217,28 @@
               <span class="https-title">HTTPS</span>
             </div>
             <div class="https-body">
-              <div class="https-success">✓ 安全</div>
+              <div class="https-success">✓ An toàn</div>
               <ul class="https-list">
-                <li>加密传输，数据无法被窃听</li>
-                <li>SSL/TLS 证书验证身份</li>
-                <li>数据完整性校验，防篡改</li>
+                <li>Truyền có mã hoá, dữ liệu không thể bị nghe lén</li>
+                <li>Chứng chỉ SSL/TLS xác thực danh tính</li>
+                <li>Kiểm tra toàn vẹn dữ liệu, chống giả mạo</li>
               </ul>
               <div class="https-example">
-                <div class="https-example-label">传输内容：</div>
-                <code>8f3a2b...（加密数据）</code>
+                <div class="https-example-label">Nội dung truyền:</div>
+                <code>8f3a2b... (dữ liệu đã mã hoá)</code>
               </div>
             </div>
           </div>
         </div>
 
         <div class="https-flow">
-          <div class="https-flow-title">HTTPS 握手过程</div>
+          <div class="https-flow-title">Quy trình bắt tay (handshake) HTTPS</div>
           <div class="https-steps">
             <div class="https-step">
               <div class="https-step-number">1</div>
               <div class="https-step-content">
                 <div class="https-step-title">Client Hello</div>
-                <div class="https-step-desc">客户端发送支持的加密套件</div>
+                <div class="https-step-desc">Client gửi danh sách cipher suite hỗ trợ</div>
               </div>
             </div>
             <div class="https-step">
@@ -246,29 +246,29 @@
               <div class="https-step-content">
                 <div class="https-step-title">Server Hello</div>
                 <div class="https-step-desc">
-                  服务器返回证书和选定的加密套件
+                  Server trả về chứng chỉ và cipher suite đã chọn
                 </div>
               </div>
             </div>
             <div class="https-step">
               <div class="https-step-number">3</div>
               <div class="https-step-content">
-                <div class="https-step-title">验证证书</div>
-                <div class="https-step-desc">客户端验证服务器证书</div>
+                <div class="https-step-title">Xác thực chứng chỉ</div>
+                <div class="https-step-desc">Client xác thực chứng chỉ của server</div>
               </div>
             </div>
             <div class="https-step">
               <div class="https-step-number">4</div>
               <div class="https-step-content">
-                <div class="https-step-title">密钥交换</div>
-                <div class="https-step-desc">生成会话密钥</div>
+                <div class="https-step-title">Trao đổi khoá</div>
+                <div class="https-step-desc">Sinh session key</div>
               </div>
             </div>
             <div class="https-step">
               <div class="https-step-number">5</div>
               <div class="https-step-content">
-                <div class="https-step-title">加密通信</div>
-                <div class="https-step-desc">使用会话密钥加密数据</div>
+                <div class="https-step-title">Giao tiếp mã hoá</div>
+                <div class="https-step-desc">Dùng session key để mã hoá dữ liệu</div>
               </div>
             </div>
           </div>
@@ -284,8 +284,8 @@ import { ref } from 'vue'
 const activeTab = ref('request')
 
 const tabs = [
-  { id: 'request', name: '请求响应', icon: '📡' },
-  { id: 'versions', name: '版本对比', icon: '📊' },
+  { id: 'request', name: 'Request/Response', icon: '📡' },
+  { id: 'versions', name: 'So sánh phiên bản', icon: '📊' },
   { id: 'http2', name: 'HTTP/2', icon: '⚡' },
   { id: 'https', name: 'HTTPS', icon: '🔒' }
 ]
@@ -313,13 +313,13 @@ const response = ref({
     'Content-Length': '156',
     'Cache-Control': 'max-age=3600'
   },
-  body: '{\n  "id": 123,\n  "name": "张三",\n  "email": "zhangsan@example.com"\n}'
+  body: '{\n  "id": 123,\n  "name": "Nguyen Van A",\n  "email": "nguyenvana@example.com"\n}'
 })
 
 const demos = [
   {
     id: 'get',
-    name: 'GET 请求',
+    name: 'Request GET',
     request: {
       method: 'GET',
       url: '/api/users/123',
@@ -339,12 +339,12 @@ const demos = [
         'Content-Type': 'application/json',
         'Content-Length': '156'
       },
-      body: '{\n  "id": 123,\n  "name": "张三"\n}'
+      body: '{\n  "id": 123,\n  "name": "Nguyen Van A"\n}'
     }
   },
   {
     id: 'post',
-    name: 'POST 创建',
+    name: 'POST tạo mới',
     request: {
       method: 'POST',
       url: '/api/users',
@@ -354,7 +354,7 @@ const demos = [
         'Content-Type': 'application/json',
         'Content-Length': '45'
       },
-      body: '{\n  "name": "李四",\n  "email": "lisi@example.com"\n}'
+      body: '{\n  "name": "Tran Van B",\n  "email": "tranvanb@example.com"\n}'
     },
     response: {
       version: 'HTTP/1.1',
@@ -365,12 +365,12 @@ const demos = [
         'Content-Type': 'application/json',
         Location: '/api/users/124'
       },
-      body: '{\n  "id": 124,\n  "name": "李四"\n}'
+      body: '{\n  "id": 124,\n  "name": "Tran Van B"\n}'
     }
   },
   {
     id: '404',
-    name: '404 错误',
+    name: 'Lỗi 404',
     request: {
       method: 'GET',
       url: '/api/users/999',
@@ -388,7 +388,7 @@ const demos = [
       headers: {
         'Content-Type': 'application/json'
       },
-      body: '{\n  "error": "用户不存在"\n}'
+      body: '{\n  "error": "Không tìm thấy user"\n}'
     }
   }
 ]
@@ -397,41 +397,41 @@ const versions = [
   {
     version: 'HTTP/0.9',
     year: '1991',
-    features: '仅支持 GET',
-    format: '纯文本',
-    connection: '一次一请求',
+    features: 'Chỉ hỗ trợ GET',
+    format: 'Plain text',
+    connection: 'Một lần một request',
     highlight: false
   },
   {
     version: 'HTTP/1.0',
     year: '1996',
-    features: '增加 POST/HEAD',
-    format: '纯文本',
-    connection: '短连接',
+    features: 'Thêm POST/HEAD',
+    format: 'Plain text',
+    connection: 'Kết nối ngắn',
     highlight: false
   },
   {
     version: 'HTTP/1.1',
     year: '1997',
-    features: '持久连接、分块传输',
-    format: '纯文本',
-    connection: '长连接',
+    features: 'Persistent connection, chunked transfer',
+    format: 'Plain text',
+    connection: 'Kết nối dài',
     highlight: true
   },
   {
     version: 'HTTP/2',
     year: '2015',
-    features: '多路复用、头部压缩',
-    format: '二进制帧',
-    connection: '多路复用',
+    features: 'Multiplexing, nén header',
+    format: 'Binary frame',
+    connection: 'Multiplexing',
     highlight: true
   },
   {
     version: 'HTTP/3',
     year: '2022',
-    features: '基于 QUIC、解决队头阻塞',
+    features: 'Dựa trên QUIC, giải quyết head-of-line blocking',
     format: 'QUIC (UDP)',
-    connection: '独立连接',
+    connection: 'Kết nối độc lập',
     highlight: true
   }
 ]
@@ -504,7 +504,7 @@ function loadDemo(demo) {
   padding: 20px;
 }
 
-/* 请求响应演示 */
+/* Demo request/response */
 .http-flow {
   display: flex;
   align-items: stretch;
@@ -672,7 +672,7 @@ function loadDemo(demo) {
   border-color: var(--vp-c-brand);
 }
 
-/* 版本对比表 */
+/* Bảng so sánh phiên bản */
 .version-table {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
@@ -721,7 +721,7 @@ function loadDemo(demo) {
   color: var(--vp-c-brand);
 }
 
-/* HTTP/2 对比 */
+/* So sánh HTTP/2 */
 .http2-comparison {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -789,7 +789,7 @@ function loadDemo(demo) {
   margin-top: 8px;
 }
 
-/* HTTPS 对比 */
+/* So sánh HTTPS */
 .https-comparison {
   display: grid;
   grid-template-columns: 1fr 1fr;

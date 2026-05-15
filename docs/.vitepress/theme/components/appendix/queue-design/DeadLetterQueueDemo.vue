@@ -1,18 +1,18 @@
 <!--
   DeadLetterQueueDemo.vue
-  死信队列演示 - 处理失败消息
+  Demo dead letter queue - xử lý message thất bại
 -->
 <template>
   <div class="dlq-demo">
     <div class="demo-header">
       <span class="icon">🚑</span>
-      <span class="title">死信队列</span>
-      <span class="subtitle">消息的"急救站" - 处理失败消息</span>
+      <span class="title">Dead Letter Queue</span>
+      <span class="subtitle">"Trạm cứu hộ" cho message - xử lý message thất bại</span>
     </div>
 
     <div class="controls">
       <div class="control">
-        <label>失败率：</label>
+        <label>Tỷ lệ thất bại:</label>
         <input
           v-model.number="failureRate"
           type="range"
@@ -23,7 +23,7 @@
         <span class="value">{{ failureRate }}%</span>
       </div>
       <div class="control">
-        <label>最大重试：</label>
+        <label>Số lần retry tối đa:</label>
         <input
           v-model.number="maxRetries"
           type="range"
@@ -39,12 +39,12 @@
       <div class="flow-container">
         <div class="main-queue-section">
           <div class="section-title">
-            📦 主队列
+            📦 Queue chính
           </div>
           <div class="queue-box main-queue">
             <div class="queue-header">
-              <span>正常消息队列</span>
-              <span class="count">{{ mainQueue.length }} 条</span>
+              <span>Queue message thường</span>
+              <span class="count">{{ mainQueue.length }} msg</span>
             </div>
             <div class="message-list">
               <div
@@ -60,20 +60,20 @@
                   v-if="msg.retries > 0"
                   class="msg-retries"
                 >
-                  重试: {{ msg.retries }}/{{ maxRetries }}
+                  Retry: {{ msg.retries }}/{{ maxRetries }}
                 </div>
               </div>
               <div
                 v-if="mainQueue.length === 0"
                 class="empty"
               >
-                队列为空
+                Queue trống
               </div>
               <div
                 v-else-if="mainQueue.length > 3"
                 class="more"
               >
-                还有 {{ mainQueue.length - 3 }} 条...
+                Còn {{ mainQueue.length - 3 }} message...
               </div>
             </div>
           </div>
@@ -82,13 +82,13 @@
             :disabled="processing"
             @click="addMessage"
           >
-            + 添加消息
+            + Thêm message
           </button>
         </div>
 
         <div class="processing-section">
           <div class="section-title">
-            ⚙️ 消费处理
+            ⚙️ Xử lý consume
           </div>
           <div class="processor-box">
             <div
@@ -98,13 +98,13 @@
               {{ processing ? '⚙️' : '💤' }}
             </div>
             <div class="processor-status">
-              {{ processing ? '处理中...' : '空闲' }}
+              {{ processing ? 'Đang xử lý...' : 'Rảnh' }}
             </div>
             <div
               v-if="currentMessage"
               class="current-msg"
             >
-              处理: #{{ currentMessage.id }}
+              Đang xử lý: #{{ currentMessage.id }}
             </div>
             <div
               v-if="lastResult"
@@ -118,12 +118,12 @@
 
         <div class="dlq-section">
           <div class="section-title">
-            ⚠️ 死信队列
+            ⚠️ Dead letter queue
           </div>
           <div class="queue-box dead-letter">
             <div class="queue-header">
-              <span>失败消息</span>
-              <span class="count">{{ deadLetterQueue.length }} 条</span>
+              <span>Message thất bại</span>
+              <span class="count">{{ deadLetterQueue.length }} msg</span>
             </div>
             <div class="message-list">
               <div
@@ -142,13 +142,13 @@
                 v-if="deadLetterQueue.length === 0"
                 class="empty"
               >
-                无失败消息
+                Không có message thất bại
               </div>
               <div
                 v-else-if="deadLetterQueue.length > 2"
                 class="more"
               >
-                还有 {{ deadLetterQueue.length - 2 }} 条...
+                Còn {{ deadLetterQueue.length - 2 }} message...
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@
             :disabled="deadLetterQueue.length === 0"
             @click="retryDeadLetters"
           >
-            🔄 重试死信
+            🔄 Retry dead letter
           </button>
         </div>
       </div>
@@ -165,7 +165,7 @@
       <div class="stats">
         <div class="stat-card">
           <div class="stat-label">
-            总消息数
+            Tổng số message
           </div>
           <div class="stat-value">
             {{ totalMessages }}
@@ -173,7 +173,7 @@
         </div>
         <div class="stat-card success">
           <div class="stat-label">
-            成功处理
+            Xử lý thành công
           </div>
           <div class="stat-value">
             {{ successCount }}
@@ -181,7 +181,7 @@
         </div>
         <div class="stat-card warning">
           <div class="stat-label">
-            进入死信
+            Vào dead letter
           </div>
           <div class="stat-value">
             {{ deadLetterCount }}
@@ -189,7 +189,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-label">
-            成功率
+            Tỷ lệ thành công
           </div>
           <div class="stat-value">
             {{ successRate }}%
@@ -200,7 +200,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想:</strong>失败消息进入死信队列,避免阻塞正常消息,可后续人工介入或自动重试
+      <strong>Ý tưởng cốt lõi:</strong> Message thất bại vào dead letter queue, tránh chặn message thường, sau đó có thể can thiệp thủ công hoặc retry tự động
     </div>
   </div>
 </template>
@@ -258,34 +258,34 @@ const processNext = () => {
       msg.processing = false
 
       if (msg.retries >= maxRetries.value) {
-        // 超过最大重试次数,进入死信队列
+        // Vượt quá số lần retry tối đa, đưa vào dead letter queue
         mainQueue.value.shift()
         deadLetterQueue.value.push({
           id: msg.id,
-          error: `重试 ${msg.retries} 次后仍失败`
+          error: `Vẫn thất bại sau ${msg.retries} lần retry`
         })
         lastResult.value = {
           type: 'error',
-          message: `❌ 消息 #${msg.id} 进入死信队列`
+          message: `❌ Message #${msg.id} vào dead letter queue`
         }
       } else {
-        // 重新入队
+        // Đưa lại vào queue
         lastResult.value = {
           type: 'warning',
-          message: `⚠️ 消息 #${msg.id} 处理失败,重试 ${msg.retries}/${maxRetries.value}`
+          message: `⚠️ Message #${msg.id} xử lý thất bại, retry ${msg.retries}/${maxRetries.value}`
         }
       }
 
       setTimeout(processNext, 500)
     } else {
-      // 成功处理
+      // Xử lý thành công
       mainQueue.value.shift()
       successCount.value++
       msg.processing = false
       currentMessage.value = null
       lastResult.value = {
         type: 'success',
-        message: `✅ 消息 #${msg.id} 处理成功`
+        message: `✅ Message #${msg.id} xử lý thành công`
       }
 
       setTimeout(processNext, 300)
@@ -305,26 +305,26 @@ const retryDeadLetters = () => {
   }
 }
 
-// 自动开始处理
+// Tự động bắt đầu xử lý
 const startProcessing = () => {
   if (!processing.value && mainQueue.value.length > 0) {
     processNext()
   }
 }
 
-// 监听队列变化
+// Lắng nghe thay đổi queue
 const checkAndProcess = () => {
   startProcessing()
 }
 
-// 添加消息后自动开始处理
+// Sau khi thêm message tự động bắt đầu xử lý
 const originalAddMessage = addMessage
 const addMessageWithAutoProcess = () => {
   originalAddMessage()
   checkAndProcess()
 }
 
-// 覆盖 addMessage 方法
+// Override method addMessage
 addMessage = addMessageWithAutoProcess
 </script>
 

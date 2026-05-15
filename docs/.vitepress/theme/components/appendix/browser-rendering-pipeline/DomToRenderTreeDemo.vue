@@ -2,19 +2,19 @@
   <div class="dom-render-tree-demo">
     <div class="demo-header">
       <span class="icon">🌲</span>
-      <span class="title">DOM到渲染树</span>
-      <span class="subtitle">浏览器如何构建渲染树</span>
+      <span class="title">Từ DOM tới render tree</span>
+      <span class="subtitle">Cách browser build render tree</span>
     </div>
 
     <div class="intro-text">
-      浏览器需要把 HTML 和 CSS 合并成一棵"渲染树"。想象你在<span class="highlight">组装家具</span>：图纸是 DOM，说明书是 CSSOM，只有结合两者，才能知道每个零件长什么样、放在哪里。
+      Browser cần hợp HTML và CSS thành một cây render tree. Hãy hình dung bạn đang <span class="highlight">lắp đồ nội thất</span>: bản vẽ là DOM, hướng dẫn lắp là CSSOM, chỉ khi ghép cả hai bạn mới biết từng chi tiết trông thế nào và đặt ở đâu.
     </div>
 
     <div class="demo-content">
       <div class="trees-container">
         <div class="tree-section">
           <div class="tree-title">
-            DOM树
+            DOM tree
           </div>
           <div class="tree dom-tree">
             <div class="tree-node">
@@ -55,7 +55,7 @@
 
         <div class="tree-section">
           <div class="tree-title">
-            CSSOM树
+            CSSOM tree
           </div>
           <div class="tree cssom-tree">
             <div class="tree-node">
@@ -96,7 +96,7 @@
 
         <div class="tree-section">
           <div class="tree-title">
-            渲染树
+            Render tree
           </div>
           <div class="tree render-tree">
             <div class="tree-node">
@@ -114,18 +114,18 @@
       <div class="legend">
         <div class="legend-item">
           <span class="legend-dot highlight-node" />
-          <span class="legend-text">可见节点</span>
+          <span class="legend-text">Node hiển thị được</span>
         </div>
         <div class="legend-item">
           <span class="legend-dot hidden-node" />
-          <span class="legend-text">不可见节点（不包含在渲染树中）</span>
+          <span class="legend-text">Node không hiển thị (không có trong render tree)</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心要点：</strong>渲染树只包含可见的节点（display: none 的元素会被忽略）。每个渲染树节点都包含对应的 DOM 节点和计算出的样式信息。渲染树构建完成后，浏览器才能进入布局阶段。
+      <strong>Ý chính:</strong> Render tree chỉ chứa các node hiển thị được (phần tử display: none sẽ bị bỏ qua). Mỗi node của render tree đều bao gồm DOM node tương ứng cùng style đã được tính. Sau khi build xong render tree, browser mới bước vào giai đoạn layout.
     </div>
   </div>
 </template>

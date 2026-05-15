@@ -1,109 +1,109 @@
 <template>
   <div class="mcp-detailed-demo">
     <div class="demo-header">
-      <span class="title">MCP 内部实现</span>
-      <span class="subtitle">客户端-服务器架构的通信细节</span>
+      <span class="title">Bên trong MCP</span>
+      <span class="subtitle">Chi tiết giao tiếp trong kiến trúc client-server</span>
     </div>
 
     <div class="intro-section">
-      <div class="section-title">为什么 MCP 这么火？</div>
+      <div class="section-title">Vì sao MCP lại hot đến vậy?</div>
       <p class="intro-text">
-        MCP 之前，AI 只能"看"和"说"，有了 MCP，AI 终于可以"动手"了。它让 AI 可以操纵各种程序，真正帮你干活。
+        Trước khi có MCP, AI chỉ "nhìn" và "nói" được. Có MCP, AI mới thực sự "ra tay" được. MCP cho phép AI điều khiển nhiều phần mềm khác nhau và làm việc thực sự giúp bạn.
       </p>
       <div class="popular-uses">
         <div class="use-item">
-          <div class="use-title">Cursor / Claude 等 AI 编辑器</div>
-          <div class="use-desc">直接读写文件、执行代码、操作 Git</div>
+          <div class="use-title">AI editor như Cursor / Claude</div>
+          <div class="use-desc">Trực tiếp đọc ghi file, chạy code, thao tác Git</div>
         </div>
         <div class="use-item">
-          <div class="use-title">浏览器自动化</div>
-          <div class="use-desc">AI 自动打开网页、点击按钮、填表单</div>
+          <div class="use-title">Tự động hoá trình duyệt</div>
+          <div class="use-desc">AI tự mở trang web, bấm nút, điền form</div>
         </div>
         <div class="use-item">
-          <div class="use-title">数据库查询</div>
-          <div class="use-desc">直接查询/写入数据库，无需手动导出</div>
+          <div class="use-title">Truy vấn cơ sở dữ liệu</div>
+          <div class="use-desc">Truy vấn / ghi DB trực tiếp, không cần export thủ công</div>
         </div>
         <div class="use-item">
-          <div class="use-title">AI 操作电脑</div>
-          <div class="use-desc">Windows-MCP 让 AI 直接操控鼠标键盘</div>
+          <div class="use-title">AI điều khiển máy tính</div>
+          <div class="use-desc">Windows-MCP giúp AI điều khiển chuột và bàn phím</div>
         </div>
         <div class="use-item">
-          <div class="use-title">自动化部署</div>
-          <div class="use-desc">Vercel-MCP 一键部署网站到线上</div>
+          <div class="use-title">Tự động triển khai</div>
+          <div class="use-desc">Vercel-MCP giúp deploy website lên prod chỉ với một lệnh</div>
         </div>
         <div class="use-item">
-          <div class="use-title">设计稿转代码</div>
-          <div class="use-desc">Figma-MCP 读取设计稿自动生成网页</div>
+          <div class="use-title">Chuyển bản vẽ thiết kế thành code</div>
+          <div class="use-desc">Figma-MCP đọc thiết kế và sinh trang web tự động</div>
         </div>
       </div>
     </div>
 
     <div class="usage-section">
-      <div class="section-title">如何使用 MCP？</div>
+      <div class="section-title">Dùng MCP như thế nào?</div>
       <p class="usage-intro">
-        使用 MCP 非常简单，只需要配置一个 <code>mcp.json</code> 文件，就可以在你的 IDE 里使用各种 MCP 工具。
+        Dùng MCP rất đơn giản, bạn chỉ cần cấu hình một file <code>mcp.json</code> là có thể dùng các tool MCP ngay trong IDE của mình.
       </p>
-      
+
       <div class="usage-steps">
         <div class="usage-step">
           <div class="step-num">1</div>
           <div class="step-content">
-            <div class="step-title">找到 MCP Server</div>
+            <div class="step-title">Tìm MCP Server</div>
             <div class="step-desc">
-              从 MCP 资源站或 GitHub 找到你需要的 MCP Server
+              Bạn tìm MCP Server cần dùng từ các trang tài nguyên MCP hoặc trên GitHub
             </div>
             <div class="mcp-resources">
               <div class="resource-item">
-                <span class="resource-name">官方 Server 列表</span>
+                <span class="resource-name">Danh sách Server chính thức</span>
                 <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="resource-link">github.com/modelcontextprotocol/servers</a>
               </div>
               <div class="resource-item">
-                <span class="resource-name">MCP.so（中文）</span>
+                <span class="resource-name">MCP.so (tiếng Trung)</span>
                 <a href="https://mcp.so" target="_blank" class="resource-link">mcp.so</a>
               </div>
               <div class="resource-item">
-                <span class="resource-name">Pulse MCP（英文）</span>
+                <span class="resource-name">Pulse MCP (tiếng Anh)</span>
                 <a href="https://www.pulsemcp.com" target="_blank" class="resource-link">pulsemcp.com</a>
               </div>
               <div class="resource-item">
-                <span class="resource-name">Smithery（英文）</span>
+                <span class="resource-name">Smithery (tiếng Anh)</span>
                 <a href="https://smithery.ai" target="_blank" class="resource-link">smithery.ai</a>
               </div>
             </div>
           </div>
         </div>
-        
+
         <div class="usage-step">
           <div class="step-num">2</div>
           <div class="step-content">
-            <div class="step-title">配置 mcp.json</div>
+            <div class="step-title">Cấu hình mcp.json</div>
             <div class="step-desc">
-              在你的 AI 编辑器（Cursor / Claude Desktop 等）中找到 MCP 配置文件位置，添加 Server 配置
+              Bạn mở file cấu hình MCP trong AI editor (Cursor / Claude Desktop, ...) và thêm cấu hình Server vào
             </div>
             <pre class="config-example"><code>{{ mcpConfigExample }}</code></pre>
           </div>
         </div>
-        
+
         <div class="usage-step">
           <div class="step-num">3</div>
           <div class="step-content">
-            <div class="step-title">重启 IDE 即可使用</div>
+            <div class="step-title">Khởi động lại IDE là dùng được</div>
             <div class="step-desc">
-              重启后，AI 会自动发现并加载 MCP 工具，你就可以直接让 AI 使用这些工具了
+              Sau khi khởi động lại, AI sẽ tự phát hiện và nạp các tool MCP, từ đó bạn có thể nhờ AI dùng các tool này ngay
             </div>
           </div>
         </div>
       </div>
-      
+
       <div class="skills-note">
-        <div class="note-title">Skills 正在替代 MCP？</div>
+        <div class="note-title">Skills đang dần thay thế MCP?</div>
         <div class="note-content">
-          随着 <strong>Skills</strong> 的普及，越来越多的场景开始使用 Skills 替代 MCP 协议。Skills 更轻量、更易编写，适合大多数常见任务。MCP 更适合需要复杂工具集成、多客户端复用的场景。如果你只是想让 AI 做一些简单操作，建议优先考虑 Skills。
+          Khi <strong>Skills</strong> ngày càng phổ biến, nhiều tình huống đã bắt đầu dùng Skills thay cho giao thức MCP. Skills nhẹ hơn, dễ viết hơn, phù hợp cho phần lớn các tác vụ thông dụng. MCP phù hợp hơn với các kịch bản cần tích hợp tool phức tạp và dùng chung cho nhiều client. Nếu bạn chỉ muốn AI làm vài thao tác đơn giản, bạn nên ưu tiên thử Skills trước.
         </div>
       </div>
-      
+
       <div class="config-locations">
-        <div class="config-title">常见 IDE 的 mcp.json 位置</div>
+        <div class="config-title">Vị trí file mcp.json trong các IDE phổ biến</div>
         <div class="config-list">
           <div class="config-item">
             <span class="config-name">Cursor</span>
@@ -122,9 +122,9 @@
     </div>
 
     <div class="implement-section">
-      <div class="section-title">如何实现一个 MCP Server？</div>
+      <div class="section-title">Làm sao hiện thực một MCP Server?</div>
       <p class="implement-intro">
-        假设你有一个天气 API，想把它封装成 MCP Server 让 AI 可以调用。下面以 Node.js 为例演示：
+        Giả sử bạn có một API thời tiết và muốn đóng gói nó thành MCP Server để AI gọi được. Ví dụ dưới đây dùng Node.js:
       </p>
       
       <div class="implement-code">
@@ -133,22 +133,22 @@
       </div>
       
       <div class="transport-compare">
-        <div class="compare-title">stdio vs HTTP+SSE 传输方式</div>
+        <div class="compare-title">So sánh phương thức truyền stdio vs HTTP+SSE</div>
         <div class="compare-grid">
           <div class="compare-item">
-            <div class="compare-name">stdio（本地进程）</div>
+            <div class="compare-name">stdio (tiến trình local)</div>
             <div class="compare-desc">
-              <p>MCP Server 作为子进程运行，通过标准输入输出通信</p>
-              <p><strong>优点：</strong>简单、安全、适合本地工具</p>
-              <p><strong>缺点：</strong>只能本地使用，不支持远程</p>
+              <p>MCP Server chạy như một tiến trình con, giao tiếp qua standard input/output</p>
+              <p><strong>Ưu điểm:</strong> đơn giản, an toàn, hợp cho tool local</p>
+              <p><strong>Nhược điểm:</strong> chỉ dùng được local, không hỗ trợ truy cập từ xa</p>
             </div>
           </div>
           <div class="compare-item">
-            <div class="compare-name">HTTP + SSE（远程服务）</div>
+            <div class="compare-name">HTTP + SSE (dịch vụ từ xa)</div>
             <div class="compare-desc">
-              <p>MCP Server 作为 HTTP 服务运行，支持 SSE 推送</p>
-              <p><strong>优点：</strong>支持远程访问、多客户端共享</p>
-              <p><strong>缺点：</strong>需要部署服务器、配置认证</p>
+              <p>MCP Server chạy như một HTTP service, hỗ trợ SSE để đẩy dữ liệu</p>
+              <p><strong>Ưu điểm:</strong> truy cập từ xa, nhiều client cùng dùng được</p>
+              <p><strong>Nhược điểm:</strong> cần triển khai server và cấu hình xác thực</p>
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@
       <div class="flow-section">
         <div class="flow-title">
           
-          通信流程（4 步）
+          Luồng giao tiếp (4 bước)
         </div>
         
         <div class="flow-steps">
@@ -187,20 +187,20 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：JSON-RPC 2.0 消息格式</span>
+          <span class="summary-text">Đào sâu kỹ thuật: định dạng message JSON-RPC 2.0</span>
         </summary>
         <div class="tech-content">
           <div class="tech-section">
-            <div class="tech-title">请求消息结构</div>
+            <div class="tech-title">Cấu trúc message request</div>
             <pre class="tech-code"><code>{{ jsonRpcRequest }}</code></pre>
           </div>
           <div class="tech-section">
-            <div class="tech-title">响应消息结构</div>
+            <div class="tech-title">Cấu trúc message response</div>
             <pre class="tech-code"><code>{{ jsonRpcResponse }}</code></pre>
           </div>
           <div class="tech-note">
             
-            <span>JSON-RPC 2.0 是无状态协议，每个请求都需要包含 <code>id</code> 用于匹配响应</span>
+            <span>JSON-RPC 2.0 là giao thức stateless, mỗi request đều cần có <code>id</code> để khớp với response tương ứng</span>
           </div>
         </div>
       </details>
@@ -208,17 +208,17 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：两种传输方式</span>
+          <span class="summary-text">Đào sâu kỹ thuật: hai phương thức truyền</span>
         </summary>
         <div class="tech-content">
           <div class="transport-grid">
             <div class="transport-card">
               <div class="transport-header">
                 
-                <span class="transport-name">stdio（本地进程）</span>
+                <span class="transport-name">stdio (tiến trình local)</span>
               </div>
               <div class="transport-desc">
-                适用于本地工具，通过标准输入输出通信
+                Phù hợp cho tool local, giao tiếp qua standard input/output
               </div>
               <div class="transport-example">
                 <pre><code>{{ stdioExample }}</code></pre>
@@ -227,10 +227,10 @@
             <div class="transport-card">
               <div class="transport-header">
                 
-                <span class="transport-name">HTTP + SSE（远程）</span>
+                <span class="transport-name">HTTP + SSE (từ xa)</span>
               </div>
               <div class="transport-desc">
-                适用于远程服务，支持长连接推送
+                Phù hợp cho dịch vụ từ xa, hỗ trợ long-connection để đẩy dữ liệu
               </div>
               <div class="transport-example">
                 <pre><code>{{ httpExample }}</code></pre>
@@ -243,7 +243,7 @@
       <details class="tech-details">
         <summary class="tech-summary">
           
-          <span class="summary-text">技术深究：MCP 核心 API</span>
+          <span class="summary-text">Đào sâu kỹ thuật: các API lõi của MCP</span>
         </summary>
         <div class="tech-content">
           <div class="api-list">
@@ -272,11 +272,11 @@ const toggleStep = (index) => {
 
 const mcpFlowSteps = [
   {
-    name: '握手（initialize）',
-    desc: 'MCP Server 启动时向 Client 发送握手请求，声明自己的协议版本和能力',
+    name: 'Bắt tay (initialize)',
+    desc: 'Khi MCP Server khởi động, nó gửi request bắt tay tới Client để khai báo phiên bản giao thức và khả năng của mình',
     example: {
       title: 'Server → Client',
-      code: `// Server 发送 initialize 请求
+      code: `// Server gửi request initialize
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -297,11 +297,11 @@ const mcpFlowSteps = [
     }
   },
   {
-    name: '列工具（tools/list）',
-    desc: 'Client 向 Server 请求可用工具列表，AI 知道能调用哪些功能',
+    name: 'Liệt kê tool (tools/list)',
+    desc: 'Client gọi Server để lấy danh sách tool sẵn có, nhờ đó AI biết có thể gọi những tính năng nào',
     example: {
       title: 'Client → Server',
-      code: `// Client 请求工具列表
+      code: `// Client yêu cầu danh sách tool
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -309,7 +309,7 @@ const mcpFlowSteps = [
   "params": {}
 }
 
-// Server 返回工具列表
+// Server trả về danh sách tool
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -317,7 +317,7 @@ const mcpFlowSteps = [
     "tools": [
       {
         "name": "read_file",
-        "description": "读取文件内容",
+        "description": "Đọc nội dung file",
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -328,7 +328,7 @@ const mcpFlowSteps = [
       },
       {
         "name": "write_file",
-        "description": "写入文件内容",
+        "description": "Ghi nội dung file",
         "inputSchema": { ... }
       }
     ]
@@ -337,11 +337,11 @@ const mcpFlowSteps = [
     }
   },
   {
-    name: '调工具（tools/call）',
-    desc: 'AI 决定调用工具时，Client 发送调用请求，Server 执行后返回结果',
+    name: 'Gọi tool (tools/call)',
+    desc: 'Khi AI quyết định dùng tool, Client gửi request gọi tool, Server thực thi và trả kết quả',
     example: {
       title: 'Client → Server',
-      code: `// Client 调用工具
+      code: `// Client gọi tool
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -354,7 +354,7 @@ const mcpFlowSteps = [
   }
 }
 
-// Server 返回结果
+// Server trả kết quả
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -370,31 +370,31 @@ const mcpFlowSteps = [
     }
   },
   {
-    name: '返回结果',
-    desc: 'Server 执行完成后把结果发回给 Client，Client 将结果返回给 AI',
+    name: 'Trả kết quả',
+    desc: 'Server thực thi xong và gửi kết quả về Client, Client lại đẩy kết quả vào ngữ cảnh cho AI',
     example: {
-      title: '结果流向',
-      code: `Server 执行 → 返回 JSON-RPC 响应 → Client 解析 → 
-       → 将结果注入 AI 上下文 → AI 继续处理`
+      title: 'Luồng kết quả',
+      code: `Server thực thi → trả JSON-RPC response → Client phân tích →
+       → đưa kết quả vào context của AI → AI tiếp tục xử lý`
     }
   }
 ]
 
 const jsonRpcRequest = `{
-  "jsonrpc": "2.0",           // 协议版本
-  "id": 1,                     // 请求 ID，用于匹配响应
-  "method": "tools/call",      // 方法名
-  "params": { ... }            // 参数对象
+  "jsonrpc": "2.0",           // Phiên bản giao thức
+  "id": 1,                     // Request ID, dùng để khớp response
+  "method": "tools/call",      // Tên method
+  "params": { ... }            // Object tham số
 }`
 
-const jsonRpcResponse = `// 成功响应
+const jsonRpcResponse = `// Response thành công
 {
   "jsonrpc": "2.0",
   "id": 1,
   "result": { ... }
 }
 
-// 错误响应
+// Response lỗi
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -404,14 +404,14 @@ const jsonRpcResponse = `// 成功响应
   }
 }`
 
-const stdioExample = `// 启动 MCP Server 作为子进程
+const stdioExample = `// Khởi động MCP Server như một tiến trình con
 npx @modelcontextprotocol/server-filesystem ./project
 
-// 通过 stdio 通信
-// stdin: 接收请求
-// stdout: 发送响应`
+// Giao tiếp qua stdio
+// stdin: nhận request
+// stdout: gửi response`
 
-const httpExample = `// HTTP 传输（Server-Sent Events）
+const httpExample = `// Truyền qua HTTP (Server-Sent Events)
 POST /mcp HTTP/1.1
 Content-Type: application/json
 
@@ -422,9 +422,9 @@ Content-Type: application/json
   "params": { ... }
 }
 
-// SSE 长连接用于推送
+// SSE long-connection để server đẩy dữ liệu
 GET /mcp/sse HTTP/1.1
-// 持续接收服务器推送的更新`
+// Liên tục nhận các bản cập nhật mà server đẩy về`
 
 const mcpConfigExample = `{
   "mcpServers": {
@@ -456,7 +456,7 @@ const mcpConfigExample = `{
 const weatherMcpCode = `import { Server } from '@modelcontextprotocol/sdk/server/index.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 
-// 1. 创建 MCP Server
+// 1. Tạo MCP Server
 const server = new Server({
   name: 'weather-server',
   version: '1.0.0'
@@ -464,32 +464,32 @@ const server = new Server({
   capabilities: { tools: {} }
 })
 
-// 2. 定义工具列表
+// 2. Khai báo danh sách tool
 server.setRequestHandler('tools/list', async () => ({
   tools: [{
     name: 'get_weather',
-    description: '获取指定城市的天气信息',
+    description: 'Lấy thông tin thời tiết của một thành phố',
     inputSchema: {
       type: 'object',
       properties: {
-        city: { type: 'string', description: '城市名称' }
+        city: { type: 'string', description: 'Tên thành phố' }
       },
       required: ['city']
     }
   }]
 }))
 
-// 3. 实现工具调用逻辑
+// 3. Hiện thực logic gọi tool
 server.setRequestHandler('tools/call', async (request) => {
   const { name, arguments: args } = request.params
-  
+
   if (name === 'get_weather') {
-    // 调用你的天气 API
+    // Gọi API thời tiết của bạn
     const response = await fetch(
       \`https://api.weather.com/v1/current?city=\${args.city}\`
     )
     const data = await response.json()
-    
+
     return {
       content: [{
         type: 'text',
@@ -499,17 +499,17 @@ server.setRequestHandler('tools/call', async (request) => {
   }
 })
 
-// 4. 启动服务（stdio 方式）
+// 4. Khởi động dịch vụ (qua stdio)
 const transport = new StdioServerTransport()
 await server.connect(transport)`
 
 const mcpApis = [
-  { method: 'initialize', name: '初始化', desc: 'Server 向 Client 声明协议版本和能力' },
-  { method: 'tools/list', name: '工具列表', desc: '获取 Server 提供所有可用工具' },
-  { method: 'tools/call', name: '调用工具', desc: '实际调用某个工具并获取结果' },
-  { method: 'resources/list', name: '资源列表', desc: '获取可访问的资源（如文件、数据库）' },
-  { method: 'resources/read', name: '读取资源', desc: '读取某个资源的内容' },
-  { method: 'prompts/list', name: '提示模板', desc: '获取预定义的提示模板' }
+  { method: 'initialize', name: 'Khởi tạo', desc: 'Server khai báo phiên bản giao thức và khả năng với Client' },
+  { method: 'tools/list', name: 'Danh sách tool', desc: 'Lấy tất cả tool mà Server cung cấp' },
+  { method: 'tools/call', name: 'Gọi tool', desc: 'Thực sự gọi một tool và lấy kết quả' },
+  { method: 'resources/list', name: 'Danh sách resource', desc: 'Lấy danh sách tài nguyên có thể truy cập (file, database, ...)' },
+  { method: 'resources/read', name: 'Đọc resource', desc: 'Đọc nội dung của một tài nguyên' },
+  { method: 'prompts/list', name: 'Prompt template', desc: 'Lấy các prompt template đã định nghĩa sẵn' }
 ]
 </script>
 

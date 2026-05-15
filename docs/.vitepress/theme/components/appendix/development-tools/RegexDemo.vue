@@ -1,8 +1,8 @@
 <template>
   <div class="regex-demo">
     <div class="demo-header">
-      <span class="title">正则表达式：文本的搜索引擎</span>
-      <span class="subtitle">模式匹配 · 分组捕获 · 实时预览</span>
+      <span class="title">Regex: công cụ tìm kiếm văn bản</span>
+      <span class="subtitle">Pattern matching · Capture group · Xem trước tức thời</span>
     </div>
 
     <div class="control-panel">
@@ -22,13 +22,13 @@
       <!-- Mode 1: Live Playground -->
       <div v-if="activeMode === 'playground'" class="playground-section">
         <div class="input-group">
-          <label>正则表达式</label>
+          <label>Biểu thức regex</label>
           <div class="regex-input-wrapper">
             <span class="regex-slash">/</span>
             <input
               v-model="regexPattern"
               type="text"
-              placeholder="输入正则..."
+              placeholder="Nhập regex..."
               class="regex-input"
             />
             <span class="regex-slash">/</span>
@@ -42,23 +42,23 @@
         </div>
 
         <div class="input-group">
-          <label>测试文本</label>
+          <label>Văn bản test</label>
           <textarea
             v-model="testText"
             rows="3"
-            placeholder="输入要匹配的文本..."
+            placeholder="Nhập văn bản cần match..."
             class="test-input"
           />
         </div>
 
         <div class="match-results">
           <div class="results-header">
-            <span class="results-title">匹配结果</span>
+            <span class="results-title">Kết quả match</span>
             <span
               class="match-count"
               :class="{ 'has-match': matches.length > 0 }"
             >
-              {{ matches.length }} 个匹配
+              {{ matches.length }} kết quả
             </span>
           </div>
           <div class="highlighted-text" v-html="highlightedText" />
@@ -72,7 +72,7 @@
         </div>
 
         <div class="preset-btns">
-          <span class="preset-label">试试预设：</span>
+          <span class="preset-label">Thử preset:</span>
           <button
             v-for="p in presets"
             :key="p.name"
@@ -121,7 +121,7 @@
               >
                 <span class="ex-text">{{ ex.text }}</span>
                 <span :class="['ex-result', ex.match ? 'pass' : 'fail']">
-                  {{ ex.match ? '✓ 匹配' : '✗ 不匹配' }}
+                  {{ ex.match ? '✓ Match' : '✗ Không match' }}
                 </span>
               </div>
             </div>
@@ -132,7 +132,7 @@
       <!-- Mode 4: Visual Breakdown -->
       <div v-if="activeMode === 'visual'" class="visual-section">
         <div class="visual-example">
-          <div class="visual-title">正则解剖：拆解一个邮箱匹配模式</div>
+          <div class="visual-title">Mổ xẻ regex: phân tích một pattern match email</div>
           <div class="visual-regex">
             <span
               v-for="(part, i) in regexParts"
@@ -159,7 +159,7 @@
         </div>
 
         <div class="visual-flow">
-          <div class="flow-title">正则引擎的工作过程</div>
+          <div class="flow-title">Quá trình hoạt động của regex engine</div>
           <div class="flow-steps">
             <div v-for="(step, i) in engineSteps" :key="i" class="flow-step">
               <div class="flow-num">{{ i + 1 }}</div>
@@ -174,12 +174,11 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span v-if="activeMode === 'playground'">正则表达式是一种用特殊符号描述文本模式的语言，在搜索、替换、数据验证中无处不在。</span>
-      <span v-else-if="activeMode === 'cheatsheet'">记住几个核心符号（. * + ? \d \w [] ()）就能覆盖 80%
-        的使用场景。点击任意符号可直接试验。</span>
-      <span v-else-if="activeMode === 'patterns'">不需要自己从零写正则——常见场景（邮箱、手机号、URL）都有成熟的模式可以直接复用。</span>
-      <span v-else>正则引擎从左到右逐字符匹配，遇到量词会"贪婪"地尽量多匹配，失败时"回溯"尝试其他路径。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span v-if="activeMode === 'playground'">Regex là một ngôn ngữ dùng ký hiệu đặc biệt để mô tả pattern văn bản, có mặt khắp nơi trong tìm kiếm, thay thế và kiểm tra dữ liệu.</span>
+      <span v-else-if="activeMode === 'cheatsheet'">Nhớ vài ký hiệu cốt lõi (. * + ? \d \w [] ()) là bao quát được 80% trường hợp sử dụng. Click vào bất kỳ ký hiệu nào để thử trực tiếp.</span>
+      <span v-else-if="activeMode === 'patterns'">Không cần tự viết regex từ đầu — các trường hợp phổ biến (email, số điện thoại, URL) đều có pattern sẵn để dùng lại.</span>
+      <span v-else>Regex engine match từng ký tự từ trái sang phải, gặp lượng từ sẽ "tham lam" match nhiều nhất có thể, khi thất bại sẽ "backtrack" thử các đường khác.</span>
     </div>
   </div>
 </template>
@@ -190,16 +189,16 @@ import { ref, computed } from 'vue'
 const activeMode = ref('playground')
 
 const modes = [
-  { id: 'playground', label: '实时试验' },
-  { id: 'cheatsheet', label: '速查表' },
-  { id: 'patterns', label: '常用模式' },
-  { id: 'visual', label: '可视化解析' }
+  { id: 'playground', label: 'Thử trực tiếp' },
+  { id: 'cheatsheet', label: 'Cheat sheet' },
+  { id: 'patterns', label: 'Pattern thường dùng' },
+  { id: 'visual', label: 'Phân tích trực quan' }
 ]
 
 const regexPattern = ref('\\d+')
 const regexFlags = ref('g')
 const testText = ref(
-  '我的手机号是 13812345678，座机是 010-12345678，邮箱是 test@example.com'
+  'Số điện thoại của tôi là 13812345678, số bàn 010-12345678, email là test@example.com'
 )
 
 function buildRegex(pattern, flags) {
@@ -258,34 +257,34 @@ function escapeHtml(str) {
 
 const presets = [
   {
-    name: '找数字',
+    name: 'Tìm số',
     pattern: '\\d+',
     flags: 'g',
-    text: '价格是 99 元，优惠 20 元，共 79 元'
+    text: 'Giá là 99 nghìn, giảm 20 nghìn, tổng 79 nghìn'
   },
   {
-    name: '找邮箱',
+    name: 'Tìm email',
     pattern: '[\\w.+-]+@[\\w-]+\\.[\\w.]+',
     flags: 'g',
-    text: 'admin@test.com 和 user@example.org 是有效邮箱'
+    text: 'admin@test.com và user@example.org là email hợp lệ'
   },
   {
-    name: '找手机号',
+    name: 'Tìm số điện thoại',
     pattern: '1[3-9]\\d{9}',
     flags: 'g',
-    text: '联系我：13812345678 或 15099887766'
+    text: 'Liên hệ: 13812345678 hoặc 15099887766'
   },
   {
-    name: '找 URL',
+    name: 'Tìm URL',
     pattern: 'https?://[^\\s]+',
     flags: 'g',
-    text: '访问 https://github.com 或 http://example.com/path'
+    text: 'Truy cập https://github.com hoặc http://example.com/path'
   },
   {
-    name: '找中文',
+    name: 'Tìm chữ tiếng Trung',
     pattern: '[\\u4e00-\\u9fa5]+',
     flags: 'g',
-    text: 'Hello世界，你好World！'
+    text: 'Hello世界, Xin chàoWorld!'
   }
 ]
 
@@ -297,44 +296,44 @@ function applyPreset(p) {
 
 const cheatsheet = [
   {
-    category: '字符类',
+    category: 'Lớp ký tự',
     items: [
-      { pattern: '.', desc: '任意字符（除换行）', example: 'a.c → abc, a1c' },
-      { pattern: '\\d', desc: '数字 [0-9]', example: '\\d → 3, 7' },
-      { pattern: '\\w', desc: '字母数字下划线', example: '\\w → a, 5, _' },
-      { pattern: '\\s', desc: '空白字符', example: '空格、Tab、换行' },
-      { pattern: '[abc]', desc: '字符集合', example: '[aeiou] → 元音' },
-      { pattern: '[^abc]', desc: '否定集合', example: '[^0-9] → 非数字' }
+      { pattern: '.', desc: 'Ký tự bất kỳ (trừ xuống dòng)', example: 'a.c → abc, a1c' },
+      { pattern: '\\d', desc: 'Chữ số [0-9]', example: '\\d → 3, 7' },
+      { pattern: '\\w', desc: 'Chữ cái, số, gạch dưới', example: '\\w → a, 5, _' },
+      { pattern: '\\s', desc: 'Ký tự khoảng trắng', example: 'Space, Tab, xuống dòng' },
+      { pattern: '[abc]', desc: 'Tập ký tự', example: '[aeiou] → nguyên âm' },
+      { pattern: '[^abc]', desc: 'Phủ định tập', example: '[^0-9] → không phải số' }
     ]
   },
   {
-    category: '量词',
+    category: 'Lượng từ',
     items: [
-      { pattern: '*', desc: '0 或多次', example: 'ab* → a, ab, abb' },
-      { pattern: '+', desc: '1 或多次', example: 'ab+ → ab, abb' },
-      { pattern: '?', desc: '0 或 1 次', example: 'colou?r → color, colour' },
-      { pattern: '{n}', desc: '恰好 n 次', example: '\\d{4} → 2024' },
-      { pattern: '{n,m}', desc: 'n 到 m 次', example: '\\d{2,4} → 12, 123' }
+      { pattern: '*', desc: '0 hoặc nhiều lần', example: 'ab* → a, ab, abb' },
+      { pattern: '+', desc: '1 hoặc nhiều lần', example: 'ab+ → ab, abb' },
+      { pattern: '?', desc: '0 hoặc 1 lần', example: 'colou?r → color, colour' },
+      { pattern: '{n}', desc: 'Đúng n lần', example: '\\d{4} → 2024' },
+      { pattern: '{n,m}', desc: 'Từ n đến m lần', example: '\\d{2,4} → 12, 123' }
     ]
   },
   {
-    category: '位置',
+    category: 'Vị trí',
     items: [
-      { pattern: '^', desc: '行首', example: '^Hello → 以 Hello 开头' },
-      { pattern: '$', desc: '行尾', example: 'end$ → 以 end 结尾' },
+      { pattern: '^', desc: 'Đầu dòng', example: '^Hello → bắt đầu bằng Hello' },
+      { pattern: '$', desc: 'Cuối dòng', example: 'end$ → kết thúc bằng end' },
       {
         pattern: '\\b',
-        desc: '单词边界',
-        example: '\\bcat\\b → cat（不匹配 catch）'
+        desc: 'Ranh giới từ',
+        example: '\\bcat\\b → cat (không match catch)'
       }
     ]
   },
   {
-    category: '分组与引用',
+    category: 'Nhóm & tham chiếu',
     items: [
-      { pattern: '(abc)', desc: '捕获组', example: '(\\d+)-(\\d+) → 分别捕获' },
-      { pattern: 'a|b', desc: '或', example: 'cat|dog → cat 或 dog' },
-      { pattern: '(?:abc)', desc: '非捕获组', example: '(?:ab)+ → abab' }
+      { pattern: '(abc)', desc: 'Nhóm capture', example: '(\\d+)-(\\d+) → capture riêng' },
+      { pattern: 'a|b', desc: 'Hoặc', example: 'cat|dog → cat hoặc dog' },
+      { pattern: '(?:abc)', desc: 'Nhóm không capture', example: '(?:ab)+ → abab' }
     ]
   }
 ]
@@ -347,7 +346,7 @@ function tryCheat(item) {
 
 const commonPatterns = [
   {
-    name: '邮箱',
+    name: 'Email',
     regex: '^[\\w.+-]+@[\\w-]+\\.[\\w.]+$',
     examples: [
       { text: 'user@example.com', match: true },
@@ -357,7 +356,7 @@ const commonPatterns = [
     ]
   },
   {
-    name: '手机号（中国）',
+    name: 'Số điện thoại (Trung Quốc)',
     regex: '^1[3-9]\\d{9}$',
     examples: [
       { text: '13812345678', match: true },
@@ -377,7 +376,7 @@ const commonPatterns = [
     ]
   },
   {
-    name: 'IPv4 地址',
+    name: 'Địa chỉ IPv4',
     regex: '^(\\d{1,3}\\.){3}\\d{1,3}$',
     examples: [
       { text: '192.168.1.1', match: true },
@@ -387,7 +386,7 @@ const commonPatterns = [
     ]
   },
   {
-    name: '日期 (YYYY-MM-DD)',
+    name: 'Ngày (YYYY-MM-DD)',
     regex: '^\\d{4}-\\d{2}-\\d{2}$',
     examples: [
       { text: '2024-01-15', match: true },
@@ -397,7 +396,7 @@ const commonPatterns = [
     ]
   },
   {
-    name: '强密码',
+    name: 'Mật khẩu mạnh',
     regex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$',
     examples: [
       { text: 'Passw0rd', match: true },
@@ -411,42 +410,42 @@ const commonPatterns = [
 const activePart = ref(-1)
 
 const regexParts = [
-  { text: '[', type: 'bracket', desc: '字符集合开始' },
-  { text: '\\w', type: 'char-class', desc: '字母、数字或下划线' },
-  { text: '.+-', type: 'literal', desc: '点号、加号、横杠（字面量）' },
-  { text: ']', type: 'bracket', desc: '字符集合结束' },
-  { text: '+', type: 'quantifier', desc: '一个或多个（贪婪匹配）' },
-  { text: '@', type: 'literal', desc: '字面量 @ 符号' },
-  { text: '[', type: 'bracket', desc: '字符集合开始' },
-  { text: '\\w', type: 'char-class', desc: '字母、数字或下划线' },
-  { text: '-', type: 'literal', desc: '横杠（字面量）' },
-  { text: ']', type: 'bracket', desc: '字符集合结束' },
-  { text: '+', type: 'quantifier', desc: '一个或多个' },
-  { text: '\\.', type: 'escape', desc: '转义的点号（匹配字面量 .）' },
-  { text: '[', type: 'bracket', desc: '字符集合开始' },
-  { text: '\\w', type: 'char-class', desc: '字母、数字或下划线' },
-  { text: '.', type: 'literal', desc: '点号（在字符集中是字面量）' },
-  { text: ']', type: 'bracket', desc: '字符集合结束' },
-  { text: '+', type: 'quantifier', desc: '一个或多个' }
+  { text: '[', type: 'bracket', desc: 'Bắt đầu tập ký tự' },
+  { text: '\\w', type: 'char-class', desc: 'Chữ cái, số hoặc gạch dưới' },
+  { text: '.+-', type: 'literal', desc: 'Dấu chấm, cộng, gạch ngang (literal)' },
+  { text: ']', type: 'bracket', desc: 'Kết thúc tập ký tự' },
+  { text: '+', type: 'quantifier', desc: 'Một hoặc nhiều (match tham lam)' },
+  { text: '@', type: 'literal', desc: 'Ký tự @ literal' },
+  { text: '[', type: 'bracket', desc: 'Bắt đầu tập ký tự' },
+  { text: '\\w', type: 'char-class', desc: 'Chữ cái, số hoặc gạch dưới' },
+  { text: '-', type: 'literal', desc: 'Gạch ngang (literal)' },
+  { text: ']', type: 'bracket', desc: 'Kết thúc tập ký tự' },
+  { text: '+', type: 'quantifier', desc: 'Một hoặc nhiều' },
+  { text: '\\.', type: 'escape', desc: 'Dấu chấm được escape (match ký tự . literal)' },
+  { text: '[', type: 'bracket', desc: 'Bắt đầu tập ký tự' },
+  { text: '\\w', type: 'char-class', desc: 'Chữ cái, số hoặc gạch dưới' },
+  { text: '.', type: 'literal', desc: 'Dấu chấm (trong tập ký tự là literal)' },
+  { text: ']', type: 'bracket', desc: 'Kết thúc tập ký tự' },
+  { text: '+', type: 'quantifier', desc: 'Một hoặc nhiều' }
 ]
 
 const legend = [
-  { type: 'char-class', label: '字符类' },
-  { type: 'quantifier', label: '量词' },
-  { type: 'literal', label: '字面量' },
-  { type: 'bracket', label: '集合边界' },
-  { type: 'escape', label: '转义字符' }
+  { type: 'char-class', label: 'Lớp ký tự' },
+  { type: 'quantifier', label: 'Lượng từ' },
+  { type: 'literal', label: 'Literal' },
+  { type: 'bracket', label: 'Ranh giới tập' },
+  { type: 'escape', label: 'Ký tự escape' }
 ]
 
 const engineSteps = [
   {
-    action: '从左到右扫描',
-    detail: '正则引擎从文本第一个字符开始，逐个尝试匹配'
+    action: 'Quét từ trái sang phải',
+    detail: 'Regex engine bắt đầu từ ký tự đầu tiên của văn bản, thử match từng cái'
   },
-  { action: '贪婪匹配', detail: '遇到 * + 等量词时，尽量多匹配字符' },
-  { action: '回溯', detail: '如果贪婪匹配失败，退回一步尝试更少的字符' },
-  { action: '捕获分组', detail: '遇到 () 时，记录匹配的子串供后续引用' },
-  { action: '返回结果', detail: '全部匹配完成，返回所有匹配项和捕获组' }
+  { action: 'Match tham lam', detail: 'Khi gặp lượng từ như * +, match càng nhiều ký tự càng tốt' },
+  { action: 'Backtrack', detail: 'Nếu match tham lam thất bại, lùi lại một bước thử ít ký tự hơn' },
+  { action: 'Capture group', detail: 'Khi gặp (), ghi lại chuỗi con đã match để tham chiếu sau' },
+  { action: 'Trả về kết quả', detail: 'Match xong hết, trả về tất cả kết quả và các capture group' }
 ]
 </script>
 

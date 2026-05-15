@@ -2,14 +2,14 @@
   <div class="prototype-demo">
     <div class="demo-header">
       <span class="icon">🧬</span>
-      <span class="title">原型与继承</span>
-      <span class="subtitle">理解 JavaScript 的原型链机制</span>
+      <span class="title">Prototype và kế thừa</span>
+      <span class="subtitle">Hiểu cơ chế prototype chain của JavaScript</span>
     </div>
 
     <div class="intro-text">
-      想象你有本<span class="highlight">秘籍</span>，上面记载了很多通用技能。当你需要某个技能时，
-      先翻翻自己的<span class="highlight">技能书</span>，没有就去翻<span class="highlight">师傅的秘籍</span>，
-      还没有就去翻<span class="highlight">师傅的师傅的秘籍</span>……这条<span class="highlight">查找链</span>就是原型链
+      Hãy hình dung bạn có một <span class="highlight">cuốn bí kíp</span> ghi nhiều chiêu thức chung. Khi cần một chiêu,
+      bạn lật <span class="highlight">sổ tay của mình</span> trước, không có thì giở <span class="highlight">bí kíp của sư phụ</span>,
+      vẫn không có thì đến <span class="highlight">bí kíp của sư phụ của sư phụ</span>... Chuỗi <span class="highlight">tìm kiếm</span> đó chính là prototype chain.
     </div>
 
     <div class="demo-tabs">
@@ -24,7 +24,7 @@
       </button>
     </div>
 
-    <!-- 原型基础 -->
+    <!-- Cơ bản về prototype -->
     <div
       v-if="activeTab === 'basic'"
       class="tab-content"
@@ -32,21 +32,21 @@
       <div class="concept-explanation">
         <div class="code-panel">
           <div class="code-title">
-            创建对象的方式
+            Cách tạo object
           </div>
           <div class="code-block">
             <div class="code-line comment">
-              // 方式 1：对象字面量
+              // Cách 1: object literal
             </div>
             <div class="code-line">
-              const obj1 = { name: "对象1" }
+              const obj1 = { name: "obj1" }
             </div>
             <div class="code-line">
               obj1.__proto__ === Object.prototype <span class="comment">// true</span>
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 方式 2：构造函数
+              // Cách 2: constructor function
             </div>
             <div class="code-line">
               function Person(name) {
@@ -58,7 +58,7 @@
               }
             </div>
             <div class="code-line">
-              const p = new Person("张三")
+              const p = new Person("An")
             </div>
             <div class="code-line">
               p.__proto__ === Person.prototype <span class="comment">// true</span>
@@ -74,11 +74,11 @@
               @click="chainLevel = 0"
             >
               <div class="node-title">
-                对象实例 (p)
+                Instance object (p)
               </div>
               <div class="node-content">
                 <div class="property">
-                  name: "张三"
+                  name: "An"
                 </div>
                 <div class="proto-link">
                   __proto__ →
@@ -90,7 +90,7 @@
               v-if="chainLevel >= 0"
               class="chain-arrow"
             >
-              ↓ 查找
+              Tìm xuống
             </div>
 
             <div
@@ -115,7 +115,7 @@
               v-if="chainLevel >= 1"
               class="chain-arrow"
             >
-              ↓ 查找
+              Tìm xuống
             </div>
 
             <div
@@ -142,23 +142,23 @@
 
           <div class="chain-explanation">
             <div v-if="chainLevel === 0">
-              <strong>实例对象</strong>
-              <p>访问 p.name 时，在自己的属性中找到 → 返回 "张三"</p>
+              <strong>Instance object</strong>
+              <p>Khi truy cập p.name, tìm thấy trong property của object đó - trả về "An"</p>
             </div>
             <div v-else-if="chainLevel === 1">
-              <strong>Person 原型</strong>
-              <p>访问 p.toString() 时，实例中没有 → 向上查找 → Person.prototype 中没有 → 继续向上</p>
+              <strong>Prototype của Person</strong>
+              <p>Khi truy cập p.toString(), instance không có - đi lên - Person.prototype cũng không có - đi tiếp lên</p>
             </div>
             <div v-else>
-              <strong>Object 原型（链的顶端）</strong>
-              <p>找到了 toString() 方法！这是所有对象的祖先提供的方法。</p>
+              <strong>Object prototype (đỉnh của chuỗi)</strong>
+              <p>Tìm thấy method toString()! Đây là method do tổ tiên của mọi object cung cấp.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 原型继承 -->
+    <!-- Kế thừa prototype -->
     <div
       v-else-if="activeTab === 'inheritance'"
       class="tab-content"
@@ -166,11 +166,11 @@
       <div class="inheritance-demo">
         <div class="inheritance-code">
           <div class="code-title">
-            原型继承示例
+            Ví dụ kế thừa prototype
           </div>
           <div class="code-block">
             <div class="code-line comment">
-              // 父类构造函数
+              // Constructor của parent class
             </div>
             <div class="code-line">
               function Animal(name) {
@@ -186,20 +186,20 @@
               Animal.prototype.eat = function() {
             </div>
             <div class="code-line indent">
-              return this.name + " 在吃东西"
+              return this.name + " đang ăn"
             </div>
             <div class="code-line">
               }
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 子类构造函数
+              // Constructor của child class
             </div>
             <div class="code-line">
               function Dog(name, breed) {
             </div>
             <div class="code-line indent">
-              Animal.call(this, name) <span class="comment">// 继承属性</span>
+              Animal.call(this, name) <span class="comment">// Kế thừa property</span>
             </div>
             <div class="code-line indent">
               this.breed = breed
@@ -209,7 +209,7 @@
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 继承方法
+              // Kế thừa method
             </div>
             <div class="code-line">
               Dog.prototype = Object.create(Animal.prototype)
@@ -224,12 +224,12 @@
           <div class="class-diagram">
             <div class="class-box parent">
               <div class="class-title">
-                Animal (父类)
+                Animal (parent class)
               </div>
               <div class="class-content">
                 <div class="class-section">
                   <div class="section-title">
-                    属性
+                    Property
                   </div>
                   <div class="section-item">
                     name: String
@@ -237,7 +237,7 @@
                 </div>
                 <div class="class-section">
                   <div class="section-title">
-                    方法 (prototype)
+                    Method (prototype)
                   </div>
                   <div class="section-item">
                     eat()
@@ -247,17 +247,17 @@
             </div>
 
             <div class="inherit-arrow">
-              ↓ 继承
+              Kế thừa xuống
             </div>
 
             <div class="class-box child">
               <div class="class-title">
-                Dog (子类)
+                Dog (child class)
               </div>
               <div class="class-content">
                 <div class="class-section">
                   <div class="section-title">
-                    属性
+                    Property
                   </div>
                   <div class="section-item">
                     name: String
@@ -268,13 +268,13 @@
                 </div>
                 <div class="class-section">
                   <div class="section-title">
-                    方法 (prototype)
+                    Method (prototype)
                   </div>
                   <div class="section-item">
-                    eat() <span class="inherited">[继承]</span>
+                    eat() <span class="inherited">[kế thừa]</span>
                   </div>
                   <div class="section-item">
-                    bark() <span class="own">[新增]</span>
+                    bark() <span class="own">[mới]</span>
                   </div>
                 </div>
               </div>
@@ -283,19 +283,19 @@
 
           <div class="inheritance-playground">
             <div class="playground-title">
-              试试创建实例
+              Thử tạo instance
             </div>
             <div class="input-group">
               <input
                 v-model="dogName"
-                placeholder="狗狗名字"
+                placeholder="Tên chó"
               >
               <input
                 v-model="dogBreed"
-                placeholder="品种"
+                placeholder="Giống chó"
               >
               <button @click="createDog">
-                创建
+                Tạo
               </button>
             </div>
             <div
@@ -303,20 +303,20 @@
               class="instance-result"
             >
               <div class="result-item">
-                <span class="label">名字：</span>
+                <span class="label">Tên:</span>
                 <span class="value">{{ dogInstance.name }}</span>
               </div>
               <div class="result-item">
-                <span class="label">品种：</span>
+                <span class="label">Giống:</span>
                 <span class="value">{{ dogInstance.breed }}</span>
               </div>
               <div class="result-item">
-                <span class="label">调用 eat()：</span>
+                <span class="label">Gọi eat():</span>
                 <button
                   class="action-btn"
                   @click="callEat"
                 >
-                  调用
+                  Gọi
                 </button>
                 <span
                   v-if="eatResult"
@@ -329,7 +329,7 @@
       </div>
     </div>
 
-    <!-- class 语法 -->
+    <!-- Cú pháp class -->
     <div
       v-else
       class="tab-content"
@@ -338,7 +338,7 @@
         <div class="syntax-comparison">
           <div class="syntax-panel old">
             <div class="panel-title">
-              ES5 构造函数
+              Constructor ES5
             </div>
             <div class="code-block">
               <div class="code-line">
@@ -355,21 +355,21 @@
                 Person.prototype.greet = function() {
               </div>
               <div class="code-line indent">
-                return "你好，我是" + this.name
+                return "Xin chào, tôi là " + this.name
               </div>
               <div class="code-line">
                 }
               </div>
               <div class="code-line" />
               <div class="code-line">
-                const p = new Person("小明")
+                const p = new Person("Minh")
               </div>
             </div>
           </div>
 
           <div class="syntax-panel new">
             <div class="panel-title">
-              ES6 class 语法
+              Cú pháp class ES6
             </div>
             <div class="code-block">
               <div class="code-line">
@@ -389,7 +389,7 @@
                 greet() {
               </div>
               <div class="code-line indent indent">
-                return "你好，我是" + this.name
+                return "Xin chào, tôi là " + this.name
               </div>
               <div class="code-line indent">
                 }
@@ -399,7 +399,7 @@
               </div>
               <div class="code-line" />
               <div class="code-line">
-                const p = new Person("小明")
+                const p = new Person("Minh")
               </div>
             </div>
           </div>
@@ -411,10 +411,10 @@
               🎯
             </div>
             <div class="feature-title">
-              更清晰的语法
+              Cú pháp rõ ràng hơn
             </div>
             <div class="feature-desc">
-              class 语法让面向对象编程更直观，但本质还是基于原型
+              Cú pháp class giúp OOP trực quan hơn, nhưng bản chất vẫn dựa trên prototype
             </div>
           </div>
 
@@ -423,10 +423,10 @@
               🔗
             </div>
             <div class="feature-title">
-              继承更简单
+              Kế thừa gọn hơn
             </div>
             <div class="feature-desc">
-              使用 extends 关键字实现继承，代码更简洁
+              Dùng keyword extends để kế thừa, code ngắn hơn
             </div>
           </div>
 
@@ -435,17 +435,17 @@
               ⚠️
             </div>
             <div class="feature-title">
-              注意
+              Lưu ý
             </div>
             <div class="feature-desc">
-              class 只是语法糖，底层仍然是原型链机制
+              class chỉ là cú pháp đường, bên dưới vẫn là prototype chain
             </div>
           </div>
         </div>
 
         <div class="inheritance-example">
           <div class="code-title">
-            class 继承示例
+            Ví dụ kế thừa với class
           </div>
           <div class="code-block">
             <div class="code-line">
@@ -464,7 +464,7 @@
               eat() {
             </div>
             <div class="code-line indent indent">
-              return this.name + " 在吃东西"
+              return this.name + " đang ăn"
             </div>
             <div class="code-line indent">
               }
@@ -480,7 +480,7 @@
               constructor(name, breed) {
             </div>
             <div class="code-line indent indent">
-              super(name) <span class="comment">// 调用父类构造函数</span>
+              super(name) <span class="comment">// Gọi constructor của parent</span>
             </div>
             <div class="code-line indent indent">
               this.breed = breed
@@ -492,7 +492,7 @@
               bark() {
             </div>
             <div class="code-line indent indent">
-              return "汪汪！"
+              return "Gâu gâu!"
             </div>
             <div class="code-line indent">
               }
@@ -507,22 +507,22 @@
 
     <div class="key-points">
       <div class="point-title">
-        🎯 核心要点
+        Điểm cốt lõi
       </div>
       <ul class="point-list">
-        <li>每个对象都有 <code>__proto__</code> 属性，指向其构造函数的 <code>prototype</code></li>
-        <li>访问对象属性时，先在自身查找，找不到就沿着原型链向上查找</li>
-        <li>原型链顶端是 <code>Object.prototype</code>，它的 <code>__proto__</code> 是 <code>null</code></li>
-        <li><code>class</code> 是语法糖，本质仍然是原型继承</li>
+        <li>Mỗi object có property <code>__proto__</code> trỏ tới <code>prototype</code> của constructor của nó</li>
+        <li>Khi truy cập property, JS tìm trên chính object đó trước, không có thì leo dần lên prototype chain</li>
+        <li>Đỉnh của prototype chain là <code>Object.prototype</code>, <code>__proto__</code> của nó là <code>null</code></li>
+        <li><code>class</code> chỉ là cú pháp đường, bản chất vẫn là prototype inheritance</li>
       </ul>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      <span v-if="activeTab === 'basic'">JavaScript 通过原型链实现继承，而不是像其他语言那样使用类。每个对象都有一个原型对象，对象以其原型为模板、从原型继承方法和属性。这种"原型式继承"机制让 JavaScript 更加灵活。</span>
-      <span v-else-if="activeTab === 'inheritance'">原型继承让对象可以共享方法，节省内存。子类通过原型链继承父类的方法，同时可以添加自己的方法。理解原型链是掌握 JavaScript 面向对象编程的关键。</span>
-      <span v-else>ES6 的 class 语法让面向对象编程更加清晰易读，但它只是语法糖，底层仍然是原型链。使用 class 可以让代码更接近传统面向对象语言的风格，降低学习成本。</span>
+      <strong>Ý chính:</strong>
+      <span v-if="activeTab === 'basic'">JavaScript dùng prototype chain để kế thừa, không dùng class như nhiều ngôn ngữ khác. Mỗi object có một prototype, lấy prototype làm khuôn để kế thừa method và property. Cơ chế "prototype inheritance" giúp JS rất linh hoạt.</span>
+      <span v-else-if="activeTab === 'inheritance'">Prototype inheritance cho phép các object chia sẻ method, tiết kiệm bộ nhớ. Child class kế thừa method của parent qua prototype chain, đồng thời có thể thêm method riêng. Hiểu prototype chain là chìa khóa để nắm OOP trong JavaScript.</span>
+      <span v-else>Cú pháp class ES6 giúp OOP gọn gàng dễ đọc, nhưng chỉ là cú pháp đường, bên dưới vẫn là prototype chain. Dùng class giúp code gần với phong cách OOP truyền thống, giảm chi phí học.</span>
     </div>
   </div>
 </template>
@@ -538,9 +538,9 @@ const dogInstance = ref(null)
 const eatResult = ref('')
 
 const tabs = [
-  { id: 'basic', label: '原型基础' },
-  { id: 'inheritance', label: '原型继承' },
-  { id: 'class', label: 'class 语法' }
+  { id: 'basic', label: 'Prototype cơ bản' },
+  { id: 'inheritance', label: 'Kế thừa prototype' },
+  { id: 'class', label: 'Cú pháp class' }
 ]
 
 const createDog = () => {
@@ -555,7 +555,7 @@ const createDog = () => {
 
 const callEat = () => {
   if (dogInstance.value) {
-    eatResult.value = `${dogInstance.value.name} 在吃东西`
+    eatResult.value = `${dogInstance.value.name} đang ăn`
   }
 }
 </script>

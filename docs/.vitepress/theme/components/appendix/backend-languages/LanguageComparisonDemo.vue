@@ -2,17 +2,17 @@
   <div class="language-comparison-demo">
     <div class="demo-header">
       <span class="icon">⚖️</span>
-      <span class="title">语言天平</span>
-      <span class="subtitle">权衡不同维度的优劣势</span>
+      <span class="title">Cân nhắc giữa các ngôn ngữ</span>
+      <span class="subtitle">Đánh đổi ưu/nhược điểm trên nhiều tiêu chí</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">超市购物</span>：有的商品便宜但不耐用，有的质量好但价格高。选择后端语言也一样，需要在性能、开发效率、生态成熟度等多个维度之间做权衡。
+      Hãy tưởng tượng bạn <span class="highlight">đi siêu thị</span>: có hàng rẻ mà không bền, có hàng chất lượng mà giá cao. Chọn ngôn ngữ backend cũng vậy, phải cân đối nhiều tiêu chí như hiệu năng, hiệu suất phát triển, độ trưởng thành của hệ sinh thái.
     </div>
 
     <div class="dimension-selector">
       <div class="dimension-label">
-        选择比较维度：
+        Chọn tiêu chí so sánh:
       </div>
       <div class="dimension-buttons">
         <button
@@ -58,14 +58,14 @@
     <div class="insight-box">
       <span class="icon">🔍</span>
       <div class="insight-content">
-        <strong>洞察分析：</strong>
+        <strong>Phân tích sâu:</strong>
         <p>{{ getDimensionInfo().insight }}</p>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>没有"万能银弹"。高性能往往意味着高开发成本（C++、Rust），快速开发通常伴随性能损失（Python、Ruby）。根据项目核心诉求做取舍，而不是追求"样样都行"。
+      <strong>Tư tưởng cốt lõi:</strong> Không có "viên đạn bạc vạn năng". Hiệu năng cao thường kéo theo chi phí phát triển cao (C++, Rust), phát triển nhanh thường kèm theo hiệu năng giảm (Python, Ruby). Hãy đánh đổi theo nhu cầu cốt lõi của dự án, đừng theo đuổi "thứ gì cũng giỏi".
     </div>
   </div>
 </template>
@@ -76,38 +76,38 @@ import { ref, computed } from 'vue'
 const selectedDimension = ref('performance')
 
 const dimensions = [
-  { key: 'performance', icon: '⚡', label: '性能' },
-  { key: 'efficiency', icon: '🚀', label: '开发效率' },
-  { key: 'ecosystem', icon: '📦', label: '生态成熟度' },
-  { key: 'learning', icon: '📚', label: '学习曲线' },
-  { key: 'concurrency', icon: '🔄', label: '并发能力' }
+  { key: 'performance', icon: '⚡', label: 'Hiệu năng' },
+  { key: 'efficiency', icon: '🚀', label: 'Hiệu suất dev' },
+  { key: 'ecosystem', icon: '📦', label: 'Hệ sinh thái' },
+  { key: 'learning', icon: '📚', label: 'Đường cong học' },
+  { key: 'concurrency', icon: '🔄', label: 'Concurrency' }
 ]
 
 const dimensionInfo = {
   performance: {
-    title: '性能对比',
-    unit: '(分数越高越快)',
-    insight: 'C++ 和 Rust 在性能方面遥遥领先，但学习曲线极其陡峭。Go 和 Java 在性能和开发效率之间取得了很好的平衡。Python 和 Ruby 性能最弱，但开发速度最快。'
+    title: 'So sánh hiệu năng',
+    unit: '(điểm càng cao càng nhanh)',
+    insight: 'C++ và Rust dẫn đầu rất xa về hiệu năng, nhưng đường cong học tập cực dốc. Go và Java cân bằng tốt giữa hiệu năng và hiệu suất phát triển. Python và Ruby hiệu năng yếu nhất, nhưng tốc độ phát triển nhanh nhất.'
   },
   efficiency: {
-    title: '开发效率',
-    unit: '(分数越高越快)',
-    insight: 'Python 和 Ruby 在快速开发方面无与伦比，适合原型和初创公司。Go 和 Node.js 居中，兼顾了开发速度和性能。Rust 和 C++ 开发效率最低，主要受学习曲线影响。'
+    title: 'Hiệu suất phát triển',
+    unit: '(điểm càng cao càng nhanh)',
+    insight: 'Python và Ruby không đối thủ về phát triển nhanh, phù hợp prototype và startup. Go và Node.js ở giữa, cân đối giữa tốc độ và hiệu năng. Rust và C++ hiệu suất thấp nhất, chủ yếu do đường cong học tập.'
   },
   ecosystem: {
-    title: '生态成熟度',
-    unit: '(分数越高库越多)',
-    insight: 'Java、Python、Node.js 拥有最成熟的生态系统。Go 和 Rust 虽然年轻，但发展迅速。C++ 生态成熟但学习成本高。Ruby 生态主要集中在 Web 开发领域。'
+    title: 'Độ trưởng thành hệ sinh thái',
+    unit: '(điểm càng cao thư viện càng nhiều)',
+    insight: 'Java, Python, Node.js có hệ sinh thái trưởng thành nhất. Go và Rust còn trẻ nhưng phát triển nhanh. C++ hệ sinh thái trưởng thành nhưng chi phí học cao. Ruby chủ yếu tập trung vào phát triển web.'
   },
   learning: {
-    title: '学习曲线',
-    unit: '(分数越高越简单)',
-    insight: 'Python、Ruby、Go 最容易上手。Node.js 需要理解异步概念。Java 需要掌握面向对象和框架。Rust 和 C++ 学习曲线最陡，需要深入理解内存管理。'
+    title: 'Đường cong học tập',
+    unit: '(điểm càng cao càng dễ)',
+    insight: 'Python, Ruby, Go dễ bắt đầu nhất. Node.js cần hiểu khái niệm async. Java cần nắm OOP và framework. Rust và C++ có đường cong dốc nhất, cần hiểu sâu quản lý bộ nhớ.'
   },
   concurrency: {
-    title: '并发能力',
-    unit: '(分数越高越强)',
-    insight: 'Go 的 Goroutine 是并发的王者，轻量且简单。Rust 的异步模型性能强大但复杂。Java 的线程池成熟稳定。Node.js 的事件循环适合 I/O 密集型。Python 的 GIL 限制了多线程性能。'
+    title: 'Khả năng concurrency',
+    unit: '(điểm càng cao càng mạnh)',
+    insight: 'Goroutine của Go là vua concurrency, nhẹ và đơn giản. Mô hình async của Rust mạnh nhưng phức tạp. Thread pool của Java trưởng thành ổn định. Event loop của Node.js phù hợp I/O-intensive. GIL của Python giới hạn hiệu năng multi-thread.'
   }
 }
 

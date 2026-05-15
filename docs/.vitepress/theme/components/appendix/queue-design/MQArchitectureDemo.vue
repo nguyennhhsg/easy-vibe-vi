@@ -11,7 +11,7 @@
         type="info"
         :closable="false"
       >
-        消息队列架构演示组件占位符 - 待实现具体交互
+        Placeholder demo kiến trúc message queue - chờ triển khai tương tác cụ thể
       </el-alert>
     </div>
   </div>
@@ -20,8 +20,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('消息队列架构演示')
-const description = ref('展示消息队列的整体架构，包括生产者、消费者、队列、交换器等核心组件')
+const title = ref('Demo kiến trúc message queue')
+const description = ref('Trình bày kiến trúc tổng thể của message queue, bao gồm producer, consumer, queue, exchange và các thành phần cốt lõi khác')
 </script>
 
 <style scoped>

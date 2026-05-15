@@ -1,8 +1,8 @@
 <template>
   <div class="ssh-auth-demo">
     <div class="demo-header">
-      <span class="title">SSH 密钥认证：你的数字身份证</span>
-      <span class="subtitle">对称加密 vs 非对称加密 · 密钥对生成 · 认证流程</span>
+      <span class="title">Xác thực SSH bằng khóa: CMND số của bạn</span>
+      <span class="subtitle">Mã hóa đối xứng vs bất đối xứng · Tạo cặp khóa · Quy trình xác thực</span>
     </div>
 
     <div class="control-panel">
@@ -24,7 +24,7 @@
         <div class="compare-grid">
           <div class="compare-card password">
             <div class="card-icon">🔑</div>
-            <div class="card-title">密码登录</div>
+            <div class="card-title">Đăng nhập bằng mật khẩu</div>
             <div class="card-flow">
               <div v-for="(step, i) in passwordFlow" :key="i" class="flow-step">
                 <span class="step-num">{{ i + 1 }}</span>
@@ -33,13 +33,13 @@
             </div>
             <div class="card-verdict danger">
               <span class="verdict-icon">⚠️</span>
-              <span>密码在网络上传输，可能被截获</span>
+              <span>Mật khẩu truyền qua mạng, có thể bị chặn bắt</span>
             </div>
           </div>
 
           <div class="compare-card key">
             <div class="card-icon">🔐</div>
-            <div class="card-title">密钥登录</div>
+            <div class="card-title">Đăng nhập bằng khóa</div>
             <div class="card-flow">
               <div v-for="(step, i) in keyFlow" :key="i" class="flow-step">
                 <span class="step-num">{{ i + 1 }}</span>
@@ -48,7 +48,7 @@
             </div>
             <div class="card-verdict success">
               <span class="verdict-icon">✅</span>
-              <span>私钥永远不离开你的电脑</span>
+              <span>Khóa riêng tư không bao giờ rời khỏi máy của bạn</span>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
               :disabled="isGenerating"
               @click="generateKeys"
             >
-              {{ isGenerating ? '生成中...' : '生成密钥对' }}
+              {{ isGenerating ? 'Đang tạo...' : 'Tạo cặp khóa' }}
             </button>
           </div>
 
@@ -72,36 +72,35 @@
             <div class="key-card private" :class="{ visible: keysGenerated }">
               <div class="key-header">
                 <span class="key-icon">🔒</span>
-                <span class="key-name">私钥 (Private Key)</span>
+                <span class="key-name">Khóa riêng tư (Private Key)</span>
               </div>
               <div class="key-location">~/.ssh/id_ed25519</div>
               <div class="key-content">
                 <code>{{ privateKeyDisplay }}</code>
               </div>
-              <div class="key-rule danger">绝不外泄 · 留在本机</div>
+              <div class="key-rule danger">Tuyệt đối không tiết lộ · Giữ trên máy</div>
             </div>
 
             <div class="key-arrow" :class="{ visible: keysGenerated }">
-              <span class="arrow-text">数学关联</span>
+              <span class="arrow-text">Liên kết toán học</span>
               <span class="arrow-icon">↔</span>
             </div>
 
             <div class="key-card public" :class="{ visible: keysGenerated }">
               <div class="key-header">
                 <span class="key-icon">🌍</span>
-                <span class="key-name">公钥 (Public Key)</span>
+                <span class="key-name">Khóa công khai (Public Key)</span>
               </div>
               <div class="key-location">~/.ssh/id_ed25519.pub</div>
               <div class="key-content">
                 <code>{{ publicKeyDisplay }}</code>
               </div>
-              <div class="key-rule success">可以给任何人 · 放到服务器</div>
+              <div class="key-rule success">Có thể đưa cho ai cũng được · Đặt trên server</div>
             </div>
           </div>
 
           <div v-if="keysGenerated" class="key-analogy">
-            <strong>生活类比：</strong>公钥 = 锁（可以随便装）· 私钥 =
-            钥匙（只有你有）· 用锁锁住的东西，只有对应的钥匙能打开
+            <strong>So sánh đời thực:</strong> Khóa công khai = ổ khóa (ai cũng có thể lắp) · Khóa riêng tư = chìa khóa (chỉ bạn có) · Cái gì bị khóa thì chỉ chìa khóa tương ứng mở được
           </div>
         </div>
       </div>
@@ -116,10 +115,10 @@
           >
             {{
               authStep === 0
-                ? '开始认证'
+                ? 'Bắt đầu xác thực'
                 : authStep >= 5
-                  ? '重新演示'
-                  : '认证中...'
+                  ? 'Chạy lại demo'
+                  : 'Đang xác thực...'
             }}
           </button>
         </div>
@@ -128,8 +127,8 @@
           <div class="auth-parties">
             <div class="party client">
               <div class="party-icon">💻</div>
-              <div class="party-name">你的电脑</div>
-              <div class="party-has">持有：私钥</div>
+              <div class="party-name">Máy của bạn</div>
+              <div class="party-has">Giữ: khóa riêng tư</div>
             </div>
 
             <div class="auth-messages">
@@ -137,34 +136,34 @@
                 :class="['msg', { active: authStep >= 1 }]"
                 class="msg-right"
               >
-                <span class="msg-label">① 请求连接</span>
-                <span class="msg-detail">"我要用密钥登录"</span>
+                <span class="msg-label">① Yêu cầu kết nối</span>
+                <span class="msg-detail">"Tôi muốn đăng nhập bằng khóa"</span>
               </div>
               <div :class="['msg', { active: authStep >= 2 }]" class="msg-left">
-                <span class="msg-label">② 发送随机挑战</span>
-                <span class="msg-detail">"请证明你有私钥：用它签名这段随机数据"</span>
+                <span class="msg-label">② Gửi thử thách ngẫu nhiên</span>
+                <span class="msg-detail">"Hãy chứng minh bạn có khóa riêng tư: ký vào đoạn dữ liệu ngẫu nhiên này"</span>
               </div>
               <div
                 :class="['msg', { active: authStep >= 3 }]"
                 class="msg-right"
               >
-                <span class="msg-label">③ 返回签名</span>
-                <span class="msg-detail">"用私钥签名后的结果（私钥本身不发送）"</span>
+                <span class="msg-label">③ Trả về chữ ký</span>
+                <span class="msg-detail">"Kết quả ký bằng khóa riêng tư (bản thân khóa không gửi đi)"</span>
               </div>
               <div :class="['msg', { active: authStep >= 4 }]" class="msg-left">
-                <span class="msg-label">④ 用公钥验证</span>
-                <span class="msg-detail">"用存储的公钥验证签名 → 匹配！"</span>
+                <span class="msg-label">④ Xác minh bằng khóa công khai</span>
+                <span class="msg-detail">"Dùng khóa công khai đã lưu để xác minh chữ ký → khớp!"</span>
               </div>
               <div :class="['msg', 'msg-result', { active: authStep >= 5 }]">
-                <span class="msg-label">⑤ 认证成功</span>
-                <span class="msg-detail">"欢迎登录！从始至终，私钥没离开过你的电脑"</span>
+                <span class="msg-label">⑤ Xác thực thành công</span>
+                <span class="msg-detail">"Chào mừng đăng nhập! Suốt quá trình, khóa riêng tư chưa bao giờ rời khỏi máy bạn"</span>
               </div>
             </div>
 
             <div class="party server">
               <div class="party-icon">🖥️</div>
-              <div class="party-name">远程服务器</div>
-              <div class="party-has">持有：公钥</div>
+              <div class="party-name">Server từ xa</div>
+              <div class="party-has">Giữ: khóa công khai</div>
             </div>
           </div>
         </div>
@@ -184,7 +183,7 @@
         </div>
 
         <div class="config-tips">
-          <div class="tip-title">~/.ssh/config 快捷配置</div>
+          <div class="tip-title">Cấu hình tắt với ~/.ssh/config</div>
           <pre class="tip-code"><code>Host my-server
   HostName 192.168.1.100
   User deploy
@@ -195,21 +194,18 @@ Host github.com
   User git
   IdentityFile ~/.ssh/id_ed25519</code></pre>
           <div class="tip-result">
-            配置后：<code>ssh my-server</code> 即可一键连接
+            Sau khi cấu hình: <code>ssh my-server</code> là kết nối ngay được
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span v-if="activeScenario === 'compare'">SSH
-        密钥登录比密码更安全，因为私钥从不在网络上传输，无法被中间人窃取。</span>
-      <span v-else-if="activeScenario === 'keygen'">一次 ssh-keygen
-        生成一对密钥：私钥自己保管，公钥放到目标服务器或平台。</span>
-      <span v-else-if="activeScenario === 'auth'">认证过程基于"挑战-响应"机制：服务器出题，你的私钥签名作答，公钥验证答案。全程私钥不离开本机。</span>
-      <span v-else>SSH 密钥不仅用于服务器登录，也是 Git (GitHub/GitLab)
-        等开发工具的标准身份认证方式。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span v-if="activeScenario === 'compare'">Đăng nhập SSH bằng khóa an toàn hơn mật khẩu, vì khóa riêng tư không bao giờ truyền qua mạng, không bị man-in-the-middle đánh cắp.</span>
+      <span v-else-if="activeScenario === 'keygen'">Một lần ssh-keygen tạo ra một cặp khóa: khóa riêng tư tự giữ, khóa công khai đặt lên server hoặc nền tảng mục tiêu.</span>
+      <span v-else-if="activeScenario === 'auth'">Quy trình xác thực dựa trên cơ chế "thử thách - phản hồi": server ra đề, khóa riêng tư của bạn ký để trả lời, khóa công khai xác minh. Suốt quá trình khóa riêng tư không rời khỏi máy.</span>
+      <span v-else>Khóa SSH không chỉ dùng để đăng nhập server, mà còn là cách xác thực chuẩn cho các công cụ dev như Git (GitHub/GitLab).</span>
     </div>
   </div>
 </template>
@@ -220,32 +216,32 @@ import { ref } from 'vue'
 const activeScenario = ref('compare')
 
 const scenarios = [
-  { id: 'compare', label: '密码 vs 密钥' },
-  { id: 'keygen', label: '生成密钥对' },
-  { id: 'auth', label: '认证流程' },
-  { id: 'uses', label: '常见用途' }
+  { id: 'compare', label: 'Mật khẩu vs khóa' },
+  { id: 'keygen', label: 'Tạo cặp khóa' },
+  { id: 'auth', label: 'Quy trình xác thực' },
+  { id: 'uses', label: 'Cách dùng thường gặp' }
 ]
 
 const passwordFlow = [
-  '输入用户名和密码',
-  '密码通过网络发送到服务器',
-  '服务器比对密码是否正确',
-  '每次都要输密码'
+  'Nhập username và mật khẩu',
+  'Mật khẩu gửi qua mạng đến server',
+  'Server so khớp mật khẩu',
+  'Mỗi lần đều phải nhập mật khẩu'
 ]
 
 const keyFlow = [
-  '事先把公钥放到服务器',
-  '连接时发送身份标识（不发私钥）',
-  '服务器用公钥出"数学题"',
-  '你的私钥在本地"答题"，只发答案'
+  'Đặt khóa công khai lên server trước',
+  'Khi kết nối chỉ gửi định danh (không gửi khóa riêng tư)',
+  'Server dùng khóa công khai ra "bài toán"',
+  'Khóa riêng tư của bạn "giải bài" cục bộ, chỉ gửi đáp án'
 ]
 
 const isGenerating = ref(false)
 const keysGenerated = ref(false)
 const privateKeyDisplay = ref(
-  '-----BEGIN OPENSSH PRIVATE KEY-----\n（等待生成...）\n-----END OPENSSH PRIVATE KEY-----'
+  '-----BEGIN OPENSSH PRIVATE KEY-----\n(Chờ tạo...)\n-----END OPENSSH PRIVATE KEY-----'
 )
-const publicKeyDisplay = ref('（等待生成...）')
+const publicKeyDisplay = ref('(Chờ tạo...)')
 
 const generateKeys = async () => {
   if (isGenerating.value) return
@@ -255,7 +251,7 @@ const generateKeys = async () => {
   await new Promise((r) => setTimeout(r, 800))
 
   privateKeyDisplay.value =
-    '-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAA...\n（2048 位密钥，绝不外传）\n-----END OPENSSH PRIVATE KEY-----'
+    '-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAA...\n(Khóa 2048 bit, tuyệt đối không chia sẻ)\n-----END OPENSSH PRIVATE KEY-----'
   publicKeyDisplay.value =
     'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA\nIGx...kF your@email.com'
 
@@ -278,39 +274,39 @@ const startAuth = async () => {
 const commonUses = [
   {
     icon: '🖥️',
-    name: '远程服务器',
+    name: 'Server từ xa',
     command: 'ssh user@server',
-    desc: '免密码登录 Linux/Mac 服务器'
+    desc: 'Đăng nhập server Linux/Mac không cần mật khẩu'
   },
   {
     icon: '🐙',
     name: 'GitHub',
     command: 'git push origin main',
-    desc: '用 SSH 协议推送代码'
+    desc: 'Push code qua giao thức SSH'
   },
   {
     icon: '🦊',
     name: 'GitLab',
     command: 'git clone git@gitlab.com:...',
-    desc: '克隆私有仓库'
+    desc: 'Clone repository riêng tư'
   },
   {
     icon: '📦',
-    name: 'SCP 传文件',
+    name: 'SCP truyền file',
     command: 'scp file.txt user@server:~/',
-    desc: '安全复制文件到远程'
+    desc: 'Sao chép file an toàn lên máy từ xa'
   },
   {
     icon: '🚇',
-    name: 'SSH 隧道',
+    name: 'SSH tunnel',
     command: 'ssh -L 8080:localhost:3000 server',
-    desc: '将远程端口映射到本地'
+    desc: 'Ánh xạ port từ xa về máy local'
   },
   {
     icon: '🐳',
-    name: '部署服务',
+    name: 'Triển khai dịch vụ',
     command: 'ssh deploy@prod "docker pull..."',
-    desc: '远程执行部署命令'
+    desc: 'Chạy lệnh triển khai từ xa'
   }
 ]
 </script>

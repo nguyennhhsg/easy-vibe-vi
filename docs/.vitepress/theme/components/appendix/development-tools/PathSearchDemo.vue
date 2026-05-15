@@ -1,12 +1,12 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">PATH 搜索过程</span>
-      <span class="subtitle">输入命令名，看 Shell 是如何逐目录查找的</span>
+      <span class="title">Quá trình tìm kiếm theo PATH</span>
+      <span class="subtitle">Nhập tên command để xem shell tìm qua từng thư mục như thế nào</span>
     </div>
 
     <div class="control-panel">
-      <div class="preset-label">选择命令：</div>
+      <div class="preset-label">Chọn command:</div>
       <div class="preset-btns">
         <button
           v-for="cmd in presets"
@@ -20,14 +20,14 @@
         </button>
       </div>
       <button class="action-btn" :disabled="isSearching || !command" @click="startSearch">
-        {{ isSearching ? '搜索中...' : '▶ 开始搜索' }}
+        {{ isSearching ? 'Đang tìm...' : '▶ Bắt đầu tìm' }}
       </button>
-      <button class="reset-btn" :disabled="isSearching" @click="reset">重置</button>
+      <button class="reset-btn" :disabled="isSearching" @click="reset">Reset</button>
     </div>
 
     <div class="visualization-area">
       <div class="path-display">
-        <div class="path-label">当前 PATH：</div>
+        <div class="path-label">PATH hiện tại:</div>
         <div class="path-value">
           <span
             v-for="(dir, idx) in pathDirs"
@@ -47,15 +47,15 @@
         >
           <div class="dir-name">{{ dir }}</div>
           <div v-if="dirStates[idx] === 'searching'" class="dir-status searching">
-            <span class="spin">⟳</span> 查找 {{ command }}...
+            <span class="spin">⟳</span> Đang tìm {{ command }}...
           </div>
           <div v-else-if="dirStates[idx] === 'found'" class="dir-status found">
-            ✓ 找到了！
+            ✓ Tìm thấy!
           </div>
           <div v-else-if="dirStates[idx] === 'notfound'" class="dir-status notfound">
-            ✗ 没有
+            ✗ Không có
           </div>
-          <div v-else class="dir-status idle">待查找</div>
+          <div v-else class="dir-status idle">Chờ tìm</div>
 
           <div v-if="dirStates[idx] === 'found' && currentCmd" class="found-path">
             {{ dir }}/{{ command }}
@@ -73,7 +73,7 @@
     </div>
 
     <div class="info-box">
-      <strong>核心机制：</strong>Shell 拿到命令名后，按 PATH 里目录的顺序依次查找。找到第一个匹配就立即使用，停止继续搜索。所以 PATH 中目录的顺序非常重要——先出现的目录优先级更高。
+      <strong>Cơ chế cốt lõi:</strong> Khi nhận được tên command, shell sẽ tìm tuần tự theo thứ tự thư mục trong PATH. Tìm thấy kết quả đầu tiên là dùng ngay và dừng tìm. Vì vậy thứ tự thư mục trong PATH rất quan trọng — thư mục xuất hiện trước có độ ưu tiên cao hơn.
     </div>
   </div>
 </template>
@@ -84,11 +84,11 @@ import { ref, reactive } from 'vue'
 const pathDirs = ['/usr/local/bin', '/usr/bin', '/bin', '/usr/sbin', '/sbin']
 
 const presets = [
-  { name: 'git', foundAt: 1, desc: 'Git 版本控制工具' },
-  { name: 'python3', foundAt: 2, desc: 'Python 解释器' },
-  { name: 'node', foundAt: 0, desc: 'Node.js 运行时（通常安装在 /usr/local/bin）' },
-  { name: 'ls', foundAt: 2, desc: '列出目录内容的内置命令' },
-  { name: 'foobar', foundAt: -1, desc: '一个不存在的命令' }
+  { name: 'git', foundAt: 1, desc: 'Công cụ Git version control' },
+  { name: 'python3', foundAt: 2, desc: 'Trình thông dịch Python' },
+  { name: 'node', foundAt: 0, desc: 'Runtime Node.js (thường cài ở /usr/local/bin)' },
+  { name: 'ls', foundAt: 2, desc: 'Command liệt kê nội dung thư mục' },
+  { name: 'foobar', foundAt: -1, desc: 'Một command không tồn tại' }
 ]
 
 const command = ref('')
@@ -140,8 +140,8 @@ const startSearch = async () => {
       dirStates[i] = 'found'
       result.value = {
         type: 'success',
-        title: `命令找到了！`,
-        detail: `在 ${pathDirs[i]}/${cmd.name} 找到可执行文件，搜索停止。`
+        title: `Đã tìm thấy command!`,
+        detail: `Tìm thấy file thực thi tại ${pathDirs[i]}/${cmd.name}, dừng tìm.`
       }
       break
     } else {
@@ -152,7 +152,7 @@ const startSearch = async () => {
       result.value = {
         type: 'error',
         title: `command not found: ${cmd.name}`,
-        detail: `已搜索 PATH 中所有 ${pathDirs.length} 个目录，均未找到。需要先安装该程序，或将其所在目录加入 PATH。`
+        detail: `Đã tìm qua ${pathDirs.length} thư mục trong PATH nhưng không thấy. Cần cài chương trình trước, hoặc thêm thư mục chứa nó vào PATH.`
       }
     }
   }

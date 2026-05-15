@@ -5,33 +5,33 @@ const selectedProblem = ref(0)
 
 const problems = [
   {
-    symptom: '端口被占用',
+    symptom: 'Port bị chiếm',
     error: 'Error: listen EADDRINUSE :::3000',
     icon: '🔴',
     steps: [
-      { cmd: 'lsof -i :3000', desc: '查看谁在用这个端口', output: 'COMMAND  PID   USER   FD   TYPE  SIZE/OFF NODE NAME\nnode     1234  sanbu  22u  IPv6  0t0      TCP  *:3000 (LISTEN)' },
-      { cmd: 'kill -9 1234', desc: '强制结束该进程（PID 为 1234）', output: '（进程已终止）' },
-      { cmd: 'npm run dev', desc: '重新启动你的服务', output: '✅ Server running at http://localhost:3000' }
+      { cmd: 'lsof -i :3000', desc: 'Xem ai đang giữ port', output: 'COMMAND  PID   USER   FD   TYPE  SIZE/OFF NODE NAME\nnode     1234  sanbu  22u  IPv6  0t0      TCP  *:3000 (LISTEN)' },
+      { cmd: 'kill -9 1234', desc: 'Kill tiến trình đó (PID 1234)', output: '(Tiến trình đã bị kill)' },
+      { cmd: 'npm run dev', desc: 'Khởi động lại dịch vụ của bạn', output: '✅ Server running at http://localhost:3000' }
     ]
   },
   {
-    symptom: '拒绝连接',
+    symptom: 'Bị từ chối kết nối',
     error: 'ERR_CONNECTION_REFUSED (localhost:8080)',
     icon: '🚫',
     steps: [
-      { cmd: 'curl http://localhost:8080', desc: '确认服务是否真的在运行', output: 'curl: (7) Failed to connect to localhost port 8080: Connection refused' },
-      { cmd: 'lsof -i :8080', desc: '检查是否有程序在监听', output: '（没有输出 = 没有程序在监听）' },
-      { cmd: 'npm run dev', desc: '启动你的后端服务', output: '✅ API server listening on port 8080' }
+      { cmd: 'curl http://localhost:8080', desc: 'Xác nhận xem dịch vụ có chạy không', output: 'curl: (7) Failed to connect to localhost port 8080: Connection refused' },
+      { cmd: 'lsof -i :8080', desc: 'Kiểm tra có tiến trình nào listen không', output: '(Không có output = không có tiến trình listen)' },
+      { cmd: 'npm run dev', desc: 'Khởi động backend của bạn', output: '✅ API server listening on port 8080' }
     ]
   },
   {
-    symptom: '跨域被拦截',
-    error: 'Access-Control-Allow-Origin 错误',
+    symptom: 'Bị chặn CORS',
+    error: 'Lỗi Access-Control-Allow-Origin',
     icon: '🛡️',
     steps: [
-      { cmd: '检查前端请求地址', desc: '确认是否从 localhost:5173 请求 localhost:3000', output: '前端 http://localhost:5173 → 后端 http://localhost:3000/api\n不同端口 = 不同源 = 触发跨域策略！' },
-      { cmd: '后端添加 CORS 配置', desc: '允许前端域名跨域访问', output: "app.use(cors({ origin: 'http://localhost:5173' }))" },
-      { cmd: '或者配置前端代理', desc: '在 vite.config.js 中设置 proxy', output: "server: {\n  proxy: {\n    '/api': 'http://localhost:3000'\n  }\n}" }
+      { cmd: 'Kiểm tra URL request frontend', desc: 'Xác nhận có phải request từ localhost:5173 sang localhost:3000', output: 'Frontend http://localhost:5173 → Backend http://localhost:3000/api\nKhác port = khác origin = bị CORS chặn!' },
+      { cmd: 'Thêm cấu hình CORS ở backend', desc: 'Cho phép domain frontend gọi cross-origin', output: "app.use(cors({ origin: 'http://localhost:5173' }))" },
+      { cmd: 'Hoặc cấu hình proxy frontend', desc: 'Thêm proxy trong vite.config.js', output: "server: {\n  proxy: {\n    '/api': 'http://localhost:3000'\n  }\n}" }
     ]
   }
 ]
@@ -66,7 +66,7 @@ function resetSteps() {
 <template>
   <div class="port-troubleshoot-demo">
     <div class="control-panel">
-      <span class="panel-label">选择一个常见问题：</span>
+      <span class="panel-label">Chọn một vấn đề thường gặp:</span>
       <div class="problem-tabs">
         <button
           v-for="(p, i) in problems"
@@ -90,8 +90,8 @@ function resetSteps() {
 
       <div class="fix-steps">
         <div class="fix-header">
-          <span>排查步骤 ({{ currentStepIndex + 1 }}/{{ currentProblem.steps.length }})</span>
-          <button class="reset-btn" @click="resetSteps">重来</button>
+          <span>Các bước xử lý ({{ currentStepIndex + 1 }}/{{ currentProblem.steps.length }})</span>
+          <button class="reset-btn" @click="resetSteps">Làm lại</button>
         </div>
 
         <div class="step-content">
@@ -103,7 +103,7 @@ function resetSteps() {
             {{ currentProblem.steps[currentStepIndex].desc }}
           </div>
           <button v-if="!showingOutput" class="run-btn" @click="runStep">
-            ▶ 执行
+            ▶ Chạy
           </button>
           <transition name="fade">
             <div v-if="showingOutput" class="step-output">
@@ -115,20 +115,20 @@ function resetSteps() {
             class="next-btn"
             @click="nextStep"
           >
-            下一步 →
+            Bước tiếp →
           </button>
           <div
             v-if="showingOutput && currentStepIndex === currentProblem.steps.length - 1"
             class="done-badge"
           >
-            ✅ 问题解决！
+            ✅ Đã xử lý xong!
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>排查口诀：</strong>先确认服务有没有启动（lsof / netstat），再确认端口对不对，最后确认是不是跨域问题。90% 的 localhost 问题都逃不出这三步。
+      <strong>Mẹo nhỏ:</strong> đầu tiên check xem dịch vụ đã chạy chưa (lsof / netstat), sau đó kiểm tra port có đúng không, cuối cùng xem có phải CORS không. 90% sự cố localhost đều nằm trong ba bước này.
     </div>
   </div>
 </template>

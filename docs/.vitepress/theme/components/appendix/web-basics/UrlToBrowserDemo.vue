@@ -50,7 +50,7 @@
           class="next-btn"
           @click="nextStage"
         >
-          下一步 →
+          Bước tiếp theo →
         </button>
       </div>
     </div>
@@ -65,36 +65,36 @@ const currentStage = ref(0)
 const stages = [
   {
     name: 'URL',
-    title: '1. 填写购物单 (URL)',
-    desc: '你想买一个玩具。首先要在订单上写清楚：去哪家店 (域名)、买什么 (路径)、用什么快递 (协议)。',
+    title: '1. Viết phiếu đặt hàng (URL)',
+    desc: 'Bạn muốn mua một món đồ chơi. Trước tiên phải ghi rõ trên đơn: đến cửa hàng nào (domain), mua gì (path), gửi bằng dịch vụ nào (protocol).',
     icon: '📝',
     component: 'UrlParserDemo'
   },
   {
     name: 'DNS',
-    title: '2. 查找店铺地址 (DNS)',
-    desc: '快递员不知道 "玩具店" 在哪。他需要查地图 (DNS)，把店名翻译成具体的 GPS 坐标 (IP 地址)。',
+    title: '2. Tìm địa chỉ cửa hàng (DNS)',
+    desc: 'Anh shipper không biết "tiệm đồ chơi" ở đâu. Anh ấy cần tra bản đồ (DNS) để đổi tên cửa hàng thành toạ độ GPS cụ thể (địa chỉ IP).',
     icon: '🧭',
     component: 'DnsLookupDemo'
   },
   {
     name: 'TCP',
-    title: '3. 建立通话 (TCP)',
-    desc: '找到店了！进店前先敲门确认："有人吗？" "有！" "那我进来了！"。确保连接通畅，不会白跑一趟。',
+    title: '3. Bắt đầu cuộc gọi (TCP)',
+    desc: 'Tìm được cửa hàng rồi! Trước khi vào, gõ cửa xác nhận: "Có ai không?" "Có!" "Vậy mình vào đây!". Đảm bảo kết nối thông suốt, không phải đi mất công.',
     icon: '📞',
     component: 'TcpHandshakeDemo'
   },
   {
     name: 'HTTP',
-    title: '4. 购买商品 (HTTP)',
-    desc: '进店后，你递交订单："我要这个玩具"。店员去仓库找货，最后把装有玩具的包裹 (HTML) 递给你。',
+    title: '4. Mua hàng (HTTP)',
+    desc: 'Vào cửa hàng, bạn đưa đơn đặt: "Cho mình món đồ chơi này". Nhân viên đi vào kho lấy hàng, cuối cùng đưa cho bạn gói hàng chứa đồ chơi (HTML).',
     icon: '📦',
     component: 'HttpExchangeDemo'
   },
   {
     name: 'Render',
-    title: '5. 拆盒组装 (渲染)',
-    desc: '回到家，拆开包裹。照着说明书 (HTML)，把积木 (DOM) 搭起来，涂上颜色 (CSS)，玩具就变好看了！',
+    title: '5. Mở hộp lắp ráp (render)',
+    desc: 'Về tới nhà, bạn mở gói hàng. Làm theo hướng dẫn (HTML), xếp các khối lego (DOM) lại, tô màu (CSS) - thế là món đồ chơi trở nên đẹp đẽ!',
     icon: '🧩',
     component: 'BrowserRenderingDemo'
   }

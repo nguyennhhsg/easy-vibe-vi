@@ -6,7 +6,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const query = ref('如何重置密码？')
+const query = ref('Làm sao để đặt lại mật khẩu?')
 const lastQuery = ref('')
 const isSearching = ref(false)
 const currentStep = ref(0) // 0: Idle, 1: Searching/Scanning, 2: Retrieved/Assembling, 3: Done
@@ -14,26 +14,26 @@ const currentStep = ref(0) // 0: Idle, 1: Searching/Scanning, 2: Retrieved/Assem
 const documents = ref([
   {
     id: 1,
-    title: '密码重置指南',
-    content: '用户可以通过点击设置页面的"忘记密码"链接来重置密码。系统会发送验证邮件。',
+    title: 'Hướng dẫn đặt lại mật khẩu',
+    content: 'Người dùng có thể đặt lại mật khẩu bằng cách bấm liên kết "Quên mật khẩu" trong trang cài đặt. Hệ thống sẽ gửi email xác minh.',
     score: 0
   },
   {
     id: 2,
-    title: '定价策略',
-    content: '基础版每月 $10，专业版每月 $29。企业版需要联系销售团队获取报价。',
+    title: 'Chính sách giá',
+    content: 'Bản cơ bản $10/tháng, bản pro $29/tháng. Bản doanh nghiệp vui lòng liên hệ team sales để nhận báo giá.',
     score: 0
   },
   {
     id: 3,
-    title: 'API 文档',
-    content: '所有 API 请求都需要在 Header 中包含 Bearer Token 进行身份验证。',
+    title: 'Tài liệu API',
+    content: 'Mọi request API đều cần Bearer Token trong Header để xác thực danh tính.',
     score: 0
   },
   {
     id: 4,
-    title: '账户安全',
-    content: '为了账户安全，建议开启双重认证 (2FA)。定期修改密码也是好习惯。',
+    title: 'An toàn tài khoản',
+    content: 'Để bảo vệ tài khoản, bạn nên bật xác thực hai bước (2FA). Đổi mật khẩu định kỳ cũng là thói quen tốt.',
     score: 0
   }
 ])
@@ -46,9 +46,10 @@ const retrievedDocs = computed(() => {
 
 const calculateSimilarity = (q, docContent) => {
   // Simple keyword matching simulation
-  if (q.includes('密码') && (docContent.includes('密码') || docContent.includes('安全'))) return 0.95
-  if (q.includes('价格') && docContent.includes('价')) return 0.9
-  if (q.includes('API') && docContent.includes('API')) return 0.9
+  const lower = q.toLowerCase()
+  if ((lower.includes('mật khẩu') || lower.includes('password')) && (docContent.toLowerCase().includes('mật khẩu') || docContent.toLowerCase().includes('an toàn'))) return 0.95
+  if ((lower.includes('giá') || lower.includes('price')) && docContent.toLowerCase().includes('giá')) return 0.9
+  if (lower.includes('api') && docContent.toLowerCase().includes('api')) return 0.9
   
   // Random noise for non-matches
   return Math.random() * 0.3
@@ -90,13 +91,13 @@ const search = async () => {
     <div class="step-section input-section">
       <div class="step-label">
         <span class="step-num">1</span>
-        <span class="step-text">用户提问 (User Query)</span>
+        <span class="step-text">Câu hỏi người dùng (User Query)</span>
       </div>
       <div class="search-box">
         <input 
           v-model="query" 
           type="text" 
-          placeholder="输入问题..."
+          placeholder="Bạn nhập câu hỏi..."
           :disabled="isSearching"
           @keyup.enter="search"
         >
@@ -105,7 +106,7 @@ const search = async () => {
           :disabled="isSearching || !query"
           @click="search"
         >
-          {{ isSearching ? '检索中...' : '🚀 开始检索' }}
+          {{ isSearching ? 'Đang truy hồi...' : '🚀 Bắt đầu truy hồi' }}
         </button>
       </div>
     </div>
@@ -128,15 +129,15 @@ const search = async () => {
     >
       <div class="step-label">
         <span class="step-num">2</span>
-        <span class="step-text">图书馆检索 (Retrieval)</span>
+        <span class="step-text">Truy hồi từ thư viện (Retrieval)</span>
         <span
           v-if="currentStep === 1"
           class="status-badge"
-        >正在扫描...</span>
+        >Đang quét...</span>
         <span
           v-if="currentStep >= 2"
           class="status-badge success"
-        >命中 {{ retrievedDocs.length }} 条</span>
+        >Khớp {{ retrievedDocs.length }} kết quả</span>
       </div>
       
       <div class="docs-grid">
@@ -156,7 +157,7 @@ const search = async () => {
               v-if="currentStep >= 2 && doc.score > 0.6"
               class="doc-score"
             >
-              {{ (doc.score * 100).toFixed(0) }}% 相关
+              {{ (doc.score * 100).toFixed(0) }}% liên quan
             </span>
           </div>
           <div class="doc-content">
@@ -179,7 +180,7 @@ const search = async () => {
     >
       <div class="line" />
       <div class="icon">
-        ✂️ 复制粘贴
+        ✂️ Sao chép & dán
       </div>
     </div>
 
@@ -190,13 +191,13 @@ const search = async () => {
     >
       <div class="step-label">
         <span class="step-num">3</span>
-        <span class="step-text">最终上下文 (Final Prompt)</span>
+        <span class="step-text">Context cuối cùng (Final Prompt)</span>
       </div>
       
       <div class="blackboard">
         <div class="chalk-text system">
           <span class="role-badge">SYSTEM</span>
-          你是一个专业的 AI 助手。请基于下方【检索到的资料】回答用户的提问。
+          Bạn là một trợ lý AI chuyên nghiệp. Hãy dựa trên [Tài liệu đã truy hồi] phía dưới để trả lời câu hỏi của người dùng.
         </div>
         
         <div
@@ -204,7 +205,7 @@ const search = async () => {
           class="retrieved-block"
         >
           <div class="block-header">
-            📚 检索到的资料 (Context)
+            📚 Tài liệu đã truy hồi (Context)
           </div>
           <div v-if="retrievedDocs.length > 0">
             <div
@@ -219,13 +220,13 @@ const search = async () => {
             v-else
             class="empty-state"
           >
-            (未找到相关资料)
+            (Không tìm thấy tài liệu liên quan)
           </div>
         </div>
         
         <div class="chalk-text user">
           <span class="role-badge">USER</span>
-          {{ lastQuery || '等待提问...' }}
+          {{ lastQuery || 'Đang chờ câu hỏi...' }}
         </div>
       </div>
     </div>

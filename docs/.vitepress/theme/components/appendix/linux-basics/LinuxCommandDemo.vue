@@ -1,12 +1,12 @@
 <!--
   LinuxCommandDemo.vue
-  Linux 常用命令分类演示
+  Tra cứu các lệnh Linux phổ biến theo nhóm
 -->
 <template>
   <div class="linux-cmd-demo">
     <div class="header">
-      <div class="title">Linux 命令速查</div>
-      <div class="subtitle">按分类查看常用命令及示例</div>
+      <div class="title">Tra cứu lệnh Linux</div>
+      <div class="subtitle">Chọn nhóm để xem các lệnh hay dùng và ví dụ</div>
     </div>
 
     <div class="categories">
@@ -42,52 +42,52 @@ const activeCat = ref('file')
 const categories = [
   {
     key: 'file',
-    label: '文件操作',
+    label: 'Thao tác file',
     commands: [
-      { name: 'ls', brief: '列出文件和目录', example: 'ls -la /home' },
-      { name: 'cd', brief: '切换目录', example: 'cd /var/log' },
-      { name: 'cp', brief: '复制文件', example: 'cp -r src/ backup/' },
-      { name: 'mv', brief: '移动/重命名', example: 'mv old.txt new.txt' },
-      { name: 'rm', brief: '删除文件', example: 'rm -rf dist/' },
-      { name: 'mkdir', brief: '创建目录', example: 'mkdir -p src/components' },
-      { name: 'find', brief: '查找文件', example: 'find . -name "*.js" -type f' }
+      { name: 'ls', brief: 'Liệt kê file và thư mục', example: 'ls -la /home' },
+      { name: 'cd', brief: 'Chuyển thư mục', example: 'cd /var/log' },
+      { name: 'cp', brief: 'Copy file', example: 'cp -r src/ backup/' },
+      { name: 'mv', brief: 'Di chuyển/đổi tên', example: 'mv old.txt new.txt' },
+      { name: 'rm', brief: 'Xóa file', example: 'rm -rf dist/' },
+      { name: 'mkdir', brief: 'Tạo thư mục', example: 'mkdir -p src/components' },
+      { name: 'find', brief: 'Tìm file', example: 'find . -name "*.js" -type f' }
     ]
   },
   {
     key: 'text',
-    label: '文本处理',
+    label: 'Xử lý văn bản',
     commands: [
-      { name: 'cat', brief: '查看文件内容', example: 'cat config.json' },
-      { name: 'grep', brief: '搜索文本', example: 'grep -rn "ERROR" /var/log/' },
-      { name: 'head/tail', brief: '查看文件头/尾', example: 'tail -f app.log' },
-      { name: 'awk', brief: '文本列处理', example: "awk '{print $1, $3}' data.txt" },
-      { name: 'sed', brief: '流式文本替换', example: "sed -i 's/old/new/g' file.txt" },
-      { name: 'wc', brief: '统计行/词/字符数', example: 'wc -l *.js' },
-      { name: 'sort | uniq', brief: '排序去重', example: 'sort data.txt | uniq -c' }
+      { name: 'cat', brief: 'Xem nội dung file', example: 'cat config.json' },
+      { name: 'grep', brief: 'Tìm trong nội dung', example: 'grep -rn "ERROR" /var/log/' },
+      { name: 'head/tail', brief: 'Xem đầu/cuối file', example: 'tail -f app.log' },
+      { name: 'awk', brief: 'Xử lý văn bản theo cột', example: "awk '{print $1, $3}' data.txt" },
+      { name: 'sed', brief: 'Thay thế văn bản kiểu stream', example: "sed -i 's/old/new/g' file.txt" },
+      { name: 'wc', brief: 'Đếm dòng/từ/ký tự', example: 'wc -l *.js' },
+      { name: 'sort | uniq', brief: 'Sắp xếp và loại trùng', example: 'sort data.txt | uniq -c' }
     ]
   },
   {
     key: 'process',
-    label: '进程管理',
+    label: 'Quản lý tiến trình',
     commands: [
-      { name: 'ps', brief: '查看进程', example: 'ps aux | grep node' },
-      { name: 'top/htop', brief: '实时监控', example: 'top -o %CPU' },
-      { name: 'kill', brief: '终止进程', example: 'kill -9 12345' },
-      { name: 'nohup', brief: '后台运行', example: 'nohup node app.js &' },
-      { name: 'lsof', brief: '查看打开的文件', example: 'lsof -i :3000' },
-      { name: 'systemctl', brief: '管理系统服务', example: 'systemctl restart nginx' }
+      { name: 'ps', brief: 'Xem tiến trình', example: 'ps aux | grep node' },
+      { name: 'top/htop', brief: 'Monitor real-time', example: 'top -o %CPU' },
+      { name: 'kill', brief: 'Kết thúc tiến trình', example: 'kill -9 12345' },
+      { name: 'nohup', brief: 'Chạy nền', example: 'nohup node app.js &' },
+      { name: 'lsof', brief: 'Xem file đang mở', example: 'lsof -i :3000' },
+      { name: 'systemctl', brief: 'Quản lý dịch vụ hệ thống', example: 'systemctl restart nginx' }
     ]
   },
   {
     key: 'network',
-    label: '网络工具',
+    label: 'Công cụ mạng',
     commands: [
-      { name: 'curl', brief: '发送 HTTP 请求', example: 'curl -X POST -d "data" url' },
-      { name: 'ping', brief: '测试连通性', example: 'ping -c 4 google.com' },
-      { name: 'ss/netstat', brief: '查看网络连接', example: 'ss -tlnp' },
-      { name: 'dig', brief: 'DNS 查询', example: 'dig example.com' },
-      { name: 'ssh', brief: '远程登录', example: 'ssh user@server -p 22' },
-      { name: 'scp', brief: '远程复制文件', example: 'scp file.txt user@server:/tmp/' }
+      { name: 'curl', brief: 'Gửi HTTP request', example: 'curl -X POST -d "data" url' },
+      { name: 'ping', brief: 'Kiểm tra kết nối', example: 'ping -c 4 google.com' },
+      { name: 'ss/netstat', brief: 'Xem kết nối mạng', example: 'ss -tlnp' },
+      { name: 'dig', brief: 'Truy vấn DNS', example: 'dig example.com' },
+      { name: 'ssh', brief: 'Đăng nhập từ xa', example: 'ssh user@server -p 22' },
+      { name: 'scp', brief: 'Copy file qua mạng', example: 'scp file.txt user@server:/tmp/' }
     ]
   }
 ]

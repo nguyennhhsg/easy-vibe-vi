@@ -1,6 +1,6 @@
 <!--
   ProjectorDemo.vue
-  投射器（Projector）原理演示
+  Mô phỏng nguyên lý Projector (bộ chiếu)
 -->
 <template>
   <div class="projector-demo">
@@ -48,7 +48,7 @@
             {{ mode === 'linear' ? 'Linear Layer' : 'Q-Former' }}
           </div>
           <div class="desc">
-            {{ mode === 'linear' ? '直接映射 (1:1)' : '查询提取 (N:M)' }}
+            {{ mode === 'linear' ? 'Ánh xạ trực tiếp (1:1)' : 'Truy vấn trích xuất (N:M)' }}
           </div>
           <div
             v-if="mode === 'qformer'"
@@ -77,8 +77,8 @@
         <div class="count">
           {{
             mode === 'linear'
-              ? '256 Tokens (保留全部细节)'
-              : '32 Tokens (只保留关键信息)'
+              ? '256 Tokens (giữ toàn bộ chi tiết)'
+              : '32 Tokens (chỉ giữ thông tin chính)'
           }}
         </div>
       </div>
@@ -87,13 +87,11 @@
     <div class="explanation">
       <div v-if="mode === 'linear'">
         <strong>Linear Projector:</strong>
-        简单高效。它像一个直译器，保留了所有的视觉信息，虽然 Token
-        数量多（计算量大），但对细节的把控更好。
+        Đơn giản, hiệu quả. Nó hoạt động như một bộ dịch trực tiếp, giữ lại toàn bộ thông tin thị giác. Số lượng Token nhiều (tốn nhiều tính toán) nhưng giữ chi tiết tốt hơn.
       </div>
       <div v-else>
         <strong>Q-Former:</strong>
-        精细优雅。它使用一组“查询向量”主动去图像中提取与文本相关的信息。大大压缩了
-        Token 数量，让 LLM 跑得更快。
+        Tinh tế và thanh thoát. Nó dùng một nhóm "vector truy vấn" để chủ động trích xuất thông tin liên quan đến văn bản từ ảnh, giúp nén mạnh số lượng Token và để LLM chạy nhanh hơn.
       </div>
     </div>
   </div>

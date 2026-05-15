@@ -1,20 +1,20 @@
 <!--
   ParticleSystemDemo.vue
-  Canvas 粒子系统演示组件
+  Component demo hệ thống particle trên Canvas
 
-  用途：
-  展示 Canvas 粒子系统的实现，包括粒子生成、运动、生命周期管理
+  Mục đích:
+  Trình bày cách hiện thực particle system trên Canvas, bao gồm sinh particle, chuyển động, quản lý vòng đời
 
-  交互功能：
-  - 鼠标交互：鼠标移动产生粒子
-  - 参数调整：粒子数量、速度、大小、颜色
-  - 效果选择：不同的粒子效果
+  Tương tác:
+  - Mouse interaction: di chuột để sinh particle
+  - Điều chỉnh tham số: số lượng particle, tốc độ, kích thước, màu
+  - Chọn hiệu ứng: nhiều hiệu ứng particle khác nhau
 -->
 <template>
   <div class="particle-demo">
     <div class="control-panel">
       <div class="effect-selector">
-        <label>Particle Effect / 粒子效果</label>
+        <label>Particle Effect / Hiệu ứng particle</label>
         <div class="button-group">
           <button
             v-for="effect in effects"
@@ -29,7 +29,7 @@
 
       <div class="parameters">
         <div class="param-row">
-          <label>Particle Count / 粒子数量: {{ maxParticles }}</label>
+          <label>Particle Count / Số particle: {{ maxParticles }}</label>
           <input
             v-model.number="maxParticles"
             type="range"
@@ -40,7 +40,7 @@
         </div>
 
         <div class="param-row">
-          <label>Particle Size / 粒子大小: {{ particleSize }}</label>
+          <label>Particle Size / Kích thước particle: {{ particleSize }}</label>
           <input
             v-model.number="particleSize"
             type="range"
@@ -50,7 +50,7 @@
         </div>
 
         <div class="param-row">
-          <label>Speed / 速度: {{ speed }}</label>
+          <label>Speed / Tốc độ: {{ speed }}</label>
           <input
             v-model.number="speed"
             type="range"
@@ -61,7 +61,7 @@
         </div>
 
         <div class="param-row">
-          <label>Gravity / 重力: {{ gravity }}</label>
+          <label>Gravity / Trọng lực: {{ gravity }}</label>
           <input
             v-model.number="gravity"
             type="range"
@@ -88,7 +88,7 @@
         @click="clearParticles"
       >
         <span class="icon">🗑️</span>
-        Clear Particles / 清除粒子
+        Clear Particles / Xoá particle
       </button>
     </div>
 
@@ -129,14 +129,14 @@ let fpsTime = 0
 let mousePos = { x: 300, y: 200 }
 
 const effects = [
-  { value: 'trail', label: 'Mouse Trail / 鼠标轨迹' },
-  { value: 'firework', label: 'Firework / 烟花' },
-  { value: 'snow', label: 'Snowfall / 雪花' },
-  { value: 'fountain', label: 'Fountain / 喷泉' }
+  { value: 'trail', label: 'Mouse Trail / Vệt theo chuột' },
+  { value: 'firework', label: 'Firework / Pháo hoa' },
+  { value: 'snow', label: 'Snowfall / Tuyết rơi' },
+  { value: 'fountain', label: 'Fountain / Đài phun' }
 ]
 
 const particleCode = computed(() => {
-  return `// 粒子系统核心代码
+  return `// Code lõi của particle system
 class Particle {
   constructor(x, y) {
     this.x = x
@@ -152,7 +152,7 @@ class Particle {
   update() {
     this.x += this.vx
     this.y += this.vy
-    this.vy += ${gravity.value}  // 重力
+    this.vy += ${gravity.value}  // Trọng lực
     this.life -= this.decay
   }
 
@@ -170,11 +170,11 @@ class Particle {
   }
 }
 
-// 动画循环
+// Animation loop
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 更新和绘制粒子
+  // Cập nhật và vẽ particle
   particles = particles.filter(p => !p.isDead())
   particles.forEach(p => {
     p.update()
@@ -205,7 +205,7 @@ class Particle {
     this.size = particleSize.value + Math.random() * 2
     this.color = colors[Math.floor(Math.random() * colors.length)]
 
-    // 根据效果类型设置不同的初始速度
+    // Thiết lập tốc độ khởi tạo theo loại hiệu ứng
     switch (effect) {
       case 'trail':
         this.vx = (Math.random() - 0.5) * 2 * speed.value
@@ -272,21 +272,21 @@ const draw = () => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')
 
-  // 清除画布（使用半透明背景产生拖尾效果）
+  // Xoá canvas (dùng nền bán trong suốt để tạo vệt mờ)
   ctx.fillStyle =
     currentEffect.value === 'trail'
       ? 'rgba(250, 250, 250, 0.2)'
       : 'rgba(250, 250, 250, 1)'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  // 更新和绘制粒子
+  // Cập nhật và vẽ particle
   particles.value = particles.value.filter((p) => !p.isDead())
   particles.value.forEach((p) => {
     p.update()
     p.draw(ctx)
   })
 
-  // 持续产生粒子（雪花效果）
+  // Liên tục sinh particle (hiệu ứng tuyết rơi)
   if (currentEffect.value === 'snow') {
     createParticles(Math.random() * 600, -10, 2)
   }
@@ -318,7 +318,7 @@ const handleMouseMove = (e) => {
   mousePos.x = e.clientX - rect.left
   mousePos.y = e.clientY - rect.top
 
-  // 鼠标轨迹效果
+  // Hiệu ứng vệt theo chuột
   if (currentEffect.value === 'trail') {
     createParticles(mousePos.x, mousePos.y, 3)
   }
@@ -332,7 +332,7 @@ const handleClick = (e) => {
   const x = e.clientX - rect.left
   const y = e.clientY - rect.top
 
-  // 烟花和喷泉效果在点击时产生
+  // Hiệu ứng pháo hoa và đài phun phát sinh khi click
   if (currentEffect.value === 'firework') {
     createParticles(x, y, 50)
   } else if (currentEffect.value === 'fountain') {

@@ -1,12 +1,12 @@
 <!--
   RateLimiterDemo.vue
-  限流算法演示：令牌桶 vs 滑动窗口
+  Demo thuật toán rate-limit: Token Bucket vs Sliding Window
 -->
 <template>
   <div class="rate-limiter-demo">
     <div class="header">
-      <div class="title">限流算法可视化</div>
-      <div class="subtitle">选择算法，点击发送请求观察限流效果</div>
+      <div class="title">Trực quan thuật toán rate-limit</div>
+      <div class="subtitle">Chọn thuật toán, bấm gửi request để quan sát hiệu ứng</div>
     </div>
 
     <div class="algo-tabs">
@@ -20,26 +20,26 @@
 
     <div class="sim-area">
       <div class="controls">
-        <button class="send-btn" @click="sendRequest">发送请求</button>
-        <button class="burst-btn" @click="sendBurst">模拟突发 (10个)</button>
-        <button class="reset-btn" @click="reset">重置</button>
+        <button class="send-btn" @click="sendRequest">Gửi request</button>
+        <button class="burst-btn" @click="sendBurst">Mô phỏng burst (10)</button>
+        <button class="reset-btn" @click="reset">Reset</button>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <span class="stat-label">已发送</span>
+          <span class="stat-label">Đã gửi</span>
           <span class="stat-value">{{ totalSent }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">通过</span>
+          <span class="stat-label">Cho qua</span>
           <span class="stat-value pass">{{ passed }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">拒绝</span>
+          <span class="stat-label">Từ chối</span>
           <span class="stat-value reject">{{ rejected }}</span>
         </div>
         <div class="stat" v-if="algo === 'token'">
-          <span class="stat-label">剩余令牌</span>
+          <span class="stat-label">Token còn lại</span>
           <span class="stat-value">{{ tokens }}</span>
         </div>
       </div>
@@ -51,7 +51,7 @@
           :class="['req-item', req.status]"
         >
           <span>{{ req.status === 'pass' ? '✅' : '❌' }}</span>
-          <span>请求 #{{ req.id }}</span>
+          <span>Request #{{ req.id }}</span>
           <span class="req-time">{{ req.time }}</span>
         </div>
       </div>
@@ -75,9 +75,9 @@ const tokens = ref(5)
 const recentRequests = ref([])
 
 const algorithms = [
-  { key: 'token', label: '令牌桶', desc: '以固定速率往桶里放令牌，每个请求消耗一个令牌。桶满时多余令牌丢弃。允许一定程度的突发流量（桶里有存量令牌时）。' },
-  { key: 'sliding', label: '滑动窗口', desc: '在一个滑动的时间窗口内统计请求数，超过阈值则拒绝。比固定窗口更平滑，避免窗口边界的突发问题。' },
-  { key: 'leaky', label: '漏桶', desc: '请求先进入桶中排队，以固定速率流出处理。无论请求多快到达，处理速率恒定。适合需要严格匀速的场景。' }
+  { key: 'token', label: 'Token Bucket', desc: 'Bỏ token vào bucket với tốc độ cố định, mỗi request tiêu thụ một token. Bucket đầy thì token thừa bị bỏ. Cho phép burst nhất định (khi bucket còn token dự trữ).' },
+  { key: 'sliding', label: 'Sliding Window', desc: 'Đếm số request trong một cửa sổ thời gian trượt, vượt ngưỡng thì từ chối. Mượt hơn fixed window, tránh vấn đề burst ở biên cửa sổ.' },
+  { key: 'leaky', label: 'Leaky Bucket', desc: 'Request vào bucket xếp hàng, chảy ra với tốc độ cố định để xử lý. Bất kể request đến nhanh thế nào, tốc độ xử lý là hằng số. Phù hợp tình huống cần đều tuyệt đối.' }
 ]
 
 const currentAlgo = computed(() => algorithms.find(a => a.key === algo.value))
@@ -105,12 +105,12 @@ function reset() {
   recentRequests.value = []
   windowRequests.value = []
   if (tokenInterval) clearInterval(tokenInterval)
-  // 只在令牌桶模式下启动补充
+  // Chỉ bật refill token khi đang dùng chế độ Token Bucket
   if (algo.value === 'token') startTokenRefill()
 }
 
 onMounted(() => {
-  // 组件挂载后启动令牌补充，避免模块加载时启动定时器导致 build 卡住
+  // Khởi động refill token sau khi mount để tránh chạy timer khi module load gây kẹt build
   startTokenRefill()
 })
 

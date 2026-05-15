@@ -105,7 +105,7 @@
     <div class="controls">
       <div class="description">
         <div v-if="!isAltBufferActive">
-          <p><strong>Current: Primary Buffer (主缓冲区)</strong></p>
+          <p><strong>Current: Primary Buffer (buffer chính)</strong></p>
           <p>
             This is the standard scrolling log. Commands are executed line by
             line.
@@ -118,7 +118,7 @@
           </button>
         </div>
         <div v-else>
-          <p><strong>Current: Alternate Buffer (备用缓冲区)</strong></p>
+          <p><strong>Current: Alternate Buffer (buffer dự phòng)</strong></p>
           <p>
             A separate "canvas" for full-screen apps. It hides the history but
             doesn't delete it.

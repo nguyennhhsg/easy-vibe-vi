@@ -11,17 +11,17 @@ const retentionData = [
 
 const curves = [
   {
-    label: '次日留存',
+    label: 'Retention D1',
     color: '#3b82f6',
     data: retentionData.map((r) => r.day1)
   },
   {
-    label: '7日留存',
+    label: 'Retention D7',
     color: '#22c55e',
     data: retentionData.map((r) => r.day7)
   },
   {
-    label: '30日留存',
+    label: 'Retention D30',
     color: '#f59e0b',
     data: retentionData.map((r) => r.day30)
   }
@@ -42,28 +42,28 @@ function rateClass(rate) {
   <div class="retention-demo">
     <div class="demo-header">
       <span class="icon">📈</span>
-      <span class="title">留存分析演示</span>
-      <span class="subtitle">产品的"硬核"体检</span>
+      <span class="title">Demo phân tích retention</span>
+      <span class="subtitle">Khám sức khỏe "cốt lõi" của sản phẩm</span>
     </div>
 
     <div class="intro-text">
-      拉新是给桶加水，留存是看桶漏不漏。留存曲线若
-      <span class="hl">趋于平稳</span>，说明产品已获得 PMF；若
-      <span class="hl">持续跌落至零</span>，说明核心价值未被验证。
+      Acquisition là đổ nước vào thùng, retention là xem thùng có rò không. Đường cong retention
+      <span class="hl">phẳng dần</span> cho thấy sản phẩm đã đạt PMF;
+      <span class="hl">rớt liên tục về 0</span> nghĩa là giá trị cốt lõi chưa được xác thực.
     </div>
 
-    <!-- 留存数据表 -->
+    <!-- Bảng dữ liệu retention -->
     <div class="section">
-      <div class="section-label">留存数据</div>
+      <div class="section-label">Dữ liệu retention</div>
       <div class="table-wrap">
         <table class="r-table">
           <thead>
             <tr>
-              <th>注册日期</th>
-              <th>注册人数</th>
-              <th>次日留存</th>
-              <th>7日留存</th>
-              <th>30日留存</th>
+              <th>Ngày đăng ký</th>
+              <th>Số người đăng ký</th>
+              <th>Retention D1</th>
+              <th>Retention D7</th>
+              <th>Retention D30</th>
             </tr>
           </thead>
           <tbody>
@@ -79,21 +79,21 @@ function rateClass(rate) {
       </div>
     </div>
 
-    <!-- 留存曲线 -->
+    <!-- Đường cong retention -->
     <div class="section">
-      <div class="section-label">留存曲线</div>
+      <div class="section-label">Đường cong retention</div>
       <div class="chart-wrap">
         <svg viewBox="0 0 400 210" class="curve-svg">
-          <!-- 坐标轴 -->
+          <!-- Trục tọa độ -->
           <line x1="40" y1="180" x2="380" y2="180" stroke="#666" stroke-width="1" />
           <line x1="40" y1="20" x2="40" y2="180" stroke="#666" stroke-width="1" />
 
-          <!-- Y轴标签 -->
+          <!-- Nhãn trục Y -->
           <text x="12" y="30" font-size="10" fill="#999">100%</text>
           <text x="17" y="100" font-size="10" fill="#999">50%</text>
           <text x="25" y="183" font-size="10" fill="#999">0</text>
 
-          <!-- 曲线 -->
+          <!-- Đường cong -->
           <template v-for="c in curves" :key="c.label">
             <polyline
               :points="points(c.data)"
@@ -111,7 +111,7 @@ function rateClass(rate) {
             />
           </template>
 
-          <!-- X轴标签 -->
+          <!-- Nhãn trục X -->
           <text
             v-for="(d, i) in ['D1','D2','D3','D4','D5','D6','D7']"
             :key="d"

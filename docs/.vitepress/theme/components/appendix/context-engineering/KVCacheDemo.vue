@@ -10,14 +10,14 @@
           >
           <span class="slider" />
         </label>
-        <span class="label">开启“背课文加速”（前缀复用 / KV Cache）</span>
+        <span class="label">Bật chế độ "thuộc bài tăng tốc" (tái dùng prefix / KV Cache)</span>
       </div>
       <button 
         class="action-btn" 
         :disabled="isProcessing"
         @click="sendRequest"
       >
-        {{ isProcessing ? '生成中...' : '发送新请求' }}
+        {{ isProcessing ? 'Đang sinh...' : 'Gửi yêu cầu mới' }}
       </button>
     </div>
 
@@ -30,20 +30,20 @@
         >
           <div class="block-header">
             <span class="icon">⚙️</span>
-            <span>固定开场白（System Prompt）</span>
+            <span>Lời mở đầu cố định (System Prompt)</span>
             <span
               v-if="isCacheEnabled && hasCache"
               class="badge"
-            >已背过</span>
+            >Đã thuộc</span>
           </div>
           <div class="block-content">
-            你是一个乐于助人的 AI 助手... （大约 500 个 token）
+            Bạn là một trợ lý AI thân thiện... (khoảng 500 token)
           </div>
           <div
             v-if="processingStep === 'system'"
             class="process-indicator"
           >
-            计算中...
+            Đang tính...
           </div>
         </div>
 
@@ -54,16 +54,16 @@
         >
           <div class="block-header">
             <span class="icon">💬</span>
-            <span>最近几轮聊天记录</span>
+            <span>Lịch sử vài lượt gần đây</span>
           </div>
           <div class="block-content">
-            用户：你好... （大约 200 个 token）
+            Người dùng: Xin chào... (khoảng 200 token)
           </div>
           <div
             v-if="processingStep === 'history'"
             class="process-indicator"
           >
-            计算中...
+            Đang tính...
           </div>
         </div>
 
@@ -74,16 +74,16 @@
         >
           <div class="block-header">
             <span class="icon">❓</span>
-            <span>这一次的新问题</span>
+            <span>Câu hỏi mới lần này</span>
           </div>
           <div class="block-content">
-            {{ currentQuery }} （大约 50 个 token）
+            {{ currentQuery }} (khoảng 50 token)
           </div>
           <div
             v-if="processingStep === 'query'"
             class="process-indicator"
           >
-            计算中...
+            Đang tính...
           </div>
         </div>
       </div>
@@ -95,14 +95,14 @@
           {{ metrics.ttft }}ms
         </div>
         <div class="metric-label">
-          开口速度（首字延迟 TTFT）
+          Tốc độ phản hồi (TTFT - độ trễ đến token đầu)
         </div>
         <div
           v-if="metrics.savedTime > 0"
           class="metric-diff"
           :class="{ 'good': metrics.savedTime > 0 }"
         >
-          节省 {{ metrics.savedTime }}ms
+          Tiết kiệm {{ metrics.savedTime }}ms
         </div>
       </div>
       <div class="metric-card">
@@ -110,7 +110,7 @@
           {{ metrics.processedTokens }}
         </div>
         <div class="metric-label">
-          这次一共算了多少个 token
+          Lần này tổng cộng tính bao nhiêu token
         </div>
       </div>
       <div class="metric-card">
@@ -118,7 +118,7 @@
           {{ metrics.cost }}
         </div>
         <div class="metric-label">
-          大致算力消耗（越少越省钱）
+          Tiêu hao tính toán ước lượng (càng thấp càng tiết kiệm)
         </div>
       </div>
     </div>
@@ -126,11 +126,11 @@
     <div class="info-box">
       <p v-if="isCacheEnabled">
         <span class="icon">⚡</span>
-        <strong>命中时在干嘛：</strong>前面的固定开场白不再重复计算，直接用“上一次背过的结果”，所以又快又省。
+        <strong>Khi cache hit, chuyện gì xảy ra:</strong> phần mở đầu cố định không cần tính lại nữa, mình dùng luôn "kết quả đã thuộc từ lần trước" nên vừa nhanh vừa tiết kiệm.
       </p>
       <p v-else>
         <span class="icon">🐌</span>
-        <strong>没开缓存时：</strong>每次都要从头把所有 token 重新算一遍注意力，就像每次都从第一页开始重读课文，又慢又费钱。
+        <strong>Khi không bật cache:</strong> mỗi lần phải tính lại attention cho toàn bộ token từ đầu, giống như mỗi lần đều mở lại trang 1 đọc lại cả bài, vừa chậm vừa tốn tiền.
       </p>
     </div>
   </div>
@@ -143,7 +143,7 @@ const isCacheEnabled = ref(false)
 const hasCache = ref(false)
 const isProcessing = ref(false)
 const processingStep = ref('') // 'system', 'history', 'query'
-const currentQuery = ref('帮我写一段 Python 代码')
+const currentQuery = ref('Giúp mình viết một đoạn Python')
 
 const metrics = reactive({
   ttft: 0,
@@ -204,9 +204,9 @@ const sendRequest = async () => {
   }
   
   // Update query for next run to simulate conversation
-  currentQuery.value = currentQuery.value === '帮我写一段 Python 代码' 
-    ? '这段代码怎么运行？' 
-    : '帮我写一段 Python 代码'
+  currentQuery.value = currentQuery.value === 'Giúp mình viết một đoạn Python'
+    ? 'Đoạn code này chạy thế nào nhỉ?'
+    : 'Giúp mình viết một đoạn Python'
 }
 </script>
 

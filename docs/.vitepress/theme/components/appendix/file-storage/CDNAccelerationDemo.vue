@@ -1,23 +1,23 @@
 <!--
   CDNAccelerationDemo.vue
-  CDN 加速演示：展示 CDN 如何加速文件访问
+  Demo tăng tốc CDN: minh hoạ CDN giúp truy cập file nhanh ra sao
 -->
 <template>
   <div class="cdn-demo">
     <div class="header">
-      <div class="title">CDN 加速原理</div>
-      <div class="subtitle">对比有无 CDN 时的文件访问路径</div>
+      <div class="title">Nguyên lý tăng tốc CDN</div>
+      <div class="subtitle">So sánh đường truy cập file khi có và không có CDN</div>
     </div>
 
     <div class="mode-tabs">
-      <button :class="['tab', { active: !cdnEnabled }]" @click="cdnEnabled = false">无 CDN</button>
-      <button :class="['tab', { active: cdnEnabled }]" @click="cdnEnabled = true">有 CDN</button>
+      <button :class="['tab', { active: !cdnEnabled }]" @click="cdnEnabled = false">Không CDN</button>
+      <button :class="['tab', { active: cdnEnabled }]" @click="cdnEnabled = true">Có CDN</button>
     </div>
 
     <div class="diagram">
       <div class="node user-node">
         <div class="node-icon">👤</div>
-        <div class="node-label">北京用户</div>
+        <div class="node-label">User Hà Nội</div>
       </div>
 
       <div class="path-line" :class="{ highlight: !cdnEnabled }">
@@ -26,30 +26,30 @@
 
       <div v-if="cdnEnabled" class="node cdn-node">
         <div class="node-icon">⚡</div>
-        <div class="node-label">北京 CDN 节点</div>
-        <div class="node-detail">缓存命中</div>
+        <div class="node-label">CDN node Hà Nội</div>
+        <div class="node-detail">Cache hit</div>
       </div>
 
       <div v-if="cdnEnabled" class="path-line miss-line">
-        <span class="latency miss">缓存未命中时回源</span>
+        <span class="latency miss">Cache miss thì quay về origin</span>
       </div>
 
       <div class="node origin-node">
         <div class="node-icon">🏢</div>
-        <div class="node-label">源站（美西 S3）</div>
+        <div class="node-label">Origin (S3 ở Mỹ)</div>
       </div>
     </div>
 
     <div class="metrics">
       <div class="metric">
-        <div class="metric-label">首字节时间 (TTFB)</div>
+        <div class="metric-label">Time To First Byte (TTFB)</div>
         <div class="metric-bar">
           <div class="bar-fill" :style="{ width: cdnEnabled ? '15%' : '100%' }"></div>
         </div>
         <div class="metric-value">{{ cdnEnabled ? '~30ms' : '~200ms' }}</div>
       </div>
       <div class="metric">
-        <div class="metric-label">下载 1MB 图片</div>
+        <div class="metric-label">Tải hình 1MB</div>
         <div class="metric-bar">
           <div class="bar-fill" :style="{ width: cdnEnabled ? '20%' : '100%' }"></div>
         </div>

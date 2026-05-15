@@ -1,8 +1,8 @@
 <template>
   <div class="why-no-auto-sync-demo">
     <div class="demo-header">
-      <span class="title">变量修改时发生了什么？</span>
-      <span class="subtitle">原生 JavaScript vs 框架</span>
+      <span class="title">Khi sửa biến thì điều gì xảy ra?</span>
+      <span class="subtitle">JavaScript thuần vs framework</span>
     </div>
 
     <div class="toggle-bar">
@@ -10,90 +10,90 @@
         :class="['toggle-btn', { active: mode === 'native' }]"
         @click="switchMode('native')"
       >
-        原生 JavaScript
+        JavaScript thuần
       </button>
       <button
         :class="['toggle-btn', { active: mode === 'framework' }]"
         @click="switchMode('framework')"
       >
-        使用框架（Vue）
+        Dùng framework (Vue)
       </button>
     </div>
 
     <div class="visualization-area">
       <div class="code-col">
-        <div class="col-title">你写的代码</div>
+        <div class="col-title">Code bạn viết</div>
         <div class="code-block">
           <div class="code-line">
-            <span class="code-comment">// 点击按钮时执行</span>
+            <span class="code-comment">// Chạy khi bấm nút</span>
           </div>
           <div :class="['code-line', 'code-highlight', { executing: step >= 1 }]">
             <span class="code-text">count = count + 1</span>
-            <span v-if="step >= 1" class="step-badge">{{ step >= 1 ? '✓ 执行' : '' }}</span>
+            <span v-if="step >= 1" class="step-badge">{{ step >= 1 ? '✓ Đã chạy' : '' }}</span>
           </div>
           <template v-if="mode === 'native'">
             <div class="code-line code-gap" />
             <div class="code-line">
-              <span class="code-comment">// 你还要手动写下面这些：</span>
+              <span class="code-comment">// Bạn còn phải tự viết những dòng sau:</span>
             </div>
             <div :class="['code-line', 'code-manual', { executing: step >= 2, missing: step === 1 }]">
               <span class="code-text">document.getElementById('count')</span>
             </div>
             <div :class="['code-line', 'code-manual', { executing: step >= 2, missing: step === 1 }]">
               <span class="code-text">  .textContent = count</span>
-              <span v-if="step >= 2" class="step-badge">✓ 手动</span>
-              <span v-else-if="step === 1" class="step-badge miss">需要你写</span>
+              <span v-if="step >= 2" class="step-badge">✓ Thủ công</span>
+              <span v-else-if="step === 1" class="step-badge miss">Bạn cần viết</span>
             </div>
             <div :class="['code-line', 'code-manual', { executing: step >= 3, missing: step < 3 && step >= 1 }]">
               <span class="code-text">document.getElementById('total')</span>
             </div>
             <div :class="['code-line', 'code-manual', { executing: step >= 3, missing: step < 3 && step >= 1 }]">
               <span class="code-text">  .textContent = count * 99</span>
-              <span v-if="step >= 3" class="step-badge">✓ 手动</span>
-              <span v-else-if="step >= 1" class="step-badge miss">需要你写</span>
+              <span v-if="step >= 3" class="step-badge">✓ Thủ công</span>
+              <span v-else-if="step >= 1" class="step-badge miss">Bạn cần viết</span>
             </div>
           </template>
           <template v-else>
             <div class="code-line code-gap" />
             <div class="code-line">
-              <span class="code-comment">// 不需要写别的了</span>
+              <span class="code-comment">// Không cần viết gì thêm</span>
             </div>
             <div class="code-line">
-              <span class="code-comment">// 框架会自动完成后续步骤</span>
+              <span class="code-comment">// Framework sẽ tự lo các bước sau</span>
             </div>
           </template>
         </div>
       </div>
 
       <div class="flow-col">
-        <div class="col-title">执行流程</div>
+        <div class="col-title">Luồng thực thi</div>
         <div class="flow-steps">
           <div :class="['flow-step', { active: step >= 1, done: step > 1 }]">
             <span class="flow-num">1</span>
             <div class="flow-content">
-              <div class="flow-title">JavaScript 修改变量</div>
-              <div class="flow-desc">count 从 {{ count - 1 }} 变成 {{ count }}</div>
+              <div class="flow-title">JavaScript sửa biến</div>
+              <div class="flow-desc">count đổi từ {{ count - 1 }} sang {{ count }}</div>
             </div>
           </div>
 
           <div class="flow-arrow" :class="{ active: step >= 1 }">
-            <span v-if="mode === 'native'">{{ step === 1 ? '❌ 到这里就停了' : '↓' }}</span>
-            <span v-else>{{ step >= 1 ? '↓ 框架自动接管' : '↓' }}</span>
+            <span v-if="mode === 'native'">{{ step === 1 ? '❌ Tới đây là dừng' : '↓' }}</span>
+            <span v-else>{{ step >= 1 ? '↓ Framework tự tiếp quản' : '↓' }}</span>
           </div>
 
           <div :class="['flow-step', { active: step >= 2, done: step > 2, auto: mode === 'framework' }]">
             <span class="flow-num">2</span>
             <div class="flow-content">
               <div class="flow-title">
-                {{ mode === 'native' ? '找到 DOM 节点' : '框架检测到变化' }}
+                {{ mode === 'native' ? 'Tìm node DOM' : 'Framework phát hiện thay đổi' }}
               </div>
               <div class="flow-desc">
                 {{ mode === 'native'
-                  ? '手动调用 document.getElementById()'
-                  : 'Proxy 拦截了赋值操作，通知更新系统' }}
+                  ? 'Tự gọi document.getElementById()'
+                  : 'Proxy chặn thao tác gán, báo cho hệ thống cập nhật' }}
               </div>
             </div>
-            <span v-if="mode === 'framework' && step >= 2" class="auto-badge">自动</span>
+            <span v-if="mode === 'framework' && step >= 2" class="auto-badge">Tự động</span>
           </div>
 
           <div class="flow-arrow" :class="{ active: step >= 2 }">↓</div>
@@ -102,54 +102,54 @@
             <span class="flow-num">3</span>
             <div class="flow-content">
               <div class="flow-title">
-                {{ mode === 'native' ? '修改 DOM 内容' : '框架更新所有相关 DOM' }}
+                {{ mode === 'native' ? 'Sửa nội dung DOM' : 'Framework cập nhật mọi DOM liên quan' }}
               </div>
               <div class="flow-desc">
                 {{ mode === 'native'
-                  ? '手动调用 .textContent = 新值'
-                  : '自动找到所有使用了 count 的位置并更新' }}
+                  ? 'Tự gọi .textContent = giá trị mới'
+                  : 'Tự tìm mọi chỗ dùng count và cập nhật' }}
               </div>
             </div>
-            <span v-if="mode === 'framework' && step >= 3" class="auto-badge">自动</span>
+            <span v-if="mode === 'framework' && step >= 3" class="auto-badge">Tự động</span>
           </div>
         </div>
       </div>
 
       <div class="result-col">
-        <div class="col-title">界面结果</div>
+        <div class="col-title">Kết quả trên giao diện</div>
         <div class="result-card">
           <div :class="['result-item', { updated: step >= (mode === 'native' ? 2 : 2) }]">
-            <span class="result-label">购物车</span>
-            <span class="result-value">{{ step >= (mode === 'native' ? 2 : 2) ? count : count - 1 }} 件</span>
+            <span class="result-label">Giỏ hàng</span>
+            <span class="result-value">{{ step >= (mode === 'native' ? 2 : 2) ? count : count - 1 }} sản phẩm</span>
           </div>
           <div :class="['result-item', { updated: step >= (mode === 'native' ? 3 : 2), stale: mode === 'native' && step >= 1 && step < 3 }]">
-            <span class="result-label">总价</span>
-            <span class="result-value">¥{{ step >= (mode === 'native' ? 3 : 2) ? count * 99 : (count - 1) * 99 }}</span>
+            <span class="result-label">Tổng tiền</span>
+            <span class="result-value">{{ step >= (mode === 'native' ? 3 : 2) ? count * 99 : (count - 1) * 99 }}k</span>
           </div>
         </div>
         <div v-if="mode === 'native' && step === 1" class="stale-warning">
-          变量已经改了，但界面没有任何变化
+          Biến đã đổi nhưng giao diện chẳng thay đổi gì
         </div>
         <div v-if="mode === 'native' && step === 2" class="stale-warning partial">
-          购物车更新了，但总价还是旧的
+          Giỏ hàng đã cập nhật nhưng tổng tiền vẫn là giá trị cũ
         </div>
       </div>
     </div>
 
     <div class="controls">
       <button class="action-btn" :disabled="isAnimating" @click="runStep">
-        {{ step === 0 ? '执行 count = count + 1' : mode === 'native' && step < 3 ? '继续手动同步下一个' : '再执行一次' }}
+        {{ step === 0 ? 'Chạy count = count + 1' : mode === 'native' && step < 3 ? 'Đồng bộ tay tiếp' : 'Chạy lại lần nữa' }}
       </button>
-      <button class="action-btn outline" @click="reset">重置</button>
+      <button class="action-btn outline" @click="reset">Reset</button>
     </div>
 
     <div v-if="mode === 'native'" class="info-box">
-      <strong>为什么不自动？</strong>
-      <span>JavaScript 的变量是"无感知"的。你执行 <code>count = 4</code> 时，JavaScript 引擎只是把内存中 count 的值从 3 改成 4，仅此而已。它不会通知任何人，不会触发任何回调，不会去检查页面上哪里显示了 count。所以界面不会有任何变化——除非你自己写代码去更新 DOM。</span>
+      <strong>Vì sao không tự động?</strong>
+      <span>Biến trong JavaScript là "vô cảm". Khi bạn chạy <code>count = 4</code>, JavaScript engine chỉ đơn giản đổi giá trị count trong bộ nhớ từ 3 sang 4, vậy thôi. Nó không báo cho ai, không trigger callback nào, cũng không đi kiểm tra xem trên trang chỗ nào đang hiển thị count. Nên giao diện sẽ không có gì thay đổi - trừ khi bạn tự viết code để cập nhật DOM.</span>
     </div>
     <div v-else class="info-box">
-      <strong>框架怎么做到的？</strong>
-      <span>框架把你的数据用特殊机制包裹起来。以 Vue 为例，它用 JavaScript 的 Proxy（代理）功能拦截你对变量的赋值操作。当你写 <code>count = 4</code> 时，Proxy 会在赋值的同时自动执行一段"通知"代码，告诉框架"count 变了"，框架再去找到所有用到 count 的 DOM 节点并更新它们。整个过程你不需要写任何额外代码。</span>
+      <strong>Framework làm được điều đó bằng cách nào?</strong>
+      <span>Framework bọc dữ liệu của bạn bằng cơ chế đặc biệt. Lấy Vue làm ví dụ, nó dùng tính năng Proxy của JavaScript để chặn thao tác gán biến. Khi bạn viết <code>count = 4</code>, Proxy vừa gán giá trị vừa tự chạy đoạn code "báo tin", nói cho framework biết "count đã đổi", rồi framework đi tìm mọi node DOM dùng count và cập nhật. Cả quá trình bạn không cần viết thêm dòng code nào.</span>
     </div>
   </div>
 </template>

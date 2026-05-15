@@ -1,26 +1,26 @@
 <template>
   <div class="demo-wrapper">
-    <div class="demo-header">Accessibility (a11y) / 读屏机眼里的你</div>
-    
+    <div class="demo-header">Accessibility (a11y) / Cách screen reader nhìn bạn</div>
+
     <div class="split-pane">
-      <!-- 糟糕的做法 -->
+      <!-- Cách làm tệ -->
       <div class="pane bad-pane">
-        <h4 class="pane-title label-bad">❌ 野路子开发：全是 DIV</h4>
-        
+        <h4 class="pane-title label-bad">Cách làm dở: toàn DIV</h4>
+
         <div class="component-card">
-          <!-- 这里全是用 div 伪造的组件 -->
-          <div 
-            class="fake-btn" 
-            @mouseenter="speakBad('提交')" 
+          <!-- Toàn bộ là component giả lập bằng div -->
+          <div
+            class="fake-btn"
+            @mouseenter="speakBad('Gửi')"
             @mouseleave="stopSpeak"
             @keydown.enter="showError"
           >
-            提交
+            Gửi
           </div>
-          
-          <div 
-            class="fake-icon" 
-            @mouseenter="speakBad('叉叉图')" 
+
+          <div
+            class="fake-icon"
+            @mouseenter="speakBad('Hình chữ X')"
             @mouseleave="stopSpeak"
           >
             ✖
@@ -28,32 +28,32 @@
         </div>
 
         <div class="reader-box">
-          <div class="reader-header">🎧 读屏机播报内容：</div>
+          <div class="reader-header">Screen reader đọc:</div>
           <div class="reader-text" :class="{ empty: !currentBadSpeech }">
-            {{ currentBadSpeech || '（只有字面，不知用途，键盘 Enter 无效）' }}
+            {{ currentBadSpeech || '(chỉ có chữ, không rõ chức năng, Enter trên bàn phím không có tác dụng)' }}
           </div>
         </div>
       </div>
 
-      <!-- 优秀做法 -->
+      <!-- Cách làm tốt -->
       <div class="pane good-pane">
-        <h4 class="pane-title label-good">✅ 专业前端：语义化 + ARIA</h4>
-        
+        <h4 class="pane-title label-good">Frontend chuẩn: semantic + ARIA</h4>
+
         <div class="component-card">
-          <!-- 使用真正的按钮和 ARIA -->
-          <button 
-            class="real-btn" 
-            @mouseenter="speakGood('提交按钮。按下以发送表单。')" 
+          <!-- Dùng button thực sự và ARIA -->
+          <button
+            class="real-btn"
+            @mouseenter="speakGood('Nút Gửi. Bấm để gửi form.')"
             @mouseleave="stopSpeak"
             @click="triggerAction"
           >
-            提交
+            Gửi
           </button>
-          
-          <button 
-            class="real-icon-btn" 
-            aria-label="关闭窗口" 
-            @mouseenter="speakGood('关闭窗口，按钮。')" 
+
+          <button
+            class="real-icon-btn"
+            aria-label="Đóng cửa sổ"
+            @mouseenter="speakGood('Đóng cửa sổ, nút.')"
             @mouseleave="stopSpeak"
           >
             <span aria-hidden="true">✖</span>
@@ -61,17 +61,17 @@
         </div>
 
         <div class="reader-box">
-          <div class="reader-header">🎧 读屏机播报内容：</div>
+          <div class="reader-header">Screen reader đọc:</div>
           <div class="reader-text active">
-            {{ currentGoodSpeech || '（悬停查看播报，支持 Tab 和 Enter 交互）' }}
+            {{ currentGoodSpeech || '(hover để xem nội dung đọc, hỗ trợ tương tác bằng Tab và Enter)' }}
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="status-msg">
-      💡 提示：将鼠标悬停在上方按钮上，模拟视障用户读屏机“听到”的内容。<br/>
-      可以尝试用键盘 Tab 键选中并按 Enter！只有右侧的按钮会响应。
+      Mẹo: hover lên các nút bên trên để mô phỏng nội dung mà screen reader đọc cho người dùng khiếm thị.<br/>
+      Bạn có thể dùng phím Tab để chọn rồi bấm Enter. Chỉ các nút bên phải mới phản hồi.
     </div>
   </div>
 </template>
@@ -83,20 +83,20 @@ const currentBadSpeech = ref('')
 const currentGoodSpeech = ref('')
 
 const speakBad = (text) => {
-  currentBadSpeech.value = `文本："${text}"`
+  currentBadSpeech.value = `Text: "${text}"`
 }
 const speakGood = (text) => {
-  currentGoodSpeech.value = `🗣️ ${text}`
+  currentGoodSpeech.value = `${text}`
 }
 const stopSpeak = () => {
   currentBadSpeech.value = ''
   currentGoodSpeech.value = ''
 }
 const showError = () => {
-  alert('假按钮的 @keydown.enter 事件不会天生自带！')
+  alert('Nút giả không tự động có sự kiện @keydown.enter!')
 }
 const triggerAction = () => {
-  alert('真按钮成功触发！')
+  alert('Nút thật đã được kích hoạt thành công!')
 }
 </script>
 
@@ -153,7 +153,7 @@ const triggerAction = () => {
   padding: 2rem 0;
 }
 
-/* 假按钮完全不响应 tab 且无默认高亮样式 */
+/* Nút giả không phản hồi tab và không có style highlight mặc định */
 .fake-btn, .real-btn {
   padding: 0.6rem 1.2rem;
   border-radius: 4px;
@@ -165,7 +165,7 @@ const triggerAction = () => {
   background: #e2e8f0;
   color: #475569;
   cursor: pointer;
-  /* 缺少 focus 可见轮廓 */
+  /* Thiếu outline khi focus */
   outline: none; 
 }
 .real-btn {

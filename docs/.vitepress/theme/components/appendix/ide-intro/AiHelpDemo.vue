@@ -1,12 +1,12 @@
 <template>
   <div class="ai-help-demo">
     <div class="desktop-container">
-      <!-- 1. VS Code 窗口 (全功能模拟) -->
+      <!-- 1. Cửa sổ VS Code (mô phỏng đầy đủ) -->
       <div
         class="window vscode"
         :class="getWindowClass('vscode')"
       >
-        <!-- 标题栏 -->
+        <!-- Title bar -->
         <div class="title-bar">
           <div class="controls">
             <span class="dot red" />
@@ -19,7 +19,7 @@
         </div>
 
         <div class="main-layout">
-          <!-- 侧边栏 (Activity Bar) -->
+          <!-- Activity Bar -->
           <div class="activity-bar">
             <div class="icon active">
               📁
@@ -38,7 +38,7 @@
             </div>
           </div>
 
-          <!-- 资源管理器 (Sidebar) -->
+          <!-- Explorer (Sidebar) -->
           <div class="sidebar">
             <div class="sidebar-title">
               EXPLORER
@@ -59,7 +59,7 @@
             </div>
           </div>
 
-          <!-- 编辑器区域 -->
+          <!-- Editor area -->
           <div class="editor-area">
             <div class="tab-bar">
               <div class="tab active">
@@ -100,7 +100,7 @@
                   <span class="kwd">async</span> () => {
                 </div>
                 <div class="line">
-                  &nbsp;&nbsp;<span class="comment">// 等待数据加载完成</span>
+                  &nbsp;&nbsp;<span class="comment">// Đợi dữ liệu tải xong</span>
                 </div>
                 <div class="line">
                   &nbsp;&nbsp;<span class="kwd">await</span>
@@ -113,7 +113,7 @@
                   ref="targetCode"
                   class="line"
                 >
-                  &nbsp;&nbsp;<span class="comment">// 👈 等待 DOM 更新后再渲染图表</span>
+                  &nbsp;&nbsp;<span class="comment">// 👈 Đợi DOM cập nhật xong rồi mới render chart</span>
                 </div>
                 <div
                   ref="targetCode2"
@@ -140,7 +140,7 @@
             </div>
           </div>
 
-          <!-- 截图选框 (Overlay) - Moved to main-layout level -->
+          <!-- Khung chụp ảnh (Overlay) - chuyển lên main-layout -->
           <div
             v-if="step === 'selecting' || step === 'captured'"
             class="screenshot-overlay"
@@ -167,7 +167,7 @@
           </div>
         </div>
 
-        <!-- 模拟操作引导 -->
+        <!-- Hướng dẫn thao tác giả lập -->
         <div
           v-if="step === 'idle'"
           class="guide-overlay"
@@ -176,12 +176,12 @@
             class="start-btn"
             @click="startDemo"
           >
-            <span>📸 演示：遇到代码不懂怎么问 AI？</span>
+            <span>📸 Demo: gặp code không hiểu thì hỏi AI thế nào?</span>
           </div>
         </div>
       </div>
 
-      <!-- 2. ChatGPT 窗口 -->
+      <!-- 2. Cửa sổ ChatGPT -->
       <div
         class="window chatgpt"
         :class="getWindowClass('chatgpt')"
@@ -251,28 +251,28 @@
               </div>
               <div class="msg-bubble ai-bubble">
                 <p>
-                  这是 VS Code 的
-                  <strong>顶部菜单栏 (Menu Bar)</strong>，包含了软件的所有功能入口。
+                  Đây là
+                  <strong>thanh menu trên cùng (Menu Bar)</strong> của VS Code, chứa toàn bộ entry vào các chức năng của phần mềm.
                 </p>
-                <p><strong>常用菜单解释：</strong></p>
+                <p><strong>Giải thích các menu thường dùng:</strong></p>
                 <ul>
                   <li>
-                    <strong>File (文件)</strong>：新建、打开、保存文件或项目。
+                    <strong>File</strong>: tạo mới, mở, lưu file hoặc dự án.
                   </li>
                   <li>
-                    <strong>Edit (编辑)</strong>：复制粘贴、查找替换、撤销重做。
+                    <strong>Edit</strong>: copy/paste, tìm/thay thế, undo/redo.
                   </li>
                   <li>
-                    <strong>View (视图)</strong>：控制界面显示，比如打开侧边栏、终端等。
+                    <strong>View</strong>: điều khiển hiển thị giao diện, như mở sidebar, terminal...
                   </li>
                   <li>
-                    <strong>Terminal (终端)</strong>：打开内置命令行工具。
+                    <strong>Terminal</strong>: mở terminal tích hợp.
                   </li>
                 </ul>
                 <p>
-                  💡 <strong>小技巧</strong>：如果不记得某个功能在哪，可以按
-                  <code>F1</code> 或
-                  <code>Ctrl+Shift+P</code> 打开命令面板直接搜索功能名字！
+                  💡 <strong>Mẹo nhỏ</strong>: nếu không nhớ chức năng nào nằm ở đâu, bấm
+                  <code>F1</code> hoặc
+                  <code>Ctrl+Shift+P</code> để mở command palette và gõ thẳng tên chức năng!
                 </p>
               </div>
             </div>
@@ -313,13 +313,13 @@
         </div>
       </div>
 
-      <!-- 全局重置按钮 -->
+      <!-- Nút reset toàn cục -->
       <button
         v-if="step === 'finished'"
         class="reset-btn"
         @click="reset"
       >
-        🔄 重播
+        🔄 Phát lại
       </button>
     </div>
   </div>
@@ -328,16 +328,16 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 状态机
-// idle: 初始状态
-// selecting: 正在截图（选框出现）
-// captured: 截图完成（闪烁）
-// switching: 窗口切换中
-// pasting: ChatGPT 界面，显示输入动作
-// typing: 正在打字
-// sending: 发送中
-// responding: AI 回复中
-// finished: 结束
+// State machine
+// idle: trạng thái ban đầu
+// selecting: đang chụp ảnh (khung chọn xuất hiện)
+// captured: chụp xong (chớp sáng)
+// switching: đang đổi cửa sổ
+// pasting: giao diện ChatGPT, hiện thao tác paste
+// typing: đang gõ
+// sending: đang gửi
+// responding: AI đang trả lời
+// finished: kết thúc
 const step = ref('idle')
 const typedText = ref('')
 const isTyping = ref(false)
@@ -373,25 +373,25 @@ const getWindowClass = (winName) => {
 const startDemo = async () => {
   step.value = 'selecting'
 
-  // 1. 模拟截图过程 (1.5s)
+  // 1. Mô phỏng quá trình chụp ảnh (1.5s)
   await wait(1500)
   step.value = 'captured'
 
-  // 2. 截图闪烁确认 (0.5s)
+  // 2. Chớp sáng xác nhận chụp xong (0.5s)
   await wait(600)
 
-  // 3. 窗口切换 (0.8s)
+  // 3. Đổi cửa sổ (0.8s)
   step.value = 'switching'
   await wait(800)
 
-  // 4. ChatGPT 界面准备 (粘贴动作)
+  // 4. Chuẩn bị giao diện ChatGPT (thao tác paste)
   step.value = 'pasting'
   await wait(800)
 
-  // 5. 打字
+  // 5. Gõ chữ
   step.value = 'typing'
   isTyping.value = true
-  const question = '帮我看下这张图，左边红框里那一块是干嘛用的？'
+  const question = 'Xem giúp mình ảnh này, phần trong khung đỏ bên trái dùng để làm gì vậy?'
   for (let i = 0; i < question.length; i++) {
     typedText.value += question[i]
     await wait(50)
@@ -399,13 +399,13 @@ const startDemo = async () => {
   isTyping.value = false
   await wait(300)
 
-  // 6. 发送
+  // 6. Gửi
   step.value = 'sending'
   await wait(500)
 
-  // 7. AI 回复
+  // 7. AI trả lời
   step.value = 'responding'
-  await wait(2500) // 模拟阅读时间
+  await wait(2500) // Giả lập thời gian đọc
 
   step.value = 'finished'
 }
@@ -430,14 +430,14 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 .desktop-container {
   position: relative;
   width: 100%;
-  height: 400px; /* 增加高度以容纳更多内容 */
-  background: #333; /* 桌面背景 */
+  height: 400px; /* Tăng chiều cao để chứa nhiều nội dung hơn */
+  background: #333; /* Nền desktop */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* 通用窗口样式 */
+/* Style chung cho cửa sổ */
 .window {
   position: absolute;
   top: 5%;
@@ -453,7 +453,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   background: #fff;
 }
 
-/* 窗口状态动画 */
+/* Animation trạng thái cửa sổ */
 .window.active {
   opacity: 1;
   transform: scale(1);
@@ -490,7 +490,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   }
 }
 
-/* ================= VS Code 样式 ================= */
+/* ================= Style VS Code ================= */
 .vscode {
   background: #1e1e1e;
   color: #ccc;
@@ -629,7 +629,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   padding-left: 5px;
 }
 
-/* 语法高亮 */
+/* Syntax highlight */
 .kwd {
   color: #569cd6;
 }
@@ -646,7 +646,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   color: #6a9955;
 }
 
-/* 截图覆盖层 */
+/* Lớp overlay khi chụp ảnh */
 .screenshot-overlay {
   position: absolute;
   top: 0;
@@ -660,13 +660,13 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 .selection-box {
   position: absolute;
-  top: 40px; /* 覆盖左侧 Sidebar */
+  top: 40px; /* Phủ Sidebar bên trái */
   left: 0;
   width: 280px;
   height: 320px;
-  border: 3px solid #ff5f56; /* 醒目的红框 */
+  border: 3px solid #ff5f56; /* Viền đỏ nổi bật */
   background: rgba(255, 95, 86, 0.1);
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); /* 遮罩效果 */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); /* Hiệu ứng mask */
   animation: selectAnim 0.5s ease-out;
 }
 
@@ -740,7 +740,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   border: 1px solid #ff5f56;
 }
 
-/* ================= ChatGPT 样式 ================= */
+/* ================= Style ChatGPT ================= */
 .chatgpt {
   background: #343541;
   color: #ececf1;
@@ -930,7 +930,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   opacity: 1;
 }
 
-/* 引导层 */
+/* Lớp dẫn dắt */
 .guide-overlay {
   position: absolute;
   top: 0;

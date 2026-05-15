@@ -1,8 +1,8 @@
 <template>
   <div class="triad">
     <div class="demo-header">
-      <span class="title">HTML / CSS / JavaScript 协作演示</span>
-      <span class="subtitle">同一段页面，切换查看三者各自的作用</span>
+      <span class="title">Demo phối hợp HTML / CSS / JavaScript</span>
+      <span class="subtitle">Cùng một trang, chuyển qua lại để xem vai trò của từng phần</span>
     </div>
 
     <div class="main-area">
@@ -28,21 +28,21 @@
             :class="{ selected: selectedPart === 'h1' }"
             @click="selectedPart = 'h1'"
           >
-            <span class="badge">①</span>欢迎来到我的网站
+            <span class="badge">①</span>Chào mừng đến với trang của mình
           </h1>
           <p
             class="desc"
             :class="{ selected: selectedPart === 'p' }"
             @click="selectedPart = 'p'"
           >
-            <span class="badge">②</span>这是一段描述文字
+            <span class="badge">②</span>Đây là một đoạn mô tả ngắn
           </p>
           <button
             class="cta"
             :class="{ selected: selectedPart === 'btn' }"
             @click="handleBtnClick"
           >
-            <span class="badge">③</span>点我试试 ({{ clicks }})
+            <span class="badge">③</span>Bấm thử nhé ({{ clicks }})
           </button>
         </div>
       </div>
@@ -65,7 +65,7 @@
 
         <div class="explain-section">
           <div class="explain-label">
-            执行过程
+            Quá trình thực thi
           </div>
           <ol class="steps">
             <li
@@ -80,7 +80,7 @@
     </div>
 
     <div class="info-box">
-      <strong>分工原则：</strong>HTML 定义结构（是什么），CSS 定义样式（长什么样），JavaScript 定义行为（能做什么）。
+      <strong>Nguyên tắc phân chia:</strong> HTML định nghĩa cấu trúc (là gì), CSS định nghĩa giao diện (trông như thế nào), JavaScript định nghĩa hành vi (làm được gì).
     </div>
   </div>
 </template>
@@ -89,9 +89,9 @@
 import { computed, ref } from 'vue'
 
 const modes = [
-  { id: 'html', label: 'HTML', icon: '结构' },
-  { id: 'css', label: 'CSS', icon: '样式' },
-  { id: 'js', label: 'JavaScript', icon: '行为' }
+  { id: 'html', label: 'HTML', icon: 'Cấu trúc' },
+  { id: 'css', label: 'CSS', icon: 'Giao diện' },
+  { id: 'js', label: 'JavaScript', icon: 'Hành vi' }
 ]
 
 const current = ref('html')
@@ -99,17 +99,17 @@ const clicks = ref(0)
 const selectedPart = ref('h1')
 
 const codeTitle = computed(() => {
-  if (current.value === 'html') return 'HTML 代码'
-  if (current.value === 'css') return 'CSS 代码'
-  return 'JavaScript 代码'
+  if (current.value === 'html') return 'Mã HTML'
+  if (current.value === 'css') return 'Mã CSS'
+  return 'Mã JavaScript'
 })
 
 const codeLines = computed(() => {
   if (current.value === 'html') {
     return [
-      { key: 'h1', text: '<h1>欢迎来到我的网站</h1>' },
-      { key: 'p', text: '<p>这是一段描述文字</p>' },
-      { key: 'btn', text: '<button>点我试试</button>' }
+      { key: 'h1', text: '<h1>Chào mừng đến với trang của mình</h1>' },
+      { key: 'p', text: '<p>Đây là một đoạn mô tả ngắn</p>' },
+      { key: 'btn', text: '<button>Bấm thử nhé</button>' }
     ]
   }
   if (current.value === 'css') {
@@ -125,7 +125,7 @@ const codeLines = computed(() => {
     { key: 'btn', text: "const btn = document.querySelector('.cta')" },
     { key: 'btn', text: "btn.addEventListener('click', () => {" },
     { key: 'btn', text: '  count++' },
-    { key: 'btn', text: "  btn.textContent = '点我 (' + count + ')'" },
+    { key: 'btn', text: "  btn.textContent = 'Bấm thử (' + count + ')'" },
     { key: 'btn', text: '})' }
   ]
 })
@@ -133,22 +133,22 @@ const codeLines = computed(() => {
 const steps = computed(() => {
   if (current.value === 'html') {
     return [
-      '浏览器解析标签，识别内容类型',
-      'h1 是标题，p 是段落，button 是按钮',
-      '按默认样式渲染（此时看起来很朴素）'
+      'Trình duyệt phân tích thẻ, nhận diện loại nội dung',
+      'h1 là tiêu đề, p là đoạn văn, button là nút bấm',
+      'Render theo style mặc định (lúc này trông khá đơn sơ)'
     ]
   }
   if (current.value === 'css') {
     return [
-      '解析选择器，找到对应元素',
-      '应用颜色、字号、间距等样式规则',
-      '页面外观发生变化'
+      'Phân tích selector, tìm phần tử tương ứng',
+      'Áp dụng các quy tắc style như màu sắc, cỡ chữ, khoảng cách',
+      'Giao diện trang thay đổi'
     ]
   }
   return [
-    '通过选择器获取按钮元素',
-    '注册 click 事件监听器',
-    '点击时执行回调函数，更新计数'
+    'Lấy phần tử nút bấm qua selector',
+    'Đăng ký event listener cho sự kiện click',
+    'Khi click thì chạy callback, cập nhật bộ đếm'
   ]
 })
 

@@ -1,21 +1,21 @@
 <!--
   EventHandlingDemo.vue
-  Canvas 事件处理演示组件
+  Component demo xử lý event trên Canvas
 
-  用途：
-  展示 Canvas 中的鼠标、键盘事件处理，包括点击、拖拽、悬停等交互
+  Mục đích:
+  Minh hoạ xử lý event chuột và bàn phím trên Canvas: click, drag, hover, v.v.
 
-  交互功能：
-  - 鼠标点击：在点击位置创建对象
-  - 拖拽：拖动对象移动
-  - 悬停：高亮显示鼠标下的对象
-  - 键盘控制：使用键盘控制对象
+  Tính năng tương tác:
+  - Click chuột: tạo object tại vị trí click
+  - Drag: kéo object để di chuyển
+  - Hover: highlight object đang hover
+  - Bàn phím: dùng phím để điều khiển object
 -->
 <template>
   <div class="event-demo">
     <div class="control-panel">
       <div class="mode-selector">
-        <label>Interaction Mode / 交互模式</label>
+        <label>Interaction Mode / Chế độ tương tác</label>
         <div class="button-group">
           <button
             v-for="mode in modes"
@@ -29,27 +29,27 @@
       </div>
 
       <div class="instructions">
-        <h4>Instructions / 操作说明</h4>
+        <h4>Instructions / Hướng dẫn</h4>
         <ul>
           <li v-if="currentMode === 'click'">
-            <strong>Click Mode：</strong>点击画布创建圆形，按住 Shift
-            可创建不同颜色
+            <strong>Click Mode:</strong> Click vào canvas để tạo hình tròn, giữ Shift
+            để chọn màu ngẫu nhiên
           </li>
           <li v-if="currentMode === 'drag'">
-            <strong>Drag Mode：</strong>拖拽圆形移动位置，拖拽时会改变颜色
+            <strong>Drag Mode:</strong> Kéo hình tròn để di chuyển, khi kéo sẽ đổi màu
           </li>
           <li v-if="currentMode === 'hover'">
-            <strong>Hover Mode：</strong>鼠标悬停在圆形上会高亮显示并显示坐标
+            <strong>Hover Mode:</strong> Di chuột lên hình tròn sẽ highlight và hiện toạ độ
           </li>
           <li v-if="currentMode === 'keyboard'">
-            <strong>Keyboard Mode：</strong>使用方向键移动选中的圆形，Delete
-            键删除
+            <strong>Keyboard Mode:</strong> Dùng phím mũi tên để di chuyển hình đang chọn, phím
+            Delete để xoá
           </li>
         </ul>
       </div>
 
       <div class="event-log">
-        <h4>Event Log / 事件日志</h4>
+        <h4>Event Log / Nhật ký sự kiện</h4>
         <div class="log-container">
           <div
             v-for="(log, index) in eventLogs"
@@ -68,7 +68,7 @@
         @click="clearAll"
       >
         <span class="icon">🗑️</span>
-        Clear All / 清除全部
+        Clear All / Xoá toàn bộ
       </button>
     </div>
 
@@ -105,10 +105,10 @@ const isDragging = ref(false)
 const eventLogs = ref([])
 
 const modes = [
-  { value: 'click', label: 'Click / 点击' },
-  { value: 'drag', label: 'Drag / 拖拽' },
-  { value: 'hover', label: 'Hover / 悬停' },
-  { value: 'keyboard', label: 'Keyboard / 键盘' }
+  { value: 'click', label: 'Click / Click' },
+  { value: 'drag', label: 'Drag / Kéo thả' },
+  { value: 'hover', label: 'Hover / Di chuột' },
+  { value: 'keyboard', label: 'Keyboard / Bàn phím' }
 ]
 
 const colors = [
@@ -122,7 +122,7 @@ const colors = [
 
 const currentCode = computed(() => {
   const templates = {
-    click: `// 点击创建圆形
+    click: `// Click để tạo hình tròn
 canvas.addEventListener('click', (e) => {
   const rect = canvas.getBoundingClientRect()
   const x = e.clientX - rect.left
@@ -139,14 +139,14 @@ canvas.addEventListener('click', (e) => {
   draw()
 })`,
 
-    drag: `// 拖拽移动圆形
+    drag: `// Kéo thả hình tròn
 let isDragging = false
 let selectedCircle = null
 
 canvas.addEventListener('mousedown', (e) => {
   const { x, y } = getMousePos(e)
 
-  // 检测点击了哪个圆形
+  // Phát hiện click vào hình tròn nào
   circles.forEach(circle => {
     const dist = Math.sqrt((x - circle.x) ** 2 + (y - circle.y) ** 2)
     if (dist < circle.radius) {
@@ -170,12 +170,12 @@ canvas.addEventListener('mouseup', () => {
   selectedCircle = null
 })`,
 
-    hover: `// 悬停高亮
+    hover: `// Highlight khi hover
 canvas.addEventListener('mousemove', (e) => {
   const { x, y } = getMousePos(e)
   let hovered = null
 
-  // 检测悬停
+  // Phát hiện hover
   circles.forEach(circle => {
     const dist = Math.sqrt((x - circle.x) ** 2 + (y - circle.y) ** 2)
     if (dist < circle.radius) {
@@ -185,7 +185,7 @@ canvas.addEventListener('mousemove', (e) => {
 
   if (hovered) {
     canvas.style.cursor = 'pointer'
-    // 绘制高亮效果
+    // Vẽ hiệu ứng highlight
     ctx.strokeStyle = '#e74c3c'
     ctx.lineWidth = 3
     ctx.beginPath()
@@ -198,8 +198,8 @@ canvas.addEventListener('mousemove', (e) => {
   draw()
 })`,
 
-    keyboard: `// 键盘控制
-canvas.tabIndex = 0  // 使 canvas 可以获取焦点
+    keyboard: `// Điều khiển bằng bàn phím
+canvas.tabIndex = 0  // để canvas có thể nhận focus
 canvas.focus()
 
 canvas.addEventListener('keydown', (e) => {
@@ -255,27 +255,27 @@ const draw = () => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')
 
-  // 清除画布
+  // Xoá canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 绘制背景
+  // Vẽ nền
   ctx.fillStyle = '#fafafa'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  // 绘制所有圆形
+  // Vẽ tất cả hình tròn
   circles.value.forEach((circle) => {
-    // 填充
+    // Fill
     ctx.fillStyle = circle.color
     ctx.beginPath()
     ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2)
     ctx.fill()
 
-    // 描边
+    // Stroke
     ctx.strokeStyle = '#2c3e50'
     ctx.lineWidth = 2
     ctx.stroke()
 
-    // 高光
+    // Highlight
     ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
     ctx.beginPath()
     ctx.arc(
@@ -287,7 +287,7 @@ const draw = () => {
     )
     ctx.fill()
 
-    // 选中状态
+    // Trạng thái đang chọn
     if (circle === selectedCircle.value) {
       ctx.strokeStyle = '#e74c3c'
       ctx.lineWidth = 3
@@ -296,14 +296,14 @@ const draw = () => {
       ctx.stroke()
     }
 
-    // 悬停状态
+    // Trạng thái hover
     if (circle === hoveredCircle.value && currentMode.value === 'hover') {
       ctx.fillStyle = 'rgba(231, 76, 60, 0.2)'
       ctx.beginPath()
       ctx.arc(circle.x, circle.y, circle.radius + 10, 0, Math.PI * 2)
       ctx.fill()
 
-      // 显示坐标
+      // Hiển thị toạ độ
       ctx.fillStyle = '#2c3e50'
       ctx.font = '12px Arial'
       ctx.fillText(
@@ -459,7 +459,7 @@ const clearAll = () => {
 }
 
 onMounted(() => {
-  // 初始化几个圆形
+  // Khởi tạo sẵn vài hình tròn
   circles.value = [
     { x: 150, y: 200, radius: 30, color: '#e74c3c' },
     { x: 300, y: 200, radius: 30, color: '#3498db' },

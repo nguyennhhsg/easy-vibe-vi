@@ -2,26 +2,26 @@
   <div class="layout-reflow-demo">
     <div class="demo-header">
       <span class="icon">📐</span>
-      <span class="title">布局与重排</span>
-      <span class="subtitle">看看布局计算如何影响页面</span>
+      <span class="title">Layout và reflow</span>
+      <span class="subtitle">Xem layout calculation ảnh hưởng đến trang ra sao</span>
     </div>
 
     <div class="demo-content">
       <div class="control-panel">
         <div class="control-group">
-          <label>选择要修改的属性：</label>
+          <label>Chọn thuộc tính muốn thay đổi:</label>
           <select
             v-model="selectedProperty"
             @change="resetDemo"
           >
             <option value="transform">
-              transform: translateY() (只触发合成)
+              transform: translateY() (chỉ trigger composite)
             </option>
             <option value="width">
-              width (触发重排)
+              width (trigger reflow)
             </option>
             <option value="marginLeft">
-              margin-left (触发重排)
+              margin-left (trigger reflow)
             </option>
           </select>
         </div>
@@ -29,7 +29,7 @@
           class="toggle-btn"
           @click="toggleAnimation"
         >
-          {{ isAnimating ? '停止动画' : '开始动画' }}
+          {{ isAnimating ? 'Dừng animation' : 'Chạy animation' }}
         </button>
       </div>
 
@@ -40,30 +40,30 @@
             :class="{ animating: isAnimating }"
             :style="elementStyle"
           >
-            <span class="element-label">盒子</span>
+            <span class="element-label">Box</span>
           </div>
           <div class="neighbor-element">
-            <span class="element-label">邻居元素</span>
+            <span class="element-label">Phần tử lân cận</span>
           </div>
         </div>
 
         <div class="stats-panel">
           <div class="stat-item">
-            <span class="stat-label">触发阶段：</span>
+            <span class="stat-label">Giai đoạn trigger:</span>
             <span
               class="stat-value"
               :class="statClass"
             >{{ currentStage }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">性能影响：</span>
+            <span class="stat-label">Ảnh hưởng hiệu năng:</span>
             <span
               class="stat-value"
               :class="performanceClass"
             >{{ performanceImpact }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">是否影响其他元素：</span>
+            <span class="stat-label">Có ảnh hưởng phần tử khác?</span>
             <span class="stat-value">{{ affectsOthers }}</span>
           </div>
         </div>
@@ -72,7 +72,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心要点：</strong>布局属性（如 width、margin）会触发重排，影响周围元素的位置。而 transform 只触发合成，在 GPU 上处理，不影响其他元素，性能更好。
+      <strong>Ý chính:</strong> Các thuộc tính layout (như width, margin) sẽ trigger reflow và ảnh hưởng vị trí phần tử xung quanh. Còn transform chỉ trigger composite, xử lý trên GPU, không ảnh hưởng phần tử khác, hiệu năng tốt hơn.
     </div>
   </div>
 </template>
@@ -97,12 +97,12 @@ const elementStyle = computed(() => {
 })
 
 const currentStage = computed(() => {
-  if (!isAnimating.value) return '无'
+  if (!isAnimating.value) return 'Không có'
 
   if (selectedProperty.value === 'transform') {
-    return '合成（Composite）'
+    return 'Composite'
   }
-  return '布局（Layout）+ 重绘（Paint）+ 合成'
+  return 'Layout + Paint + Composite'
 })
 
 const performanceClass = computed(() => {
@@ -114,18 +114,18 @@ const performanceImpact = computed(() => {
   if (!isAnimating.value) return '-'
 
   if (selectedProperty.value === 'transform') {
-    return '低（GPU加速）'
+    return 'Thấp (GPU tăng tốc)'
   }
-  return '高（CPU计算）'
+  return 'Cao (tính trên CPU)'
 })
 
 const affectsOthers = computed(() => {
   if (!isAnimating.value) return '-'
 
   if (selectedProperty.value === 'transform') {
-    return '否'
+    return 'Không'
   }
-  return '是（需要重新计算）'
+  return 'Có (phải tính lại)'
 })
 
 function toggleAnimation() {

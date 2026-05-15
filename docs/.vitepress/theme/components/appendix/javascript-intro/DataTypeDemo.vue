@@ -2,14 +2,14 @@
   <div class="data-type-demo">
     <div class="demo-header">
       <span class="icon">🏷️</span>
-      <span class="title">JavaScript 数据类型</span>
-      <span class="subtitle">原始类型 vs 引用类型</span>
+      <span class="title">Kiểu dữ liệu JavaScript</span>
+      <span class="subtitle">Kiểu nguyên thủy vs kiểu tham chiếu</span>
     </div>
 
     <div class="intro-text">
-      想象你在外面<span class="highlight">租了个储物柜</span>：
-      <span class="highlight">原始类型</span>像是把东西直接拿回家（复制一份）；
-      <span class="highlight">引用类型</span>像是只拿了张写着地址的小纸条（共享同一个位置）
+      Hãy hình dung bạn <span class="highlight">thuê một tủ đồ ngoài trời</span>:
+      <span class="highlight">Kiểu nguyên thủy</span> giống như mang đồ về tận nhà (copy một bản);
+      <span class="highlight">Kiểu tham chiếu</span> giống như chỉ cầm về một mảnh giấy ghi địa chỉ (cùng trỏ tới một chỗ).
     </div>
 
     <div class="type-tabs">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="content-area">
-      <!-- 原始类型 -->
+      <!-- Kiểu nguyên thủy -->
       <div
         v-if="activeTab === 'primitive'"
         class="primitive-types"
@@ -55,18 +55,18 @@
           class="type-detail"
         >
           <div class="detail-title">
-            📝 {{ selectedType.name }} 详细说明
+            Chi tiết về {{ selectedType.name }}
           </div>
           <div class="detail-desc">
             {{ selectedType.description }}
           </div>
           <div class="detail-note">
-            <strong>💡 关键特性：</strong>{{ selectedType.note }}
+            <strong>Đặc điểm chính:</strong> {{ selectedType.note }}
           </div>
         </div>
       </div>
 
-      <!-- 引用类型 -->
+      <!-- Kiểu tham chiếu -->
       <div
         v-else-if="activeTab === 'reference'"
         class="reference-types"
@@ -74,7 +74,7 @@
         <div class="comparison-box">
           <div class="compare-side">
             <div class="side-title">
-              原始类型赋值
+              Gán kiểu nguyên thủy
             </div>
             <div class="code-example">
               <div class="code-line">
@@ -87,7 +87,7 @@
                 b = 20
               </div>
               <div class="code-line result">
-                // a = 10 (不变)
+                // a = 10 (không đổi)
               </div>
             </div>
             <div class="visual-box">
@@ -95,7 +95,7 @@
                 a = 10
               </div>
               <div class="arrow">
-                复制
+                Copy
               </div>
               <div class="value-box">
                 b = 20
@@ -105,7 +105,7 @@
 
           <div class="compare-side">
             <div class="side-title">
-              引用类型赋值
+              Gán kiểu tham chiếu
             </div>
             <div class="code-example">
               <div class="code-line">
@@ -118,7 +118,7 @@
                 obj2.x = 20
               </div>
               <div class="code-line result">
-                // obj1.x = 20 (变了!)
+                // obj1.x = 20 (đã đổi!)
               </div>
             </div>
             <div class="visual-box ref-visual">
@@ -141,7 +141,7 @@
                 </div>
               </div>
               <div class="arrow down-arrow">
-                指向同一位置
+                Cùng trỏ vào một chỗ
               </div>
               <div class="memory-box">
                 {x: 20}
@@ -171,25 +171,25 @@
         </div>
       </div>
 
-      <!-- 类型转换 -->
+      <!-- Type conversion -->
       <div
         v-else
         class="type-conversion"
       >
         <div class="conversion-playground">
           <div class="input-section">
-            <label>输入一个值：</label>
+            <label>Nhập một giá trị:</label>
             <input
               v-model="inputValue"
               type="text"
-              placeholder="试试输入 '123' 或 'hello'"
+              placeholder="Thử nhập '123' hoặc 'hello'"
               @keyup.enter="convertType"
             >
             <button
               class="convert-btn"
               @click="convertType"
             >
-              转换
+              Chuyển kiểu
             </button>
           </div>
 
@@ -215,7 +215,7 @@
 
           <div class="falsy-values">
             <div class="falsy-title">
-              ⚠️ 转成 false 的值（falsy values）：
+              Các giá trị chuyển thành false (falsy values):
             </div>
             <div class="falsy-list">
               <span
@@ -225,7 +225,7 @@
               >{{ val }}</span>
             </div>
             <div class="falsy-note">
-              其他所有值（包括空数组 []、空对象 {}）都转成 true
+              Mọi giá trị khác (kể cả mảng rỗng [], object rỗng {}) đều chuyển thành true
             </div>
           </div>
         </div>
@@ -234,10 +234,10 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      <span v-if="activeTab === 'primitive'">原始类型存储实际的值，赋值时复制值。它们是不可变的，修改后创建新值。</span>
-      <span v-else-if="activeTab === 'reference'">引用类型存储的是内存地址的引用，赋值时复制引用。多个变量可以指向同一个对象，修改其中一个会影响所有引用。</span>
-      <span v-else>类型转换是 JS 中常见的 bug 来源。理解 falsy values 和隐式转换规则能避免很多问题。使用 === 而不是 == 来避免自动类型转换。</span>
+      <strong>Ý chính:</strong>
+      <span v-if="activeTab === 'primitive'">Kiểu nguyên thủy lưu giá trị thật, khi gán thì copy giá trị. Chúng là immutable, mọi thay đổi tạo ra giá trị mới.</span>
+      <span v-else-if="activeTab === 'reference'">Kiểu tham chiếu lưu một reference tới địa chỉ bộ nhớ, khi gán thì copy reference. Nhiều biến có thể trỏ tới cùng một object, sửa một biến sẽ ảnh hưởng mọi tham chiếu khác.</span>
+      <span v-else>Type conversion là nguồn bug phổ biến trong JS. Hiểu falsy values và quy tắc chuyển kiểu ngầm sẽ giúp tránh nhiều rắc rối. Dùng === thay vì == để tránh chuyển kiểu tự động.</span>
     </div>
   </div>
 </template>
@@ -255,9 +255,9 @@ const conversionResults = ref({
 })
 
 const tabs = [
-  { id: 'primitive', label: '原始类型' },
-  { id: 'reference', label: '引用类型' },
-  { id: 'conversion', label: '类型转换' }
+  { id: 'primitive', label: 'Kiểu nguyên thủy' },
+  { id: 'reference', label: 'Kiểu tham chiếu' },
+  { id: 'conversion', label: 'Type conversion' }
 ]
 
 const primitiveTypes = [
@@ -265,50 +265,50 @@ const primitiveTypes = [
     name: 'Number',
     icon: '🔢',
     example: '42, 3.14, NaN',
-    description: '数字类型，包括整数和小数。NaN 表示"不是数字"。',
-    note: '所有数字都是浮点数，没有整数类型。特殊值：Infinity、-Infinity、NaN'
+    description: 'Kiểu số, bao gồm số nguyên và số thập phân. NaN nghĩa là "Not a Number".',
+    note: 'Mọi số đều là float, không có kiểu integer riêng. Giá trị đặc biệt: Infinity, -Infinity, NaN'
   },
   {
     name: 'String',
     icon: '📝',
-    example: '"hello", \'你好\'',
-    description: '字符串类型，用单引号或双引号包裹的文本。',
-    note: '字符串是不可变的，任何操作都会返回新的字符串。'
+    example: '"hello", \'xin chào\'',
+    description: 'Kiểu chuỗi, là văn bản bọc trong dấu nháy đơn hoặc nháy kép.',
+    note: 'String là immutable, mọi thao tác đều trả về string mới.'
   },
   {
     name: 'Boolean',
     icon: '✅',
     example: 'true, false',
-    description: '布尔类型，只有两个值：真或假。',
-    note: '常用于条件判断和逻辑运算。'
+    description: 'Kiểu boolean, chỉ có hai giá trị: true hoặc false.',
+    note: 'Thường dùng cho điều kiện và phép toán logic.'
   },
   {
     name: 'Undefined',
     icon: '❓',
-    example: 'let x; // x 是 undefined',
-    description: '变量已声明但未赋值时的默认值。',
-    note: '表示"缺少值"。主动赋值 undefined 没有意义。'
+    example: 'let x; // x là undefined',
+    description: 'Giá trị mặc định khi biến đã khai báo nhưng chưa gán giá trị.',
+    note: 'Mang nghĩa "thiếu giá trị". Tự gán undefined không có nhiều ý nghĩa.'
   },
   {
     name: 'Null',
     icon: '🕳️',
     example: 'let x = null;',
-    description: '表示"空值"或"无对象"。',
-    note: 'typeof null === "object" 是 JS 的历史 bug。'
+    description: 'Biểu thị "giá trị rỗng" hoặc "không có object".',
+    note: 'typeof null === "object" là bug lịch sử của JS.'
   },
   {
     name: 'Symbol',
     icon: '🔑',
     example: 'Symbol("id")',
-    description: 'ES6 新增，表示独一无二的值。',
-    note: '常用于对象属性的键，防止属性名冲突。'
+    description: 'Thêm vào từ ES6, biểu thị giá trị duy nhất.',
+    note: 'Thường dùng làm key cho object, tránh trùng tên property.'
   },
   {
     name: 'BigInt',
     icon: '🔢',
     example: '9007199254740991n',
-    description: 'ES2020 新增，表示任意大的整数。',
-    note: '数字后面加 n。用于处理超大整数。'
+    description: 'Thêm vào từ ES2020, biểu thị số nguyên rất lớn.',
+    note: 'Hậu tố n sau số. Dùng để xử lý số nguyên cực lớn.'
   }
 ]
 
@@ -316,27 +316,27 @@ const referenceTypes = [
   {
     name: 'Object',
     icon: '📦',
-    description: '键值对集合，最常用的引用类型。数组、函数也是对象。'
+    description: 'Tập hợp key-value, kiểu tham chiếu phổ biến nhất. Array và function cũng là object.'
   },
   {
     name: 'Array',
     icon: '📚',
-    description: '有序的数据集合，实际上是特殊的对象。'
+    description: 'Tập hợp dữ liệu có thứ tự, thực chất là object đặc biệt.'
   },
   {
     name: 'Function',
     icon: '⚙️',
-    description: '可执行的代码块，也是对象，可以赋值给变量。'
+    description: 'Khối code có thể chạy được, cũng là object và có thể gán cho biến.'
   },
   {
     name: 'Date',
     icon: '📅',
-    description: '日期和时间对象。'
+    description: 'Object ngày giờ.'
   },
   {
     name: 'RegExp',
     icon: '🔍',
-    description: '正则表达式对象，用于模式匹配。'
+    description: 'Object regex, dùng cho khớp pattern.'
   }
 ]
 
@@ -564,7 +564,7 @@ const convertType = () => {
   text-align: center;
 }
 
-/* 修复引用类型可视化 */
+/* Sửa hiển thị của reference type */
 .ref-visual {
   flex-direction: column;
   gap: 0.75rem;

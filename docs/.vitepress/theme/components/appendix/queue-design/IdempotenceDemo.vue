@@ -1,13 +1,13 @@
 <!--
   IdempotenceDemo.vue
-  幂等性演示 - 重复消费处理
+  Demo tính idempotent - xử lý consume trùng lặp
 -->
 <template>
   <div class="idempotence-demo">
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">幂等性演示</span>
-      <span class="subtitle">保证重复消费不会产生副作用</span>
+      <span class="title">Demo tính idempotent</span>
+      <span class="subtitle">Đảm bảo consume trùng lặp không gây tác dụng phụ</span>
     </div>
 
     <div class="scenario-switch">
@@ -16,39 +16,39 @@
         :class="{ active: scenario === 'transfer' }"
         @click="scenario = 'transfer'"
       >
-        💰 银行转账
+        💰 Chuyển khoản ngân hàng
       </button>
       <button
         class="scenario-btn"
         :class="{ active: scenario === 'elevator' }"
         @click="scenario = 'elevator'"
       >
-        🛗 电梯按钮
+        🛗 Nút thang máy
       </button>
     </div>
 
     <div class="demo-content">
-      <!-- 银行转账场景 -->
+      <!-- Kịch bản chuyển khoản -->
       <div
         v-if="scenario === 'transfer'"
         class="transfer-scenario"
       >
         <div class="scenario-header">
           <div class="title">
-            ❌ 非幂等操作: 银行转账
+            ❌ Thao tác không idempotent: chuyển khoản ngân hàng
           </div>
           <div class="subtitle">
-            重复消费会导致多次扣款
+            Consume trùng sẽ dẫn đến trừ tiền nhiều lần
           </div>
         </div>
 
         <div class="account-system">
           <div class="account-card sender">
             <div class="account-name">
-              发送方
+              Bên gửi
             </div>
             <div class="account-balance">
-              余额: ¥<span class="balance-amount">{{ senderBalance }}</span>
+              Số dư: <span class="balance-amount">{{ senderBalance }}</span>đ
             </div>
           </div>
 
@@ -61,7 +61,7 @@
                 💰
               </div>
               <div class="flow-label">
-                转账 ¥100
+                Chuyển 100đ
               </div>
             </div>
             <div
@@ -69,17 +69,17 @@
               class="retry-info"
             >
               <div class="retry-badge">
-                重试 {{ retryCount }} 次
+                Retry {{ retryCount }} lần
               </div>
             </div>
           </div>
 
           <div class="account-card receiver">
             <div class="account-name">
-              接收方
+              Bên nhận
             </div>
             <div class="account-balance">
-              余额: ¥<span class="balance-amount">{{ receiverBalance }}</span>
+              Số dư: <span class="balance-amount">{{ receiverBalance }}</span>đ
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@
         <div class="control-panel">
           <div class="control-row">
             <div class="control-item">
-              <label>幂等性保护</label>
+              <label>Bảo vệ idempotent</label>
               <div class="toggle-switch">
                 <button
                   class="toggle-btn"
@@ -96,7 +96,7 @@
                 >
                   <span class="toggle-slider" />
                 </button>
-                <span class="toggle-label">{{ useIdempotence ? '已启用' : '未启用' }}</span>
+                <span class="toggle-label">{{ useIdempotence ? 'Đã bật' : 'Chưa bật' }}</span>
               </div>
             </div>
 
@@ -105,7 +105,7 @@
               :disabled="isTransferring"
               @click="simulateTransfer"
             >
-              {{ isTransferring ? '处理中...' : '模拟重复消费' }}
+              {{ isTransferring ? 'Đang xử lý...' : 'Mô phỏng consume trùng' }}
             </button>
           </div>
 
@@ -115,14 +115,14 @@
           >
             <div class="info-item">
               <span class="info-icon">🔑</span>
-              <span class="info-text">每笔交易有唯一ID,重复请求被自动过滤</span>
+              <span class="info-text">Mỗi giao dịch có ID duy nhất, request lặp sẽ tự động bị lọc</span>
             </div>
           </div>
         </div>
 
         <div class="result-log">
           <div class="log-header">
-            处理日志
+            Log xử lý
           </div>
           <div class="log-list">
             <div
@@ -138,7 +138,7 @@
               v-if="logs.length === 0"
               class="log-empty"
             >
-              暂无日志,点击按钮开始模拟
+              Chưa có log, nhấn nút để bắt đầu mô phỏng
             </div>
           </div>
         </div>
@@ -146,51 +146,51 @@
         <div class="comparison-box">
           <div class="comparison-item bad">
             <div class="comp-header">
-              ❌ 无幂等保护
+              ❌ Không có bảo vệ idempotent
             </div>
             <div class="comp-body">
               <div class="comp-result">
-                扣款 ¥{{ (retryCount + 1) * 100 }}
+                Trừ {{ (retryCount + 1) * 100 }}đ
               </div>
               <div class="comp-desc">
-                重复消费造成多次扣款
+                Consume trùng gây ra trừ tiền nhiều lần
               </div>
             </div>
           </div>
           <div class="comparison-item good">
             <div class="comp-header">
-              ✅ 有幂等保护
+              ✅ Có bảo vệ idempotent
             </div>
             <div class="comp-body">
               <div class="comp-result">
-                扣款 ¥100
+                Trừ 100đ
               </div>
               <div class="comp-desc">
-                重复请求被过滤,只扣一次
+                Request lặp bị lọc, chỉ trừ một lần
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 电梯按钮场景 -->
+      <!-- Kịch bản nút thang máy -->
       <div
         v-else
         class="elevator-scenario"
       >
         <div class="scenario-header">
           <div class="title">
-            ✅ 天然幂等操作: 电梯按钮
+            ✅ Thao tác idempotent tự nhiên: nút thang máy
           </div>
           <div class="subtitle">
-            无论按多少次,电梯只响应一次
+            Bấm bao nhiêu lần thì thang máy cũng chỉ phản hồi một lần
           </div>
         </div>
 
         <div class="elevator-system">
           <div class="elevator-panel">
             <div class="panel-title">
-              电梯按钮面板
+              Bảng nút thang máy
             </div>
             <div class="button-grid">
               <button
@@ -200,13 +200,13 @@
                 :class="{ active: selectedFloor === floor }"
                 @click="pressFloor(floor)"
               >
-                {{ floor }}F
+                Tầng {{ floor }}
               </button>
             </div>
             <div class="press-count">
-              <span class="count-label">按钮按了</span>
+              <span class="count-label">Đã bấm nút</span>
               <span class="count-value">{{ pressCount }}</span>
-              <span class="count-label">次</span>
+              <span class="count-label">lần</span>
             </div>
           </div>
 
@@ -218,7 +218,7 @@
                 class="floor-mark"
                 :class="{ current: elevatorFloor === floor }"
               >
-                <span class="floor-num">{{ floor }}F</span>
+                <span class="floor-num">Tầng {{ floor }}</span>
               </div>
             </div>
             <div
@@ -234,36 +234,36 @@
 
         <div class="control-panel">
           <div class="control-item">
-            <label>快速连按3次</label>
+            <label>Bấm liên tục 3 lần</label>
             <button
               class="action-btn"
               @click="pressMultipleTimes"
             >
-              🚀 连续点击
+              🚀 Bấm liên tục
             </button>
           </div>
           <div class="info-text">
             <span class="info-icon">💡</span>
-            虽然按了{{ pressCount }}次,但电梯只响应一次请求
+            Dù bấm {{ pressCount }} lần, thang máy chỉ phản hồi một request
           </div>
         </div>
 
         <div class="explanation-box">
           <div class="explanation-title">
-            为什么电梯按钮是幂等的?
+            Vì sao nút thang máy mang tính idempotent?
           </div>
           <div class="explanation-list">
             <div class="explanation-item">
               <span class="icon">✅</span>
-              <span>状态只切换一次: 停靠 → 已选中</span>
+              <span>Trạng thái chỉ chuyển một lần: dừng → đã chọn</span>
             </div>
             <div class="explanation-item">
               <span class="icon">✅</span>
-              <span>重复请求不改变目标楼层</span>
+              <span>Request lặp không làm thay đổi tầng đích</span>
             </div>
             <div class="explanation-item">
               <span class="icon">✅</span>
-              <span>无需额外的幂等性保护机制</span>
+              <span>Không cần cơ chế bảo vệ idempotent thêm</span>
             </div>
           </div>
         </div>
@@ -275,10 +275,10 @@
         🎯
       </div>
       <div class="principle-content">
-        <strong>幂等性核心原则:</strong>
+        <strong>Nguyên tắc cốt lõi của idempotent:</strong>
         {{ scenario === 'transfer'
-          ? '为每条消息生成唯一ID,处理前检查是否已处理,避免重复操作'
-          : '设计操作时确保重复执行和执行一次的效果相同' }}
+          ? 'Sinh ID duy nhất cho mỗi message, kiểm tra trước khi xử lý để tránh thao tác lặp'
+          : 'Thiết kế thao tác sao cho chạy lặp và chạy một lần cho cùng kết quả' }}
       </div>
     </div>
   </div>
@@ -287,10 +287,10 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 场景切换
+// Chuyển kịch bản
 const scenario = ref('transfer')
 
-// 转账场景
+// Kịch bản chuyển khoản
 const senderBalance = ref(1000)
 const receiverBalance = ref(500)
 const isTransferring = ref(false)
@@ -314,9 +314,9 @@ const simulateTransfer = () => {
   const originalSenderBalance = senderBalance.value
   const originalReceiverBalance = receiverBalance.value
 
-  addLog('收到转账请求: ¥100', 'info')
+  addLog('Nhận request chuyển khoản: 100đ', 'info')
 
-  // 模拟重复消费
+  // Mô phỏng consume trùng
   const processTransfer = (attempt) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -326,15 +326,15 @@ const simulateTransfer = () => {
           if (attempt === 0) {
             senderBalance.value = originalSenderBalance - 100
             receiverBalance.value = originalReceiverBalance + 100
-            addLog(`第${attempt + 1}次处理: 成功转账 ¥100`, 'success')
-            addLog('幂等性检查: 唯一ID已记录,后续请求被过滤', 'info')
+            addLog(`Lần xử lý thứ ${attempt + 1}: chuyển khoản thành công 100đ`, 'success')
+            addLog('Kiểm tra idempotent: ID duy nhất đã được ghi, request sau bị lọc', 'info')
           } else {
-            addLog(`第${attempt + 1}次处理: 重复请求,已忽略`, 'warning')
+            addLog(`Lần xử lý thứ ${attempt + 1}: request lặp, đã bỏ qua`, 'warning')
           }
         } else {
           senderBalance.value -= 100
           receiverBalance.value += 100
-          addLog(`第${attempt + 1}次处理: 转账 ¥100`, attempt === 0 ? 'success' : 'error')
+          addLog(`Lần xử lý thứ ${attempt + 1}: chuyển khoản 100đ`, attempt === 0 ? 'success' : 'error')
         }
 
         if (attempt < 2) {
@@ -353,7 +353,7 @@ const simulateTransfer = () => {
   processTransfer(0)
 }
 
-// 电梯场景
+// Kịch bản thang máy
 const floors = [1, 2, 3, 4, 5]
 const selectedFloor = ref(null)
 const elevatorFloor = ref(1)

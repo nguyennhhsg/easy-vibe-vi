@@ -1,20 +1,20 @@
 <!--
   TaskWorkerDemo.vue
-  Worker 工作池演示：展示任务分发和消费过程
+  Demo worker pool: trình bày quá trình phân phối và consume task
 -->
 <template>
   <div class="worker-demo">
     <div class="header">
-      <div class="title">Worker 工作池模型</div>
-      <div class="subtitle">观察任务如何被分发到不同 Worker 处理</div>
+      <div class="title">Mô hình worker pool</div>
+      <div class="subtitle">Quan sát cách task được phân phối cho các worker xử lý</div>
     </div>
 
     <div class="controls">
-      <button class="ctrl-btn" @click="addTask" :disabled="running">添加任务</button>
-      <button class="ctrl-btn primary" @click="startProcessing" :disabled="running || queue.length === 0">开始处理</button>
-      <button class="ctrl-btn" @click="resetAll">重置</button>
+      <button class="ctrl-btn" @click="addTask" :disabled="running">Thêm task</button>
+      <button class="ctrl-btn primary" @click="startProcessing" :disabled="running || queue.length === 0">Bắt đầu xử lý</button>
+      <button class="ctrl-btn" @click="resetAll">Reset</button>
       <div class="worker-count">
-        Worker 数量：
+        Số worker:
         <button class="small-btn" @click="workerCount = Math.max(1, workerCount - 1)" :disabled="running">-</button>
         <span>{{ workerCount }}</span>
         <button class="small-btn" @click="workerCount = Math.min(5, workerCount + 1)" :disabled="running">+</button>
@@ -23,27 +23,27 @@
 
     <div class="pool-layout">
       <div class="queue-section">
-        <div class="section-title">任务队列 ({{ queue.length }})</div>
+        <div class="section-title">Task queue ({{ queue.length }})</div>
         <div class="queue-list">
           <div v-for="task in queue" :key="task.id" class="queue-item">
             {{ task.name }}
           </div>
-          <div v-if="queue.length === 0" class="empty">队列为空</div>
+          <div v-if="queue.length === 0" class="empty">Queue trống</div>
         </div>
       </div>
 
       <div class="arrow-section">→</div>
 
       <div class="workers-section">
-        <div class="section-title">Workers</div>
+        <div class="section-title">Worker</div>
         <div class="workers-grid">
           <div v-for="w in workers" :key="w.id" :class="['worker-card', w.status]">
             <div class="worker-name">Worker {{ w.id }}</div>
             <div class="worker-status">
-              <template v-if="w.status === 'idle'">💤 空闲</template>
+              <template v-if="w.status === 'idle'">💤 Rảnh</template>
               <template v-else>⚙️ {{ w.currentTask }}</template>
             </div>
-            <div class="worker-count-label">已完成: {{ w.completed }}</div>
+            <div class="worker-count-label">Đã xong: {{ w.completed }}</div>
           </div>
         </div>
       </div>
@@ -51,12 +51,12 @@
       <div class="arrow-section">→</div>
 
       <div class="done-section">
-        <div class="section-title">已完成 ({{ doneList.length }})</div>
+        <div class="section-title">Đã hoàn thành ({{ doneList.length }})</div>
         <div class="done-list">
           <div v-for="task in doneList" :key="task.id" class="done-item">
             ✅ {{ task.name }}
           </div>
-          <div v-if="doneList.length === 0" class="empty">暂无</div>
+          <div v-if="doneList.length === 0" class="empty">Chưa có</div>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ const workerCount = ref(3)
 const running = ref(false)
 let taskId = 0
 
-const taskTypes = ['发送邮件', '生成报表', '图片压缩', '数据同步', '推送通知', '日志归档', 'PDF 导出', '缓存预热']
+const taskTypes = ['Gửi email', 'Tạo báo cáo', 'Nén ảnh', 'Đồng bộ dữ liệu', 'Push thông báo', 'Lưu trữ log', 'Export PDF', 'Warm-up cache']
 
 const queue = ref([])
 const doneList = ref([])

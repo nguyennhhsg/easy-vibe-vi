@@ -2,12 +2,12 @@
   <div class="rendering-pipeline-demo">
     <div class="demo-header">
       <span class="icon">🏭</span>
-      <span class="title">渲染管线</span>
-      <span class="subtitle">从代码到像素的五步旅程</span>
+      <span class="title">Rendering pipeline</span>
+      <span class="subtitle">Hành trình 5 bước từ code đến pixel</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">印刷厂</span>工作：稿件要排版、印刷、装订，最后才能变成书本。浏览器渲染网页也一样，HTML 和 CSS 要经过一道道"工序"，才能变成屏幕上的画面。
+      Hãy hình dung bạn làm trong một <span class="highlight">xưởng in</span>: bản thảo phải được dàn trang, in, đóng bìa, cuối cùng mới thành cuốn sách. Browser render trang web cũng vậy, HTML và CSS phải đi qua từng công đoạn mới biến thành hình ảnh trên màn hình.
     </div>
 
     <div class="pipeline">
@@ -51,7 +51,7 @@
           </p>
           <div class="detail-example">
             <div class="example-label">
-              🌰 举个例子：
+              Ví dụ:
             </div>
             <div class="example-content">
               {{ currentStage?.example }}
@@ -65,12 +65,12 @@
       v-if="!activeStage"
       class="hint-text"
     >
-      👆 点击上方任意阶段，查看详细解释
+      Bấm vào bất kỳ giai đoạn nào ở trên để xem giải thích chi tiết
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>每个阶段各司其职，前面的阶段为后面阶段准备数据。理解这个流程，你就能知道什么时候用什么方式修改页面，才能避免性能问题。
+      <strong>Ý chính:</strong> Mỗi giai đoạn đảm nhận một việc, giai đoạn trước chuẩn bị dữ liệu cho giai đoạn sau. Hiểu quy trình này bạn sẽ biết lúc nào nên dùng cách nào để chỉnh trang, tránh các vấn đề hiệu năng.
     </div>
   </div>
 </template>
@@ -84,42 +84,42 @@ const stages = ref([
   {
     id: 1,
     icon: '🌲',
-    name: '构建DOM/CSSOM',
-    simple: '解析代码',
-    detailDesc: '浏览器把 HTML 标签解析成 DOM 树（骨架），把 CSS 解析成 CSSOM 树（样式）。这两个树是并行构建的，但 CSS 会阻塞渲染，因为浏览器必须知道样式才能正确显示页面。',
-    example: '浏览器读到 <div class="container">，会在 DOM 树中创建一个 div 节点；读到 .container { width: 100px }，会在 CSSOM 树中记录这个样式规则。'
+    name: 'Build DOM/CSSOM',
+    simple: 'Parse code',
+    detailDesc: 'Browser parse các thẻ HTML thành DOM tree (khung xương), parse CSS thành CSSOM tree (style). Hai cây này được build song song, nhưng CSS sẽ block rendering vì browser phải biết style mới hiển thị trang đúng được.',
+    example: 'Khi browser gặp <div class="container">, nó sẽ tạo một node div trong DOM tree; khi đọc .container { width: 100px }, nó ghi luật style đó vào CSSOM tree.'
   },
   {
     id: 2,
     icon: '🎨',
-    name: '构建渲染树',
-    simple: '合并筛选',
-    detailDesc: '把 DOM 树和 CSSOM 树合并，生成渲染树。只包含真正会显示在页面上的元素（不包括 head、script、display:none 的元素等）。',
-    example: '就像从完整的建筑图纸中抠出"看得见的部分"，去掉墙里的电线、管道，只保留墙面和家具。这样后续的计算会更高效。'
+    name: 'Build render tree',
+    simple: 'Hợp nhất và lọc',
+    detailDesc: 'Hợp DOM tree và CSSOM tree để tạo render tree. Chỉ giữ những phần tử thực sự hiển thị trên trang (loại bỏ head, script, các phần tử display:none, v.v.).',
+    example: 'Giống như từ bản vẽ kiến trúc đầy đủ, ta lọc ra phần "nhìn thấy được": bỏ điện, ống nước trong tường, chỉ giữ tường và đồ nội thất. Như vậy việc tính toán sau đó sẽ hiệu quả hơn.'
   },
   {
     id: 3,
     icon: '📐',
-    name: '布局',
-    simple: '计算位置',
-    detailDesc: '计算每个元素在屏幕上的精确位置和大小（几何信息）。这是最昂贵的操作之一，因为改一个元素可能影响其他元素的位置（"牵一发而动全身"）。',
-    example: '浏览器算出："这个 div 在距离顶部 100px 的地方，宽度 200px，高度 50px"。如果改了这个 div 的宽度，它的子元素、兄弟元素的位置都要重新计算。'
+    name: 'Layout',
+    simple: 'Tính vị trí',
+    detailDesc: 'Tính vị trí và kích thước chính xác của từng phần tử trên màn hình (thông tin hình học). Đây là một trong những thao tác tốn kém nhất, vì sửa một phần tử có thể ảnh hưởng vị trí của các phần tử khác (kéo theo cả chuỗi).',
+    example: 'Browser tính ra: "div này cách top 100px, rộng 200px, cao 50px". Nếu đổi width của div, các phần tử con và phần tử anh em đều phải tính lại vị trí.'
   },
   {
     id: 4,
     icon: '✏️',
-    name: '绘制',
-    simple: '填充颜色',
-    detailDesc: '把"计算好位置"的元素真正"画"成像素。包括填充背景色、绘制文字、绘制边框等。只改变外观（如 color、background-color）会触发重绘，成本比重排低。',
-    example: '就像给家具上漆：改家具颜色只需要重新上漆（重绘），但改家具位置需要重新摆放所有家具（重排）。'
+    name: 'Paint',
+    simple: 'Tô màu',
+    detailDesc: 'Vẽ thực sự các phần tử (đã có vị trí) thành pixel. Bao gồm tô màu nền, vẽ chữ, vẽ border, v.v. Nếu chỉ đổi vẻ ngoài (như color, background-color) thì sẽ trigger repaint, chi phí thấp hơn reflow.',
+    example: 'Giống như sơn lại đồ nội thất: đổi màu đồ chỉ cần sơn lại (repaint), nhưng đổi vị trí đồ thì phải sắp xếp lại toàn bộ (reflow).'
   },
   {
     id: 5,
     icon: '🔮',
-    name: '合成',
-    simple: '合并图层',
-    detailDesc: '现代浏览器的终极武器。把多个绘制层（Layer）按照正确的顺序合并成最终画面。利用 GPU 并行处理，性能极佳。transform 和 opacity 动画只触发这一步。',
-    example: '就像 Photoshop 的图层：每个图层单独画，最后合并在一起。某些元素（如动画）会被提升到独立层，变化时只需要调整位置和透明度，不需要重绘。'
+    name: 'Composite',
+    simple: 'Hợp layer',
+    detailDesc: 'Vũ khí tối thượng của browser hiện đại. Gộp nhiều layer paint theo đúng thứ tự thành ảnh cuối cùng. Tận dụng GPU xử lý song song, hiệu năng rất tốt. Animation transform và opacity chỉ trigger giai đoạn này.',
+    example: 'Giống như layer trong Photoshop: mỗi layer vẽ riêng, cuối cùng gộp lại với nhau. Một số phần tử (như animation) sẽ được tách thành layer riêng, khi đổi chỉ cần điều chỉnh vị trí và độ trong, không cần repaint.'
   }
 ])
 

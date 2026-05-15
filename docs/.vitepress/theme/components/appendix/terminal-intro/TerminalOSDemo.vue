@@ -52,7 +52,7 @@
         >
           <div class="start-hint">
             <span class="icon">👆</span>
-            <span class="text">不断点击屏幕演示 / Keep Clicking</span>
+            <span class="text">Click liên tục vào màn hình / Keep Clicking</span>
           </div>
         </div>
 
@@ -66,7 +66,7 @@
             @click.stop="resetDemo"
           >
             <span class="icon">✅</span>
-            <span class="text">演示结束，点击重置 / Finished (Reset)</span>
+            <span class="text">Demo kết thúc, click để reset / Finished (Reset)</span>
           </div>
         </div>
 
@@ -99,7 +99,7 @@
             v-if="lines.length === 0"
             class="hint"
           >
-            (点击屏幕继续 / Click screen to continue)</span>
+            (Click vào màn hình để tiếp tục / Click screen to continue)</span>
           <span
             v-else
             class="hint blink-hint"
@@ -140,19 +140,19 @@ const configs = {
     title: 'Command Prompt',
     prompt: 'C:\\Users\\User>',
     demo: [
-      { type: 'explanation', content: '准备输入命令...' },
+      { type: 'explanation', content: 'Chuẩn bị gõ lệnh...' },
       {
         type: 'command',
         content: 'dir',
         delay: 400,
         explanation:
-          '输入 `dir` (Directory)。这是 Windows 系统用来**列出当前文件夹内容**的命令。'
+          'Gõ `dir` (Directory). Đây là lệnh trên Windows để **liệt kê nội dung thư mục hiện tại**.'
       },
       {
         type: 'output',
         content: ' Volume in drive C has no label.',
         delay: 100,
-        explanation: '系统正在执行命令...'
+        explanation: 'Hệ thống đang chạy lệnh...'
       },
       {
         type: 'output',
@@ -187,7 +187,7 @@ const configs = {
         content: '               2 Dir(s)  50,000,000,000 bytes free',
         delay: 50,
         explanation:
-          '系统返回了文件列表。`<DIR>` 表示这是一个文件夹，数字表示文件大小。'
+          'Hệ thống trả về danh sách file. `<DIR>` nghĩa là thư mục, số là kích thước file.'
       },
       { type: 'output', content: '', delay: 100 }
     ]
@@ -196,19 +196,19 @@ const configs = {
     title: 'Windows PowerShell',
     prompt: 'PS C:\\Users\\User>',
     demo: [
-      { type: 'explanation', content: '准备输入命令...' },
+      { type: 'explanation', content: 'Chuẩn bị gõ lệnh...' },
       {
         type: 'command',
         content: 'Get-Date',
         delay: 400,
         explanation:
-          '输入 `Get-Date`。PowerShell 使用动词-名词的命名方式，这里是**获取当前时间**。'
+          'Gõ `Get-Date`. PowerShell dùng quy ước verb-noun, ở đây là **lấy thời gian hiện tại**.'
       },
       {
         type: 'output',
         content: '',
         delay: 100,
-        explanation: '系统返回了当前的日期和时间。'
+        explanation: 'Hệ thống trả về ngày giờ hiện tại.'
       },
       {
         type: 'output',
@@ -221,13 +221,13 @@ const configs = {
         content: 'echo "Hello World"',
         delay: 400,
         explanation:
-          '输入 `echo`。这是让计算机**复读**你说的话，常用于测试或打印信息。'
+          'Gõ `echo`. Đây là lệnh bảo máy tính **lặp lại** lời bạn nói, thường dùng để test hoặc in thông tin.'
       },
       {
         type: 'output',
         content: 'Hello World',
         delay: 100,
-        explanation: '计算机乖乖地输出了 "Hello World"。'
+        explanation: 'Máy tính ngoan ngoãn in ra "Hello World".'
       }
     ]
   },
@@ -235,13 +235,13 @@ const configs = {
     title: 'user — -zsh — 80x24',
     prompt: 'user@MacBook-Pro ~ % ',
     demo: [
-      { type: 'explanation', content: '准备输入命令...' },
+      { type: 'explanation', content: 'Chuẩn bị gõ lệnh...' },
       {
         type: 'command',
         content: 'ls -G',
         delay: 400,
         explanation:
-          '输入 `ls` (List)。这是 Mac/Linux 系统用来**列出文件**的命令。`-G` 参数让输出带颜色。'
+          'Gõ `ls` (List). Đây là lệnh trên Mac/Linux để **liệt kê file**. Tham số `-G` thêm màu cho output.'
       },
       {
         type: 'output',
@@ -252,14 +252,14 @@ const configs = {
         type: 'output',
         content: 'Documents Library     Pictures  Public',
         delay: 100,
-        explanation: '系统列出了你的主目录下的文件夹。'
+        explanation: 'Hệ thống liệt kê các thư mục trong home directory của bạn.'
       },
       {
         type: 'command',
         content: 'sw_vers',
         delay: 400,
         explanation:
-          '输入 `sw_vers` (Software Version)。这是 macOS 特有的命令，查看**系统版本**。'
+          'Gõ `sw_vers` (Software Version). Đây là lệnh đặc trưng của macOS để xem **phiên bản hệ thống**.'
       },
       { type: 'output', content: 'ProductName:		macOS', delay: 50 },
       { type: 'output', content: 'ProductVersion:		15.1', delay: 50 },
@@ -267,7 +267,7 @@ const configs = {
         type: 'output',
         content: 'BuildVersion:		24B83',
         delay: 50,
-        explanation: '系统返回了当前的 macOS 版本信息。'
+        explanation: 'Hệ thống trả về thông tin phiên bản macOS hiện tại.'
       }
     ]
   },
@@ -275,20 +275,20 @@ const configs = {
     title: 'user@hostname: ~',
     prompt: 'user@hostname:~$ ',
     demo: [
-      { type: 'explanation', content: '准备输入命令...' },
+      { type: 'explanation', content: 'Chuẩn bị gõ lệnh...' },
       {
         type: 'command',
         content: 'ls -la',
         delay: 400,
         explanation:
-          '输入 `ls` (List)。这是 Linux/Mac 系统用来**列出文件**的命令。`-la` 是参数，表示“列出所有文件(all)的详细信息(long)”。'
+          'Gõ `ls` (List). Đây là lệnh trên Linux/Mac để **liệt kê file**. `-la` là tham số nghĩa là "liệt kê tất cả (all) file kèm thông tin chi tiết (long)".'
       },
       {
         type: 'output',
         content: 'total 8',
         delay: 100,
         explanation:
-          '系统返回了文件列表。左边的 `drwxr-xr-x` 看起来像乱码，其实是**权限描述**（谁能读、谁能写）。'
+          'Hệ thống trả về danh sách file. Bên trái `drwxr-xr-x` trông như ký tự loạn nhưng thực ra là **mô tả quyền** (ai đọc được, ai ghi được).'
       },
       {
         type: 'output',
@@ -310,13 +310,13 @@ const configs = {
         content: 'whoami',
         delay: 400,
         explanation:
-          '输入 `whoami` (Who am I)。这是一个经典的哲学命令（笑），告诉计算机：**我是谁？**（当前登录用户）。'
+          'Gõ `whoami` (Who am I). Một lệnh mang triết lý kinh điển (cười), bảo máy tính: **tôi là ai?** (user đang đăng nhập).'
       },
       {
         type: 'output',
         content: 'user',
         delay: 100,
-        explanation: '系统回答：你是 "user"。'
+        explanation: 'Hệ thống trả lời: bạn là "user".'
       }
     ]
   }

@@ -1,6 +1,6 @@
 <!--
   PatchifyDemo.vue
-  视觉分词（Patchify）演示
+  Mô phỏng "tách token thị giác" (Patchify)
 -->
 <template>
   <div class="patchify-demo">
@@ -11,7 +11,7 @@
           :disabled="currentStep === 0"
           @click="prevStep"
         >
-          ⬅ 上一步 (Prev)
+          ⬅ Bước trước (Prev)
         </button>
         <span class="step-indicator">Step {{ currentStep + 1 }} / 4</span>
         <button
@@ -19,7 +19,7 @@
           :disabled="currentStep === 3"
           @click="nextStep"
         >
-          {{ currentStep === 3 ? '完成 (Done)' : '下一步 (Next) ➡' }}
+          {{ currentStep === 3 ? 'Hoàn tất (Done)' : 'Bước tiếp (Next) ➡' }}
         </button>
       </div>
       <div class="step-desc">
@@ -28,7 +28,7 @@
     </div>
 
     <div class="visual-area">
-      <!-- 原始/切分视图容器 -->
+      <!-- Khung hiển thị ảnh gốc / ảnh đã chia patch -->
       <!-- 
         Step 0: Show container background, cells hidden
         Step 1: Show container background, grid overlay visible (cells with border)
@@ -73,13 +73,13 @@
         ⬇
       </div>
 
-      <!-- 线性序列视图 -->
+      <!-- Khung hiển thị chuỗi tuyến tính -->
       <div
         v-if="currentStep >= 3"
         class="sequence-container"
       >
         <div class="sequence-label">
-          Token Sequence: 196×D (每个 Token 是 D 维向量)
+          Token Sequence: 196×D (mỗi Token là vector D chiều)
         </div>
         <div class="token-stream">
           <div
@@ -100,10 +100,10 @@ import { ref, computed } from 'vue'
 const currentStep = ref(0)
 
 const stepDescriptions = [
-  '1. 原始图片 (Original Image): 计算机看到的原始输入。',
-  '2. 数字化 (Digitization): 图片本质上是一个数字矩阵 (H x W x C)。',
-  '3. 切块 (Patchify): 典型设置：224×224 按 16×16 切成 14×14=196 个 Patch（此处等比示意）。',
-  '4. 序列化 (Serialize): 将二维分布的 Patch “拍扁”成一维序列 (Spatial Flatten)。现在它看起来就像一串“视觉单词”，可以被 Transformer 逐个读取。'
+  '1. Ảnh gốc (Original Image): đây là đầu vào thô mà máy tính nhìn thấy.',
+  '2. Số hoá (Digitization): bản chất ảnh là một ma trận số (H x W x C).',
+  '3. Chia patch (Patchify): cấu hình điển hình: 224×224 chia theo 16×16 thành 14×14=196 Patch (ở đây minh hoạ tỉ lệ).',
+  '4. Tuần tự hoá (Serialize): "trải phẳng" các Patch hai chiều thành một chuỗi một chiều (Spatial Flatten). Bây giờ trông giống một chuỗi "từ thị giác" để Transformer đọc lần lượt.'
 ]
 
 const nextStep = () => {
@@ -114,7 +114,7 @@ const prevStep = () => {
   if (currentStep.value > 0) currentStep.value--
 }
 
-// 模拟一张风景图的 CSS 渐变
+// Giả lập một bức ảnh phong cảnh bằng CSS gradient
 // Sky (Blue) -> Mountains (Green/Grey) -> Sun (Yellow)
 const bgImage =
   'linear-gradient(to bottom, #87CEEB 0%, #87CEEB 50%, #228B22 50%, #228B22 100%)'

@@ -7,26 +7,26 @@ const explanation = ref('')
 const scopes = [
   {
     id: 'global',
-    name: '全局作用域',
+    name: 'Global scope',
     color: '#a0aec0',
     vars: [{ name: 'appName', value: '"Todo"', own: true }]
   },
   {
     id: 'function',
-    name: '函数 greet() 作用域',
+    name: 'Scope hàm greet()',
     color: '#4299e1',
     vars: [
-      { name: 'appName', value: '"Todo"', own: false, from: '全局' },
-      { name: 'message', value: '"你好"', own: true }
+      { name: 'appName', value: '"Todo"', own: false, from: 'Global' },
+      { name: 'message', value: '"Xin chào"', own: true }
     ]
   },
   {
     id: 'block',
-    name: 'if 块作用域',
+    name: 'Block scope if',
     color: '#38a169',
     vars: [
-      { name: 'appName', value: '"Todo"', own: false, from: '全局' },
-      { name: 'message', value: '"你好"', own: false, from: '函数' },
+      { name: 'appName', value: '"Todo"', own: false, from: 'Global' },
+      { name: 'message', value: '"Xin chào"', own: false, from: 'Hàm' },
       { name: 'greeting', value: 'message+appName', own: true }
     ]
   }
@@ -34,11 +34,11 @@ const scopes = [
 
 const updateExplanation = () => {
   const texts = {
-    global: '在全局作用域，只能使用全局变量 appName',
+    global: 'Ở global scope, chỉ có biến toàn cục appName để dùng',
     function:
-      '在函数作用域，可以使用自己的 message 和全局的 appName（作用域链查找）',
+      'Ở function scope, có thể dùng message của hàm và appName từ global (qua scope chain)',
     block:
-      '在块级作用域，可以使用自己的 greeting，以及外层的 message 和 appName'
+      'Ở block scope, có thể dùng greeting trong block, cũng như message và appName từ scope ngoài'
   }
   explanation.value = texts[activeScope.value]
 }
@@ -48,7 +48,7 @@ updateExplanation()
 
 <template>
   <div class="scope-demo">
-    <h3>🔍 作用域：变量的"可见范围"</h3>
+    <h3>Scope: phạm vi "nhìn thấy" của biến</h3>
 
     <div class="scope-selector">
       <button
@@ -64,7 +64,7 @@ updateExplanation()
     </div>
 
     <div class="scope-visual">
-      <!-- 作用域层级图 -->
+      <!-- Sơ đồ các tầng scope -->
       <div class="scope-levels">
         <div
           v-for="scope in scopes"
@@ -94,9 +94,9 @@ updateExplanation()
         </div>
       </div>
 
-      <!-- 说明 -->
+      <!-- Giải thích -->
       <div class="explanation-box">
-        <div class="explanation-title">💡 当前位置可见的变量</div>
+        <div class="explanation-title">Biến nhìn thấy được tại vị trí hiện tại</div>
         <div class="explanation-text">
           {{ explanation }}
         </div>
@@ -104,18 +104,18 @@ updateExplanation()
     </div>
 
     <div class="code-display">
-      <h4>对应代码</h4>
-      <pre><code>const appName = "Todo"  // 全局作用域
+      <h4>Code tương ứng</h4>
+      <pre><code>const appName = "Todo"  // Global scope
 
 function greet() {
-  const message = "你好"  // 函数作用域
+  const message = "Xin chào"  // Function scope
 
   if (true) {
-    const greeting = message + appName  // 块级作用域
+    const greeting = message + appName  // Block scope
     console.log(greeting)
   }
 
-  console.log(greeting)  // ❌ 报错！外层看不到内层
+  console.log(greeting)  // Lỗi! Scope ngoài không thấy biến của scope trong
 }</code></pre>
     </div>
   </div>

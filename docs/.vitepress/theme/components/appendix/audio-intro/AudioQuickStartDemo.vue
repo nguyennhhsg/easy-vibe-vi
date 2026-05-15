@@ -1,28 +1,28 @@
 <!--
   AudioQuickStartDemo.vue
-  音频 AI 快速体验组件
+  Component trải nghiệm nhanh AI âm thanh
 
-  用途：
-  让用户快速体验 AI 音频的核心能力：语音合成、语音识别、声音克隆。
+  Mục đích:
+  Giúp người dùng trải nghiệm nhanh các năng lực cốt lõi của AI âm thanh: TTS, ASR, voice cloning.
 
-  交互功能：
-  - 快速场景选择
-  - 实时模拟音频处理效果
-  - 可视化反馈
+  Tính năng tương tác:
+  - Chọn nhanh kịch bản
+  - Mô phỏng hiệu ứng xử lý audio thời gian thực
+  - Phản hồi trực quan
 -->
 <template>
   <div class="audio-quick-start">
     <div class="header">
       <div class="title">
-        🎙️ AI 音频初体验：让机器开口说话
+        🎙️ Trải nghiệm AI âm thanh: để máy biết "lên tiếng"
       </div>
       <div class="subtitle">
-        从语音合成到声音克隆，探索 AI 如何让机器拥有"声音"
+        Từ TTS đến voice cloning, cùng xem AI làm sao để máy có "giọng nói"
       </div>
     </div>
 
     <div class="demo-window">
-      <!-- 场景选择 -->
+      <!-- Chọn kịch bản -->
       <div class="scene-selector">
         <button
           v-for="scene in scenes"
@@ -36,7 +36,7 @@
         </button>
       </div>
 
-      <!-- 演示区域 -->
+      <!-- Khu vực demo -->
       <div class="demo-area">
         <div
           v-if="!currentScene"
@@ -45,10 +45,10 @@
           <div class="emoji">
             🎵
           </div>
-          <p>选择一个场景开始体验 AI 音频</p>
+          <p>Bạn chọn một kịch bản để bắt đầu trải nghiệm AI âm thanh</p>
         </div>
 
-        <!-- TTS 场景 -->
+        <!-- Kịch bản TTS -->
         <div
           v-else-if="currentScene.id === 'tts'"
           class="tts-demo"
@@ -57,11 +57,11 @@
             <textarea
               v-model="ttsText"
               rows="3"
-              placeholder="输入要合成的文本..."
+              placeholder="Bạn nhập văn bản cần tổng hợp..."
             />
           </div>
           <div class="voice-selector">
-            <span class="label">声音:</span>
+            <span class="label">Giọng đọc:</span>
             <button
               v-for="voice in voices"
               :key="voice.id"
@@ -77,11 +77,11 @@
             :disabled="isProcessing"
             @click="synthesize"
           >
-            <span v-if="isProcessing">合成中...</span>
-            <span v-else>🎙️ 合成语音</span>
+            <span v-if="isProcessing">Đang tổng hợp...</span>
+            <span v-else>🎙️ Tổng hợp giọng nói</span>
           </button>
 
-          <!-- 波形可视化 -->
+          <!-- Trực quan dạng sóng -->
           <div
             v-if="showWaveform"
             class="waveform-container"
@@ -108,7 +108,7 @@
           </div>
         </div>
 
-        <!-- ASR 场景 -->
+        <!-- Kịch bản ASR -->
         <div
           v-else-if="currentScene.id === 'asr'"
           class="asr-demo"
@@ -120,11 +120,11 @@
               @click="toggleRecording"
             >
               <span class="record-icon">{{ isRecording ? '⏹️' : '🎤' }}</span>
-              <span>{{ isRecording ? '停止录音' : '开始录音' }}</span>
+              <span>{{ isRecording ? 'Dừng ghi âm' : 'Bắt đầu ghi âm' }}</span>
             </button>
           </div>
 
-          <!-- 录音波形 -->
+          <!-- Sóng ghi âm -->
           <div
             v-if="isRecording || hasRecorded"
             class="waveform-container"
@@ -136,13 +136,13 @@
             />
           </div>
 
-          <!-- 识别结果 -->
+          <!-- Kết quả nhận dạng -->
           <div
             v-if="transcription"
             class="result-box"
           >
             <div class="result-label">
-              识别结果:
+              Kết quả nhận dạng:
             </div>
             <div class="result-text">
               {{ transcription }}
@@ -150,7 +150,7 @@
           </div>
         </div>
 
-        <!-- 声音克隆场景 -->
+        <!-- Kịch bản voice cloning -->
         <div
           v-else-if="currentScene.id === 'clone'"
           class="clone-demo"
@@ -165,14 +165,14 @@
               </div>
               <div class="step-content">
                 <div class="step-title">
-                  录制参考音频
+                  Ghi audio mẫu
                 </div>
                 <button
                   class="step-btn"
                   :disabled="cloneStep !== 1"
                   @click="recordReference"
                 >
-                  {{ cloneStep > 1 ? '✓ 已完成' : '🎙️ 录制 5 秒' }}
+                  {{ cloneStep > 1 ? '✓ Đã xong' : '🎙️ Ghi 5 giây' }}
                 </button>
               </div>
             </div>
@@ -188,14 +188,14 @@
               </div>
               <div class="step-content">
                 <div class="step-title">
-                  提取声纹特征
+                  Trích xuất đặc trưng giọng
                 </div>
                 <div
                   v-if="cloneStep === 2"
                   class="processing"
                 >
                   <div class="spinner" />
-                  <span>分析中...</span>
+                  <span>Đang phân tích...</span>
                 </div>
               </div>
             </div>
@@ -211,7 +211,7 @@
               </div>
               <div class="step-content">
                 <div class="step-title">
-                  合成克隆语音
+                  Tổng hợp giọng đã clone
                 </div>
                 <div
                   v-if="cloneStep === 3"
@@ -219,32 +219,32 @@
                 >
                   <input
                     v-model="cloneText"
-                    placeholder="输入要合成的文本"
+                    placeholder="Bạn nhập văn bản cần tổng hợp"
                   >
                   <button
                     class="step-btn"
                     @click="synthesizeClone"
                   >
-                    合成
+                    Tổng hợp
                   </button>
                 </div>
                 <div
                   v-if="cloneStep > 3"
                   class="success-msg"
                 >
-                  ✓ 克隆成功!
+                  ✓ Clone thành công!
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 声纹可视化 -->
+          <!-- Trực quan đặc trưng giọng -->
           <div
             v-if="cloneStep >= 2"
             class="embedding-viz"
           >
             <div class="viz-title">
-              声纹特征向量 (256维)
+              Vector đặc trưng giọng (256 chiều)
             </div>
             <div class="embedding-bars">
               <div
@@ -262,15 +262,15 @@
     <div class="tips">
       <div class="tip-item">
         <span class="tip-icon">💡</span>
-        <span>TTS: 文本转语音，让 AI 朗读任意文字</span>
+        <span>TTS: chuyển văn bản thành giọng nói, để AI đọc bất kỳ đoạn chữ nào</span>
       </div>
       <div class="tip-item">
         <span class="tip-icon">🎯</span>
-        <span>ASR: 语音识别，将语音转为文字</span>
+        <span>ASR: nhận dạng giọng nói, chuyển âm thanh thành văn bản</span>
       </div>
       <div class="tip-item">
         <span class="tip-icon">🎭</span>
-        <span>声音克隆: 只需几秒音频，复制任何人的声音</span>
+        <span>Voice cloning: chỉ vài giây audio là có thể nhân bản giọng của bất kỳ ai</span>
       </div>
     </div>
   </div>
@@ -280,15 +280,15 @@
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 
 const scenes = [
-  { id: 'tts', name: '语音合成', icon: '🗣️' },
-  { id: 'asr', name: '语音识别', icon: '🎤' },
-  { id: 'clone', name: '声音克隆', icon: '🎭' }
+  { id: 'tts', name: 'TTS', icon: '🗣️' },
+  { id: 'asr', name: 'ASR', icon: '🎤' },
+  { id: 'clone', name: 'Voice cloning', icon: '🎭' }
 ]
 
 const voices = [
-  { id: 'female1', name: '女声A', icon: '👩' },
-  { id: 'male1', name: '男声B', icon: '👨' },
-  { id: 'female2', name: '女声C', icon: '👧' }
+  { id: 'female1', name: 'Nữ A', icon: '👩' },
+  { id: 'male1', name: 'Nam B', icon: '👨' },
+  { id: 'female2', name: 'Nữ C', icon: '👧' }
 ]
 
 const currentScene = ref(null)
@@ -303,11 +303,11 @@ const cloneStep = ref(1)
 const embeddingValues = ref([])
 
 // TTS
-const ttsText = ref('你好，我是 AI 语音助手。')
+const ttsText = ref('Xin chào, mình là trợ lý giọng nói AI.')
 const selectedVoice = ref('female1')
 
 // Clone
-const cloneText = ref('这是用我的声音克隆合成的语音。')
+const cloneText = ref('Đây là giọng nói được tổng hợp bằng cách clone giọng của mình.')
 
 const waveformCanvas = ref(null)
 const recordCanvas = ref(null)
@@ -333,7 +333,7 @@ const resetState = () => {
   if (progressInterval) clearInterval(progressInterval)
 }
 
-// TTS 合成
+// Tổng hợp TTS
 const synthesize = async () => {
   isProcessing.value = true
   showWaveform.value = true
@@ -370,15 +370,15 @@ const togglePlay = () => {
   }
 }
 
-// ASR 录音
+// Ghi âm ASR
 const toggleRecording = () => {
   if (isRecording.value) {
     isRecording.value = false
     hasRecorded.value = true
     stopRecordingAnimation()
-    // 模拟识别
+    // Mô phỏng nhận dạng
     setTimeout(() => {
-      transcription.value = '今天天气真不错，适合出去散步。'
+      transcription.value = 'Hôm nay thời tiết rất đẹp, hợp để ra ngoài đi dạo.'
     }, 800)
   } else {
     isRecording.value = true
@@ -401,7 +401,7 @@ const stopRecordingAnimation = () => {
   if (animationId) cancelAnimationFrame(animationId)
 }
 
-// 声音克隆
+// Voice cloning
 const recordReference = async () => {
   isRecording.value = true
   startRecordingAnimation()
@@ -411,7 +411,7 @@ const recordReference = async () => {
     stopRecordingAnimation()
     cloneStep.value = 2
 
-    // 模拟提取声纹
+    // Mô phỏng trích xuất đặc trưng giọng
     setTimeout(() => {
       embeddingValues.value = Array.from({ length: 32 }, () => Math.random() * 80 + 10)
       cloneStep.value = 3
@@ -427,7 +427,7 @@ const synthesizeClone = () => {
   })
 }
 
-// 绘制波形
+// Vẽ dạng sóng
 const drawWaveform = (canvas, isDynamic = false) => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')

@@ -2,12 +2,12 @@
   <div class="syntax-comparison-demo">
     <div class="demo-header">
       <span class="icon">📝</span>
-      <span class="title">语法对比镜</span>
-      <span class="subtitle">同样的功能，不同的表达方式</span>
+      <span class="title">Kính so sánh cú pháp</span>
+      <span class="subtitle">Cùng một chức năng, các cách diễn đạt khác nhau</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">写信</span>：有人喜欢简洁明了（Python、Ruby），有人喜欢正式严谨（Java、C#），有人喜欢直接高效（Go）。不同语言的语法反映了不同的设计哲学。
+      Hãy tưởng tượng bạn <span class="highlight">viết thư</span>: có người thích gọn và rõ (Python, Ruby), có người thích chính thống và nghiêm cẩn (Java, C#), có người thích trực tiếp và hiệu quả (Go). Cú pháp các ngôn ngữ phản ánh triết lý thiết kế khác nhau.
     </div>
 
     <div class="language-tabs">
@@ -47,11 +47,11 @@
 
         <div class="code-stats">
           <div class="stat-item">
-            <span class="stat-label">代码行数：</span>
-            <span class="stat-value">{{ getLineCount(selectedLang) }} 行</span>
+            <span class="stat-label">Số dòng code:</span>
+            <span class="stat-value">{{ getLineCount(selectedLang) }} dòng</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">复杂度：</span>
+            <span class="stat-label">Độ phức tạp:</span>
             <span class="stat-value">{{ getCode(selectedLang).complexity }}</span>
           </div>
         </div>
@@ -60,7 +60,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>简洁的语法（Python、Ruby）让开发更快，但冗长的语法（Java、C#）提供了更强的类型安全性和可维护性。没有"最好"的语法，只有最适合团队的语法。
+      <strong>Tư tưởng cốt lõi:</strong> Cú pháp gọn (Python, Ruby) giúp phát triển nhanh, nhưng cú pháp dài dòng (Java, C#) cho type safety và khả năng bảo trì tốt hơn. Không có cú pháp "tốt nhất", chỉ có cú pháp phù hợp nhất với team.
     </div>
   </div>
 </template>
@@ -82,7 +82,7 @@ const codes = {
   Python: {
     code: `print("Hello, World!")`,
     filename: 'hello.py',
-    complexity: '极简'
+    complexity: 'Cực gọn'
   },
   Go: {
     code: `package main
@@ -93,12 +93,12 @@ func main() {
     fmt.Println("Hello, World!")
 }`,
     filename: 'hello.go',
-    complexity: '简洁'
+    complexity: 'Gọn'
   },
   'Node.js': {
     code: `console.log("Hello, World!");`,
     filename: 'hello.js',
-    complexity: '极简'
+    complexity: 'Cực gọn'
   },
   Java: {
     code: `public class HelloWorld {
@@ -107,14 +107,14 @@ func main() {
     }
 }`,
     filename: 'HelloWorld.java',
-    complexity: '冗长'
+    complexity: 'Dài dòng'
   },
   Rust: {
     code: `fn main() {
     println!("Hello, World!");
 }`,
     filename: 'main.rs',
-    complexity: '简洁'
+    complexity: 'Gọn'
   }
 }
 

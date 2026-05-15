@@ -62,17 +62,17 @@ const startSearch = async () => {
   <div class="db-index-demo">
     <div class="demo-header">
       <span class="icon">🔍</span>
-      <span class="title">索引查找演示</span>
-      <span class="subtitle">全表扫描 vs 索引查找</span>
+      <span class="title">Demo tìm kiếm có index</span>
+      <span class="subtitle">Full table scan vs index lookup</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">图书馆</span>找一本叫"数据库原理"的书。如果没有目录，你得一排排书架找；有了索书号，直接去对应区域拿。数据库索引就像这个<span class="highlight">索书号</span>，让查找速度从"翻遍所有书"变成"直接定位"。
+      Hãy hình dung bạn đang ở <span class="highlight">thư viện</span> tìm cuốn "Nguyên lý CSDL". Nếu không có mục lục, bạn phải đi từng kệ. Có số sách thì đến thẳng khu đó lấy. Index của database giống như <span class="highlight">số sách</span>: tốc độ tìm từ "lật hết mọi sách" thành "đi thẳng tới".
     </div>
 
     <div class="controls-area">
       <div class="input-group">
-        <label>查找 ID:</label>
+        <label>Tìm ID:</label>
         <el-input-number
           v-model="searchQuery"
           :min="1"
@@ -89,7 +89,7 @@ const startSearch = async () => {
           :disabled="isSearching"
           @click="mode = 'scan'"
         >
-          🐢 全表扫描 O(n)
+          🐢 Full table scan O(n)
         </button>
         <button
           class="mode-btn"
@@ -97,7 +97,7 @@ const startSearch = async () => {
           :disabled="isSearching"
           @click="mode = 'index'"
         >
-          ⚡ 索引查找 O(log n)
+          ⚡ Index lookup O(log n)
         </button>
       </div>
 
@@ -106,7 +106,7 @@ const startSearch = async () => {
         :disabled="isSearching"
         @click="startSearch"
       >
-        {{ isSearching ? '查找中...' : '开始查找' }}
+        {{ isSearching ? 'Đang tìm...' : 'Bắt đầu tìm' }}
       </button>
     </div>
 
@@ -131,7 +131,7 @@ const startSearch = async () => {
           </div>
         </div>
         <p class="view-desc">
-          全表扫描：数据库像<span class="highlight">逐个翻书架</span>一样，必须逐行检查数据，直到找到匹配项。数据越多，速度越慢。
+          Full table scan: database giống như <span class="highlight">lật từng kệ</span>, phải kiểm tra từng dòng cho tới khi tìm thấy. Dữ liệu càng nhiều, càng chậm.
         </p>
       </div>
 
@@ -155,7 +155,7 @@ const startSearch = async () => {
           </div>
         </div>
         <p class="view-desc">
-          索引查找：类似<span class="highlight">查字典</span>，通过二分查找或 B+ 树，每次比较都能排除掉一半（或更多）的数据，极快地定位目标。
+          Index lookup: giống như <span class="highlight">tra từ điển</span>, qua binary search hoặc B+ Tree, mỗi lần so sánh loại bỏ một nửa (hoặc nhiều hơn), định vị mục tiêu cực nhanh.
         </p>
       </div>
     </div>
@@ -168,7 +168,7 @@ const startSearch = async () => {
         <span class="stat-icon">🎯</span>
         <div class="stat-content">
           <div class="stat-label">
-            查找结果
+            Kết quả tìm
           </div>
           <div class="stat-value">
             {{ searchResult.value }}
@@ -179,13 +179,13 @@ const startSearch = async () => {
         <span class="stat-icon">{{ mode === 'scan' ? '🐢' : '⚡' }}</span>
         <div class="stat-content">
           <div class="stat-label">
-            操作次数
+            Số thao tác
           </div>
           <div
             class="stat-value"
             :class="mode"
           >
-            {{ mode === 'scan' ? scanCurrentIndex + 1 : treeActiveNodes.length }} 次
+            {{ mode === 'scan' ? scanCurrentIndex + 1 : treeActiveNodes.length }} lần
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ const startSearch = async () => {
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>索引是用<span class="highlight">空间换时间</span>的经典案例。虽然需要额外空间存储索引结构，但能让查询速度提升成千上万倍。就像图书馆的目录卡片，虽占位置，但找书快太多了。
+      <strong>Tư tưởng cốt lõi:</strong> Index là ví dụ kinh điển của việc <span class="highlight">đánh đổi không gian lấy thời gian</span>. Tuy tốn thêm không gian để lưu cấu trúc index, nhưng tốc độ query tăng hàng nghìn, hàng vạn lần. Giống thẻ mục lục thư viện: tốn chỗ một chút, nhưng tìm sách nhanh hơn hẳn.
     </div>
   </div>
 </template>

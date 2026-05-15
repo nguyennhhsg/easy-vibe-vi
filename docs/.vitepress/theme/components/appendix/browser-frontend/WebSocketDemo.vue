@@ -1,61 +1,61 @@
 <template>
   <div class="demo-wrapper">
-    <div class="demo-header">WebSocket / 全双工通信演示</div>
-    
+    <div class="demo-header">WebSocket / Demo giao tiếp full-duplex</div>
+
     <div class="network-stage">
-      <!-- 客户端 -->
+      <!-- Client -->
       <div class="node client">
         <div class="node-icon">🎮</div>
         <div class="node-label">Player 1</div>
-        <button 
-          v-if="isConnected" 
-          class="action-btn client-btn" 
+        <button
+          v-if="isConnected"
+          class="action-btn client-btn"
           @click="sendMessage('client')"
         >
-          发招：升龙拳！👊
+          Ra chiêu: Thăng Long Quyền!
         </button>
       </div>
 
-      <!-- WebSocket 通信链路（包含左右两个方向的车道） -->
+      <!-- Kênh WebSocket (gồm hai luồng ngược chiều) -->
       <div class="channel">
         <div class="ws-pipe" v-show="isConnected">
           <div class="line top-line"></div>
           <div class="line bottom-line"></div>
         </div>
-        
-        <!-- 流动的数据包 -->
-        <div 
-          v-for="msg in activeMessages" 
-          :key="msg.id" 
+
+        <!-- Các packet đang truyền -->
+        <div
+          v-for="msg in activeMessages"
+          :key="msg.id"
           class="ws-packet"
-          :class="msg.sender" 
+          :class="msg.sender"
         >
           {{ msg.text }}
         </div>
       </div>
 
-      <!-- 服务端 -->
+      <!-- Server -->
       <div class="node server">
         <div class="node-icon">🖥️</div>
         <div class="node-label">Game Server</div>
-        <button 
-          v-if="isConnected" 
-          class="action-btn server-btn" 
+        <button
+          v-if="isConnected"
+          class="action-btn server-btn"
           @click="sendMessage('server')"
         >
-          群发：敌军出动！🛸
+          Broadcast: quân địch xuất hiện!
         </button>
       </div>
     </div>
 
     <div class="status-panel">
       <div class="status-controls">
-        <button 
-          class="toggle-btn" 
-          :class="{ active: isConnected }" 
+        <button
+          class="toggle-btn"
+          :class="{ active: isConnected }"
           @click="toggleConnection"
         >
-          {{ isConnected ? '⏹ 挥泪握手告别' : '⚡ Upgrade: websocket 协议质变' }}
+          {{ isConnected ? 'Ngắt kết nối (TCP close)' : 'Upgrade lên giao thức websocket' }}
         </button>
       </div>
       <div class="log-box">
@@ -83,33 +83,33 @@ const addLog = (msg) => {
 const toggleConnection = () => {
   if (isConnected.value) {
     isConnected.value = false
-    addLog('断开 WebSockets 连接 (TCP 四次挥手).')
+    addLog('Đã ngắt kết nối WebSocket (TCP 4-way close).')
     activeMessages.value = []
   } else {
-    addLog('客户端发 HTTP 请求：Upgrade: websocket, Connection: Upgrade')
+    addLog('Client gửi HTTP request: Upgrade: websocket, Connection: Upgrade')
     setTimeout(() => {
-      addLog('服务端响应：101 Switching Protocols。神级链路建立完成！')
+      addLog('Server phản hồi: 101 Switching Protocols. Kênh đã sẵn sàng!')
       isConnected.value = true
     }, 600)
   }
 }
 
 const sendMessage = (sender) => {
-  const text = sender === 'client' ? '【二进制帧】走位左移' : '【JSON帧】Boss 释放技能'
+  const text = sender === 'client' ? '[Binary frame] Di chuyển sang trái' : '[JSON frame] Boss tung chiêu'
   const msgObj = { id: msgId++, text, sender }
   activeMessages.value.push(msgObj)
-  
+
   if (sender === 'client') {
-    addLog(`客户端：瞬间送出 0101 极简格式数据包`)
+    addLog(`Client: gửi packet 0101 cực gọn trong tích tắc`)
   } else {
-    addLog(`服务端：瞬间下发最新全局状态帧`)
+    addLog(`Server: đẩy state frame mới nhất ngay lập tức`)
   }
-  
-  // 模拟极快传输
+
+  // Giả lập truyền tốc độ cao
   setTimeout(() => {
     activeMessages.value = activeMessages.value.filter(m => m.id !== msgObj.id)
-    if (sender === 'client') addLog('服务端：光速收到玩家操作响应。')
-    else addLog('客户端：光速渲染 Boss 动画！')
+    if (sender === 'client') addLog('Server: nhận thao tác người chơi tốc độ ánh sáng.')
+    else addLog('Client: render animation Boss tốc độ ánh sáng!')
   }, 800)
 }
 

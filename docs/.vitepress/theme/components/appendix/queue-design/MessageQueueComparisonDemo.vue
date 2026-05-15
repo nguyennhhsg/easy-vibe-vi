@@ -1,15 +1,15 @@
 <!--
   MessageQueueComparisonDemo.vue
-  主流消息队列对比交互演示
+  Demo tương tác so sánh các message queue phổ biến
 -->
 <template>
   <div class="mq-comparison-demo">
     <div class="header">
       <div class="title">
-        主流消息队列对比
+        So sánh các message queue phổ biến
       </div>
       <div class="subtitle">
-        选择不同 MQ，查看特性对比和适用场景
+        Chọn MQ khác nhau để xem so sánh đặc tính và use case phù hợp
       </div>
     </div>
 
@@ -39,7 +39,7 @@
         <div class="metrics-grid">
           <div class="metric">
             <div class="metric-label">
-              吞吐量
+              Throughput
             </div>
             <div class="metric-value">
               {{ currentMQ.throughput }}
@@ -54,7 +54,7 @@
 
           <div class="metric">
             <div class="metric-label">
-              延迟
+              Latency
             </div>
             <div class="metric-value">
               {{ currentMQ.latency }}
@@ -66,7 +66,7 @@
 
           <div class="metric">
             <div class="metric-label">
-              可靠性
+              Độ tin cậy
             </div>
             <div class="metric-value">
               {{ currentMQ.reliability }}
@@ -78,7 +78,7 @@
 
           <div class="metric">
             <div class="metric-label">
-              学习曲线
+              Đường cong học tập
             </div>
             <div class="metric-value">
               {{ currentMQ.learning }}
@@ -94,7 +94,7 @@
 
         <div class="features">
           <div class="feature-title">
-            核心特性
+            Đặc tính cốt lõi
           </div>
           <div class="feature-list">
             <div
@@ -109,7 +109,7 @@
 
         <div class="use-cases">
           <div class="use-case-title">
-            ✅ 适用场景
+            ✅ Use case phù hợp
           </div>
           <ul class="use-case-list">
             <li
@@ -123,7 +123,7 @@
 
         <div class="not-recommended">
           <div class="not-title">
-            ⚠️ 不推荐场景
+            ⚠️ Use case không khuyến nghị
           </div>
           <ul class="not-list">
             <li
@@ -139,12 +139,12 @@
 
     <div class="comparison-table">
       <div class="table-title">
-        快速对比表
+        Bảng so sánh nhanh
       </div>
       <table>
         <thead>
           <tr>
-            <th>特性</th>
+            <th>Đặc tính</th>
             <th
               v-for="mq in messageQueues"
               :key="mq.name"
@@ -156,7 +156,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>吞吐量</td>
+            <td>Throughput</td>
             <td
               v-for="mq in messageQueues"
               :key="mq.name"
@@ -166,7 +166,7 @@
             </td>
           </tr>
           <tr>
-            <td>延迟</td>
+            <td>Latency</td>
             <td
               v-for="mq in messageQueues"
               :key="mq.name"
@@ -176,7 +176,7 @@
             </td>
           </tr>
           <tr>
-            <td>消息顺序</td>
+            <td>Thứ tự message</td>
             <td
               v-for="mq in messageQueues"
               :key="mq.name"
@@ -186,7 +186,7 @@
             </td>
           </tr>
           <tr>
-            <td>消息回溯</td>
+            <td>Replay message</td>
             <td
               v-for="mq in messageQueues"
               :key="mq.name"
@@ -196,7 +196,7 @@
             </td>
           </tr>
           <tr>
-            <td>最佳场景</td>
+            <td>Use case tốt nhất</td>
             <td
               v-for="mq in messageQueues"
               :key="mq.name"
@@ -211,7 +211,7 @@
 
     <div class="recommendation">
       <div class="rec-title">
-        💡 选择建议
+        💡 Gợi ý lựa chọn
       </div>
       <div class="rec-content">
         <div
@@ -219,31 +219,31 @@
           class="rec-text"
         >
           <strong>RabbitMQ</strong>
-          是最稳妥的选择，适合大多数传统业务场景。如果团队有 AMQP
-          经验，或者需要复杂的路由规则，优先选择它。
+          là lựa chọn an toàn nhất, phù hợp đa số nghiệp vụ truyền thống. Nếu đội nhóm bạn có kinh nghiệm AMQP
+          hoặc cần routing rule phức tạp, ưu tiên chọn nó.
         </div>
         <div
           v-else-if="selectedMQ === 'kafka'"
           class="rec-text"
         >
-          <strong>Kafka</strong> 适合大数据量和流式处理场景。如果需要处理百万级
-          TPS，或者需要消息回溯、与大数据生态集成，选择 Kafka。
+          <strong>Kafka</strong> phù hợp use case dữ liệu lớn và stream processing. Nếu bạn cần xử lý TPS hàng triệu
+          hoặc cần replay message, tích hợp big data, hãy chọn Kafka.
         </div>
         <div
           v-else-if="selectedMQ === 'rocketmq'"
           class="rec-text"
         >
           <strong>RocketMQ</strong>
-          是阿里开源，特别适合电商、金融场景。如果需要事务消息、顺序消息、延迟消息等高级特性，RocketMQ
-          是最佳选择。
+          do Alibaba mã nguồn mở, đặc biệt phù hợp e-commerce, tài chính. Nếu bạn cần transactional message, ordered message, delayed message và các tính năng cao cấp khác, RocketMQ
+          là lựa chọn tốt nhất.
         </div>
         <div
           v-else
           class="rec-text"
         >
-          <strong>Redis Stream</strong> 最轻量，适合小团队和 MVP
-          验证。如果已经有 Redis 基础设施，且对可靠性要求不是极高，可以先用
-          Redis Stream 快速实现。
+          <strong>Redis Stream</strong> là nhẹ nhất, phù hợp team nhỏ và validate MVP. Nếu đã có sẵn hạ tầng Redis
+          và yêu cầu độ tin cậy không quá cao, bạn có thể dùng
+          Redis Stream để triển khai nhanh.
         </div>
       </div>
     </div>
@@ -259,114 +259,114 @@ const messageQueues = [
   {
     name: 'rabbitmq',
     label: 'RabbitMQ',
-    positioning: '传统消息队列',
-    throughput: '1 万/秒',
+    positioning: 'Message queue truyền thống',
+    throughput: '10K/giây',
     throughputPercent: 10,
-    latency: '微秒级',
-    latencyDesc: '极低延迟',
-    reliability: '高',
-    reliabilityDesc: '持久化支持',
-    learning: '中等',
+    latency: 'Cấp micro giây',
+    latencyDesc: 'Latency cực thấp',
+    reliability: 'Cao',
+    reliabilityDesc: 'Hỗ trợ persist',
+    learning: 'Trung bình',
     learningPercent: 40,
-    ordering: '支持（单队列）',
-    rewind: '不支持',
-    bestScenario: '传统业务',
+    ordering: 'Có (trong 1 queue)',
+    rewind: 'Không hỗ trợ',
+    bestScenario: 'Nghiệp vụ truyền thống',
     features: [
-      'AMQP 协议标准',
-      '灵活的路由规则',
-      '多种消息模式',
-      '管理界面友好',
-      '成熟的生态'
+      'Chuẩn giao thức AMQP',
+      'Routing rule linh hoạt',
+      'Nhiều pattern message',
+      'Giao diện quản trị thân thiện',
+      'Hệ sinh thái trưởng thành'
     ],
     useCases: [
-      '传统业务系统',
-      '任务队列',
-      '需要复杂路由规则',
-      '对延迟敏感（微秒级）',
-      '团队熟悉 AMQP'
+      'Hệ thống nghiệp vụ truyền thống',
+      'Task queue',
+      'Cần routing rule phức tạp',
+      'Nhạy cảm với latency (cấp micro giây)',
+      'Đội nhóm thông thạo AMQP'
     ],
-    notRecommended: ['吞吐量要求百万级', '需要消息回溯功能']
+    notRecommended: ['Cần throughput cấp triệu/giây', 'Cần tính năng replay message']
   },
   {
     name: 'kafka',
     label: 'Kafka',
-    positioning: '分布式日志系统',
-    throughput: '100 万/秒',
+    positioning: 'Hệ thống log phân tán',
+    throughput: '1M/giây',
     throughputPercent: 100,
-    latency: '毫秒级',
-    latencyDesc: '相对较高',
-    reliability: '高',
-    reliabilityDesc: '多副本机制',
-    learning: '陡峭',
+    latency: 'Cấp mili giây',
+    latencyDesc: 'Tương đối cao',
+    reliability: 'Cao',
+    reliabilityDesc: 'Cơ chế đa replica',
+    learning: 'Dốc',
     learningPercent: 80,
-    ordering: '支持（分区内）',
-    rewind: '支持',
-    bestScenario: '日志/流处理',
+    ordering: 'Có (trong partition)',
+    rewind: 'Hỗ trợ',
+    bestScenario: 'Log/stream processing',
     features: [
-      '超高吞吐量',
-      '消息回溯能力',
-      '分布式架构',
-      '与大数据生态集成',
-      '分区机制'
+      'Throughput siêu cao',
+      'Khả năng replay message',
+      'Kiến trúc phân tán',
+      'Tích hợp hệ sinh thái big data',
+      'Cơ chế partition'
     ],
     useCases: [
-      '日志收集',
-      '流式处理',
-      '事件溯源',
-      '用户行为分析',
-      '百万级 TPS 场景'
+      'Thu thập log',
+      'Stream processing',
+      'Event sourcing',
+      'Phân tích hành vi người dùng',
+      'Use case TPS hàng triệu'
     ],
-    notRecommended: ['对延迟极度敏感', '简单的任务队列', '小团队快速开发']
+    notRecommended: ['Nhạy cảm cực với latency', 'Task queue đơn giản', 'Team nhỏ phát triển nhanh']
   },
   {
     name: 'rocketmq',
     label: 'RocketMQ',
-    positioning: '电商级消息队列',
-    throughput: '10 万/秒',
+    positioning: 'Message queue cấp e-commerce',
+    throughput: '100K/giây',
     throughputPercent: 30,
-    latency: '毫秒级',
-    latencyDesc: '低延迟',
-    reliability: '高',
-    reliabilityDesc: '同步/异步刷盘',
-    learning: '陡峭',
+    latency: 'Cấp mili giây',
+    latencyDesc: 'Latency thấp',
+    reliability: 'Cao',
+    reliabilityDesc: 'Flush sync/async',
+    learning: 'Dốc',
     learningPercent: 70,
-    ordering: '支持',
-    rewind: '支持',
-    bestScenario: '电商/金融',
-    features: ['事务消息', '顺序消息', '延迟消息', '消息过滤', '金融级可靠性'],
+    ordering: 'Có',
+    rewind: 'Hỗ trợ',
+    bestScenario: 'E-commerce/tài chính',
+    features: ['Transactional message', 'Ordered message', 'Delayed message', 'Lọc message', 'Độ tin cậy cấp tài chính'],
     useCases: [
-      '电商交易系统',
-      '金融支付',
-      '订单处理',
-      '需要事务一致性',
-      '需要定时/延迟消息'
+      'Hệ thống giao dịch e-commerce',
+      'Thanh toán tài chính',
+      'Xử lý đơn hàng',
+      'Cần tính nhất quán giao dịch',
+      'Cần message scheduled/delayed'
     ],
-    notRecommended: ['简单的异步任务', '小团队快速验证', '不需要高级特性']
+    notRecommended: ['Async task đơn giản', 'Team nhỏ validate nhanh', 'Không cần tính năng cao cấp']
   },
   {
     name: 'redis',
     label: 'Redis Stream',
-    positioning: '轻量级队列',
-    throughput: '5 万/秒',
+    positioning: 'Queue nhẹ',
+    throughput: '50K/giây',
     throughputPercent: 20,
-    latency: '毫秒级',
-    latencyDesc: '低延迟',
-    reliability: '中',
-    reliabilityDesc: 'AOF 持久化',
-    learning: '简单',
+    latency: 'Cấp mili giây',
+    latencyDesc: 'Latency thấp',
+    reliability: 'Trung bình',
+    reliabilityDesc: 'Persist AOF',
+    learning: 'Đơn giản',
     learningPercent: 15,
-    ordering: '支持',
-    rewind: '支持',
-    bestScenario: '小规模队列',
-    features: ['轻量级', '基于 Redis', '学习成本低', '易于部署', '性能优秀'],
+    ordering: 'Có',
+    rewind: 'Hỗ trợ',
+    bestScenario: 'Queue quy mô nhỏ',
+    features: ['Nhẹ', 'Dựa trên Redis', 'Chi phí học thấp', 'Dễ deploy', 'Hiệu năng tốt'],
     useCases: [
-      '小团队项目',
-      'MVP 快速验证',
-      '已有 Redis 基础设施',
-      '简单队列需求',
-      '对可靠性要求不高'
+      'Dự án team nhỏ',
+      'Validate MVP nhanh',
+      'Đã có sẵn hạ tầng Redis',
+      'Nhu cầu queue đơn giản',
+      'Yêu cầu độ tin cậy không quá cao'
     ],
-    notRecommended: ['对可靠性要求极高', '复杂的路由需求', '需要事务消息']
+    notRecommended: ['Yêu cầu độ tin cậy cực cao', 'Nhu cầu routing phức tạp', 'Cần transactional message']
   }
 ]
 

@@ -21,14 +21,14 @@ const refReset = () => { refStep.value = 0; objData.value.age = 25 }
 <template>
   <div class="reference-demo">
     <div class="demo-title">
-      🔄 值 vs 引用
+      Value vs Reference
     </div>
-    
+
     <div class="compare-grid">
-      <!-- 左侧：基本类型 -->
+      <!-- Bên trái: kiểu nguyên thủy -->
       <div class="compare-box">
         <div class="box-header blue">
-          基本类型（复制值）
+          Kiểu nguyên thủy (copy giá trị)
         </div>
         
         <div class="memory-area">
@@ -52,43 +52,43 @@ const refReset = () => { refStep.value = 0; objData.value.age = 25 }
             v-if="basicStep >= 1"
             class="copy-arrow"
           >
-            ↓ 复制值
+            Copy giá trị
           </div>
         </div>
-        
+
         <div
           class="result-text"
           :class="basicStep === 2 ? 'success' : 'info'"
         >
-          {{ basicStep === 0 ? '点击复制' : basicStep === 1 ? 'b 得到 10' : '✅ 修改 b 不影响 a' }}
+          {{ basicStep === 0 ? 'Bấm để copy' : basicStep === 1 ? 'b nhận giá trị 10' : 'Sửa b không ảnh hưởng a' }}
         </div>
-        
+
         <div class="btn-group">
           <button
             :disabled="basicStep >= 1"
             @click="basicCopy"
           >
-            复制
+            Copy
           </button>
           <button
             :disabled="basicStep !== 1"
             @click="basicModify"
           >
-            改 b
+            Sửa b
           </button>
           <button
             class="reset"
             @click="basicReset"
           >
-            重置
+            Reset
           </button>
         </div>
       </div>
-      
-      <!-- 右侧：引用类型 -->
+
+      <!-- Bên phải: kiểu tham chiếu -->
       <div class="compare-box">
         <div class="box-header orange">
-          引用类型（复制地址）
+          Kiểu tham chiếu (copy địa chỉ)
         </div>
         
         <div class="memory-area">
@@ -123,41 +123,41 @@ const refReset = () => { refStep.value = 0; objData.value.age = 25 }
             v-if="refStep >= 1"
             class="copy-arrow"
           >
-            指向同一地址
+            Cùng trỏ tới một địa chỉ
           </div>
         </div>
-        
+
         <div
           class="result-text"
           :class="refStep === 2 ? 'warning' : refStep === 3 ? 'success' : 'info'"
         >
-          {{ refStep === 0 ? '点击复制' : refStep === 1 ? '共享地址' : refStep === 2 ? '⚠️ 一改全变' : '✅ 已分离' }}
+          {{ refStep === 0 ? 'Bấm để copy' : refStep === 1 ? 'Dùng chung địa chỉ' : refStep === 2 ? 'Sửa một, đổi cả hai' : 'Đã tách riêng' }}
         </div>
-        
+
         <div class="btn-group">
           <button
             :disabled="refStep >= 1"
             @click="refCopy"
           >
-            复制
+            Copy
           </button>
           <button
             :disabled="refStep !== 1"
             @click="refModify"
           >
-            修改
+            Sửa
           </button>
           <button
             :disabled="refStep !== 2"
             @click="refSpread"
           >
-            展开
+            Spread
           </button>
           <button
             class="reset"
             @click="refReset"
           >
-            重置
+            Reset
           </button>
         </div>
       </div>
@@ -166,20 +166,20 @@ const refReset = () => { refStep.value = 0; objData.value.age = 25 }
     <div class="code-compare">
       <div class="code-col">
         <div class="code-title">
-          基本类型
+          Kiểu nguyên thủy
         </div>
         <pre><code>let a = 10
 let b = a  // b=10
-b = 20     // a还是10</code></pre>
+b = 20     // a vẫn là 10</code></pre>
       </div>
       <div class="code-col">
         <div class="code-title">
-          引用类型
+          Kiểu tham chiếu
         </div>
         <pre><code>let obj1 = {age:25}
 let obj2 = obj1
-obj2.age=30 // obj1也变了！
-// 用 {...obj1} 复制</code></pre>
+obj2.age=30 // obj1 cũng đổi theo!
+// Dùng {...obj1} để copy</code></pre>
       </div>
     </div>
   </div>

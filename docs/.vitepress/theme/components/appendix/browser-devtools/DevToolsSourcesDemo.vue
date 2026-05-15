@@ -241,7 +241,7 @@ const flatNext = () => {
   >
     <template #header>
       <div class="header">
-        <span class="title">Sources (源代码调试)</span>
+        <span class="title">Sources (Debug mã nguồn)</span>
         <div class="controls">
           <el-button-group>
             <el-button
@@ -330,7 +330,7 @@ const flatNext = () => {
     </div>
     
     <div class="footer-tip">
-      点击行号设置断点。点击 Run 开始执行，代码将在断点处暂停。
+      Bấm vào số dòng để đặt breakpoint. Bấm Run để chạy, code sẽ dừng tại breakpoint.
     </div>
   </el-card>
 </template>

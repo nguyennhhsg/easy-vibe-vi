@@ -1,8 +1,8 @@
 <template>
   <div class="demo-root">
     <div class="demo-header">
-      <span class="title">环境变量的三个层级</span>
-      <span class="subtitle">变量从外到内单向传递，子进程继承父进程的副本</span>
+      <span class="title">Ba cấp độ của biến môi trường</span>
+      <span class="subtitle">Biến truyền một chiều từ ngoài vào trong, child process kế thừa bản sao của parent process</span>
     </div>
 
     <div class="scope-stack">
@@ -10,8 +10,8 @@
         <div class="layer-header">
           <span class="layer-icon">🖥️</span>
           <div>
-            <div class="layer-title">系统级 <code>/etc/environment</code></div>
-            <div class="layer-desc">所有用户、所有进程都能看到，由管理员配置</div>
+            <div class="layer-title">Cấp hệ thống <code>/etc/environment</code></div>
+            <div class="layer-desc">Mọi user, mọi tiến trình đều thấy, do admin cấu hình</div>
           </div>
         </div>
         <div class="var-list">
@@ -23,7 +23,7 @@
 
       <div class="arrow-row">
         <span class="arrow-line" />
-        <span class="arrow-label">▼ 子进程继承父进程环境</span>
+        <span class="arrow-label">▼ Child process kế thừa env của parent process</span>
         <span class="arrow-line" />
       </div>
 
@@ -31,8 +31,8 @@
         <div class="layer-header">
           <span class="layer-icon">👤</span>
           <div>
-            <div class="layer-title">用户级 <code>~/.zshrc</code></div>
-            <div class="layer-desc">只影响当前用户，登录 Shell 启动时自动加载</div>
+            <div class="layer-title">Cấp user <code>~/.zshrc</code></div>
+            <div class="layer-desc">Chỉ ảnh hưởng user hiện tại, tự động nạp khi login shell khởi động</div>
           </div>
         </div>
         <div class="var-list">
@@ -50,7 +50,7 @@
 
       <div class="arrow-row">
         <span class="arrow-line" />
-        <span class="arrow-label">▼ 启动子进程（如 node app.js）</span>
+        <span class="arrow-label">▼ Khởi chạy child process (vd: node app.js)</span>
         <span class="arrow-line" />
       </div>
 
@@ -58,21 +58,21 @@
         <div class="layer-header">
           <span class="layer-icon">⚙️</span>
           <div>
-            <div class="layer-title">进程级（当前运行的程序）</div>
-            <div class="layer-desc">继承所有上层变量，退出后消失，修改不影响父进程</div>
+            <div class="layer-title">Cấp tiến trình (chương trình đang chạy)</div>
+            <div class="layer-desc">Kế thừa mọi biến cấp trên, mất khi thoát, sửa đổi không ảnh hưởng parent process</div>
           </div>
         </div>
         <div class="var-list">
           <div v-for="v in processVars" :key="v.key" class="var-chip process-chip" :class="{ 'is-new': v.isNew }">
             <span class="chip-key">{{ v.key }}</span><span class="chip-eq">=</span><span class="chip-val">{{ v.value }}</span>
-            <span v-if="v.isNew" class="new-badge">你加的</span>
+            <span v-if="v.isNew" class="new-badge">Bạn thêm</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>单向传递：</strong>变量只能向下继承，子进程修改变量值不会影响父进程。关闭终端后，直接 <code>export</code> 的变量也会消失。
+      <strong>Truyền một chiều:</strong> Biến chỉ kế thừa xuống dưới, child process sửa giá trị không ảnh hưởng parent process. Sau khi đóng terminal, các biến chỉ <code>export</code> trực tiếp cũng sẽ biến mất.
     </div>
   </div>
 </template>
@@ -82,8 +82,8 @@ import { ref, computed } from 'vue'
 
 const systemVars = [
   { key: 'PATH', value: '/usr/local/bin:/usr/bin:/bin' },
-  { key: 'LANG', value: 'zh_CN.UTF-8' },
-  { key: 'TZ', value: 'Asia/Shanghai' }
+  { key: 'LANG', value: 'vi_VN.UTF-8' },
+  { key: 'TZ', value: 'Asia/Ho_Chi_Minh' }
 ]
 
 const baseUserVars = [

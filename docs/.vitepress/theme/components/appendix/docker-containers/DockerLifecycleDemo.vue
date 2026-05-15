@@ -1,12 +1,12 @@
 <!--
   DockerLifecycleDemo.vue
-  Docker 生命周期演示：镜像构建到容器运行的流程
+  Vòng đời Docker: từ build image tới container chạy
 -->
 <template>
   <div class="docker-lifecycle-demo">
     <div class="header">
-      <div class="title">Docker 生命周期</div>
-      <div class="subtitle">点击每个阶段查看详细说明</div>
+      <div class="title">Vòng đời Docker</div>
+      <div class="subtitle">Bấm vào từng giai đoạn để xem chi tiết</div>
     </div>
 
     <div class="stages">
@@ -26,7 +26,7 @@
       <div class="detail-title">{{ current.name }}</div>
       <div class="detail-desc">{{ current.desc }}</div>
       <div class="command-block">
-        <div class="cmd-label">常用命令</div>
+        <div class="cmd-label">Lệnh hay dùng</div>
         <div v-for="(cmd, i) in current.commands" :key="i" class="cmd-item">
           <code>{{ cmd.cmd }}</code>
           <span class="cmd-desc">{{ cmd.desc }}</span>
@@ -44,63 +44,63 @@ const activeStage = ref('write')
 const stages = [
   {
     key: 'write',
-    name: '编写 Dockerfile',
+    name: 'Viết Dockerfile',
     icon: '📝',
-    desc: 'Dockerfile 是构建镜像的"配方"，定义了从基础镜像开始，如何一步步构建出你的应用环境。每条指令创建一个镜像层（Layer），Docker 会缓存这些层以加速后续构建。',
+    desc: 'Dockerfile là &quot;công thức&quot; để build image, mô tả từ base image cách bạn dựng lên môi trường ứng dụng từng bước. Mỗi chỉ thị tạo một lớp image (layer), Docker cache các lớp này để build lần sau nhanh hơn.',
     commands: [
-      { cmd: 'FROM node:18-alpine', desc: '指定基础镜像' },
-      { cmd: 'WORKDIR /app', desc: '设置工作目录' },
-      { cmd: 'COPY package*.json ./', desc: '复制依赖文件（利用缓存）' },
-      { cmd: 'RUN npm install', desc: '安装依赖' },
-      { cmd: 'COPY . .', desc: '复制应用代码' },
-      { cmd: 'EXPOSE 3000', desc: '声明端口' },
-      { cmd: 'CMD ["node", "server.js"]', desc: '启动命令' }
+      { cmd: 'FROM node:18-alpine', desc: 'Chỉ định base image' },
+      { cmd: 'WORKDIR /app', desc: 'Đặt thư mục làm việc' },
+      { cmd: 'COPY package*.json ./', desc: 'Copy file dependency (tận dụng cache)' },
+      { cmd: 'RUN npm install', desc: 'Cài dependency' },
+      { cmd: 'COPY . .', desc: 'Copy code ứng dụng' },
+      { cmd: 'EXPOSE 3000', desc: 'Khai báo port' },
+      { cmd: 'CMD ["node", "server.js"]', desc: 'Lệnh khởi động' }
     ]
   },
   {
     key: 'build',
-    name: '构建镜像',
+    name: 'Build image',
     icon: '🔨',
-    desc: 'docker build 命令读取 Dockerfile，逐层执行指令，最终生成一个不可变的镜像（Image）。镜像是只读的模板，包含运行应用所需的一切：代码、运行时、库、环境变量。',
+    desc: 'Lệnh docker build đọc Dockerfile, chạy từng chỉ thị theo layer rồi sinh ra một image bất biến. Image là template chỉ đọc, chứa mọi thứ cần để chạy app: code, runtime, library, biến môi trường.',
     commands: [
-      { cmd: 'docker build -t myapp:1.0 .', desc: '构建并打标签' },
-      { cmd: 'docker images', desc: '查看本地镜像列表' },
-      { cmd: 'docker image prune', desc: '清理无用镜像' }
+      { cmd: 'docker build -t myapp:1.0 .', desc: 'Build và gắn tag' },
+      { cmd: 'docker images', desc: 'Xem danh sách image local' },
+      { cmd: 'docker image prune', desc: 'Dọn image không dùng' }
     ]
   },
   {
     key: 'push',
-    name: '推送仓库',
+    name: 'Push lên registry',
     icon: '☁️',
-    desc: '将构建好的镜像推送到镜像仓库（Registry），如 Docker Hub、阿里云 ACR、AWS ECR。团队成员和部署环境可以从仓库拉取镜像，实现"一次构建，到处运行"。',
+    desc: 'Đẩy image đã build lên registry (Docker Hub, Aliyun ACR, AWS ECR...). Thành viên trong team và môi trường deploy đều kéo image từ registry, đúng tinh thần &quot;build một lần, chạy khắp nơi&quot;.',
     commands: [
-      { cmd: 'docker tag myapp:1.0 registry/myapp:1.0', desc: '给镜像打远程标签' },
-      { cmd: 'docker push registry/myapp:1.0', desc: '推送到仓库' },
-      { cmd: 'docker pull registry/myapp:1.0', desc: '从仓库拉取' }
+      { cmd: 'docker tag myapp:1.0 registry/myapp:1.0', desc: 'Gắn tag remote cho image' },
+      { cmd: 'docker push registry/myapp:1.0', desc: 'Đẩy lên registry' },
+      { cmd: 'docker pull registry/myapp:1.0', desc: 'Kéo về từ registry' }
     ]
   },
   {
     key: 'run',
-    name: '运行容器',
+    name: 'Chạy container',
     icon: '▶️',
-    desc: '容器是镜像的运行实例。一个镜像可以启动多个容器，每个容器有独立的文件系统、网络和进程空间。容器是轻量级的，启动只需秒级。',
+    desc: 'Container là một instance đang chạy của image. Một image có thể bật nhiều container, mỗi container có filesystem, network và process space riêng. Container rất nhẹ, khởi động chỉ tính bằng giây.',
     commands: [
-      { cmd: 'docker run -d -p 3000:3000 myapp:1.0', desc: '后台运行并映射端口' },
-      { cmd: 'docker ps', desc: '查看运行中的容器' },
-      { cmd: 'docker logs <container>', desc: '查看容器日志' },
-      { cmd: 'docker exec -it <container> sh', desc: '进入容器终端' }
+      { cmd: 'docker run -d -p 3000:3000 myapp:1.0', desc: 'Chạy nền và map port' },
+      { cmd: 'docker ps', desc: 'Xem container đang chạy' },
+      { cmd: 'docker logs <container>', desc: 'Xem log container' },
+      { cmd: 'docker exec -it <container> sh', desc: 'Vào terminal trong container' }
     ]
   },
   {
     key: 'manage',
-    name: '管理容器',
+    name: 'Quản lý container',
     icon: '⚙️',
-    desc: '容器运行后需要监控、停止、重启或删除。Docker Compose 可以管理多个容器的编排，定义服务间的依赖关系和网络。',
+    desc: 'Sau khi chạy, container cần được monitor, stop, restart hay xóa. Docker Compose giúp bạn orchestrate nhiều container, mô tả dependency và network giữa các service.',
     commands: [
-      { cmd: 'docker stop <container>', desc: '停止容器' },
-      { cmd: 'docker restart <container>', desc: '重启容器' },
-      { cmd: 'docker rm <container>', desc: '删除容器' },
-      { cmd: 'docker compose up -d', desc: '用 Compose 启动多服务' }
+      { cmd: 'docker stop <container>', desc: 'Dừng container' },
+      { cmd: 'docker restart <container>', desc: 'Restart container' },
+      { cmd: 'docker rm <container>', desc: 'Xóa container' },
+      { cmd: 'docker compose up -d', desc: 'Bật nhiều service bằng Compose' }
     ]
   }
 ]

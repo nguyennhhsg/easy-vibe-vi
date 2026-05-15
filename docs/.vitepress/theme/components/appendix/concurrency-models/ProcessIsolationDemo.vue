@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>进程内存隔离演示</h4>
+    <h4>Demo cô lập bộ nhớ process</h4>
 
     <div class="controls">
       <el-button
@@ -9,7 +9,7 @@
         :disabled="processes.length >= 4"
         @click="addProcess"
       >
-        创建进程
+        Tạo process
       </el-button>
       <el-button
         type="danger"
@@ -17,25 +17,25 @@
         :disabled="processes.length === 0"
         @click="killProcess"
       >
-        结束进程
+        Kết thúc process
       </el-button>
       <el-button
         size="small"
         @click="simulateCrash"
       >
-        模拟进程崩溃
+        Mô phỏng process crash
       </el-button>
       <el-button
         size="small"
         @click="reset"
       >
-        重置
+        Reset
       </el-button>
     </div>
 
     <div class="memory-view">
       <div class="memory-label">
-        系统内存
+        Bộ nhớ hệ thống
       </div>
       <div class="memory-blocks">
         <div
@@ -46,24 +46,24 @@
           :style="{ width: process.size + '%', backgroundColor: process.color }"
         >
           <div class="process-header">
-            <span class="process-name">进程 {{ process.id }}</span>
+            <span class="process-name">Process {{ process.id }}</span>
             <span class="process-pid">PID: {{ process.pid }}</span>
           </div>
           <div class="process-memory">
             <div class="memory-section code">
-              <span class="section-label">代码段</span>
+              <span class="section-label">Code segment</span>
               <span class="section-size">{{ process.codeSize }}MB</span>
             </div>
             <div class="memory-section data">
-              <span class="section-label">数据段</span>
+              <span class="section-label">Data segment</span>
               <span class="section-size">{{ process.dataSize }}MB</span>
             </div>
             <div class="memory-section heap">
-              <span class="section-label">堆</span>
+              <span class="section-label">Heap</span>
               <span class="section-size">{{ process.heapSize }}MB</span>
             </div>
             <div class="memory-section stack">
-              <span class="section-label">栈</span>
+              <span class="section-label">Stack</span>
               <span class="section-size">{{ process.stackSize }}MB</span>
             </div>
           </div>
@@ -71,8 +71,8 @@
             v-if="process.crashed"
             class="crash-overlay"
           >
-            <span class="crash-text">💥 已崩溃</span>
-            <span class="crash-info">不影响其他进程</span>
+            <span class="crash-text">💥 Đã crash</span>
+            <span class="crash-info">Không ảnh hưởng các process khác</span>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
         class="shared-memory"
       >
         <div class="shared-label">
-          共享内存区域 (IPC)
+          Vùng shared memory (IPC)
         </div>
         <div class="shared-content">
           <div
@@ -94,7 +94,7 @@
               class="access-indicator"
               :style="{ backgroundColor: process.color }"
             />
-            <span>进程 {{ process.id }} 可以访问</span>
+            <span>Process {{ process.id }} có thể truy cập</span>
           </div>
         </div>
       </div>
@@ -123,25 +123,25 @@ let pidCounter = 1000
 const currentInfo = computed(() => {
   if (processes.value.length === 0) {
     return {
-      title: '进程隔离',
+      title: 'Cô lập process',
       type: 'info',
-      description: '每个进程拥有独立的虚拟地址空间，一个进程崩溃不会影响其他进程。点击"创建进程"开始演示。'
+      description: 'Mỗi process có không gian địa chỉ ảo riêng, một process crash không ảnh hưởng các process khác. Nhấn "Tạo process" để bắt đầu demo.'
     }
   }
 
   const crashed = processes.value.filter(p => p.crashed).length
   if (crashed > 0) {
     return {
-      title: '隔离性验证',
+      title: 'Xác thực tính cô lập',
       type: 'success',
-      description: `进程已崩溃但其他进程正常运行，证明进程间内存隔离有效。崩溃的进程会被操作系统回收资源。`
+      description: `Process đã crash nhưng các process khác vẫn chạy bình thường, chứng minh cô lập bộ nhớ giữa các process là hiệu quả. Process bị crash sẽ được hệ điều hành thu hồi tài nguyên.`
     }
   }
 
   return {
-    title: '内存布局',
+    title: 'Bố cục bộ nhớ',
     type: 'info',
-    description: `当前有 ${processes.value.length} 个进程在运行。每个进程的内存分为代码段、数据段、堆和栈，相互隔离不可访问。`
+    description: `Hiện có ${processes.value.length} process đang chạy. Bộ nhớ mỗi process chia thành code segment, data segment, heap và stack, cô lập với nhau và không thể truy cập chéo.`
   }
 })
 
@@ -153,7 +153,7 @@ function killProcess() {
 function simulateCrash() {
   if (processes.value.length === 0) return
 
-  // 随机让一个未崩溃的进程崩溃
+  // Cho một process chưa crash crash ngẫu nhiên
   const candidates = processes.value.filter(p => !p.crashed)
   if (candidates.length > 0) {
     const victim = candidates[Math.floor(Math.random() * candidates.length)]

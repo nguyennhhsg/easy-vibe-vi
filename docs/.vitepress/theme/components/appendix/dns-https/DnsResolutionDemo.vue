@@ -1,20 +1,20 @@
 <template>
   <div class="dns-resolution-demo">
     <h4 style="margin: 0 0 12px 0; color: #1a1a2e">
-      🔍 DNS 解析过程模拟器
+      🔍 Mô phỏng quá trình DNS resolve
     </h4>
     <div class="input-row">
       <input
         v-model="domain"
         type="text"
-        placeholder="输入域名，如 www.example.com"
+        placeholder="Gõ tên miền, ví dụ www.example.com"
         class="domain-input"
         @keyup.enter="startResolve"
       />
       <button class="resolve-btn" :disabled="isResolving" @click="startResolve">
-        {{ isResolving ? '解析中...' : '开始解析' }}
+        {{ isResolving ? 'Đang resolve...' : 'Bắt đầu resolve' }}
       </button>
-      <button class="reset-btn" @click="reset">重置</button>
+      <button class="reset-btn" @click="reset">Reset</button>
     </div>
 
     <div class="resolve-flow">
@@ -47,19 +47,19 @@
     </div>
 
     <div v-if="resolved" class="result-box">
-      <div class="result-title">✅ 解析完成</div>
+      <div class="result-title">✅ Resolve xong</div>
       <div class="result-detail">
         <span class="result-domain">{{ domain }}</span>
         →
         <span class="result-ip">{{ resolvedIp }}</span>
       </div>
-      <div class="result-time">总耗时：约 {{ totalTime }}ms（模拟）</div>
+      <div class="result-time">Tổng thời gian: khoảng {{ totalTime }}ms (mô phỏng)</div>
     </div>
 
     <div class="info-box">
-      <strong>解析流程说明：</strong>
-      浏览器访问网站时，需要先将域名翻译成 IP
-      地址。这个过程会依次查询多级缓存和服务器，直到找到对应的 IP。
+      <strong>Quá trình resolve:</strong>
+      Khi trình duyệt truy cập website, nó phải đổi tên miền sang địa chỉ IP trước.
+      Quá trình này lần lượt hỏi nhiều tầng cache và server cho tới khi tìm thấy IP.
     </div>
   </div>
 </template>
@@ -77,32 +77,32 @@ const totalTime = ref(0)
 const steps = reactive([
   {
     icon: '🌐',
-    label: '浏览器缓存',
-    result: '未命中，继续查询...'
+    label: 'Cache trình duyệt',
+    result: 'Miss, tiếp tục hỏi...'
   },
   {
     icon: '💻',
-    label: '操作系统缓存',
-    result: '未命中，继续查询...'
+    label: 'Cache hệ điều hành',
+    result: 'Miss, tiếp tục hỏi...'
   },
   {
     icon: '🔄',
-    label: '递归解析器',
-    result: '向根服务器发起查询...'
+    label: 'Recursive resolver',
+    result: 'Đi hỏi root server...'
   },
   {
     icon: '🌍',
-    label: '根域名服务器',
-    result: '返回 .com TLD 服务器地址'
+    label: 'Root DNS server',
+    result: 'Trả về địa chỉ TLD server .com'
   },
   {
     icon: '📂',
-    label: 'TLD 服务器',
-    result: '返回权威服务器地址'
+    label: 'TLD server',
+    result: 'Trả về địa chỉ authoritative server'
   },
   {
     icon: '🏠',
-    label: '权威 DNS 服务器',
+    label: 'Authoritative DNS server',
     result: ''
   }
 ])
@@ -122,7 +122,7 @@ async function startResolve() {
   currentStep.value = -1
   const ip = generateIp()
   resolvedIp.value = ip
-  steps[5].result = `找到记录！IP = ${ip}`
+  steps[5].result = `Tìm thấy record! IP = ${ip}`
 
   const delays = [200, 300, 400, 500, 400, 300]
   let total = 0

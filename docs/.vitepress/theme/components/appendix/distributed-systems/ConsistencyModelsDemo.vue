@@ -1,12 +1,12 @@
 <!--
   ConsistencyModelsDemo.vue
-  一致性模型演示：展示强一致性、最终一致性、因果一致性的区别
+  Demo các mô hình consistency: minh hoạ khác biệt giữa strong, eventual, causal consistency
 -->
 <template>
   <div class="consistency-demo">
     <div class="header">
-      <div class="title">一致性模型对比</div>
-      <div class="subtitle">点击查看不同一致性模型的行为差异</div>
+      <div class="title">So sánh các mô hình consistency</div>
+      <div class="subtitle">Bấm vào để xem khác biệt giữa các mô hình consistency</div>
     </div>
 
     <div class="model-tabs">
@@ -42,7 +42,7 @@
       </div>
 
       <div class="model-tradeoff">
-        <span class="label">权衡：</span>{{ current.tradeoff }}
+        <span class="label">Đánh đổi:</span> {{ current.tradeoff }}
       </div>
     </div>
   </div>
@@ -56,35 +56,35 @@ const activeModel = ref('strong')
 const models = [
   {
     key: 'strong',
-    name: '强一致性',
-    desc: '写入成功后，所有节点立即返回最新值。像单机数据库一样的体验。',
-    tradeoff: '延迟高（需要等所有节点确认），可用性低（节点故障时可能阻塞）',
+    name: 'Strong consistency',
+    desc: 'Sau khi ghi thành công, mọi node trả về ngay giá trị mới nhất. Trải nghiệm giống như database đơn máy.',
+    tradeoff: 'Latency cao (phải chờ mọi node xác nhận), availability thấp (node lỗi có thể bị block)',
     steps: [
-      { nodes: [{ name: '节点A', value: 'v1', status: 'ok' }, { name: '节点B', value: 'v1', status: 'ok' }, { name: '节点C', value: 'v1', status: 'ok' }], desc: '初始状态，所有节点数据一致' },
-      { nodes: [{ name: '节点A', value: 'v2 ✍️', status: 'writing' }, { name: '节点B', value: '同步中...', status: 'syncing' }, { name: '节点C', value: '同步中...', status: 'syncing' }], desc: '客户端写入 v2，等待所有节点确认' },
-      { nodes: [{ name: '节点A', value: 'v2', status: 'ok' }, { name: '节点B', value: 'v2', status: 'ok' }, { name: '节点C', value: 'v2', status: 'ok' }], desc: '所有节点确认后才返回成功，读任意节点都是 v2' }
+      { nodes: [{ name: 'Node A', value: 'v1', status: 'ok' }, { name: 'Node B', value: 'v1', status: 'ok' }, { name: 'Node C', value: 'v1', status: 'ok' }], desc: 'Trạng thái ban đầu, dữ liệu mọi node đồng nhất' },
+      { nodes: [{ name: 'Node A', value: 'v2 ✍️', status: 'writing' }, { name: 'Node B', value: 'Đang đồng bộ...', status: 'syncing' }, { name: 'Node C', value: 'Đang đồng bộ...', status: 'syncing' }], desc: 'Client ghi v2, chờ tất cả node xác nhận' },
+      { nodes: [{ name: 'Node A', value: 'v2', status: 'ok' }, { name: 'Node B', value: 'v2', status: 'ok' }, { name: 'Node C', value: 'v2', status: 'ok' }], desc: 'Mọi node xác nhận xong mới trả về thành công, đọc node nào cũng ra v2' }
     ]
   },
   {
     key: 'eventual',
-    name: '最终一致性',
-    desc: '写入后不等所有节点同步，数据最终会一致，但中间可能读到旧值。',
-    tradeoff: '延迟低、可用性高，但可能短暂读到旧数据',
+    name: 'Eventual consistency',
+    desc: 'Sau khi ghi không cần đợi mọi node đồng bộ, cuối cùng dữ liệu sẽ đồng nhất nhưng giai đoạn giữa có thể đọc trúng giá trị cũ.',
+    tradeoff: 'Latency thấp, availability cao, nhưng có thể đọc trúng dữ liệu cũ trong thời gian ngắn',
     steps: [
-      { nodes: [{ name: '节点A', value: 'v1', status: 'ok' }, { name: '节点B', value: 'v1', status: 'ok' }, { name: '节点C', value: 'v1', status: 'ok' }], desc: '初始状态' },
-      { nodes: [{ name: '节点A', value: 'v2 ✍️', status: 'writing' }, { name: '节点B', value: 'v1', status: 'stale' }, { name: '节点C', value: 'v1', status: 'stale' }], desc: '写入 A 后立即返回成功，B/C 还是旧值' },
-      { nodes: [{ name: '节点A', value: 'v2', status: 'ok' }, { name: '节点B', value: 'v2', status: 'ok' }, { name: '节点C', value: 'v1→v2', status: 'syncing' }], desc: '后台异步同步，逐渐达到一致' }
+      { nodes: [{ name: 'Node A', value: 'v1', status: 'ok' }, { name: 'Node B', value: 'v1', status: 'ok' }, { name: 'Node C', value: 'v1', status: 'ok' }], desc: 'Trạng thái ban đầu' },
+      { nodes: [{ name: 'Node A', value: 'v2 ✍️', status: 'writing' }, { name: 'Node B', value: 'v1', status: 'stale' }, { name: 'Node C', value: 'v1', status: 'stale' }], desc: 'Ghi vào A xong là trả thành công ngay, B/C vẫn còn giá trị cũ' },
+      { nodes: [{ name: 'Node A', value: 'v2', status: 'ok' }, { name: 'Node B', value: 'v2', status: 'ok' }, { name: 'Node C', value: 'v1→v2', status: 'syncing' }], desc: 'Đồng bộ bất đồng bộ ở background, dần đạt đồng nhất' }
     ]
   },
   {
     key: 'causal',
-    name: '因果一致性',
-    desc: '有因果关系的操作保证顺序，无因果关系的操作可以乱序。介于强一致和最终一致之间。',
-    tradeoff: '比强一致性延迟低，比最终一致性更可预测',
+    name: 'Causal consistency',
+    desc: 'Các thao tác có quan hệ nhân quả thì đảm bảo thứ tự, các thao tác không liên quan thì có thể xen kẽ. Nằm giữa strong và eventual.',
+    tradeoff: 'Latency thấp hơn strong consistency, dễ đoán hơn eventual consistency',
     steps: [
-      { nodes: [{ name: '用户A', value: '发帖: "你好"', status: 'ok' }, { name: '用户B', value: '看到帖子', status: 'ok' }, { name: '用户C', value: '看到帖子', status: 'ok' }], desc: '用户 A 发帖' },
-      { nodes: [{ name: '用户A', value: '发帖: "你好"', status: 'ok' }, { name: '用户B', value: '回复: "嗨!"', status: 'writing' }, { name: '用户C', value: '看到帖子', status: 'ok' }], desc: '用户 B 回复（因果依赖于 A 的帖子）' },
-      { nodes: [{ name: '用户A', value: '看到回复', status: 'ok' }, { name: '用户B', value: '回复: "嗨!"', status: 'ok' }, { name: '用户C', value: '先看到帖子再看到回复', status: 'ok' }], desc: '所有人都先看到帖子再看到回复（因果顺序保证）' }
+      { nodes: [{ name: 'User A', value: 'Đăng bài: "Xin chào"', status: 'ok' }, { name: 'User B', value: 'Thấy bài', status: 'ok' }, { name: 'User C', value: 'Thấy bài', status: 'ok' }], desc: 'User A đăng bài' },
+      { nodes: [{ name: 'User A', value: 'Đăng bài: "Xin chào"', status: 'ok' }, { name: 'User B', value: 'Trả lời: "Hi!"', status: 'writing' }, { name: 'User C', value: 'Thấy bài', status: 'ok' }], desc: 'User B trả lời (phụ thuộc nhân quả vào bài của A)' },
+      { nodes: [{ name: 'User A', value: 'Thấy reply', status: 'ok' }, { name: 'User B', value: 'Trả lời: "Hi!"', status: 'ok' }, { name: 'User C', value: 'Thấy bài rồi mới thấy reply', status: 'ok' }], desc: 'Ai cũng thấy bài trước rồi mới thấy reply (đảm bảo thứ tự nhân quả)' }
     ]
   }
 ]

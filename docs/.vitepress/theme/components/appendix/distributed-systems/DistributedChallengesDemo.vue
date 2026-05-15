@@ -1,12 +1,12 @@
 <!--
   DistributedChallengesDemo.vue
-  分布式系统常见挑战交互演示
+  Demo tương tác về các thách thức của hệ thống distributed
 -->
 <template>
   <div class="challenges-demo">
     <div class="header">
-      <div class="title">分布式系统八大挑战</div>
-      <div class="subtitle">点击查看每个挑战的详情和应对策略</div>
+      <div class="title">8 thách thức của hệ thống distributed</div>
+      <div class="subtitle">Bấm vào để xem chi tiết và cách xử lý từng thách thức</div>
     </div>
 
     <div class="challenge-grid">
@@ -25,10 +25,10 @@
       <div class="detail-title">{{ current.icon }} {{ current.name }}</div>
       <div class="detail-desc">{{ current.desc }}</div>
       <div class="detail-scenario">
-        <span class="label">场景举例：</span>{{ current.scenario }}
+        <span class="label">Ví dụ tình huống:</span> {{ current.scenario }}
       </div>
       <div class="detail-solution">
-        <span class="label">应对策略：</span>
+        <span class="label">Cách xử lý:</span>
         <ul class="solution-list">
           <li v-for="(s, i) in current.solutions" :key="i">{{ s }}</li>
         </ul>
@@ -45,98 +45,98 @@ const activeChallenge = ref('network')
 const challenges = [
   {
     key: 'network',
-    name: '网络不可靠',
+    name: 'Mạng không tin cậy',
     icon: '🔌',
-    desc: '分布式系统的节点通过网络通信，而网络随时可能丢包、延迟、断开。这是分布式系统最根本的挑战——你永远不能假设网络是可靠的。',
-    scenario: '服务 A 调用服务 B，请求发出后 3 秒没收到响应。是 B 没收到？还是 B 处理了但响应丢了？A 无法区分。',
+    desc: 'Các node trong hệ thống distributed giao tiếp qua mạng, mà mạng thì lúc nào cũng có thể mất gói, trễ, hoặc đứt. Đây là thách thức cốt lõi nhất, bạn không bao giờ được giả định mạng luôn ổn.',
+    scenario: 'Service A gọi service B, sau 3 giây không nhận được phản hồi. B chưa nhận được? Hay B đã xử lý mà response bị mất? A không cách nào phân biệt.',
     solutions: [
-      '超时 + 重试：设置合理超时，失败后重试（需保证幂等性）',
-      '心跳检测：定期发送心跳包检测连接是否存活',
-      '断路器模式：连续失败后暂停调用，避免雪崩'
+      'Timeout + retry: đặt timeout hợp lý, retry khi fail (cần đảm bảo idempotent)',
+      'Heartbeat: định kỳ gửi heartbeat để kiểm tra connection còn sống không',
+      'Circuit breaker: liên tục fail thì tạm dừng gọi để tránh cascading failure'
     ]
   },
   {
     key: 'clock',
-    name: '时钟不同步',
+    name: 'Đồng hồ lệch nhau',
     icon: '⏰',
-    desc: '每台机器的物理时钟都有微小偏差（时钟漂移），即使用 NTP 同步也只能精确到毫秒级。在分布式系统中，你不能依赖物理时钟来判断事件的先后顺序。',
-    scenario: '节点 A 在 10:00:00.001 写入数据，节点 B 在 10:00:00.002 写入数据。但 B 的时钟快了 5ms，实际上 B 先写的。',
+    desc: 'Đồng hồ vật lý mỗi máy đều lệch chút ít (clock drift), kể cả dùng NTP đồng bộ cũng chỉ chính xác đến mili giây. Trong hệ thống distributed, bạn không thể dựa vào đồng hồ vật lý để xác định thứ tự sự kiện.',
+    scenario: 'Node A ghi dữ liệu lúc 10:00:00.001, node B ghi lúc 10:00:00.002. Nhưng đồng hồ của B nhanh 5ms, thực ra B ghi trước.',
     solutions: [
-      '逻辑时钟（Lamport Clock）：用递增计数器代替物理时钟',
-      '向量时钟（Vector Clock）：每个节点维护一个向量，追踪因果关系',
-      'TrueTime（Google Spanner）：用 GPS + 原子钟提供有界误差的时间'
+      'Logical clock (Lamport Clock): dùng bộ đếm tăng dần thay cho đồng hồ vật lý',
+      'Vector clock: mỗi node duy trì một vector để theo dõi quan hệ nhân quả',
+      'TrueTime (Google Spanner): dùng GPS + đồng hồ nguyên tử để cung cấp thời gian có sai số giới hạn'
     ]
   },
   {
     key: 'partition',
-    name: '网络分区',
+    name: 'Network partition',
     icon: '✂️',
-    desc: '网络分区是指部分节点之间无法通信，但各自仍在运行。这时系统必须在一致性和可用性之间做选择（CAP 定理）。',
-    scenario: '数据中心 A 和 B 之间的光纤被挖断，两边的服务各自运行，但数据开始分叉。',
+    desc: 'Network partition là khi một số node không thể liên lạc với nhau nhưng mỗi bên vẫn chạy. Lúc này hệ thống buộc phải chọn giữa consistency và availability (định lý CAP).',
+    scenario: 'Cáp quang giữa data center A và B bị đứt, dịch vụ hai bên vẫn chạy nhưng dữ liệu bắt đầu phân nhánh.',
     solutions: [
-      'CP 策略：分区时拒绝写入，保证一致性（如 ZooKeeper）',
-      'AP 策略：分区时允许写入，事后合并冲突（如 DynamoDB）',
-      '多数派写入：只要多数节点确认就算成功'
+      'Chiến lược CP: khi partition thì từ chối ghi để đảm bảo consistency (như ZooKeeper)',
+      'Chiến lược AP: khi partition vẫn cho ghi, sau đó merge xung đột (như DynamoDB)',
+      'Quorum write: chỉ cần đa số node xác nhận là coi như thành công'
     ]
   },
   {
     key: 'consistency',
-    name: '数据一致性',
+    name: 'Đồng nhất dữ liệu',
     icon: '🔄',
-    desc: '多个副本之间如何保持数据一致？强一致性性能差，最终一致性可能读到旧数据。没有银弹，只有权衡。',
-    scenario: '用户在节点 A 修改了头像，但刷新页面时请求被路由到节点 B，看到的还是旧头像。',
+    desc: 'Nhiều bản replica thì làm sao giữ dữ liệu đồng nhất? Strong consistency thì performance kém, eventual consistency thì có thể đọc trúng dữ liệu cũ. Không có viên đạn bạc, chỉ có sự đánh đổi.',
+    scenario: 'User đổi ảnh đại diện ở node A, nhưng khi refresh thì request bị route sang node B và vẫn thấy ảnh cũ.',
     solutions: [
-      '读写同一节点：写入后的读请求路由到同一节点',
-      '读修复（Read Repair）：读取时检测不一致并修复',
-      '反熵协议：后台定期比对副本，修复差异'
+      'Read your writes: request đọc sau ghi được route về cùng node',
+      'Read repair: phát hiện và sửa khi đọc gặp dữ liệu không đồng nhất',
+      'Anti-entropy: định kỳ background đối chiếu các replica để sửa chênh lệch'
     ]
   },
   {
     key: 'failure',
-    name: '部分失败',
+    name: 'Lỗi cục bộ',
     icon: '💥',
-    desc: '分布式系统中，部分节点可能失败而其他节点正常运行。系统需要在部分失败的情况下继续提供服务。',
-    scenario: '5 个节点的集群中有 2 个节点宕机，系统需要判断：是继续服务还是停止？剩余节点的数据是否完整？',
+    desc: 'Trong hệ thống distributed, một số node có thể fail trong khi các node khác vẫn chạy bình thường. Hệ thống cần tiếp tục phục vụ trong tình huống một phần bị lỗi.',
+    scenario: 'Cluster 5 node có 2 node down, hệ thống cần quyết định: tiếp tục phục vụ hay dừng? Dữ liệu các node còn lại có đầy đủ không?',
     solutions: [
-      '冗余副本：数据存多份，单点故障不影响可用性',
-      '故障检测：通过心跳和超时机制快速发现故障节点',
-      '自动故障转移：检测到主节点故障后自动切换到备节点'
+      'Replica dự phòng: dữ liệu lưu nhiều bản, lỗi single point không ảnh hưởng availability',
+      'Phát hiện lỗi: dùng heartbeat và timeout để phát hiện node lỗi nhanh',
+      'Tự động failover: khi phát hiện master lỗi, tự động chuyển sang node dự phòng'
     ]
   },
   {
     key: 'split-brain',
-    name: '脑裂问题',
+    name: 'Split-brain',
     icon: '🧠',
-    desc: '当网络分区导致集群分成两部分时，两边都认为自己是"主"，各自接受写入，导致数据冲突。这就是脑裂。',
-    scenario: '主从架构中，主节点和从节点之间网络断开，从节点以为主节点挂了，自己升级为主。现在有两个主节点同时写入。',
+    desc: 'Khi partition mạng chia cluster thành hai phần, cả hai bên đều nghĩ mình là master và nhận ghi, gây xung đột dữ liệu. Đó là split-brain.',
+    scenario: 'Trong kiến trúc master-slave, mạng giữa master và slave bị đứt, slave tưởng master chết và tự thăng cấp lên master. Giờ có hai master cùng ghi.',
     solutions: [
-      '多数派选举：只有获得多数票的节点才能成为主节点',
-      'Fencing Token：旧主节点的写入请求会被存储层拒绝',
-      '仲裁节点：引入第三方节点来裁决谁是真正的主'
+      'Bầu cử đa số: chỉ node nào được đa số phiếu mới được làm master',
+      'Fencing token: request ghi của master cũ sẽ bị tầng storage từ chối',
+      'Arbiter node: thêm node thứ ba để quyết định ai mới là master thật'
     ]
   },
   {
     key: 'ordering',
-    name: '事件排序',
+    name: 'Thứ tự sự kiện',
     icon: '📋',
-    desc: '在分布式系统中，不同节点上发生的事件没有全局统一的顺序。如何确定"谁先谁后"是一个根本性难题。',
-    scenario: '两个用户同时编辑同一个文档，节点 A 收到"删除第 3 行"，节点 B 收到"修改第 3 行"。最终结果取决于执行顺序。',
+    desc: 'Trong hệ thống distributed, các sự kiện xảy ra ở các node khác nhau không có thứ tự toàn cục thống nhất. Xác định "ai trước ai sau" là một bài toán nan giải.',
+    scenario: 'Hai user đồng thời sửa cùng một document, node A nhận "xoá dòng 3", node B nhận "sửa dòng 3". Kết quả cuối phụ thuộc vào thứ tự thực thi.',
     solutions: [
-      '全序广播（Total Order Broadcast）：所有节点以相同顺序处理消息',
-      'CRDT（无冲突复制数据类型）：数据结构本身保证合并无冲突',
-      'OT（操作转换）：Google Docs 使用的协作编辑算法'
+      'Total Order Broadcast: mọi node xử lý message theo cùng thứ tự',
+      'CRDT (Conflict-free Replicated Data Type): cấu trúc dữ liệu tự đảm bảo merge không xung đột',
+      'OT (Operational Transformation): thuật toán collaborative editing mà Google Docs dùng'
     ]
   },
   {
     key: 'transaction',
-    name: '分布式事务',
+    name: 'Distributed transaction',
     icon: '🔐',
-    desc: '跨多个节点的操作如何保证原子性？要么全部成功，要么全部回滚。这比单机事务复杂得多。',
-    scenario: '电商下单：扣库存在服务 A，扣余额在服务 B，创建订单在服务 C。如果扣余额失败，库存需要回滚。',
+    desc: 'Thao tác qua nhiều node làm sao đảm bảo atomic? Hoặc tất cả thành công, hoặc tất cả rollback. Phức tạp hơn nhiều so với transaction đơn máy.',
+    scenario: 'Đặt hàng e-commerce: trừ tồn kho ở service A, trừ tiền ở service B, tạo order ở service C. Nếu trừ tiền fail, tồn kho phải rollback.',
     solutions: [
-      '2PC（两阶段提交）：协调者先问所有参与者能否提交，再统一提交',
-      'Saga 模式：每个步骤有对应的补偿操作，失败时逐步回滚',
-      'TCC（Try-Confirm-Cancel）：预留资源 → 确认 → 取消'
+      '2PC (Two-Phase Commit): coordinator hỏi tất cả participant có thể commit không rồi mới commit thống nhất',
+      'Saga: mỗi bước có thao tác bù trừ tương ứng, fail thì rollback từng bước',
+      'TCC (Try-Confirm-Cancel): giữ chỗ resource → xác nhận → huỷ'
     ]
   }
 ]

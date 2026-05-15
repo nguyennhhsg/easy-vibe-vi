@@ -1,17 +1,17 @@
 <!--
   K8sArchitectureDemo.vue
-  Kubernetes 架构演示：控制平面与工作节点
+  Kiến trúc Kubernetes: Control Plane và Worker Node
 -->
 <template>
   <div class="k8s-arch-demo">
     <div class="header">
-      <div class="title">Kubernetes 架构</div>
-      <div class="subtitle">点击组件查看详细说明</div>
+      <div class="title">Kiến trúc Kubernetes</div>
+      <div class="subtitle">Bấm vào từng component để xem chi tiết</div>
     </div>
 
     <div class="arch-layout">
       <div class="plane control-plane">
-        <div class="plane-title">控制平面（Control Plane）</div>
+        <div class="plane-title">Control Plane</div>
         <div class="components">
           <div
             v-for="c in controlPlane"
@@ -25,7 +25,7 @@
       </div>
 
       <div class="plane worker-plane">
-        <div class="plane-title">工作节点（Worker Node）× N</div>
+        <div class="plane-title">Worker Node × N</div>
         <div class="components">
           <div
             v-for="c in workerNode"
@@ -43,7 +43,7 @@
       <div class="detail-title">{{ current.name }}</div>
       <div class="detail-desc">{{ current.desc }}</div>
       <div class="detail-analogy">
-        <span class="label">类比：</span>{{ current.analogy }}
+        <span class="label">Hình dung:</span> {{ current.analogy }}
       </div>
     </div>
   </div>
@@ -58,26 +58,26 @@ const controlPlane = [
   {
     key: 'api-server',
     name: 'API Server',
-    desc: 'Kubernetes 的"前门"，所有操作（kubectl、Dashboard、内部组件）都通过 API Server 进行。它负责认证、授权、准入控制，是集群的唯一入口。',
-    analogy: '公司前台，所有访客和快递都要经过前台登记'
+    desc: '&quot;Cửa chính&quot; của Kubernetes - mọi thao tác (kubectl, Dashboard, component nội bộ) đều đi qua API Server. Nó lo authentication, authorization, admission control và là điểm vào duy nhất của cluster.',
+    analogy: 'Quầy lễ tân của công ty, mọi khách và bưu kiện đều phải qua đây đăng ký'
   },
   {
     key: 'etcd',
     name: 'etcd',
-    desc: '分布式键值存储，保存集群的所有状态数据：Pod 信息、Service 配置、Secret 等。它是集群的"记忆"，丢失 etcd 数据等于丢失整个集群。',
-    analogy: '公司的档案室，记录所有员工信息和规章制度'
+    desc: 'Key-value store phân tán, lưu mọi trạng thái cluster: thông tin Pod, cấu hình Service, Secret... Đây là &quot;ký ức&quot; của cluster, mất etcd coi như mất luôn cluster.',
+    analogy: 'Phòng lưu trữ hồ sơ - lưu thông tin nhân viên và mọi quy định công ty'
   },
   {
     key: 'scheduler',
     name: 'Scheduler',
-    desc: '负责将新创建的 Pod 分配到合适的节点上。它会考虑资源需求、亲和性规则、污点容忍等因素，做出最优调度决策。',
-    analogy: 'HR 部门，根据岗位需求把新员工分配到合适的部门'
+    desc: 'Lo việc xếp Pod mới tạo vào node phù hợp. Nó cân nhắc nhu cầu tài nguyên, affinity, taint/toleration... để ra quyết định scheduling tối ưu.',
+    analogy: 'Phòng HR - dựa vào yêu cầu vị trí để xếp người mới vào đúng bộ phận'
   },
   {
     key: 'controller',
     name: 'Controller Manager',
-    desc: '运行各种控制器（Deployment、ReplicaSet、Job 等），持续监控集群状态，确保实际状态与期望状态一致。如果 Pod 挂了，控制器会自动重建。',
-    analogy: '各部门经理，确保每个部门的人员配置符合编制要求'
+    desc: 'Chạy các controller (Deployment, ReplicaSet, Job...), liên tục theo dõi trạng thái cluster để đảm bảo trạng thái thực tế khớp trạng thái mong muốn. Pod chết thì controller tự dựng lại.',
+    analogy: 'Các trưởng bộ phận - đảm bảo nhân sự mỗi phòng đủ theo biên chế'
   }
 ]
 
@@ -85,20 +85,20 @@ const workerNode = [
   {
     key: 'kubelet',
     name: 'kubelet',
-    desc: '每个节点上的"代理人"，负责管理本节点上的 Pod 生命周期。它接收 API Server 的指令，调用容器运行时创建/销毁容器，并上报节点状态。',
-    analogy: '每个工位上的组长，负责管理组员的日常工作'
+    desc: 'Agent trên mỗi node, quản lý vòng đời Pod cục bộ. Nó nhận lệnh từ API Server, gọi container runtime để tạo/hủy container và báo cáo trạng thái node lên.',
+    analogy: 'Trưởng nhóm ngồi ngay tại chỗ làm, quản lý công việc hằng ngày của nhóm'
   },
   {
     key: 'kube-proxy',
     name: 'kube-proxy',
-    desc: '负责实现 Service 的网络规则，将访问 Service 的流量转发到对应的 Pod。它维护节点上的 iptables/IPVS 规则，实现负载均衡。',
-    analogy: '公司的电话总机，把外部来电转接到正确的分机'
+    desc: 'Triển khai network rule của Service, chuyển traffic tới Pod tương ứng. Nó duy trì rule iptables/IPVS trên node để load balance.',
+    analogy: 'Tổng đài điện thoại - chuyển cuộc gọi từ ngoài vào đúng máy nhánh'
   },
   {
     key: 'runtime',
-    name: '容器运行时',
-    desc: '实际运行容器的组件，如 containerd、CRI-O。kubelet 通过 CRI（容器运行时接口）与它交互，它负责拉取镜像、创建和管理容器。',
-    analogy: '实际干活的工人，按照指令完成具体的生产任务'
+    name: 'Container runtime',
+    desc: 'Component thực sự chạy container, ví dụ containerd, CRI-O. kubelet trao đổi với nó qua CRI (Container Runtime Interface) để pull image, tạo và quản lý container.',
+    analogy: 'Công nhân làm việc thực sự, theo chỉ thị mà hoàn thành nhiệm vụ'
   }
 ]
 

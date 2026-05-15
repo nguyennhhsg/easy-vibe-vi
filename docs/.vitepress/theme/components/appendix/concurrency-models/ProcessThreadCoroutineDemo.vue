@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>进程 / 线程 / 协程 对比演示</h4>
+    <h4>Demo so sánh process / thread / coroutine</h4>
 
     <div class="controls">
       <el-radio-group
@@ -8,13 +8,13 @@
         size="small"
       >
         <el-radio-button label="process">
-          多进程
+          Đa process
         </el-radio-button>
         <el-radio-button label="thread">
-          多线程
+          Đa thread
         </el-radio-button>
         <el-radio-button label="coroutine">
-          协程
+          Coroutine
         </el-radio-button>
       </el-radio-group>
 
@@ -24,26 +24,26 @@
         :disabled="isRunning"
         @click="startSimulation"
       >
-        {{ isRunning ? '运行中...' : '开始模拟' }}
+        {{ isRunning ? 'Đang chạy...' : 'Bắt đầu mô phỏng' }}
       </el-button>
     </div>
 
     <div class="stats-bar">
       <el-statistic
-        title="内存占用"
+        title="Dùng RAM"
         :value="memoryUsage"
         suffix="MB"
       />
       <el-statistic
-        title="上下文切换"
+        title="Context switch"
         :value="contextSwitches"
       />
       <el-statistic
-        title="完成任务"
+        title="Task đã xong"
         :value="completedTasks"
       />
       <el-statistic
-        title="耗时"
+        title="Thời gian"
         :value="elapsedTime"
         suffix="ms"
       />
@@ -68,7 +68,7 @@
       </div>
 
       <div class="task-queue">
-        <h5>任务队列</h5>
+        <h5>Task queue</h5>
         <div class="queue-items">
           <div
             v-for="(task, idx) in pendingTasks"
@@ -115,9 +115,9 @@ const pendingTasks = ref([])
 
 const explanationTitle = computed(() => {
   const titles = {
-    process: '多进程模型',
-    thread: '多线程模型',
-    coroutine: '协程模型'
+    process: 'Mô hình đa process',
+    thread: 'Mô hình đa thread',
+    coroutine: 'Mô hình coroutine'
   }
   return titles[model.value]
 })
@@ -133,9 +133,9 @@ const explanationType = computed(() => {
 
 const explanationText = computed(() => {
   const texts = {
-    process: '每个进程拥有独立的内存空间，隔离性强但开销大。进程间通信需要 IPC 机制。适合需要强隔离的场景，如浏览器标签页、沙箱程序。',
-    thread: '线程共享进程内存，切换开销较小，但需要同步机制保护共享数据。适合 CPU 密集型任务和需要共享数据的场景。',
-    coroutine: '用户态轻量级线程，由运行时调度，切换极快。适合 I/O 密集型高并发场景，如 Web 服务器、网关、长连接服务。'
+    process: 'Mỗi process có không gian bộ nhớ riêng, tính cô lập tốt nhưng chi phí lớn. Giao tiếp giữa các process cần cơ chế IPC. Phù hợp use case cần cô lập mạnh như tab trình duyệt, sandbox.',
+    thread: 'Thread chia sẻ bộ nhớ trong process, chi phí context switch nhỏ hơn, nhưng cần cơ chế đồng bộ để bảo vệ dữ liệu chung. Phù hợp task CPU-intensive và use case cần chia sẻ dữ liệu.',
+    coroutine: 'Thread nhẹ ở user space, được schedule bởi runtime, switch cực nhanh. Phù hợp use case concurrency cao và I/O-intensive như web server, gateway, dịch vụ long connection.'
   }
   return texts[model.value]
 })

@@ -1,16 +1,16 @@
 <template>
   <div class="demo data-tracking-demo">
 
-    <!-- Methods: 同一场景，三种方式各自捕获到什么 -->
+    <!-- Methods: cùng tình huống, ba cách thu thập -->
     <div v-if="activeTab === 'methods'" class="content">
-      <div class="scenario-bar">场景：用户在电商 App 点击了「加入购物车」按钮</div>
+      <div class="scenario-bar">Tình huống: user bấm nút "Thêm vào giỏ" trong app e-commerce</div>
       <table class="capture-table">
         <thead>
           <tr>
-            <th class="col-dim">捕获到的信息</th>
-            <th>代码埋点</th>
-            <th>可视化埋点</th>
-            <th>全埋点</th>
+            <th class="col-dim">Thông tin thu thập được</th>
+            <th>Code tracking</th>
+            <th>Visual tracking</th>
+            <th>Auto tracking</th>
           </tr>
         </thead>
         <tbody>
@@ -23,16 +23,16 @@
         </tbody>
       </table>
       <div class="capture-footer">
-        <span class="cf-item"><span class="yes">✔</span> 能捕获</span>
-        <span class="cf-item"><span class="no">✘</span> 无法捕获</span>
+        <span class="cf-item"><span class="yes">✔</span> Thu thập được</span>
+        <span class="cf-item"><span class="no">✘</span> Không thu thập được</span>
       </div>
     </div>
 
-    <!-- Model: 点击模拟，看 JSON 逐行组装 -->
+    <!-- Model: bấm để xem JSON được lắp từng dòng -->
     <div v-if="activeTab === 'model'" class="content">
       <div class="sim-header">
         <button class="sim-btn" @click="runSimulation" :disabled="simRunning">
-          {{ simRunning ? '记录生成中...' : '模拟：用户点击「加入购物车」' }}
+          {{ simRunning ? 'Đang sinh bản ghi...' : 'Mô phỏng: user bấm "Thêm vào giỏ"' }}
         </button>
       </div>
       <div class="json-build">
@@ -42,10 +42,10 @@
           <code>{{ line.code }}</code>
         </div>
       </div>
-      <div class="sim-hint" v-if="simStep === 0">点击上方按钮，观察一条埋点记录是如何被组装出来的</div>
+      <div class="sim-hint" v-if="simStep === 0">Bấm nút phía trên để xem một bản ghi tracking được lắp ráp thế nào</div>
     </div>
 
-    <!-- Pipeline: 动画数据流 -->
+    <!-- Pipeline: animation luồng dữ liệu -->
     <div v-if="activeTab === 'pipeline'" class="content">
       <div class="pipe-visual">
         <div class="pipe-stage" v-for="(s, i) in pipeStages" :key="i">
@@ -60,7 +60,7 @@
         </div>
       </div>
       <button class="sim-btn pipe-btn" @click="startPipeAnim">
-        {{ pipeFlying ? '传输中...' : '模拟：发送一批数据' }}
+        {{ pipeFlying ? 'Đang truyền...' : 'Mô phỏng: gửi một batch dữ liệu' }}
       </button>
       <div class="pipe-legend">
         <span v-for="(s, i) in pipeStages" :key="i" class="legend-item">
@@ -69,22 +69,22 @@
       </div>
     </div>
 
-    <!-- ETL: before / after 数据对比 -->
+    <!-- ETL: so sánh dữ liệu before / after -->
     <div v-if="activeTab === 'overview'" class="content">
       <div class="etl-compare">
         <div class="etl-side etl-before">
-          <div class="etl-side-title">原始数据（服务器收到的）</div>
+          <div class="etl-side-title">Dữ liệu thô (server nhận được)</div>
           <div class="etl-row-data" v-for="(r, i) in rawData" :key="i" :class="r.issue">
             <code>{{ r.text }}</code>
             <span class="issue-tag" v-if="r.tag">{{ r.tag }}</span>
           </div>
         </div>
         <div class="etl-arrow-col">
-          <div class="etl-arrow-label">ETL 清洗</div>
+          <div class="etl-arrow-label">ETL làm sạch</div>
           <div class="etl-arrow-icon">→</div>
         </div>
         <div class="etl-side etl-after">
-          <div class="etl-side-title">清洗后（写入数据仓库的）</div>
+          <div class="etl-side-title">Sau khi làm sạch (ghi vào data warehouse)</div>
           <div class="etl-row-data clean" v-for="(r, i) in cleanData" :key="i">
             <code>{{ r }}</code>
           </div>
@@ -103,18 +103,18 @@ const props = defineProps({
 })
 const activeTab = ref(props.tab)
 
-// === Methods tab: 同一场景，三种方式各自能捕获什么 ===
+// === Methods tab: cùng tình huống, ba phương thức ===
 const captureRows = [
-  { label: '点击了哪个按钮', code: true, visual: true, auto: true },
-  { label: '点击发生的时间', code: true, visual: true, auto: true },
-  { label: '用户停留了多久', code: false, visual: false, auto: true },
-  { label: '商品名称 / 价格', code: true, visual: false, auto: false },
-  { label: '用了哪张优惠券', code: true, visual: false, auto: false },
-  { label: '账户余额', code: true, visual: false, auto: false },
-  { label: '页面滑动轨迹', code: false, visual: false, auto: true }
+  { label: 'Bấm nút nào', code: true, visual: true, auto: true },
+  { label: 'Thời điểm bấm', code: true, visual: true, auto: true },
+  { label: 'Người dùng ở lại bao lâu', code: false, visual: false, auto: true },
+  { label: 'Tên / giá sản phẩm', code: true, visual: false, auto: false },
+  { label: 'Đã dùng voucher nào', code: true, visual: false, auto: false },
+  { label: 'Số dư tài khoản', code: true, visual: false, auto: false },
+  { label: 'Quỹ đạo cuộn trang', code: false, visual: false, auto: true }
 ]
 
-// === Model tab: 模拟 JSON 逐行组装 ===
+// === Model tab: mô phỏng JSON được ráp từng dòng ===
 const simStep = ref(0)
 const simRunning = ref(false)
 const jsonLines = [
@@ -122,7 +122,7 @@ const jsonLines = [
   { tag: 'Who', color: '#3b82f6', code: '"user_id": "u_98765"' },
   { tag: 'When', color: '#8b5cf6', code: '"time": "2025-08-12T10:33:09Z"' },
   { tag: 'Where', color: '#f59e0b', code: '"device": "iPhone 15", "network": "5G"' },
-  { tag: 'What', color: '#10b981', code: '"product": "新款手机", "price": 2999' }
+  { tag: 'What', color: '#10b981', code: '"product": "Điện thoại mới", "price": 2999' }
 ]
 
 function runSimulation() {
@@ -140,14 +140,14 @@ function runSimulation() {
   }, 600)
 }
 
-// === Pipeline tab: 动画数据流 ===
+// === Pipeline tab: animation luồng dữ liệu ===
 const pipeFlying = ref(false)
 const pipeStages = [
-  { icon: '📱', name: '手机', label: '产生数据', bg: '#e0f2fe' },
-  { icon: '📦', name: '打包', label: '攒一批', bg: '#fef08a' },
-  { icon: '🌐', name: '发送', label: '网络传输', bg: '#fed7aa' },
-  { icon: '🚦', name: '排队', label: '消息队列', bg: '#fecaca' },
-  { icon: '🗄️', name: '入库', label: '数据仓库', bg: '#bbf7d0' }
+  { icon: '📱', name: 'Điện thoại', label: 'Sinh dữ liệu', bg: '#e0f2fe' },
+  { icon: '📦', name: 'Đóng gói', label: 'Gom batch', bg: '#fef08a' },
+  { icon: '🌐', name: 'Gửi', label: 'Truyền qua mạng', bg: '#fed7aa' },
+  { icon: '🚦', name: 'Xếp hàng', label: 'Message queue', bg: '#fecaca' },
+  { icon: '🗄️', name: 'Lưu', label: 'Data warehouse', bg: '#bbf7d0' }
 ]
 
 function startPipeAnim() {
@@ -156,19 +156,19 @@ function startPipeAnim() {
   setTimeout(() => { pipeFlying.value = false }, 3000)
 }
 
-// === ETL tab: before / after 对比 ===
+// === ETL tab: so sánh before / after ===
 const rawData = [
-  { text: 'id-001  userId: "zhang"  add_to_cart  ¥2999', issue: '', tag: '' },
-  { text: 'id-001  userId: "zhang"  add_to_cart  ¥2999', issue: 'dup', tag: '重复' },
-  { text: 'id-002  user_id: "li"    click_buy    ¥0', issue: '', tag: '' },
-  { text: 'id-003  userId: "wang"   pay  1970-01-01', issue: 'bad', tag: '时间异常' },
-  { text: 'id-004  user_id: "zhao"  click_buy    ¥599', issue: '', tag: '' }
+  { text: 'id-001  userId: "anh"   add_to_cart  2999k', issue: '', tag: '' },
+  { text: 'id-001  userId: "anh"   add_to_cart  2999k', issue: 'dup', tag: 'Trùng' },
+  { text: 'id-002  user_id: "binh" click_buy    0k', issue: '', tag: '' },
+  { text: 'id-003  userId: "cuong" pay  1970-01-01', issue: 'bad', tag: 'Time sai' },
+  { text: 'id-004  user_id: "dung" click_buy    599k', issue: '', tag: '' }
 ]
 
 const cleanData = [
-  'id-001  user_id: "zhang"  add_to_cart  ¥2999',
-  'id-002  user_id: "li"     click_buy    ¥0',
-  'id-004  user_id: "zhao"   click_buy    ¥599'
+  'id-001  user_id: "anh"   add_to_cart  2999k',
+  'id-002  user_id: "binh"  click_buy    0k',
+  'id-004  user_id: "dung"  click_buy    599k'
 ]
 </script>
 
@@ -262,7 +262,7 @@ const cleanData = [
 
 .cf-item { display: flex; align-items: center; gap: 4px; }
 
-/* === Model: JSON 逐行组装 === */
+/* === Model: lắp ráp JSON từng dòng === */
 .sim-header {
   text-align: center;
 }
@@ -320,7 +320,7 @@ const cleanData = [
   margin-top: 12px;
 }
 
-/* === Pipeline: 动画数据流 === */
+/* === Pipeline: animation luồng dữ liệu === */
 .pipe-visual {
   position: relative;
   display: flex;
@@ -414,7 +414,7 @@ const cleanData = [
   display: inline-block;
 }
 
-/* === ETL: Before / After 对比 === */
+/* === ETL: so sánh Before / After === */
 .etl-compare {
   display: flex;
   gap: 0;

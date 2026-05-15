@@ -1,29 +1,29 @@
 <!--
   MessageQueueDemo.vue
-  消息队列概览 - 异步通信可视化
+  Tổng quan message queue - trực quan hóa giao tiếp async
 -->
 <template>
   <div class="mq-demo">
     <div class="header">
       <div class="title">
-        消息队列：异步通信的"缓冲器"
+        Message queue: "buffer" giao tiếp async
       </div>
       <div class="subtitle">
-        观察消息如何通过队列实现异步处理
+        Quan sát cách message được xử lý async qua queue
       </div>
     </div>
 
     <div class="flow-container">
       <div class="section producer">
         <div class="section-title">
-          生产者 Producer
+          Producer
         </div>
         <div class="box producer-box">
           <div class="icon">
             📤
           </div>
           <div class="label">
-            订单服务
+            Service đơn hàng
           </div>
         </div>
         <button
@@ -31,17 +31,17 @@
           :disabled="sending"
           @click="sendMessage"
         >
-          {{ sending ? '发送中...' : '发送消息' }}
+          {{ sending ? 'Đang gửi...' : 'Gửi message' }}
         </button>
       </div>
 
       <div class="section broker">
         <div class="section-title">
-          消息代理 Broker
+          Broker
         </div>
         <div class="queue-container">
           <div class="queue-label">
-            消息队列 Queue
+            Message queue
           </div>
           <div class="queue-box">
             <transition-group name="message">
@@ -58,15 +58,15 @@
               v-if="messages.length === 0"
               class="empty-queue"
             >
-              队列为空
+              Queue trống
             </div>
           </div>
           <div class="queue-stats">
             <div class="stat">
-              消息数: {{ messages.length }}
+              Số message: {{ messages.length }}
             </div>
             <div class="stat">
-              容量: {{ queueCapacity }}
+              Dung lượng: {{ queueCapacity }}
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
 
       <div class="section consumer">
         <div class="section-title">
-          消费者 Consumer
+          Consumer
         </div>
         <div
           class="box consumer-box"
@@ -84,14 +84,14 @@
             {{ isProcessing ? '⚙️' : '📥' }}
           </div>
           <div class="label">
-            {{ isProcessing ? '处理中...' : '库存服务' }}
+            {{ isProcessing ? 'Đang xử lý...' : 'Service kho' }}
           </div>
         </div>
         <div
           v-if="processedMessage"
           class="processed-msg"
         >
-          已处理: #{{ processedMessage }}
+          Đã xử lý: #{{ processedMessage }}
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
             v-model="autoConsume"
             type="checkbox"
           >
-          自动消费
+          Tự động consume
         </label>
       </div>
       <div class="control">
@@ -112,7 +112,7 @@
             v-model="showSync"
             type="checkbox"
           >
-          显示同步对比
+          Hiển thị so sánh sync
         </label>
       </div>
     </div>
@@ -123,53 +123,53 @@
     >
       <div class="compare-col sync">
         <div class="compare-title">
-          同步调用 (Synchronous)
+          Gọi sync (synchronous)
         </div>
         <div class="compare-flow">
           <div class="flow-item">
-            A 调用 B
+            A gọi B
           </div>
           <div class="arrow">
             ⬇️
           </div>
           <div class="flow-item wait">
-            B 处理 (阻塞等待)
+            B xử lý (block đợi)
           </div>
           <div class="arrow">
             ⬇️
           </div>
           <div class="flow-item">
-            B 返回结果
+            B trả về kết quả
           </div>
         </div>
         <div class="compare-desc">
-          总耗时 = 300ms + 500ms = 800ms
+          Tổng thời gian = 300ms + 500ms = 800ms
         </div>
       </div>
 
       <div class="compare-col async">
         <div class="compare-title">
-          异步调用 (Asynchronous)
+          Gọi async (asynchronous)
         </div>
         <div class="compare-flow">
           <div class="flow-item">
-            A 发送消息
+            A gửi message
           </div>
           <div class="arrow">
             ⬇️
           </div>
           <div class="flow-item highlight">
-            消息队列缓冲
+            Buffer message queue
           </div>
           <div class="arrow">
             ⬇️
           </div>
           <div class="flow-item">
-            B 稍后处理
+            B xử lý sau
           </div>
         </div>
         <div class="compare-desc">
-          A 只需 10ms，B 在后台慢慢处理
+          A chỉ cần 10ms, B xử lý từ từ ở background
         </div>
       </div>
     </div>

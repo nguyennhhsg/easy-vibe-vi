@@ -1,13 +1,13 @@
 <template>
   <div class="component-tree-demo">
     <div class="demo-header">
-      <span class="title">组件化拆分</span>
-      <span class="subtitle">一个页面如何拆成多个独立组件</span>
+      <span class="title">Chia nhỏ thành component</span>
+      <span class="subtitle">Một trang được tách thành nhiều component độc lập như thế nào</span>
     </div>
 
     <div class="demo-body">
       <div class="tree-panel">
-        <div class="tree-title">组件树结构</div>
+        <div class="tree-title">Cấu trúc cây component</div>
         <div class="tree-list">
           <div
             v-for="comp in components"
@@ -24,21 +24,21 @@
       </div>
 
       <div class="preview-panel">
-        <div class="tree-title">页面预览</div>
+        <div class="tree-title">Xem trước trang</div>
         <div class="page-mock">
           <div
             :class="['mock-navbar', { highlighted: selected === 'navbar' }]"
             @click="selected = 'navbar'"
           >
-            <span>🏠 电商网站</span>
+            <span>🏠 Trang TMĐT</span>
             <span
               :class="['mock-search', { highlighted: selected === 'search' }]"
               @click.stop="selected = 'search'"
-            >🔍 搜索框</span>
+            >🔍 Ô tìm kiếm</span>
             <span
               :class="['mock-cart-icon', { highlighted: selected === 'cart' }]"
               @click.stop="selected = 'cart'"
-            >🛒 购物车(3)</span>
+            >🛒 Giỏ hàng(3)</span>
           </div>
           <div class="mock-content">
             <div
@@ -49,8 +49,8 @@
             >
               <div class="mock-img">📦</div>
               <div class="mock-info">
-                <div class="mock-product-name">商品 {{ i }}</div>
-                <div class="mock-price">¥{{ i * 99 + 100 }}</div>
+                <div class="mock-product-name">Sản phẩm {{ i }}</div>
+                <div class="mock-price">{{ i * 99 + 100 }}k</div>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
             :class="['mock-footer', { highlighted: selected === 'footer' }]"
             @click="selected = 'footer'"
           >
-            © 2025 电商网站
+            © 2025 Trang TMĐT
           </div>
         </div>
       </div>
@@ -68,17 +68,17 @@
       <div class="detail-name">{{ selectedComp.icon }} {{ selectedComp.name }}</div>
       <div class="detail-desc">{{ selectedComp.desc }}</div>
       <div class="detail-tags">
-        <span class="detail-tag">数据独立</span>
-        <span class="detail-tag">样式隔离</span>
+        <span class="detail-tag">Dữ liệu độc lập</span>
+        <span class="detail-tag">Style cô lập</span>
         <span v-if="selectedComp.reused" class="detail-tag reuse">
-          复用 {{ selectedComp.reused }} 次
+          Dùng lại {{ selectedComp.reused }} lần
         </span>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>组件化就是把一个大页面拆成多个独立的小块。每个组件管理自己的数据、界面和样式，互不干扰。同一个组件可以在不同地方复用多次，传入不同的数据就会显示不同的内容。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Component hoá là chia một trang lớn thành nhiều khối nhỏ độc lập. Mỗi component tự quản lý dữ liệu, giao diện và style của riêng nó, không ảnh hưởng lẫn nhau. Cùng một component có thể dùng lại nhiều lần ở nhiều nơi, truyền dữ liệu khác nhau thì hiển thị nội dung khác nhau.</span>
     </div>
   </div>
 </template>
@@ -89,12 +89,12 @@ import { ref, computed } from 'vue'
 const selected = ref('product')
 
 const components = [
-  { id: 'app', name: 'App（根组件）', icon: '📱', depth: 0, desc: '整个应用的根组件，包含所有其他组件。' },
-  { id: 'navbar', name: 'NavBar（导航栏）', icon: '🧭', depth: 1, desc: '页面顶部的导航栏，包含 Logo、搜索框和购物车入口。' },
-  { id: 'search', name: 'SearchBox（搜索框）', icon: '🔍', depth: 2, desc: '独立的搜索框组件，管理搜索关键词和搜索结果。' },
-  { id: 'cart', name: 'CartIcon（购物车图标）', icon: '🛒', depth: 2, desc: '显示购物车数量的小图标，数据来自全局购物车状态。' },
-  { id: 'product', name: 'ProductCard（商品卡片）', icon: '📦', depth: 1, reused: 3, desc: '单个商品的展示卡片。写一次代码，传入不同的商品数据就能复用多次，每次显示不同的商品信息。' },
-  { id: 'footer', name: 'Footer（页脚）', icon: '📄', depth: 1, desc: '页面底部信息，一般包含版权声明等。' }
+  { id: 'app', name: 'App (root component)', icon: '📱', depth: 0, desc: 'Component gốc của toàn bộ ứng dụng, chứa mọi component khác.' },
+  { id: 'navbar', name: 'NavBar (thanh điều hướng)', icon: '🧭', depth: 1, desc: 'Thanh điều hướng phía trên trang, gồm logo, ô tìm kiếm và icon giỏ hàng.' },
+  { id: 'search', name: 'SearchBox (ô tìm kiếm)', icon: '🔍', depth: 2, desc: 'Component ô tìm kiếm độc lập, quản lý từ khoá và kết quả tìm kiếm.' },
+  { id: 'cart', name: 'CartIcon (icon giỏ hàng)', icon: '🛒', depth: 2, desc: 'Icon nhỏ hiển thị số lượng giỏ hàng, dữ liệu lấy từ state giỏ hàng toàn cục.' },
+  { id: 'product', name: 'ProductCard (card sản phẩm)', icon: '📦', depth: 1, reused: 3, desc: 'Card hiển thị một sản phẩm. Viết code một lần, truyền dữ liệu sản phẩm khác nhau là dùng lại được nhiều lần, mỗi lần hiển thị thông tin khác nhau.' },
+  { id: 'footer', name: 'Footer (chân trang)', icon: '📄', depth: 1, desc: 'Thông tin chân trang, thường chứa bản quyền và thông tin liên hệ.' }
 ]
 
 const selectedComp = computed(() => components.find(c => c.id === selected.value))

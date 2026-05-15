@@ -1,7 +1,7 @@
 <template>
   <div class="dns-record-demo">
     <h4 style="margin: 0 0 12px 0; color: #1a1a2e">
-      📋 DNS 记录类型速查
+      📋 Tra cứu loại DNS record
     </h4>
     <div class="tab-row">
       <button
@@ -23,12 +23,12 @@
       <p class="type-desc">{{ current.desc }}</p>
 
       <div class="example-block">
-        <div class="example-title">示例记录</div>
+        <div class="example-title">Record mẫu</div>
         <code class="example-code">{{ current.example }}</code>
       </div>
 
       <div class="usage-block">
-        <div class="usage-title">常见用途</div>
+        <div class="usage-title">Trường hợp dùng</div>
         <ul class="usage-list">
           <li v-for="(u, i) in current.usages" :key="i">{{ u }}</li>
         </ul>
@@ -36,8 +36,8 @@
     </div>
 
     <div class="info-box">
-      <strong>小贴士：</strong>
-      DNS 不只是把域名翻译成 IP，它还承载了邮件路由、域名验证、负载均衡等多种功能，全靠不同的记录类型来实现。
+      <strong>Mẹo nhỏ:</strong>
+      DNS không chỉ dịch domain thành IP, nó còn lo định tuyến email, xác thực domain, load balancing... mọi thứ đều dựa vào các loại record khác nhau.
     </div>
   </div>
 </template>
@@ -50,68 +50,68 @@ const selected = ref('A')
 const records = [
   {
     type: 'A',
-    name: 'Address 记录',
-    desc: '将域名映射到一个 IPv4 地址。这是最常见的 DNS 记录类型，浏览器访问网站时最终需要的就是这条记录。',
+    name: 'Address record',
+    desc: 'Map domain sang một địa chỉ IPv4. Đây là loại DNS record phổ biến nhất, cái mà trình duyệt cuối cùng cần khi truy cập web.',
     example: 'example.com.  IN  A  93.184.216.34',
     usages: [
-      '网站域名指向服务器 IP',
-      '子域名指向不同的服务器',
-      '配合负载均衡返回多个 IP'
+      'Trỏ domain website tới IP server',
+      'Subdomain trỏ về server khác nhau',
+      'Trả nhiều IP để load balancing'
     ]
   },
   {
     type: 'AAAA',
-    name: 'IPv6 Address 记录',
-    desc: '将域名映射到一个 IPv6 地址。随着 IPv4 地址耗尽，AAAA 记录变得越来越重要。',
+    name: 'IPv6 Address record',
+    desc: 'Map domain sang một địa chỉ IPv6. Khi IPv4 cạn dần, AAAA ngày càng quan trọng.',
     example: 'example.com.  IN  AAAA  2606:2800:220:1:248:1893:25c8:1946',
     usages: [
-      '支持 IPv6 网络的设备访问',
-      '双栈部署（同时配置 A 和 AAAA）',
-      '面向未来的网络架构'
+      'Hỗ trợ thiết bị IPv6 truy cập',
+      'Triển khai dual-stack (cấu hình cả A và AAAA)',
+      'Kiến trúc mạng hướng tới tương lai'
     ]
   },
   {
     type: 'CNAME',
-    name: 'Canonical Name 记录',
-    desc: '将一个域名指向另一个域名（别名）。浏览器会继续解析目标域名，直到找到 A 记录。',
+    name: 'Canonical Name record',
+    desc: 'Trỏ một domain tới một domain khác (alias). Trình duyệt sẽ tiếp tục resolve domain đích cho tới khi gặp record A.',
     example: 'www.example.com.  IN  CNAME  example.com.',
     usages: [
-      'www 子域名指向主域名',
-      'CDN 加速（指向 CDN 提供商域名）',
-      '多个域名指向同一服务'
+      'Subdomain www trỏ về domain chính',
+      'Tăng tốc CDN (trỏ tới domain CDN provider)',
+      'Nhiều domain trỏ về cùng một dịch vụ'
     ]
   },
   {
     type: 'MX',
-    name: 'Mail Exchange 记录',
-    desc: '指定负责接收该域名邮件的邮件服务器地址和优先级。数字越小优先级越高。',
+    name: 'Mail Exchange record',
+    desc: 'Khai báo mail server nào sẽ nhận email cho domain này và mức độ ưu tiên. Số càng nhỏ ưu tiên càng cao.',
     example: 'example.com.  IN  MX  10 mail.example.com.',
     usages: [
-      '配置企业邮箱（如 Gmail、Outlook）',
-      '设置邮件服务器优先级',
-      '邮件备份和容灾'
+      'Cấu hình email doanh nghiệp (Gmail, Outlook...)',
+      'Đặt thứ tự ưu tiên mail server',
+      'Backup mail và disaster recovery'
     ]
   },
   {
     type: 'TXT',
-    name: 'Text 记录',
-    desc: '存储任意文本信息。常用于域名所有权验证、邮件安全策略（SPF/DKIM/DMARC）等场景。',
+    name: 'Text record',
+    desc: 'Lưu thông tin văn bản tùy ý. Hay dùng để verify quyền sở hữu domain, chính sách bảo mật email (SPF/DKIM/DMARC)...',
     example: 'example.com.  IN  TXT  "v=spf1 include:_spf.google.com ~all"',
     usages: [
-      'SPF 记录防止邮件伪造',
-      'SSL 证书申请时的域名验证',
-      '第三方服务的域名所有权确认'
+      'SPF record chống giả mạo email',
+      'Xác thực domain khi xin SSL certificate',
+      'Xác nhận quyền sở hữu domain cho dịch vụ third-party'
     ]
   },
   {
     type: 'NS',
-    name: 'Name Server 记录',
-    desc: '指定该域名由哪些 DNS 服务器负责解析。这是 DNS 委派机制的核心。',
+    name: 'Name Server record',
+    desc: 'Khai báo các DNS server chịu trách nhiệm resolve domain này. Đây là cơ chế cốt lõi của ủy quyền DNS.',
     example: 'example.com.  IN  NS  ns1.exampledns.com.',
     usages: [
-      '将域名托管到指定 DNS 服务商',
-      '子域名委派给不同团队管理',
-      'DNS 服务迁移'
+      'Host domain lên nhà cung cấp DNS chỉ định',
+      'Ủy quyền subdomain cho team khác quản lý',
+      'Chuyển dịch vụ DNS'
     ]
   }
 ]

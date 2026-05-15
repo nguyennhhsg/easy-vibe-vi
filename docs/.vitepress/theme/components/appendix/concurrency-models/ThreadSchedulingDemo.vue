@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <h4>线程调度演示</h4>
+    <h4>Demo scheduling thread</h4>
 
     <div class="controls">
       <el-radio-group
@@ -8,13 +8,13 @@
         size="small"
       >
         <el-radio-button label="fifo">
-          FIFO (先来先服务)
+          FIFO (đến trước phục vụ trước)
         </el-radio-button>
         <el-radio-button label="roundrobin">
-          时间片轮转
+          Round robin
         </el-radio-button>
         <el-radio-button label="priority">
-          优先级调度
+          Priority scheduling
         </el-radio-button>
       </el-radio-group>
 
@@ -24,7 +24,7 @@
         :disabled="threads.length >= 6"
         @click="addThread"
       >
-        添加线程
+        Thêm thread
       </el-button>
 
       <el-button
@@ -32,20 +32,20 @@
         size="small"
         @click="toggleSimulation"
       >
-        {{ isRunning ? '暂停' : '开始调度' }}
+        {{ isRunning ? 'Tạm dừng' : 'Bắt đầu schedule' }}
       </el-button>
 
       <el-button
         size="small"
         @click="reset"
       >
-        重置
+        Reset
       </el-button>
     </div>
 
     <div class="timeline-container">
       <div class="timeline-header">
-        <span class="timeline-label">时间轴</span>
+        <span class="timeline-label">Timeline</span>
         <div class="time-marker">
           0ms
         </div>
@@ -86,7 +86,7 @@
               >
                 {{ stateText(thread.state) }}
               </el-tag>
-              <span class="priority">优先级: {{ thread.priority }}</span>
+              <span class="priority">Priority: {{ thread.priority }}</span>
             </div>
           </div>
 
@@ -101,11 +101,11 @@
               <span
                 v-if="slot.state === 'running'"
                 class="slot-label"
-              >运行</span>
+              >Chạy</span>
               <span
                 v-else
                 class="slot-label"
-              >等待</span>
+              >Đợi</span>
             </div>
 
             <div
@@ -126,7 +126,7 @@
           {{ completedThreads }}
         </div>
         <div class="stat-label">
-          已完成线程
+          Thread đã xong
         </div>
       </div>
       <div class="stat-item">
@@ -134,7 +134,7 @@
           {{ contextSwitches }}
         </div>
         <div class="stat-label">
-          上下文切换
+          Context switch
         </div>
       </div>
       <div class="stat-item">
@@ -142,7 +142,7 @@
           {{ avgWaitTime }}ms
         </div>
         <div class="stat-label">
-          平均等待时间
+          Thời gian đợi trung bình
         </div>
       </div>
       <div class="stat-item">
@@ -150,13 +150,13 @@
           {{ throughput }}
         </div>
         <div class="stat-label">
-          吞吐量 (线程/秒)
+          Throughput (thread/giây)
         </div>
       </div>
     </div>
 
     <div class="algorithm-info">
-      <h5>当前调度算法: {{ algorithmName }}</h5>
+      <h5>Thuật toán scheduling hiện tại: {{ algorithmName }}</h5>
       <p>{{ algorithmDescription }}</p>
     </div>
   </div>
@@ -182,17 +182,17 @@ const colors = ['#409eff', '#67c23a', '#e6a23c', '#f56c6c', '#909399', '#b3d8ff'
 const algorithmName = computed(() => {
   const names = {
     fifo: 'FIFO (First In First Out)',
-    roundrobin: 'Round Robin (时间片轮转)',
-    priority: 'Priority Scheduling (优先级调度)'
+    roundrobin: 'Round Robin (xoay vòng time slice)',
+    priority: 'Priority Scheduling'
   }
   return names[schedulingPolicy.value]
 })
 
 const algorithmDescription = computed(() => {
   const descriptions = {
-    fifo: '按照线程到达的先后顺序执行，直到当前线程完成才执行下一个。简单公平但可能导致短任务等待长任务。',
-    roundrobin: '每个线程轮流执行一个时间片，时间片用完就切换到下一个线程。响应性好，适合交互式系统。',
-    priority: '根据线程优先级决定执行顺序，高优先级线程优先执行。需要处理优先级反转和饥饿问题。'
+    fifo: 'Chạy theo thứ tự thread đến trước, cho đến khi thread hiện tại xong mới chạy thread kế tiếp. Đơn giản công bằng nhưng có thể khiến task ngắn phải đợi task dài.',
+    roundrobin: 'Mỗi thread chạy luân phiên một time slice, hết time slice thì chuyển sang thread kế tiếp. Phản hồi tốt, phù hợp hệ thống tương tác.',
+    priority: 'Quyết định thứ tự chạy dựa trên priority của thread, thread priority cao chạy trước. Cần xử lý vấn đề priority inversion và starvation.'
   }
   return descriptions[schedulingPolicy.value]
 })
@@ -211,10 +211,10 @@ const throughput = computed(() => {
 
 const stateText = (state) => {
   const map = {
-    running: '运行中',
-    ready: '就绪',
-    blocked: '阻塞',
-    completed: '完成'
+    running: 'Đang chạy',
+    ready: 'Sẵn sàng',
+    blocked: 'Bị chặn',
+    completed: 'Hoàn thành'
   }
   return map[state] || state
 }
