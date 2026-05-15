@@ -54,6 +54,13 @@ const topPromo = computed(() => {
       link: '/vi-vn/stage-1/learning-map/'
     }
   }
+  if (code === 'vi-vn') {
+    return {
+      text: 'Dùng Easy-Vibe để xây ứng dụng AI đầu tiên của bạn — nhanh nhất ngay trong ngày đã có nguyên mẫu lên sóng.',
+      cta: 'Bắt đầu học ›',
+      link: '/vi-vn/stage-1/learning-map/'
+    }
+  }
   return {
     text: 'Build your first AI app with Easy-Vibe and ship a working prototype fast.',
     cta: 'Start learning ›',
@@ -341,7 +348,7 @@ onUnmounted(() => {
               class="nav-link-item"
               @click="scrollTo('vibe-stories')"
             >
-              {{ t.nav.stories || 'Vibe 故事' }}
+              {{ t.nav.stories || 'Vibe Stories' }}
             </button>
             <button
               :class="{ active: activeTab === 'pm' }"

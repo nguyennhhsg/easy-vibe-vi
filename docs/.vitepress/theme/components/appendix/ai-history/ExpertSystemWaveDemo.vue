@@ -2,50 +2,50 @@
   <div class="demo-card">
     <div class="expert-system-flow">
       <div class="es-card success">
-        <div class="es-title">🌟 专家系统的辉煌</div>
+        <div class="es-title">🌟 Thời hoàng kim của hệ chuyên gia</div>
         <div class="es-list">
           <div class="es-item">
-            <span class="es-box input">人类专家经验</span>
+            <span class="es-box input">Kinh nghiệm chuyên gia</span>
             <span class="es-arrow">→</span>
-            <span class="es-box rules">转为 IF-THEN 规则库</span>
+            <span class="es-box rules">Chuyển thành luật IF-THEN</span>
           </div>
           <div class="es-item">
-            <span class="es-box input">特定领域问题</span>
+            <span class="es-box input">Bài toán trong lĩnh vực cụ thể</span>
             <span class="es-arrow">→</span>
-            <span class="es-box output">推理解答 (诊断/配置)</span>
+            <span class="es-box output">Suy luận ra đáp án (chẩn đoán/cấu hình)</span>
           </div>
         </div>
         <div class="es-tags">
-          <span class="es-tag">1965: Dendral (化学)</span>
-          <span class="es-tag">1977: MYCIN (医疗)</span>
-          <span class="es-tag">1980: XCON (配置)</span>
+          <span class="es-tag">1965: Dendral (hóa học)</span>
+          <span class="es-tag">1977: MYCIN (y tế)</span>
+          <span class="es-tag">1980: XCON (cấu hình)</span>
         </div>
       </div>
 
-      <div class="es-arrow-down">⬇️ 局限性爆发 ⬇️</div>
+      <div class="es-arrow-down">⬇️ Giới hạn bộc lộ ⬇️</div>
 
       <div class="es-card winter">
-        <div class="es-title"><span class="snow">❄️</span> 第一次 AI 寒冬 (1974-1980)</div>
+        <div class="es-title"><span class="snow">❄️</span> Mùa đông AI lần thứ nhất (1974-1980)</div>
         <div class="winter-reasons">
           <div class="reason">
             <span class="r-icon">📝</span>
             <div class="r-text">
-              <strong>知识获取瓶颈</strong>
-              <span>波兰尼悖论：人类无法说清所有规律。大量"常识"无法被人工硬编码。</span>
+              <strong>Bottleneck thu nhận tri thức</strong>
+              <span>Nghịch lý Polanyi: con người không thể diễn đạt hết mọi quy luật. Rất nhiều "tri thức thông thường" không thể hardcode được.</span>
             </div>
           </div>
           <div class="reason">
             <span class="r-icon">💥</span>
             <div class="r-text">
-              <strong>组合爆炸 & 脆性问题</strong>
-              <span>现实情况太多，穷举极难；且缺少常识，稍微偏离规则库系统就直接崩溃。</span>
+              <strong>Bùng nổ tổ hợp & dễ vỡ</strong>
+              <span>Tình huống thực tế quá nhiều, liệt kê hết là rất khó; lại thiếu common sense, chỉ cần lệch luật một chút là hệ thống sụp đổ.</span>
             </div>
           </div>
           <div class="reason">
             <span class="r-icon">📉</span>
             <div class="r-text">
-              <strong>算力不足 & 经费断层</strong>
-              <span>当时的硬件算力根本无法支撑爆发性的逻辑推演，遭遇 DARPA 研发经费大削减。</span>
+              <strong>Thiếu compute & đứt nguồn tài chính</strong>
+              <span>Phần cứng thời đó không đủ sức cho việc suy luận logic bùng nổ, gặp đợt cắt ngân sách lớn của DARPA.</span>
             </div>
           </div>
         </div>

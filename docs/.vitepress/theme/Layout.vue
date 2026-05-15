@@ -86,7 +86,7 @@ const resetLineHeight = () => {
 }
 
 // ============================================
-// 目录栏（左侧 VPSidebar）收起/展开功能
+// Chức năng thu gọn/mở rộng thanh mục lục (VPSidebar bên trái)
 // ============================================
 const SIDEBAR_COLLAPSED_KEY = 'ev-sidebar-collapsed'
 const SIDEBAR_WIDTH_KEY = 'ev-sidebar-width'
@@ -200,7 +200,7 @@ onMounted(() => {
   applyLineHeight(savedLineHeight)
   isHydrated.value = true
 
-  // 恢复目录栏收起状态
+  // Khôi phục trạng thái thu gọn của thanh mục lục
   const savedCollapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY)
   if (savedCollapsed === 'true') {
     sidebarCollapsed.value = true
@@ -225,8 +225,8 @@ onBeforeUnmount(() => {
 })
 
 // ============================================
-// Outline 侧边栏自动滚动跟随功能
-// 当页面滚动时，自动滚动 outline 让当前激活项保持在可视区域
+// Chức năng tự động cuộn theo của sidebar Outline
+// Khi trang cuộn, tự động cuộn outline để mục đang active luôn nằm trong vùng nhìn thấy
 // ============================================
 function initOutlineAutoScroll() {
   const outlineSelectors = [
@@ -332,7 +332,7 @@ function initOutlineAutoScroll() {
   })
 }
 
-// 滚动 outline 让当前激活项保持在可视区域中心
+// Cuộn outline để mục đang active nằm ở giữa vùng nhìn thấy
 function scrollOutlineToActiveItem(activeLink) {
   const outlineContainer = document.querySelector('.VPDocAsideOutline')
   if (!outlineContainer || !activeLink) return
@@ -340,17 +340,17 @@ function scrollOutlineToActiveItem(activeLink) {
   const containerRect = outlineContainer.getBoundingClientRect()
   const linkRect = activeLink.getBoundingClientRect()
 
-  // 计算链接相对于容器的位置
+  // Tính vị trí của link tương đối với container
   const linkTop = linkRect.top - containerRect.top + outlineContainer.scrollTop
   const linkHeight = linkRect.height
   const containerHeight = containerRect.height
 
-  // 判断链接是否在可视区域外
+  // Kiểm tra link có nằm ngoài vùng nhìn thấy hay không
   const isAbove = linkRect.top < containerRect.top + 20
   const isBelow = linkRect.bottom > containerRect.bottom - 20
 
   if (isAbove || isBelow) {
-    // 将激活项滚动到容器中间位置
+    // Cuộn mục active đến vị trí giữa container
     const targetScrollTop = linkTop - containerHeight / 2 + linkHeight / 2
     outlineContainer.scrollTo({
       top: targetScrollTop,
@@ -359,7 +359,7 @@ function scrollOutlineToActiveItem(activeLink) {
   }
 }
 
-// 滚动侧边栏让当前激活项保持在可视区域中心
+// Cuộn sidebar để mục đang active nằm ở giữa vùng nhìn thấy
 function scrollSidebarToActiveItem(activeItem) {
   const sidebarContainer = document.querySelector('.VPSidebar') || document.querySelector('.VPDocSidebar')
   if (!sidebarContainer || !activeItem) return
@@ -412,7 +412,7 @@ watch(sidebarCollapsed, (collapsed) => {
       <button
         class="ev-sidebar-nav-btn"
         type="button"
-        :aria-label="sidebarCollapsed ? '展开目录' : '收起目录'"
+        :aria-label="sidebarCollapsed ? 'Mở rộng mục lục' : 'Thu gọn mục lục'"
         @click.stop.prevent="toggleSidebar"
       >
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -440,7 +440,7 @@ watch(sidebarCollapsed, (collapsed) => {
             <button
               class="ev-fontsize-button"
               type="button"
-              aria-label="阅读设置"
+              aria-label="Cài đặt đọc"
               style="margin-left: 16px; padding: 0; width: 32px"
             >
               <el-icon :size="16">
@@ -452,7 +452,7 @@ watch(sidebarCollapsed, (collapsed) => {
             <div class="ev-setting-group">
               <div class="ev-setting-header">
                 <div class="ev-setting-title">
-                  字号
+                  Cỡ chữ
                 </div>
                 <div class="ev-setting-value">
                   {{ fontSize }}px
@@ -471,7 +471,7 @@ watch(sidebarCollapsed, (collapsed) => {
                   type="button"
                   @click="resetFontSize"
                 >
-                  默认
+                  Mặc định
                 </button>
                 <button
                   class="ev-fontsize-action"
@@ -492,7 +492,7 @@ watch(sidebarCollapsed, (collapsed) => {
             <div class="ev-setting-group">
               <div class="ev-setting-header">
                 <div class="ev-setting-title">
-                  行距
+                  Khoảng cách dòng
                 </div>
                 <div class="ev-setting-value">
                   {{ lineHeight.toFixed(2) }}
@@ -504,21 +504,21 @@ watch(sidebarCollapsed, (collapsed) => {
                   type="button"
                   @click="resetLineHeight"
                 >
-                  默认
+                  Mặc định
                 </button>
                 <button
                   class="ev-fontsize-action"
                   type="button"
                   @click="lineHeight = clampLineHeight(lineHeight - 0.05)"
                 >
-                  更紧
+                  Hẹp hơn
                 </button>
                 <button
                   class="ev-fontsize-action"
                   type="button"
                   @click="lineHeight = clampLineHeight(lineHeight + 0.05)"
                 >
-                  更松
+                  Rộng hơn
                 </button>
               </div>
               <el-slider
@@ -537,7 +537,7 @@ watch(sidebarCollapsed, (collapsed) => {
         v-if="frontmatter.layout === 'home'"
         class="vp-home-wordmark"
         type="button"
-        aria-label="打开欢迎页"
+        aria-label="Mở trang chào mừng"
         @click="openWelcomeFromWordmark"
       >
         <svg
@@ -602,7 +602,7 @@ watch(sidebarCollapsed, (collapsed) => {
         class="ev-sidebar-toggle-btn"
         :class="{ collapsed: sidebarCollapsed }"
         type="button"
-        :aria-label="sidebarCollapsed ? '展开目录' : '收起目录'"
+        :aria-label="sidebarCollapsed ? 'Mở rộng mục lục' : 'Thu gọn mục lục'"
         @click="toggleSidebar"
       >
         <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
@@ -628,12 +628,12 @@ watch(sidebarCollapsed, (collapsed) => {
   display: block;
 }
 
-/* 隐藏默认的 tagline，因为我们用打字机效果替代了它 */
+/* Ẩn tagline mặc định vì ta đã thay thế bằng hiệu ứng máy đánh chữ */
 .VPHomeHero .tagline {
   display: none !important;
 }
 
-/* 调整打字机容器的样式，使其看起来像原来的 tagline */
+/* Điều chỉnh style của container máy đánh chữ để trông giống tagline gốc */
 .vp-typed-tagline {
   padding-top: 0;
   margin-top: 8px;
@@ -644,12 +644,12 @@ watch(sidebarCollapsed, (collapsed) => {
   color: var(--vp-c-text-2);
   min-height: 28px;
   display: flex;
-  /* 居中对齐 */
+  /* Căn giữa */
   text-align: center;
   justify-content: center;
 }
 
-/* 强制 HomeHero 内容居中 */
+/* Bắt buộc nội dung HomeHero căn giữa */
 .VPHomeHero .container {
   text-align: center;
 }
@@ -779,10 +779,10 @@ watch(sidebarCollapsed, (collapsed) => {
 }
 
 /* ============================================
-   目录栏收起/展开
+   Thu gọn/mở rộng thanh mục lục
    ============================================ */
 
-/* 导航栏左侧的收起按钮 */
+/* Nút thu gọn ở bên trái navbar */
 .ev-sidebar-nav-btn {
   display: none;
   align-items: center;
@@ -802,7 +802,7 @@ watch(sidebarCollapsed, (collapsed) => {
   background: var(--vp-c-bg-soft);
 }
 
-/* 左侧边缘悬停区域 */
+/* Vùng hover ở cạnh trái */
 .ev-sidebar-hover-area {
   display: none;
   position: fixed;
@@ -833,7 +833,7 @@ watch(sidebarCollapsed, (collapsed) => {
   background: var(--vp-c-brand-1);
 }
 
-/* 分界线上的收起按钮 */
+/* Nút thu gọn trên đường phân cách */
 .ev-sidebar-toggle-btn {
   display: flex;
   position: absolute;
@@ -873,7 +873,7 @@ watch(sidebarCollapsed, (collapsed) => {
   opacity: 1;
 }
 
-/* 桌面端才显示按钮 */
+/* Chỉ hiển thị nút trên desktop */
 @media (min-width: 960px) {
   .ev-sidebar-nav-btn {
     display: inline-flex;
@@ -883,28 +883,28 @@ watch(sidebarCollapsed, (collapsed) => {
   }
 }
 
-/* @1440px 时分界线按钮跟随侧边栏实际宽度 */
+/* Tại @1440px, nút phân cách đi theo chiều rộng thực tế của sidebar */
 @media (min-width: 1440px) {
   .ev-sidebar-hover-area:not(.collapsed) {
     left: calc((100% - (var(--vp-layout-max-width, 1440px) - 64px)) / 2 + var(--vp-sidebar-width, 272px) - var(--ev-sidebar-divider-offset));
   }
 }
 
-/* ---- 收起状态下的 CSS 覆盖 ---- */
+/* ---- CSS override ở trạng thái thu gọn ---- */
 
-/* 隐藏侧边栏 — 仅桌面端，避免覆盖移动端的汉堡菜单 */
+/* Ẩn sidebar - chỉ trên desktop, tránh đè lên menu hamburger trên mobile */
 @media (min-width: 960px) {
   .ev-sidebar-collapsed .VPSidebar {
     display: none !important;
   }
 }
 
-/* 修复侧边栏收起后导航栏标题 border-bottom 重叠问题 */
+/* Sửa lỗi border-bottom của tiêu đề navbar bị chồng lấp sau khi sidebar thu gọn */
 .ev-sidebar-collapsed .VPNavBar.has-sidebar .VPNavBarTitle .title {
   border-bottom-color: transparent !important;
 }
 
-/* 内容区域填满页面 */
+/* Khu vực nội dung lấp đầy trang */
 @media (min-width: 960px) {
   .ev-sidebar-collapsed .VPContent.has-sidebar {
     padding-left: 0 !important;
@@ -929,7 +929,7 @@ watch(sidebarCollapsed, (collapsed) => {
   }
 }
 
-/* 收起/展开过渡动画 */
+/* Animation chuyển tiếp thu gọn/mở rộng */
 .VPSidebar,
 .VPContent.has-sidebar,
 .VPNavBar.has-sidebar .content,

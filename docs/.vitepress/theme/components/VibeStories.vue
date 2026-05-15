@@ -11,15 +11,15 @@ import story4Cover from '../../../vi-vn/vibe-stories/images/story-4/image7.png'
 const t = inject('t', {
   value: {
     stories: {
-      cat: '用户故事',
-      title: '看见每一个<br><span class="highlight">闪亮的你</span>',
-      sub: '加入他们，分享你的 vibe coding 故事',
-      authorPrefix: '讲述者：',
+      cat: 'Câu chuyện người dùng',
+      title: 'Nhìn thấy mỗi một<br><span class="highlight">bạn rạng rỡ</span>',
+      sub: 'Tham gia cùng họ, chia sẻ câu chuyện vibe coding của bạn',
+      authorPrefix: 'Người kể: ',
       ui: {
-        prevLabel: '上一则故事',
-        nextLabel: '下一则故事',
-        selectLabel: '查看这个故事',
-        imageAlt: '用户故事封面'
+        prevLabel: 'Câu chuyện trước',
+        nextLabel: 'Câu chuyện tiếp theo',
+        selectLabel: 'Xem câu chuyện này',
+        imageAlt: 'Ảnh bìa câu chuyện người dùng'
       }
     }
   }
@@ -28,8 +28,8 @@ const t = inject('t', {
 const tStories = computed(() => [
   {
     id: 1,
-    title: t.value?.stories?.s1?.title || '放弃月入过万，他在农村小学带孩子们“用AI赶苍蝇”',
-    author: t.value?.stories?.s1?.author || '小学老师小浩',
+    title: t.value?.stories?.s1?.title || 'Từ bỏ thu nhập hàng tháng vạn tệ, anh ấy về trường tiểu học nông thôn dạy bọn trẻ "dùng AI đuổi ruồi"',
+    author: t.value?.stories?.s1?.author || 'Thầy giáo tiểu học Tiểu Hạo',
     avatar: '👨‍🏫',
     image: story1Cover,
     imageStyle: {
@@ -39,8 +39,8 @@ const tStories = computed(() => [
   },
   {
     id: 2,
-    title: t.value?.stories?.s2?.title || '期末考试周，我偷偷用AI造了个“校园闲鱼”',
-    author: t.value?.stories?.s2?.author || '一位大二学生',
+    title: t.value?.stories?.s2?.title || 'Tuần thi cuối kỳ, tôi lén dùng AI làm ra một "chợ tự do trong khuôn viên trường"',
+    author: t.value?.stories?.s2?.author || 'Một sinh viên năm hai',
     avatar: '🎓',
     image: story2Cover,
     imageStyle: {
@@ -50,8 +50,8 @@ const tStories = computed(() => [
   },
   {
     id: 3,
-    title: t.value?.stories?.s3?.title || '我给每个学生，做了一个不会累的“学霸同桌”',
-    author: t.value?.stories?.s3?.author || '高中信息技术老师',
+    title: t.value?.stories?.s3?.title || 'Tôi làm cho mỗi học sinh một "bạn cùng bàn học giỏi" không bao giờ mệt',
+    author: t.value?.stories?.s3?.author || 'Giáo viên công nghệ thông tin cấp 3',
     avatar: '🧑‍🏫',
     image: story3Cover,
     imageStyle: {
@@ -61,8 +61,8 @@ const tStories = computed(() => [
   },
   {
     id: 4,
-    title: t.value?.stories?.s4?.title || '48岁货车司机，熬了几个通宵，硬是用AI磕出一个出海工具站',
-    author: t.value?.stories?.s4?.author || '货车司机老黄',
+    title: t.value?.stories?.s4?.title || 'Tài xế xe tải 48 tuổi, thức trắng mấy đêm, đã dùng AI làm ra một website công cụ vươn ra biển',
+    author: t.value?.stories?.s4?.author || 'Bác tài xế xe tải Lão Hoàng',
     avatar: '🚚',
     image: story4Cover,
     imageStyle: {
@@ -218,8 +218,8 @@ onUnmounted(() => {
 <template>
   <div ref="containerRef" class="vibe-stories-container">
     <div class="section-header">
-      <h3 class="section-headline" v-html="t.stories?.title || '看见每一个<br><span class=\'highlight\'>闪亮的你</span>'"></h3>
-      <p class="section-sub">{{ t.stories?.sub || '加入他们，分享你的 vibe coding 故事' }}</p>
+      <h3 class="section-headline" v-html="t.stories?.title || 'Nhìn thấy mỗi một<br><span class=\'highlight\'>bạn rạng rỡ</span>'"></h3>
+      <p class="section-sub">{{ t.stories?.sub || 'Tham gia cùng họ, chia sẻ câu chuyện vibe coding của bạn' }}</p>
     </div>
 
     <div class="laptop-wrapper" @mouseenter="stopAutoplay" @mouseleave="startAutoplay">

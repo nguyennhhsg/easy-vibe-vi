@@ -2,10 +2,10 @@
   <div class="agent-chat-demo">
     <div class="header">
       <div class="title">
-        🤖 Agent 初体验：从"能说"到"能做"
+        🤖 Trải nghiệm Agent đầu tiên: từ "biết nói" đến "biết làm"
       </div>
       <div class="subtitle">
-        体验 Agent 如何自动调用工具完成任务
+        Trải nghiệm cách Agent tự động gọi tool để hoàn thành task
       </div>
     </div>
 
@@ -41,7 +41,7 @@
         </div>
         <div class="bubble llm-bubble">
           <div class="llm-label">
-            普通 LLM
+            LLM thường
           </div>
           <div class="llm-content">
             {{ currentScenarioData.llmResponse }}
@@ -56,10 +56,10 @@
         </div>
         <div class="bubble agent-bubble">
           <div class="agent-label">
-            Agent 智能体
+            Agent thông minh
           </div>
-          
-          <!-- 思考过程（可折叠） -->
+
+          <!-- Quá trình suy nghĩ (có thể thu gọn) -->
           <div
             v-if="showThinking"
             class="thinking-section"
@@ -68,7 +68,7 @@
               class="thinking-header"
               @click="toggleThinking"
             >
-              <span>🧠 思考过程</span>
+              <span>🧠 Quá trình suy nghĩ</span>
               <span class="toggle-icon">{{ thinkingExpanded ? '▼' : '▶' }}</span>
             </div>
             <div
@@ -81,7 +81,7 @@
             </div>
           </div>
 
-          <!-- 工具调用（可折叠） -->
+          <!-- Gọi tool (có thể thu gọn) -->
           <div
             v-if="showTools"
             ref="toolsSection"
@@ -91,7 +91,7 @@
               class="tools-header"
               @click="toggleTools"
             >
-              <span>🔧 工具调用 ({{ currentScenarioData.tools.length }}个)</span>
+              <span>🔧 Gọi tool ({{ currentScenarioData.tools.length }} tool)</span>
               <span class="toggle-icon">{{ toolsExpanded ? '▼' : '▶' }}</span>
             </div>
             <div
@@ -134,41 +134,41 @@
             </div>
           </div>
 
-          <!-- 最终回复 -->
+          <!-- Câu trả lời cuối -->
           <div
             v-if="showResponse"
             class="final-response"
           >
             <div class="response-header">
-              💬 最终回复
+              💬 Câu trả lời cuối
             </div>
             <div class="response-content">
               {{ currentScenarioData.agentResponse }}
             </div>
           </div>
 
-          <!-- 执行按钮 -->
+          <!-- Nút chạy -->
           <button
             v-if="!isExecuting && !executionComplete"
             class="execute-btn"
             @click="startExecution"
           >
-            ▶ 让 Agent 执行
+            ▶ Cho Agent chạy
           </button>
           <button
             v-else-if="executionComplete"
             class="execute-btn reset"
             @click="reset"
           >
-            🔄 重置对话
+            🔄 Reset hội thoại
           </button>
         </div>
       </div>
     </div>
 
-    <!-- 核心区别 -->
+    <!-- Khác biệt cốt lõi -->
     <div class="insight-bar">
-      <span class="insight-label">💡 核心区别：</span>
+      <span class="insight-label">💡 Khác biệt cốt lõi: </span>
       <span class="insight-text">{{ currentScenarioData.insight }}</span>
     </div>
   </div>
@@ -181,126 +181,126 @@ const scenarios = [
   {
     id: 'weather',
     icon: '🌤️',
-    name: '查天气',
-    query: '北京今天天气怎么样？适合穿什么衣服？',
-    llmResponse: '我无法获取实时天气信息。北京一般在春季比较温和，建议穿薄外套。',
-    thinking: '用户想知道北京今天的天气和穿衣建议。我需要：1) 查询实时天气 2) 根据温度给出穿衣建议',
+    name: 'Tra thời tiết',
+    query: 'Thời tiết Hà Nội hôm nay thế nào? Nên mặc gì?',
+    llmResponse: 'Mình không thể lấy thông tin thời tiết realtime. Hà Nội mùa xuân thường khá dịu, gợi ý mặc áo khoác mỏng.',
+    thinking: 'Người dùng muốn biết thời tiết Hà Nội hôm nay và gợi ý mặc đồ. Mình cần: 1) Tra thời tiết realtime 2) Dựa vào nhiệt độ gợi ý mặc đồ',
     tools: [
-      { name: 'weather_api', params: '{"city": "北京", "date": "today"}', result: '☀️ 晴，15-25°C，空气质量良' }
+      { name: 'weather_api', params: '{"city": "Hà Nội", "date": "today"}', result: '☀️ Nắng, 15-25°C, chất lượng không khí tốt' }
     ],
-    agentResponse: '北京今天天气晴朗，15-25°C，空气质量良。建议穿薄外套或长袖T恤，早晚温差较大，可以带件薄外套。',
-    insight: 'Agent 调用天气 API 获取实时数据，LLM 只能基于训练数据推测。'
+    agentResponse: 'Hà Nội hôm nay nắng đẹp, 15-25°C, chất lượng không khí tốt. Gợi ý mặc áo khoác mỏng hoặc áo dài tay, chênh lệch nhiệt độ sáng/tối khá lớn, nên mang theo áo khoác mỏng.',
+    insight: 'Agent gọi API thời tiết lấy dữ liệu realtime, LLM chỉ có thể đoán dựa trên dữ liệu huấn luyện.'
   },
   {
     id: 'calculate',
     icon: '🧮',
-    name: '复杂计算',
-    query: '帮我算一下：如果贷款100万，年利率4.2%，30年等额本息，每月还多少？总利息多少？',
-    llmResponse: '根据公式计算，月供大约5000元左右，总利息约80万。这只是估算，建议用专业计算器。',
-    thinking: '这是房贷计算问题，需要用到等额本息公式。月供 = 贷款本金 × 月利率 × (1+月利率)^还款月数 / [(1+月利率)^还款月数 - 1]',
+    name: 'Tính toán phức tạp',
+    query: 'Tính giúp mình: vay 1 tỷ, lãi suất năm 4.2%, trả đều 30 năm, mỗi tháng trả bao nhiêu? Tổng lãi bao nhiêu?',
+    llmResponse: 'Theo công thức, mỗi tháng khoảng 5 triệu, tổng lãi khoảng 800 triệu. Đây chỉ là ước lượng, nên dùng máy tính chuyên dụng.',
+    thinking: 'Đây là bài toán lãi vay nhà, cần dùng công thức trả đều. Tiền hàng tháng = Nợ gốc × Lãi tháng × (1 + Lãi tháng)^Số tháng / [(1 + Lãi tháng)^Số tháng - 1]',
     tools: [
-      { name: 'calculator', params: '{"principal": 1000000, "rate": 0.042, "years": 30}', result: '月供: ¥4,890.19, 总利息: ¥760,468.40' }
+      { name: 'calculator', params: '{"principal": 1000000000, "rate": 0.042, "years": 30}', result: 'Hàng tháng: 4.890.190đ, Tổng lãi: 760.468.400đ' }
     ],
-    agentResponse: '计算结果：\n• 每月还款：¥4,890.19\n• 还款总额：¥1,760,468.40\n• 总利息：¥760,468.40\n\n30年下来利息约占本金的76%。',
-    insight: 'Agent 调用计算器确保 100% 准确，LLM 心算可能出错。'
+    agentResponse: 'Kết quả tính:\n• Trả hàng tháng: 4.890.190đ\n• Tổng phải trả: 1.760.468.400đ\n• Tổng lãi: 760.468.400đ\n\nSau 30 năm, lãi chiếm khoảng 76% nợ gốc.',
+    insight: 'Agent gọi máy tính đảm bảo chính xác 100%, LLM nhẩm có thể sai.'
   },
   {
     id: 'stock',
     icon: '📈',
-    name: '股票分析',
-    query: '分析一下特斯拉股票最近的表现，并预测明天走势',
-    llmResponse: '我无法获取实时股票数据。特斯拉是知名电动车公司，股价波动较大，建议查看专业财经网站。',
-    thinking: '用户需要特斯拉股票的近期表现分析和预测。我需要：1) 获取最新股价 2) 获取历史数据 3) 进行技术分析',
+    name: 'Phân tích chứng khoán',
+    query: 'Phân tích diễn biến cổ phiếu Tesla gần đây và dự đoán xu hướng ngày mai',
+    llmResponse: 'Mình không lấy được dữ liệu chứng khoán realtime. Tesla là công ty xe điện nổi tiếng, giá cổ phiếu biến động mạnh, gợi ý xem trên website tài chính chuyên nghiệp.',
+    thinking: 'Người dùng cần phân tích diễn biến cổ phiếu Tesla gần đây và dự đoán. Mình cần: 1) Lấy giá mới nhất 2) Lấy dữ liệu lịch sử 3) Phân tích kỹ thuật',
     tools: [
-      { name: 'stock_api', params: '{"symbol": "TSLA", "period": "1mo"}', result: '当前价: $248.50, 月涨幅: +12.3%, 成交量: 1.2亿' },
-      { name: 'news_search', params: '{"query": "Tesla stock news", "limit": 5}', result: '找到5条相关新闻：财报超预期、新车型发布...' },
-      { name: 'technical_analysis', params: '{"data": "TSLA_price_data", "indicators": ["MA", "RSI"]}', result: 'RSI: 68(接近超买), MA20: $235, 趋势: 上升' }
+      { name: 'stock_api', params: '{"symbol": "TSLA", "period": "1mo"}', result: 'Giá hiện tại: $248.50, tăng tháng: +12.3%, KL: 120M' },
+      { name: 'news_search', params: '{"query": "Tesla stock news", "limit": 5}', result: 'Tìm thấy 5 tin: báo cáo tài chính vượt kỳ vọng, ra mắt model mới...' },
+      { name: 'technical_analysis', params: '{"data": "TSLA_price_data", "indicators": ["MA", "RSI"]}', result: 'RSI: 68 (sát overbought), MA20: $235, xu hướng: tăng' }
     ],
-    agentResponse: '特斯拉(TSLA)最近表现：\n📈 月涨幅 +12.3%，现报 $248.50\n📊 技术指标：RSI 68(接近超买)，站上20日均线\n📰 消息面：财报超预期、新车型发布利好\n\n预测：短期可能回调，中长期看好。',
-    insight: 'Agent 串联多个工具（股价+新闻+技术分析）完成复杂分析任务。'
+    agentResponse: 'Diễn biến Tesla (TSLA) gần đây:\n📈 Tăng tháng +12.3%, giá hiện tại $248.50\n📊 Chỉ báo kỹ thuật: RSI 68 (sát overbought), trên MA20\n📰 Tin tức: báo cáo tài chính vượt kỳ vọng, ra model mới có lợi\n\nDự đoán: ngắn hạn có thể điều chỉnh, trung dài hạn tích cực.',
+    insight: 'Agent nối nhiều tool (giá + tin tức + phân tích kỹ thuật) để hoàn thành task phân tích phức tạp.'
   },
   {
     id: 'travel',
     icon: '✈️',
-    name: '旅行规划',
-    query: '帮我规划一个3天2晚的东京旅行，预算1万人民币，包含机票、酒店、景点',
-    llmResponse: '东京是个好地方！我可以给你一些建议：浅草寺、东京塔、银座购物区都很值得去。预算1万可能有点紧张，建议提前预订。',
-    thinking: '用户需要完整的东京3天2晚旅行规划。我需要：1) 查询机票价格 2) 搜索酒店 3) 推荐景点 4) 规划路线 5) 计算总预算',
+    name: 'Lập kế hoạch du lịch',
+    query: 'Lập kế hoạch du lịch Tokyo 3 ngày 2 đêm, ngân sách 30 triệu, gồm vé máy bay, khách sạn, điểm tham quan',
+    llmResponse: 'Tokyo là nơi rất hay! Mình có thể gợi ý: chùa Asakusa, Tokyo Tower, khu mua sắm Ginza đều đáng đi. Ngân sách 30 triệu hơi căng, nên đặt sớm.',
+    thinking: 'Người dùng cần kế hoạch trọn vẹn Tokyo 3 ngày 2 đêm. Mình cần: 1) Tra vé máy bay 2) Search khách sạn 3) Gợi ý điểm tham quan 4) Lập lộ trình 5) Tính tổng ngân sách',
     tools: [
-      { name: 'flight_search', params: '{"from": "上海", "to": "东京", "depart": "2024-03-15", "return": "2024-03-17"}', result: '往返机票: ¥3,200 (春秋航空)' },
-      { name: 'hotel_search', params: '{"city": "东京", "checkin": "2024-03-15", "nights": 2, "budget": 3000}', result: '新宿华盛顿酒店: ¥1,200/晚, 评分4.5' },
-      { name: 'attractions_search', params: '{"city": "东京", "days": 3}', result: '推荐景点: 浅草寺、东京塔、涩谷十字路口、明治神宫、秋叶原' },
-      { name: 'route_planner', params: '{"spots": ["浅草寺", "东京塔", "涩谷", "秋叶原"], "days": 3}', result: 'Day1: 浅草寺→东京塔, Day2: 涩谷→明治神宫, Day3: 秋叶原→银座' },
-      { name: 'budget_calculator', params: '{"flight": 3200, "hotel": 2400, "food": 1500, "transport": 500, "tickets": 800}', result: '总预算: ¥8,400 (剩余¥1,600用于购物)' }
+      { name: 'flight_search', params: '{"from": "HCM", "to": "Tokyo", "depart": "2024-03-15", "return": "2024-03-17"}', result: 'Vé khứ hồi: 9.500.000đ (Spring Airlines)' },
+      { name: 'hotel_search', params: '{"city": "Tokyo", "checkin": "2024-03-15", "nights": 2, "budget": 9000000}', result: 'KS Shinjuku Washington: 3.600.000đ/đêm, đánh giá 4.5' },
+      { name: 'attractions_search', params: '{"city": "Tokyo", "days": 3}', result: 'Điểm gợi ý: chùa Asakusa, Tokyo Tower, ngã tư Shibuya, Đền Meiji, Akihabara' },
+      { name: 'route_planner', params: '{"spots": ["Asakusa", "Tokyo Tower", "Shibuya", "Akihabara"], "days": 3}', result: 'Day1: Asakusa→Tokyo Tower, Day2: Shibuya→Đền Meiji, Day3: Akihabara→Ginza' },
+      { name: 'budget_calculator', params: '{"flight": 9500000, "hotel": 7200000, "food": 4500000, "transport": 1500000, "tickets": 2400000}', result: 'Tổng ngân sách: 25.100.000đ (còn 4.900.000đ để mua sắm)' }
     ],
-    agentResponse: '✈️ 东京3天2晚行程规划\n\n📅 Day1: 浅草寺→东京塔\n📅 Day2: 涩谷→明治神宫\n📅 Day3: 秋叶原→银座\n\n💰 预算明细：\n• 往返机票: ¥3,200\n• 酒店2晚: ¥2,400\n• 餐饮: ¥1,500\n• 交通: ¥500\n• 门票: ¥800\n• 总计: ¥8,400 (剩余¥1,600购物)',
-    insight: 'Agent 调用5个工具完成机票、酒店、景点、路线、预算的完整规划。'
+    agentResponse: '✈️ Lịch trình Tokyo 3 ngày 2 đêm\n\n📅 Day1: Asakusa→Tokyo Tower\n📅 Day2: Shibuya→Đền Meiji\n📅 Day3: Akihabara→Ginza\n\n💰 Chi tiết ngân sách:\n• Vé máy bay khứ hồi: 9.500.000đ\n• Khách sạn 2 đêm: 7.200.000đ\n• Ăn uống: 4.500.000đ\n• Di chuyển: 1.500.000đ\n• Vé tham quan: 2.400.000đ\n• Tổng: 25.100.000đ (còn 4.900.000đ để mua sắm)',
+    insight: 'Agent gọi 5 tool để hoàn thành kế hoạch trọn vẹn về vé máy bay, khách sạn, điểm tham quan, lộ trình, ngân sách.'
   },
   {
     id: 'shopping',
     icon: '🛒',
-    name: '智能购物',
-    query: '我想买一台5000元左右的笔记本电脑，主要用于编程和轻度游戏，推荐几款并对比',
-    llmResponse: '5000元预算可以买到不错的笔记本。推荐联想小新Pro、华为MateBook、小米RedmiBook。具体配置建议16GB内存、512GB SSD。',
-    thinking: '用户需要5000元价位的编程+游戏笔记本推荐。我需要：1) 搜索当前热门机型 2) 获取详细规格参数 3) 查询实时价格 4) 查看用户评价 5) 进行性能对比',
+    name: 'Mua sắm thông minh',
+    query: 'Mình muốn mua laptop khoảng 20 triệu, chủ yếu để lập trình và chơi game nhẹ, gợi ý vài model và so sánh',
+    llmResponse: 'Ngân sách 20 triệu có thể mua được laptop ổn. Gợi ý Lenovo Slim Pro, Huawei MateBook, RedmiBook. Cấu hình nên có 16GB RAM, 512GB SSD.',
+    thinking: 'Người dùng cần gợi ý laptop 20 triệu cho lập trình + chơi game. Mình cần: 1) Tìm model hot hiện tại 2) Lấy thông số chi tiết 3) Tra giá realtime 4) Xem review 5) So benchmark hiệu năng',
     tools: [
-      { name: 'product_search', params: '{"category": "laptop", "budget": 5000, "usage": "programming,gaming"}', result: '找到6款: 联想小新Pro16、ThinkBook14+、华为MateBook14、RedmiBook Pro15、荣耀MagicBook14、机械革命极光Pro' },
-      { name: 'specs_query', params: '{"products": ["联想小新Pro16", "ThinkBook14+", "华为MateBook14"]}', result: '小新Pro16: R7-7840HS/16G/1TB/2.5K; ThinkBook14+: i5-13500H/16G/512G/2.8K; MateBook14: i5-1340P/16G/512G/2K触控' },
-      { name: 'price_compare', params: '{"products": ["联想小新Pro16", "ThinkBook14+", "华为MateBook14"]}', result: '小新Pro16: ¥4,999; ThinkBook14+: ¥5,299; MateBook14: ¥5,499' },
-      { name: 'reviews_search', params: '{"products": ["联想小新Pro16", "ThinkBook14+"], "source": "jd,tmall"}', result: '小新Pro16: 好评率96%,  praised for screen and performance; ThinkBook14+: 好评率94%, praised for build quality' },
-      { name: 'benchmark_compare', params: '{"products": ["联想小新Pro16", "ThinkBook14+"], "tests": ["cpu", "gpu", "battery"]}', result: 'CPU: 小新Pro16(R7) > ThinkBook14+(i5); GPU: 两者均为核显; 续航: ThinkBook14+ 8h > 小新Pro16 6.5h' }
+      { name: 'product_search', params: '{"category": "laptop", "budget": 20000000, "usage": "programming,gaming"}', result: 'Tìm thấy 6 model: Lenovo Slim Pro 16, ThinkBook 14+, Huawei MateBook 14, RedmiBook Pro 15, Honor MagicBook 14, Mechrevo Aurora Pro' },
+      { name: 'specs_query', params: '{"products": ["Lenovo Slim Pro 16", "ThinkBook 14+", "Huawei MateBook 14"]}', result: 'Slim Pro 16: R7-7840HS/16G/1TB/2.5K; ThinkBook 14+: i5-13500H/16G/512G/2.8K; MateBook 14: i5-1340P/16G/512G/2K cảm ứng' },
+      { name: 'price_compare', params: '{"products": ["Lenovo Slim Pro 16", "ThinkBook 14+", "Huawei MateBook 14"]}', result: 'Slim Pro 16: 19.900.000đ; ThinkBook 14+: 21.000.000đ; MateBook 14: 21.800.000đ' },
+      { name: 'reviews_search', params: '{"products": ["Lenovo Slim Pro 16", "ThinkBook 14+"], "source": "shopee,lazada"}', result: 'Slim Pro 16: tỷ lệ tốt 96%, được khen về màn hình và hiệu năng; ThinkBook 14+: tỷ lệ tốt 94%, được khen về gia công' },
+      { name: 'benchmark_compare', params: '{"products": ["Lenovo Slim Pro 16", "ThinkBook 14+"], "tests": ["cpu", "gpu", "battery"]}', result: 'CPU: Slim Pro 16 (R7) > ThinkBook 14+ (i5); GPU: cả hai đều là card tích hợp; Pin: ThinkBook 14+ 8h > Slim Pro 16 6.5h' }
     ],
-    agentResponse: '💻 5000元笔记本推荐对比\n\n🥇 首选: 联想小新Pro16\n• 配置: R7-7840HS/16G/1TB/2.5K 120Hz\n• 价格: ¥4,999\n• 优势: 性能强、屏幕好、存储大\n• 适合: 编程+轻度游戏\n\n🥈 备选: ThinkBook14+\n• 配置: i5-13500H/16G/512G/2.8K\n• 价格: ¥5,299\n• 优势: 做工好、续航长、接口全\n• 适合: 商务办公+编程',
-    insight: 'Agent 调用5个工具完成搜索、查规格、比价格、看评价、跑分对比的完整购物决策。'
+    agentResponse: '💻 So sánh gợi ý laptop 20 triệu\n\n🥇 Lựa chọn ưu tiên: Lenovo Slim Pro 16\n• Cấu hình: R7-7840HS/16G/1TB/2.5K 120Hz\n• Giá: 19.900.000đ\n• Ưu thế: hiệu năng mạnh, màn hình đẹp, ổ lớn\n• Phù hợp: lập trình + chơi game nhẹ\n\n🥈 Phương án dự phòng: ThinkBook 14+\n• Cấu hình: i5-13500H/16G/512G/2.8K\n• Giá: 21.000.000đ\n• Ưu thế: gia công tốt, pin trâu, đầy đủ cổng\n• Phù hợp: công việc văn phòng + lập trình',
+    insight: 'Agent gọi 5 tool để hoàn thành quyết định mua sắm trọn vẹn: tìm kiếm, tra cấu hình, so giá, xem review, so benchmark.'
   },
   {
     id: 'report',
     icon: '📊',
-    name: '研究报告',
-    query: '帮我生成一份2024年新能源汽车行业分析报告，包含市场规模、主要玩家、技术趋势',
-    llmResponse: '新能源汽车行业正在快速发展。特斯拉、比亚迪是行业领导者。市场规模预计持续增长，电池技术是关键。建议查阅专业行业报告获取详细数据。',
-    thinking: '用户需要一份完整的新能源汽车行业分析报告。我需要：1) 查询最新市场数据 2) 搜索主要厂商信息 3) 获取技术发展趋势 4) 查找政策法规 5) 生成数据可视化 6) 整理成报告格式',
+    name: 'Báo cáo nghiên cứu',
+    query: 'Tạo giúp mình báo cáo phân tích ngành xe điện 2024, gồm quy mô thị trường, các tay chơi chính, xu hướng công nghệ',
+    llmResponse: 'Ngành xe điện đang phát triển nhanh. Tesla, BYD là dẫn đầu. Quy mô thị trường dự kiến tăng tiếp, công nghệ pin là then chốt. Nên xem báo cáo ngành chuyên nghiệp để có số liệu chi tiết.',
+    thinking: 'Người dùng cần báo cáo phân tích ngành xe điện trọn vẹn. Mình cần: 1) Tra dữ liệu thị trường mới nhất 2) Search thông tin các hãng chính 3) Lấy xu hướng công nghệ 4) Tìm chính sách 5) Sinh biểu đồ 6) Sắp xếp thành báo cáo',
     tools: [
-      { name: 'market_data', params: '{"industry": "NEV", "year": 2024, "metrics": ["size", "growth", "penetration"]}', result: '2024年全球NEV销量: 1,700万辆(+35%), 中国占比60%, 渗透率: 全球18%, 中国35%' },
-      { name: 'company_search', params: '{"industry": "NEV", "ranking": "top10"}', result: 'TOP5: 比亚迪(302万辆)、特斯拉(181万辆)、大众(77万辆)、吉利(68万辆)、上汽(63万辆)' },
-      { name: 'tech_trends', params: '{"field": "NEV", "technologies": ["battery", "autonomous", "charging"]}', result: '电池: 固态电池量产在即, 能量密度>400Wh/kg; 智驾: L2+普及率>50%, L4开始商用; 充电: 800V高压平台普及, 5分钟补能200km' },
-      { name: 'policy_search', params: '{"region": "global", "topic": "NEV_policy", "year": 2024}', result: '中国: 购置税减免延续至2027年; 欧盟: 2035年禁售燃油车; 美国: IRA法案补贴本土化生产' },
-      { name: 'data_visualization', params: '{"type": "chart", "data": "NEV_market_share", "chart_type": "pie"}', result: '生成市场份额饼图: 比亚迪35%, 特斯拉21%, 其他44%' },
-      { name: 'report_generator', params: '{"title": "2024新能源汽车行业分析报告", "sections": ["market", "players", "tech", "policy"], "format": "markdown"}', result: '报告已生成: 12页, 包含6个图表, 3个数据表格' }
+      { name: 'market_data', params: '{"industry": "NEV", "year": 2024, "metrics": ["size", "growth", "penetration"]}', result: 'Doanh số NEV toàn cầu 2024: 17 triệu xe (+35%), Trung Quốc chiếm 60%, tỷ lệ thâm nhập: toàn cầu 18%, Trung Quốc 35%' },
+      { name: 'company_search', params: '{"industry": "NEV", "ranking": "top10"}', result: 'TOP5: BYD (3.02M xe), Tesla (1.81M), Volkswagen (770K), Geely (680K), SAIC (630K)' },
+      { name: 'tech_trends', params: '{"field": "NEV", "technologies": ["battery", "autonomous", "charging"]}', result: 'Pin: pin thể rắn sắp ra hàng loạt, mật độ năng lượng >400Wh/kg; Tự lái: L2+ phổ biến >50%, L4 bắt đầu thương mại; Sạc: nền tảng 800V phổ biến, 5 phút sạc 200km' },
+      { name: 'policy_search', params: '{"region": "global", "topic": "NEV_policy", "year": 2024}', result: 'Trung Quốc: miễn thuế gia hạn đến 2027; EU: cấm bán xe xăng từ 2035; Mỹ: đạo luật IRA trợ cấp sản xuất nội địa' },
+      { name: 'data_visualization', params: '{"type": "chart", "data": "NEV_market_share", "chart_type": "pie"}', result: 'Sinh biểu đồ tròn thị phần: BYD 35%, Tesla 21%, khác 44%' },
+      { name: 'report_generator', params: '{"title": "Báo cáo phân tích ngành xe điện 2024", "sections": ["market", "players", "tech", "policy"], "format": "markdown"}', result: 'Báo cáo đã sinh: 12 trang, 6 biểu đồ, 3 bảng dữ liệu' }
     ],
-    agentResponse: '📊 2024新能源汽车行业分析报告\n\n📈 市场规模\n• 全球销量: 1,700万辆 (+35%)\n• 中国市场占比: 60%\n• 全球渗透率: 18% (中国35%)\n\n🏆 主要玩家\n1. 比亚迪: 302万辆 (35%)\n2. 特斯拉: 181万辆 (21%)\n3. 大众: 77万辆\n\n🔋 技术趋势\n• 固态电池能量密度>400Wh/kg\n• L2+智驾普及率超50%\n• 800V高压快充普及\n\n📋 报告已生成: 12页完整分析',
-    insight: 'Agent 调用6个工具完成数据收集、分析、可视化和报告生成的完整研究流程。'
+    agentResponse: '📊 Báo cáo phân tích ngành xe điện 2024\n\n📈 Quy mô thị trường\n• Doanh số toàn cầu: 17 triệu xe (+35%)\n• Trung Quốc chiếm: 60%\n• Tỷ lệ thâm nhập toàn cầu: 18% (Trung Quốc 35%)\n\n🏆 Các tay chơi chính\n1. BYD: 3.02 triệu xe (35%)\n2. Tesla: 1.81 triệu xe (21%)\n3. Volkswagen: 770K xe\n\n🔋 Xu hướng công nghệ\n• Pin thể rắn mật độ năng lượng >400Wh/kg\n• L2+ phổ biến hơn 50%\n• Sạc nhanh 800V phổ biến\n\n📋 Báo cáo đã sinh: 12 trang phân tích đầy đủ',
+    insight: 'Agent gọi 6 tool để hoàn thành quy trình nghiên cứu trọn vẹn: thu thập dữ liệu, phân tích, trực quan hóa và sinh báo cáo.'
   },
   {
     id: 'code-run',
     icon: '💻',
-    name: '代码执行',
-    query: '生成一个1-100的随机数列表，找出其中的质数，并计算平均值',
-    llmResponse: '我可以写出代码，但无法实际执行。质数是指只能被1和自身整除的数，比如2,3,5,7...',
-    thinking: '用户需要：1) 生成随机数列表 2) 筛选质数 3) 计算平均值。我需要在沙箱中执行Python代码',
+    name: 'Chạy code',
+    query: 'Sinh danh sách số ngẫu nhiên 1-100, tìm các số nguyên tố trong đó, và tính giá trị trung bình',
+    llmResponse: 'Mình có thể viết code nhưng không chạy thật được. Số nguyên tố là số chỉ chia hết cho 1 và chính nó, ví dụ 2, 3, 5, 7...',
+    thinking: 'Người dùng cần: 1) Sinh danh sách số ngẫu nhiên 2) Lọc số nguyên tố 3) Tính trung bình. Mình cần chạy code Python trong sandbox',
     tools: [
-      { name: 'python_executor', params: '{"code": "import random; nums = [random.randint(1,100) for _ in range(20)]; primes = [n for n in nums if all(n%i!=0 for i in range(2,int(n**0.5)+1)) and n>1]; print(f\"随机数: {nums}\"); print(f\"质数: {primes}\"); print(f\"平均值: {sum(nums)/len(nums):.2f}\")"}', result: '随机数: [42, 17, 89, 23, 56, 71, 34, 91, 13, 67...]\n质数: [17, 89, 23, 71, 13, 67, 47, 79]\n平均值: 52.35' }
+      { name: 'python_executor', params: '{"code": "import random; nums = [random.randint(1,100) for _ in range(20)]; primes = [n for n in nums if all(n%i!=0 for i in range(2,int(n**0.5)+1)) and n>1]; print(f\"Random: {nums}\"); print(f\"Primes: {primes}\"); print(f\"Mean: {sum(nums)/len(nums):.2f}\")"}', result: 'Random: [42, 17, 89, 23, 56, 71, 34, 91, 13, 67...]\nPrimes: [17, 89, 23, 71, 13, 67, 47, 79]\nMean: 52.35' }
     ],
-    agentResponse: '执行结果：\n🎲 生成20个随机数：42, 17, 89, 23, 56, 71...\n🔢 其中质数：17, 89, 23, 71, 13, 67, 47, 79 (共8个)\n📊 所有数平均值：52.35',
-    insight: 'Agent 在沙箱中实际执行代码，LLM 只能推理无法验证结果。'
+    agentResponse: 'Kết quả chạy:\n🎲 Sinh 20 số ngẫu nhiên: 42, 17, 89, 23, 56, 71...\n🔢 Trong đó số nguyên tố: 17, 89, 23, 71, 13, 67, 47, 79 (8 số)\n📊 Trung bình tất cả các số: 52.35',
+    insight: 'Agent thực sự chạy code trong sandbox, LLM chỉ suy luận và không thể verify kết quả.'
   },
   {
     id: 'data-analysis',
     icon: '📉',
-    name: '数据分析',
-    query: '分析一下我们公司上季度的销售数据，找出增长最快的产品线和地区',
-    llmResponse: '我无法访问您公司的内部销售数据。建议您使用Excel或专业BI工具进行分析，关注同比和环比增长率。',
-    thinking: '用户需要分析公司销售数据。我需要：1) 连接数据库获取销售数据 2) 按产品线分组统计 3) 按地区分组统计 4) 计算增长率 5) 生成可视化图表 6) 输出分析报告',
+    name: 'Phân tích dữ liệu',
+    query: 'Phân tích dữ liệu doanh thu quý trước của công ty mình, tìm dòng sản phẩm và khu vực tăng nhanh nhất',
+    llmResponse: 'Mình không truy cập được dữ liệu nội bộ của công ty bạn. Gợi ý dùng Excel hoặc công cụ BI chuyên nghiệp để phân tích, chú ý tỷ lệ tăng theo năm và theo kỳ.',
+    thinking: 'Người dùng cần phân tích dữ liệu doanh thu công ty. Mình cần: 1) Kết nối database lấy dữ liệu 2) Group theo dòng sản phẩm 3) Group theo khu vực 4) Tính tỷ lệ tăng 5) Sinh biểu đồ 6) Xuất báo cáo phân tích',
     tools: [
-      { name: 'database_query', params: '{"table": "sales", "period": "Q4_2023", "fields": ["product", "region", "amount", "quantity"]}', result: '获取Q4销售记录: 15,230条, 涵盖12个产品线, 8个地区' },
-      { name: 'data_groupby', params: '{"data": "sales_q4", "group": "product", "agg": ["sum", "count", "avg"]}', result: '产品线统计: 电子产品¥2.1M(+45%), 服装¥1.8M(+12%), 家居¥1.2M(+28%)...' },
-      { name: 'data_groupby', params: '{"data": "sales_q4", "group": "region", "agg": ["sum", "growth"]}', result: '地区统计: 华东¥3.2M(+38%), 华南¥2.1M(+52%), 华北¥1.5M(+15%)...' },
-      { name: 'growth_calculator', params: '{"current": "Q4_2023", "previous": "Q3_2023", "dimensions": ["product", "region"]}', result: '增长最快产品线: 电子产品+45%; 增长最快地区: 华南+52%' },
-      { name: 'chart_generator', params: '{"type": "bar", "data": "product_growth", "title": "产品线增长率对比"}', result: '生成柱状图: 电子产品45%, 家居28%, 服装12%' },
-      { name: 'chart_generator', params: '{"type": "map", "data": "region_sales", "title": "地区销售热力图"}', result: '生成中国地图热力图: 华东、华南为深色高值区' }
+      { name: 'database_query', params: '{"table": "sales", "period": "Q4_2023", "fields": ["product", "region", "amount", "quantity"]}', result: 'Lấy được Q4: 15.230 bản ghi, 12 dòng sản phẩm, 8 khu vực' },
+      { name: 'data_groupby', params: '{"data": "sales_q4", "group": "product", "agg": ["sum", "count", "avg"]}', result: 'Thống kê dòng sản phẩm: Điện tử 2.1M (+45%), Thời trang 1.8M (+12%), Gia dụng 1.2M (+28%)...' },
+      { name: 'data_groupby', params: '{"data": "sales_q4", "group": "region", "agg": ["sum", "growth"]}', result: 'Thống kê khu vực: Miền Bắc 3.2M (+38%), Miền Nam 2.1M (+52%), Miền Trung 1.5M (+15%)...' },
+      { name: 'growth_calculator', params: '{"current": "Q4_2023", "previous": "Q3_2023", "dimensions": ["product", "region"]}', result: 'Dòng sản phẩm tăng nhanh nhất: Điện tử +45%; Khu vực tăng nhanh nhất: Miền Nam +52%' },
+      { name: 'chart_generator', params: '{"type": "bar", "data": "product_growth", "title": "So sánh tỷ lệ tăng dòng sản phẩm"}', result: 'Sinh biểu đồ cột: Điện tử 45%, Gia dụng 28%, Thời trang 12%' },
+      { name: 'chart_generator', params: '{"type": "map", "data": "region_sales", "title": "Bản đồ nhiệt doanh thu theo khu vực"}', result: 'Sinh bản đồ nhiệt: Miền Bắc, Miền Nam là vùng giá trị cao' }
     ],
-    agentResponse: '📊 Q4销售数据分析报告\n\n🏆 增长最快产品线\n1. 电子产品: +45% (¥2.1M)\n2. 家居用品: +28% (¥1.2M)\n3. 服装: +12% (¥1.8M)\n\n🌍 增长最快地区\n1. 华南: +52% (¥2.1M)\n2. 华东: +38% (¥3.2M)\n3. 西南: +22% (¥0.8M)\n\n💡 建议: 加大电子产品投入，重点拓展华南市场',
-    insight: 'Agent 调用6个工具完成数据查询、分组统计、增长率计算、可视化的完整分析流程。'
+    agentResponse: '📊 Báo cáo phân tích doanh thu Q4\n\n🏆 Dòng sản phẩm tăng nhanh nhất\n1. Điện tử: +45% (2.1M USD)\n2. Gia dụng: +28% (1.2M USD)\n3. Thời trang: +12% (1.8M USD)\n\n🌍 Khu vực tăng nhanh nhất\n1. Miền Nam: +52% (2.1M USD)\n2. Miền Bắc: +38% (3.2M USD)\n3. Tây Nguyên: +22% (0.8M USD)\n\n💡 Gợi ý: tăng đầu tư cho Điện tử, mở rộng thị trường Miền Nam',
+    insight: 'Agent gọi 6 tool để hoàn thành quy trình phân tích trọn vẹn: query, group, tính tỷ lệ tăng, trực quan hóa.'
   }
 ]
 
@@ -341,34 +341,34 @@ const startExecution = async () => {
   thinkingExpanded.value = true
   toolsExpanded.value = true
 
-  // 显示思考
+  // Hiển thị suy nghĩ
   await wait(800)
-  
-  // 显示工具调用
+
+  // Hiển thị gọi tool
   showTools.value = true
   toolsExpanded.value = true
-  
+
   await nextTick()
-  
+
   const tools = currentScenarioData.value.tools
-  
+
   for (let i = 0; i < tools.length; i++) {
     toolExecuting.value = i
-    
-    // 滚动到当前执行的工具
+
+    // Cuộn đến tool đang chạy
     await nextTick()
     const toolEl = toolRefs.value[i]
     if (toolEl && toolsSection.value) {
       toolEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-    
+
     await wait(1000)
     toolExecuted.value = i + 1
     toolExecuting.value = -1
     await wait(300)
   }
 
-  // 显示最终回复
+  // Hiển thị câu trả lời cuối
   await wait(500)
   showResponse.value = true
   isExecuting.value = false

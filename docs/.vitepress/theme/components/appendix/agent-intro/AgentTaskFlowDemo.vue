@@ -1,16 +1,16 @@
 <!--
   AgentTaskFlowDemo.vue
-  任务执行流：像看“回放”一样看 Agent 一步步完成一个任务。
+  Luồng thực thi task: như xem "replay" Agent hoàn thành một task từng bước.
 -->
 <template>
   <div class="flow">
     <div class="header">
       <div>
         <div class="title">
-          任务回放：Agent 怎么一步步做完？
+          Replay task: Agent hoàn thành từng bước thế nào?
         </div>
         <div class="subtitle">
-          点步骤，看“工具调用”和“中间结果”。
+          Click vào bước để xem "gọi tool" và "kết quả trung gian".
         </div>
       </div>
       <div class="actions">
@@ -19,14 +19,14 @@
           :disabled="step === 0"
           @click="step = Math.max(0, step - 1)"
         >
-          上一步
+          Bước trước
         </button>
         <button
           class="btn primary"
           :disabled="step === steps.length - 1"
           @click="step = Math.min(steps.length - 1, step + 1)"
         >
-          下一步
+          Bước sau
         </button>
       </div>
     </div>
@@ -46,7 +46,7 @@
     <div class="grid">
       <div class="panel">
         <div class="panel-title">
-          当前步骤
+          Bước hiện tại
         </div>
         <div class="panel-body">
           {{ steps[step].desc }}
@@ -54,13 +54,13 @@
       </div>
       <div class="panel">
         <div class="panel-title">
-          工具调用（示意）
+          Gọi tool (minh họa)
         </div>
         <pre><code>{{ steps[step].tool }}</code></pre>
       </div>
       <div class="panel">
         <div class="panel-title">
-          结果（示意）
+          Kết quả (minh họa)
         </div>
         <pre><code>{{ steps[step].result }}</code></pre>
       </div>
@@ -75,34 +75,34 @@ const step = ref(0)
 
 const steps = [
   {
-    title: '理解目标',
-    desc: '把用户需求拆成“可交付”的输出结构。',
+    title: 'Hiểu mục tiêu',
+    desc: 'Chia yêu cầu của bạn thành cấu trúc output "có thể bàn giao".',
     tool: 'LLM: parse_goal({ task, constraints, output_format })',
-    result: '目标：找 3 篇文章；输出：标题 + 一句话总结（Markdown 列表）'
+    result: 'Mục tiêu: tìm 3 bài; Output: tiêu đề + tóm tắt 1 câu (danh sách Markdown)'
   },
   {
-    title: '搜索',
-    desc: '先用搜索工具拿到候选链接。',
+    title: 'Tìm kiếm',
+    desc: 'Dùng tool search để lấy các link ứng cử.',
     tool: 'tool:web_search({ query: \"agent introduction\" })',
     result: '- link1\n- link2\n- link3\n- link4 ...'
   },
   {
-    title: '读取页面',
-    desc: '打开前三个链接，取出核心段落。',
+    title: 'Đọc trang',
+    desc: 'Mở 3 link đầu, trích đoạn văn cốt lõi.',
     tool: 'tool:read_page({ url: link1/link2/link3 })',
-    result: '每篇文章的核心段落（已截取）'
+    result: 'Đoạn cốt lõi của từng bài (đã trích)'
   },
   {
-    title: '压缩与整理',
-    desc: '把每篇文章压缩成“一句话总结”，统一格式。',
+    title: 'Nén và sắp xếp',
+    desc: 'Nén từng bài thành "tóm tắt 1 câu", thống nhất format.',
     tool: 'LLM: summarize_each({ paragraphs, max_len: 25 })',
-    result: '- 标题A：一句话…\n- 标题B：一句话…\n- 标题C：一句话…'
+    result: '- Tiêu đề A: một câu...\n- Tiêu đề B: một câu...\n- Tiêu đề C: một câu...'
   },
   {
-    title: '自检与交付',
-    desc: '检查是否满足“3 条 + 一句话 + 格式正确”，再输出。',
+    title: 'Tự check và bàn giao',
+    desc: 'Kiểm tra có thỏa "3 mục + 1 câu + đúng format", rồi mới output.',
     tool: 'LLM: self_check({ checklist })',
-    result: '✅ 满足要求；输出已就绪'
+    result: '✅ Đạt yêu cầu; output đã sẵn sàng'
   }
 ]
 </script>

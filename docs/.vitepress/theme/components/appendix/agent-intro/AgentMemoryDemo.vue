@@ -2,7 +2,7 @@
   <div class="memory-demo">
     <div class="header">
       <div class="title">
-        💾 Agent 的记忆系统
+        💾 Hệ thống bộ nhớ của Agent
       </div>
     </div>
 
@@ -21,7 +21,7 @@
         class="action-btn reset"
         @click="resetConversation"
       >
-        🔄 重置
+        🔄 Reset
       </button>
     </div>
 
@@ -30,7 +30,7 @@
       <!-- 对话区 -->
       <div class="chat-box">
         <div class="box-header">
-          💬 对话
+          💬 Hội thoại
         </div>
         <div
           ref="chatContainer"
@@ -56,7 +56,7 @@
             v-if="messages.length === 0"
             class="empty-msg"
           >
-            点击上方按钮开始对话
+            Click các nút phía trên để bắt đầu hội thoại
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
       <div class="memory-row">
         <div class="memory-card">
           <div class="card-header">
-            <span>⏱️ 短期记忆</span>
+            <span>⏱️ Bộ nhớ ngắn hạn</span>
             <span class="count">{{ shortTermMemory.length }}</span>
           </div>
           <div class="card-body">
@@ -81,14 +81,14 @@
               v-if="shortTermMemory.length === 0"
               class="empty"
             >
-              空
+              Trống
             </div>
           </div>
         </div>
 
         <div class="memory-card">
           <div class="card-header">
-            <span>📝 工作记忆</span>
+            <span>📝 Working memory</span>
             <span class="count">{{ Object.keys(workingMemory).length }}</span>
           </div>
           <div class="card-body">
@@ -104,14 +104,14 @@
               v-if="Object.keys(workingMemory).length === 0"
               class="empty"
             >
-              空
+              Trống
             </div>
           </div>
         </div>
 
         <div class="memory-card">
           <div class="card-header">
-            <span>🗄️ 长期记忆</span>
+            <span>🗄️ Bộ nhớ dài hạn</span>
             <span class="count">{{ longTermMemory.length }}</span>
           </div>
           <div class="card-body">
@@ -127,7 +127,7 @@
               v-if="longTermMemory.length === 0"
               class="empty"
             >
-              空
+              Trống
             </div>
           </div>
         </div>
@@ -143,10 +143,10 @@
       <span>{{ lastOp.text }}</span>
     </div>
 
-    <!-- 提示 -->
+    <!-- Gợi ý -->
     <div class="tip-bar">
       <span>💡</span>
-      <span><strong>短期</strong>=当前对话，<strong>工作</strong>=临时变量，<strong>长期</strong>=跨会话知识</span>
+      <span><strong>Ngắn hạn</strong> = hội thoại hiện tại, <strong>Working</strong> = biến tạm thời, <strong>Dài hạn</strong> = kiến thức xuyên session</span>
     </div>
   </div>
 </template>
@@ -162,33 +162,33 @@ const isTyping = ref(false)
 const lastOp = ref(null)
 
 const quickActions = [
-  '我叫张三',
-  '我喜欢 Python',
-  '推荐编程书',
-  '我叫什么？'
+  'Tôi tên là An',
+  'Tôi thích Python',
+  'Gợi ý sách lập trình',
+  'Tôi tên gì?'
 ]
 
 const responses = {
-  '我叫张三': {
-    reply: '好的，我记住了你叫张三。',
-    op: { icon: '💾', text: '长期记忆: 姓名=张三' },
-    update: () => longTermMemory.value.push({ category: '身份', content: '姓名: 张三' })
+  'Tôi tên là An': {
+    reply: 'Được rồi, tôi đã nhớ bạn tên là An.',
+    op: { icon: '💾', text: 'Bộ nhớ dài hạn: tên = An' },
+    update: () => longTermMemory.value.push({ category: 'Danh tính', content: 'Tên: An' })
   },
-  '我喜欢 Python': {
-    reply: '收到！记录了你偏好 Python。',
-    op: { icon: '💾', text: '工作记忆: 偏好=Python | 长期记忆: 技术偏好' },
+  'Tôi thích Python': {
+    reply: 'Đã nhận! Đã ghi lại bạn thích Python.',
+    op: { icon: '💾', text: 'Working memory: sở thích = Python | Bộ nhớ dài hạn: sở thích kỹ thuật' },
     update: () => {
-      workingMemory.value['偏好'] = 'Python'
-      longTermMemory.value.push({ category: '偏好', content: '编程语言: Python' })
+      workingMemory.value['Sở thích'] = 'Python'
+      longTermMemory.value.push({ category: 'Sở thích', content: 'Ngôn ngữ lập trình: Python' })
     }
   },
-  '推荐编程书': {
-    reply: '基于你偏好 Python，推荐《流畅的Python》。',
-    op: { icon: '🔍', text: '检索工作记忆: 偏好=Python → 生成推荐' }
+  'Gợi ý sách lập trình': {
+    reply: 'Dựa vào việc bạn thích Python, mình gợi ý cuốn "Fluent Python".',
+    op: { icon: '🔍', text: 'Truy xuất working memory: sở thích = Python → tạo gợi ý' }
   },
-  '我叫什么？': {
-    reply: '你叫张三。',
-    op: { icon: '🔍', text: '检索长期记忆: 姓名=张三' }
+  'Tôi tên gì?': {
+    reply: 'Bạn tên là An.',
+    op: { icon: '🔍', text: 'Truy xuất bộ nhớ dài hạn: tên = An' }
   }
 }
 
@@ -200,7 +200,7 @@ const sendMessage = async (text) => {
 
   await wait(600)
 
-  const config = responses[text] || { reply: '收到', op: null, update: () => {} }
+  const config = responses[text] || { reply: 'Đã nhận', op: null, update: () => {} }
   config.update()
   lastOp.value = config.op
 

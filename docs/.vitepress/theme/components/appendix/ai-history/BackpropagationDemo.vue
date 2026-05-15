@@ -28,7 +28,7 @@
         <!-- X Label -->
         <text x="300" y="125" text-anchor="end" class="ax-title">{{ t('backprop.axisEpochs') }}</text>
 
-        <!-- Loss 曲线 -->
+        <!-- Loss curve -->
         <polyline :points="lossPoints" fill="none" stroke="var(--vp-c-brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </div>
@@ -48,13 +48,13 @@ const lossPoints = (() => {
   const pts = []
   for (let i = 0; i <= 50; i++) {
     const x = 40 + i * 5; // 40 to 290
-    // Y从上(小值)到下(大值)，Loss越来越低，意味着Y越来越大，靠近110
-    // 我们让一开始的高Loss出现在 y=20 附近，最终的低Loss停留 在 y=105 附近
-    let noise = (Math.random() - 0.5) * 3; 
-    let y = 105 - 85 * Math.exp(-i * 0.12) + noise; 
-    
-    if (i === 0) y = 20; // 确保起点干净
-    if (y > 108) y = 108; // 不超过底轴
+    // Y from top (small) to bottom (large); Loss decreases over time, so Y increases toward 110
+    // High initial loss appears around y=20, final low loss stays around y=105
+    let noise = (Math.random() - 0.5) * 3;
+    let y = 105 - 85 * Math.exp(-i * 0.12) + noise;
+
+    if (i === 0) y = 20; // Ensure clean start
+    if (y > 108) y = 108; // Don't exceed bottom axis
     
     pts.push(`${x},${y}`)
   }

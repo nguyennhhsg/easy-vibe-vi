@@ -1,20 +1,20 @@
 <!--
   AgentLevelDemo.vue
-  Agent 分级（L0-L5）交互：拖动等级，看到“能做什么/不能做什么/典型任务”。
+  Phân cấp Agent (L0-L5) tương tác: kéo level, xem "làm được gì / không làm được gì / task điển hình".
 -->
 <template>
   <div class="levels">
     <div class="header">
       <div>
         <div class="title">
-          Agent 能力分级（从聊天到协作）
+          Phân cấp năng lực Agent (từ chat đến hợp tác)
         </div>
         <div class="subtitle">
-          拖动看看：等级越高，越像“能独立干活的同事”。
+          Kéo thử: level càng cao càng giống "đồng nghiệp có thể làm việc độc lập".
         </div>
       </div>
       <div class="badge">
-        当前：{{ current.name }}
+        Hiện tại: {{ current.name }}
       </div>
     </div>
 
@@ -37,7 +37,7 @@
     <div class="grid">
       <div class="card">
         <div class="k">
-          能做什么
+          Làm được gì
         </div>
         <ul>
           <li
@@ -50,7 +50,7 @@
       </div>
       <div class="card">
         <div class="k">
-          容易出的问题
+          Vấn đề dễ gặp
         </div>
         <ul>
           <li
@@ -63,7 +63,7 @@
       </div>
       <div class="card">
         <div class="k">
-          典型任务
+          Task điển hình
         </div>
         <div class="v">
           {{ current.example }}
@@ -80,40 +80,40 @@ const level = ref(2)
 
 const levels = [
   {
-    name: 'L0：纯对话',
-    can: ['回答问题', '写文本/代码（但不执行）'],
-    risk: ['只能“说”，不能“做”', '需要你手动分步骤'],
-    example: '解释概念、写一段文案'
+    name: 'L0: Chỉ chat',
+    can: ['Trả lời câu hỏi', 'Viết text/code (nhưng không thực thi)'],
+    risk: ['Chỉ "nói" được, không "làm" được', 'Bạn phải tự chia bước thủ công'],
+    example: 'Giải thích khái niệm, viết một đoạn văn bản'
   },
   {
-    name: 'L1：单工具',
-    can: ['调用一个固定工具', '把结果解释给你'],
-    risk: ['工具用错参数', '缺少复杂规划'],
-    example: '只会查一次搜索/只会跑一次代码'
+    name: 'L1: Một tool',
+    can: ['Gọi một tool cố định', 'Giải thích kết quả cho bạn'],
+    risk: ['Dùng sai tham số tool', 'Thiếu khả năng lập kế hoạch phức tạp'],
+    example: 'Chỉ tìm kiếm một lần / chỉ chạy code một lần'
   },
   {
-    name: 'L2：多工具',
-    can: ['在多个工具间选择', '按需要组合调用'],
-    risk: ['选择工具不稳', '权限与安全需要控制'],
-    example: '搜索 + 打开网页 + 摘要'
+    name: 'L2: Nhiều tool',
+    can: ['Chọn giữa nhiều tool', 'Kết hợp gọi theo nhu cầu'],
+    risk: ['Việc chọn tool không ổn định', 'Cần kiểm soát quyền và an toàn'],
+    example: 'Search + mở trang web + tóm tắt'
   },
   {
-    name: 'L3：多步骤执行',
-    can: ['先计划后执行', '完成一串步骤', '记录中间结果'],
-    risk: ['步骤漏/顺序错', '成本上升（更多调用）'],
-    example: '读代码 → 改代码 → 跑测试 → 出报告'
+    name: 'L3: Thực thi nhiều bước',
+    can: ['Lập kế hoạch rồi mới thực thi', 'Hoàn thành một chuỗi bước', 'Ghi lại kết quả trung gian'],
+    risk: ['Sót bước / sai thứ tự', 'Chi phí tăng (gọi nhiều hơn)'],
+    example: 'Đọc code → sửa code → chạy test → ra báo cáo'
   },
   {
-    name: 'L4：自我纠错',
-    can: ['失败后换策略', '用检查点避免跑偏'],
-    risk: ['可能反复尝试（需要上限）', '更依赖监控与日志'],
-    example: '测试失败后自动定位并尝试修复'
+    name: 'L4: Tự sửa lỗi',
+    can: ['Đổi chiến lược khi thất bại', 'Dùng checkpoint để tránh lệch hướng'],
+    risk: ['Có thể thử lại lặp đi lặp lại (cần giới hạn)', 'Phụ thuộc vào monitoring và log hơn'],
+    example: 'Test fail thì tự định vị và thử sửa'
   },
   {
-    name: 'L5：多 Agent 协作',
-    can: ['多个角色分工', '并行处理任务', '合并结果'],
-    risk: ['协作成本更高', '需要清晰协议与仲裁机制'],
-    example: '研究员找资料 + 工程师实现 + 编辑写总结'
+    name: 'L5: Multi-Agent hợp tác',
+    can: ['Nhiều vai trò chia việc', 'Xử lý task song song', 'Gộp kết quả'],
+    risk: ['Chi phí hợp tác cao hơn', 'Cần protocol rõ ràng và cơ chế phân xử'],
+    example: 'Researcher tìm tài liệu + Engineer hiện thực + Editor viết tổng kết'
   }
 ]
 

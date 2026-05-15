@@ -2,7 +2,7 @@
   <div class="planning-demo">
     <div class="header">
       <div class="title">
-        📋 Agent 的规划能力
+        📋 Khả năng lập kế hoạch của Agent
       </div>
     </div>
 
@@ -56,22 +56,22 @@
       <div class="info-row">
         <div class="log-box">
           <div class="box-header">
-            <span>📝 执行日志</span>
+            <span>📝 Log thực thi</span>
             <span
               v-if="executionStatus === 'running'"
               class="status running"
-            >执行中</span>
+            >Đang chạy</span>
             <span
               v-else-if="executionStatus === 'completed'"
               class="status completed"
-            >已完成</span>
+            >Đã xong</span>
           </div>
           <div class="log-content">
             <div
               v-if="logs.length === 0"
               class="empty"
             >
-              点击"开始执行"查看过程
+              Click "Bắt đầu chạy" để xem quá trình
             </div>
             <div
               v-for="(log, i) in logs.slice(-4)"
@@ -94,7 +94,7 @@
           class="thought-box"
         >
           <div class="box-header">
-            🧠 正在思考
+            🧠 Đang suy nghĩ
           </div>
           <div class="thought-content">
             {{ currentThought }}
@@ -110,30 +110,30 @@
         class="ctrl-btn primary"
         @click="startExecution"
       >
-        ▶ 开始执行
+        ▶ Bắt đầu chạy
       </button>
       <button
         v-else-if="executionStatus === 'running'"
         class="ctrl-btn"
         disabled
       >
-        ⏳ 执行中...
+        ⏳ Đang chạy...
       </button>
       <button
         v-else
         class="ctrl-btn"
         @click="reset"
       >
-        🔄 重置
+        🔄 Reset
       </button>
 
       <div
         v-if="executionStatus === 'completed'"
         class="stats"
       >
-        <span class="stat">{{ currentTaskData.steps.length }} 步骤</span>
+        <span class="stat">{{ currentTaskData.steps.length }} bước</span>
         <span class="stat">{{ executionTime }}s</span>
-        <span class="stat">{{ toolCalls }} 调用</span>
+        <span class="stat">{{ toolCalls }} lượt gọi</span>
       </div>
 
       <div class="step-dots">
@@ -145,10 +145,10 @@
       </div>
     </div>
 
-    <!-- 提示 -->
+    <!-- Tip -->
     <div class="tip-bar">
       <span>💡</span>
-      <span>规划核心：将复杂任务分解为<strong>原子操作</strong>，根据上一步结果<strong>动态调整</strong>后续计划</span>
+      <span>Cốt lõi của planning: chia task phức tạp thành <strong>thao tác nguyên tử</strong>, dựa vào kết quả bước trước để <strong>điều chỉnh động</strong> kế hoạch tiếp theo</span>
     </div>
   </div>
 </template>
@@ -160,76 +160,76 @@ const tasks = [
   {
     id: 'simple',
     icon: '🌤️',
-    name: '查天气',
+    name: 'Tra thời tiết',
     complexity: 'easy',
-    complexityLabel: '简单',
-    goal: '查询北京今天的天气',
+    complexityLabel: 'Đơn giản',
+    goal: 'Tra thời tiết Hà Nội hôm nay',
     steps: [
-      { name: '调用天气 API', tool: 'weather_api' },
-      { name: '格式化结果', tool: 'formatter' }
+      { name: 'Gọi API thời tiết', tool: 'weather_api' },
+      { name: 'Format kết quả', tool: 'formatter' }
     ],
     logs: [
-      { type: 'think', icon: '🧠', message: '需要查询北京天气' },
-      { type: 'action', icon: '🔧', message: 'weather_api(city="北京")' },
-      { type: 'result', icon: '📥', message: '晴, 25°C, 空气质量良' },
-      { type: 'complete', icon: '✅', message: '北京今天天气晴朗' }
+      { type: 'think', icon: '🧠', message: 'Cần tra thời tiết Hà Nội' },
+      { type: 'action', icon: '🔧', message: 'weather_api(city="Hà Nội")' },
+      { type: 'result', icon: '📥', message: 'Nắng, 25°C, chất lượng không khí tốt' },
+      { type: 'complete', icon: '✅', message: 'Hà Nội hôm nay nắng đẹp' }
     ]
   },
   {
     id: 'medium',
     icon: '📊',
-    name: '数据分析',
+    name: 'Phân tích dữ liệu',
     complexity: 'medium',
-    complexityLabel: '中等',
-    goal: '分析销售 CSV，找出销售额最高月份',
+    complexityLabel: 'Trung bình',
+    goal: 'Phân tích CSV doanh thu, tìm tháng có doanh thu cao nhất',
     steps: [
-      { name: '读取 CSV', tool: 'file_reader' },
-      { name: '解析数据', tool: 'data_parser' },
-      { name: '聚合计算', tool: 'calculator' },
-      { name: '生成报告', tool: 'report_generator' }
+      { name: 'Đọc CSV', tool: 'file_reader' },
+      { name: 'Parse dữ liệu', tool: 'data_parser' },
+      { name: 'Aggregate', tool: 'calculator' },
+      { name: 'Sinh báo cáo', tool: 'report_generator' }
     ],
     logs: [
-      { type: 'think', icon: '🧠', message: '读取销售数据文件' },
+      { type: 'think', icon: '🧠', message: 'Đọc file dữ liệu doanh thu' },
       { type: 'action', icon: '🔧', message: 'file_reader(path="sales.csv")' },
-      { type: 'result', icon: '📥', message: '读取 1200 行数据' },
-      { type: 'think', icon: '🧠', message: '解析数据结构' },
+      { type: 'result', icon: '📥', message: 'Đọc được 1200 dòng' },
+      { type: 'think', icon: '🧠', message: 'Parse cấu trúc dữ liệu' },
       { type: 'action', icon: '🔧', message: 'data_parser(data)' },
-      { type: 'result', icon: '📥', message: '解析完成' },
-      { type: 'think', icon: '🧠', message: '按月份聚合销售额' },
+      { type: 'result', icon: '📥', message: 'Parse xong' },
+      { type: 'think', icon: '🧠', message: 'Aggregate doanh thu theo tháng' },
       { type: 'action', icon: '🔧', message: 'calculator.aggregate(by="month")' },
-      { type: 'result', icon: '📥', message: '11月销售额最高 ¥320K' },
-      { type: 'complete', icon: '✅', message: '分析完成' }
+      { type: 'result', icon: '📥', message: 'Tháng 11 cao nhất 320K USD' },
+      { type: 'complete', icon: '✅', message: 'Phân tích xong' }
     ]
   },
   {
     id: 'complex',
     icon: '🔬',
-    name: '研究报告',
+    name: 'Báo cáo nghiên cứu',
     complexity: 'hard',
-    complexityLabel: '复杂',
-    goal: '调研 AI Agent 进展，撰写完整报告',
+    complexityLabel: 'Phức tạp',
+    goal: 'Nghiên cứu tiến triển AI Agent, viết báo cáo hoàn chỉnh',
     steps: [
-      { name: '搜索资讯', tool: 'web_search' },
-      { name: '阅读文章', tool: 'web_reader' },
-      { name: '提取信息', tool: 'extractor' },
-      { name: '搜索厂商', tool: 'web_search' },
-      { name: '生成大纲', tool: 'planner' },
-      { name: '撰写报告', tool: 'writer' }
+      { name: 'Search tin tức', tool: 'web_search' },
+      { name: 'Đọc bài', tool: 'web_reader' },
+      { name: 'Trích thông tin', tool: 'extractor' },
+      { name: 'Search nhà cung cấp', tool: 'web_search' },
+      { name: 'Sinh outline', tool: 'planner' },
+      { name: 'Viết báo cáo', tool: 'writer' }
     ],
     logs: [
-      { type: 'think', icon: '🧠', message: '搜索最新 AI Agent 资讯' },
+      { type: 'think', icon: '🧠', message: 'Tìm tin tức AI Agent mới nhất' },
       { type: 'action', icon: '🔧', message: 'web_search("AI Agent 2024")' },
-      { type: 'result', icon: '📥', message: '找到 15 篇文章' },
+      { type: 'result', icon: '📥', message: 'Tìm thấy 15 bài viết' },
       { type: 'action', icon: '🔧', message: 'web_reader(urls=[...])' },
-      { type: 'result', icon: '📥', message: '成功读取内容' },
+      { type: 'result', icon: '📥', message: 'Đọc nội dung thành công' },
       { type: 'action', icon: '🔧', message: 'extractor(fields=[...])' },
-      { type: 'result', icon: '📥', message: '提取 45 个数据点' },
+      { type: 'result', icon: '📥', message: 'Trích 45 data point' },
       { type: 'action', icon: '🔧', message: 'web_search("AI Agent companies")' },
       { type: 'result', icon: '📥', message: 'OpenAI, Anthropic, Microsoft...' },
       { type: 'action', icon: '🔧', message: 'planner.generate_outline()' },
-      { type: 'result', icon: '📥', message: '大纲生成完成' },
+      { type: 'result', icon: '📥', message: 'Outline đã sinh xong' },
       { type: 'action', icon: '🔧', message: 'writer.generate_content()' },
-      { type: 'complete', icon: '✅', message: '报告生成完成，2500字' }
+      { type: 'complete', icon: '✅', message: 'Báo cáo đã sinh, 2500 từ' }
     ]
   }
 ]
@@ -282,7 +282,7 @@ const startExecution = async () => {
     }
     if (log.type === 'complete') currentThought.value = ''
 
-    logs.value.push({ ...log, time: new Date().toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }) })
+    logs.value.push({ ...log, time: new Date().toLocaleTimeString('vi-VN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }) })
     await wait(700)
   }
 

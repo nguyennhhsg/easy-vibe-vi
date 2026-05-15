@@ -404,11 +404,11 @@ Hãy tưởng tượng bạn phải tìm một từ trong một cuốn sách 100
 
 **Chỉ có thể lật trang lần lượt**——đó là quét toàn bảng, trung bình cần lật 500 trang.
 
-Nhưng nếu cuốn sách này có **mục lục theo phông chữ Latinh** thì sao?
+Nhưng nếu cuốn sách này có **mục lục theo bảng chữ cái** thì sao?
 
-Bạn muốn tìm từ "数据库":
-1. Lật đến mục lục, tìm khu vực bắt đầu bằng chữ "数"
-2. Trong khu vực "数", tìm chữ "据"
+Bạn muốn tìm từ "database":
+1. Lật đến mục lục, tìm khu vực bắt đầu bằng chữ "d"
+2. Trong khu vực "d", tìm tiếp các chữ "a", "t"...
 3. Mục lục cho bạn biết: ở trang 256
 
 Bạn chỉ cần lật 3 lần! Đó là **tìm kiếm với chỉ mục**.

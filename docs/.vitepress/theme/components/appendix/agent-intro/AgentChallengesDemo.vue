@@ -1,25 +1,25 @@
 <!--
   AgentChallengesDemo.vue
-  挑战不是“列清单”，而是“能感受到风险”：
-  - 开关护栏（步数上限/预算/确认/沙箱）
-  - 看风险分数怎么变化
+  Thử thách không phải "liệt kê danh sách", mà là "cảm nhận được rủi ro":
+  - Bật/tắt guardrails (giới hạn bước / ngân sách / xác nhận / sandbox)
+  - Xem điểm rủi ro thay đổi thế nào
 -->
 <template>
   <div class="risk">
     <div class="header">
       <div>
         <div class="title">
-          Agent 的挑战：没护栏就容易“翻车”
+          Thử thách của Agent: không có guardrails là dễ "lật xe"
         </div>
         <div class="subtitle">
-          打开这些护栏，风险会明显下降。
+          Bật những guardrails này, rủi ro sẽ giảm rõ rệt.
         </div>
       </div>
       <div
         class="score"
         :class="scoreClass"
       >
-        风险分数：{{ score }}/100
+        Điểm rủi ro: {{ score }}/100
       </div>
     </div>
 
@@ -28,47 +28,47 @@
         v-model="maxSteps"
         type="checkbox"
       >
-        最大迭代次数（防死循环）</label>
+        Số vòng lặp tối đa (chống vòng lặp vô tận)</label>
       <label class="toggle"><input
         v-model="budget"
         type="checkbox"
-      > 预算上限（防烧钱）</label>
+      > Giới hạn ngân sách (chống đốt tiền)</label>
       <label class="toggle"><input
         v-model="confirm"
         type="checkbox"
-      > 危险操作二次确认</label>
+      > Xác nhận lại với thao tác nguy hiểm</label>
       <label class="toggle"><input
         v-model="sandbox"
         type="checkbox"
-      > 沙箱执行（隔离系统）</label>
+      > Chạy trong sandbox (cách ly hệ thống)</label>
     </div>
 
     <div class="grid">
       <div class="card">
         <div class="k">
-          常见风险
+          Rủi ro thường gặp
         </div>
         <ul>
-          <li>重复尝试 → 死循环</li>
-          <li>乱用工具 → 误删/误发</li>
-          <li>外部内容注入 → 被带偏</li>
-          <li>调用太多 → 成本失控</li>
+          <li>Thử đi thử lại → vòng lặp vô tận</li>
+          <li>Dùng tool lung tung → xóa nhầm / gửi nhầm</li>
+          <li>Nội dung bên ngoài inject → bị dắt đi sai hướng</li>
+          <li>Gọi quá nhiều → chi phí mất kiểm soát</li>
         </ul>
       </div>
       <div class="card">
         <div class="k">
-          你现在开启了什么？
+          Bạn đang bật những gì?
         </div>
         <div class="v">
           {{ enabledList }}
         </div>
         <div class="note">
-          建议：最少也要有“最大步数 + 确认”。
+          Gợi ý: ít nhất nên có "Số bước tối đa + Xác nhận".
         </div>
       </div>
       <div class="card">
         <div class="k">
-          一句话建议
+          Lời khuyên một câu
         </div>
         <div class="v">
           {{ advice }}
@@ -103,20 +103,20 @@ const scoreClass = computed(() => {
 
 const enabledList = computed(() => {
   const items = []
-  if (maxSteps.value) items.push('最大步数')
-  if (budget.value) items.push('预算上限')
-  if (confirm.value) items.push('二次确认')
-  if (sandbox.value) items.push('沙箱')
-  return items.length ? items.join('、') : '（都没开）'
+  if (maxSteps.value) items.push('Số bước tối đa')
+  if (budget.value) items.push('Giới hạn ngân sách')
+  if (confirm.value) items.push('Xác nhận lại')
+  if (sandbox.value) items.push('Sandbox')
+  return items.length ? items.join(', ') : '(chưa bật cái nào)'
 })
 
 const advice = computed(() => {
   if (!maxSteps.value && !confirm.value)
-    return '先加“最大步数”和“二次确认”，这是最低成本的安全感。'
+    return 'Trước hết hãy thêm "Số bước tối đa" và "Xác nhận lại", đây là cảm giác an toàn rẻ nhất.'
   if (score.value <= 35)
-    return '很稳了：可以开始做更复杂的任务，但记得加日志与监控。'
-  if (score.value <= 60) return '还不错：建议再加预算或沙箱，避免极端情况。'
-  return '风险偏高：建议优先补护栏，再让 Agent 真去执行。'
+    return 'Rất ổn: có thể bắt đầu làm các task phức tạp hơn, nhưng nhớ thêm log và monitoring.'
+  if (score.value <= 60) return 'Tạm ổn: nên thêm ngân sách hoặc sandbox để tránh tình huống cực đoan.'
+  return 'Rủi ro hơi cao: nên ưu tiên bổ sung guardrails trước khi cho Agent thực thi thật.'
 })
 </script>
 

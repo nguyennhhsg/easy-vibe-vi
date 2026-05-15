@@ -2,7 +2,7 @@
   <div class="tool-use-demo">
     <div class="header">
       <div class="title">
-        🔧 揭秘：Agent 如何调用工具？
+        🔧 Hé lộ: Agent gọi tool như thế nào?
       </div>
     </div>
 
@@ -40,7 +40,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">
-            分析需求
+            Phân tích yêu cầu
           </div>
           <div
             v-if="currentStep >= 1"
@@ -48,7 +48,7 @@
           >
             <div class="intent-box">
               <div class="intent-label">
-                用户想要：
+                Bạn muốn:
               </div>
               <div class="intent-value">
                 {{ currentData.intent.type }}
@@ -56,7 +56,7 @@
             </div>
             <div class="extract-box">
               <div class="extract-label">
-                提取信息：
+                Trích thông tin:
               </div>
               <div class="extract-tags">
                 <span
@@ -87,7 +87,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">
-            选择工具
+            Chọn tool
           </div>
           <div
             v-if="currentStep >= 2"
@@ -129,7 +129,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">
-            构造参数
+            Tạo tham số
           </div>
           <div
             v-if="currentStep >= 3"
@@ -157,7 +157,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">
-            执行返回
+            Thực thi và trả về
           </div>
           <div
             v-if="currentStep >= 4"
@@ -168,7 +168,7 @@
               <span class="arrow">→</span>
               <span class="to">{{ currentData.selectedTool }}</span>
               <span class="arrow">→</span>
-              <span class="from">结果</span>
+              <span class="from">Kết quả</span>
             </div>
           </div>
         </div>
@@ -180,7 +180,7 @@
       v-if="currentStep >= 4"
       class="final-result"
     >
-      <span class="result-label">💬 回复：</span>
+      <span class="result-label">💬 Trả lời:</span>
       <span class="result-text">{{ currentData.finalResponse }}</span>
     </div>
 
@@ -191,21 +191,21 @@
         class="ctrl-btn primary"
         @click="nextStep"
       >
-        ▶ 开始演示
+        ▶ Bắt đầu demo
       </button>
       <button
         v-else-if="currentStep < 4"
         class="ctrl-btn primary"
         @click="nextStep"
       >
-        下一步 →
+        Bước sau →
       </button>
       <button
         v-else
         class="ctrl-btn"
         @click="reset"
       >
-        🔄 重置
+        🔄 Reset
       </button>
       
       <div class="step-dots">
@@ -217,10 +217,10 @@
       </div>
     </div>
 
-    <!-- 提示 -->
+    <!-- Gợi ý -->
     <div class="tip-bar">
       <span>💡</span>
-      <span>Tool Calling 本质：LLM 生成结构化文本（JSON），外部系统执行后返回结果</span>
+      <span>Bản chất của Tool Calling: LLM sinh ra text có cấu trúc (JSON), hệ thống bên ngoài chạy rồi trả kết quả</span>
     </div>
   </div>
 </template>
@@ -232,44 +232,44 @@ const scenarios = [
   {
     id: 'weather',
     icon: '🌤️',
-    name: '查天气',
-    userInput: '明天上海需要带伞吗？',
-    intent: { type: '天气查询', entities: ['明天', '上海'], confidence: 95 },
+    name: 'Tra thời tiết',
+    userInput: 'Mai ở Hà Nội có cần mang ô không?',
+    intent: { type: 'Tra thời tiết', entities: ['ngày mai', 'Hà Nội'], confidence: 95 },
     availableTools: [
-      { name: 'weather_api', icon: '🌤️', description: '获取天气', selected: true, score: 95 },
-      { name: 'calculator', icon: '🧮', description: '数学计算', selected: false, score: 10 },
+      { name: 'weather_api', icon: '🌤️', description: 'Lấy thời tiết', selected: true, score: 95 },
+      { name: 'calculator', icon: '🧮', description: 'Tính toán', selected: false, score: 10 },
     ],
     selectedTool: 'weather_api',
-    finalParams: { tool: 'weather_api', params: { city: '上海', date: 'tomorrow' } },
-    finalResponse: '明天上海有小雨，建议带伞。气温 8-15°C。'
+    finalParams: { tool: 'weather_api', params: { city: 'Hà Nội', date: 'tomorrow' } },
+    finalResponse: 'Mai Hà Nội có mưa nhỏ, nên mang ô. Nhiệt độ 8-15°C.'
   },
   {
     id: 'calculate',
     icon: '🧮',
-    name: '计算',
-    userInput: '1250 除以 25 乘以 8 等于多少',
-    intent: { type: '数学计算', entities: ['1250', '25', '8'], confidence: 98 },
+    name: 'Tính toán',
+    userInput: '1250 chia 25 nhân 8 bằng bao nhiêu',
+    intent: { type: 'Tính toán', entities: ['1250', '25', '8'], confidence: 98 },
     availableTools: [
-      { name: 'weather_api', icon: '🌤️', description: '获取天气', selected: false, score: 5 },
-      { name: 'calculator', icon: '🧮', description: '数学计算', selected: true, score: 98 },
+      { name: 'weather_api', icon: '🌤️', description: 'Lấy thời tiết', selected: false, score: 5 },
+      { name: 'calculator', icon: '🧮', description: 'Tính toán', selected: true, score: 98 },
     ],
     selectedTool: 'calculator',
     finalParams: { tool: 'calculator', params: { expression: '(1250/25)*8' } },
-    finalResponse: '计算结果：400。'
+    finalResponse: 'Kết quả: 400.'
   },
   {
     id: 'search',
     icon: '🔍',
-    name: '搜索',
-    userInput: '搜索最近关于人工智能的新闻',
-    intent: { type: '信息检索', entities: ['AI', '新闻'], confidence: 92 },
+    name: 'Search',
+    userInput: 'Tìm tin tức về AI gần đây',
+    intent: { type: 'Truy xuất thông tin', entities: ['AI', 'tin tức'], confidence: 92 },
     availableTools: [
-      { name: 'web_search', icon: '🔍', description: '网络搜索', selected: true, score: 92 },
-      { name: 'calculator', icon: '🧮', description: '数学计算', selected: false, score: 5 },
+      { name: 'web_search', icon: '🔍', description: 'Tìm kiếm web', selected: true, score: 92 },
+      { name: 'calculator', icon: '🧮', description: 'Tính toán', selected: false, score: 5 },
     ],
     selectedTool: 'web_search',
     finalParams: { tool: 'web_search', params: { query: 'AI news', max: 5 } },
-    finalResponse: '为您找到 5 条最新 AI 新闻...'
+    finalResponse: 'Đã tìm thấy 5 tin AI mới nhất cho bạn...'
   }
 ]
 
@@ -288,7 +288,7 @@ const flowRowRef = ref(null)
 const nextStep = () => {
   if (currentStep.value < 4) {
     currentStep.value++
-    // 自动滚动到当前步骤
+    // Tự động cuộn đến bước hiện tại
     nextTick(() => {
       if (flowRowRef.value) {
         const cards = flowRowRef.value.querySelectorAll('.flow-card')

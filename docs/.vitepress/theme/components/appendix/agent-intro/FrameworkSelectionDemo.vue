@@ -1,23 +1,23 @@
 <!--
   FrameworkSelectionDemo.vue
-  框架选择小向导：回答 3 个问题，给出推荐 + 适配理由 + 你需要注意什么。
+  Wizard chọn framework: trả lời 3 câu hỏi, nhận gợi ý + lý do phù hợp + lưu ý.
 -->
 <template>
   <div class="sel">
     <div class="header">
       <div>
         <div class="title">
-          三问选框架
+          3 câu hỏi chọn framework
         </div>
         <div class="subtitle">
-          目标：先跑通一个最小 Agent，再逐步增强。
+          Mục tiêu: chạy được một Agent tối thiểu trước, rồi mở rộng dần.
         </div>
       </div>
     </div>
 
     <div class="q">
       <div class="q-title">
-        1) 你更在乎什么？
+        1) Bạn quan tâm điều gì nhất?
       </div>
       <div class="opts">
         <button
@@ -33,7 +33,7 @@
 
     <div class="q">
       <div class="q-title">
-        2) 你的任务像哪种？
+        2) Task của bạn giống loại nào?
       </div>
       <div class="opts">
         <button
@@ -49,7 +49,7 @@
 
     <div class="q">
       <div class="q-title">
-        3) 需要多 Agent 分工吗？
+        3) Có cần phân công nhiều Agent không?
       </div>
       <div class="opts">
         <button
@@ -65,16 +65,16 @@
 
     <div class="result">
       <div class="r-title">
-        推荐：{{ rec.name }}
+        Gợi ý: {{ rec.name }}
       </div>
       <div class="r-body">
         {{ rec.reason }}
       </div>
       <div class="r-note">
-        <strong>注意：</strong>{{ rec.note }}
+        <strong>Lưu ý: </strong>{{ rec.note }}
       </div>
       <div class="r-next">
-        <strong>下一步：</strong>{{ rec.next }}
+        <strong>Bước tiếp: </strong>{{ rec.next }}
       </div>
     </div>
   </div>
@@ -84,19 +84,19 @@
 import { computed, ref } from 'vue'
 
 const q1 = [
-  { id: 'easy', label: '快速上手' },
-  { id: 'stable', label: '可控可上线' },
-  { id: 'team', label: '团队协作' }
+  { id: 'easy', label: 'Học nhanh' },
+  { id: 'stable', label: 'Kiểm soát & deploy được' },
+  { id: 'team', label: 'Hợp tác nhóm' }
 ]
 const q2 = [
-  { id: 'workflow', label: '有明确流程（步骤/图）' },
-  { id: 'chat', label: '偏对话与协商' },
-  { id: 'explore', label: '探索式试错' }
+  { id: 'workflow', label: 'Có flow rõ ràng (bước/sơ đồ)' },
+  { id: 'chat', label: 'Thiên về hội thoại & đàm phán' },
+  { id: 'explore', label: 'Thử nghiệm theo kiểu khám phá' }
 ]
 const q3 = [
-  { id: 'no', label: '不需要' },
-  { id: 'maybe', label: '可能需要' },
-  { id: 'yes', label: '必须需要' }
+  { id: 'no', label: 'Không cần' },
+  { id: 'maybe', label: 'Có thể cần' },
+  { id: 'yes', label: 'Bắt buộc cần' }
 ]
 
 const a1 = ref('stable')
@@ -109,16 +109,16 @@ const rec = computed(() => {
     if (a2.value === 'chat') {
       return {
         name: 'AutoGen',
-        reason: '多 Agent 对话协作是强项，适合“互相讨论、分工协作”。',
-        note: '先把角色边界写清楚，否则容易重复劳动或互怼。',
-        next: '从 2 个 Agent 开始：研究员 + 执行者。'
+        reason: 'Hội thoại và hợp tác multi-Agent là điểm mạnh, phù hợp khi cần "thảo luận với nhau, chia việc".',
+        note: 'Định nghĩa ranh giới vai trò trước, nếu không dễ trùng việc hoặc cãi nhau.',
+        next: 'Bắt đầu với 2 Agent: Researcher + Executor.'
       }
     }
     return {
       name: 'CrewAI',
-      reason: '角色+任务模型很直观，适合“分工明确”的团队工作流。',
-      note: '先把输入/输出格式定死，避免多人输出难合并。',
-      next: '先搭 2-3 个角色：Researcher/Writer/Reviewer。'
+      reason: 'Mô hình vai trò + task rất trực quan, phù hợp với workflow nhóm "phân công rõ ràng".',
+      note: 'Cố định format input/output trước, tránh khó gộp output từ nhiều người.',
+      next: 'Bắt đầu với 2-3 vai trò: Researcher/Writer/Reviewer.'
     }
   }
 
@@ -126,18 +126,18 @@ const rec = computed(() => {
   if (a1.value === 'stable' || a2.value === 'workflow') {
     return {
       name: 'LangChain / LangGraph',
-      reason: '更适合把 Agent 写成“可控流程”，便于调试、上线、加护栏。',
-      note: '别一上来做大系统，先把 1 个工具调用跑通。',
-      next: '用 LangGraph 画一个 3-5 节点的小图。'
+      reason: 'Phù hợp viết Agent thành "flow có kiểm soát", dễ debug, deploy, thêm guardrails.',
+      note: 'Đừng làm hệ thống lớn ngay, hãy chạy thông 1 lượt gọi tool trước.',
+      next: 'Vẽ một sơ đồ nhỏ 3-5 node bằng LangGraph.'
     }
   }
 
   // Easy start
   return {
     name: 'CrewAI',
-    reason: '上手快、概念直观，适合先做出一个“能跑”的 demo。',
-    note: 'demo 能跑不代表可上线，后续要补安全与可观测。',
-    next: '先做一个“研究+写作”的最小团队。'
+    reason: 'Học nhanh, khái niệm trực quan, phù hợp để làm ra một demo "chạy được" trước.',
+    note: 'Demo chạy được không có nghĩa deploy được, cần bổ sung bảo mật và observability sau.',
+    next: 'Làm một team tối thiểu "Nghiên cứu + Viết" trước.'
   }
 })
 </script>

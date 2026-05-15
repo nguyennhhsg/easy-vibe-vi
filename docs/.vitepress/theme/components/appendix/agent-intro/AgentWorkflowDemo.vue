@@ -1,18 +1,18 @@
 <!--
   AgentWorkflowDemo.vue
-  Agent 核心循环（更像“先玩后讲”的演示）：
-  - 点步骤：看这一轮 Agent “在干什么”
-  - 点“下一轮”：看它如何反复迭代直到完成
+  Vòng lặp cốt lõi của Agent (demo kiểu "chơi trước, giải thích sau"):
+  - Click vào bước: xem Agent "đang làm gì" trong vòng này
+  - Click "Vòng tiếp theo": xem nó lặp đi lặp lại cho đến khi xong
 -->
 <template>
   <div class="workflow">
     <div class="header">
       <div>
         <div class="title">
-          先玩一下：Agent 不是“聊天”，是“循环行动”
+          Chơi thử trước: Agent không phải "chat", mà là "hành động theo vòng lặp"
         </div>
         <div class="subtitle">
-          它会反复：观察 → 计划 → 用工具 → 检查结果。
+          Nó sẽ lặp lại: Quan sát → Lập kế hoạch → Dùng tool → Kiểm tra kết quả.
         </div>
       </div>
       <div class="actions">
@@ -20,13 +20,13 @@
           class="btn"
           @click="reset"
         >
-          重置
+          Reset
         </button>
         <button
           class="btn primary"
           @click="nextRound"
         >
-          下一轮 ({{ round }}/3)
+          Vòng tiếp theo ({{ round }}/3)
         </button>
       </div>
     </div>
@@ -46,15 +46,15 @@
     <div class="panels">
       <div class="panel">
         <div class="panel-title">
-          任务
+          Task
         </div>
         <div class="panel-body">
-          帮我找 3 篇 “Agent” 入门文章，并输出：标题 + 一句话总结。
+          Tìm giúp tôi 3 bài giới thiệu về "Agent", output: tiêu đề + tóm tắt một câu.
         </div>
       </div>
       <div class="panel">
         <div class="panel-title">
-          这一轮发生了什么？
+          Vòng này diễn ra điều gì?
         </div>
         <div class="panel-body">
           {{ detail }}
@@ -64,7 +64,7 @@
 
     <div class="log">
       <div class="log-title">
-        Agent 运行日志（示意）
+        Log chạy của Agent (minh họa)
       </div>
       <pre><code>{{ logText }}</code></pre>
     </div>
@@ -75,10 +75,10 @@
 import { computed, ref } from 'vue'
 
 const steps = [
-  { id: 'observe', name: '观察', icon: '👀' },
-  { id: 'plan', name: '计划', icon: '🧩' },
-  { id: 'act', name: '行动', icon: '🔧' },
-  { id: 'check', name: '检查', icon: '✅' }
+  { id: 'observe', name: 'Quan sát', icon: '👀' },
+  { id: 'plan', name: 'Kế hoạch', icon: '🧩' },
+  { id: 'act', name: 'Hành động', icon: '🔧' },
+  { id: 'check', name: 'Kiểm tra', icon: '✅' }
 ]
 
 const round = ref(1)
@@ -86,22 +86,22 @@ const currentStep = ref('observe')
 
 const scenarios = [
   {
-    observe: '看到用户目标：要 3 篇入门文章 + 简短总结。',
-    plan: '计划：1) 搜索关键词 2) 打开前几条 3) 抽取标题与要点。',
-    act: '调用工具：web_search(query="agent introduction")。',
-    check: '检查：结果里有 3 条可用链接，还缺“每条一句话总结”。'
+    observe: 'Thấy mục tiêu của user: cần 3 bài giới thiệu + tóm tắt ngắn.',
+    plan: 'Kế hoạch: 1) Search từ khóa 2) Mở vài link đầu 3) Trích tiêu đề và điểm chính.',
+    act: 'Gọi tool: web_search(query="agent introduction").',
+    check: 'Kiểm tra: kết quả có 3 link dùng được, còn thiếu "tóm tắt 1 câu cho từng link".'
   },
   {
-    observe: '拿到链接列表，准备逐条打开并提取要点。',
-    plan: '计划：依次 read_page 3 次，把内容压缩成一句话。',
-    act: '调用工具：read_page(url=...) × 3。',
-    check: '检查：信息够了，但标题格式不统一，需要整理输出。'
+    observe: 'Đã có danh sách link, chuẩn bị mở từng cái và trích điểm chính.',
+    plan: 'Kế hoạch: read_page lần lượt 3 lần, nén nội dung thành 1 câu.',
+    act: 'Gọi tool: read_page(url=...) × 3.',
+    check: 'Kiểm tra: thông tin đủ rồi, nhưng format tiêu đề không thống nhất, cần sắp xếp lại output.'
   },
   {
-    observe: '材料齐全：标题 + 文章要点都已提取。',
-    plan: '计划：统一格式，输出 Markdown 列表。',
-    act: '组织输出：每条“标题 - 一句话总结”。',
-    check: '完成：满足“3 条 + 一句话总结 + 可直接复制”。'
+    observe: 'Nguyên liệu đầy đủ: tiêu đề + điểm chính của bài đều đã trích.',
+    plan: 'Kế hoạch: thống nhất format, output danh sách Markdown.',
+    act: 'Tổ chức output: mỗi mục "tiêu đề - tóm tắt 1 câu".',
+    check: 'Hoàn thành: đạt yêu cầu "3 mục + tóm tắt 1 câu + có thể copy ngay".'
   }
 ]
 

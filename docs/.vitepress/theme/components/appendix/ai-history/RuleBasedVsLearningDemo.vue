@@ -1,7 +1,7 @@
 <template>
   <div class="demo-card">
     <div class="demo-header">
-      <span class="title">关键发展路径总结</span>
+      <span class="title">Tóm tắt lộ trình phát triển chính</span>
     </div>
     <div class="path-flow">
       <div v-for="(item, i) in path" :key="i" class="path-item">
@@ -25,11 +25,11 @@
 
 <script setup>
 const path = [
-  { name: '理论奠基', years: '1940s-1950s', desc: '图灵测试、达特茅斯会议，符号主义诞生', color: '#3b82f6' },
-  { name: '符号主义主导', years: '1960s-1980s', desc: '专家系统兴起与两次 AI 寒冬', color: '#059669' },
-  { name: '机器学习转型', years: '1990s-2000s', desc: '统计方法取代规则，连接主义复苏', color: '#d97706' },
-  { name: '深度学习革命', years: '2010s', desc: 'AlexNet、AlphaGo、Transformer 架构，连接主义成为主流', color: '#dc2626' },
-  { name: '大模型时代', years: '2018 至今', desc: 'GPT 系列、多模态融合，通用智能曙光初现', color: '#7c3aed' },
+  { name: 'Đặt nền móng lý thuyết', years: '1940s-1950s', desc: 'Turing Test, hội nghị Dartmouth, ra đời chủ nghĩa biểu tượng', color: '#3b82f6' },
+  { name: 'Chủ nghĩa biểu tượng chi phối', years: '1960s-1980s', desc: 'Hệ chuyên gia trỗi dậy và hai mùa đông AI', color: '#059669' },
+  { name: 'Chuyển sang Machine Learning', years: '1990s-2000s', desc: 'Phương pháp thống kê thay thế rule, connectionism hồi sinh', color: '#d97706' },
+  { name: 'Cách mạng Deep Learning', years: '2010s', desc: 'AlexNet, AlphaGo, kiến trúc Transformer; connectionism trở thành chủ đạo', color: '#dc2626' },
+  { name: 'Kỷ nguyên mô hình lớn', years: '2018 đến nay', desc: 'Dòng GPT, multimodal, hé lộ AGI', color: '#7c3aed' },
 ]
 </script>
 

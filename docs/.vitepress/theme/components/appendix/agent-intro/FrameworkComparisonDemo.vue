@@ -1,16 +1,16 @@
 <!--
   FrameworkComparisonDemo.vue
-  框架对比（更直观）：选择关注点，表格高亮适配度。
+  So sánh framework (trực quan): chọn tiêu chí quan tâm, bảng sẽ highlight mức độ phù hợp.
 -->
 <template>
   <div class="cmp">
     <div class="header">
       <div>
         <div class="title">
-          主流框架对比（先看“适配度”）
+          So sánh các framework chính (xem "mức độ phù hợp" trước)
         </div>
         <div class="subtitle">
-          先选你的关注点，再看推荐。
+          Chọn tiêu chí bạn quan tâm trước, rồi xem gợi ý.
         </div>
       </div>
       <div class="focus">
@@ -27,11 +27,11 @@
 
     <div class="table">
       <div class="row head">
-        <div>框架</div>
-        <div>上手</div>
-        <div>可控</div>
-        <div>多 Agent</div>
-        <div>适合做什么</div>
+        <div>Framework</div>
+        <div>Dễ học</div>
+        <div>Kiểm soát</div>
+        <div>Multi-Agent</div>
+        <div>Phù hợp làm gì</div>
       </div>
       <div
         v-for="fw in frameworks"
@@ -52,7 +52,7 @@
 
     <div class="rec">
       <div class="rec-title">
-        此刻更推荐：{{ best }}
+        Gợi ý lúc này: {{ best }}
       </div>
       <div class="rec-body">
         {{ reason }}
@@ -65,9 +65,9 @@
 import { computed, ref } from 'vue'
 
 const focuses = [
-  { id: 'start', label: '快速上手' },
-  { id: 'control', label: '可控可调试' },
-  { id: 'team', label: '多 Agent 协作' }
+  { id: 'start', label: 'Học nhanh' },
+  { id: 'control', label: 'Kiểm soát & debug' },
+  { id: 'team', label: 'Multi-Agent hợp tác' }
 ]
 
 const focus = ref('control')
@@ -75,24 +75,24 @@ const focus = ref('control')
 const frameworks = [
   {
     name: 'LangChain / LangGraph',
-    learn: '中',
-    control: '高',
-    multi: '中',
-    use: '可控的工具调用、工作流、企业集成'
+    learn: 'Trung bình',
+    control: 'Cao',
+    multi: 'Trung bình',
+    use: 'Gọi tool có kiểm soát, workflow, tích hợp doanh nghiệp'
   },
   {
     name: 'AutoGen',
-    learn: '中',
-    control: '中',
-    multi: '高',
-    use: '多 Agent 对话协作、编程/分析助手'
+    learn: 'Trung bình',
+    control: 'Trung bình',
+    multi: 'Cao',
+    use: 'Multi-Agent hội thoại, trợ lý lập trình/phân tích'
   },
   {
     name: 'CrewAI',
-    learn: '低',
-    control: '中',
-    multi: '高',
-    use: '角色分工清晰的团队协作任务'
+    learn: 'Thấp',
+    control: 'Trung bình',
+    multi: 'Cao',
+    use: 'Task hợp tác có vai trò phân công rõ ràng'
   }
 ]
 
@@ -104,10 +104,10 @@ const best = computed(() => {
 
 const reason = computed(() => {
   if (focus.value === 'start')
-    return '概念更直观（角色+任务），适合先跑通一个最小团队。'
+    return 'Khái niệm trực quan hơn (vai trò + task), phù hợp để chạy thử một team tối thiểu trước.'
   if (focus.value === 'team')
-    return '多 Agent 对话与协作是强项，适合需要分工的场景。'
-  return '把流程“画成图/写成步骤”，更利于调试、上线与长期维护。'
+    return 'Hội thoại và hợp tác multi-Agent là điểm mạnh, phù hợp khi cần phân công.'
+  return 'Vẽ flow thành sơ đồ / viết thành các bước, dễ debug, deploy và bảo trì lâu dài.'
 })
 </script>
 

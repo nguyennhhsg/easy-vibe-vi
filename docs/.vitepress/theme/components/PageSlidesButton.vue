@@ -16,8 +16,8 @@ const isOpen = ref(false)
 const isPreparingSlides = ref(false)
 const slideCount = ref(0)
 
-// 这个组件只负责把当前 VitePress 文档页临时渲染为浏览器幻灯片。
-// 它不修改 Markdown 源文件、路由、部署配置，也不改变页面原有阅读体验。
+// Component này chỉ chịu trách nhiệm render tạm thời trang tài liệu VitePress hiện tại thành slide trình duyệt.
+// Nó không sửa file Markdown nguồn, route, cấu hình triển khai, cũng không thay đổi trải nghiệm đọc gốc của trang.
 let deck = null
 let previousBodyOverflow = ''
 let openedFullscreen = false
@@ -76,7 +76,7 @@ const isHeading = (node, level) => node.tagName?.toLowerCase() === `h${level}`
 
 const isPrimarySlideHeading = (node) => ['h1', 'h2', 'h3'].includes(node.tagName?.toLowerCase())
 
-// 复制正文节点时保留表单、details、canvas 等运行时状态，避免幻灯片内容退回初始态。
+// Khi sao chép node nội dung, giữ lại trạng thái runtime của form, details, canvas... để slide không bị trở về trạng thái ban đầu.
 const removeIds = (root) => {
   if (root.id) root.removeAttribute('id')
   root.querySelectorAll?.('[id]').forEach((node) => node.removeAttribute('id'))
@@ -98,7 +98,7 @@ const createContinuationHeading = (heading) => {
 
   const label = document.createElement('span')
   label.className = 'ev-slide-continuation-label'
-  label.textContent = '续页'
+  label.textContent = 'Trang tiếp'
   clone.appendChild(label)
 
   return clone
@@ -334,7 +334,7 @@ const shouldAddVisualCard = (nodes, role) => {
 const createSlideVisualCard = (role) => {
   const card = document.createElement('figure')
   card.className = `ev-slide-visual-card ev-slide-visual-card--${role}`
-  card.setAttribute('aria-label', 'AI 编程教学场景插图')
+  card.setAttribute('aria-label', 'Hình minh họa bối cảnh dạy lập trình AI')
 
   const panel = document.createElement('div')
   panel.className = 'ev-slide-visual-panel'
@@ -347,7 +347,7 @@ const createSlideVisualCard = (role) => {
   badge.textContent = role === 'cover' ? 'AI Coding' : 'Mini Lesson'
 
   const title = document.createElement('strong')
-  title.textContent = role === 'cover' ? '从想法到原型' : '一节课一个主题'
+  title.textContent = role === 'cover' ? 'Từ ý tưởng đến nguyên mẫu' : 'Một bài học một chủ đề'
 
   header.append(badge, title)
 
@@ -356,15 +356,15 @@ const createSlideVisualCard = (role) => {
 
   const promptCard = document.createElement('div')
   promptCard.className = 'ev-slide-visual-note ev-slide-visual-note--prompt'
-  promptCard.innerHTML = '<span>说清目标</span><b>Prompt</b>'
+  promptCard.innerHTML = '<span>Nêu rõ mục tiêu</span><b>Prompt</b>'
 
   const aiCard = document.createElement('div')
   aiCard.className = 'ev-slide-visual-note ev-slide-visual-note--ai'
-  aiCard.innerHTML = '<span>AI 协作</span><b>Generate</b>'
+  aiCard.innerHTML = '<span>Cộng tác AI</span><b>Generate</b>'
 
   const resultCard = document.createElement('div')
   resultCard.className = 'ev-slide-visual-note ev-slide-visual-note--result'
-  resultCard.innerHTML = '<span>运行验证</span><b>Demo</b>'
+  resultCard.innerHTML = '<span>Chạy kiểm chứng</span><b>Demo</b>'
 
   const connector = document.createElement('div')
   connector.className = 'ev-slide-visual-connector'
@@ -387,7 +387,7 @@ const createSlideVisualCard = (role) => {
 
   const footer = document.createElement('figcaption')
   footer.className = 'ev-slide-visual-caption'
-  footer.textContent = '把自然语言转成可演示的网页、小游戏和应用原型'
+  footer.textContent = 'Biến ngôn ngữ tự nhiên thành trang web, mini game và nguyên mẫu ứng dụng có thể demo'
 
   panel.append(header, stage, footer)
   card.appendChild(panel)
@@ -403,7 +403,7 @@ const decorateSparseSlide = (nodes, role) => {
 const paginateLogicalSlide = (nodes, measureContext) => {
   if (!nodes.length) return []
 
-  // 先按 h2/h3 切出逻辑页，再用隐藏测量容器分页；超长表格、列表和代码块会继续拆分或缩放。
+  // Trước tiên tách trang logic theo h2/h3, sau đó dùng container đo ẩn để phân trang; bảng, danh sách và khối code quá dài sẽ tiếp tục được chia nhỏ hoặc thu phóng.
   const primaryHeading = nodes.find(isPrimarySlideHeading)
   const pages = []
   let currentNodes = []
@@ -754,14 +754,14 @@ onBeforeUnmount(() => {
     v-if="hasDocContent"
     class="ev-slides-button"
     type="button"
-    aria-label="打开幻灯片"
-    title="幻灯片"
+    aria-label="Mở slide"
+    title="Trình chiếu"
     @click="openSlides"
   >
     <el-icon :size="16">
       <Present />
     </el-icon>
-    <span class="ev-slides-button-label">幻灯片</span>
+    <span class="ev-slides-button-label">Slide</span>
   </button>
 
   <Teleport to="body">
@@ -772,14 +772,14 @@ onBeforeUnmount(() => {
       tabindex="-1"
       role="dialog"
       aria-modal="true"
-      aria-label="页面幻灯片播放"
+      aria-label="Trình chiếu slide trang"
       @keydown.esc.stop.prevent="closeSlides"
     >
       <button
         class="ev-slides-close"
         type="button"
-        aria-label="关闭幻灯片"
-        title="关闭幻灯片"
+        aria-label="Đóng slide"
+        title="Đóng slide"
         @click="closeSlides"
       >
         <el-icon :size="18">
@@ -795,7 +795,7 @@ onBeforeUnmount(() => {
           aria-live="polite"
         >
           <span class="ev-slides-loading-dot" aria-hidden="true" />
-          <span>正在生成幻灯片...</span>
+          <span>Đang tạo slide...</span>
         </div>
 
         <div

@@ -2,17 +2,17 @@
   <div class="memory-principle">
     <div class="header">
       <div class="title">
-        🧠 Agent 记忆系统原理：如何让 AI "记得"你
+        🧠 Nguyên lý hệ thống bộ nhớ Agent: làm sao để AI "nhớ" bạn
       </div>
       <div class="subtitle">
-        理解短期记忆、工作记忆、长期记忆的协同工作机制
+        Hiểu cách bộ nhớ ngắn hạn, working memory, và bộ nhớ dài hạn phối hợp với nhau
       </div>
     </div>
 
     <!-- 记忆类型概览 -->
     <div class="memory-overview">
       <div class="overview-title">
-        📊 三层记忆架构
+        📊 Kiến trúc bộ nhớ ba lớp
       </div>
       <div class="memory-cards">
         <div
@@ -24,13 +24,13 @@
             ⏱️
           </div>
           <div class="card-name">
-            短期记忆
+            Bộ nhớ ngắn hạn
           </div>
           <div class="card-desc">
-            当前对话上下文
+            Context hội thoại hiện tại
           </div>
           <div class="card-lifetime">
-            ⚡ 会话级
+            ⚡ Cấp session
           </div>
         </div>
         <div
@@ -42,13 +42,13 @@
             📝
           </div>
           <div class="card-name">
-            工作记忆
+            Working memory
           </div>
           <div class="card-desc">
-            任务相关变量
+            Biến liên quan đến task
           </div>
           <div class="card-lifetime">
-            🔄 任务级
+            🔄 Cấp task
           </div>
         </div>
         <div
@@ -60,13 +60,13 @@
             💾
           </div>
           <div class="card-name">
-            长期记忆
+            Bộ nhớ dài hạn
           </div>
           <div class="card-desc">
-            用户偏好与知识
+            Sở thích người dùng & kiến thức
           </div>
           <div class="card-lifetime">
-            ♾️ 持久化
+            ♾️ Persistent
           </div>
         </div>
       </div>
@@ -75,18 +75,18 @@
     <!-- 交互演示区 -->
     <div class="demo-section">
       <div class="demo-title">
-        🎮 交互演示：观察记忆如何工作
+        🎮 Demo tương tác: quan sát bộ nhớ hoạt động thế nào
       </div>
-      
-      <!-- 对话区 -->
+
+      <!-- Khu vực hội thoại -->
       <div class="chat-area">
         <div class="chat-header">
-          <span>💬 对话窗口</span>
+          <span>💬 Cửa sổ hội thoại</span>
           <button
             class="reset-btn"
             @click="resetDemo"
           >
-            🔄 重置
+            🔄 Reset
           </button>
         </div>
         <div
@@ -141,10 +141,10 @@
       <!-- 记忆状态面板 -->
       <div class="memory-panels">
         <div class="panel-title">
-          📂 记忆状态实时监控
+          📂 Theo dõi trạng thái bộ nhớ realtime
         </div>
-        
-        <!-- 短期记忆 -->
+
+        <!-- Bộ nhớ ngắn hạn -->
         <div
           class="memory-panel"
           :class="{ highlight: activeTab === 'short' }"
@@ -152,15 +152,15 @@
         >
           <div class="panel-header">
             <span class="panel-icon">⏱️</span>
-            <span class="panel-name">短期记忆</span>
-            <span class="panel-count">{{ shortTermMemory.length }} 条</span>
+            <span class="panel-name">Bộ nhớ ngắn hạn</span>
+            <span class="panel-count">{{ shortTermMemory.length }} mục</span>
           </div>
           <div class="panel-content">
             <div
               v-if="shortTermMemory.length === 0"
               class="empty"
             >
-              暂无对话记录
+              Chưa có lịch sử hội thoại
             </div>
             <div
               v-for="(item, idx) in shortTermMemory.slice(-5)"
@@ -175,11 +175,11 @@
             </div>
           </div>
           <div class="panel-footer">
-            💡 保存最近的对话轮次，超出上下文窗口会被遗忘
+            💡 Lưu các lượt hội thoại gần nhất, vượt context window sẽ bị quên
           </div>
         </div>
 
-        <!-- 工作记忆 -->
+        <!-- Working memory -->
         <div
           class="memory-panel"
           :class="{ highlight: activeTab === 'working' }"
@@ -187,15 +187,15 @@
         >
           <div class="panel-header">
             <span class="panel-icon">📝</span>
-            <span class="panel-name">工作记忆</span>
-            <span class="panel-count">{{ Object.keys(workingMemory).length }} 个变量</span>
+            <span class="panel-name">Working memory</span>
+            <span class="panel-count">{{ Object.keys(workingMemory).length }} biến</span>
           </div>
           <div class="panel-content">
             <div
               v-if="Object.keys(workingMemory).length === 0"
               class="empty"
             >
-              暂无任务变量
+              Chưa có biến task
             </div>
             <div
               v-for="(value, key) in workingMemory"
@@ -207,11 +207,11 @@
             </div>
           </div>
           <div class="panel-footer">
-            💡 临时存储任务相关变量，任务结束后清除
+            💡 Lưu tạm các biến liên quan đến task, xóa khi task kết thúc
           </div>
         </div>
 
-        <!-- 长期记忆 -->
+        <!-- Bộ nhớ dài hạn -->
         <div
           class="memory-panel"
           :class="{ highlight: activeTab === 'long' }"
@@ -219,15 +219,15 @@
         >
           <div class="panel-header">
             <span class="panel-icon">💾</span>
-            <span class="panel-name">长期记忆</span>
-            <span class="panel-count">{{ longTermMemory.length }} 条知识</span>
+            <span class="panel-name">Bộ nhớ dài hạn</span>
+            <span class="panel-count">{{ longTermMemory.length }} mục kiến thức</span>
           </div>
           <div class="panel-content">
             <div
               v-if="longTermMemory.length === 0"
               class="empty"
             >
-              暂无持久化知识
+              Chưa có kiến thức persistent
             </div>
             <div
               v-for="(item, idx) in longTermMemory"
@@ -242,7 +242,7 @@
             </div>
           </div>
           <div class="panel-footer">
-            💡 跨会话持久保存，需要显式写入
+            💡 Lưu xuyên session, cần ghi tường minh
           </div>
         </div>
       </div>
@@ -251,7 +251,7 @@
     <!-- 记忆流转示意 -->
     <div class="memory-flow">
       <div class="flow-title">
-        🔄 记忆流转机制
+        🔄 Cơ chế luân chuyển bộ nhớ
       </div>
       <div class="flow-diagram">
         <div class="flow-step">
@@ -260,48 +260,48 @@
               👤
             </div>
             <div class="step-text">
-              用户输入
+              Input của bạn
             </div>
           </div>
           <div class="step-arrow">
             ➡️
           </div>
         </div>
-        
+
         <div class="flow-step">
           <div class="step-box">
             <div class="step-icon">
               ⏱️
             </div>
             <div class="step-text">
-              短期记忆
+              Bộ nhớ ngắn hạn
             </div>
             <div class="step-desc">
-              自动记录对话
+              Tự ghi lại hội thoại
             </div>
           </div>
           <div class="step-arrow">
             ➡️
           </div>
         </div>
-        
+
         <div class="flow-step">
           <div class="step-box">
             <div class="step-icon">
               🧠
             </div>
             <div class="step-text">
-              LLM 处理
+              LLM xử lý
             </div>
             <div class="step-desc">
-              理解+决策
+              Hiểu + quyết định
             </div>
           </div>
           <div class="step-arrow">
             ➡️
           </div>
         </div>
-        
+
         <div class="flow-branch">
           <div class="branch-option">
             <div class="branch-arrow">
@@ -312,10 +312,10 @@
                 📝
               </div>
               <div class="step-text">
-                工作记忆
+                Working memory
               </div>
               <div class="step-desc">
-                临时变量
+                Biến tạm thời
               </div>
             </div>
           </div>
@@ -328,15 +328,15 @@
                 💾
               </div>
               <div class="step-text">
-                长期记忆
+                Bộ nhớ dài hạn
               </div>
               <div class="step-desc">
-                持久化存储
+                Lưu persistent
               </div>
             </div>
           </div>
         </div>
-        
+
         <div class="flow-step">
           <div class="step-arrow">
             ➡️
@@ -346,7 +346,7 @@
               🤖
             </div>
             <div class="step-text">
-              Agent 回复
+              Agent trả lời
             </div>
           </div>
         </div>
@@ -356,7 +356,7 @@
     <!-- 核心机制解释 -->
     <div class="mechanism-section">
       <div class="mechanism-title">
-        ⚙️ 核心机制详解
+        ⚙️ Chi tiết cơ chế cốt lõi
       </div>
       <div class="mechanism-grid">
         <div
@@ -366,24 +366,24 @@
         >
           <div class="card-header">
             <span class="card-icon">⏱️</span>
-            <span class="card-title">短期记忆 (Short-term)</span>
+            <span class="card-title">Bộ nhớ ngắn hạn (Short-term)</span>
           </div>
           <div class="card-body">
             <div class="mechanism-item">
-              <span class="item-label">存储内容：</span>
-              <span class="item-value">当前对话的完整历史</span>
+              <span class="item-label">Nội dung lưu:</span>
+              <span class="item-value">Toàn bộ lịch sử hội thoại hiện tại</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">生命周期：</span>
-              <span class="item-value">当前会话，关闭即消失</span>
+              <span class="item-label">Vòng đời:</span>
+              <span class="item-value">Session hiện tại, đóng là mất</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">容量限制：</span>
-              <span class="item-value">受限于 LLM 上下文窗口（通常4K-128K tokens）</span>
+              <span class="item-label">Giới hạn dung lượng:</span>
+              <span class="item-value">Giới hạn bởi context window của LLM (thường 4K-128K tokens)</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">更新方式：</span>
-              <span class="item-value">自动追加每条对话</span>
+              <span class="item-label">Cách cập nhật:</span>
+              <span class="item-value">Tự động append mỗi lượt hội thoại</span>
             </div>
             <div class="code-example">
               <code>messages = [{role: "user", content: "..."}, {role: "assistant", content: "..."}]</code>
@@ -398,27 +398,27 @@
         >
           <div class="card-header">
             <span class="card-icon">📝</span>
-            <span class="card-title">工作记忆 (Working)</span>
+            <span class="card-title">Working memory</span>
           </div>
           <div class="card-body">
             <div class="mechanism-item">
-              <span class="item-label">存储内容：</span>
-              <span class="item-value">任务相关的临时变量和状态</span>
+              <span class="item-label">Nội dung lưu:</span>
+              <span class="item-value">Biến và state tạm thời liên quan đến task</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">生命周期：</span>
-              <span class="item-value">单个任务/会话期间</span>
+              <span class="item-label">Vòng đời:</span>
+              <span class="item-value">Trong suốt một task/session</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">典型用途：</span>
-              <span class="item-value">当前步骤、中间结果、用户偏好</span>
+              <span class="item-label">Dùng điển hình:</span>
+              <span class="item-value">Bước hiện tại, kết quả trung gian, sở thích người dùng</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">更新方式：</span>
-              <span class="item-value">Agent 主动读写</span>
+              <span class="item-label">Cách cập nhật:</span>
+              <span class="item-value">Agent chủ động đọc/ghi</span>
             </div>
             <div class="code-example">
-              <code>working_memory = {"step": 2, "user_name": "张三", "topic": "Python"}</code>
+              <code>working_memory = {"step": 2, "user_name": "An", "topic": "Python"}</code>
             </div>
           </div>
         </div>
@@ -430,27 +430,27 @@
         >
           <div class="card-header">
             <span class="card-icon">💾</span>
-            <span class="card-title">长期记忆 (Long-term)</span>
+            <span class="card-title">Bộ nhớ dài hạn (Long-term)</span>
           </div>
           <div class="card-body">
             <div class="mechanism-item">
-              <span class="item-label">存储内容：</span>
-              <span class="item-value">用户画像、偏好设置、历史知识</span>
+              <span class="item-label">Nội dung lưu:</span>
+              <span class="item-value">Chân dung người dùng, cài đặt sở thích, kiến thức lịch sử</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">生命周期：</span>
-              <span class="item-value">永久保存，跨会话可用</span>
+              <span class="item-label">Vòng đời:</span>
+              <span class="item-value">Lưu vĩnh viễn, dùng xuyên session</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">存储方式：</span>
-              <span class="item-value">向量数据库、知识图谱、键值存储</span>
+              <span class="item-label">Cách lưu:</span>
+              <span class="item-value">Vector database, knowledge graph, key-value store</span>
             </div>
             <div class="mechanism-item">
-              <span class="item-label">更新方式：</span>
-              <span class="item-value">显式写入，定期总结提炼</span>
+              <span class="item-label">Cách cập nhật:</span>
+              <span class="item-value">Ghi tường minh, định kỳ tổng kết chắt lọc</span>
             </div>
             <div class="code-example">
-              <code>long_term_memory = [{"type": "preference", "key": "语言", "value": "Python"}]</code>
+              <code>long_term_memory = [{"type": "preference", "key": "language", "value": "Python"}]</code>
             </div>
           </div>
         </div>
@@ -460,7 +460,7 @@
     <!-- 最佳实践 -->
     <div class="best-practices">
       <div class="practices-title">
-        💡 记忆系统最佳实践
+        💡 Best practice cho hệ thống bộ nhớ
       </div>
       <div class="practices-list">
         <div class="practice-item">
@@ -469,10 +469,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-title">
-              短期记忆优化
+              Tối ưu bộ nhớ ngắn hạn
             </div>
             <div class="practice-desc">
-              定期清理无关历史，保留关键上下文；超长对话使用摘要技术压缩
+              Định kỳ dọn lịch sử không liên quan, giữ lại context then chốt; hội thoại dài dùng kỹ thuật tóm tắt để nén lại
             </div>
           </div>
         </div>
@@ -482,10 +482,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-title">
-              工作记忆管理
+              Quản lý working memory
             </div>
             <div class="practice-desc">
-              任务开始时初始化，结束时清理；避免存储大量中间结果
+              Init khi task bắt đầu, dọn khi task kết thúc; tránh lưu quá nhiều kết quả trung gian
             </div>
           </div>
         </div>
@@ -495,10 +495,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-title">
-              长期记忆构建
+              Xây dựng bộ nhớ dài hạn
             </div>
             <div class="practice-desc">
-              定期总结对话提炼知识；使用向量检索实现语义搜索；区分事实和偏好
+              Định kỳ tổng kết hội thoại để chắt lọc kiến thức; dùng vector search để tìm theo ngữ nghĩa; phân biệt fact và preference
             </div>
           </div>
         </div>
@@ -508,10 +508,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-title">
-              记忆一致性
+              Tính nhất quán của bộ nhớ
             </div>
             <div class="practice-desc">
-              长期记忆更新前验证；处理矛盾信息；支持用户显式修改记忆
+              Verify trước khi cập nhật bộ nhớ dài hạn; xử lý thông tin mâu thuẫn; cho phép người dùng sửa bộ nhớ tường minh
             </div>
           </div>
         </div>
@@ -527,19 +527,19 @@ const activeTab = ref('short')
 const isProcessing = ref(false)
 const messageContainer = ref(null)
 
-// 记忆存储
+// Lưu trữ bộ nhớ
 const messages = ref([])
 const shortTermMemory = ref([])
 const workingMemory = reactive({})
 const longTermMemory = ref([])
 
-// 快捷按钮
+// Nút truy cập nhanh
 const quickButtons = ref([
-  { id: 1, text: '我叫张三', used: false, action: 'setName' },
-  { id: 2, text: '我喜欢 Python', used: false, action: 'setPreference' },
-  { id: 3, text: '推荐编程书', used: false, action: 'recommend' },
-  { id: 4, text: '我叫什么？', used: false, action: 'askName' },
-  { id: 5, text: '我喜欢什么语言？', used: false, action: 'askPreference' }
+  { id: 1, text: 'Tôi tên là An', used: false, action: 'setName' },
+  { id: 2, text: 'Tôi thích Python', used: false, action: 'setPreference' },
+  { id: 3, text: 'Gợi ý sách lập trình', used: false, action: 'recommend' },
+  { id: 4, text: 'Tôi tên gì?', used: false, action: 'askName' },
+  { id: 5, text: 'Tôi thích ngôn ngữ nào?', used: false, action: 'askPreference' }
 ])
 
 const sendMessage = async (btn) => {
@@ -547,97 +547,97 @@ const sendMessage = async (btn) => {
   isProcessing.value = true
   btn.used = true
 
-  // 用户消息
+  // Tin nhắn của user
   messages.value.push({
     role: 'user',
     text: btn.text,
     memoryOps: []
   })
-  
-  // 添加到短期记忆
+
+  // Thêm vào bộ nhớ ngắn hạn
   shortTermMemory.value.push({
     role: 'user',
     content: btn.text
   })
-  
+
   await scrollToBottom()
   await wait(600)
 
-  // Agent 处理
+  // Agent xử lý
   let response = {}
-  
+
   switch (btn.action) {
     case 'setName':
-      workingMemory.user_name = '张三'
+      workingMemory.user_name = 'An'
       response = {
-        text: '好的，我记住了你叫张三。',
+        text: 'Được rồi, tôi đã nhớ bạn tên là An.',
         memoryOps: [
-          { icon: '📝', text: '工作记忆: user_name = 张三', type: 'working' },
-          { icon: '💾', text: '长期记忆: 姓名 = 张三', type: 'long-term' }
+          { icon: '📝', text: 'Working memory: user_name = An', type: 'working' },
+          { icon: '💾', text: 'Bộ nhớ dài hạn: tên = An', type: 'long-term' }
         ]
       }
-      // 模拟写入长期记忆（去重：如果已存在则更新，否则添加）
+      // Mô phỏng ghi vào bộ nhớ dài hạn (dedup: nếu đã có thì cập nhật, không thì thêm mới)
       await wait(300)
-      const existingNameIndex = longTermMemory.value.findIndex(m => m.key === '姓名')
+      const existingNameIndex = longTermMemory.value.findIndex(m => m.key === 'Tên')
       if (existingNameIndex >= 0) {
-        longTermMemory.value[existingNameIndex].value = '张三'
+        longTermMemory.value[existingNameIndex].value = 'An'
       } else {
-        longTermMemory.value.push({ type: '身份', key: '姓名', value: '张三' })
+        longTermMemory.value.push({ type: 'identity', key: 'Tên', value: 'An' })
       }
       break
-      
+
     case 'setPreference':
       workingMemory.favorite_language = 'Python'
       response = {
-        text: '收到！我记住了你喜欢 Python。',
+        text: 'Đã nhận! Tôi đã nhớ bạn thích Python.',
         memoryOps: [
-          { icon: '📝', text: '工作记忆: favorite_language = Python', type: 'working' },
-          { icon: '💾', text: '长期记忆: 偏好 = Python', type: 'long-term' }
+          { icon: '📝', text: 'Working memory: favorite_language = Python', type: 'working' },
+          { icon: '💾', text: 'Bộ nhớ dài hạn: sở thích = Python', type: 'long-term' }
         ]
       }
       await wait(300)
-      // 去重逻辑：如果已存在则更新，否则添加
-      const existingPrefIndex = longTermMemory.value.findIndex(m => m.key === '编程语言')
+      // Dedup: nếu đã có thì cập nhật, không thì thêm mới
+      const existingPrefIndex = longTermMemory.value.findIndex(m => m.key === 'Ngôn ngữ lập trình')
       if (existingPrefIndex >= 0) {
         longTermMemory.value[existingPrefIndex].value = 'Python'
       } else {
-        longTermMemory.value.push({ type: '偏好', key: '编程语言', value: 'Python' })
+        longTermMemory.value.push({ type: 'preference', key: 'Ngôn ngữ lập trình', value: 'Python' })
       }
       break
-      
+
     case 'recommend':
-      const lang = workingMemory.favorite_language || longTermMemory.value.find(m => m.key === '编程语言')?.value
+      const lang = workingMemory.favorite_language || longTermMemory.value.find(m => m.key === 'Ngôn ngữ lập trình')?.value
       response = {
-        text: lang 
-          ? `基于你喜欢 ${lang}，我推荐《${lang}编程：从入门到实践》和《流畅的${lang}》。`
-          : '我推荐《代码大全》和《程序员修炼之道》，适合所有编程语言。',
+        text: lang
+          ? `Dựa vào việc bạn thích ${lang}, mình gợi ý cuốn "${lang} Crash Course" và "Fluent ${lang}".`
+          : 'Mình gợi ý "Code Complete" và "The Pragmatic Programmer", phù hợp với mọi ngôn ngữ.',
         memoryOps: [
-          { icon: '🔍', text: `检索长期记忆: 偏好 = ${lang || '无'}`, type: 'retrieve' }
+          { icon: '🔍', text: `Truy xuất bộ nhớ dài hạn: sở thích = ${lang || 'không có'}`, type: 'retrieve' }
         ]
       }
       break
-      
+
     case 'askName':
-      const name = workingMemory.user_name || longTermMemory.value.find(m => m.key === '姓名')?.value
+      const name = workingMemory.user_name || longTermMemory.value.find(m => m.key === 'Tên')?.value
       response = {
-        text: name 
-          ? `你叫${name}。` 
-          : '我还不知道你的名字，请告诉我。',
-        memoryOps: name 
-          ? [{ icon: '🔍', text: '检索记忆: 姓名', type: 'retrieve' }]
-          : [{ icon: '❓', text: '记忆缺失: 未找到姓名', type: 'missing' }]
+        text: name
+          ? `Bạn tên là ${name}.`
+          : 'Mình chưa biết tên bạn, hãy cho mình biết nhé.',
+        memoryOps: name
+          ? [{ icon: '🔍', text: 'Truy xuất bộ nhớ: tên', type: 'retrieve' }]
+          : [{ icon: '❓', text: 'Thiếu bộ nhớ: không tìm thấy tên', type: 'missing' }]
       }
       break
-      
+
     case 'askPreference':
-      const pref = workingMemory.favorite_language || longTermMemory.value.find(m => m.key === '编程语言')?.value
+      const pref = workingMemory.favorite_language || longTermMemory.value.find(m => m.key === 'Ngôn ngữ lập trình')?.value
       response = {
-        text: pref 
-          ? `你喜欢 ${pref}。` 
-          : '我还不知道你喜欢什么编程语言。',
-        memoryOps: pref 
-          ? [{ icon: '🔍', text: '检索记忆: 偏好', type: 'retrieve' }]
-          : [{ icon: '❓', text: '记忆缺失: 未找到偏好', type: 'missing' }]
+        text: pref
+          ? `Bạn thích ${pref}.`
+          : 'Mình chưa biết bạn thích ngôn ngữ lập trình nào.',
+        memoryOps: pref
+          ? [{ icon: '🔍', text: 'Truy xuất bộ nhớ: sở thích', type: 'retrieve' }]
+          : [{ icon: '❓', text: 'Thiếu bộ nhớ: không tìm thấy sở thích', type: 'missing' }]
       }
       break
   }
@@ -1045,8 +1045,8 @@ const truncate = (str, len) => str?.length > len ? str.slice(0, len) + '...' : s
   flex-shrink: 0;
 }
 
-.item-type.身份 { background: #dbeafe; color: #1e40af; }
-.item-type.偏好 { background: #d1fae5; color: #065f46; }
+.item-type.identity { background: #dbeafe; color: #1e40af; }
+.item-type.preference { background: #d1fae5; color: #065f46; }
 
 .panel-footer {
   padding: 8px 10px;

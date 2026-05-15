@@ -1,16 +1,16 @@
 <!--
   AgentArchitectureDemo.vue
-  Agent 架构“点哪看哪”：点击模块，右侧展示它负责什么 + 典型输入输出。
+  Kiến trúc Agent "bấm đâu xem đó": click vào module, bên phải hiện ra nó làm gì + input/output điển hình.
 -->
 <template>
   <div class="arch">
     <div class="header">
       <div>
         <div class="title">
-          Agent 由哪些模块拼起来？
+          Agent được ghép từ những module nào?
         </div>
         <div class="subtitle">
-          点一下模块，看它“负责什么”。
+          Click vào module để xem nó "phụ trách gì".
         </div>
       </div>
     </div>
@@ -29,10 +29,10 @@
 
         <div class="pipes">
           <div class="pipe">
-            用户目标 → 计划 → 工具调用 → 结果 → 再计划…
+            Mục tiêu của bạn → Kế hoạch → Gọi tool → Kết quả → Lập kế hoạch lại…
           </div>
           <div class="pipe small">
-            （记忆会贯穿整个过程）
+            (Bộ nhớ sẽ xuyên suốt toàn bộ quá trình)
           </div>
         </div>
       </div>
@@ -47,13 +47,13 @@
 
         <div class="io">
           <div class="io-title">
-            典型输入
+            Input điển hình
           </div>
           <pre><code>{{ current.input }}</code></pre>
         </div>
         <div class="io">
           <div class="io-title">
-            典型输出
+            Output điển hình
           </div>
           <pre><code>{{ current.output }}</code></pre>
         </div>
@@ -69,42 +69,42 @@ const modules = [
   {
     id: 'llm',
     icon: '🧠',
-    name: 'LLM（大脑）',
-    desc: '负责理解目标、生成计划、选择动作、组织语言输出。',
-    input: '用户目标 + 当前状态 + 可用工具列表',
-    output: '下一步计划 / 工具调用参数 / 最终回答'
+    name: 'LLM (Bộ não)',
+    desc: 'Phụ trách hiểu mục tiêu, tạo kế hoạch, chọn hành động, tổ chức ngôn ngữ output.',
+    input: 'Mục tiêu của bạn + trạng thái hiện tại + danh sách tool khả dụng',
+    output: 'Kế hoạch bước tiếp theo / tham số gọi tool / câu trả lời cuối cùng'
   },
   {
     id: 'tools',
     icon: '🔧',
-    name: 'Tools（手脚）',
-    desc: '负责真正“做事”：搜索、读写文件、调用 API、运行命令。',
-    input: 'tool_name + input_schema 参数',
-    output: '工具执行结果（文本/数据/文件变更）'
+    name: 'Tools (Tay chân)',
+    desc: 'Phụ trách thực sự "làm việc": tìm kiếm, đọc/ghi file, gọi API, chạy lệnh.',
+    input: 'tool_name + tham số input_schema',
+    output: 'Kết quả thực thi tool (text/data/thay đổi file)'
   },
   {
     id: 'memory',
     icon: '💾',
-    name: 'Memory（记忆）',
-    desc: '把“已经做过什么、得到什么结果”存起来，避免重复与跑偏。',
-    input: '对话历史 / 工具结果 / 当前任务状态',
-    output: '可检索的上下文（短期/长期/工作记忆）'
+    name: 'Memory (Bộ nhớ)',
+    desc: 'Lưu lại "đã làm gì, kết quả ra sao" để tránh lặp lại và lệch hướng.',
+    input: 'Lịch sử hội thoại / kết quả tool / trạng thái task hiện tại',
+    output: 'Context có thể truy xuất (ngắn hạn / dài hạn / working memory)'
   },
   {
     id: 'planner',
     icon: '🧩',
-    name: 'Planning（规划）',
-    desc: '把大目标拆成小步骤，并在失败时改计划（计划不是一次性的）。',
-    input: '目标 + 约束（预算/时间/安全） + 当前进度',
-    output: '步骤清单 / 下一步动作 / 停止条件'
+    name: 'Planning (Lập kế hoạch)',
+    desc: 'Chia mục tiêu lớn thành các bước nhỏ, và sửa kế hoạch khi gặp lỗi (kế hoạch không cố định).',
+    input: 'Mục tiêu + ràng buộc (ngân sách/thời gian/an toàn) + tiến độ hiện tại',
+    output: 'Danh sách bước / hành động tiếp theo / điều kiện dừng'
   },
   {
     id: 'guard',
     icon: '🛡️',
-    name: 'Guardrails（护栏）',
-    desc: '限制风险：权限白名单、预算上限、敏感操作确认、沙箱执行。',
-    input: '请求执行的动作 + 安全策略',
-    output: '允许/拒绝/要求确认 + 审计日志'
+    name: 'Guardrails (Hàng rào bảo vệ)',
+    desc: 'Hạn chế rủi ro: whitelist quyền, giới hạn ngân sách, xác nhận thao tác nhạy cảm, chạy trong sandbox.',
+    input: 'Hành động yêu cầu thực thi + chính sách an toàn',
+    output: 'Cho phép / từ chối / yêu cầu xác nhận + log audit'
   }
 ]
 

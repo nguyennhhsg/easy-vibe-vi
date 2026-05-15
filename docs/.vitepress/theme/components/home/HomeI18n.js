@@ -1378,7 +1378,7 @@ export const i18n = {
       title: 'Hướng dẫn Easy-Vibe',
       home: 'Trang chủ',
       stories: 'Câu chuyện người dùng',
-      pm: 'Quản lý sản phẩm',
+      pm: 'Nhập môn từ số 0',
       junior: 'Dev Sơ/Trung cấp',
       senior: 'Dev Cao cấp',
       appendix: 'Phụ lục',
@@ -1401,117 +1401,172 @@ export const i18n = {
       }
     },
     stage1: {
-      cat: 'Stage 1 · Người mới & PM',
+      cat: 'Stage 1 · Nhập môn từ số 0',
       title:
-        'Từ số 0 đến Hero,<br><span class="highlight">Tự làm PM cho chính mình.</span>',
-      sub: 'Không cần nền tảng CS. Chỉ cần nói ra ý tưởng, AI sẽ biến nó thành nguyên mẫu web độ trung thực cao.',
+        'Không có nền tảng kỹ thuật?<br><span class="highlight">Quá hợp.</span>',
+      sub: 'Không xét chuyên ngành, không xét xuất thân — biết nói là bạn đã có thể làm ra sản phẩm.',
       cards: [
         {
-          title: 'AI PM',
-          desc: 'Từ ý tưởng đến nguyên mẫu, chỉ bằng lời nói.',
-          sub: 'Thân thiện với non-tech',
+          title: 'Bản đồ học tập',
+          desc: 'Hiểu lộ trình học đầy đủ từ số 0 đến full-stack, biết rõ mục tiêu và thu hoạch của từng giai đoạn.',
+          sub: 'Phù hợp mọi lứa tuổi',
           link: '/vi-vn/stage-1/learning-map/'
         },
         {
-          title: 'Nhập môn qua Game',
-          desc: 'Xây dựng Snake, Tetris và phá bỏ nỗi sợ code.',
-          sub: 'Học mà chơi',
-          link: '/vi-vn/stage-1/learning-map/'
+          title: 'Nhập môn qua game',
+          desc: 'Làm các trò chơi AI-native như Snake để cảm nhận sức hút của lập trình AI và phá bỏ nỗi sợ code.',
+          sub: 'Vừa chơi vừa học',
+          link: '/vi-vn/stage-1/ai-capabilities-through-games/'
         },
         {
-          title: 'Vibe Coding',
-          desc: 'Nắm vững cốt lõi lập trình AI: Prompt Engineering & Context.',
+          title: 'Thực chiến nguyên mẫu sản phẩm',
+          desc: 'Nắm vững workflow Vibe Coding, từ ý tưởng đến nguyên mẫu tương tác, tự tay hoàn thành web app độ trung thực cao.',
           sub: 'Tư duy cốt lõi',
-          link: '/vi-vn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/finding-great-idea/'
         }
       ]
     },
     stage2: {
       cat: 'Stage 2 · Dev Sơ/Trung cấp',
-      title:
-        'Full Stack,<br><span class="highlight">Xây dựng App thực tế.</span>',
-      sub: 'Nắm vững tách biệt frontend-backend. Xây dựng dự án thương mại với DB, API và tương tác phức tạp.',
+      title: 'Một người,<br><span class="highlight">là cả một team.</span>',
+      sub: 'Từ frontend đến backend, từ database đến lên sản phẩm.',
       cards: [
         {
-          title: 'Full Stack',
-          headline: 'Frontend & Backend.',
-          desc: 'Từ thiết kế DB đến API và component, xây dựng trọn vẹn web app hiện đại.',
-          link: '/vi-vn/stage-2/'
+          title: 'Asset Agent',
+          headline: 'Tăng tốc sản xuất tư liệu trước.',
+          desc: 'Bắt đầu từ Lovart và Nanobanana, dựng workflow sản xuất tư liệu và Agent vẽ của riêng bạn.',
+          link: '/vi-vn/stage-2/frontend/lovart-assets/'
         },
         {
-          title: 'Dự án thực tế',
-          headline: 'Không phải code đồ chơi.',
-          desc: 'Đi sâu vào Auth, Lưu trữ, Upload file và logic nghiệp vụ cốt lõi.',
-          link: '/vi-vn/stage-2/'
+          title: 'Figma và MasterGo',
+          headline: 'Dùng công cụ thiết kế cho trơn.',
+          desc: 'Nắm vững thao tác cơ bản với công cụ thiết kế UI chuyên nghiệp, hiểu mạch nối từ bản thiết kế đến phối hợp phát triển.',
+          link: '/vi-vn/stage-2/frontend/figma-mastergo/'
         },
         {
-          title: 'Triển khai',
-          headline: 'Show cho thế giới.',
-          desc: 'Cấu hình server, DNS, CI/CD. Chặng cuối của việc giao sản phẩm.',
-          link: '/vi-vn/stage-2/'
+          title: 'Design to Code',
+          headline: 'Biến nguyên mẫu thành trang thật sự.',
+          desc: 'Học cách chuyển nguyên mẫu thiết kế thành code frontend chạy được trên trình duyệt, giảm việc dựng lại bằng tay.',
+          link: '/vi-vn/stage-2/frontend/design-to-code/'
+        },
+        {
+          title: 'Dự án dữ liệu thật',
+          headline: 'Kết nối database thật sự.',
+          desc: 'Thiết kế bảng và quyền trên Supabase, dùng thao tác đọc/ghi thật để gánh tầng dữ liệu cho sản phẩm.',
+          link: '/vi-vn/stage-2/backend/database-supabase/'
+        },
+        {
+          title: 'Triển khai lên sản phẩm',
+          headline: 'Để thế giới thấy tác phẩm của bạn.',
+          desc: 'Dùng các nền tảng như CloudBase, Vercel, Zeabur để thông từ code đến truy cập công khai trong một mạch.',
+          link: '/vi-vn/stage-2/backend/zeabur-deployment/'
+        },
+        {
+          title: 'Tích hợp AI Knowledge Base',
+          headline: 'Cắm hỏi đáp thông minh vào ứng dụng.',
+          desc: 'Học dùng Dify để dựng AI app và knowledge base, đưa khả năng retrieval augmentation vào sản phẩm thật của bạn.',
+          link: '/vi-vn/stage-2/ai-capabilities/dify-knowledge-base/'
         }
       ]
     },
     stage3: {
       cat: 'Stage 3 · Dev Cao cấp',
-      title:
-        'Thực hành nâng cao,<br><span class="highlight">Khả năng vô hạn.</span>',
-      sub: 'Mini-app di động & Ứng dụng AI Native. Khám phá kỷ nguyên LLM.',
+      title: 'Sản phẩm và kết quả,<br><span class="highlight">mình muốn tất cả.</span>',
+      sub: 'Vượt qua giới hạn thời gian và thiết bị, đưa sản phẩm AI hiện diện khắp nơi.',
       cards: [
         {
-          title: 'WeChat Mini-app',
-          desc: 'Phát triển đa nền tảng, tiếp cận hàng triệu người dùng.',
-          link: '/vi-vn/stage-3/'
+          title: 'Ứng dụng desktop đa nền tảng',
+          desc: 'Dùng Electron tạo ứng dụng desktop chuyển giọng nói thành văn bản, một lần code chạy được trên Windows, macOS và Linux.',
+          link: '/vi-vn/stage-3/cross-platform/electron-voice-to-text/'
         },
         {
-          title: 'App AI Native',
-          desc: 'RAG, Agent. Khám phá giới hạn của LLM.',
-          link: '/vi-vn/stage-3/'
+          title: 'Đội ngũ AI Agent',
+          desc: 'Dùng Claude Agent Teams để lập nhóm phát triển AI, nhiều agent phối hợp hoàn thành task lớn.',
+          link: '/vi-vn/stage-3/core-skills/agent-teams/'
         },
         {
-          title: 'Kiến trúc phức tạp',
-          desc: 'Thiết kế kiến trúc chịu tải cao và sẵn sàng cao.',
-          link: '/vi-vn/stage-3/'
+          title: 'Chạy ổn định lâu dài',
+          desc: 'Dùng script vòng lặp và plugin Ralph để quản lý task dài hơi, cho Claude Code chạy xuyên đêm hoàn thành công việc ổn định.',
+          link: '/vi-vn/stage-3/core-skills/long-running-tasks/'
         },
         {
-          title: 'Thương hiệu cá nhân',
-          desc: 'Xây dựng website và blog học thuật của riêng bạn.',
-          link: '/vi-vn/stage-3/'
+          title: 'Thương hiệu cá nhân và đầu ra',
+          desc: 'Xây website cá nhân và blog kỹ thuật để dự án và kinh nghiệm của bạn được lưu lại lâu dài và tiếp cận nhiều người hơn.',
+          link: '/vi-vn/stage-3/personal-brand/personal-website-blog/'
         }
       ]
     },
     appendix: {
       cat: 'Appendix · Phụ lục',
-      title:
-        'Encyclopedia, <br><span class="highlight">Solid Foundation.</span>',
-      sub: 'From Computer Networks to AI Principles, complete your tech puzzle.',
+      title: 'Để code,<br><span class="highlight">trở nên sống động.</span>',
+      sub: 'Tạm biệt những bức tường chữ khô khan. Bằng demo động và tương tác thời gian thực, định nghĩa lại tài liệu kỹ thuật.',
       cards: [
         {
-          title: 'AI Fundamentals',
-          desc: 'LLM, Agent, RAG. Dive into AI internals.',
+          title: 'Lịch sử tiến hóa AI',
+          desc: 'Nhìn lại các cột mốc quan trọng trong hành trình phát triển của trí tuệ nhân tạo.',
           link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
-          title: 'Frontend',
-          desc: 'Browser internals, Performance, Canvas.',
+          title: 'Prompt Engineering',
+          desc: 'Nắm vững kỹ thuật trò chuyện hiệu quả với AI, khai mở tiềm năng.',
+          link: '/vi-vn/appendix/8-artificial-intelligence/prompt-engineering'
+        },
+        {
+          title: 'Mô hình ngôn ngữ lớn',
+          desc: 'Giải thích dễ hiểu nguyên lý hoạt động và ứng dụng của LLM.',
+          link: '/vi-vn/appendix/8-artificial-intelligence/llm-principles'
+        },
+        {
+          title: 'AI Agent',
+          desc: 'Khám phá kiến trúc AI có khả năng tự ra quyết định và thực thi.',
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-agents'
+        },
+        {
+          title: 'Nền tảng frontend',
+          desc: 'HTML/CSS/JS — ba trụ cột, môn học bắt buộc khi nhập môn.',
           link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
-          title: 'Backend',
-          desc: 'High concurrency, Distributed systems, Microservices.',
+          title: 'Lịch sử tiến hóa frontend',
+          desc: 'Hiểu hành trình của tech stack frontend, nắm bắt xu hướng phát triển.',
+          link: '/vi-vn/appendix/3-browser-and-frontend/frontend-frameworks'
+        },
+        {
+          title: 'Kiến trúc backend',
+          desc: 'Từ monolith đến microservices, khám phá hành trình tiến hóa kiến trúc.',
           link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
-          title: 'General Skills',
-          desc: 'Git, Networks, IDE internals.',
+          title: 'Ngôn ngữ backend',
+          desc: 'So sánh đặc điểm các ngôn ngữ backend phổ biến, chọn stack tốt nhất.',
+          link: '/vi-vn/appendix/4-server-and-backend/backend-languages'
+        },
+        {
+          title: 'Nguyên lý database',
+          desc: 'Hiểu nguyên lý cốt lõi của cơ sở dữ liệu, làm chủ nghệ thuật lưu trữ dữ liệu.',
+          link: '/vi-vn/appendix/5-data/database-fundamentals'
+        },
+        {
+          title: 'Thiết kế API',
+          desc: 'Kiến thức nền về thiết kế và phát triển API.',
+          link: '/vi-vn/appendix/4-server-and-backend/api-intro'
+        },
+        {
+          title: 'Git Version Control',
+          desc: 'Hiểu sâu nguyên lý Git và các cách dùng nâng cao.',
           link: '/vi-vn/appendix/2-development-tools/git-version-control'
+        },
+        {
+          title: 'Mạng máy tính',
+          desc: 'Kiến thức nền tảng về giao thức mạng và nguyên lý truyền thông.',
+          link: '/vi-vn/appendix/1-computer-fundamentals/computer-networks'
         }
       ]
     },
     footer: {
-      title: 'Sẵn sàng chưa?',
-      desc: 'Easy-Vibe, biến lập trình trở nên tự nhiên như hơi thở.',
-      btn: 'Bắt đầu ngay'
+      title: 'Ý tưởng của bạn,<br>lên sóng ngay bây giờ.',
+      desc: 'Từ cảm hứng đến hiện thực — sao không bắt đầu ngay lúc này.',
+      btn: '>_ Start'
     }
   }
 }

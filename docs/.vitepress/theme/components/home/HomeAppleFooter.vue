@@ -83,6 +83,42 @@ const appleFooterInfo = computed(() => {
       moreTail: ' for updates and community discussions.',
       copyright: 'Copyright © 2026 Easy-Vibe. All rights reserved.',
       policies: ['Privacy Policy', 'Terms of Use', 'Sitemap']
+    },
+    'vi-vn': {
+      notes: [
+        '1. Lộ trình học và nội dung chương sẽ được cập nhật liên tục, nội dung hiển thị lấy theo trang hiện tại.',
+        '2. Dự án ví dụ và ảnh chụp dùng để minh họa giảng dạy, có thể khác với phiên bản giao diện sau này.',
+        '3. Một số liên kết chương sẽ thay đổi khi giáo trình lặp lại; nên ưu tiên vào từ điều hướng trang chủ để có đường dẫn mới nhất.'
+      ],
+      breadcrumbPrefix: 'Easy-Vibe',
+      breadcrumbCurrent: 'Điều hướng học tập',
+      columns: [
+        {
+          title: 'Học và điều hướng',
+          links: ['Nhập môn từ số 0', 'Dev Sơ/Trung cấp', 'Dev Cao cấp', 'Phụ lục', 'Bản đồ học tập', 'Tổng quan giáo trình']
+        },
+        {
+          title: 'Hỗ trợ học',
+          links: ['Câu hỏi thường gặp', 'Gợi ý học', 'Đính chính chương', 'Cập nhật phiên bản']
+        },
+        {
+          title: 'Tài nguyên dự án',
+          links: ['Kho GitHub', 'Giấy phép mã nguồn mở', 'Gửi Issue', 'Hướng dẫn đóng góp']
+        },
+        {
+          title: 'Cộng đồng',
+          links: ['Cộng đồng học tập', 'Khu thảo luận', 'Phản hồi giáo trình']
+        },
+        {
+          title: 'Về Easy-Vibe',
+          links: ['Giới thiệu dự án', 'Nhật ký cập nhật', 'Liên hệ chúng tôi']
+        }
+      ],
+      more: 'Thêm cách học khác: truy cập',
+      moreLink: 'Kho GitHub',
+      moreTail: ' để nhận cập nhật và thông tin trao đổi.',
+      copyright: 'Copyright © 2026 Easy-Vibe. Mọi quyền được bảo lưu.',
+      policies: ['Chính sách bảo mật', 'Điều khoản sử dụng', 'Sơ đồ trang']
     }
   }
   return content[locale] || content.en
@@ -96,7 +132,10 @@ const footerPolicyLinkMap = {
   '网站地图': '#',
   'Privacy Policy': '#',
   'Terms of Use': '#',
-  'Sitemap': '#'
+  'Sitemap': '#',
+  'Chính sách bảo mật': '#',
+  'Điều khoản sử dụng': '#',
+  'Sơ đồ trang': '#'
 }
 
 const footerColumnLinkMap = {
@@ -115,7 +154,16 @@ const footerColumnLinkMap = {
   'Course Outline': '/en/stage-1/',
   'GitHub Repository': 'https://github.com/datawhalechina/easy-vibe',
   'Overview': '/en/guide/introduction',
-  'Changelog': 'https://github.com/datawhalechina/easy-vibe/releases'
+  'Changelog': 'https://github.com/datawhalechina/easy-vibe/releases',
+  'Nhập môn từ số 0': '/vi-vn/stage-1/',
+  'Dev Sơ/Trung cấp': '/vi-vn/stage-2/',
+  'Dev Cao cấp': '/vi-vn/stage-3/',
+  'Phụ lục': '/vi-vn/appendix/',
+  'Bản đồ học tập': '/vi-vn/stage-1/learning-map/',
+  'Tổng quan giáo trình': '/vi-vn/stage-1/',
+  'Kho GitHub': 'https://github.com/datawhalechina/easy-vibe',
+  'Giới thiệu dự án': '/vi-vn/guide/introduction',
+  'Nhật ký cập nhật': 'https://github.com/datawhalechina/easy-vibe/releases'
 }
 
 const getFooterLink = (label) => {

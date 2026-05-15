@@ -2,10 +2,10 @@
   <div class="multi-tool-principle">
     <div class="header">
       <div class="title">
-        🔧 多工具调用原理：Agent 如何"串联"工具完成任务
+        🔧 Nguyên lý gọi nhiều tool: Agent "nối chuỗi" tool để hoàn thành task thế nào
       </div>
       <div class="subtitle">
-        理解 Agent 的链式思考(Chain-of-Thought)和工具编排机制
+        Hiểu Chain-of-Thought và cơ chế orchestration tool của Agent
       </div>
     </div>
 
@@ -22,31 +22,31 @@
       </button>
     </div>
 
-    <!-- 用户意图 -->
+    <!-- Ý định của user -->
     <div class="intent-box">
       <div class="intent-label">
-        👤 用户意图
+        👤 Ý định của bạn
       </div>
       <div class="intent-text">
         {{ currentData.intent }}
       </div>
     </div>
 
-    <!-- 执行流程可视化 -->
+    <!-- Trực quan hóa luồng thực thi -->
     <div class="execution-flow">
       <div class="flow-title">
-        🔄 工具调用执行流程
+        🔄 Luồng thực thi gọi tool
       </div>
-      
-      <!-- 思考阶段 -->
+
+      <!-- Giai đoạn suy nghĩ -->
       <div
         class="phase thinking-phase"
         :class="{ active: currentPhase >= 0 }"
       >
         <div class="phase-header">
           <span class="phase-icon">🧠</span>
-          <span class="phase-name">思考规划</span>
-          <span class="phase-status">{{ currentPhase > 0 ? '✅ 完成' : currentPhase === 0 ? '🔄 进行中' : '⏳ 等待' }}</span>
+          <span class="phase-name">Suy nghĩ và lập kế hoạch</span>
+          <span class="phase-status">{{ currentPhase > 0 ? '✅ Xong' : currentPhase === 0 ? '🔄 Đang xử lý' : '⏳ Chờ' }}</span>
         </div>
         <div
           v-if="currentPhase >= 0"
@@ -65,15 +65,15 @@
         </div>
       </div>
 
-      <!-- 工具执行阶段 -->
+      <!-- Giai đoạn thực thi tool -->
       <div
         class="phase tools-phase"
         :class="{ active: currentPhase >= 1 }"
       >
         <div class="phase-header">
           <span class="phase-icon">🔧</span>
-          <span class="phase-name">工具执行</span>
-          <span class="phase-status">{{ currentPhase > 1 ? '✅ 完成' : currentPhase === 1 ? '🔄 进行中' : '⏳ 等待' }}</span>
+          <span class="phase-name">Thực thi tool</span>
+          <span class="phase-status">{{ currentPhase > 1 ? '✅ Xong' : currentPhase === 1 ? '🔄 Đang xử lý' : '⏳ Chờ' }}</span>
         </div>
         <div
           v-if="currentPhase >= 1"
@@ -124,47 +124,47 @@
                 </div>
               </div>
               
-              <!-- 工具详情 -->
+              <!-- Chi tiết tool -->
               <div
                 v-if="currentTool >= idx"
                 class="tool-detail-popup"
               >
                 <div class="detail-row">
-                  <span class="detail-label">输入:</span>
+                  <span class="detail-label">Input:</span>
                   <code class="detail-code">{{ tool.input }}</code>
                 </div>
                 <div
                   v-if="currentTool > idx"
                   class="detail-row"
                 >
-                  <span class="detail-label">输出:</span>
+                  <span class="detail-label">Output:</span>
                   <span class="detail-output">{{ truncate(tool.output, 50) }}</span>
                 </div>
               </div>
             </div>
           </div>
           
-          <!-- 数据流转示意 -->
+          <!-- Sơ đồ luồng dữ liệu -->
           <div
             v-if="currentPhase === 1"
             class="data-flow-hint"
           >
             <div class="flow-arrow">
-              ⬇️ 数据在工具间流转，上一步的输出成为下一步的输入
+              ⬇️ Dữ liệu luân chuyển giữa các tool, output của bước trước trở thành input của bước sau
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 结果整合阶段 -->
+      <!-- Giai đoạn tổng hợp kết quả -->
       <div
         class="phase result-phase"
         :class="{ active: currentPhase >= 2 }"
       >
         <div class="phase-header">
           <span class="phase-icon">📝</span>
-          <span class="phase-name">结果整合</span>
-          <span class="phase-status">{{ currentPhase > 2 ? '✅ 完成' : currentPhase === 2 ? '🔄 进行中' : '⏳ 等待' }}</span>
+          <span class="phase-name">Tổng hợp kết quả</span>
+          <span class="phase-status">{{ currentPhase > 2 ? '✅ Xong' : currentPhase === 2 ? '🔄 Đang xử lý' : '⏳ Chờ' }}</span>
         </div>
         <div
           v-if="currentPhase >= 2"
@@ -176,42 +176,42 @@
               :class="{ done: integrationStep >= 0 }"
             >
               <span class="check">{{ integrationStep >= 0 ? '✓' : '○' }}</span>
-              <span>收集所有工具输出</span>
+              <span>Thu thập toàn bộ output của tool</span>
             </div>
             <div
               class="integration-step"
               :class="{ done: integrationStep >= 1 }"
             >
               <span class="check">{{ integrationStep >= 1 ? '✓' : '○' }}</span>
-              <span>去重与验证</span>
+              <span>Dedup và verify</span>
             </div>
             <div
               class="integration-step"
               :class="{ done: integrationStep >= 2 }"
             >
               <span class="check">{{ integrationStep >= 2 ? '✓' : '○' }}</span>
-              <span>结构化整理</span>
+              <span>Cấu trúc hóa nội dung</span>
             </div>
             <div
               class="integration-step"
               :class="{ done: integrationStep >= 3 }"
             >
               <span class="check">{{ integrationStep >= 3 ? '✓' : '○' }}</span>
-              <span>生成自然语言回复</span>
+              <span>Sinh câu trả lời tự nhiên</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 最终输出 -->
+      <!-- Output cuối cùng -->
       <div
         class="phase output-phase"
         :class="{ active: currentPhase >= 3 }"
       >
         <div class="phase-header">
           <span class="phase-icon">💬</span>
-          <span class="phase-name">最终输出</span>
-          <span class="phase-status">{{ currentPhase >= 3 ? '✅ 完成' : '⏳ 等待' }}</span>
+          <span class="phase-name">Output cuối cùng</span>
+          <span class="phase-status">{{ currentPhase >= 3 ? '✅ Xong' : '⏳ Chờ' }}</span>
         </div>
         <div
           v-if="currentPhase >= 3"
@@ -226,35 +226,35 @@
       </div>
     </div>
 
-    <!-- 控制按钮 -->
+    <!-- Nút điều khiển -->
     <div class="controls">
       <button
         v-if="!isRunning && currentPhase === -1"
         class="control-btn primary"
         @click="startDemo"
       >
-        ▶ 开始演示
+        ▶ Bắt đầu demo
       </button>
       <button
         v-else-if="isRunning"
         class="control-btn"
         disabled
       >
-        ⏳ 执行中...
+        ⏳ Đang chạy...
       </button>
       <button
         v-else
         class="control-btn secondary"
         @click="reset"
       >
-        🔄 重新演示
+        🔄 Demo lại
       </button>
     </div>
 
     <!-- 原理说明 -->
     <div class="principle-explanation">
       <div class="explanation-title">
-        📚 核心原理
+        📚 Nguyên lý cốt lõi
       </div>
       <div class="explanation-grid">
         <div class="explanation-card">
@@ -262,10 +262,10 @@
             🧩
           </div>
           <div class="card-title">
-            任务分解
+            Phân rã task
           </div>
           <div class="card-desc">
-            Agent 将复杂任务拆解为多个子任务，每个子任务对应一个工具调用
+            Agent chia task phức tạp thành các sub-task, mỗi sub-task ứng với một lần gọi tool
           </div>
         </div>
         <div class="explanation-card">
@@ -273,10 +273,10 @@
             🔗
           </div>
           <div class="card-title">
-            链式调用
+            Gọi chuỗi
           </div>
           <div class="card-desc">
-            工具按依赖关系串联执行，前一个工具的输出成为后一个工具的输入
+            Các tool thực thi theo quan hệ phụ thuộc, output tool trước thành input tool sau
           </div>
         </div>
         <div class="explanation-card">
@@ -284,10 +284,10 @@
             🔄
           </div>
           <div class="card-title">
-            动态调整
+            Điều chỉnh động
           </div>
           <div class="card-desc">
-            根据中间结果，Agent 可以动态决定下一步调用哪个工具
+            Dựa vào kết quả trung gian, Agent có thể quyết định động xem bước tiếp theo gọi tool nào
           </div>
         </div>
         <div class="explanation-card">
@@ -295,10 +295,10 @@
             🎯
           </div>
           <div class="card-title">
-            结果整合
+            Tổng hợp kết quả
           </div>
           <div class="card-desc">
-            将所有工具输出整合为连贯、有用的最终回复
+            Gộp toàn bộ output của tool thành câu trả lời cuối mạch lạc và hữu ích
           </div>
         </div>
       </div>
@@ -307,18 +307,18 @@
     <!-- 与 LLM 对比 -->
     <div class="comparison-section">
       <div class="comparison-title">
-        ⚖️ 为什么需要多工具调用？
+        ⚖️ Tại sao cần gọi nhiều tool?
       </div>
       <div class="comparison-table">
         <div class="comparison-row header">
           <div class="col scenario">
-            场景
+            Tình huống
           </div>
           <div class="col llm">
-            普通 LLM
+            LLM thường
           </div>
           <div class="col agent">
-            Agent + 多工具
+            Agent + nhiều tool
           </div>
         </div>
         <div
@@ -348,68 +348,68 @@ const scenarios = [
   {
     id: 'travel',
     icon: '✈️',
-    name: '旅行规划',
-    intent: '规划一个3天2晚的东京旅行，预算1万元',
+    name: 'Lập kế hoạch du lịch',
+    intent: 'Lập kế hoạch du lịch Tokyo 3 ngày 2 đêm, ngân sách 30 triệu',
     planningSteps: [
-      '分析需求：东京、3天2晚、预算1万',
-      '确定需要查询：机票、酒店、景点、路线、预算',
-      '规划工具调用顺序：机票→酒店→景点→路线→预算汇总'
+      'Phân tích yêu cầu: Tokyo, 3 ngày 2 đêm, ngân sách 30 triệu',
+      'Xác định cần tra cứu: vé máy bay, khách sạn, điểm tham quan, lộ trình, ngân sách',
+      'Lập thứ tự gọi tool: vé máy bay → khách sạn → điểm tham quan → lộ trình → tổng hợp ngân sách'
     ],
     tools: [
-      { icon: '✈️', name: '查机票', input: '{from:上海, to:东京, date:3.15}', output: '往返¥3,200' },
-      { icon: '🏨', name: '查酒店', input: '{city:东京, nights:2, budget:3000}', output: '新宿酒店¥1,200/晚' },
-      { icon: '📍', name: '查景点', input: '{city:东京, days:3}', output: '推荐5个景点' },
-      { icon: '🗺️', name: '规划路线', input: '{spots:[...], days:3}', output: '3天路线规划' },
-      { icon: '💰', name: '算预算', input: '{items:[...]}', output: '总计¥8,400' }
+      { icon: '✈️', name: 'Tra vé máy bay', input: '{from:HCM, to:Tokyo, date:3.15}', output: 'Khứ hồi 9.500.000đ' },
+      { icon: '🏨', name: 'Tra khách sạn', input: '{city:Tokyo, nights:2, budget:9tr}', output: 'KS Shinjuku 3.600.000đ/đêm' },
+      { icon: '📍', name: 'Tra điểm tham quan', input: '{city:Tokyo, days:3}', output: 'Gợi ý 5 điểm' },
+      { icon: '🗺️', name: 'Lập lộ trình', input: '{spots:[...], days:3}', output: 'Lộ trình 3 ngày' },
+      { icon: '💰', name: 'Tính ngân sách', input: '{items:[...]}', output: 'Tổng 25.200.000đ' }
     ],
-    finalOutput: '✈️ 东京3天2晚行程已规划好！\n• 机票：¥3,200\n• 酒店：¥2,400\n• 餐饮交通：¥2,000\n• 门票购物：¥1,000\n• 总计：¥8,400（剩余¥1,600）'
+    finalOutput: '✈️ Lịch trình Tokyo 3 ngày 2 đêm đã sẵn sàng!\n• Vé máy bay: 9.500.000đ\n• Khách sạn: 7.200.000đ\n• Ăn uống & đi lại: 6.000.000đ\n• Vé tham quan & mua sắm: 3.000.000đ\n• Tổng: 25.700.000đ (dư 4.300.000đ)'
   },
   {
     id: 'research',
     icon: '📊',
-    name: '行业研究',
-    intent: '生成2024年新能源汽车行业分析报告',
+    name: 'Nghiên cứu ngành',
+    intent: 'Sinh báo cáo phân tích ngành xe điện 2024',
     planningSteps: [
-      '分析需求：行业报告需要市场数据、厂商信息、技术趋势、政策',
-      '确定数据来源：市场数据库、公司信息、技术文献、政策文件',
-      '规划工具调用：市场数据→厂商排名→技术趋势→政策→可视化→报告生成'
+      'Phân tích yêu cầu: báo cáo ngành cần dữ liệu thị trường, thông tin nhà sản xuất, xu hướng công nghệ, chính sách',
+      'Xác định nguồn dữ liệu: cơ sở dữ liệu thị trường, thông tin công ty, tài liệu kỹ thuật, văn bản chính sách',
+      'Lập gọi tool: dữ liệu thị trường → xếp hạng nhà sản xuất → xu hướng kỹ thuật → chính sách → trực quan hóa → sinh báo cáo'
     ],
     tools: [
-      { icon: '📈', name: '市场数据', input: '{industry:NEV, year:2024}', output: '销量1700万辆，+35%' },
-      { icon: '🏢', name: '厂商信息', input: '{industry:NEV, top:10}', output: '比亚迪302万，特斯拉181万...' },
-      { icon: '🔋', name: '技术趋势', input: '{field:NEV, tech:[电池,智驾]}', output: '固态电池、L2+智驾普及' },
-      { icon: '📋', name: '政策查询', input: '{region:全球, topic:NEV}', output: '中国减免购置税至2027' },
-      { icon: '📊', name: '数据可视化', input: '{type:饼图, data:市场份额}', output: '生成6个图表' },
-      { icon: '📝', name: '报告生成', input: '{sections:[...]}', output: '12页完整报告' }
+      { icon: '📈', name: 'Dữ liệu thị trường', input: '{industry:NEV, year:2024}', output: 'Doanh số 17 triệu xe, +35%' },
+      { icon: '🏢', name: 'Thông tin hãng', input: '{industry:NEV, top:10}', output: 'BYD 3.02M, Tesla 1.81M...' },
+      { icon: '🔋', name: 'Xu hướng công nghệ', input: '{field:NEV, tech:[pin,tự lái]}', output: 'Pin thể rắn, L2+ tự lái phổ biến' },
+      { icon: '📋', name: 'Tra cứu chính sách', input: '{region:toàn cầu, topic:NEV}', output: 'Trung Quốc miễn thuế đến 2027' },
+      { icon: '📊', name: 'Trực quan hóa', input: '{type:biểu đồ tròn, data:thị phần}', output: 'Sinh 6 biểu đồ' },
+      { icon: '📝', name: 'Sinh báo cáo', input: '{sections:[...]}', output: 'Báo cáo đầy đủ 12 trang' }
     ],
-    finalOutput: '📊 2024新能源汽车行业分析报告已完成！\n• 全球销量1700万辆（+35%）\n• 比亚迪领先（302万辆）\n• 技术趋势：固态电池、800V快充\n• 完整报告：12页，6个图表'
+    finalOutput: '📊 Báo cáo phân tích ngành xe điện 2024 đã hoàn tất!\n• Doanh số toàn cầu 17 triệu xe (+35%)\n• BYD dẫn đầu (3.02 triệu xe)\n• Xu hướng: pin thể rắn, sạc nhanh 800V\n• Báo cáo: 12 trang, 6 biểu đồ'
   },
   {
     id: 'shopping',
     icon: '🛒',
-    name: '智能购物',
-    intent: '买5000元笔记本，编程+轻度游戏',
+    name: 'Mua sắm thông minh',
+    intent: 'Mua laptop 20 triệu, lập trình + chơi game nhẹ',
     planningSteps: [
-      '分析需求：5000元、编程、轻度游戏',
-      '确定评估维度：机型、规格、价格、评价、性能跑分',
-      '规划工具调用：搜索→查规格→比价格→看评价→跑分对比'
+      'Phân tích yêu cầu: 20 triệu, lập trình, chơi game nhẹ',
+      'Xác định tiêu chí đánh giá: model, cấu hình, giá, review, benchmark',
+      'Lập gọi tool: search → tra cấu hình → so giá → xem review → so benchmark'
     ],
     tools: [
-      { icon: '🔍', name: '搜索机型', input: '{category:笔记本, budget:5000}', output: '找到6款候选机型' },
-      { icon: '⚙️', name: '查规格', input: '{products:[...]}', output: 'CPU/内存/屏幕参数' },
-      { icon: '💰', name: '比价格', input: '{products:[...]}', output: '价格对比表' },
-      { icon: '⭐', name: '看评价', input: '{products:[...], source:电商}', output: '好评率96% vs 94%' },
-      { icon: '📊', name: '跑分对比', input: '{products:[...], tests:[CPU,GPU]}', output: 'R7>i5，续航8h vs 6.5h' }
+      { icon: '🔍', name: 'Tìm model', input: '{category:laptop, budget:20tr}', output: 'Tìm thấy 6 model ứng cử' },
+      { icon: '⚙️', name: 'Tra cấu hình', input: '{products:[...]}', output: 'Thông số CPU/RAM/màn hình' },
+      { icon: '💰', name: 'So giá', input: '{products:[...]}', output: 'Bảng so giá' },
+      { icon: '⭐', name: 'Xem review', input: '{products:[...], source:e-commerce}', output: 'Tỷ lệ tốt 96% vs 94%' },
+      { icon: '📊', name: 'So benchmark', input: '{products:[...], tests:[CPU,GPU]}', output: 'R7>i5, pin 8h vs 6.5h' }
     ],
-    finalOutput: '💻 笔记本推荐结果\n🥇 首选：联想小新Pro16（¥4,999）\n• R7-7840HS/16G/1TB/2.5K\n• 性能强、屏幕好、存储大\n\n🥈 备选：ThinkBook14+（¥5,299）\n• 做工好、续航长、接口全'
+    finalOutput: '💻 Kết quả gợi ý laptop\n🥇 Lựa chọn ưu tiên: Lenovo Slim Pro 16 (19.900.000đ)\n• R7-7840HS/16G/1TB/2.5K\n• Hiệu năng mạnh, màn hình đẹp, ổ lớn\n\n🥈 Phương án dự phòng: ThinkBook 14+ (21.000.000đ)\n• Gia công tốt, pin trâu, đầy đủ cổng'
   }
 ]
 
 const comparisons = [
-  { scenario: '查天气+穿衣建议', llm: '只能推测，无法获取实时数据', agent: '调用天气API获取实时数据，再给出穿衣建议' },
-  { scenario: '股票分析', llm: '无法获取股价，只能泛泛而谈', agent: '股价+新闻+技术分析，三个工具串联完成深度分析' },
-  { scenario: '旅行规划', llm: '只能给建议，无法查询实时价格', agent: '机票+酒店+景点+路线+预算，5个工具完成完整规划' },
-  { scenario: '数据分析', llm: '无法访问数据，只能讲分析方法', agent: '查询+分组+计算+可视化，6个工具完成完整分析' }
+  { scenario: 'Tra thời tiết + gợi ý mặc đồ', llm: 'Chỉ đoán, không lấy được dữ liệu thời gian thực', agent: 'Gọi API thời tiết lấy dữ liệu realtime, rồi gợi ý mặc đồ' },
+  { scenario: 'Phân tích chứng khoán', llm: 'Không lấy được giá, chỉ nói chung chung', agent: 'Giá + tin tức + phân tích kỹ thuật, 3 tool nối tiếp để phân tích sâu' },
+  { scenario: 'Lập kế hoạch du lịch', llm: 'Chỉ gợi ý chung, không tra được giá realtime', agent: 'Vé máy bay + khách sạn + điểm tham quan + lộ trình + ngân sách, 5 tool cho kế hoạch trọn vẹn' },
+  { scenario: 'Phân tích dữ liệu', llm: 'Không truy cập dữ liệu, chỉ nói phương pháp', agent: 'Query + group + tính toán + trực quan hóa, 6 tool cho phân tích trọn vẹn' }
 ]
 
 const currentScenario = ref('travel')
@@ -431,10 +431,10 @@ const startDemo = async () => {
   currentTool.value = -1
   integrationStep.value = -1
 
-  // 思考阶段
+  // Giai đoạn suy nghĩ
   await wait(1500)
 
-  // 工具执行阶段
+  // Giai đoạn thực thi tool
   currentPhase.value = 1
   const tools = currentData.value.tools
 
@@ -446,14 +446,14 @@ const startDemo = async () => {
 
   await wait(500)
 
-  // 结果整合阶段
+  // Giai đoạn tổng hợp
   currentPhase.value = 2
   for (let i = 0; i < 4; i++) {
     integrationStep.value = i
     await wait(600)
   }
 
-  // 最终输出
+  // Output cuối
   await wait(300)
   currentPhase.value = 3
 

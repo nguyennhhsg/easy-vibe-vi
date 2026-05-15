@@ -1,16 +1,16 @@
 <!--
   AgentFutureDemo.vue
-  Agent 未来方向：点选趋势，看看“会带来什么变化”和“现在就能做的准备”。
+  Hướng tương lai của Agent: click một xu hướng, xem "sẽ mang lại thay đổi gì" và "ngay bây giờ bạn có thể chuẩn bị gì".
 -->
 <template>
   <div class="future">
     <div class="header">
       <div>
         <div class="title">
-          Agent 的未来：更稳、更强、更协作
+          Tương lai của Agent: ổn định hơn, mạnh hơn, hợp tác hơn
         </div>
         <div class="subtitle">
-          点一个趋势，看它意味着什么。
+          Click một xu hướng để xem nó có ý nghĩa gì.
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
       <div class="grid">
         <div class="card">
           <div class="k">
-            会带来什么？
+            Sẽ mang lại điều gì?
           </div>
           <div class="v">
             {{ current.impact }}
@@ -44,7 +44,7 @@
         </div>
         <div class="card">
           <div class="k">
-            你现在能做什么准备？
+            Bây giờ bạn có thể chuẩn bị gì?
           </div>
           <div class="v">
             {{ current.prepare }}
@@ -61,31 +61,31 @@ import { ref } from 'vue'
 const trends = [
   {
     id: 'planning',
-    label: '更强规划',
-    desc: '把大目标拆成更合理的子任务，并能动态改计划。',
-    impact: '更少跑题、更少漏步骤，复杂任务成功率更高。',
-    prepare: '学会写“计划/检查点”，并把任务拆成可验收小块。'
+    label: 'Planning mạnh hơn',
+    desc: 'Chia mục tiêu lớn thành sub-task hợp lý hơn, và có thể đổi kế hoạch linh hoạt.',
+    impact: 'Ít lệch chủ đề hơn, ít sót bước hơn, tỷ lệ thành công của task phức tạp cao hơn.',
+    prepare: 'Học cách viết "kế hoạch/checkpoint", chia task thành các phần nhỏ có thể nghiệm thu.'
   },
   {
     id: 'memory',
-    label: '更好记忆',
-    desc: '长期记住偏好、事实与项目状态，跨任务复用。',
-    impact: '更像长期同事：越用越懂你，重复工作更少。',
-    prepare: '设计记忆结构：短期/长期/工作记忆，并做好隐私与脱敏。'
+    label: 'Bộ nhớ tốt hơn',
+    desc: 'Ghi nhớ lâu dài sở thích, sự kiện và trạng thái dự án, tái sử dụng xuyên task.',
+    impact: 'Giống như đồng nghiệp lâu năm: càng dùng càng hiểu bạn, ít việc lặp lại.',
+    prepare: 'Thiết kế cấu trúc bộ nhớ: ngắn hạn / dài hạn / working memory, kèm bảo mật và che dữ liệu nhạy cảm.'
   },
   {
     id: 'multi',
-    label: '多 Agent 协作',
-    desc: '多个角色并行处理，再由协调者合并输出。',
-    impact: '大任务并行化，质量更稳（研究/实现/评审分工）。',
-    prepare: '先把“角色边界”和“交付格式”定义清楚。'
+    label: 'Multi-Agent hợp tác',
+    desc: 'Nhiều vai trò xử lý song song, sau đó coordinator gộp output lại.',
+    impact: 'Task lớn được parallelize, chất lượng ổn định hơn (nghiên cứu / hiện thực hóa / review chia việc).',
+    prepare: 'Định nghĩa rõ "ranh giới vai trò" và "format bàn giao" trước.'
   },
   {
     id: 'safety',
-    label: '更强安全护栏',
-    desc: '更细的权限、确认与审计，降低工具滥用风险。',
-    impact: '更容易上线到真实业务场景，减少事故。',
-    prepare: '默认开启：最大步数、预算上限、危险操作确认、沙箱。'
+    label: 'Guardrails an toàn mạnh hơn',
+    desc: 'Phân quyền, xác nhận và audit chi tiết hơn, giảm rủi ro lạm dụng tool.',
+    impact: 'Dễ đưa lên môi trường nghiệp vụ thật hơn, giảm sự cố.',
+    prepare: 'Mặc định bật: số bước tối đa, giới hạn ngân sách, xác nhận thao tác nguy hiểm, sandbox.'
   }
 ]
 

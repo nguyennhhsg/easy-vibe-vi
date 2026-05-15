@@ -256,7 +256,7 @@ Trình duyệt ───────→ Lưu trữ đối tượng
 
 - Thực hiện hơi phức tạp, cần hiểu STS、cơ chế ký
 - Front-end cần xử lý tải lên phân đoạn, tiếp tục từ nơi gián đoạn v.v.
--跨域 (CORS) cần cấu hình
+- Cross-origin (CORS) cần cấu hình
 
 **Trường hợp phù hợp**：Tải lên tệp lớn、nội dung do người dùng tạo (UGC)、kinh doanh cần tải lên cùng lúc cao.
 
