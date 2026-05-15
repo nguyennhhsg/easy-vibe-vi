@@ -1,8 +1,8 @@
 <template>
   <div class="language-map-demo">
     <div class="demo-header">
-      <span class="title">编程语言分类</span>
-      <span class="subtitle">不同维度看语言</span>
+      <span class="title">Phân loại ngôn ngữ lập trình</span>
+      <span class="subtitle">Nhìn ngôn ngữ qua nhiều góc độ</span>
     </div>
 
     <div class="classification-tabs">
@@ -28,7 +28,7 @@
     </div>
 
     <div class="info-box">
-      <strong>选择建议：</strong>先学一门主流语言深入，理解编程思想，再学其他语言会容易很多。
+      <strong>Gợi ý lựa chọn:</strong> Hãy học sâu một ngôn ngữ phổ biến trước, nắm vững tư duy lập trình, sau đó học các ngôn ngữ khác sẽ dễ hơn nhiều.
     </div>
   </div>
 </template>
@@ -39,24 +39,24 @@ import { ref, computed } from 'vue'
 const activeTab = ref('type')
 
 const tabs = [
-  { key: 'type', label: '按类型系统' },
-  { key: 'level', label: '按抽象层级' },
-  { key: 'paradigm', label: '按编程范式' }
+  { key: 'type', label: 'Theo hệ kiểu' },
+  { key: 'level', label: 'Theo mức trừu tượng' },
+  { key: 'paradigm', label: 'Theo paradigm' }
 ]
 
 const classifications = {
   type: [
-    { name: '静态类型', desc: '变量类型在编译时确定', examples: ['Java', 'C++', 'Go', 'TypeScript'] },
-    { name: '动态类型', desc: '变量类型在运行时确定', examples: ['Python', 'JavaScript', 'Ruby'] }
+    { name: 'Kiểu tĩnh', desc: 'Kiểu biến được xác định lúc biên dịch', examples: ['Java', 'C++', 'Go', 'TypeScript'] },
+    { name: 'Kiểu động', desc: 'Kiểu biến được xác định lúc chạy', examples: ['Python', 'JavaScript', 'Ruby'] }
   ],
   level: [
-    { name: '低级语言', desc: '接近硬件，执行效率高', examples: ['C', '汇编'] },
-    { name: '高级语言', desc: '接近人类语言，开发效率高', examples: ['Python', 'Java', 'JavaScript'] }
+    { name: 'Ngôn ngữ bậc thấp', desc: 'Gần phần cứng, hiệu năng cao', examples: ['C', 'Assembly'] },
+    { name: 'Ngôn ngữ bậc cao', desc: 'Gần ngôn ngữ con người, năng suất cao', examples: ['Python', 'Java', 'JavaScript'] }
   ],
   paradigm: [
-    { name: '面向对象', desc: '以对象为中心组织代码', examples: ['Java', 'C++', 'Python'] },
-    { name: '函数式', desc: '以函数为中心，强调不可变', examples: ['Haskell', 'Elixir', 'Clojure'] },
-    { name: '多范式', desc: '支持多种编程风格', examples: ['Python', 'JavaScript', 'Rust'] }
+    { name: 'Hướng đối tượng', desc: 'Tổ chức code xoay quanh object', examples: ['Java', 'C++', 'Python'] },
+    { name: 'Hàm thuần', desc: 'Xoay quanh function, đề cao bất biến', examples: ['Haskell', 'Elixir', 'Clojure'] },
+    { name: 'Đa paradigm', desc: 'Hỗ trợ nhiều phong cách lập trình', examples: ['Python', 'JavaScript', 'Rust'] }
   ]
 }
 

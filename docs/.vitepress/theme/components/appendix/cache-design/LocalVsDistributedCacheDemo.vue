@@ -1,15 +1,15 @@
 <!--
   LocalVsDistributedCacheDemo.vue
-  本地缓存 vs 分布式缓存对比演示
+  Demo so sánh cache cục bộ vs cache phân tán
 -->
 <template>
   <div class="cache-comparison-demo">
     <div class="header">
       <div class="title">
-        本地缓存 vs 分布式缓存
+        Cache cục bộ vs Cache phân tán
       </div>
       <div class="subtitle">
-        对比两种缓存架构的性能和特点
+        So sánh hiệu năng và đặc điểm của hai kiểu kiến trúc cache
       </div>
     </div>
 
@@ -18,21 +18,21 @@
       <div class="cache-side local">
         <div class="side-header">
           <div class="title">
-            本地缓存 (Local Cache)
+            Cache cục bộ (Local Cache)
           </div>
           <div class="tag">
-            进程内
+            Trong process
           </div>
         </div>
 
         <div class="architecture">
           <div class="app-instance">
             <div class="instance-label">
-              应用实例 1
+              Application instance 1
             </div>
             <div class="cache-box">
               <div class="cache-label">
-                缓存
+                Cache
               </div>
               <div class="cache-data">
                 <div
@@ -48,11 +48,11 @@
 
           <div class="app-instance">
             <div class="instance-label">
-              应用实例 2
+              Application instance 2
             </div>
             <div class="cache-box">
               <div class="cache-label">
-                缓存
+                Cache
               </div>
               <div class="cache-data">
                 <div
@@ -70,7 +70,7 @@
         <div class="metrics">
           <div class="metric">
             <div class="metric-label">
-              响应时间
+              Thời gian phản hồi
             </div>
             <div class="metric-value fast">
               ~1 ms
@@ -78,7 +78,7 @@
           </div>
           <div class="metric">
             <div class="metric-label">
-              容量
+              Dung lượng
             </div>
             <div class="metric-value">
               ~1 GB
@@ -86,10 +86,10 @@
           </div>
           <div class="metric">
             <div class="metric-label">
-              一致性
+              Tính nhất quán
             </div>
             <div class="metric-value warning">
-              低
+              Thấp
             </div>
           </div>
         </div>
@@ -97,24 +97,24 @@
         <div class="pros-cons">
           <div class="pros">
             <div class="list-title">
-              ✅ 优点
+              ✅ Ưu điểm
             </div>
             <div class="list-item">
-              极快（无网络开销）
+              Cực nhanh (không có overhead mạng)
             </div>
             <div class="list-item">
-              简单（内存 Map）
+              Đơn giản (Map trong bộ nhớ)
             </div>
           </div>
           <div class="cons">
             <div class="list-title">
-              ❌ 缺点
+              ❌ Nhược điểm
             </div>
             <div class="list-item">
-              容量受限
+              Dung lượng hạn chế
             </div>
             <div class="list-item">
-              实例间不一致
+              Không đồng nhất giữa các instance
             </div>
           </div>
         </div>
@@ -124,10 +124,10 @@
       <div class="cache-side distributed">
         <div class="side-header">
           <div class="title">
-            分布式缓存 (Distributed Cache)
+            Cache phân tán (Distributed Cache)
           </div>
           <div class="tag">
-            独立服务
+            Dịch vụ độc lập
           </div>
         </div>
 
@@ -135,24 +135,24 @@
           <div class="instances-row">
             <div class="app-instance-small">
               <div class="instance-label-small">
-                实例 1
+                Instance 1
               </div>
             </div>
             <div class="app-instance-small">
               <div class="instance-label-small">
-                实例 2
+                Instance 2
               </div>
             </div>
             <div class="app-instance-small">
               <div class="instance-label-small">
-                实例 3
+                Instance 3
               </div>
             </div>
           </div>
 
           <div class="network-layer">
             <div class="network-label">
-              网络
+              Mạng
             </div>
             <div class="network-arrows">
               ⬇️ ⬇️ ⬇️
@@ -161,7 +161,7 @@
 
           <div class="redis-cluster">
             <div class="cluster-label">
-              Redis 集群
+              Cluster Redis
             </div>
             <div class="redis-nodes">
               <div class="redis-node">
@@ -213,7 +213,7 @@
         <div class="metrics">
           <div class="metric">
             <div class="metric-label">
-              响应时间
+              Thời gian phản hồi
             </div>
             <div class="metric-value medium">
               ~5 ms
@@ -221,7 +221,7 @@
           </div>
           <div class="metric">
             <div class="metric-label">
-              容量
+              Dung lượng
             </div>
             <div class="metric-value">
               ~100 GB
@@ -229,10 +229,10 @@
           </div>
           <div class="metric">
             <div class="metric-label">
-              一致性
+              Tính nhất quán
             </div>
             <div class="metric-value good">
-              高
+              Cao
             </div>
           </div>
         </div>
@@ -240,24 +240,24 @@
         <div class="pros-cons">
           <div class="pros">
             <div class="list-title">
-              ✅ 优点
+              ✅ Ưu điểm
             </div>
             <div class="list-item">
-              容量可扩展
+              Dung lượng có thể mở rộng
             </div>
             <div class="list-item">
-              全局共享
+              Chia sẻ toàn cục
             </div>
           </div>
           <div class="cons">
             <div class="list-title">
-              ❌ 缺点
+              ❌ Nhược điểm
             </div>
             <div class="list-item">
-              网络延迟
+              Có độ trễ mạng
             </div>
             <div class="list-item">
-              需要维护
+              Cần bảo trì
             </div>
           </div>
         </div>
@@ -266,26 +266,26 @@
 
     <div class="interactive-demo">
       <div class="demo-title">
-        交互演示：写入和读取数据
+        Demo tương tác: ghi và đọc dữ liệu
       </div>
       <div class="demo-controls">
         <button
           class="demo-btn"
           @click="simulateWrite"
         >
-          写入数据
+          Ghi dữ liệu
         </button>
         <button
           class="demo-btn secondary"
           @click="simulateRead"
         >
-          读取数据
+          Đọc dữ liệu
         </button>
         <button
           class="demo-btn reset"
           @click="reset"
         >
-          重置
+          Đặt lại
         </button>
       </div>
 
@@ -334,8 +334,8 @@ const simulateWrite = () => {
 
   lastOperation.value = {
     icon: '✍️',
-    text: `写入 ${key}`,
-    detail: '本地缓存: 仅实例1有数据 | 分布式缓存: 所有实例共享'
+    text: `Ghi ${key}`,
+    detail: 'Cache cục bộ: Chỉ instance 1 có dữ liệu | Cache phân tán: Tất cả instance đều chia sẻ'
   }
 }
 
@@ -351,8 +351,8 @@ const simulateRead = () => {
 
   lastOperation.value = {
     icon: '🔍',
-    text: `读取 ${key}`,
-    detail: `本地缓存: 实例1${inLocal1 ? '✅' : '❌'} 实例2${inLocal2 ? '✅' : '❌'} | 分布式缓存: ${inRedis ? '✅' : '❌'}`
+    text: `Đọc ${key}`,
+    detail: `Cache cục bộ: Instance 1 ${inLocal1 ? '✅' : '❌'} Instance 2 ${inLocal2 ? '✅' : '❌'} | Cache phân tán: ${inRedis ? '✅' : '❌'}`
   }
 }
 

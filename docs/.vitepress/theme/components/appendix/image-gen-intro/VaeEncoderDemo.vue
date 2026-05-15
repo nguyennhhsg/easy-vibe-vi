@@ -1,42 +1,42 @@
 <!--
   VaeEncoderDemo.vue
-  VAE 编解码器演示组件
+  Component minh hoạ VAE Encoder/Decoder
 
-  用途：
-  展示 VAE 如何将高分辨率图像压缩到潜空间，以及如何从潜空间还原图像。
-  帮助用户理解 Latent Space 的概念。
+  Mục đích:
+  Trình bày VAE nén ảnh độ phân giải cao xuống latent space, và khôi phục ảnh từ latent space ra sao.
+  Giúp bạn hiểu khái niệm Latent Space.
 
-  交互功能：
-  - 编码/解码模式切换
-  - 可视化压缩过程
-  - 展示潜空间表示
-  - 对比原始图像和重建图像
+  Tương tác:
+  - Chuyển đổi chế độ encode/decode
+  - Trực quan hoá quá trình nén
+  - Hiển thị biểu diễn trong latent space
+  - So sánh ảnh gốc và ảnh tái tạo
 -->
 <template>
   <div class="vae-demo">
     <el-card shadow="never">
       <template #header>
         <div class="header-controls">
-          <span class="title">🔍 VAE 编解码器</span>
+          <span class="title">🔍 VAE Encoder/Decoder</span>
           <el-radio-group
             v-model="mode"
             size="small"
           >
             <el-radio-button label="encode">
-              <el-icon><ArrowRight /></el-icon> 编码 (Encode)
+              <el-icon><ArrowRight /></el-icon> Encode
             </el-radio-button>
             <el-radio-button label="decode">
-              <el-icon><ArrowLeft /></el-icon> 解码 (Decode)
+              <el-icon><ArrowLeft /></el-icon> Decode
             </el-radio-button>
           </el-radio-group>
         </div>
       </template>
 
       <div class="vae-flow">
-        <!-- 输入侧 -->
+        <!-- Phía đầu vào -->
         <div class="stage">
           <div class="stage-label">
-            {{ mode === 'encode' ? '原始图像' : '潜空间表示' }}
+            {{ mode === 'encode' ? 'Ảnh gốc' : 'Biểu diễn latent space' }}
           </div>
           <div class="stage-visual">
             <canvas
@@ -51,12 +51,12 @@
               size="small"
               type="info"
             >
-              {{ mode === 'encode' ? '512 × 512 × 3 = 786,432 数值' : '64 × 64 × 4 = 16,384 数值' }}
+              {{ mode === 'encode' ? '512 × 512 × 3 = 786,432 giá trị' : '64 × 64 × 4 = 16,384 giá trị' }}
             </el-tag>
           </div>
         </div>
 
-        <!-- 箭头 -->
+        <!-- Mũi tên -->
         <div class="arrow-stage">
           <el-icon
             class="flow-arrow"
@@ -69,15 +69,15 @@
               type="success"
               effect="dark"
             >
-              压缩率: 48×
+              Tỉ lệ nén: 48×
             </el-tag>
           </div>
         </div>
 
-        <!-- 输出侧 -->
+        <!-- Phía đầu ra -->
         <div class="stage">
           <div class="stage-label">
-            {{ mode === 'encode' ? '潜空间表示' : '重建图像' }}
+            {{ mode === 'encode' ? 'Biểu diễn latent space' : 'Ảnh tái tạo' }}
           </div>
           <div class="stage-visual">
             <canvas
@@ -92,19 +92,19 @@
               size="small"
               type="info"
             >
-              {{ mode === 'encode' ? '64 × 64 × 4 = 16,384 数值' : '512 × 512 × 3 = 786,432 数值' }}
+              {{ mode === 'encode' ? '64 × 64 × 4 = 16,384 giá trị' : '512 × 512 × 3 = 786,432 giá trị' }}
             </el-tag>
           </div>
         </div>
       </div>
 
-      <!-- 潜空间可视化 -->
+      <!-- Trực quan hoá latent space -->
       <div
         v-if="mode === 'encode'"
         class="latent-viz"
       >
         <div class="latent-title">
-          潜空间特征图 (4 个通道)
+          Bản đồ đặc trưng latent space (4 channel)
         </div>
         <div class="latent-channels">
           <div
@@ -120,11 +120,11 @@
 
       <div class="explanation">
         <el-alert
-          :title="mode === 'encode' ? '编码：图像 → 潜空间' : '解码：潜空间 → 图像'"
+          :title="mode === 'encode' ? 'Encode: Ảnh → Latent space' : 'Decode: Latent space → Ảnh'"
           :type="mode === 'encode' ? 'warning' : 'success'"
           :description="mode === 'encode'
-            ? 'VAE Encoder 将高维图像压缩到低维潜空间，保留关键语义信息，丢弃冗余细节。这就像把一本厚书浓缩成大纲。'
-            : 'VAE Decoder 从潜空间表示中重建图像。虽然无法完美还原每一个细节，但足以生成高质量的图像。这就像根据大纲重写一本书。'"
+            ? 'VAE Encoder nén ảnh nhiều chiều xuống latent space ít chiều, giữ lại thông tin ngữ nghĩa quan trọng và bỏ đi chi tiết dư thừa. Giống như cô đọng một cuốn sách dày thành dàn ý.'
+            : 'VAE Decoder tái tạo ảnh từ biểu diễn latent space. Tuy không thể khôi phục hoàn hảo mọi chi tiết, nhưng đủ để sinh ra ảnh chất lượng cao. Giống như viết lại một cuốn sách dựa trên dàn ý.'"
           show-icon
           :closable="false"
         />
@@ -133,8 +133,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>为什么需要 VAE？</strong>
-          直接在像素空间训练扩散模型计算量太大。通过 VAE 压缩到潜空间，计算效率提升约 48 倍，同时保持图像质量。
+          <strong>Tại sao cần VAE?</strong>
+          Huấn luyện diffusion model trực tiếp trong không gian pixel tốn quá nhiều tính toán. Nhờ nén xuống latent space qua VAE, hiệu suất tính toán tăng khoảng 48 lần mà vẫn giữ được chất lượng ảnh.
         </p>
       </div>
     </el-card>
@@ -149,27 +149,27 @@ const mode = ref('encode')
 const inputCanvas = ref(null)
 const outputCanvas = ref(null)
 
-// 绘制示例图像
+// Vẽ ảnh ví dụ
 const drawSampleImage = (canvas) => {
   const ctx = canvas.getContext('2d')
   const w = canvas.width
   const h = canvas.height
 
-  // 绘制一个风景图
-  // 天空
+  // Vẽ một bức tranh phong cảnh
+  // Bầu trời
   const skyGradient = ctx.createLinearGradient(0, 0, 0, h * 0.6)
   skyGradient.addColorStop(0, '#87CEEB')
   skyGradient.addColorStop(1, '#E0F7FA')
   ctx.fillStyle = skyGradient
   ctx.fillRect(0, 0, w, h * 0.6)
 
-  // 太阳
+  // Mặt trời
   ctx.beginPath()
   ctx.arc(w * 0.75, h * 0.2, w * 0.1, 0, Math.PI * 2)
   ctx.fillStyle = '#FFD700'
   ctx.fill()
 
-  // 山
+  // Núi
   ctx.fillStyle = '#4CAF50'
   ctx.beginPath()
   ctx.moveTo(0, h * 0.6)
@@ -180,11 +180,11 @@ const drawSampleImage = (canvas) => {
   ctx.lineTo(0, h)
   ctx.fill()
 
-  // 草地
+  // Bãi cỏ
   ctx.fillStyle = '#8BC34A'
   ctx.fillRect(0, h * 0.6, w, h * 0.4)
 
-  // 花朵
+  // Hoa
   const colors = ['#FF69B4', '#FFD700', '#FF6347', '#9370DB']
   for (let i = 0; i < 8; i++) {
     const x = (i * w * 0.12) + 20
@@ -196,18 +196,18 @@ const drawSampleImage = (canvas) => {
   }
 }
 
-// 绘制潜空间表示（抽象可视化）
+// Vẽ biểu diễn latent space (trực quan hoá trừu tượng)
 const drawLatentRepresentation = (canvas) => {
   const ctx = canvas.getContext('2d')
   const w = canvas.width
   const h = canvas.height
 
-  // 生成噪声纹理表示潜空间
+  // Sinh kết cấu noise đại diện cho latent space
   const imageData = ctx.createImageData(w, h)
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4
-      // 使用柏林噪声模拟潜空间特征
+      // Dùng Perlin noise mô phỏng đặc trưng latent space
       const value = Math.sin(x * 0.1) * Math.cos(y * 0.1) * 50 + 128
       imageData.data[i] = value + Math.random() * 30
       imageData.data[i + 1] = value + Math.random() * 30
@@ -218,7 +218,7 @@ const drawLatentRepresentation = (canvas) => {
   ctx.putImageData(imageData, 0, 0)
 }
 
-// 获取通道样式
+// Lấy style cho channel
 const getChannelStyle = (channel) => {
   const hues = [200, 120, 30, 280]
   return {
@@ -226,7 +226,7 @@ const getChannelStyle = (channel) => {
   }
 }
 
-// 更新显示
+// Cập nhật hiển thị
 const updateDisplay = () => {
   if (!inputCanvas.value || !outputCanvas.value) return
 

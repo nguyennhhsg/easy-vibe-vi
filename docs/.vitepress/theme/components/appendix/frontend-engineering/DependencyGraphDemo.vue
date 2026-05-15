@@ -2,8 +2,8 @@
   <div class="dependency-graph-demo">
     <div class="demo-header">
       <span class="icon">🕸️</span>
-      <span class="title">依赖图谱</span>
-      <span class="subtitle">模块依赖关系可视化</span>
+      <span class="title">Đồ thị phụ thuộc</span>
+      <span class="subtitle">Trực quan hóa mối quan hệ phụ thuộc giữa các module</span>
     </div>
 
     <div class="graph-container">
@@ -68,19 +68,19 @@
 
     <div class="legend">
       <div class="legend-item">
-        <span class="dot entry" />入口文件
+        <span class="dot entry" />Tệp entry
       </div>
       <div class="legend-item">
-        <span class="dot module" />模块
+        <span class="dot module" />Module
       </div>
       <div class="legend-item">
-        <span class="arrow">→</span>依赖关系
+        <span class="arrow">→</span>Quan hệ phụ thuộc
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>依赖图谱的作用：</strong>就像地图一样，帮助你理解模块之间是如何相互引用的。main.js 引用了 utils、components、api，而 components 又引用了 utils——这就是依赖链。
+      <strong>Vai trò của đồ thị phụ thuộc:</strong> Giống như một tấm bản đồ, giúp bạn hiểu các module tham chiếu lẫn nhau như thế nào. main.js tham chiếu utils, components, api, còn components lại tham chiếu utils — đó chính là chuỗi phụ thuộc.
     </div>
   </div>
 </template>

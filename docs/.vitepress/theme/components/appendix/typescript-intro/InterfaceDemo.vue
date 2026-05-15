@@ -1,15 +1,15 @@
 <script setup>
 import { ref } from 'vue'
 
-// 用户数据
+// Dữ liệu người dùng
 const user = ref({
   id: 1,
-  name: '张三',
-  email: 'zhangsan@example.com',
+  name: 'Nguyễn Văn A',
+  email: 'vana@example.com',
   age: 25
 })
 
-// 显示错误信息
+// Hiển thị thông báo lỗi
 const showError = ref(false)
 const errorMessage = ref('')
 
@@ -22,39 +22,39 @@ const setMessage = (msg, isError = false) => {
   }, 3000)
 }
 
-// 尝试添加错误类型的属性
+// Thử thêm thuộc tính với kiểu sai
 const addErrorProperty = () => {
   showError.value = true
-  errorMessage.value = '❌ TypeScript 错误：类型 "string" 不可分配给类型 "number"'
+  errorMessage.value = '❌ Lỗi TypeScript: Kiểu "string" không thể gán cho kiểu "number"'
   setTimeout(() => {
     showError.value = false
     errorMessage.value = ''
   }, 3000)
 }
 
-// 添加新用户
+// Tạo người dùng mới
 const addNewUser = () => {
   user.value = {
     id: 2,
-    name: '李四',
-    email: 'lisi@example.com',
+    name: 'Trần Thị B',
+    email: 'thib@example.com',
     age: 30
   }
-  setMessage('✅ 创建新用户成功！类型检查通过', false)
+  setMessage('✅ Tạo người dùng mới thành công! Kiểm tra kiểu đã qua', false)
 }
 
-// 修改用户年龄
+// Sửa tuổi người dùng
 const modifyAge = () => {
   user.value.age = user.value.age + 1
-  setMessage(`✅ 年龄更新为 ${user.value.age}`, false)
+  setMessage(`✅ Tuổi cập nhật thành ${user.value.age}`, false)
 }
 
-// 重置
+// Đặt lại
 const reset = () => {
   user.value = {
     id: 1,
-    name: '张三',
-    email: 'zhangsan@example.com',
+    name: 'Nguyễn Văn A',
+    email: 'vana@example.com',
     age: 25
   }
   errorMessage.value = ''
@@ -64,14 +64,14 @@ const reset = () => {
 
 <template>
   <div class="interface-demo">
-    <h3>🎯 Interface 接口演示</h3>
+    <h3>🎯 Demo Interface</h3>
 
     <div class="demo-container">
-      <!-- 接口定义 -->
+      <!-- Định nghĩa interface -->
       <div class="interface-definition">
         <div class="code-header">
           <span class="typescript-logo">TS</span>
-          <span>User Interface 定义</span>
+          <span>Định nghĩa User Interface</span>
         </div>
         <pre><code class="typescript">interface User {
   id: number
@@ -81,7 +81,7 @@ const reset = () => {
 }</code></pre>
       </div>
 
-      <!-- 用户对象展示 -->
+      <!-- Hiển thị đối tượng user -->
       <div class="user-display">
         <div class="user-card">
           <div class="card-header">
@@ -104,7 +104,7 @@ const reset = () => {
               <span class="type-badge">number</span>
             </div>
             <div class="detail-item">
-              <span class="label">年龄:</span>
+              <span class="label">Tuổi:</span>
               <span class="value">{{ user.age }}</span>
               <span class="type-badge">number</span>
             </div>
@@ -112,7 +112,7 @@ const reset = () => {
         </div>
       </div>
 
-      <!-- 错误消息显示 -->
+      <!-- Hiển thị thông báo lỗi -->
       <div
         v-if="errorMessage"
         :class="['message-box', showError ? 'error' : 'success']"
@@ -120,57 +120,57 @@ const reset = () => {
         {{ errorMessage }}
       </div>
 
-      <!-- 操作按钮 -->
+      <!-- Nút thao tác -->
       <div class="controls">
         <button
           class="btn-primary"
           @click="modifyAge"
         >
-          增加年龄
+          Tăng tuổi
         </button>
         <button
           class="btn-danger"
           @click="addErrorProperty"
         >
-          尝试赋值错误类型
+          Thử gán sai kiểu
         </button>
         <button
           class="btn-secondary"
           @click="addNewUser"
         >
-          创建新用户
+          Tạo người dùng mới
         </button>
         <button
           class="btn-ghost"
           @click="reset"
         >
-          重置
+          Đặt lại
         </button>
       </div>
 
-      <!-- 代码示例 -->
+      <!-- Ví dụ mã -->
       <div class="code-examples">
         <div class="example-item">
           <div class="example-header">
-            ✅ 正确使用
+            ✅ Dùng đúng
           </div>
           <pre><code class="typescript">const user: User = {
   id: 1,
-  name: "张三",
-  email: "zhangsan@example.com",
+  name: "Nguyễn Văn A",
+  email: "vana@example.com",
   age: 25
-} // ✅ 类型完全匹配</code></pre>
+} // ✅ Kiểu hoàn toàn khớp</code></pre>
         </div>
 
         <div class="example-item error">
           <div class="example-header">
-            ❌ 错误使用
+            ❌ Dùng sai
           </div>
           <pre><code class="typescript">const user: User = {
   id: 1,
-  name: "张三",
-  email: "zhangsan@example.com",
-  age: "25"  // ❌ 错误：age 应该是 number，不是 string
+  name: "Nguyễn Văn A",
+  email: "vana@example.com",
+  age: "25"  // ❌ Lỗi: age phải là number, không phải string
 }</code></pre>
         </div>
       </div>

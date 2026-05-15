@@ -1,26 +1,26 @@
 <!--
   ProductCacheDemo.vue
-  商品详情页缓存实战演示 - 完整的三级缓存系统
+  Demo thực chiến cache trang chi tiết sản phẩm - hệ thống cache ba cấp hoàn chỉnh
 -->
 <template>
   <div class="product-cache-demo">
     <div class="header">
       <div class="title">
-        商品详情页缓存系统实战
+        Thực chiến hệ thống cache trang chi tiết sản phẩm
       </div>
       <div class="subtitle">
-        完整的三级缓存架构 + 监控面板
+        Kiến trúc cache ba cấp đầy đủ + dashboard giám sát
       </div>
     </div>
 
     <div class="architecture-overview">
       <div class="overview-title">
-        系统架构
+        Kiến trúc hệ thống
       </div>
       <div class="architecture-diagram">
         <div class="layer client">
           <div class="layer-label">
-            客户端
+            Client
           </div>
           <div class="layer-icon">
             📱
@@ -34,12 +34,12 @@
           :class="{ hit: currentLevel === 1 }"
         >
           <div class="layer-label">
-            L1: 本地缓存 (Caffeine)
+            L1: Cache cục bộ (Caffeine)
           </div>
           <div class="layer-stats">
-            <div>容量: 1000</div>
+            <div>Dung lượng: 1000</div>
             <div>TTL: 30s</div>
-            <div>命中: {{ localHits }}</div>
+            <div>Hit: {{ localHits }}</div>
           </div>
         </div>
         <div class="arrow">
@@ -50,12 +50,12 @@
           :class="{ hit: currentLevel === 2 }"
         >
           <div class="layer-label">
-            L2: Redis 集群
+            L2: Cluster Redis
           </div>
           <div class="layer-stats">
-            <div>容量: 100万</div>
-            <div>TTL: 5min</div>
-            <div>命中: {{ redisHits }}</div>
+            <div>Dung lượng: 1 triệu</div>
+            <div>TTL: 5 phút</div>
+            <div>Hit: {{ redisHits }}</div>
           </div>
         </div>
         <div class="arrow">
@@ -66,11 +66,11 @@
           :class="{ hit: currentLevel === 3 }"
         >
           <div class="layer-label">
-            L3: MySQL 数据库
+            L3: Database MySQL
           </div>
           <div class="layer-stats">
-            <div>持久化存储</div>
-            <div>查询: {{ dbQueries }}</div>
+            <div>Lưu trữ bền vững</div>
+            <div>Truy vấn: {{ dbQueries }}</div>
           </div>
         </div>
       </div>
@@ -79,13 +79,13 @@
     <div class="demo-sections">
       <div class="section query-demo">
         <div class="section-title">
-          查询商品
+          Truy vấn sản phẩm
         </div>
         <div class="query-controls">
           <input
             v-model="productId"
             type="text"
-            placeholder="输入商品ID (如: P001)"
+            placeholder="Nhập ID sản phẩm (ví dụ: P001)"
             class="product-input"
           >
           <button
@@ -93,13 +93,13 @@
             :disabled="querying"
             @click="queryProduct"
           >
-            {{ querying ? '查询中...' : '查询' }}
+            {{ querying ? 'Đang truy vấn...' : 'Truy vấn' }}
           </button>
           <button
             class="reset-btn"
             @click="resetDemo"
           >
-            重置
+            Đặt lại
           </button>
         </div>
 
@@ -113,19 +113,19 @@
           </div>
           <div class="result-details">
             <div class="detail-item">
-              <span class="detail-label">商品ID:</span>
+              <span class="detail-label">ID sản phẩm:</span>
               <span class="detail-value">{{ queryResult.id }}</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">名称:</span>
+              <span class="detail-label">Tên:</span>
               <span class="detail-value">{{ queryResult.name }}</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">价格:</span>
+              <span class="detail-label">Giá:</span>
               <span class="detail-value">¥{{ queryResult.price }}</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">来源:</span>
+              <span class="detail-label">Nguồn:</span>
               <span
                 class="detail-value source"
                 :class="queryResult.sourceLevel"
@@ -134,7 +134,7 @@
               </span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">响应时间:</span>
+              <span class="detail-label">Thời gian phản hồi:</span>
               <span class="detail-value">{{ queryResult.responseTime }}ms</span>
             </div>
           </div>
@@ -145,7 +145,7 @@
           class="query-flow"
         >
           <div class="flow-title">
-            查询流程
+            Luồng truy vấn
           </div>
           <div class="flow-steps">
             <div
@@ -170,13 +170,13 @@
 
       <div class="section cache-monitor">
         <div class="section-title">
-          缓存监控
+          Giám sát cache
         </div>
 
         <div class="metrics-grid">
           <div class="metric-card">
             <div class="metric-label">
-              总请求数
+              Tổng số request
             </div>
             <div class="metric-value">
               {{ metrics.totalRequests }}
@@ -184,7 +184,7 @@
           </div>
           <div class="metric-card">
             <div class="metric-label">
-              本地缓存命中
+              Hit cache cục bộ
             </div>
             <div class="metric-value local">
               {{ localHits }}
@@ -192,7 +192,7 @@
           </div>
           <div class="metric-card">
             <div class="metric-label">
-              Redis命中
+              Hit Redis
             </div>
             <div class="metric-value redis">
               {{ redisHits }}
@@ -200,7 +200,7 @@
           </div>
           <div class="metric-card">
             <div class="metric-label">
-              数据库查询
+              Truy vấn database
             </div>
             <div class="metric-value db">
               {{ dbQueries }}
@@ -210,7 +210,7 @@
 
         <div class="hit-rate-display">
           <div class="rate-label">
-            整体命中率
+            Tỷ lệ hit tổng thể
           </div>
           <div class="rate-value">
             {{ overallHitRate }}%
@@ -222,29 +222,29 @@
             />
           </div>
           <div class="rate-target">
-            目标: > 90%
+            Mục tiêu: > 90%
           </div>
         </div>
 
         <div class="cache-stats-detail">
           <div class="stats-title">
-            详细统计
+            Thống kê chi tiết
           </div>
           <div class="stats-list">
             <div class="stat-item">
-              <span class="stat-label">本地缓存命中率:</span>
+              <span class="stat-label">Tỷ lệ hit cache cục bộ:</span>
               <span class="stat-value">{{ localHitRate }}%</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">Redis缓存命中率:</span>
+              <span class="stat-label">Tỷ lệ hit cache Redis:</span>
               <span class="stat-value">{{ redisHitRate }}%</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">平均响应时间:</span>
+              <span class="stat-label">Thời gian phản hồi trung bình:</span>
               <span class="stat-value">{{ avgResponseTime }}ms</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">数据库压力:</span>
+              <span class="stat-label">Áp lực database:</span>
               <span class="stat-value">{{ dbPressure }}%</span>
             </div>
           </div>
@@ -254,7 +254,7 @@
 
     <div class="features">
       <div class="feature-title">
-        核心特性
+        Đặc tính cốt lõi
       </div>
       <div class="feature-grid">
         <div class="feature-item">
@@ -262,10 +262,10 @@
             🛡️
           </div>
           <div class="feature-name">
-            多级缓存
+            Cache nhiều cấp
           </div>
           <div class="feature-desc">
-            本地缓存 + Redis 双层防护，减少 99% 数据库查询
+            Cache cục bộ + Redis, hai lớp bảo vệ, giảm 99% truy vấn database
           </div>
         </div>
         <div class="feature-item">
@@ -273,10 +273,10 @@
             🔒
           </div>
           <div class="feature-name">
-            防击穿
+            Chống breakdown
           </div>
           <div class="feature-desc">
-            互斥锁保护热点数据，避免并发查询数据库
+            Mutex lock bảo vệ dữ liệu hot, tránh truy vấn database đồng thời
           </div>
         </div>
         <div class="feature-item">
@@ -284,10 +284,10 @@
             🎯
           </div>
           <div class="feature-name">
-            防穿透
+            Chống penetration
           </div>
           <div class="feature-desc">
-            缓存空对象，防止查询不存在的商品
+            Cache object rỗng, ngăn truy vấn các sản phẩm không tồn tại
           </div>
         </div>
         <div class="feature-item">
@@ -295,10 +295,10 @@
             ⏰
           </div>
           <div class="feature-name">
-            随机 TTL
+            TTL ngẫu nhiên
           </div>
           <div class="feature-desc">
-            避免缓存雪崩，过期时间加随机值
+            Tránh cache avalanche, thêm giá trị ngẫu nhiên vào thời gian hết hạn
           </div>
         </div>
       </div>
@@ -306,41 +306,41 @@
 
     <div class="code-preview">
       <div class="code-title">
-        核心代码片段
+        Đoạn code cốt lõi
       </div>
-      <pre class="code-block"><code>// 三级缓存查询
+      <pre class="code-block"><code>// Truy vấn cache ba cấp
 public Product getProduct(String productId) {
-    // L1: 本地缓存
+    // L1: Cache cục bộ
     Product product = localCache.getIfPresent(productId);
     if (product != null) {
         metrics.localHits++;
         return product;
     }
 
-    // L2: Redis 缓存
+    // L2: Cache Redis
     product = redisTemplate.get("product:" + productId);
     if (product != null) {
-        localCache.put(productId, product);  // 回填
+        localCache.put(productId, product);  // back-fill
         metrics.redisHits++;
         return product;
     }
 
-    // L3: 数据库（加锁防击穿）
+    // L3: Database (lock để chống breakdown)
     synchronized(this) {
-        // 双重检查
+        // Double check
         product = redisTemplate.get("product:" + productId);
         if (product != null) return product;
 
-        // 查数据库
+        // Truy vấn database
         product = productMapper.selectById(productId);
         if (product == null) {
-            // 缓存空对象（防穿透）
+            // Cache object rỗng (chống penetration)
             redisTemplate.set("product:" + productId,
                 NULL_PRODUCT, 5, TimeUnit.MINUTES);
             return null;
         }
 
-        // 写入缓存（随机 TTL 防雪崩）
+        // Ghi vào cache (TTL ngẫu nhiên để chống avalanche)
         int ttl = 300 + ThreadLocalRandom.current().nextInt(-30, 30);
         redisTemplate.set("product:" + productId, product,
             ttl, TimeUnit.SECONDS);
@@ -430,8 +430,8 @@ const queryProduct = async () => {
   currentLevel.value = 1
   const localHit = Math.random() < 0.3
   flow.push({
-    level: 'L1: 本地缓存',
-    result: localHit ? '✅ 命中' : '❌ 未命中',
+    level: 'L1: Cache cục bộ',
+    result: localHit ? '✅ Hit' : '❌ Miss',
     time: 1,
     type: localHit ? 'hit' : 'miss'
   })
@@ -442,11 +442,11 @@ const queryProduct = async () => {
     queryFlow.value = flow
     queryResult.value = {
       icon: '⚡',
-      title: '本地缓存命中',
+      title: 'Hit cache cục bộ',
       id: products[id].id,
       name: products[id].name,
       price: products[id].price,
-      source: '本地缓存',
+      source: 'Cache cục bộ',
       sourceLevel: 'local',
       responseTime: 1
     }
@@ -461,7 +461,7 @@ const queryProduct = async () => {
   const redisHit = !localHit && Math.random() < 0.5 && exists
   flow.push({
     level: 'L2: Redis',
-    result: redisHit ? '✅ 命中' : '❌ 未命中',
+    result: redisHit ? '✅ Hit' : '❌ Miss',
     time: 5,
     type: redisHit ? 'hit' : 'miss'
   })
@@ -472,11 +472,11 @@ const queryProduct = async () => {
     queryFlow.value = flow
     queryResult.value = {
       icon: '🚀',
-      title: 'Redis缓存命中',
+      title: 'Hit cache Redis',
       id: products[id].id,
       name: products[id].name,
       price: products[id].price,
-      source: 'Redis缓存',
+      source: 'Cache Redis',
       sourceLevel: 'redis',
       responseTime: 6
     }
@@ -489,8 +489,8 @@ const queryProduct = async () => {
   await new Promise((resolve) => setTimeout(resolve, 500))
   currentLevel.value = 3
   flow.push({
-    level: 'L3: 数据库',
-    result: exists ? '✅ 查询成功' : '❌ 商品不存在',
+    level: 'L3: Database',
+    result: exists ? '✅ Truy vấn thành công' : '❌ Sản phẩm không tồn tại',
     time: 50,
     type: exists ? 'hit' : 'miss'
   })
@@ -502,22 +502,22 @@ const queryProduct = async () => {
   if (exists) {
     queryResult.value = {
       icon: '🗄️',
-      title: '数据库查询',
+      title: 'Truy vấn database',
       id: products[id].id,
       name: products[id].name,
       price: products[id].price,
-      source: 'MySQL 数据库',
+      source: 'Database MySQL',
       sourceLevel: 'database',
       responseTime: 56
     }
   } else {
     queryResult.value = {
       icon: '❌',
-      title: '商品不存在',
+      title: 'Sản phẩm không tồn tại',
       id: id,
       name: '-',
       price: '-',
-      source: '缓存空对象',
+      source: 'Cache object rỗng',
       sourceLevel: 'notfound',
       responseTime: 56
     }

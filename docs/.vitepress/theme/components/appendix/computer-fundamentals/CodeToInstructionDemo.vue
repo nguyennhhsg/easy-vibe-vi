@@ -1,7 +1,7 @@
 <template>
   <div class="code-to-instruction-demo">
-    <h4>🔗 从代码到指令：一行代码的翻译之旅</h4>
-    <p class="desc">点击每个阶段，看你写的代码如何一步步变成 CPU 能执行的指令</p>
+    <h4>🔗 Từ code đến lệnh: hành trình dịch một dòng code</h4>
+    <p class="desc">Bấm vào mỗi giai đoạn để xem code bạn viết được biến thành lệnh CPU như thế nào</p>
 
     <div class="example-selector">
       <button
@@ -42,11 +42,11 @@
     </div>
 
     <div class="key-insight">
-      <div class="insight-title">💡 关键理解</div>
+      <div class="insight-title">💡 Điểm cốt lõi</div>
       <div class="insight-text">
-        指令集就是 CPU 的「API」——它定义了 CPU 能听懂的所有命令。
-        编译器的工作就是把你写的高级语言「翻译」成这套 API 的调用序列。
-        不同的 CPU（x86、ARM）有不同的指令集，就像不同的服务有不同的 API。
+        Tập lệnh chính là "API" của CPU — nó định nghĩa mọi lệnh mà CPU có thể hiểu.
+        Việc của compiler là "dịch" ngôn ngữ bậc cao mà bạn viết thành chuỗi gọi của bộ API này.
+        CPU khác nhau (x86, ARM) có tập lệnh khác nhau, giống như các dịch vụ khác nhau thì có API khác nhau.
       </div>
     </div>
   </div>
@@ -63,28 +63,28 @@ const examples = [
     code: 'int a = 10 + 5;',
     stages: [
       {
-        name: '你写的代码',
+        name: 'Code bạn viết',
         content: 'int a = 10 + 5;',
         explain:
-          '这是你在编辑器里写的高级语言代码。对人类来说很好懂，但 CPU 完全看不懂——它不认识 int、也不知道 + 是什么。'
+          'Đây là code ngôn ngữ bậc cao bạn viết trong editor. Con người đọc rất dễ hiểu, nhưng CPU hoàn toàn không hiểu nổi — nó không biết int là gì, cũng không biết dấu + là gì.'
       },
       {
-        name: '编译器翻译成汇编',
-        content: 'MOV  R1, #10    ; 把 10 放入寄存器 R1\nMOV  R2, #5     ; 把 5 放入寄存器 R2\nADD  R3, R1, R2 ; R3 = R1 + R2\nSTORE R3, [a]   ; 把结果存到变量 a 的内存地址',
+        name: 'Compiler dịch sang Assembly',
+        content: 'MOV  R1, #10    ; Đưa 10 vào thanh ghi R1\nMOV  R2, #5     ; Đưa 5 vào thanh ghi R2\nADD  R3, R1, R2 ; R3 = R1 + R2\nSTORE R3, [a]   ; Lưu kết quả vào địa chỉ của biến a',
         explain:
-          '编译器把一行高级代码拆成了 4 条汇编指令。每条指令只做一件最简单的事：搬数据、做加法、存结果。这就是 CPU 的「能力粒度」。'
+          'Compiler tách một dòng code bậc cao thành 4 lệnh assembly. Mỗi lệnh chỉ làm một việc đơn giản nhất: chuyển dữ liệu, cộng, lưu kết quả. Đó chính là "độ mịn năng lực" của CPU.'
       },
       {
-        name: '汇编器转成机器码',
+        name: 'Assembler chuyển thành machine code',
         content: '0001 0001 0000 1010  → MOV R1, #10\n0001 0010 0000 0101  → MOV R2, #5\n0010 0011 0001 0010  → ADD R3, R1, R2\n0100 0011 1000 0000  → STORE R3, [a]',
         explain:
-          '汇编器把每条汇编指令编码成二进制数字。操作码（前几位）告诉 CPU「做什么」，操作数（后面的位）告诉 CPU「对谁做」。这就是 CPU 真正执行的东西。'
+          'Assembler mã hóa mỗi lệnh assembly thành con số nhị phân. Opcode (vài bit đầu) bảo CPU "làm gì", còn operand (các bit sau) bảo CPU "làm với cái nào". Đây mới là thứ CPU thực sự chạy.'
       },
       {
-        name: 'CPU 逐条执行',
-        content: '时钟 1: 取指 → 译码 → 执行 MOV R1, #10\n时钟 2: 取指 → 译码 → 执行 MOV R2, #5\n时钟 3: 取指 → 译码 → 执行 ADD R3, R1, R2\n时钟 4: 取指 → 译码 → 执行 STORE R3, [a]',
+        name: 'CPU chạy từng lệnh',
+        content: 'Clock 1: Fetch → Decode → Execute MOV R1, #10\nClock 2: Fetch → Decode → Execute MOV R2, #5\nClock 3: Fetch → Decode → Execute ADD R3, R1, R2\nClock 4: Fetch → Decode → Execute STORE R3, [a]',
         explain:
-          'CPU 按顺序从内存取出每条指令，译码后执行。每个时钟周期处理一条指令（简化模型）。4 条指令执行完，变量 a 的值就是 15 了。'
+          'CPU lần lượt nạp lệnh từ bộ nhớ, giải mã rồi thực thi. Mỗi chu kỳ clock xử lý một lệnh (mô hình đơn giản). Sau 4 lệnh, giá trị của biến a sẽ là 15.'
       }
     ]
   },
@@ -92,28 +92,28 @@ const examples = [
     code: 'if (x > 0) y = 1;',
     stages: [
       {
-        name: '你写的代码',
+        name: 'Code bạn viết',
         content: 'if (x > 0) y = 1;',
         explain:
-          '一个简单的条件判断。人类一眼就懂，但 CPU 没有「if」的概念——它只会比较和跳转。'
+          'Một phép kiểm tra điều kiện đơn giản. Con người nhìn là hiểu ngay, nhưng CPU không có khái niệm "if" — nó chỉ biết so sánh và nhảy.'
       },
       {
-        name: '编译器翻译成汇编',
-        content: 'LOAD R1, [x]     ; 从内存读取 x 的值\nCMP  R1, #0       ; 比较 R1 和 0\nBLE  skip         ; 如果 ≤ 0，跳过下面\nMOV  R2, #1       ; R2 = 1\nSTORE R2, [y]     ; 把 1 存到 y\nskip:             ; 跳转目标',
+        name: 'Compiler dịch sang Assembly',
+        content: 'LOAD R1, [x]     ; Đọc giá trị x từ bộ nhớ\nCMP  R1, #0       ; So sánh R1 với 0\nBLE  skip         ; Nếu ≤ 0 thì nhảy qua\nMOV  R2, #1       ; R2 = 1\nSTORE R2, [y]     ; Lưu 1 vào y\nskip:             ; Nhãn nhảy đến',
         explain:
-          '编译器把 if 语句拆成了「比较 + 条件跳转」。CMP 指令比较两个值并设置标志位，BLE 根据标志位决定是否跳过赋值代码。这就是 CPU 实现条件逻辑的方式。'
+          'Compiler tách câu if thành "so sánh + nhảy có điều kiện". Lệnh CMP so sánh hai giá trị và đặt cờ trạng thái, BLE dựa vào cờ để quyết định có bỏ qua đoạn gán hay không. Đó là cách CPU triển khai logic điều kiện.'
       },
       {
-        name: '汇编器转成机器码',
-        content: '0011 0001 1000 0000  → LOAD R1, [x]\n0101 0001 0000 0000  → CMP R1, #0\n0110 0000 0000 0011  → BLE +3（跳过3条）\n0001 0010 0000 0001  → MOV R2, #1\n0100 0010 1000 0001  → STORE R2, [y]',
+        name: 'Assembler chuyển thành machine code',
+        content: '0011 0001 1000 0000  → LOAD R1, [x]\n0101 0001 0000 0000  → CMP R1, #0\n0110 0000 0000 0011  → BLE +3 (nhảy qua 3 lệnh)\n0001 0010 0000 0001  → MOV R2, #1\n0100 0010 1000 0001  → STORE R2, [y]',
         explain:
-          '注意 BLE 指令的操作数是「+3」——这是一个相对地址偏移，告诉 CPU 向前跳 3 条指令。这就是「相对寻址」的实际应用。'
+          'Để ý operand của lệnh BLE là "+3" — đó là độ lệch địa chỉ tương đối, bảo CPU nhảy về phía trước 3 lệnh. Đây là ứng dụng thực tế của "định địa chỉ tương đối".'
       },
       {
-        name: 'CPU 逐条执行',
-        content: '假设 x = 5（大于 0）:\n→ LOAD: 读取 x=5 到 R1\n→ CMP:  比较 5 > 0，设置标志位\n→ BLE:  条件不满足，不跳转\n→ MOV:  R2 = 1\n→ STORE: y = 1 ✅',
+        name: 'CPU chạy từng lệnh',
+        content: 'Giả sử x = 5 (lớn hơn 0):\n→ LOAD: Đọc x=5 vào R1\n→ CMP:  So sánh 5 > 0, đặt cờ\n→ BLE:  Điều kiện không thỏa, không nhảy\n→ MOV:  R2 = 1\n→ STORE: y = 1 ✅',
         explain:
-          '因为 x=5 大于 0，BLE 的条件不满足，所以 CPU 继续执行下面的赋值。如果 x=0，BLE 会跳过赋值，直接到 skip 标签处。'
+          'Vì x=5 lớn hơn 0 nên điều kiện BLE không thỏa, CPU tiếp tục chạy đoạn gán bên dưới. Nếu x=0 thì BLE sẽ nhảy qua đoạn gán, đi thẳng đến nhãn skip.'
       }
     ]
   }

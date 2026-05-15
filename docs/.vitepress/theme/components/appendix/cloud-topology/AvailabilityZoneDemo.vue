@@ -1,38 +1,38 @@
 <template>
   <div class="availability-zone-demo">
-    <!-- 控制面板 -->
+    <!-- Bảng điều khiển -->
     <div class="control-panel">
       <el-radio-group
         v-model="viewMode"
         size="small"
       >
         <el-radio-button label="normal">
-          正常运行
+          Hoạt động bình thường
         </el-radio-button>
         <el-radio-button label="az-failure">
-          单 AZ 故障
+          Sự cố 1 AZ
         </el-radio-button>
         <el-radio-button label="maintenance">
-          维护模式
+          Bảo trì
         </el-radio-button>
         <el-radio-button label="scaling">
-          弹性扩容
+          Auto scaling
         </el-radio-button>
       </el-radio-group>
 
       <el-switch
         v-model="showTraffic"
-        active-text="显示流量"
+        active-text="Hiện traffic"
         style="margin-left: 20px"
       />
     </div>
 
-    <!-- 架构图 -->
+    <!-- Sơ đồ kiến trúc -->
     <div class="architecture-container">
-      <!-- 流量入口层 -->
+      <!-- Lớp entry traffic -->
       <div class="layer entry-layer">
         <div class="layer-title">
-          🚪 流量入口层
+          🚪 Lớp entry traffic
         </div>
         <div class="entry-components">
           <div class="component dns">
@@ -40,7 +40,7 @@
               📖
             </div>
             <div class="component-name">
-              DNS 解析
+              DNS resolution
             </div>
           </div>
 
@@ -53,7 +53,7 @@
               🌐
             </div>
             <div class="component-name">
-              CDN 加速
+              CDN tăng tốc
             </div>
           </div>
 
@@ -66,16 +66,16 @@
               🛡️
             </div>
             <div class="component-name">
-              WAF 防护
+              WAF bảo vệ
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 流量分发层 -->
+      <!-- Lớp phân phối traffic -->
       <div class="layer distribution-layer">
         <div class="layer-title">
-          ⚖️ 流量分发层 (SLB)
+          ⚖️ Lớp phân phối traffic (SLB)
         </div>
         <div
           class="slb-cluster"
@@ -90,13 +90,13 @@
                 class="status-indicator"
                 :class="viewMode === 'az-failure' ? 'offline' : 'online'"
               />
-              <span class="instance-name">SLB-A (主)</span>
+              <span class="instance-name">SLB-A (primary)</span>
             </div>
             <div class="instance-meta">
-              可用区 A
+              AZ A
             </div>
 
-            <!-- 流量动画 -->
+            <!-- Animation traffic -->
             <div
               v-if="showTraffic && viewMode !== 'az-failure'"
               class="traffic-flow"
@@ -109,7 +109,7 @@
             v-if="viewMode === 'az-failure'"
             class="failover-arrow"
           >
-            <span class="failover-text">故障转移</span>
+            <span class="failover-text">Failover</span>
             <div class="arrow-line" />
           </div>
 
@@ -122,10 +122,10 @@
                 class="status-indicator"
                 :class="viewMode === 'az-failure' ? 'online' : 'standby'"
               />
-              <span class="instance-name">SLB-B (备)</span>
+              <span class="instance-name">SLB-B (standby)</span>
             </div>
             <div class="instance-meta">
-              可用区 B
+              AZ B
             </div>
 
             <div
@@ -138,10 +138,10 @@
         </div>
       </div>
 
-      <!-- 可用区层 -->
+      <!-- Lớp Availability Zone -->
       <div class="layer azs-layer">
         <div class="layer-title">
-          🏢 可用区层 (Multi-AZ)
+          🏢 Lớp AZ (Multi-AZ)
         </div>
         <div class="azs-grid">
           <div
@@ -183,7 +183,7 @@
               </div>
             </div>
 
-            <!-- 维护模式遮罩 -->
+            <!-- Lớp phủ bảo trì -->
             <div
               v-if="viewMode === 'maintenance' && az.id === 'az-a'"
               class="maintenance-overlay"
@@ -193,19 +193,19 @@
                   🔧
                 </div>
                 <div class="overlay-text">
-                  维护中
+                  Đang bảo trì
                 </div>
               </div>
             </div>
 
-            <!-- 弹性扩容动画 -->
+            <!-- Animation auto scaling -->
             <div
               v-if="viewMode === 'scaling'"
               class="scaling-indicator"
             >
               <div class="scaling-dot" />
               <div class="scaling-text">
-                扩容中
+                Đang scale
               </div>
             </div>
           </div>
@@ -213,27 +213,27 @@
       </div>
     </div>
 
-    <!-- 状态说明 -->
+    <!-- Chú thích trạng thái -->
     <div class="status-legend">
       <div class="legend-title">
-        状态说明：
+        Chú thích trạng thái:
       </div>
       <div class="legend-items">
         <div class="legend-item">
           <span class="legend-dot healthy" />
-          <span>健康运行</span>
+          <span>Healthy</span>
         </div>
         <div class="legend-item">
           <span class="legend-dot standby" />
-          <span>待机中</span>
+          <span>Standby</span>
         </div>
         <div class="legend-item">
           <span class="legend-dot degraded" />
-          <span>降级/故障</span>
+          <span>Degraded/Failed</span>
         </div>
         <div class="legend-item">
           <span class="legend-dot maintenance" />
-          <span>维护中</span>
+          <span>Đang bảo trì</span>
         </div>
       </div>
     </div>
@@ -249,30 +249,30 @@ const showTraffic = ref(false)
 const availabilityZones = [
   {
     id: 'az-a',
-    name: '可用区 A',
+    name: 'AZ A',
     resources: [
-      { type: 'ecs', name: 'ECS 实例', icon: '🖥️', count: 8 },
-      { type: 'rds', name: 'RDS 主库', icon: '🗄️', count: 1 },
-      { type: 'redis', name: 'Redis 主库', icon: '📦', count: 1 },
-      { type: 'slb', name: 'SLB 主', icon: '⚖️', count: 1 }
+      { type: 'ecs', name: 'ECS instance', icon: '🖥️', count: 8 },
+      { type: 'rds', name: 'RDS primary', icon: '🗄️', count: 1 },
+      { type: 'redis', name: 'Redis primary', icon: '📦', count: 1 },
+      { type: 'slb', name: 'SLB primary', icon: '⚖️', count: 1 }
     ]
   },
   {
     id: 'az-b',
-    name: '可用区 B',
+    name: 'AZ B',
     resources: [
-      { type: 'ecs', name: 'ECS 实例', icon: '🖥️', count: 6 },
-      { type: 'rds', name: 'RDS 备库', icon: '🗄️', count: 1 },
-      { type: 'redis', name: 'Redis 备库', icon: '📦', count: 1 },
-      { type: 'slb', name: 'SLB 备', icon: '⚖️', count: 1 }
+      { type: 'ecs', name: 'ECS instance', icon: '🖥️', count: 6 },
+      { type: 'rds', name: 'RDS standby', icon: '🗄️', count: 1 },
+      { type: 'redis', name: 'Redis standby', icon: '📦', count: 1 },
+      { type: 'slb', name: 'SLB standby', icon: '⚖️', count: 1 }
     ]
   },
   {
     id: 'az-c',
-    name: '可用区 C',
+    name: 'AZ C',
     resources: [
-      { type: 'ecs', name: 'ECS 实例', icon: '🖥️', count: 4 },
-      { type: 'slb', name: 'SLB 备', icon: '⚖️', count: 1 }
+      { type: 'ecs', name: 'ECS instance', icon: '🖥️', count: 4 },
+      { type: 'slb', name: 'SLB standby', icon: '⚖️', count: 1 }
     ]
   }
 ]
@@ -291,11 +291,11 @@ const getAzStatusClass = (az) => {
 const getAzStatusText = (az) => {
   switch (viewMode.value) {
     case 'az-failure':
-      return az.id === 'az-a' ? '故障中' : '接管中'
+      return az.id === 'az-a' ? 'Đang lỗi' : 'Đang takeover'
     case 'maintenance':
-      return az.id === 'az-a' ? '维护中' : '待机中'
+      return az.id === 'az-a' ? 'Đang bảo trì' : 'Standby'
     default:
-      return '正常运行'
+      return 'Hoạt động bình thường'
   }
 }
 </script>

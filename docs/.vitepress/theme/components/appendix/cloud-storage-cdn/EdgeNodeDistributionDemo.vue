@@ -11,7 +11,7 @@
         type="info"
         :closable="false"
       >
-        边缘节点分布演示组件占位符 - 待实现具体交互
+        Placeholder demo phân bố edge node - chờ triển khai chi tiết tương tác
       </el-alert>
     </div>
   </div>
@@ -20,8 +20,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('边缘节点分布演示')
-const description = ref('展示CDN边缘节点在全球的分布情况和调度策略')
+const title = ref('Demo phân bố edge node')
+const description = ref('Hiển thị phân bố edge node của CDN trên toàn cầu và chiến lược điều phối')
 </script>
 
 <style scoped>

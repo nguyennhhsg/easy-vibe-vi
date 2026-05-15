@@ -1,8 +1,8 @@
 <template>
   <div class="complete-adder-demo">
     <div class="demo-header">
-      <span class="title">完整加法器演示</span>
-      <span class="subtitle">从逻辑门到多位加法 ── 层层抽象，逐级封装</span>
+      <span class="title">Demo bộ cộng đầy đủ</span>
+      <span class="subtitle">Từ cổng logic đến cộng nhiều bit - trừu tượng và đóng gói theo từng lớp</span>
     </div>
 
     <div class="layer-tabs">
@@ -18,21 +18,21 @@
     </div>
 
     <div v-if="currentLayer === 'gates'" class="layer-panel">
-      <div class="panel-title">第一层：逻辑门</div>
-      <div class="panel-desc">最基础的运算单元，每个门执行一种布尔运算</div>
+      <div class="panel-title">Lớp 1: Cổng logic</div>
+      <div class="panel-desc">Đơn vị tính toán cơ bản nhất, mỗi cổng thực hiện một phép Boolean</div>
 
       <div class="terms-box">
         <div class="term-item">
-          <span class="term-name">AND (与门)</span>
-          <span class="term-desc">全 1 为 1</span>
+          <span class="term-name">AND (cổng AND)</span>
+          <span class="term-desc">Cả hai đều là 1 thì = 1</span>
         </div>
         <div class="term-item">
-          <span class="term-name">OR (或门)</span>
-          <span class="term-desc">有 1 为 1</span>
+          <span class="term-name">OR (cổng OR)</span>
+          <span class="term-desc">Có 1 là 1</span>
         </div>
         <div class="term-item">
-          <span class="term-name">XOR (异或门)</span>
-          <span class="term-desc">不同为 1</span>
+          <span class="term-name">XOR (cổng XOR)</span>
+          <span class="term-desc">Khác nhau thì = 1</span>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
         >
           <div class="gate-symbol">{{ gate.symbol }}</div>
           <div class="gate-info">
-            <span class="gate-name">{{ gate.name }} ({{ gate.cn }})</span>
+            <span class="gate-name">{{ gate.name }} - {{ gate.cn }}</span>
             <span class="gate-formula">{{ gate.formula }}</span>
           </div>
           <div class="gate-mini-truth">
@@ -61,25 +61,25 @@
       </div>
 
       <div class="info-box">
-        <strong>核心思想：</strong>
-        逻辑门把电压高低（0/1）变成布尔运算（真/假），是硬件实现数学的起点。
+        <strong>Ý tưởng cốt lõi:</strong>
+        Cổng logic biến mức điện áp cao/thấp (0/1) thành phép Boolean (đúng/sai), là điểm xuất phát để phần cứng làm toán.
       </div>
     </div>
 
     <div v-if="currentLayer === 'half'" class="layer-panel">
-      <div class="panel-title">第二层：半加器</div>
+      <div class="panel-title">Lớp 2: Bộ cộng bán phần</div>
       <div class="panel-desc">
-        用 XOR + AND 组合，实现 1 位加法（无进位输入）
+        Kết hợp XOR + AND để thực hiện phép cộng 1 bit (không có nhớ vào)
       </div>
 
       <div class="terms-box">
         <div class="term-item">
-          <span class="term-name">本位 (Sum)</span>
-          <span class="term-desc">当前位的计算结果，不考虑外部进位</span>
+          <span class="term-name">Sum - tổng bit</span>
+          <span class="term-desc">Kết quả tại bit hiện tại, chưa tính nhớ từ bên ngoài</span>
         </div>
         <div class="term-item">
-          <span class="term-name">进位 (Carry)</span>
-          <span class="term-desc">当两位都是 1 时，向更高位"借位"</span>
+          <span class="term-name">Carry - bit nhớ</span>
+          <span class="term-desc">Khi cả hai bit đều là 1, sinh ra bit nhớ lên bit cao hơn</span>
         </div>
       </div>
 
@@ -89,13 +89,13 @@
             <button class="toggle-btn" :class="{ on: haA }" @click="haA = !haA">
               {{ haA ? '1' : '0' }}
             </button>
-            <span class="label">输入 A</span>
+            <span class="label">Đầu vào A</span>
           </div>
           <div class="input-line">
             <button class="toggle-btn" :class="{ on: haB }" @click="haB = !haB">
               {{ haB ? '1' : '0' }}
             </button>
-            <span class="label">输入 B</span>
+            <span class="label">Đầu vào B</span>
           </div>
         </div>
 
@@ -144,18 +144,18 @@
           <div class="gate-box" :class="{ active: haSum }">
             <div class="gate-header">
               <span class="gate-name">XOR</span>
-              <span class="gate-cn">异或门</span>
+              <span class="gate-cn">Cổng XOR</span>
             </div>
             <div class="gate-formula">A XOR B</div>
-            <div class="gate-desc">不同为 1 → 本位</div>
+            <div class="gate-desc">Khác nhau → tổng bit</div>
           </div>
           <div class="gate-box" :class="{ active: haCarry }">
             <div class="gate-header">
               <span class="gate-name">AND</span>
-              <span class="gate-cn">与门</span>
+              <span class="gate-cn">Cổng AND</span>
             </div>
             <div class="gate-formula">A AND B</div>
-            <div class="gate-desc">全 1 为 1 → 进位</div>
+            <div class="gate-desc">Cả hai = 1 → bit nhớ</div>
           </div>
         </div>
 
@@ -184,61 +184,61 @@
 
         <div class="outputs">
           <div class="output-line" :class="{ active: haSum }">
-            <span class="label">本位</span>
+            <span class="label">Sum</span>
             <span class="out-val s-val">{{ haSum ? '1' : '0' }}</span>
           </div>
           <div class="output-line" :class="{ active: haCarry }">
-            <span class="label">进位</span>
+            <span class="label">Carry</span>
             <span class="out-val c-val">{{ haCarry ? '1' : '0' }}</span>
           </div>
         </div>
       </div>
 
       <div class="calculation-box">
-        <div class="calc-title">计算过程</div>
+        <div class="calc-title">Quá trình tính toán</div>
         <div class="calc-content">
           <div class="calc-row">
-            <span class="calc-label">输入：</span>
-            <span class="calc-value">A = {{ haA ? '1' : '0' }}，B = {{ haB ? '1' : '0' }}</span>
+            <span class="calc-label">Đầu vào:</span>
+            <span class="calc-value">A = {{ haA ? '1' : '0' }}, B = {{ haB ? '1' : '0' }}</span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">本位：</span>
+            <span class="calc-label">Sum:</span>
             <span class="calc-formula">A XOR B = {{ haA ? '1' : '0' }} XOR {{ haB ? '1' : '0' }} =
               <strong>{{ haSum ? '1' : '0' }}</strong></span>
-            <span class="calc-reason">（{{ haA !== haB ? '不同' : '相同' }}）</span>
+            <span class="calc-reason">({{ haA !== haB ? 'Khác nhau' : 'Giống nhau' }})</span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">进位：</span>
+            <span class="calc-label">Carry:</span>
             <span class="calc-formula">A AND B = {{ haA ? '1' : '0' }} AND {{ haB ? '1' : '0' }} =
               <strong>{{ haCarry ? '1' : '0' }}</strong></span>
-            <span class="calc-reason">（{{ haA && haB ? '全为 1' : '不全为 1' }}）</span>
+            <span class="calc-reason">({{ haA && haB ? 'Cả hai đều là 1' : 'Không phải cả hai đều là 1' }})</span>
           </div>
         </div>
       </div>
 
       <div class="info-box">
-        <strong>核心思想：</strong>
-        半加器用 XOR 算"本位和"，用 AND
-        算"进位"。它是最小的加法单元，但无法处理来自低位的进位。
+        <strong>Ý tưởng cốt lõi:</strong>
+        Bộ cộng bán phần dùng XOR để tính "tổng bit", dùng AND
+        để tính "bit nhớ". Đây là đơn vị cộng nhỏ nhất, nhưng không xử lý được nhớ từ bit thấp hơn.
       </div>
     </div>
 
     <div v-if="currentLayer === 'full'" class="layer-panel">
-      <div class="panel-title">第三层：全加器</div>
-      <div class="panel-desc">用两个半加器 + OR 门，处理进位输入</div>
+      <div class="panel-title">Lớp 3: Bộ cộng toàn phần</div>
+      <div class="panel-desc">Dùng 2 bộ cộng bán phần + cổng OR để xử lý nhớ vào</div>
 
       <div class="terms-box">
         <div class="term-item">
-          <span class="term-name">Cin (进位输入)</span>
-          <span class="term-desc">来自低位的进位信号</span>
+          <span class="term-name">Cin (nhớ vào)</span>
+          <span class="term-desc">Tín hiệu nhớ đến từ bit thấp hơn</span>
         </div>
         <div class="term-item">
-          <span class="term-name">Sum (本位)</span>
-          <span class="term-desc">三位异或的结果</span>
+          <span class="term-name">Sum (tổng bit)</span>
+          <span class="term-desc">Kết quả XOR của ba bit</span>
         </div>
         <div class="term-item">
-          <span class="term-name">Cout (进位输出)</span>
-          <span class="term-desc">向高位的进位信号</span>
+          <span class="term-name">Cout (nhớ ra)</span>
+          <span class="term-desc">Tín hiệu nhớ đi lên bit cao hơn</span>
         </div>
       </div>
 
@@ -374,53 +374,53 @@
       </div>
 
       <div class="calculation-box">
-        <div class="calc-title">计算过程</div>
+        <div class="calc-title">Quá trình tính toán</div>
         <div class="calc-content">
           <div class="calc-row">
-            <span class="calc-label">输入：</span>
+            <span class="calc-label">Đầu vào:</span>
             <span class="calc-value">A={{ faA ? '1' : '0' }} B={{ faB ? '1' : '0' }} Cin={{
                 faCin ? '1' : '0'
               }}</span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">中间：</span>
-            <span class="calc-formula">中间值 = A XOR B = <strong>{{ faXor1 ? '1' : '0' }}</strong></span>
+            <span class="calc-label">Trung gian:</span>
+            <span class="calc-formula">Trung gian = A XOR B = <strong>{{ faXor1 ? '1' : '0' }}</strong></span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">本位：</span>
-            <span class="calc-formula">本位 = 中间值 XOR Cin = <strong>{{ faSum ? '1' : '0' }}</strong></span>
+            <span class="calc-label">Sum:</span>
+            <span class="calc-formula">Sum = Trung gian XOR Cin = <strong>{{ faSum ? '1' : '0' }}</strong></span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">进位：</span>
-            <span class="calc-formula">进位 = (A AND B) OR (中间值 AND Cin) =
+            <span class="calc-label">Carry:</span>
+            <span class="calc-formula">Carry = (A AND B) OR (Trung gian AND Cin) =
               <strong>{{ faCarryOut ? '1' : '0' }}</strong></span>
           </div>
         </div>
       </div>
 
       <div class="info-box">
-        <strong>核心思想：</strong>
-        全加器 = 两个半加器 + 一个 OR
-        门。它能处理来自低位的进位，是构建多位加法器的基础。
+        <strong>Ý tưởng cốt lõi:</strong>
+        Bộ cộng toàn phần = 2 bộ cộng bán phần + 1 cổng OR.
+        Nó xử lý được nhớ từ bit thấp, là nền tảng để xây bộ cộng nhiều bit.
       </div>
     </div>
 
     <div v-if="currentLayer === 'multi'" class="layer-panel">
-      <div class="panel-title">第四层：4 位加法器</div>
-      <div class="panel-desc">4 个全加器级联，实现 0-15 范围的加法</div>
+      <div class="panel-title">Lớp 4: Bộ cộng 4 bit</div>
+      <div class="panel-desc">4 bộ cộng toàn phần nối tiếp, thực hiện phép cộng trong khoảng 0-15</div>
 
       <div class="terms-box">
         <div class="term-item">
-          <span class="term-name">级联</span>
-          <span class="term-desc">低位 Cout 连接高位 Cin</span>
+          <span class="term-name">Nối tiếp</span>
+          <span class="term-desc">Cout của bit thấp nối vào Cin của bit cao</span>
         </div>
         <div class="term-item">
-          <span class="term-name">行波</span>
-          <span class="term-desc">进位像波浪一样逐位传递</span>
+          <span class="term-name">Lan truyền</span>
+          <span class="term-desc">Bit nhớ lan truyền qua từng bit như sóng</span>
         </div>
         <div class="term-item">
-          <span class="term-name">溢出</span>
-          <span class="term-desc">最高位产生进位</span>
+          <span class="term-name">Tràn</span>
+          <span class="term-desc">Bit cao nhất sinh ra nhớ</span>
         </div>
       </div>
 
@@ -436,7 +436,7 @@
         </label>
         <span class="multi-op">=</span>
         <span class="multi-result">{{ multiResult }}</span>
-        <span v-if="multiOverflow" class="multi-overflow">溢出</span>
+        <span v-if="multiOverflow" class="multi-overflow">Tràn</span>
       </div>
 
       <div class="multi-binary">
@@ -463,58 +463,58 @@
           @mouseenter="multiHover = 3 - i"
           @mouseleave="multiHover = null"
         >
-          <span class="multi-stage-bit">位{{ 3 - i }}</span>
+          <span class="multi-stage-bit">Bit {{ 3 - i }}</span>
           <span class="multi-stage-io">{{ s.a }}+{{ s.b }}<span v-if="3 - i > 0">+{{ s.cin }}</span></span>
           <span class="multi-stage-out">={{ s.sum }}<span v-if="s.cout">C</span></span>
         </div>
       </div>
 
       <div class="calculation-box">
-        <div class="calc-title">计算过程</div>
+        <div class="calc-title">Quá trình tính toán</div>
         <div class="calc-content">
           <div class="calc-row">
-            <span class="calc-label">输入：</span>
-            <span class="calc-value">A = {{ clampedMultiA }} ({{ multiBitsA }})，B =
+            <span class="calc-label">Đầu vào:</span>
+            <span class="calc-value">A = {{ clampedMultiA }} ({{ multiBitsA }}), B =
               {{ clampedMultiB }} ({{ multiBitsB }})</span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">过程：</span>
-            <span class="calc-formula">从第 0 位开始，逐位计算本位和进位，进位向高位传递</span>
+            <span class="calc-label">Quá trình:</span>
+            <span class="calc-formula">Bắt đầu từ bit 0, tính lần lượt tổng và bit nhớ cho từng bit, bit nhớ lan truyền lên bit cao</span>
           </div>
           <div class="calc-row">
-            <span class="calc-label">结果：</span>
-            <span class="calc-formula">{{ multiBitsSum }} = <strong>{{ multiResult }}</strong>{{ multiOverflow ? ' (溢出)' : '' }}</span>
+            <span class="calc-label">Kết quả:</span>
+            <span class="calc-formula">{{ multiBitsSum }} = <strong>{{ multiResult }}</strong>{{ multiOverflow ? ' (tràn)' : '' }}</span>
           </div>
         </div>
       </div>
 
       <div class="info-box">
-        <strong>核心思想：</strong>
-        进位从最低位"波纹式"传递到最高位，这就是"行波进位加法器"。位数越多，延迟越大。
+        <strong>Ý tưởng cốt lõi:</strong>
+        Bit nhớ lan truyền "gợn sóng" từ bit thấp nhất lên bit cao nhất, đó là "bộ cộng nhớ lan truyền". Càng nhiều bit thì độ trễ càng lớn.
       </div>
     </div>
 
     <div class="summary-box">
-      <div class="summary-title">抽象层级总结</div>
+      <div class="summary-title">Tổng kết các lớp trừu tượng</div>
       <div class="summary-flow">
         <div class="summary-item">
           <span class="summary-icon">◇</span>
-          <span class="summary-name">逻辑门</span>
+          <span class="summary-name">Cổng logic</span>
         </div>
         <span class="summary-arrow">→</span>
         <div class="summary-item">
           <span class="summary-icon">⊞</span>
-          <span class="summary-name">半加器</span>
+          <span class="summary-name">Bộ cộng bán phần</span>
         </div>
         <span class="summary-arrow">→</span>
         <div class="summary-item">
           <span class="summary-icon">⊞⊞</span>
-          <span class="summary-name">全加器</span>
+          <span class="summary-name">Bộ cộng toàn phần</span>
         </div>
         <span class="summary-arrow">→</span>
         <div class="summary-item">
           <span class="summary-icon">🔲</span>
-          <span class="summary-name">多位加法器</span>
+          <span class="summary-name">Bộ cộng nhiều bit</span>
         </div>
         <span class="summary-arrow">→</span>
         <div class="summary-item">
@@ -533,35 +533,35 @@ const currentLayer = ref('gates')
 const gateActive = ref('XOR')
 
 const layers = [
-  { id: 'gates', name: '逻辑门' },
-  { id: 'half', name: '半加器' },
-  { id: 'full', name: '全加器' },
-  { id: 'multi', name: '多位加法' }
+  { id: 'gates', name: 'Cổng logic' },
+  { id: 'half', name: 'Bộ cộng bán phần' },
+  { id: 'full', name: 'Bộ cộng toàn phần' },
+  { id: 'multi', name: 'Cộng nhiều bit' }
 ]
 
 const gates = [
   {
     name: 'AND',
-    cn: '与门',
+    cn: 'Cổng AND',
     symbol: '&',
     formula: 'A AND B',
     truth: [0, 0, 0, 1]
   },
   {
     name: 'OR',
-    cn: '或门',
+    cn: 'Cổng OR',
     symbol: '≥1',
     formula: 'A OR B',
     truth: [0, 1, 1, 1]
   },
   {
     name: 'XOR',
-    cn: '异或门',
+    cn: 'Cổng XOR',
     symbol: '=1',
     formula: 'A XOR B',
     truth: [0, 1, 1, 0]
   },
-  { name: 'NOT', cn: '非门', symbol: '1', formula: '¬A', truth: [1, 0] }
+  { name: 'NOT', cn: 'Cổng NOT', symbol: '1', formula: '¬A', truth: [1, 0] }
 ]
 
 const haA = ref(false)

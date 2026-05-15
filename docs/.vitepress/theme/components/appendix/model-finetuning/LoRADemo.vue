@@ -1,8 +1,8 @@
 <template>
   <div class="lora-demo">
     <div class="demo-header">
-      <h4>LoRA 低秩适配原理演示</h4>
-      <p class="subtitle">理解 LoRA 如何用极少参数实现高效微调</p>
+      <h4>Demo nguyên lý LoRA (Low-Rank Adaptation)</h4>
+      <p class="subtitle">Hiểu cách LoRA fine-tuning hiệu quả với rất ít tham số</p>
     </div>
 
     <div class="tabs">
@@ -20,19 +20,19 @@
       <div class="matrix-visual">
         <div class="matrix-row">
           <div class="matrix-box frozen">
-            <div class="matrix-label">原始权重 W</div>
+            <div class="matrix-label">Trọng số gốc W</div>
             <div class="matrix-size">{{ matrixSize }}x{{ matrixSize }}</div>
             <div class="matrix-grid">
               <div v-for="i in 16" :key="i" class="cell frozen-cell"></div>
             </div>
-            <div class="param-count">{{ (matrixSize * matrixSize).toLocaleString() }} 参数</div>
-            <div class="status-badge frozen-badge">冻结不动</div>
+            <div class="param-count">{{ (matrixSize * matrixSize).toLocaleString() }} tham số</div>
+            <div class="status-badge frozen-badge">Đóng băng</div>
           </div>
 
           <div class="plus-sign">+</div>
 
           <div class="matrix-box trainable">
-            <div class="matrix-label">LoRA 适配器</div>
+            <div class="matrix-label">LoRA adapter</div>
             <div class="lora-decompose">
               <div class="small-matrix a-matrix">
                 <div class="sm-label">A</div>
@@ -50,26 +50,26 @@
                 </div>
               </div>
             </div>
-            <div class="param-count lora-count">{{ loraParams.toLocaleString() }} 参数</div>
-            <div class="status-badge train-badge">可训练</div>
+            <div class="param-count lora-count">{{ loraParams.toLocaleString() }} tham số</div>
+            <div class="status-badge train-badge">Huấn luyện được</div>
           </div>
         </div>
       </div>
 
       <div class="savings-bar">
-        <div class="savings-label">参数节省比例</div>
+        <div class="savings-label">Tỷ lệ tiết kiệm tham số</div>
         <div class="bar-track">
           <div class="bar-fill" :style="{ width: savingsPercent + '%' }"></div>
         </div>
-        <div class="savings-value">节省 {{ savingsPercent.toFixed(1) }}% 参数</div>
+        <div class="savings-value">Tiết kiệm {{ savingsPercent.toFixed(1) }}% tham số</div>
       </div>
 
       <div class="rank-control">
-        <label>LoRA 秩 (Rank): <strong>{{ loraRank }}</strong></label>
+        <label>LoRA rank: <strong>{{ loraRank }}</strong></label>
         <input type="range" min="1" max="64" v-model.number="loraRank" />
         <div class="rank-hints">
-          <span>秩越小 = 参数越少、训练越快</span>
-          <span>秩越大 = 表达力越强、效果越好</span>
+          <span>Rank nhỏ = ít tham số, train nhanh</span>
+          <span>Rank lớn = biểu diễn mạnh, chất lượng tốt hơn</span>
         </div>
       </div>
     </div>
@@ -79,17 +79,17 @@
       <div class="analogy-card">
         <div class="analogy-icon">🎨</div>
         <div class="analogy-text">
-          <p><strong>想象你有一幅巨大的油画（预训练模型）。</strong></p>
-          <p>传统微调就像把整幅画重新画一遍——费时费力，还可能破坏原作的精髓。</p>
-          <p>而 LoRA 的做法是：<strong>在原画上覆盖一层薄薄的透明贴纸</strong>，只在贴纸上做修改。原画完好无损，贴纸又轻又薄，随时可以换。</p>
+          <p><strong>Hãy tưởng tượng bạn có một bức tranh sơn dầu khổng lồ (mô hình pre-trained).</strong></p>
+          <p>Fine-tuning truyền thống giống như vẽ lại toàn bộ bức tranh — vừa mất công vừa có thể phá hỏng tinh túy của bản gốc.</p>
+          <p>Cách LoRA làm là: <strong>phủ lên bức tranh một lớp decal trong suốt mỏng</strong>, chỉ chỉnh sửa trên lớp decal. Tranh gốc còn nguyên, decal mỏng nhẹ, có thể thay bất cứ lúc nào.</p>
         </div>
       </div>
 
       <div class="comparison-table">
         <div class="comp-row header">
-          <div class="comp-cell">对比维度</div>
-          <div class="comp-cell">全量微调</div>
-          <div class="comp-cell highlight">LoRA 微调</div>
+          <div class="comp-cell">Tiêu chí</div>
+          <div class="comp-cell">Full fine-tuning</div>
+          <div class="comp-cell highlight">LoRA fine-tuning</div>
         </div>
         <div v-for="row in comparisonRows" :key="row.dim" class="comp-row">
           <div class="comp-cell dim">{{ row.dim }}</div>
@@ -124,9 +124,9 @@ const matrixSize = ref(4096)
 const loraRank = ref(8)
 
 const tabs = [
-  { id: 'principle', label: '核心原理' },
-  { id: 'analogy', label: '直觉类比' },
-  { id: 'usage', label: '实际应用' }
+  { id: 'principle', label: 'Nguyên lý cốt lõi' },
+  { id: 'analogy', label: 'Liên hệ trực quan' },
+  { id: 'usage', label: 'Ứng dụng thực tế' }
 ]
 
 const loraParams = computed(() => {
@@ -140,25 +140,25 @@ const savingsPercent = computed(() => {
 })
 
 const comparisonRows = [
-  { dim: '训练参数量', full: '100%（数十亿）', lora: '0.1%~1%（数百万）' },
-  { dim: '显存需求', full: '4x A100 80GB', lora: '1x RTX 4090 24GB' },
-  { dim: '训练时间', full: '数天~数周', lora: '数小时~1天' },
-  { dim: '存储开销', full: '完整模型副本（~14GB）', lora: '适配器文件（~几十MB）' },
-  { dim: '多任务切换', full: '需要多个完整模型', lora: '共享基座 + 切换适配器' },
-  { dim: '训练效果', full: '理论上限最高', lora: '接近全量微调（90%+）' }
+  { dim: 'Số tham số huấn luyện', full: '100% (hàng tỷ)', lora: '0.1%~1% (vài triệu)' },
+  { dim: 'Yêu cầu VRAM', full: '4x A100 80GB', lora: '1x RTX 4090 24GB' },
+  { dim: 'Thời gian huấn luyện', full: 'Vài ngày ~ vài tuần', lora: 'Vài giờ ~ 1 ngày' },
+  { dim: 'Dung lượng lưu trữ', full: 'Bản sao đầy đủ (~14GB)', lora: 'File adapter (~vài chục MB)' },
+  { dim: 'Chuyển task', full: 'Cần nhiều bản model riêng', lora: 'Dùng chung base + đổi adapter' },
+  { dim: 'Chất lượng', full: 'Trần lý thuyết cao nhất', lora: 'Gần full fine-tuning (90%+)' }
 ]
 
 const usageSteps = [
   {
-    title: '配置 LoRA 参数',
-    code: `lora_config = LoraConfig(\n  r=8,              # 秩\n  lora_alpha=16,    # 缩放因子\n  target_modules=["q_proj", "v_proj"],\n  lora_dropout=0.05\n)`
+    title: 'Cấu hình tham số LoRA',
+    code: `lora_config = LoraConfig(\n  r=8,              # rank\n  lora_alpha=16,    # hệ số scale\n  target_modules=["q_proj", "v_proj"],\n  lora_dropout=0.05\n)`
   },
   {
-    title: '应用到模型',
-    code: `model = get_peft_model(base_model, lora_config)\nmodel.print_trainable_parameters()\n# 可训练参数: 4,194,304 / 6,738,415,616 (0.06%)`
+    title: 'Áp dụng vào mô hình',
+    code: `model = get_peft_model(base_model, lora_config)\nmodel.print_trainable_parameters()\n# Tham số có thể train: 4,194,304 / 6,738,415,616 (0.06%)`
   },
   {
-    title: '训练完成后合并',
+    title: 'Merge sau khi huấn luyện xong',
     code: `merged_model = model.merge_and_unload()\nmerged_model.save_pretrained("my-model")`
   }
 ]

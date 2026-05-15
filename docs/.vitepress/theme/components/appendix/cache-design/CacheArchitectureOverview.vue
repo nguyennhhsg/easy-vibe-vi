@@ -2,13 +2,13 @@
   <div class="cache-architecture-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">多级缓存架构</span>
-      <span class="subtitle">像图书分馆一样层层拦截请求</span>
+      <span class="title">Kiến trúc cache nhiều cấp</span>
+      <span class="subtitle">Chặn request từng lớp như chuỗi thư viện chi nhánh</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">连锁图书馆</span>找书：先在桌面上找（CDN），没有就去房间书架（本地缓存），
-      再没有就去楼层的公共阅览室（Redis），最后才去总馆（数据库）。每一层都能拦截大量请求。
+      Hãy tưởng tượng bạn đang tìm sách trong <span class="highlight">chuỗi thư viện</span>: trước tiên tìm trên bàn làm việc (CDN), không có thì ra kệ sách trong phòng (cache cục bộ),
+      vẫn không có thì lên phòng đọc chung của tầng (Redis), cuối cùng mới đến thư viện tổng (database). Mỗi lớp đều có thể chặn lại lượng lớn request.
     </div>
 
     <div class="architecture-diagram">
@@ -17,7 +17,7 @@
           👤
         </div>
         <div class="layer-label">
-          用户请求
+          Yêu cầu của người dùng
         </div>
       </div>
 
@@ -31,19 +31,19 @@
       >
         <div class="layer-header">
           <span class="icon">🌐</span>
-          <span class="layer-name">CDN 缓存</span>
+          <span class="layer-name">CDN cache</span>
         </div>
         <div class="layer-details">
           <div class="detail-item">
-            <span class="label">位置</span>
-            <span class="value">全球边缘节点</span>
+            <span class="label">Vị trí</span>
+            <span class="value">Edge node toàn cầu</span>
           </div>
           <div class="detail-item">
-            <span class="label">内容</span>
-            <span class="value">静态资源</span>
+            <span class="label">Nội dung</span>
+            <span class="value">Tài nguyên tĩnh</span>
           </div>
           <div class="detail-item">
-            <span class="label">命中率</span>
+            <span class="label">Tỷ lệ hit</span>
             <span class="value highlight">{{ cdnHitRate }}%</span>
           </div>
         </div>
@@ -59,20 +59,20 @@
       >
         <div class="layer-header">
           <span class="icon">💻</span>
-          <span class="layer-name">本地缓存</span>
+          <span class="layer-name">Cache cục bộ</span>
         </div>
         <div class="layer-details">
           <div class="detail-item">
-            <span class="label">位置</span>
-            <span class="value">应用服务器内存</span>
+            <span class="label">Vị trí</span>
+            <span class="value">Bộ nhớ của application server</span>
           </div>
           <div class="detail-item">
-            <span class="label">内容</span>
-            <span class="value">热点数据</span>
+            <span class="label">Nội dung</span>
+            <span class="value">Dữ liệu hot</span>
           </div>
           <div class="detail-item">
-            <span class="label">速度</span>
-            <span class="value highlight">极快 (~1ms)</span>
+            <span class="label">Tốc độ</span>
+            <span class="value highlight">Cực nhanh (~1ms)</span>
           </div>
         </div>
       </div>
@@ -87,20 +87,20 @@
       >
         <div class="layer-header">
           <span class="icon">🗄️</span>
-          <span class="layer-name">分布式缓存</span>
+          <span class="layer-name">Cache phân tán</span>
         </div>
         <div class="layer-details">
           <div class="detail-item">
-            <span class="label">位置</span>
-            <span class="value">Redis 集群</span>
+            <span class="label">Vị trí</span>
+            <span class="value">Cluster Redis</span>
           </div>
           <div class="detail-item">
-            <span class="label">内容</span>
-            <span class="value">共享缓存数据</span>
+            <span class="label">Nội dung</span>
+            <span class="value">Dữ liệu cache chia sẻ</span>
           </div>
           <div class="detail-item">
-            <span class="label">容量</span>
-            <span class="value highlight">可扩展</span>
+            <span class="label">Dung lượng</span>
+            <span class="value highlight">Có thể mở rộng</span>
           </div>
         </div>
       </div>
@@ -112,16 +112,16 @@
       <div class="layer database-layer">
         <div class="layer-header">
           <span class="icon">🗃️</span>
-          <span class="layer-name">数据库</span>
+          <span class="layer-name">Database</span>
         </div>
         <div class="layer-details">
           <div class="detail-item">
-            <span class="label">位置</span>
+            <span class="label">Vị trí</span>
             <span class="value">MySQL / PostgreSQL</span>
           </div>
           <div class="detail-item">
-            <span class="label">速度</span>
-            <span class="value warning">较慢 (~100ms)</span>
+            <span class="label">Tốc độ</span>
+            <span class="value warning">Chậm hơn (~100ms)</span>
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>多级缓存通过在不同层次拦截请求，逐层过滤，最终只有极少数请求会打到数据库。就像漏斗一样，越往下流量越小。
+      <strong>Ý tưởng cốt lõi:</strong> Cache nhiều cấp chặn request ở các lớp khác nhau, lọc dần qua từng lớp, cuối cùng chỉ rất ít request đi đến database. Giống như một cái phễu, càng xuống dưới lưu lượng càng ít.
     </div>
   </div>
 </template>
@@ -153,10 +153,10 @@ const activeLayer = ref('local')
 const cdnHitRate = ref(95)
 
 const layers = [
-  { id: 'cdn', name: 'CDN 缓存' },
-  { id: 'local', name: '本地缓存' },
-  { id: 'distributed', name: '分布式缓存' },
-  { id: 'database', name: '数据库' }
+  { id: 'cdn', name: 'CDN cache' },
+  { id: 'local', name: 'Cache cục bộ' },
+  { id: 'distributed', name: 'Cache phân tán' },
+  { id: 'database', name: 'Database' }
 ]
 </script>
 

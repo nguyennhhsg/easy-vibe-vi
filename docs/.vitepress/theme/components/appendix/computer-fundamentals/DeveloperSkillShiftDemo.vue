@@ -1,13 +1,13 @@
 <template>
   <div class="skill-shift-demo">
     <div class="demo-header">
-      <span class="title">能力重要性变化</span>
-      <span class="subtitle">AI 时代，哪些能力更重要了？</span>
+      <span class="title">Sự thay đổi tầm quan trọng của các kỹ năng</span>
+      <span class="subtitle">Trong kỷ nguyên AI, những kỹ năng nào trở nên quan trọng hơn?</span>
     </div>
 
     <div class="comparison-grid">
       <div class="column">
-        <div class="column-title">传统时代更重要</div>
+        <div class="column-title">Quan trọng hơn trong thời kỳ truyền thống</div>
         <div class="skill-list">
           <div v-for="skill in beforeSkills" :key="skill.name" class="skill-item">
             <span class="skill-name">{{ skill.name }}</span>
@@ -20,7 +20,7 @@
       </div>
 
       <div class="column">
-        <div class="column-title">AI 时代更重要</div>
+        <div class="column-title">Quan trọng hơn trong kỷ nguyên AI</div>
         <div class="skill-list">
           <div v-for="skill in afterSkills" :key="skill.name" class="skill-item">
             <span class="skill-name">{{ skill.name }}</span>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="info-box">
-      <strong>关键洞察：</strong>AI 能帮你写代码，但判断力、架构思维、领域知识、调试能力是 AI 替代不了的。
+      <strong>Insight quan trọng:</strong> AI có thể giúp bạn viết code, nhưng khả năng phán đoán, tư duy kiến trúc, kiến thức lĩnh vực và khả năng debug là những thứ AI không thay thế được.
     </div>
   </div>
 </template>
@@ -43,16 +43,16 @@
 import { ref } from 'vue'
 
 const beforeSkills = ref([
-  { name: '语法记忆', level: 90, desc: '熟记 API 和语法细节' },
-  { name: '手写代码速度', level: 85, desc: '快速敲代码的能力' },
-  { name: '查文档能力', level: 80, desc: '快速找到 API 用法' }
+  { name: 'Ghi nhớ cú pháp', level: 90, desc: 'Thuộc API và chi tiết cú pháp' },
+  { name: 'Tốc độ gõ code', level: 85, desc: 'Khả năng viết code nhanh bằng tay' },
+  { name: 'Khả năng tra tài liệu', level: 80, desc: 'Tìm cách dùng API nhanh chóng' }
 ])
 
 const afterSkills = ref([
-  { name: '需求描述能力', level: 95, desc: '用自然语言准确描述需求' },
-  { name: '代码审核能力', level: 90, desc: '判断 AI 生成代码的对错' },
-  { name: '架构设计能力', level: 85, desc: '设计系统整体结构' },
-  { name: '问题定位能力', level: 80, desc: '出问题时知道从哪排查' }
+  { name: 'Mô tả yêu cầu', level: 95, desc: 'Diễn đạt yêu cầu chính xác bằng ngôn ngữ tự nhiên' },
+  { name: 'Review code', level: 90, desc: 'Đánh giá đúng/sai của code do AI sinh ra' },
+  { name: 'Thiết kế kiến trúc', level: 85, desc: 'Thiết kế cấu trúc tổng thể của hệ thống' },
+  { name: 'Định vị lỗi', level: 80, desc: 'Biết bắt đầu kiểm tra từ đâu khi có sự cố' }
 ])
 </script>
 

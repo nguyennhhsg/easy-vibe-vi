@@ -2,19 +2,19 @@
   <div class="cache-architecture-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">缓存架构</span>
-      <span class="subtitle">数据访问的"高速公路系统"</span>
+      <span class="title">Kiến trúc cache</span>
+      <span class="subtitle">"Hệ thống đường cao tốc" của truy cập dữ liệu</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">图书馆</span>找书：如果书桌上已经有你要的书（缓存），直接拿就行；
-      如果没有，就得去书架（数据库）找。缓存就是这样一张"书桌"，让常用数据触手可及。
+      Hãy tưởng tượng bạn đang tìm sách trong <span class="highlight">thư viện</span>: nếu cuốn sách bạn cần đã có sẵn trên bàn (cache), bạn chỉ việc lấy;
+      nếu không, bạn phải ra kệ sách (database) để tìm. Cache chính là chiếc "bàn làm việc" như thế, giúp dữ liệu thường dùng luôn trong tầm tay.
     </div>
 
     <div class="architecture-flow">
       <div class="flow-layer user">
         <div class="layer-label">
-          用户请求
+          Yêu cầu của người dùng
         </div>
         <div class="request-icon">
           👤
@@ -30,15 +30,15 @@
         :class="{ active: currentLayer === 'cache' }"
       >
         <div class="layer-label">
-          缓存层 (Cache)
+          Lớp cache (Cache)
         </div>
         <div class="cache-box">
           <div class="cache-icon">
             ⚡
           </div>
           <div class="cache-stats">
-            <div>命中率: {{ hitRate }}%</div>
-            <div>响应时间: ~1ms</div>
+            <div>Tỷ lệ hit: {{ hitRate }}%</div>
+            <div>Thời gian phản hồi: ~1ms</div>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
         ↓ <span
           v-if="showMiss"
           class="miss-text"
-        >未命中</span>
+        >Miss</span>
       </div>
 
       <div
@@ -55,15 +55,15 @@
         :class="{ active: currentLayer === 'database' }"
       >
         <div class="layer-label">
-          数据库层 (Database)
+          Lớp database (Database)
         </div>
         <div class="database-box">
           <div class="database-icon">
             🗄️
           </div>
           <div class="database-stats">
-            <div>响应时间: ~50ms</div>
-            <div>持久化存储</div>
+            <div>Thời gian phản hồi: ~50ms</div>
+            <div>Lưu trữ bền vững</div>
           </div>
         </div>
       </div>
@@ -71,12 +71,12 @@
 
     <div class="comparison">
       <div class="comparison-title">
-        访问速度对比
+        So sánh tốc độ truy cập
       </div>
       <div class="speed-bars">
         <div class="speed-item">
           <div class="label">
-            缓存命中
+            Cache hit
           </div>
           <div class="bar-container">
             <div
@@ -90,7 +90,7 @@
         </div>
         <div class="speed-item">
           <div class="label">
-            数据库查询
+            Truy vấn database
           </div>
           <div class="bar-container">
             <div
@@ -104,7 +104,7 @@
         </div>
       </div>
       <div class="conclusion">
-        缓存命中时，响应速度提升 <strong>{{ speedup }}x</strong>
+        Khi cache hit, tốc độ phản hồi tăng <strong>{{ speedup }}x</strong>
       </div>
     </div>
 
@@ -113,14 +113,14 @@
         class="demo-btn"
         @click="simulateRequest"
       >
-        模拟请求
+        Mô phỏng request
       </button>
       <div
         v-if="lastResult"
         class="demo-result"
       >
         <span :class="{ hit: lastResult.hit, miss: !lastResult.hit }">
-          {{ lastResult.hit ? '✅ 缓存命中' : '❌ 缓存未命中，访问数据库' }}
+          {{ lastResult.hit ? '✅ Cache hit' : '❌ Cache miss, truy cập database' }}
         </span>
         <span class="response-time">{{ lastResult.time }}ms</span>
       </div>
@@ -128,7 +128,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>缓存就像内存和数据库之间的"高速缓冲区"，用空间换时间，把热点数据放在更快的地方。
+      <strong>Ý tưởng cốt lõi:</strong> Cache giống như một "vùng đệm tốc độ cao" giữa bộ nhớ và database, dùng không gian đổi lấy thời gian, đặt dữ liệu hot ở nơi nhanh hơn.
     </div>
   </div>
 </template>

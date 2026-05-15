@@ -1,14 +1,14 @@
 <!--
   CFGScaleDemo.vue
-  CFG Scale 演示组件
+  Component minh hoạ CFG Scale
 
-  用途：
-  展示 Classifier-Free Guidance (CFG) Scale 如何影响生成结果，帮助用户理解提示词遵循度的概念。
+  Mục đích:
+  Trình bày Classifier-Free Guidance (CFG) Scale ảnh hưởng tới kết quả sinh ảnh ra sao, giúp bạn hiểu khái niệm mức độ tuân theo prompt.
 
-  交互功能：
-  - CFG Scale 滑动调节
-  - 实时对比不同 CFG 值的效果
-  - 可视化 CFG 对图像的影响
+  Tương tác:
+  - Trượt điều chỉnh CFG Scale
+  - So sánh thời gian thực hiệu ứng của các giá trị CFG khác nhau
+  - Trực quan hoá ảnh hưởng của CFG lên ảnh
 -->
 <template>
   <div class="cfg-scale-demo">
@@ -16,12 +16,12 @@
       <template #header>
         <div class="header-title">
           <el-icon><ScaleToOriginal /></el-icon>
-          <span>⚖️ CFG Scale：提示词遵循度</span>
+          <span>⚖️ CFG Scale: Mức độ tuân theo prompt</span>
         </div>
       </template>
 
       <div class="demo-content">
-        <!-- CFG 控制 -->
+        <!-- Điều khiển CFG -->
         <div class="cfg-control">
           <div class="cfg-slider-section">
             <div class="cfg-label">
@@ -41,9 +41,9 @@
               :step="0.5"
               show-stops
               :marks="{
-                1: '1\n(自由创作)',
-                7: '7\n(平衡)',
-                15: '15\n(严格遵循)'
+                1: '1\n(Tự do)',
+                7: '7\n(Cân bằng)',
+                15: '15\n(Tuân thủ chặt)'
               }"
             />
           </div>
@@ -61,12 +61,12 @@
           </div>
         </div>
 
-        <!-- 对比展示 -->
+        <!-- Khu vực so sánh -->
         <div class="comparison-display">
           <div class="comparison-item">
             <div class="item-label">
               <el-tag type="info">
-                无条件生成
+                Sinh không điều kiện
               </el-tag>
               <span class="cfg-value">CFG = 1</span>
             </div>
@@ -77,7 +77,7 @@
               class="comparison-canvas"
             />
             <div class="item-desc">
-              忽略提示词，自由发挥
+              Bỏ qua prompt, tự do sáng tạo
             </div>
           </div>
 
@@ -87,10 +87,10 @@
             </el-icon>
             <div class="guidance-formula">
               <div class="formula">
-                输出 = 无条件 + CFG × (有条件 - 无条件)
+                Output = Không-điều-kiện + CFG × (Có-điều-kiện - Không-điều-kiện)
               </div>
               <div class="formula-desc">
-                CFG 越大，提示词影响越强
+                CFG càng lớn, ảnh hưởng của prompt càng mạnh
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@
           <div class="comparison-item">
             <div class="item-label">
               <el-tag type="success">
-                当前设置
+                Cấu hình hiện tại
               </el-tag>
               <span class="cfg-value">CFG = {{ cfgScale }}</span>
             </div>
@@ -114,10 +114,10 @@
           </div>
         </div>
 
-        <!-- CFG 效果展示 -->
+        <!-- Khu vực hiệu ứng CFG -->
         <div class="cfg-effects">
           <div class="effects-title">
-            不同 CFG 值的效果对比
+            So sánh hiệu ứng các giá trị CFG khác nhau
           </div>
           <div class="effects-grid">
             <div
@@ -143,43 +143,43 @@
           </div>
         </div>
 
-        <!-- 推荐设置 -->
+        <!-- Cấu hình gợi ý -->
         <div class="recommendations">
           <div class="rec-title">
-            🎯 推荐设置
+            🎯 Cấu hình gợi ý
           </div>
           <div class="rec-grid">
             <div class="rec-item">
               <div class="rec-scenario">
-                创意探索
+                Khám phá sáng tạo
               </div>
               <div class="rec-value">
                 CFG 3-5
               </div>
               <div class="rec-desc">
-                给 AI 更多自由，适合艺术探索
+                Cho AI nhiều tự do hơn, hợp khám phá nghệ thuật
               </div>
             </div>
             <div class="rec-item">
               <div class="rec-scenario">
-                平衡模式
+                Chế độ cân bằng
               </div>
               <div class="rec-value">
                 CFG 7-9
               </div>
               <div class="rec-desc">
-                大多数场景的最佳选择
+                Lựa chọn tốt nhất cho đa số tình huống
               </div>
             </div>
             <div class="rec-item">
               <div class="rec-scenario">
-                精确控制
+                Kiểm soát chính xác
               </div>
               <div class="rec-value">
                 CFG 12-15
               </div>
               <div class="rec-desc">
-                严格遵循提示词，但可能过饱和
+                Tuân thủ prompt chặt, nhưng có thể quá bão hoà
               </div>
             </div>
           </div>
@@ -189,8 +189,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>CFG Scale 原理：</strong>
-          CFG (Classifier-Free Guidance) 控制生成结果对提示词的遵循程度。值越高，图像越符合提示词描述，但过高会导致图像过饱和或失真。
+          <strong>Nguyên lý CFG Scale:</strong>
+          CFG (Classifier-Free Guidance) kiểm soát mức độ kết quả sinh ra tuân theo prompt. Giá trị càng cao, ảnh càng bám sát mô tả của prompt, nhưng quá cao sẽ khiến ảnh bị quá bão hoà hoặc méo.
         </p>
       </div>
     </el-card>
@@ -207,19 +207,19 @@ const currentCanvas = ref(null)
 const effectCanvases = ref({})
 
 const cfgPresets = [
-  { label: '自由 (3)', value: 3 },
-  { label: '平衡 (7)', value: 7 },
-  { label: '严格 (12)', value: 12 }
+  { label: 'Tự do (3)', value: 3 },
+  { label: 'Cân bằng (7)', value: 7 },
+  { label: 'Nghiêm ngặt (12)', value: 12 }
 ]
 
 const cfgEffects = [
-  { value: 1, desc: '完全自由' },
-  { value: 3, desc: '创意优先' },
-  { value: 5, desc: '轻度引导' },
-  { value: 7, desc: '平衡' },
-  { value: 9, desc: '严格遵循' },
-  { value: 12, desc: '非常严格' },
-  { value: 15, desc: '过度饱和' }
+  { value: 1, desc: 'Hoàn toàn tự do' },
+  { value: 3, desc: 'Ưu tiên sáng tạo' },
+  { value: 5, desc: 'Dẫn dắt nhẹ' },
+  { value: 7, desc: 'Cân bằng' },
+  { value: 9, desc: 'Tuân thủ chặt' },
+  { value: 12, desc: 'Rất nghiêm' },
+  { value: 15, desc: 'Quá bão hoà' }
 ]
 
 const setEffectCanvas = (el, value) => {
@@ -228,12 +228,12 @@ const setEffectCanvas = (el, value) => {
   }
 }
 
-// 绘制目标图像
+// Vẽ ảnh mục tiêu
 const drawTargetImage = (ctx, width, height, cfgValue) => {
-  // 基础图像（提示词：一只蓝色的猫）
+  // Ảnh nền (prompt: một con mèo màu xanh)
   const baseColor = { r: 100, g: 150, b: 200 }
 
-  // 根据 CFG 值调整颜色饱和度
+  // Điều chỉnh độ bão hoà màu theo giá trị CFG
   const saturationBoost = Math.min((cfgValue - 1) / 7, 1.5)
   const color = {
     r: Math.min(255, baseColor.r + saturationBoost * 50),
@@ -241,24 +241,24 @@ const drawTargetImage = (ctx, width, height, cfgValue) => {
     b: Math.min(255, baseColor.b + saturationBoost * 30)
   }
 
-  // 背景
+  // Nền
   ctx.fillStyle = '#f0f0f0'
   ctx.fillRect(0, 0, width, height)
 
-  // 猫的形状
+  // Hình con mèo
   ctx.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`
 
-  // 身体
+  // Thân
   ctx.beginPath()
   ctx.ellipse(width / 2, height * 0.65, width * 0.25, height * 0.2, 0, 0, Math.PI * 2)
   ctx.fill()
 
-  // 头
+  // Đầu
   ctx.beginPath()
   ctx.arc(width / 2, height * 0.4, width * 0.18, 0, Math.PI * 2)
   ctx.fill()
 
-  // 耳朵
+  // Tai
   ctx.beginPath()
   ctx.moveTo(width * 0.35, height * 0.3)
   ctx.lineTo(width * 0.3, height * 0.15)
@@ -271,7 +271,7 @@ const drawTargetImage = (ctx, width, height, cfgValue) => {
   ctx.lineTo(width * 0.58, height * 0.25)
   ctx.fill()
 
-  // 眼睛
+  // Mắt
   ctx.fillStyle = '#fff'
   ctx.beginPath()
   ctx.ellipse(width * 0.45, height * 0.38, width * 0.05, height * 0.04, 0, 0, Math.PI * 2)
@@ -280,7 +280,7 @@ const drawTargetImage = (ctx, width, height, cfgValue) => {
   ctx.ellipse(width * 0.55, height * 0.38, width * 0.05, height * 0.04, 0, 0, Math.PI * 2)
   ctx.fill()
 
-  // 瞳孔
+  // Đồng tử
   ctx.fillStyle = '#000'
   ctx.beginPath()
   ctx.arc(width * 0.45, height * 0.38, width * 0.025, 0, Math.PI * 2)
@@ -289,7 +289,7 @@ const drawTargetImage = (ctx, width, height, cfgValue) => {
   ctx.arc(width * 0.55, height * 0.38, width * 0.025, 0, Math.PI * 2)
   ctx.fill()
 
-  // 添加噪声（模拟低 CFG 的自由度）
+  // Thêm noise (mô phỏng độ tự do của CFG thấp)
   if (cfgValue < 5) {
     const imageData = ctx.getImageData(0, 0, width, height)
     const noiseAmount = (5 - cfgValue) / 5 * 30
@@ -302,12 +302,12 @@ const drawTargetImage = (ctx, width, height, cfgValue) => {
     ctx.putImageData(imageData, 0, 0)
   }
 
-  // 添加过饱和效果（高 CFG）
+  // Thêm hiệu ứng quá bão hoà (CFG cao)
   if (cfgValue > 10) {
     const imageData = ctx.getImageData(0, 0, width, height)
     const oversaturation = (cfgValue - 10) / 5
     for (let i = 0; i < imageData.data.length; i += 4) {
-      // 增强对比度
+      // Tăng độ tương phản
       const avg = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3
       imageData.data[i] = Math.min(255, imageData.data[i] + (imageData.data[i] - avg) * oversaturation)
       imageData.data[i + 1] = Math.min(255, imageData.data[i + 1] + (imageData.data[i + 1] - avg) * oversaturation)
@@ -318,26 +318,26 @@ const drawTargetImage = (ctx, width, height, cfgValue) => {
 }
 
 const getCfgDescription = () => {
-  if (cfgScale.value <= 3) return '自由创作，AI 有更多发挥空间'
-  if (cfgScale.value <= 7) return '平衡模式，兼顾创意和遵循'
-  if (cfgScale.value <= 10) return '严格遵循提示词'
-  return '过度控制，可能导致图像失真'
+  if (cfgScale.value <= 3) return 'Tự do sáng tạo, AI có nhiều không gian phát huy'
+  if (cfgScale.value <= 7) return 'Chế độ cân bằng, vừa sáng tạo vừa tuân theo'
+  if (cfgScale.value <= 10) return 'Tuân thủ prompt nghiêm ngặt'
+  return 'Kiểm soát quá mức, ảnh có thể bị méo'
 }
 
 const updateDisplay = () => {
-  // 更新无条件生成
+  // Cập nhật sinh không điều kiện
   if (uncondCanvas.value) {
     const ctx = uncondCanvas.value.getContext('2d')
     drawTargetImage(ctx, 200, 200, 1)
   }
 
-  // 更新当前设置
+  // Cập nhật cấu hình hiện tại
   if (currentCanvas.value) {
     const ctx = currentCanvas.value.getContext('2d')
     drawTargetImage(ctx, 200, 200, cfgScale.value)
   }
 
-  // 更新效果网格
+  // Cập nhật lưới hiệu ứng
   cfgEffects.forEach(effect => {
     const canvas = effectCanvases.value[effect.value]
     if (canvas) {

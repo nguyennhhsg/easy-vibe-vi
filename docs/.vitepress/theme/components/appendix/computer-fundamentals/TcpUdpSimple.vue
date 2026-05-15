@@ -8,23 +8,23 @@
         <div class="card-header">
           <span class="card-icon">📨</span>
           <span class="card-title">TCP</span>
-          <span class="card-subtitle">可靠传输</span>
+          <span class="card-subtitle">Truyền tin cậy</span>
         </div>
         <div class="card-body">
           <div class="feature">
             <span class="feature-icon">✅</span>
-            <span>保证数据送达</span>
+            <span>Đảm bảo dữ liệu tới nơi</span>
           </div>
           <div class="feature">
             <span class="feature-icon">📞</span>
-            <span>需要先建立连接</span>
+            <span>Cần thiết lập kết nối trước</span>
           </div>
           <div class="feature">
             <span class="feature-icon">🐢</span>
-            <span>速度较慢</span>
+            <span>Tốc độ chậm hơn</span>
           </div>
         </div>
-        <div class="card-example">网页浏览、邮件、文件下载</div>
+        <div class="card-example">Duyệt web, email, tải file</div>
       </div>
 
       <div class="vs-badge">VS</div>
@@ -36,33 +36,33 @@
         <div class="card-header">
           <span class="card-icon">📮</span>
           <span class="card-title">UDP</span>
-          <span class="card-subtitle">快速传输</span>
+          <span class="card-subtitle">Truyền nhanh</span>
         </div>
         <div class="card-body">
           <div class="feature">
-            <span>速度极快</span>
+            <span>Tốc độ cực nhanh</span>
           </div>
           <div class="feature">
             <span class="feature-icon">🚀</span>
-            <span>不需要建立连接</span>
+            <span>Không cần thiết lập kết nối</span>
           </div>
           <div class="feature">
             <span class="feature-icon">❓</span>
-            <span>可能丢包</span>
+            <span>Có thể mất gói</span>
           </div>
         </div>
-        <div class="card-example">视频通话、在线游戏、直播</div>
+        <div class="card-example">Gọi video, game online, livestream</div>
       </div>
     </div>
 
     <div class="analogy">
-      <div class="analogy-title">📦 生活类比</div>
+      <div class="analogy-title">📦 Liên hệ thực tế</div>
       <div class="analogy-content">
         <div class="analogy-item">
-          <strong>TCP</strong> = 挂号信（要签收，丢了重发）
+          <strong>TCP</strong> = Thư bảo đảm (phải ký nhận, mất thì gửi lại)
         </div>
         <div class="analogy-item">
-          <strong>UDP</strong> = 平信（直接扔信箱，不管丢没丢）
+          <strong>UDP</strong> = Thư thường (thả vào hộp thư, không quan tâm thất lạc)
         </div>
       </div>
     </div>

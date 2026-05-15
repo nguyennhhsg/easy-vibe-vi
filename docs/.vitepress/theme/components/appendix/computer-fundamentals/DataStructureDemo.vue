@@ -1,8 +1,8 @@
 <template>
   <div class="data-structure-demo">
     <div class="demo-header">
-      <span class="title">数据结构：数据的"容器"</span>
-      <span class="subtitle">不同场景选择不同的存储方式</span>
+      <span class="title">Cấu trúc dữ liệu: "vật chứa" của dữ liệu</span>
+      <span class="subtitle">Mỗi tình huống chọn cách lưu trữ khác nhau</span>
     </div>
 
     <div class="demo-content">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="visual-content">
-          <div v-if="activeStructure === '数组'" class="array-visual">
+          <div v-if="activeStructure === 'Mảng'" class="array-visual">
             <div class="array-container">
               <div v-for="(item, i) in arrayData" :key="i" class="array-item">
                 <span class="index">{{ i }}</span>
@@ -32,11 +32,11 @@
               </div>
             </div>
             <div class="operation-hint">
-              访问 arr[2] = O(1)，插入/删除 = O(n)
+              Truy cập arr[2] = O(1), chèn/xóa = O(n)
             </div>
           </div>
 
-          <div v-else-if="activeStructure === '链表'" class="linked-visual">
+          <div v-else-if="activeStructure === 'Danh sách liên kết'" class="linked-visual">
             <div class="linked-container">
               <div v-for="(item, i) in linkedData" :key="i" class="linked-node">
                 <span class="node-value">{{ item.value }}</span>
@@ -44,40 +44,40 @@
               </div>
             </div>
             <div class="operation-hint">
-              访问第 n 个 = O(n)，插入/删除 = O(1)
+              Truy cập phần tử thứ n = O(n), chèn/xóa = O(1)
             </div>
           </div>
 
-          <div v-else-if="activeStructure === '栈'" class="stack-visual">
+          <div v-else-if="activeStructure === 'Stack'" class="stack-visual">
             <div class="stack-container">
               <div v-for="(item, i) in stackData" :key="i" class="stack-item">
                 {{ item }}
               </div>
-              <div class="stack-bottom">栈底</div>
+              <div class="stack-bottom">Đáy stack</div>
             </div>
             <div class="stack-ops">
-              <button class="op-btn" @click="pushStack">入栈 Push</button>
-              <button class="op-btn" @click="popStack">出栈 Pop</button>
+              <button class="op-btn" @click="pushStack">Push</button>
+              <button class="op-btn" @click="popStack">Pop</button>
             </div>
-            <div class="operation-hint">后进先出 (LIFO)，操作都是 O(1)</div>
+            <div class="operation-hint">Vào sau ra trước (LIFO), mọi thao tác O(1)</div>
           </div>
 
-          <div v-else-if="activeStructure === '队列'" class="queue-visual">
+          <div v-else-if="activeStructure === 'Queue'" class="queue-visual">
             <div class="queue-container">
-              <span class="queue-label">出 ←</span>
+              <span class="queue-label">Ra ←</span>
               <div v-for="(item, i) in queueData" :key="i" class="queue-item">
                 {{ item }}
               </div>
-              <span class="queue-label">← 入</span>
+              <span class="queue-label">← Vào</span>
             </div>
             <div class="queue-ops">
-              <button class="op-btn" @click="enqueue">入队</button>
-              <button class="op-btn" @click="dequeue">出队</button>
+              <button class="op-btn" @click="enqueue">Enqueue</button>
+              <button class="op-btn" @click="dequeue">Dequeue</button>
             </div>
-            <div class="operation-hint">先进先出 (FIFO)，操作都是 O(1)</div>
+            <div class="operation-hint">Vào trước ra trước (FIFO), mọi thao tác O(1)</div>
           </div>
 
-          <div v-else-if="activeStructure === '哈希表'" class="hash-visual">
+          <div v-else-if="activeStructure === 'Hash Table'" class="hash-visual">
             <div class="hash-container">
               <div v-for="(bucket, i) in hashData" :key="i" class="hash-bucket">
                 <span class="bucket-index">{{ i }}</span>
@@ -90,10 +90,10 @@
                 </div>
               </div>
             </div>
-            <div class="operation-hint">查找/插入/删除平均 O(1)，最坏 O(n)</div>
+            <div class="operation-hint">Tìm/chèn/xóa trung bình O(1), tệ nhất O(n)</div>
           </div>
 
-          <div v-else-if="activeStructure === '树'" class="tree-visual">
+          <div v-else-if="activeStructure === 'Cây'" class="tree-visual">
             <div class="tree-container">
               <div class="tree-level">
                 <div class="tree-node root">
@@ -123,47 +123,47 @@
                 </div>
               </div>
             </div>
-            <div class="operation-hint">查找/插入/删除 O(log n)，遍历 O(n)</div>
+            <div class="operation-hint">Tìm/chèn/xóa O(log n), duyệt O(n)</div>
           </div>
         </div>
       </div>
 
       <div class="complexity-table">
-        <div class="table-title">时间复杂度对比</div>
+        <div class="table-title">So sánh độ phức tạp thời gian</div>
         <table>
           <thead>
             <tr>
-              <th>操作</th>
-              <th>数组</th>
-              <th>链表</th>
-              <th>哈希表</th>
-              <th>树</th>
+              <th>Thao tác</th>
+              <th>Mảng</th>
+              <th>Linked List</th>
+              <th>Hash Table</th>
+              <th>Cây</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>访问</td>
+              <td>Truy cập</td>
               <td class="good">O(1)</td>
               <td class="bad">O(n)</td>
               <td class="good">O(1)</td>
               <td class="mid">O(log n)</td>
             </tr>
             <tr>
-              <td>查找</td>
+              <td>Tìm kiếm</td>
               <td class="bad">O(n)</td>
               <td class="bad">O(n)</td>
               <td class="good">O(1)</td>
               <td class="mid">O(log n)</td>
             </tr>
             <tr>
-              <td>插入</td>
+              <td>Chèn</td>
               <td class="bad">O(n)</td>
               <td class="good">O(1)</td>
               <td class="good">O(1)</td>
               <td class="mid">O(log n)</td>
             </tr>
             <tr>
-              <td>删除</td>
+              <td>Xóa</td>
               <td class="bad">O(n)</td>
               <td class="good">O(1)</td>
               <td class="good">O(1)</td>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>数据结构是数据的"容器"，不同的容器有不同的特点。选择合适的数据结构，能让程序效率提升几个数量级。
+      <strong>Ý tưởng cốt lõi:</strong> Cấu trúc dữ liệu là "vật chứa" của dữ liệu, mỗi loại có đặc điểm riêng. Chọn đúng cấu trúc dữ liệu có thể giúp chương trình nhanh hơn vài bậc.
     </div>
   </div>
 </template>
@@ -183,15 +183,15 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const activeStructure = ref('数组')
+const activeStructure = ref('Mảng')
 
 const structures = [
-  { name: '数组', desc: '连续内存，索引访问快' },
-  { name: '链表', desc: '节点相连，插入删除快' },
-  { name: '栈', desc: '后进先出，函数调用用' },
-  { name: '队列', desc: '先进先出，任务调度用' },
-  { name: '哈希表', desc: '键值对，查找最快' },
-  { name: '树', desc: '层次结构，排序搜索' }
+  { name: 'Mảng', desc: 'Bộ nhớ liên tục, truy cập theo index nhanh' },
+  { name: 'Danh sách liên kết', desc: 'Các node nối nhau, chèn/xóa nhanh' },
+  { name: 'Stack', desc: 'Vào sau ra trước, dùng cho gọi hàm' },
+  { name: 'Queue', desc: 'Vào trước ra trước, dùng cho lên lịch tác vụ' },
+  { name: 'Hash Table', desc: 'Cặp khóa-giá trị, tìm kiếm nhanh nhất' },
+  { name: 'Cây', desc: 'Cấu trúc phân cấp, sắp xếp và tìm kiếm' }
 ]
 
 const currentStructure = computed(() => {
@@ -222,12 +222,12 @@ const popStack = () => {
   }
 }
 
-const queueData = ref(['任务1', '任务2', '任务3'])
+const queueData = ref(['Tác vụ 1', 'Tác vụ 2', 'Tác vụ 3'])
 const queueCounter = ref(3)
 
 const enqueue = () => {
   queueCounter.value++
-  queueData.value.push(`任务${queueCounter.value}`)
+  queueData.value.push(`Tác vụ ${queueCounter.value}`)
 }
 
 const dequeue = () => {

@@ -1,50 +1,50 @@
 <template>
   <div class="data-encoding-basics-demo">
     <div class="demo-header">
-      <span class="title">数据编码基础</span>
-      <span class="subtitle">信息如何被表示和存储</span>
+      <span class="title">Cơ bản về mã hóa dữ liệu</span>
+      <span class="subtitle">Thông tin được biểu diễn và lưu trữ như thế nào</span>
     </div>
 
     <div class="encoding-intro">
-      计算机只能识别 <strong>0 和 1</strong>，所有数据都需要转换成二进制
+      Máy tính chỉ hiểu <strong>0 và 1</strong>, mọi dữ liệu đều phải chuyển sang nhị phân
     </div>
 
     <div class="bit-byte">
       <div class="bb-cards">
         <div class="bb-card">
-          <div class="bb-title">位 (Bit)</div>
-          <div class="bb-value">0 或 1</div>
-          <div class="bb-desc">最小数据单位</div>
+          <div class="bb-title">Bit</div>
+          <div class="bb-value">0 hoặc 1</div>
+          <div class="bb-desc">Đơn vị dữ liệu nhỏ nhất</div>
         </div>
         <div class="bb-card">
-          <div class="bb-title">字节 (Byte)</div>
-          <div class="bb-value">8 位</div>
-          <div class="bb-desc">常用存储单位</div>
+          <div class="bb-title">Byte</div>
+          <div class="bb-value">8 bit</div>
+          <div class="bb-desc">Đơn vị lưu trữ thông dụng</div>
         </div>
       </div>
     </div>
 
     <div class="encoding-examples">
-      <div class="example-title">不同数据的编码方式</div>
+      <div class="example-title">Cách mã hóa các loại dữ liệu khác nhau</div>
       <div class="example-grid">
         <div class="example-card">
           <div class="card-icon">🔢</div>
-          <div class="card-title">数字</div>
+          <div class="card-title">Số</div>
           <div class="card-encoding">
-            <div class="encoding-label">十进制</div>
+            <div class="encoding-label">Thập phân</div>
             <div class="encoding-value">25</div>
           </div>
           <div class="card-encoding">
-            <div class="encoding-label">二进制</div>
+            <div class="encoding-label">Nhị phân</div>
             <div class="encoding-value">00011001</div>
           </div>
         </div>
 
         <div class="example-card">
           <div class="card-icon">🔤</div>
-          <div class="card-title">字符</div>
+          <div class="card-title">Ký tự</div>
           <div class="card-encoding">
-            <div class="encoding-label">字符</div>
+            <div class="encoding-label">Ký tự</div>
             <div class="encoding-value">A</div>
           </div>
           <div class="card-encoding">
@@ -55,13 +55,13 @@
 
         <div class="example-card">
           <div class="card-icon">🎨</div>
-          <div class="card-title">颜色</div>
+          <div class="card-title">Màu sắc</div>
           <div class="card-encoding">
             <div class="encoding-label">RGB</div>
             <div class="encoding-value">255,0,0</div>
           </div>
           <div class="card-encoding">
-            <div class="encoding-label">十六进制</div>
+            <div class="encoding-label">Hexa</div>
             <div class="encoding-value">#FF0000</div>
           </div>
         </div>
@@ -69,35 +69,35 @@
     </div>
 
     <div class="encoding-standards">
-      <div class="standards-title">常见编码标准</div>
+      <div class="standards-title">Các chuẩn mã hóa phổ biến</div>
       <table class="standards-table">
         <thead>
           <tr>
-            <th>编码</th>
-            <th>说明</th>
-            <th>用途</th>
+            <th>Mã hóa</th>
+            <th>Mô tả</th>
+            <th>Dùng cho</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>ASCII</td>
-            <td>7 位，128 个字符</td>
-            <td>英文字符</td>
+            <td>7 bit, 128 ký tự</td>
+            <td>Ký tự tiếng Anh</td>
           </tr>
           <tr>
             <td>Unicode</td>
-            <td>统一码，全球字符</td>
-            <td>多语言文本</td>
+            <td>Mã hóa thống nhất, ký tự toàn cầu</td>
+            <td>Văn bản đa ngôn ngữ</td>
           </tr>
           <tr>
             <td>UTF-8</td>
-            <td>变长编码，1-4 字节</td>
-            <td>网页文本</td>
+            <td>Mã hóa độ dài thay đổi, 1-4 byte</td>
+            <td>Văn bản web</td>
           </tr>
           <tr>
             <td>Base64</td>
-            <td>二进制转文本</td>
-            <td>邮件、图片</td>
+            <td>Chuyển nhị phân thành văn bản</td>
+            <td>Email, ảnh</td>
           </tr>
         </tbody>
       </table>

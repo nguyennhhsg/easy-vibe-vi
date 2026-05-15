@@ -13,7 +13,7 @@
                 <el-icon :size="20">
                   <EditPen />
                 </el-icon>
-                <span>提示词 (Prompt)</span>
+                <span>Prompt</span>
               </div>
             </template>
             <div class="node-content">
@@ -21,7 +21,7 @@
                 type="info"
                 effect="plain"
               >
-                "一只可爱的猫"
+                "Một chú mèo dễ thương"
               </el-tag>
             </div>
           </el-card>
@@ -44,7 +44,7 @@
                 <el-icon :size="20">
                   <Microphone />
                 </el-icon>
-                <span>文本编码器</span>
+                <span>Text Encoder</span>
               </div>
             </template>
             <div class="node-content">
@@ -78,7 +78,7 @@
                 >
                   <Cpu />
                 </el-icon>
-                <span>生成模型</span>
+                <span>Mô hình sinh</span>
               </div>
             </template>
             <div class="node-content">
@@ -91,7 +91,7 @@
                   size="small"
                   effect="dark"
                 >
-                  去噪 (Denoise)
+                  Khử nhiễu (Denoise)
                 </el-tag>
               </div>
             </div>
@@ -115,7 +115,7 @@
                 <el-icon :size="20">
                   <View />
                 </el-icon>
-                <span>图像解码器</span>
+                <span>Image Decoder</span>
               </div>
             </template>
             <div class="node-content">
@@ -141,8 +141,8 @@
               </el-icon>
             </div>
             <div class="exp-text">
-              <h4>耳朵 (Text Encoder)</h4>
-              <p>负责"听懂"你的描述，把它翻译成计算机能理解的数学向量。</p>
+              <h4>Tai (Text Encoder)</h4>
+              <p>Lo việc "nghe hiểu" mô tả của bạn, dịch nó thành vector toán học mà máy tính hiểu được.</p>
             </div>
           </div>
         </el-col>
@@ -154,9 +154,9 @@
               </el-icon>
             </div>
             <div class="exp-text">
-              <h4>大脑 (UNet/DiT)</h4>
+              <h4>Bộ não (UNet/DiT)</h4>
               <p>
-                核心创造者。在潜空间(Latent Space)中通过预测噪声来构思画面。
+                Người sáng tạo cốt lõi. Phác hoạ khung cảnh trong latent space bằng cách dự đoán noise.
               </p>
             </div>
           </div>
@@ -169,8 +169,8 @@
               </el-icon>
             </div>
             <div class="exp-text">
-              <h4>眼睛 (VAE)</h4>
-              <p>负责"翻译"回图像。把大脑构思的模糊特征还原成高清像素图片。</p>
+              <h4>Đôi mắt (VAE)</h4>
+              <p>Lo việc "dịch" trở lại thành ảnh. Khôi phục đặc trưng mờ trong não thành ảnh pixel độ phân giải cao.</p>
             </div>
           </div>
         </el-col>

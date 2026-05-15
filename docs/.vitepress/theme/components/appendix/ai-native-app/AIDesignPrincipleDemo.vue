@@ -1,8 +1,8 @@
 <template>
   <div class="principle-demo">
     <div class="header">
-      <div class="title">AI 原生设计原则</div>
-      <div class="subtitle">点击卡片，深入了解每条设计原则</div>
+      <div class="title">Nguyên tắc thiết kế AI-native</div>
+      <div class="subtitle">Bấm vào card để xem chi tiết mỗi nguyên tắc</div>
     </div>
 
     <div class="principle-grid">
@@ -27,21 +27,21 @@
         <div class="detail-desc">{{ currentPrinciple.detail }}</div>
 
         <div class="example-section">
-          <div class="example-title">实践对比</div>
+          <div class="example-title">So sánh thực tiễn</div>
           <div class="compare-grid">
             <div class="compare-bad">
-              <div class="compare-label bad-label">❌ 反面示例</div>
+              <div class="compare-label bad-label">❌ Ví dụ phản diện</div>
               <div class="compare-text">{{ currentPrinciple.bad }}</div>
             </div>
             <div class="compare-good">
-              <div class="compare-label good-label">✅ 正确做法</div>
+              <div class="compare-label good-label">✅ Cách làm đúng</div>
               <div class="compare-text">{{ currentPrinciple.good }}</div>
             </div>
           </div>
         </div>
 
         <div class="checklist">
-          <div class="checklist-title">检查清单</div>
+          <div class="checklist-title">Checklist</div>
           <div
             v-for="(item, idx) in currentPrinciple.checklist"
             :key="idx"
@@ -66,61 +66,61 @@ const principles = [
   {
     id: 'graceful',
     icon: '🛡️',
-    name: '优雅降级',
-    brief: 'AI 失败时，系统仍然可用',
-    detail: 'AI 模型可能超时、返回错误、产生幻觉。优雅降级意味着：当 AI 不可用时，系统应该有兜底方案，而不是直接崩溃。这是 AI 原生应用与玩具项目的分水岭。',
-    bad: '模型 API 超时后，页面显示空白错误页，用户只能刷新重试。',
-    good: '模型超时后，显示缓存的上一次回答或推荐相关文档，同时后台自动重试。',
+    name: 'Graceful degradation',
+    brief: 'Khi AI lỗi, hệ thống vẫn dùng được',
+    detail: 'Mô hình AI có thể timeout, trả lỗi, sinh ảo giác. Graceful degradation nghĩa là khi AI không khả dụng, hệ thống có phương án dự phòng, không sập thẳng. Đây là ranh giới giữa ứng dụng AI-native và project đồ chơi.',
+    bad: 'Khi API mô hình timeout, trang hiện lỗi trắng, user chỉ còn cách refresh.',
+    good: 'Khi mô hình timeout, hiển thị câu trả lời cache trước đó hoặc gợi ý tài liệu liên quan, đồng thời tự retry phía sau.',
     checklist: [
-      '设置合理的 API 超时时间（通常 30-60s）',
-      '准备降级方案：缓存、规则引擎、人工转接',
-      '向用户透明地展示当前状态',
-      '记录失败日志用于后续优化'
+      'Đặt timeout API hợp lý (thường 30-60s)',
+      'Chuẩn bị phương án dự phòng: cache, rule engine, chuyển human',
+      'Hiển thị trạng thái minh bạch cho user',
+      'Ghi log lỗi để cải thiện sau này'
     ]
   },
   {
     id: 'human',
     icon: '🤝',
-    name: '人机协作',
-    brief: '关键决策由人类确认',
-    detail: 'AI 擅长生成和建议，但不应该在高风险场景中自主决策。人机协作（Human-in-the-Loop）模式让 AI 负责草稿和推荐，人类负责审核和确认。',
-    bad: 'AI 自动发送邮件给客户，内容未经人工审核，导致错误信息传播。',
-    good: 'AI 生成邮件草稿并高亮不确定的部分，用户审核修改后手动发送。',
+    name: 'Human-in-the-loop',
+    brief: 'Quyết định quan trọng do con người xác nhận',
+    detail: 'AI giỏi sinh nội dung và gợi ý, nhưng không nên tự quyết trong tình huống rủi ro cao. Mô hình Human-in-the-Loop để AI lo bản nháp và đề xuất, con người duyệt và xác nhận.',
+    bad: 'AI tự gửi email cho khách hàng, nội dung không qua duyệt, làm lan thông tin sai.',
+    good: 'AI sinh bản nháp email và bôi đậm chỗ không chắc, user duyệt và sửa rồi mới gửi tay.',
     checklist: [
-      '识别哪些操作是"高风险"的（发送、删除、支付）',
-      '高风险操作前必须有人工确认步骤',
-      'AI 输出标注置信度，低置信内容需人工复核',
-      '提供便捷的编辑和修改界面'
+      'Xác định thao tác nào là "rủi ro cao" (gửi, xóa, thanh toán)',
+      'Thao tác rủi ro cao phải có bước xác nhận của người',
+      'Output AI có gắn confidence, nội dung confidence thấp phải duyệt tay',
+      'Cung cấp giao diện chỉnh sửa thuận tiện'
     ]
   },
   {
     id: 'transparent',
     icon: '🔍',
-    name: '透明可解释',
-    brief: '让用户理解 AI 的推理过程',
-    detail: 'AI 不是黑盒魔法。用户需要知道 AI 为什么给出这个回答、依据了哪些信息、有多大把握。透明性建立信任，也帮助用户判断何时该相信 AI、何时该质疑。',
-    bad: 'AI 直接给出一个结论，没有任何解释或来源引用，用户无法判断可靠性。',
-    good: '回答附带推理过程、引用来源链接、置信度指示，用户可以追溯验证。',
+    name: 'Minh bạch và giải thích được',
+    brief: 'Cho user hiểu cách AI suy luận',
+    detail: 'AI không phải hộp đen ma thuật. User cần biết tại sao AI đưa ra câu trả lời, dựa vào thông tin gì, độ chắc chắn ra sao. Minh bạch xây dựng niềm tin và giúp user biết khi nào tin, khi nào nên đặt câu hỏi.',
+    bad: 'AI đưa kết luận thẳng, không giải thích, không trích nguồn, user không đánh giá được độ tin cậy.',
+    good: 'Câu trả lời kèm quá trình suy luận, link nguồn trích dẫn, chỉ số confidence — user có thể truy vết.',
     checklist: [
-      '展示 AI 的推理链路或思考过程',
-      '标注信息来源和引用',
-      '显示置信度或不确定性指标',
-      '提供"为什么这样回答"的解释入口'
+      'Hiển thị chuỗi suy luận hoặc quá trình tư duy của AI',
+      'Gắn nguồn và trích dẫn',
+      'Hiện chỉ số confidence hoặc mức độ không chắc chắn',
+      'Có chỗ giải thích "vì sao trả lời như vậy"'
     ]
   },
   {
     id: 'feedback',
     icon: '🔄',
-    name: '反馈闭环',
-    brief: '用户反馈驱动持续改进',
-    detail: '每一次用户交互都是改进的机会。通过收集用户对 AI 输出的评价（点赞/点踩、修改记录、追问模式），持续优化 Prompt、微调模型、改进检索策略。',
-    bad: 'AI 回答错误后，没有任何反馈渠道，同样的错误会反复出现。',
-    good: '用户可以标记错误回答，系统自动收集并用于优化 Prompt 和检索策略。',
+    name: 'Vòng phản hồi',
+    brief: 'Phản hồi của user thúc đẩy cải tiến liên tục',
+    detail: 'Mỗi tương tác là một cơ hội cải thiện. Thu thập đánh giá của user (like/dislike, lịch sử chỉnh sửa, pattern hỏi tiếp) để liên tục tối ưu prompt, fine-tune mô hình, cải tiến retrieval.',
+    bad: 'Khi AI trả lời sai, không có kênh phản hồi, lỗi tương tự cứ lặp lại.',
+    good: 'User có thể đánh dấu câu sai, hệ thống tự gom lại để tối ưu prompt và retrieval.',
     checklist: [
-      '提供简单的反馈机制（👍👎 按钮）',
-      '记录用户的修改和追问作为隐式反馈',
-      '定期分析反馈数据，优化 Prompt 模板',
-      '建立 A/B 测试机制验证改进效果'
+      'Cung cấp cơ chế phản hồi đơn giản (nút 👍👎)',
+      'Ghi nhận chỉnh sửa và hỏi tiếp như phản hồi ngầm',
+      'Định kỳ phân tích dữ liệu phản hồi để tối ưu prompt template',
+      'Có A/B test để xác minh hiệu quả cải tiến'
     ]
   }
 ]

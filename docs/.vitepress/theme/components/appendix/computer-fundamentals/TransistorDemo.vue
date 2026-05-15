@@ -1,11 +1,11 @@
 <template>
   <div class="transistor-demo">
-    <div class="demo-label">MOSFET 晶体管示意 ── 点击切换 Gate 电压</div>
+    <div class="demo-label">Sơ đồ transistor MOSFET ── bấm để chuyển điện áp Gate</div>
 
     <div class="schematic" @click="gateOn = !gateOn">
       <!-- Source terminal -->
       <div class="terminal-box source">
-        <span class="pin-label">源极<br /><span class="en">Source</span></span>
+        <span class="pin-label">Cực nguồn<br /><span class="en">Source</span></span>
         <div class="pin-wire" :class="{ active: gateOn }"></div>
       </div>
 
@@ -24,18 +24,18 @@
           <span v-else class="block-mark">✕</span>
         </div>
         <div class="channel-status">
-          {{ gateOn ? '导通 → 输出 1' : '断开 → 输出 0' }}
+          {{ gateOn ? 'Thông → xuất 1' : 'Ngắt → xuất 0' }}
         </div>
       </div>
 
       <!-- Drain terminal -->
       <div class="terminal-box drain">
         <div class="pin-wire" :class="{ active: gateOn }"></div>
-        <span class="pin-label">漏极<br /><span class="en">Drain</span></span>
+        <span class="pin-label">Cực thoát<br /><span class="en">Drain</span></span>
       </div>
     </div>
 
-    <div class="tap-hint">👆 点击切换 Gate 电压</div>
+    <div class="tap-hint">👆 Bấm để chuyển điện áp Gate</div>
   </div>
 </template>
 

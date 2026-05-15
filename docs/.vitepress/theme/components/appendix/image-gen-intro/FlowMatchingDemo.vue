@@ -7,7 +7,7 @@
           :disabled="isPlaying"
           @click="startRace"
         >
-          <span class="icon">{{ isPlaying ? 'Running...' : '🚀 开始比赛 (Start Race)' }}</span>
+          <span class="icon">{{ isPlaying ? 'Running...' : '🚀 Bắt đầu đua (Start Race)' }}</span>
         </button>
       </div>
 
@@ -15,7 +15,7 @@
         <!-- Track 1: Diffusion -->
         <div class="track">
           <div class="track-info">
-            <span class="track-name">Diffusion (迷宫模式)</span>
+            <span class="track-name">Diffusion (Chế độ mê cung)</span>
             <span class="step-count">{{ diffSteps }} Steps</span>
           </div>
           <div class="canvas-wrapper">
@@ -25,10 +25,10 @@
               height="100"
             />
             <div class="marker start">
-              噪声
+              Noise
             </div>
             <div class="marker end">
-              图像
+              Ảnh
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
         <!-- Track 2: Flow Matching -->
         <div class="track">
           <div class="track-info">
-            <span class="track-name">Flow Matching (直通模式)</span>
+            <span class="track-name">Flow Matching (Chế độ đi thẳng)</span>
             <span class="step-count highlight">{{ flowSteps }} Steps</span>
           </div>
           <div class="canvas-wrapper">
@@ -46,10 +46,10 @@
               height="100"
             />
             <div class="marker start">
-              噪声
+              Noise
             </div>
             <div class="marker end">
-              图像
+              Ảnh
             </div>
           </div>
         </div>
@@ -59,8 +59,8 @@
     <div class="info-bar">
       <span class="icon">💡</span>
       <span>
-        <strong>核心区别：</strong>
-        Diffusion 就像在走迷宫，虽然也能到终点，但绕了很多弯路（步数多）。Flow Matching 则是直接修了一条直线高速公路，所以 8 步就能走完别人 50 步的路。
+        <strong>Khác biệt cốt lõi:</strong>
+        Diffusion giống như đi mê cung, vẫn tới đích nhưng vòng vèo nhiều (nhiều bước). Flow Matching thì xây thẳng một đường cao tốc thẳng, nên 8 bước là đi xong quãng đường người khác mất 50 bước.
       </span>
     </div>
   </div>

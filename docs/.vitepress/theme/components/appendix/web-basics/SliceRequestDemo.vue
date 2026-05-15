@@ -1,21 +1,21 @@
 <!--
   SliceRequestDemo.vue
-  切图时代的请求数与加载时间演示
+  Demo số lượng request và thời gian tải trong thời đại cắt ảnh
 -->
 <template>
   <div class="slice-demo">
     <div class="header">
       <div class="title">
-        切图时代：请求数越多越慢
+        Thời đại cắt ảnh: Càng nhiều request càng chậm
       </div>
       <div class="subtitle">
-        调整切图数量，观察加载时间变化
+        Điều chỉnh số ảnh cắt, quan sát thời gian tải thay đổi
       </div>
     </div>
 
     <div class="controls">
       <label>
-        切图数量：<strong>{{ slices }}</strong> 张
+        Số ảnh cắt: <strong>{{ slices }}</strong> ảnh
       </label>
       <input
         v-model="slices"
@@ -29,14 +29,14 @@
           v-model="useSprite"
           type="checkbox"
         >
-        合并雪碧图 (Sprite)
+        Gộp thành sprite (Sprite)
       </label>
     </div>
 
     <div class="metrics">
       <div class="metric">
         <div class="label">
-          总请求数
+          Tổng số request
         </div>
         <div class="value">
           {{ totalRequests }}
@@ -44,7 +44,7 @@
       </div>
       <div class="metric">
         <div class="label">
-          预计加载时间
+          Thời gian tải dự kiến
         </div>
         <div class="value">
           {{ loadTime }} ms

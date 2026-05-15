@@ -1,12 +1,12 @@
 <!--
   UrlToBrowserQuickStart.vue
-  网络快递之旅 - 紧凑交互版 (Refactored)
-  
-  设计理念：
-  1. 传送带模式：将纵向卡片改为横向时间轴，大幅节省空间。
-  2. 动态教学：名词解释不再静态展示，而是随着包裹移动实时浮现。
-  3. 极简高度：控制在 200px 以内。
-  4. 手动步进：用户自主控制节奏，避免自动播放跟不上。
+  Hành trình bưu kiện trên mạng - phiên bản tương tác gọn nhẹ (Refactored)
+
+  Triết lý thiết kế:
+  1. Chế độ băng chuyền: chuyển từ card dọc sang timeline ngang, tiết kiệm không gian.
+  2. Dạy động: giải nghĩa thuật ngữ không hiển thị tĩnh mà xuất hiện theo gói hàng di chuyển.
+  3. Chiều cao tối giản: dưới 200px.
+  4. Bước thủ công: bạn tự kiểm soát nhịp độ, tránh autoplay theo không kịp.
 -->
 <template>
   <div class="quick-start-compact">
@@ -20,7 +20,7 @@
         <input 
           v-model="url" 
           type="text" 
-          placeholder="输入网址，开始旅程..."
+          placeholder="Nhập URL để bắt đầu hành trình..."
           :disabled="isActive && !isFinished"
           @keyup.enter="handleMainAction"
         >
@@ -44,7 +44,7 @@
         <button 
           class="control-btn" 
           :disabled="currentStep === 0" 
-          title="上一步"
+          title="Bước trước"
           @click="prevStep"
         >
           ⬅️
@@ -52,7 +52,7 @@
         <button 
           class="control-btn" 
           :disabled="isFinished" 
-          title="下一步"
+          title="Bước sau"
           @click="nextStep"
         >
           ➡️
@@ -64,7 +64,7 @@
         v-if="!isActive"
         class="quick-chips"
       >
-        <span class="chip-label">试一试:</span>
+        <span class="chip-label">Thử nhanh:</span>
         <button
           v-for="u in quickUrls"
           :key="u"
@@ -136,21 +136,21 @@
           class="info-content"
         >
           <div class="info-left">
-            <span class="stage-badge">第 {{ currentStep + 1 }} 站</span>
+            <span class="stage-badge">Trạm {{ currentStep + 1 }}</span>
             <span class="stage-title">{{ steps[currentStep].title }}</span>
           </div>
           <div class="info-divider" />
           <div class="info-right">
             <div class="mapping-item">
               <span class="mapping-icon">🚚</span>
-              <span class="mapping-text">生活：{{ steps[currentStep].analogyDesc }}</span>
+              <span class="mapping-text">Đời thường: {{ steps[currentStep].analogyDesc }}</span>
             </div>
             <div class="mapping-arrow">
               ↔️
             </div>
             <div class="mapping-item">
               <span class="mapping-icon">💻</span>
-              <span class="mapping-text">技术：{{ steps[currentStep].techDesc }}</span>
+              <span class="mapping-text">Kỹ thuật: {{ steps[currentStep].techDesc }}</span>
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@
           v-else
           class="info-placeholder"
         >
-          👈 在左上角输入网址，开启网络快递之旅
+          👈 Nhập URL ở góc trên bên trái để bắt đầu hành trình
         </div>
       </transition>
     </div>
@@ -172,48 +172,48 @@ const url = ref('')
 const isActive = ref(false)
 const currentStep = ref(0)
 
-const quickUrls = ['baidu.com', 'google.com', 'github.com']
+const quickUrls = ['vnexpress.net', 'google.com', 'github.com']
 
 const steps = [
   {
-    name: '出发',
+    name: 'Xuất phát',
     icon: '🛒',
-    title: 'URL 解析',
-    analogyAction: '填写购物单...',
-    analogyDesc: '列出想要的商品清单',
-    techDesc: '解析协议、域名和路径'
+    title: 'Phân tích URL',
+    analogyAction: 'Điền đơn mua hàng...',
+    analogyDesc: 'Liệt kê các món hàng muốn mua',
+    techDesc: 'Phân tích protocol, tên miền và path'
   },
   {
-    name: '查仓库',
+    name: 'Tra kho',
     icon: '🗺️',
-    title: 'DNS 查询',
-    analogyAction: '查发货地...',
-    analogyDesc: '在地图上找到商家仓库',
-    techDesc: '将域名解析为 IP 地址'
+    title: 'Tra cứu DNS',
+    analogyAction: 'Tra địa chỉ kho...',
+    analogyDesc: 'Tìm kho hàng của shop trên bản đồ',
+    techDesc: 'Phân giải tên miền thành địa chỉ IP'
   },
   {
-    name: '建立通道',
+    name: 'Mở kênh',
     icon: '📞',
-    title: 'TCP 握手',
-    analogyAction: '联系商家...',
-    analogyDesc: '确认商家营业且能送货',
-    techDesc: '建立可靠的数据通道'
+    title: 'TCP handshake',
+    analogyAction: 'Liên hệ shop...',
+    analogyDesc: 'Xác nhận shop đang mở và có thể giao',
+    techDesc: 'Thiết lập kênh dữ liệu tin cậy'
   },
   {
-    name: '发货',
+    name: 'Giao hàng',
     icon: '🚚',
-    title: 'HTTP 请求',
-    analogyAction: '运输中...',
-    analogyDesc: '商家打包发货，快递送达',
-    techDesc: '发送请求并接收响应'
+    title: 'HTTP request',
+    analogyAction: 'Đang vận chuyển...',
+    analogyDesc: 'Shop đóng gói, shipper giao đến',
+    techDesc: 'Gửi request và nhận response'
   },
   {
-    name: '收货',
+    name: 'Nhận hàng',
     icon: '🎁',
-    title: '浏览器渲染',
-    analogyAction: '拆箱体验！',
-    analogyDesc: '收到包裹，取出商品展示',
-    techDesc: '解析代码绘制页面'
+    title: 'Render trên trình duyệt',
+    analogyAction: 'Mở hộp trải nghiệm!',
+    analogyDesc: 'Nhận bưu kiện, lấy hàng ra trưng bày',
+    techDesc: 'Phân tích mã và vẽ trang'
   }
 ]
 
@@ -221,9 +221,9 @@ const steps = [
 const isFinished = computed(() => currentStep.value === steps.length - 1)
 
 const mainButtonText = computed(() => {
-  if (!isActive.value) return '提交订单'
-  if (isFinished.value) return '再来一单'
-  return '下一步'
+  if (!isActive.value) return 'Đặt đơn'
+  if (isFinished.value) return 'Đặt lại'
+  return 'Bước tiếp'
 })
 
 // 包裹位置 (0-100)

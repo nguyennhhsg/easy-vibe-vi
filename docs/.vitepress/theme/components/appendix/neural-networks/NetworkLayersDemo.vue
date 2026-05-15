@@ -1,12 +1,12 @@
 <!--
   NetworkLayersDemo.vue
-  神经网络层类型交互演示
+  Demo tương tác các loại layer trong neural network
 -->
 <template>
   <div class="layers-demo">
     <div class="header">
-      <div class="title">神经网络常见层类型</div>
-      <div class="subtitle">点击查看各层的作用和参数</div>
+      <div class="title">Các loại layer phổ biến trong neural network</div>
+      <div class="subtitle">Bấm để xem vai trò và tham số của từng layer</div>
     </div>
 
     <div class="layer-tabs">
@@ -21,11 +21,11 @@
       <div class="detail-name">{{ current.name }}</div>
       <div class="detail-desc">{{ current.desc }}</div>
       <div class="detail-section">
-        <span class="section-label">核心参数：</span>
+        <span class="section-label">Tham số chính:</span>
         <code v-for="(p, i) in current.params" :key="i" class="param-tag">{{ p }}</code>
       </div>
       <div class="detail-section">
-        <span class="section-label">典型用途：</span>
+        <span class="section-label">Ứng dụng điển hình:</span>
         <span class="usage-text">{{ current.usage }}</span>
       </div>
       <div class="detail-code">
@@ -43,50 +43,50 @@ const activeLayer = ref('dense')
 const layers = [
   {
     key: 'dense',
-    name: '全连接层',
-    desc: '每个神经元与上一层所有神经元相连。最基础的层类型，用于学习输入特征的组合。',
-    params: ['units（神经元数）', 'activation（激活函数）'],
-    usage: '分类、回归任务的输出层，以及简单特征提取',
+    name: 'Fully-connected layer',
+    desc: 'Mỗi neuron nối tới mọi neuron của tầng trước. Loại layer cơ bản nhất, học các tổ hợp đặc trưng đầu vào.',
+    params: ['units (số neuron)', 'activation (hàm kích hoạt)'],
+    usage: 'Tầng đầu ra cho classification, regression, và trích đặc trưng đơn giản',
     code: 'Dense(128, activation="relu")'
   },
   {
     key: 'conv',
-    name: '卷积层',
-    desc: '用滑动窗口（卷积核）扫描输入，提取局部特征。参数共享大幅减少参数量，是图像处理的核心。',
-    params: ['filters（卷积核数）', 'kernel_size（核大小）', 'stride（步长）'],
-    usage: '图像分类、目标检测、图像分割',
+    name: 'Convolutional layer',
+    desc: 'Dùng cửa sổ trượt (kernel) quét đầu vào để trích đặc trưng cục bộ. Chia sẻ tham số giúp giảm mạnh số lượng tham số, là cốt lõi của xử lý ảnh.',
+    params: ['filters (số kernel)', 'kernel_size (kích thước kernel)', 'stride (bước)'],
+    usage: 'Phân loại ảnh, object detection, phân vùng ảnh',
     code: 'Conv2D(64, kernel_size=3, stride=1, padding=1)'
   },
   {
     key: 'rnn',
-    name: '循环层',
-    desc: '具有"记忆"能力，能处理序列数据。每个时间步的输出会作为下一步的输入，形成循环。',
-    params: ['hidden_size（隐藏维度）', 'num_layers（层数）'],
-    usage: '文本生成、语音识别、时间序列预测',
+    name: 'Recurrent layer',
+    desc: 'Có "trí nhớ", xử lý được dữ liệu chuỗi. Đầu ra mỗi bước thời gian được dùng làm đầu vào bước kế, tạo thành vòng lặp.',
+    params: ['hidden_size (chiều ẩn)', 'num_layers (số tầng)'],
+    usage: 'Sinh văn bản, nhận dạng giọng nói, dự đoán chuỗi thời gian',
     code: 'LSTM(hidden_size=256, num_layers=2)'
   },
   {
     key: 'attention',
-    name: '注意力层',
-    desc: '让模型学会"关注"输入中最重要的部分。Transformer 的核心，彻底改变了 NLP 领域。',
-    params: ['embed_dim（嵌入维度）', 'num_heads（注意力头数）'],
-    usage: 'GPT、BERT 等大语言模型，机器翻译',
+    name: 'Attention layer',
+    desc: 'Cho mô hình học cách "chú ý" tới phần quan trọng nhất của đầu vào. Là cốt lõi của transformer, đã thay đổi hoàn toàn lĩnh vực NLP.',
+    params: ['embed_dim (chiều embedding)', 'num_heads (số attention head)'],
+    usage: 'Các LLM như GPT, BERT, dịch máy',
     code: 'MultiHeadAttention(embed_dim=512, num_heads=8)'
   },
   {
     key: 'norm',
-    name: '归一化层',
-    desc: '将数据标准化到合理范围，加速训练收敛，缓解梯度消失/爆炸问题。',
-    params: ['num_features（特征数）'],
-    usage: '几乎所有深度网络中都会使用，通常跟在卷积或全连接层后面',
+    name: 'Normalization layer',
+    desc: 'Chuẩn hóa dữ liệu về khoảng hợp lý, tăng tốc hội tụ khi huấn luyện, giảm hiện tượng gradient biến mất / bùng nổ.',
+    params: ['num_features (số đặc trưng)'],
+    usage: 'Gần như mọi mạng sâu đều dùng, thường đặt sau convolutional hoặc fully-connected',
     code: 'BatchNorm2d(64) / LayerNorm(512)'
   },
   {
     key: 'dropout',
-    name: 'Dropout 层',
-    desc: '训练时随机"关闭"一部分神经元，防止网络过度依赖某些特征，是最常用的正则化手段。',
-    params: ['p（丢弃概率，通常 0.1~0.5）'],
-    usage: '防止过拟合，提升模型泛化能力',
+    name: 'Dropout layer',
+    desc: 'Khi huấn luyện sẽ ngẫu nhiên "tắt" một phần neuron, tránh mạng phụ thuộc quá mức vào vài đặc trưng. Là biện pháp regularization phổ biến nhất.',
+    params: ['p (xác suất bỏ, thường 0.1~0.5)'],
+    usage: 'Chống overfitting, tăng khả năng tổng quát hóa',
     code: 'Dropout(p=0.3)'
   }
 ]

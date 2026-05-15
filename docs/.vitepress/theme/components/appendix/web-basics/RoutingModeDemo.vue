@@ -1,15 +1,15 @@
 <!--
   RoutingModeDemo.vue
-  MPA vs SPA 路由体验对比
+  So sánh trải nghiệm routing MPA vs SPA
 -->
 <template>
   <div class="routing-demo">
     <div class="header">
       <div class="title">
-        路由方式：整页刷新 vs 局部切换
+        Cách routing: Tải lại toàn trang vs Chuyển cục bộ
       </div>
       <div class="subtitle">
-        点击导航，感受体验差异
+        Nhấp vào nav, cảm nhận sự khác biệt
       </div>
     </div>
 
@@ -19,14 +19,14 @@
         :class="{ active: mode === 'mpa' }"
         @click="mode = 'mpa'"
       >
-        传统多页 (MPA)
+        Truyền thống đa trang (MPA)
       </button>
       <button
         class="mode"
         :class="{ active: mode === 'spa' }"
         @click="mode = 'spa'"
       >
-        单页应用 (SPA)
+        Single Page App (SPA)
       </button>
     </div>
 
@@ -45,13 +45,13 @@
         v-if="loading"
         class="loading"
       >
-        页面加载中...
+        Đang tải trang...
       </div>
       <div
         v-else
         class="content"
       >
-        当前页面：<strong>{{ currentPage }}</strong>
+        Trang hiện tại: <strong>{{ currentPage }}</strong>
       </div>
     </div>
 
@@ -65,14 +65,14 @@
 import { ref, computed } from 'vue'
 
 const mode = ref('mpa')
-const pages = ['首页', '商品', '购物车', '个人中心']
-const currentPage = ref('首页')
+const pages = ['Trang chủ', 'Sản phẩm', 'Giỏ hàng', 'Cá nhân']
+const currentPage = ref('Trang chủ')
 const loading = ref(false)
 
 const hintText = computed(() =>
   mode.value === 'mpa'
-    ? 'MPA：每次切换都要整页刷新'
-    : 'SPA：只更新内容区域，状态可保留'
+    ? 'MPA: Mỗi lần chuyển trang đều phải tải lại toàn bộ'
+    : 'SPA: Chỉ cập nhật vùng nội dung, có thể giữ state'
 )
 
 const navigate = (page) => {

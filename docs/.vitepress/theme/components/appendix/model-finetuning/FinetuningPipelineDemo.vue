@@ -1,8 +1,8 @@
 <template>
   <div class="finetuning-pipeline-demo">
     <div class="pipeline-header">
-      <h4>微调流水线演示</h4>
-      <p class="subtitle">点击每个阶段，了解微调的完整流程</p>
+      <h4>Demo pipeline fine-tuning</h4>
+      <p class="subtitle">Bấm vào từng giai đoạn để hiểu trọn quy trình fine-tuning</p>
     </div>
 
     <div class="pipeline-steps">
@@ -37,15 +37,15 @@
       </div>
 
       <div class="detail-example" v-if="steps[activeStep].example">
-        <div class="example-label">示例</div>
+        <div class="example-label">Ví dụ</div>
         <code>{{ steps[activeStep].example }}</code>
       </div>
     </div>
 
     <div class="pipeline-controls">
-      <button class="ctrl-btn" :disabled="activeStep <= 0" @click="prevStep">上一步</button>
+      <button class="ctrl-btn" :disabled="activeStep <= 0" @click="prevStep">Bước trước</button>
       <span class="step-indicator">{{ activeStep + 1 }} / {{ steps.length }}</span>
-      <button class="ctrl-btn primary" :disabled="activeStep >= steps.length - 1" @click="nextStep">下一步</button>
+      <button class="ctrl-btn primary" :disabled="activeStep >= steps.length - 1" @click="nextStep">Bước kế</button>
     </div>
   </div>
 </template>
@@ -59,65 +59,65 @@ const steps = [
   {
     id: 'base',
     icon: '🧠',
-    label: '选择基座模型',
-    description: '微调的第一步是选择一个合适的预训练基座模型。基座模型已经在海量数据上学习了通用的语言能力，我们要做的是在此基础上进行"专业化训练"。',
+    label: 'Chọn base model',
+    description: 'Bước đầu của fine-tuning là chọn một base model đã được pre-train phù hợp. Base model đã học năng lực ngôn ngữ tổng quát trên khối lượng dữ liệu rất lớn, việc của bạn là "huấn luyện chuyên môn hóa" trên nền đó.',
     points: [
-      '根据任务需求选择模型规模（7B、13B、70B 等）',
-      '考虑开源许可证（Apache 2.0、Llama 许可等）',
-      '评估模型的基础能力是否匹配目标场景',
-      '常见选择：Llama、Qwen、Mistral、DeepSeek 等'
+      'Chọn quy mô mô hình theo yêu cầu task (7B, 13B, 70B...)',
+      'Cân nhắc giấy phép mã nguồn (Apache 2.0, Llama license...)',
+      'Đánh giá năng lực cơ bản có phù hợp với tình huống đích không',
+      'Lựa chọn phổ biến: Llama, Qwen, Mistral, DeepSeek...'
     ],
     example: 'model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2-7B")'
   },
   {
     id: 'data',
     icon: '📊',
-    label: '准备训练数据',
-    description: '高质量的训练数据是微调成功的关键。数据的质量远比数量重要——1000 条精心标注的数据，往往胜过 10 万条噪声数据。',
+    label: 'Chuẩn bị dữ liệu huấn luyện',
+    description: 'Dữ liệu chất lượng là chìa khóa thành công khi fine-tuning. Chất lượng quan trọng hơn số lượng — 1000 mẫu được gán nhãn kỹ thường thắng 100,000 mẫu nhiễu.',
     points: [
-      '收集与目标任务相关的数据样本',
-      '清洗数据：去重、过滤低质量内容',
-      '格式化为模型要求的输入格式（如 instruction-response 对）',
-      '划分训练集、验证集（通常 9:1）'
+      'Thu thập mẫu dữ liệu liên quan tới task',
+      'Làm sạch: khử trùng lặp, lọc nội dung kém',
+      'Format theo định dạng đầu vào của mô hình (ví dụ cặp instruction-response)',
+      'Chia tập train, validation (thường 9:1)'
     ],
-    example: '{"instruction": "翻译成英文", "input": "你好世界", "output": "Hello World"}'
+    example: '{"instruction": "Dịch sang tiếng Anh", "input": "Xin chào thế giới", "output": "Hello World"}'
   },
   {
     id: 'train',
     icon: '⚙️',
-    label: '执行微调训练',
-    description: '使用准备好的数据对模型进行训练。现代微调通常采用参数高效方法（如 LoRA），只更新模型的一小部分参数，大幅降低计算成本。',
+    label: 'Huấn luyện fine-tuning',
+    description: 'Dùng dữ liệu đã chuẩn bị để huấn luyện mô hình. Fine-tuning hiện đại thường dùng phương pháp parameter-efficient (như LoRA), chỉ cập nhật một phần nhỏ tham số, giảm mạnh chi phí tính toán.',
     points: [
-      '配置训练超参数（学习率、批次大小、训练轮数）',
-      '选择微调策略（全量微调 / LoRA / QLoRA）',
-      '监控训练损失曲线，防止过拟合',
-      '通常需要 1-4 个 GPU，训练数小时到数天'
+      'Cấu hình hyperparameter (learning rate, batch size, số epoch)',
+      'Chọn chiến lược (full fine-tuning / LoRA / QLoRA)',
+      'Theo dõi đường loss để tránh overfitting',
+      'Thường cần 1-4 GPU, huấn luyện từ vài giờ đến vài ngày'
     ],
     example: 'trainer = SFTTrainer(model, train_dataset, peft_config=lora_config)'
   },
   {
     id: 'eval',
     icon: '📈',
-    label: '评估与测试',
-    description: '训练完成后，需要全面评估模型的表现。不仅要看自动化指标，更要进行人工评测，确保模型在真实场景中表现良好。',
+    label: 'Đánh giá và test',
+    description: 'Sau huấn luyện, cần đánh giá toàn diện. Ngoài chỉ số tự động, cần đánh giá thủ công để đảm bảo mô hình tốt trong tình huống thực.',
     points: [
-      '在验证集上计算损失和困惑度（Perplexity）',
-      '使用任务特定指标（BLEU、ROUGE、准确率等）',
-      '人工评测：流畅度、准确性、安全性',
-      '与基座模型对比，确认微调带来了提升'
+      'Tính loss và perplexity trên tập validation',
+      'Dùng chỉ số đặc thù task (BLEU, ROUGE, accuracy...)',
+      'Đánh giá thủ công: độ trôi chảy, chính xác, an toàn',
+      'So với base model để xác nhận fine-tuning có cải thiện'
     ],
     example: 'eval_results = trainer.evaluate(eval_dataset)'
   },
   {
     id: 'deploy',
     icon: '🚀',
-    label: '部署上线',
-    description: '将微调好的模型部署到生产环境，对外提供服务。部署前通常需要进行模型优化（量化、蒸馏等）以降低推理成本。',
+    label: 'Triển khai lên production',
+    description: 'Triển khai mô hình đã fine-tune vào môi trường production để phục vụ người dùng. Trước khi deploy thường cần tối ưu (quantize, distill...) để giảm chi phí inference.',
     points: [
-      '导出模型权重，合并 LoRA 适配器',
-      '应用量化技术压缩模型体积',
-      '选择部署方案（API 服务、边缘部署等）',
-      '配置监控和日志，持续跟踪线上表现'
+      'Xuất trọng số mô hình, merge LoRA adapter',
+      'Áp dụng quantization để giảm kích thước',
+      'Chọn cách deploy (API service, edge...)',
+      'Cấu hình monitoring và log để theo dõi liên tục'
     ],
     example: 'model.merge_and_unload().save_pretrained("my-finetuned-model")'
   }

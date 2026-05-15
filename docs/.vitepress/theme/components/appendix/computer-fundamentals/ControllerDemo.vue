@@ -1,21 +1,21 @@
 <template>
   <div class="controller-demo">
     <div class="demo-header">
-      <span class="title">控制器工作原理</span>
-      <span class="subtitle">控制信号如何协调 CPU 各个部件</span>
+      <span class="title">Nguyên lý của bộ điều khiển</span>
+      <span class="subtitle">Tín hiệu điều khiển phối hợp các thành phần của CPU như thế nào</span>
     </div>
 
     <div class="control-unit">
       <div class="cu-box">
-        <div class="cu-title">控制单元 CU</div>
+        <div class="cu-title">Control Unit (CU)</div>
         <div class="cu-diagram">
           <div class="cu-internal">
-            <div class="cu-component">指令寄存器 IR</div>
-            <div class="cu-component">指令译码器</div>
-            <div class="cu-component">时序发生器</div>
+            <div class="cu-component">Thanh ghi lệnh IR</div>
+            <div class="cu-component">Bộ giải mã lệnh</div>
+            <div class="cu-component">Bộ phát xung nhịp</div>
           </div>
           <div class="cu-output">
-            <div class="output-label">输出控制信号：</div>
+            <div class="output-label">Tín hiệu điều khiển xuất ra:</div>
             <div class="control-signals">
               <div v-for="sig in controlSignals" :key="sig.name" :class="['sig-box', sig.active ? 'active' : '']">
                 {{ sig.name }}
@@ -30,58 +30,58 @@
       <div class="block-row">
         <div class="cpu-block" :class="{ active: activeBlock === 'pc' }">
           <div class="block-name">PC</div>
-          <div class="block-desc">程序计数器</div>
+          <div class="block-desc">Bộ đếm chương trình</div>
         </div>
         <div class="arrow" :class="{ active: activeBlock === 'pc' }">→</div>
         <div class="cpu-block" :class="{ active: activeBlock === 'mar' }">
           <div class="block-name">MAR</div>
-          <div class="block-desc">地址寄存器</div>
+          <div class="block-desc">Thanh ghi địa chỉ</div>
         </div>
         <div class="arrow" :class="{ active: activeBlock === 'mar' }">→</div>
         <div class="cpu-block" :class="{ active: activeBlock === 'memory' }">
           <div class="block-name">Memory</div>
-          <div class="block-desc">主存</div>
+          <div class="block-desc">Bộ nhớ chính</div>
         </div>
       </div>
 
       <div class="block-row">
         <div class="cpu-block" :class="{ active: activeBlock === 'mdr' }">
           <div class="block-name">MDR</div>
-          <div class="block-desc">数据寄存器</div>
+          <div class="block-desc">Thanh ghi dữ liệu</div>
         </div>
         <div class="arrow" :class="{ active: activeBlock === 'mdr' }">→</div>
         <div class="cpu-block" :class="{ active: activeBlock === 'ir' }">
           <div class="block-name">IR</div>
-          <div class="block-desc">指令寄存器</div>
+          <div class="block-desc">Thanh ghi lệnh</div>
         </div>
         <div class="arrow" :class="{ active: activeBlock === 'ir' }">→</div>
         <div class="cpu-block" :class="{ active: activeBlock === 'decoder' }">
           <div class="block-name">ID</div>
-          <div class="block-desc">译码器</div>
+          <div class="block-desc">Bộ giải mã</div>
         </div>
       </div>
 
       <div class="block-row">
         <div class="cpu-block" :class="{ active: activeBlock === 'alu' }">
           <div class="block-name">ALU</div>
-          <div class="block-desc">算术逻辑单元</div>
+          <div class="block-desc">Đơn vị số học - logic</div>
         </div>
         <div class="arrow" :class="{ active: activeBlock === 'alu' }">↔</div>
         <div class="cpu-block" :class="{ active: activeBlock === 'acc' }">
           <div class="block-name">ACC</div>
-          <div class="block-desc">累加器</div>
+          <div class="block-desc">Thanh ghi tích lũy</div>
         </div>
       </div>
     </div>
 
     <div class="control-panel">
-      <button class="btn" @click="executeFetch">执行取指周期</button>
-      <button class="btn" @click="executeAdd">执行 ADD 指令</button>
-      <button class="btn" @click="executeLoad">执行 LOAD 指令</button>
+      <button class="btn" @click="executeFetch">Chạy chu kỳ fetch</button>
+      <button class="btn" @click="executeAdd">Chạy lệnh ADD</button>
+      <button class="btn" @click="executeLoad">Chạy lệnh LOAD</button>
     </div>
 
     <div class="microinstruction-panel">
-      <div class="panel-title">当前微指令</div>
+      <div class="panel-title">Vi lệnh hiện tại</div>
       <div class="micro-ops">
         <div v-for="(op, i) in microOps" :key="i" :class="['micro-op', op.active ? 'active' : '']">
           <span class="op-cycle">T{{ i + 1 }}</span>
@@ -91,16 +91,16 @@
     </div>
 
     <div class="cu-explanation">
-      <div class="exp-title">控制器核心概念</div>
+      <div class="exp-title">Khái niệm cốt lõi của bộ điều khiển</div>
       <div class="exp-content">
         <div class="exp-item">
-          <strong>控制信号：</strong>由控制器发出的电信号，用于控制数据通路中各个部件的动作
+          <strong>Tín hiệu điều khiển:</strong> Tín hiệu điện do bộ điều khiển phát ra, dùng để điều khiển hoạt động của các thành phần trên đường dữ liệu
         </div>
         <div class="exp-item">
-          <strong>时序：</strong>CPU 操作按时钟节拍进行，每个节拍执行特定微操作
+          <strong>Định thời:</strong> CPU hoạt động theo nhịp xung clock, mỗi nhịp thực hiện một vi thao tác nhất định
         </div>
         <div class="exp-item">
-          <strong>硬布线 vs 微程序：</strong>硬布线控制器速度快但设计复杂；微程序控制器灵活但速度稍慢
+          <strong>Hardwired vs Microprogram:</strong> Bộ điều khiển hardwired nhanh nhưng thiết kế phức tạp; bộ điều khiển microprogram linh hoạt nhưng hơi chậm
         </div>
       </div>
     </div>
@@ -132,22 +132,22 @@ const executeFetch = async () => {
   clearSignals()
   microOps.splice(0, microOps.length)
   
-  microOps.push({ desc: 'PC→MAR: 将PC中的地址送入MAR', active: true })
+  microOps.push({ desc: 'PC→MAR: Đưa địa chỉ trong PC sang MAR', active: true })
   controlSignals[0].active = true
   activeBlock.value = 'pc'
   await wait(1000)
 
-  microOps.push({ desc: 'MEM→MDR: 从内存读取指令到MDR', active: true })
+  microOps.push({ desc: 'MEM→MDR: Đọc lệnh từ bộ nhớ vào MDR', active: true })
   controlSignals[1].active = true
   activeBlock.value = 'memory'
   await wait(1000)
 
-  microOps.push({ desc: 'MDR→IR: 将指令送入IR', active: true })
+  microOps.push({ desc: 'MDR→IR: Đưa lệnh vào IR', active: true })
   controlSignals[2].active = true
   activeBlock.value = 'mar'
   await wait(1000)
 
-  microOps.push({ desc: 'IR→ID: 指令送入译码器', active: true })
+  microOps.push({ desc: 'IR→ID: Đưa lệnh sang bộ giải mã', active: true })
   controlSignals[3].active = true
   activeBlock.value = 'ir'
   await wait(1000)
@@ -157,16 +157,16 @@ const executeAdd = async () => {
   clearSignals()
   microOps.splice(0, microOps.length)
   
-  microOps.push({ desc: '指令译码：识别为ADD指令', active: true })
+  microOps.push({ desc: 'Giải mã lệnh: nhận diện là lệnh ADD', active: true })
   activeBlock.value = 'decoder'
   await wait(1000)
 
-  microOps.push({ desc: 'ALU执行加法运算', active: true })
+  microOps.push({ desc: 'ALU thực hiện phép cộng', active: true })
   controlSignals[4].active = true
   activeBlock.value = 'alu'
   await wait(1000)
 
-  microOps.push({ desc: '结果写入ACC', active: true })
+  microOps.push({ desc: 'Ghi kết quả vào ACC', active: true })
   activeBlock.value = 'acc'
   await wait(1000)
 }
@@ -175,21 +175,21 @@ const executeLoad = async () => {
   clearSignals()
   microOps.splice(0, microOps.length)
   
-  microOps.push({ desc: '指令译码：识别为LOAD指令', active: true })
+  microOps.push({ desc: 'Giải mã lệnh: nhận diện là lệnh LOAD', active: true })
   activeBlock.value = 'decoder'
   await wait(1000)
 
-  microOps.push({ desc: 'PC→MAR: 取操作数地址', active: true })
+  microOps.push({ desc: 'PC→MAR: Lấy địa chỉ toán hạng', active: true })
   controlSignals[0].active = true
   activeBlock.value = 'pc'
   await wait(1000)
 
-  microOps.push({ desc: 'MEM→MDR: 读取数据', active: true })
+  microOps.push({ desc: 'MEM→MDR: Đọc dữ liệu', active: true })
   controlSignals[1].active = true
   activeBlock.value = 'memory'
   await wait(1000)
 
-  microOps.push({ desc: 'MDR→ACC: 数据送入ACC', active: true })
+  microOps.push({ desc: 'MDR→ACC: Đưa dữ liệu vào ACC', active: true })
   controlSignals[5].active = true
   activeBlock.value = 'mdr'
   await wait(1000)

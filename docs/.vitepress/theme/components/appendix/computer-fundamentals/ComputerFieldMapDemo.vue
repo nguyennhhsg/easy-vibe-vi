@@ -1,8 +1,8 @@
 <template>
   <div class="field-map-demo">
     <div class="demo-header">
-      <span class="title">计算机领域全景图</span>
-      <span class="subtitle">点击查看详情</span>
+      <span class="title">Bản đồ tổng quan các lĩnh vực máy tính</span>
+      <span class="subtitle">Bấm để xem chi tiết</span>
     </div>
 
     <div class="field-grid">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="info-box">
-      <strong>建议：</strong>不要试图一次学完所有方向。先选一个方向深入，建立"根据地"，再横向扩展。
+      <strong>Lời khuyên:</strong> Đừng cố học tất cả các hướng cùng lúc. Hãy chọn một hướng để đi sâu, xây "căn cứ" trước rồi mới mở rộng theo chiều ngang.
     </div>
   </div>
 </template>
@@ -28,34 +28,34 @@
 <script setup>
 const fields = [
   {
-    name: '前端',
-    desc: '用户能看到、能交互的一切',
+    name: 'Frontend',
+    desc: 'Mọi thứ người dùng nhìn thấy và tương tác',
     techs: ['HTML/CSS', 'JavaScript', 'React/Vue']
   },
   {
-    name: '后端',
-    desc: '服务器端的业务逻辑和数据处理',
+    name: 'Backend',
+    desc: 'Logic nghiệp vụ và xử lý dữ liệu phía server',
     techs: ['Node.js', 'Go', 'Java', 'Python']
   },
   {
-    name: '移动端',
-    desc: '手机上的应用体验',
+    name: 'Mobile',
+    desc: 'Trải nghiệm ứng dụng trên điện thoại',
     techs: ['Swift', 'Kotlin', 'Flutter']
   },
   {
-    name: 'AI/算法',
-    desc: '让系统变"聪明"',
-    techs: ['PyTorch', 'TensorFlow', '机器学习']
+    name: 'AI/Thuật toán',
+    desc: 'Làm cho hệ thống trở nên "thông minh"',
+    techs: ['PyTorch', 'TensorFlow', 'Machine Learning']
   },
   {
-    name: '运维/DevOps',
-    desc: '保证系统稳定运行',
+    name: 'DevOps',
+    desc: 'Đảm bảo hệ thống chạy ổn định',
     techs: ['Docker', 'K8s', 'CI/CD']
   },
   {
-    name: '数据工程',
-    desc: '数据采集、存储、分析',
-    techs: ['SQL', 'Spark', '数据仓库']
+    name: 'Data Engineering',
+    desc: 'Thu thập, lưu trữ và phân tích dữ liệu',
+    techs: ['SQL', 'Spark', 'Data Warehouse']
   }
 ]
 </script>

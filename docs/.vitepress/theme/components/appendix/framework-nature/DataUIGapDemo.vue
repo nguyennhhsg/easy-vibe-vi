@@ -3,65 +3,65 @@
     <div class="two-panels">
       <div class="panel data-panel">
         <div class="panel-header">
-          <span class="panel-badge data">数据（JavaScript 变量）</span>
+          <span class="panel-badge data">Dữ liệu (biến JavaScript)</span>
         </div>
         <div class="data-display">
           <div class="data-row">
-            <span class="data-key">商品数量</span>
+            <span class="data-key">Số lượng sản phẩm</span>
             <span class="data-val">{{ dataCount }}</span>
           </div>
           <div class="data-row">
-            <span class="data-key">总价</span>
+            <span class="data-key">Tổng giá</span>
             <span class="data-val">¥{{ dataCount * 99 }}</span>
           </div>
           <div class="data-row">
-            <span class="data-key">状态</span>
-            <span class="data-val">{{ dataCount > 5 ? '过多' : '正常' }}</span>
+            <span class="data-key">Trạng thái</span>
+            <span class="data-val">{{ dataCount > 5 ? 'Quá nhiều' : 'Bình thường' }}</span>
           </div>
         </div>
-        <button class="action-btn" @click="addItem">添加商品（修改数据）</button>
+        <button class="action-btn" @click="addItem">Thêm sản phẩm (sửa dữ liệu)</button>
       </div>
 
       <div class="gap-indicator" :class="{ desynced: isDesynced }">
         <div class="gap-line" />
-        <span class="gap-label">{{ isDesynced ? '❌ 不同步' : '✅ 同步' }}</span>
+        <span class="gap-label">{{ isDesynced ? '❌ Không đồng bộ' : '✅ Đồng bộ' }}</span>
         <div class="gap-line" />
       </div>
 
       <div class="panel ui-panel">
         <div class="panel-header">
-          <span class="panel-badge ui">界面（用户看到的）</span>
+          <span class="panel-badge ui">Giao diện (cái người dùng thấy)</span>
         </div>
         <div class="ui-display">
           <div class="ui-row" :class="{ stale: uiCount !== dataCount }">
-            <span class="ui-key">购物车</span>
-            <span class="ui-val">{{ uiCount }} 件</span>
+            <span class="ui-key">Giỏ hàng</span>
+            <span class="ui-val">{{ uiCount }} món</span>
           </div>
           <div class="ui-row" :class="{ stale: uiCount !== dataCount }">
-            <span class="ui-key">总价</span>
+            <span class="ui-key">Tổng giá</span>
             <span class="ui-val">¥{{ uiCount * 99 }}</span>
           </div>
           <div class="ui-row" :class="{ stale: uiCount !== dataCount }">
-            <span class="ui-key">状态</span>
-            <span class="ui-val">{{ uiCount > 5 ? '过多' : '正常' }}</span>
+            <span class="ui-key">Trạng thái</span>
+            <span class="ui-val">{{ uiCount > 5 ? 'Quá nhiều' : 'Bình thường' }}</span>
           </div>
         </div>
         <button class="sync-btn" :disabled="!isDesynced" @click="syncUI">
-          {{ isDesynced ? '手动同步界面' : '已同步' }}
+          {{ isDesynced ? 'Đồng bộ giao diện thủ công' : 'Đã đồng bộ' }}
         </button>
       </div>
     </div>
 
     <div class="controls-row">
-      <button class="action-btn outline" @click="reset">重置</button>
+      <button class="action-btn outline" @click="reset">Đặt lại</button>
       <span v-if="desyncCount > 0" class="desync-stat">
-        累计不同步 {{ desyncCount }} 次
+        Tổng số lần lệch đồng bộ: {{ desyncCount }}
       </span>
     </div>
 
     <div class="info-box">
-      <strong>核心问题：</strong>
-      <span>在没有框架的情况下，数据变了，界面不会自动跟着变。你必须自己写代码去更新界面，一旦忘了，用户看到的就是过时的、错误的信息。</span>
+      <strong>Vấn đề cốt lõi:</strong>
+      <span>Khi không có framework, dữ liệu thay đổi nhưng giao diện không tự cập nhật theo. Bạn phải tự viết mã cập nhật giao diện, lỡ quên một lần là người dùng thấy thông tin cũ, sai.</span>
     </div>
   </div>
 </template>

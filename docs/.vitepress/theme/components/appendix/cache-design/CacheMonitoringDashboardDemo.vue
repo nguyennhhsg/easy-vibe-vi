@@ -2,13 +2,13 @@
   <div class="cache-monitoring-demo">
     <div class="demo-header">
       <span class="icon">📊</span>
-      <span class="title">缓存监控面板</span>
-      <span class="subtitle">实时追踪缓存的健康状况</span>
+      <span class="title">Dashboard giám sát cache</span>
+      <span class="subtitle">Theo dõi tình trạng cache theo thời gian thực</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">开车</span>：仪表盘显示速度、油量、引擎温度。缓存监控就像仪表盘，
-      让你实时看到命中率、响应时间、内存使用等关键指标，及时发现问题。
+      Hãy tưởng tượng bạn đang <span class="highlight">lái xe</span>: bảng đồng hồ hiển thị tốc độ, nhiên liệu, nhiệt độ động cơ. Giám sát cache cũng giống như bảng đồng hồ,
+      giúp bạn thấy ngay tỷ lệ hit, thời gian phản hồi, mức dùng bộ nhớ và các chỉ số quan trọng khác để kịp thời phát hiện vấn đề.
     </div>
 
     <div class="metrics-grid">
@@ -18,7 +18,7 @@
         </div>
         <div class="metric-content">
           <div class="metric-label">
-            命中率
+            Tỷ lệ hit
           </div>
           <div
             class="metric-value"
@@ -41,13 +41,13 @@
         </div>
         <div class="metric-content">
           <div class="metric-label">
-            平均响应时间
+            Thời gian phản hồi trung bình
           </div>
           <div class="metric-value">
             {{ avgResponseTime }}ms
           </div>
           <div class="metric-sub">
-            命中: {{ hitTime }}ms | 未命中: {{ missTime }}ms
+            Hit: {{ hitTime }}ms | Miss: {{ missTime }}ms
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
         </div>
         <div class="metric-content">
           <div class="metric-label">
-            缓存使用量
+            Dung lượng cache đã dùng
           </div>
           <div class="metric-value">
             {{ usedSize }}MB
@@ -84,13 +84,13 @@
         </div>
         <div class="metric-content">
           <div class="metric-label">
-            总请求数
+            Tổng số request
           </div>
           <div class="metric-value">
             {{ totalRequests.toLocaleString() }}
           </div>
           <div class="metric-sub">
-            命中: {{ totalHits.toLocaleString() }} | 未命中: {{ totalMisses.toLocaleString() }}
+            Hit: {{ totalHits.toLocaleString() }} | Miss: {{ totalMisses.toLocaleString() }}
           </div>
         </div>
       </div>
@@ -98,12 +98,12 @@
 
     <div class="request-log">
       <div class="log-header">
-        <span>📋 请求日志</span>
+        <span>📋 Nhật ký request</span>
         <button
           class="clear-btn"
           @click="clearLog"
         >
-          清空
+          Xóa
         </button>
       </div>
       <div class="log-list">
@@ -117,7 +117,7 @@
             <span class="log-icon">{{ log.type === 'hit' ? '✅' : '❌' }}</span>
             <span class="log-time">{{ log.time }}</span>
             <span class="log-key">{{ log.key }}</span>
-            <span class="log-result">{{ log.type === 'hit' ? '命中' : '未命中' }}</span>
+            <span class="log-result">{{ log.type === 'hit' ? 'Hit' : 'Miss' }}</span>
             <span class="log-latency">{{ log.latency }}ms</span>
           </div>
         </transition-group>
@@ -125,7 +125,7 @@
           v-if="requestLogs.length === 0"
           class="empty-log"
         >
-          暂无请求记录，点击下方按钮发送请求
+          Chưa có request, hãy bấm nút bên dưới để gửi request
         </div>
       </div>
     </div>
@@ -135,25 +135,25 @@
         class="action-btn"
         @click="simulateRequest"
       >
-        🎲 模拟请求
+        🎲 Mô phỏng request
       </button>
       <button
         class="action-btn"
         @click="simulateBurst"
       >
-        🚀 连续请求 (10次)
+        🚀 Request liên tục (10 lần)
       </button>
       <button
         class="action-btn outline"
         @click="resetMetrics"
       >
-        ↺ 重置指标
+        ↺ Đặt lại chỉ số
       </button>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心指标：</strong>命中率应该 &gt; 80%，响应时间 &lt; 10ms，内存使用 &lt; 80%。如果命中率突然下降，可能是缓存穿透或雪崩；如果响应时间变长，可能是缓存满了。
+      <strong>Chỉ số cốt lõi:</strong> Tỷ lệ hit nên &gt; 80%, thời gian phản hồi &lt; 10ms, mức dùng bộ nhớ &lt; 80%. Nếu tỷ lệ hit đột ngột giảm, có thể là cache penetration hoặc avalanche; nếu thời gian phản hồi tăng, có thể là cache đã đầy.
     </div>
   </div>
 </template>

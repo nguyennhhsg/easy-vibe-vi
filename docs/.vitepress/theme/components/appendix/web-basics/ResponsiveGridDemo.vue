@@ -1,21 +1,21 @@
 <!--
   ResponsiveGridDemo.vue
-  响应式布局断点演示
+  Demo điểm dừng (breakpoint) cho bố cục responsive
 -->
 <template>
   <div class="responsive-demo">
     <div class="header">
       <div class="title">
-        响应式布局：一套代码，多种屏幕
+        Bố cục responsive: Một mã, nhiều màn hình
       </div>
       <div class="subtitle">
-        拖动宽度，观察列数变化
+        Kéo độ rộng, quan sát số cột thay đổi
       </div>
     </div>
 
     <div class="controls">
       <label>
-        视口宽度：<strong>{{ viewportWidth }}</strong> px
+        Độ rộng viewport: <strong>{{ viewportWidth }}</strong> px
       </label>
       <input
         v-model="viewportWidth"
@@ -45,7 +45,7 @@
     </div>
 
     <div class="note">
-      当前列数：<strong>{{ columns }}</strong>
+      Số cột hiện tại: <strong>{{ columns }}</strong>
     </div>
   </div>
 </template>

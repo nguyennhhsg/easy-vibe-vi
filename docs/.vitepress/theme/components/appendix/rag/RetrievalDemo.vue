@@ -1,20 +1,20 @@
 <!--
   RetrievalDemo.vue
-  检索过程可视化演示
+  Trực quan hóa quá trình retrieval
 
-  用途：
-  展示 RAG 中的检索流程：查询编码 → 向量搜索 → 重排序 → Top-K 选择
-  用户可以输入查询，观察检索过程。
+  Mục đích:
+  Trình bày luồng retrieval trong RAG: encode query → vector search → rerank → chọn Top-K.
+  User chọn câu hỏi mẫu để quan sát quá trình.
 
-  交互功能：
-  - 选择示例查询
-  - 观察向量相似度计算过程
-  - 查看重排序效果
+  Tính năng:
+  - Chọn câu hỏi mẫu
+  - Quan sát quá trình tính độ tương đồng vector
+  - Xem hiệu quả của rerank
 -->
 <template>
   <div class="retrieval-demo">
     <div class="query-section">
-      <span class="label">选择查询：</span>
+      <span class="label">Chọn câu hỏi:</span>
       <div class="query-options">
         <button
           v-for="(q, i) in queries"
@@ -46,10 +46,10 @@
 
     <!-- Step 1: Query Embedding -->
     <div v-if="currentStep === 0" class="embedding-viz">
-      <div class="embed-label">查询文本</div>
+      <div class="embed-label">Văn bản truy vấn</div>
       <div class="embed-text">{{ queries[currentQuery].text }}</div>
-      <div class="embed-arrow">↓ 嵌入模型编码</div>
-      <div class="embed-label">查询向量</div>
+      <div class="embed-arrow">↓ Encode bằng embedding model</div>
+      <div class="embed-label">Vector truy vấn</div>
       <div class="vector-display">
         <span
           v-for="(v, i) in queries[currentQuery].vector"
@@ -88,7 +88,7 @@
     <div v-if="currentStep === 2" class="rerank-viz">
       <div class="rerank-columns">
         <div class="rerank-col">
-          <div class="col-title">初始排序（向量相似度）</div>
+          <div class="col-title">Sắp xếp ban đầu (theo vector similarity)</div>
           <div
             v-for="(doc, i) in sortedBySimilarity"
             :key="'init-' + i"
@@ -101,7 +101,7 @@
         </div>
         <div class="rerank-arrow-col">→</div>
         <div class="rerank-col">
-          <div class="col-title">重排序后（交叉编码器）</div>
+          <div class="col-title">Sau rerank (cross-encoder)</div>
           <div
             v-for="(doc, i) in reranked"
             :key="'re-' + i"
@@ -118,7 +118,7 @@
     <!-- Step 4: Top-K Selection -->
     <div v-if="currentStep === 3" class="topk-viz">
       <div class="topk-setting">
-        <span>Top-K 值：</span>
+        <span>Giá trị Top-K:</span>
         <button
           v-for="k in [1, 2, 3]"
           :key="k"
@@ -139,7 +139,7 @@
           <span
             v-if="i < topK"
             class="topk-badge"
-          >已选中</span>
+          >Đã chọn</span>
         </div>
       </div>
     </div>
@@ -150,14 +150,14 @@
         :disabled="currentStep <= 0"
         @click="currentStep--"
       >
-        ← 上一步
+        ← Bước trước
       </button>
       <button
         class="nav-btn primary"
         :disabled="currentStep >= steps.length - 1"
         @click="currentStep++"
       >
-        下一步 →
+        Bước kế →
       </button>
     </div>
   </div>
@@ -171,33 +171,33 @@ const currentStep = ref(0)
 const topK = ref(2)
 
 const steps = [
-  { name: '查询编码', desc: '将用户的自然语言查询通过嵌入模型（如 text-embedding-ada-002）转化为高维向量表示。这个向量捕捉了查询的语义信息。' },
-  { name: '向量搜索', desc: '在向量数据库中计算查询向量与所有文档向量的余弦相似度，找出语义最接近的候选文档。' },
-  { name: '重排序', desc: '使用交叉编码器（Cross-Encoder）对候选文档进行精细排序。交叉编码器同时考虑查询和文档的交互信息，排序更准确。' },
-  { name: 'Top-K 选择', desc: '从重排序后的结果中选取前 K 个最相关的文档片段，作为 LLM 生成回答的上下文。K 值的选择需要平衡准确性和上下文长度。' }
+  { name: 'Encode query', desc: 'Đưa câu hỏi tự nhiên của user qua embedding model (ví dụ text-embedding-ada-002) để biến thành vector chiều cao, mang theo thông tin ngữ nghĩa của câu hỏi.' },
+  { name: 'Vector search', desc: 'Trong vector database, tính cosine similarity giữa vector query và tất cả vector tài liệu để tìm các ứng viên gần nghĩa nhất.' },
+  { name: 'Rerank', desc: 'Dùng cross-encoder để sắp xếp các ứng viên một cách tinh hơn. Cross-encoder xét tương tác giữa query và tài liệu cùng lúc nên xếp chính xác hơn.' },
+  { name: 'Chọn Top-K', desc: 'Chọn K đoạn liên quan nhất sau rerank để làm context cho LLM sinh câu trả lời. Giá trị K cần cân bằng giữa độ chính xác và độ dài context.' }
 ]
 
 const queries = [
   {
-    text: '如何申请年假？',
+    text: 'Làm thế nào để xin nghỉ phép?',
     vector: [0.12, -0.45, 0.78, 0.33, -0.21, 0.56, 0.89, -0.14],
     candidates: [
-      { text: '员工年假申请需提前 3 个工作日提交审批流程', similarity: 0.94, rerankScore: 0.97 },
-      { text: '年假天数根据工龄计算：1-5年10天，5年以上15天', similarity: 0.88, rerankScore: 0.91 },
-      { text: '病假需提供医院开具的诊断证明', similarity: 0.62, rerankScore: 0.35 },
-      { text: '未使用的年假可折算为工资补偿', similarity: 0.79, rerankScore: 0.82 },
-      { text: '公司茶水间提供免费咖啡和零食', similarity: 0.15, rerankScore: 0.05 }
+      { text: 'Đơn xin nghỉ phép cần gửi vào quy trình duyệt trước 3 ngày làm việc', similarity: 0.94, rerankScore: 0.97 },
+      { text: 'Số ngày nghỉ phép tính theo thâm niên: 1-5 năm 10 ngày, trên 5 năm 15 ngày', similarity: 0.88, rerankScore: 0.91 },
+      { text: 'Nghỉ ốm cần giấy chứng nhận của bệnh viện', similarity: 0.62, rerankScore: 0.35 },
+      { text: 'Phép chưa dùng có thể quy đổi thành tiền', similarity: 0.79, rerankScore: 0.82 },
+      { text: 'Phòng pantry công ty có cà phê và đồ ăn nhẹ miễn phí', similarity: 0.15, rerankScore: 0.05 }
     ]
   },
   {
-    text: 'Redis 缓存穿透怎么解决？',
+    text: 'Cache penetration trong Redis xử lý sao?',
     vector: [0.67, 0.23, -0.89, 0.45, 0.11, -0.34, 0.72, 0.56],
     candidates: [
-      { text: '缓存穿透可通过布隆过滤器拦截不存在的 key', similarity: 0.96, rerankScore: 0.98 },
-      { text: '对空值也进行缓存，设置较短的 TTL', similarity: 0.89, rerankScore: 0.93 },
-      { text: '缓存雪崩是指大量 key 同时过期导致数据库压力骤增', similarity: 0.71, rerankScore: 0.42 },
-      { text: 'Redis 支持主从复制和哨兵模式实现高可用', similarity: 0.58, rerankScore: 0.28 },
-      { text: '接口限流可以使用令牌桶或漏桶算法', similarity: 0.43, rerankScore: 0.15 }
+      { text: 'Cache penetration có thể chặn bằng bloom filter để loại key không tồn tại', similarity: 0.96, rerankScore: 0.98 },
+      { text: 'Cache cả giá trị null với TTL ngắn', similarity: 0.89, rerankScore: 0.93 },
+      { text: 'Cache avalanche là khi nhiều key hết hạn cùng lúc, dồn áp lực lên DB', similarity: 0.71, rerankScore: 0.42 },
+      { text: 'Redis hỗ trợ master-slave và sentinel để đạt high availability', similarity: 0.58, rerankScore: 0.28 },
+      { text: 'API rate limit có thể dùng token bucket hoặc leaky bucket', similarity: 0.43, rerankScore: 0.15 }
     ]
   }
 ]

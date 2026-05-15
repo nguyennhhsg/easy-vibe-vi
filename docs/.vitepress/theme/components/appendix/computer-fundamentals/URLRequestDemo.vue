@@ -1,15 +1,15 @@
 <template>
   <div class="url-demo">
     <div class="demo-header">
-      <div class="demo-title">URL 访问全流程</div>
+      <div class="demo-title">Toàn bộ quy trình truy cập URL</div>
       <button class="play-btn" @click="autoPlay" :disabled="playing">
-        {{ playing ? '播放中...' : '▶ 自动演示' }}
+        {{ playing ? 'Đang chạy...' : '▶ Tự động' }}
       </button>
     </div>
 
     <div class="flow">
       <div class="flow-side client-side">
-        <div class="side-label">浏览器</div>
+        <div class="side-label">Trình duyệt</div>
       </div>
 
       <div class="flow-steps">
@@ -36,7 +36,7 @@
       </div>
 
       <div class="flow-side server-side">
-        <div class="side-label">服务器</div>
+        <div class="side-label">Server</div>
       </div>
     </div>
   </div>
@@ -50,14 +50,14 @@ const playing = ref(false)
 let timer = null
 
 const steps = [
-  { name: 'URL 解析', dir: 'right', detail: 'https://example.com → 协议: https, 域名: example.com, 路径: /' },
-  { name: 'DNS 解析', dir: 'right', detail: '向 DNS 服务器查询，将域名翻译为 IP 地址 93.184.216.34' },
-  { name: 'TCP 三次握手', dir: 'right', detail: 'SYN → SYN-ACK → ACK，建立可靠的传输连接' },
-  { name: 'TLS 握手', dir: 'right', detail: '交换密钥、验证证书，建立 HTTPS 加密通道' },
-  { name: '发送 HTTP 请求', dir: 'right', detail: 'GET /index.html HTTP/1.1  Host: example.com' },
-  { name: '服务器处理', dir: 'left', detail: '解析请求 → 执行业务逻辑 → 查询数据库 → 组装响应' },
-  { name: '返回 HTTP 响应', dir: 'left', detail: 'HTTP/1.1 200 OK  Content-Type: text/html' },
-  { name: '浏览器渲染', dir: 'left', detail: 'HTML → DOM 树 → 样式计算 → 布局 → 绘制到屏幕' }
+  { name: 'Phân tích URL', dir: 'right', detail: 'https://example.com → protocol: https, domain: example.com, path: /' },
+  { name: 'Phân giải DNS', dir: 'right', detail: 'Hỏi DNS server, dịch tên miền sang địa chỉ IP 93.184.216.34' },
+  { name: 'TCP three-way handshake', dir: 'right', detail: 'SYN → SYN-ACK → ACK, thiết lập kết nối truyền tin cậy' },
+  { name: 'TLS handshake', dir: 'right', detail: 'Trao đổi khóa, xác thực chứng chỉ, lập kênh HTTPS mã hóa' },
+  { name: 'Gửi HTTP request', dir: 'right', detail: 'GET /index.html HTTP/1.1  Host: example.com' },
+  { name: 'Server xử lý', dir: 'left', detail: 'Phân tích request → chạy business logic → truy vấn DB → đóng gói response' },
+  { name: 'Trả về HTTP response', dir: 'left', detail: 'HTTP/1.1 200 OK  Content-Type: text/html' },
+  { name: 'Trình duyệt render', dir: 'left', detail: 'HTML → cây DOM → tính style → layout → vẽ lên màn hình' }
 ]
 
 const autoPlay = () => {

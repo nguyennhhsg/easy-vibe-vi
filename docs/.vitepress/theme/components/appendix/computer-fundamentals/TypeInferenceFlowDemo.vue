@@ -1,7 +1,7 @@
 <template>
   <div class="type-inference-demo">
-    <h4>🧠 类型推断：编译器如何"猜"出类型</h4>
-    <p class="desc">点击代码行，看编译器如何一步步推断类型</p>
+    <h4>🧠 Suy luận kiểu: trình biên dịch "đoán" kiểu thế nào</h4>
+    <p class="desc">Bấm vào dòng code để xem trình biên dịch suy luận kiểu từng bước</p>
 
     <div class="code-area">
       <div
@@ -19,7 +19,7 @@
     </div>
 
     <div v-if="activeLine !== null" class="explanation">
-      <div class="explain-header">推断过程</div>
+      <div class="explain-header">Quá trình suy luận</div>
       <div class="explain-steps">
         <div v-for="(step, j) in codeLines[activeLine].steps" :key="j" class="step">
           <span class="step-num">{{ j + 1 }}</span>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="lang-support">
-      <div class="support-title">各语言的类型推断能力</div>
+      <div class="support-title">Khả năng suy luận kiểu của các ngôn ngữ</div>
       <div class="support-grid">
         <div v-for="lang in langs" :key="lang.name" class="support-item">
           <span class="support-name">{{ lang.name }}</span>
@@ -53,56 +53,56 @@ const codeLines = [
     code: '<span class="kw">let</span> x = <span class="num">42</span>',
     inferred: 'number',
     steps: [
-      '右侧是字面量 42',
-      '42 是整数，类型为 number',
-      '推断 x 的类型为 number'
+      'Vế phải là literal 42',
+      '42 là số nguyên, kiểu là number',
+      'Suy ra kiểu của x là number'
     ]
   },
   {
     code: '<span class="kw">let</span> names = [<span class="str">"Alice"</span>, <span class="str">"Bob"</span>]',
     inferred: 'string[]',
     steps: [
-      '右侧是数组字面量 [...]',
-      '数组元素 "Alice"、"Bob" 都是 string',
-      '推断数组类型为 string[]'
+      'Vế phải là literal mảng [...]',
+      'Các phần tử "Alice", "Bob" đều là string',
+      'Suy ra kiểu mảng là string[]'
     ]
   },
   {
     code: '<span class="kw">let</span> result = x > 10 ? <span class="str">"big"</span> : <span class="str">"small"</span>',
     inferred: 'string',
     steps: [
-      '三元表达式的两个分支都是 string',
-      '两个分支类型一致',
-      '推断 result 类型为 string'
+      'Hai nhánh của biểu thức ba ngôi đều là string',
+      'Hai nhánh cùng kiểu',
+      'Suy ra kiểu của result là string'
     ]
   },
   {
     code: '<span class="kw">const</span> add = (a: <span class="type">number</span>, b: <span class="type">number</span>) => a + b',
     inferred: '(a: number, b: number) => number',
     steps: [
-      '参数 a 和 b 显式标注为 number',
-      'number + number 的结果是 number',
-      '推断返回值类型为 number'
+      'Tham số a và b được khai báo tường minh là number',
+      'number + number cho kết quả number',
+      'Suy ra kiểu trả về là number'
     ]
   },
   {
     code: '<span class="kw">let</span> mixed = [<span class="num">1</span>, <span class="str">"two"</span>, <span class="kw">true</span>]',
     inferred: '(number | string | boolean)[]',
     steps: [
-      '数组包含 number、string、boolean 三种类型',
-      '取所有元素类型的联合类型',
-      '推断为 (number | string | boolean)[]'
+      'Mảng chứa ba kiểu: number, string, boolean',
+      'Lấy union type của tất cả phần tử',
+      'Suy ra là (number | string | boolean)[]'
     ]
   }
 ]
 
 const langs = [
-  { name: 'Rust', level: 95, label: '几乎全推断' },
-  { name: 'TypeScript', level: 85, label: '大部分可推断' },
-  { name: 'Kotlin', level: 80, label: '局部推断强' },
-  { name: 'Go', level: 50, label: '仅 := 短声明' },
-  { name: 'Java', level: 40, label: 'var 关键字（Java 10+）' },
-  { name: 'C', level: 5, label: '几乎不推断' }
+  { name: 'Rust', level: 95, label: 'Gần như suy luận hết' },
+  { name: 'TypeScript', level: 85, label: 'Phần lớn có thể suy luận' },
+  { name: 'Kotlin', level: 80, label: 'Suy luận cục bộ mạnh' },
+  { name: 'Go', level: 50, label: 'Chỉ với khai báo ngắn :=' },
+  { name: 'Java', level: 40, label: 'Từ khóa var (Java 10+)' },
+  { name: 'C', level: 5, label: 'Hầu như không suy luận' }
 ]
 </script>
 

@@ -24,14 +24,14 @@
           v-if="!isGenerating && !hasGenerated"
           class="placeholder-text"
         >
-          👈 点击上方风格，开始创作
+          👈 Bấm vào phong cách bên trên để bắt đầu sáng tạo
         </div>
         <div
           v-if="isGenerating"
           class="loading-overlay"
         >
           <div class="spinner" />
-          <div>AI 正在绘制 {{ presets[selectedPreset].name }}...</div>
+          <div>AI đang vẽ {{ presets[selectedPreset].name }}...</div>
         </div>
       </div>
     </div>
@@ -47,9 +47,9 @@ const hasGenerated = ref(false)
 const selectedPreset = ref(-1)
 
 const presets = [
-  { name: '赛博朋克 (Cyberpunk)', icon: '🌃', color: ['#2b0055', '#ff00aa', '#00ffff'] },
-  { name: '油画风景 (Oil Painting)', icon: '🎨', color: ['#556b2f', '#8b4513', '#ffdead'] },
-  { name: '二次元 (Anime)', icon: '🌸', color: ['#ffb7c5', '#87ceeb', '#ffffff'] }
+  { name: 'Cyberpunk', icon: '🌃', color: ['#2b0055', '#ff00aa', '#00ffff'] },
+  { name: 'Tranh sơn dầu phong cảnh (Oil Painting)', icon: '🎨', color: ['#556b2f', '#8b4513', '#ffdead'] },
+  { name: 'Anime', icon: '🌸', color: ['#ffb7c5', '#87ceeb', '#ffffff'] }
 ]
 
 const selectPreset = (index) => {

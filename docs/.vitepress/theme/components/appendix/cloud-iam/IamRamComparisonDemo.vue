@@ -2,8 +2,8 @@
   <div class="iam-ram-comparison-demo">
     <div class="demo-header">
       <span class="icon">🔐</span>
-      <span class="title">IAM vs RAM 对比</span>
-      <span class="subtitle">不同云厂商权限管理服务</span>
+      <span class="title">So sánh IAM vs RAM</span>
+      <span class="subtitle">Dịch vụ quản lý quyền của các nhà cung cấp cloud</span>
     </div>
 
     <div class="main-area">
@@ -45,7 +45,7 @@
             </div>
             <div class="comp-item ram">
               <div class="comp-label">
-                阿里云 RAM
+                Alibaba Cloud RAM
               </div>
               <div class="comp-desc">
                 {{ selectedFeatureData.ramDetail }}
@@ -74,7 +74,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>IAM 和 RAM 核心概念基本一致，只是术语和实现细节略有不同。
+      <strong>Ý tưởng cốt lõi:</strong> Khái niệm cốt lõi của IAM và RAM về cơ bản giống nhau, chỉ khác chút về thuật ngữ và chi tiết triển khai.
     </div>
   </div>
 </template>
@@ -85,21 +85,21 @@ import { ref, computed } from 'vue'
 const selectedFeature = ref(0)
 
 const features = [
-  { icon: '👤', name: '用户管理' },
-  { icon: '👥', name: '用户组' },
-  { icon: '🎭', name: '角色扮演' },
-  { icon: '📋', name: '权限策略' },
-  { icon: '🔗', name: '身份联合' },
-  { icon: '🔑', name: '访问密钥' }
+  { icon: '👤', name: 'Quản lý user' },
+  { icon: '👥', name: 'User group' },
+  { icon: '🎭', name: 'Đóng vai role' },
+  { icon: '📋', name: 'Policy quyền' },
+  { icon: '🔗', name: 'Liên kết danh tính' },
+  { icon: '🔑', name: 'Access key' }
 ]
 
 const featureDetails = [
-  { name: '用户管理', awsDetail: 'IAM User，支持编程访问和控制台访问', ramDetail: 'RAM 用户，功能类似，支持子账号登录' },
-  { name: '用户组管理', awsDetail: 'IAM Group 批量管理用户权限', ramDetail: 'RAM 用户组，按部门分组管理' },
-  { name: '角色与扮演', awsDetail: 'IAM Role + STS AssumeRole', ramDetail: 'RAM 角色 + STS AssumeRole' },
-  { name: '权限策略', awsDetail: 'JSON 格式 Policy', ramDetail: '语法类似的权限策略' },
-  { name: '身份联合', awsDetail: 'SAML 2.0 / OIDC，支持 AD/Okta', ramDetail: 'SAML 2.0，支持钉钉等' },
-  { name: '访问密钥', awsDetail: 'AK/SK，支持轮换和分析', ramDetail: 'AccessKey，提供安全建议' }
+  { name: 'Quản lý user', awsDetail: 'IAM User, hỗ trợ truy cập lập trình và console', ramDetail: 'RAM user, chức năng tương tự, hỗ trợ login sub-account' },
+  { name: 'Quản lý user group', awsDetail: 'IAM Group quản lý quyền theo nhóm', ramDetail: 'RAM user group, gom nhóm theo bộ phận' },
+  { name: 'Role và assume', awsDetail: 'IAM Role + STS AssumeRole', ramDetail: 'RAM role + STS AssumeRole' },
+  { name: 'Policy quyền', awsDetail: 'Policy định dạng JSON', ramDetail: 'Policy quyền có cú pháp tương tự' },
+  { name: 'Liên kết danh tính', awsDetail: 'SAML 2.0 / OIDC, hỗ trợ AD/Okta', ramDetail: 'SAML 2.0, hỗ trợ DingTalk v.v.' },
+  { name: 'Access key', awsDetail: 'AK/SK, hỗ trợ xoay key và phân tích', ramDetail: 'AccessKey, có khuyến nghị bảo mật' }
 ]
 
 const selectedFeatureData = computed(() => featureDetails[selectedFeature.value])

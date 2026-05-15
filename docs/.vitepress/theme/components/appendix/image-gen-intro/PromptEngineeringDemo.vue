@@ -1,15 +1,15 @@
 <!--
   PromptEngineeringDemo.vue
-  提示词工程演示组件
+  Component minh hoạ prompt engineering
 
-  用途：
-  展示提示词如何影响生成结果，帮助用户理解提示词工程的重要性。
+  Mục đích:
+  Trình bày prompt ảnh hưởng tới kết quả sinh ảnh ra sao, giúp bạn hiểu tầm quan trọng của prompt engineering.
 
-  交互功能：
-  - 提示词实时编辑
-  - 关键词提取和高亮
-  - 权重调节
-  - 对比不同提示词的效果
+  Tương tác:
+  - Chỉnh sửa prompt theo thời gian thực
+  - Trích xuất và làm nổi bật từ khoá
+  - Điều chỉnh trọng số
+  - So sánh hiệu quả của các prompt khác nhau
 -->
 <template>
   <div class="prompt-engineering-demo">
@@ -17,26 +17,26 @@
       <template #header>
         <div class="header-title">
           <el-icon><EditPen /></el-icon>
-          <span>✍️ 提示词工程实验室</span>
+          <span>✍️ Phòng thí nghiệm prompt engineering</span>
         </div>
       </template>
 
       <div class="demo-layout">
-        <!-- 左侧：提示词编辑 -->
+        <!-- Bên trái: chỉnh sửa prompt -->
         <div class="prompt-panel">
           <div class="prompt-input-section">
-            <label>提示词 (Prompt)</label>
+            <label>Prompt</label>
             <el-input
               v-model="prompt"
               type="textarea"
               :rows="4"
-              placeholder="输入你的提示词..."
+              placeholder="Nhập prompt của bạn..."
             />
           </div>
 
           <div class="prompt-analysis">
             <div class="analysis-title">
-              关键词分析
+              Phân tích từ khoá
             </div>
             <div class="keywords-list">
               <div
@@ -61,76 +61,76 @@
 
           <div class="prompt-tips">
             <el-collapse>
-              <el-collapse-item title="💡 提示词技巧">
+              <el-collapse-item title="💡 Mẹo viết prompt">
                 <ul class="tips-list">
-                  <li><strong>主体描述</strong>：明确你要画什么（如 "一只橘猫"）</li>
-                  <li><strong>风格词</strong>：指定艺术风格（如 "水彩画"、"赛博朋克"）</li>
-                  <li><strong>质量词</strong>：提升画质（如 "8k"、" masterpiece"、"highly detailed"）</li>
-                  <li><strong>光照</strong>：控制光线效果（如 "golden hour"、"volumetric lighting"）</li>
-                  <li><strong>权重语法</strong>：使用 (word:1.5) 增加权重，(word:0.5) 降低权重</li>
+                  <li><strong>Mô tả chủ thể</strong>: Nói rõ bạn muốn vẽ gì (ví dụ "một con mèo vàng")</li>
+                  <li><strong>Từ phong cách</strong>: Chỉ định phong cách nghệ thuật (ví dụ "tranh màu nước", "cyberpunk")</li>
+                  <li><strong>Từ chất lượng</strong>: Nâng chất lượng ảnh (ví dụ "8k", "masterpiece", "highly detailed")</li>
+                  <li><strong>Ánh sáng</strong>: Điều khiển hiệu ứng ánh sáng (ví dụ "golden hour", "volumetric lighting")</li>
+                  <li><strong>Cú pháp trọng số</strong>: Dùng (word:1.5) để tăng trọng số, (word:0.5) để giảm</li>
                 </ul>
               </el-collapse-item>
             </el-collapse>
           </div>
         </div>
 
-        <!-- 右侧：效果预览 -->
+        <!-- Bên phải: xem trước hiệu quả -->
         <div class="preview-panel">
           <div class="preview-tabs">
             <el-tabs v-model="activeTab">
               <el-tab-pane
-                label="结构解析"
+                label="Phân tích cấu trúc"
                 name="structure"
               >
                 <div class="structure-viz">
                   <div class="structure-section">
                     <div class="section-header">
                       <el-tag type="primary">
-                        主体 (Subject)
+                        Chủ thể (Subject)
                       </el-tag>
                     </div>
                     <div class="section-content">
-                      {{ extractSubject() || '未检测到主体' }}
+                      {{ extractSubject() || 'Không phát hiện chủ thể' }}
                     </div>
                   </div>
 
                   <div class="structure-section">
                     <div class="section-header">
                       <el-tag type="success">
-                        风格 (Style)
+                        Phong cách (Style)
                       </el-tag>
                     </div>
                     <div class="section-content">
-                      {{ extractStyle() || '未检测到风格词' }}
+                      {{ extractStyle() || 'Không phát hiện từ phong cách' }}
                     </div>
                   </div>
 
                   <div class="structure-section">
                     <div class="section-header">
                       <el-tag type="warning">
-                        质量 (Quality)
+                        Chất lượng (Quality)
                       </el-tag>
                     </div>
                     <div class="section-content">
-                      {{ extractQuality() || '未检测到质量词' }}
+                      {{ extractQuality() || 'Không phát hiện từ chất lượng' }}
                     </div>
                   </div>
 
                   <div class="structure-section">
                     <div class="section-header">
                       <el-tag type="info">
-                        环境 (Environment)
+                        Môi trường (Environment)
                       </el-tag>
                     </div>
                     <div class="section-content">
-                      {{ extractEnvironment() || '未检测到环境描述' }}
+                      {{ extractEnvironment() || 'Không phát hiện mô tả môi trường' }}
                     </div>
                   </div>
                 </div>
               </el-tab-pane>
 
               <el-tab-pane
-                label="对比示例"
+                label="So sánh ví dụ"
                 name="comparison"
               >
                 <div class="comparison-list">
@@ -152,16 +152,16 @@
               </el-tab-pane>
 
               <el-tab-pane
-                label="负面提示词"
+                label="Negative prompt"
                 name="negative"
               >
                 <div class="negative-prompt-section">
-                  <label>负面提示词 (Negative Prompt)</label>
+                  <label>Negative Prompt</label>
                   <el-input
                     v-model="negativePrompt"
                     type="textarea"
                     :rows="3"
-                    placeholder="输入你不希望出现的内容..."
+                    placeholder="Nhập nội dung bạn không muốn xuất hiện..."
                   />
                   <div class="negative-presets">
                     <el-tag
@@ -184,8 +184,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>提示词工程的核心：</strong>
-          好的提示词 = 清晰的描述 + 适当的风格词 + 质量增强词。通过调整不同部分的权重，可以精确控制生成结果。
+          <strong>Cốt lõi của prompt engineering:</strong>
+          Prompt tốt = mô tả rõ ràng + từ phong cách phù hợp + từ tăng chất lượng. Bằng cách điều chỉnh trọng số của từng phần, bạn có thể kiểm soát chính xác kết quả sinh ảnh.
         </p>
       </div>
     </el-card>
@@ -196,30 +196,30 @@
 import { ref, computed } from 'vue'
 import { EditPen } from '@element-plus/icons-vue'
 
-const prompt = ref('一只橘猫，坐在窗台上，阳光照射，水彩画风格，8k高清')
-const negativePrompt = ref('模糊, 低质量, 变形, 多余的手指')
+const prompt = ref('một con mèo vàng, ngồi trên bậu cửa sổ, ánh nắng chiếu, phong cách tranh màu nước, 8k chất lượng cao')
+const negativePrompt = ref('blurry, low quality, deformed, extra fingers')
 const activeTab = ref('structure')
 const selectedExample = ref(0)
 
-// 关键词类型
+// Loại từ khoá
 const keywordTypes = {
-  subject: ['猫', '狗', '人', '风景', '建筑', '汽车', '花', '树'],
-  style: ['水彩', '油画', '素描', '赛博朋克', '像素', '写实', '卡通', '动漫'],
-  quality: ['8k', '高清', ' masterpiece', 'detailed', 'high quality', '4k', 'sharp'],
-  environment: ['阳光', '雨天', '夜晚', '森林', '城市', '海边', '室内', '户外']
+  subject: ['mèo', 'chó', 'người', 'phong cảnh', 'kiến trúc', 'xe', 'hoa', 'cây', 'cat', 'dog'],
+  style: ['màu nước', 'sơn dầu', 'phác thảo', 'cyberpunk', 'pixel', 'tả thực', 'cartoon', 'anime', 'watercolor'],
+  quality: ['8k', 'chất lượng cao', 'masterpiece', 'detailed', 'high quality', '4k', 'sharp'],
+  environment: ['nắng', 'mưa', 'đêm', 'rừng', 'thành phố', 'biển', 'trong nhà', 'ngoài trời', 'ánh nắng']
 }
 
-// 分析关键词
+// Phân tích từ khoá
 const analyzedKeywords = computed(() => {
   const keywords = []
   const words = prompt.value.split(/[,，\s]+/).filter(w => w.length > 0)
 
   words.forEach(word => {
     let type = 'other'
-    if (keywordTypes.subject.some(k => word.includes(k))) type = 'subject'
-    else if (keywordTypes.style.some(k => word.includes(k))) type = 'style'
+    if (keywordTypes.subject.some(k => word.toLowerCase().includes(k.toLowerCase()))) type = 'subject'
+    else if (keywordTypes.style.some(k => word.toLowerCase().includes(k.toLowerCase()))) type = 'style'
     else if (keywordTypes.quality.some(k => word.toLowerCase().includes(k.toLowerCase()))) type = 'quality'
-    else if (keywordTypes.environment.some(k => word.includes(k))) type = 'environment'
+    else if (keywordTypes.environment.some(k => word.toLowerCase().includes(k.toLowerCase()))) type = 'environment'
 
     keywords.push({
       text: word,
@@ -231,7 +231,7 @@ const analyzedKeywords = computed(() => {
   return keywords
 })
 
-// 提取不同类型的词
+// Trích xuất các loại từ khác nhau
 const extractSubject = () => {
   return analyzedKeywords.value
     .filter(k => k.type === 'subject')
@@ -260,36 +260,36 @@ const extractEnvironment = () => {
     .join(', ')
 }
 
-// 提示词示例
+// Ví dụ prompt
 const promptExamples = [
   {
-    prompt: '一只猫',
-    description: '基础描述，结果可能不够理想'
+    prompt: 'một con mèo',
+    description: 'Mô tả cơ bản, kết quả có thể chưa ưng ý'
   },
   {
-    prompt: '一只橘猫，坐在窗台上',
-    description: '添加主体细节和场景'
+    prompt: 'một con mèo vàng, ngồi trên bậu cửa sổ',
+    description: 'Thêm chi tiết chủ thể và bối cảnh'
   },
   {
-    prompt: '一只橘猫，坐在窗台上，阳光照射，水彩画风格',
-    description: '添加光照和风格'
+    prompt: 'một con mèo vàng, ngồi trên bậu cửa sổ, ánh nắng chiếu, phong cách tranh màu nước',
+    description: 'Thêm ánh sáng và phong cách'
   },
   {
-    prompt: '一只橘猫，坐在窗台上，阳光照射，水彩画风格，8k高清， masterpiece',
-    description: '完整提示词，包含质量词'
+    prompt: 'một con mèo vàng, ngồi trên bậu cửa sổ, ánh nắng chiếu, phong cách tranh màu nước, 8k chất lượng cao, masterpiece',
+    description: 'Prompt đầy đủ, bao gồm từ chất lượng'
   }
 ]
 
-// 负面提示词预设
+// Preset negative prompt
 const negativePresets = [
-  '模糊',
-  '低质量',
-  '变形',
-  '多余的手指',
-  '扭曲的脸',
-  '噪点',
-  '水印',
-  '文字'
+  'blurry',
+  'low quality',
+  'deformed',
+  'extra fingers',
+  'distorted face',
+  'noise',
+  'watermark',
+  'text'
 ]
 
 const selectExample = (index) => {

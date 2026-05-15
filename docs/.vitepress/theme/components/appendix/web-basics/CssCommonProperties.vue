@@ -1,8 +1,7 @@
 <template>
   <div class="css-props-ref">
     <div class="intro">
-      CSS
-      属性就像装修队的“施工指令”。常用的其实只有几十个，这里有一份“装修菜单”供你参考：
+      Thuộc tính CSS giống như "chỉ thị thi công" của đội thi công. Thường dùng thực ra chỉ có vài chục cái, đây là một "menu trang trí" cho bạn tham khảo:
     </div>
 
     <div class="categories">
@@ -46,7 +45,7 @@
       </div>
       <div class="detail-code">
         <div class="code-label">
-          示例代码：
+          Mã ví dụ:
         </div>
         <pre><code>{{ activeProp.example }}</code></pre>
       </div>
@@ -55,7 +54,7 @@
       v-else
       class="prop-detail empty"
     >
-      点击上面的属性看看它能做什么 👆
+      Nhấp vào thuộc tính phía trên để xem nó có thể làm gì 👆
     </div>
   </div>
 </template>
@@ -67,145 +66,145 @@ const activeProp = ref(null)
 
 const categories = [
   {
-    title: '📝 文字与排版',
+    title: '📝 Chữ và bố cục',
     props: [
       {
         name: 'color',
-        desc: '文字颜色',
-        categoryLabel: '文字',
+        desc: 'Màu chữ',
+        categoryLabel: 'Chữ',
         fullDesc:
-          '改变文字的颜色。可以使用英文单词(red)、十六进制(#ff0000)或RGB值。',
+          'Thay đổi màu chữ. Có thể dùng tên tiếng Anh (red), hệ thập lục phân (#ff0000) hoặc giá trị RGB.',
         example: 'color: #333333;'
       },
       {
         name: 'font-size',
-        desc: '字号大小',
-        categoryLabel: '文字',
-        fullDesc: '设置文字的大小。常用单位是 px (像素) 或 rem。',
+        desc: 'Cỡ chữ',
+        categoryLabel: 'Chữ',
+        fullDesc: 'Đặt cỡ chữ. Đơn vị thường dùng là px (pixel) hoặc rem.',
         example: 'font-size: 16px;'
       },
       {
         name: 'font-weight',
-        desc: '字体粗细',
-        categoryLabel: '文字',
-        fullDesc: '设置文字的粗细。bold 是加粗，normal 是正常。',
+        desc: 'Độ đậm chữ',
+        categoryLabel: 'Chữ',
+        fullDesc: 'Đặt độ đậm chữ. bold là in đậm, normal là bình thường.',
         example: 'font-weight: bold;'
       },
       {
         name: 'text-align',
-        desc: '对齐方式',
-        categoryLabel: '排版',
+        desc: 'Cách căn lề',
+        categoryLabel: 'Bố cục',
         fullDesc:
-          '设置文字水平对齐方式：左对齐(left)、居中(center)、右对齐(right)。',
+          'Đặt cách căn ngang của chữ: căn trái (left), căn giữa (center), căn phải (right).',
         example: 'text-align: center;'
       },
       {
         name: 'line-height',
-        desc: '行高',
-        categoryLabel: '排版',
-        fullDesc: '设置行间距。通常设为 1.5 左右让阅读更舒服。',
+        desc: 'Chiều cao dòng',
+        categoryLabel: 'Bố cục',
+        fullDesc: 'Đặt khoảng cách giữa các dòng. Thường đặt khoảng 1.5 để đọc thoải mái hơn.',
         example: 'line-height: 1.5;'
       }
     ]
   },
   {
-    title: '📦 盒子与大小',
+    title: '📦 Hộp và kích thước',
     props: [
       {
         name: 'width / height',
-        desc: '宽 / 高',
-        categoryLabel: '尺寸',
-        fullDesc: '设置元素的宽度和高度。',
+        desc: 'Rộng / Cao',
+        categoryLabel: 'Kích thước',
+        fullDesc: 'Đặt chiều rộng và chiều cao của phần tử.',
         example: 'width: 100px;\nheight: 50px;'
       },
       {
         name: 'padding',
-        desc: '内边距',
-        categoryLabel: '间距',
+        desc: 'Lề trong',
+        categoryLabel: 'Khoảng cách',
         fullDesc:
-          '盒子内部的空间（内容距离边框的距离）。像填充泡沫一样撑大盒子。',
+          'Không gian bên trong hộp (khoảng cách từ nội dung đến viền). Giống như chèn xốp để làm phình hộp ra.',
         example: 'padding: 20px;'
       },
       {
         name: 'margin',
-        desc: '外边距',
-        categoryLabel: '间距',
-        fullDesc: '盒子外部的空间（盒子与其他元素之间的距离）。',
+        desc: 'Lề ngoài',
+        categoryLabel: 'Khoảng cách',
+        fullDesc: 'Không gian bên ngoài hộp (khoảng cách giữa hộp và các phần tử khác).',
         example: 'margin: 20px;'
       },
       {
         name: 'background',
-        desc: '背景',
-        categoryLabel: '外观',
-        fullDesc: '设置背景颜色或背景图片。',
+        desc: 'Nền',
+        categoryLabel: 'Vẻ ngoài',
+        fullDesc: 'Đặt màu nền hoặc ảnh nền.',
         example: 'background: #f0f0f0;'
       }
     ]
   },
   {
-    title: '🎨 边框与装饰',
+    title: '🎨 Viền và trang trí',
     props: [
       {
         name: 'border',
-        desc: '边框',
-        categoryLabel: '边框',
-        fullDesc: '设置边框的粗细、样式和颜色。',
+        desc: 'Viền',
+        categoryLabel: 'Viền',
+        fullDesc: 'Đặt độ dày, kiểu và màu sắc của viền.',
         example: 'border: 1px solid #ccc;'
       },
       {
         name: 'border-radius',
-        desc: '圆角',
-        categoryLabel: '边框',
-        fullDesc: '让盒子的角变圆润。现在的按钮通常都有点圆角。',
+        desc: 'Bo góc',
+        categoryLabel: 'Viền',
+        fullDesc: 'Làm cho các góc của hộp tròn lại. Các nút bây giờ thường đều có chút bo góc.',
         example: 'border-radius: 6px;'
       },
       {
         name: 'box-shadow',
-        desc: '阴影',
-        categoryLabel: '装饰',
-        fullDesc: '给盒子添加阴影效果，增加立体感和层次感。',
+        desc: 'Bóng đổ',
+        categoryLabel: 'Trang trí',
+        fullDesc: 'Thêm hiệu ứng bóng đổ cho hộp, tăng cảm giác lập thể và độ sâu.',
         example: 'box-shadow: 0 4px 6px rgba(0,0,0,0.1);'
       },
       {
         name: 'opacity',
-        desc: '透明度',
-        categoryLabel: '装饰',
-        fullDesc: '设置元素的透明度，0 是全透明（看不见但还在），1 是不透明。',
+        desc: 'Độ mờ',
+        categoryLabel: 'Trang trí',
+        fullDesc: 'Đặt độ mờ của phần tử, 0 là trong suốt hoàn toàn (không nhìn thấy nhưng vẫn còn), 1 là không trong suốt.',
         example: 'opacity: 0.8;'
       }
     ]
   },
   {
-    title: '📐 布局与定位',
+    title: '📐 Bố trí và định vị',
     props: [
       {
         name: 'display',
-        desc: '显示模式',
-        categoryLabel: '布局',
+        desc: 'Chế độ hiển thị',
+        categoryLabel: 'Bố trí',
         fullDesc:
-          '决定盒子怎么摆。block(独占一行), flex(弹性布局), none(隐藏)。',
+          'Quyết định cách hộp được đặt. block (chiếm trọn một hàng), flex (bố cục linh hoạt), none (ẩn).',
         example: 'display: flex;'
       },
       {
         name: 'position',
-        desc: '定位方式',
-        categoryLabel: '定位',
+        desc: 'Cách định vị',
+        categoryLabel: 'Định vị',
         fullDesc:
-          '决定盒子怎么定位。relative(相对), absolute(绝对), fixed(固定在屏幕)。',
+          'Quyết định cách định vị hộp. relative (tương đối), absolute (tuyệt đối), fixed (cố định trên màn hình).',
         example: 'position: absolute;\ntop: 0;\nleft: 0;'
       },
       {
         name: 'z-index',
-        desc: '层级',
-        categoryLabel: '定位',
-        fullDesc: '决定谁叠在谁上面。数字越大越靠上。',
+        desc: 'Lớp xếp chồng',
+        categoryLabel: 'Định vị',
+        fullDesc: 'Quyết định ai chồng lên ai. Số càng lớn càng ở trên.',
         example: 'z-index: 100;'
       },
       {
         name: 'cursor',
-        desc: '鼠标手势',
-        categoryLabel: '交互',
-        fullDesc: '鼠标移上去变成什么样。pointer(小手), text(输入光标)。',
+        desc: 'Con trỏ chuột',
+        categoryLabel: 'Tương tác',
+        fullDesc: 'Khi rê chuột lên sẽ biến thành hình gì. pointer (bàn tay nhỏ), text (con trỏ nhập).',
         example: 'cursor: pointer;'
       }
     ]

@@ -1,15 +1,15 @@
 <!--
   LoRADemo.vue
-  LoRA 微调演示组件
+  Component minh hoạ LoRA fine-tuning
 
-  用途：
-  展示 LoRA (Low-Rank Adaptation) 如何以轻量级方式微调模型，实现特定风格或角色的生成。
+  Mục đích:
+  Trình bày LoRA (Low-Rank Adaptation) fine-tune model nhẹ ra sao, để sinh ra phong cách hoặc nhân vật cụ thể.
 
-  交互功能：
-  - LoRA 权重调节
-  - 基础模型 + LoRA 组合展示
-  - 对比不同权重的生成效果
-  - LoRA 融合可视化
+  Tương tác:
+  - Điều chỉnh trọng số LoRA
+  - Hiển thị tổ hợp base model + LoRA
+  - So sánh hiệu quả sinh ảnh với các trọng số khác nhau
+  - Trực quan hoá việc gộp nhiều LoRA
 -->
 <template>
   <div class="lora-demo">
@@ -17,23 +17,23 @@
       <template #header>
         <div class="header-title">
           <el-icon><Collection /></el-icon>
-          <span>🎨 LoRA：轻量级微调</span>
+          <span>🎨 LoRA: Fine-tune nhẹ</span>
         </div>
       </template>
 
       <div class="demo-content">
-        <!-- LoRA 概念说明 -->
+        <!-- Giải thích khái niệm LoRA -->
         <div class="concept-section">
           <div class="concept-visual">
             <div class="model-box base">
               <div class="box-title">
-                基础模型
+                Base model
               </div>
               <div class="box-size">
                 4-8 GB
               </div>
               <div class="box-desc">
-                通用知识
+                Kiến thức tổng quát
               </div>
             </div>
             <div class="plus-sign">
@@ -41,13 +41,13 @@
             </div>
             <div class="model-box lora">
               <div class="box-title">
-                LoRA 权重
+                Trọng số LoRA
               </div>
               <div class="box-size">
                 50-200 MB
               </div>
               <div class="box-desc">
-                特定风格/角色
+                Phong cách/nhân vật cụ thể
               </div>
             </div>
             <div class="equals-sign">
@@ -55,22 +55,22 @@
             </div>
             <div class="model-box result">
               <div class="box-title">
-                定制模型
+                Model tuỳ biến
               </div>
               <div class="box-size">
-                无需合并
+                Không cần merge
               </div>
               <div class="box-desc">
-                动态加载
+                Nạp động
               </div>
             </div>
           </div>
         </div>
 
-        <!-- LoRA 权重调节 -->
+        <!-- Điều chỉnh trọng số LoRA -->
         <div class="weight-control-section">
           <div class="weight-header">
-            <span>LoRA 权重调节</span>
+            <span>Điều chỉnh trọng số LoRA</span>
             <el-tag
               type="primary"
               effect="dark"
@@ -85,41 +85,41 @@
             :step="0.1"
             show-stops
             :marks="{
-              0: '无效果',
-              0.5: '轻微',
-              1: '标准',
-              1.5: '强烈'
+              0: 'Không tác dụng',
+              0.5: 'Nhẹ',
+              1: 'Chuẩn',
+              1.5: 'Mạnh'
             }"
           />
 
           <div class="lora-selector">
             <el-radio-group v-model="selectedLoRA">
               <el-radio-button label="anime">
-                动漫风格
+                Phong cách anime
               </el-radio-button>
               <el-radio-button label="realistic">
-                写实风格
+                Phong cách tả thực
               </el-radio-button>
               <el-radio-button label="sketch">
-                素描风格
+                Phong cách phác thảo
               </el-radio-button>
               <el-radio-button label="3d">
-                3D 风格
+                Phong cách 3D
               </el-radio-button>
             </el-radio-group>
           </div>
         </div>
 
-        <!-- 效果对比 -->
+        <!-- So sánh hiệu quả -->
         <div class="comparison-section">
           <div class="comparison-title">
-            生成效果对比
+            So sánh hiệu quả sinh ảnh
           </div>
           <div class="comparison-grid">
             <div class="comparison-item">
               <div class="item-label">
                 <el-tag type="info">
-                  仅基础模型
+                  Chỉ base model
                 </el-tag>
               </div>
               <canvas
@@ -129,14 +129,14 @@
                 class="comparison-canvas"
               />
               <div class="item-desc">
-                通用风格
+                Phong cách tổng quát
               </div>
             </div>
 
             <div class="comparison-item main">
               <div class="item-label">
                 <el-tag type="success">
-                  基础 + LoRA ({{ loraWeight }})
+                  Base + LoRA ({{ loraWeight }})
                 </el-tag>
               </div>
               <canvas
@@ -152,10 +152,10 @@
           </div>
         </div>
 
-        <!-- 多 LoRA 融合 -->
+        <!-- Gộp nhiều LoRA -->
         <div class="fusion-section">
           <div class="fusion-title">
-            🔀 多 LoRA 融合
+            🔀 Gộp nhiều LoRA
           </div>
           <div class="fusion-controls">
             <div
@@ -185,24 +185,24 @@
                 type="primary"
                 size="small"
               >
-                <el-icon><Plus /></el-icon> 添加 LoRA
+                <el-icon><Plus /></el-icon> Thêm LoRA
               </el-button>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item command="anime">
-                    动漫风格
+                    Phong cách anime
                   </el-dropdown-item>
                   <el-dropdown-item command="realistic">
-                    写实风格
+                    Phong cách tả thực
                   </el-dropdown-item>
                   <el-dropdown-item command="sketch">
-                    素描风格
+                    Phong cách phác thảo
                   </el-dropdown-item>
                   <el-dropdown-item command="3d">
-                    3D 风格
+                    Phong cách 3D
                   </el-dropdown-item>
                   <el-dropdown-item command="watercolor">
-                    水彩风格
+                    Phong cách màu nước
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -218,19 +218,19 @@
             />
             <div class="fusion-formula">
               <div class="formula-title">
-                融合公式
+                Công thức gộp
               </div>
               <div class="formula-content">
-                输出 = 基础模型 + Σ(LoRAᵢ × 权重ᵢ)
+                Output = Base model + Σ(LoRAᵢ × trọng_sốᵢ)
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 应用场景 -->
+        <!-- Tình huống ứng dụng -->
         <div class="use-cases">
           <div class="use-cases-title">
-            🎯 LoRA 典型应用
+            🎯 Ứng dụng tiêu biểu của LoRA
           </div>
           <div class="use-cases-grid">
             <div class="use-case-card">
@@ -238,10 +238,10 @@
                 👤
               </div>
               <div class="use-case-title">
-                角色一致性
+                Nhất quán nhân vật
               </div>
               <div class="use-case-desc">
-                训练特定角色，保持形象一致
+                Huấn luyện nhân vật cụ thể, giữ hình tượng nhất quán
               </div>
             </div>
             <div class="use-case-card">
@@ -249,10 +249,10 @@
                 🎨
               </div>
               <div class="use-case-title">
-                艺术风格
+                Phong cách nghệ thuật
               </div>
               <div class="use-case-desc">
-                模仿特定画家或艺术风格
+                Mô phỏng phong cách của một hoạ sĩ hay trường phái cụ thể
               </div>
             </div>
             <div class="use-case-card">
@@ -260,10 +260,10 @@
                 👗
               </div>
               <div class="use-case-title">
-                服装概念
+                Concept trang phục
               </div>
               <div class="use-case-desc">
-                特定服装或配饰设计
+                Thiết kế trang phục hay phụ kiện cụ thể
               </div>
             </div>
             <div class="use-case-card">
@@ -271,10 +271,10 @@
                 🏢
               </div>
               <div class="use-case-title">
-                产品展示
+                Trưng bày sản phẩm
               </div>
               <div class="use-case-desc">
-                特定产品或品牌风格
+                Phong cách của sản phẩm hay thương hiệu cụ thể
               </div>
             </div>
           </div>
@@ -284,8 +284,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>LoRA 原理：</strong>
-          LoRA 通过在原始权重矩阵旁边添加低秩矩阵来进行微调，只训练少量参数（通常 &lt; 1%），就能实现特定风格或角色的学习。相比完整微调，LoRA 文件小、训练快、可组合使用。
+          <strong>Nguyên lý LoRA:</strong>
+          LoRA fine-tune bằng cách thêm ma trận low-rank cạnh ma trận trọng số gốc, chỉ huấn luyện một lượng nhỏ tham số (thường &lt; 1%) là có thể học được phong cách hoặc nhân vật cụ thể. So với full fine-tune, LoRA có file nhỏ, train nhanh, và có thể kết hợp nhiều LoRA với nhau.
         </p>
       </div>
     </el-card>
@@ -304,25 +304,25 @@ const loraCanvas = ref(null)
 const fusionCanvas = ref(null)
 
 const activeLoRAs = ref([
-  { name: '动漫风格', type: 'primary', weight: 0.6 },
-  { name: '水彩效果', type: 'success', weight: 0.3 }
+  { name: 'Phong cách anime', type: 'primary', weight: 0.6 },
+  { name: 'Hiệu ứng màu nước', type: 'success', weight: 0.3 }
 ])
 
 const loraTypes = {
-  anime: { name: '动漫风格', type: 'primary', color: '#FFB6C1' },
-  realistic: { name: '写实风格', type: 'success', color: '#DDA0DD' },
-  sketch: { name: '素描风格', type: 'warning', color: '#D3D3D3' },
-  '3d': { name: '3D 风格', type: 'danger', color: '#87CEEB' },
-  watercolor: { name: '水彩效果', type: 'info', color: '#98FB98' }
+  anime: { name: 'Phong cách anime', type: 'primary', color: '#FFB6C1' },
+  realistic: { name: 'Phong cách tả thực', type: 'success', color: '#DDA0DD' },
+  sketch: { name: 'Phong cách phác thảo', type: 'warning', color: '#D3D3D3' },
+  '3d': { name: 'Phong cách 3D', type: 'danger', color: '#87CEEB' },
+  watercolor: { name: 'Hiệu ứng màu nước', type: 'info', color: '#98FB98' }
 }
 
 const getLoRADescription = () => {
   const descriptions = {
-    anime: '大眼睛、鲜明色彩的动漫风格',
-    realistic: '照片级真实感',
-    sketch: '手绘线条和阴影',
-    '3d': '立体感和材质渲染',
-    watercolor: '柔和的水彩晕染效果'
+    anime: 'Phong cách anime mắt to, màu sắc tươi',
+    realistic: 'Chân thực như ảnh chụp',
+    sketch: 'Nét vẽ tay và đổ bóng',
+    '3d': 'Cảm giác lập thể và render chất liệu',
+    watercolor: 'Hiệu ứng loang màu nước nhẹ nhàng'
   }
   return descriptions[selectedLoRA.value] || ''
 }
@@ -342,27 +342,27 @@ const removeLoRA = (index) => {
   activeLoRAs.value.splice(index, 1)
 }
 
-// 绘制基础图像
+// Vẽ ảnh nền
 const drawBaseImage = (ctx, width, height) => {
   ctx.fillStyle = '#f5f5f5'
   ctx.fillRect(0, 0, width, height)
 
-  // 绘制一个简单的角色轮廓
+  // Vẽ đường viền nhân vật đơn giản
   ctx.strokeStyle = '#666'
   ctx.lineWidth = 2
 
-  // 头部
+  // Đầu
   ctx.beginPath()
   ctx.arc(width * 0.5, height * 0.3, width * 0.2, 0, Math.PI * 2)
   ctx.stroke()
 
-  // 身体
+  // Thân
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.5)
   ctx.lineTo(width * 0.5, height * 0.8)
   ctx.stroke()
 
-  // 手臂
+  // Cánh tay
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.55)
   ctx.lineTo(width * 0.25, height * 0.7)
@@ -371,19 +371,19 @@ const drawBaseImage = (ctx, width, height) => {
   ctx.stroke()
 }
 
-// 绘制 LoRA 效果
+// Vẽ hiệu ứng LoRA
 const drawLoRAImage = (ctx, width, height, loraType, weight) => {
-  // 先画基础
+  // Vẽ base trước
   drawBaseImage(ctx, width, height)
 
-  // 根据 LoRA 类型添加效果
+  // Thêm hiệu ứng theo loại LoRA
   const effects = {
     anime: () => {
-      // 动漫风格：大眼睛、鲜艳色彩
+      // Phong cách anime: mắt to, màu sắc tươi
       ctx.fillStyle = `rgba(255, 182, 193, ${weight * 0.5})`
       ctx.fillRect(0, 0, width, height)
 
-      // 大眼睛
+      // Mắt to
       ctx.fillStyle = `rgba(100, 149, 237, ${weight})`
       ctx.beginPath()
       ctx.ellipse(width * 0.42, height * 0.28, width * 0.08 * weight, width * 0.1 * weight, 0, 0, Math.PI * 2)
@@ -393,18 +393,18 @@ const drawLoRAImage = (ctx, width, height, loraType, weight) => {
       ctx.fill()
     },
     realistic: () => {
-      // 写实风格：阴影、细节
+      // Phong cách tả thực: đổ bóng, chi tiết
       ctx.fillStyle = `rgba(139, 69, 19, ${weight * 0.3})`
       ctx.fillRect(0, 0, width, height)
 
-      // 添加阴影
+      // Thêm bóng
       ctx.fillStyle = `rgba(0, 0, 0, ${weight * 0.2})`
       ctx.beginPath()
       ctx.ellipse(width * 0.5, height * 0.85, width * 0.3, height * 0.05, 0, 0, Math.PI * 2)
       ctx.fill()
     },
     sketch: () => {
-      // 素描风格：线条、交叉阴影
+      // Phong cách phác thảo: nét và bóng chéo
       ctx.strokeStyle = `rgba(0, 0, 0, ${weight * 0.5})`
       ctx.lineWidth = 1
       for (let i = 0; i < 10; i++) {
@@ -415,7 +415,7 @@ const drawLoRAImage = (ctx, width, height, loraType, weight) => {
       }
     },
     '3d': () => {
-      // 3D 风格：渐变、立体感
+      // Phong cách 3D: gradient, cảm giác lập thể
       const gradient = ctx.createRadialGradient(
         width * 0.3, height * 0.3, 0,
         width * 0.5, height * 0.5, width * 0.6
@@ -432,15 +432,15 @@ const drawLoRAImage = (ctx, width, height, loraType, weight) => {
   }
 }
 
-// 绘制融合效果
+// Vẽ hiệu ứng gộp
 const drawFusionImage = (ctx, width, height) => {
   ctx.fillStyle = '#f5f5f5'
   ctx.fillRect(0, 0, width, height)
 
-  // 基础图像
+  // Ảnh nền
   drawBaseImage(ctx, width, height)
 
-  // 叠加所有 LoRA 效果
+  // Chồng tất cả hiệu ứng LoRA
   activeLoRAs.value.forEach(lora => {
     const loraKey = Object.keys(loraTypes).find(
       key => loraTypes[key].name === lora.name

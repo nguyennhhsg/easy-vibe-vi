@@ -58,8 +58,8 @@
       </div>
     </div>
     <div class="caption">
-      位置编码 (Position Embedding)
-      是一组可学习的向量，直接<b>加</b>在图像特征上。
+      Positional encoding (Position Embedding)
+      là một bộ vector có thể học được, được <b>cộng</b> trực tiếp vào đặc trưng ảnh.
     </div>
   </div>
 </template>

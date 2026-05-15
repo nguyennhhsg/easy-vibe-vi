@@ -12,7 +12,7 @@
         type="info"
         :closable="false"
       >
-        电商缓存架构演示组件占位符 - 待实现具体交互
+        Placeholder cho component demo kiến trúc cache thương mại điện tử - chờ triển khai chi tiết
       </el-alert>
     </div>
   </div>
@@ -21,8 +21,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('电商缓存架构演示')
-const description = ref('展示电商系统中的多级缓存架构设计，包括商品缓存、库存缓存、用户缓存等')
+const title = ref('Demo kiến trúc cache thương mại điện tử')
+const description = ref('Minh họa thiết kế kiến trúc cache nhiều cấp trong hệ thống thương mại điện tử, bao gồm cache sản phẩm, cache tồn kho, cache người dùng v.v.')
 </script>
 
 <style scoped>

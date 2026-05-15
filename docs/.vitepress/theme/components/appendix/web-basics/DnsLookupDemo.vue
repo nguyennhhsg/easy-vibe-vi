@@ -1,42 +1,42 @@
 <template>
   <div class="dns-lookup-demo custom-demo-base">
-    <div class="demo-label">DNS 解析 ── 查地址簿找坐标</div>
+    <div class="demo-label">Phân giải DNS ── Tra danh bạ để tìm tọa độ</div>
     <div class="demo-panel">
-      
+
       <div class="lookup-flow">
-        <!-- 浏览器 -->
+        <!-- Trình duyệt -->
         <div class="flow-node browser-node" :class="{ active: true }">
           <div class="node-icon">📱</div>
-          <div class="node-title">浏览器</div>
-          <div class="node-desc" v-if="step === 0">要去 www.google.com</div>
-          <div class="node-desc" v-if="step === 1">问 114查号台...</div>
-          <div class="node-desc success" v-if="step === 2">收到: 142... 发车!</div>
+          <div class="node-title">Trình duyệt</div>
+          <div class="node-desc" v-if="step === 0">Muốn đến www.google.com</div>
+          <div class="node-desc" v-if="step === 1">Hỏi tổng đài 114...</div>
+          <div class="node-desc success" v-if="step === 2">Nhận: 142... Khởi hành!</div>
         </div>
 
         <div class="flow-path-wrapper">
           <div class="flow-path" :class="{ active: step >= 0 }">
-            <span class="path-label">询问坐标</span>
+            <span class="path-label">Hỏi tọa độ</span>
             <div class="moving-dot" v-if="step === 1"></div>
           </div>
           <div class="flow-path reverse" :class="{ active: step === 2 }">
-            <span class="path-label">返回 IP</span>
+            <span class="path-label">Trả IP</span>
             <div class="moving-dot reverse" v-if="step === 2"></div>
           </div>
         </div>
 
-        <!-- 查号台 -->
+        <!-- Tổng đài tra cứu -->
         <div class="flow-node dns-node" :class="{ active: step >= 1, flash: step === 1 }">
           <div class="node-icon">📞</div>
-          <div class="node-title">114查号台 (DNS)</div>
-          <div class="node-desc" v-if="step === 0">待命</div>
-          <div class="node-desc" v-if="step === 1">正在翻地址簿...</div>
-          <div class="node-desc success" v-if="step === 2">找到啦: 142.250.80.46</div>
+          <div class="node-title">Tổng đài 114 (DNS)</div>
+          <div class="node-desc" v-if="step === 0">Sẵn sàng</div>
+          <div class="node-desc" v-if="step === 1">Đang lật danh bạ...</div>
+          <div class="node-desc success" v-if="step === 2">Tìm thấy: 142.250.80.46</div>
         </div>
       </div>
 
       <div class="action-bar">
-        <button class="action-btn" @click="runDemo" :disabled="isRunning"> 
-          {{ isRunning ? '查询中...' : (step === 2 ? '重新查询' : '开始 DNS 查询') }} 
+        <button class="action-btn" @click="runDemo" :disabled="isRunning">
+          {{ isRunning ? 'Đang tra cứu...' : (step === 2 ? 'Tra lại' : 'Bắt đầu tra DNS') }}
         </button>
       </div>
 
@@ -51,9 +51,9 @@ import { ref, computed } from 'vue'
 const step = ref(0)
 const isRunning = ref(false)
 const statusList = [
-  '点击按钮，告诉浏览器你不知道 Google 服务器在哪',
-  '浏览器向营运商查号台 (DNS) 请求数字坐标...',
-  '拿到具体的 IP 地址，准备开始发车通信！'
+  'Nhấp nút để báo cho trình duyệt biết bạn không rõ máy chủ Google ở đâu',
+  'Trình duyệt gửi yêu cầu tọa độ số đến tổng đài tra cứu (DNS) của nhà mạng...',
+  'Đã có địa chỉ IP cụ thể, sẵn sàng bắt đầu liên lạc!'
 ]
 
 const statusText = computed(() => statusList[step.value])

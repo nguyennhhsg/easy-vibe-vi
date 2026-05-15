@@ -1,15 +1,15 @@
 <!--
   RAGArchitectureDemo.vue
-  RAG 架构演进交互演示
+  Demo tương tác về sự tiến hóa của kiến trúc RAG
 
-  用途：
-  展示三种 RAG 架构：Naive RAG、Advanced RAG、Modular RAG
-  用户可以切换查看不同架构的流程图和特点。
+  Mục đích:
+  Hiển thị ba kiến trúc RAG: Naive RAG, Advanced RAG, Modular RAG.
+  User có thể chuyển qua lại để xem sơ đồ và đặc điểm từng kiến trúc.
 
-  交互功能：
-  - 切换三种架构
-  - 查看每种架构的流程节点
-  - 对比各架构的优劣
+  Tính năng:
+  - Chuyển giữa ba kiến trúc
+  - Xem các node trong sơ đồ
+  - So sánh ưu nhược điểm
 -->
 <template>
   <div class="rag-arch-demo">
@@ -71,11 +71,11 @@
       v-else
       class="node-hint"
     >
-      点击流程节点查看详细说明
+      Bấm vào node trong sơ đồ để xem chi tiết
     </div>
 
     <div class="arch-features">
-      <div class="feature-title">架构特点</div>
+      <div class="feature-title">Đặc điểm kiến trúc</div>
       <div class="feature-grid">
         <div
           v-for="(f, i) in activeArch.features"
@@ -89,7 +89,7 @@
     </div>
 
     <div class="evolution-bar">
-      <div class="evo-title">架构演进路线</div>
+      <div class="evo-title">Lộ trình tiến hóa kiến trúc</div>
       <div class="evo-track">
         <div
           v-for="(arch, i) in architectures"
@@ -124,59 +124,59 @@ const architectures = [
     name: 'Naive RAG',
     badge: 'v1',
     year: '2023',
-    desc: '最基础的 RAG 架构，流程简单直接：索引 → 检索 → 生成。适合快速原型验证，但在复杂场景下效果有限。',
+    desc: 'Kiến trúc RAG cơ bản nhất, quy trình đơn giản: index → retrieval → sinh. Phù hợp dựng prototype nhanh, nhưng hiệu quả hạn chế ở các tình huống phức tạp.',
     nodes: [
-      { icon: '📄', label: '文档加载', type: 'input', detail: '将原始文档（PDF、网页、数据库等）加载到系统中，进行基本的文本提取和清洗。', connectorLabel: '' },
-      { icon: '✂️', label: '文本分块', type: 'process', detail: '将长文档按固定大小切分为较小的文本块（chunk），通常 200-500 个 token。', connectorLabel: '' },
-      { icon: '🔢', label: '向量化', type: 'process', detail: '使用嵌入模型将每个文本块转化为向量，存入向量数据库。', connectorLabel: '' },
-      { icon: '🔍', label: '检索', type: 'process', detail: '用户提问时，将问题向量化后在向量数据库中搜索最相似的文本块。', connectorLabel: '' },
-      { icon: '🤖', label: '生成', type: 'output', detail: '将检索到的文本块与问题拼接为 Prompt，交给 LLM 生成回答。' }
+      { icon: '📄', label: 'Nạp tài liệu', type: 'input', detail: 'Nạp tài liệu gốc (PDF, web, database...) vào hệ thống, thực hiện trích xuất và làm sạch văn bản cơ bản.', connectorLabel: '' },
+      { icon: '✂️', label: 'Chunking', type: 'process', detail: 'Cắt tài liệu dài thành các chunk có kích thước cố định, thường 200-500 token mỗi chunk.', connectorLabel: '' },
+      { icon: '🔢', label: 'Vector hóa', type: 'process', detail: 'Dùng embedding model chuyển mỗi chunk thành vector, lưu vào vector database.', connectorLabel: '' },
+      { icon: '🔍', label: 'Retrieval', type: 'process', detail: 'Khi user hỏi, vector hóa câu hỏi rồi tìm các chunk gần nhất trong vector database.', connectorLabel: '' },
+      { icon: '🤖', label: 'Sinh', type: 'output', detail: 'Ghép chunk retrieve được với câu hỏi thành prompt, đưa cho LLM để sinh câu trả lời.' }
     ],
     features: [
-      { icon: '✅', text: '实现简单，上手快' },
-      { icon: '✅', text: '适合结构化知识库' },
-      { icon: '⚠️', text: '检索质量依赖分块策略' },
-      { icon: '❌', text: '无法处理复杂查询' }
+      { icon: '✅', text: 'Triển khai đơn giản, dễ làm quen' },
+      { icon: '✅', text: 'Phù hợp với kho tri thức có cấu trúc' },
+      { icon: '⚠️', text: 'Chất lượng retrieval phụ thuộc cách chunking' },
+      { icon: '❌', text: 'Không xử lý được truy vấn phức tạp' }
     ]
   },
   {
     name: 'Advanced RAG',
     badge: 'v2',
     year: '2024',
-    desc: '在 Naive RAG 基础上增加了查询优化和检索后处理，显著提升检索质量和生成准确性。',
+    desc: 'Trên nền Naive RAG, bổ sung tối ưu truy vấn và xử lý sau retrieval, giúp tăng đáng kể chất lượng retrieval và độ chính xác câu trả lời.',
     nodes: [
-      { icon: '💬', label: '用户查询', type: 'input', detail: '接收用户的原始问题。', connectorLabel: '' },
-      { icon: '🔄', label: '查询改写', type: 'enhance', detail: '使用 LLM 对原始查询进行改写、扩展或分解。例如将模糊问题改写为更精确的检索查询，或生成多个子查询。', connectorLabel: '' },
-      { icon: '🔍', label: '混合检索', type: 'process', detail: '同时使用向量检索（语义）和关键词检索（BM25），融合两者的结果，兼顾语义理解和精确匹配。', connectorLabel: '' },
-      { icon: '📊', label: '重排序', type: 'enhance', detail: '使用交叉编码器对检索结果进行精细排序，过滤掉不相关的文档片段。', connectorLabel: '' },
-      { icon: '📋', label: '上下文压缩', type: 'enhance', detail: '从检索到的文档中提取与问题最相关的部分，去除冗余信息，节省上下文窗口。', connectorLabel: '' },
-      { icon: '🤖', label: '生成', type: 'output', detail: '基于优化后的上下文生成高质量回答。' }
+      { icon: '💬', label: 'Truy vấn user', type: 'input', detail: 'Nhận câu hỏi gốc của user.', connectorLabel: '' },
+      { icon: '🔄', label: 'Viết lại truy vấn', type: 'enhance', detail: 'Dùng LLM để viết lại, mở rộng hoặc phân rã truy vấn gốc. Ví dụ chuyển câu hỏi mơ hồ thành truy vấn cụ thể hơn, hoặc tách thành nhiều câu con.', connectorLabel: '' },
+      { icon: '🔍', label: 'Hybrid retrieval', type: 'process', detail: 'Dùng song song retrieval theo vector (ngữ nghĩa) và keyword (BM25), kết hợp kết quả để vừa hiểu ngữ nghĩa vừa khớp chính xác.', connectorLabel: '' },
+      { icon: '📊', label: 'Rerank', type: 'enhance', detail: 'Dùng cross-encoder để sắp xếp lại kết quả retrieval một cách tinh hơn, loại bỏ đoạn không liên quan.', connectorLabel: '' },
+      { icon: '📋', label: 'Nén context', type: 'enhance', detail: 'Trích phần liên quan nhất với câu hỏi từ các tài liệu retrieve được, bỏ phần dư thừa để tiết kiệm context window.', connectorLabel: '' },
+      { icon: '🤖', label: 'Sinh', type: 'output', detail: 'Sinh câu trả lời chất lượng cao dựa trên context đã tối ưu.' }
     ],
     features: [
-      { icon: '✅', text: '查询改写提升检索召回率' },
-      { icon: '✅', text: '混合检索兼顾语义和关键词' },
-      { icon: '✅', text: '重排序显著提升精度' },
-      { icon: '⚠️', text: '流程较长，延迟增加' }
+      { icon: '✅', text: 'Viết lại truy vấn tăng recall' },
+      { icon: '✅', text: 'Hybrid retrieval cân bằng ngữ nghĩa & keyword' },
+      { icon: '✅', text: 'Rerank tăng độ chính xác đáng kể' },
+      { icon: '⚠️', text: 'Quy trình dài hơn, độ trễ tăng' }
     ]
   },
   {
     name: 'Modular RAG',
     badge: 'v3',
     year: '2025',
-    desc: '将 RAG 拆解为可插拔的模块，支持灵活组合和路由。可根据查询类型动态选择最优流程。',
+    desc: 'Tách RAG thành các module có thể cắm-tháo, hỗ trợ kết hợp và định tuyến linh hoạt. Có thể chọn quy trình tối ưu theo loại truy vấn.',
     nodes: [
-      { icon: '💬', label: '用户查询', type: 'input', detail: '接收用户的原始问题。', connectorLabel: '' },
-      { icon: '🧭', label: '路由判断', type: 'enhance', detail: '分析查询意图，决定走哪条处理路径：简单问题直接回答，复杂问题走检索流程，多步问题走分解流程。', connectorLabel: '' },
-      { icon: '🔀', label: '查询转换', type: 'enhance', detail: '根据路由结果选择：HyDE（假设文档嵌入）、Step-back（退一步提问）、子问题分解等策略。', connectorLabel: '' },
-      { icon: '🔍', label: '自适应检索', type: 'process', detail: '根据查询特征自动选择检索策略：向量检索、图检索、SQL 检索或多路检索融合。', connectorLabel: '' },
-      { icon: '🔄', label: '自我反思', type: 'enhance', detail: 'LLM 评估检索结果是否充分，不充分则触发二次检索或调整检索策略（Self-RAG / CRAG）。', connectorLabel: '' },
-      { icon: '🤖', label: '生成', type: 'output', detail: '基于充分验证的上下文生成最终回答，并附带置信度评分。' }
+      { icon: '💬', label: 'Truy vấn user', type: 'input', detail: 'Nhận câu hỏi gốc của user.', connectorLabel: '' },
+      { icon: '🧭', label: 'Định tuyến', type: 'enhance', detail: 'Phân tích ý định truy vấn, quyết định đi nhánh nào: câu đơn giản trả lời thẳng, câu phức tạp đi retrieval, câu nhiều bước thì phân rã.', connectorLabel: '' },
+      { icon: '🔀', label: 'Chuyển dạng truy vấn', type: 'enhance', detail: 'Dựa trên kết quả định tuyến để chọn chiến lược: HyDE (Hypothetical Document Embeddings), Step-back, phân rã truy vấn con...', connectorLabel: '' },
+      { icon: '🔍', label: 'Adaptive retrieval', type: 'process', detail: 'Tự chọn chiến lược retrieval theo đặc điểm truy vấn: vector, graph, SQL hoặc kết hợp nhiều cách.', connectorLabel: '' },
+      { icon: '🔄', label: 'Tự phản tỉnh', type: 'enhance', detail: 'LLM tự đánh giá xem kết quả retrieval đã đủ chưa, nếu chưa thì retrieval lần nữa hoặc đổi chiến lược (Self-RAG / CRAG).', connectorLabel: '' },
+      { icon: '🤖', label: 'Sinh', type: 'output', detail: 'Sinh câu trả lời cuối dựa trên context đã kiểm chứng kỹ, kèm điểm tin cậy.' }
     ],
     features: [
-      { icon: '✅', text: '模块化设计，灵活可扩展' },
-      { icon: '✅', text: '自适应路由，智能选择策略' },
-      { icon: '✅', text: '自我反思机制提升可靠性' },
-      { icon: '⚠️', text: '系统复杂度高，需要精心调优' }
+      { icon: '✅', text: 'Thiết kế module hóa, dễ mở rộng' },
+      { icon: '✅', text: 'Định tuyến thích ứng, chọn chiến lược thông minh' },
+      { icon: '✅', text: 'Cơ chế tự phản tỉnh tăng độ tin cậy' },
+      { icon: '⚠️', text: 'Độ phức tạp cao, cần tinh chỉnh kỹ' }
     ]
   }
 ]

@@ -12,13 +12,13 @@
           border: `${borderWidth}px solid ${borderColor}`
         }"
       >
-        我是演示元素
+        Tôi là phần tử demo
       </div>
     </div>
 
     <div class="controls">
       <div class="control-group">
-        <label>背景颜色 (background-color)</label>
+        <label>Màu nền (background-color)</label>
         <input
           v-model="bgColor"
           type="color"
@@ -27,7 +27,7 @@
       </div>
 
       <div class="control-group">
-        <label>文字颜色 (color)</label>
+        <label>Màu chữ (color)</label>
         <input
           v-model="textColor"
           type="color"
@@ -36,7 +36,7 @@
       </div>
 
       <div class="control-group">
-        <label>字体大小 (font-size)</label>
+        <label>Cỡ chữ (font-size)</label>
         <input
           v-model="fontSize"
           type="range"
@@ -47,7 +47,7 @@
       </div>
 
       <div class="control-group">
-        <label>内边距 (padding)</label>
+        <label>Lề trong (padding)</label>
         <input
           v-model="padding"
           type="range"
@@ -58,7 +58,7 @@
       </div>
 
       <div class="control-group">
-        <label>圆角 (border-radius)</label>
+        <label>Bo góc (border-radius)</label>
         <input
           v-model="borderRadius"
           type="range"
@@ -69,7 +69,7 @@
       </div>
 
       <div class="control-group">
-        <label>边框宽度 (border-width)</label>
+        <label>Độ rộng viền (border-width)</label>
         <input
           v-model="borderWidth"
           type="range"
@@ -80,7 +80,7 @@
       </div>
 
       <div class="control-group">
-        <label>边框颜色 (border-color)</label>
+        <label>Màu viền (border-color)</label>
         <input
           v-model="borderColor"
           type="color"
@@ -91,7 +91,7 @@
 
     <div class="code-preview">
       <div class="code-title">
-        生成的 CSS 代码：
+        Mã CSS được tạo ra:
       </div>
       <pre><code>.element {
   background-color: <span class="highlight">{{ bgColor }}</span>;

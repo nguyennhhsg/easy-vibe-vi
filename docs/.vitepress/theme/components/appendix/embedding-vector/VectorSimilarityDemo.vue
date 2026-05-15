@@ -1,20 +1,21 @@
 <!--
   VectorSimilarityDemo.vue
-  向量相似度交互演示组件
+  Demo tương tác về độ tương đồng vector
 
-  用途：
-  交互式展示余弦相似度和欧氏距离的计算过程，用户可拖动点观察相似度变化。
+  Mục đích:
+  Hiển thị tương tác quá trình tính cosine similarity và khoảng cách Euclid,
+  user có thể kéo điểm để xem độ tương đồng thay đổi.
 
-  交互功能：
-  - 拖动两个向量端点
-  - 实时计算余弦相似度和欧氏距离
-  - 切换度量方式查看差异
+  Tính năng:
+  - Kéo hai đầu vector
+  - Tính cosine similarity và Euclid theo thời gian thực
+  - Đổi giữa các thước đo
 -->
 <template>
   <div class="similarity-demo">
     <div class="demo-header">
-      <h4>向量相似度计算器</h4>
-      <p class="desc">拖动向量端点，观察不同相似度指标的实时变化</p>
+      <h4>Máy tính độ tương đồng vector</h4>
+      <p class="desc">Kéo đầu vector và quan sát các thước đo thay đổi theo thời gian thực</p>
     </div>
 
     <div class="metric-tabs">
@@ -102,23 +103,23 @@
     <!-- 结果面板 -->
     <div class="results">
       <div class="result-card" :class="{ highlight: activeMetric === 'cosine' }">
-        <div class="result-label">余弦相似度</div>
+        <div class="result-label">Cosine similarity</div>
         <div class="result-value">{{ cosineSim.toFixed(4) }}</div>
         <div class="result-bar">
           <div class="bar-fill cosine-bar" :style="{ width: ((cosineSim + 1) / 2 * 100) + '%' }"></div>
         </div>
-        <div class="result-range">-1 (相反) ~ 1 (相同)</div>
+        <div class="result-range">-1 (ngược chiều) ~ 1 (cùng chiều)</div>
       </div>
       <div class="result-card" :class="{ highlight: activeMetric === 'euclidean' }">
-        <div class="result-label">欧氏距离</div>
+        <div class="result-label">Khoảng cách Euclid</div>
         <div class="result-value">{{ euclideanDist.toFixed(2) }}</div>
         <div class="result-bar">
           <div class="bar-fill euclidean-bar" :style="{ width: Math.min(euclideanDist / 5 * 100, 100) + '%' }"></div>
         </div>
-        <div class="result-range">0 (完全重合) ~ &#x221E; (无穷远)</div>
+        <div class="result-range">0 (trùng nhau) ~ &#x221E; (rất xa)</div>
       </div>
       <div class="result-card">
-        <div class="result-label">点积</div>
+        <div class="result-label">Tích vô hướng</div>
         <div class="result-value">{{ dotProduct.toFixed(2) }}</div>
         <div class="result-hint">dot(A, B) = |A||B|cos&#x3B8;</div>
       </div>
@@ -127,7 +128,7 @@
     <div class="info-box">
       <p>
         <span class="icon">&#x1F4A1;</span>
-        <strong>余弦相似度</strong>只关注方向，不关注长度，适合文本语义比较；<strong>欧氏距离</strong>同时考虑方向和大小，适合需要绝对距离的场景。
+<strong>Cosine similarity</strong> chỉ xét hướng, không xét độ dài, phù hợp so sánh ngữ nghĩa văn bản; <strong>khoảng cách Euclid</strong> xét cả hướng và độ lớn, phù hợp khi cần khoảng cách tuyệt đối.
       </p>
     </div>
   </div>
@@ -140,8 +141,8 @@ const activeMetric = ref('cosine')
 const dragging = ref(null)
 
 const metrics = [
-  { key: 'cosine', label: '余弦相似度' },
-  { key: 'euclidean', label: '欧氏距离' }
+  { key: 'cosine', label: 'Cosine similarity' },
+  { key: 'euclidean', label: 'Khoảng cách Euclid' }
 ]
 
 const vecA = ref({ x: 350, y: 80 })

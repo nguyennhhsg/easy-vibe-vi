@@ -2,14 +2,14 @@
   <div class="closure-demo">
     <div class="demo-header">
       <span class="icon">🎁</span>
-      <span class="title">函数与闭包</span>
-      <span class="subtitle">理解作用域链和闭包机制</span>
+      <span class="title">Hàm và closure</span>
+      <span class="subtitle">Hiểu chuỗi scope và cơ chế closure</span>
     </div>
 
     <div class="intro-text">
-      想象你有个<span class="highlight">背包</span>（函数），每次出门时都会把当时看到的
-      <span class="highlight">风景</span>（外部变量）装进去。
-      <span class="highlight">闭包</span>就是这个背包——即使离开了那个地方，你依然能拿出当时装的风景
+      Hãy hình dung bạn có một chiếc <span class="highlight">balo</span> (hàm), mỗi lần ra ngoài bạn bỏ
+      <span class="highlight">phong cảnh</span> (biến bên ngoài) bạn nhìn thấy vào balo.
+      <span class="highlight">Closure</span> chính là chiếc balo đó — dù đã rời khỏi nơi cũ, bạn vẫn lấy ra được phong cảnh đã bỏ vào.
     </div>
 
     <div class="demo-tabs">
@@ -24,7 +24,7 @@
       </button>
     </div>
 
-    <!-- 函数基础 -->
+    <!-- Cơ bản về hàm -->
     <div
       v-if="activeTab === 'basic'"
       class="tab-content"
@@ -32,11 +32,11 @@
       <div class="function-showcase">
         <div class="code-panel">
           <div class="code-title">
-            函数声明方式
+            Các cách khai báo hàm
           </div>
           <div class="code-block">
             <div class="code-line comment">
-              // 1. 函数声明
+              // 1. Function declaration
             </div>
             <div class="code-line">
               function greet(name) {
@@ -49,7 +49,7 @@
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 2. 函数表达式
+              // 2. Function expression
             </div>
             <div class="code-line">
               const greet = function(name) {
@@ -62,7 +62,7 @@
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 3. 箭头函数 (ES6)
+              // 3. Arrow function (ES6)
             </div>
             <div class="code-line">
               const greet = (name) => {
@@ -75,7 +75,7 @@
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 简化版（单行可省略 return）
+              // Rút gọn (một dòng có thể bỏ return)
             </div>
             <div class="code-line">
               const greet = name => "Hello " + name
@@ -85,15 +85,15 @@
 
         <div class="playground">
           <div class="playground-title">
-            试试调用函数
+            Thử gọi hàm
           </div>
           <div class="input-group">
             <input
               v-model="functionName"
-              placeholder="输入你的名字"
+              placeholder="Nhập tên của bạn"
             >
             <button @click="callFunction">
-              调用
+              Gọi
             </button>
           </div>
           <div class="output">
@@ -104,7 +104,7 @@
             <span
               v-else
               class="placeholder"
-            >点击"调用"按钮看结果...</span>
+            >Nhấp nút "Gọi" để xem kết quả...</span>
           </div>
         </div>
       </div>

@@ -10,17 +10,17 @@
           {{ currentEmoji }}
         </div>
         <div class="label">
-          像素空间 (Pixel Space)
+          Không gian pixel (Pixel Space)
         </div>
         <div class="sub-label">
-          最终看到的图像
+          Ảnh cuối cùng bạn thấy
         </div>
       </div>
 
       <!-- Center: The Mechanism -->
       <div class="connection">
         <div class="arrow">
-          ← 映射 →
+          ← Ánh xạ →
         </div>
         <div class="vae-tag">
           VAE Decoder
@@ -37,10 +37,10 @@
         >
           <div class="grid-lines" />
           <div class="axis-label x-axis">
-            开心值 (Happiness)
+            Độ vui (Happiness)
           </div>
           <div class="axis-label y-axis">
-            惊讶值 (Surprise)
+            Độ ngạc nhiên (Surprise)
           </div>
           
           <!-- The Latent Point -->
@@ -54,10 +54,10 @@
           </div>
         </div>
         <div class="label">
-          潜空间 (Latent Space)
+          Không gian tiềm ẩn (Latent Space)
         </div>
         <div class="sub-label">
-          拖动红点改变特征
+          Kéo chấm đỏ để đổi đặc trưng
         </div>
       </div>
     </div>
@@ -65,8 +65,8 @@
     <div class="info-bar">
       <span class="icon">💡</span>
       <span>
-        <strong>核心原理：</strong>
-        在像素空间里修改图片很难（要改几千个像素）。但在潜空间里，我们只需要修改两个坐标（开心值、惊讶值），就能生成完全不同的表情。这就是 AI "画画" 的本质——在数学空间里找坐标。
+        <strong>Nguyên lý cốt lõi:</strong>
+        Sửa ảnh trong không gian pixel rất khó (phải sửa hàng nghìn pixel). Nhưng trong không gian tiềm ẩn, bạn chỉ cần đổi hai toạ độ (độ vui, độ ngạc nhiên) là sinh ra biểu cảm hoàn toàn khác. Đây chính là bản chất của việc "vẽ" của AI — tìm toạ độ trong không gian toán học.
       </span>
     </div>
   </div>

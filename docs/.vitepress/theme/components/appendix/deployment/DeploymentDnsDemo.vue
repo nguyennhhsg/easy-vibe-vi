@@ -1,34 +1,34 @@
 <!--
   DeploymentDnsDemo.vue
-  DNS 解析（精简版）
+  DNS resolution (bản rút gọn)
 -->
 <template>
   <div class="deployment-dns">
     <div class="header">
       <span class="icon">🔍</span>
-      <span class="title">DNS 解析</span>
-      <span class="subtitle">把"好记的名字"变成"机器能懂的IP"</span>
+      <span class="title">DNS resolution</span>
+      <span class="subtitle">Biến "tên dễ nhớ" thành "IP máy hiểu được"</span>
     </div>
 
     <div class="flow">
       <div class="step">
         <span class="emoji">💻</span>
-        <span class="text">用户输入域名</span>
+        <span class="text">User nhập domain</span>
       </div>
       <span class="arrow">→</span>
       <div class="step">
         <span class="emoji">📋</span>
-        <span class="text">查询 DNS</span>
+        <span class="text">Truy vấn DNS</span>
       </div>
       <span class="arrow">→</span>
       <div class="step success">
         <span class="emoji">✅</span>
-        <span class="text">返回 IP</span>
+        <span class="text">Trả về IP</span>
       </div>
     </div>
 
     <div class="example">
-      <span class="label">示例：</span>
+      <span class="label">Ví dụ:</span>
       <code>example.com → 192.168.1.1</code>
     </div>
   </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="training-data-demo">
     <div class="demo-header">
-      <h4>训练数据格式演示</h4>
-      <p class="subtitle">切换不同格式，了解微调数据的组织方式</p>
+      <h4>Demo định dạng dữ liệu huấn luyện</h4>
+      <p class="subtitle">Chuyển giữa các định dạng để hiểu cách tổ chức dữ liệu fine-tuning</p>
     </div>
 
     <div class="format-tabs">
@@ -29,9 +29,9 @@
 
       <div class="data-preview">
         <div class="preview-header">
-          <span class="preview-label">数据样例</span>
+          <span class="preview-label">Mẫu dữ liệu</span>
           <button class="switch-btn" @click="nextExample">
-            换一条 ↻
+            Đổi mẫu ↻
           </button>
         </div>
         <div class="json-block">
@@ -44,7 +44,7 @@
       </div>
 
       <div class="quality-tips">
-        <div class="tips-title">数据质量要点</div>
+        <div class="tips-title">Lưu ý về chất lượng dữ liệu</div>
         <div class="tips-list">
           <div v-for="(tip, i) in currentFormat.tips" :key="i" class="tip-item">
             <span class="tip-check">✓</span>
@@ -66,60 +66,60 @@ const formats = [
   {
     id: 'instruction',
     icon: '📝',
-    label: '指令跟随',
-    description: '最常见的微调数据格式。每条数据包含一个指令（instruction）、可选的输入（input）和期望的输出（output）。适合训练通用助手类模型。',
-    tags: ['通用助手', 'ChatGPT 风格', '最常用'],
+    label: 'Instruction following',
+    description: 'Định dạng phổ biến nhất khi fine-tuning. Mỗi mẫu gồm instruction, input (tùy chọn) và output mong muốn. Phù hợp huấn luyện assistant đa năng.',
+    tags: ['Assistant tổng quát', 'Phong cách ChatGPT', 'Phổ biến nhất'],
     tips: [
-      '指令要清晰明确，避免歧义',
-      '输出要完整、准确、格式规范',
-      '覆盖多种任务类型（翻译、摘要、问答等）',
-      '数据量建议：1,000 ~ 50,000 条'
+      'Instruction rõ ràng, không mơ hồ',
+      'Output đầy đủ, chính xác, đúng format',
+      'Phủ nhiều loại task (dịch, tóm tắt, Q&A...)',
+      'Đề xuất: 1,000 ~ 50,000 mẫu'
     ],
     examples: [
       [
-        { key: '"instruction"', value: '"请将以下中文翻译成英文"', type: 'string' },
-        { key: '"input"', value: '"人工智能正在改变世界"', type: 'string' },
+        { key: '"instruction"', value: '"Dịch tiếng Việt sau sang tiếng Anh"', type: 'string' },
+        { key: '"input"', value: '"AI đang thay đổi thế giới"', type: 'string' },
         { key: '"output"', value: '"AI is changing the world"', type: 'string' }
       ],
       [
-        { key: '"instruction"', value: '"用一句话总结以下段落"', type: 'string' },
-        { key: '"input"', value: '"深度学习是机器学习的一个分支..."', type: 'string' },
-        { key: '"output"', value: '"深度学习通过多层神经网络自动学习数据特征"', type: 'string' }
+        { key: '"instruction"', value: '"Tóm tắt đoạn sau bằng một câu"', type: 'string' },
+        { key: '"input"', value: '"Deep learning là một nhánh của machine learning..."', type: 'string' },
+        { key: '"output"', value: '"Deep learning dùng neural network nhiều tầng để tự học đặc trưng"', type: 'string' }
       ],
       [
-        { key: '"instruction"', value: '"解释什么是 API"', type: 'string' },
+        { key: '"instruction"', value: '"Giải thích API là gì"', type: 'string' },
         { key: '"input"', value: '""', type: 'string' },
-        { key: '"output"', value: '"API 是应用程序编程接口，它定义了..."', type: 'string' }
+        { key: '"output"', value: '"API là giao diện lập trình ứng dụng, định nghĩa..."', type: 'string' }
       ]
     ]
   },
   {
     id: 'conversation',
     icon: '💬',
-    label: '多轮对话',
-    description: '模拟真实的多轮对话场景。每条数据包含一组对话消息，包括系统提示、用户消息和助手回复。适合训练聊天机器人。',
-    tags: ['聊天机器人', '多轮交互', '上下文理解'],
+    label: 'Hội thoại nhiều lượt',
+    description: 'Mô phỏng hội thoại nhiều lượt thật. Mỗi mẫu gồm một chuỗi tin nhắn: system prompt, tin của user, trả lời của assistant. Phù hợp huấn luyện chatbot.',
+    tags: ['Chatbot', 'Tương tác nhiều lượt', 'Hiểu context'],
     tips: [
-      '对话要自然流畅，符合真实交互模式',
-      '保持角色一致性（系统提示贯穿始终）',
-      '包含上下文引用和追问场景',
-      '数据量建议：5,000 ~ 100,000 条对话'
+      'Hội thoại tự nhiên, đúng mẫu tương tác thực',
+      'Giữ tính nhất quán nhân vật (system prompt xuyên suốt)',
+      'Bao gồm các tình huống tham chiếu context và hỏi tiếp',
+      'Đề xuất: 5,000 ~ 100,000 cuộc hội thoại'
     ],
     examples: [
       [
         { key: '"messages"', value: '[', type: 'bracket' },
-        { key: '  {"role"', value: '"system", "content": "你是一个编程助手"}', type: 'string' },
-        { key: '  {"role"', value: '"user", "content": "Python 怎么读取文件？"}', type: 'string' },
-        { key: '  {"role"', value: '"assistant", "content": "使用 open() 函数..."}', type: 'string' },
+        { key: '  {"role"', value: '"system", "content": "Bạn là một trợ lý lập trình"}', type: 'string' },
+        { key: '  {"role"', value: '"user", "content": "Python đọc file như thế nào?"}', type: 'string' },
+        { key: '  {"role"', value: '"assistant", "content": "Dùng hàm open()..."}', type: 'string' },
         { key: '', value: ']', type: 'bracket' }
       ],
       [
         { key: '"messages"', value: '[', type: 'bracket' },
-        { key: '  {"role"', value: '"system", "content": "你是一个医疗顾问"}', type: 'string' },
-        { key: '  {"role"', value: '"user", "content": "感冒了怎么办？"}', type: 'string' },
-        { key: '  {"role"', value: '"assistant", "content": "建议多休息多喝水..."}', type: 'string' },
-        { key: '  {"role"', value: '"user", "content": "需要吃药吗？"}', type: 'string' },
-        { key: '  {"role"', value: '"assistant", "content": "如果症状较轻..."}', type: 'string' },
+        { key: '  {"role"', value: '"system", "content": "Bạn là một chuyên gia tư vấn y tế"}', type: 'string' },
+        { key: '  {"role"', value: '"user", "content": "Bị cảm thì phải làm sao?"}', type: 'string' },
+        { key: '  {"role"', value: '"assistant", "content": "Nên nghỉ ngơi và uống nhiều nước..."}', type: 'string' },
+        { key: '  {"role"', value: '"user", "content": "Có cần uống thuốc không?"}', type: 'string' },
+        { key: '  {"role"', value: '"assistant", "content": "Nếu triệu chứng nhẹ..."}', type: 'string' },
         { key: '', value: ']', type: 'bracket' }
       ]
     ]
@@ -127,26 +127,26 @@ const formats = [
   {
     id: 'classification',
     icon: '🏷️',
-    label: '分类标注',
-    description: '用于训练文本分类任务。每条数据包含输入文本和对应的类别标签。适合情感分析、意图识别、内容审核等场景。',
-    tags: ['情感分析', '意图识别', '内容审核'],
+    label: 'Phân loại / gán nhãn',
+    description: 'Dùng cho task phân loại văn bản. Mỗi mẫu gồm văn bản đầu vào và nhãn tương ứng. Phù hợp phân tích cảm xúc, nhận diện ý định, kiểm duyệt nội dung...',
+    tags: ['Phân tích cảm xúc', 'Nhận diện intent', 'Kiểm duyệt nội dung'],
     tips: [
-      '类别标签要统一规范，避免拼写差异',
-      '各类别样本数量尽量均衡',
-      '包含边界案例和易混淆样本',
-      '数据量建议：每个类别至少 100 条'
+      'Nhãn phải thống nhất, tránh khác biệt cách gõ',
+      'Số mẫu giữa các lớp nên cân bằng',
+      'Bao gồm cả trường hợp biên và dễ nhầm lẫn',
+      'Đề xuất: ít nhất 100 mẫu cho mỗi lớp'
     ],
     examples: [
       [
-        { key: '"text"', value: '"这家餐厅的菜品非常好吃，服务也很周到"', type: 'string' },
+        { key: '"text"', value: '"Món ăn của nhà hàng này rất ngon, phục vụ chu đáo"', type: 'string' },
         { key: '"label"', value: '"positive"', type: 'label' }
       ],
       [
-        { key: '"text"', value: '"等了一个小时还没上菜，太失望了"', type: 'string' },
+        { key: '"text"', value: '"Đợi cả tiếng đồng hồ chưa có đồ ăn, quá thất vọng"', type: 'string' },
         { key: '"label"', value: '"negative"', type: 'label' }
       ],
       [
-        { key: '"text"', value: '"餐厅环境一般，价格中等"', type: 'string' },
+        { key: '"text"', value: '"Không gian bình thường, giá tầm trung"', type: 'string' },
         { key: '"label"', value: '"neutral"', type: 'label' }
       ]
     ]

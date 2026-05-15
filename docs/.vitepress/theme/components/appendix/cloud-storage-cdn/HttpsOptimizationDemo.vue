@@ -2,21 +2,21 @@
   <div class="https-optimization-demo">
     <div class="demo-header">
       <span class="icon">🔒</span>
-      <span class="title">HTTPS 优化</span>
-      <span class="subtitle">理解 CDN 的 HTTPS 协议和证书管理</span>
+      <span class="title">Tối ưu HTTPS</span>
+      <span class="subtitle">Hiểu giao thức HTTPS và quản lý chứng chỉ trên CDN</span>
     </div>
     <div class="demo-content">
       <el-alert
         type="info"
         :closable="false"
       >
-        HTTPS 优化演示组件占位符 - 待实现具体交互
+        Placeholder demo tối ưu HTTPS - chờ triển khai chi tiết tương tác
       </el-alert>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>HTTPS 通过 TLS/SSL 加密数据传输，防止中间人攻击和数据泄露，是现代 Web 应用的安全基础。
+      <strong>Ý tưởng cốt lõi:</strong> HTTPS mã hóa truyền tải dữ liệu qua TLS/SSL, chống man-in-the-middle và rò rỉ dữ liệu, là nền tảng bảo mật cho ứng dụng Web hiện đại.
     </div>
   </div>
 </template>
@@ -24,8 +24,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('HTTPS 优化演示')
-const description = ref('展示CDN的HTTPS优化技术，包括TLS握手优化、证书管理、HSTS等')
+const title = ref('Demo tối ưu HTTPS')
+const description = ref('Hiển thị các kỹ thuật tối ưu HTTPS trên CDN: tối ưu TLS handshake, quản lý chứng chỉ, HSTS...')
 </script>
 
 <style scoped>

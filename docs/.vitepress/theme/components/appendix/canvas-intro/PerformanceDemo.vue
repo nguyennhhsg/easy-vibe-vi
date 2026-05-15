@@ -1,21 +1,21 @@
 <!--
   PerformanceDemo.vue
-  Canvas 性能优化演示组件
+  Component demo tối ưu hiệu năng Canvas
 
-  用途：
-  展示 Canvas 性能优化技术，包括离屏 Canvas、减少重绘、图层管理等
+  Mục đích:
+  Trình bày các kỹ thuật tối ưu hiệu năng Canvas: offscreen canvas, giảm vẽ lại, quản lý layer...
 
-  交互功能：
-  - 性能对比：优化前后的性能对比
-  - 对象数量调整：测试不同负载下的性能
-  - FPS 显示：实时显示帧率
-  - 优化开关：启用/禁用各种优化技术
+  Tính năng tương tác:
+  - So sánh hiệu năng: trước và sau khi tối ưu
+  - Điều chỉnh số lượng đối tượng: kiểm tra hiệu năng dưới các mức tải khác nhau
+  - Hiển thị FPS: hiển thị frame rate theo thời gian thực
+  - Bật/tắt tối ưu: bật/tắt các kỹ thuật tối ưu
 -->
 <template>
   <div class="performance-demo">
     <div class="control-panel">
       <div class="test-selector">
-        <label>Performance Test / 性能测试</label>
+        <label>Performance Test / Kiểm tra hiệu năng</label>
         <div class="button-group">
           <button
             v-for="test in tests"
@@ -30,7 +30,7 @@
 
       <div class="parameters">
         <div class="param-row">
-          <label>Object Count / 对象数量: {{ objectCount }}</label>
+          <label>Object Count / Số đối tượng: {{ objectCount }}</label>
           <input
             v-model.number="objectCount"
             type="range"
@@ -43,7 +43,7 @@
       </div>
 
       <div class="optimization-toggles">
-        <label>Optimizations / 优化技术</label>
+        <label>Optimizations / Kỹ thuật tối ưu</label>
         <div class="toggle-grid">
           <label
             v-if="currentTest === 'redraw'"
@@ -53,7 +53,7 @@
               v-model="useDirtyRect"
               type="checkbox"
             >
-            <span>Dirty Rect / 脏矩形</span>
+            <span>Dirty Rect / Hình chữ nhật bẩn</span>
           </label>
 
           <label
@@ -64,7 +64,7 @@
               v-model="useOffscreenCanvas"
               type="checkbox"
             >
-            <span>Offscreen Canvas / 离屏画布</span>
+            <span>Offscreen Canvas / Canvas ngoài màn hình</span>
           </label>
 
           <label
@@ -75,7 +75,7 @@
               v-model="useBatching"
               type="checkbox"
             >
-            <span>Batch Rendering / 批量渲染</span>
+            <span>Batch Rendering / Render theo lô</span>
           </label>
         </div>
       </div>
@@ -109,7 +109,7 @@
         @click="resetTest"
       >
         <span class="icon">🔄</span>
-        Restart Test / 重新测试
+        Restart Test / Chạy lại kiểm tra
       </button>
     </div>
 
@@ -132,38 +132,38 @@
       v-if="showComparison"
       class="comparison"
     >
-      <h4>Performance Comparison / 性能对比</h4>
+      <h4>Performance Comparison / So sánh hiệu năng</h4>
       <div class="comparison-table">
         <table>
           <thead>
             <tr>
-              <th>Technique / 技术</th>
+              <th>Technique / Kỹ thuật</th>
               <th>FPS</th>
-              <th>Improvement / 提升</th>
+              <th>Improvement / Cải thiện</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Baseline / 基准</td>
+              <td>Baseline / Cơ sở</td>
               <td>{{ baselineFps }}</td>
               <td>-</td>
             </tr>
             <tr v-if="useDirtyRect">
-              <td>Dirty Rect / 脏矩形</td>
+              <td>Dirty Rect / Hình chữ nhật bẩn</td>
               <td>{{ fps }}</td>
               <td>
                 {{ (((fps - baselineFps) / baselineFps) * 100).toFixed(1) }}%
               </td>
             </tr>
             <tr v-if="useOffscreenCanvas">
-              <td>Offscreen Canvas / 离屏画布</td>
+              <td>Offscreen Canvas / Canvas ngoài màn hình</td>
               <td>{{ fps }}</td>
               <td>
                 {{ (((fps - baselineFps) / baselineFps) * 100).toFixed(1) }}%
               </td>
             </tr>
             <tr v-if="useBatching">
-              <td>Batch Rendering / 批量渲染</td>
+              <td>Batch Rendering / Render theo lô</td>
               <td>{{ fps }}</td>
               <td>
                 {{ (((fps - baselineFps) / baselineFps) * 100).toFixed(1) }}%
@@ -203,71 +203,71 @@ let objects = []
 let offscreenCtx = null
 
 const tests = [
-  { value: 'redraw', label: 'Minimize Redraw / 减少重绘' },
-  { value: 'layer', label: 'Layer Management / 图层管理' },
-  { value: 'batch', label: 'Batch Rendering / 批量渲染' }
+  { value: 'redraw', label: 'Minimize Redraw / Giảm vẽ lại' },
+  { value: 'layer', label: 'Layer Management / Quản lý layer' },
+  { value: 'batch', label: 'Batch Rendering / Render theo lô' }
 ]
 
 const optimizationCode = computed(() => {
   const templates = {
-    redraw: `// 脏矩形优化 - 只重绘变化的部分
+    redraw: `// Tối ưu dirty rect - chỉ vẽ lại phần thay đổi
 function draw() {
-  // 不清除整个画布，只清除变化的区域
+  // Không xóa toàn bộ canvas, chỉ xóa vùng thay đổi
   if (useDirtyRect) {
     objects.forEach(obj => {
       if (obj.moved) {
-        // 清除旧位置
+        // Xóa vị trí cũ
         ctx.clearRect(
           obj.oldX - obj.size,
           obj.oldY - obj.size,
           obj.size * 2,
           obj.size * 2
         )
-        // 绘制新位置
+        // Vẽ vị trí mới
         obj.draw(ctx)
         obj.moved = false
       }
     })
   } else {
-    // 传统方式：清除整个画布
+    // Cách truyền thống: xóa toàn bộ canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     objects.forEach(obj => obj.draw(ctx))
   }
 }`,
 
-    layer: `// 离屏 Canvas - 预渲染静态内容
-// 初始化时创建离屏 Canvas
+    layer: `// Offscreen Canvas - prerender nội dung tĩnh
+// Tạo offscreen canvas khi khởi tạo
 const offscreenCanvas = document.createElement('canvas')
 const offscreenCtx = offscreenCanvas.getContext('2d')
 
-// 预渲染静态背景
+// Prerender nền tĩnh
 function drawBackground(ctx) {
   ctx.fillStyle = '#f0f0f0'
   ctx.fillRect(0, 0, 600, 400)
-  // 绘制网格等静态内容...
+  // Vẽ grid và các nội dung tĩnh khác...
 }
 
-// 只绘制一次到离屏 Canvas
+// Chỉ vẽ một lần vào offscreen canvas
 drawBackground(offscreenCtx)
 
-// 主渲染循环
+// Vòng lặp render chính
 function draw() {
   if (useOffscreenCanvas) {
-    // 直接复制预渲染的内容
+    // Sao chép trực tiếp nội dung đã prerender
     ctx.drawImage(offscreenCanvas, 0, 0)
   } else {
-    // 每帧重新绘制背景
+    // Vẽ lại nền mỗi frame
     drawBackground(ctx)
   }
 
-  // 只绘制动态对象
+  // Chỉ vẽ các đối tượng động
   objects.forEach(obj => obj.draw(ctx))
 }`,
 
-    batch: `// 批量渲染 - 减少状态切换
+    batch: `// Render theo lô - giảm chuyển trạng thái
 function draw() {
   if (useBatching) {
-    // 按颜色分组
+    // Nhóm theo màu
     const batches = {}
     objects.forEach(obj => {
       if (!batches[obj.color]) {
@@ -276,9 +276,9 @@ function draw() {
       batches[obj.color].push(obj)
     })
 
-    // 批量绘制相同颜色的对象
+    // Vẽ các đối tượng cùng màu theo lô
     Object.keys(batches).forEach(color => {
-      ctx.fillStyle = color  // 只设置一次颜色
+      ctx.fillStyle = color  // Chỉ set màu một lần
       batches[color].forEach(obj => {
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.size, 0, Math.PI * 2)
@@ -286,9 +286,9 @@ function draw() {
       })
     })
   } else {
-    // 传统方式：每个对象都切换状态
+    // Cách truyền thống: mỗi đối tượng đều đổi trạng thái
     objects.forEach(obj => {
-      ctx.fillStyle = obj.color  // 频繁切换状态
+      ctx.fillStyle = obj.color  // Đổi trạng thái liên tục
       ctx.beginPath()
       ctx.arc(obj.x, obj.y, obj.size, 0, Math.PI * 2)
       ctx.fill()
@@ -323,11 +323,11 @@ const initOffscreenCanvas = () => {
   if (!offscreenCanvasRef.value) return
   offscreenCtx = offscreenCanvasRef.value.getContext('2d')
 
-  // 预渲染静态背景
+  // Prerender nền tĩnh
   offscreenCtx.fillStyle = '#fafafa'
   offscreenCtx.fillRect(0, 0, 600, 400)
 
-  // 绘制网格
+  // Vẽ grid
   offscreenCtx.strokeStyle = '#e0e0e0'
   offscreenCtx.lineWidth = 1
   for (let x = 0; x < 600; x += 50) {
@@ -346,7 +346,7 @@ const initOffscreenCanvas = () => {
 
 const drawRedrawTest = (ctx) => {
   if (useDirtyRect.value) {
-    // 只重绘移动的对象
+    // Chỉ vẽ lại các đối tượng đã di chuyển
     objects.forEach((obj) => {
       if (obj.moved) {
         ctx.clearRect(
@@ -363,12 +363,12 @@ const drawRedrawTest = (ctx) => {
       }
     })
   } else {
-    // 清除整个画布
+    // Xóa toàn bộ canvas
     ctx.clearRect(0, 0, 600, 400)
     ctx.fillStyle = '#fafafa'
     ctx.fillRect(0, 0, 600, 400)
 
-    // 绘制所有对象
+    // Vẽ tất cả đối tượng
     objects.forEach((obj) => {
       ctx.fillStyle = obj.color
       ctx.beginPath()
@@ -380,10 +380,10 @@ const drawRedrawTest = (ctx) => {
 
 const drawLayerTest = (ctx) => {
   if (useOffscreenCanvas.value && offscreenCtx) {
-    // 复制预渲染的背景
+    // Sao chép nền đã prerender
     ctx.drawImage(offscreenCanvasRef.value, 0, 0)
   } else {
-    // 绘制背景
+    // Vẽ nền
     ctx.fillStyle = '#fafafa'
     ctx.fillRect(0, 0, 600, 400)
     ctx.strokeStyle = '#e0e0e0'
@@ -402,7 +402,7 @@ const drawLayerTest = (ctx) => {
     }
   }
 
-  // 绘制动态对象
+  // Vẽ đối tượng động
   objects.forEach((obj) => {
     ctx.fillStyle = obj.color
     ctx.beginPath()
@@ -417,7 +417,7 @@ const drawBatchTest = (ctx) => {
   ctx.fillRect(0, 0, 600, 400)
 
   if (useBatching.value) {
-    // 按颜色分组批量渲染
+    // Render theo lô, nhóm theo màu
     const batches = {}
     objects.forEach((obj) => {
       if (!batches[obj.color]) {
@@ -435,7 +435,7 @@ const drawBatchTest = (ctx) => {
       })
     })
   } else {
-    // 逐个渲染
+    // Render từng đối tượng
     objects.forEach((obj) => {
       ctx.fillStyle = obj.color
       ctx.beginPath()

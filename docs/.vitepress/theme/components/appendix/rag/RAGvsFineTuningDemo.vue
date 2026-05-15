@@ -1,14 +1,14 @@
 <!--
   RAGvsFineTuningDemo.vue
-  RAG vs 微调对比演示
+  Demo so sánh RAG vs fine-tuning
 
-  用途：
-  并排对比 RAG 和微调两种方案的优劣势，
-  帮助用户理解何时选择哪种方案。
+  Mục đích:
+  So sánh song song ưu nhược điểm của RAG và fine-tuning,
+  giúp user hiểu khi nào nên chọn cách nào.
 
-  交互功能：
-  - 切换不同维度的对比
-  - 场景选择器：根据需求推荐方案
+  Tính năng:
+  - Chuyển giữa các góc so sánh
+  - Chọn tình huống để được gợi ý phương án
 -->
 <template>
   <div class="rag-vs-ft-demo">
@@ -17,13 +17,13 @@
         :class="['toggle-btn', { active: view === 'compare' }]"
         @click="view = 'compare'"
       >
-        维度对比
+        So sánh theo tiêu chí
       </button>
       <button
         :class="['toggle-btn', { active: view === 'scenario' }]"
         @click="view = 'scenario'"
       >
-        场景推荐
+        Gợi ý theo tình huống
       </button>
     </div>
 
@@ -32,9 +32,9 @@
       class="compare-view"
     >
       <div class="compare-header">
-        <div class="col-label rag-label">RAG 检索增强生成</div>
+        <div class="col-label rag-label">RAG (Retrieval-Augmented Generation)</div>
         <div class="col-label vs-label">VS</div>
-        <div class="col-label ft-label">Fine-tuning 微调</div>
+        <div class="col-label ft-label">Fine-tuning</div>
       </div>
 
       <div
@@ -71,7 +71,7 @@
       v-if="view === 'scenario'"
       class="scenario-view"
     >
-      <div class="scenario-question">你的需求是什么？</div>
+      <div class="scenario-question">Nhu cầu của bạn là gì?</div>
       <div class="scenario-grid">
         <div
           v-for="(s, i) in scenarios"
@@ -83,7 +83,7 @@
           <div class="scenario-name">{{ s.name }}</div>
           <div class="scenario-desc">{{ s.desc }}</div>
           <div :class="['recommendation', s.recommend]">
-            {{ s.recommend === 'rag' ? '推荐 RAG' : s.recommend === 'ft' ? '推荐微调' : '两者结合' }}
+            {{ s.recommend === 'rag' ? 'Nên dùng RAG' : s.recommend === 'ft' ? 'Nên fine-tuning' : 'Kết hợp cả hai' }}
           </div>
         </div>
       </div>
@@ -92,17 +92,17 @@
         v-if="selectedScenario !== null"
         class="scenario-detail"
       >
-        <div class="detail-title">{{ scenarios[selectedScenario].name }} — 详细分析</div>
+        <div class="detail-title">{{ scenarios[selectedScenario].name }} — Phân tích chi tiết</div>
         <div class="detail-reason">{{ scenarios[selectedScenario].reason }}</div>
       </div>
     </div>
 
     <div class="summary-box">
-      <div class="summary-title">一句话总结</div>
+      <div class="summary-title">Tóm lại một câu</div>
       <div class="summary-text">
-        RAG 像是给模型配了一个<strong>实时更新的参考书库</strong>，适合知识频繁变化的场景；
-        微调像是让模型<strong>上了一门专业课</strong>，适合需要特定风格或领域深度的场景。
-        实际项目中，两者常常结合使用。
+        RAG giống như cho mô hình một <strong>tủ sách tham khảo được cập nhật liên tục</strong>, phù hợp khi tri thức thay đổi thường xuyên;
+        Fine-tuning giống như cho mô hình <strong>học một môn chuyên ngành</strong>, phù hợp khi cần phong cách riêng hoặc chuyên sâu lĩnh vực.
+        Trong thực tế, hai cách này thường được kết hợp.
       </div>
     </div>
   </div>
@@ -116,97 +116,97 @@ const selectedScenario = ref(null)
 
 const dimensions = [
   {
-    name: '知识更新速度',
+    name: 'Tốc độ cập nhật tri thức',
     icon: '⚡',
     ragScore: 95,
-    ragText: '实时更新，修改文档即生效',
+    ragText: 'Cập nhật ngay, sửa tài liệu là có hiệu lực',
     ftScore: 25,
-    ftText: '需要重新训练，周期长'
+    ftText: 'Phải huấn luyện lại, chu kỳ dài'
   },
   {
-    name: '实施成本',
+    name: 'Chi phí triển khai',
     icon: '💰',
     ragScore: 80,
-    ragText: '搭建检索系统，成本适中',
+    ragText: 'Dựng hệ thống retrieval, chi phí vừa phải',
     ftScore: 35,
-    ftText: '需要 GPU 资源和标注数据'
+    ftText: 'Cần GPU và dữ liệu đã gán nhãn'
   },
   {
-    name: '回答风格控制',
+    name: 'Kiểm soát phong cách trả lời',
     icon: '🎨',
     ragScore: 40,
-    ragText: '依赖 Prompt 工程',
+    ragText: 'Phụ thuộc prompt engineering',
     ftScore: 90,
-    ftText: '可深度定制输出风格'
+    ftText: 'Có thể tùy biến sâu phong cách đầu ra'
   },
   {
-    name: '幻觉控制',
+    name: 'Kiểm soát ảo giác (hallucination)',
     icon: '🎯',
     ragScore: 85,
-    ragText: '有据可查，可追溯来源',
+    ragText: 'Có nguồn để kiểm chứng, truy vết được',
     ftScore: 50,
-    ftText: '仍可能产生幻觉'
+    ftText: 'Vẫn có thể sinh ảo giác'
   },
   {
-    name: '推理延迟',
+    name: 'Độ trễ inference',
     icon: '⏱️',
     ragScore: 55,
-    ragText: '需要额外的检索步骤',
+    ragText: 'Cần thêm bước retrieval',
     ftScore: 85,
-    ftText: '直接生成，无额外开销'
+    ftText: 'Sinh trực tiếp, không có overhead thêm'
   },
   {
-    name: '私有数据安全',
+    name: 'An toàn dữ liệu riêng',
     icon: '🔒',
     ragScore: 90,
-    ragText: '数据留在本地，不进入模型',
+    ragText: 'Dữ liệu nằm ở local, không vào mô hình',
     ftScore: 45,
-    ftText: '数据融入模型权重'
+    ftText: 'Dữ liệu được nhúng vào trọng số mô hình'
   }
 ]
 
 const scenarios = [
   {
     icon: '📚',
-    name: '企业知识库问答',
-    desc: '内部文档、政策、FAQ 等频繁更新的知识',
+    name: 'Hỏi đáp kho tri thức doanh nghiệp',
+    desc: 'Tài liệu nội bộ, chính sách, FAQ thường xuyên thay đổi',
     recommend: 'rag',
-    reason: '企业知识库的内容更新频繁，使用 RAG 可以在文档更新后立即生效，无需重新训练。同时数据留在本地，满足企业数据安全要求。'
+    reason: 'Nội dung kho tri thức doanh nghiệp cập nhật thường xuyên; dùng RAG sẽ có hiệu lực ngay sau khi sửa tài liệu, không cần huấn luyện lại. Dữ liệu cũng nằm ở local, đáp ứng yêu cầu an toàn.'
   },
   {
     icon: '🏥',
-    name: '医疗报告生成',
-    desc: '需要严格遵循特定格式和术语的专业文档',
+    name: 'Sinh báo cáo y tế',
+    desc: 'Văn bản chuyên ngành cần tuân thủ nghiêm format và thuật ngữ',
     recommend: 'ft',
-    reason: '医疗报告有严格的格式要求和专业术语规范，微调可以让模型深度学习这些模式，生成更符合行业标准的内容。'
+    reason: 'Báo cáo y tế có yêu cầu nghiêm về format và thuật ngữ chuyên ngành; fine-tuning giúp mô hình học sâu các mẫu này và sinh nội dung đúng chuẩn ngành.'
   },
   {
     icon: '💬',
-    name: '客服对话系统',
-    desc: '需要准确回答产品问题，同时保持品牌语调',
+    name: 'Hệ thống chatbot CSKH',
+    desc: 'Vừa trả lời chính xác về sản phẩm, vừa giữ tone thương hiệu',
     recommend: 'both',
-    reason: '客服系统需要 RAG 来检索最新的产品信息和解决方案，同时需要微调来保持一致的品牌语调和对话风格。两者结合效果最佳。'
+    reason: 'Hệ thống CSKH cần RAG để tra cứu thông tin sản phẩm và giải pháp mới nhất, đồng thời cần fine-tuning để giữ tone và phong cách hội thoại nhất quán. Kết hợp cả hai là tốt nhất.'
   },
   {
     icon: '📰',
-    name: '实时新闻摘要',
-    desc: '需要基于最新信息生成摘要',
+    name: 'Tóm tắt tin tức thời gian thực',
+    desc: 'Cần sinh tóm tắt dựa trên thông tin mới nhất',
     recommend: 'rag',
-    reason: '新闻内容实时变化，RAG 可以检索最新的新闻源并生成摘要，而微调无法跟上信息更新的速度。'
+    reason: 'Nội dung tin tức thay đổi liên tục; RAG có thể retrieve nguồn tin mới và sinh tóm tắt, còn fine-tuning không kịp tốc độ cập nhật.'
   },
   {
     icon: '✍️',
-    name: '特定风格写作',
-    desc: '模仿特定作者或品牌的写作风格',
+    name: 'Viết theo phong cách cụ thể',
+    desc: 'Bắt chước phong cách của tác giả hoặc thương hiệu',
     recommend: 'ft',
-    reason: '写作风格是一种内化的模式，通过微调让模型学习大量风格样本，能更自然地模仿目标风格，RAG 难以实现这种深层次的风格迁移。'
+    reason: 'Phong cách viết là một dạng mẫu nội tại; fine-tuning với nhiều mẫu phong cách giúp mô hình mô phỏng tự nhiên hơn, RAG khó đạt được sự chuyển phong cách sâu này.'
   },
   {
     icon: '🔬',
-    name: '科研文献助手',
-    desc: '基于海量论文回答学术问题',
+    name: 'Trợ lý nghiên cứu khoa học',
+    desc: 'Trả lời câu hỏi học thuật dựa trên kho paper khổng lồ',
     recommend: 'rag',
-    reason: '科研文献数量庞大且持续增长，RAG 可以动态检索相关论文片段，并提供引用来源，便于研究者验证和追溯。'
+    reason: 'Số lượng paper khoa học lớn và tăng liên tục; RAG có thể retrieve động các đoạn paper liên quan và đưa nguồn trích dẫn để nhà nghiên cứu kiểm chứng.'
   }
 ]
 </script>

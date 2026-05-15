@@ -1,33 +1,33 @@
 <!--
   ChunkingStrategyDemo.vue
-  文本分块策略交互演示
+  Demo tương tác các chiến lược chunking văn bản
 
-  用途：
-  展示不同的文本分块策略（固定大小、按句子、语义、递归），
-  用户可以输入文本并观察不同策略如何切分。
+  Mục đích:
+  Trình bày các chiến lược chunking khác nhau (fixed-size, theo câu, semantic, recursive),
+  user có thể nhập văn bản và quan sát cách mỗi chiến lược cắt.
 
-  交互功能：
-  - 输入自定义文本或使用预设文本
-  - 切换不同分块策略
-  - 可视化展示分块结果与边界
+  Tính năng:
+  - Nhập văn bản tùy ý hoặc dùng mẫu có sẵn
+  - Chuyển giữa các chiến lược chunking
+  - Trực quan hóa kết quả và ranh giới các chunk
 -->
 <template>
   <div class="chunking-demo">
     <div class="input-section">
       <div class="section-header">
-        <span class="section-title">输入文本</span>
+        <span class="section-title">Văn bản đầu vào</span>
         <button
           class="preset-btn"
           @click="usePreset"
         >
-          使用示例文本
+          Dùng văn bản mẫu
         </button>
       </div>
       <textarea
         v-model="inputText"
         class="text-input"
         rows="4"
-        placeholder="请输入要分块的文本，或点击「使用示例文本」..."
+        placeholder="Nhập văn bản cần chunking, hoặc bấm 'Dùng văn bản mẫu'..."
       />
     </div>
 
@@ -59,8 +59,8 @@
 
     <div class="result-section">
       <div class="result-header">
-        分块结果
-        <span class="chunk-count">共 {{ chunks.length }} 个块</span>
+        Kết quả chunking
+        <span class="chunk-count">Tổng {{ chunks.length }} chunk</span>
       </div>
       <div class="chunks-container">
         <div
@@ -76,7 +76,7 @@
             >
               #{{ i + 1 }}
             </span>
-            <span class="chunk-size">{{ chunk.length }} 字符</span>
+            <span class="chunk-size">{{ chunk.length }} ký tự</span>
           </div>
           <div class="chunk-text">{{ chunk }}</div>
         </div>
@@ -84,7 +84,7 @@
           v-if="chunks.length === 0"
           class="empty-hint"
         >
-          请输入文本后查看分块结果
+          Hãy nhập văn bản để xem kết quả chunking
         </div>
       </div>
     </div>
@@ -93,10 +93,10 @@
       <table>
         <thead>
           <tr>
-            <th>策略</th>
-            <th>优点</th>
-            <th>缺点</th>
-            <th>适用场景</th>
+            <th>Chiến lược</th>
+            <th>Ưu điểm</th>
+            <th>Nhược điểm</th>
+            <th>Tình huống phù hợp</th>
           </tr>
         </thead>
         <tbody>
@@ -121,7 +121,7 @@ import { ref, computed } from 'vue'
 
 const chunkColors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4']
 
-const presetText = '人工智能（AI）是计算机科学的一个分支，致力于创建能够模拟人类智能的系统。机器学习是 AI 的核心方法之一，它让计算机能够从数据中学习规律。深度学习是机器学习的子集，使用多层神经网络来处理复杂任务。自然语言处理（NLP）使计算机能够理解和生成人类语言。大语言模型（LLM）如 GPT 和 Claude 通过海量文本训练，具备了强大的语言理解和生成能力。RAG（检索增强生成）技术通过在生成前检索相关文档，显著提升了 LLM 回答的准确性和时效性。向量数据库是 RAG 系统的关键组件，它能高效存储和检索文本的向量表示。'
+const presetText = 'AI (Trí tuệ nhân tạo) là một nhánh của khoa học máy tính, hướng tới xây dựng các hệ thống mô phỏng được trí tuệ con người. Machine learning là một trong những phương pháp cốt lõi của AI, cho phép máy tính học quy luật từ dữ liệu. Deep learning là tập con của machine learning, dùng neural network nhiều tầng để xử lý các bài toán phức tạp. NLP (Natural Language Processing) giúp máy tính hiểu và sinh ngôn ngữ con người. Các LLM như GPT và Claude được huấn luyện trên khối lượng văn bản khổng lồ, có khả năng hiểu và sinh ngôn ngữ rất mạnh. Kỹ thuật RAG (Retrieval-Augmented Generation) cải thiện rõ rệt độ chính xác và tính thời sự của câu trả lời LLM bằng cách retrieve tài liệu liên quan trước khi sinh. Vector database là thành phần then chốt của hệ thống RAG, lưu và tìm kiếm hiệu quả các vector biểu diễn văn bản.'
 
 const inputText = ref('')
 const currentStrategy = ref('fixed')
@@ -129,43 +129,43 @@ const currentStrategy = ref('fixed')
 const strategies = [
   {
     id: 'fixed',
-    name: '固定大小',
+    name: 'Kích thước cố định',
     icon: '📏',
-    desc: '按照固定的字符数切分文本，是最简单直接的分块方式。通常会设置一定的重叠区域（overlap），避免在切分边界丢失上下文。',
-    params: ['块大小: 80 字符', '重叠: 20 字符'],
-    pros: '实现简单，块大小均匀',
-    cons: '可能在句子中间截断',
-    useCase: '结构化程度低的长文本'
+    desc: 'Cắt văn bản theo số ký tự cố định, là cách chunking đơn giản nhất. Thường có vùng overlap để tránh mất context tại ranh giới cắt.',
+    params: ['Chunk size: 80 ký tự', 'Overlap: 20 ký tự'],
+    pros: 'Đơn giản, kích thước đều',
+    cons: 'Có thể cắt giữa câu',
+    useCase: 'Văn bản dài, ít cấu trúc'
   },
   {
     id: 'sentence',
-    name: '按句子',
+    name: 'Theo câu',
     icon: '📝',
-    desc: '以句号、问号、感叹号等标点作为分隔符，按完整句子进行切分。保证每个块都是语义完整的句子集合。',
-    params: ['每块: 2-3 句', '分隔符: 。？！'],
-    pros: '保持句子完整性',
-    cons: '块大小不均匀',
-    useCase: '文章、报告等自然文本'
+    desc: 'Dùng dấu chấm, hỏi, cảm thán... làm dấu phân tách, cắt theo câu hoàn chỉnh. Mỗi chunk là tập hợp các câu trọn vẹn về nghĩa.',
+    params: ['2-3 câu mỗi chunk', 'Dấu phân tách: .?!'],
+    pros: 'Giữ nguyên câu',
+    cons: 'Kích thước chunk không đều',
+    useCase: 'Bài viết, báo cáo và văn bản tự nhiên'
   },
   {
     id: 'semantic',
-    name: '语义分块',
+    name: 'Semantic chunking',
     icon: '🧠',
-    desc: '根据文本的语义相似度进行分块。当相邻句子的语义差异超过阈值时，在此处切分。能更好地保持主题的连贯性。',
-    params: ['相似度阈值: 0.7', '最小块: 50 字符'],
-    pros: '主题连贯，语义完整',
-    cons: '计算成本高，需要嵌入模型',
-    useCase: '多主题混合的复杂文档'
+    desc: 'Chunking dựa trên độ tương đồng ngữ nghĩa. Khi sự khác biệt ngữ nghĩa giữa các câu liền kề vượt ngưỡng thì cắt. Giữ tính liền mạch chủ đề tốt hơn.',
+    params: ['Ngưỡng tương đồng: 0.7', 'Chunk tối thiểu: 50 ký tự'],
+    pros: 'Liền mạch chủ đề, trọn nghĩa',
+    cons: 'Chi phí tính cao, cần embedding model',
+    useCase: 'Tài liệu phức tạp, nhiều chủ đề trộn lẫn'
   },
   {
     id: 'recursive',
-    name: '递归分块',
+    name: 'Recursive chunking',
     icon: '🔄',
-    desc: '使用多级分隔符递归切分：先按段落分，段落太长则按句子分，句子太长则按固定大小分。LangChain 的默认策略。',
-    params: ['分隔符: \\n\\n → 。→ 固定', '目标: 80 字符'],
-    pros: '兼顾结构与大小',
-    cons: '实现较复杂',
-    useCase: '通用场景，推荐默认选择'
+    desc: 'Cắt đệ quy qua nhiều mức dấu phân tách: trước hết theo đoạn, đoạn quá dài thì theo câu, câu quá dài thì theo kích thước cố định. Là chiến lược mặc định của LangChain.',
+    params: ['Dấu cắt: \\n\\n → . → cố định', 'Mục tiêu: 80 ký tự'],
+    pros: 'Cân bằng giữa cấu trúc và kích thước',
+    cons: 'Triển khai phức tạp hơn',
+    useCase: 'Tình huống chung, lựa chọn mặc định khuyến nghị'
   }
 ]
 
@@ -212,7 +212,7 @@ function chunkSemantic(text) {
   const sentences = text.split(/(?<=[。？！.?!])/).filter((s) => s.trim())
   const result = []
   let current = ''
-  const keywords = ['AI', 'LLM', 'RAG', 'NLP', '机器学习', '深度学习', '向量']
+  const keywords = ['AI', 'LLM', 'RAG', 'NLP', 'machine learning', 'deep learning', 'vector']
   let prevKeywords = new Set()
 
   for (const s of sentences) {

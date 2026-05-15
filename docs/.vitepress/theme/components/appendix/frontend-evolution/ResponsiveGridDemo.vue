@@ -1,6 +1,6 @@
 <!--
-  ResponsiveGridDemo.vue - 魔法衣柜
-  用"衣服自动叠放"的比喻来解释响应式布局
+  ResponsiveGridDemo.vue - Tủ quần áo phép thuật
+  Dùng phép so sánh "quần áo tự gấp xếp" để giải thích bố cục responsive
 -->
 <template>
   <div class="magic-closet">
@@ -10,23 +10,23 @@
         👗✨🚪
       </div>
       <h4 class="story-title">
-        小美的魔法衣柜
+        Tủ quần áo phép thuật của Mai
       </h4>
       <p class="story-text">
-        小美有一件神奇的魔法衣柜！不管你把它放在大房间还是小房间，<br>
-        <strong>里面的衣服都会自动叠好、排好，完美适应空间大小！</strong>
+        Mai có một chiếc tủ quần áo phép thuật! Dù bạn đặt nó trong phòng lớn hay phòng nhỏ,<br>
+        <strong>quần áo bên trong sẽ tự gấp gọn, sắp xếp hoàn hảo theo kích thước không gian!</strong>
       </p>
     </div>
 
     <!-- 衣柜宽度调节 -->
     <div class="closet-control">
       <div class="control-label">
-        <span>🚪 拖动把手，把衣柜放进不同房间：</span>
+        <span>🚪 Kéo thanh trượt để đặt tủ vào các phòng khác nhau:</span>
         <span class="room-label">{{ currentRoom.name }}</span>
       </div>
 
       <div class="slider-box">
-        <span class="slider-emoji">🏠小</span>
+        <span class="slider-emoji">🏠 Nhỏ</span>
         <input
           v-model="closetWidth"
           type="range"
@@ -35,11 +35,11 @@
           step="10"
           class="magic-slider"
         >
-        <span class="slider-emoji">大🏰</span>
+        <span class="slider-emoji">Lớn 🏰</span>
       </div>
 
       <div class="width-hint">
-        当前衣柜宽度：<strong>{{ closetWidth }}px</strong> | 可以放下 <strong>{{ clothesPerRow }}</strong> 件衣服
+        Độ rộng tủ hiện tại: <strong>{{ closetWidth }}px</strong> | Mỗi hàng chứa được <strong>{{ clothesPerRow }}</strong> món đồ
       </div>
     </div>
 
@@ -50,7 +50,7 @@
     >
       <div class="closet-header">
         <span class="closet-icon">🚪</span>
-        <span class="closet-title">小美的魔法衣柜</span>
+        <span class="closet-title">Tủ quần áo phép thuật của Mai</span>
         <span class="closet-icon">🪄</span>
       </div>
 
@@ -79,22 +79,22 @@
               v-if="isSmallSpace"
               class="fold-hint"
             >
-              叠好了!
+              Đã gấp gọn!
             </div>
           </div>
         </div>
       </div>
 
       <div class="closet-footer">
-        <span>✨ 衣服数量：{{ clothes.length }}件</span>
-        <span>📐 排列方式：{{ arrangementMode }}</span>
+        <span>✨ Số món đồ: {{ clothes.length }}</span>
+        <span>📐 Cách sắp xếp: {{ arrangementMode }}</span>
       </div>
     </div>
 
     <!-- 魔法原理说明 -->
     <div class="magic-explain">
       <div class="explain-title">
-        🔮 魔法原理揭秘
+        🔮 Bí mật của phép thuật
       </div>
       <div class="explain-cards">
         <div class="explain-card">
@@ -102,10 +102,10 @@
             📱
           </div>
           <div class="card-title">
-            小房间（手机）
+            Phòng nhỏ (điện thoại)
           </div>
           <div class="card-desc">
-            衣柜只有 320px 宽，衣服会自动叠起来，<strong>1列</strong>排开
+            Tủ chỉ rộng 320px, quần áo tự gấp gọn, xếp <strong>1 cột</strong>
           </div>
         </div>
         <div class="explain-arrow">
@@ -116,10 +116,10 @@
             📲
           </div>
           <div class="card-title">
-            中房间（平板）
+            Phòng vừa (tablet)
           </div>
           <div class="card-desc">
-            衣柜有 768px 宽，衣服舒展开，<strong>2列</strong>排开
+            Tủ rộng 768px, quần áo mở rộng, xếp <strong>2 cột</strong>
           </div>
         </div>
         <div class="explain-arrow">
@@ -130,10 +130,10 @@
             💻
           </div>
           <div class="card-title">
-            大房间（电脑）
+            Phòng lớn (máy tính)
           </div>
           <div class="card-desc">
-            衣柜有 1200px 宽，衣服完全展开，<strong>3列</strong>排开
+            Tủ rộng 1200px, quần áo mở hết, xếp <strong>3 cột</strong>
           </div>
         </div>
       </div>
@@ -142,27 +142,27 @@
     <!-- 代码展示 -->
     <div class="code-section">
       <div class="code-header">
-        <span>💻 魔法咒语（CSS代码）</span>
+        <span>💻 Câu thần chú (mã CSS)</span>
         <span class="code-tag">CSS</span>
       </div>
-      <pre class="code-content"><code>/* 默认：小房间，衣服叠成1列 */
+      <pre class="code-content"><code>/* Mặc định: phòng nhỏ, quần áo xếp 1 cột */
 .closet {
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr;  /* 1列 */
+  grid-template-columns: 1fr;  /* 1 cột */
 }
 
-/* 中房间：衣服排成2列 */
+/* Phòng vừa: quần áo xếp 2 cột */
 @media (min-width: 640px) {
   .closet {
-    grid-template-columns: repeat(2, 1fr);  /* 2列 */
+    grid-template-columns: repeat(2, 1fr);  /* 2 cột */
   }
 }
 
-/* 大房间：衣服排成3列 */
+/* Phòng lớn: quần áo xếp 3 cột */
 @media (min-width: 1024px) {
   .closet {
-    grid-template-columns: repeat(3, 1fr);  /* 3列 */
+    grid-template-columns: repeat(3, 1fr);  /* 3 cột */
   }
 }</code></pre>
     </div>
@@ -173,10 +173,10 @@
         🎯
       </div>
       <div class="summary-content">
-        <strong>关键 takeaway：</strong>
-        响应式布局就像小美的魔法衣柜，<strong>同一套衣服（内容）</strong>，
-        会根据<strong>房间大小（屏幕宽度）</strong>自动调整排列方式！
-        这就是 CSS 媒体查询（Media Query）的魔法！
+        <strong>Điểm rút ra:</strong>
+        Bố cục responsive giống như tủ phép thuật của Mai, <strong>cùng một bộ quần áo (nội dung)</strong>
+        sẽ tự điều chỉnh cách sắp xếp theo <strong>kích thước phòng (độ rộng màn hình)</strong>!
+        Đó chính là phép màu của CSS Media Query!
       </div>
     </div>
   </div>
@@ -185,36 +185,36 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 衣柜宽度（模拟屏幕宽度）
+// Độ rộng tủ (mô phỏng độ rộng màn hình)
 const closetWidth = ref(375)
 
-// 房间类型
+// Các loại phòng
 const rooms = [
-  { name: '小房间（手机）', min: 280, max: 639, cols: 1, icon: '📱' },
-  { name: '中房间（平板）', min: 640, max: 1023, cols: 2, icon: '📲' },
-  { name: '大房间（电脑）', min: 1024, max: 900, cols: 3, icon: '💻' }
+  { name: 'Phòng nhỏ (điện thoại)', min: 280, max: 639, cols: 1, icon: '📱' },
+  { name: 'Phòng vừa (tablet)', min: 640, max: 1023, cols: 2, icon: '📲' },
+  { name: 'Phòng lớn (máy tính)', min: 1024, max: 900, cols: 3, icon: '💻' }
 ]
 
-// 当前房间
+// Phòng hiện tại
 const currentRoom = computed(() => {
   const room = rooms.find(r => closetWidth.value >= r.min && closetWidth.value <= r.max)
   return room || rooms[0]
 })
 
-// 每行衣服数量
+// Số quần áo mỗi hàng
 const clothesPerRow = computed(() => currentRoom.value.cols)
 
-// 是否小空间（需要叠衣服）
+// Có phải không gian nhỏ (cần gấp gọn)
 const isSmallSpace = computed(() => closetWidth.value < 500)
 
-// 排列模式文字
+// Mô tả cách sắp xếp
 const arrangementMode = computed(() => {
-  if (closetWidth.value < 640) return '小空间模式（叠放）'
-  if (closetWidth.value < 1024) return '中等空间（舒展）'
-  return '大空间（完全展开）'
+  if (closetWidth.value < 640) return 'Chế độ không gian nhỏ (gấp gọn)'
+  if (closetWidth.value < 1024) return 'Không gian vừa (mở rộng)'
+  return 'Không gian lớn (mở hết)'
 })
 
-// 衣柜网格样式
+// Kiểu lưới của tủ
 const rackStyle = computed(() => {
   const cols = currentRoom.value.cols
   return {
@@ -224,14 +224,14 @@ const rackStyle = computed(() => {
   }
 })
 
-// 衣服列表
+// Danh sách quần áo
 const clothes = [
-  { emoji: '👗', name: '连衣裙' },
-  { emoji: '👔', name: '衬衫' },
-  { emoji: '👖', name: '牛仔裤' },
-  { emoji: '🧥', name: '大衣' },
-  { emoji: '👘', name: '和服' },
-  { emoji: '🥻', name: '纱丽' }
+  { emoji: '👗', name: 'Váy liền' },
+  { emoji: '👔', name: 'Áo sơ mi' },
+  { emoji: '👖', name: 'Quần jeans' },
+  { emoji: '🧥', name: 'Áo khoác' },
+  { emoji: '👘', name: 'Kimono' },
+  { emoji: '🥻', name: 'Sari' }
 ]
 </script>
 

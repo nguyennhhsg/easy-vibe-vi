@@ -1,14 +1,14 @@
 <template>
   <div class="cpu-registers-demo">
     <div class="demo-header">
-      <span class="title">CPU 寄存器组</span>
-      <span class="subtitle">CPU 内部的高速存储单元</span>
+      <span class="title">Tập thanh ghi CPU</span>
+      <span class="subtitle">Đơn vị lưu trữ tốc độ cao bên trong CPU</span>
     </div>
 
     <div class="registers-layout">
-      <!-- 专用寄存器 -->
+      <!-- Thanh ghi chuyên dụng -->
       <div class="reg-section special-regs">
-        <div class="section-title">专用寄存器 (Special Registers)</div>
+        <div class="section-title">Thanh ghi chuyên dụng (Special Registers)</div>
         <div class="reg-grid">
           <div v-for="reg in specialRegisters" :key="reg.name" class="reg-card" :class="{ active: activeReg === reg.name }" @click="selectReg(reg)">
             <div class="reg-name">{{ reg.name }}</div>
@@ -18,9 +18,9 @@
         </div>
       </div>
 
-      <!-- 通用寄存器 -->
+      <!-- Thanh ghi đa dụng -->
       <div class="reg-section general-regs">
-        <div class="section-title">通用寄存器 (General Purpose Registers)</div>
+        <div class="section-title">Thanh ghi đa dụng (General Purpose Registers)</div>
         <div class="reg-grid">
           <div v-for="reg in generalRegisters" :key="reg.name" class="reg-card small" :class="{ active: activeReg === reg.name }" @click="selectReg(reg)">
             <div class="reg-name">{{ reg.name }}</div>
@@ -30,9 +30,9 @@
         </div>
       </div>
 
-      <!-- 状态寄存器 -->
+      <!-- Thanh ghi trạng thái -->
       <div class="reg-section status-reg">
-        <div class="section-title">程序状态字 (PSW / FLAGS)</div>
+        <div class="section-title">Từ trạng thái chương trình (PSW / FLAGS)</div>
         <div class="flags-container">
           <div v-for="flag in statusFlags" :key="flag.name" class="flag-bit" :class="{ set: flag.value === 1 }">
             <span class="flag-name">{{ flag.name }}</span>
@@ -43,47 +43,47 @@
       </div>
     </div>
 
-    <!-- 寄存器详解 -->
+    <!-- Chi tiết thanh ghi -->
     <div class="reg-details" v-if="selectedReg">
       <div class="details-header">
-        <span class="details-title">{{ selectedReg.name }} 寄存器</span>
+        <span class="details-title">Thanh ghi {{ selectedReg.name }}</span>
         <span class="details-type">{{ selectedReg.type }}</span>
       </div>
       <div class="details-content">{{ selectedReg.detail }}</div>
     </div>
 
-    <!-- 寄存器说明 -->
+    <!-- Giải thích về thanh ghi -->
     <div class="register-explanation">
-      <div class="exp-title">寄存器 vs 内存</div>
+      <div class="exp-title">Thanh ghi vs RAM</div>
       <div class="exp-table">
         <table>
           <thead>
             <tr>
-              <th>特性</th>
-              <th>寄存器</th>
-              <th>内存 (RAM)</th>
+              <th>Đặc điểm</th>
+              <th>Thanh ghi</th>
+              <th>RAM</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>位置</td>
-              <td>CPU 内部</td>
-              <td>CPU 外部</td>
+              <td>Vị trí</td>
+              <td>Bên trong CPU</td>
+              <td>Bên ngoài CPU</td>
             </tr>
             <tr>
-              <td>访问速度</td>
-              <td>最快 (&lt; 1ns)</td>
-              <td>较慢 (50-100ns)</td>
+              <td>Tốc độ truy cập</td>
+              <td>Nhanh nhất (&lt; 1ns)</td>
+              <td>Chậm hơn (50-100ns)</td>
             </tr>
             <tr>
-              <td>容量</td>
-              <td>极小 (Bytes)</td>
-              <td>大 (GB)</td>
+              <td>Dung lượng</td>
+              <td>Cực nhỏ (Bytes)</td>
+              <td>Lớn (GB)</td>
             </tr>
             <tr>
-              <td>作用</td>
-              <td>暂存指令/操作数/结果</td>
-              <td>存储程序和数据</td>
+              <td>Vai trò</td>
+              <td>Lưu tạm chỉ thị/toán hạng/kết quả</td>
+              <td>Lưu chương trình và dữ liệu</td>
             </tr>
           </tbody>
         </table>
@@ -99,31 +99,31 @@ const activeReg = ref('')
 const selectedReg = ref(null)
 
 const specialRegisters = ref([
-  { name: 'PC', value: '0x00401000', desc: '程序计数器', type: '专用寄存器', detail: 'Program Counter，存放下一条要执行的指令地址。每执行一条指令，PC 自动加 4（32位）或 8（64位），指向下一条指令。' },
-  { name: 'IR', value: '0x8B450008', desc: '指令寄存器', type: '专用寄存器', detail: 'Instruction Register，存放当前正在执行的指令。CPU 从内存取指令后，先存入 IR，再送入译码器进行解析。' },
-  { name: 'MAR', value: '0x00401000', desc: '内存地址寄存器', type: '专用寄存器', detail: 'Memory Address Register，存放要访问的内存地址。CPU 通过它向地址总线发送内存位置。' },
-  { name: 'MDR', value: '0x00000000', desc: '内存数据寄存器', type: '专用寄存器', detail: 'Memory Data Register，临时存放要写入或从内存读取的数据。是 CPU 与内存交换数据的桥梁。' },
-  { name: 'ACC', value: '0x0000001A', desc: '累加器', type: '专用寄存器', detail: 'Accumulator，传统 CPU 中最重要的寄存器，用于存放算术运算和逻辑运算的中间结果。' },
+  { name: 'PC', value: '0x00401000', desc: 'Bộ đếm chương trình', type: 'Thanh ghi chuyên dụng', detail: 'Program Counter, lưu địa chỉ chỉ thị kế tiếp sẽ thực thi. Mỗi khi thực thi xong, PC tự tăng 4 (32-bit) hoặc 8 (64-bit) để trỏ tới chỉ thị tiếp theo.' },
+  { name: 'IR', value: '0x8B450008', desc: 'Thanh ghi chỉ thị', type: 'Thanh ghi chuyên dụng', detail: 'Instruction Register, lưu chỉ thị đang thực thi. CPU đọc chỉ thị từ bộ nhớ vào IR rồi đưa qua bộ giải mã để phân tích.' },
+  { name: 'MAR', value: '0x00401000', desc: 'Thanh ghi địa chỉ bộ nhớ', type: 'Thanh ghi chuyên dụng', detail: 'Memory Address Register, lưu địa chỉ bộ nhớ cần truy cập. CPU dùng nó để gửi vị trí bộ nhớ qua bus địa chỉ.' },
+  { name: 'MDR', value: '0x00000000', desc: 'Thanh ghi dữ liệu bộ nhớ', type: 'Thanh ghi chuyên dụng', detail: 'Memory Data Register, lưu tạm dữ liệu cần ghi vào hoặc đọc từ bộ nhớ. Là cầu nối trao đổi dữ liệu giữa CPU và RAM.' },
+  { name: 'ACC', value: '0x0000001A', desc: 'Bộ tích lũy', type: 'Thanh ghi chuyên dụng', detail: 'Accumulator, thanh ghi quan trọng nhất trong CPU truyền thống, lưu kết quả trung gian của phép toán số học và logic.' },
 ])
 
 const generalRegisters = ref([
-  { name: 'RAX', value: '0x00000000', desc: '返回值', type: '通用寄存器', detail: '64位寄存器，用于存放函数返回值。低32位为 EAX，低16位为 AX，低8位为 AL。' },
-  { name: 'RBX', value: '0x00000000', desc: '基址寄存器', type: '通用寄存器', detail: '64位通用寄存器，可用于存放数据或内存地址。' },
-  { name: 'RCX', value: '0x00000000', desc: '计数寄存器', type: '通用寄存器', detail: '64位通用寄存器，常用于循环计数。低32位为 ECX。' },
-  { name: 'RDX', value: '0x00000000', desc: '数据寄存器', type: '通用寄存器', detail: '64位通用寄存器，用于存放数据，也用于乘除法指令。' },
-  { name: 'RSI', value: '0x00000000', desc: '源索引', type: '通用寄存器', detail: 'Source Index，字符串操作中作为源地址指针。' },
-  { name: 'RDI', value: '0x00000000', desc: '目标索引', type: '通用寄存器', detail: 'Destination Index，字符串操作中作为目标地址指针。' },
-  { name: 'RBP', value: '0x00000000', desc: '栈帧指针', type: '通用寄存器', detail: 'Base Pointer，指向函数栈帧的基址，用于访问局部变量和函数参数。' },
-  { name: 'RSP', value: '0x7FFDE000', desc: '栈指针', type: '通用寄存器', detail: 'Stack Pointer，指向当前栈顶位置。Push 操作减 4，Pop 操作加 4。' },
+  { name: 'RAX', value: '0x00000000', desc: 'Giá trị trả về', type: 'Thanh ghi đa dụng', detail: 'Thanh ghi 64-bit, dùng lưu giá trị trả về của hàm. 32-bit thấp là EAX, 16-bit thấp là AX, 8-bit thấp là AL.' },
+  { name: 'RBX', value: '0x00000000', desc: 'Thanh ghi cơ sở', type: 'Thanh ghi đa dụng', detail: 'Thanh ghi đa dụng 64-bit, có thể lưu dữ liệu hoặc địa chỉ bộ nhớ.' },
+  { name: 'RCX', value: '0x00000000', desc: 'Thanh ghi đếm', type: 'Thanh ghi đa dụng', detail: 'Thanh ghi đa dụng 64-bit, thường dùng cho đếm vòng lặp. 32-bit thấp là ECX.' },
+  { name: 'RDX', value: '0x00000000', desc: 'Thanh ghi dữ liệu', type: 'Thanh ghi đa dụng', detail: 'Thanh ghi đa dụng 64-bit, dùng để lưu dữ liệu, cũng dùng trong các lệnh nhân chia.' },
+  { name: 'RSI', value: '0x00000000', desc: 'Chỉ số nguồn', type: 'Thanh ghi đa dụng', detail: 'Source Index, đóng vai trò con trỏ địa chỉ nguồn trong các thao tác chuỗi.' },
+  { name: 'RDI', value: '0x00000000', desc: 'Chỉ số đích', type: 'Thanh ghi đa dụng', detail: 'Destination Index, đóng vai trò con trỏ địa chỉ đích trong các thao tác chuỗi.' },
+  { name: 'RBP', value: '0x00000000', desc: 'Con trỏ khung stack', type: 'Thanh ghi đa dụng', detail: 'Base Pointer, trỏ tới cơ sở của khung stack hàm, dùng để truy cập biến cục bộ và tham số.' },
+  { name: 'RSP', value: '0x7FFDE000', desc: 'Con trỏ stack', type: 'Thanh ghi đa dụng', detail: 'Stack Pointer, trỏ tới đỉnh stack hiện tại. Push giảm 4, Pop tăng 4.' },
 ])
 
 const statusFlags = ref([
-  { name: 'CF', value: 0, desc: '进位标志' },
-  { name: 'PF', value: 0, desc: '奇偶标志' },
-  { name: 'AF', value: 0, desc: '辅助进位' },
-  { name: 'ZF', value: 0, desc: '零标志' },
-  { name: 'SF', value: 0, desc: '符号标志' },
-  { name: 'OF', value: 0, desc: '溢出标志' },
+  { name: 'CF', value: 0, desc: 'Cờ nhớ (carry)' },
+  { name: 'PF', value: 0, desc: 'Cờ chẵn lẻ' },
+  { name: 'AF', value: 0, desc: 'Cờ nhớ phụ' },
+  { name: 'ZF', value: 0, desc: 'Cờ zero' },
+  { name: 'SF', value: 0, desc: 'Cờ dấu' },
+  { name: 'OF', value: 0, desc: 'Cờ tràn' },
 ])
 
 const selectReg = (reg) => {

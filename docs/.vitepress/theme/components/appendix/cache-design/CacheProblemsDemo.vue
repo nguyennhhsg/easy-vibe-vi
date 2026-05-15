@@ -1,15 +1,15 @@
 <!--
   CacheProblemsDemo.vue
-  缓存三大问题演示 - 缓存穿透、缓存击穿、缓存雪崩
+  Demo ba vấn đề lớn của cache - Cache Penetration, Cache Breakdown, Cache Avalanche
 -->
 <template>
   <div class="cache-problems-demo">
     <div class="header">
       <div class="title">
-        缓存的三大问题
+        Ba vấn đề lớn của cache
       </div>
       <div class="subtitle">
-        穿透、击穿、雪崩的场景与解决方案
+        Tình huống và giải pháp cho penetration, breakdown, avalanche
       </div>
     </div>
 
@@ -27,24 +27,24 @@
     </div>
 
     <div class="problem-content">
-      <!-- 缓存穿透 -->
+      <!-- Cache Penetration -->
       <div
         v-if="activeProblem === 'penetration'"
         class="problem-detail"
       >
         <div class="problem-intro">
           <div class="intro-title">
-            什么是缓存穿透？
+            Cache Penetration là gì?
           </div>
           <div class="intro-text">
-            查询一个<strong>不存在的数据</strong>（如恶意请求
-            id=-1），缓存没有，数据库也没有。 导致每次请求都直接打到数据库。
+            Truy vấn một <strong>dữ liệu không tồn tại</strong> (ví dụ request độc hại
+            id=-1), cache không có, database cũng không có. Khiến mọi request đều đập thẳng vào database.
           </div>
         </div>
 
         <div class="problem-scenario">
           <div class="scenario-title">
-            场景模拟
+            Mô phỏng tình huống
           </div>
           <div class="scenario-diagram">
             <div class="flow-item request">
@@ -52,7 +52,7 @@
                 🔥
               </div>
               <div class="flow-text">
-                请求 id=-999
+                Request id=-999
               </div>
             </div>
             <div class="flow-arrow">
@@ -66,7 +66,7 @@
                 ❌
               </div>
               <div class="flow-text">
-                缓存未命中
+                Cache miss
               </div>
             </div>
             <div class="flow-arrow">
@@ -80,7 +80,7 @@
                 🗄️
               </div>
               <div class="flow-text">
-                数据库查询（不存在）
+                Truy vấn database (không có)
               </div>
             </div>
           </div>
@@ -91,13 +91,13 @@
               :disabled="simulating"
               @click="simulatePenetration"
             >
-              {{ simulating ? '攻击中...' : '模拟恶意攻击' }}
+              {{ simulating ? 'Đang tấn công...' : 'Mô phỏng tấn công độc hại' }}
             </button>
           </div>
 
           <div class="pressure-meter">
             <div class="meter-label">
-              数据库压力
+              Áp lực database
             </div>
             <div class="meter-bar">
               <div
@@ -113,61 +113,61 @@
 
         <div class="solutions">
           <div class="solutions-title">
-            解决方案
+            Giải pháp
           </div>
           <div class="solution-list">
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">1</span>
-                <span class="solution-name">布隆过滤器 (Bloom Filter)</span>
+                <span class="solution-name">Bloom Filter</span>
               </div>
               <div class="solution-desc">
-                在缓存前加一层过滤器，快速判断"这个 id 肯定不存在"。
+                Đặt một lớp filter trước cache, nhanh chóng xác định "id này chắc chắn không tồn tại".
                 <br>
-                <span class="note">100% 判断不存在，但可能有误判</span>
+                <span class="note">Xác định không có thì chắc chắn, nhưng có thể nhận dạng nhầm</span>
               </div>
             </div>
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">2</span>
-                <span class="solution-name">缓存空对象</span>
+                <span class="solution-name">Cache object rỗng</span>
               </div>
               <div class="solution-desc">
-                查询不存在时，缓存一个 NULL 值（TTL 设置短一点，如 5 分钟）。
+                Khi truy vấn không tồn tại, cache một giá trị NULL (đặt TTL ngắn, ví dụ 5 phút).
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 缓存击穿 -->
+      <!-- Cache Breakdown -->
       <div
         v-if="activeProblem === 'breakdown'"
         class="problem-detail"
       >
         <div class="problem-intro">
           <div class="intro-title">
-            什么是缓存击穿？
+            Cache Breakdown là gì?
           </div>
           <div class="intro-text">
-            某个<strong>热点数据</strong>过期（如微博热搜），瞬间几百万请求同时打到数据库。
+            Một <strong>dữ liệu hot</strong> hết hạn (ví dụ trending Weibo), ngay lập tức hàng triệu request cùng đập vào database.
           </div>
         </div>
 
         <div class="problem-scenario">
           <div class="scenario-title">
-            场景模拟
+            Mô phỏng tình huống
           </div>
           <div class="hotkey-scenario">
             <div class="hotkey-badge">
-              🔥 热点数据
+              🔥 Dữ liệu hot
               <br>
               <span class="key">user:12345</span>
             </div>
 
             <div class="concurrent-requests">
               <div class="requests-title">
-                并发请求
+                Request đồng thời
               </div>
               <div class="requests-container">
                 <div
@@ -177,7 +177,7 @@
                   :class="req.status"
                 >
                   <div class="request-id">
-                    请求 {{ req.id }}
+                    Request {{ req.id }}
                   </div>
                   <div class="request-status">
                     {{ req.statusText }}
@@ -191,10 +191,10 @@
               class="mutex-visual"
             >
               <div class="mutex-badge">
-                🔒 互斥锁
+                🔒 Mutex lock
               </div>
               <div class="mutex-text">
-                只有一个线程能查数据库
+                Chỉ một thread được truy vấn database
               </div>
             </div>
           </div>
@@ -205,60 +205,60 @@
               :disabled="simulating"
               @click="simulateBreakdown"
             >
-              {{ simulating ? '模拟中...' : '模拟热点过期' }}
+              {{ simulating ? 'Đang mô phỏng...' : 'Mô phỏng key hot hết hạn' }}
             </button>
           </div>
         </div>
 
         <div class="solutions">
           <div class="solutions-title">
-            解决方案
+            Giải pháp
           </div>
           <div class="solution-list">
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">1</span>
-                <span class="solution-name">互斥锁 (Mutex Lock)</span>
+                <span class="solution-name">Mutex Lock</span>
               </div>
               <div class="solution-desc">
-                只允许一个线程查数据库，其他线程等待。
+                Chỉ cho phép một thread truy vấn database, các thread khác chờ.
                 <br>
-                <span class="note">优点：简单；缺点：阻塞其他请求</span>
+                <span class="note">Ưu: đơn giản; Nhược: chặn các request khác</span>
               </div>
             </div>
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">2</span>
-                <span class="solution-name">逻辑过期 (Logical Expiration)</span>
+                <span class="solution-name">Logical Expiration (hết hạn logic)</span>
               </div>
               <div class="solution-desc">
-                不设置 TTL，而是在 value 里存一个过期时间字段。
+                Không đặt TTL, mà lưu một trường thời gian hết hạn trong value.
                 <br>
-                <span class="note">查询时发现"逻辑过期"，异步更新缓存，同时返回旧数据</span>
+                <span class="note">Khi truy vấn phát hiện "hết hạn logic", cập nhật cache bất đồng bộ, đồng thời trả về dữ liệu cũ</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 缓存雪崩 -->
+      <!-- Cache Avalanche -->
       <div
         v-if="activeProblem === 'avalanche'"
         class="problem-detail"
       >
         <div class="problem-intro">
           <div class="intro-title">
-            什么是缓存雪崩？
+            Cache Avalanche là gì?
           </div>
           <div class="intro-text">
-            大量缓存<strong>同时过期</strong>（如系统重启后，所有缓存都在
-            00:00:00 过期）， 数据库瞬间被打爆。
+            Một lượng lớn cache <strong>cùng hết hạn</strong> (ví dụ sau khi khởi động lại hệ thống, tất cả cache đều hết hạn lúc
+            00:00:00), database bị đập sập ngay lập tức.
           </div>
         </div>
 
         <div class="problem-scenario">
           <div class="scenario-title">
-            场景模拟
+            Mô phỏng tình huống
           </div>
           <div class="avalanche-visual">
             <div class="cache-items">
@@ -285,7 +285,7 @@
                 💥
               </div>
               <div class="explosion-text">
-                同时过期！
+                Cùng hết hạn!
               </div>
             </div>
 
@@ -297,7 +297,7 @@
                 🗄️
               </div>
               <div class="db-status">
-                数据库负载: {{ dbPressure }}%
+                Tải database: {{ dbPressure }}%
               </div>
             </div>
           </div>
@@ -308,53 +308,53 @@
               :disabled="simulating"
               @click="simulateAvalanche"
             >
-              {{ simulating ? '模拟中...' : '模拟缓存雪崩' }}
+              {{ simulating ? 'Đang mô phỏng...' : 'Mô phỏng cache avalanche' }}
             </button>
             <button
               class="solution-btn"
               @click="applyRandomTTL"
             >
-              应用解决方案（随机 TTL）
+              Áp dụng giải pháp (TTL ngẫu nhiên)
             </button>
           </div>
         </div>
 
         <div class="solutions">
           <div class="solutions-title">
-            解决方案
+            Giải pháp
           </div>
           <div class="solution-list">
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">1</span>
-                <span class="solution-name">随机 TTL</span>
+                <span class="solution-name">TTL ngẫu nhiên</span>
               </div>
               <div class="solution-desc">
-                避免同时过期，TTL 加上随机值。
+                Tránh hết hạn đồng loạt, cộng thêm giá trị ngẫu nhiên vào TTL.
                 <br>
-                <span class="code">ttl = 600 + random.randint(-60, 60) # 600 ± 60 秒</span>
+                <span class="code">ttl = 600 + random.randint(-60, 60) # 600 ± 60 giây</span>
               </div>
             </div>
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">2</span>
-                <span class="solution-name">缓存预热</span>
+                <span class="solution-name">Khởi động cache (warm-up)</span>
               </div>
               <div class="solution-desc">
-                系统启动时，主动加载热点数据到缓存。
+                Khi hệ thống khởi động, chủ động nạp dữ liệu hot vào cache.
                 <br>
-                <span class="note">使用定时任务，提前刷新即将过期的热点数据</span>
+                <span class="note">Dùng tác vụ định kỳ, refresh trước những dữ liệu hot sắp hết hạn</span>
               </div>
             </div>
             <div class="solution-item">
               <div class="solution-header">
                 <span class="solution-number">3</span>
-                <span class="solution-name">熔断降级</span>
+                <span class="solution-name">Ngắt mạch & hạ cấp (circuit breaker)</span>
               </div>
               <div class="solution-desc">
-                当数据库压力过大时，暂时停止更新缓存，直接返回降级数据。
+                Khi áp lực database quá lớn, tạm dừng cập nhật cache, trả về dữ liệu hạ cấp.
                 <br>
-                <span class="note">如"系统繁忙，请稍后再试"</span>
+                <span class="note">Ví dụ "Hệ thống đang bận, vui lòng thử lại sau"</span>
               </div>
             </div>
           </div>
@@ -364,35 +364,35 @@
 
     <div class="comparison-table">
       <div class="table-title">
-        三大问题对比
+        So sánh ba vấn đề
       </div>
       <table class="problems-table">
         <thead>
           <tr>
-            <th>问题</th>
-            <th>原因</th>
-            <th>影响</th>
-            <th>主要解决方案</th>
+            <th>Vấn đề</th>
+            <th>Nguyên nhân</th>
+            <th>Tác động</th>
+            <th>Giải pháp chính</th>
           </tr>
         </thead>
         <tbody>
           <tr :class="{ active: activeProblem === 'penetration' }">
-            <td>缓存穿透</td>
-            <td>查询不存在的数据</td>
-            <td>数据库压力增加</td>
-            <td>布隆过滤器、缓存空对象</td>
+            <td>Cache Penetration</td>
+            <td>Truy vấn dữ liệu không tồn tại</td>
+            <td>Áp lực database tăng</td>
+            <td>Bloom filter, cache object rỗng</td>
           </tr>
           <tr :class="{ active: activeProblem === 'breakdown' }">
-            <td>缓存击穿</td>
-            <td>热点数据过期</td>
-            <td>数据库瞬间压力</td>
-            <td>互斥锁、逻辑过期</td>
+            <td>Cache Breakdown</td>
+            <td>Dữ liệu hot hết hạn</td>
+            <td>Database chịu tải đột biến</td>
+            <td>Mutex lock, hết hạn logic</td>
           </tr>
           <tr :class="{ active: activeProblem === 'avalanche' }">
-            <td>缓存雪崩</td>
-            <td>大量缓存同时过期</td>
-            <td>数据库被打爆</td>
-            <td>随机 TTL、缓存预热</td>
+            <td>Cache Avalanche</td>
+            <td>Nhiều cache hết hạn cùng lúc</td>
+            <td>Database bị đập sập</td>
+            <td>TTL ngẫu nhiên, warm-up cache</td>
           </tr>
         </tbody>
       </table>
@@ -412,9 +412,9 @@ const cacheItems = ref([])
 const massExplosion = ref(false)
 
 const problems = [
-  { id: 'penetration', name: '缓存穿透', icon: '🕳️' },
-  { id: 'breakdown', name: '缓存击穿', icon: '🔥' },
-  { id: 'avalanche', name: '缓存雪崩', icon: '❄️' }
+  { id: 'penetration', name: 'Cache Penetration', icon: '🕳️' },
+  { id: 'breakdown', name: 'Cache Breakdown', icon: '🔥' },
+  { id: 'avalanche', name: 'Cache Avalanche', icon: '❄️' }
 ]
 
 const initializeCacheItems = () => {
@@ -445,7 +445,7 @@ const simulateBreakdown = async () => {
   concurrentRequests.value = Array.from({ length: 10 }, (_, i) => ({
     id: i + 1,
     status: 'waiting',
-    statusText: '等待中'
+    statusText: 'Đang chờ'
   }))
 
   showMutex.value = true
@@ -453,17 +453,17 @@ const simulateBreakdown = async () => {
   // First request gets the lock
   await new Promise((resolve) => setTimeout(resolve, 300))
   concurrentRequests.value[0].status = 'processing'
-  concurrentRequests.value[0].statusText = '查询数据库...'
+  concurrentRequests.value[0].statusText = 'Đang truy vấn database...'
 
   await new Promise((resolve) => setTimeout(resolve, 1000))
   concurrentRequests.value[0].status = 'done'
-  concurrentRequests.value[0].statusText = '✅ 完成'
+  concurrentRequests.value[0].statusText = '✅ Hoàn thành'
 
   // Other requests wait and get from cache
   for (let i = 1; i < concurrentRequests.value.length; i++) {
     await new Promise((resolve) => setTimeout(resolve, 200))
     concurrentRequests.value[i].status = 'done'
-    concurrentRequests.value[i].statusText = '✅ 从缓存获取'
+    concurrentRequests.value[i].statusText = '✅ Lấy từ cache'
   }
 
   showMutex.value = false

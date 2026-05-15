@@ -1,12 +1,12 @@
 <!--
   CssLayoutDemo.vue
-  布局演示：Flexbox 核心概念交互
+  Demo bố cục: Tương tác với khái niệm cốt lõi của Flexbox
 -->
 <template>
   <div class="layout-demo">
     <div class="controls">
       <div class="control-group">
-        <label>排列方向 (flex-direction)</label>
+        <label>Hướng sắp xếp (flex-direction)</label>
         <div class="btn-group">
           <button
             v-for="val in ['row', 'column']"
@@ -20,7 +20,7 @@
       </div>
 
       <div class="control-group">
-        <label>主轴对齐 (justify-content)</label>
+        <label>Căn theo trục chính (justify-content)</label>
         <div class="btn-group">
           <button
             v-for="val in [
@@ -39,7 +39,7 @@
       </div>
 
       <div class="control-group">
-        <label>交叉轴对齐 (align-items)</label>
+        <label>Căn theo trục phụ (align-items)</label>
         <div class="btn-group">
           <button
             v-for="val in ['stretch', 'center', 'flex-start', 'flex-end']"
@@ -53,7 +53,7 @@
       </div>
 
       <div class="control-group">
-        <label>换行 (flex-wrap)</label>
+        <label>Xuống dòng (flex-wrap)</label>
         <div class="btn-group">
           <button
             v-for="val in ['nowrap', 'wrap']"
@@ -85,7 +85,7 @@
 
     <div class="code-display">
       <div class="code-header">
-        👆 点击代码行可以暂时禁用该属性
+        👆 Nhấp vào dòng mã để tạm thời vô hiệu thuộc tính đó
       </div>
       <pre>.container {
   display: flex;
@@ -109,7 +109,7 @@
     :class="{ disabled: !activeProps.wrap }"
     @click="toggleProp('wrap')"
   >flex-wrap: <span class="val">{{ wrap }}</span>;</div>
-  /* ...其他样式 */
+  /* ...các kiểu khác */
 }</pre>
     </div>
   </div>

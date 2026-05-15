@@ -1,8 +1,8 @@
 <template>
   <div class="encoding-demo">
     <div class="demo-header">
-      <span class="title">数字编码：用 0 和 1 表示一切</span>
-      <span class="subtitle">字符、数字、图像如何变成二进制</span>
+      <span class="title">Mã hóa số: dùng 0 và 1 để biểu diễn mọi thứ</span>
+      <span class="subtitle">Ký tự, số, hình ảnh trở thành nhị phân như thế nào</span>
     </div>
 
     <div class="demo-content">
@@ -19,7 +19,7 @@
 
       <div class="encoding-area">
         <div class="input-section">
-          <label>输入内容：</label>
+          <label>Nội dung nhập:</label>
           <input
             v-model="inputValue"
             class="input-field"
@@ -28,13 +28,13 @@
         </div>
 
         <div class="output-section">
-          <div class="output-label">编码结果：</div>
+          <div class="output-label">Kết quả mã hóa:</div>
           <div class="output-box">
             <code>{{ encodedResult }}</code>
           </div>
           <div v-if="currentTab.name === 'text'" class="output-info">
-            <span>字符数: {{ inputValue.length }}</span>
-            <span>字节数: {{ byteCount }}</span>
+            <span>Số ký tự: {{ inputValue.length }}</span>
+            <span>Số byte: {{ byteCount }}</span>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
           v-if="currentTab.name === 'text' && inputValue"
           class="encoding-table"
         >
-          <div class="table-title">字符编码详情</div>
+          <div class="table-title">Chi tiết mã hóa ký tự</div>
           <div class="char-list">
             <div
               v-for="(char, i) in inputValue.slice(0, 10)"
@@ -63,9 +63,9 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>所有数据最终都要变成 0 和
-      1。不同类型的数据用不同的编码规则：字符用
-      ASCII/Unicode，数字用二进制，图像用像素值。
+      <strong>Ý tưởng cốt lõi:</strong> Mọi dữ liệu cuối cùng đều phải trở thành 0 và 1.
+      Mỗi loại dữ liệu dùng quy tắc mã hóa riêng: ký tự dùng ASCII/Unicode,
+      số dùng nhị phân, hình ảnh dùng giá trị pixel.
     </div>
   </div>
 </template>
@@ -77,9 +77,9 @@ const activeTab = ref('text')
 const inputValue = ref('Hello')
 
 const tabs = [
-  { name: 'text', label: '文本编码' },
-  { name: 'number', label: '数字编码' },
-  { name: 'color', label: '颜色编码' }
+  { name: 'text', label: 'Mã hóa văn bản' },
+  { name: 'number', label: 'Mã hóa số' },
+  { name: 'color', label: 'Mã hóa màu' }
 ]
 
 const currentTab = computed(() => {
@@ -88,10 +88,10 @@ const currentTab = computed(() => {
     ...tab,
     placeholder:
       tab.name === 'text'
-        ? '输入文字...'
+        ? 'Nhập văn bản...'
         : tab.name === 'number'
-          ? '输入数字...'
-          : '输入颜色值(如 #FF5733)'
+          ? 'Nhập số...'
+          : 'Nhập mã màu (ví dụ #FF5733)'
   }
 })
 
@@ -105,11 +105,11 @@ const encodedResult = computed(() => {
         .join(' ')
     case 'number':
       const num = parseInt(inputValue.value)
-      if (isNaN(num)) return '请输入有效数字'
+      if (isNaN(num)) return 'Vui lòng nhập số hợp lệ'
       return num.toString(2)
     case 'color':
       const hex = inputValue.value.replace('#', '')
-      if (!/^[0-9A-Fa-f]{6}$/.test(hex)) return '请输入有效的颜色值(如 #FF5733)'
+      if (!/^[0-9A-Fa-f]{6}$/.test(hex)) return 'Vui lòng nhập mã màu hợp lệ (ví dụ #FF5733)'
       const r = parseInt(hex.slice(0, 2), 16)
       const g = parseInt(hex.slice(2, 4), 16)
       const b = parseInt(hex.slice(4, 6), 16)

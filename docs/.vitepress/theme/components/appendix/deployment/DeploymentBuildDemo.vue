@@ -1,12 +1,12 @@
 <!--
   DeploymentBuildDemo.vue
-  构建过程演示：原材料变成品（简化版）
+  Demo quá trình build: từ source code thành thành phẩm (bản đơn giản)
 -->
 <template>
   <div class="deployment-build">
     <div class="header">
       <span class="icon">📦</span>
-      <span class="title">代码构建</span>
+      <span class="title">Build code</span>
     </div>
 
     <div class="content">
@@ -16,7 +16,7 @@
           :class="{ done: buildProgress >= 25 }"
         >
           <span class="num">1</span>
-          <span class="text">解析依赖</span>
+          <span class="text">Phân giải dependency</span>
         </div>
         <span class="arrow">→</span>
         <div
@@ -24,7 +24,7 @@
           :class="{ done: buildProgress >= 50 }"
         >
           <span class="num">2</span>
-          <span class="text">编译转换</span>
+          <span class="text">Compile/transform</span>
         </div>
         <span class="arrow">→</span>
         <div
@@ -32,7 +32,7 @@
           :class="{ done: buildProgress >= 75 }"
         >
           <span class="num">3</span>
-          <span class="text">打包压缩</span>
+          <span class="text">Bundle & nén</span>
         </div>
         <span class="arrow">→</span>
         <div
@@ -40,7 +40,7 @@
           :class="{ done: buildProgress >= 100 }"
         >
           <span class="num">4</span>
-          <span class="text">完成</span>
+          <span class="text">Xong</span>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
         :disabled="building"
         @click="startBuild"
       >
-        {{ building ? '构建中...' : '▶ 开始构建' }}
+        {{ building ? 'Đang build...' : '▶ Bắt đầu build' }}
       </button>
     </div>
   </div>

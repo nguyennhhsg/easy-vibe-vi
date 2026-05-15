@@ -1,8 +1,8 @@
 <template>
   <div class="data-lifecycle-demo">
     <div class="demo-header">
-      <span class="title">数据的生命周期</span>
-      <span class="subtitle">从输入到存储到传输到输出的全过程</span>
+      <span class="title">Vòng đời dữ liệu</span>
+      <span class="subtitle">Toàn bộ hành trình từ nhập vào, lưu trữ, truyền tải đến xuất ra</span>
     </div>
 
     <div class="lifecycle-flow">
@@ -20,7 +20,7 @@
               <p>{{ stage.description }}</p>
 
               <div class="stage-example">
-                <div class="example-label">示例：{{ stage.example.label }}</div>
+                <div class="example-label">Ví dụ: {{ stage.example.label }}</div>
                 <div class="example-content">
                   <div
                     v-for="(item, i) in stage.example.items"
@@ -34,7 +34,7 @@
               </div>
 
               <div class="stage-encoding">
-                <div class="encoding-label">编码方式:</div>
+                <div class="encoding-label">Cách mã hóa:</div>
                 <div class="encoding-value">{{ stage.encoding }}</div>
               </div>
             </div>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="lifecycle-summary">
-      <div class="summary-title">数据转换的关键点</div>
+      <div class="summary-title">Điểm then chốt khi chuyển đổi dữ liệu</div>
       <div class="summary-grid">
         <div
           v-for="(point, index) in keyPoints"
@@ -72,111 +72,111 @@ const activeStage = ref(0)
 const stages = [
   {
     id: 'input',
-    name: '数据输入',
+    name: 'Nhập dữ liệu',
     icon: '⌨️',
-    title: '阶段 1：数据输入',
+    title: 'Giai đoạn 1: Nhập dữ liệu',
     description:
-      '用户通过各种输入设备（键盘、鼠标、触摸屏、麦克风等）将信息输入到计算机系统中。',
+      'Người dùng nhập thông tin vào hệ thống thông qua các thiết bị nhập (bàn phím, chuột, màn hình cảm ứng, micro,...).',
     example: {
-      label: '用户输入文字',
+      label: 'Người dùng gõ chữ',
       items: [
-        { label: '原始动作', value: '按下键盘 A 键' },
-        { label: '硬件信号', value: '键盘扫描码' },
-        { label: '操作系统', value: '键盘中断' }
+        { label: 'Thao tác gốc', value: 'Nhấn phím A trên bàn phím' },
+        { label: 'Tín hiệu phần cứng', value: 'Mã quét bàn phím' },
+        { label: 'OS', value: 'Ngắt bàn phím' }
       ]
     },
     encoding: 'ASCII: 01000001 (65)'
   },
   {
     id: 'processing',
-    name: '数据处理',
+    name: 'Xử lý dữ liệu',
     icon: '🔄',
-    title: '阶段 2：数据处理',
+    title: 'Giai đoạn 2: Xử lý dữ liệu',
     description:
-      'CPU 对输入的数据进行计算、转换、格式化等操作，应用程序根据业务逻辑处理数据。',
+      'CPU thực hiện tính toán, chuyển đổi, định dạng dữ liệu được nhập vào, ứng dụng xử lý theo logic nghiệp vụ.',
     example: {
-      label: '文本编辑器处理',
+      label: 'Trình soạn thảo xử lý',
       items: [
-        { label: '应用程序', value: '接收字符 "A"' },
-        { label: '内存存储', value: 'Unicode: U+0041' },
-        { label: '显示准备', value: '字体渲染' }
+        { label: 'Ứng dụng', value: 'Nhận ký tự "A"' },
+        { label: 'Lưu vào bộ nhớ', value: 'Unicode: U+0041' },
+        { label: 'Chuẩn bị hiển thị', value: 'Render font' }
       ]
     },
-    encoding: 'UTF-8: 0x41 (单字节)'
+    encoding: 'UTF-8: 0x41 (1 byte)'
   },
   {
     id: 'storage',
-    name: '数据存储',
+    name: 'Lưu trữ dữ liệu',
     icon: '💾',
-    title: '阶段 3：数据存储',
+    title: 'Giai đoạn 3: Lưu trữ dữ liệu',
     description:
-      '处理后的数据被保存到存储设备中（内存、硬盘、SSD、云存储等），以便后续使用。',
+      'Dữ liệu sau khi xử lý được lưu vào thiết bị lưu trữ (RAM, HDD, SSD, cloud,...) để dùng về sau.',
     example: {
-      label: '保存文档',
+      label: 'Lưu tài liệu',
       items: [
-        { label: '内存数据', value: '文本内容' },
-        { label: '文件系统', value: '创建 .txt 文件' },
-        { label: '磁盘写入', value: '二进制数据' }
+        { label: 'Dữ liệu RAM', value: 'Nội dung văn bản' },
+        { label: 'Hệ thống file', value: 'Tạo file .txt' },
+        { label: 'Ghi đĩa', value: 'Dữ liệu nhị phân' }
       ]
     },
-    encoding: '磁盘: 二进制位序列'
+    encoding: 'Đĩa: chuỗi bit nhị phân'
   },
   {
     id: 'transmission',
-    name: '数据传输',
+    name: 'Truyền dữ liệu',
     icon: '📡',
-    title: '阶段 4：数据传输',
+    title: 'Giai đoạn 4: Truyền dữ liệu',
     description:
-      '数据通过网络（局域网、互联网）或内部总线从一个位置传输到另一个位置。',
+      'Dữ liệu được truyền từ nơi này sang nơi khác qua mạng (LAN, Internet) hoặc bus nội bộ.',
     example: {
-      label: '上传文件',
+      label: 'Upload file',
       items: [
-        { label: '文件读取', value: '从磁盘加载' },
-        { label: '网络封装', value: 'TCP/IP 数据包' },
-        { label: '物理传输', value: '电信号/光信号' }
+        { label: 'Đọc file', value: 'Tải từ đĩa lên' },
+        { label: 'Đóng gói mạng', value: 'Gói TCP/IP' },
+        { label: 'Truyền vật lý', value: 'Tín hiệu điện/quang' }
       ]
     },
-    encoding: '网络: 数据包帧格式'
+    encoding: 'Mạng: định dạng frame'
   },
   {
     id: 'output',
-    name: '数据输出',
+    name: 'Xuất dữ liệu',
     icon: '🖥️',
-    title: '阶段 5：数据输出',
+    title: 'Giai đoạn 5: Xuất dữ liệu',
     description:
-      '数据通过输出设备（显示器、打印机、扬声器等）呈现给用户，或传输给其他系统。',
+      'Dữ liệu được hiển thị tới người dùng thông qua thiết bị xuất (màn hình, máy in, loa,...), hoặc truyền cho hệ thống khác.',
     example: {
-      label: '显示网页',
+      label: 'Hiển thị trang web',
       items: [
-        { label: '浏览器接收', value: 'HTML 数据' },
-        { label: '渲染引擎', value: '解析样式、布局' },
-        { label: '屏幕显示', value: '像素点阵' }
+        { label: 'Trình duyệt nhận', value: 'Dữ liệu HTML' },
+        { label: 'Render engine', value: 'Phân tích style, layout' },
+        { label: 'Hiển thị màn hình', value: 'Lưới điểm ảnh' }
       ]
     },
-    encoding: '显示: RGB 像素值'
+    encoding: 'Hiển thị: giá trị pixel RGB'
   }
 ]
 
 const keyPoints = [
   {
     icon: '🔤',
-    title: '编码转换',
-    desc: '数据在不同阶段使用不同的编码方式（ASCII、Unicode、二进制等）'
+    title: 'Chuyển đổi mã hóa',
+    desc: 'Dữ liệu dùng các kiểu mã hóa khác nhau ở mỗi giai đoạn (ASCII, Unicode, nhị phân,...)'
   },
   {
     icon: '📦',
-    title: '封装格式',
-    desc: '传输和存储时需要封装成特定格式（文件、数据包、帧等）'
+    title: 'Định dạng đóng gói',
+    desc: 'Khi truyền và lưu cần đóng gói theo định dạng riêng (file, packet, frame,...)'
   },
   {
     icon: '🎯',
-    title: '协议标准',
-    desc: '每个环节都遵循相应的协议和标准（TCP/IP、USB、HDMI等）'
+    title: 'Chuẩn giao thức',
+    desc: 'Mỗi mắt xích đều tuân theo giao thức và chuẩn tương ứng (TCP/IP, USB, HDMI,...)'
   },
   {
     icon: '⚡',
-    title: '性能优化',
-    desc: '编码压缩、缓存、流水线等技术提升数据处理效率'
+    title: 'Tối ưu hiệu năng',
+    desc: 'Nén, cache, pipeline,... giúp tăng tốc xử lý dữ liệu'
   }
 ]
 </script>

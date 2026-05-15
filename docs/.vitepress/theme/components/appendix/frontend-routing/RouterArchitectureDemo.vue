@@ -2,12 +2,12 @@
   <div class="router-architecture-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">路由架构</span>
-      <span class="subtitle">前端路由系统的组成部分</span>
+      <span class="title">Kiến trúc router</span>
+      <span class="subtitle">Các thành phần của hệ thống routing frontend</span>
     </div>
 
     <div class="intro-text">
-      想象<span class="highlight">公司的组织架构</span>：有前台接待（URL监听）、有调度中心（路由匹配）、有各部门（组件渲染）。前端路由也是这样分层协作的，各司其职。
+      Hãy hình dung <span class="highlight">cơ cấu tổ chức công ty</span>: có lễ tân (lắng nghe URL), có trung tâm điều phối (khớp route), có các phòng ban (render component). Routing frontend cũng phối hợp phân tầng như vậy, ai vào việc nấy.
     </div>
 
     <div class="architecture-layers">
@@ -40,34 +40,34 @@
     </div>
 
     <div class="data-flow">
-      <h5>📊 数据流向</h5>
+      <h5>📊 Luồng dữ liệu</h5>
       <div class="flow-steps">
         <div class="flow-step">
           <span class="step-num">1</span>
-          <span>用户点击链接，触发 URL 变化</span>
+          <span>Người dùng nhấp link, URL thay đổi</span>
         </div>
         <div class="flow-step">
           <span class="step-num">2</span>
-          <span>History 监听器捕获变化</span>
+          <span>Bộ lắng nghe History bắt sự kiện thay đổi</span>
         </div>
         <div class="flow-step">
           <span class="step-num">3</span>
-          <span>路由匹配器找到对应配置</span>
+          <span>Bộ khớp route tìm cấu hình tương ứng</span>
         </div>
         <div class="flow-step">
           <span class="step-num">4</span>
-          <span>执行守卫进行验证</span>
+          <span>Chạy guard để kiểm tra</span>
         </div>
         <div class="flow-step">
           <span class="step-num">5</span>
-          <span>渲染组件到 RouterView</span>
+          <span>Render component vào RouterView</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>路由系统通过监听URL变化、匹配路由配置、执行守卫验证、渲染组件这一系列流程，实现了单页应用的无刷新导航。
+      <strong>Ý tưởng cốt lõi:</strong> Hệ thống routing lắng nghe URL thay đổi, khớp cấu hình route, chạy guard kiểm tra, rồi render component — chuỗi bước này hiện thực việc điều hướng không refresh cho single page app.
     </div>
   </div>
 </template>
@@ -75,22 +75,22 @@
 <script setup>
 const layers = [
   {
-    name: '浏览器层',
+    name: 'Lớp trình duyệt',
     icon: '🌐',
-    desc: '提供 URL 和 History API',
+    desc: 'Cung cấp URL và History API',
     components: ['URL Bar', 'History API', 'Hash Change', 'PopState']
   },
   {
-    name: '路由核心层',
+    name: 'Lớp lõi router',
     icon: '⚙️',
-    desc: '路由系统的核心逻辑',
-    components: ['Router 实例', '路由匹配器', 'History 管理', '守卫管道']
+    desc: 'Logic cốt lõi của hệ thống routing',
+    components: ['Router instance', 'Bộ khớp route', 'Quản lý History', 'Pipeline guard']
   },
   {
-    name: '组件层',
+    name: 'Lớp component',
     icon: '🧩',
-    desc: '用户界面渲染',
-    components: ['RouterView', 'RouterLink', '页面组件']
+    desc: 'Render giao diện người dùng',
+    components: ['RouterView', 'RouterLink', 'Component trang']
   }
 ]
 </script>

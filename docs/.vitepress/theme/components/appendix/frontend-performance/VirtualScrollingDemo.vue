@@ -1,6 +1,6 @@
 <!--
   VirtualScrollingDemo.vue
-  虚拟滚动演示
+  Demo cuộn ảo (virtual scrolling)
 -->
 <script setup>
 import { ref, computed } from 'vue'
@@ -12,7 +12,7 @@ const CONTAINER_HEIGHT = 280
 // Generate mock data
 const items = Array.from({ length: TOTAL_ITEMS }, (_, i) => ({
   id: i,
-  content: `Item #${i + 1} - 虚拟滚动列表项内容`
+  content: `Item #${i + 1} - Nội dung của item trong danh sách cuộn ảo`
 }))
 
 const scrollTop = ref(0)
@@ -47,14 +47,14 @@ const renderedCount = computed(() => visibleItems.value.length)
   <div class="demo-container">
     <div class="demo-header">
       <span class="icon">📜</span>
-      <span class="title">虚拟滚动</span>
-      <span class="subtitle">只渲染可见区域的列表项</span>
+      <span class="title">Cuộn ảo</span>
+      <span class="subtitle">Chỉ render các item trong vùng nhìn thấy</span>
     </div>
 
     <div class="controls">
       <div class="stat-box">
         <div class="stat-label">
-          总数据量
+          Tổng dữ liệu
         </div>
         <div class="stat-value">
           {{ TOTAL_ITEMS.toLocaleString() }}
@@ -62,7 +62,7 @@ const renderedCount = computed(() => visibleItems.value.length)
       </div>
       <div class="stat-box highlight">
         <div class="stat-label">
-          实际渲染
+          Thực tế render
         </div>
         <div class="stat-value">
           {{ renderedCount }}
@@ -70,7 +70,7 @@ const renderedCount = computed(() => visibleItems.value.length)
       </div>
       <div class="stat-box">
         <div class="stat-label">
-          节省内存
+          Tiết kiệm bộ nhớ
         </div>
         <div class="stat-value">
           ~{{ ((1 - renderedCount / TOTAL_ITEMS) * 100).toFixed(1) }}%
@@ -106,7 +106,7 @@ const renderedCount = computed(() => visibleItems.value.length)
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>工作原理：</strong>不渲染全部 {{ TOTAL_ITEMS }} 项，只渲染视口中可见的项（加上少量缓冲）。滚动时计算应该显示哪些项，并使用绝对定位创建完整列表的错觉。性能从 O(n) 优化到 O(1)。
+      <strong>Nguyên lý hoạt động:</strong> Không render toàn bộ {{ TOTAL_ITEMS }} item, chỉ render những item nhìn thấy trong viewport (cộng thêm vài item đệm). Khi cuộn, tính xem nên hiển thị item nào và dùng absolute positioning để tạo ảo giác danh sách đầy đủ. Hiệu năng từ O(n) tối ưu xuống O(1).
     </div>
   </div>
 </template>

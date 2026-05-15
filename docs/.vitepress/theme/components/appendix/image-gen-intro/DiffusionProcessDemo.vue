@@ -31,7 +31,7 @@
           @click="startDenoise"
         >
           <span class="icon">✨</span>
-          {{ isProcessing ? '去噪中...' : '开始去噪 (Denoise)' }}
+          {{ isProcessing ? 'Đang khử nhiễu...' : 'Bắt đầu khử nhiễu (Denoise)' }}
         </button>
         
         <button
@@ -39,7 +39,7 @@
           :disabled="isProcessing"
           @click="reset"
         >
-          <span class="icon">🔄</span> 重置
+          <span class="icon">🔄</span> Đặt lại
         </button>
       </div>
     </div>
@@ -47,8 +47,8 @@
     <div class="info-bar">
       <span class="icon">💡</span>
       <span>
-        <strong>观察重点：</strong>
-        注意看，图像不是一下子变出来的，而是像在雾气中慢慢显影。这就是 Diffusion 的核心——它在不断猜测“噪声背后的真相”。
+        <strong>Điểm quan sát:</strong>
+        Để ý nhé, ảnh không hiện ra ngay tức khắc, mà từ từ lộ rõ như đang hiện hình trong sương mù. Đó chính là cốt lõi của Diffusion — nó liên tục đoán "sự thật ẩn sau noise".
       </span>
     </div>
   </div>
@@ -131,11 +131,11 @@ const drawNoise = (ctx, amount) => {
 }
 
 const stepDescription = computed(() => {
-  if (currentStep.value === 0) return '纯噪声 (Pure Noise)'
-  if (currentStep.value < 10) return '隐约出现轮廓...'
-  if (currentStep.value < 30) return '色彩开始浮现...'
-  if (currentStep.value < 50) return '细节逐渐清晰...'
-  return '生成完成 (Done)!'
+  if (currentStep.value === 0) return 'Noise thuần (Pure Noise)'
+  if (currentStep.value < 10) return 'Đường nét mơ hồ hiện ra...'
+  if (currentStep.value < 30) return 'Màu sắc bắt đầu hiện lên...'
+  if (currentStep.value < 50) return 'Chi tiết dần rõ ràng...'
+  return 'Sinh ảnh xong (Done)!'
 })
 
 const startDenoise = () => {

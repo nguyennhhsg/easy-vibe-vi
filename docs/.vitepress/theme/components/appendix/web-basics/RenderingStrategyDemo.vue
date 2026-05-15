@@ -1,15 +1,15 @@
 <!--
   RenderingStrategyDemo.vue
-  CSR / SSR / SSG 对比演示
+  Demo so sánh CSR / SSR / SSG
 -->
 <template>
   <div class="render-demo">
     <div class="header">
       <div class="title">
-        渲染策略：CSR / SSR / SSG
+        Chiến lược render: CSR / SSR / SSG
       </div>
       <div class="subtitle">
-        选择策略，观察首屏表现
+        Chọn chiến lược, quan sát hiệu năng màn hình đầu tiên
       </div>
     </div>
 
@@ -36,7 +36,7 @@
       </div>
       <div class="card">
         <div class="label">
-          可交互时间
+          Thời gian có thể tương tác
         </div>
         <div class="value">
           {{ metrics.tti }} ms
@@ -44,7 +44,7 @@
       </div>
       <div class="card">
         <div class="label">
-          SEO 友好
+          Thân thiện SEO
         </div>
         <div class="value">
           {{ metrics.seo }}
@@ -71,17 +71,17 @@ const current = ref('csr')
 
 const metrics = computed(() => {
   if (current.value === 'csr') {
-    return { ttfb: 450, tti: 1600, seo: '一般', note: 'JS 拉取完成后才渲染' }
+    return { ttfb: 450, tti: 1600, seo: 'Bình thường', note: 'Phải tải xong JS mới render' }
   }
   if (current.value === 'ssr') {
     return {
       ttfb: 220,
       tti: 1100,
-      seo: '好',
-      note: '首屏更快，但服务器压力更大'
+      seo: 'Tốt',
+      note: 'Màn hình đầu tiên nhanh hơn, nhưng máy chủ chịu tải nặng hơn'
     }
   }
-  return { ttfb: 120, tti: 700, seo: '很好', note: '静态预渲染，适合内容站点' }
+  return { ttfb: 120, tti: 700, seo: 'Rất tốt', note: 'Render tĩnh trước, phù hợp cho trang nội dung' }
 })
 </script>
 

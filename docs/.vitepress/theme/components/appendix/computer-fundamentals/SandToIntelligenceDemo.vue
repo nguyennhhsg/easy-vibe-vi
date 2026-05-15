@@ -1,6 +1,6 @@
 <template>
   <div class="sand-demo">
-    <div class="demo-label">从沙子到智能 ── 每一层都是对下一层的封装</div>
+    <div class="demo-label">Từ cát đến trí tuệ ── mỗi lớp là một lớp bao bọc cho lớp dưới</div>
 
     <div class="layers">
       <div
@@ -25,7 +25,7 @@
     </div>
 
     <div class="demo-caption">
-      层层抽象封装，最底层的物理材料最终变成通用计算平台
+      Trừu tượng hóa qua từng lớp, vật liệu vật lý ở đáy cuối cùng trở thành nền tảng tính toán đa năng
     </div>
   </div>
 </template>
@@ -38,51 +38,51 @@ const activeLayer = ref(null)
 const layers = [
   {
     icon: '🏖️',
-    name: '沙子（硅）',
-    desc: '地球上最丰富的元素之一，提炼出高纯度硅',
-    scale: '原材料',
-    arrow: '提纯 → 切割'
+    name: 'Cát (silicon)',
+    desc: 'Một trong những nguyên tố giàu nhất Trái Đất, tinh luyện thành silicon tinh khiết cao',
+    scale: 'Nguyên liệu thô',
+    arrow: 'Tinh luyện → cắt'
   },
   {
     icon: '💿',
-    name: '硅晶圆',
-    desc: '直径约 30cm 的单晶硅片，表面极其光滑',
-    scale: '基底',
-    arrow: '光刻 → 蚀刻 → 掺杂'
+    name: 'Wafer silicon',
+    desc: 'Tấm silicon đơn tinh thể đường kính khoảng 30cm, bề mặt cực kỳ mịn',
+    scale: 'Đế nền',
+    arrow: 'Quang khắc → ăn mòn → pha tạp'
   },
   {
     icon: '🔌',
-    name: '晶体管（开关）',
-    desc: 'Gate=1 导通，Gate=0 断开，用电压控制电流',
-    scale: '数百亿 / 芯片',
-    arrow: '组合成逻辑电路'
+    name: 'Transistor (công tắc)',
+    desc: 'Gate=1 thông, Gate=0 ngắt, dùng điện áp điều khiển dòng điện',
+    scale: 'Hàng chục tỷ / chip',
+    arrow: 'Ghép thành mạch logic'
   },
   {
     icon: '🔲',
-    name: '逻辑门',
-    desc: 'AND / OR / NOT / XOR，实现基本布尔运算',
-    scale: '数十亿',
-    arrow: '组合成功能模块'
+    name: 'Cổng logic',
+    desc: 'AND / OR / NOT / XOR, thực hiện phép toán Boolean cơ bản',
+    scale: 'Hàng tỷ',
+    arrow: 'Ghép thành module chức năng'
   },
   {
     icon: '⚙️',
-    name: '功能单元',
-    desc: '加法器、寄存器、多路选择器……各司其职',
-    scale: '数百个',
-    arrow: '集成为处理器'
+    name: 'Khối chức năng',
+    desc: 'Bộ cộng, thanh ghi, bộ chọn đa kênh... mỗi khối một nhiệm vụ',
+    scale: 'Hàng trăm',
+    arrow: 'Tích hợp thành bộ xử lý'
   },
   {
     icon: '🧠',
-    name: 'CPU 核心',
-    desc: 'ALU + 控制器 + 寄存器组，取指→解码→执行→写回',
-    scale: '1–128 核',
-    arrow: '软件编程'
+    name: 'Nhân CPU',
+    desc: 'ALU + bộ điều khiển + tập thanh ghi, fetch → decode → execute → write back',
+    scale: '1–128 nhân',
+    arrow: 'Lập trình phần mềm'
   },
   {
     icon: '🚀',
-    name: '软件应用',
-    desc: '操作系统 / AI / 游戏 / 网页……一切皆指令',
-    scale: '无限可能',
+    name: 'Ứng dụng phần mềm',
+    desc: 'Hệ điều hành / AI / game / web... tất cả đều là chỉ thị',
+    scale: 'Vô hạn khả năng',
     arrow: ''
   }
 ]

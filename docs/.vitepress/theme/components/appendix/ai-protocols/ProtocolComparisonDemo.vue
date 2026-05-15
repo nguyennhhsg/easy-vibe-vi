@@ -2,83 +2,83 @@
   <div class="protocol-comparison-demo">
     <div class="demo-header">
       <span class="title">MCP vs A2A</span>
-      <span class="subtitle">AI Agent 两大协议的定位差异</span>
+      <span class="subtitle">Khác biệt định vị giữa hai protocol cho AI agent</span>
     </div>
 
     <div class="intro-text">
-      想象你在一个<span class="highlight">大型商场</span>：MCP 就像商场的"统一插座标准"，让各种电器（工具）都能插上使用；A2A 就像商场的"内部对讲系统"，让不同店铺（Agent）之间可以协作。
+      Hãy tưởng tượng bạn đang ở trong một <span class="highlight">trung tâm thương mại lớn</span>: MCP giống như "chuẩn ổ cắm thống nhất" của trung tâm, để mọi thiết bị (công cụ) đều cắm vào dùng được; A2A giống như "hệ thống bộ đàm nội bộ" để các cửa hàng (agent) phối hợp với nhau.
     </div>
 
     <div class="protocol-cards">
       <div class="protocol-card mcp">
         <div class="card-header">
           <span class="card-title">MCP</span>
-          <span class="card-badge">工具连接</span>
+          <span class="card-badge">Kết nối công cụ</span>
         </div>
         <div class="card-fullname">Model Context Protocol</div>
         <div class="card-desc">
-          AI 与外部工具、数据源的连接协议，让工具开发者写一次代码，所有 AI 应用都能用
+          Protocol kết nối AI với công cụ và nguồn dữ liệu bên ngoài, viết code công cụ một lần là mọi ứng dụng AI đều dùng được
         </div>
         <div class="card-meta">
           <div class="meta-item">
-            <span class="meta-label">发起方</span>
+            <span class="meta-label">Khởi xướng</span>
             <span class="meta-value">Anthropic</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">发布时间</span>
+            <span class="meta-label">Phát hành</span>
             <span class="meta-value">2024.11</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">架构</span>
+            <span class="meta-label">Kiến trúc</span>
             <span class="meta-value">Client-Server</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">数据格式</span>
+            <span class="meta-label">Định dạng dữ liệu</span>
             <span class="meta-value">JSON-RPC 2.0</span>
           </div>
         </div>
         <div class="card-analogy">
-          <span class="analogy-label">类比</span>
-          <span class="analogy-text">USB-C 接口 —— 统一各种设备的充电方式</span>
+          <span class="analogy-label">Liên hệ</span>
+          <span class="analogy-text">Cổng USB-C — thống nhất cách sạc cho mọi thiết bị</span>
         </div>
       </div>
 
       <div class="protocol-card a2a">
         <div class="card-header">
           <span class="card-title">A2A</span>
-          <span class="card-badge">Agent协作</span>
+          <span class="card-badge">Phối hợp agent</span>
         </div>
         <div class="card-fullname">Agent-to-Agent Protocol</div>
         <div class="card-desc">
-          Agent 之间的通信协议，让不同厂商、不同框架的 Agent 能够无缝协作
+          Protocol giao tiếp giữa các agent, cho phép agent từ nhà cung cấp và framework khác nhau phối hợp mượt mà
         </div>
         <div class="card-meta">
           <div class="meta-item">
-            <span class="meta-label">发起方</span>
+            <span class="meta-label">Khởi xướng</span>
             <span class="meta-value">Google</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">发布时间</span>
+            <span class="meta-label">Phát hành</span>
             <span class="meta-value">2025.04</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">架构</span>
+            <span class="meta-label">Kiến trúc</span>
             <span class="meta-value">Peer-to-Peer</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">数据格式</span>
+            <span class="meta-label">Định dạng dữ liệu</span>
             <span class="meta-value">HTTP + JSON</span>
           </div>
         </div>
         <div class="card-analogy">
-          <span class="analogy-label">类比</span>
-          <span class="analogy-text">企业微信 —— 让同事之间可以发任务、聊天</span>
+          <span class="analogy-label">Liên hệ</span>
+          <span class="analogy-text">Slack/Teams nội bộ — đồng nghiệp giao việc, nhắn tin với nhau</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>MCP 和 A2A 不是竞争关系，而是互补关系。MCP 解决"AI 如何获取外部能力"，A2A 解决"多个 AI 如何协作"。
+      <strong>Ý tưởng cốt lõi:</strong> MCP và A2A không cạnh tranh mà bổ trợ cho nhau. MCP giải quyết "AI lấy năng lực bên ngoài thế nào", A2A giải quyết "nhiều AI phối hợp ra sao".
     </div>
   </div>
 </template>

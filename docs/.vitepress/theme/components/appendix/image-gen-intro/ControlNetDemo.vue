@@ -1,15 +1,15 @@
 <!--
   ControlNetDemo.vue
-  ControlNet 控制网络演示组件
+  Component minh hoạ ControlNet
 
-  用途：
-  展示 ControlNet 如何精确控制图像生成，包括姿态、边缘、深度等控制方式。
+  Mục đích:
+  Trình bày ControlNet kiểm soát chính xác việc sinh ảnh ra sao, bao gồm các cách điều khiển như tư thế, cạnh, độ sâu...
 
-  交互功能：
-  - 不同控制类型切换
-  - 控制强度调节
-  - 可视化控制信号
-  - 对比有无 ControlNet 的效果
+  Tương tác:
+  - Chuyển đổi giữa các loại điều khiển
+  - Điều chỉnh cường độ điều khiển
+  - Trực quan hoá tín hiệu điều khiển
+  - So sánh kết quả khi có và không dùng ControlNet
 -->
 <template>
   <div class="controlnet-demo">
@@ -17,12 +17,12 @@
       <template #header>
         <div class="header-title">
           <el-icon><Pointer /></el-icon>
-          <span>🎮 ControlNet：精确控制</span>
+          <span>🎮 ControlNet: Kiểm soát chính xác</span>
         </div>
       </template>
 
       <div class="demo-content">
-        <!-- 控制类型选择 -->
+        <!-- Chọn loại điều khiển -->
         <div class="control-types">
           <div
             v-for="control in controlTypes"
@@ -43,11 +43,11 @@
           </div>
         </div>
 
-        <!-- 可视化流程 -->
+        <!-- Trực quan hoá quy trình -->
         <div class="workflow-viz">
           <div class="workflow-step">
             <div class="step-label">
-              输入图像
+              Ảnh đầu vào
             </div>
             <canvas
               ref="inputCanvas"
@@ -62,13 +62,13 @@
               <ArrowRight />
             </el-icon>
             <div class="arrow-label">
-              提取
+              Trích xuất
             </div>
           </div>
 
           <div class="workflow-step">
             <div class="step-label">
-              控制信号
+              Tín hiệu điều khiển
             </div>
             <canvas
               ref="controlCanvas"
@@ -83,13 +83,13 @@
               <ArrowRight />
             </el-icon>
             <div class="arrow-label">
-              + 提示词
+              + Prompt
             </div>
           </div>
 
           <div class="workflow-step">
             <div class="step-label">
-              生成结果
+              Kết quả sinh ra
             </div>
             <canvas
               ref="outputCanvas"
@@ -100,10 +100,10 @@
           </div>
         </div>
 
-        <!-- 控制强度 -->
+        <!-- Cường độ điều khiển -->
         <div class="strength-control">
           <div class="strength-header">
-            <span>控制强度 (Control Strength)</span>
+            <span>Cường độ điều khiển (Control Strength)</span>
             <el-tag
               type="primary"
               effect="dark"
@@ -118,9 +118,9 @@
             :step="0.1"
             show-stops
             :marks="{
-              0: '无控制',
-              1: '平衡',
-              2: '强控制'
+              0: 'Không điều khiển',
+              1: 'Cân bằng',
+              2: 'Điều khiển mạnh'
             }"
           />
           <div class="strength-desc">
@@ -128,16 +128,16 @@
           </div>
         </div>
 
-        <!-- 对比展示 -->
+        <!-- Khu vực so sánh -->
         <div class="comparison-section">
           <div class="comparison-title">
-            对比：有无 ControlNet
+            So sánh: có và không có ControlNet
           </div>
           <div class="comparison-grid">
             <div class="comparison-item">
               <div class="item-label">
                 <el-tag type="info">
-                  仅文本生成
+                  Chỉ sinh từ văn bản
                 </el-tag>
               </div>
               <canvas
@@ -147,14 +147,14 @@
                 class="comparison-canvas"
               />
               <div class="item-desc">
-                姿态随机，不可控
+                Tư thế ngẫu nhiên, không kiểm soát được
               </div>
             </div>
 
             <div class="comparison-item">
               <div class="item-label">
                 <el-tag type="success">
-                  ControlNet 控制
+                  Có ControlNet điều khiển
                 </el-tag>
               </div>
               <canvas
@@ -164,16 +164,16 @@
                 class="comparison-canvas"
               />
               <div class="item-desc">
-                姿态精确匹配输入
+                Tư thế khớp chính xác với input
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 应用场景 -->
+        <!-- Tình huống ứng dụng -->
         <div class="use-cases">
           <div class="use-cases-title">
-            🎯 典型应用场景
+            🎯 Các tình huống ứng dụng tiêu biểu
           </div>
           <div class="use-cases-grid">
             <div
@@ -198,8 +198,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>ControlNet 原理：</strong>
-          ControlNet 是一个附加在扩散模型上的神经网络，它学习从输入图像中提取特定的结构信息（如姿态、边缘），并用这些信息引导生成过程，实现精确控制。
+          <strong>Nguyên lý ControlNet:</strong>
+          ControlNet là một mạng nơ-ron gắn thêm vào diffusion model, học cách trích xuất thông tin cấu trúc cụ thể (như tư thế, cạnh) từ ảnh đầu vào, rồi dùng thông tin đó dẫn dắt quá trình sinh ảnh, đạt mức kiểm soát chính xác.
         </p>
       </div>
     </el-card>
@@ -224,68 +224,68 @@ const controlTypes = [
     id: 'pose',
     name: 'OpenPose',
     icon: '🕺',
-    description: '姿态控制，提取人体骨骼关键点'
+    description: 'Điều khiển tư thế, trích xuất điểm khung xương người'
   },
   {
     id: 'canny',
     name: 'Canny',
     icon: '✏️',
-    description: '边缘检测，提取图像轮廓'
+    description: 'Phát hiện cạnh, trích xuất đường viền ảnh'
   },
   {
     id: 'depth',
     name: 'Depth',
     icon: '📐',
-    description: '深度估计，控制空间结构'
+    description: 'Ước lượng độ sâu, kiểm soát cấu trúc không gian'
   },
   {
     id: 'scribble',
     name: 'Scribble',
     icon: '🎨',
-    description: '涂鸦控制，手绘引导生成'
+    description: 'Điều khiển bằng nét vẽ tay, hướng dẫn sinh ảnh'
   },
   {
     id: 'segmentation',
     name: 'Segmentation',
     icon: '🧩',
-    description: '语义分割，控制物体布局'
+    description: 'Phân đoạn ngữ nghĩa, kiểm soát bố cục đối tượng'
   }
 ]
 
 const useCases = [
   {
     icon: '👗',
-    title: '虚拟试衣',
-    description: '保持人物姿态，更换服装款式'
+    title: 'Thử đồ ảo',
+    description: 'Giữ tư thế nhân vật, thay đổi kiểu trang phục'
   },
   {
     icon: '🏠',
-    title: '室内设计',
-    description: '基于房间结构，生成不同装修风格'
+    title: 'Thiết kế nội thất',
+    description: 'Dựa vào cấu trúc phòng, sinh ra phong cách trang trí khác nhau'
   },
   {
     icon: '🎭',
-    title: '角色一致性',
-    description: '保持角色姿态，改变服装或场景'
+    title: 'Nhất quán nhân vật',
+    description: 'Giữ tư thế nhân vật, thay đổi trang phục hoặc bối cảnh'
   },
   {
     icon: '📐',
-    title: '产品展示',
-    description: '固定产品角度，变换背景和光照'
+    title: 'Trưng bày sản phẩm',
+    description: 'Cố định góc sản phẩm, thay đổi nền và ánh sáng'
   }
 ]
 
 const getStrengthDescription = () => {
   if (controlStrength.value < 0.5) {
-    return '控制较弱，生成结果更自由，但可能偏离预期结构'
+    return 'Điều khiển yếu, kết quả tự do hơn nhưng có thể lệch cấu trúc mong muốn'
   } else if (controlStrength.value < 1.5) {
-    return '平衡模式，在遵循控制和保持创意之间取得平衡'
+    return 'Chế độ cân bằng, dung hoà giữa tuân theo điều khiển và giữ sự sáng tạo'
   } else {
-    return '强控制模式，严格遵循输入结构，但可能牺牲一些图像质量'
+    return 'Chế độ điều khiển mạnh, bám sát cấu trúc đầu vào nhưng có thể đánh đổi chất lượng ảnh'
   }
 }
 
-// 绘制姿态骨架
+// Vẽ khung xương tư thế
 const drawPoseSkeleton = (ctx, width, height, isControl = false) => {
   ctx.clearRect(0, 0, width, height)
 
@@ -303,42 +303,42 @@ const drawPoseSkeleton = (ctx, width, height, isControl = false) => {
 
   ctx.lineWidth = isControl ? 3 : 2
 
-  // 头部
+  // Đầu
   ctx.beginPath()
   ctx.arc(width * 0.5, height * 0.15, width * 0.08, 0, Math.PI * 2)
   ctx.stroke()
 
-  // 身体
+  // Thân
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.23)
   ctx.lineTo(width * 0.5, height * 0.5)
   ctx.stroke()
 
-  // 左臂
+  // Tay trái
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.3)
   ctx.lineTo(width * 0.25, height * 0.4)
   ctx.stroke()
 
-  // 右臂
+  // Tay phải
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.3)
   ctx.lineTo(width * 0.75, height * 0.35)
   ctx.stroke()
 
-  // 左腿
+  // Chân trái
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.5)
   ctx.lineTo(width * 0.35, height * 0.8)
   ctx.stroke()
 
-  // 右腿
+  // Chân phải
   ctx.beginPath()
   ctx.moveTo(width * 0.5, height * 0.5)
   ctx.lineTo(width * 0.65, height * 0.75)
   ctx.stroke()
 
-  // 关节点
+  // Điểm khớp
   const joints = [
     [0.5, 0.23], [0.5, 0.3], [0.5, 0.5],
     [0.25, 0.4], [0.75, 0.35],
@@ -352,14 +352,14 @@ const drawPoseSkeleton = (ctx, width, height, isControl = false) => {
   })
 }
 
-// 绘制边缘检测
+// Vẽ phát hiện cạnh
 const drawCannyEdges = (ctx, width, height) => {
   ctx.fillStyle = '#000'
   ctx.fillRect(0, 0, width, height)
   ctx.strokeStyle = '#fff'
   ctx.lineWidth = 2
 
-  // 绘制简单的几何形状边缘
+  // Vẽ cạnh hình học đơn giản
   ctx.beginPath()
   ctx.moveTo(width * 0.2, height * 0.2)
   ctx.lineTo(width * 0.8, height * 0.2)
@@ -368,15 +368,15 @@ const drawCannyEdges = (ctx, width, height) => {
   ctx.closePath()
   ctx.stroke()
 
-  // 内部细节
+  // Chi tiết bên trong
   ctx.beginPath()
   ctx.arc(width * 0.5, height * 0.5, width * 0.2, 0, Math.PI * 2)
   ctx.stroke()
 }
 
-// 绘制深度图
+// Vẽ depth map
 const drawDepthMap = (ctx, width, height) => {
-  // 创建深度渐变
+  // Tạo gradient độ sâu
   const gradient = ctx.createRadialGradient(
     width * 0.5, height * 0.5, 0,
     width * 0.5, height * 0.5, width * 0.5
@@ -389,14 +389,14 @@ const drawDepthMap = (ctx, width, height) => {
   ctx.fillRect(0, 0, width, height)
 }
 
-// 绘制涂鸦
+// Vẽ scribble
 const drawScribble = (ctx, width, height) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, width, height)
   ctx.strokeStyle = '#000'
   ctx.lineWidth = 3
 
-  // 随机涂鸦线条
+  // Nét vẽ ngẫu nhiên
   ctx.beginPath()
   for (let i = 0; i < 5; i++) {
     ctx.moveTo(Math.random() * width, Math.random() * height)
@@ -405,21 +405,21 @@ const drawScribble = (ctx, width, height) => {
   ctx.stroke()
 }
 
-// 绘制语义分割
+// Vẽ phân đoạn ngữ nghĩa
 const drawSegmentation = (ctx, width, height) => {
-  // 天空
+  // Bầu trời
   ctx.fillStyle = '#87CEEB'
   ctx.fillRect(0, 0, width, height * 0.4)
 
-  // 地面
+  // Mặt đất
   ctx.fillStyle = '#8B4513'
   ctx.fillRect(0, height * 0.6, width, height * 0.4)
 
-  // 建筑
+  // Toà nhà
   ctx.fillStyle = '#808080'
   ctx.fillRect(width * 0.3, height * 0.2, width * 0.4, height * 0.5)
 
-  // 树木
+  // Cây cối
   ctx.fillStyle = '#228B22'
   ctx.beginPath()
   ctx.arc(width * 0.15, height * 0.5, width * 0.1, 0, Math.PI * 2)
@@ -429,23 +429,23 @@ const drawSegmentation = (ctx, width, height) => {
   ctx.fill()
 }
 
-// 绘制生成结果
+// Vẽ kết quả sinh ra
 const drawOutput = (ctx, width, height, withControl = true) => {
   ctx.fillStyle = '#f0f0f0'
   ctx.fillRect(0, 0, width, height)
 
-  // 根据控制类型绘制不同的输出
+  // Vẽ output khác nhau theo loại điều khiển
   if (selectedControl.value === 'pose') {
-    // 绘制一个人物，姿态与骨架匹配
+    // Vẽ một nhân vật, tư thế khớp với khung xương
     const strength = withControl ? controlStrength.value : 0.3
 
-    // 头部
+    // Đầu
     ctx.fillStyle = '#fdbcb4'
     ctx.beginPath()
     ctx.arc(width * 0.5, height * 0.15, width * 0.08 * (0.5 + strength * 0.5), 0, Math.PI * 2)
     ctx.fill()
 
-    // 身体
+    // Thân
     ctx.fillStyle = '#4a90e2'
     ctx.fillRect(
       width * (0.5 - 0.08 * strength),
@@ -454,23 +454,23 @@ const drawOutput = (ctx, width, height, withControl = true) => {
       height * 0.27
     )
 
-    // 简单的肢体
+    // Tay chân đơn giản
     ctx.strokeStyle = '#fdbcb4'
     ctx.lineWidth = 8 * strength
 
-    // 左臂
+    // Tay trái
     ctx.beginPath()
     ctx.moveTo(width * 0.5, height * 0.3)
     ctx.lineTo(width * (0.25 + (0.5 - strength) * 0.3), height * 0.4)
     ctx.stroke()
 
-    // 右臂
+    // Tay phải
     ctx.beginPath()
     ctx.moveTo(width * 0.5, height * 0.3)
     ctx.lineTo(width * (0.75 - (0.5 - strength) * 0.3), height * 0.35)
     ctx.stroke()
   } else if (selectedControl.value === 'canny') {
-    // 边缘控制效果
+    // Hiệu ứng điều khiển bằng cạnh
     const strength = withControl ? controlStrength.value : 0.3
     ctx.strokeStyle = '#333'
     ctx.lineWidth = 2
@@ -486,13 +486,13 @@ const drawOutput = (ctx, width, height, withControl = true) => {
 }
 
 const updateDisplay = () => {
-  // 输入图像
+  // Ảnh đầu vào
   if (inputCanvas.value) {
     const ctx = inputCanvas.value.getContext('2d')
     drawPoseSkeleton(ctx, 200, 200, false)
   }
 
-  // 控制信号
+  // Tín hiệu điều khiển
   if (controlCanvas.value) {
     const ctx = controlCanvas.value.getContext('2d')
     switch (selectedControl.value) {
@@ -514,13 +514,13 @@ const updateDisplay = () => {
     }
   }
 
-  // 输出
+  // Output
   if (outputCanvas.value) {
     const ctx = outputCanvas.value.getContext('2d')
     drawOutput(ctx, 200, 200, true)
   }
 
-  // 对比
+  // So sánh
   if (textOnlyCanvas.value) {
     const ctx = textOnlyCanvas.value.getContext('2d')
     drawOutput(ctx, 180, 180, false)

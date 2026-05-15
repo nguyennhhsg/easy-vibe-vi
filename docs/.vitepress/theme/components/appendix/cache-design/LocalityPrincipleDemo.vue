@@ -1,15 +1,15 @@
 <!--
   LocalityPrincipleDemo.vue
-  局部性原理演示 - 展示时间局部性和空间局部性
+  Demo nguyên lý cục bộ - minh họa tính cục bộ về thời gian và không gian
 -->
 <template>
   <div class="locality-demo">
     <div class="header">
       <div class="title">
-        局部性原理演示
+        Demo nguyên lý cục bộ
       </div>
       <div class="subtitle">
-        理解缓存为什么有效
+        Hiểu vì sao cache có hiệu quả
       </div>
     </div>
 
@@ -19,14 +19,14 @@
         :class="{ active: activeTab === 'temporal' }"
         @click="activeTab = 'temporal'"
       >
-        时间局部性
+        Cục bộ về thời gian
       </button>
       <button
         class="tab-btn"
         :class="{ active: activeTab === 'spatial' }"
         @click="activeTab = 'spatial'"
       >
-        空间局部性
+        Cục bộ về không gian
       </button>
     </div>
 
@@ -37,14 +37,14 @@
         class="temporal-demo"
       >
         <div class="description">
-          <strong>时间局部性</strong>：如果你访问了某个数据，未来很可能再次访问它。
+          <strong>Cục bộ về thời gian</strong>: Nếu bạn vừa truy cập một dữ liệu, rất có khả năng bạn sẽ truy cập lại nó trong tương lai.
           <br>
-          <span class="example">例子：用户登录后，每次请求都需要查询用户信息</span>
+          <span class="example">Ví dụ: Sau khi người dùng đăng nhập, mỗi request đều cần truy vấn thông tin người dùng</span>
         </div>
 
         <div class="timeline">
           <div class="timeline-title">
-            访问时间线
+            Dòng thời gian truy cập
           </div>
           <div class="timeline-events">
             <div
@@ -58,10 +58,10 @@
               </div>
               <div class="event-action">
                 <span class="user-icon">👤</span>
-                <span>查询 user_{{ event.userId }}</span>
+                <span>Truy vấn user_{{ event.userId }}</span>
               </div>
               <div class="event-result">
-                {{ event.hit ? '✅ 缓存命中' : '❌ 缓存未命中' }}
+                {{ event.hit ? '✅ Cache hit' : '❌ Cache miss' }}
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
 
         <div class="cache-state">
           <div class="cache-title">
-            当前缓存状态
+            Trạng thái cache hiện tại
           </div>
           <div class="cache-items">
             <div
@@ -82,7 +82,7 @@
                 {{ item.id }}
               </div>
               <div class="item-hits">
-                命中 {{ item.hits }} 次
+                Hit {{ item.hits }} lần
               </div>
             </div>
           </div>
@@ -95,14 +95,14 @@
         class="spatial-demo"
       >
         <div class="description">
-          <strong>空间局部性</strong>：如果你访问了某个数据，很可能访问它附近的数据。
+          <strong>Cục bộ về không gian</strong>: Nếu bạn vừa truy cập một dữ liệu, rất có thể bạn sẽ truy cập các dữ liệu gần đó.
           <br>
-          <span class="example">例子：浏览商品列表时，通常会翻到下一页</span>
+          <span class="example">Ví dụ: Khi xem danh sách sản phẩm, bạn thường sẽ lật sang trang tiếp theo</span>
         </div>
 
         <div class="product-grid">
           <div class="grid-title">
-            商品浏览序列
+            Chuỗi xem sản phẩm
           </div>
           <div class="products">
             <div
@@ -119,9 +119,9 @@
                 {{ product.id }}
               </div>
               <div class="product-status">
-                <span v-if="product.current">👁️ 当前</span>
-                <span v-else-if="product.cached">⚡ 已缓存</span>
-                <span v-else-if="product.viewed">✓ 已浏览</span>
+                <span v-if="product.current">👁️ Hiện tại</span>
+                <span v-else-if="product.cached">⚡ Đã cache</span>
+                <span v-else-if="product.viewed">✓ Đã xem</span>
               </div>
             </div>
           </div>
@@ -133,8 +133,8 @@
               📊
             </div>
             <div class="text">
-              <strong>预取策略</strong>：当你浏览第 5 个商品时，系统自动将 6-8
-              预加载到缓存
+              <strong>Chiến lược prefetch</strong>: Khi bạn xem sản phẩm thứ 5, hệ thống tự động nạp trước 6-8
+              vào cache
             </div>
           </div>
           <div class="explanation-item">
@@ -142,7 +142,7 @@
               🎯
             </div>
             <div class="text">
-              <strong>命中率提升</strong>：空间局部性让缓存命中率达到 70-90%
+              <strong>Tăng tỷ lệ hit</strong>: Cục bộ về không gian giúp tỷ lệ hit của cache đạt 70-90%
             </div>
           </div>
         </div>
@@ -154,20 +154,20 @@
         class="control-btn"
         @click="addEvent"
       >
-        添加访问事件
+        Thêm sự kiện truy cập
       </button>
       <button
         class="control-btn secondary"
         @click="reset"
       >
-        重置
+        Đặt lại
       </button>
     </div>
 
     <div class="stats">
       <div class="stat-item">
         <div class="stat-label">
-          总访问次数
+          Tổng số lần truy cập
         </div>
         <div class="stat-value">
           {{ totalAccess }}
@@ -175,7 +175,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-label">
-          缓存命中
+          Cache hit
         </div>
         <div class="stat-value hit">
           {{ hitCount }}
@@ -183,7 +183,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-label">
-          命中率
+          Tỷ lệ hit
         </div>
         <div class="stat-value">
           {{ hitRate }}%

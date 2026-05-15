@@ -1,20 +1,20 @@
 <template>
   <div class="desktop-demo">
-    <div class="demo-title">从开机到桌面</div>
+    <div class="demo-title">Từ lúc bật máy đến màn hình desktop</div>
     <div class="screen-wrapper">
       <div class="screen">
         <div v-if="phase === 0" class="phase-bios">
-          <div class="bios-text">POST 自检中...</div>
+          <div class="bios-text">Đang chạy POST...</div>
         </div>
         <div v-else-if="phase === 1" class="phase-boot">
           <div class="boot-spinner"></div>
-          <div class="boot-text">正在加载内核...</div>
+          <div class="boot-text">Đang tải kernel...</div>
         </div>
         <div v-else-if="phase === 2" class="phase-loading">
           <div class="loading-bar-track">
             <div class="loading-bar-fill"></div>
           </div>
-          <div class="loading-text">启动系统服务...</div>
+          <div class="loading-text">Khởi động dịch vụ hệ thống...</div>
         </div>
         <div v-else class="phase-desktop">
           <div class="desktop-icons">
@@ -48,16 +48,16 @@ let timer = null
 let phaseTimer = null
 
 const icons = [
-  { emoji: '📁', label: '文件' },
-  { emoji: '🌐', label: '浏览器' },
-  { emoji: '⚙️', label: '设置' },
-  { emoji: '🗑️', label: '回收站' }
+  { emoji: '📁', label: 'File' },
+  { emoji: '🌐', label: 'Trình duyệt' },
+  { emoji: '⚙️', label: 'Cài đặt' },
+  { emoji: '🗑️', label: 'Thùng rác' }
 ]
-const labels = ['BIOS 自检', '内核加载', '服务启动', '桌面就绪']
+const labels = ['BIOS POST', 'Tải kernel', 'Khởi động dịch vụ', 'Sẵn sàng']
 
 const updateClock = () => {
   const now = new Date()
-  clock.value = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+  clock.value = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
 }
 
 const runSequence = () => {

@@ -1,8 +1,8 @@
 <template>
   <div class="sorting-algorithm-demo">
     <div class="demo-header">
-      <span class="title">排序算法</span>
-      <span class="subtitle">把数据按顺序排列</span>
+      <span class="title">Thuật toán sắp xếp</span>
+      <span class="subtitle">Sắp dữ liệu theo thứ tự</span>
     </div>
 
     <div class="visual-array">
@@ -22,53 +22,53 @@
     </div>
 
     <div class="controls">
-      <button class="control-btn" @click="generateArray">生成新数组</button>
-      <button class="control-btn" @click="startBubbleSort">冒泡排序</button>
-      <button class="control-btn" @click="startQuickSort">快速排序</button>
+      <button class="control-btn" @click="generateArray">Tạo mảng mới</button>
+      <button class="control-btn" @click="startBubbleSort">Bubble sort</button>
+      <button class="control-btn" @click="startQuickSort">Quick sort</button>
     </div>
 
     <div class="algorithm-info">
       <div class="info-title">{{ currentAlgo }}</div>
       <div class="info-desc">{{ currentAlgoDesc }}</div>
-      <div class="info-complexity">时间复杂度：{{ complexity }}</div>
+      <div class="info-complexity">Độ phức tạp thời gian: {{ complexity }}</div>
     </div>
 
     <div class="comparison">
-      <div class="comparison-title">算法对比</div>
+      <div class="comparison-title">So sánh thuật toán</div>
       <table class="comparison-table">
         <thead>
           <tr>
-            <th>算法</th>
-            <th>平均时间</th>
-            <th>最坏时间</th>
-            <th>空间</th>
-            <th>稳定</th>
+            <th>Thuật toán</th>
+            <th>Trung bình</th>
+            <th>Tệ nhất</th>
+            <th>Không gian</th>
+            <th>Ổn định</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>冒泡排序</td>
+            <td>Bubble sort</td>
             <td>O(n²)</td>
             <td>O(n²)</td>
             <td>O(1)</td>
             <td>✓</td>
           </tr>
           <tr>
-            <td>快速排序</td>
+            <td>Quick sort</td>
             <td>O(n log n)</td>
             <td>O(n²)</td>
             <td>O(log n)</td>
             <td>✗</td>
           </tr>
           <tr>
-            <td>归并排序</td>
+            <td>Merge sort</td>
             <td>O(n log n)</td>
             <td>O(n log n)</td>
             <td>O(n)</td>
             <td>✓</td>
           </tr>
           <tr>
-            <td>插入排序</td>
+            <td>Insertion sort</td>
             <td>O(n²)</td>
             <td>O(n²)</td>
             <td>O(1)</td>
@@ -87,8 +87,8 @@ const array = ref([50, 30, 70, 40, 90, 20, 60, 80, 10, 55])
 const comparingIndices = ref([])
 const swappingIndices = ref([])
 const sortedCount = ref(0)
-const currentAlgo = ref('请选择排序算法')
-const currentAlgoDesc = ref('选择一个排序算法开始演示')
+const currentAlgo = ref('Hãy chọn thuật toán sắp xếp')
+const currentAlgoDesc = ref('Chọn một thuật toán để bắt đầu demo')
 const complexity = ref('')
 
 const generateArray = () => {
@@ -104,8 +104,8 @@ const generateArray = () => {
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const startBubbleSort = async () => {
-  currentAlgo.value = '冒泡排序'
-  currentAlgoDesc.value = '重复遍历数组，比较相邻元素并交换'
+  currentAlgo.value = 'Bubble sort'
+  currentAlgoDesc.value = 'Duyệt mảng nhiều lần, so sánh và đổi chỗ các phần tử liền kề'
   complexity.value = 'O(n²)'
 
   sortedCount.value = 0
@@ -133,8 +133,8 @@ const startBubbleSort = async () => {
 }
 
 const startQuickSort = async () => {
-  currentAlgo.value = '快速排序'
-  currentAlgoDesc.value = '选择基准，将数组分成小于和大于基准的两部分'
+  currentAlgo.value = 'Quick sort'
+  currentAlgoDesc.value = 'Chọn pivot, chia mảng thành hai phần nhỏ hơn và lớn hơn pivot'
   complexity.value = 'O(n log n)'
 
   sortedCount.value = 0

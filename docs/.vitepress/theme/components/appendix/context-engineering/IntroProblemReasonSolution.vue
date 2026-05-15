@@ -2,32 +2,32 @@
   <div class="intro-prs">
     <div class="prs-item">
       <div class="prs-title">
-        问题
+        Vấn đề
       </div>
       <ul>
-        <li><strong>上下文难以保持一致</strong>：对话一长，前后语义容易脱节。</li>
-        <li><strong>关键事实容易丢失</strong>：早期给出的信息在后续轮次中难以被准确引用。</li>
-        <li><strong>调用成本持续上升</strong>：每一轮都要重新处理大量历史内容。</li>
+        <li><strong>Context khó giữ nhất quán</strong>: hội thoại càng dài, ngữ nghĩa trước sau càng dễ lệch.</li>
+        <li><strong>Thông tin quan trọng dễ thất lạc</strong>: dữ kiện đưa ra ở đầu khó được trích đúng trong các lượt sau.</li>
+        <li><strong>Chi phí gọi tăng liên tục</strong>: mỗi lượt đều phải xử lý lại nhiều lịch sử.</li>
       </ul>
     </div>
     <div class="prs-item">
       <div class="prs-title">
-        可能的成因
+        Nguyên nhân khả dĩ
       </div>
       <ul>
-        <li><strong>视野仅限当前调用</strong>：模型只能依赖这一轮提供的上下文。</li>
-        <li><strong>信息缺乏结构化组织</strong>：重要信息与次要细节混在一起，难以形成稳定记忆。</li>
-        <li><strong>历史内容反复计算</strong>：大量固定前缀在多轮对话中被一遍遍重新处理。</li>
+        <li><strong>Tầm nhìn chỉ giới hạn trong lần gọi hiện tại</strong>: mô hình chỉ dựa vào context lượt này.</li>
+        <li><strong>Thông tin thiếu tổ chức cấu trúc</strong>: cái quan trọng và cái phụ trộn lẫn, khó tạo bộ nhớ ổn định.</li>
+        <li><strong>Lịch sử bị tính lại nhiều lần</strong>: nhiều prefix cố định bị xử lý đi xử lý lại qua các lượt.</li>
       </ul>
     </div>
     <div class="prs-item">
       <div class="prs-title">
-        带来的影响
+        Hệ quả
       </div>
       <ul>
-        <li><strong>回答质量不稳定</strong>：对话越长，模型越难保持一致性和可追溯性。</li>
-        <li><strong>成本难以预估</strong>：每轮上下文大小高度波动，调用费用不可控。</li>
-        <li><strong>难以工程化落地</strong>：缺乏明确的上下文管理策略，系统在生产环境中难以维护与扩展。</li>
+        <li><strong>Chất lượng trả lời không ổn định</strong>: hội thoại càng dài, mô hình càng khó giữ tính nhất quán và truy vết.</li>
+        <li><strong>Chi phí khó dự đoán</strong>: kích thước context mỗi lượt biến động lớn, chi phí không kiểm soát được.</li>
+        <li><strong>Khó đưa vào sản xuất</strong>: thiếu chiến lược quản lý context rõ ràng, hệ thống khó bảo trì và mở rộng.</li>
       </ul>
     </div>
   </div>

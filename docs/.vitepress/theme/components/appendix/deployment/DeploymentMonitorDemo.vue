@@ -1,33 +1,33 @@
 <!--
   DeploymentMonitorDemo.vue
-  监控备份（精简版）
+  Monitoring & backup (bản rút gọn)
 -->
 <template>
   <div class="deployment-monitor">
     <div class="header">
       <span class="icon">📊</span>
-      <span class="title">监控 & 备份</span>
-      <span class="subtitle">守住网站底线的最后一道防线</span>
+      <span class="title">Monitoring & backup</span>
+      <span class="subtitle">Tuyến phòng thủ cuối cùng để giữ website ổn định</span>
     </div>
 
     <div class="metrics">
       <div class="metric">
-        <span class="label">CPU 使用率</span>
+        <span class="label">CPU usage</span>
         <span class="value">{{ cpuUsage }}%</span>
       </div>
       <div class="metric">
-        <span class="label">内存使用率</span>
+        <span class="label">Memory usage</span>
         <span class="value">{{ memoryUsage }}%</span>
       </div>
       <div class="metric">
-        <span class="label">在线用户</span>
+        <span class="label">User online</span>
         <span class="value">{{ activeUsers }}</span>
       </div>
     </div>
 
     <div class="backup">
       <div class="label">
-        上次备份：
+        Lần backup gần nhất:
       </div>
       <span class="value">{{ lastBackup }}</span>
     </div>

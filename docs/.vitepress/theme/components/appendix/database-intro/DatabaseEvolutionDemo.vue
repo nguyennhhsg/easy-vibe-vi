@@ -2,12 +2,12 @@
   <div class="data-evolution-demo">
     <div class="demo-header">
       <span class="icon">📊</span>
-      <span class="title">数据存储演进</span>
-      <span class="subtitle">从记事本到数据库的演变</span>
+      <span class="title">Tiến hóa của lưu trữ dữ liệu</span>
+      <span class="subtitle">Từ cuốn sổ tay đến database</span>
     </div>
 
     <div class="intro-text">
-      想象你在经营一家<span class="highlight">书店</span>：从记在小本本上，到用 Excel 管理，再到用专业的数据库系统。每一步演变，都是为了解决数据量增长带来的新问题。
+      Hãy tưởng tượng bạn đang quản lý một <span class="highlight">tiệm sách</span>: từ ghi chép trên sổ tay, đến quản lý bằng Excel, rồi đến hệ thống database chuyên nghiệp. Mỗi bước tiến hóa đều nhằm giải quyết các vấn đề mới khi lượng dữ liệu tăng lên.
     </div>
 
     <div class="evolution-stages">
@@ -43,7 +43,7 @@
       v-if="!activeStage"
       class="hint-text"
     >
-      👆 点击上方任意阶段，查看详细特点
+      👆 Nhấn vào một giai đoạn ở trên để xem chi tiết
     </div>
 
     <Transition name="fade">
@@ -60,7 +60,7 @@
           <div class="pros-cons">
             <div class="pros">
               <div class="list-title">
-                ✅ 优点
+                ✅ Ưu điểm
               </div>
               <ul>
                 <li
@@ -73,7 +73,7 @@
             </div>
             <div class="cons">
               <div class="list-title">
-                ❌ 缺点
+                ❌ Nhược điểm
               </div>
               <ul>
                 <li
@@ -90,7 +90,7 @@
             class="example-box"
           >
             <div class="example-label">
-              🌰 举个例子：
+              🌰 Ví dụ:
             </div>
             <div class="example-content">
               {{ currentStage?.example }}
@@ -102,7 +102,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>数据存储方式的演进，本质上是<span class="highlight">用更复杂的系统解决数据量增长带来的问题</span>。从"能用"到"好用"，再到"专业"，每一步都是为了提升效率、保证安全、支持更大的规模。
+      <strong>Ý tưởng cốt lõi:</strong> Sự tiến hóa của cách lưu trữ dữ liệu, về bản chất là <span class="highlight">dùng hệ thống phức tạp hơn để giải quyết các vấn đề khi lượng dữ liệu tăng</span>. Từ "dùng được" đến "dễ dùng" rồi đến "chuyên nghiệp", mỗi bước đều nhằm tăng hiệu suất, đảm bảo an toàn, hỗ trợ quy mô lớn hơn.
     </div>
   </div>
 </template>
@@ -116,32 +116,32 @@ const stages = ref([
   {
     id: 1,
     icon: '📒',
-    name: '记事本',
-    simple: '手工记录',
-    capacity: '100 条',
-    pros: ['零门槛，拿笔就能写', '简单直接，随时查看'],
-    cons: ['查询困难，需要人工计算', '容易丢失，无法备份', '无法统计和分析'],
-    example: '你在笔记本上记：2024-01-15，张三买了《百年孤独》，59元。想统计上个月卖了多少，得一页页翻。'
+    name: 'Sổ tay',
+    simple: 'Ghi chép thủ công',
+    capacity: '100 bản ghi',
+    pros: ['Không cần kỹ năng, cầm bút là viết được', 'Đơn giản trực tiếp, xem lúc nào cũng được'],
+    cons: ['Khó tra cứu, phải tính tay', 'Dễ mất, không thể sao lưu', 'Không thể thống kê, phân tích'],
+    example: 'Bạn ghi vào sổ: 2024-01-15, Minh mua "Trăm năm cô đơn", 59k. Muốn thống kê tháng trước bán bao nhiêu, phải lật từng trang.'
   },
   {
     id: 2,
     icon: '📊',
     name: 'Excel',
-    simple: '电子表格',
-    capacity: '100 万条',
-    pros: ['自动求和、排序、筛选', '界面直观，容易上手', '支持简单的公式计算'],
-    cons: ['容量有限，数据量大就卡死', '难以协作，容易冲突', '数据冗余，重复信息多'],
-    example: '你用 Excel 管理订单，张三买了 100 本书，他的地址和电话重复写了 100 次。如果他换电话，得修改 100 行。'
+    simple: 'Bảng tính điện tử',
+    capacity: '1 triệu bản ghi',
+    pros: ['Tự động tính tổng, sắp xếp, lọc', 'Giao diện trực quan, dễ làm quen', 'Hỗ trợ công thức đơn giản'],
+    cons: ['Dung lượng hạn chế, nhiều dữ liệu là treo', 'Khó cộng tác, dễ xung đột', 'Dữ liệu trùng lặp, thông tin lặp lại nhiều'],
+    example: 'Bạn dùng Excel quản lý đơn hàng, Minh mua 100 cuốn sách, địa chỉ và số điện thoại của bạn ấy được ghi lặp 100 lần. Khi đổi số điện thoại, phải sửa 100 dòng.'
   },
   {
     id: 3,
     icon: '🗄️',
-    name: '数据库',
-    simple: '专业系统',
-    capacity: '亿级+',
-    pros: ['海量数据，毫秒查询', '多人协作，不会冲突', '数据安全，自动备份', '消除冗余，统一管理'],
-    cons: ['需要学习 SQL 语言', '搭建和维护成本高', '小项目有点"杀鸡用牛刀"'],
-    example: '亚马逊用数据库管理 10 亿订单。张三的地址只存一次，无论他买多少本书，查询他的所有订单只需 0.01 秒。'
+    name: 'Database',
+    simple: 'Hệ thống chuyên nghiệp',
+    capacity: 'Hàng tỷ+',
+    pros: ['Lưu lượng lớn, truy vấn mili giây', 'Cộng tác nhiều người, không xung đột', 'Dữ liệu an toàn, tự động sao lưu', 'Loại bỏ trùng lặp, quản lý thống nhất'],
+    cons: ['Phải học ngôn ngữ SQL', 'Chi phí triển khai và bảo trì cao', 'Dự án nhỏ thì hơi "dùng dao mổ trâu để giết gà"'],
+    example: 'Amazon dùng database để quản lý 1 tỷ đơn hàng. Địa chỉ của Minh chỉ lưu một lần, dù bạn ấy mua bao nhiêu sách, tra cứu mọi đơn của bạn ấy chỉ mất 0.01 giây.'
   }
 ])
 

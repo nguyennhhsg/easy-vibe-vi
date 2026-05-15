@@ -1,13 +1,13 @@
 <!--
   DeploymentHttpsDemo.vue
-  HTTPS 安全（精简版）
+  HTTPS bảo mật (bản rút gọn)
 -->
 <template>
   <div class="deployment-https">
     <div class="header">
       <span class="icon">🔒</span>
-      <span class="title">HTTPS 安全</span>
-      <span class="subtitle">给数据传输加把锁</span>
+      <span class="title">HTTPS bảo mật</span>
+      <span class="subtitle">Khóa lại đường truyền dữ liệu</span>
     </div>
 
     <div class="compare">
@@ -16,7 +16,7 @@
           HTTP
         </div>
         <div class="item">
-          ❌ 明文传输
+          ❌ Truyền plaintext
         </div>
       </div>
       <div class="col highlight">
@@ -24,13 +24,13 @@
           HTTPS
         </div>
         <div class="item">
-          ✅ 加密传输
+          ✅ Truyền mã hóa
         </div>
       </div>
     </div>
 
     <div class="info">
-      <span class="text">💡 推荐：Let's Encrypt 免费证书</span>
+      <span class="text">💡 Gợi ý: chứng chỉ miễn phí Let's Encrypt</span>
     </div>
   </div>
 </template>

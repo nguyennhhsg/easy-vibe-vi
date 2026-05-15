@@ -1,12 +1,12 @@
 <!--
   NetworkArchitectureDemo.vue
-  神经网络架构对比演示
+  Demo so sánh các kiến trúc neural network
 -->
 <template>
   <div class="net-arch-demo">
     <div class="header">
-      <div class="title">常见神经网络架构</div>
-      <div class="subtitle">点击查看不同网络架构的特点和应用</div>
+      <div class="title">Các kiến trúc neural network phổ biến</div>
+      <div class="subtitle">Bấm để xem đặc điểm và ứng dụng của từng kiến trúc</div>
     </div>
 
     <div class="arch-tabs">
@@ -22,13 +22,13 @@
 
     <div v-if="current" class="detail-panel">
       <div class="detail-header">
-        <div class="detail-title">{{ current.name }}（{{ current.abbr }}）</div>
+        <div class="detail-title">{{ current.name }} ({{ current.abbr }})</div>
         <div class="detail-year">{{ current.year }}</div>
       </div>
       <div class="detail-desc">{{ current.desc }}</div>
 
       <div class="structure">
-        <div class="struct-label">网络结构</div>
+        <div class="struct-label">Cấu trúc mạng</div>
         <div class="struct-visual">
           <span v-for="(layer, i) in current.layers" :key="i" class="layer-tag">
             {{ layer }}
@@ -38,14 +38,14 @@
       </div>
 
       <div class="apps">
-        <div class="apps-label">典型应用</div>
+        <div class="apps-label">Ứng dụng điển hình</div>
         <div class="apps-list">
           <span v-for="(app, i) in current.applications" :key="i" class="app-tag">{{ app }}</span>
         </div>
       </div>
 
       <div class="key-idea">
-        <span class="idea-label">核心思想：</span>{{ current.keyIdea }}
+        <span class="idea-label">Ý tưởng cốt lõi:</span> {{ current.keyIdea }}
       </div>
     </div>
   </div>
@@ -59,53 +59,53 @@ const activeArch = ref('ffn')
 const architectures = [
   {
     key: 'ffn',
-    name: '前馈神经网络',
+    name: 'Mạng feed-forward',
     abbr: 'FNN',
     year: '1958',
-    desc: '最基础的神经网络结构，数据从输入层经过隐藏层到输出层，单向流动，没有循环。每一层的每个神经元与下一层的所有神经元相连（全连接）。',
-    layers: ['输入层', '隐藏层 ×N', '输出层'],
-    applications: ['分类', '回归', '函数逼近'],
-    keyIdea: '通过多层非线性变换，将输入映射到输出。层数越多，能表达的函数越复杂。'
+    desc: 'Kiến trúc neural network cơ bản nhất: dữ liệu chảy một chiều từ tầng đầu vào qua tầng ẩn đến tầng đầu ra, không có vòng lặp. Mỗi neuron của một tầng nối với mọi neuron của tầng tiếp theo (fully-connected).',
+    layers: ['Input layer', 'Hidden layer ×N', 'Output layer'],
+    applications: ['Phân loại', 'Hồi quy', 'Xấp xỉ hàm'],
+    keyIdea: 'Qua nhiều biến đổi phi tuyến nhiều tầng, ánh xạ đầu vào sang đầu ra. Càng nhiều tầng càng biểu diễn được hàm phức tạp.'
   },
   {
     key: 'cnn',
-    name: '卷积神经网络',
+    name: 'Convolutional neural network',
     abbr: 'CNN',
     year: '1998',
-    desc: '专为处理网格状数据（如图像）设计。通过卷积核在输入上滑动提取局部特征，池化层降低维度，最后全连接层做分类。参数共享大幅减少了参数量。',
-    layers: ['输入', '卷积层', '池化层', '...', '全连接层', '输出'],
-    applications: ['图像分类', '目标检测', '人脸识别', '医学影像'],
-    keyIdea: '局部感受野 + 参数共享。卷积核只关注局部区域，同一个卷积核在整张图上共享参数。'
+    desc: 'Thiết kế riêng cho dữ liệu dạng lưới (như ảnh). Kernel trượt trên đầu vào để trích đặc trưng cục bộ, pooling giảm chiều, cuối cùng fully-connected để phân loại. Chia sẻ tham số giúp giảm mạnh số lượng tham số.',
+    layers: ['Input', 'Conv layer', 'Pooling', '...', 'FC layer', 'Output'],
+    applications: ['Phân loại ảnh', 'Object detection', 'Nhận diện khuôn mặt', 'Ảnh y tế'],
+    keyIdea: 'Vùng tiếp nhận cục bộ + chia sẻ tham số. Kernel chỉ tập trung một vùng nhỏ, cùng một kernel chia sẻ tham số trên toàn ảnh.'
   },
   {
     key: 'rnn',
-    name: '循环神经网络',
+    name: 'Recurrent neural network',
     abbr: 'RNN/LSTM',
     year: '1997',
-    desc: '专为处理序列数据设计。隐藏状态会传递到下一个时间步，让网络具有"记忆"能力。LSTM 通过门控机制解决了长序列中的梯度消失问题。',
-    layers: ['输入序列', '循环层(含记忆)', '...', '输出序列'],
-    applications: ['机器翻译', '语音识别', '时间序列预测', '文本生成'],
-    keyIdea: '引入时间维度的循环连接，让网络能处理变长序列并保持上下文记忆。'
+    desc: 'Thiết kế cho dữ liệu chuỗi. Trạng thái ẩn truyền sang bước thời gian kế tiếp, cho mạng khả năng "ghi nhớ". LSTM dùng cơ chế cổng để giải quyết vấn đề gradient biến mất trên chuỗi dài.',
+    layers: ['Chuỗi đầu vào', 'Recurrent layer (có nhớ)', '...', 'Chuỗi đầu ra'],
+    applications: ['Dịch máy', 'Nhận dạng giọng nói', 'Dự báo chuỗi thời gian', 'Sinh văn bản'],
+    keyIdea: 'Thêm kết nối hồi tiếp theo chiều thời gian, cho mạng xử lý chuỗi độ dài thay đổi và giữ context.'
   },
   {
     key: 'transformer',
     name: 'Transformer',
     abbr: 'Transformer',
     year: '2017',
-    desc: '用自注意力机制替代循环结构，可以并行处理整个序列。每个位置都能直接关注序列中的任意其他位置，解决了 RNN 的长距离依赖问题。是 GPT、BERT 等大模型的基础。',
-    layers: ['输入嵌入', '位置编码', '多头注意力', '前馈网络', '...×N', '输出'],
-    applications: ['ChatGPT', 'BERT', '机器翻译', '代码生成', '图像生成'],
-    keyIdea: '自注意力（Self-Attention）：让序列中的每个元素都能"看到"其他所有元素，计算相关性权重。'
+    desc: 'Thay cấu trúc hồi tiếp bằng self-attention, có thể xử lý song song toàn bộ chuỗi. Mỗi vị trí có thể chú ý trực tiếp tới mọi vị trí khác trong chuỗi, giải quyết vấn đề phụ thuộc xa của RNN. Là nền tảng cho GPT, BERT.',
+    layers: ['Input embedding', 'Positional encoding', 'Multi-head attention', 'Feed-forward', '...×N', 'Output'],
+    applications: ['ChatGPT', 'BERT', 'Dịch máy', 'Sinh code', 'Sinh ảnh'],
+    keyIdea: 'Self-attention: mỗi phần tử trong chuỗi có thể "nhìn thấy" mọi phần tử khác và tính trọng số liên quan.'
   },
   {
     key: 'gan',
-    name: '生成对抗网络',
+    name: 'Generative adversarial network',
     abbr: 'GAN',
     year: '2014',
-    desc: '由生成器和判别器两个网络对抗训练。生成器试图生成以假乱真的数据，判别器试图区分真假。两者博弈的结果是生成器越来越强。',
-    layers: ['随机噪声', '生成器', '生成数据', '判别器', '真/假'],
-    applications: ['图像生成', '风格迁移', '超分辨率', '数据增强'],
-    keyIdea: '对抗训练：生成器和判别器互相博弈，共同进步，最终生成器能产生逼真的数据。'
+    desc: 'Gồm hai mạng đối kháng nhau: generator và discriminator. Generator cố sinh dữ liệu giả như thật, discriminator cố phân biệt thật/giả. Kết quả của cuộc đua là generator ngày càng mạnh.',
+    layers: ['Nhiễu ngẫu nhiên', 'Generator', 'Dữ liệu sinh', 'Discriminator', 'Thật / Giả'],
+    applications: ['Sinh ảnh', 'Chuyển phong cách', 'Siêu phân giải', 'Tăng cường dữ liệu'],
+    keyIdea: 'Adversarial training: generator và discriminator đối đầu, cùng tiến hóa; cuối cùng generator tạo ra dữ liệu chân thực.'
   }
 ]
 

@@ -1,20 +1,20 @@
 <!--
   RAGPipelineDemo.vue
-  RAG 完整流程可视化演示
+  Demo trực quan toàn bộ quy trình RAG
 
-  用途：
-  展示 RAG 的核心流程：用户提问 → 检索 → 上下文组装 → LLM 生成 → 返回结果
-  用户可以逐步点击，观察每个阶段的数据流动。
+  Mục đích:
+  Hiển thị quy trình RAG cốt lõi: user hỏi → retrieval → ghép context → LLM sinh → trả kết quả.
+  User có thể bấm từng bước để quan sát luồng dữ liệu qua từng giai đoạn.
 
-  交互功能：
-  - 点击"下一步"逐步推进流程
-  - 每个阶段高亮并展示说明
-  - 可选择不同的示例问题
+  Tính năng:
+  - Bấm "Bước kế" để đi tới từng giai đoạn
+  - Mỗi giai đoạn được highlight và giải thích
+  - Có thể chọn câu hỏi mẫu khác nhau
 -->
 <template>
   <div class="rag-pipeline-demo">
     <div class="query-selector">
-      <span class="label">选择问题：</span>
+      <span class="label">Chọn câu hỏi:</span>
       <button
         v-for="(q, i) in queries"
         :key="i"
@@ -49,19 +49,19 @@
     </div>
 
     <div class="detail-panel">
-      <div class="detail-title">{{ stages[currentStep]?.name }} — 详细说明</div>
+      <div class="detail-title">{{ stages[currentStep]?.name }} — Mô tả chi tiết</div>
       <div class="detail-desc">{{ stages[currentStep]?.desc }}</div>
       <div
         v-if="currentStep >= 1 && currentStep <= 2"
         class="retrieved-docs"
       >
-        <div class="doc-title">检索到的文档片段：</div>
+        <div class="doc-title">Các đoạn tài liệu retrieve được:</div>
         <div
           v-for="(doc, i) in queries[currentQuery].docs"
           :key="i"
           :class="['doc-item', { visible: currentStep >= 2 }]"
         >
-          <span class="doc-score">相关度 {{ doc.score }}</span>
+          <span class="doc-score">Liên quan {{ doc.score }}</span>
           <span class="doc-text">{{ doc.text }}</span>
         </div>
       </div>
@@ -73,7 +73,7 @@
         :disabled="currentStep <= 0"
         @click="prevStep"
       >
-        ← 上一步
+        ← Bước trước
       </button>
       <span class="step-indicator">{{ currentStep + 1 }} / {{ stages.length }}</span>
       <button
@@ -81,13 +81,13 @@
         :disabled="currentStep >= stages.length - 1"
         @click="nextStep"
       >
-        下一步 →
+        Bước kế →
       </button>
       <button
         class="ctrl-btn"
         @click="reset"
       >
-        重置
+        Reset
       </button>
     </div>
   </div>
@@ -98,52 +98,52 @@ import { ref } from 'vue'
 
 const stages = [
   {
-    name: '用户提问',
+    name: 'User hỏi',
     icon: '💬',
-    desc: '用户向系统提出一个自然语言问题。这个问题会被转化为向量表示，用于后续的语义检索。'
+    desc: 'User đưa cho hệ thống một câu hỏi bằng ngôn ngữ tự nhiên. Câu hỏi sẽ được chuyển thành vector để phục vụ retrieval ngữ nghĩa ở bước sau.'
   },
   {
-    name: '语义检索',
+    name: 'Retrieval ngữ nghĩa',
     icon: '🔍',
-    desc: '系统将问题编码为向量，在向量数据库中搜索语义最相近的文档片段。通常使用余弦相似度或点积来衡量相关性。'
+    desc: 'Hệ thống encode câu hỏi thành vector, tìm trong vector database các đoạn tài liệu có nghĩa gần nhất. Thường dùng cosine similarity hoặc dot product để đo độ liên quan.'
   },
   {
-    name: '上下文组装',
+    name: 'Ghép context',
     icon: '📋',
-    desc: '将检索到的 Top-K 文档片段与原始问题拼接，构造成一个完整的 Prompt。这个 Prompt 会告诉 LLM："请根据以下参考资料回答问题"。'
+    desc: 'Ghép Top-K đoạn tài liệu retrieve được với câu hỏi gốc thành một prompt hoàn chỉnh. Prompt này nói với LLM: "Hãy trả lời dựa trên tài liệu tham khảo sau".'
   },
   {
-    name: 'LLM 生成',
+    name: 'LLM sinh',
     icon: '🤖',
-    desc: '大语言模型接收组装好的 Prompt，基于检索到的上下文信息生成回答。因为有了真实的参考资料，模型的回答更加准确、可靠。'
+    desc: 'LLM nhận prompt đã ghép và sinh câu trả lời dựa trên context được retrieve. Nhờ có tài liệu tham khảo thực, câu trả lời chính xác và đáng tin hơn.'
   },
   {
-    name: '返回结果',
+    name: 'Trả kết quả',
     icon: '✅',
-    desc: '系统将 LLM 生成的回答返回给用户。高级系统还会附带引用来源，方便用户验证答案的可靠性。'
+    desc: 'Hệ thống trả câu trả lời của LLM về cho user. Các hệ thống nâng cao còn kèm trích dẫn nguồn để user kiểm chứng độ tin cậy.'
   }
 ]
 
 const queries = [
   {
-    short: '公司年假政策',
-    question: '我们公司的年假政策是什么？',
+    short: 'Chính sách nghỉ phép',
+    question: 'Chính sách nghỉ phép năm của công ty mình thế nào?',
     docs: [
-      { score: '0.95', text: '员工入职满一年后享有 10 天带薪年假，满五年后增至 15 天。' },
-      { score: '0.87', text: '年假需提前 3 个工作日申请，经直属主管审批后生效。' },
-      { score: '0.72', text: '未使用的年假可结转至次年第一季度，逾期作废。' }
+      { score: '0.95', text: 'Nhân viên đủ 1 năm thâm niên được 10 ngày phép có lương, đủ 5 năm tăng lên 15 ngày.' },
+      { score: '0.87', text: 'Nghỉ phép cần đăng ký trước 3 ngày làm việc, có duyệt của quản lý trực tiếp.' },
+      { score: '0.72', text: 'Phép chưa dùng có thể chuyển sang quý I năm sau, quá hạn sẽ bị hủy.' }
     ],
-    answer: '根据公司规定，入职满一年享有 10 天带薪年假，满五年增至 15 天。需提前 3 个工作日申请并经主管审批，未用年假可结转至次年 Q1。'
+    answer: 'Theo quy định, đủ 1 năm thâm niên được 10 ngày phép có lương, đủ 5 năm là 15 ngày. Cần đăng ký trước 3 ngày làm việc và được quản lý duyệt; phép chưa dùng có thể chuyển sang quý I năm sau.'
   },
   {
-    short: 'API 限流规则',
-    question: '我们的 API 限流规则是怎样的？',
+    short: 'Quy tắc rate limit API',
+    question: 'Quy tắc rate limit của API bên mình ra sao?',
     docs: [
-      { score: '0.93', text: '免费用户每分钟限 60 次请求，付费用户限 600 次。' },
-      { score: '0.85', text: '超出限流后返回 HTTP 429 状态码，需等待 60 秒后重试。' },
-      { score: '0.68', text: '企业版用户可申请自定义限流配额，最高支持每分钟 10000 次。' }
+      { score: '0.93', text: 'User miễn phí giới hạn 60 request/phút, user trả phí giới hạn 600.' },
+      { score: '0.85', text: 'Vượt giới hạn sẽ trả HTTP 429, cần đợi 60 giây mới thử lại.' },
+      { score: '0.68', text: 'User Enterprise có thể xin quota tùy chỉnh, tối đa 10000 request/phút.' }
     ],
-    answer: '免费用户每分钟限 60 次请求，付费用户 600 次。超限返回 429 状态码，需等 60 秒。企业版可申请最高 10000 次/分钟的自定义配额。'
+    answer: 'User miễn phí giới hạn 60 request/phút, trả phí 600. Vượt giới hạn trả 429, cần đợi 60 giây. Enterprise có thể xin tối đa 10000 request/phút.'
   }
 ]
 
@@ -158,9 +158,9 @@ function selectQuery(i) {
 function getStageContent(i) {
   const q = queries[currentQuery.value]
   if (i === 0) return q.question
-  if (i === 1) return `找到 ${q.docs.length} 个相关片段`
-  if (i === 2) return '问题 + 参考资料 → Prompt'
-  if (i === 3) return '基于上下文生成回答...'
+  if (i === 1) return `Tìm thấy ${q.docs.length} đoạn liên quan`
+  if (i === 2) return 'Câu hỏi + tài liệu → Prompt'
+  if (i === 3) return 'Đang sinh câu trả lời dựa trên context...'
   if (i === 4) return q.answer
   return ''
 }

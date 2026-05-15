@@ -1,79 +1,79 @@
 <template>
   <div class="mcp-visual-demo">
-    <div class="section-title">MCP 是什么？</div>
+    <div class="section-title">MCP là gì?</div>
 
     <div class="intro-text">
-      MCP（Model Context Protocol）是 Anthropic 于 2024 年 11 月推出的<strong>AI 与外部工具连接的统一标准</strong>。它让 AI 应用可以调用外部工具、读取资源数据、使用预定义提示，就像给 AI 装上了"手"和"眼睛"。
+      MCP (Model Context Protocol) là <strong>chuẩn thống nhất để kết nối AI với công cụ bên ngoài</strong> do Anthropic công bố vào tháng 11/2024. Nó cho phép ứng dụng AI gọi công cụ ngoài, đọc dữ liệu tài nguyên, dùng prompt định sẵn — giống như trang bị "tay" và "mắt" cho AI.
     </div>
 
-    <div class="section-title">三大核心能力</div>
+    <div class="section-title">Ba năng lực cốt lõi</div>
 
     <div class="能力-table">
       <div class="table-header">
-        <div class="col-能力">能力</div>
-        <div class="col-英文">英文</div>
-        <div class="col-作用">作用</div>
-        <div class="col-示例">示例</div>
+        <div class="col-能力">Năng lực</div>
+        <div class="col-英文">Tiếng Anh</div>
+        <div class="col-作用">Vai trò</div>
+        <div class="col-示例">Ví dụ</div>
       </div>
       <div class="table-row">
-        <div class="col-能力"><strong>工具</strong></div>
+        <div class="col-能力"><strong>Công cụ</strong></div>
         <div class="col-英文">Tools</div>
-        <div class="col-作用">AI 可以调用的功能</div>
-        <div class="col-示例">查询天气、发送邮件、调用 API</div>
+        <div class="col-作用">Chức năng AI có thể gọi</div>
+        <div class="col-示例">Tra thời tiết, gửi mail, gọi API</div>
       </div>
       <div class="table-row">
-        <div class="col-能力"><strong>资源</strong></div>
+        <div class="col-能力"><strong>Tài nguyên</strong></div>
         <div class="col-英文">Resources</div>
-        <div class="col-作用">AI 可以读取的数据</div>
-        <div class="col-示例">文件内容、数据库记录、配置信息</div>
+        <div class="col-作用">Dữ liệu AI có thể đọc</div>
+        <div class="col-示例">Nội dung file, record database, cấu hình</div>
       </div>
       <div class="table-row">
-        <div class="col-能力"><strong>提示</strong></div>
+        <div class="col-能力"><strong>Prompt</strong></div>
         <div class="col-英文">Prompts</div>
-        <div class="col-作用">预定义的提示模板</div>
-        <div class="col-示例">代码审查模板、写作模板</div>
+        <div class="col-作用">Mẫu prompt định sẵn</div>
+        <div class="col-示例">Mẫu code review, mẫu viết bài</div>
       </div>
     </div>
 
-    <div class="section-title">什么时候用 MCP？</div>
+    <div class="section-title">Khi nào dùng MCP?</div>
 
     <div class="use-cases">
       <div class="use-case">
-        <div class="use-case-title">当 AI 需要执行实际操作时</div>
-        <div class="use-case-desc">AI 不仅要回答问题，还要真正做事：发送邮件、操作文件、调用第三方 API</div>
+        <div class="use-case-title">Khi AI cần thực hiện thao tác thực tế</div>
+        <div class="use-case-desc">AI không chỉ trả lời mà còn thật sự làm việc: gửi email, thao tác file, gọi API bên thứ ba</div>
       </div>
       <div class="use-case">
-        <div class="use-case-title">当 AI 需要访问私有数据时</div>
-        <div class="use-case-desc">读取本地文件、查询数据库、访问企业内部系统</div>
+        <div class="use-case-title">Khi AI cần truy cập dữ liệu riêng</div>
+        <div class="use-case-desc">Đọc file local, truy vấn database, truy cập hệ thống nội bộ doanh nghiệp</div>
       </div>
       <div class="use-case">
-        <div class="use-case-title">当需要标准化工具接入时</div>
-        <div class="use-case-desc">一次开发，多个 AI 应用可用（Claude、Cursor、Windsurf 等）</div>
+        <div class="use-case-title">Khi cần chuẩn hóa cách kết nối công cụ</div>
+        <div class="use-case-desc">Phát triển một lần, nhiều ứng dụng AI dùng được (Claude, Cursor, Windsurf...)</div>
       </div>
     </div>
 
-    <div class="section-title">如何使用 MCP？</div>
+    <div class="section-title">Cách dùng MCP?</div>
 
     <div class="usage-steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <div class="step-title">开发 MCP Server</div>
-          <div class="step-desc">按 MCP 规范实现 Server，提供 tools/resources/prompts</div>
+          <div class="step-title">Phát triển MCP Server</div>
+          <div class="step-desc">Hiện thực server theo chuẩn MCP, cung cấp tools/resources/prompts</div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">配置 AI 应用连接</div>
-          <div class="step-desc">在 AI 应用中添加 MCP Server 配置（本地或远程）</div>
+          <div class="step-title">Cấu hình kết nối trong ứng dụng AI</div>
+          <div class="step-desc">Thêm cấu hình MCP Server (local hoặc remote) vào ứng dụng AI</div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">AI 自动调用</div>
-          <div class="step-desc">AI 根据任务需求，自动发现并调用合适的工具或读取资源</div>
+          <div class="step-title">AI gọi tự động</div>
+          <div class="step-desc">AI dựa theo yêu cầu của task để tự khám phá và gọi công cụ phù hợp hoặc đọc resource</div>
         </div>
       </div>
     </div>

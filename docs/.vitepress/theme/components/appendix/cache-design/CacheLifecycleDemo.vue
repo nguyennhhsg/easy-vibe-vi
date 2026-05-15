@@ -1,26 +1,26 @@
 <!--
   CacheLifecycleDemo.vue
-  缓存生命周期演示 - 展示缓存条目的写入、命中、过期、淘汰过程
+  Demo vòng đời cache - minh họa quá trình ghi, hit, hết hạn và thải loại entry cache
 -->
 <template>
   <div class="cache-lifecycle-demo">
     <div class="header">
       <div class="title">
-        缓存生命周期演示
+        Demo vòng đời cache
       </div>
       <div class="subtitle">
-        观察缓存条目从创建到淘汰的完整过程
+        Quan sát toàn bộ quá trình một entry cache từ lúc tạo đến lúc bị thải loại
       </div>
     </div>
 
     <div class="cache-container">
       <div class="cache-header">
         <div class="cache-title">
-          缓存存储 (容量: {{ cacheSize }}/{{ maxCacheSize }})
+          Bộ nhớ cache (dung lượng: {{ cacheSize }}/{{ maxCacheSize }})
         </div>
         <div class="cache-stats">
-          <span>命中率: {{ hitRate }}%</span>
-          <span>淘汰: {{ evictionCount }}</span>
+          <span>Tỷ lệ hit: {{ hitRate }}%</span>
+          <span>Đã thải: {{ evictionCount }}</span>
         </div>
       </div>
 
@@ -71,8 +71,8 @@
             </div>
           </div>
           <div class="entry-meta">
-            <span>命中: {{ entry.hits }}</span>
-            <span>访问: {{ entry.lastAccess }}s前</span>
+            <span>Hit: {{ entry.hits }}</span>
+            <span>Truy cập: {{ entry.lastAccess }}s trước</span>
           </div>
         </div>
       </div>
@@ -80,36 +80,36 @@
 
     <div class="controls">
       <div class="control-group">
-        <label>操作</label>
+        <label>Thao tác</label>
         <button
           class="action-btn read"
           @click="readData"
         >
-          读取数据
+          Đọc dữ liệu
         </button>
         <button
           class="action-btn write"
           @click="writeData"
         >
-          写入新数据
+          Ghi dữ liệu mới
         </button>
       </div>
 
       <div class="control-group">
-        <label>自动模拟</label>
+        <label>Mô phỏng tự động</label>
         <button
           class="action-btn auto"
           :class="{ active: autoMode }"
           @click="toggleAuto"
         >
-          {{ autoMode ? '停止' : '开始' }}自动模拟
+          {{ autoMode ? 'Dừng' : 'Bắt đầu' }} mô phỏng tự động
         </button>
       </div>
     </div>
 
     <div class="timeline">
       <div class="timeline-title">
-        事件时间线
+        Dòng thời gian sự kiện
       </div>
       <div class="timeline-events">
         <div
@@ -132,19 +132,19 @@
     <div class="legend">
       <div class="legend-item">
         <span class="legend-color new" />
-        <span>新写入</span>
+        <span>Mới ghi</span>
       </div>
       <div class="legend-item">
         <span class="legend-color hit" />
-        <span>缓存命中</span>
+        <span>Cache hit</span>
       </div>
       <div class="legend-item">
         <span class="legend-color expiring" />
-        <span>即将过期</span>
+        <span>Sắp hết hạn</span>
       </div>
       <div class="legend-item">
         <span class="legend-color evicting" />
-        <span>淘汰中</span>
+        <span>Đang thải</span>
       </div>
     </div>
   </div>
@@ -197,7 +197,7 @@ const writeData = () => {
 
     const evicting = cacheEntries.value[lruIndex]
     evicting.status = 'evicting'
-    addEvent('eviction', '🗑️', `淘汰 ${evicting.key} (LRU)`)
+    addEvent('eviction', '🗑️', `Thải ${evicting.key} (LRU)`)
 
     setTimeout(() => {
       cacheEntries.value.splice(lruIndex, 1)
@@ -215,7 +215,7 @@ const writeData = () => {
   }
 
   cacheEntries.value.push(newEntry)
-  addEvent('write', '✨', `写入 ${newId}`)
+  addEvent('write', '✨', `Ghi ${newId}`)
 
   setTimeout(() => {
     newEntry.status = null
@@ -226,7 +226,7 @@ const writeData = () => {
 
 const readData = () => {
   if (cacheEntries.value.length === 0) {
-    addEvent('miss', '❌', '缓存为空，未命中')
+    addEvent('miss', '❌', 'Cache rỗng, miss')
     return
   }
 
@@ -239,7 +239,7 @@ const readData = () => {
   entry.ttl = Math.min(entry.ttl + 5, 30) // Refresh TTL on hit
   entry.ttlPercent = (entry.ttl / 30) * 100
 
-  addEvent('hit', '✅', `命中 ${entry.key} (第${entry.hits}次)`)
+  addEvent('hit', '✅', `Hit ${entry.key} (lần ${entry.hits})`)
 
   setTimeout(() => {
     entry.status = null
@@ -262,7 +262,7 @@ const startTTLDecay = (entry) => {
     }
 
     if (entry.ttl <= 0) {
-      addEvent('expiration', '⏰', `${entry.key} 过期`)
+      addEvent('expiration', '⏰', `${entry.key} hết hạn`)
       const idx = cacheEntries.value.indexOf(entry)
       if (idx !== -1) {
         cacheEntries.value.splice(idx, 1)

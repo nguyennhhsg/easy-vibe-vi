@@ -1,15 +1,15 @@
 <!--
   MultiLevelCacheDemo.vue
-  多级缓存架构演示 - 展示浏览器缓存、CDN、本地缓存、Redis、数据库的多级架构
+  Demo kiến trúc cache nhiều cấp - browser cache, CDN, cache cục bộ, Redis, database
 -->
 <template>
   <div class="multi-level-cache-demo">
     <div class="header">
       <div class="title">
-        多级缓存架构
+        Kiến trúc cache nhiều cấp
       </div>
       <div class="subtitle">
-        每一层都是上一层的"保护伞"
+        Mỗi lớp là "chiếc ô che" cho lớp trên
       </div>
     </div>
 
@@ -47,11 +47,11 @@
             <span
               v-if="level.status === 'hit'"
               class="status-badge hit"
-            >✅ 命中</span>
+            >✅ Hit</span>
             <span
               v-if="level.status === 'miss'"
               class="status-badge miss"
-            >❌ 未命中</span>
+            >❌ Miss</span>
           </div>
         </div>
         <div
@@ -65,31 +65,31 @@
 
     <div class="controls">
       <div class="control-group">
-        <label>请求数据</label>
+        <label>Yêu cầu dữ liệu</label>
         <button
           class="request-btn"
           :disabled="processing"
           @click="makeRequest"
         >
-          {{ processing ? '处理中...' : '发起请求' }}
+          {{ processing ? 'Đang xử lý...' : 'Gửi request' }}
         </button>
       </div>
 
       <div class="control-group">
-        <label>模拟场景</label>
+        <label>Tình huống mô phỏng</label>
         <select
           v-model="scenario"
           class="scenario-select"
           @change="onScenarioChange"
         >
           <option value="normal">
-            正常访问 (70% 命中率)
+            Truy cập bình thường (tỷ lệ hit 70%)
           </option>
           <option value="cold">
-            冷启动 (0% 命中率)
+            Khởi động lạnh (tỷ lệ hit 0%)
           </option>
           <option value="hot">
-            热点数据 (95% 命中率)
+            Dữ liệu hot (tỷ lệ hit 95%)
           </option>
         </select>
       </div>
@@ -100,7 +100,7 @@
       class="request-flow"
     >
       <div class="flow-title">
-        请求流程
+        Luồng request
       </div>
       <div class="flow-timeline">
         <div
@@ -126,7 +126,7 @@
     <div class="statistics">
       <div class="stat-card">
         <div class="stat-label">
-          总请求数
+          Tổng số request
         </div>
         <div class="stat-value">
           {{ stats.totalRequests }}
@@ -134,7 +134,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">
-          缓存命中
+          Cache hit
         </div>
         <div class="stat-value hit">
           {{ stats.cacheHits }}
@@ -142,7 +142,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">
-          命中率
+          Tỷ lệ hit
         </div>
         <div class="stat-value">
           {{ stats.hitRate }}%
@@ -150,7 +150,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">
-          平均响应时间
+          Thời gian phản hồi trung bình
         </div>
         <div class="stat-value">
           {{ stats.avgLatency }}ms
@@ -158,7 +158,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">
-          数据库访问
+          Truy cập database
         </div>
         <div class="stat-value db">
           {{ stats.dbAccess }}
@@ -168,7 +168,7 @@
 
     <div class="explanation">
       <div class="explanation-title">
-        多级缓存的优势
+        Lợi ích của cache nhiều cấp
       </div>
       <div class="explanation-grid">
         <div class="explanation-item">
@@ -176,9 +176,9 @@
             🛡️
           </div>
           <div class="item-text">
-            <strong>逐级过滤</strong>
+            <strong>Lọc theo từng cấp</strong>
             <br>
-            <span class="item-detail">每层过滤掉大部分请求，最终到达数据库的可能只有 1%</span>
+            <span class="item-detail">Mỗi lớp lọc ra phần lớn request, cuối cùng đến database có thể chỉ còn 1%</span>
           </div>
         </div>
         <div class="explanation-item">
@@ -186,9 +186,9 @@
             ⚡
           </div>
           <div class="item-text">
-            <strong>极速响应</strong>
+            <strong>Phản hồi cực nhanh</strong>
             <br>
-            <span class="item-detail">上层缓存命中时，响应时间从 50ms 降至 0-10ms</span>
+            <span class="item-detail">Khi hit cache lớp trên, thời gian phản hồi giảm từ 50ms xuống 0-10ms</span>
           </div>
         </div>
         <div class="explanation-item">
@@ -196,9 +196,9 @@
             💰
           </div>
           <div class="item-text">
-            <strong>降低成本</strong>
+            <strong>Giảm chi phí</strong>
             <br>
-            <span class="item-detail">减少昂贵的数据库查询，节省服务器资源</span>
+            <span class="item-detail">Giảm các truy vấn database tốn kém, tiết kiệm tài nguyên server</span>
           </div>
         </div>
       </div>
@@ -217,42 +217,42 @@ const requestHistory = ref([])
 const cacheLevels = ref([
   {
     layer: 1,
-    name: '浏览器缓存',
+    name: 'Browser cache',
     latency: '~0 ms',
     capacity: '~100 MB',
-    description: '静态资源（图片、CSS、JS）',
+    description: 'Tài nguyên tĩnh (ảnh, CSS, JS)',
     status: null
   },
   {
     layer: 2,
-    name: 'CDN 缓存',
+    name: 'CDN cache',
     latency: '~10 ms',
-    capacity: 'TB 级',
-    description: '边缘节点静态文件',
+    capacity: 'Cỡ TB',
+    description: 'File tĩnh ở edge node',
     status: null
   },
   {
     layer: 3,
-    name: '本地缓存',
+    name: 'Cache cục bộ',
     latency: '~1 ms',
     capacity: '~1 GB',
-    description: '进程内极热点数据',
+    description: 'Dữ liệu cực hot trong process',
     status: null
   },
   {
     layer: 4,
-    name: 'Redis 缓存',
+    name: 'Cache Redis',
     latency: '~5 ms',
     capacity: '~100 GB',
-    description: '分布式热点数据',
+    description: 'Dữ liệu hot phân tán',
     status: null
   },
   {
     layer: 5,
-    name: '数据库',
+    name: 'Database',
     latency: '~50 ms',
     capacity: 'TB ~ PB',
-    description: '持久化存储',
+    description: 'Lưu trữ bền vững',
     status: null
   }
 ])
@@ -318,7 +318,7 @@ const makeRequest = async () => {
       requestHistory.value.push({
         level: level.name,
         icon: '✅',
-        action: '缓存命中',
+        action: 'Cache hit',
         time: eventTime,
         type: 'hit'
       })
@@ -333,7 +333,7 @@ const makeRequest = async () => {
       requestHistory.value.push({
         level: level.name,
         icon: '🗄️',
-        action: '查询数据库',
+        action: 'Truy vấn database',
         time: eventTime,
         type: 'miss'
       })
@@ -347,7 +347,7 @@ const makeRequest = async () => {
       requestHistory.value.push({
         level: level.name,
         icon: '❌',
-        action: '未命中，继续',
+        action: 'Miss, đi tiếp',
         time: eventTime,
         type: 'miss'
       })

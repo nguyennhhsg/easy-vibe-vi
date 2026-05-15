@@ -1,77 +1,77 @@
 <template>
   <div class="protocol-workflow-demo">
     <div class="demo-header">
-      <span class="title">MCP + A2A 协作流程</span>
-      <span class="subtitle">两者如何配合完成复杂任务</span>
+      <span class="title">Quy trình phối hợp MCP + A2A</span>
+      <span class="subtitle">Hai protocol kết hợp để hoàn thành task phức tạp như thế nào</span>
     </div>
 
     <div class="intro-text">
-      想象你要<span class="highlight">装修房子</span>：你需要设计师（主 Agent）出方案，工人（专家 Agent）施工，还要从建材市场（工具）买材料。A2A 让设计师和工人能协作，MCP 让工人能买到材料。
+      Hãy tưởng tượng bạn cần <span class="highlight">sửa sang nhà cửa</span>: cần kiến trúc sư (agent chính) ra phương án, thợ thi công (agent chuyên môn) làm việc, và mua vật liệu từ cửa hàng (công cụ). A2A cho phép kiến trúc sư và thợ phối hợp, MCP cho phép thợ mua được vật liệu.
     </div>
 
     <div class="workflow-diagram">
       <div class="user-node">
-        <span class="node-label">用户</span>
+        <span class="node-label">User</span>
       </div>
       <div class="arrow">→</div>
       <div class="agent-node main">
-        <span class="node-label">主 Agent</span>
-        <span class="node-role">需求分析</span>
+        <span class="node-label">Agent chính</span>
+        <span class="node-role">Phân tích yêu cầu</span>
       </div>
       <div class="arrow">→</div>
       <div class="a2a-badge">
         <span class="badge-text">A2A</span>
       </div>
       <div class="agent-node expert">
-        <span class="node-label">专家 Agent</span>
-        <span class="node-role">执行任务</span>
+        <span class="node-label">Agent chuyên môn</span>
+        <span class="node-role">Thực thi task</span>
       </div>
       <div class="arrow">↔</div>
       <div class="mcp-badge">
         <span class="badge-text">MCP</span>
       </div>
       <div class="tool-node">
-        <span class="node-label">外部工具</span>
-        <span class="node-role">API/数据库</span>
+        <span class="node-label">Công cụ ngoài</span>
+        <span class="node-role">API/Database</span>
       </div>
     </div>
 
     <div class="flow-steps">
       <div class="flow-step">
         <span class="step-num">1</span>
-        <span class="step-text">用户向主 Agent 提出需求（如"分析这个 GitHub 仓库"）</span>
+        <span class="step-text">User đưa yêu cầu cho agent chính (ví dụ "phân tích repo GitHub này")</span>
       </div>
       <div class="flow-step">
         <span class="step-num">2</span>
-        <span class="step-text">主 Agent 通过 <strong>A2A</strong> 委托专家 Agent 执行任务</span>
+        <span class="step-text">Agent chính dùng <strong>A2A</strong> ủy thác task cho agent chuyên môn</span>
       </div>
       <div class="flow-step">
         <span class="step-num">3</span>
-        <span class="step-text">专家 Agent 通过 <strong>MCP</strong> 调用外部工具获取数据</span>
+        <span class="step-text">Agent chuyên môn dùng <strong>MCP</strong> gọi công cụ bên ngoài để lấy dữ liệu</span>
       </div>
       <div class="flow-step">
         <span class="step-num">4</span>
-        <span class="step-text">专家 Agent 通过 <strong>A2A</strong> 返回结果给主 Agent</span>
+        <span class="step-text">Agent chuyên môn dùng <strong>A2A</strong> trả kết quả về cho agent chính</span>
       </div>
       <div class="flow-step">
         <span class="step-num">5</span>
-        <span class="step-text">主 Agent 汇总结果，回复用户</span>
+        <span class="step-text">Agent chính tổng hợp và trả lời user</span>
       </div>
     </div>
 
     <div class="legend">
       <div class="legend-item">
         <span class="legend-dot a2a"></span>
-        <span class="legend-text"><strong>A2A</strong>：Agent ↔ Agent 通信</span>
+        <span class="legend-text"><strong>A2A</strong>: giao tiếp Agent ↔ Agent</span>
       </div>
       <div class="legend-item">
         <span class="legend-dot mcp"></span>
-        <span class="legend-text"><strong>MCP</strong>：Agent ↔ 工具 通信</span>
+        <span class="legend-text"><strong>MCP</strong>: giao tiếp Agent ↔ Công cụ</span>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>A2A 负责 Agent 之间的任务分配和协作，MCP 负责 Agent 与外部工具的交互，两者各司其职，互补协作。
+      <strong>Ý tưởng cốt lõi:</strong> A2A lo phân công và phối hợp giữa các agent, MCP lo tương tác giữa agent và công cụ bên ngoài; hai protocol đảm nhận vai trò riêng và bổ trợ cho nhau.
     </div>
   </div>
 </template>

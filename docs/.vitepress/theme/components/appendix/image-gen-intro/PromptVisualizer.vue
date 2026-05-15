@@ -15,7 +15,7 @@
         >
           {{ token.text }}
           <div class="tooltip">
-            关注度: {{ (token.weight * 100).toFixed(0) }}%
+            Mức chú ý: {{ (token.weight * 100).toFixed(0) }}%
           </div>
         </div>
       </div>
@@ -50,8 +50,8 @@
     <div class="info-bar">
       <span class="icon">💡</span>
       <span>
-        <strong>交叉注意力 (Cross-Attention)：</strong>
-        AI 在画画时，每画一笔都会回头看一眼 Prompt。当它画背景时，"city" 单词会亮起来；当它画主角时，"cat" 单词会亮起来。
+        <strong>Cross-Attention (Chú ý chéo):</strong>
+        Khi AI vẽ, mỗi nét vẽ nó đều ngoảnh lại nhìn Prompt. Khi vẽ nền, từ "city" sẽ sáng lên; khi vẽ nhân vật chính, từ "cat" sẽ sáng lên.
       </span>
     </div>
   </div>

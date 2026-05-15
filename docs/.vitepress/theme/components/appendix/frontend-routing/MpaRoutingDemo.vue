@@ -3,48 +3,48 @@
     <div class="demo-header">
       <span class="icon">🔄</span>
       <span class="title">MPA vs SPA</span>
-      <span class="subtitle">多页面 vs 单页面导航</span>
+      <span class="subtitle">Đa trang vs Đơn trang</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">餐厅吃饭</span>：MPA像是每次点菜都<span class="highlight">换一家餐厅</span>（重新加载整个页面），SPA则是在同一家餐厅换菜品（只更新需要变化的部分）。显然，SPA体验更流畅！
+      Hãy hình dung bạn đang <span class="highlight">ăn nhà hàng</span>: MPA giống như mỗi lần gọi món lại <span class="highlight">đổi sang nhà hàng khác</span> (tải lại toàn trang), còn SPA thì giống như đổi món trong cùng một nhà hàng (chỉ cập nhật phần cần thay đổi). Rõ ràng SPA cho trải nghiệm mượt mà hơn!
     </div>
 
     <div class="comparison-container">
       <div class="mode-box mpa">
         <div class="mode-header">
           <span class="mode-icon">🏢</span>
-          <span class="mode-title">MPA (多页面应用)</span>
+          <span class="mode-title">MPA (Multi-Page App)</span>
         </div>
         <div class="flow-steps">
           <div class="step">
-            1. 用户点击链接
+            1. Người dùng nhấp vào link
           </div>
           <div class="step">
-            2. 浏览器发送 HTTP 请求
+            2. Trình duyệt gửi HTTP request
           </div>
           <div class="step">
-            3. 服务器返回完整 HTML
+            3. Máy chủ trả về HTML đầy đủ
           </div>
           <div class="step">
-            4. 浏览器解析并渲染新页面
+            4. Trình duyệt phân tích và render trang mới
           </div>
           <div class="step">
-            5. 页面资源重新加载 (JS/CSS)
+            5. Tài nguyên trang tải lại (JS/CSS)
           </div>
         </div>
         <div class="mode-features">
           <div class="feature">
             <span class="feature-icon">✓</span>
-            <span>SEO 友好</span>
+            <span>Thân thiện SEO</span>
           </div>
           <div class="feature">
             <span class="feature-icon">✓</span>
-            <span>首屏快</span>
+            <span>First paint nhanh</span>
           </div>
           <div class="feature bad">
             <span class="feature-icon">✗</span>
-            <span>页面有白屏</span>
+            <span>Có nháy trắng trang</span>
           </div>
         </div>
       </div>
@@ -52,40 +52,40 @@
       <div class="mode-box spa">
         <div class="mode-header">
           <span class="mode-icon">⚡</span>
-          <span class="mode-title">SPA (单页面应用)</span>
+          <span class="mode-title">SPA (Single Page App)</span>
         </div>
         <div class="flow-steps">
           <div class="step">
-            1. 用户点击链接
+            1. Người dùng nhấp vào link
           </div>
           <div class="step">
-            2. 拦截默认行为
+            2. Chặn hành vi mặc định
           </div>
           <div class="step">
-            3. 更新 URL (History API)
+            3. Cập nhật URL (History API)
           </div>
           <div class="step">
-            4. 匹配路由配置
+            4. Khớp cấu hình routing
           </div>
           <div class="step">
-            5. 动态渲染新组件
+            5. Render component mới động
           </div>
           <div class="step">
-            6. 页面无刷新更新
+            6. Trang cập nhật không cần refresh
           </div>
         </div>
         <div class="mode-features">
           <div class="feature">
             <span class="feature-icon">✓</span>
-            <span>过渡流畅</span>
+            <span>Chuyển trang mượt</span>
           </div>
           <div class="feature">
             <span class="feature-icon">✓</span>
-            <span>体验好</span>
+            <span>Trải nghiệm tốt</span>
           </div>
           <div class="feature bad">
             <span class="feature-icon">✗</span>
-            <span>需要 SSR 支持 SEO</span>
+            <span>Cần SSR để hỗ trợ SEO</span>
           </div>
         </div>
       </div>
@@ -93,18 +93,18 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心区别：</strong>MPA每次跳转都要重新下载整个页面，SPA只在首次加载时下载，后续只更新变化的内容。这就是为什么SPA感觉"更快"的原因。
+      <strong>Khác biệt cốt lõi:</strong> MPA mỗi lần điều hướng đều phải tải lại toàn trang, SPA chỉ tải lúc đầu, sau đó chỉ cập nhật phần thay đổi. Đó là lý do SPA cho cảm giác "nhanh hơn".
     </div>
   </div>
 </template>
 
 <script setup>
 const comparisonData = [
-  { feature: '页面加载', mpa: '每次跳转加载完整页面', spa: '首次加载后只更新内容' },
-  { feature: 'URL 变化', mpa: '浏览器地址栏正常变化', spa: 'History API 控制 URL' },
-  { feature: '用户体验', mpa: '页面有白屏闪烁', spa: '过渡流畅无刷新' },
-  { feature: 'SEO 友好', mpa: '天生对搜索引擎友好', spa: '需要 SSR/预渲染优化' },
-  { feature: '首屏时间', mpa: '较快（只加载当前页）', spa: '较慢（需加载完整应用）' }
+  { feature: 'Tải trang', mpa: 'Mỗi lần điều hướng tải toàn trang', spa: 'Sau lần tải đầu chỉ cập nhật nội dung' },
+  { feature: 'URL thay đổi', mpa: 'Thanh địa chỉ trình duyệt thay đổi như bình thường', spa: 'History API điều khiển URL' },
+  { feature: 'Trải nghiệm người dùng', mpa: 'Có nháy trắng trang', spa: 'Chuyển mượt, không refresh' },
+  { feature: 'Thân thiện SEO', mpa: 'Tự nhiên thân thiện với công cụ tìm kiếm', spa: 'Cần SSR/prerender để tối ưu' },
+  { feature: 'Thời gian màn hình đầu', mpa: 'Nhanh (chỉ tải trang hiện tại)', spa: 'Chậm hơn (tải toàn bộ app)' }
 ]
 </script>
 

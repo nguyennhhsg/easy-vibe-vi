@@ -1,15 +1,15 @@
 <!--
   TerminalGrid.vue
-  终端网格模型演示组件
-  
-  用途：
-  展示终端屏幕本质上是由“字符网格”构成的。
-  帮助用户理解终端不是像素画板，而是由一个个固定大小的单元格（Cell）组成的矩阵。
-  
-  交互功能：
-  - 点击/拖拽：可以在网格上“画”出字符。
-  - 键盘输入：可以直接在网格中打字，观察光标移动和字符填充。
-  - 响应式布局：支持横向滚动，适应不同屏幕宽度。
+  Component demo mô hình lưới của terminal
+
+  Mục đích:
+  Cho thấy màn hình terminal về bản chất là cấu thành từ "lưới ký tự".
+  Giúp bạn hiểu terminal không phải bảng vẽ pixel, mà là ma trận các ô (Cell) có kích thước cố định.
+
+  Tính năng tương tác:
+  - Nhấp/kéo: Có thể "vẽ" ký tự lên lưới.
+  - Bàn phím: Có thể gõ trực tiếp vào lưới, quan sát con trỏ di chuyển và ký tự được lấp vào.
+  - Bố cục responsive: Hỗ trợ cuộn ngang, thích nghi với độ rộng màn hình khác nhau.
 -->
 <template>
   <div class="grid-demo">
@@ -156,7 +156,7 @@ onBeforeUnmount(() => {
   border-radius: 12px;
   border: 1px solid #27272a;
   font-family: 'JetBrains Mono', 'Menlo', 'Monaco', monospace;
-  overflow: hidden; /* 防止内容溢出圆角 */
+  overflow: hidden; /* Tránh nội dung tràn ra ngoài góc bo */
 }
 
 .terminal-screen {
@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
   background: #000;
   cursor: text;
   display: block;
-  overflow-x: auto; /* 允许横向滚动 */
+  overflow-x: auto; /* Cho phép cuộn ngang */
   max-width: 100%;
   border-radius: 6px;
   scrollbar-width: thin; /* Firefox */
@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
 
 .grid-row {
   display: flex;
-  width: max-content; /* 确保内容撑开宽度 */
+  width: max-content; /* Đảm bảo nội dung mở rộng đủ độ rộng */
 }
 
 .grid-cell {

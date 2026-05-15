@@ -4,7 +4,7 @@
       <!-- Step 1: Patch -->
       <div class="step-box">
         <div class="label">
-          1. Patch (16×16×3) (示意 / Toy)
+          1. Patch (16×16×3) (minh họa / Toy)
         </div>
         <div class="grid-patch">
           <div
@@ -15,7 +15,7 @@
           />
         </div>
         <div class="desc">
-          16×16 像素 × 3 通道 = 768 标量值
+          16×16 pixel × 3 channel = 768 giá trị scalar
         </div>
       </div>
 
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="desc">
-          得到 1×768 向量 (Vector)
+          Cho ra vector 1×768
         </div>
       </div>
 
@@ -61,7 +61,7 @@
           />
         </div>
         <div class="desc">
-          映射到 D 维 (示意 D=8；常见 D=768)
+          Ánh xạ sang D chiều (ở đây D=8 minh họa, thực tế thường D=768)
         </div>
       </div>
     </div>

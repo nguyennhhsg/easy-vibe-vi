@@ -10,13 +10,13 @@
         type="info"
         :closable="false"
       >
-        缓存策略演示组件占位符 - 待实现具体交互
+        Placeholder demo chính sách cache - chờ triển khai chi tiết tương tác
       </el-alert>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>缓存策略平衡命中率和新鲜度，TTL 设置太短会导致频繁回源，太长会导致内容过期。
+      <strong>Ý tưởng cốt lõi:</strong> Chính sách cache cân bằng hit rate và độ tươi của dữ liệu. TTL quá ngắn sẽ gây frequent origin fetch, quá dài thì nội dung bị cũ.
     </div>
   </div>
 </template>
@@ -24,8 +24,8 @@
 <script setup>
 import { ref } from 'vue'
 
-const title = ref('缓存策略演示')
-const description = ref('展示CDN和对象存储的缓存策略配置，包括缓存时间、刷新机制等')
+const title = ref('Demo chính sách cache')
+const description = ref('Hiển thị cấu hình chính sách cache cho CDN và object storage: thời gian cache, cơ chế refresh...')
 </script>
 
 <style scoped>

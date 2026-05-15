@@ -2,8 +2,8 @@
   <div class="iam-structure">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">IAM 五大核心概念</span>
-      <span class="subtitle">云上权限管理的基础构件</span>
+      <span class="title">5 khái niệm cốt lõi của IAM</span>
+      <span class="subtitle">Khối nền tảng quản lý quyền trên cloud</span>
     </div>
 
     <div class="main-area">
@@ -30,7 +30,7 @@
           {{ selectedLayerData.description }}
         </div>
         <div class="detail-examples">
-          <span class="example-label">示例：</span>
+          <span class="example-label">Ví dụ:</span>
           <span
             v-for="(example, i) in selectedLayerData.examples.slice(0, 2)"
             :key="i"
@@ -42,7 +42,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>IAM 就像公司的门禁系统——根账号是老板，用户是员工，角色是临时访客证，策略是"谁能进哪些门"的规则。
+      <strong>Ý tưởng cốt lõi:</strong> IAM giống hệ thống kiểm soát ra vào của công ty — tài khoản root là sếp, user là nhân viên, role là thẻ khách tạm thời, còn policy là quy tắc "ai được vào cửa nào".
     </div>
   </div>
 </template>
@@ -55,38 +55,38 @@ const selectedLayer = ref(0)
 const layers = [
   {
     icon: '👑',
-    name: '根账号',
-    shortDesc: '最高权限',
-    description: '云账号的所有者，拥有全部资源的完全控制权限。建议仅用于初始设置。',
-    examples: ['创建/删除 IAM 用户', '管理账单和支付方式']
+    name: 'Tài khoản root',
+    shortDesc: 'Quyền cao nhất',
+    description: 'Chủ sở hữu tài khoản cloud, nắm toàn quyền với mọi tài nguyên. Khuyến nghị chỉ dùng cho cấu hình ban đầu.',
+    examples: ['Tạo/xóa IAM user', 'Quản lý billing và payment']
   },
   {
     icon: '👤',
-    name: 'IAM 用户',
-    shortDesc: '个人身份',
-    description: '为具体人员创建的长期凭证，用于日常登录和操作云服务。',
-    examples: ['开发人员账号', '运维人员账号']
+    name: 'IAM user',
+    shortDesc: 'Danh tính cá nhân',
+    description: 'Credential dài hạn được tạo cho từng người, dùng để đăng nhập và thao tác cloud hằng ngày.',
+    examples: ['Tài khoản dev', 'Tài khoản ops']
   },
   {
     icon: '👥',
-    name: '用户组',
-    shortDesc: '批量管理',
-    description: '将多个用户归为一组，统一分配权限，简化管理。',
-    examples: ['开发组', '运维组']
+    name: 'User group',
+    shortDesc: 'Quản lý theo nhóm',
+    description: 'Gom nhiều user vào một nhóm, cấp quyền đồng nhất, đơn giản hóa quản lý.',
+    examples: ['Nhóm dev', 'Nhóm ops']
   },
   {
     icon: '🎭',
-    name: '角色',
-    shortDesc: '临时授权',
-    description: '一种临时身份，可以被切换或赋予其他账号/服务，具有时效性更安全。',
-    examples: ['跨账号访问角色', '服务角色']
+    name: 'Role',
+    shortDesc: 'Cấp quyền tạm thời',
+    description: 'Một danh tính tạm thời có thể switch sang hoặc gán cho tài khoản/dịch vụ khác, có thời hạn nên an toàn hơn.',
+    examples: ['Cross-account role', 'Service role']
   },
   {
     icon: '📋',
-    name: '策略',
-    shortDesc: '权限规则',
-    description: '定义"谁可以对什么资源执行什么操作"的规则文档，以 JSON 格式编写。',
-    examples: ['允许访问 S3', '禁止删除 EC2']
+    name: 'Policy',
+    shortDesc: 'Quy tắc quyền',
+    description: 'Tài liệu quy tắc định nghĩa "ai có thể thao tác gì trên tài nguyên nào", viết bằng định dạng JSON.',
+    examples: ['Cho phép truy cập S3', 'Cấm xóa EC2']
   }
 ]
 

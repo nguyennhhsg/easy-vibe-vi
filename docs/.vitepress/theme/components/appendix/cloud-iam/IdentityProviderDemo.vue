@@ -2,8 +2,8 @@
   <div class="identity-provider-demo">
     <div class="demo-header">
       <span class="icon">🔐</span>
-      <span class="title">身份提供商集成</span>
-      <span class="subtitle">企业 SSO 单点登录流程</span>
+      <span class="title">Tích hợp Identity Provider</span>
+      <span class="subtitle">Luồng SSO của doanh nghiệp</span>
     </div>
 
     <div class="flow-steps">
@@ -38,7 +38,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>通过企业 IdP 统一管理用户身份，避免在每个云平台单独创建账号。
+      <strong>Ý tưởng cốt lõi:</strong> Quản lý danh tính user tập trung qua IdP doanh nghiệp, tránh phải tạo account riêng trên từng nền tảng cloud.
     </div>
   </div>
 </template>
@@ -49,23 +49,23 @@ import { ref, computed } from 'vue'
 const currentStep = ref(0)
 
 const steps = [
-  { title: '访问应用' },
-  { title: '重定向 IdP' },
-  { title: '用户登录' },
-  { title: '颁发令牌' },
-  { title: '返回应用' },
-  { title: '换取凭证' },
-  { title: '访问资源' }
+  { title: 'Truy cập ứng dụng' },
+  { title: 'Redirect IdP' },
+  { title: 'User login' },
+  { title: 'Cấp token' },
+  { title: 'Quay lại ứng dụng' },
+  { title: 'Đổi credential' },
+  { title: 'Truy cập tài nguyên' }
 ]
 
 const stepDetails = [
-  { title: '用户访问企业应用', detail: '用户打开浏览器访问企业业务系统，应用检测到用户没有有效会话。', flow: [{ from: { name: '用户' }, action: '访问 →', to: { name: '企业应用' } }] },
-  { title: '应用重定向到 IdP', detail: '应用生成 SAML Request，将用户重定向到企业身份提供商。', flow: [{ from: { name: '应用' }, action: '重定向 →', to: { name: 'IdP' } }] },
-  { title: '用户在 IdP 登录', detail: '用户在 IdP 登录页面输入企业账号密码，可能需要 MFA 认证。', flow: [{ from: { name: '用户' }, action: '登录 →', to: { name: 'IdP' } }] },
-  { title: 'IdP 颁发 SAML 令牌', detail: '用户认证成功后，IdP 生成包含用户身份的 SAML Assertion。', flow: [{ from: { name: 'IdP' }, action: '颁发 →', to: { name: '令牌' } }] },
-  { title: '返回企业应用', detail: 'IdP 通过浏览器将 SAML Response POST 到企业应用。', flow: [{ from: { name: '浏览器' }, action: 'POST →', to: { name: '应用' } }] },
-  { title: '换取云临时凭证', detail: '应用使用 SAML 向云 STS 服务请求临时安全凭证。', flow: [{ from: { name: '应用' }, action: 'AssumeRole →', to: { name: '云 STS' } }] },
-  { title: '访问云资源', detail: '应用使用临时凭证调用云服务 API 访问资源。', flow: [{ from: { name: '应用' }, action: '访问 →', to: { name: '云服务' } }] }
+  { title: 'User truy cập ứng dụng doanh nghiệp', detail: 'User mở trình duyệt truy cập hệ thống business, ứng dụng phát hiện user không có session hợp lệ.', flow: [{ from: { name: 'User' }, action: 'truy cập →', to: { name: 'Ứng dụng' } }] },
+  { title: 'Ứng dụng redirect đến IdP', detail: 'Ứng dụng tạo SAML Request, chuyển hướng user đến Identity Provider doanh nghiệp.', flow: [{ from: { name: 'Ứng dụng' }, action: 'redirect →', to: { name: 'IdP' } }] },
+  { title: 'User đăng nhập tại IdP', detail: 'User nhập tài khoản doanh nghiệp tại trang login của IdP, có thể yêu cầu MFA.', flow: [{ from: { name: 'User' }, action: 'login →', to: { name: 'IdP' } }] },
+  { title: 'IdP cấp token SAML', detail: 'Sau khi xác thực thành công, IdP tạo SAML Assertion chứa thông tin danh tính user.', flow: [{ from: { name: 'IdP' }, action: 'cấp →', to: { name: 'Token' } }] },
+  { title: 'Quay lại ứng dụng doanh nghiệp', detail: 'IdP gửi POST SAML Response qua trình duyệt về ứng dụng doanh nghiệp.', flow: [{ from: { name: 'Trình duyệt' }, action: 'POST →', to: { name: 'Ứng dụng' } }] },
+  { title: 'Đổi lấy credential tạm thời', detail: 'Ứng dụng dùng SAML để gọi STS của cloud xin credential bảo mật tạm thời.', flow: [{ from: { name: 'Ứng dụng' }, action: 'AssumeRole →', to: { name: 'Cloud STS' } }] },
+  { title: 'Truy cập tài nguyên cloud', detail: 'Ứng dụng dùng credential tạm thời gọi API cloud để truy cập tài nguyên.', flow: [{ from: { name: 'Ứng dụng' }, action: 'truy cập →', to: { name: 'Cloud service' } }] }
 ]
 
 const currentStepData = computed(() => stepDetails[currentStep.value])

@@ -1,12 +1,12 @@
 <template>
   <div class="est-demo">
     <div class="demo-header">
-      <span class="title">编码、存储与传输的协作</span>
-      <span class="subtitle">三大系统如何协同处理数据</span>
+      <span class="title">Phối hợp giữa mã hóa, lưu trữ và truyền dữ liệu</span>
+      <span class="subtitle">Ba hệ thống lớn xử lý dữ liệu cùng nhau như thế nào</span>
     </div>
 
     <div class="scenario-selector">
-      <div class="selector-label">选择场景：</div>
+      <div class="selector-label">Chọn tình huống:</div>
       <div class="scenario-buttons">
         <button
           v-for="scenario in scenarios"
@@ -21,20 +21,20 @@
 
     <div class="collab-diagram">
       <div class="diagram-flow">
-        <!-- 编码阶段 -->
+        <!-- Giai đoạn mã hóa -->
         <div class="flow-stage encoding-stage">
           <div class="stage-header">
             <span class="stage-icon">🔤</span>
-            <span class="stage-title">编码</span>
+            <span class="stage-title">Mã hóa</span>
           </div>
           <div class="stage-content">
             <div class="input-box">
-              <div class="box-label">原始数据</div>
+              <div class="box-label">Dữ liệu gốc</div>
               <div class="box-value">{{ currentScenario.encoding.input }}</div>
             </div>
             <div class="arrow">↓</div>
             <div class="output-box">
-              <div class="box-label">编码后</div>
+              <div class="box-label">Sau mã hóa</div>
               <div class="box-value code">
                 {{ currentScenario.encoding.output }}
               </div>
@@ -42,11 +42,11 @@
           </div>
         </div>
 
-        <!-- 存储阶段 -->
+        <!-- Giai đoạn lưu trữ -->
         <div class="flow-stage storage-stage">
           <div class="stage-header">
             <span class="stage-icon">💾</span>
-            <span class="stage-title">存储</span>
+            <span class="stage-title">Lưu trữ</span>
           </div>
           <div class="stage-content">
             <div class="storage-visual">
@@ -63,13 +63,13 @@
             </div>
             <div class="storage-info">
               <div class="info-item">
-                <span class="info-label">位置:</span>
+                <span class="info-label">Vị trí:</span>
                 <span class="info-value">{{
                   currentScenario.storage.location
                 }}</span>
               </div>
               <div class="info-item">
-                <span class="info-label">大小:</span>
+                <span class="info-label">Kích thước:</span>
                 <span class="info-value">{{
                   currentScenario.storage.size
                 }}</span>
@@ -78,16 +78,16 @@
           </div>
         </div>
 
-        <!-- 传输阶段 -->
+        <!-- Giai đoạn truyền -->
         <div class="flow-stage transmission-stage">
           <div class="stage-header">
             <span class="stage-icon">📡</span>
-            <span class="stage-title">传输</span>
+            <span class="stage-title">Truyền</span>
           </div>
           <div class="stage-content">
             <div class="transmission-flow">
               <div class="transmission-packet">
-                <div class="packet-header">数据包</div>
+                <div class="packet-header">Gói dữ liệu</div>
                 <div class="packet-body">
                   <div
                     v-for="(layer, index) in currentScenario.transmission
@@ -103,13 +103,13 @@
             </div>
             <div class="transmission-info">
               <div class="info-item">
-                <span class="info-label">协议:</span>
+                <span class="info-label">Giao thức:</span>
                 <span class="info-value">{{
                   currentScenario.transmission.protocol
                 }}</span>
               </div>
               <div class="info-item">
-                <span class="info-label">路径:</span>
+                <span class="info-label">Đường đi:</span>
                 <span class="info-value">{{
                   currentScenario.transmission.path
                 }}</span>
@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <!-- 协作关系 -->
+      <!-- Quan hệ phối hợp -->
       <div class="collab-relationships">
         <div class="relationship-arrow encoding-to-storage">
           <span class="arrow-text">{{
@@ -136,9 +136,9 @@
       </div>
     </div>
 
-    <!-- 关键要点 -->
+    <!-- Điểm cốt lõi -->
     <div class="key-points">
-      <div class="points-title">协作要点</div>
+      <div class="points-title">Điểm cốt lõi khi phối hợp</div>
       <div class="points-grid">
         <div
           v-for="(point, index) in currentScenario.points"
@@ -164,22 +164,22 @@ const activeScenario = ref('text-file')
 const scenarios = [
   {
     id: 'text-file',
-    name: '保存文本文件',
+    name: 'Lưu file văn bản',
     icon: '📝'
   },
   {
     id: 'upload-image',
-    name: '上传图片',
+    name: 'Upload ảnh',
     icon: '🖼️'
   },
   {
     id: 'stream-video',
-    name: '流媒体播放',
+    name: 'Streaming video',
     icon: '🎬'
   },
   {
     id: 'send-message',
-    name: '发送消息',
+    name: 'Gửi tin nhắn',
     icon: '💬'
   }
 ]
@@ -187,165 +187,165 @@ const scenarios = [
 const scenarioData = {
   'text-file': {
     encoding: {
-      input: '你好',
-      output: 'U+4F60 U+597D'
+      input: 'Xin chào',
+      output: 'U+0058 U+0069 U+006E ...'
     },
     storage: {
-      location: '文档文件夹 /hello.txt',
-      size: '6 字节 (UTF-8)',
-      blocks: ['E4', 'BD', 'A0', 'E5', 'A5', 'BD']
+      location: 'Thư mục Documents /hello.txt',
+      size: '10 byte (UTF-8)',
+      blocks: ['58', '69', '6E', '20', '63', '68', 'C3', 'A0', '6F']
     },
     transmission: {
       protocol: 'HTTP + TCP/IP',
-      path: '客户端 → 服务器 → 云存储',
+      path: 'Client → Server → Cloud storage',
       layers: [
-        { name: '应用层', value: 'HTTP POST' },
-        { name: '传输层', value: 'TCP 端口 443' },
-        { name: '网络层', value: 'IP 数据包' }
+        { name: 'Tầng ứng dụng', value: 'HTTP POST' },
+        { name: 'Tầng giao vận', value: 'TCP port 443' },
+        { name: 'Tầng mạng', value: 'Gói IP' }
       ]
     },
     relationships: {
-      encodingToStorage: 'UTF-8 编码后的字节序列写入磁盘',
-      storageToTransmission: '读取文件并通过网络发送'
+      encodingToStorage: 'Chuỗi byte UTF-8 được ghi xuống đĩa',
+      storageToTransmission: 'Đọc file rồi gửi qua mạng'
     },
     points: [
       {
         icon: '🔤',
-        title: '编码统一',
-        desc: '使用 UTF-8 编码确保中文字符正确存储和传输'
+        title: 'Thống nhất mã hóa',
+        desc: 'Dùng UTF-8 để đảm bảo ký tự được lưu và truyền đúng'
       },
       {
         icon: '📦',
-        title: '文件封装',
-        desc: '文本内容被封装成 .txt 文件格式存储'
+        title: 'Đóng gói file',
+        desc: 'Nội dung văn bản được gói vào file .txt để lưu'
       },
       {
         icon: '🔄',
-        title: '协议转换',
-        desc: '存储时用文件系统协议，传输时用 HTTP 协议'
+        title: 'Chuyển đổi giao thức',
+        desc: 'Khi lưu dùng giao thức file system, khi truyền dùng HTTP'
       }
     ]
   },
   'upload-image': {
     encoding: {
-      input: '图片数据',
-      output: 'JPEG 压缩编码'
+      input: 'Dữ liệu ảnh',
+      output: 'Mã hóa nén JPEG'
     },
     storage: {
-      location: '相册 /photo.jpg',
+      location: 'Album /photo.jpg',
       size: '2.5 MB',
       blocks: ['FF', 'D8', 'FF', 'E0', '...', 'FF', 'D9']
     },
     transmission: {
       protocol: 'HTTPS + MIME multipart',
-      path: '手机 → API 网关 → 对象存储',
+      path: 'Điện thoại → API Gateway → Object storage',
       layers: [
-        { name: '应用层', value: 'HTTPS POST' },
-        { name: '传输层', value: 'TLS 加密' },
-        { name: '网络层', value: 'IP 分片' }
+        { name: 'Tầng ứng dụng', value: 'HTTPS POST' },
+        { name: 'Tầng giao vận', value: 'Mã hóa TLS' },
+        { name: 'Tầng mạng', value: 'Phân mảnh IP' }
       ]
     },
     relationships: {
-      encodingToStorage: 'JPEG 压缩编码减少文件大小',
-      storageToTransmission: '二进制数据分块上传'
+      encodingToStorage: 'Mã hóa nén JPEG giảm kích thước file',
+      storageToTransmission: 'Tải dữ liệu nhị phân theo từng khối'
     },
     points: [
       {
         icon: '🗜️',
-        title: '压缩编码',
-        desc: 'JPEG 压缩算法减少图片体积，节省存储空间'
+        title: 'Mã hóa nén',
+        desc: 'Thuật toán nén JPEG giảm dung lượng ảnh, tiết kiệm bộ nhớ'
       },
       {
         icon: '🔐',
-        title: '安全传输',
-        desc: 'HTTPS 加密保护图片数据在网络传输中的安全'
+        title: 'Truyền an toàn',
+        desc: 'HTTPS mã hóa bảo vệ dữ liệu ảnh khi truyền qua mạng'
       },
       {
         icon: '⚡',
-        title: '分块上传',
-        desc: '大文件分块传输，支持断点续传'
+        title: 'Upload theo khối',
+        desc: 'File lớn chia khối để truyền, hỗ trợ tiếp tục khi đứt'
       }
     ]
   },
   'stream-video': {
     encoding: {
-      input: '视频流',
-      output: 'H.264 编码'
+      input: 'Luồng video',
+      output: 'Mã hóa H.264'
     },
     storage: {
-      location: 'CDN 缓存节点',
-      size: '动态调整',
-      blocks: ['帧1', '帧2', '帧3', '...']
+      location: 'Node cache CDN',
+      size: 'Tự điều chỉnh',
+      blocks: ['Frame 1', 'Frame 2', 'Frame 3', '...']
     },
     transmission: {
       protocol: 'HLS + DASH',
-      path: '服务器 → CDN → 用户设备',
+      path: 'Server → CDN → Thiết bị người dùng',
       layers: [
-        { name: '应用层', value: 'HLS 播放列表' },
-        { name: '传输层', value: 'TCP 流式' },
-        { name: '网络层', value: 'UDP 可能' }
+        { name: 'Tầng ứng dụng', value: 'Danh sách HLS' },
+        { name: 'Tầng giao vận', value: 'TCP streaming' },
+        { name: 'Tầng mạng', value: 'Có thể dùng UDP' }
       ]
     },
     relationships: {
-      encodingToStorage: '视频分段存储在 CDN',
-      storageToTransmission: '根据网络状况自适应码率'
+      encodingToStorage: 'Video chia đoạn lưu trên CDN',
+      storageToTransmission: 'Điều chỉnh bitrate thích ứng theo mạng'
     },
     points: [
       {
         icon: '🎬',
-        title: '流式编码',
-        desc: 'H.264 视频编码压缩，适合网络传输'
+        title: 'Mã hóa streaming',
+        desc: 'H.264 nén video, phù hợp truyền qua mạng'
       },
       {
         icon: '🌐',
-        title: 'CDN 加速',
-        desc: '内容分发网络缓存视频，就近提供服务'
+        title: 'Tăng tốc CDN',
+        desc: 'Mạng phân phối nội dung cache video, phục vụ từ vị trí gần'
       },
       {
         icon: '📊',
-        title: '自适应码率',
-        desc: '根据网络状况动态调整视频质量'
+        title: 'Bitrate thích ứng',
+        desc: 'Tự động chỉnh chất lượng video theo tình trạng mạng'
       }
     ]
   },
   'send-message': {
     encoding: {
-      input: '消息内容',
-      output: 'JSON 格式'
+      input: 'Nội dung tin nhắn',
+      output: 'Định dạng JSON'
     },
     storage: {
-      location: '本地数据库 + 服务器',
-      size: '约 200 字节',
-      blocks: ['JSON格式']
+      location: 'CSDL local + Server',
+      size: 'Khoảng 200 byte',
+      blocks: ['JSON']
     },
     transmission: {
       protocol: 'WebSocket',
-      path: '发送方 → 即时通讯服务器 → 接收方',
+      path: 'Bên gửi → Server chat → Bên nhận',
       layers: [
-        { name: '应用层', value: 'WebSocket 帧' },
-        { name: '传输层', value: 'TCP 长连接' },
-        { name: '网络层', value: 'IP 路由' }
+        { name: 'Tầng ứng dụng', value: 'WebSocket frame' },
+        { name: 'Tầng giao vận', value: 'TCP kết nối liên tục' },
+        { name: 'Tầng mạng', value: 'Định tuyến IP' }
       ]
     },
     relationships: {
-      encodingToStorage: 'JSON 格式便于解析和存储',
-      storageToTransmission: 'WebSocket 保持实时连接'
+      encodingToStorage: 'Định dạng JSON tiện cho parse và lưu trữ',
+      storageToTransmission: 'WebSocket duy trì kết nối realtime'
     },
     points: [
       {
         icon: '📨',
-        title: '实时推送',
-        desc: 'WebSocket 长连接实现消息即时送达'
+        title: 'Push realtime',
+        desc: 'Kết nối WebSocket liên tục giúp tin nhắn tới ngay lập tức'
       },
       {
         icon: '💾',
-        title: '双重存储',
-        desc: '本地存储离线消息，服务器存储历史记录'
+        title: 'Lưu kép',
+        desc: 'Local lưu tin offline, server lưu lịch sử'
       },
       {
         icon: '🔗',
-        title: 'JSON 编码',
-        desc: '结构化数据格式，易于解析和扩展'
+        title: 'Mã hóa JSON',
+        desc: 'Định dạng có cấu trúc, dễ parse và mở rộng'
       }
     ]
   }

@@ -1,21 +1,21 @@
 <!--
   CdnAccelerationDemo.vue
-  CDN 加速原理演示 - 展示边缘节点、源站、回源等概念
+  Demo nguyên lý tăng tốc CDN - minh họa khái niệm edge node, origin và origin fetch
 -->
 <template>
   <div class="cdn-acceleration-demo">
     <div class="demo-header">
       <span class="icon">🌐</span>
-      <span class="title">CDN 加速原理</span>
-      <span class="subtitle">边缘节点、源站与回源的协同工作</span>
+      <span class="title">Nguyên lý tăng tốc CDN</span>
+      <span class="subtitle">Edge node, origin và origin fetch phối hợp với nhau</span>
     </div>
 
     <div class="cdn-architecture">
-      <!-- 用户层 -->
+      <!-- User layer -->
       <div class="layer users-layer">
         <div class="layer-title">
           <span class="icon">👥</span>
-          <span>全球用户</span>
+          <span>User toàn cầu</span>
         </div>
         <div class="users-map">
           <div
@@ -34,7 +34,7 @@
             </div>
           </div>
 
-          <!-- 请求动画线 -->
+          <!-- Đường animation request -->
           <div
             v-if="requestAnimation"
             class="request-line"
@@ -43,11 +43,11 @@
         </div>
       </div>
 
-      <!-- 边缘节点层 -->
+      <!-- Edge node layer -->
       <div class="layer edge-layer">
         <div class="layer-title">
           <span class="icon">🌐</span>
-          <span>CDN 边缘节点 (Edge Nodes)</span>
+          <span>Edge node CDN (Edge Nodes)</span>
           <span
             class="layer-status"
             :class="{ hit: cacheHit, miss: !cacheHit && showCacheStatus }"
@@ -77,11 +77,11 @@
             </div>
             <div class="node-stats">
               <div class="stat">
-                <span class="stat-label">缓存</span>
+                <span class="stat-label">Cache</span>
                 <span class="stat-value">{{ node.cacheSize }}</span>
               </div>
               <div class="stat">
-                <span class="stat-label">命中</span>
+                <span class="stat-label">Hit</span>
                 <span
                   class="stat-value"
                   :style="{ color: node.hitRate > 80 ? 'var(--vp-c-brand-1)' : 'var(--vp-c-brand)' }"
@@ -94,11 +94,11 @@
         </div>
       </div>
 
-      <!-- 源站层 -->
+      <!-- Origin layer -->
       <div class="layer origin-layer">
         <div class="layer-title">
           <span class="icon">🏢</span>
-          <span>源站 (Origin Server)</span>
+          <span>Origin (Origin Server)</span>
           <span
             class="layer-status"
             :class="{ active: showBackToSource }"
@@ -114,7 +114,7 @@
             </div>
             <div class="server-info">
               <div class="server-name">
-                对象存储源站
+                Object storage origin
               </div>
               <div class="server-address">
                 bucket.oss-cn-beijing.aliyuncs.com
@@ -122,7 +122,7 @@
             </div>
             <div class="server-status">
               <span class="status-dot active" />
-              <span class="status-text">健康</span>
+              <span class="status-text">Healthy</span>
             </div>
           </div>
 
@@ -131,20 +131,20 @@
             class="back-to-source-flow"
           >
             <div class="flow-arrow">
-              <span>⬆️ 回源请求</span>
+              <span>⬆️ Origin fetch</span>
             </div>
             <div class="flow-detail">
               <div class="flow-step">
-                1. CDN 节点未命中缓存
+                1. Edge node CDN cache miss
               </div>
               <div class="flow-step">
-                2. 向源站发起回源请求
+                2. Gửi yêu cầu fetch về origin
               </div>
               <div class="flow-step">
-                3. 源站返回文件内容
+                3. Origin trả về nội dung file
               </div>
               <div class="flow-step">
-                4. CDN 缓存并响应用户
+                4. CDN cache lại và trả về cho user
               </div>
             </div>
           </div>
@@ -152,10 +152,10 @@
       </div>
     </div>
 
-    <!-- 交互控制区 -->
+    <!-- Khu vực điều khiển tương tác -->
     <div class="demo-controls">
       <div class="controls-title">
-        🎮 模拟演示
+        🎮 Mô phỏng demo
       </div>
       <div class="controls-row">
         <button
@@ -163,29 +163,29 @@
           @click="simulateCacheHit"
         >
           <span>✅</span>
-          <span>模拟缓存命中</span>
+          <span>Mô phỏng cache hit</span>
         </button>
         <button
           class="control-btn"
           @click="simulateCacheMiss"
         >
           <span>❌</span>
-          <span>模拟缓存未命中（回源）</span>
+          <span>Mô phỏng cache miss (origin fetch)</span>
         </button>
         <button
           class="control-btn reset"
           @click="resetDemo"
         >
           <span>🔄</span>
-          <span>重置</span>
+          <span>Reset</span>
         </button>
       </div>
     </div>
 
-    <!-- 统计信息 -->
+    <!-- Thông tin thống kê -->
     <div class="stats-panel">
       <div class="stats-title">
-        📊 访问统计
+        📊 Thống kê truy cập
       </div>
       <div class="stats-grid">
         <div class="stat-card">
@@ -196,7 +196,7 @@
             {{ stats.cacheHit }}
           </div>
           <div class="stat-label">
-            缓存命中
+            Cache hit
           </div>
         </div>
         <div class="stat-card">
@@ -207,7 +207,7 @@
             {{ stats.cacheMiss }}
           </div>
           <div class="stat-label">
-            缓存未命中
+            Cache miss
           </div>
         </div>
         <div class="stat-card">
@@ -218,7 +218,7 @@
             {{ stats.hitRate }}%
           </div>
           <div class="stat-label">
-            命中率
+            Hit rate
           </div>
         </div>
         <div class="stat-card">
@@ -229,7 +229,7 @@
             {{ stats.avgResponseTime }}ms
           </div>
           <div class="stat-label">
-            平均响应
+            Phản hồi trung bình
           </div>
         </div>
       </div>
@@ -237,7 +237,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>CDN就像在全球开了分店——用户访问最近的分店拿资源，不用都跑总店来，速度自然快。
+      <strong>Ý tưởng cốt lõi:</strong> CDN giống như mở chi nhánh khắp toàn cầu — user truy cập chi nhánh gần nhất để lấy tài nguyên, không cần chạy đến cửa hàng chính, nên tự nhiên nhanh hơn.
     </div>
   </div>
 </template>
@@ -245,24 +245,24 @@
 <script setup>
 import { ref, computed, reactive } from 'vue'
 
-// 用户数据
+// Dữ liệu user
 const users = [
-  { id: 'user1', name: '北京用户', icon: '👤', x: 75, y: 35 },
-  { id: 'user2', name: '上海用户', icon: '👤', x: 80, y: 55 },
-  { id: 'user3', name: '广州用户', icon: '👤', x: 70, y: 75 },
-  { id: 'user4', name: '成都用户', icon: '👤', x: 50, y: 60 },
-  { id: 'user5', name: '海外用户', icon: '👤', x: 90, y: 25 }
+  { id: 'user1', name: 'User Hà Nội', icon: '👤', x: 75, y: 35 },
+  { id: 'user2', name: 'User TP.HCM', icon: '👤', x: 80, y: 55 },
+  { id: 'user3', name: 'User Đà Nẵng', icon: '👤', x: 70, y: 75 },
+  { id: 'user4', name: 'User Cần Thơ', icon: '👤', x: 50, y: 60 },
+  { id: 'user5', name: 'User quốc tế', icon: '👤', x: 90, y: 25 }
 ]
 
-// 边缘节点数据
+// Dữ liệu edge node
 const edgeNodes = [
-  { id: 'node1', name: '北京节点', icon: '🌐', location: '华北', cacheSize: '2.5 TB', hitRate: 92 },
-  { id: 'node2', name: '上海节点', icon: '🌐', location: '华东', cacheSize: '3.1 TB', hitRate: 89 },
-  { id: 'node3', name: '广州节点', icon: '🌐', location: '华南', cacheSize: '1.8 TB', hitRate: 87 },
-  { id: 'node4', name: '成都节点', icon: '🌐', location: '西南', cacheSize: '1.2 TB', hitRate: 85 }
+  { id: 'node1', name: 'Node Hà Nội', icon: '🌐', location: 'Miền Bắc', cacheSize: '2.5 TB', hitRate: 92 },
+  { id: 'node2', name: 'Node TP.HCM', icon: '🌐', location: 'Miền Nam', cacheSize: '3.1 TB', hitRate: 89 },
+  { id: 'node3', name: 'Node Đà Nẵng', icon: '🌐', location: 'Miền Trung', cacheSize: '1.8 TB', hitRate: 87 },
+  { id: 'node4', name: 'Node Cần Thơ', icon: '🌐', location: 'Tây Nam', cacheSize: '1.2 TB', hitRate: 85 }
 ]
 
-// 状态
+// Trạng thái
 const activeUser = ref(null)
 const requestingUser = ref(null)
 const activeNode = ref(null)
@@ -272,7 +272,7 @@ const showCacheStatus = ref(false)
 const showBackToSource = ref(false)
 const requestAnimation = ref(false)
 
-// 统计
+// Thống kê
 const stats = reactive({
   cacheHit: 0,
   cacheMiss: 0,
@@ -280,24 +280,24 @@ const stats = reactive({
   avgResponseTime: 0
 })
 
-// 计算属性
+// Computed
 const requestLineStyle = computed(() => {
   if (!activeUser.value || !activeNode.value) return {}
-  // 这里简化处理，实际应该计算从用户到节点的线
+  // Đơn giản hóa, thực tế cần tính đường nối từ user đến node
   return {}
 })
 
 const cacheStatusText = computed(() => {
   if (!showCacheStatus.value) return ''
-  return cacheHit.value ? '✅ 缓存命中' : '❌ 未命中'
+  return cacheHit.value ? '✅ Cache hit' : '❌ Miss'
 })
 
 const backToSourceText = computed(() => {
   if (!showBackToSource.value) return ''
-  return '📥 回源中...'
+  return '📥 Đang fetch origin...'
 })
 
-// 方法
+// Methods
 const selectUser = (user) => {
   activeUser.value = user.id
 }
@@ -311,7 +311,7 @@ const simulateCacheHit = () => {
   stats.cacheHit++
   updateStats()
 
-  // 模拟缓存命中流程
+  // Mô phỏng luồng cache hit
   activeUser.value = 'user1'
   requestingUser.value = 'user1'
   activeNode.value = 'node1'
@@ -328,7 +328,7 @@ const simulateCacheMiss = () => {
   stats.cacheMiss++
   updateStats()
 
-  // 模拟缓存未命中（回源）流程
+  // Mô phỏng luồng cache miss (origin fetch)
   activeUser.value = 'user3'
   requestingUser.value = 'user3'
   activeNode.value = 'node3'
@@ -344,7 +344,7 @@ const simulateCacheMiss = () => {
 const updateStats = () => {
   const total = stats.cacheHit + stats.cacheMiss
   stats.hitRate = total > 0 ? Math.round((stats.cacheHit / total) * 100) : 0
-  // 模拟平均响应时间：命中约 20ms，未命中约 200ms
+  // Mô phỏng thời gian phản hồi trung bình: hit ~20ms, miss ~200ms
   stats.avgResponseTime = total > 0
     ? Math.round((stats.cacheHit * 20 + stats.cacheMiss * 200) / total)
     : 0

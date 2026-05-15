@@ -1,8 +1,8 @@
 <template>
   <div class="career-path-demo">
     <div class="demo-header">
-      <span class="title">工程师成长路径</span>
-      <span class="subtitle">从入门到精通的技能演进</span>
+      <span class="title">Lộ trình phát triển kỹ sư</span>
+      <span class="subtitle">Hành trình kỹ năng từ nhập môn đến thành thạo</span>
     </div>
 
     <div class="path-container">
@@ -19,7 +19,7 @@
         <div class="stage-content">
           <div class="stage-desc">{{ stage.desc }}</div>
           <div class="stage-skills">
-            <span class="skill-label">核心技能：</span>
+            <span class="skill-label">Kỹ năng cốt lõi:</span>
             <div class="skill-tags">
               <span v-for="skill in stage.skills" :key="skill" class="skill-tag">
                 {{ skill }}
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="stage-output">
-            <span class="output-label">典型产出：</span>
+            <span class="output-label">Kết quả điển hình:</span>
             <span class="output-text">{{ stage.output }}</span>
           </div>
         </div>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="info-box">
-      <strong>成长关键点：</strong>前 1-2 年打基础，建立独立完成任务的能力；2-3 年选方向，建立深度；3-5 年横向扩展，培养架构思维；5 年+ 技术决策与团队影响力。
+      <strong>Điểm then chốt khi phát triển:</strong> 1-2 năm đầu xây nền tảng, hình thành khả năng tự hoàn thành nhiệm vụ; 2-3 năm chọn hướng đi và xây dựng chiều sâu; 3-5 năm mở rộng ngang, rèn tư duy kiến trúc; 5 năm+ ra quyết định kỹ thuật và tạo ảnh hưởng đến đội ngũ.
     </div>
   </div>
 </template>
@@ -43,44 +43,44 @@
 <script setup>
 const stages = [
   {
-    name: '入门期',
+    name: 'Giai đoạn nhập môn',
     icon: '🌱',
-    time: '0-1 年',
-    desc: '学习基础语法和工具，能完成简单任务',
-    skills: ['一门语言基础', 'Git 使用', '调试技巧', '阅读文档'],
-    output: '能独立完成小功能、修复简单 Bug'
+    time: '0-1 năm',
+    desc: 'Học cú pháp và công cụ cơ bản, hoàn thành được nhiệm vụ đơn giản',
+    skills: ['Nền tảng một ngôn ngữ', 'Dùng Git', 'Kỹ năng debug', 'Đọc tài liệu'],
+    output: 'Tự làm được tính năng nhỏ, sửa Bug đơn giản'
   },
   {
-    name: '成长期',
+    name: 'Giai đoạn phát triển',
     icon: '🌿',
-    time: '1-2 年',
-    desc: '熟悉常用框架和最佳实践，能独立负责模块',
-    skills: ['框架熟练', '代码规范', '单元测试', 'API 设计'],
-    output: '独立负责一个功能模块，代码质量稳定'
+    time: '1-2 năm',
+    desc: 'Thông thạo framework phổ biến và best practice, độc lập phụ trách module',
+    skills: ['Thành thạo framework', 'Chuẩn mã nguồn', 'Unit test', 'Thiết kế API'],
+    output: 'Tự phụ trách một module tính năng, chất lượng code ổn định'
   },
   {
-    name: '进阶期',
+    name: 'Giai đoạn nâng cao',
     icon: '🌳',
-    time: '2-3 年',
-    desc: '深入某个领域，开始有技术选型能力',
-    skills: ['领域深入', '性能优化', '架构设计', '技术选型'],
-    output: '主导技术方案设计，解决复杂问题'
+    time: '2-3 năm',
+    desc: 'Đi sâu vào một lĩnh vực, bắt đầu có khả năng lựa chọn công nghệ',
+    skills: ['Chuyên sâu lĩnh vực', 'Tối ưu hiệu năng', 'Thiết kế kiến trúc', 'Lựa chọn công nghệ'],
+    output: 'Chủ trì thiết kế giải pháp kỹ thuật, giải quyết vấn đề phức tạp'
   },
   {
-    name: '成熟期',
+    name: 'Giai đoạn trưởng thành',
     icon: '🌲',
-    time: '3-5 年',
-    desc: '全栈能力或领域专家，能带领小团队',
-    skills: ['全栈能力', '团队协作', '技术分享', '项目管理'],
-    output: '负责核心系统，指导新人成长'
+    time: '3-5 năm',
+    desc: 'Khả năng fullstack hoặc chuyên gia lĩnh vực, dẫn dắt nhóm nhỏ',
+    skills: ['Năng lực fullstack', 'Hợp tác nhóm', 'Chia sẻ kỹ thuật', 'Quản lý dự án'],
+    output: 'Phụ trách hệ thống lõi, hướng dẫn người mới'
   },
   {
-    name: '专家期',
+    name: 'Giai đoạn chuyên gia',
     icon: '🏔️',
-    time: '5 年+',
-    desc: '技术决策者，有行业影响力',
-    skills: ['技术战略', '团队建设', '行业洞察', '创新引领'],
-    output: '技术方向决策，培养技术团队'
+    time: '5 năm+',
+    desc: 'Người ra quyết định kỹ thuật, có ảnh hưởng trong ngành',
+    skills: ['Chiến lược kỹ thuật', 'Xây dựng đội ngũ', 'Hiểu biết ngành', 'Dẫn dắt đổi mới'],
+    output: 'Quyết định hướng đi kỹ thuật, đào tạo đội ngũ kỹ thuật'
   }
 ]
 </script>

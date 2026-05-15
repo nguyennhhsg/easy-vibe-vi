@@ -1,7 +1,7 @@
 <template>
   <div class="type-safety-demo">
-    <h4>🛡️ 类型安全实战：常见陷阱与防御</h4>
-    <p class="desc">点击不同的陷阱场景，学习如何用类型系统保护你的代码</p>
+    <h4>🛡️ Thực hành type safety: cạm bẫy thường gặp và cách phòng vệ</h4>
+    <p class="desc">Bấm vào các tình huống cạm bẫy khác nhau để học cách dùng hệ kiểu bảo vệ code của bạn</p>
 
     <div class="trap-selector">
       <button
@@ -17,20 +17,20 @@
 
     <div class="trap-detail">
       <div class="danger-zone">
-        <div class="zone-header danger">⚠️ 危险代码</div>
+        <div class="zone-header danger">⚠️ Code nguy hiểm</div>
         <pre class="code-block">{{ traps[selected].dangerCode }}</pre>
         <div class="zone-result danger">{{ traps[selected].dangerResult }}</div>
       </div>
 
       <div class="safe-zone">
-        <div class="zone-header safe">✅ 安全代码</div>
+        <div class="zone-header safe">✅ Code an toàn</div>
         <pre class="code-block">{{ traps[selected].safeCode }}</pre>
         <div class="zone-result safe">{{ traps[selected].safeResult }}</div>
       </div>
     </div>
 
     <div class="defense-tip">
-      <div class="tip-header">🔑 防御策略</div>
+      <div class="tip-header">🔑 Chiến lược phòng vệ</div>
       <ul>
         <li v-for="(tip, j) in traps[selected].tips" :key="j">{{ tip }}</li>
       </ul>
@@ -45,62 +45,62 @@ const selected = ref(0)
 
 const traps = [
   {
-    icon: '💣', name: 'null 引用',
+    icon: '💣', name: 'Tham chiếu null',
     dangerCode: `function getLength(str) {
-  return str.length  // 如果 str 是 null？
+  return str.length  // Lỡ str là null thì sao?
 }
-getLength(null)  // 💥 运行时崩溃`,
+getLength(null)  // 💥 Crash lúc chạy`,
     dangerResult: '💥 TypeError: Cannot read properties of null',
     safeCode: `function getLength(str: string | null): number {
   if (str === null) return 0
-  return str.length  // ✅ 编译器确保此处 str 不为 null
+  return str.length  // ✅ Trình biên dịch đảm bảo str khác null
 }`,
-    safeResult: '✅ 编译器强制你处理 null 的情况',
-    tips: ['使用 strictNullChecks 编译选项', '用联合类型 string | null 显式标注可空', '用可选链 ?. 安全访问属性']
+    safeResult: '✅ Trình biên dịch buộc bạn xử lý trường hợp null',
+    tips: ['Bật tùy chọn biên dịch strictNullChecks', 'Dùng union type string | null để khai báo có thể null', 'Dùng optional chaining ?. để truy cập thuộc tính an toàn']
   },
   {
-    icon: '🎭', name: '类型断言滥用',
+    icon: '🎭', name: 'Lạm dụng type assertion',
     dangerCode: `const data = fetchAPI() as any
 const name = data.user.profile.name
-// 如果 API 返回格式变了？`,
-    dangerResult: '💥 运行时崩溃，any 绕过了所有类型检查',
+// Lỡ API đổi định dạng thì sao?`,
+    dangerResult: '💥 Crash lúc chạy, any bỏ qua mọi kiểm tra kiểu',
     safeCode: `interface APIResponse {
   user: { profile: { name: string } }
 }
 const data: APIResponse = await fetchAPI()
 const name = data.user.profile.name`,
-    safeResult: '✅ 如果 API 格式变了，编译时就能发现',
-    tips: ['避免使用 any，用 unknown 代替', '为 API 响应定义明确的接口', '使用 zod 等库做运行时校验']
+    safeResult: '✅ Nếu định dạng API đổi, lỗi sẽ lộ ra lúc biên dịch',
+    tips: ['Tránh dùng any, thay bằng unknown', 'Định nghĩa interface rõ ràng cho response API', 'Dùng thư viện như zod để kiểm tra ở runtime']
   },
   {
-    icon: '🔄', name: '隐式转换',
+    icon: '🔄', name: 'Chuyển kiểu ngầm',
     dangerCode: `if (userId == 0) {
-  // 当 userId 是 "" 时也会进入！
-  console.log("无效用户")
+  // userId là "" cũng vào nhánh này!
+  console.log("User không hợp lệ")
 }
-// "" == 0 → true（隐式转换）`,
-    dangerResult: '💥 空字符串被当成 0，逻辑错误',
+// "" == 0 → true (chuyển kiểu ngầm)`,
+    dangerResult: '💥 Chuỗi rỗng bị coi là 0, logic sai',
     safeCode: `if (userId === 0) {
-  console.log("无效用户")
+  console.log("User không hợp lệ")
 }
-// "" === 0 → false（严格比较）`,
-    safeResult: '✅ 严格比较不做隐式转换',
-    tips: ['始终使用 === 而不是 ==', '开启 ESLint 的 eqeqeq 规则', '用 TypeScript 的严格模式']
+// "" === 0 → false (so sánh nghiêm ngặt)`,
+    safeResult: '✅ So sánh nghiêm ngặt không chuyển kiểu ngầm',
+    tips: ['Luôn dùng === thay cho ==', 'Bật quy tắc eqeqeq của ESLint', 'Dùng strict mode của TypeScript']
   },
   {
-    icon: '📦', name: '数组类型不安全',
-    dangerCode: `const items = []  // any[] 类型
+    icon: '📦', name: 'Mảng không an toàn kiểu',
+    dangerCode: `const items = []  // kiểu any[]
 items.push(1)
 items.push("hello")
 items.push({ x: 1 })
-// 数组里什么都有，取出来用时容易出错`,
-    dangerResult: '💥 数组元素类型不一致，后续操作可能崩溃',
+// Mảng chứa đủ kiểu, lúc lấy ra dùng dễ lỗi`,
+    dangerResult: '💥 Phần tử mảng không cùng kiểu, thao tác sau dễ crash',
     safeCode: `const items: number[] = []
 items.push(1)
-items.push("hello")  // ❌ 编译错误！
-// 编译器确保数组元素类型一致`,
-    safeResult: '✅ 编译时就阻止了类型不一致的元素',
-    tips: ['声明数组时指定元素类型', '使用 ReadonlyArray 防止意外修改', '用元组类型 [string, number] 表示固定结构']
+items.push("hello")  // ❌ Lỗi biên dịch!
+// Trình biên dịch đảm bảo các phần tử cùng kiểu`,
+    safeResult: '✅ Lúc biên dịch đã chặn các phần tử khác kiểu',
+    tips: ['Chỉ định kiểu phần tử khi khai báo mảng', 'Dùng ReadonlyArray để tránh sửa ngoài ý muốn', 'Dùng tuple [string, number] cho cấu trúc cố định']
   }
 ]
 </script>

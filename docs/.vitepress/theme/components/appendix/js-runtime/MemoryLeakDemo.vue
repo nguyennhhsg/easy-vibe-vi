@@ -4,9 +4,9 @@ import { ref } from 'vue'
 const activeScenario = ref('global-vars')
 
 const scenarios = [
-  { value: 'global-vars', label: '全局变量', icon: '🌍' },
-  { value: 'event-listeners', label: '事件监听', icon: '🎯' },
-  { value: 'closures', label: '闭包引用', icon: '🔒' }
+  { value: 'global-vars', label: 'Biến toàn cục', icon: '🌍' },
+  { value: 'event-listeners', label: 'Event listener', icon: '🎯' },
+  { value: 'closures', label: 'Closure tham chiếu', icon: '🔒' }
 ]
 
 // 全局变量场景
@@ -23,7 +23,7 @@ const memoryUsage = ref(0)
 const maxMemory = ref(100)
 
 const addGlobalVariable = () => {
-  const largeData = new Array(10000).fill(`数据 ${globalMemory.value.length}`)
+  const largeData = new Array(10000).fill(`Dữ liệu ${globalMemory.value.length}`)
   globalMemory.value.push({
     id: Date.now(),
     data: largeData,
@@ -39,7 +39,7 @@ const clearGlobalVariables = () => {
 
 // 事件监听场景
 const addEventListener = () => {
-  const handler = () => console.log('事件监听器')
+  const handler = () => console.log('event listener')
   eventListeners.value.push({
     id: Date.now(),
     handler: handler,
@@ -57,7 +57,7 @@ const removeAllListeners = () => {
 
 // 闭包场景
 const createClosure = () => {
-  const largeData = new Array(10000).fill('闭包数据')
+  const largeData = new Array(10000).fill('Dữ liệu closure')
   const closure = () => {
     return largeData.length
   }
@@ -91,9 +91,9 @@ const resetAll = () => {
 
 <template>
   <div class="memory-leak-demo">
-    <h3>内存泄漏演示</h3>
+    <h3>Demo memory leak (rò rỉ bộ nhớ)</h3>
 
-    <!-- 场景选择 -->
+    <!-- Chọn kịch bản -->
     <div class="scenario-tabs">
       <button
         v-for="scenario in scenarios"
@@ -107,10 +107,10 @@ const resetAll = () => {
       </button>
     </div>
 
-    <!-- 内存使用情况 -->
+    <!-- Tình trạng dùng bộ nhớ -->
     <div class="memory-monitor">
       <div class="monitor-header">
-        <span class="monitor-title">内存使用情况</span>
+        <span class="monitor-title">Tình trạng dùng bộ nhớ</span>
         <span class="monitor-value">{{ memoryUsage }}%</span>
       </div>
       <div class="memory-bar">
@@ -129,22 +129,22 @@ const resetAll = () => {
         v-if="memoryUsage > 90"
         class="memory-alert"
       >
-        ⚠️ 内存占用过高!可能导致页面卡顿或崩溃
+        ⚠️ Bộ nhớ chiếm quá cao! Có thể gây giật hoặc crash trang
       </div>
     </div>
 
-    <!-- 场景内容 -->
+    <!-- Nội dung kịch bản -->
     <div class="scenario-content">
-      <!-- 全局变量场景 -->
+      <!-- Kịch bản biến toàn cục -->
       <div
         v-if="activeScenario === 'global-vars'"
         class="scenario-panel"
       >
-        <h4>全局变量泄漏</h4>
+        <h4>Rò rỉ biến toàn cục</h4>
 
         <div class="scenario-description">
-          <p><strong>问题:</strong>全局变量不会被垃圾回收,会一直占用内存</p>
-          <p><strong>示例:</strong>不断往全局数组添加数据,从不清理</p>
+          <p><strong>Vấn đề:</strong> Biến toàn cục không bị garbage collect, luôn chiếm bộ nhớ</p>
+          <p><strong>Ví dụ:</strong> Liên tục thêm dữ liệu vào mảng toàn cục, không bao giờ dọn</p>
         </div>
 
         <div class="action-buttons">
@@ -152,19 +152,19 @@ const resetAll = () => {
             class="btn-add"
             @click="addGlobalVariable"
           >
-            ➕ 添加全局变量
+            ➕ Thêm biến toàn cục
           </button>
           <button
             class="btn-clear"
             @click="clearGlobalVariables"
           >
-            🗑️ 清空全局变量
+            🗑️ Xóa biến toàn cục
           </button>
         </div>
 
         <div class="data-preview">
           <div class="preview-header">
-            <span>全局变量 ({{ globalMemory.length }} 项)</span>
+            <span>Biến toàn cục ({{ globalMemory.length }} mục)</span>
           </div>
           <div class="preview-list">
             <div
@@ -174,26 +174,26 @@ const resetAll = () => {
             >
               <span class="item-id">ID: {{ item.id }}</span>
               <span class="item-time">{{ item.timestamp }}</span>
-              <span class="item-size">{{ item.data.length }} 项数据</span>
+              <span class="item-size">{{ item.data.length }} mục dữ liệu</span>
             </div>
             <div
               v-if="globalMemory.length === 0"
               class="empty-state"
             >
-              暂无全局变量
+              Chưa có biến toàn cục
             </div>
             <div
               v-if="globalMemory.length > 5"
               class="more-items"
             >
-              ... 还有 {{ globalMemory.length - 5 }} 项
+              ... còn {{ globalMemory.length - 5 }} mục
             </div>
           </div>
         </div>
 
         <div class="code-example">
-          <h5>❌ 错误做法</h5>
-          <pre><code>// 全局变量不会被回收
+          <h5>❌ Cách sai</h5>
+          <pre><code>// Biến toàn cục không bị garbage collect
 globalCache = []
 function addItem() {
   globalCache.push(largeData)
@@ -201,16 +201,16 @@ function addItem() {
         </div>
       </div>
 
-      <!-- 事件监听场景 -->
+      <!-- Kịch bản event listener -->
       <div
         v-if="activeScenario === 'event-listeners'"
         class="scenario-panel"
       >
-        <h4>事件监听器泄漏</h4>
+        <h4>Rò rỉ event listener</h4>
 
         <div class="scenario-description">
-          <p><strong>问题:</strong>事件监听器没有被移除,持续占用内存</p>
-          <p><strong>示例:</strong>动态创建元素并添加监听,但从不移除</p>
+          <p><strong>Vấn đề:</strong> Event listener không được gỡ, tiếp tục chiếm bộ nhớ</p>
+          <p><strong>Ví dụ:</strong> Tạo phần tử động và thêm listener, nhưng không bao giờ gỡ</p>
         </div>
 
         <div class="action-buttons">
@@ -218,19 +218,19 @@ function addItem() {
             class="btn-add"
             @click="addEventListener"
           >
-            ➕ 添加事件监听
+            ➕ Thêm event listener
           </button>
           <button
             class="btn-clear"
             @click="removeAllListeners"
           >
-            🗑️ 移除所有监听
+            🗑️ Gỡ tất cả listener
           </button>
         </div>
 
         <div class="data-preview">
           <div class="preview-header">
-            <span>活跃监听器: {{ eventCount }} 个</span>
+            <span>Listener đang hoạt động: {{ eventCount }}</span>
           </div>
           <div class="listener-list">
             <div
@@ -242,51 +242,51 @@ function addItem() {
                 🎯
               </div>
               <div class="listener-info">
-                <span class="listener-id">监听器 #{{ listener.id }}</span>
-                <span class="listener-status">活跃中</span>
+                <span class="listener-id">Listener #{{ listener.id }}</span>
+                <span class="listener-status">Đang hoạt động</span>
               </div>
             </div>
             <div
               v-if="eventListeners.length === 0"
               class="empty-state"
             >
-              暂无事件监听器
+              Chưa có event listener
             </div>
             <div
               v-if="eventListeners.length > 5"
               class="more-items"
             >
-              ... 还有 {{ eventListeners.length - 5 }} 个监听器
+              ... còn {{ eventListeners.length - 5 }} listener
             </div>
           </div>
         </div>
 
         <div class="code-example">
-          <h5>❌ 错误做法</h5>
-          <pre><code>// 监听器没有被移除
+          <h5>❌ Cách sai</h5>
+          <pre><code>// Listener không bị gỡ
 button.addEventListener('click', handler)
-// 元素删除时监听器还在!</code></pre>
+// Khi phần tử bị xóa listener vẫn còn!</code></pre>
 
-          <h5>✅ 正确做法</h5>
-          <pre><code>// 保存监听器引用
+          <h5>✅ Cách đúng</h5>
+          <pre><code>// Lưu tham chiếu listener
 const handler = () => { ... }
 button.addEventListener('click', handler)
 
-// 不需要时移除
+// Khi không cần thì gỡ
 button.removeEventListener('click', handler)</code></pre>
         </div>
       </div>
 
-      <!-- 闭包场景 -->
+      <!-- Kịch bản closure -->
       <div
         v-if="activeScenario === 'closures'"
         class="scenario-panel"
       >
-        <h4>闭包引用泄漏</h4>
+        <h4>Rò rỉ do closure tham chiếu</h4>
 
         <div class="scenario-description">
-          <p><strong>问题:</strong>闭包持有大对象引用,导致对象无法被回收</p>
-          <p><strong>示例:</strong>闭包函数一直引用大数组</p>
+          <p><strong>Vấn đề:</strong> Closure giữ tham chiếu đến đối tượng lớn, khiến đối tượng không thể bị thu hồi</p>
+          <p><strong>Ví dụ:</strong> Hàm closure luôn tham chiếu mảng lớn</p>
         </div>
 
         <div class="action-buttons">
@@ -294,19 +294,19 @@ button.removeEventListener('click', handler)</code></pre>
             class="btn-add"
             @click="createClosure"
           >
-            ➕ 创建闭包
+            ➕ Tạo closure
           </button>
           <button
             class="btn-clear"
             @click="clearClosures"
           >
-            🗑️ 清空闭包
+            🗑️ Xóa closure
           </button>
         </div>
 
         <div class="data-preview">
           <div class="preview-header">
-            <span>活跃闭包: {{ closureItems.length }} 个</span>
+            <span>Closure đang hoạt động: {{ closureItems.length }}</span>
           </div>
           <div class="closure-list">
             <div
@@ -318,66 +318,66 @@ button.removeEventListener('click', handler)</code></pre>
                 🔒
               </div>
               <div class="closure-info">
-                <span class="closure-id">闭包 #{{ item.id }}</span>
+                <span class="closure-id">Closure #{{ item.id }}</span>
                 <span class="closure-time">{{ item.timestamp }}</span>
-                <span class="closure-size">持有 {{ item.data.length }} 项数据</span>
+                <span class="closure-size">Giữ {{ item.data.length }} mục dữ liệu</span>
               </div>
             </div>
             <div
               v-if="closureItems.length === 0"
               class="empty-state"
             >
-              暂无闭包
+              Chưa có closure
             </div>
             <div
               v-if="closureItems.length > 5"
               class="more-items"
             >
-              ... 还有 {{ closureItems.length - 5 }} 个闭包
+              ... còn {{ closureItems.length - 5 }} closure
             </div>
           </div>
         </div>
 
         <div class="code-example">
-          <h5>❌ 错误做法</h5>
-          <pre><code>// 闭包持有大对象引用
+          <h5>❌ Cách sai</h5>
+          <pre><code>// Closure giữ tham chiếu đối tượng lớn
 function createHandler() {
   const largeData = new Array(1000000)
   return function() {
-    // largeData 一直被引用,不会被回收
-    console.log('处理中')
+    // largeData luôn bị tham chiếu, không bị thu hồi
+    console.log('đang xử lý')
   }
 }
 const handler = createHandler()</code></pre>
 
-          <h5>✅ 正确做法</h5>
-          <pre><code>// 使用后释放引用
+          <h5>✅ Cách đúng</h5>
+          <pre><code>// Dùng xong thì giải phóng tham chiếu
 let handler = createHandler()
-handler()  // 使用
-handler = null  // 释放引用</code></pre>
+handler()  // Sử dụng
+handler = null  // Giải phóng tham chiếu</code></pre>
         </div>
       </div>
     </div>
 
-    <!-- 重置按钮 -->
+    <!-- Nút đặt lại -->
     <div class="global-actions">
       <button
         class="btn-reset"
         @click="resetAll"
       >
-        🔄 重置所有场景
+        🔄 Đặt lại tất cả kịch bản
       </button>
     </div>
 
-    <!-- 总结 -->
+    <!-- Tổng kết -->
     <div class="summary-box">
-      <h4>如何避免内存泄漏</h4>
+      <h4>Cách tránh memory leak</h4>
       <ul>
-        <li><strong>避免全局变量:</strong> 使用 const/let 代替 var,尽量使用局部变量</li>
-        <li><strong>及时清理监听器:</strong> 组件销毁时移除所有事件监听</li>
-        <li><strong>释放闭包引用:</strong> 不需要时将闭包变量设为 null</li>
-        <li><strong>使用 WeakMap/WeakSet:</strong> 自动清理不再被引用的对象</li>
-        <li><strong>定期检查:</strong> 用 DevTools Memory 面板检查内存泄漏</li>
+        <li><strong>Tránh biến toàn cục:</strong> Dùng const/let thay var, ưu tiên biến cục bộ</li>
+        <li><strong>Dọn listener kịp thời:</strong> Khi component bị hủy thì gỡ hết event listener</li>
+        <li><strong>Giải phóng tham chiếu closure:</strong> Khi không cần thì set biến closure về null</li>
+        <li><strong>Dùng WeakMap/WeakSet:</strong> Tự động dọn các đối tượng không còn tham chiếu</li>
+        <li><strong>Kiểm tra định kỳ:</strong> Dùng bảng Memory trong DevTools để kiểm tra rò rỉ bộ nhớ</li>
       </ul>
     </div>
   </div>

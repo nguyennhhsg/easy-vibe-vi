@@ -2,8 +2,8 @@
   <div class="paint-layer-demo">
     <div class="demo-header">
       <span class="icon">🎨</span>
-      <span class="title">绘制层优化</span>
-      <span class="subtitle">浏览器如何通过分层提升性能</span>
+      <span class="title">Tối ưu lớp vẽ (paint layer)</span>
+      <span class="subtitle">Trình duyệt cải thiện hiệu năng bằng cách phân lớp như thế nào</span>
     </div>
 
     <div class="demo-content">
@@ -22,7 +22,7 @@
               <span
                 v-if="layer.isPromoted"
                 class="promoted-badge"
-              >GPU层</span>
+              >Lớp GPU</span>
             </div>
             <div class="layer-content">
               <div
@@ -34,14 +34,14 @@
                 class="card-box"
               >
                 <div class="card-title">
-                  卡片
+                  Card
                 </div>
               </div>
               <div
                 v-if="layer.id === 'button'"
                 class="button-box"
               >
-                按钮
+                Nút
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
 
       <div class="properties-panel">
         <div class="panel-title">
-          触发新层的 CSS 属性：
+          Các thuộc tính CSS kích hoạt lớp mới:
         </div>
         <div class="property-list">
           <div
@@ -69,7 +69,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心要点：</strong>浏览器把需要动画的元素提升到独立的 GPU 层，这样动画时只需要调整位置和透明度，不需要重绘。但不要滥用，每个层都会占用 GPU 内存。
+      <strong>Điểm cốt lõi:</strong> Trình duyệt đưa các phần tử cần animation lên lớp GPU độc lập, khi animation chỉ cần điều chỉnh vị trí và độ mờ, không cần vẽ lại. Nhưng đừng lạm dụng, mỗi lớp đều tốn bộ nhớ GPU.
     </div>
   </div>
 </template>
@@ -80,21 +80,21 @@ import { ref } from 'vue'
 const layers = ref([
   {
     id: 'background',
-    name: '背景层',
+    name: 'Lớp nền',
     icon: '🖼️',
     isActive: false,
     isPromoted: false
   },
   {
     id: 'card',
-    name: '内容层',
+    name: 'Lớp nội dung',
     icon: '📄',
     isActive: false,
     isPromoted: false
   },
   {
     id: 'button',
-    name: '动画层',
+    name: 'Lớp animation',
     icon: '✨',
     isActive: false,
     isPromoted: true
@@ -103,27 +103,27 @@ const layers = ref([
 
 const promotedProperties = [
   {
-    name: '3D变换',
+    name: 'Biến đổi 3D',
     code: 'transform: translate3d(0,0,0)',
-    desc: '任何3D变换都会创建新层',
+    desc: 'Bất kỳ biến đổi 3D nào cũng tạo lớp mới',
     layerId: 'button'
   },
   {
-    name: '透明度动画',
+    name: 'Animation độ mờ',
     code: 'opacity',
-    desc: '配合transition使用时',
+    desc: 'Khi dùng kèm với transition',
     layerId: 'button'
   },
   {
-    name: '固定定位',
+    name: 'Định vị fixed',
     code: 'position: fixed',
-    desc: '固定定位元素需要独立层',
+    desc: 'Phần tử position: fixed cần lớp riêng',
     layerId: 'button'
   },
   {
     name: 'Will-change',
     code: 'will-change: transform',
-    desc: '显式提示浏览器创建层',
+    desc: 'Báo rõ cho trình duyệt tạo lớp riêng',
     layerId: 'button'
   }
 ]

@@ -1,44 +1,44 @@
 <!--
   DeploymentCicdDemo.vue
-  CI/CD 自动化（精简版）
+  CI/CD tự động hóa (bản rút gọn)
 -->
 <template>
   <div class="deployment-cicd">
     <div class="header">
       <span class="icon">🔄</span>
-      <span class="title">CI/CD 自动化</span>
-      <span class="subtitle">从代码到上线，一键搞定</span>
+      <span class="title">CI/CD tự động hóa</span>
+      <span class="subtitle">Từ code đến production chỉ một cú nhấn</span>
     </div>
 
     <div class="pipeline">
       <div class="step">
         <span class="num">1</span>
-        <span class="text">代码推送</span>
+        <span class="text">Push code</span>
       </div>
       <span class="arrow">→</span>
       <div class="step">
         <span class="num">2</span>
-        <span class="text">自动测试</span>
+        <span class="text">Test tự động</span>
       </div>
       <span class="arrow">→</span>
       <div class="step">
         <span class="num">3</span>
-        <span class="text">自动构建</span>
+        <span class="text">Build tự động</span>
       </div>
       <span class="arrow">→</span>
       <div class="step">
         <span class="num">4</span>
-        <span class="text">自动部署</span>
+        <span class="text">Deploy tự động</span>
       </div>
     </div>
 
     <div class="compare">
       <div class="col">
         <div class="title">
-          手动部署
+          Deploy thủ công
         </div>
         <div class="item">
-          ❌ 容易出错
+          ❌ Dễ sai sót
         </div>
       </div>
       <div class="col highlight">
@@ -46,7 +46,7 @@
           CI/CD
         </div>
         <div class="item">
-          ✅ 快速可靠
+          ✅ Nhanh và tin cậy
         </div>
       </div>
     </div>

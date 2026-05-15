@@ -1,40 +1,40 @@
 <template>
   <div class="demo">
-    <div class="title">📁 你看到的文件 vs 硬盘上的碎片</div>
-    
+    <div class="title">📁 File bạn thấy vs các mảnh trên ổ cứng</div>
+
     <div class="scene">
-      <!-- 文件视图 -->
+      <!-- View file -->
       <div class="file-view">
-        <div class="view-label">📂 你看到的（文件夹）</div>
+        <div class="view-label">📂 Bạn thấy (thư mục)</div>
         <div class="folder-tree">
           <div class="folder">
             <span class="folder-icon">📁</span>
-            <span>照片</span>
+            <span>Ảnh</span>
           </div>
           <div class="files">
-            <div 
+            <div
               class="file-item"
               :class="{ active: currentFile === 'pet' }"
             >
               <span class="file-icon">🖼️</span>
-              <span>宠物.jpg</span>
+              <span>thucung.jpg</span>
               <span class="file-size">2.5MB</span>
             </div>
-            <div 
+            <div
               class="file-item"
               :class="{ active: currentFile === 'trip' }"
             >
               <span class="file-icon">🖼️</span>
-              <span>旅游.png</span>
+              <span>dulich.png</span>
               <span class="file-size">1.8MB</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 读取动画 -->
+      <!-- Animation đọc -->
       <div class="read-animation" v-if="isReading">
-        <div class="read-text">正在读取...</div>
+        <div class="read-text">Đang đọc...</div>
         <div class="read-blocks">
           <div 
             v-for="(block, idx) in readingBlocks" 
@@ -48,9 +48,9 @@
         </div>
       </div>
 
-      <!-- 硬盘视图 -->
+      <!-- View ổ cứng -->
       <div class="disk-view">
-        <div class="view-label">💾 硬盘实际存储（数据块）</div>
+        <div class="view-label">💾 Lưu thực tế trên ổ cứng (data block)</div>
         <div class="disk-grid">
           <div
             v-for="n in 12"
@@ -72,7 +72,7 @@
     </div>
 
     <div class="explain">
-      <strong>💡 原理：</strong>文件系统把文件切成碎片存在硬盘各处（如宠物.jpg存在第3、7、11块），然后用"账本"记录位置。你看到的整齐文件夹只是账本上的记录。
+      <strong>💡 Nguyên lý:</strong> Hệ thống file cắt file thành nhiều mảnh lưu rải rác trên ổ cứng (ví dụ thucung.jpg nằm ở block 3, 7, 11), sau đó dùng một "sổ cái" để ghi nhớ vị trí. Thư mục gọn gàng bạn nhìn thấy chỉ là bản ghi trong sổ cái thôi.
     </div>
   </div>
 </template>
@@ -85,19 +85,19 @@ const isReading = ref(false)
 const readProgress = ref(-1)
 const currentBlocks = ref([])
 
-// 文件存储位置
+// Vị trí lưu file
 const fileLocations = {
-  pet: [3, 7, 11],    // 宠物.jpg 存在第3、7、11块
-  trip: [5, 6]        // 旅游.png 存在第5、6块
+  pet: [3, 7, 11],    // thucung.jpg nằm ở block 3, 7, 11
+  trip: [5, 6]        // dulich.png nằm ở block 5, 6
 }
 
-// 每块的内容
+// Nội dung từng block
 const blockContents = {
-  3: '宠-1',
-  7: '宠-2', 
-  11: '宠-3',
-  5: '旅-1',
-  6: '旅-2'
+  3: 'TC-1',
+  7: 'TC-2',
+  11: 'TC-3',
+  5: 'DL-1',
+  6: 'DL-2'
 }
 
 let timer = null
@@ -119,39 +119,39 @@ const readingBlocks = computed(() => {
 
 const runDemo = () => {
   switch(phase) {
-    case 0: // 开始读取宠物.jpg
+    case 0: // Bắt đầu đọc thucung.jpg
       currentFile.value = 'pet'
       currentBlocks.value = fileLocations.pet
       isReading.value = true
       readProgress.value = -1
       phase = 1
       break
-    case 1: // 逐块读取
+    case 1: // Đọc từng block
       if (readProgress.value < currentBlocks.value.length - 1) {
         readProgress.value++
       } else {
         phase = 2
       }
       break
-    case 2: // 读取完成，暂停
+    case 2: // Đọc xong, dừng
       isReading.value = false
       phase = 3
       break
-    case 3: // 开始读取旅游.png
+    case 3: // Bắt đầu đọc dulich.png
       currentFile.value = 'trip'
       currentBlocks.value = fileLocations.trip
       isReading.value = true
       readProgress.value = -1
       phase = 4
       break
-    case 4: // 逐块读取
+    case 4: // Đọc từng block
       if (readProgress.value < currentBlocks.value.length - 1) {
         readProgress.value++
       } else {
         phase = 5
       }
       break
-    case 5: // 重置
+    case 5: // Reset
       isReading.value = false
       currentFile.value = ''
       currentBlocks.value = []

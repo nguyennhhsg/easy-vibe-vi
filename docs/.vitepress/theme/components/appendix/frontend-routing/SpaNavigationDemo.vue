@@ -2,12 +2,12 @@
   <div class="spa-navigation-demo">
     <div class="demo-header">
       <span class="icon">🚀</span>
-      <span class="title">SPA导航流程</span>
-      <span class="subtitle">从点击到渲染的完整旅程</span>
+      <span class="title">Quy trình điều hướng SPA</span>
+      <span class="subtitle">Hành trình từ click đến render</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">餐厅点菜</span>：从看菜单、下单、厨房准备、最后上菜。SPA导航也是这样，用户触发后经过一系列步骤，最终把新"菜品"（页面）端到你面前。
+      Hãy hình dung bạn đang <span class="highlight">gọi món tại nhà hàng</span>: từ xem menu, đặt món, bếp chuẩn bị, đến khi món ra bàn. Điều hướng SPA cũng vậy: sau khi người dùng kích hoạt, hệ thống đi qua một loạt bước rồi "phục vụ" món mới (trang) đến trước mặt bạn.
     </div>
 
     <div class="flow-container">
@@ -31,16 +31,16 @@
     </div>
 
     <div class="highlight-box">
-      <h5>⚡ 关键优化点</h5>
+      <h5>⚡ Điểm tối ưu then chốt</h5>
       <div class="optimization-tips">
         <div class="tip-item">
           <span class="tip-icon">🎯</span>
           <div class="tip-content">
             <div class="tip-title">
-              路由懒加载
+              Lazy load route
             </div>
             <div class="tip-desc">
-              按需加载页面组件，减少初始包体积
+              Tải component theo nhu cầu, giảm kích thước bundle ban đầu
             </div>
           </div>
         </div>
@@ -48,10 +48,10 @@
           <span class="tip-icon">🛡️</span>
           <div class="tip-content">
             <div class="tip-title">
-              守卫预加载
+              Preload trong guard
             </div>
             <div class="tip-desc">
-              在beforeEnter中预加载数据，提升用户体验
+              Tải trước dữ liệu trong beforeEnter để cải thiện trải nghiệm
             </div>
           </div>
         </div>
@@ -59,10 +59,10 @@
           <span class="tip-icon">⚡</span>
           <div class="tip-content">
             <div class="tip-title">
-              过渡动画
+              Hiệu ứng chuyển trang
             </div>
             <div class="tip-desc">
-              添加页面切换动画，让导航更流畅
+              Thêm animation chuyển trang để điều hướng mượt hơn
             </div>
           </div>
         </div>
@@ -71,20 +71,20 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心优势：</strong>整个流程在浏览器内完成，无需服务器参与，体验如原生应用般流畅。这就是SPA相比传统MPA的最大优势。
+      <strong>Ưu điểm cốt lõi:</strong> Toàn bộ quy trình diễn ra trong trình duyệt, không cần máy chủ tham gia, trải nghiệm mượt như ứng dụng native. Đây chính là lợi thế lớn nhất của SPA so với MPA truyền thống.
     </div>
   </div>
 </template>
 
 <script setup>
 const steps = [
-  { title: '触发导航', desc: '用户点击链接或调用 router.push()' },
-  { title: 'URL 变化', desc: '浏览器地址栏更新，History API 记录状态' },
-  { title: '路由匹配', desc: '路由器根据URL匹配对应的路由配置' },
-  { title: '守卫验证', desc: '执行全局、路由独享、组件内守卫' },
-  { title: '组件加载', desc: '懒加载的组件异步加载并解析' },
-  { title: '组件渲染', desc: '新组件挂载到 DOM，页面更新' },
-  { title: '后置钩子', desc: '执行 afterEach 钩子，完成导航' }
+  { title: 'Kích hoạt điều hướng', desc: 'Người dùng nhấp link hoặc gọi router.push()' },
+  { title: 'URL thay đổi', desc: 'Thanh địa chỉ trình duyệt cập nhật, History API ghi nhận trạng thái' },
+  { title: 'Khớp route', desc: 'Router khớp cấu hình route tương ứng theo URL' },
+  { title: 'Kiểm tra guard', desc: 'Chạy guard toàn cục, guard riêng cho route và guard trong component' },
+  { title: 'Tải component', desc: 'Component lazy-load được tải bất đồng bộ và phân giải' },
+  { title: 'Render component', desc: 'Component mới được mount vào DOM, trang cập nhật' },
+  { title: 'Hook sau', desc: 'Chạy hook afterEach, hoàn tất điều hướng' }
 ]
 </script>
 

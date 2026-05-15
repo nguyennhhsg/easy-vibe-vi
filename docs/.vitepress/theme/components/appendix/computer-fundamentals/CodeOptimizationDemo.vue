@@ -1,7 +1,7 @@
 <template>
   <div class="code-optimization-demo">
-    <h4>⚡ 编译器优化：让代码自动变快</h4>
-    <p class="desc">选择一种优化技术，观察编译器如何自动改进你的代码</p>
+    <h4>⚡ Tối ưu compiler: giúp code tự động chạy nhanh hơn</h4>
+    <p class="desc">Chọn một kỹ thuật tối ưu để xem compiler tự cải thiện code của bạn như thế nào</p>
 
     <div class="opt-selector">
       <button
@@ -17,26 +17,26 @@
 
     <div class="opt-detail">
       <div class="code-panel before">
-        <div class="panel-header">📝 优化前</div>
+        <div class="panel-header">📝 Trước tối ưu</div>
         <pre class="code-block">{{ optimizations[selected].before }}</pre>
       </div>
       <div class="arrow-col">
         <div class="arrow-box">
           <span class="arrow-icon">→</span>
-          <span class="arrow-label">编译器优化</span>
+          <span class="arrow-label">Compiler tối ưu</span>
         </div>
       </div>
       <div class="code-panel after">
-        <div class="panel-header">🚀 优化后</div>
+        <div class="panel-header">🚀 Sau tối ưu</div>
         <pre class="code-block">{{ optimizations[selected].after }}</pre>
       </div>
     </div>
 
     <div class="opt-explain">
-      <div class="explain-header">{{ optimizations[selected].name }}原理</div>
+      <div class="explain-header">Nguyên lý của {{ optimizations[selected].name }}</div>
       <div class="explain-text">{{ optimizations[selected].explain }}</div>
       <div class="perf-gain">
-        <span class="gain-label">性能提升：</span>
+        <span class="gain-label">Mức tăng hiệu năng:</span>
         <div class="gain-bar-bg">
           <div
             class="gain-bar"
@@ -57,83 +57,83 @@ const selected = ref(0)
 const optimizations = [
   {
     icon: '🧮',
-    name: '常量折叠',
+    name: 'Gấp hằng số',
     before: `const width = 10
 const height = 20
-const area = width * height  // 运行时计算
+const area = width * height  // Tính khi chạy
 console.log(area)`,
-    after: `const area = 200  // 编译时直接算出结果
+    after: `const area = 200  // Compiler tính sẵn lúc biên dịch
 console.log(200)`,
     explain:
-      '编译器发现 width 和 height 都是常量，在编译阶段就直接计算出 10 * 20 = 200，运行时不再需要做乘法运算。这是最基础也最常见的优化。',
+      'Compiler nhận ra width và height đều là hằng số, nên tính ngay 10 * 20 = 200 tại bước biên dịch. Khi chạy không cần thực hiện phép nhân nữa. Đây là tối ưu cơ bản và phổ biến nhất.',
     gain: 30
   },
   {
     icon: '💀',
-    name: '死代码消除',
+    name: 'Loại bỏ code chết',
     before: `function process(x) {
   const result = x * 2
   return result
 
-  // 以下代码永远不会执行
+  // Đoạn code dưới không bao giờ chạy
   console.log("debug info")
   const unused = x + 1
   return unused
 }`,
     after: `function process(x) {
-  return x * 2  // 只保留有用的代码
+  return x * 2  // Chỉ giữ lại code có ích
 }`,
     explain:
-      '编译器分析控制流，发现 return 之后的代码永远不会执行，直接删除。同时发现 result 变量只被赋值后立即返回，于是内联了表达式。',
+      'Compiler phân tích luồng điều khiển, thấy code sau return không bao giờ chạy nên xóa luôn. Đồng thời nhận ra biến result chỉ được gán rồi trả về ngay, nên inline biểu thức.',
     gain: 20
   },
   {
     icon: '🔄',
-    name: '循环不变量外提',
+    name: 'Đưa bất biến ra ngoài vòng lặp',
     before: `const arr = [1, 2, 3, ..., 10000]
 for (let i = 0; i < arr.length; i++) {
-  // arr.length 每次循环都要读取
+  // arr.length đọc lại ở mỗi lần lặp
   process(arr[i])
 }`,
     after: `const arr = [1, 2, 3, ..., 10000]
-const len = arr.length  // 提到循环外，只读一次
+const len = arr.length  // Đưa ra ngoài, chỉ đọc một lần
 for (let i = 0; i < len; i++) {
   process(arr[i])
 }`,
     explain:
-      '循环体内的 arr.length 每次迭代都要访问，但它的值在循环中不会改变。编译器把这个不变的计算提到循环外面，避免了 10000 次重复读取。',
+      'Trong vòng lặp, arr.length bị truy cập mỗi vòng nhưng giá trị không đổi. Compiler đưa phép tính bất biến này ra ngoài, tránh việc đọc lại 10000 lần.',
     gain: 45
   },
   {
     icon: '📦',
-    name: '函数内联',
+    name: 'Inline hàm',
     before: `function square(x) {
   return x * x
 }
 
-// 调用 10000 次
+// Gọi 10000 lần
 for (let i = 0; i < 10000; i++) {
-  result += square(i)  // 每次都有函数调用开销
+  result += square(i)  // Mỗi lần đều có chi phí gọi hàm
 }`,
-    after: `// 消除函数调用开销
+    after: `// Loại bỏ chi phí gọi hàm
 for (let i = 0; i < 10000; i++) {
-  result += i * i  // 直接展开，无调用开销
+  result += i * i  // Trải code thẳng vào, không còn chi phí gọi
 }`,
     explain:
-      '函数调用有开销（保存寄存器、跳转、返回）。对于小函数，编译器直接把函数体"粘贴"到调用处，消除调用开销。JIT 编译器（如 V8）特别擅长这个优化。',
+      'Gọi hàm có chi phí (lưu thanh ghi, nhảy, trở về). Với hàm nhỏ, compiler dán thẳng thân hàm vào nơi gọi để loại bỏ chi phí này. Compiler JIT (như V8) đặc biệt giỏi tối ưu kiểu này.',
     gain: 55
   },
   {
     icon: '🔗',
-    name: '常量传播',
+    name: 'Truyền hằng số',
     before: `const x = 10
 const y = x + 5      // y = 15
 const z = y * 2      // z = 30
 console.log(z + 1)   // 31`,
-    after: `console.log(31)  // 编译时追踪所有常量值
-// x, y, z 全部被消除`,
+    after: `console.log(31)  // Compiler theo dấu mọi giá trị hằng số
+// x, y, z đều bị loại bỏ`,
     explain:
-      '编译器追踪每个变量的值：x=10 → y=15 → z=30 → z+1=31。当所有中间变量都是常量时，整个计算链在编译时就完成了，运行时只需要输出结果。',
+      'Compiler theo dấu giá trị từng biến: x=10 → y=15 → z=30 → z+1=31. Khi mọi biến trung gian đều là hằng số, cả chuỗi tính toán được hoàn tất tại bước biên dịch, lúc chạy chỉ cần in kết quả.',
     gain: 40
   }
 ]

@@ -31,23 +31,23 @@
       >
         <code>{{ op.cmd }}</code>
       </button>
-      <button class="gb-btn gb-btn--reset" :disabled="running" @click="reset">重置</button>
+      <button class="gb-btn gb-btn--reset" :disabled="running" @click="reset">Đặt lại</button>
     </div>
 
     <!-- SVG Graph -->
     <div class="gb-graph-wrap">
       <div class="gb-legend">
-        <span class="leg-item"><span class="leg-dot main-c" />main 主分支</span>
-        <span v-if="featLog.length" class="leg-item"><span class="leg-dot feat-c" />feature-login 功能分支</span>
-        <span v-if="mergeNode" class="leg-item"><span class="leg-dot merge-c" />Merge 合并节点</span>
-        <span class="leg-item head-leg"><span class="leg-head">HEAD</span> 你当前所在位置</span>
+        <span class="leg-item"><span class="leg-dot main-c" />main (nhánh chính)</span>
+        <span v-if="featLog.length" class="leg-item"><span class="leg-dot feat-c" />feature-login (nhánh tính năng)</span>
+        <span v-if="mergeNode" class="leg-item"><span class="leg-dot merge-c" />Merge (node hợp nhất)</span>
+        <span class="leg-item head-leg"><span class="leg-head">HEAD</span> vị trí hiện tại của bạn</span>
       </div>
 
       <div class="svg-scroll">
         <svg :width="svgW" :height="svgH" class="gb-svg">
-          <!-- ── 连接线 ── -->
+          <!-- ── Đường nối ── -->
 
-          <!-- main 主轨道横线 -->
+          <!-- Đường ngang nhánh main -->
           <line
             v-if="mainLog.length > 1"
             :x1="nodeX(0) + NODE_R"
@@ -57,14 +57,14 @@
             stroke="#5b9cf6" stroke-width="2.5"
           />
 
-          <!-- 分叉弧线：从 main 最后一个原始节点向下弯到 feat 第一个节点 -->
+          <!-- Cung rẽ nhánh: từ node main gốc cuối cùng cong xuống node feat đầu tiên -->
           <path
             v-if="featLog.length"
             :d="forkPath"
             fill="none" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"
           />
 
-          <!-- feature 轨道横线 -->
+          <!-- Đường ngang nhánh feature -->
           <line
             v-if="featLog.length > 1"
             :x1="featNodeX(0) + NODE_R"
@@ -74,16 +74,16 @@
             stroke="#f9e2af" stroke-width="2.5"
           />
 
-          <!-- merge 收束弧线：从 feat 最后节点弯回 main merge 节点 -->
+          <!-- Cung merge: từ node feat cuối cùng cong về node merge trên main -->
           <path
             v-if="mergeNode"
             :d="mergePath"
             fill="none" stroke="#a6e3a1" stroke-width="2.5" stroke-linecap="round"
           />
 
-          <!-- ── 节点 ── -->
+          <!-- ── Các node ── -->
 
-          <!-- main 节点 -->
+          <!-- Node main -->
           <g v-for="(c, i) in mainLog" :key="'m'+i">
             <circle
               :cx="nodeX(i)"
@@ -92,7 +92,7 @@
               :fill="c.merge ? '#a6e3a1' : '#5b9cf6'"
               stroke="#1a1a2e" stroke-width="2"
             />
-            <!-- HEAD 标签 -->
+            <!-- Nhãn HEAD -->
             <g v-if="branch === 'main' && i === mainLog.length - 1">
               <rect
                 :x="nodeX(i) - 18"
@@ -123,7 +123,7 @@
             >{{ c.shortMsg }}</text>
           </g>
 
-          <!-- feature 节点 -->
+          <!-- Node feature -->
           <g v-for="(c, i) in featLog" :key="'f'+i">
             <circle
               :cx="featNodeX(i)"
@@ -132,7 +132,7 @@
               fill="#f9e2af"
               stroke="#1a1a2e" stroke-width="2"
             />
-            <!-- HEAD 标签 -->
+            <!-- Nhãn HEAD -->
             <g v-if="branch === 'feature-login' && i === featLog.length - 1">
               <rect
                 :x="featNodeX(i) - 18"
@@ -162,7 +162,7 @@
             >{{ c.shortMsg }}</text>
           </g>
 
-          <!-- 分支名标签 -->
+          <!-- Nhãn tên nhánh -->
           <text
             :x="svgPad"
             :y="MAIN_Y - NODE_R - 26"
@@ -193,16 +193,16 @@ const MAIN_Y = 70     // main track y
 const FEAT_Y = 170    // feature track y
 
 const termEl = ref(null)
-const lines = ref([{ kind: 'dim', text: '# main 分支上已有 2 次提交，按步骤演示分支操作' }])
+const lines = ref([{ kind: 'dim', text: '# main đã có 2 commit, làm theo từng bước để xem thao tác nhánh' }])
 const typing = ref('')
 const running = ref(false)
 const active = ref(null)
-const hint = ref('👆 依次点击上方命令按钮，观察下方分支图的变化')
+const hint = ref('👆 Bấm lần lượt các nút lệnh phía trên để quan sát biểu đồ nhánh thay đổi')
 const branch = ref('main')
 
 const mainLog = ref([
   { hash: '9f3e1b2', shortMsg: 'init', merge: false },
-  { hash: 'c4d8a31', shortMsg: '首页', merge: false },
+  { hash: 'c4d8a31', shortMsg: 'Trang chủ', merge: false },
 ])
 const featLog = ref([])
 const mergeNode = ref(false)
@@ -255,37 +255,37 @@ const ops = [
     output: [
       { kind: 'grn', text: "Switched to a new branch 'feature-login'" },
     ],
-    hint: '新分支创建了！它和 main 指向同一个提交，但是独立的"时间线"。现在你在 feature-login 上，main 的时间线不会动。',
+    hint: 'Đã tạo nhánh mới! Nó trỏ vào cùng commit với main, nhưng là "timeline" độc lập. Bạn đang ở feature-login, timeline của main không di chuyển.',
     do: () => { s.created = true; branch.value = 'feature-login' },
   },
   {
     id: 'c1',
-    cmd: 'git commit -m "feat: 登录表单"',
+    cmd: 'git commit -m "feat: form đăng nhập"',
     ok: () => s.created && !s.c1,
     output: [
-      { kind: 'dim', text: '[feature-login e1a2b3c] feat: 登录表单' },
+      { kind: 'dim', text: '[feature-login e1a2b3c] feat: form đăng nhập' },
       { kind: 'dim', text: ' 1 file changed, 38 insertions(+)' },
     ],
-    hint: '看图！feature-login 向右延伸了一个新节点，而 main 纹丝不动。这就是"平行宇宙"——两条线同时存在，互不影响。',
-    do: () => { s.c1 = true; featLog.value.push({ hash: 'e1a2b3c', shortMsg: '登录表单' }) },
+    hint: 'Nhìn biểu đồ! feature-login mọc thêm một node mới về bên phải, còn main đứng yên. Đây chính là "vũ trụ song song" — hai đường tồn tại đồng thời, không ảnh hưởng nhau.',
+    do: () => { s.c1 = true; featLog.value.push({ hash: 'e1a2b3c', shortMsg: 'Form đăng nhập' }) },
   },
   {
     id: 'c2',
-    cmd: 'git commit -m "feat: 登录接口"',
+    cmd: 'git commit -m "feat: API đăng nhập"',
     ok: () => s.c1 && !s.c2,
     output: [
-      { kind: 'dim', text: '[feature-login f4d5e6f] feat: 登录接口' },
+      { kind: 'dim', text: '[feature-login f4d5e6f] feat: API đăng nhập' },
       { kind: 'dim', text: ' 1 file changed, 22 insertions(+)' },
     ],
-    hint: 'feature-login 又多了一个提交。此时它比 main 多了 2 个节点。功能开发完毕，准备合并回主线。',
-    do: () => { s.c2 = true; featLog.value.push({ hash: 'f4d5e6f', shortMsg: '登录接口' }) },
+    hint: 'feature-login lại có thêm một commit. Lúc này nó nhiều hơn main 2 node. Tính năng phát triển xong, sẵn sàng merge về nhánh chính.',
+    do: () => { s.c2 = true; featLog.value.push({ hash: 'f4d5e6f', shortMsg: 'API đăng nhập' }) },
   },
   {
     id: 'back',
     cmd: 'git checkout main',
     ok: () => s.c2 && branch.value !== 'main',
     output: [{ kind: 'grn', text: "Switched to branch 'main'" }],
-    hint: '切回 main。HEAD 标签跳回到 main 最后的节点。feature-login 里写的代码，现在工作区完全看不到——两条线彻底隔离。',
+    hint: 'Quay lại main. Nhãn HEAD nhảy về node cuối cùng của main. Code viết trong feature-login giờ không thấy trong working dir — hai timeline bị cô lập hoàn toàn.',
     do: () => { branch.value = 'main' },
   },
   {
@@ -296,7 +296,7 @@ const ops = [
       { kind: 'dim', text: "Merge made by the 'ort' strategy." },
       { kind: 'grn', text: ' login.js | 60 ++++++ 1 file changed' },
     ],
-    hint: '合并完成！看图：feature-login 的弧线收束回了 main，形成一个绿色合并节点。两条时间线重新汇合，登录功能进入主线。',
+    hint: 'Merge xong! Nhìn biểu đồ: cung của feature-login cong về lại main, tạo thành node merge màu xanh. Hai timeline hợp nhất, tính năng đăng nhập đã vào nhánh chính.',
     do: () => {
       s.merged = true
       mergeNode.value = true
@@ -320,15 +320,15 @@ async function run(op) {
 }
 
 function reset() {
-  lines.value = [{ kind: 'dim', text: '# main 分支上已有 2 次提交，按步骤演示分支操作' }]
+  lines.value = [{ kind: 'dim', text: '# main đã có 2 commit, làm theo từng bước để xem thao tác nhánh' }]
   mainLog.value = [
     { hash: '9f3e1b2', shortMsg: 'init', merge: false },
-    { hash: 'c4d8a31', shortMsg: '首页', merge: false },
+    { hash: 'c4d8a31', shortMsg: 'Trang chủ', merge: false },
   ]
   featLog.value = []; branch.value = 'main'; mergeNode.value = false
   s = { created: false, c1: false, c2: false, merged: false }
   active.value = null
-  hint.value = '👆 依次点击上方命令按钮，观察下方分支图的变化'
+  hint.value = '👆 Bấm lần lượt các nút lệnh phía trên để quan sát biểu đồ nhánh thay đổi'
   typing.value = ''; running.value = false
 }
 </script>
@@ -377,7 +377,7 @@ function reset() {
 .gb-btn--on code { color: var(--vp-c-brand); }
 .gb-btn--dim { opacity: 0.3; cursor: not-allowed; }
 .gb-btn--reset { background: transparent; border-color: #313244; margin-left: auto; }
-.gb-btn--reset::after { content: '重置'; font-size: 0.7rem; color: #585b70; }
+.gb-btn--reset::after { content: 'Đặt lại'; font-size: 0.7rem; color: #585b70; }
 
 /* Graph */
 .gb-graph-wrap {

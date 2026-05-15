@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <div class="title">⏱️ CPU 在疯狂切换，你感觉不出来</div>
+    <div class="title">⏱️ CPU đang chuyển ngữ cảnh điên cuồng, bạn không cảm nhận được</div>
     
     <div class="cpu-core">
       <div class="cpu-label">CPU</div>
@@ -8,7 +8,7 @@
         <span class="task-icon">{{ currentTask.icon }}</span>
         <span class="task-name">{{ currentTask.name }}</span>
       </div>
-      <div class="time-slice">时间片: {{ timeLeft }}ms</div>
+      <div class="time-slice">Time slice: {{ timeLeft }}ms</div>
     </div>
 
     <div class="process-queue">
@@ -30,12 +30,12 @@
             <div class="p-fill"></div>
           </div>
         </div>
-        <span class="p-status">{{ idx === currentIdx ? '运行中' : (proc.progress >= 100 ? '完成' : '等待') }}</span>
+        <span class="p-status">{{ idx === currentIdx ? 'Đang chạy' : (proc.progress >= 100 ? 'Xong' : 'Chờ') }}</span>
       </div>
     </div>
 
     <div class="explain">
-      <strong>💡 原理：</strong>CPU 每 {{ sliceTime }}ms 切换一次进程，因为太快了你感觉是"同时运行"。实际上每个进程都在断断续续地执行。
+      <strong>💡 Nguyên lý:</strong> CPU chuyển tiến trình mỗi {{ sliceTime }}ms, vì quá nhanh nên bạn cảm thấy chúng "chạy đồng thời". Thực ra mỗi tiến trình chỉ chạy ngắt quãng.
     </div>
   </div>
 </template>
@@ -44,15 +44,15 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const processes = ref([
-  { id: 1, name: '微信', icon: '💬', progress: 0 },
-  { id: 2, name: '音乐', icon: '🎵', progress: 0 },
-  { id: 3, name: '浏览器', icon: '🌐', progress: 0 }
+  { id: 1, name: 'Zalo', icon: '💬', progress: 0 },
+  { id: 2, name: 'Nhạc', icon: '🎵', progress: 0 },
+  { id: 3, name: 'Trình duyệt', icon: '🌐', progress: 0 }
 ])
 
 const currentIdx = ref(0)
 const timeLeft = ref(0)
 const isSwitching = ref(false)
-const sliceTime = 100 // 每个时间片100ms（演示用，实际是10ms左右）
+const sliceTime = 100 // Mỗi time slice 100ms (cho demo, thực tế khoảng 10ms)
 
 let timer = null
 let switchTimer = null
@@ -69,22 +69,22 @@ const switchTask = () => {
 const tick = () => {
   const current = processes.value[currentIdx.value]
   
-  // 当前进程执行
+  // Tiến trình hiện tại chạy
   if (current.progress < 100) {
     current.progress = Math.min(100, current.progress + 5)
   }
-  
-  // 时间片倒计时
+
+  // Đếm ngược time slice
   timeLeft.value -= 10
-  
-  // 时间片用完，切换
+
+  // Hết time slice thì chuyển
   if (timeLeft.value <= 0) {
     switchTask()
   }
-  
-  // 检查是否全部完成
+
+  // Kiểm tra đã xong hết chưa
   if (processes.value.every(p => p.progress >= 100)) {
-    // 重置演示
+    // Reset demo
     setTimeout(() => {
       processes.value.forEach(p => p.progress = 0)
       currentIdx.value = 0
@@ -95,7 +95,7 @@ const tick = () => {
 
 onMounted(() => {
   timeLeft.value = sliceTime
-  timer = setInterval(tick, 10) // 每10ms更新一次
+  timer = setInterval(tick, 10) // Cập nhật mỗi 10ms
 })
 
 onUnmounted(() => {

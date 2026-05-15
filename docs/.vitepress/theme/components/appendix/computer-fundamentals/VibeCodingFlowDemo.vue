@@ -1,38 +1,38 @@
 <template>
   <div class="flow-demo">
     <div class="flow-section">
-      <div class="flow-label traditional">传统开发流程</div>
+      <div class="flow-label traditional">Quy trình phát triển truyền thống</div>
       <div class="flow-steps">
         <span v-for="(step, i) in traditionalSteps" :key="step">
           <span class="flow-step">{{ step }}</span>
           <span v-if="i < traditionalSteps.length - 1" class="flow-arrow">→</span>
         </span>
       </div>
-      <div class="flow-loop">↑ 反复循环 ↓</div>
+      <div class="flow-loop">↑ Lặp đi lặp lại ↓</div>
     </div>
 
     <div class="flow-section">
-      <div class="flow-label vibe">Vibe Coding 流程</div>
+      <div class="flow-label vibe">Quy trình Vibe Coding</div>
       <div class="flow-steps">
         <span v-for="(step, i) in vibeSteps" :key="step">
           <span class="flow-step" :class="{ highlight: step.highlight }">{{ step.text }}</span>
           <span v-if="i < vibeSteps.length - 1" class="flow-arrow">→</span>
         </span>
       </div>
-      <div class="flow-loop">↑ 快速迭代 ↓</div>
+      <div class="flow-loop">↑ Lặp nhanh ↓</div>
     </div>
   </div>
 </template>
 
 <script setup>
-const traditionalSteps = ['你', '学习语法', '写代码', '调试', '查文档', '修改', '运行']
+const traditionalSteps = ['Bạn', 'Học cú pháp', 'Viết code', 'Debug', 'Tra tài liệu', 'Chỉnh sửa', 'Chạy']
 
 const vibeSteps = [
-  { text: '你', highlight: false },
-  { text: '用自然语言描述需求', highlight: true },
-  { text: 'AI 生成代码', highlight: true },
-  { text: '你审核修改', highlight: false },
-  { text: '运行', highlight: false }
+  { text: 'Bạn', highlight: false },
+  { text: 'Mô tả yêu cầu bằng ngôn ngữ tự nhiên', highlight: true },
+  { text: 'AI sinh code', highlight: true },
+  { text: 'Bạn duyệt và chỉnh sửa', highlight: false },
+  { text: 'Chạy', highlight: false }
 ]
 </script>
 

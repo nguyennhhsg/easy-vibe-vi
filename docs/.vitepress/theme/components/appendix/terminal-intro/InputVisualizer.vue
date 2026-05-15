@@ -1,15 +1,15 @@
 <!--
   InputVisualizer.vue
-  输入可视化组件
-  
-  用途：
-  展示键盘输入在底层是如何被转换为字节流发送给终端的。
-  纠正“按键直接上屏”的误区，强调“按键 -> 编码 -> 发送”的过程。
-  
-  交互功能：
-  - 键盘监听：捕获用户的真实按键。
-  - 数据展示：同时显示按键名、16进制字节码和转义序列（如方向键）。
-  - 历史记录：记录最近几次按键的编码流。
+  Component trực quan hóa input
+
+  Mục đích:
+  Cho thấy phím bấm bàn phím được chuyển thành luồng byte rồi gửi đến terminal ở tầng dưới như thế nào.
+  Sửa cho bạn quan niệm sai "bấm phím là chữ lên màn hình", nhấn mạnh quy trình "phím -> mã hóa -> gửi".
+
+  Tính năng tương tác:
+  - Lắng nghe bàn phím: bắt phím bấm thật của bạn.
+  - Hiển thị dữ liệu: hiện cả tên phím, byte hex và escape sequence (ví dụ phím mũi tên).
+  - Lịch sử: ghi lại luồng mã hóa của vài phím gần nhất.
 -->
 <template>
   <div

@@ -1,9 +1,9 @@
 <template>
   <div class="demo">
     <div class="scene">
-      <!-- 应用程序层 -->
+      <!-- Tầng ứng dụng -->
       <div class="layer-box app-layer" :class="{ active: currentStep >= 1 }">
-        <div class="layer-title">📱 应用程序</div>
+        <div class="layer-title">📱 Ứng dụng</div>
         <div class="apps">
           <span class="app-icon" :class="{ pulse: currentStep === 1 }">🎵</span>
           <span class="app-icon" :class="{ pulse: currentStep === 1 }">💬</span>
@@ -11,37 +11,37 @@
         </div>
       </div>
 
-      <!-- 流动箭头 -->
+      <!-- Mũi tên dòng chảy -->
       <div class="flow-arrow" :class="{ flowing: currentStep === 2 }">
         <div class="arrow-line"></div>
         <div class="arrow-head">▼</div>
-        <div class="packet" v-if="currentStep === 2">📦 请求</div>
+        <div class="packet" v-if="currentStep === 2">📦 Yêu cầu</div>
       </div>
 
-      <!-- 操作系统层 -->
+      <!-- Tầng hệ điều hành -->
       <div class="layer-box os-layer" :class="{ active: currentStep >= 2, processing: currentStep === 3 }">
-        <div class="layer-title">🖥️ 操作系统</div>
+        <div class="layer-title">🖥️ Hệ điều hành</div>
         <div class="os-core">
-          <div class="core-item" :class="{ working: currentStep === 3 && subStep === 0 }">调度CPU</div>
-          <div class="core-item" :class="{ working: currentStep === 3 && subStep === 1 }">分配内存</div>
-          <div class="core-item" :class="{ working: currentStep === 3 && subStep === 2 }">管理文件</div>
+          <div class="core-item" :class="{ working: currentStep === 3 && subStep === 0 }">Lập lịch CPU</div>
+          <div class="core-item" :class="{ working: currentStep === 3 && subStep === 1 }">Cấp phát RAM</div>
+          <div class="core-item" :class="{ working: currentStep === 3 && subStep === 2 }">Quản lý file</div>
         </div>
       </div>
 
-      <!-- 流动箭头 -->
+      <!-- Mũi tên dòng chảy -->
       <div class="flow-arrow" :class="{ flowing: currentStep === 4 }">
         <div class="arrow-line"></div>
         <div class="arrow-head">▼</div>
-        <div class="packet" v-if="currentStep === 4">⚡ 指令</div>
+        <div class="packet" v-if="currentStep === 4">⚡ Chỉ thị</div>
       </div>
 
-      <!-- 硬件层 -->
+      <!-- Tầng phần cứng -->
       <div class="layer-box hw-layer" :class="{ active: currentStep >= 4, working: currentStep === 5 }">
-        <div class="layer-title">💾 硬件</div>
+        <div class="layer-title">💾 Phần cứng</div>
         <div class="hw-items">
           <span class="hw-icon" :class="{ spin: currentStep === 5 }">🧠 CPU</span>
-          <span class="hw-icon" :class="{ flash: currentStep === 5 }">💾 内存</span>
-          <span class="hw-icon" :class="{ flash: currentStep === 5 }">💿 硬盘</span>
+          <span class="hw-icon" :class="{ flash: currentStep === 5 }">💾 RAM</span>
+          <span class="hw-icon" :class="{ flash: currentStep === 5 }">💿 Ổ cứng</span>
         </div>
       </div>
     </div>
@@ -60,19 +60,19 @@ const subStep = ref(0)
 let timer = null
 
 const statusTexts = [
-  '应用程序准备发起请求...',
-  '应用程序：我要播放音乐！',
-  '请求发送给操作系统...',
-  '操作系统正在协调资源...',
-  '指令下发到硬件...',
-  '硬件开始执行：音乐播放中 🎵'
+  'Ứng dụng đang chuẩn bị gửi yêu cầu...',
+  'Ứng dụng: Tôi muốn phát nhạc!',
+  'Gửi yêu cầu đến hệ điều hành...',
+  'Hệ điều hành đang điều phối tài nguyên...',
+  'Chỉ thị được gửi xuống phần cứng...',
+  'Phần cứng bắt đầu chạy: đang phát nhạc 🎵'
 ]
 
 const statusText = computed(() => statusTexts[currentStep.value] || '')
 
 const nextStep = () => {
   if (currentStep.value === 3) {
-    // 在操作系统处理阶段，循环显示子步骤
+    // Trong giai đoạn OS xử lý, lặp qua các bước con
     subStep.value = (subStep.value + 1) % 3
     if (subStep.value === 0) {
       currentStep.value = 4

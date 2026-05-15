@@ -1,6 +1,6 @@
 <!--
   SemanticTagsDemo.vue
-  语义标签速查：点击标签名，右侧展示用途、是否块级/行内、常见场景和示例 HTML。
+  Tra nhanh thẻ semantic: Nhấp vào tên thẻ, bên phải hiển thị mục đích, có phải block/inline, ngữ cảnh thường dùng và HTML mẫu.
 -->
 <template>
   <div class="semantic">
@@ -17,27 +17,27 @@
 
     <div class="panel">
       <div class="row">
-        <span class="label">用途</span><span>{{ current.purpose }}</span>
+        <span class="label">Mục đích</span><span>{{ current.purpose }}</span>
       </div>
       <div class="row">
-        <span class="label">类型</span><span>{{ current.display }}</span>
+        <span class="label">Loại</span><span>{{ current.display }}</span>
       </div>
       <div class="row">
-        <span class="label">常见位置</span><span>{{ current.scene }}</span>
+        <span class="label">Vị trí thường gặp</span><span>{{ current.scene }}</span>
       </div>
       <div class="row code-title">
-        示例
+        Ví dụ
       </div>
       <pre><code>{{ current.example }}</code></pre>
       <div class="row code-title">
-        渲染效果
+        Kết quả render
       </div>
       <div
         class="preview-box"
         v-html="current.example"
       />
       <div class="row tip">
-        小贴士：{{ current.tip }}
+        Mẹo nhỏ: {{ current.tip }}
       </div>
     </div>
   </div>
@@ -49,67 +49,67 @@ import { ref } from 'vue'
 const tags = [
   {
     name: '<header>',
-    purpose: '页面/区块的头部区域，通常放 Logo、导航',
-    display: '块级',
-    scene: '页面顶部、文章顶部',
-    example: `<header style="background:#eee; padding:10px;">\n  <h1 style="margin:0;">我的网站</h1>\n  <nav>...</nav>\n</header>`,
-    tip: '一个页面可有多个 header，只要是各自区块的开头都行'
+    purpose: 'Phần đầu của trang/khối, thường đặt Logo, nav',
+    display: 'Block',
+    scene: 'Đỉnh trang, đỉnh bài viết',
+    example: `<header style="background:#eee; padding:10px;">\n  <h1 style="margin:0;">Trang web của tôi</h1>\n  <nav>...</nav>\n</header>`,
+    tip: 'Một trang có thể có nhiều header, miễn là phần đầu của từng khối'
   },
   {
     name: '<nav>',
-    purpose: '导航链接区域',
-    display: '块级',
-    scene: '全站导航、面包屑、侧边栏',
-    example: `<nav style="background:#f4f4f4; padding:10px;">\n  <a href="javascript:void(0)">首页</a> | <a href="javascript:void(0)">关于</a>\n</nav>`,
-    tip: '尽量只放导航链接，便于屏幕阅读器识别'
+    purpose: 'Khu vực liên kết điều hướng',
+    display: 'Block',
+    scene: 'Nav toàn site, breadcrumb, sidebar',
+    example: `<nav style="background:#f4f4f4; padding:10px;">\n  <a href="javascript:void(0)">Trang chủ</a> | <a href="javascript:void(0)">Giới thiệu</a>\n</nav>`,
+    tip: 'Cố gắng chỉ đặt link điều hướng, để screen reader dễ nhận diện'
   },
   {
     name: '<main>',
-    purpose: '文档主体，一个页面只能有一个',
-    display: '块级',
-    scene: '包裹主要内容区域',
-    example: `<main style="border:1px dashed #999; padding:10px;">\n  <article>主要内容区域...</article>\n</main>`,
-    tip: '辅助技术可快速跳转到 main，提高可访问性'
+    purpose: 'Thân tài liệu, mỗi trang chỉ được có một',
+    display: 'Block',
+    scene: 'Bọc khu vực nội dung chính',
+    example: `<main style="border:1px dashed #999; padding:10px;">\n  <article>Khu vực nội dung chính...</article>\n</main>`,
+    tip: 'Công nghệ hỗ trợ có thể nhảy nhanh đến main, tăng accessibility'
   },
   {
     name: '<section>',
-    purpose: '主题分组的区块',
-    display: '块级',
-    scene: '页面分段、文档章节',
-    example: `<section style="border-left:4px solid #007acc; padding-left:10px;">\n  <h2 style="margin:0;">功能亮点</h2>\n  <p>这里是功能介绍...</p>\n</section>`,
-    tip: '每个 section 里最好有标题（h2/h3）'
+    purpose: 'Khối được nhóm theo chủ đề',
+    display: 'Block',
+    scene: 'Phân đoạn trang, chương trong tài liệu',
+    example: `<section style="border-left:4px solid #007acc; padding-left:10px;">\n  <h2 style="margin:0;">Điểm nổi bật</h2>\n  <p>Giới thiệu tính năng...</p>\n</section>`,
+    tip: 'Mỗi section nên có tiêu đề (h2/h3)'
   },
   {
     name: '<article>',
-    purpose: '一篇可独立传播的内容',
-    display: '块级',
-    scene: '博客文章、论坛帖子、卡片',
-    example: `<article style="border:1px solid #ddd; padding:10px; border-radius:4px;">\n  <h2 style="margin-top:0;">博客标题</h2>\n  <p>正文内容...</p>\n</article>`,
-    tip: 'article 里可以再嵌套 section'
+    purpose: 'Một nội dung có thể độc lập lan truyền',
+    display: 'Block',
+    scene: 'Bài blog, bài forum, card',
+    example: `<article style="border:1px solid #ddd; padding:10px; border-radius:4px;">\n  <h2 style="margin-top:0;">Tiêu đề blog</h2>\n  <p>Nội dung chính...</p>\n</article>`,
+    tip: 'Trong article có thể lồng tiếp section'
   },
   {
     name: '<aside>',
-    purpose: '旁注/侧栏信息',
-    display: '块级',
-    scene: '侧边栏、提示框、相关链接',
-    example: `<aside style="background:#fff3cd; padding:10px;">\n  <h3 style="margin-top:0;">相关阅读</h3>\n  <ul style="margin-bottom:0;">\n    <li>文章一</li>\n    <li>文章二</li>\n  </ul>\n</aside>`,
-    tip: '与主内容相关但非主体'
+    purpose: 'Thông tin phụ/sidebar',
+    display: 'Block',
+    scene: 'Sidebar, hộp gợi ý, link liên quan',
+    example: `<aside style="background:#fff3cd; padding:10px;">\n  <h3 style="margin-top:0;">Đọc thêm</h3>\n  <ul style="margin-bottom:0;">\n    <li>Bài 1</li>\n    <li>Bài 2</li>\n  </ul>\n</aside>`,
+    tip: 'Liên quan đến nội dung chính nhưng không phải nội dung chính'
   },
   {
     name: '<footer>',
-    purpose: '页面/区块的底部区域',
-    display: '块级',
-    scene: '版权、联系信息、链接',
+    purpose: 'Phần cuối của trang/khối',
+    display: 'Block',
+    scene: 'Bản quyền, liên hệ, link',
     example: `<footer style="background:#333; color:#fff; padding:10px; text-align:center;">\n  <p style="margin:0;">© 2026 MySite</p>\n</footer>`,
-    tip: '页面可有多个 footer，对应不同区块'
+    tip: 'Trang có thể có nhiều footer, tương ứng các khối khác nhau'
   },
   {
     name: '<figure>',
-    purpose: '插图+说明的容器',
-    display: '块级',
-    scene: '图片/代码片段/表格附说明',
-    example: `<figure style="border:1px solid #ccc; padding:5px; margin:0; display:inline-block;">\n  <img src="https://placehold.co/150x100?text=Hero+Img" alt="示例" style="display:block;"/>\n  <figcaption style="text-align:center; font-size:12px; color:#666;">图注文字</figcaption>\n</figure>`,
-    tip: '搭配 <figcaption> 提示内容说明'
+    purpose: 'Container chứa hình minh họa + chú thích',
+    display: 'Block',
+    scene: 'Ảnh/đoạn mã/bảng kèm chú thích',
+    example: `<figure style="border:1px solid #ccc; padding:5px; margin:0; display:inline-block;">\n  <img src="https://placehold.co/150x100?text=Hero+Img" alt="ví dụ" style="display:block;"/>\n  <figcaption style="text-align:center; font-size:12px; color:#666;">Chú thích ảnh</figcaption>\n</figure>`,
+    tip: 'Kết hợp với <figcaption> để chú thích nội dung'
   }
 ]
 

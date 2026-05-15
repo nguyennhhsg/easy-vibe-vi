@@ -2,19 +2,19 @@
   <div class="btree-demo">
     <div class="demo-header">
       <span class="icon">🌳</span>
-      <span class="title">B+ 树索引演示</span>
-      <span class="subtitle">理解数据库如何快速查找数据</span>
+      <span class="title">Demo index B+ tree</span>
+      <span class="subtitle">Hiểu cách database tra cứu dữ liệu nhanh</span>
     </div>
 
     <div class="intro-text">
-      想象你要在<span class="highlight">字典</span>里找一个字。你会先看目录，定位到首字母的区域，再在这个区域里找具体页码。B+ 树就是这样的<span class="highlight">多层目录</span>，让数据库在 10 亿条数据中 3 次就能找到目标。
+      Hãy tưởng tượng bạn tra một chữ trong <span class="highlight">từ điển</span>. Bạn sẽ xem mục lục trước, định vị tới vùng chữ cái đầu, rồi tìm số trang cụ thể trong vùng đó. B+ tree chính là <span class="highlight">mục lục nhiều tầng</span> như vậy, giúp database tìm mục tiêu trong 1 tỷ bản ghi chỉ qua 3 bước.
     </div>
 
     <div class="comparison">
       <div class="compare-card scan">
         <div class="card-header">
           <span class="icon">🐢</span>
-          <span class="title">全表扫描</span>
+          <span class="title">Quét toàn bảng</span>
         </div>
         <div class="card-content">
           <div class="data-rows">
@@ -25,21 +25,21 @@
               :class="{ found: scanMode === 'found' && i === targetId }"
             >
               <span class="row-id">{{ String(i).padStart(3, '0') }}</span>
-              <span class="row-name">用户{{ i }}</span>
+              <span class="row-name">User {{ i }}</span>
             </div>
           </div>
           <div class="scan-info">
             <p v-if="!scanMode">
-              👆 点击"开始查找"看全表扫描有多慢
+              👆 Nhấn "Bắt đầu tìm" để xem quét toàn bảng chậm đến đâu
             </p>
             <p v-else-if="scanMode === 'scanning'">
-              正在扫描... 第 {{ scanCount }} 条
+              Đang quét... bản ghi thứ {{ scanCount }}
             </p>
             <p
               v-else
               class="found"
             >
-              ✅ 找到了！扫描了 {{ scanCount }} 条记录，耗时 {{ scanTime }}秒
+              ✅ Tìm thấy! Đã quét {{ scanCount }} bản ghi, mất {{ scanTime }}s
             </p>
           </div>
           <button
@@ -47,7 +47,7 @@
             class="btn"
             @click="startScan"
           >
-            开始查找
+            Bắt đầu tìm
           </button>
         </div>
       </div>
@@ -55,13 +55,13 @@
       <div class="compare-card index">
         <div class="card-header">
           <span class="icon">⚡</span>
-          <span class="title">索引查找</span>
+          <span class="title">Tra cứu bằng index</span>
         </div>
         <div class="card-content">
           <div class="tree-structure">
             <div class="tree-level root">
               <div class="node-label">
-                根节点
+                Node gốc
               </div>
               <div class="node">
                 1-100
@@ -69,7 +69,7 @@
             </div>
             <div class="tree-level intermediate">
               <div class="node-label">
-                中间节点
+                Node trung gian
               </div>
               <div class="node">
                 1-10
@@ -77,7 +77,7 @@
             </div>
             <div class="tree-level leaf">
               <div class="node-label">
-                叶子节点
+                Node lá
               </div>
               <div
                 v-for="i in 10"
@@ -91,16 +91,16 @@
           </div>
           <div class="index-info">
             <p v-if="!indexMode">
-              👆 点击"开始查找"看索引有多快
+              👆 Nhấn "Bắt đầu tìm" để xem index nhanh đến đâu
             </p>
             <p v-else-if="indexMode === 'searching'">
-              正在搜索... 第 {{ indexStep }} 步
+              Đang tìm... bước {{ indexStep }}
             </p>
             <p
               v-else
               class="found"
             >
-              ✅ 找到了！只用了 {{ indexSteps.length }} 步，耗时 {{ indexTime }}秒
+              ✅ Tìm thấy! Chỉ qua {{ indexSteps.length }} bước, mất {{ indexTime }}s
             </p>
           </div>
           <button
@@ -108,7 +108,7 @@
             class="btn"
             @click="startIndex"
           >
-            开始查找
+            Bắt đầu tìm
           </button>
         </div>
       </div>
@@ -117,41 +117,41 @@
     <div class="stats-box">
       <div class="stat-item">
         <div class="stat-label">
-          数据量
+          Số lượng dữ liệu
         </div>
         <div class="stat-value">
-          100 万条
+          1 triệu bản ghi
         </div>
       </div>
       <div class="stat-item">
         <div class="stat-label">
-          全表扫描
+          Quét toàn bảng
         </div>
         <div class="stat-value slow">
-          平均 50 万次比较
+          Trung bình 500k lần so sánh
         </div>
       </div>
       <div class="stat-item">
         <div class="stat-label">
-          B+ 树索引
+          Index B+ tree
         </div>
         <div class="stat-value fast">
-          仅 3 次比较
+          Chỉ 3 lần so sánh
         </div>
       </div>
       <div class="stat-item">
         <div class="stat-label">
-          速度提升
+          Tăng tốc
         </div>
         <div class="stat-value highlight">
-          10 万倍+
+          100.000 lần+
         </div>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心原理：</strong>B+ 树通过"矮胖"的设计，让树的高度只有 3-4 层。每层可以存储成百上千个键值，所以 10 亿数据也只需要 3 次磁盘 I/O。这就是数据库查询飞快的秘密。
+      <strong>Nguyên lý cốt lõi:</strong> B+ tree dùng thiết kế "thấp và rộng", chiều cao cây chỉ 3-4 tầng. Mỗi tầng có thể chứa hàng trăm đến hàng nghìn key, nên 1 tỷ bản ghi cũng chỉ cần 3 lần I/O đĩa. Đây là bí quyết giúp truy vấn database cực nhanh.
     </div>
   </div>
 </template>
@@ -188,7 +188,7 @@ const startScan = () => {
 const startIndex = () => {
   indexMode.value = 'searching'
   indexStep.value = 0
-  indexSteps.value = ['根节点', '中间节点', '叶子节点']
+  indexSteps.value = ['Node gốc', 'Node trung gian', 'Node lá']
 
   let currentStep = 0
 

@@ -2,21 +2,21 @@
   <div class="object-storage-demo">
     <div class="demo-header">
       <span class="icon">🗄️</span>
-      <span class="title">对象存储架构</span>
-      <span class="subtitle">理解 Bucket、Object 和 Metadata 的关系</span>
+      <span class="title">Kiến trúc object storage</span>
+      <span class="subtitle">Hiểu quan hệ giữa Bucket, Object và Metadata</span>
     </div>
 
     <div class="storage-architecture">
-      <!-- 账户层 -->
+      <!-- Account layer -->
       <div class="account-layer">
         <div class="account-icon">
           👤
         </div>
         <div class="account-name">
-          云账户 (Account)
+          Cloud account
         </div>
         <div class="account-desc">
-          管理权限、计费、全局配置
+          Quản lý quyền, billing, cấu hình toàn cục
         </div>
       </div>
 
@@ -24,12 +24,12 @@
         ▼
       </div>
 
-      <!-- 桶层 -->
+      <!-- Bucket layer -->
       <div class="buckets-container">
         <div class="section-title">
           <span>📦</span>
-          <span>存储桶 (Buckets)</span>
-          <span class="section-desc">命名空间隔离，权限控制</span>
+          <span>Buckets</span>
+          <span class="section-desc">Cô lập namespace, kiểm soát quyền</span>
         </div>
 
         <div class="buckets-row">
@@ -47,7 +47,7 @@
               {{ bucket.name }}
             </div>
             <div class="bucket-meta">
-              {{ bucket.objects }} 对象
+              {{ bucket.objects }} object
             </div>
             <div class="bucket-size">
               {{ bucket.size }}
@@ -60,12 +60,12 @@
         ▼
       </div>
 
-      <!-- 对象层 -->
+      <!-- Object layer -->
       <div class="objects-container">
         <div class="section-title">
           <span>📄</span>
-          <span>对象 (Objects)</span>
-          <span class="section-desc">文件数据 + 元数据</span>
+          <span>Objects</span>
+          <span class="section-desc">Dữ liệu file + metadata</span>
         </div>
 
         <div
@@ -100,7 +100,7 @@
           v-else
           class="objects-placeholder"
         >
-          点击上方存储桶查看对象列表
+          Bấm vào bucket phía trên để xem danh sách object
         </div>
       </div>
 
@@ -108,12 +108,12 @@
         ▼
       </div>
 
-      <!-- 元数据层 -->
+      <!-- Metadata layer -->
       <div class="metadata-container">
         <div class="section-title">
           <span>🏷️</span>
-          <span>元数据 (Metadata)</span>
-          <span class="section-desc">系统元数据 + 自定义元数据</span>
+          <span>Metadata</span>
+          <span class="section-desc">Metadata hệ thống + metadata custom</span>
         </div>
 
         <div
@@ -122,7 +122,7 @@
         >
           <div class="metadata-section">
             <div class="metadata-section-title">
-              系统元数据 (System)
+              Metadata hệ thống (System)
             </div>
             <div class="metadata-list">
               <div
@@ -138,7 +138,7 @@
 
           <div class="metadata-section">
             <div class="metadata-section-title">
-              自定义元数据 (Custom)
+              Metadata custom (Custom)
             </div>
             <div class="metadata-list">
               <div
@@ -157,14 +157,14 @@
           v-else
           class="metadata-placeholder"
         >
-          点击左侧对象查看详细元数据
+          Bấm vào object bên trái để xem metadata chi tiết
         </div>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>对象存储采用三层架构：Account（账户）→ Bucket（桶）→ Object（对象），每个对象都附带丰富的元数据用于检索和管理。理解这个层次结构是掌握对象存储的第一步。
+      <strong>Ý tưởng cốt lõi:</strong> Object storage có kiến trúc 3 lớp: Account → Bucket → Object. Mỗi object đi kèm metadata phong phú phục vụ tra cứu và quản lý. Hiểu cấu trúc phân lớp này là bước đầu tiên khi học object storage.
     </div>
   </div>
 </template>
@@ -172,7 +172,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 存储桶数据
+// Dữ liệu bucket
 const buckets = [
   {
     name: 'myapp-images-prod',
@@ -194,7 +194,7 @@ const buckets = [
   }
 ]
 
-// 对象数据
+// Dữ liệu object
 const objectsData = {
   'myapp-images-prod': [
     { key: 'avatars/user123.jpg', type: 'image/jpeg', size: '156 KB', lastModified: '2024-01-15' },
@@ -211,7 +211,7 @@ const objectsData = {
   ]
 }
 
-// 元数据
+// Metadata
 const metadataData = {
   'avatars/user123.jpg': {
     system: {
@@ -243,11 +243,11 @@ const metadataData = {
   }
 }
 
-// 状态
+// Trạng thái
 const selectedBucket = ref(null)
 const selectedObject = ref(null)
 
-// 计算属性
+// Computed
 const currentObjects = computed(() => {
   if (!selectedBucket.value) return []
   return objectsData[selectedBucket.value] || []
@@ -258,7 +258,7 @@ const currentMetadata = computed(() => {
   return metadataData[selectedObject.value] || null
 })
 
-// 方法
+// Methods
 const selectBucket = (name) => {
   selectedBucket.value = name
   selectedObject.value = null

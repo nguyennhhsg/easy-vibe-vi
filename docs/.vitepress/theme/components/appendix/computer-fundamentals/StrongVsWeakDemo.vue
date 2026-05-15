@@ -1,7 +1,7 @@
 <template>
   <div class="strong-vs-weak-demo">
-    <h4>⚡ 强类型 vs 弱类型：隐式转换实验室</h4>
-    <p class="desc">输入一个表达式，看看不同语言怎么处理</p>
+    <h4>⚡ Kiểu mạnh vs kiểu yếu: phòng thí nghiệm chuyển kiểu ngầm</h4>
+    <p class="desc">Nhập một biểu thức và xem cách mỗi ngôn ngữ xử lý</p>
 
     <div class="expr-selector">
       <button
@@ -19,7 +19,7 @@
         <div class="lang-header">
           <span class="lang-name">{{ lang.name }}</span>
           <span :class="['lang-type', lang.strong ? 'strong' : 'weak']">
-            {{ lang.strong ? '强类型' : '弱类型' }}
+            {{ lang.strong ? 'Kiểu mạnh' : 'Kiểu yếu' }}
           </span>
         </div>
         <pre class="lang-code">{{ lang.code }}</pre>
@@ -44,32 +44,32 @@ const expressions = [
   {
     expr: '"1" + 1',
     langs: [
-      { name: 'JavaScript', strong: false, code: '"1" + 1', result: '→ "11"（字符串拼接）', error: false },
+      { name: 'JavaScript', strong: false, code: '"1" + 1', result: '→ "11" (nối chuỗi)', error: false },
       { name: 'Python', strong: true, code: '"1" + 1', result: '→ TypeError: can only concatenate str to str', error: true },
-      { name: 'Java', strong: false, code: '"1" + 1', result: '→ "11"（字符串拼接）', error: false },
-      { name: 'Rust', strong: true, code: '"1" + 1', result: '→ 编译错误：类型不匹配', error: true }
+      { name: 'Java', strong: false, code: '"1" + 1', result: '→ "11" (nối chuỗi)', error: false },
+      { name: 'Rust', strong: true, code: '"1" + 1', result: '→ Lỗi biên dịch: kiểu không khớp', error: true }
     ],
-    takeaway: '强类型语言拒绝猜测你的意图，宁可报错也不悄悄转换。弱类型语言会"好心"帮你转，但结果可能不是你想要的。'
+    takeaway: 'Ngôn ngữ kiểu mạnh từ chối đoán ý bạn, thà báo lỗi còn hơn ngầm chuyển kiểu. Ngôn ngữ kiểu yếu sẽ "tốt bụng" chuyển giúp bạn, nhưng kết quả có thể không như bạn muốn.'
   },
   {
     expr: 'true + 1',
     langs: [
-      { name: 'JavaScript', strong: false, code: 'true + 1', result: '→ 2（true 被转为 1）', error: false },
-      { name: 'Python', strong: true, code: 'True + 1', result: '→ 2（Python 中 bool 是 int 子类）', error: false },
-      { name: 'Java', strong: false, code: 'true + 1', result: '→ 编译错误', error: true },
-      { name: 'C', strong: false, code: '1 + 1 // true=1', result: '→ 2（C 中没有 bool，用 0/1）', error: false }
+      { name: 'JavaScript', strong: false, code: 'true + 1', result: '→ 2 (true được chuyển thành 1)', error: false },
+      { name: 'Python', strong: true, code: 'True + 1', result: '→ 2 (Python: bool là lớp con của int)', error: false },
+      { name: 'Java', strong: false, code: 'true + 1', result: '→ Lỗi biên dịch', error: true },
+      { name: 'C', strong: false, code: '1 + 1 // true=1', result: '→ 2 (C không có bool, dùng 0/1)', error: false }
     ],
-    takeaway: 'bool 和数字的关系因语言而异。Python 虽是强类型，但 bool 继承自 int，这是设计选择而非弱类型。'
+    takeaway: 'Quan hệ giữa bool và số khác nhau ở mỗi ngôn ngữ. Python là kiểu mạnh nhưng bool kế thừa từ int, đó là lựa chọn thiết kế chứ không phải kiểu yếu.'
   },
   {
     expr: '"5" == 5',
     langs: [
-      { name: 'JavaScript', strong: false, code: '"5" == 5', result: '→ true（隐式转换后比较）', error: false },
-      { name: 'Python', strong: true, code: '"5" == 5', result: '→ False（类型不同，直接 False）', error: false },
-      { name: 'TypeScript', strong: false, code: '"5" == 5', result: '→ true（但 TSLint 会警告）', error: false },
-      { name: 'PHP', strong: false, code: '"5" == 5', result: '→ true（臭名昭著的松散比较）', error: false }
+      { name: 'JavaScript', strong: false, code: '"5" == 5', result: '→ true (chuyển kiểu ngầm rồi so sánh)', error: false },
+      { name: 'Python', strong: true, code: '"5" == 5', result: '→ False (khác kiểu thì False luôn)', error: false },
+      { name: 'TypeScript', strong: false, code: '"5" == 5', result: '→ true (nhưng TSLint sẽ cảnh báo)', error: false },
+      { name: 'PHP', strong: false, code: '"5" == 5', result: '→ true (kiểu so sánh lỏng khét tiếng)', error: false }
     ],
-    takeaway: 'JavaScript 的 == 会做隐式转换，这是无数 bug 的来源。所以社区推荐始终使用 === 严格比较。'
+    takeaway: 'Toán tử == của JavaScript làm chuyển kiểu ngầm, nguồn gốc của vô vàn bug. Cộng đồng khuyến nghị luôn dùng === để so sánh nghiêm ngặt.'
   }
 ]
 </script>

@@ -1,16 +1,16 @@
 <!--
   UploadProcessDemo.vue
-  上传流程演示 - 展示直传、分片、断点续传等上传方式
+  Demo luồng upload - minh họa direct upload, multipart và resumable upload
 -->
 <template>
   <div class="upload-process-demo">
     <div class="demo-header">
       <span class="icon">📤</span>
-      <span class="title">文件上传流程</span>
-      <span class="subtitle">理解直传、分片、断点续传三种方式</span>
+      <span class="title">Luồng upload file</span>
+      <span class="subtitle">Hiểu 3 cách: direct, multipart và resumable</span>
     </div>
 
-    <!-- 上传方式选择 -->
+    <!-- Lựa chọn phương thức upload -->
     <div class="upload-methods">
       <div
         v-for="method in uploadMethods"
@@ -22,60 +22,60 @@
         <div class="method-icon">{{ method.icon }}</div>
         <div class="method-name">{{ method.name }}</div>
         <div class="method-desc">{{ method.description }}</div>
-        <div class="method-size">适合: {{ method.suitable }}</div>
+        <div class="method-size">Phù hợp: {{ method.suitable }}</div>
       </div>
     </div>
 
-    <!-- 上传流程可视化 -->
+    <!-- Trực quan hóa luồng upload -->
     <div class="upload-flow">
       <div class="flow-title">
-        <span v-if="selectedMethod === 'direct'">🚀 直传流程</span>
-        <span v-else-if="selectedMethod === 'multipart'">🔪 分片上传流程</span>
-        <span v-else>💾 断点续传流程</span>
+        <span v-if="selectedMethod === 'direct'">🚀 Luồng direct upload</span>
+        <span v-else-if="selectedMethod === 'multipart'">🔪 Luồng multipart upload</span>
+        <span v-else>💾 Luồng resumable upload</span>
       </div>
 
-      <!-- 直传流程 -->
+      <!-- Luồng direct upload -->
       <div v-if="selectedMethod === 'direct'" class="flow-steps">
         <div class="flow-step" :class="{ active: currentStep >= 1 }">
           <div class="step-num">1</div>
           <div class="step-content">
-            <div class="step-title">用户选择文件</div>
-            <div class="step-detail">浏览器选择 5MB 图片文件</div>
+            <div class="step-title">User chọn file</div>
+            <div class="step-detail">Trình duyệt chọn file ảnh 5MB</div>
           </div>
         </div>
         <div class="flow-arrow">⬇️</div>
         <div class="flow-step" :class="{ active: currentStep >= 2 }">
           <div class="step-num">2</div>
           <div class="step-content">
-            <div class="step-title">申请上传凭证</div>
-            <div class="step-detail">前端 → 后端 → STS 临时凭证</div>
+            <div class="step-title">Xin credential upload</div>
+            <div class="step-detail">Frontend → Backend → STS credential tạm thời</div>
           </div>
         </div>
         <div class="flow-arrow">⬇️</div>
         <div class="flow-step" :class="{ active: currentStep >= 3 }">
           <div class="step-num">3</div>
           <div class="step-content">
-            <div class="step-title">直传到对象存储</div>
-            <div class="step-detail">浏览器 → OSS/COS（5MB 一次性上传）</div>
+            <div class="step-title">Upload thẳng vào object storage</div>
+            <div class="step-detail">Trình duyệt → OSS/COS (upload 5MB một lần)</div>
           </div>
         </div>
         <div class="flow-arrow">⬇️</div>
         <div class="flow-step" :class="{ active: currentStep >= 4 }">
           <div class="step-num">4</div>
           <div class="step-content">
-            <div class="step-title">上传完成</div>
-            <div class="step-detail">返回 URL，前端通知后端保存记录</div>
+            <div class="step-title">Upload xong</div>
+            <div class="step-detail">Trả URL về, frontend thông báo backend lưu bản ghi</div>
           </div>
         </div>
       </div>
 
-      <!-- 分片上传流程 -->
+      <!-- Luồng multipart upload -->
       <div v-else-if="selectedMethod === 'multipart'" class="flow-steps multipart-flow">
         <div class="flow-step" :class="{ active: currentStep >= 1 }">
           <div class="step-num">1</div>
           <div class="step-content">
-            <div class="step-title">文件分片</div>
-            <div class="step-detail">500MB 视频 → 50个 10MB 分片</div>
+            <div class="step-title">Chia nhỏ file</div>
+            <div class="step-detail">Video 500MB → 50 chunk mỗi chunk 10MB</div>
             <div class="chunks-preview">
               <div v-for="i in 10" :key="i" class="chunk" :class="{ uploaded: i <= 3 }">{{ i }}</div>
               <span class="chunks-more">...</span>
@@ -86,20 +86,20 @@
         <div class="flow-step" :class="{ active: currentStep >= 2 }">
           <div class="step-num">2</div>
           <div class="step-content">
-            <div class="step-title">初始化分片上传</div>
-            <div class="step-detail">获取 uploadId（上传会话 ID）</div>
+            <div class="step-title">Khởi tạo multipart upload</div>
+            <div class="step-detail">Lấy uploadId (ID phiên upload)</div>
           </div>
         </div>
         <div class="flow-arrow">⬇️</div>
         <div class="flow-step" :class="{ active: currentStep >= 3 }">
           <div class="step-num">3</div>
           <div class="step-content">
-            <div class="step-title">并行上传分片</div>
-            <div class="step-detail">3 个并发，每片 10MB</div>
+            <div class="step-title">Upload chunk song song</div>
+            <div class="step-detail">3 concurrent, mỗi chunk 10MB</div>
             <div class="parallel-upload">
-              <div class="upload-slot" :class="{ active: parallelActive >= 1 }">分片 1</div>
-              <div class="upload-slot" :class="{ active: parallelActive >= 2 }">分片 2</div>
-              <div class="upload-slot" :class="{ active: parallelActive >= 3 }">分片 3</div>
+              <div class="upload-slot" :class="{ active: parallelActive >= 1 }">Chunk 1</div>
+              <div class="upload-slot" :class="{ active: parallelActive >= 2 }">Chunk 2</div>
+              <div class="upload-slot" :class="{ active: parallelActive >= 3 }">Chunk 3</div>
             </div>
           </div>
         </div>
@@ -107,19 +107,19 @@
         <div class="flow-step" :class="{ active: currentStep >= 4 }">
           <div class="step-num">4</div>
           <div class="step-content">
-            <div class="step-title">合并分片</div>
-            <div class="step-detail">服务端合并所有分片为完整文件</div>
+            <div class="step-title">Hợp nhất chunk</div>
+            <div class="step-detail">Server gộp toàn bộ chunk thành file hoàn chỉnh</div>
           </div>
         </div>
       </div>
 
-      <!-- 断点续传流程 -->
+      <!-- Luồng resumable upload -->
       <div v-else class="flow-steps resume-flow">
         <div class="flow-step" :class="{ active: currentStep >= 1 }">
           <div class="step-num">1</div>
           <div class="step-content">
-            <div class="step-title">开始上传 1GB 视频</div>
-            <div class="step-detail">已上传 6 个分片（60MB），正在上传第 7 个</div>
+            <div class="step-title">Bắt đầu upload video 1GB</div>
+            <div class="step-detail">Đã upload 6 chunk (60MB), đang upload chunk thứ 7</div>
             <div class="progress-bar">
               <div class="progress-fill" style="width: 6%;"></div>
               <div class="progress-text">6% (60MB / 1GB)</div>
@@ -130,11 +130,11 @@
         <div class="flow-step error-step" :class="{ active: currentStep >= 2 }">
           <div class="step-num">⚠️</div>
           <div class="step-content">
-            <div class="step-title">网络中断！</div>
-            <div class="step-detail">WiFi 切换到 4G，上传中断，第 7 个分片上传失败</div>
+            <div class="step-title">Mạng bị ngắt!</div>
+            <div class="step-detail">WiFi chuyển sang 4G, upload bị ngắt, chunk thứ 7 upload thất bại</div>
             <div class="error-info">
               <span>❌ Error: ETIMEDOUT</span>
-              <span>已上传分片: 6/100</span>
+              <span>Chunk đã upload: 6/100</span>
             </div>
           </div>
         </div>
@@ -142,16 +142,16 @@
         <div class="flow-step" :class="{ active: currentStep >= 3 }">
           <div class="step-num">3</div>
           <div class="step-content">
-            <div class="step-title">查询已上传分片</div>
-            <div class="step-detail">恢复网络后，查询服务端已保存的分片列表</div>
+            <div class="step-title">Truy vấn chunk đã upload</div>
+            <div class="step-detail">Sau khi có mạng lại, query danh sách chunk server đã lưu</div>
             <div class="resume-info">
               <div class="resume-item success">
-                <span>✅ 分片 1-6</span>
-                <span>已上传</span>
+                <span>✅ Chunk 1-6</span>
+                <span>Đã upload</span>
               </div>
               <div class="resume-item pending">
-                <span>⏳ 分片 7-100</span>
-                <span>待上传</span>
+                <span>⏳ Chunk 7-100</span>
+                <span>Chờ upload</span>
               </div>
             </div>
           </div>
@@ -160,19 +160,19 @@
         <div class="flow-step" :class="{ active: currentStep >= 4 }">
           <div class="step-num">4</div>
           <div class="step-content">
-            <div class="step-title">断点续传成功！</div>
-            <div class="step-detail">从第 7 个分片继续上传，无需重传前 6 个分片</div>
+            <div class="step-title">Resume upload thành công!</div>
+            <div class="step-detail">Tiếp tục từ chunk thứ 7, không cần upload lại 6 chunk đầu</div>
             <div class="success-info">
               <div class="success-item">
-                <span>💾 节省流量</span>
+                <span>💾 Tiết kiệm traffic</span>
                 <span>60MB</span>
               </div>
               <div class="success-item">
-                <span>⏱️ 节省时间</span>
+                <span>⏱️ Tiết kiệm thời gian</span>
                 <span>~6s</span>
               </div>
               <div class="success-item">
-                <span>🎯 续传进度</span>
+                <span>🎯 Tiến độ resume</span>
                 <span>6% → 100%</span>
               </div>
             </div>
@@ -183,7 +183,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>大文件分片上传提高可靠性，网络中断可以从断点续传，避免重复上传整个文件。
+      <strong>Ý tưởng cốt lõi:</strong> Multipart upload giúp file lớn upload đáng tin cậy hơn, khi mạng đứt có thể resume từ điểm dừng, tránh phải upload lại toàn bộ file.
     </div>
   </div>
 </template>
@@ -191,32 +191,32 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 上传方式数据
+// Dữ liệu phương thức upload
 const uploadMethods = [
   {
     id: 'direct',
-    name: '直传',
+    name: 'Direct',
     icon: '🚀',
-    description: '小文件一次性上传到对象存储',
+    description: 'Upload file nhỏ một lần vào object storage',
     suitable: '< 100MB'
   },
   {
     id: 'multipart',
-    name: '分片上传',
+    name: 'Multipart',
     icon: '🔪',
-    description: '大文件切分多片并行上传',
+    description: 'File lớn chia nhỏ, upload song song nhiều chunk',
     suitable: '> 100MB'
   },
   {
     id: 'resume',
-    name: '断点续传',
+    name: 'Resumable',
     icon: '💾',
-    description: '网络中断后从断点继续上传',
-    suitable: '任何大小'
+    description: 'Mạng đứt vẫn resume tiếp từ điểm dừng',
+    suitable: 'Mọi kích thước'
   }
 ]
 
-// 状态
+// Trạng thái
 const selectedMethod = ref('direct')
 const currentStep = ref(0)
 const parallelActive = ref(0)
@@ -228,7 +228,7 @@ const stats = ref({
   progress: 6
 })
 
-// 方法
+// Methods
 const selectMethod = (id) => {
   selectedMethod.value = id
   resetDemo()
@@ -249,7 +249,7 @@ const resetDemo = () => {
   parallelActive.value = 0
 }
 
-// 计算属性
+// Computed
 const uploadProgress = computed(() => {
   return Math.round((stats.value.uploadedChunks / stats.value.totalChunks) * 100)
 })
@@ -426,7 +426,7 @@ const uploadProgress = computed(() => {
   font-size: 1rem;
 }
 
-/* 分片预览 */
+/* Preview chunk */
 .chunks-preview {
   display: flex;
   align-items: center;
@@ -456,7 +456,7 @@ const uploadProgress = computed(() => {
   color: var(--vp-c-text-2);
 }
 
-/* 并行上传 */
+/* Upload song song */
 .parallel-upload {
   display: flex;
   gap: 0.5rem;
@@ -482,7 +482,7 @@ const uploadProgress = computed(() => {
   font-weight: 600;
 }
 
-/* 进度条 */
+/* Progress bar */
 .progress-bar {
   position: relative;
   height: 24px;
@@ -510,7 +510,7 @@ const uploadProgress = computed(() => {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* 错误信息 */
+/* Thông tin lỗi */
 .error-info {
   display: flex;
   flex-direction: column;
@@ -528,7 +528,7 @@ const uploadProgress = computed(() => {
   font-family: var(--vp-font-family-mono);
 }
 
-/* 恢复信息 */
+/* Thông tin resume */
 .resume-info {
   margin-top: 0.5rem;
 }
@@ -565,7 +565,7 @@ const uploadProgress = computed(() => {
   color: var(--vp-c-text-2);
 }
 
-/* 成功信息 */
+/* Thông tin thành công */
 .success-info {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

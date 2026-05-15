@@ -1,21 +1,21 @@
 <template>
   <div class="compiler-analogy-demo">
     <div class="demo-header">
-      <span class="title">编译原理：翻译的艺术</span>
-      <span class="subtitle">如何把代码翻译成机器指令</span>
+      <span class="title">Nguyên lý biên dịch: nghệ thuật phiên dịch</span>
+      <span class="subtitle">Dịch code thành lệnh máy như thế nào</span>
     </div>
 
     <div class="analogy-intro">
       <div class="analogy-box">
         <div class="analogy-text">
-          编译器就像<strong>翻译官</strong>，把人类能懂的代码翻译成机器能懂的指令
+          Compiler giống như <strong>thông dịch viên</strong>, dịch code mà con người đọc hiểu thành lệnh mà máy hiểu được
         </div>
       </div>
     </div>
 
-    <!-- 翻译过程 -->
+    <!-- Quy trình phiên dịch -->
     <div class="translation-process">
-      <div class="process-title">代码翻译的完整流程</div>
+      <div class="process-title">Quy trình dịch code đầy đủ</div>
       <div class="process-flow">
         <div
           v-for="(step, index) in translationSteps"
@@ -35,9 +35,9 @@
       </div>
     </div>
 
-    <!-- 词法分析 -->
+    <!-- Phân tích từ vựng -->
     <div class="analyzer-section">
-      <div class="analyzer-title">词法分析：分词</div>
+      <div class="analyzer-title">Phân tích từ vựng: tách token</div>
       <div class="lexical-demo">
         <div class="source-code">
           <code>int age = 25;</code>
@@ -52,24 +52,24 @@
       </div>
     </div>
 
-    <!-- 语法分析 -->
+    <!-- Phân tích cú pháp -->
     <div class="analyzer-section">
-      <div class="analyzer-title">语法分析：构建树</div>
+      <div class="analyzer-title">Phân tích cú pháp: dựng cây</div>
       <div class="syntax-demo">
         <div class="syntax-tree">
           <div class="tree-node root">
-            <span class="node-label">赋值语句</span>
+            <span class="node-label">Câu lệnh gán</span>
             <div class="node-children">
               <div class="tree-node">
-                <span class="node-label">变量</span>
+                <span class="node-label">Biến</span>
                 <span class="node-value">age</span>
               </div>
               <div class="tree-node">
-                <span class="node-label">运算符</span>
+                <span class="node-label">Toán tử</span>
                 <span class="node-value">=</span>
               </div>
               <div class="tree-node">
-                <span class="node-label">数字</span>
+                <span class="node-label">Số</span>
                 <span class="node-value">25</span>
               </div>
             </div>
@@ -78,54 +78,54 @@
       </div>
     </div>
 
-    <!-- 编译 vs 解释 -->
+    <!-- Biên dịch vs Thông dịch -->
     <div class="comparison">
-      <div class="comparison-title">编译 vs 解释</div>
+      <div class="comparison-title">Biên dịch vs Thông dịch</div>
       <div class="comparison-box">
         <div class="compare-side compile">
-          <div class="side-header">编译型语言</div>
+          <div class="side-header">Ngôn ngữ biên dịch</div>
           <div class="side-content">
-            <div class="side-step">源代码 → 编译器 → 机器码</div>
+            <div class="side-step">Source code → Compiler → Machine code</div>
             <div class="side-example">C, Go, Rust</div>
             <div class="side-features">
-              <div class="feature">✓ 执行快</div>
-              <div class="feature">✓ 一次编译多次运行</div>
-              <div class="feature">✗ 编译慢</div>
+              <div class="feature">✓ Chạy nhanh</div>
+              <div class="feature">✓ Biên dịch một lần, chạy nhiều lần</div>
+              <div class="feature">✗ Biên dịch chậm</div>
             </div>
           </div>
         </div>
 
         <div class="compare-side interpret">
-          <div class="side-header">解释型语言</div>
+          <div class="side-header">Ngôn ngữ thông dịch</div>
           <div class="side-content">
-            <div class="side-step">源代码 → 解释器 → 逐行执行</div>
+            <div class="side-step">Source code → Interpreter → Chạy từng dòng</div>
             <div class="side-example">Python, JavaScript, PHP</div>
             <div class="side-features">
-              <div class="feature">✓ 开发快</div>
-              <div class="feature">✓ 跨平台</div>
-              <div class="feature">✗ 执行慢</div>
+              <div class="feature">✓ Phát triển nhanh</div>
+              <div class="feature">✓ Đa nền tảng</div>
+              <div class="feature">✗ Chạy chậm</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 优化 -->
+    <!-- Tối ưu hóa -->
     <div class="optimization">
-      <div class="optimization-title">编译器优化</div>
+      <div class="optimization-title">Tối ưu hóa của compiler</div>
       <div class="optimization-content">
         <div class="opt-examples">
           <div class="opt-item">
-            <div class="opt-before">优化前：</div>
+            <div class="opt-before">Trước tối ưu:</div>
             <div class="opt-code">x = 5 + 3 + 2</div>
           </div>
           <div class="opt-arrow">⬇️</div>
           <div class="opt-item">
-            <div class="opt-after">优化后：</div>
+            <div class="opt-after">Sau tối ưu:</div>
             <div class="opt-code">x = 10</div>
           </div>
         </div>
-        <div class="opt-note">编译器会自动优化代码，提高运行效率</div>
+        <div class="opt-note">Compiler tự động tối ưu code, nâng cao hiệu năng khi chạy</div>
       </div>
     </div>
   </div>
@@ -136,43 +136,43 @@ import { ref } from 'vue'
 
 const translationSteps = [
   {
-    name: '词法分析',
-    desc: '将代码分解成一个个单词（token）',
+    name: 'Phân tích từ vựng',
+    desc: 'Tách code thành từng từ (token)',
     example: 'int age = 25 → [int, age, =, 25]'
   },
   {
-    name: '语法分析',
-    desc: '检查代码是否符合语法规则，构建语法树',
-    example: '验证语句结构是否正确'
+    name: 'Phân tích cú pháp',
+    desc: 'Kiểm tra code có đúng cú pháp không, dựng cây cú pháp',
+    example: 'Xác minh cấu trúc câu lệnh có hợp lệ không'
   },
   {
-    name: '语义分析',
-    desc: '检查代码的含义是否合理',
-    example: '检查变量是否定义、类型是否匹配'
+    name: 'Phân tích ngữ nghĩa',
+    desc: 'Kiểm tra ý nghĩa của code có hợp lý không',
+    example: 'Kiểm tra biến đã khai báo chưa, kiểu có khớp không'
   },
   {
-    name: '中间代码生成',
-    desc: '生成与机器无关的中间表示',
-    example: '生成字节码或中间表示'
+    name: 'Sinh mã trung gian',
+    desc: 'Sinh ra biểu diễn trung gian không phụ thuộc máy',
+    example: 'Sinh bytecode hoặc biểu diễn trung gian'
   },
   {
-    name: '优化',
-    desc: '改进代码，提高执行效率',
-    example: '常量折叠、死代码消除'
+    name: 'Tối ưu hóa',
+    desc: 'Cải thiện code để chạy hiệu quả hơn',
+    example: 'Gấp hằng số, loại bỏ code chết'
   },
   {
-    name: '目标代码生成',
-    desc: '生成机器码或目标代码',
-    example: '生成 x86、ARM 等机器指令'
+    name: 'Sinh mã đích',
+    desc: 'Sinh machine code hoặc mã đích',
+    example: 'Sinh lệnh máy x86, ARM,...'
   }
 ]
 
 const tokens = [
-  { type: '关键字', value: 'int' },
-  { type: '标识符', value: 'age' },
-  { type: '运算符', value: '=' },
-  { type: '数字', value: '25' },
-  { type: '分隔符', value: ';' }
+  { type: 'Từ khóa', value: 'int' },
+  { type: 'Định danh', value: 'age' },
+  { type: 'Toán tử', value: '=' },
+  { type: 'Số', value: '25' },
+  { type: 'Dấu phân cách', value: ';' }
 ]
 </script>
 

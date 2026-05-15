@@ -1,15 +1,15 @@
 <!--
   CachePatternsDemo.vue
-  缓存模式演示 - Cache-Aside, Read-Through, Write-Behind
+  Demo các mô hình cache - Cache-Aside, Read-Through, Write-Behind
 -->
 <template>
   <div class="cache-patterns-demo">
     <div class="header">
       <div class="title">
-        缓存模式 (Caching Patterns)
+        Các mô hình cache (Caching Patterns)
       </div>
       <div class="subtitle">
-        理解不同缓存读写模式的工作原理
+        Hiểu cách hoạt động của các mô hình đọc/ghi cache khác nhau
       </div>
     </div>
 
@@ -33,22 +33,22 @@
       >
         <div class="description">
           <div class="pattern-title">
-            Cache-Aside (旁路缓存)
+            Cache-Aside (cache đi bên cạnh)
           </div>
           <div class="pattern-subtitle">
-            最常用的模式，由应用代码控制缓存
+            Mô hình phổ biến nhất, code ứng dụng tự kiểm soát cache
           </div>
           <div class="pattern-points">
             <div class="point">
               <span class="icon">📖</span>
               <div>
-                <strong>读取</strong>：先查缓存，没命中再查数据库，然后写入缓存
+                <strong>Đọc</strong>: Tra cache trước, miss thì truy vấn database rồi ghi vào cache
               </div>
             </div>
             <div class="point">
               <span class="icon">✏️</span>
               <div>
-                <strong>更新</strong>：先更新数据库，然后<strong>删除</strong>缓存（不是更新！）
+                <strong>Cập nhật</strong>: Cập nhật database trước, sau đó <strong>xóa</strong> cache (không phải cập nhật!)
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
 
         <div class="diagram">
           <div class="diagram-title">
-            读取流程
+            Luồng đọc
           </div>
           <div class="flow-chart">
             <div
@@ -67,7 +67,7 @@
                 1
               </div>
               <div class="step-text">
-                查询缓存
+                Tra cache
               </div>
             </div>
             <div class="flow-arrow">
@@ -75,7 +75,7 @@
             </div>
             <div class="flow-decision">
               <div class="decision-label">
-                命中?
+                Hit?
               </div>
               <div class="decision-branches">
                 <div
@@ -83,10 +83,10 @@
                   :class="{ active: flowStep >= 2 && cacheHit }"
                 >
                   <div class="branch-label">
-                    是
+                    Có
                   </div>
                   <div class="branch-result">
-                    ✅ 返回数据
+                    ✅ Trả về dữ liệu
                   </div>
                 </div>
                 <div
@@ -94,7 +94,7 @@
                   :class="{ active: flowStep >= 2 && !cacheHit }"
                 >
                   <div class="branch-label">
-                    否
+                    Không
                   </div>
                   <div class="branch-steps">
                     <div
@@ -105,7 +105,7 @@
                         2
                       </div>
                       <div class="step-text">
-                        查询数据库
+                        Truy vấn database
                       </div>
                     </div>
                     <div class="flow-arrow">
@@ -119,7 +119,7 @@
                         3
                       </div>
                       <div class="step-text">
-                        写入缓存
+                        Ghi vào cache
                       </div>
                     </div>
                     <div class="flow-arrow">
@@ -133,7 +133,7 @@
                         4
                       </div>
                       <div class="step-text">
-                        返回数据
+                        Trả về dữ liệu
                       </div>
                     </div>
                   </div>
@@ -148,42 +148,42 @@
               :disabled="simulating"
               @click="simulateCacheAside"
             >
-              {{ simulating ? '模拟中...' : '模拟读取' }}
+              {{ simulating ? 'Đang mô phỏng...' : 'Mô phỏng đọc' }}
             </button>
             <label class="checkbox">
               <input
                 v-model="cacheHit"
                 type="checkbox"
               >
-              缓存命中
+              Cache hit
             </label>
           </div>
         </div>
 
         <div class="code-example">
           <div class="code-title">
-            代码示例
+            Ví dụ code
           </div>
-          <pre class="code-block"><code>// Cache-Aside 模式
+          <pre class="code-block"><code>// Mô hình Cache-Aside
 def get_user(user_id):
-    # 1. 查缓存
+    # 1. Tra cache
     user = cache.get(f'user:{user_id}')
     if user:
-        return user  # 命中，直接返回
+        return user  # Hit, trả về ngay
 
-    # 2. 查数据库
+    # 2. Truy vấn database
     user = db.query(f'SELECT * FROM users WHERE id = {user_id}')
 
-    # 3. 写入缓存
+    # 3. Ghi vào cache
     cache.set(f'user:{user_id}', user, ttl=600)
 
     return user
 
 def update_user(user_id, data):
-    # 1. 更新数据库
+    # 1. Cập nhật database
     db.update('users', data)
 
-    # 2. 删除缓存（不是更新！）
+    # 2. Xóa cache (không phải cập nhật!)
     cache.delete(f'user:{user_id}')</code></pre>
         </div>
       </div>
@@ -198,19 +198,19 @@ def update_user(user_id, data):
             Read-Through / Write-Through
           </div>
           <div class="pattern-subtitle">
-            由缓存库负责与数据库交互，应用只和缓存打交道
+            Thư viện cache lo việc giao tiếp với database, ứng dụng chỉ làm việc với cache
           </div>
           <div class="pattern-points">
             <div class="point">
               <span class="icon">📖</span>
               <div>
-                <strong>Read-Through</strong>：缓存库自动从数据库加载数据
+                <strong>Read-Through</strong>: Thư viện cache tự động load dữ liệu từ database
               </div>
             </div>
             <div class="point">
               <span class="icon">✏️</span>
               <div>
-                <strong>Write-Through</strong>：写入缓存时同步写入数据库
+                <strong>Write-Through</strong>: Khi ghi cache cũng đồng thời ghi vào database
               </div>
             </div>
           </div>
@@ -218,7 +218,7 @@ def update_user(user_id, data):
 
         <div class="diagram">
           <div class="diagram-title">
-            架构对比
+            So sánh kiến trúc
           </div>
           <div class="architecture-comparison">
             <div class="arch-block">
@@ -227,11 +227,11 @@ def update_user(user_id, data):
               </div>
               <div class="arch-flow">
                 <div class="flow-box app">
-                  应用
+                  Ứng dụng
                 </div>
                 <div class="flow-arrows">
-                  <div>↔️ 缓存</div>
-                  <div>↔️ 数据库</div>
+                  <div>↔️ Cache</div>
+                  <div>↔️ Database</div>
                 </div>
               </div>
             </div>
@@ -241,13 +241,13 @@ def update_user(user_id, data):
               </div>
               <div class="arch-flow">
                 <div class="flow-box app">
-                  应用
+                  Ứng dụng
                 </div>
                 <div class="flow-arrows">
-                  <div>↔️ 缓存库</div>
+                  <div>↔️ Thư viện cache</div>
                 </div>
                 <div class="flow-box cache">
-                  缓存库 ↔️ 数据库
+                  Thư viện cache ↔️ Database
                 </div>
               </div>
             </div>
@@ -256,18 +256,18 @@ def update_user(user_id, data):
 
         <div class="code-example">
           <div class="code-title">
-            代码示例
+            Ví dụ code
           </div>
-          <pre class="code-block"><code>// Read-Through 模式（代码更简洁）
+          <pre class="code-block"><code>// Mô hình Read-Through (code gọn hơn)
 def get_user(user_id):
-    # 缓存库自动处理数据库查询
+    # Thư viện cache tự xử lý truy vấn database
     user = cache.get_or_load(user_id, lambda: db.get_user(user_id))
     return user
 
-// Write-Through 模式
+// Mô hình Write-Through
 def update_user(user_id, data):
-    # 缓存库自动同步到数据库
-    cache.set(user_id, data)  # 自动写入数据库</code></pre>
+    # Thư viện cache tự đồng bộ xuống database
+    cache.set(user_id, data)  # tự động ghi vào database</code></pre>
         </div>
       </div>
 
@@ -278,26 +278,26 @@ def update_user(user_id, data):
       >
         <div class="description">
           <div class="pattern-title">
-            Write-Behind (异步写回)
+            Write-Behind (ghi trễ bất đồng bộ)
           </div>
           <div class="pattern-subtitle">
-            写入时只写缓存，异步批量写数据库
+            Khi ghi chỉ ghi vào cache, sau đó ghi vào database theo lô và bất đồng bộ
           </div>
           <div class="pattern-points">
             <div class="point">
               <span class="icon">⚡</span>
-              <div><strong>优点</strong>：写入极快，适合写多的场景</div>
+              <div><strong>Ưu điểm</strong>: Ghi cực nhanh, phù hợp tình huống ghi nhiều</div>
             </div>
             <div class="point">
               <span class="icon">⚠️</span>
               <div>
-                <strong>缺点</strong>：数据可能丢失（缓存崩了，数据就没了）
+                <strong>Nhược điểm</strong>: Có thể mất dữ liệu (cache sập là dữ liệu mất)
               </div>
             </div>
             <div class="point">
               <span class="icon">🎯</span>
               <div>
-                <strong>适用</strong>：秒杀系统、点赞数、浏览量（可接受少量丢失）
+                <strong>Phù hợp</strong>: Hệ thống flash sale, số lượt like, lượt xem (chấp nhận mất ít)
               </div>
             </div>
           </div>
@@ -305,7 +305,7 @@ def update_user(user_id, data):
 
         <div class="diagram">
           <div class="diagram-title">
-            写入流程
+            Luồng ghi
           </div>
           <div class="flow-chart">
             <div class="flow-step">
@@ -313,7 +313,7 @@ def update_user(user_id, data):
                 1
               </div>
               <div class="step-text">
-                写入缓存
+                Ghi vào cache
               </div>
               <div class="step-time">
                 ⚡ ~1ms
@@ -327,7 +327,7 @@ def update_user(user_id, data):
                 2
               </div>
               <div class="step-text">
-                立即返回
+                Trả về ngay lập tức
               </div>
             </div>
             <div class="flow-arrow">
@@ -338,10 +338,10 @@ def update_user(user_id, data):
                 3
               </div>
               <div class="step-text">
-                异步批量写数据库
+                Ghi database theo lô, bất đồng bộ
               </div>
               <div class="step-time">
-                🕐 后台执行
+                🕐 Chạy nền
               </div>
             </div>
           </div>
@@ -351,7 +351,7 @@ def update_user(user_id, data):
               class="demo-btn"
               @click="simulateWriteBehind"
             >
-              模拟批量写入
+              Mô phỏng ghi theo lô
             </button>
           </div>
 
@@ -360,7 +360,7 @@ def update_user(user_id, data):
             class="write-queue"
           >
             <div class="queue-title">
-              待写入队列
+              Queue chờ ghi
             </div>
             <div class="queue-items">
               <div
@@ -378,18 +378,18 @@ def update_user(user_id, data):
 
         <div class="code-example">
           <div class="code-title">
-            代码示例
+            Ví dụ code
           </div>
-          <pre class="code-block"><code>// Write-Behind 模式
+          <pre class="code-block"><code>// Mô hình Write-Behind
 def update_counter(post_id):
-    # 1. 立即更新缓存（极快）
+    # 1. Cập nhật cache ngay (cực nhanh)
     cache.incr(f'views:{post_id}')
-    # 立即返回，不等待数据库
+    # Trả về ngay, không chờ database
 
-    # 2. 后台异步批量写入数据库
+    # 2. Bất đồng bộ ghi theo lô vào database ở nền
     async def flush_to_db():
         while True:
-            await asyncio.sleep(5)  # 每5秒批量写入
+            await asyncio.sleep(5)  # Mỗi 5 giây ghi một lô
             batch = cache.get_many('views:*')
             db.batch_update(batch)
 
@@ -400,39 +400,39 @@ def update_counter(post_id):
 
     <div class="pattern-comparison">
       <div class="comparison-title">
-        模式对比
+        So sánh các mô hình
       </div>
       <table class="comparison-table">
         <thead>
           <tr>
-            <th>模式</th>
-            <th>复杂度</th>
-            <th>性能</th>
-            <th>一致性</th>
-            <th>适用场景</th>
+            <th>Mô hình</th>
+            <th>Độ phức tạp</th>
+            <th>Hiệu năng</th>
+            <th>Tính nhất quán</th>
+            <th>Trường hợp dùng</th>
           </tr>
         </thead>
         <tbody>
           <tr :class="{ highlight: activePattern === 'cache-aside' }">
             <td>Cache-Aside</td>
-            <td>中</td>
-            <td>高</td>
-            <td>中</td>
-            <td>大多数场景</td>
+            <td>Trung bình</td>
+            <td>Cao</td>
+            <td>Trung bình</td>
+            <td>Hầu hết các tình huống</td>
           </tr>
           <tr :class="{ highlight: activePattern === 'read-through' }">
             <td>Read-Through</td>
-            <td>低</td>
-            <td>中</td>
-            <td>高</td>
-            <td>简单场景</td>
+            <td>Thấp</td>
+            <td>Trung bình</td>
+            <td>Cao</td>
+            <td>Tình huống đơn giản</td>
           </tr>
           <tr :class="{ highlight: activePattern === 'write-behind' }">
             <td>Write-Behind</td>
-            <td>高</td>
-            <td>极高</td>
-            <td>低</td>
-            <td>写多、可丢失</td>
+            <td>Cao</td>
+            <td>Cực cao</td>
+            <td>Thấp</td>
+            <td>Ghi nhiều, chấp nhận mất</td>
           </tr>
         </tbody>
       </table>
@@ -477,21 +477,21 @@ const simulateWriteBehind = async () => {
     {
       key: 'views:post:1',
       value: 100,
-      status: '待写入',
+      status: 'Chờ ghi',
       writing: false,
       written: false
     },
     {
       key: 'views:post:2',
       value: 200,
-      status: '待写入',
+      status: 'Chờ ghi',
       writing: false,
       written: false
     },
     {
       key: 'views:post:3',
       value: 150,
-      status: '待写入',
+      status: 'Chờ ghi',
       writing: false,
       written: false
     }
@@ -500,12 +500,12 @@ const simulateWriteBehind = async () => {
   for (let i = 0; i < writeQueue.value.length; i++) {
     await new Promise((resolve) => setTimeout(resolve, 800))
     writeQueue.value[i].writing = true
-    writeQueue.value[i].status = '写入中...'
+    writeQueue.value[i].status = 'Đang ghi...'
 
     await new Promise((resolve) => setTimeout(resolve, 700))
     writeQueue.value[i].writing = false
     writeQueue.value[i].written = true
-    writeQueue.value[i].status = '✅ 已写入'
+    writeQueue.value[i].status = '✅ Đã ghi'
   }
 }
 </script>

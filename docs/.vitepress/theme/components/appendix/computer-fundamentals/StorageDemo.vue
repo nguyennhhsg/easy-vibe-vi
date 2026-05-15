@@ -1,8 +1,8 @@
 <template>
   <div class="storage-demo">
     <div class="demo-header">
-      <span class="title">存储层次：从寄存器到云存储</span>
-      <span class="subtitle">速度与容量的权衡</span>
+      <span class="title">Phân cấp bộ nhớ: từ thanh ghi đến cloud</span>
+      <span class="subtitle">Đánh đổi giữa tốc độ và dung lượng</span>
     </div>
 
     <div class="demo-content">
@@ -28,22 +28,22 @@
       </div>
 
       <div v-if="currentLevel" class="level-detail">
-        <div class="detail-title">{{ currentLevel.name }} 详情</div>
+        <div class="detail-title">Chi tiết {{ currentLevel.name }}</div>
         <div class="detail-grid">
           <div class="detail-item">
-            <span class="label">访问速度</span>
+            <span class="label">Tốc độ truy cập</span>
             <span class="value">{{ currentLevel.speed }}</span>
           </div>
           <div class="detail-item">
-            <span class="label">典型容量</span>
+            <span class="label">Dung lượng điển hình</span>
             <span class="value">{{ currentLevel.size }}</span>
           </div>
           <div class="detail-item">
-            <span class="label">每字节成本</span>
+            <span class="label">Chi phí mỗi byte</span>
             <span class="value">{{ currentLevel.cost }}</span>
           </div>
           <div class="detail-item">
-            <span class="label">易失性</span>
+            <span class="label">Tính dễ mất (volatile)</span>
             <span class="value">{{ currentLevel.volatile }}</span>
           </div>
         </div>
@@ -54,8 +54,7 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>存储遵循"金字塔"原则：越快的存储越贵、容量越小。CPU
-      需要的数据放在最快的存储（寄存器、缓存），暂时不用的放在慢速大容量存储（磁盘、云端）。
+      <strong>Ý tưởng cốt lõi:</strong> Bộ nhớ tuân theo nguyên tắc "kim tự tháp": càng nhanh thì càng đắt và càng ít dung lượng. Dữ liệu CPU cần được đặt ở bộ nhớ nhanh nhất (thanh ghi, cache), còn dữ liệu tạm thời chưa dùng đặt ở bộ nhớ chậm nhưng dung lượng lớn (disk, cloud).
     </div>
   </div>
 </template>
@@ -67,58 +66,58 @@ const activeLevel = ref(0)
 
 const storageLevels = [
   {
-    name: '寄存器',
-    speed: '~1 纳秒',
-    size: '几百字节',
+    name: 'Thanh ghi',
+    speed: '~1 nano giây',
+    size: 'Vài trăm byte',
     width: '30%',
-    cost: '极高',
-    volatile: '是',
-    desc: 'CPU 内部最快的存储，直接参与运算。数量有限，由编译器自动管理。'
+    cost: 'Cực cao',
+    volatile: 'Có',
+    desc: 'Bộ nhớ nhanh nhất bên trong CPU, tham gia trực tiếp vào phép tính. Số lượng hạn chế, do trình biên dịch tự quản lý.'
   },
   {
-    name: 'L1 缓存',
-    speed: '~2 纳秒',
+    name: 'Cache L1',
+    speed: '~2 nano giây',
     size: '32-64 KB',
     width: '45%',
-    cost: '很高',
-    volatile: '是',
-    desc: 'CPU 内置的高速缓存，存储最常用的数据。每个核心独立拥有。'
+    cost: 'Rất cao',
+    volatile: 'Có',
+    desc: 'Cache tốc độ cao tích hợp trong CPU, lưu dữ liệu hay dùng nhất. Mỗi nhân CPU có riêng.'
   },
   {
-    name: 'L2/L3 缓存',
-    speed: '~10 纳秒',
-    size: '几 MB',
+    name: 'Cache L2/L3',
+    speed: '~10 nano giây',
+    size: 'Vài MB',
     width: '60%',
-    cost: '高',
-    volatile: '是',
-    desc: '更大但稍慢的缓存，L3 通常多核心共享。'
+    cost: 'Cao',
+    volatile: 'Có',
+    desc: 'Cache lớn hơn nhưng chậm hơn, L3 thường được chia sẻ giữa các nhân.'
   },
   {
-    name: '内存 (RAM)',
-    speed: '~100 纳秒',
+    name: 'RAM',
+    speed: '~100 nano giây',
     size: '8-128 GB',
     width: '75%',
-    cost: '中等',
-    volatile: '是',
-    desc: '程序运行时的主要工作区。断电后数据丢失。'
+    cost: 'Trung bình',
+    volatile: 'Có',
+    desc: 'Vùng làm việc chính khi chương trình chạy. Mất điện là mất dữ liệu.'
   },
   {
-    name: 'SSD 固态硬盘',
-    speed: '~100 微秒',
+    name: 'SSD',
+    speed: '~100 micro giây',
     size: '256 GB - 4 TB',
     width: '90%',
-    cost: '较低',
-    volatile: '否',
-    desc: '比机械硬盘快很多，无机械部件。断电数据保留。'
+    cost: 'Khá thấp',
+    volatile: 'Không',
+    desc: 'Nhanh hơn ổ HDD nhiều, không có bộ phận cơ. Mất điện vẫn giữ dữ liệu.'
   },
   {
-    name: 'HDD 机械硬盘',
-    speed: '~10 毫秒',
+    name: 'HDD',
+    speed: '~10 mili giây',
     size: '1-20 TB',
     width: '100%',
-    cost: '低',
-    volatile: '否',
-    desc: '容量大、成本低，但有机械延迟。适合存储大量数据。'
+    cost: 'Thấp',
+    volatile: 'Không',
+    desc: 'Dung lượng lớn, chi phí thấp, nhưng có độ trễ cơ học. Phù hợp lưu trữ dữ liệu lớn.'
   }
 ]
 

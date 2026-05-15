@@ -1,32 +1,32 @@
 <!--
   SourceMapDemo.vue
-  SourceMap原理演示
+  Demo nguyên lý SourceMap
 
-  用途：
-  展示SourceMap如何将压缩后的代码映射回源代码。
+  Mục đích:
+  Cho thấy SourceMap ánh xạ mã đã minify trở lại mã nguồn như thế nào.
 -->
 <template>
   <div class="source-map-demo">
     <div class="demo-header">
-      <h3>🗺️ SourceMap 原理演示</h3>
-      <p>调试压缩代码的秘密武器</p>
+      <h3>🗺️ Demo nguyên lý SourceMap</h3>
+      <p>Vũ khí bí mật để debug mã đã minify</p>
     </div>
 
     <div class="demo-content">
       <div class="code-comparison">
         <div class="code-panel source">
           <div class="panel-title">
-            📄 源代码 (Source)
+            📄 Mã nguồn (Source)
           </div>
           <pre class="code-block"><code>function calculateSum(a, b) {
-  // 计算两个数的和
+  // Tính tổng hai số
   const result = a + b;
-  console.log('结果:', result);
+  console.log('Kết quả:', result);
   return result;
 }
 
 const sum = calculateSum(10, 20);
-console.log('总和:', sum);</code></pre>
+console.log('Tổng:', sum);</code></pre>
         </div>
 
         <div class="mapping-arrows">
@@ -42,16 +42,16 @@ console.log('总和:', sum);</code></pre>
 
         <div class="code-panel minified">
           <div class="panel-title">
-            🔧 压缩后 (Minified)
+            🔧 Đã minify (Minified)
           </div>
-          <pre class="code-block"><code>function n(n,r){var t=n+r;return console.log("结果:",t),t}var r=n(10,20);console.log("总和:",r);
-// sourceMappingURL=app.js.map (指向映射文件)</code></pre>
+          <pre class="code-block"><code>function n(n,r){var t=n+r;return console.log("Kết quả:",t),t}var r=n(10,20);console.log("Tổng:",r);
+// sourceMappingURL=app.js.map (trỏ tới tệp map)</code></pre>
         </div>
       </div>
 
       <div class="sourcemap-explanation">
         <div class="explanation-section">
-          <h4>📦 SourceMap 文件内容示例</h4>
+          <h4>📦 Ví dụ nội dung tệp SourceMap</h4>
           <pre class="json-block"><code>{
   "version": 3,
   "sources": ["src/utils.js", "src/main.js"],
@@ -60,36 +60,36 @@ console.log('总和:', sum);</code></pre>
   "file": "app.min.js"
 }</code></pre>
           <ul class="field-explanation">
-            <li><strong>version</strong>: SourceMap 规范版本（当前是 3）</li>
-            <li><strong>sources</strong>: 原始源文件列表</li>
-            <li><strong>names</strong>: 压缩前后的变量名映射</li>
-            <li><strong>mappings</strong>: 位置映射信息（VLQ 编码）</li>
-            <li><strong>file</strong>: 对应的压缩文件名</li>
+            <li><strong>version</strong>: Phiên bản đặc tả SourceMap (hiện tại là 3)</li>
+            <li><strong>sources</strong>: Danh sách tệp nguồn ban đầu</li>
+            <li><strong>names</strong>: Ánh xạ tên biến trước và sau khi minify</li>
+            <li><strong>mappings</strong>: Thông tin ánh xạ vị trí (mã hóa VLQ)</li>
+            <li><strong>file</strong>: Tên tệp đã minify tương ứng</li>
           </ul>
         </div>
 
         <div class="tips-section">
-          <h4>💡 使用建议</h4>
+          <h4>💡 Gợi ý sử dụng</h4>
           <div class="tips-grid">
             <div class="tip-item">
               <span class="tip-icon">🚀</span>
               <div class="tip-content">
-                <strong>开发环境</strong>
-                <p>开启 SourceMap，方便调试</p>
+                <strong>Môi trường dev</strong>
+                <p>Bật SourceMap để debug dễ dàng</p>
               </div>
             </div>
             <div class="tip-item">
               <span class="tip-icon">🔒</span>
               <div class="tip-content">
-                <strong>生产环境</strong>
-                <p>不部署 .map 文件，防止源码泄露</p>
+                <strong>Môi trường production</strong>
+                <p>Không triển khai tệp .map để tránh lộ mã nguồn</p>
               </div>
             </div>
             <div class="tip-item">
               <span class="tip-icon">🗂️</span>
               <div class="tip-content">
-                <strong>单独存放</strong>
-                <p>使用 `sourceMappingURL` 指向独立服务器</p>
+                <strong>Lưu riêng</strong>
+                <p>Dùng `sourceMappingURL` trỏ đến máy chủ riêng</p>
               </div>
             </div>
           </div>
@@ -100,10 +100,10 @@ console.log('总和:', sum);</code></pre>
     <div class="info-box">
       <p>
         <span class="icon">💡</span>
-        <strong>SourceMap 工作原理：</strong>
-        压缩代码时，构建工具会记录每个字符在源代码中的位置，生成 .map 文件。
-        浏览器调试时，通过映射关系把压缩后的代码"还原"成源代码显示。
-        注意：生产环境不要暴露 .map 文件，防止源码泄露！
+        <strong>Cách SourceMap hoạt động:</strong>
+        Khi minify mã, công cụ build ghi lại vị trí của từng ký tự trong mã nguồn, tạo ra tệp .map.
+        Khi bạn debug trong trình duyệt, nhờ ánh xạ này mà mã đã minify được "khôi phục" về dạng mã nguồn để hiển thị.
+        Lưu ý: Đừng để lộ tệp .map trên môi trường production để tránh lộ mã nguồn!
       </p>
     </div>
   </div>

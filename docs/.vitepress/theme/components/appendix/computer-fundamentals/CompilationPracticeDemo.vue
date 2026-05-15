@@ -1,21 +1,21 @@
 <template>
   <div class="compilation-practice-demo">
     <div class="demo-header">
-      <span class="title">编译过程实践</span>
-      <span class="subtitle">从代码到可执行文件</span>
+      <span class="title">Thực hành quy trình biên dịch</span>
+      <span class="subtitle">Từ source code đến file thực thi</span>
     </div>
 
     <div class="code-input">
-      <div class="input-title">输入代码</div>
+      <div class="input-title">Nhập code</div>
       <textarea
         v-model="sourceCode"
         class="code-textarea"
-        placeholder="输入 C 语言代码..."
+        placeholder="Nhập code C..."
       ></textarea>
     </div>
 
     <div class="compilation-steps">
-      <div class="steps-title">编译步骤</div>
+      <div class="steps-title">Các bước biên dịch</div>
       <div class="steps-flow">
         <div v-for="(step, index) in steps" :key="index" class="step-item">
           <div class="step-number">{{ index + 1 }}</div>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="file-outputs">
-      <div class="outputs-title">生成的文件</div>
+      <div class="outputs-title">File sinh ra</div>
       <div class="file-list">
         <div v-for="file in outputFiles" :key="file.name" class="file-item">
           <div class="file-icon">{{ file.icon }}</div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="tools">
-      <div class="tools-title">常用编译工具</div>
+      <div class="tools-title">Công cụ biên dịch phổ biến</div>
       <div class="tools-grid">
         <div class="tool-card">
           <div class="tool-name">GCC</div>
@@ -50,7 +50,7 @@
         </div>
         <div class="tool-card">
           <div class="tool-name">Clang</div>
-          <div class="tool-desc">LLVM 的 C/C++ 编译器</div>
+          <div class="tool-desc">Compiler C/C++ của LLVM</div>
         </div>
         <div class="tool-card">
           <div class="tool-name">MSVC</div>
@@ -73,24 +73,24 @@ int main() {
 
 const steps = [
   {
-    name: '预处理',
+    name: 'Tiền xử lý',
     command: 'gcc -E hello.c -o hello.i',
-    output: '处理 #include，展开宏定义'
+    output: 'Xử lý #include, mở rộng macro'
   },
   {
-    name: '编译',
+    name: 'Biên dịch',
     command: 'gcc -S hello.i -o hello.s',
-    output: '生成汇编代码'
+    output: 'Sinh mã assembly'
   },
   {
-    name: '汇编',
+    name: 'Assembly',
     command: 'gcc -c hello.s -o hello.o',
-    output: '生成目标文件'
+    output: 'Sinh object file'
   },
   {
-    name: '链接',
+    name: 'Liên kết',
     command: 'gcc hello.o -o hello',
-    output: '生成可执行文件'
+    output: 'Sinh file thực thi'
   }
 ]
 
@@ -98,27 +98,27 @@ const outputFiles = [
   {
     name: 'hello.c',
     icon: '📄',
-    desc: '源代码文件'
+    desc: 'File source code'
   },
   {
     name: 'hello.i',
     icon: '📝',
-    desc: '预处理后的文件'
+    desc: 'File sau tiền xử lý'
   },
   {
     name: 'hello.s',
     icon: '⚙️',
-    desc: '汇编代码文件'
+    desc: 'File mã assembly'
   },
   {
     name: 'hello.o',
     icon: '📦',
-    desc: '目标文件'
+    desc: 'Object file'
   },
   {
     name: 'hello',
     icon: '🚀',
-    desc: '可执行文件'
+    desc: 'File thực thi'
   }
 ]
 </script>

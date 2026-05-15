@@ -41,7 +41,7 @@ const updateStyle = (prop, value) => {
   >
     <template #header>
       <div class="header">
-        <span class="title">Elements (元素面板)</span>
+        <span class="title">Elements (Bảng phần tử)</span>
       </div>
     </template>
 
@@ -113,7 +113,7 @@ const updateStyle = (prop, value) => {
     <!-- Preview Area -->
     <div class="preview-area">
       <div class="preview-label">
-        页面预览 (Page Preview)
+        Xem trước trang (Page Preview)
       </div>
       <div class="preview-content">
         <div :style="styles.box">
@@ -123,7 +123,7 @@ const updateStyle = (prop, value) => {
     </div>
     
     <div class="footer-tip">
-      点击左侧 DOM 树中的元素，在右侧 Styles 面板修改样式，下方预览会实时更新。
+      Nhấp vào phần tử trong cây DOM bên trái, chỉnh style ở bảng Styles bên phải, bản xem trước phía dưới sẽ cập nhật thời gian thực.
     </div>
   </el-card>
 </template>

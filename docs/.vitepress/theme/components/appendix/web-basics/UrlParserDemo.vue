@@ -1,6 +1,6 @@
 <template>
   <div class="url-parser-demo custom-demo-base">
-    <div class="demo-label">URL 解析 ── 把人类文字翻译成结构化信息</div>
+    <div class="demo-label">Phân tích URL ── Dịch chữ con người thành thông tin có cấu trúc</div>
 
     <div class="demo-panel url-panel">
       <!-- url block -->
@@ -32,8 +32,8 @@
           @mouseenter="activePart = 'protocol'"
           @mouseleave="activePart = null"
         >
-          <div class="card-title">🚛 交通方式 (协议 Protocol)</div>
-          <div class="card-desc">代表你要求坐安全级别最高的"运钞车"（加密通信HTTPS）。如果是 HTTP，就是老式敞篷车，沿途都会被看见。</div>
+          <div class="card-title">🚛 Phương tiện vận chuyển (Protocol)</div>
+          <div class="card-desc">Tương trưng cho việc bạn yêu cầu đi "xe chở tiền" có mức bảo mật cao nhất (HTTPS mã hóa). Nếu là HTTP, giống xe mui trần kiểu cũ, dọc đường ai cũng thấy.</div>
         </div>
 
         <div 
@@ -42,8 +42,8 @@
           @mouseenter="activePart = 'host'"
           @mouseleave="activePart = null"
         >
-          <div class="card-title">🏢 店铺名 (主机名 Host)</div>
-          <div class="card-desc">这就是你要去哪家店，也是服务器的域名，后续浏览器需要把它翻译成网络世界认的数字 IP。</div>
+          <div class="card-title">🏢 Tên cửa hàng (Host)</div>
+          <div class="card-desc">Đây chính là bạn muốn đến cửa hàng nào, cũng là tên miền của máy chủ. Sau đó trình duyệt cần dịch nó thành địa chỉ IP số mà thế giới mạng hiểu được.</div>
         </div>
 
         <div 
@@ -52,12 +52,12 @@
           @mouseenter="activePart = 'path'"
           @mouseleave="activePart = null"
         >
-          <div class="card-title">📍 具体货架 (路径 Path)</div>
-          <div class="card-desc">进了店门之后，你要去哪个房间拿具体的哪件商品或执行具体的某个动作。</div>
+          <div class="card-title">📍 Kệ hàng cụ thể (Path)</div>
+          <div class="card-desc">Sau khi vào cửa hàng, bạn muốn đến phòng nào để lấy món hàng nào, hoặc thực hiện hành động cụ thể nào.</div>
         </div>
       </div>
     </div>
-    <div class="demo-status">悬停查看每个部分的职责</div>
+    <div class="demo-status">Di chuột để xem vai trò của từng phần</div>
   </div>
 </template>
 

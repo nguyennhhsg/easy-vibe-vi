@@ -2,34 +2,34 @@
   <div class="props-flow-demo">
     <div class="demo-header">
       <span class="icon">📦</span>
-      <span class="title">Props 数据传递</span>
-      <span class="subtitle">父亲给儿子送礼物的单向流动</span>
+      <span class="title">Truyền dữ liệu qua Props</span>
+      <span class="subtitle">Luồng một chiều: cha gửi quà cho con</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">快递公司</span>工作：包裹（数据）只能从寄件人（父组件）发往收件人（子组件），收件人不能直接修改包裹内容，只能通过电话（事件）让寄件人修改。
+      Hãy hình dung bạn đang làm việc tại <span class="highlight">công ty chuyển phát nhanh</span>: bưu kiện (dữ liệu) chỉ có thể đi từ người gửi (component cha) đến người nhận (component con), người nhận không thể tự sửa nội dung bưu kiện, chỉ có thể gọi điện (event) để nhờ người gửi sửa.
     </div>
 
     <div class="demo-content">
       <div class="component-box parent">
         <div class="component-label">
-          👨 父组件 (寄件人)
+          👨 Component cha (Người gửi)
         </div>
         <div class="data-display">
           <div class="data-row">
-            <span class="key">包裹内容:</span>
-            <span class="value">{{ user.name }} ({{ user.age }}岁)</span>
+            <span class="key">Nội dung bưu kiện:</span>
+            <span class="value">{{ user.name }} ({{ user.age }} tuổi)</span>
           </div>
           <div class="data-row">
-            <span class="key">包装颜色:</span>
+            <span class="key">Màu đóng gói:</span>
             <span
               class="value"
               :class="theme"
-            >{{ theme === 'light' ? '亮色' : '暗色' }}</span>
+            >{{ theme === 'light' ? 'Sáng' : 'Tối' }}</span>
           </div>
         </div>
         <div class="props-output">
-          <span class="label">📮 发送包裹:</span>
+          <span class="label">📮 Gửi bưu kiện:</span>
           <div class="prop-tags">
             <span class="prop-tag">:user</span>
             <span class="prop-tag">:theme</span>
@@ -45,51 +45,51 @@
           ▼
         </div>
         <div class="flow-text">
-          {{ isFlowing ? '快递派送中...' : 'Props 单向传递' }}
+          {{ isFlowing ? 'Đang giao hàng...' : 'Props truyền một chiều' }}
         </div>
       </div>
 
       <div class="component-box child">
         <div class="component-label">
-          👦 子组件 (收件人)
+          👦 Component con (Người nhận)
         </div>
         <div class="props-display">
           <div class="label">
-            📬 接收包裹:
+            📬 Nhận bưu kiện:
           </div>
           <div class="prop-item">
             <span class="prop-name">user</span>
-            <span class="prop-value">{{ user.name }} ({{ user.age }}岁)</span>
+            <span class="prop-value">{{ user.name }} ({{ user.age }} tuổi)</span>
           </div>
           <div class="prop-item">
             <span class="prop-name">theme</span>
             <span
               class="prop-value"
               :class="theme"
-            >{{ theme === 'light' ? '亮色' : '暗色' }}</span>
+            >{{ theme === 'light' ? 'Sáng' : 'Tối' }}</span>
           </div>
         </div>
         <button
           class="emit-btn"
           @click="handleEmit"
         >
-          📞 打电话给爸爸改名字
+          📞 Gọi điện nhờ bố đổi tên
         </button>
       </div>
     </div>
 
     <div class="interaction-area">
       <div class="control-group">
-        <label>📝 修改包裹内容：</label>
+        <label>📝 Sửa nội dung bưu kiện:</label>
         <input
           v-model="user.name"
-          placeholder="收件人姓名"
+          placeholder="Tên người nhận"
           @input="triggerFlow"
         >
         <input
           v-model.number="user.age"
           type="number"
-          placeholder="年龄"
+          placeholder="Tuổi"
           @input="triggerFlow"
         >
         <select
@@ -97,10 +97,10 @@
           @change="triggerFlow"
         >
           <option value="light">
-            亮色包装
+            Bao bì sáng
           </option>
           <option value="dark">
-            暗色包装
+            Bao bì tối
           </option>
         </select>
       </div>
@@ -108,7 +108,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>Props 是单向数据流，父组件像寄件人，子组件像收件人。子组件不能直接修改 props，只能通过 emit 事件通知父组件修改。
+      <strong>Ý tưởng cốt lõi:</strong> Props là luồng dữ liệu một chiều, component cha như người gửi, component con như người nhận. Component con không thể tự sửa props, chỉ có thể emit event để báo cha sửa.
     </div>
   </div>
 </template>
@@ -117,7 +117,7 @@
 import { ref, reactive } from 'vue'
 
 const user = reactive({
-  name: '小明',
+  name: 'Minh',
   age: 25
 })
 
@@ -135,7 +135,7 @@ const triggerFlow = () => {
 }
 
 const handleEmit = () => {
-  user.name = '小红'
+  user.name = 'Hồng'
   triggerFlow()
 }
 </script>

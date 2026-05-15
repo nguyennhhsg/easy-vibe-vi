@@ -1,12 +1,12 @@
 <template>
   <div class="data-link-demo">
     <div class="demo-header">
-      <span class="title">数据链路层：帧的传递</span>
-      <span class="subtitle">MAC 地址如何定位设备</span>
+      <span class="title">Tầng liên kết dữ liệu: truyền frame</span>
+      <span class="subtitle">Địa chỉ MAC định vị thiết bị như thế nào</span>
     </div>
 
     <div class="lan-scene">
-      <div class="lan-title">局域网场景</div>
+      <div class="lan-title">Kịch bản mạng LAN</div>
       <div class="lan-devices">
         <div
           v-for="device in devices"
@@ -30,17 +30,17 @@
         </div>
       </div>
 
-      <!-- 交换机 -->
+      <!-- Switch -->
       <div class="switch">
         <div class="switch-icon">🔄</div>
-        <div class="switch-name">交换机</div>
-        <div class="switch-desc">根据 MAC 地址转发数据帧</div>
+        <div class="switch-name">Switch</div>
+        <div class="switch-desc">Chuyển tiếp frame dựa trên địa chỉ MAC</div>
       </div>
     </div>
 
-    <!-- 帧结构 -->
+    <!-- Cấu trúc frame -->
     <div class="frame-structure">
-      <div class="frame-title">以太网帧结构</div>
+      <div class="frame-title">Cấu trúc frame Ethernet</div>
       <div class="frame-visual">
         <div class="frame-fields">
           <div
@@ -57,9 +57,9 @@
       </div>
     </div>
 
-    <!-- 传输过程 -->
+    <!-- Quá trình truyền -->
     <div class="transfer-process">
-      <div class="process-title">数据帧传输过程</div>
+      <div class="process-title">Quá trình truyền frame</div>
       <div class="process-steps">
         <div
           v-for="(step, index) in transferSteps"
@@ -75,18 +75,18 @@
       </div>
     </div>
 
-    <!-- ARP 协议 -->
+    <!-- Giao thức ARP -->
     <div class="arp-section">
-      <div class="arp-title">ARP：IP 地址到 MAC 地址的映射</div>
+      <div class="arp-title">ARP: ánh xạ địa chỉ IP sang địa chỉ MAC</div>
       <div class="arp-example">
         <div class="arp-question">
           <span class="question-icon">❓</span>
-          <span class="question-text">谁有 IP 地址 192.168.1.200？</span>
+          <span class="question-text">Ai có địa chỉ IP 192.168.1.200?</span>
         </div>
-        <div class="arp-arrow">↓ 广播到局域网</div>
+        <div class="arp-arrow">↓ Phát tán (broadcast) trong LAN</div>
         <div class="arp-answer">
           <span class="answer-icon">✅</span>
-          <span class="answer-text">我是！我的 MAC 地址是 00:11:22:33:44:66</span>
+          <span class="answer-text">Tôi đây! Địa chỉ MAC của tôi là 00:11:22:33:44:66</span>
         </div>
       </div>
     </div>
@@ -102,32 +102,32 @@ const activeStep = ref(0)
 const devices = [
   {
     id: 'pc1',
-    name: '电脑 A',
+    name: 'Máy tính A',
     icon: '💻',
     mac: '00:11:22:33:44:55',
     ip: '192.168.1.100',
     role: 'sender',
-    roleText: '发送方'
+    roleText: 'Bên gửi'
   },
   {
     id: 'pc2',
-    name: '电脑 B',
+    name: 'Máy tính B',
     icon: '🖥️',
     mac: '00:11:22:33:44:66',
     ip: '192.168.1.200',
     role: 'receiver',
-    roleText: '接收方'
+    roleText: 'Bên nhận'
   },
   {
     id: 'printer',
-    name: '打印机',
+    name: 'Máy in',
     icon: '🖨️',
     mac: '00:11:22:33:44:77',
     ip: '192.168.1.50'
   },
   {
     id: 'phone',
-    name: '手机',
+    name: 'Điện thoại',
     icon: '📱',
     mac: '00:11:22:33:44:88',
     ip: '192.168.1.150'
@@ -136,53 +136,53 @@ const devices = [
 
 const frameFields = [
   {
-    name: '目的 MAC',
+    name: 'MAC đích',
     value: '00:11:22:33:44:66',
-    size: '6 字节',
+    size: '6 byte',
     width: '18%'
   },
   {
-    name: '源 MAC',
+    name: 'MAC nguồn',
     value: '00:11:22:33:44:55',
-    size: '6 字节',
+    size: '6 byte',
     width: '18%'
   },
   {
-    name: '类型',
+    name: 'Loại',
     value: '0x0800 (IPv4)',
-    size: '2 字节',
+    size: '2 byte',
     width: '12%'
   },
   {
-    name: '数据',
-    value: 'IP 数据包...',
-    size: '46-1500 字节',
+    name: 'Dữ liệu',
+    value: 'Gói IP...',
+    size: '46-1500 byte',
     width: '44%'
   },
   {
     name: 'FCS',
-    value: '校验序列',
-    size: '4 字节',
+    value: 'Mã kiểm tra',
+    size: '4 byte',
     width: '8%'
   }
 ]
 
 const transferSteps = [
   {
-    title: '封装成帧',
-    desc: '发送方将数据封装成以太网帧，添加源 MAC 和目的 MAC 地址'
+    title: 'Đóng gói thành frame',
+    desc: 'Bên gửi đóng gói dữ liệu thành frame Ethernet, thêm địa chỉ MAC nguồn và MAC đích'
   },
   {
-    title: '发送到交换机',
-    desc: '帧通过物理介质（网线或 WiFi）发送到交换机'
+    title: 'Gửi đến switch',
+    desc: 'Frame được truyền qua môi trường vật lý (cáp mạng hoặc Wi-Fi) đến switch'
   },
   {
-    title: '交换机转发',
-    desc: '交换机根据目的 MAC 地址，将帧转发到对应端口'
+    title: 'Switch chuyển tiếp',
+    desc: 'Switch dựa vào MAC đích để chuyển frame đến cổng tương ứng'
   },
   {
-    title: '接收方处理',
-    desc: '接收方检查目的 MAC 地址，匹配后接收并处理数据'
+    title: 'Bên nhận xử lý',
+    desc: 'Bên nhận kiểm tra MAC đích, nếu khớp thì tiếp nhận và xử lý dữ liệu'
   }
 ]
 </script>

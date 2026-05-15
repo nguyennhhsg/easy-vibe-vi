@@ -1,8 +1,8 @@
 <template>
   <div class="model-serving-demo">
     <div class="demo-header">
-      <h4>模型服务架构演示</h4>
-      <p class="subtitle">点击不同部署方案，对比其特点与适用场景</p>
+      <h4>Demo kiến trúc model serving</h4>
+      <p class="subtitle">Bấm vào các phương án deploy để so sánh đặc điểm và tình huống phù hợp</p>
     </div>
 
     <div class="serving-options">
@@ -27,7 +27,7 @@
       <p class="detail-desc">{{ currentOption.description }}</p>
 
       <div class="arch-flow">
-        <div class="flow-label">架构流程</div>
+        <div class="flow-label">Luồng kiến trúc</div>
         <div class="flow-steps">
           <div v-for="(node, i) in currentOption.flow" :key="i" class="flow-node">
             <div class="node-box">{{ node }}</div>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="tools-section">
-        <div class="tools-label">常用工具</div>
+        <div class="tools-label">Công cụ phổ biến</div>
         <div class="tools-list">
           <span v-for="tool in currentOption.tools" :key="tool" class="tool-tag">{{ tool }}</span>
         </div>
@@ -65,45 +65,45 @@ const options = [
   {
     id: 'api',
     icon: '🌐',
-    name: 'API 服务',
-    brief: '最常见的在线部署方式',
-    description: '将模型封装为 RESTful API 或 gRPC 服务，通过 HTTP 请求调用。适合需要实时响应的在线应用，如聊天机器人、智能客服、内容生成等。是目前最主流的部署方式。',
-    flow: ['客户端请求', '负载均衡', '推理服务器', 'GPU 推理', '返回结果'],
+    name: 'API service',
+    brief: 'Cách deploy online phổ biến nhất',
+    description: 'Đóng gói mô hình thành dịch vụ RESTful API hoặc gRPC, gọi qua HTTP. Phù hợp ứng dụng online cần phản hồi thời gian thực như chatbot, CSKH thông minh, sinh nội dung. Là cách deploy phổ biến nhất hiện nay.',
+    flow: ['Client request', 'Load balancer', 'Inference server', 'GPU inference', 'Trả kết quả'],
     specs: [
-      { label: '响应延迟', value: '100ms - 2s', score: 70, color: '#10b981' },
-      { label: '并发能力', value: '高（可水平扩展）', score: 85, color: '#818cf8' },
-      { label: '部署成本', value: '中高（需 GPU 服务器）', score: 50, color: '#f59e0b' },
-      { label: '运维复杂度', value: '中等', score: 55, color: '#ef4444' }
+      { label: 'Độ trễ', value: '100ms - 2s', score: 70, color: '#10b981' },
+      { label: 'Khả năng concurrent', value: 'Cao (scale ngang)', score: 85, color: '#818cf8' },
+      { label: 'Chi phí deploy', value: 'Trung bình cao (cần GPU server)', score: 50, color: '#f59e0b' },
+      { label: 'Độ phức tạp vận hành', value: 'Trung bình', score: 55, color: '#ef4444' }
     ],
     tools: ['vLLM', 'TGI', 'Triton', 'FastAPI', 'Ollama']
   },
   {
     id: 'edge',
     icon: '📱',
-    name: '边缘部署',
-    brief: '在终端设备上本地运行',
-    description: '将量化后的模型部署到手机、笔记本、嵌入式设备等终端上，无需网络连接即可运行。适合隐私敏感、离线场景或需要极低延迟的应用。',
-    flow: ['模型量化', '格式转换', '设备加载', '本地推理', '即时输出'],
+    name: 'Deploy edge',
+    brief: 'Chạy ngay trên thiết bị đầu cuối',
+    description: 'Triển khai mô hình đã quantize lên điện thoại, laptop, thiết bị nhúng — chạy được không cần mạng. Phù hợp tình huống nhạy quyền riêng tư, offline, hoặc yêu cầu độ trễ cực thấp.',
+    flow: ['Quantize mô hình', 'Chuyển format', 'Tải lên thiết bị', 'Inference local', 'Output tức thì'],
     specs: [
-      { label: '响应延迟', value: '50ms - 5s', score: 60, color: '#10b981' },
-      { label: '并发能力', value: '低（单设备）', score: 20, color: '#818cf8' },
-      { label: '部署成本', value: '低（无服务器费用）', score: 90, color: '#f59e0b' },
-      { label: '运维复杂度', value: '低', score: 85, color: '#ef4444' }
+      { label: 'Độ trễ', value: '50ms - 5s', score: 60, color: '#10b981' },
+      { label: 'Khả năng concurrent', value: 'Thấp (đơn thiết bị)', score: 20, color: '#818cf8' },
+      { label: 'Chi phí deploy', value: 'Thấp (không tốn server)', score: 90, color: '#f59e0b' },
+      { label: 'Độ phức tạp vận hành', value: 'Thấp', score: 85, color: '#ef4444' }
     ],
     tools: ['llama.cpp', 'MLC LLM', 'ONNX Runtime', 'MediaPipe']
   },
   {
     id: 'batch',
     icon: '📦',
-    name: '批量处理',
-    brief: '离线批量推理大量数据',
-    description: '将大量请求收集后统一处理，不要求实时响应。适合数据标注、文档摘要、批量翻译等离线任务。通过批处理可以最大化 GPU 利用率，显著降低单条推理成本。',
-    flow: ['数据队列', '批量收集', 'GPU 批推理', '结果存储', '异步通知'],
+    name: 'Batch processing',
+    brief: 'Inference batch khối lượng lớn offline',
+    description: 'Gom nhiều request lại xử lý chung, không yêu cầu trả lời thời gian thực. Phù hợp các task offline như gán nhãn dữ liệu, tóm tắt tài liệu, dịch hàng loạt. Batch giúp tối đa hóa hiệu suất GPU và giảm mạnh chi phí mỗi request.',
+    flow: ['Hàng đợi dữ liệu', 'Gom thành batch', 'GPU batch inference', 'Lưu kết quả', 'Thông báo bất đồng bộ'],
     specs: [
-      { label: '响应延迟', value: '分钟~小时级', score: 20, color: '#10b981' },
-      { label: '吞吐量', value: '极高（批处理优化）', score: 95, color: '#818cf8' },
-      { label: '部署成本', value: '低（GPU 利用率高）', score: 85, color: '#f59e0b' },
-      { label: '运维复杂度', value: '中等', score: 55, color: '#ef4444' }
+      { label: 'Độ trễ', value: 'Phút ~ giờ', score: 20, color: '#10b981' },
+      { label: 'Throughput', value: 'Cực cao (tối ưu batch)', score: 95, color: '#818cf8' },
+      { label: 'Chi phí deploy', value: 'Thấp (tận dụng GPU tốt)', score: 85, color: '#f59e0b' },
+      { label: 'Độ phức tạp vận hành', value: 'Trung bình', score: 55, color: '#ef4444' }
     ],
     tools: ['Ray Serve', 'Spark', 'Celery', 'AWS Batch']
   }

@@ -1,20 +1,21 @@
 <!--
   VectorIndexDemo.vue
-  向量索引策略可视化组件
+  Trực quan hóa chiến lược index vector
 
-  用途：
-  展示暴力搜索与近似最近邻(ANN)搜索的对比，可视化不同索引策略的工作原理。
+  Mục đích:
+  So sánh brute-force search và Approximate Nearest Neighbor (ANN) search,
+  minh họa cách các chiến lược index khác nhau hoạt động.
 
-  交互功能：
-  - 切换暴力搜索和ANN搜索模式
-  - 点击查询点触发搜索动画
-  - 展示搜索过程中访问的节点数量对比
+  Tính năng:
+  - Chuyển giữa brute-force và ANN
+  - Bấm để chạy animation tìm kiếm
+  - So sánh số node truy cập trong quá trình tìm
 -->
 <template>
   <div class="index-demo">
     <div class="demo-header">
-      <h4>向量索引策略对比</h4>
-      <p class="desc">对比暴力搜索与近似最近邻搜索的效率差异</p>
+      <h4>So sánh các chiến lược index vector</h4>
+      <p class="desc">So sánh hiệu quả giữa brute-force và approximate nearest neighbor search</p>
     </div>
 
     <div class="controls">
@@ -28,7 +29,7 @@
         {{ mode.label }}
       </button>
       <button class="search-btn" @click="runSearch">
-        {{ searching ? '搜索中...' : '开始搜索' }}
+        {{ searching ? 'Đang tìm...' : 'Bắt đầu tìm' }}
       </button>
     </div>
 
@@ -70,7 +71,7 @@
           <text
             :x="query.x + 14" :y="query.y + 4"
             fill="#ef4444" font-size="12" font-weight="600"
-          >查询点</text>
+          >Query</text>
         </g>
 
         <!-- 搜索连线 -->
@@ -97,23 +98,23 @@
     <!-- 统计面板 -->
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-label">数据点总数</div>
+        <div class="stat-label">Tổng số điểm</div>
         <div class="stat-val">{{ points.length }}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">访问节点数</div>
+        <div class="stat-label">Số node đã thăm</div>
         <div class="stat-val" :class="{ good: visitedOrder.length < points.length }">
           {{ visitedOrder.length }}
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">搜索效率</div>
+        <div class="stat-label">Hiệu suất tìm</div>
         <div class="stat-val efficiency">
           {{ points.length > 0 ? ((visitedOrder.length / points.length) * 100).toFixed(0) : 0 }}%
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">找到最近 K 个</div>
+        <div class="stat-label">Tìm được Top-K gần nhất</div>
         <div class="stat-val">{{ resultIndices.length }}</div>
       </div>
     </div>
@@ -122,30 +123,30 @@
       <table>
         <thead>
           <tr>
-            <th>策略</th>
-            <th>时间复杂度</th>
-            <th>精确度</th>
-            <th>适用场景</th>
+            <th>Chiến lược</th>
+            <th>Độ phức tạp</th>
+            <th>Độ chính xác</th>
+            <th>Tình huống phù hợp</th>
           </tr>
         </thead>
         <tbody>
           <tr :class="{ 'row-active': activeMode === 'brute' }">
-            <td>暴力搜索</td>
+            <td>Brute-force</td>
             <td><code>O(n)</code></td>
             <td>100%</td>
-            <td>小数据集 (&lt;10K)</td>
+            <td>Tập dữ liệu nhỏ (&lt;10K)</td>
           </tr>
           <tr :class="{ 'row-active': activeMode === 'ann' }">
             <td>ANN (IVF)</td>
             <td><code>O(n/k)</code></td>
             <td>~95%</td>
-            <td>大数据集 (>100K)</td>
+            <td>Tập dữ liệu lớn (>100K)</td>
           </tr>
           <tr>
             <td>HNSW</td>
             <td><code>O(log n)</code></td>
             <td>~98%</td>
-            <td>高性能检索</td>
+            <td>Retrieval hiệu năng cao</td>
           </tr>
         </tbody>
       </table>
@@ -162,13 +163,13 @@ const visitedOrder = ref([])
 const resultIndices = ref([])
 
 const modes = [
-  { key: 'brute', label: '暴力搜索' },
-  { key: 'ann', label: 'ANN 近似搜索' }
+  { key: 'brute', label: 'Brute-force' },
+  { key: 'ann', label: 'ANN (xấp xỉ)' }
 ]
 
 const query = reactive({ x: 250, y: 190 })
 
-// 生成随机数据点
+// Sinh các điểm ngẫu nhiên
 function generatePoints() {
   const pts = []
   const rng = (seed) => {
@@ -216,7 +217,7 @@ function runSearch() {
   const trueTopK = allDists.slice(0, K).map((x) => x.i)
 
   if (activeMode.value === 'brute') {
-    // 暴力搜索：逐个访问
+    // Brute-force: thăm từng điểm
     const order = allDists.map((x) => x.i)
     let step = 0
     const timer = setInterval(() => {

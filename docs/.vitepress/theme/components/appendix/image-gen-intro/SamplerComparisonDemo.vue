@@ -1,15 +1,15 @@
 <!--
   SamplerComparisonDemo.vue
-  采样器对比演示组件
+  Component so sánh sampler
 
-  用途：
-  展示不同采样器（Euler, DPM++, DDIM 等）的生成特点，帮助用户选择合适的采样器。
+  Mục đích:
+  Trình bày đặc điểm sinh ảnh của các sampler khác nhau (Euler, DPM++, DDIM...), giúp bạn chọn sampler phù hợp.
 
-  交互功能：
-  - 采样器选择对比
-  - 步数调节
-  - 生成路径可视化
-  - 速度/质量权衡展示
+  Tương tác:
+  - Chọn và so sánh sampler
+  - Điều chỉnh số bước
+  - Trực quan hoá đường sinh ảnh
+  - Hiển thị đánh đổi tốc độ/chất lượng
 -->
 <template>
   <div class="sampler-demo">
@@ -17,12 +17,12 @@
       <template #header>
         <div class="header-title">
           <el-icon><Timer /></el-icon>
-          <span>⏱️ 采样器对比</span>
+          <span>⏱️ So sánh sampler</span>
         </div>
       </template>
 
       <div class="demo-content">
-        <!-- 采样器列表 -->
+        <!-- Danh sách sampler -->
         <div class="sampler-list">
           <div
             v-for="sampler in samplers"
@@ -56,10 +56,10 @@
           </div>
         </div>
 
-        <!-- 可视化对比 -->
+        <!-- So sánh trực quan -->
         <div class="visualization-section">
           <div class="viz-header">
-            <span class="viz-title">生成路径可视化</span>
+            <span class="viz-title">Trực quan hoá đường sinh ảnh</span>
             <el-slider
               v-model="steps"
               :min="10"
@@ -68,7 +68,7 @@
               show-stops
               style="width: 200px"
             />
-            <span class="steps-label">{{ steps }} 步</span>
+            <span class="steps-label">{{ steps }} bước</span>
           </div>
 
           <div class="path-visualization">
@@ -85,16 +85,16 @@
               :column="2"
               border
             >
-              <el-descriptions-item label="推荐步数">
+              <el-descriptions-item label="Số bước khuyên dùng">
                 {{ currentSampler.recommendedSteps }}
               </el-descriptions-item>
-              <el-descriptions-item label="收敛速度">
+              <el-descriptions-item label="Tốc độ hội tụ">
                 {{ currentSampler.convergence }}
               </el-descriptions-item>
-              <el-descriptions-item label="适用场景">
+              <el-descriptions-item label="Tình huống phù hợp">
                 {{ currentSampler.useCase }}
               </el-descriptions-item>
-              <el-descriptions-item label="稳定性">
+              <el-descriptions-item label="Độ ổn định">
                 <el-rate
                   :model-value="currentSampler.stability"
                   disabled
@@ -106,21 +106,21 @@
           </div>
         </div>
 
-        <!-- 推荐矩阵 -->
+        <!-- Ma trận khuyến nghị -->
         <div class="recommendation-matrix">
           <div class="matrix-title">
-            🎯 采样器选择指南
+            🎯 Hướng dẫn chọn sampler
           </div>
           <div class="matrix-grid">
             <div class="matrix-row header">
               <div class="matrix-cell">
-                场景
+                Tình huống
               </div>
               <div class="matrix-cell">
-                推荐采样器
+                Sampler đề xuất
               </div>
               <div class="matrix-cell">
-                原因
+                Lý do
               </div>
             </div>
             <div
@@ -147,8 +147,8 @@
       <div class="info-box">
         <p>
           <span class="icon">💡</span>
-          <strong>采样器的作用：</strong>
-          采样器决定了如何从噪声中逐步恢复图像。不同的采样器有不同的数学特性，影响生成速度、质量和稳定性。
+          <strong>Vai trò của sampler:</strong>
+          Sampler quyết định cách phục hồi ảnh từng bước từ noise. Các sampler khác nhau có đặc tính toán học khác nhau, ảnh hưởng đến tốc độ sinh, chất lượng và độ ổn định.
         </p>
       </div>
     </el-card>
@@ -168,78 +168,78 @@ const samplers = [
     id: 'euler',
     name: 'Euler',
     speed: 'success',
-    speedLabel: '快速',
-    description: '最简单高效的采样器，适合快速预览',
-    pros: '速度快，内存占用低',
-    cons: '步数少时可能不够精细',
+    speedLabel: 'Nhanh',
+    description: 'Sampler đơn giản và hiệu quả nhất, hợp xem trước nhanh',
+    pros: 'Tốc độ nhanh, chiếm ít bộ nhớ',
+    cons: 'Số bước thấp có thể chưa tinh xảo',
     recommendedSteps: '20-30',
-    convergence: '中等',
-    useCase: '快速迭代、草图生成',
+    convergence: 'Trung bình',
+    useCase: 'Lặp nhanh, sinh phác thảo',
     stability: 3
   },
   {
     id: 'euler_a',
     name: 'Euler a',
     speed: 'success',
-    speedLabel: '快速',
-    description: 'Euler 的祖先版本，更具创造性',
-    pros: '生成结果更有创意',
-    cons: '收敛性较差，结果不稳定',
+    speedLabel: 'Nhanh',
+    description: 'Phiên bản tổ tiên của Euler, giàu tính sáng tạo hơn',
+    pros: 'Kết quả sinh có nhiều sáng tạo hơn',
+    cons: 'Hội tụ kém, kết quả không ổn định',
     recommendedSteps: '25-35',
-    convergence: '慢',
-    useCase: '艺术创作、探索性生成',
+    convergence: 'Chậm',
+    useCase: 'Sáng tạo nghệ thuật, khám phá',
     stability: 2
   },
   {
     id: 'dpm',
     name: 'DPM++ 2M',
     speed: 'warning',
-    speedLabel: '中等',
-    description: '当前最流行的采样器，平衡了速度和质量',
-    pros: '质量高，收敛快',
-    cons: '计算量稍大',
+    speedLabel: 'Trung bình',
+    description: 'Sampler phổ biến nhất hiện nay, cân bằng tốc độ và chất lượng',
+    pros: 'Chất lượng cao, hội tụ nhanh',
+    cons: 'Tính toán hơi nhiều',
     recommendedSteps: '20-30',
-    convergence: '快',
-    useCase: '大多数场景的首选',
+    convergence: 'Nhanh',
+    useCase: 'Lựa chọn hàng đầu cho đa số tình huống',
     stability: 5
   },
   {
     id: 'dpm_karras',
     name: 'DPM++ 2M Karras',
     speed: 'warning',
-    speedLabel: '中等',
-    description: '使用 Karras 噪声调度的 DPM++',
-    pros: '低步数也能出好效果',
-    cons: '需要更多显存',
+    speedLabel: 'Trung bình',
+    description: 'DPM++ dùng lịch noise Karras',
+    pros: 'Số bước ít vẫn cho hiệu quả tốt',
+    cons: 'Cần nhiều VRAM hơn',
     recommendedSteps: '15-25',
-    convergence: '很快',
-    useCase: '高质量最终输出',
+    convergence: 'Rất nhanh',
+    useCase: 'Output chất lượng cao cuối cùng',
     stability: 5
   },
   {
     id: 'ddim',
     name: 'DDIM',
     speed: 'danger',
-    speedLabel: '较慢',
-    description: '确定性采样器，可复现结果',
-    pros: '确定性，相同种子结果一致',
-    cons: '速度较慢',
+    speedLabel: 'Chậm hơn',
+    description: 'Sampler tất định, kết quả có thể tái lập',
+    pros: 'Tất định, cùng seed cho kết quả giống nhau',
+    cons: 'Tốc độ chậm hơn',
     recommendedSteps: '25-50',
-    convergence: '中等',
-    useCase: '需要可复现结果的场景',
+    convergence: 'Trung bình',
+    useCase: 'Tình huống cần kết quả tái lập',
     stability: 4
   },
   {
     id: 'uni_pc',
     name: 'UniPC',
     speed: 'success',
-    speedLabel: '快速',
-    description: '新型采样器，5-10 步即可出图',
-    pros: '极快，低步数效果好',
-    cons: '较新，兼容性待验证',
+    speedLabel: 'Nhanh',
+    description: 'Sampler mới, chỉ 5-10 bước là ra ảnh',
+    pros: 'Cực nhanh, hiệu quả tốt với số bước thấp',
+    cons: 'Còn mới, độ tương thích cần kiểm chứng',
     recommendedSteps: '5-15',
-    convergence: '极快',
-    useCase: '实时应用、快速预览',
+    convergence: 'Cực nhanh',
+    useCase: 'Ứng dụng thời gian thực, xem trước nhanh',
     stability: 4
   }
 ]
@@ -250,28 +250,28 @@ const currentSampler = computed(() => {
 
 const recommendations = [
   {
-    scenario: '快速预览',
+    scenario: 'Xem trước nhanh',
     sampler: 'Euler / UniPC',
-    reason: '步数少，速度快，适合快速尝试不同提示词'
+    reason: 'Ít bước, nhanh, hợp thử nhiều prompt khác nhau'
   },
   {
-    scenario: '最终输出',
+    scenario: 'Output cuối cùng',
     sampler: 'DPM++ 2M Karras',
-    reason: '质量高，收敛快，15-20 步即可出高质量图'
+    reason: 'Chất lượng cao, hội tụ nhanh, 15-20 bước đã ra ảnh chất lượng'
   },
   {
-    scenario: '艺术创作',
+    scenario: 'Sáng tạo nghệ thuật',
     sampler: 'Euler a',
-    reason: '结果更有创意和随机性，适合探索'
+    reason: 'Kết quả nhiều sáng tạo và ngẫu nhiên, hợp khám phá'
   },
   {
-    scenario: '需要可复现',
+    scenario: 'Cần tái lập kết quả',
     sampler: 'DDIM',
-    reason: '确定性采样，相同参数结果完全一致'
+    reason: 'Sampler tất định, cùng tham số cho kết quả hoàn toàn giống nhau'
   }
 ]
 
-// 绘制采样路径可视化
+// Vẽ trực quan hoá đường sinh ảnh
 const drawPathVisualization = () => {
   const canvas = pathCanvas.value
   if (!canvas) return
@@ -280,11 +280,11 @@ const drawPathVisualization = () => {
   const width = canvas.width
   const height = canvas.height
 
-  // 清空画布
+  // Xoá canvas
   ctx.fillStyle = '#f5f5f5'
   ctx.fillRect(0, 0, width, height)
 
-  // 绘制坐标轴
+  // Vẽ trục toạ độ
   ctx.strokeStyle = '#ccc'
   ctx.lineWidth = 1
   ctx.beginPath()
@@ -294,17 +294,17 @@ const drawPathVisualization = () => {
   ctx.lineTo(40, 20)
   ctx.stroke()
 
-  // 标签
+  // Nhãn
   ctx.fillStyle = '#666'
   ctx.font = '12px sans-serif'
-  ctx.fillText('步数 →', width - 60, height - 20)
+  ctx.fillText('Số bước →', width - 70, height - 20)
   ctx.save()
   ctx.translate(20, height / 2)
   ctx.rotate(-Math.PI / 2)
-  ctx.fillText('图像质量 →', 0, 0)
+  ctx.fillText('Chất lượng ảnh →', 0, 0)
   ctx.restore()
 
-  // 绘制不同采样器的收敛曲线
+  // Vẽ đường hội tụ của từng sampler
   const samplerCurves = {
     euler: { color: '#67c23a', curve: t => 1 - Math.exp(-t * 2) },
     euler_a: { color: '#e6a23c', curve: t => 1 - Math.exp(-t * 1.5) + Math.sin(t * 10) * 0.05 },
@@ -341,7 +341,7 @@ const drawPathVisualization = () => {
 
   ctx.setLineDash([])
 
-  // 绘制当前步数标记
+  // Vẽ dấu hiện số bước hiện tại
   const currentX = 40 + (steps.value / 50) * plotWidth
   ctx.strokeStyle = '#ff6b6b'
   ctx.lineWidth = 2
@@ -350,7 +350,7 @@ const drawPathVisualization = () => {
   ctx.lineTo(currentX, height - 40)
   ctx.stroke()
 
-  // 标记点
+  // Điểm đánh dấu
   const selectedCurve = samplerCurves[selectedSampler.value]
   const currentT = steps.value / 50
   const currentY = height - 40 - selectedCurve.curve(currentT) * plotHeight * 0.9
@@ -360,7 +360,7 @@ const drawPathVisualization = () => {
   ctx.arc(currentX, currentY, 6, 0, Math.PI * 2)
   ctx.fill()
 
-  // 图例
+  // Chú giải
   let legendY = 30
   ctx.font = '12px sans-serif'
   Object.entries(samplerCurves).forEach(([id, config]) => {

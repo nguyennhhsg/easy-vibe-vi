@@ -1,14 +1,14 @@
 <template>
   <div class="flip-flop-wrapper">
     <div class="header">
-      <div class="title">从触发器到寄存器：记忆的闭环机制</div>
-      <div class="desc">试着改变数据并观察，没有时钟信号的允许，输出重新反馈回输入端的"闭环"长久保护了记忆。</div>
+      <div class="title">Từ flip-flop đến thanh ghi: cơ chế vòng phản hồi cho bộ nhớ</div>
+      <div class="desc">Thử thay đổi dữ liệu và quan sát: nếu không có xung clock cho phép, "vòng kín" đưa ngõ ra phản hồi về ngõ vào sẽ giữ giá trị nhớ bền vững.</div>
     </div>
     
     <div class="interactive-panel">
       <!-- Left side: Controllable Data inputs -->
       <div class="data-input-sec">
-        <div class="sec-label">数据总线 (Data Input)</div>
+        <div class="sec-label">Bus dữ liệu (Data Input)</div>
         <div class="bus-lines">
           <div 
             v-for="(bit, idx) in inputBits" :key="'in'+idx" 
@@ -24,7 +24,7 @@
 
       <!-- Arrow indicating flow, blocked by a 'gate' if no clock -->
       <div class="gate-sec">
-        <div class="sec-label transparent">大门</div>
+        <div class="sec-label transparent">Cổng</div>
         <div class="gate-door-container">
           <div class="flow-paths">
             <div v-for="(bit, idx) in inputBits" :key="'path'+idx" class="flow-line" :class="{ active: bit === 1, open: isClockPulsing }">
@@ -40,7 +40,7 @@
 
       <!-- Right side: The flip-flops (registers) -->
       <div class="register-sec" :class="{ writing: isClockPulsing }">
-        <div class="sec-label">4位寄存器 (存储状态)</div>
+        <div class="sec-label">Thanh ghi 4 bit (trạng thái lưu)</div>
         <div class="stored-bits">
           <div 
             v-for="(bit, idx) in storedBits" :key="'s'+idx" 
@@ -61,9 +61,9 @@
 
     <!-- Clock button at bottom -->
     <div class="clock-sec">
-      <div class="sec-label">控制中心</div>
+      <div class="sec-label">Trung tâm điều khiển</div>
       <button class="clock-btn" :class="{ active: isClockPulsing }" @click="triggerClock">
-        <span class="icon">⚡</span> 发送时钟脉冲 (Clock)
+        <span class="icon">⚡</span> Phát xung clock
       </button>
       <div class="status-msg">
         <strong :class="{ 'warning-text': pendingChanges, 'success-text': !pendingChanges && !isClockPulsing, 'action-text': isClockPulsing }">

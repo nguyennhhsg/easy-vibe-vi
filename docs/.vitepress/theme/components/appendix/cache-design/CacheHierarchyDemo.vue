@@ -2,13 +2,13 @@
   <div class="cache-hierarchy-demo">
     <div class="demo-header">
       <span class="icon">🏗️</span>
-      <span class="title">缓存层级结构</span>
-      <span class="subtitle">数据是如何在不同缓存层级间流动的</span>
+      <span class="title">Cấu trúc cấp bậc cache</span>
+      <span class="subtitle">Dữ liệu luân chuyển giữa các cấp cache như thế nào</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">超市</span>买东西：先在购物车找（L1缓存），没有就去货架上找（L2缓存），
-      再没有就去仓库找（L3缓存）。越往上层，速度越快但容量越小；越往下层，速度越慢但容量越大。
+      Hãy tưởng tượng bạn đi <span class="highlight">siêu thị</span>: trước tiên tìm trong giỏ hàng (cache L1), không có thì ra kệ hàng tìm (cache L2),
+      vẫn không có thì vào kho (cache L3). Càng lên trên, tốc độ càng nhanh nhưng dung lượng càng nhỏ; càng xuống dưới, tốc độ càng chậm nhưng dung lượng càng lớn.
     </div>
 
     <div class="hierarchy-layers">
@@ -25,18 +25,18 @@
         </div>
         <div class="layer-stats">
           <div class="stat">
-            <span class="stat-label">速度</span>
+            <span class="stat-label">Tốc độ</span>
             <span
               class="stat-value"
               :class="layer.speedClass"
             >{{ layer.speed }}</span>
           </div>
           <div class="stat">
-            <span class="stat-label">容量</span>
+            <span class="stat-label">Dung lượng</span>
             <span class="stat-value">{{ layer.capacity }}</span>
           </div>
           <div class="stat">
-            <span class="stat-label">成本</span>
+            <span class="stat-label">Chi phí</span>
             <span class="stat-value">{{ layer.cost }}</span>
           </div>
         </div>
@@ -51,7 +51,7 @@
 
     <div class="data-flow">
       <div class="flow-title">
-        数据流动演示
+        Mô phỏng luồng dữ liệu
       </div>
       <div class="flow-steps">
         <div
@@ -62,7 +62,7 @@
             1
           </div>
           <div class="step-text">
-            查询 L1 缓存
+            Tra cứu cache L1
           </div>
           <div class="step-time">
             ~1ns
@@ -79,7 +79,7 @@
             2
           </div>
           <div class="step-text">
-            未命中，查 L2
+            Miss, tra L2
           </div>
           <div class="step-time">
             ~10ns
@@ -96,7 +96,7 @@
             3
           </div>
           <div class="step-text">
-            未命中，查 L3
+            Miss, tra L3
           </div>
           <div class="step-time">
             ~100ns
@@ -107,21 +107,21 @@
         class="simulate-btn"
         @click="simulateFlow"
       >
-        模拟数据查找
+        Mô phỏng tra cứu dữ liệu
       </button>
     </div>
 
     <div class="comparison-table">
       <div class="table-title">
-        各层级对比
+        So sánh các cấp
       </div>
       <table>
         <thead>
           <tr>
-            <th>层级</th>
-            <th>速度</th>
-            <th>容量</th>
-            <th>成本</th>
+            <th>Cấp</th>
+            <th>Tốc độ</th>
+            <th>Dung lượng</th>
+            <th>Chi phí</th>
           </tr>
         </thead>
         <tbody>
@@ -141,7 +141,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>多级缓存利用<span class="highlight">局部性原理</span>——程序倾向于访问最近访问过的数据位置。通过把热点数据放在最快的层级，大幅提升访问速度。
+      <strong>Ý tưởng cốt lõi:</strong> Cache nhiều cấp tận dụng <span class="highlight">nguyên lý cục bộ</span> — chương trình có xu hướng truy cập lại các vị trí dữ liệu vừa truy cập. Đặt dữ liệu hot ở cấp nhanh nhất giúp tăng đáng kể tốc độ truy cập.
     </div>
   </div>
 </template>
@@ -155,29 +155,29 @@ const flowStep = ref(0)
 const layers = [
   {
     id: 'l1',
-    name: 'L1 缓存',
+    name: 'Cache L1',
     icon: '⚡',
     speed: '~1ns',
     capacity: '~64KB',
-    cost: '极高',
+    cost: 'Cực cao',
     speedClass: 'fast'
   },
   {
     id: 'l2',
-    name: 'L2 缓存',
+    name: 'Cache L2',
     icon: '🚀',
     speed: '~10ns',
     capacity: '~256KB',
-    cost: '高',
+    cost: 'Cao',
     speedClass: 'medium'
   },
   {
     id: 'l3',
-    name: 'L3 缓存',
+    name: 'Cache L3',
     icon: '📦',
     speed: '~100ns',
     capacity: '~8MB',
-    cost: '中',
+    cost: 'Trung bình',
     speedClass: 'slow'
   }
 ]

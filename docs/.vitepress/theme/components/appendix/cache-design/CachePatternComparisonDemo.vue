@@ -2,13 +2,13 @@
   <div class="cache-pattern-comparison-demo">
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">缓存读写模式</span>
+      <span class="title">Các mô hình đọc/ghi cache</span>
       <span class="subtitle">Cache-Aside vs Read-Through vs Write-Behind</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">厨房</span>做菜：Cache-aside 就像自己决定什么时候从冰箱拿菜；
-      Read-Through 像有个助手，你说要什么他就帮你拿；Write-Behind 像先记在购物清单上，之后再去买。
+      Hãy tưởng tượng bạn đang <span class="highlight">nấu ăn</span>: Cache-Aside giống như bạn tự quyết định khi nào lấy đồ trong tủ lạnh;
+      Read-Through giống như có một trợ lý, bạn cần gì là họ lấy giúp; Write-Behind giống như ghi vào danh sách mua sắm trước, sau đó mới đi mua.
     </div>
 
     <div class="pattern-tabs">
@@ -30,9 +30,9 @@
         class="pattern-detail"
       >
         <div class="pattern-header">
-          <h3>Cache-Aside (旁路缓存)</h3>
+          <h3>Cache-Aside (cache đi bên cạnh)</h3>
           <p class="pattern-desc">
-            最常用的模式，应用代码直接控制缓存
+            Mô hình phổ biến nhất, code ứng dụng tự kiểm soát cache
           </p>
         </div>
 
@@ -42,7 +42,7 @@
               📖
             </div>
             <div class="step-content">
-              <strong>读取：</strong>先查缓存 → 没有就查数据库 → 写入缓存
+              <strong>Đọc:</strong> Tra cache trước → nếu không có thì truy vấn database → ghi vào cache
             </div>
           </div>
           <div class="flow-step write">
@@ -50,7 +50,7 @@
               ✏️
             </div>
             <div class="step-content">
-              <strong>更新：</strong>先更新数据库 → <span class="highlight">删除</span>缓存（不是更新！）
+              <strong>Cập nhật:</strong> Cập nhật database trước → <span class="highlight">xóa</span> cache (không phải cập nhật!)
             </div>
           </div>
         </div>
@@ -58,24 +58,24 @@
         <div class="pros-cons">
           <div class="pros">
             <div class="list-title">
-              ✅ 优点
+              ✅ Ưu điểm
             </div>
             <div class="list-item">
-              灵活，可精细控制
+              Linh hoạt, kiểm soát chi tiết
             </div>
             <div class="list-item">
-              适合大多数场景
+              Phù hợp với hầu hết trường hợp
             </div>
           </div>
           <div class="cons">
             <div class="list-title">
-              ❌ 缺点
+              ❌ Nhược điểm
             </div>
             <div class="list-item">
-              代码复杂度较高
+              Code khá phức tạp
             </div>
             <div class="list-item">
-              需要手动维护一致性
+              Phải tự duy trì tính nhất quán
             </div>
           </div>
         </div>
@@ -86,9 +86,9 @@
         class="pattern-detail"
       >
         <div class="pattern-header">
-          <h3>Read-Through (读穿透)</h3>
+          <h3>Read-Through (đọc xuyên qua)</h3>
           <p class="pattern-desc">
-            缓存库负责从数据库加载数据
+            Thư viện cache chịu trách nhiệm load dữ liệu từ database
           </p>
         </div>
 
@@ -98,7 +98,7 @@
               📖
             </div>
             <div class="step-content">
-              <strong>读取：</strong>应用只调 cache.get()，缓存库负责查数据库
+              <strong>Đọc:</strong> Ứng dụng chỉ gọi cache.get(), thư viện cache sẽ truy vấn database
             </div>
           </div>
           <div class="flow-step">
@@ -106,7 +106,7 @@
               ✏️
             </div>
             <div class="step-content">
-              <strong>写入：</strong>通常与 Write-Through 配合，同步写缓存和数据库
+              <strong>Ghi:</strong> Thường kết hợp với Write-Through, ghi đồng bộ vào cache và database
             </div>
           </div>
         </div>
@@ -114,24 +114,24 @@
         <div class="pros-cons">
           <div class="pros">
             <div class="list-title">
-              ✅ 优点
+              ✅ Ưu điểm
             </div>
             <div class="list-item">
-              代码简洁
+              Code gọn gàng
             </div>
             <div class="list-item">
-              一致性更好
+              Tính nhất quán tốt hơn
             </div>
           </div>
           <div class="cons">
             <div class="list-title">
-              ❌ 缺点
+              ❌ Nhược điểm
             </div>
             <div class="list-item">
-              需要专门的缓存库
+              Cần thư viện cache chuyên dụng
             </div>
             <div class="list-item">
-              灵活性较低
+              Ít linh hoạt hơn
             </div>
           </div>
         </div>
@@ -142,9 +142,9 @@
         class="pattern-detail"
       >
         <div class="pattern-header">
-          <h3>Write-Behind (异步写回)</h3>
+          <h3>Write-Behind (ghi trễ bất đồng bộ)</h3>
           <p class="pattern-desc">
-            写入时只写缓存，异步批量写数据库
+            Khi ghi chỉ ghi vào cache, sau đó ghi vào database theo lô và bất đồng bộ
           </p>
         </div>
 
@@ -154,7 +154,7 @@
               ⚡
             </div>
             <div class="step-content">
-              <strong>写入：</strong>立即写缓存 → 异步批量写数据库
+              <strong>Ghi:</strong> Ghi cache ngay lập tức → ghi database theo lô bất đồng bộ
             </div>
           </div>
           <div class="flow-step">
@@ -162,7 +162,7 @@
               ⚠️
             </div>
             <div class="step-content">
-              <strong>风险：</strong>缓存崩溃会导致数据丢失
+              <strong>Rủi ro:</strong> Cache sập sẽ làm mất dữ liệu
             </div>
           </div>
         </div>
@@ -170,24 +170,24 @@
         <div class="pros-cons">
           <div class="pros">
             <div class="list-title">
-              ✅ 优点
+              ✅ Ưu điểm
             </div>
             <div class="list-item">
-              写入极快
+              Ghi cực nhanh
             </div>
             <div class="list-item">
-              适合写多场景
+              Phù hợp với tình huống ghi nhiều
             </div>
           </div>
           <div class="cons">
             <div class="list-title">
-              ❌ 缺点
+              ❌ Nhược điểm
             </div>
             <div class="list-item">
-              可能丢失数据
+              Có thể mất dữ liệu
             </div>
             <div class="list-item">
-              一致性差
+              Tính nhất quán kém
             </div>
           </div>
         </div>
@@ -196,39 +196,39 @@
 
     <div class="comparison-table">
       <div class="table-title">
-        三种模式对比
+        So sánh ba mô hình
       </div>
       <table>
         <thead>
           <tr>
-            <th>模式</th>
-            <th>复杂度</th>
-            <th>性能</th>
-            <th>一致性</th>
-            <th>适用场景</th>
+            <th>Mô hình</th>
+            <th>Độ phức tạp</th>
+            <th>Hiệu năng</th>
+            <th>Tính nhất quán</th>
+            <th>Trường hợp dùng</th>
           </tr>
         </thead>
         <tbody>
           <tr :class="{ active: activePattern === 'cache-aside' }">
             <td>Cache-Aside</td>
-            <td>中</td>
-            <td>高</td>
-            <td>中</td>
-            <td>大多数场景</td>
+            <td>Trung bình</td>
+            <td>Cao</td>
+            <td>Trung bình</td>
+            <td>Hầu hết các tình huống</td>
           </tr>
           <tr :class="{ active: activePattern === 'read-through' }">
             <td>Read-Through</td>
-            <td>低</td>
-            <td>中</td>
-            <td>高</td>
-            <td>读多写少</td>
+            <td>Thấp</td>
+            <td>Trung bình</td>
+            <td>Cao</td>
+            <td>Đọc nhiều, ghi ít</td>
           </tr>
           <tr :class="{ active: activePattern === 'write-behind' }">
             <td>Write-Behind</td>
-            <td>高</td>
-            <td>极高</td>
-            <td>低</td>
-            <td>写多、可丢失</td>
+            <td>Cao</td>
+            <td>Cực cao</td>
+            <td>Thấp</td>
+            <td>Ghi nhiều, chấp nhận mất</td>
           </tr>
         </tbody>
       </table>
@@ -236,7 +236,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选择建议：</strong>90% 的场景用 Cache-Aside；如果追求代码简洁用 Read-Through；如果是秒杀、点赞这种"能丢数据"的场景才用 Write-Behind。
+      <strong>Gợi ý lựa chọn:</strong> 90% trường hợp dùng Cache-Aside; nếu muốn code gọn gàng dùng Read-Through; nếu là tình huống "chấp nhận mất dữ liệu" như flash sale, like thì mới dùng Write-Behind.
     </div>
   </div>
 </template>

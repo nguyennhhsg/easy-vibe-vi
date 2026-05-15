@@ -1,13 +1,13 @@
 <template>
   <div class="ds-overview-demo">
     <div class="demo-header">
-      <span class="title">数据结构全景图</span>
-      <span class="subtitle">不同场景选择不同的数据组织方式</span>
+      <span class="title">Toàn cảnh các cấu trúc dữ liệu</span>
+      <span class="subtitle">Mỗi tình huống chọn cách tổ chức dữ liệu khác nhau</span>
     </div>
 
     <div class="structure-map">
       <div class="map-intro">
-        数据结构就像整理房间的方式：把衣服放进衣柜、书放在书架、杂物放抽屉
+        Cấu trúc dữ liệu giống như cách dọn phòng: quần áo cho vào tủ, sách lên kệ, đồ linh tinh vào ngăn kéo
       </div>
 
       <div class="structure-categories">
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <!-- 详细说明 -->
+    <!-- Mô tả chi tiết -->
     <div class="category-detail">
       <div class="detail-header">
         <span class="detail-icon">{{ currentCategory.icon }}</span>
@@ -42,7 +42,7 @@
 
       <div class="detail-content">
         <div class="detail-section">
-          <div class="section-title">特点</div>
+          <div class="section-title">Đặc điểm</div>
           <div class="feature-grid">
             <div
               v-for="(feature, index) in currentCategory.features"
@@ -56,7 +56,7 @@
         </div>
 
         <div class="detail-section">
-          <div class="section-title">适用场景</div>
+          <div class="section-title">Trường hợp áp dụng</div>
           <div class="scenario-list">
             <div
               v-for="(scenario, index) in currentCategory.scenarios"
@@ -73,11 +73,11 @@
         </div>
 
         <div class="detail-section">
-          <div class="section-title">操作复杂度</div>
+          <div class="section-title">Độ phức tạp thao tác</div>
           <div class="complexity-table">
             <div class="table-header">
-              <span class="header-cell">操作</span>
-              <span class="header-cell">平均时间</span>
+              <span class="header-cell">Thao tác</span>
+              <span class="header-cell">Thời gian trung bình</span>
             </div>
             <div
               v-for="(op, index) in currentCategory.complexity"
@@ -92,9 +92,9 @@
       </div>
     </div>
 
-    <!-- 类比说明 -->
+    <!-- Phép so sánh -->
     <div class="analogy-section">
-      <div class="analogy-title">生活类比</div>
+      <div class="analogy-title">Liên hệ thực tế</div>
       <div class="analogy-content">
         <div class="analogy-text">{{ currentCategory.analogy.text }}</div>
         <div class="analogy-example">{{ currentCategory.analogy.example }}</div>
@@ -111,138 +111,138 @@ const activeCategory = ref('linear')
 const categories = [
   {
     id: 'linear',
-    name: '线性结构',
+    name: 'Cấu trúc tuyến tính',
     icon: '📚',
-    desc: '数据按顺序排列，像一排书',
-    examples: ['数组', '链表', '栈', '队列'],
+    desc: 'Dữ liệu xếp theo thứ tự, giống một hàng sách',
+    examples: ['Mảng', 'Linked List', 'Stack', 'Queue'],
     features: [
-      '数据元素之间一对一关系',
-      '有明确的先后顺序',
-      '可以是连续存储或链式存储'
+      'Các phần tử dữ liệu có quan hệ 1-1',
+      'Có thứ tự trước sau rõ ràng',
+      'Có thể lưu trữ liên tục hoặc dạng liên kết'
     ],
     scenarios: [
       {
         icon: '📝',
-        title: '数组：列表数据',
-        desc: '存储学生成绩、商品价格等有序数据'
+        title: 'Mảng: dữ liệu dạng danh sách',
+        desc: 'Lưu điểm học sinh, giá hàng hóa và các dữ liệu có thứ tự'
       },
       {
         icon: '🔄',
-        title: '栈：撤销操作',
-        desc: '文本编辑器的撤销功能，后进先出'
+        title: 'Stack: thao tác Undo',
+        desc: 'Chức năng Undo của trình soạn thảo, vào sau ra trước'
       },
       {
         icon: '🎫',
-        title: '队列：任务调度',
-        desc: '打印队列、任务队列，先进先出'
+        title: 'Queue: lên lịch tác vụ',
+        desc: 'Hàng đợi in, hàng đợi task, vào trước ra trước'
       }
     ],
     complexity: [
-      { operation: '访问元素', time: 'O(1)' },
-      { operation: '插入/删除', time: 'O(n)' }
+      { operation: 'Truy cập phần tử', time: 'O(1)' },
+      { operation: 'Chèn/xóa', time: 'O(n)' }
     ],
     analogy: {
-      text: '像一列火车，车厢按顺序连接',
-      example: '要找到第 5 节车厢，直接数过去；要插入新车厢，需要断开连接'
+      text: 'Giống một đoàn tàu, các toa nối nhau theo thứ tự',
+      example: 'Muốn đến toa số 5 thì đếm từ đầu; muốn chèn toa mới phải tách rời các nối'
     }
   },
   {
     id: 'hash',
-    name: '哈希结构',
+    name: 'Cấu trúc băm',
     icon: '🗂️',
-    desc: '通过关键词快速查找',
-    examples: ['哈希表', '字典', '集合'],
-    features: ['通过键值对存储数据', '查找速度极快', '数据之间没有顺序关系'],
+    desc: 'Tìm nhanh qua từ khóa',
+    examples: ['Hash Table', 'Dictionary', 'Set'],
+    features: ['Lưu dữ liệu dạng key-value', 'Tốc độ tìm cực nhanh', 'Dữ liệu không có thứ tự'],
     scenarios: [
       {
         icon: '📖',
-        title: '字典：单词查找',
-        desc: '根据英文单词快速找到中文释义'
+        title: 'Từ điển: tra từ',
+        desc: 'Tra nghĩa nhanh theo từ tiếng Anh'
       },
       {
         icon: '👤',
-        title: '用户信息：ID 查询',
-        desc: '根据用户 ID 快速获取用户资料'
+        title: 'Thông tin user: tra theo ID',
+        desc: 'Lấy thông tin user nhanh theo ID'
       },
       {
         icon: '🛒',
-        title: '购物车：商品管理',
-        desc: '记录商品 ID 和数量，快速结算'
+        title: 'Giỏ hàng: quản lý sản phẩm',
+        desc: 'Ghi ID sản phẩm và số lượng, thanh toán nhanh'
       }
     ],
     complexity: [
-      { operation: '查找', time: 'O(1)' },
-      { operation: '插入/删除', time: 'O(1)' }
+      { operation: 'Tìm kiếm', time: 'O(1)' },
+      { operation: 'Chèn/xóa', time: 'O(1)' }
     ],
     analogy: {
-      text: '像图书馆的索引卡片',
-      example: '不用在一排排书架上找，直接查索引就能找到位置'
+      text: 'Giống thẻ tra cứu trong thư viện',
+      example: 'Không cần lùng khắp kệ sách, tra thẻ là biết ngay vị trí'
     }
   },
   {
     id: 'tree',
-    name: '树形结构',
+    name: 'Cấu trúc cây',
     icon: '🌳',
-    desc: '层级关系，像家谱',
-    examples: ['二叉树', 'B 树', '堆'],
-    features: ['一对多的层级关系', '有明确的根节点', '适合表示分类和层级'],
+    desc: 'Quan hệ phân cấp, giống cây gia phả',
+    examples: ['Cây nhị phân', 'B-Tree', 'Heap'],
+    features: ['Quan hệ phân cấp 1-nhiều', 'Có node gốc rõ ràng', 'Phù hợp biểu diễn phân loại và phân cấp'],
     scenarios: [
       {
         icon: '📁',
-        title: '文件系统：目录树',
-        desc: '文件夹和文件的层级组织'
+        title: 'Hệ thống file: cây thư mục',
+        desc: 'Tổ chức phân cấp của thư mục và file'
       },
       {
         icon: '🏢',
-        title: '组织架构：管理树',
-        desc: '公司管理层级关系'
+        title: 'Sơ đồ tổ chức: cây quản lý',
+        desc: 'Quan hệ phân cấp quản lý của công ty'
       },
       {
         icon: '💻',
-        title: 'HTML：DOM 树',
-        desc: '网页元素的嵌套结构'
+        title: 'HTML: cây DOM',
+        desc: 'Cấu trúc lồng nhau của các phần tử web'
       }
     ],
     complexity: [
-      { operation: '查找', time: 'O(log n)' },
-      { operation: '插入/删除', time: 'O(log n)' }
+      { operation: 'Tìm kiếm', time: 'O(log n)' },
+      { operation: 'Chèn/xóa', time: 'O(log n)' }
     ],
     analogy: {
-      text: '像家谱树或公司组织架构',
-      example: '从根节点（祖先）开始，一层层向下找，路径唯一'
+      text: 'Giống cây gia phả hoặc sơ đồ tổ chức công ty',
+      example: 'Từ gốc (tổ tiên) lần xuống từng tầng, đường đi là duy nhất'
     }
   },
   {
     id: 'graph',
-    name: '图结构',
+    name: 'Cấu trúc đồ thị',
     icon: '🕸️',
-    desc: '复杂关系网络',
-    examples: ['有向图', '无向图', '网络图'],
-    features: ['多对多的复杂关系', '节点之间可以任意连接', '可以表示复杂网络'],
+    desc: 'Mạng lưới quan hệ phức tạp',
+    examples: ['Đồ thị có hướng', 'Đồ thị vô hướng', 'Đồ thị mạng'],
+    features: ['Quan hệ nhiều-nhiều phức tạp', 'Các node có thể nối tùy ý', 'Biểu diễn được mạng lưới phức tạp'],
     scenarios: [
       {
         icon: '🗺️',
-        title: '地图：路径规划',
-        desc: '城市之间的道路连接，导航系统'
+        title: 'Bản đồ: tìm đường',
+        desc: 'Kết nối các thành phố, hệ thống dẫn đường'
       },
       {
         icon: '👥',
-        title: '社交网络：好友关系',
-        desc: '用户之间的关注、好友关系'
+        title: 'Mạng xã hội: quan hệ bạn bè',
+        desc: 'Quan hệ theo dõi, kết bạn giữa các user'
       },
       {
         icon: '🔗',
-        title: '网页：链接关系',
-        desc: '网页之间的超链接网络'
+        title: 'Web: liên kết',
+        desc: 'Mạng lưới hyperlink giữa các trang'
       }
     ],
     complexity: [
-      { operation: '遍历', time: 'O(V + E)' },
-      { operation: '最短路径', time: 'O(E + V log V)' }
+      { operation: 'Duyệt', time: 'O(V + E)' },
+      { operation: 'Đường ngắn nhất', time: 'O(E + V log V)' }
     ],
     analogy: {
-      text: '像地铁线路图或航空网络',
-      example: '多个站点，多条线路，站点之间可以有多种连接方式'
+      text: 'Giống sơ đồ tàu điện ngầm hoặc mạng lưới hàng không',
+      example: 'Nhiều ga, nhiều tuyến, giữa các ga có nhiều cách nối khác nhau'
     }
   }
 ]

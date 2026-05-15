@@ -1,12 +1,12 @@
 <template>
   <div class="ds-selector-demo">
     <div class="demo-header">
-      <span class="title">如何选择合适的数据结构？</span>
-      <span class="subtitle">根据场景需求做出最佳选择</span>
+      <span class="title">Chọn cấu trúc dữ liệu phù hợp như thế nào?</span>
+      <span class="subtitle">Đưa ra lựa chọn tốt nhất dựa trên nhu cầu thực tế</span>
     </div>
 
     <div class="scenario-selector">
-      <div class="selector-title">你的使用场景是？</div>
+      <div class="selector-title">Tình huống bạn đang gặp là gì?</div>
       <div class="scenario-grid">
         <div
           v-for="scenario in scenarios"
@@ -21,14 +21,14 @@
       </div>
     </div>
 
-    <!-- 推荐结果 -->
+    <!-- Kết quả gợi ý -->
     <div v-if="activeScenario" class="recommendation">
       <div class="rec-header">
-        <span class="rec-title">推荐使用：{{ currentScenario.recommendation }}</span>
+        <span class="rec-title">Gợi ý dùng: {{ currentScenario.recommendation }}</span>
       </div>
 
       <div class="rec-reason">
-        <div class="reason-title">为什么？</div>
+        <div class="reason-title">Vì sao?</div>
         <div class="reason-list">
           <div
             v-for="(reason, index) in currentScenario.reasons"
@@ -42,20 +42,20 @@
       </div>
 
       <div class="rec-example">
-        <div class="example-title">实际例子</div>
+        <div class="example-title">Ví dụ thực tế</div>
         <div class="example-content">{{ currentScenario.example }}</div>
       </div>
     </div>
 
-    <!-- 快速参考表 -->
+    <!-- Bảng tra nhanh -->
     <div class="quick-reference">
-      <div class="ref-title">快速参考表</div>
+      <div class="ref-title">Bảng tra nhanh</div>
       <table class="ref-table">
         <thead>
           <tr>
-            <th>场景需求</th>
-            <th>推荐数据结构</th>
-            <th>时间复杂度</th>
+            <th>Tình huống</th>
+            <th>Cấu trúc dữ liệu gợi ý</th>
+            <th>Độ phức tạp thời gian</th>
           </tr>
         </thead>
         <tbody>
@@ -68,42 +68,42 @@
       </table>
     </div>
 
-    <!-- 决策流程 -->
+    <!-- Quy trình ra quyết định -->
     <div class="decision-flow">
-      <div class="flow-title">选择决策流程</div>
+      <div class="flow-title">Quy trình chọn lựa</div>
       <div class="flow-diagram">
         <div class="flow-step question">
           <div class="step-icon">❓</div>
-          <div class="step-text">需要快速访问元素？</div>
+          <div class="step-text">Cần truy cập phần tử nhanh không?</div>
         </div>
         <div class="flow-branch">
           <div class="branch-yes">
-            <div class="branch-label">是</div>
-            <div class="flow-result">数组 / 哈希表</div>
+            <div class="branch-label">Có</div>
+            <div class="flow-result">Mảng / Hash Table</div>
           </div>
           <div class="branch-no">
-            <div class="branch-label">否</div>
+            <div class="branch-label">Không</div>
             <div class="flow-step question">
-              <div class="step-text">需要频繁插入删除？</div>
+              <div class="step-text">Cần chèn/xóa thường xuyên không?</div>
             </div>
             <div class="flow-branch">
               <div class="branch-yes">
-                <div class="branch-label">是</div>
-                <div class="flow-result">链表</div>
+                <div class="branch-label">Có</div>
+                <div class="flow-result">Linked List</div>
               </div>
               <div class="branch-no">
-                <div class="branch-label">否</div>
+                <div class="branch-label">Không</div>
                 <div class="flow-step question">
-                  <div class="step-text">需要保持顺序？</div>
+                  <div class="step-text">Cần giữ thứ tự không?</div>
                 </div>
                 <div class="flow-branch">
                   <div class="branch-yes">
-                    <div class="branch-label">是</div>
-                    <div class="flow-result">栈 / 队列</div>
+                    <div class="branch-label">Có</div>
+                    <div class="flow-result">Stack / Queue</div>
                   </div>
                   <div class="branch-no">
-                    <div class="branch-label">否</div>
-                    <div class="flow-result">树 / 图</div>
+                    <div class="branch-label">Không</div>
+                    <div class="flow-result">Cây / Đồ thị</div>
                   </div>
                 </div>
               </div>
@@ -124,74 +124,74 @@ const scenarios = [
   {
     id: 'lookup',
     icon: '🔍',
-    name: '快速查找',
-    desc: '根据关键词快速找到对应数据',
-    recommendation: '哈希表',
+    name: 'Tìm kiếm nhanh',
+    desc: 'Tìm dữ liệu nhanh theo từ khóa',
+    recommendation: 'Hash Table',
     reasons: [
-      '平均查找时间 O(1)，瞬间找到',
-      '键值对存储，语义清晰',
-      '无需遍历整个数据集'
+      'Thời gian tìm trung bình O(1), gần như tức thời',
+      'Lưu dạng key-value, ngữ nghĩa rõ ràng',
+      'Không cần duyệt toàn bộ dữ liệu'
     ],
-    example: '用户 ID 查找用户资料、字典查词、缓存系统'
+    example: 'Tra thông tin user theo ID, tra từ điển, hệ thống cache'
   },
   {
     id: 'ordered',
     icon: '📊',
-    name: '保持顺序',
-    desc: '数据需要按插入顺序或特定顺序存储',
-    recommendation: '数组 或 链表',
+    name: 'Giữ thứ tự',
+    desc: 'Dữ liệu cần lưu theo thứ tự thêm vào hoặc thứ tự cụ thể',
+    recommendation: 'Mảng hoặc Linked List',
     reasons: [
-      '数组支持索引直接访问',
-      '链表可以灵活调整大小',
-      '按位置访问速度快'
+      'Mảng cho phép truy cập trực tiếp theo index',
+      'Linked List có thể thay đổi kích thước linh hoạt',
+      'Truy cập theo vị trí nhanh'
     ],
-    example: '学生成绩列表、时间序列数据、排行榜'
+    example: 'Danh sách điểm học sinh, dữ liệu chuỗi thời gian, bảng xếp hạng'
   },
   {
     id: 'lifo',
     icon: '🥞',
-    name: '后进先出',
-    desc: '最后进入的最先处理',
-    recommendation: '栈',
-    reasons: ['只能在栈顶操作', '入栈出栈都是 O(1)', '适合回溯和撤销操作'],
-    example: '浏览器后退、编辑器撤销、函数调用栈'
+    name: 'Vào sau ra trước',
+    desc: 'Cái vào sau cùng được xử lý trước',
+    recommendation: 'Stack',
+    reasons: ['Chỉ thao tác ở đỉnh stack', 'Push/pop đều O(1)', 'Phù hợp truy vết và Undo'],
+    example: 'Nút Back trình duyệt, Undo trình soạn thảo, call stack của hàm'
   },
   {
     id: 'fifo',
     icon: '🚶',
-    name: '先进先出',
-    desc: '先来的先处理',
-    recommendation: '队列',
-    reasons: ['一端入队，另一端出队', '入队出队都是 O(1)', '公平的调度方式'],
-    example: '打印队列、任务调度、消息队列'
+    name: 'Vào trước ra trước',
+    desc: 'Ai đến trước xử lý trước',
+    recommendation: 'Queue',
+    reasons: ['Một đầu vào, đầu kia ra', 'Enqueue/dequeue đều O(1)', 'Cách lên lịch công bằng'],
+    example: 'Hàng đợi in, lên lịch tác vụ, message queue'
   },
   {
     id: 'hierarchy',
     icon: '🌳',
-    name: '层级关系',
-    desc: '数据之间有父子层级关系',
-    recommendation: '树',
-    reasons: ['清晰表达层级结构', '查找效率 O(log n)', '支持多种遍历方式'],
-    example: '文件系统、组织架构、HTML DOM'
+    name: 'Quan hệ phân cấp',
+    desc: 'Dữ liệu có quan hệ cha-con',
+    recommendation: 'Cây',
+    reasons: ['Diễn tả cấu trúc phân cấp rõ ràng', 'Tìm kiếm O(log n)', 'Hỗ trợ nhiều cách duyệt'],
+    example: 'Hệ thống file, sơ đồ tổ chức, HTML DOM'
   },
   {
     id: 'relationship',
     icon: '🕸️',
-    name: '复杂关系',
-    desc: '数据之间有多对多的复杂连接',
-    recommendation: '图',
-    reasons: ['可以表示任意关系', '支持路径搜索算法', '适合网络和社交关系'],
-    example: '社交网络、地图导航、网页链接'
+    name: 'Quan hệ phức tạp',
+    desc: 'Dữ liệu có kết nối nhiều-nhiều phức tạp',
+    recommendation: 'Đồ thị',
+    reasons: ['Biểu diễn được mọi quan hệ', 'Hỗ trợ thuật toán tìm đường', 'Phù hợp mạng lưới và quan hệ xã hội'],
+    example: 'Mạng xã hội, định tuyến bản đồ, liên kết web'
   }
 ]
 
 const referenceTable = [
-  { scenario: '随机访问', structure: '数组', complexity: 'O(1)' },
-  { scenario: '快速查找', structure: '哈希表', complexity: 'O(1)' },
-  { scenario: '有序查找', structure: '二叉搜索树', complexity: 'O(log n)' },
-  { scenario: '频繁插入删除', structure: '链表', complexity: 'O(1)' },
-  { scenario: '撤销操作', structure: '栈', complexity: 'O(1)' },
-  { scenario: '任务调度', structure: '队列', complexity: 'O(1)' }
+  { scenario: 'Truy cập ngẫu nhiên', structure: 'Mảng', complexity: 'O(1)' },
+  { scenario: 'Tìm kiếm nhanh', structure: 'Hash Table', complexity: 'O(1)' },
+  { scenario: 'Tìm kiếm có thứ tự', structure: 'Cây tìm kiếm nhị phân', complexity: 'O(log n)' },
+  { scenario: 'Chèn/xóa thường xuyên', structure: 'Linked List', complexity: 'O(1)' },
+  { scenario: 'Thao tác Undo', structure: 'Stack', complexity: 'O(1)' },
+  { scenario: 'Lên lịch tác vụ', structure: 'Queue', complexity: 'O(1)' }
 ]
 
 const currentScenario = computed(() => {

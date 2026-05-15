@@ -1,6 +1,6 @@
 <template>
   <div class="power-on-demo">
-    <div class="demo-title">硬件启动链路</div>
+    <div class="demo-title">Chuỗi khởi động phần cứng</div>
     <div class="flow">
       <div v-for="(step, i) in steps" :key="step.name" class="flow-item">
         <div class="step-card">
@@ -20,10 +20,10 @@
 
 <script setup>
 const steps = [
-  { icon: '🔌', name: '电源 PSU', desc: '交流电 → 直流电' },
-  { icon: '🧩', name: '主板芯片组', desc: '协调各硬件部件' },
-  { icon: '⚙️', name: 'CPU 复位', desc: '清零寄存器，就绪' },
-  { icon: '📟', name: 'BIOS/UEFI', desc: '执行第一条指令' }
+  { icon: '🔌', name: 'Nguồn PSU', desc: 'Điện xoay chiều → một chiều' },
+  { icon: '🧩', name: 'Chipset bo mạch', desc: 'Điều phối các phần cứng' },
+  { icon: '⚙️', name: 'Reset CPU', desc: 'Xóa thanh ghi, sẵn sàng' },
+  { icon: '📟', name: 'BIOS/UEFI', desc: 'Thực thi lệnh đầu tiên' }
 ]
 </script>
 

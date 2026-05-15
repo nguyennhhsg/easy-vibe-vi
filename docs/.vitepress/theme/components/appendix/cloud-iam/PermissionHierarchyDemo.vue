@@ -2,8 +2,8 @@
   <div class="permission-hierarchy-demo">
     <div class="demo-header">
       <span class="icon">🏛️</span>
-      <span class="title">权限层级结构</span>
-      <span class="subtitle">不同权限级别的范围差异</span>
+      <span class="title">Cấu trúc phân tầng quyền</span>
+      <span class="subtitle">Khác biệt phạm vi giữa các mức quyền</span>
     </div>
 
     <div class="main-area">
@@ -31,11 +31,11 @@
           {{ selectedLevelData.name }}
         </div>
         <div class="detail-row">
-          <span class="label">范围：</span>
+          <span class="label">Phạm vi:</span>
           <span class="value">{{ selectedLevelData.scope }}</span>
         </div>
         <div class="detail-row">
-          <span class="label">场景：</span>
+          <span class="label">Tình huống:</span>
           <span class="value">{{ selectedLevelData.scenario }}</span>
         </div>
         <div class="perms-list">
@@ -50,7 +50,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>最小权限原则——始终授予用户完成工作所需的最小权限。
+      <strong>Ý tưởng cốt lõi:</strong> Nguyên tắc least privilege — luôn cấp cho user mức quyền tối thiểu đủ để hoàn thành công việc.
     </div>
   </div>
 </template>
@@ -63,38 +63,38 @@ const selectedLevel = ref(0)
 const hierarchyLevels = [
   {
     icon: '👑',
-    name: '根账号',
-    scope: '全账号最高权限',
-    scenario: '账号所有者，拥有所有权限',
-    permissions: [{ name: '完全管理' }, { name: '账单管理' }, { name: '关闭账号' }]
+    name: 'Tài khoản root',
+    scope: 'Quyền cao nhất toàn account',
+    scenario: 'Chủ tài khoản, nắm toàn bộ quyền',
+    permissions: [{ name: 'Quản lý toàn diện' }, { name: 'Quản lý billing' }, { name: 'Đóng account' }]
   },
   {
     icon: '👤',
-    name: 'IAM 管理员',
-    scope: 'IAM 全权限',
-    scenario: '管理所有 IAM 用户、角色、策略',
-    permissions: [{ name: '创建/删除用户' }, { name: '管理策略' }, { name: '查看凭证' }]
+    name: 'IAM admin',
+    scope: 'Toàn quyền IAM',
+    scenario: 'Quản lý mọi IAM user, role, policy',
+    permissions: [{ name: 'Tạo/xóa user' }, { name: 'Quản lý policy' }, { name: 'Xem credential' }]
   },
   {
     icon: '👥',
-    name: '普通用户',
-    scope: '受限权限',
-    scenario: '日常开发，只能访问特定资源',
-    permissions: [{ name: '只读 EC2' }, { name: '读写 S3' }, { name: '查看日志' }]
+    name: 'User thường',
+    scope: 'Quyền bị giới hạn',
+    scenario: 'Phát triển hằng ngày, chỉ truy cập tài nguyên cụ thể',
+    permissions: [{ name: 'Read-only EC2' }, { name: 'Đọc/ghi S3' }, { name: 'Xem log' }]
   },
   {
     icon: '🎭',
-    name: '临时角色',
-    scope: '按策略定义',
-    scenario: '跨账号访问、临时授权',
-    permissions: [{ name: '临时凭证' }, { name: '跨账号' }, { name: '无长期凭证' }]
+    name: 'Role tạm thời',
+    scope: 'Theo policy định nghĩa',
+    scenario: 'Cross-account, cấp quyền tạm thời',
+    permissions: [{ name: 'Credential tạm thời' }, { name: 'Cross-account' }, { name: 'Không có credential dài hạn' }]
   },
   {
     icon: '🔑',
-    name: '服务账号',
-    scope: 'API 访问',
-    scenario: '应用程序、CI/CD 流水线',
-    permissions: [{ name: 'AK/SK' }, { name: '特定 API' }, { name: '定期轮换' }]
+    name: 'Service account',
+    scope: 'Truy cập API',
+    scenario: 'Ứng dụng, CI/CD pipeline',
+    permissions: [{ name: 'AK/SK' }, { name: 'API cụ thể' }, { name: 'Xoay key định kỳ' }]
   }
 ]
 
