@@ -148,7 +148,7 @@ const getSeoHead = (locale, title, description, path = '') => {
       {
         name: 'keywords',
         content:
-          'AI编程,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,零基础学编程,AI辅助开发,产品经理,全栈开发,编程教程,编程工具,Datawhale,Supabase,React,大模型,LLM,人工智能,微信小程序,Android开发,iOS开发,MCP,RAG,LangGraph,Dify,跨平台开发,AI应用开发'
+          'Lập trình AI, Vibe Coding, Claude Code, Cursor, Trae, AI IDE, học lập trình từ con số 0, phát triển hỗ trợ AI, Product Manager, full-stack, hướng dẫn lập trình, công cụ lập trình, Supabase, React, LLM, AI, ứng dụng mini-program, Android, iOS, MCP, RAG, LangGraph, Dify, đa nền tảng, phát triển ứng dụng AI'
       }
     ],
     ['meta', { name: 'author', content: 'Datawhale' }],
@@ -321,9 +321,9 @@ const commonThemeConfig = {
   },
   footer: {
     message:
-      '<a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2026002630号-1</a> | <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010602202215" rel="noreferrer" target="_blank">京公网安备11010602202215号</a>',
+      'Phiên bản tiếng Việt do <a href="https://github.com/nguyennhhsg" target="_blank">@nguyennhhsg</a> dịch từ <a href="https://github.com/datawhalechina/easy-vibe" target="_blank">Datawhale Easy-Vibe</a>',
     copyright:
-      '本作品采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议（CC BY-NC-SA 4.0）</a> 进行许可'
+      'Nội dung sử dụng giấy phép <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> (Ghi nhận - Phi thương mại - Chia sẻ tương tự)'
   }
 }
 
