@@ -1,19 +1,19 @@
 <!--
-  ImperativeVsDeclarativeDemo.vue - 命令式 vs 声明式编程对比
-  用"画画的两种方式"来解释 jQuery vs Vue/React 的区别
+  ImperativeVsDeclarativeDemo.vue - So sánh lập trình mệnh lệnh và khai báo
+  Dùng ẩn dụ "hai cách vẽ tranh" để giải thích khác biệt giữa jQuery và Vue/React
 -->
 <template>
   <div class="imperative-declarative-demo">
-    <!-- 标题区 -->
+    <!-- Khu tiêu đề -->
     <div class="demo-header">
       <span class="icon">🎨</span>
-      <span class="title">编程范式对比</span>
-      <span class="subtitle">告诉"怎么做" vs 告诉"要什么"</span>
+      <span class="title">So sánh hai phong cách lập trình</span>
+      <span class="subtitle">Chỉ "cách làm" vs nói "muốn gì"</span>
     </div>
 
-    <!-- 主内容区 -->
+    <!-- Nội dung chính -->
     <div class="demo-content">
-      <!-- 视图切换 -->
+      <!-- Chuyển view -->
       <div class="toggle-group">
         <button
           v-for="view in views"
@@ -29,8 +29,8 @@
         <!-- Imperative Side (jQuery) -->
         <div class="side imperative-side">
           <div class="side-header">
-            <span class="badge imperative">jQuery / 命令式</span>
-            <span class="sub-label">通俗说法: 告诉怎么做</span>
+            <span class="badge imperative">jQuery / Mệnh lệnh</span>
+            <span class="sub-label">Nói nôm na: chỉ ra cách làm</span>
           </div>
 
           <div class="demo-area">
@@ -116,15 +116,15 @@
           >
             <div class="pain-point">
               <span class="icon">⚠️</span>
-              <span>需要手动操作多个 DOM 元素</span>
+              <span>Phải thao tác thủ công nhiều phần tử DOM</span>
             </div>
             <div class="pain-point">
               <span class="icon">🐛</span>
-              <span>容易遗漏更新，导致界面不一致</span>
+              <span>Dễ quên cập nhật, khiến giao diện thiếu nhất quán</span>
             </div>
             <div class="pain-point">
               <span class="icon">🍝</span>
-              <span>逻辑分散，代码难以维护</span>
+              <span>Logic rải rác, code khó bảo trì</span>
             </div>
           </div>
         </div>
@@ -139,8 +139,8 @@
         <!-- Declarative Side (Vue) -->
         <div class="side declarative-side">
           <div class="side-header">
-            <span class="badge declarative">Vue / 声明式</span>
-            <span class="sub-label">通俗说法: 告诉要什么</span>
+            <span class="badge declarative">Vue / Khai báo</span>
+            <span class="sub-label">Nói nôm na: nói rõ bạn muốn gì</span>
           </div>
 
           <div class="demo-area">
@@ -224,36 +224,36 @@
           >
             <div class="benefit">
               <span class="icon">✅</span>
-              <span>只关注数据，不用手动操作 DOM</span>
+              <span>Chỉ quan tâm tới dữ liệu, không cần thao tác DOM thủ công</span>
             </div>
             <div class="benefit">
               <span class="icon">🔄</span>
-              <span>数据变化自动同步到所有相关视图</span>
+              <span>Dữ liệu đổi sẽ tự đồng bộ tới mọi view liên quan</span>
             </div>
             <div class="benefit">
               <span class="icon">🧩</span>
-              <span>代码结构清晰，易于维护</span>
+              <span>Cấu trúc code rõ ràng, dễ bảo trì</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 底部控制 -->
+      <!-- Điều khiển ở dưới -->
       <div class="demo-controls">
         <button
           class="toggle-btn"
           @click="showAnalysis = !showAnalysis"
         >
-          {{ showAnalysis ? '隐藏' : '显示' }}对比分析
+          {{ showAnalysis ? 'Ẩn' : 'Hiện' }} phân tích so sánh
         </button>
       </div>
     </div>
 
-    <!-- 信息框 -->
+    <!-- Khung thông tin -->
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      命令式编程需要一步步告诉浏览器"怎么做"，声明式编程只需告诉浏览器"要什么"，框架会自动处理细节。
+      <strong>Ý chính:</strong>
+      Lập trình mệnh lệnh phải chỉ trình duyệt "làm từng bước thế nào", còn lập trình khai báo chỉ cần nói "tôi muốn kết quả gì", framework sẽ tự lo phần còn lại.
     </div>
   </div>
 </template>
@@ -267,8 +267,8 @@ const jqCount = ref(0)
 const vueCount = ref(0)
 
 const views = [
-  { id: 'ui', label: '仅显示界面' },
-  { id: 'code', label: '显示代码' }
+  { id: 'ui', label: 'Chỉ hiện giao diện' },
+  { id: 'code', label: 'Hiện code' }
 ]
 
 const jqProgress = computed(() => Math.min((jqCount.value / 10) * 100, 100))
@@ -291,7 +291,7 @@ function updateJq(change) {
   margin: 0.5rem 0;
 }
 
-/* 标题区 */
+/* Khu tiêu đề */
 .demo-header {
   display: flex;
   align-items: center;
@@ -562,7 +562,7 @@ function updateJq(change) {
   border-top: 1px solid var(--vp-c-divider);
 }
 
-/* 信息框 */
+/* Khung thông tin */
 .info-box {
   background: var(--vp-c-bg-alt);
   padding: 0.75rem;

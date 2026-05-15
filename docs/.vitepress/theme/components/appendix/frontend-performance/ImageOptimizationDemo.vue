@@ -1,15 +1,15 @@
 <!--
   ImageOptimizationDemo.vue
-  图片格式对比演示
+  Demo so sánh các định dạng ảnh
 -->
 <template>
   <div class="image-optimization-demo">
     <div class="header">
       <div class="title">
-        图片格式对比：大小与质量的权衡
+        So sánh định dạng ảnh: cân bằng giữa dung lượng và chất lượng
       </div>
       <div class="subtitle">
-        对比不同图片格式的大小和质量
+        So sánh dung lượng và chất lượng giữa các định dạng ảnh khác nhau
       </div>
     </div>
 
@@ -49,15 +49,15 @@
 
         <div class="format-metrics">
           <div class="metric">
-            <span class="metric-label">文件大小</span>
+            <span class="metric-label">Dung lượng file</span>
             <span class="metric-value">{{ format.fileSize }}</span>
           </div>
           <div class="metric">
-            <span class="metric-label">压缩率</span>
+            <span class="metric-label">Tỉ lệ nén</span>
             <span class="metric-value">{{ format.compression }}</span>
           </div>
           <div class="metric">
-            <span class="metric-label">质量</span>
+            <span class="metric-label">Chất lượng</span>
             <div class="quality-bar">
               <div
                 class="quality-fill"
@@ -66,14 +66,14 @@
             </div>
           </div>
           <div class="metric">
-            <span class="metric-label">浏览器支持</span>
+            <span class="metric-label">Hỗ trợ trình duyệt</span>
             <span class="metric-value">{{ format.support }}</span>
           </div>
         </div>
 
         <div class="format-use-case">
           <div class="use-case-label">
-            适用场景
+            Tình huống phù hợp
           </div>
           <div class="use-case-value">
             {{ format.useCase }}
@@ -83,16 +83,16 @@
     </div>
 
     <div class="comparison-table">
-      <h4>详细对比</h4>
+      <h4>So sánh chi tiết</h4>
       <table>
         <thead>
           <tr>
-            <th>格式</th>
-            <th>大小</th>
-            <th>质量</th>
-            <th>透明度</th>
-            <th>动画</th>
-            <th>推荐指数</th>
+            <th>Định dạng</th>
+            <th>Dung lượng</th>
+            <th>Chất lượng</th>
+            <th>Trong suốt</th>
+            <th>Animation</th>
+            <th>Mức khuyến nghị</th>
           </tr>
         </thead>
         <tbody>
@@ -126,15 +126,15 @@
           💡
         </div>
         <div class="tip-content">
-          <h4>优化建议</h4>
+          <h4>Gợi ý tối ưu</h4>
           <ul>
-            <li>优先使用 WebP 格式，可减少 30-50% 的大小</li>
-            <li>为旧浏览器提供 JPEG/PNG 降级方案</li>
+            <li>Ưu tiên dùng định dạng WebP, có thể giảm 30-50% dung lượng</li>
+            <li>Chuẩn bị phương án dự phòng JPEG/PNG cho các trình duyệt cũ</li>
             <li>
-              使用
-              <code class="inline-code">&lt;picture&gt;</code> 元素实现自动降级
+              Dùng phần tử
+              <code class="inline-code">&lt;picture&gt;</code> để tự động dùng định dạng dự phòng
             </li>
-            <li>照片使用 JPEG，图标使用 PNG 或 SVG</li>
+            <li>Ảnh chụp dùng JPEG, icon dùng PNG hoặc SVG</li>
           </ul>
         </div>
       </div>
@@ -144,12 +144,12 @@
           🔧
         </div>
         <div class="tip-content">
-          <h4>工具推荐</h4>
+          <h4>Công cụ gợi ý</h4>
           <ul>
-            <li><strong>Squoosh</strong>：Google 开源的图片压缩工具</li>
-            <li><strong>ImageOptim</strong>：Mac 平台的图片优化工具</li>
-            <li><strong>TinyPNG</strong>：在线智能压缩，支持 WebP</li>
-            <li><strong>Sharp</strong>：Node.js 图片处理库，适合自动化</li>
+            <li><strong>Squoosh</strong>: công cụ nén ảnh open-source của Google</li>
+            <li><strong>ImageOptim</strong>: công cụ tối ưu ảnh trên macOS</li>
+            <li><strong>TinyPNG</strong>: nén ảnh thông minh online, hỗ trợ WebP</li>
+            <li><strong>Sharp</strong>: thư viện xử lý ảnh trên Node.js, hợp tự động hoá</li>
           </ul>
         </div>
       </div>
@@ -165,16 +165,16 @@ const selectedFormat = ref('WebP')
 const formats = [
   {
     name: 'JPEG',
-    badge: '经典',
+    badge: 'Kinh điển',
     badgeClass: 'classic',
     size: '500 KB',
     fileSize: '500 KB',
     compression: '70%',
     quality: 85,
     support: '100%',
-    useCase: '照片、复杂图像',
-    sizeLevel: '中等',
-    qualityLevel: '良好',
+    useCase: 'Ảnh chụp, ảnh phức tạp',
+    sizeLevel: 'Trung bình',
+    qualityLevel: 'Tốt',
     transparency: false,
     animation: false,
     rating: 4,
@@ -182,16 +182,16 @@ const formats = [
   },
   {
     name: 'PNG',
-    badge: '无损',
+    badge: 'Không mất',
     badgeClass: 'lossless',
     size: '1.2 MB',
     fileSize: '1.2 MB',
     compression: '40%',
     quality: 100,
     support: '100%',
-    useCase: '透明图片、图标',
-    sizeLevel: '大',
-    qualityLevel: '完美',
+    useCase: 'Ảnh có trong suốt, icon',
+    sizeLevel: 'Lớn',
+    qualityLevel: 'Hoàn hảo',
     transparency: true,
     animation: false,
     rating: 4.5,
@@ -199,16 +199,16 @@ const formats = [
   },
   {
     name: 'WebP',
-    badge: '推荐',
+    badge: 'Nên dùng',
     badgeClass: 'recommended',
     size: '250 KB',
     fileSize: '250 KB',
     compression: '85%',
     quality: 90,
     support: '95%',
-    useCase: '大部分场景',
-    sizeLevel: '小',
-    qualityLevel: '优秀',
+    useCase: 'Hầu hết tình huống',
+    sizeLevel: 'Nhỏ',
+    qualityLevel: 'Xuất sắc',
     transparency: true,
     animation: true,
     rating: 5,
@@ -216,16 +216,16 @@ const formats = [
   },
   {
     name: 'AVIF',
-    badge: '最新',
+    badge: 'Mới nhất',
     badgeClass: 'latest',
     size: '180 KB',
     fileSize: '180 KB',
     compression: '90%',
     quality: 95,
     support: '75%',
-    useCase: '追求极致性能',
-    sizeLevel: '最小',
-    qualityLevel: '卓越',
+    useCase: 'Khi cần performance tối đa',
+    sizeLevel: 'Nhỏ nhất',
+    qualityLevel: 'Vượt trội',
     transparency: true,
     animation: false,
     rating: 4.5,

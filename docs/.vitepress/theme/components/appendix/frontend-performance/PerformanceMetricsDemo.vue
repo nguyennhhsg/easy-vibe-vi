@@ -1,18 +1,18 @@
 <!--
   PerformanceMetricsDemo.vue
-  Core Web Vitals 性能指标演示
+  Demo các chỉ số performance Core Web Vitals
 -->
 <template>
   <div class="metrics-demo">
     <div class="demo-header">
       <span class="icon">📊</span>
       <span class="title">Core Web Vitals</span>
-      <span class="subtitle">调整加载时间，观察性能指标变化</span>
+      <span class="subtitle">Chỉnh thời gian tải để quan sát các chỉ số performance thay đổi</span>
     </div>
 
     <div class="simulation-controls">
       <label>
-        模拟加载时间：<strong>{{ loadTime }}</strong> 秒
+        Mô phỏng thời gian tải: <strong>{{ loadTime }}</strong> giây
       </label>
       <input
         v-model.number="loadTime"
@@ -40,7 +40,7 @@
           {{ fcp }} s
         </div>
         <div class="metric-desc">
-          首次内容绘制
+          Vẽ nội dung đầu tiên
         </div>
         <div class="metric-status">
           {{ fcpStatus.text }}
@@ -67,7 +67,7 @@
           {{ lcp }} s
         </div>
         <div class="metric-desc">
-          最大内容绘制
+          Vẽ khối nội dung lớn nhất
         </div>
         <div class="metric-status">
           {{ lcpStatus.text }}
@@ -94,7 +94,7 @@
           {{ fid }} ms
         </div>
         <div class="metric-desc">
-          首次输入延迟
+          Độ trễ input đầu tiên
         </div>
         <div class="metric-status">
           {{ fidStatus.text }}
@@ -121,7 +121,7 @@
           {{ cls }}
         </div>
         <div class="metric-desc">
-          累积布局偏移
+          Độ dịch layout tích lũy
         </div>
         <div class="metric-status">
           {{ clsStatus.text }}
@@ -136,21 +136,21 @@
     <div class="standards">
       <div class="standard-item">
         <span class="color-box good" />
-        <span>良好</span>
+        <span>Tốt</span>
       </div>
       <div class="standard-item">
         <span class="color-box needs-improvement" />
-        <span>需改进</span>
+        <span>Cần cải thiện</span>
       </div>
       <div class="standard-item">
         <span class="color-box poor" />
-        <span>差</span>
+        <span>Kém</span>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心指标：</strong>FCP（首次绘制）≤1.8s，LCP（最大内容绘制）≤2.5s，FID（输入延迟）≤100ms，CLS（布局偏移）≤0.1。目标是让所有指标都达到"良好"标准。
+      <strong>Các chỉ số chính:</strong> FCP (vẽ nội dung đầu tiên) ≤ 1.8s, LCP (vẽ khối nội dung lớn nhất) ≤ 2.5s, FID (độ trễ input) ≤ 100ms, CLS (dịch layout) ≤ 0.1. Mục tiêu là đưa mọi chỉ số đạt mức "Tốt".
     </div>
   </div>
 </template>
@@ -169,30 +169,30 @@ const cls = computed(() =>
 
 const fcpStatus = computed(() => {
   const value = parseFloat(fcp.value)
-  if (value <= 1.8) return { class: 'good', text: '良好' }
-  if (value <= 3) return { class: 'needs-improvement', text: '需改进' }
-  return { class: 'poor', text: '差' }
+  if (value <= 1.8) return { class: 'good', text: 'Tốt' }
+  if (value <= 3) return { class: 'needs-improvement', text: 'Cần cải thiện' }
+  return { class: 'poor', text: 'Kém' }
 })
 
 const lcpStatus = computed(() => {
   const value = parseFloat(lcp.value)
-  if (value <= 2.5) return { class: 'good', text: '良好' }
-  if (value <= 4) return { class: 'needs-improvement', text: '需改进' }
-  return { class: 'poor', text: '差' }
+  if (value <= 2.5) return { class: 'good', text: 'Tốt' }
+  if (value <= 4) return { class: 'needs-improvement', text: 'Cần cải thiện' }
+  return { class: 'poor', text: 'Kém' }
 })
 
 const fidStatus = computed(() => {
   const value = fid.value
-  if (value <= 100) return { class: 'good', text: '良好' }
-  if (value <= 300) return { class: 'needs-improvement', text: '需改进' }
-  return { class: 'poor', text: '差' }
+  if (value <= 100) return { class: 'good', text: 'Tốt' }
+  if (value <= 300) return { class: 'needs-improvement', text: 'Cần cải thiện' }
+  return { class: 'poor', text: 'Kém' }
 })
 
 const clsStatus = computed(() => {
   const value = parseFloat(cls.value)
-  if (value <= 0.1) return { class: 'good', text: '良好' }
-  if (value <= 0.25) return { class: 'needs-improvement', text: '需改进' }
-  return { class: 'poor', text: '差' }
+  if (value <= 0.1) return { class: 'good', text: 'Tốt' }
+  if (value <= 0.25) return { class: 'needs-improvement', text: 'Cần cải thiện' }
+  return { class: 'poor', text: 'Kém' }
 })
 </script>
 

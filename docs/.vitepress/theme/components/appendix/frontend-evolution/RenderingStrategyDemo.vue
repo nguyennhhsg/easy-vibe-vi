@@ -1,26 +1,26 @@
 <!--
-  RenderingStrategyDemo.vue - 渲染策略对比
-  用"餐厅上菜"的比喻来解释 CSR、SSR、SSG 三种渲染方式
+  RenderingStrategyDemo.vue - So sánh các chiến lược render
+  Dùng ẩn dụ "nhà hàng dọn món" để giải thích ba kiểu render CSR, SSR, SSG
 -->
 <template>
   <div class="rendering-demo">
-    <!-- 故事引入 -->
+    <!-- Giới thiệu câu chuyện -->
     <div class="story-box">
       <div class="story-emoji">
         🍽️👨‍🍳⚡
       </div>
       <h4 class="story-title">
-        小美的餐厅
+        Nhà hàng của Mai
       </h4>
       <p class="story-text">
-        小美开了家餐厅，有三种上菜方式：<br>
-        <strong>CSR（客户端渲染）</strong>：给你半成品食材包，你自己做 <br>
-        <strong>SSR（服务端渲染）</strong>：厨房做好菜端给你 <br>
-        <strong>SSG（静态生成）</strong>：提前做好所有菜放保温柜
+        Mai mở một nhà hàng với ba cách dọn món:<br>
+        <strong>CSR (render phía client)</strong>: đưa bạn nguyên liệu sơ chế, bạn tự nấu <br>
+        <strong>SSR (render phía server)</strong>: bếp nấu xong rồi bưng ra cho bạn <br>
+        <strong>SSG (sinh trang tĩnh)</strong>: nấu sẵn tất cả món rồi cất trong tủ giữ ấm
       </p>
     </div>
 
-    <!-- 模式选择 -->
+    <!-- Chọn chế độ -->
     <div class="mode-tabs">
       <button
         v-for="strategy in strategies"
@@ -35,15 +35,15 @@
       </button>
     </div>
 
-    <!-- 演示区域 -->
+    <!-- Khu vực mô phỏng -->
     <div class="demo-container">
-      <!-- 客户区 -->
+      <!-- Khu khách -->
       <div class="customer-area">
         <div class="customer-icon">
           🧑‍🦰
         </div>
         <div class="customer-label">
-          用户（浏览器）
+          Người dùng (trình duyệt)
         </div>
         <div class="table">
           <div
@@ -52,21 +52,21 @@
           >
             <div class="ingredients-pack">
               <div class="pack-label">
-                📦 食材包
+                📦 Túi nguyên liệu
               </div>
               <div class="pack-content">
                 <div class="ingredient">
-                  🥬 菜叶
+                  🥬 Rau
                 </div>
                 <div class="ingredient">
-                  🥩 肉片
+                  🥩 Thịt
                 </div>
                 <div class="ingredient">
-                  🧂 调料
+                  🧂 Gia vị
                 </div>
               </div>
               <div class="instruction">
-                ↑ 请自己烹饪
+                ↑ Bạn hãy tự nấu nhé
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <!-- 传输区 -->
+      <!-- Khu vận chuyển -->
       <div class="transfer-area">
         <div
           v-if="isAnimating"
@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <!-- 厨房/服务器 -->
+      <!-- Bếp / Server -->
       <div class="kitchen-area">
         <div class="kitchen-icon">
           👨‍🍳
@@ -124,10 +124,10 @@
               📡
             </div>
             <div class="station-label">
-              配送站
+              Trạm giao hàng
             </div>
             <div class="station-desc">
-              只管配送，不做菜
+              Chỉ giao đồ, không nấu
             </div>
           </div>
           <div
@@ -152,7 +152,7 @@
               🗄️
             </div>
             <div class="cabinet-label">
-              保温柜
+              Tủ giữ ấm
             </div>
             <div class="cabinet-desc">
               {{ currentStrategy.cabinetDesc }}
@@ -162,11 +162,11 @@
       </div>
     </div>
 
-    <!-- 性能指标 -->
+    <!-- Chỉ số hiệu năng -->
     <div class="metrics-panel">
       <div class="metric-item">
         <div class="metric-label">
-          首屏速度
+          Tốc độ first screen
         </div>
         <div class="metric-bar">
           <div
@@ -183,7 +183,7 @@
       </div>
       <div class="metric-item">
         <div class="metric-label">
-          交互体验
+          Trải nghiệm tương tác
         </div>
         <div class="metric-bar">
           <div
@@ -200,7 +200,7 @@
       </div>
       <div class="metric-item">
         <div class="metric-label">
-          SEO 友好度
+          Độ thân thiện SEO
         </div>
         <div class="metric-bar">
           <div
@@ -217,32 +217,32 @@
       </div>
     </div>
 
-    <!-- 操作按钮 -->
+    <!-- Nút thao tác -->
     <div class="controls">
       <button
         class="btn btn-primary"
         :disabled="isAnimating"
         @click="startDemo"
       >
-        {{ isAnimating ? '演示中...' : '开始演示' }}
+        {{ isAnimating ? 'Đang chạy...' : 'Bắt đầu demo' }}
       </button>
       <button
         class="btn btn-secondary"
         @click="resetDemo"
       >
-        重置
+        Đặt lại
       </button>
     </div>
 
-    <!-- 详细对比表 -->
+    <!-- Bảng so sánh chi tiết -->
     <div class="comparison-table">
       <div class="table-title">
-        📊 三种渲染方式详细对比
+        📊 So sánh chi tiết ba kiểu render
       </div>
       <div class="table-content">
         <div class="comparison-row header">
           <div class="col-feature">
-            特点
+            Đặc điểm
           </div>
           <div class="col-csr">
             CSR
@@ -256,116 +256,116 @@
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            比喻
+            Ẩn dụ
           </div>
           <div class="col-csr">
-            给半成品食材包，自己做
+            Nhận túi nguyên liệu rồi tự nấu
           </div>
           <div class="col-ssr">
-            厨房做好菜端给你
+            Bếp nấu xong bưng ra
           </div>
           <div class="col-ssg">
-            提前做好放保温柜
+            Nấu sẵn để trong tủ giữ ấm
           </div>
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            首屏速度
+            Tốc độ first screen
           </div>
           <div class="col-csr">
-            慢（要等 JS）
+            Chậm (phải đợi JS)
           </div>
           <div class="col-ssr">
-            快（直接给 HTML）
+            Nhanh (trả HTML ngay)
           </div>
           <div class="col-ssg">
-            最快（直接给 HTML）
+            Nhanh nhất (trả HTML ngay)
           </div>
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            交互体验
+            Trải nghiệm tương tác
           </div>
           <div class="col-csr">
-            流畅（已在浏览器）
+            Mượt (đã ở trình duyệt)
           </div>
           <div class="col-ssr">
-            较流畅（交互仍需 JS）
+            Khá mượt (tương tác vẫn cần JS)
           </div>
           <div class="col-ssg">
-            较流畅（交互仍需 JS）
+            Khá mượt (tương tác vẫn cần JS)
           </div>
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            SEO 友好度
+            Độ thân thiện SEO
           </div>
           <div class="col-csr">
-            差（搜不到内容）
+            Kém (không index được nội dung)
           </div>
           <div class="col-ssr">
-            好（完整 HTML）
+            Tốt (HTML đầy đủ)
           </div>
           <div class="col-ssg">
-            好（完整 HTML）
+            Tốt (HTML đầy đủ)
           </div>
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            服务器压力
+            Áp lực server
           </div>
           <div class="col-csr">
-            小（只传 JS）
+            Nhỏ (chỉ gửi JS)
           </div>
           <div class="col-ssr">
-            大（每次都渲染）
+            Lớn (render mỗi lần)
           </div>
           <div class="col-ssg">
-            最小（预渲染好）
+            Nhỏ nhất (đã prerender)
           </div>
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            适合场景
+            Tình huống phù hợp
           </div>
           <div class="col-csr">
-            后台系统、工具应用
+            Hệ thống nội bộ, ứng dụng công cụ
           </div>
           <div class="col-ssr">
-            新闻网站、电商首页
+            Trang tin tức, trang chủ TMĐT
           </div>
           <div class="col-ssg">
-            博客、文档站
+            Blog, trang tài liệu
           </div>
         </div>
         <div class="comparison-row">
           <div class="col-feature">
-            代表框架
+            Framework tiêu biểu
           </div>
           <div class="col-csr">
-            React SPA、Vue SPA
+            React SPA, Vue SPA
           </div>
           <div class="col-ssr">
-            Next.js SSR、Nuxt SSR
+            Next.js SSR, Nuxt SSR
           </div>
           <div class="col-ssg">
-            Next.js SSG、Nuxt SSG
+            Next.js SSG, Nuxt SSG
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 核心要点 -->
+    <!-- Điểm cốt lõi -->
     <div class="key-takeaway">
       <div class="takeaway-icon">
         🎯
       </div>
       <div class="takeaway-content">
-        <strong>如何选择？</strong><br>
-        <strong>CSR</strong>：适合需要复杂交互、不关心 SEO 的应用（如后台管理系统）<br>
-        <strong>SSR</strong>：适合需要首屏快、SEO 好的动态内容网站（如新闻、电商）<br>
-        <strong>SSG</strong>：适合内容固定的静态网站（如博客、文档站）<br>
-        <strong>现代方案</strong>：混合渲染，首页用 SSG/SSR，后续页面用 CSR，兼顾速度和体验。
+        <strong>Chọn kiểu nào?</strong><br>
+        <strong>CSR</strong>: phù hợp các ứng dụng cần tương tác phức tạp, không quan tâm SEO (ví dụ trang quản trị)<br>
+        <strong>SSR</strong>: phù hợp các trang nội dung động cần first screen nhanh và SEO tốt (tin tức, TMĐT)<br>
+        <strong>SSG</strong>: phù hợp các trang tĩnh có nội dung cố định (blog, trang tài liệu)<br>
+        <strong>Cách làm hiện đại</strong>: render lai (hybrid) — trang chủ dùng SSG/SSR, các trang sau dùng CSR, vừa nhanh vừa mượt.
       </div>
     </div>
   </div>
@@ -377,102 +377,102 @@ import { ref, computed } from 'vue'
 const activeStrategy = ref('ssg')
 const isAnimating = ref(false)
 const isCooking = ref(false)
-const chefAction = ref('👨‍🍳 准备中...')
+const chefAction = ref('👨‍🍳 Đang chuẩn bị...')
 
 const strategies = {
   csr: {
     id: 'csr',
     name: 'CSR',
-    sub: '客户端渲染',
+    sub: 'Render phía client',
     icon: '📦',
-    dish: '⚠️ 还没做',
-    readyStatus: '等待用户自己烹饪',
-    transferItem: '📦 食材包',
-    transferLabel: '配送食材包',
-    serverLabel: '服务器（配送站）',
+    dish: '⚠️ Chưa nấu',
+    readyStatus: 'Đợi người dùng tự nấu',
+    transferItem: '📦 Túi nguyên liệu',
+    transferLabel: 'Giao túi nguyên liệu',
+    serverLabel: 'Server (trạm giao hàng)',
     firstScreenScore: 40,
-    firstScreenText: '慢',
+    firstScreenText: 'Chậm',
     interactionScore: 100,
-    interactionText: '流畅',
+    interactionText: 'Mượt',
     seoScore: 20,
-    seoText: '差',
+    seoText: 'Kém',
     color: '#f44336',
     cabinetDesc: ''
   },
   ssr: {
     id: 'ssr',
     name: 'SSR',
-    sub: '服务端渲染',
+    sub: 'Render phía server',
     icon: '👨‍🍳',
-    dish: '🍲 刚做好的菜',
-    readyStatus: '热腾腾，直接吃',
-    transferItem: '🍲 做好的菜',
-    transferLabel: '现做现送',
-    serverLabel: '服务器（厨房）',
+    dish: '🍲 Món vừa nấu xong',
+    readyStatus: 'Nóng hổi, ăn được ngay',
+    transferItem: '🍲 Món đã nấu',
+    transferLabel: 'Nấu xong giao ngay',
+    serverLabel: 'Server (bếp)',
     firstScreenScore: 90,
-    firstScreenText: '快',
+    firstScreenText: 'Nhanh',
     interactionScore: 85,
-    interactionText: '较流畅',
+    interactionText: 'Khá mượt',
     seoScore: 100,
-    seoText: '好',
+    seoText: 'Tốt',
     color: '#2196f3',
     cabinetDesc: ''
   },
   ssg: {
     id: 'ssg',
     name: 'SSG',
-    sub: '静态生成',
+    sub: 'Sinh trang tĩnh',
     icon: '🗄️',
-    dish: '🍲 提前做好的菜',
-    readyStatus: '保温中，直接吃',
-    transferItem: '🍲 预制的菜',
-    transferLabel: '直接取',
-    serverLabel: '服务器（保温柜）',
+    dish: '🍲 Món đã nấu sẵn',
+    readyStatus: 'Đang giữ ấm, ăn được ngay',
+    transferItem: '🍲 Món làm sẵn',
+    transferLabel: 'Lấy luôn',
+    serverLabel: 'Server (tủ giữ ấm)',
     firstScreenScore: 100,
-    firstScreenText: '最快',
+    firstScreenText: 'Nhanh nhất',
     interactionScore: 85,
-    interactionText: '较流畅',
+    interactionText: 'Khá mượt',
     seoScore: 100,
-    seoText: '好',
+    seoText: 'Tốt',
     color: '#4caf50',
-    cabinetDesc: '所有菜都提前做好了'
+    cabinetDesc: 'Mọi món đều đã nấu sẵn'
   }
 }
 
 const currentStrategy = computed(() => strategies[activeStrategy.value])
 
-// 开始演示
+// Bắt đầu demo
 const startDemo = async () => {
   if (isAnimating.value) return
 
   isAnimating.value = true
 
   if (activeStrategy.value === 'csr') {
-    // CSR: 传送食材包
+    // CSR: giao túi nguyên liệu
     await sleep(1000)
   } else if (activeStrategy.value === 'ssr') {
-    // SSR: 厨房做菜
+    // SSR: bếp nấu món
     isCooking.value = true
-    chefAction.value = '👨‍🍳 正在做菜...'
+    chefAction.value = '👨‍🍳 Đang nấu món...'
     await sleep(800)
-    chefAction.value = '🍳 烹饪中...'
+    chefAction.value = '🍳 Đang nấu...'
     await sleep(800)
-    chefAction.value = '✅ 做好了！'
+    chefAction.value = '✅ Nấu xong!'
     isCooking.value = false
     await sleep(400)
   } else {
-    // SSG: 直接取菜
+    // SSG: lấy món sẵn
     await sleep(600)
   }
 
   isAnimating.value = false
 }
 
-// 重置演示
+// Đặt lại demo
 const resetDemo = () => {
   isAnimating.value = false
   isCooking.value = false
-  chefAction.value = '👨‍🍳 准备中...'
+  chefAction.value = '👨‍🍳 Đang chuẩn bị...'
 }
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -488,7 +488,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
-/* 故事框 */
+/* Khung câu chuyện */
 .story-box {
   text-align: center;
   margin-bottom: 24px;
@@ -517,7 +517,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   line-height: 1.6;
 }
 
-/* 模式选项卡 */
+/* Tab chọn chế độ */
 .mode-tabs {
   display: flex;
   gap: 12px;
@@ -565,7 +565,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   opacity: 0.8;
 }
 
-/* 演示容器 */
+/* Khung demo */
 .demo-container {
   display: flex;
   align-items: center;
@@ -607,7 +607,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   min-height: 160px;
 }
 
-/* 食材包 */
+/* Túi nguyên liệu */
 .ingredients-pack {
   text-align: center;
 }
@@ -643,7 +643,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-weight: 500;
 }
 
-/* 做好的菜 */
+/* Món đã nấu */
 .table-content.ready {
   display: flex;
   flex-direction: column;
@@ -662,7 +662,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-weight: bold;
 }
 
-/* 厨房区域 */
+/* Khu bếp */
 .server-station,
 .server-kitchen,
 .server-cabinet {
@@ -708,7 +708,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   50% { transform: scale(1.1); }
 }
 
-/* 传输区域 */
+/* Khu vận chuyển */
 .transfer-area {
   flex: 0 0 120px;
   display: flex;
@@ -751,7 +751,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   border-radius: 6px;
 }
 
-/* 性能指标 */
+/* Chỉ số hiệu năng */
 .metrics-panel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -793,7 +793,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   text-align: center;
 }
 
-/* 控制按钮 */
+/* Nút điều khiển */
 .controls {
   display: flex;
   justify-content: center;
@@ -831,7 +831,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   color: #666;
 }
 
-/* 对比表格 */
+/* Bảng so sánh */
 .comparison-table {
   background: white;
   border-radius: 16px;
@@ -899,7 +899,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-size: 13px;
 }
 
-/* 核心要点 */
+/* Điểm cốt lõi */
 .key-takeaway {
   display: flex;
   gap: 16px;
@@ -921,7 +921,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   line-height: 1.8;
 }
 
-/* 响应式 */
+/* Responsive */
 @media (max-width: 768px) {
   .mode-tabs {
     flex-direction: column;

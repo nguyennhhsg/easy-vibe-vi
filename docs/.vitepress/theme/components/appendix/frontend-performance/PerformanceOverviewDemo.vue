@@ -1,23 +1,23 @@
 <!--
   PerformanceOverviewDemo.vue
-  前端性能优化全景图：展示瓶颈与优化手段的对应关系
+  Bức tranh tổng quan tối ưu performance frontend: thể hiện quan hệ giữa nút thắt và các cách giải
 
-  交互功能：
-  - 点击不同维度（传输、渲染、执行）查看对应的瓶颈和方案
-  - 动态展示瓶颈对用户体验的影响
+  Tương tác:
+  - Bấm vào từng nhóm (transfer, rendering, execution) để xem nút thắt và giải pháp tương ứng
+  - Trình bày trực quan ảnh hưởng của nút thắt tới trải nghiệm người dùng
 -->
 <template>
   <div class="performance-overview">
     <div class="header">
       <div class="title">
-        前端性能优化全景图
+        Bức tranh tổng quan tối ưu performance frontend
       </div>
       <div class="subtitle">
-        点击下方维度，探索性能瓶颈与优化方案的对应关系
+        Bấm vào các nhóm phía dưới để khám phá nút thắt và giải pháp tối ưu tương ứng
       </div>
     </div>
 
-    <!-- 维度切换 -->
+    <!-- Chuyển nhóm -->
     <div class="dimension-tabs">
       <button
         v-for="dim in dimensions"
@@ -31,7 +31,7 @@
       </button>
     </div>
 
-    <!-- 内容展示区 -->
+    <!-- Khu nội dung -->
     <div
       class="content-area"
       :class="currentDim.id"
@@ -39,7 +39,7 @@
       <div class="panel bottlenecks">
         <h3>
           <span class="icon">⚠️</span>
-          常见瓶颈 (Bottlenecks)
+          Nút thắt thường gặp (Bottlenecks)
         </h3>
         <ul class="list">
           <li
@@ -59,14 +59,14 @@
       <div class="arrow">
         <div class="arrow-line" />
         <div class="arrow-text">
-          如何解决？
+          Cách xử lý?
         </div>
       </div>
 
       <div class="panel solutions">
         <h3>
           <span class="icon">🚀</span>
-          优化方案 (Solutions)
+          Giải pháp tối ưu (Solutions)
         </h3>
         <ul class="list">
           <li
@@ -91,10 +91,10 @@
       </div>
     </div>
 
-    <!-- 总结栏 -->
+    <!-- Thanh tóm tắt -->
     <div class="summary-bar">
       <p>
-        <strong>核心目标：</strong>
+        <strong>Mục tiêu chính:</strong>
         {{ currentDim.goal }}
       </p>
     </div>
@@ -107,53 +107,53 @@ import { ref } from 'vue'
 const dimensions = [
   {
     id: 'network',
-    name: '传输层 (Network)',
+    name: 'Tầng truyền tải (Network)',
     icon: '📡',
-    goal: '让资源更快到达浏览器 (减体积、减次数、缩短距离)',
+    goal: 'Đưa tài nguyên đến trình duyệt nhanh hơn (giảm dung lượng, giảm số request, rút ngắn quãng đường)',
     bottlenecks: [
-      { title: '体积过大', desc: '图片、JS bundle 未压缩，下载耗时久' },
-      { title: '请求过多', desc: 'HTTP/1.1 队头阻塞，资源排队下载' },
-      { title: '网络延迟', desc: '服务器物理距离远，RTT 时间长' }
+      { title: 'Dung lượng lớn', desc: 'Ảnh và JS bundle chưa nén, tải lâu' },
+      { title: 'Quá nhiều request', desc: 'HTTP/1.1 bị nghẽn đầu hàng, tài nguyên phải xếp hàng tải' },
+      { title: 'Độ trễ mạng', desc: 'Server cách xa người dùng, RTT cao' }
     ],
     solutions: [
-      { title: '资源压缩', desc: 'Gzip/Brotli, 图片格式转换 (WebP)', tags: ['减体积'] },
-      { title: '懒加载', desc: '只加载当前视口可见的资源', tags: ['减体积', '减次数'] },
-      { title: 'CDN 加速', desc: '将资源分发到离用户最近的节点', tags: ['缩短距离'] },
-      { title: 'HTTP 缓存', desc: '利用浏览器缓存，避免重复请求', tags: ['减次数'] }
+      { title: 'Nén tài nguyên', desc: 'Gzip/Brotli, đổi định dạng ảnh (WebP)', tags: ['Giảm dung lượng'] },
+      { title: 'Lazy load', desc: 'Chỉ tải tài nguyên đang nằm trong viewport', tags: ['Giảm dung lượng', 'Giảm số request'] },
+      { title: 'Tăng tốc bằng CDN', desc: 'Phân phối tài nguyên tới node gần người dùng nhất', tags: ['Rút ngắn quãng đường'] },
+      { title: 'Cache HTTP', desc: 'Tận dụng cache trình duyệt, tránh request lặp', tags: ['Giảm số request'] }
     ]
   },
   {
     id: 'rendering',
-    name: '渲染层 (Rendering)',
+    name: 'Tầng render (Rendering)',
     icon: '🎨',
-    goal: '让页面更快画出来 (减少重排重绘、利用 GPU)',
+    goal: 'Vẽ trang nhanh hơn (giảm reflow/repaint, tận dụng GPU)',
     bottlenecks: [
-      { title: '关键路径阻塞', desc: 'CSS/JS 阻塞了 DOM 树构建' },
-      { title: '频繁重排 (Reflow)', desc: '修改布局属性导致全量重新计算' },
-      { title: '动画卡顿', desc: '使用 CPU 绘制动画，帧率低于 60fps' }
+      { title: 'Chặn critical path', desc: 'CSS/JS chặn việc dựng cây DOM' },
+      { title: 'Reflow thường xuyên', desc: 'Sửa thuộc tính layout khiến phải tính lại toàn bộ' },
+      { title: 'Animation giật', desc: 'Vẽ animation bằng CPU, framerate thấp hơn 60fps' }
     ],
     solutions: [
-      { title: '关键 CSS 内联', desc: '首屏样式直接写在 HTML 中', tags: ['关键路径'] },
-      { title: 'GPU 加速', desc: '使用 transform/opacity 触发合成层', tags: ['动画'] },
-      { title: '虚拟列表', desc: '只渲染可见 DOM，处理海量数据', tags: ['DOM 优化'] },
-      { title: '防抖节流', desc: '减少高频事件触发渲染的频率', tags: ['逻辑优化'] }
+      { title: 'Inline critical CSS', desc: 'Đặt CSS first screen ngay trong HTML', tags: ['Critical path'] },
+      { title: 'Tăng tốc bằng GPU', desc: 'Dùng transform/opacity để kích hoạt composite layer', tags: ['Animation'] },
+      { title: 'Virtual list', desc: 'Chỉ render DOM trong viewport, xử lý dữ liệu khổng lồ', tags: ['Tối ưu DOM'] },
+      { title: 'Debounce / throttle', desc: 'Giảm tần suất event tần số cao kích hoạt render', tags: ['Tối ưu logic'] }
     ]
   },
   {
     id: 'execution',
-    name: '执行层 (Scripting)',
+    name: 'Tầng thực thi (Scripting)',
     icon: '⚙️',
-    goal: '让主线程不卡顿 (减少长任务、并行计算)',
+    goal: 'Giữ main thread không bị kẹt (giảm long task, tính toán song song)',
     bottlenecks: [
-      { title: '主线程阻塞', desc: '长任务 (Long Tasks) 导致无法响应交互' },
-      { title: '无效计算', desc: 'React/Vue 中不必要的组件重渲染' },
-      { title: '内存泄漏', desc: '未清理的监听器导致页面越来越卡' }
+      { title: 'Chặn main thread', desc: 'Long Tasks khiến trang không thể phản hồi tương tác' },
+      { title: 'Tính toán thừa', desc: 'Component trong React/Vue bị re-render không cần thiết' },
+      { title: 'Rò rỉ bộ nhớ', desc: 'Listener không được dọn, trang ngày càng lag' }
     ],
     solutions: [
-      { title: 'Web Workers', desc: '将复杂计算移到后台线程', tags: ['并行'] },
-      { title: '代码分割', desc: '按需加载 JS，减少主线程解析压力', tags: ['减负'] },
-      { title: '时间切片', desc: '将大任务拆分为多个小任务', tags: ['响应'] },
-      { title: '算法优化', desc: '降低时间复杂度 (如 O(n²) -> O(n))', tags: ['效率'] }
+      { title: 'Web Workers', desc: 'Đẩy việc tính toán nặng ra background thread', tags: ['Song song'] },
+      { title: 'Code split', desc: 'Tải JS theo nhu cầu, giảm áp lực parse cho main thread', tags: ['Giảm tải'] },
+      { title: 'Time slicing', desc: 'Chia task lớn thành nhiều task nhỏ', tags: ['Phản hồi'] },
+      { title: 'Tối ưu thuật toán', desc: 'Giảm độ phức tạp (ví dụ O(n²) -> O(n))', tags: ['Hiệu suất'] }
     ]
   }
 ]

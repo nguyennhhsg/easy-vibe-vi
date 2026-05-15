@@ -4,7 +4,7 @@
 -->
 <template>
   <div class="magic-closet">
-    <!-- 故事开头 -->
+    <!-- Mở đầu câu chuyện -->
     <div class="story-box">
       <div class="story-emoji">
         👗✨🚪
@@ -18,7 +18,7 @@
       </p>
     </div>
 
-    <!-- 衣柜宽度调节 -->
+    <!-- Điều chỉnh độ rộng tủ -->
     <div class="closet-control">
       <div class="control-label">
         <span>🚪 Kéo thanh trượt để đặt tủ vào các phòng khác nhau:</span>
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <!-- 魔法衣柜展示 -->
+    <!-- Hiển thị tủ phép thuật -->
     <div
       class="closet-display"
       :style="{ width: closetWidth + 'px' }"
@@ -91,7 +91,7 @@
       </div>
     </div>
 
-    <!-- 魔法原理说明 -->
+    <!-- Giải thích nguyên lý phép thuật -->
     <div class="magic-explain">
       <div class="explain-title">
         🔮 Bí mật của phép thuật
@@ -139,7 +139,7 @@
       </div>
     </div>
 
-    <!-- 代码展示 -->
+    <!-- Hiển thị code -->
     <div class="code-section">
       <div class="code-header">
         <span>💻 Câu thần chú (mã CSS)</span>
@@ -167,7 +167,7 @@
 }</code></pre>
     </div>
 
-    <!-- 总结 -->
+    <!-- Tóm tắt -->
     <div class="summary-box">
       <div class="summary-icon">
         🎯
@@ -245,7 +245,7 @@ const clothes = [
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
-/* 故事框 */
+/* Khung câu chuyện */
 .story-box {
   text-align: center;
   margin-bottom: 24px;
@@ -280,7 +280,7 @@ const clothes = [
   line-height: 1.6;
 }
 
-/* 衣柜控制 */
+/* Điều khiển tủ */
 .closet-control {
   background: white;
   border-radius: 12px;
@@ -349,7 +349,7 @@ const clothes = [
   border-radius: 6px;
 }
 
-/* 衣柜展示 */
+/* Hiển thị tủ */
 .closet-display {
   margin: 0 auto 20px;
   background: linear-gradient(135deg, #8b4513, #a0522d);
@@ -456,7 +456,7 @@ const clothes = [
   color: white;
 }
 
-/* 魔法原理说明 */
+/* Giải thích nguyên lý phép thuật */
 .magic-explain {
   background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
   border-radius: 16px;
@@ -513,7 +513,7 @@ const clothes = [
   color: #7e57c2;
 }
 
-/* 代码区域 */
+/* Khu vực code */
 .code-section {
   border: 2px solid #e0e0e0;
   border-radius: 12px;
@@ -548,7 +548,7 @@ const clothes = [
   overflow-x: auto;
 }
 
-/* 总结框 */
+/* Khung tóm tắt */
 .summary-box {
   display: flex;
   gap: 16px;
@@ -570,7 +570,7 @@ const clothes = [
   line-height: 1.6;
 }
 
-/* 响应式调整 */
+/* Điều chỉnh responsive */
 @media (max-width: 768px) {
   .explain-cards {
     flex-direction: column;

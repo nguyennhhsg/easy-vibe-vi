@@ -1,13 +1,13 @@
 <!--
   ReflowRepaintDemo.vue
-  重排与重绘演示
+  Demo reflow và repaint
 -->
 <template>
   <div class="reflow-demo">
     <div class="demo-header">
       <span class="icon">⚡</span>
-      <span class="title">重排与重绘</span>
-      <span class="subtitle">观察不同操作对性能的影响</span>
+      <span class="title">Reflow và repaint</span>
+      <span class="subtitle">Quan sát ảnh hưởng tới performance của từng thao tác</span>
     </div>
 
     <div class="tabs">
@@ -38,7 +38,7 @@
 
         <div class="performance-meter">
           <div class="meter-label">
-            性能影响
+            Ảnh hưởng performance
           </div>
           <div class="meter-bar">
             <div
@@ -58,7 +58,7 @@
         <div class="stats">
           <div class="stat-item">
             <div class="stat-label">
-              操作类型
+              Loại thao tác
             </div>
             <div class="stat-value">
               {{ currentOperation }}
@@ -66,10 +66,10 @@
           </div>
           <div class="stat-item">
             <div class="stat-label">
-              影响范围
+              Phạm vi ảnh hưởng
             </div>
             <div class="stat-value">
-              {{ affectedElements }} 个元素
+              {{ affectedElements }} phần tử
             </div>
           </div>
         </div>
@@ -84,19 +84,19 @@
             class="btn high-impact"
             @click="changeWidth"
           >
-            改变宽度
+            Đổi width
           </button>
           <button
             class="btn high-impact"
             @click="changePosition"
           >
-            改变位置
+            Đổi vị trí
           </button>
           <button
             class="btn high-impact"
             @click="addBox"
           >
-            添加元素
+            Thêm phần tử
           </button>
         </div>
 
@@ -108,19 +108,19 @@
             class="btn medium-impact"
             @click="changeColor"
           >
-            改变颜色
+            Đổi màu chữ
           </button>
           <button
             class="btn medium-impact"
             @click="changeBackground"
           >
-            改变背景
+            Đổi background
           </button>
           <button
             class="btn medium-impact"
             @click="toggleBorder"
           >
-            切换边框
+            Bật/tắt border
           </button>
         </div>
 
@@ -132,19 +132,19 @@
             class="btn low-impact"
             @click="transformTranslate"
           >
-            Transform 位移
+            Transform translate
           </button>
           <button
             class="btn low-impact"
             @click="transformRotate"
           >
-            Transform 旋转
+            Transform rotate
           </button>
           <button
             class="btn low-impact"
             @click="changeOpacity"
           >
-            改变透明度
+            Đổi opacity
           </button>
         </div>
       </div>
@@ -160,7 +160,7 @@
           class="info-content"
         >
           <p>
-            <strong>重排 (Reflow)</strong>：当元素的位置、尺寸发生变化时，浏览器需要重新计算布局。重排开销最大，因为要重新计算所有受影响元素的位置。
+            <strong>Reflow</strong>: khi vị trí hoặc kích thước phần tử thay đổi, trình duyệt phải tính lại layout. Reflow tốn kém nhất vì phải tính lại vị trí của tất cả phần tử bị ảnh hưởng.
           </p>
         </div>
         <div
@@ -168,7 +168,7 @@
           class="info-content"
         >
           <p>
-            <strong>重绘 (Repaint)</strong>：当元素的外观（颜色、背景）发生变化，但位置不变时，浏览器只需要重新绘制像素。比重排快，但仍有开销。
+            <strong>Repaint</strong>: khi vẻ ngoài (màu, background) thay đổi nhưng vị trí không đổi, trình duyệt chỉ phải vẽ lại pixel. Nhanh hơn reflow nhưng vẫn tốn chi phí.
           </p>
         </div>
         <div
@@ -176,7 +176,7 @@
           class="info-content"
         >
           <p>
-            <strong>合成 (Composite)</strong>：使用 transform 和 opacity 等属性，浏览器可以在合成层上完成变化，完全不触发布局和绘制。性能最佳，推荐优先使用。
+            <strong>Composite</strong>: dùng các thuộc tính như transform và opacity, trình duyệt có thể xử lý thay đổi trên composite layer mà không kích hoạt layout hay paint. Performance tốt nhất, nên ưu tiên dùng.
           </p>
         </div>
       </div>
@@ -184,7 +184,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>性能优化原则：</strong>优先使用 transform 和 opacity 进行动画，避免频繁触发布局计算（如 width、height、top、left），可以大幅提升页面性能。
+      <strong>Nguyên tắc tối ưu performance:</strong> ưu tiên dùng transform và opacity cho animation, tránh thường xuyên kích hoạt tính layout (như width, height, top, left). Cách này giúp trang chạy nhanh hơn rất nhiều.
     </div>
   </div>
 </template>
@@ -195,9 +195,9 @@ import { ref, computed } from 'vue'
 const activeTab = ref('reflow')
 
 const tabs = [
-  { id: 'reflow', icon: '🔴', label: '重排' },
-  { id: 'repaint', icon: '🟡', label: '重绘' },
-  { id: 'composite', icon: '🟢', label: '合成' }
+  { id: 'reflow', icon: '🔴', label: 'Reflow' },
+  { id: 'repaint', icon: '🟡', label: 'Repaint' },
+  { id: 'composite', icon: '🟢', label: 'Composite' }
 ]
 
 const boxes = ref([
@@ -206,14 +206,14 @@ const boxes = ref([
   { id: 3, x: 20, y: 120, width: 80, height: 80, bg: 'var(--vp-c-brand-3)', rotation: 0, opacity: 1 }
 ])
 
-const currentOperation = ref('无')
+const currentOperation = ref('Không có')
 const performanceImpact = ref(0)
 const affectedElements = ref(0)
 
 const performanceLevel = computed(() => {
-  if (performanceImpact.value <= 33) return { class: 'good', text: '低' }
-  if (performanceImpact.value <= 66) return { class: 'medium', text: '中' }
-  return { class: 'high', text: '高' }
+  if (performanceImpact.value <= 33) return { class: 'good', text: 'Thấp' }
+  if (performanceImpact.value <= 66) return { class: 'medium', text: 'Trung bình' }
+  return { class: 'high', text: 'Cao' }
 })
 
 function getBoxStyle(box) {
@@ -236,7 +236,7 @@ function updateMetrics(operation, impact, affected) {
 
 function changeWidth() {
   boxes.value.forEach((box) => { box.width = 60 + Math.random() * 60 })
-  updateMetrics('改变宽度', 90, boxes.value.length)
+  updateMetrics('Đổi width', 90, boxes.value.length)
 }
 
 function changePosition() {
@@ -244,7 +244,7 @@ function changePosition() {
     box.x = Math.random() * 150
     box.y = Math.random() * 150
   })
-  updateMetrics('改变位置', 85, boxes.value.length)
+  updateMetrics('Đổi vị trí', 85, boxes.value.length)
 }
 
 function addBox() {
@@ -259,38 +259,38 @@ function addBox() {
     rotation: 0,
     opacity: 1
   })
-  updateMetrics('添加元素', 95, boxes.value.length)
+  updateMetrics('Thêm phần tử', 95, boxes.value.length)
 }
 
 function changeColor() {
   const colors = ['var(--vp-c-brand-1)', 'var(--vp-c-brand-2)', 'var(--vp-c-brand-3)']
   boxes.value.forEach((box) => { box.bg = colors[Math.floor(Math.random() * colors.length)] })
-  updateMetrics('改变颜色', 50, boxes.value.length)
+  updateMetrics('Đổi màu chữ', 50, boxes.value.length)
 }
 
 function changeBackground() {
   const bgs = ['var(--vp-c-brand-1)', 'var(--vp-c-brand-2)', 'var(--vp-c-brand-3)']
   boxes.value.forEach((box) => { box.bg = bgs[Math.floor(Math.random() * bgs.length)] })
-  updateMetrics('改变背景', 45, boxes.value.length)
+  updateMetrics('Đổi background', 45, boxes.value.length)
 }
 
 function toggleBorder() {
-  updateMetrics('切换边框', 55, boxes.value.length)
+  updateMetrics('Bật/tắt border', 55, boxes.value.length)
 }
 
 function transformTranslate() {
   boxes.value.forEach((box) => { box.x += Math.random() * 20 - 10 })
-  updateMetrics('Transform 位移', 10, boxes.value.length)
+  updateMetrics('Transform translate', 10, boxes.value.length)
 }
 
 function transformRotate() {
   boxes.value.forEach((box) => { box.rotation += Math.random() * 30 - 15 })
-  updateMetrics('Transform 旋转', 10, boxes.value.length)
+  updateMetrics('Transform rotate', 10, boxes.value.length)
 }
 
 function changeOpacity() {
   boxes.value.forEach((box) => { box.opacity = 0.5 + Math.random() * 0.5 })
-  updateMetrics('改变透明度', 10, boxes.value.length)
+  updateMetrics('Đổi opacity', 10, boxes.value.length)
 }
 </script>
 

@@ -1,15 +1,15 @@
 <!--
   LazyLoadingDemo.vue
-  懒加载演示
+  Demo lazy load
 -->
 <template>
   <div class="lazy-loading-demo">
     <div class="header">
       <div class="title">
-        图片懒加载：节省带宽，提升性能
+        Lazy load ảnh: tiết kiệm băng thông, tăng performance
       </div>
       <div class="subtitle">
-        对比懒加载和立即加载的区别
+        So sánh lazy load và tải ngay
       </div>
     </div>
 
@@ -19,23 +19,23 @@
           :class="['mode-btn', { active: mode === 'eager' }]"
           @click="mode = 'eager'"
         >
-          📦 立即加载
+          📦 Tải ngay
         </button>
         <button
           :class="['mode-btn', { active: mode === 'lazy' }]"
           @click="mode = 'lazy'"
         >
-          ⏳ 懒加载
+          ⏳ Lazy load
         </button>
       </div>
 
       <div class="stats-bar">
         <div class="stat">
-          <span class="stat-label">已加载图片</span>
+          <span class="stat-label">Ảnh đã tải</span>
           <span class="stat-value">{{ loadedImages }} / {{ totalImages }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">节省流量</span>
+          <span class="stat-label">Băng thông tiết kiệm</span>
           <span
             class="stat-value"
             :class="{ positive: savedBandwidth > 0 }"
@@ -44,7 +44,7 @@
           </span>
         </div>
         <div class="stat">
-          <span class="stat-label">加载时间</span>
+          <span class="stat-label">Thời gian tải</span>
           <span class="stat-value">{{ loadTime }} ms</span>
         </div>
       </div>
@@ -56,7 +56,7 @@
       >
         <div class="content-area">
           <div class="placeholder">
-            向下滚动查看更多内容
+            Cuộn xuống để xem thêm nội dung
           </div>
 
           <div
@@ -75,7 +75,7 @@
               >
                 <div class="spinner" />
                 <div class="placeholder-text">
-                  加载中...
+                  Đang tải...
                 </div>
               </div>
               <div
@@ -96,39 +96,38 @@
               </div>
             </div>
             <div class="image-caption">
-              图片 {{ index + 1 }}
+              Ảnh {{ index + 1 }}
             </div>
           </div>
 
           <div class="placeholder">
-            已经到底了
+            Đã hết nội dung
           </div>
         </div>
       </div>
 
       <div class="explanation">
         <div class="explanation-item">
-          <h4>💡 懒加载原理</h4>
+          <h4>💡 Nguyên lý lazy load</h4>
           <p>
-            只有当图片进入视口（用户可见区域）时才开始加载。使用 Intersection
-            Observer API 可以高效实现。
+            Ảnh chỉ bắt đầu tải khi đi vào viewport (vùng người dùng nhìn thấy). Dùng Intersection
+            Observer API có thể triển khai rất hiệu quả.
           </p>
         </div>
 
         <div class="explanation-item">
-          <h4>📊 性能收益</h4>
+          <h4>📊 Lợi ích về performance</h4>
           <p>
-            懒加载可以节省 30-60%
-            的带宽，大幅提升首屏加载速度，特别是在移动端效果显著。
+            Lazy load có thể tiết kiệm 30-60% băng thông, đẩy nhanh tốc độ tải first screen rất nhiều, đặc biệt rõ rệt trên mobile.
           </p>
         </div>
 
         <div class="explanation-item">
-          <h4>🔧 实现方式</h4>
+          <h4>🔧 Cách triển khai</h4>
           <p>
-            <code>loading="lazy"</code>
-            属性是最简单的方式，现代浏览器都支持。需要更多控制时使用
-            Intersection Observer。
+            Thuộc tính <code>loading="lazy"</code>
+            là cách đơn giản nhất, mọi trình duyệt hiện đại đều hỗ trợ. Nếu cần kiểm soát nhiều hơn thì dùng
+            Intersection Observer.
           </p>
         </div>
       </div>
@@ -156,7 +155,7 @@ const savedBandwidth = computed(() => {
     (img) =>
       !img.loaded && !imageRefs.value[images.value.indexOf(img)]?.isVisible
   ).length
-  return notLoaded * 150 // 假设每张图片 150KB
+  return notLoaded * 150 // Giả định mỗi ảnh 150KB
 })
 
 const loadTime = computed(() => {
@@ -190,7 +189,7 @@ function checkVisibility() {
   if (!container) return
 
   const containerRect = container.getBoundingClientRect()
-  const threshold = 100 // 提前 100px 开始加载
+  const threshold = 100 // Bắt đầu tải sớm 100px trước
 
   images.value.forEach((image, index) => {
     if (image.loaded || image.loading) return
@@ -213,7 +212,7 @@ function loadImage(index) {
 
   image.loading = true
 
-  // 模拟加载延迟
+  // Mô phỏng độ trễ khi tải
   setTimeout(
     () => {
       image.loaded = true

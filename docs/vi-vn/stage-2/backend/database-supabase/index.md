@@ -264,11 +264,11 @@ Tuy nhiên trong thực tế nghiệp vụ, sự dư thừa này thường là "
 
 Trên đây là giới thiệu đơn giản về các loại cơ sở dữ liệu. Nếu bạn muốn tìm hiểu thêm về các loại cơ sở dữ liệu cụ thể, bạn có thể tham khảo các tài liệu sau để thử nghiệm các loại khác nhau.
 
-Examples of SQL databases：
-[Db2](https://www.ibm.com/products/db2-database)、[MySQL](https://cloud.ibm.com/catalog#highlights)、[PostgreSQL](https://www.ibm.com/think/topics/postgresql)、[YugabyteDB](https://www.yugabyte.com/)、[CockroachDB](https://www.cockroachlabs.com/)、[Oracle Database](https://www.ibm.com/products/postgres-enterprise)、[Azure SQL Database](https://www.ibm.com/consulting/microsoft)
+Examples of SQL databases:
+[Db2](https://www.ibm.com/products/db2-database), [MySQL](https://cloud.ibm.com/catalog#highlights), [PostgreSQL](https://www.ibm.com/think/topics/postgresql), [YugabyteDB](https://www.yugabyte.com/), [CockroachDB](https://www.cockroachlabs.com/), [Oracle Database](https://www.ibm.com/products/postgres-enterprise), [Azure SQL Database](https://www.ibm.com/consulting/microsoft)
 
-Examples of NoSQL databases：
-[Redis](https://www.ibm.com/think/topics/redis)、[CouchDB](https://www.ibm.com/think/topics/couchdb)、[MongoDB](https://www.ibm.com/think/topics/mongodb)、[Cassandra](https://cloud.ibm.com/catalog#highlights)、[Elasticsearch](https://www.ibm.com/think/topics/elasticsearch)、[BigTable](https://www.techtarget.com/searchdatamanagement/news/252512583/Google-scales-up-Cloud-Bigtable-NoSQL-database)、[Neo4j](https://neo4j.com/users/ibm/)、[HBase](https://www.ibm.com/think/topics/hbase)
+Examples of NoSQL databases:
+[Redis](https://www.ibm.com/think/topics/redis), [CouchDB](https://www.ibm.com/think/topics/couchdb), [MongoDB](https://www.ibm.com/think/topics/mongodb), [Cassandra](https://cloud.ibm.com/catalog#highlights), [Elasticsearch](https://www.ibm.com/think/topics/elasticsearch), [BigTable](https://www.techtarget.com/searchdatamanagement/news/252512583/Google-scales-up-Cloud-Bigtable-NoSQL-database), [Neo4j](https://neo4j.com/users/ibm/), [HBase](https://www.ibm.com/think/topics/hbase)
 
 # 2. Supabase
 
@@ -403,9 +403,9 @@ async function callEdgeFunction() {
     });
 
     const result = await response.json();
-    console.log("Gọi thành công：", result);
+    console.log("Gọi thành công:", result);
   } catch (error) {
-    console.error("Gọi thất bại：", error.message);
+    console.error("Gọi thất bại:", error.message);
   }
 }
 
@@ -547,17 +547,17 @@ Sau khi cấu trúc bảng được tạo xong, bước tiếp theo là dùng c�
 -- Bước 2: Chèn các hàng ban đầu vào bảng orders
 -- Cung cấp dữ liệu thực tế, đa dạng cho demo/kiểm thử. Tất cả giá trị đều độc lập.
 INSERT INTO orders (user_id, status, amount, details, placed_at, is_paid) VALUES
-  (2001, 'pending', 23.50, '{"items":[{"sku":"BGR001","name":"Beef Burger","qty":1,"price":12.00}]}', now() - interval '2 days', false),
-  (2002, 'paid', 50.00, '{"items":[{"sku":"BGR002","name":"Chicken Burger","qty":2,"price":10.00},{"sku":"DRK001","name":"Lemonade","qty":2,"price":5.00}]}', now() - interval '1 day', true),
-  (2003, 'cancelled', 15.00, '{"items":[{"sku":"FRY001","name":"French Fries","qty":3,"price":5.00}], "reason":"Not available"}', now() - interval '45 days', false),
-  (2004, 'paid', 22.98, '{"items":[{"sku":"BGR003","name":"Veggie Burger","qty":2,"price":9.99}], "promo":"SUMMER22"}', now() - interval '10 days', true),
-  (2005, 'pending', 18.75, '{"items":[{"sku":"SAL001","name":"Salad","qty":1,"price":6.75},{"sku":"BGR001","name":"Beef Burger","qty":1,"price":12.00}]}', now() - interval '7 hours', false),
-  (2006, 'paid', 8.00, '{"items":[{"sku":"DRK002","name":"Cola","qty":2,"price":4.00}]}', now() - interval '3 hours', true),
-  (2007, 'refunded', 14.50, '{"items":[{"sku":"BGR003","name":"Veggie Burger","qty":1,"price":9.99},{"sku":"FRY001","name":"French Fries","qty":1,"price":4.51}], "refund_reason":"Late delivery"}', now() - interval '15 days', false),
-  (2008, 'paid', 26.99, '{"items":[{"sku":"BGR002","name":"Chicken Burger","qty":2,"price":10.00},{"sku":"DRK001","name":"Lemonade","qty":1,"price":6.99}]}', now() - interval '12 days', true),
-  (2009, 'pending', 9.99, '{"items":[{"sku":"BGR003","name":"Veggie Burger","qty":1,"price":9.99}]}', now() - interval '30 minutes', false),
-  (2010, 'paid', 19.89, '{"items":[{"sku":"BGR001","name":"Beef Burger","qty":1,"price":12.00},{"sku":"DRK002","name":"Cola","qty":2,"price":3.95}]}', now() - interval '5 days', true),
-  (2011, 'cancelled', 0.00, '{"items":[], "reason":"User cancelled"}', now() - interval '2 days', false);
+ (2001, 'pending', 23.50, '{"items":[{"sku":"BGR001","name":"Beef Burger","qty":1,"price":12.00}]}', now() - interval '2 days', false),
+ (2002, 'paid', 50.00, '{"items":[{"sku":"BGR002","name":"Chicken Burger","qty":2,"price":10.00},{"sku":"DRK001","name":"Lemonade","qty":2,"price":5.00}]}', now() - interval '1 day', true),
+ (2003, 'cancelled', 15.00, '{"items":[{"sku":"FRY001","name":"French Fries","qty":3,"price":5.00}], "reason":"Not available"}', now() - interval '45 days', false),
+ (2004, 'paid', 22.98, '{"items":[{"sku":"BGR003","name":"Veggie Burger","qty":2,"price":9.99}], "promo":"SUMMER22"}', now() - interval '10 days', true),
+ (2005, 'pending', 18.75, '{"items":[{"sku":"SAL001","name":"Salad","qty":1,"price":6.75},{"sku":"BGR001","name":"Beef Burger","qty":1,"price":12.00}]}', now() - interval '7 hours', false),
+ (2006, 'paid', 8.00, '{"items":[{"sku":"DRK002","name":"Cola","qty":2,"price":4.00}]}', now() - interval '3 hours', true),
+ (2007, 'refunded', 14.50, '{"items":[{"sku":"BGR003","name":"Veggie Burger","qty":1,"price":9.99},{"sku":"FRY001","name":"French Fries","qty":1,"price":4.51}], "refund_reason":"Late delivery"}', now() - interval '15 days', false),
+ (2008, 'paid', 26.99, '{"items":[{"sku":"BGR002","name":"Chicken Burger","qty":2,"price":10.00},{"sku":"DRK001","name":"Lemonade","qty":1,"price":6.99}]}', now() - interval '12 days', true),
+ (2009, 'pending', 9.99, '{"items":[{"sku":"BGR003","name":"Veggie Burger","qty":1,"price":9.99}]}', now() - interval '30 minutes', false),
+ (2010, 'paid', 19.89, '{"items":[{"sku":"BGR001","name":"Beef Burger","qty":1,"price":12.00},{"sku":"DRK002","name":"Cola","qty":2,"price":3.95}]}', now() - interval '5 days', true),
+ (2011, 'cancelled', 0.00, '{"items":[], "reason":"User cancelled"}', now() - interval '2 days', false);
 
 -- Kết quả mong đợi:
 -- Sau khi chạy script này, SELECT * FROM orders sẽ hiển thị khoảng 11 hàng với user_id, status, amount, details (JSON), placed_at và is_paid đa dạng.
@@ -1248,7 +1248,7 @@ WITH CHECK (
   bucket_id = 'avatars' AND
   auth.uid() = (storage.foldername(name))
   [1]::uuid AND
-  (storage.extension(name) IN ('png', 
+ (storage.extension(name) IN ('png', 
   'jpg', 'jpeg'))
 );
 
@@ -1654,13 +1654,13 @@ Trước khi bắt đầu, bạn có thể tham khảo các nền tảng BaaS t�
 
 | Nền tảng/Dịch vụ | Loại | Gói miễn phí/Định giá | Đặc điểm / Phù hợp với |
 | --- | --- | --- | --- |
-| Firebase（Google） | BaaS toànmanaged（Auth + Firestore + Storage + Functions + Hosting） | Spark: miễn phí mức nhẹ; Blaze: tính theo lượng dùng (Firestore/Storage/Functions tính riêng) | Trưởng thành nhất trong ngành, tài liệu tốt, dễ bắt đầu, khả năng realtime mạnh. Phù hợp với sản phẩm vừa và nhỏ, team thiên về mobile/frontend. Nhược điểm: tính phí phức tạp, vendor lock-in cao, hạn chế truy vấn nhiều (đặc biệt Firestore). |
+| Firebase (Google) | BaaS toànmanaged (Auth + Firestore + Storage + Functions + Hosting) | Spark: miễn phí mức nhẹ; Blaze: tính theo lượng dùng (Firestore/Storage/Functions tính riêng) | Trưởng thành nhất trong ngành, tài liệu tốt, dễ bắt đầu, khả năng realtime mạnh. Phù hợp với sản phẩm vừa và nhỏ, team thiên về mobile/frontend. Nhược điểm: tính phí phức tạp, vendor lock-in cao, hạn chế truy vấn nhiều (đặc biệt Firestore). |
 | Supabase | BaaS mã nguồn mở (Postgres + Auth + Storage + Edge Functions + Realtime) | Miễn phí: 500MB DB, 1GB Storage, ít lần gọi serverless function; Pro: tính theo instance | Phiên bản SQL gần giống Firebase nhất; giao diện xuất sắc, trải nghiệm hiện đại, có thể tự host. Phù hợp với ứng dụng cần SQL mạnh, BI, khả năng transaction. Nhược điểm: chi phí cao khi concurrent lớn hoặc function phức tạp. |
 | Appwrite Cloud | BaaS mã nguồn mở all-in-one (DB + Auth + Storage + Functions + Realtime) | Miễn phí: bao gồm DB/Storage/FaaS cơ bản; trả phí theo mức tài nguyên | Trải nghiệm hiện đại, API thống nhất, có thể tự host; phù hợp để iterate nhanh với ứng dụng thân thiện với developer. Nhược điểm: hệ sinh thái chưa chín muồi bằng Firebase/Supabase; hiệu năng với ứng dụng lớn cần kiểm tra. |
 | Nhost | Postgres + GraphQL + Auth + Storage + Functions | Miễn phí: 1GB DB, 1GB Storage, ít lần gọi function | Giống "Supabase + Hasura"; GraphQL tự nhiên; phù hợp với team frontend và dự án React/Next.js. Nhược điểm: hệ sinh thái nhỏ, chi phí tăng theo lượng dùng. |
 | AWS Amplify | Backend all-in-one của AWS (Cognito + AppSync + DynamoDB + Storage + Functions + Hosting) | Miễn phí: quota Hosting + Cognito 10k MAU + một phần quota function | Đầy đủ và toàn diện, phù hợp với team đã có nền tảng AWS; độ tin cậy cấp enterprise. Nhược điểm: khó bắt đầu nhất, dịch vụ phân mảnh; chi phí vận hành cao với team startup. |
-| Xata（tăng trưởng nhanh trong 2 năm gần đây） | Cơ sở dữ liệu đa mô hình + Auth + Edge Functions | Miễn phí: 250k bản ghi, 15GB băng thông | Thiên về "DB + API" hơn, nhưng cung cấp Auth, file, logic, có thể dùng làm backend full-stack nhẹ. Trải nghiệm UI/developer cực tốt. Nhược điểm: tính năng chưa toàn diện bằng Firebase/Supabase. |
-| Convex（trải nghiệm developer cực mạnh） | Cơ sở dữ liệumanaged + Auth + Functions (ưu tiên frontend) | Bản miễn phí cho development; trả phí theo lượng request | Bắt đầu cực đơn giản; không cần schema; frontend viết function là dùng được backend. Phù hợp với MVP/kiểm chứng nhanh. Nhược điểm: gắn chặt với nền tảng, chi phí migration cao; không hẳn là BaaS truyền thống. |
+| Xata (tăng trưởng nhanh trong 2 năm gần đây) | Cơ sở dữ liệu đa mô hình + Auth + Edge Functions | Miễn phí: 250k bản ghi, 15GB băng thông | Thiên về "DB + API" hơn, nhưng cung cấp Auth, file, logic, có thể dùng làm backend full-stack nhẹ. Trải nghiệm UI/developer cực tốt. Nhược điểm: tính năng chưa toàn diện bằng Firebase/Supabase. |
+| Convex (trải nghiệm developer cực mạnh) | Cơ sở dữ liệumanaged + Auth + Functions (ưu tiên frontend) | Bản miễn phí cho development; trả phí theo lượng request | Bắt đầu cực đơn giản; không cần schema; frontend viết function là dùng được backend. Phù hợp với MVP/kiểm chứng nhanh. Nhược điểm: gắn chặt với nền tảng, chi phí migration cao; không hẳn là BaaS truyền thống. |
 ## Xác thực (Auth)
 
 | Công cụ/Nền tảng        | Tính năng                                                                                                               | Miễn phí/Định giá                        | Phù hợp & Ưu nhược điểm                                                                                                                                   |

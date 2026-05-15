@@ -1,21 +1,21 @@
 <!--
   CriticalRenderingPathDemo.vue
-  关键渲染路径演示
+  Demo critical rendering path
 -->
 <template>
   <div class="crp-demo">
     <div class="header">
       <div class="title">
-        关键渲染路径 (Critical Rendering Path)
+        Critical Rendering Path
       </div>
       <div class="subtitle">
-        浏览器如何将 HTML、CSS 和 JavaScript 转换为像素
+        Cách trình duyệt biến HTML, CSS và JavaScript thành các pixel
       </div>
     </div>
 
     <div class="demo-container">
       <div class="input-section">
-        <h4>1. DOM 树构建</h4>
+        <h4>1. Dựng cây DOM</h4>
         <div class="code-block">
           <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -24,8 +24,8 @@
   &lt;/head&gt;
   &lt;body&gt;
     &lt;div class="container"&gt;
-      &lt;h1&gt;标题&lt;/h1&gt;
-      &lt;p&gt;段落&lt;/p&gt;
+      &lt;h1&gt;Tiêu đề&lt;/h1&gt;
+      &lt;p&gt;Đoạn văn&lt;/p&gt;
     &lt;/div&gt;
     &lt;script src="app.js"&gt;&lt;/script&gt;
   &lt;/body&gt;
@@ -49,7 +49,7 @@
               🌲
             </div>
             <div class="step-title">
-              DOM 树
+              Cây DOM
             </div>
           </div>
           <div class="tree-visualization">
@@ -89,7 +89,7 @@
               🎨
             </div>
             <div class="step-title">
-              CSSOM 树
+              Cây CSSOM
             </div>
           </div>
           <div class="tree-visualization">
@@ -121,7 +121,7 @@
               🖼️
             </div>
             <div class="step-title">
-              渲染树
+              Render tree
             </div>
           </div>
           <div class="tree-visualization">
@@ -153,7 +153,7 @@
               📐
             </div>
             <div class="step-title">
-              布局 (Layout)
+              Layout
             </div>
           </div>
           <div class="layout-demo">
@@ -184,14 +184,14 @@
               🖌️
             </div>
             <div class="step-title">
-              绘制 (Paint)
+              Paint
             </div>
           </div>
           <div class="paint-demo">
             <div class="paint-box container">
               <div class="paint-content">
-                <h1>标题</h1>
-                <p>段落</p>
+                <h1>Tiêu đề</h1>
+                <p>Đoạn văn</p>
               </div>
             </div>
           </div>
@@ -206,21 +206,21 @@
               ✨
             </div>
             <div class="step-title">
-              合成 (Composite)
+              Composite
             </div>
           </div>
           <div class="composite-demo">
             <div class="composite-layer">
-              图层 1: 背景
+              Layer 1: background
             </div>
             <div class="composite-layer">
-              图层 2: 内容
+              Layer 2: nội dung
             </div>
             <div class="composite-layer">
-              图层 3: 装饰
+              Layer 3: trang trí
             </div>
             <div class="composite-result">
-              = 最终页面
+              = Trang cuối cùng
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@
 
     <div class="timeline">
       <div class="timeline-header">
-        渲染时间线
+        Timeline render
       </div>
       <div class="timeline-bar">
         <div
@@ -264,8 +264,8 @@
           ⚡
         </div>
         <div class="tip-content">
-          <h4>优化 DOM 构建</h4>
-          <p>减少 HTML 嵌套层级，避免不必要的标签。使用语义化 HTML。</p>
+          <h4>Tối ưu việc dựng DOM</h4>
+          <p>Giảm độ lồng HTML, tránh thẻ thừa. Dùng HTML có ngữ nghĩa (semantic HTML).</p>
         </div>
       </div>
 
@@ -274,8 +274,8 @@
           🎨
         </div>
         <div class="tip-content">
-          <h4>优化 CSS</h4>
-          <p>CSS 是渲染阻塞资源。将关键 CSS 内联，异步加载非关键 CSS。</p>
+          <h4>Tối ưu CSS</h4>
+          <p>CSS là tài nguyên chặn render. Inline critical CSS, tải bất đồng bộ phần CSS không quan trọng.</p>
         </div>
       </div>
 
@@ -284,10 +284,10 @@
           ⚙️
         </div>
         <div class="tip-content">
-          <h4>优化 JavaScript</h4>
+          <h4>Tối ưu JavaScript</h4>
           <p>
-            JS 会阻塞 DOM 构建。使用 <code>defer</code> 或
-            <code>async</code> 属性。
+            JS chặn việc dựng DOM. Dùng thuộc tính <code>defer</code> hoặc
+            <code>async</code>.
           </p>
         </div>
       </div>
@@ -297,10 +297,10 @@
           📐
         </div>
         <div class="tip-content">
-          <h4>减少重排</h4>
+          <h4>Giảm reflow</h4>
           <p>
-            批量修改样式，避免逐帧操作。使用
-            <code>transform</code> 代替位置属性。
+            Sửa style gộp một lần, tránh chỉnh sửa theo từng frame. Dùng
+            <code>transform</code> thay cho các thuộc tính vị trí.
           </p>
         </div>
       </div>
@@ -335,7 +335,7 @@ const timelineSteps = [
 ]
 
 const totalDuration = computed(() => {
-  return 1000 // 假设总时长 1000ms
+  return 1000 // Giả định tổng thời gian là 1000ms
 })
 
 function setStep(step) {

@@ -1,28 +1,28 @@
 <!--
-  SliceRequestDemo.vue - HTTP请求优化对比
-  用"搬家"的比喻来解释雪碧图 vs 切片请求
+  SliceRequestDemo.vue - So sánh tối ưu request HTTP
+  Dùng ẩn dụ "chuyển nhà" để giải thích sprite vs cắt nhỏ request
 -->
 <template>
   <div class="slice-request-demo">
-    <!-- 标题区 -->
+    <!-- Khu tiêu đề -->
     <div class="demo-header">
       <span class="icon">📦</span>
-      <span class="title">HTTP请求优化</span>
-      <span class="subtitle">雪碧图 vs 独立请求</span>
+      <span class="title">Tối ưu request HTTP</span>
+      <span class="subtitle">Sprite gộp ảnh vs request độc lập</span>
     </div>
 
-    <!-- 主内容区 -->
+    <!-- Nội dung chính -->
     <div class="demo-content">
-      <!-- 故事引入 -->
+      <!-- Giới thiệu câu chuyện -->
       <div class="story-box">
         <p class="story-text">
-          <strong>通俗说法：</strong>就像搬家——<br>
-          <strong>切图模式</strong>：一箱一箱搬，需要6趟（6次HTTP请求）<br>
-          <strong>雪碧图模式</strong>：打包一次性运走，只需1趟（1次HTTP请求）
+          <strong>Nói nôm na:</strong> giống như chuyển nhà —<br>
+          <strong>Chế độ cắt nhỏ</strong>: mỗi thùng đi một chuyến, cần 6 chuyến (6 request HTTP)<br>
+          <strong>Chế độ sprite</strong>: đóng gói chở một chuyến, chỉ cần 1 chuyến (1 request HTTP)
         </p>
       </div>
 
-      <!-- 模式选择 -->
+      <!-- Chọn chế độ -->
       <div class="mode-selector">
         <div
           class="mode-card"
@@ -33,13 +33,13 @@
             🛵
           </div>
           <div class="mode-name">
-            切图模式
+            Chế độ cắt nhỏ
           </div>
           <div class="mode-desc">
-            通俗说法: 一箱一趟
+            Nói nôm na: mỗi thùng một chuyến
           </div>
           <div class="mode-detail">
-            需要 6 趟运输
+            Cần 6 chuyến
           </div>
         </div>
 
@@ -56,37 +56,37 @@
             🚚
           </div>
           <div class="mode-name">
-            雪碧图模式
+            Chế độ sprite
           </div>
           <div class="mode-desc">
-            通俗说法: 打包一车拉
+            Nói nôm na: đóng gói chở 1 chuyến
           </div>
           <div class="mode-detail">
-            只需 1 趟运输
+            Chỉ cần 1 chuyến
           </div>
         </div>
       </div>
 
-      <!-- 动画演示区 -->
+      <!-- Khu animation -->
       <div class="animation-area">
-        <!-- 起点 -->
+        <!-- Điểm xuất phát -->
         <div class="location start">
           <div class="location-icon">
             🏠
           </div>
           <div class="location-label">
-            旧家
+            Nhà cũ
           </div>
           <div class="boxes-remaining">
-            剩余箱子: <span class="count">{{ remainingBoxes }}</span>
+            Còn lại: <span class="count">{{ remainingBoxes }}</span>
           </div>
         </div>
 
-        <!-- 道路 -->
+        <!-- Con đường -->
         <div class="road">
           <div class="road-line" />
 
-          <!-- 运输车辆 -->
+          <!-- Phương tiện vận chuyển -->
           <div
             v-for="vehicle in vehicles"
             :key="vehicle.id"
@@ -106,44 +106,44 @@
           </div>
         </div>
 
-        <!-- 终点 -->
+        <!-- Điểm đến -->
         <div class="location end">
           <div class="location-icon">
             🏡
           </div>
           <div class="location-label">
-            新家
+            Nhà mới
           </div>
           <div class="boxes-delivered">
-            已送达: <span class="count">{{ deliveredBoxes }}</span>/6
+            Đã giao: <span class="count">{{ deliveredBoxes }}</span>/6
           </div>
         </div>
       </div>
 
-      <!-- 统计面板 -->
+      <!-- Bảng thống kê -->
       <div class="stats-panel">
         <div class="stat-item">
           <div class="stat-label">
-            运输趟数
+            Số chuyến
           </div>
           <div
             class="stat-value"
             :class="{ 'good': trips <= 2, 'bad': trips > 2 }"
           >
-            {{ trips }} 趟
+            {{ trips }} chuyến
           </div>
         </div>
         <div class="stat-item">
           <div class="stat-label">
-            总耗时
+            Tổng thời gian
           </div>
           <div class="stat-value">
-            {{ totalTime.toFixed(1) }} 秒
+            {{ totalTime.toFixed(1) }} giây
           </div>
         </div>
         <div class="stat-item">
           <div class="stat-label">
-            效率评分
+            Điểm hiệu suất
           </div>
           <div
             class="stat-value"
@@ -154,30 +154,30 @@
         </div>
       </div>
 
-      <!-- 控制按钮 -->
+      <!-- Nút điều khiển -->
       <div class="controls">
         <button
           class="btn btn-primary"
           :disabled="isRunning"
           @click="startSimulation"
         >
-          {{ isRunning ? '运输中...' : '开始搬家' }}
+          {{ isRunning ? 'Đang vận chuyển...' : 'Bắt đầu chuyển nhà' }}
         </button>
         <button
           class="btn btn-secondary"
           @click="resetSimulation"
         >
-          重置
+          Đặt lại
         </button>
       </div>
     </div>
 
-    <!-- 信息框 -->
+    <!-- Khung thông tin -->
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想:</strong>
-      <span v-if="mode === 'separate'">切图模式每次只拉一件货,需要6次HTTP请求,效率低。</span>
-      <span v-else>雪碧图模式打包一次性运走,只需1次HTTP请求,大幅减少连接开销。</span>
+      <strong>Ý chính:</strong>
+      <span v-if="mode === 'separate'">Chế độ cắt nhỏ mỗi lần chỉ chở một thứ, cần 6 request HTTP, hiệu suất thấp.</span>
+      <span v-else>Chế độ sprite đóng gói rồi gửi một lượt, chỉ cần 1 request HTTP, giảm đáng kể chi phí thiết lập kết nối.</span>
     </div>
   </div>
 </template>
@@ -185,37 +185,37 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 模式选择
+// Chọn chế độ
 const mode = ref('separate')
 
-// 运行状态
+// Trạng thái chạy
 const isRunning = ref(false)
 const trips = ref(0)
 const totalTime = ref(0)
 const remainingBoxes = ref(6)
 const deliveredBoxes = ref(0)
 
-// 车辆动画
+// Animation phương tiện
 const vehicles = ref([])
 
-// 计算效率评分
+// Tính điểm hiệu suất
 const efficiency = computed(() => {
   if (mode.value === 'packed') {
-    return trips.value <= 1 ? '优秀' : '良好'
+    return trips.value <= 1 ? 'Xuất sắc' : 'Tốt'
   } else {
-    return trips.value <= 3 ? '一般' : '低效'
+    return trips.value <= 3 ? 'Trung bình' : 'Kém hiệu quả'
   }
 })
 
 const efficiencyClass = computed(() => {
   const score = efficiency.value
-  if (score === '优秀') return 'excellent'
-  if (score === '良好') return 'good'
-  if (score === '一般') return 'average'
+  if (score === 'Xuất sắc') return 'excellent'
+  if (score === 'Tốt') return 'good'
+  if (score === 'Trung bình') return 'average'
   return 'poor'
 })
 
-// 开始模拟
+// Bắt đầu mô phỏng
 const startSimulation = async () => {
   if (isRunning.value) return
 
@@ -223,13 +223,13 @@ const startSimulation = async () => {
   resetStats()
 
   if (mode.value === 'separate') {
-    // 分开运输：一箱一趟
+    // Vận chuyển tách rời: mỗi thùng một chuyến
     for (let i = 0; i < 6; i++) {
       await runTrip(1)
       trips.value++
     }
   } else {
-    // 打包运输：6箱一趟
+    // Đóng gói vận chuyển: 6 thùng một chuyến
     await runTrip(6)
     trips.value = 1
   }
@@ -237,10 +237,10 @@ const startSimulation = async () => {
   isRunning.value = false
 }
 
-// 单次运输动画
+// Animation một chuyến đi
 const runTrip = (cargoCount) => {
   return new Promise((resolve) => {
-    // 创建车辆
+    // Tạo phương tiện
     const vehicle = {
       id: Date.now(),
       position: 0,
@@ -249,19 +249,19 @@ const runTrip = (cargoCount) => {
     }
     vehicles.value = [vehicle]
 
-    // 更新剩余箱子
+    // Cập nhật số thùng còn lại
     remainingBoxes.value = Math.max(0, remainingBoxes.value - cargoCount)
 
-    // 动画：去程
+    // Animation: lượt đi
     const goTrip = setInterval(() => {
       vehicle.position += 2
       if (vehicle.position >= 100) {
         clearInterval(goTrip)
 
-        // 送达
+        // Đã giao
         deliveredBoxes.value += cargoCount
 
-        // 动画：返程
+        // Animation: lượt về
         setTimeout(() => {
           const returnTrip = setInterval(() => {
             vehicle.position -= 2
@@ -275,12 +275,12 @@ const runTrip = (cargoCount) => {
       }
     }, 20)
 
-    // 累计时间
+    // Cộng dồn thời gian
     totalTime.value += 2.5
   })
 }
 
-// 重置模拟
+// Đặt lại mô phỏng
 const resetSimulation = () => {
   isRunning.value = false
   vehicles.value = []
@@ -304,7 +304,7 @@ const resetStats = () => {
   margin: 0.5rem 0;
 }
 
-/* 标题区 */
+/* Khu tiêu đề */
 .demo-header {
   display: flex;
   align-items: center;
@@ -327,12 +327,12 @@ const resetStats = () => {
   margin-left: 0.5rem;
 }
 
-/* 主内容区 */
+/* Nội dung chính */
 .demo-content {
   margin-bottom: 0.75rem;
 }
 
-/* 故事框 */
+/* Khung câu chuyện */
 .story-box {
   text-align: center;
   margin-bottom: 1rem;
@@ -348,7 +348,7 @@ const resetStats = () => {
   line-height: 1.6;
 }
 
-/* 模式选择 */
+/* Chọn chế độ */
 .mode-selector {
   display: flex;
   align-items: center;
@@ -416,7 +416,7 @@ const resetStats = () => {
   padding: 0 0.5rem;
 }
 
-/* 动画演示区 */
+/* Khu animation */
 .animation-area {
   display: flex;
   align-items: center;
@@ -512,7 +512,7 @@ const resetStats = () => {
   color: var(--vp-c-brand);
 }
 
-/* 统计面板 */
+/* Bảng thống kê */
 .stats-panel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -556,7 +556,7 @@ const resetStats = () => {
   color: var(--vp-c-warning);
 }
 
-/* 控制按钮 */
+/* Nút điều khiển */
 .controls {
   display: flex;
   justify-content: center;
@@ -594,7 +594,7 @@ const resetStats = () => {
   color: var(--vp-c-text-1);
 }
 
-/* 信息框 */
+/* Khung thông tin */
 .info-box {
   background: var(--vp-c-bg-alt);
   padding: 0.75rem;
@@ -613,7 +613,7 @@ const resetStats = () => {
   color: var(--vp-c-text-1);
 }
 
-/* 响应式 */
+/* Responsive */
 @media (max-width: 768px) {
   .mode-selector {
     flex-direction: column;

@@ -1,19 +1,19 @@
 <!--
-  JQueryVsStateDemo.vue - 前端开发模式对比
-  用"手工记账 vs 智能管家"的比喻来解释 jQuery vs Vue/React
+  JQueryVsStateDemo.vue - So sánh hai mô hình phát triển frontend
+  Dùng ẩn dụ "ghi sổ tay vs quản gia thông minh" để so sánh jQuery với Vue/React
 -->
 <template>
   <div class="jquery-vs-state-demo">
-    <!-- 标题区 -->
+    <!-- Khu tiêu đề -->
     <div class="demo-header">
       <span class="icon">🔄</span>
-      <span class="title">前端开发模式</span>
-      <span class="subtitle">手动操作DOM vs 状态管理</span>
+      <span class="title">Mô hình phát triển frontend</span>
+      <span class="subtitle">Thao tác DOM thủ công vs quản lý state</span>
     </div>
 
-    <!-- 主内容区 -->
+    <!-- Nội dung chính -->
     <div class="demo-content">
-      <!-- 模式选择 -->
+      <!-- Chọn chế độ -->
       <div class="mode-tabs">
         <button
           class="tab-btn"
@@ -21,8 +21,8 @@
           @click="mode = 'manual'"
         >
           <span class="tab-icon">✍️</span>
-          <span class="tab-text">手工记账</span>
-          <span class="tab-sub">通俗说法: jQuery</span>
+          <span class="tab-text">Ghi sổ tay</span>
+          <span class="tab-sub">Nói nôm na: jQuery</span>
         </button>
         <button
           class="tab-btn"
@@ -30,18 +30,18 @@
           @click="mode = 'smart'"
         >
           <span class="tab-icon">🤖</span>
-          <span class="tab-text">智能管家</span>
-          <span class="tab-sub">通俗说法: Vue/React</span>
+          <span class="tab-text">Quản gia thông minh</span>
+          <span class="tab-sub">Nói nôm na: Vue/React</span>
         </button>
       </div>
 
-      <!-- 对比展示区 -->
+      <!-- Khu so sánh -->
       <div class="comparison-showcase">
-        <!-- 左侧：场景描述 -->
+        <!-- Bên trái: mô tả tình huống -->
         <div class="scenario-panel">
           <div class="scenario-header">
             <span class="scenario-icon">{{ mode === 'manual' ? '👨‍🍳' : '🤖' }}</span>
-            <span class="scenario-title">{{ mode === 'manual' ? '手工记账' : '智能管家' }}</span>
+            <span class="scenario-title">{{ mode === 'manual' ? 'Ghi sổ tay' : 'Quản gia thông minh' }}</span>
           </div>
 
           <div class="scenario-content">
@@ -63,11 +63,11 @@
           </div>
         </div>
 
-        <!-- 右侧：账本展示 -->
+        <!-- Bên phải: sổ sách -->
         <div class="ledger-panel">
           <div class="ledger-header">
             <span class="ledger-icon">📒</span>
-            <span class="ledger-title">今日账本</span>
+            <span class="ledger-title">Sổ sách hôm nay</span>
             <span
               class="ledger-status"
               :class="mode"
@@ -75,7 +75,7 @@
           </div>
 
           <div class="ledger-content">
-            <!-- 订单列表 -->
+            <!-- Danh sách đơn -->
             <div class="order-list">
               <div
                 v-for="order in orders"
@@ -85,7 +85,7 @@
               >
                 <div class="order-info">
                   <span class="order-name">{{ order.name }}</span>
-                  <span class="order-price">¥{{ order.price }}</span>
+                  <span class="order-price">{{ order.price }}k</span>
                 </div>
                 <div class="order-status">
                   {{ order.completed ? '✓' : '○' }}
@@ -93,45 +93,45 @@
               </div>
             </div>
 
-            <!-- 总计 -->
+            <!-- Tổng kết -->
             <div class="total-section">
               <div class="total-row">
-                <span>菜品数量：</span>
-                <span class="total-value">{{ completedCount }}/{{ orders.length }} 份</span>
+                <span>Số món:</span>
+                <span class="total-value">{{ completedCount }}/{{ orders.length }} món</span>
               </div>
               <div class="total-row total-final">
-                <span>今日营收：</span>
-                <span class="total-amount">¥{{ totalRevenue }}</span>
+                <span>Doanh thu hôm nay:</span>
+                <span class="total-amount">{{ totalRevenue }}k</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 操作按钮 -->
+      <!-- Nút thao tác -->
       <div class="action-buttons">
         <button
           class="btn btn-primary"
           :disabled="isProcessing || allCompleted"
           @click="processOrder"
         >
-          {{ isProcessing ? '处理中...' : allCompleted ? '今日完成！' : '下一道菜' }}
+          {{ isProcessing ? 'Đang xử lý...' : allCompleted ? 'Xong hết rồi!' : 'Món tiếp theo' }}
         </button>
         <button
           class="btn btn-secondary"
           @click="resetDemo"
         >
-          重新开始
+          Bắt đầu lại
         </button>
       </div>
     </div>
 
-    <!-- 信息框 -->
+    <!-- Khung thông tin -->
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想:</strong>
-      <span v-if="mode === 'manual'">jQuery需要手动查找和修改DOM,就像手工记账,容易出错。</span>
-      <span v-else>Vue/React通过状态自动更新界面,就像智能管家,改数据界面自动变。</span>
+      <strong>Ý chính:</strong>
+      <span v-if="mode === 'manual'">jQuery cần bạn tự tìm và sửa DOM, giống ghi sổ tay, dễ sai sót.</span>
+      <span v-else>Vue/React tự động cập nhật UI dựa trên state, như quản gia thông minh: đổi dữ liệu thì giao diện tự đổi theo.</span>
     </div>
   </div>
 </template>
@@ -139,69 +139,69 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 当前模式
+// Chế độ hiện tại
 const mode = ref('manual')
 
-// 处理状态
+// Trạng thái xử lý
 const isProcessing = ref(false)
 const currentStep = ref(0)
 
-// 订单数据
+// Dữ liệu đơn hàng
 const orders = ref([
-  { id: 1, name: '宫保鸡丁', price: 38, completed: false },
-  { id: 2, name: '鱼香肉丝', price: 32, completed: false },
-  { id: 3, name: '麻婆豆腐', price: 18, completed: false },
-  { id: 4, name: '糖醋排骨', price: 48, completed: false }
+  { id: 1, name: 'Gà xào hạt điều', price: 88, completed: false },
+  { id: 2, name: 'Thịt xào chua ngọt', price: 72, completed: false },
+  { id: 3, name: 'Đậu hũ Tứ Xuyên', price: 48, completed: false },
+  { id: 4, name: 'Sườn xào chua ngọt', price: 108, completed: false }
 ])
 
-// 手工记账步骤
+// Các bước ghi sổ tay
 const manualSteps = [
-  '翻开账本，找到对应菜品',
-  '手动计算价格，写到本子上',
-  '再算一遍总数，防止算错',
-  '把完成的菜标记一下'
+  'Mở sổ ra, tìm đúng món',
+  'Tự tính giá rồi ghi vào sổ',
+  'Tính lại tổng để khỏi sai số',
+  'Đánh dấu món đã xong'
 ]
 
-// 智能管家步骤
+// Các bước quản gia thông minh
 const smartSteps = [
-  '告诉管家：这道菜做好了',
-  '管家自动更新账本',
-  '总数自动计算，不会出错',
-  '所有数据实时同步'
+  'Báo cho quản gia: món này đã xong',
+  'Quản gia tự cập nhật sổ sách',
+  'Tổng tự tính, không sai được',
+  'Mọi dữ liệu đồng bộ tức thì'
 ]
 
-// 当前步骤列表
+// Danh sách bước hiện tại
 const currentSteps = computed(() => {
   return mode.value === 'manual' ? manualSteps : smartSteps
 })
 
-// 计算属性
+// Các thuộc tính tính toán
 const completedCount = computed(() => orders.value.filter(o => o.completed).length)
 const totalRevenue = computed(() => orders.value.filter(o => o.completed).reduce((sum, o) => sum + o.price, 0))
 const allCompleted = computed(() => orders.value.every(o => o.completed))
 
 const ledgerStatus = computed(() => {
-  if (allCompleted.value) return '已完成'
-  return mode.value === 'manual' ? '手工计算中...' : '自动同步中...'
+  if (allCompleted.value) return 'Đã xong'
+  return mode.value === 'manual' ? 'Đang tính tay...' : 'Đang đồng bộ tự động...'
 })
 
-// 处理下一道菜
+// Xử lý món tiếp theo
 const processOrder = async () => {
   if (isProcessing.value || allCompleted.value) return
 
   isProcessing.value = true
   currentStep.value = 0
 
-  // 找到第一个未完成的订单
+  // Tìm đơn chưa hoàn thành đầu tiên
   const orderIndex = orders.value.findIndex(o => !o.completed)
 
-  // 模拟步骤执行
+  // Mô phỏng chạy lần lượt các bước
   for (let i = 0; i < currentSteps.value.length; i++) {
     currentStep.value = i
     await sleep(400)
   }
 
-  // 完成订单
+  // Hoàn thành đơn
   if (orderIndex !== -1) {
     orders.value[orderIndex].completed = true
   }
@@ -210,14 +210,14 @@ const processOrder = async () => {
   currentStep.value = 0
 }
 
-// 重置演示
+// Đặt lại demo
 const resetDemo = () => {
   isProcessing.value = false
   currentStep.value = 0
   orders.value.forEach(o => o.completed = false)
 }
 
-// 辅助函数
+// Hàm phụ trợ
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 </script>
 
@@ -230,7 +230,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   margin: 0.5rem 0;
 }
 
-/* 标题区 */
+/* Khu tiêu đề */
 .demo-header {
   display: flex;
   align-items: center;
@@ -253,12 +253,12 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   margin-left: 0.5rem;
 }
 
-/* 主内容区 */
+/* Nội dung chính */
 .demo-content {
   margin-bottom: 0.75rem;
 }
 
-/* 模式选项卡 */
+/* Tab chọn chế độ */
 .mode-tabs {
   display: flex;
   gap: 0.75rem;
@@ -307,7 +307,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   opacity: 0.8;
 }
 
-/* 对比展示区 */
+/* Khu so sánh */
 .comparison-showcase {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -321,7 +321,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   }
 }
 
-/* 场景面板 */
+/* Khung tình huống */
 .scenario-panel {
   background: var(--vp-c-bg);
   border-radius: 6px;
@@ -397,7 +397,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   flex: 1;
 }
 
-/* 账本面板 */
+/* Khung sổ sách */
 .ledger-panel {
   background: var(--vp-c-bg);
   border-radius: 6px;
@@ -519,7 +519,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-size: 1.1rem;
 }
 
-/* 操作按钮 */
+/* Nút thao tác */
 .action-buttons {
   display: flex;
   justify-content: center;
@@ -556,7 +556,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   color: var(--vp-c-text-1);
 }
 
-/* 信息框 */
+/* Khung thông tin */
 .info-box {
   background: var(--vp-c-bg-alt);
   padding: 0.75rem;

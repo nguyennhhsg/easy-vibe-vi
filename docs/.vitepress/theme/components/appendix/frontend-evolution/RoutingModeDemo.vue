@@ -1,28 +1,28 @@
 <!--
-  RoutingModeDemo.vue - MPA vs SPA 路由模式对比
-  用"翻书 vs 换纸"的比喻来解释多页应用和单页应用的区别
+  RoutingModeDemo.vue - So sánh chế độ định tuyến MPA và SPA
+  Dùng ẩn dụ "lật sách vs đổi trang" để giải thích khác biệt giữa MPA và SPA
 -->
 <template>
   <div class="routing-demo">
-    <!-- 标题区 -->
+    <!-- Khu tiêu đề -->
     <div class="demo-header">
       <span class="icon">📖</span>
-      <span class="title">路由模式对比</span>
-      <span class="subtitle">MPA 多页应用 vs SPA 单页应用</span>
+      <span class="title">So sánh chế độ định tuyến</span>
+      <span class="subtitle">MPA (multi-page app) vs SPA (single-page app)</span>
     </div>
 
-    <!-- 主内容区 -->
+    <!-- Nội dung chính -->
     <div class="demo-content">
-      <!-- 故事引入 -->
+      <!-- Giới thiệu câu chuyện -->
       <div class="story-box">
         <p class="story-text">
-          <strong>通俗说法：</strong>小明喜欢看书，有两种看书方式：<br>
-          <strong>MPA 方式（像翻书）</strong>：每翻一页都要换一本书<br>
-          <strong>SPA 方式（像换纸）</strong>：在同一本书里换内容
+          <strong>Nói nôm na:</strong> Minh thích đọc sách và có hai cách đọc:<br>
+          <strong>Cách MPA (như lật sách)</strong>: mỗi lần lật trang phải đổi sang một quyển khác<br>
+          <strong>Cách SPA (như đổi trang)</strong>: thay nội dung ngay trong cùng một quyển sách
         </p>
       </div>
 
-      <!-- 模式选择 -->
+      <!-- Chọn chế độ -->
       <div class="mode-selector">
         <div
           class="mode-card"
@@ -33,13 +33,13 @@
             📚
           </div>
           <div class="mode-name">
-            MPA 多页应用
+            MPA - multi-page app
           </div>
           <div class="mode-sub">
-            通俗说法: 像翻书
+            Nói nôm na: như lật sách
           </div>
           <div class="mode-desc">
-            每点一次链接，浏览器向服务器要新页面
+            Mỗi lần bấm link, trình duyệt xin server một trang mới
           </div>
         </div>
 
@@ -56,36 +56,36 @@
             📄
           </div>
           <div class="mode-name">
-            SPA 单页应用
+            SPA - single-page app
           </div>
           <div class="mode-sub">
-            通俗说法: 像换纸
+            Nói nôm na: như đổi trang
           </div>
           <div class="mode-desc">
-            只加载一次，后续只切换内容
+            Chỉ tải một lần, sau đó chỉ đổi nội dung
           </div>
         </div>
       </div>
 
-      <!-- 动画演示 -->
+      <!-- Demo có animation -->
       <div class="demo-area">
         <div class="demo-header">
-          <span>当前模式：</span>
+          <span>Chế độ hiện tại:</span>
           <span
             class="mode-badge"
             :class="mode"
-          >{{ mode === 'mpa' ? 'MPA 多页应用' : 'SPA 单页应用' }}</span>
+          >{{ mode === 'mpa' ? 'MPA - multi-page app' : 'SPA - single-page app' }}</span>
         </div>
 
-        <!-- 场景模拟 -->
+        <!-- Mô phỏng tình huống -->
         <div class="scene-container">
-          <!-- 书架（服务器） -->
+          <!-- Kệ sách (server) -->
           <div class="server-side">
             <div class="server-icon">
               📚
             </div>
             <div class="server-label">
-              书架（服务器）
+              Kệ sách (server)
             </div>
             <div class="books-shelf">
               <div
@@ -102,7 +102,7 @@
             </div>
           </div>
 
-          <!-- 传输过程 -->
+          <!-- Quá trình truyền -->
           <div class="transfer-area">
             <div
               v-if="mode === 'mpa' && isLoading"
@@ -119,17 +119,17 @@
               v-else
               class="transfer-placeholder"
             >
-              <span>{{ mode === 'mpa' ? '点击页面传输' : '无需传输' }}</span>
+              <span>{{ mode === 'mpa' ? 'Bấm để truyền trang' : 'Không cần truyền' }}</span>
             </div>
           </div>
 
-          <!-- 阅读区（浏览器） -->
+          <!-- Khu đọc (trình duyệt) -->
           <div class="browser-side">
             <div class="browser-icon">
               📖
             </div>
             <div class="browser-label">
-              阅读区（浏览器）
+              Khu đọc (trình duyệt)
             </div>
             <div class="reading-paper">
               <Transition
@@ -152,15 +152,15 @@
                 </div>
               </Transition>
 
-              <!-- 状态保留测试 -->
+              <!-- Kiểm thử giữ state -->
               <div class="state-test">
                 <div class="test-label">
-                  ✏️ 状态保留测试：
+                  ✏️ Kiểm thử giữ state:
                 </div>
                 <input
                   v-model="userInput"
                   type="text"
-                  placeholder="在这里输入文字，然后切换页面..."
+                  placeholder="Nhập gì đó ở đây rồi chuyển trang..."
                   class="test-input"
                 >
               </div>
@@ -168,10 +168,10 @@
           </div>
         </div>
 
-        <!-- 导航控制 -->
+        <!-- Điều khiển điều hướng -->
         <div class="navigation-controls">
           <div class="nav-label">
-            切换页面：
+            Chuyển trang:
           </div>
           <div class="nav-buttons">
             <button
@@ -187,129 +187,129 @@
           </div>
         </div>
 
-        <!-- 状态指示 -->
+        <!-- Trạng thái -->
         <div class="status-indicator">
           <div
             v-if="mode === 'mpa'"
             class="status-text mpa"
           >
             <span class="status-icon">📚</span>
-            <span>每次切换都要从书架拿新书（服务器请求）</span>
+            <span>Mỗi lần chuyển trang đều phải lấy sách mới từ kệ (request lên server)</span>
           </div>
           <div
             v-else
             class="status-text spa"
           >
             <span class="status-icon">⚡</span>
-            <span>内容已经下载好了，切换不需要再拿（前端路由）</span>
+            <span>Nội dung đã tải sẵn rồi, chuyển trang không cần lấy lại (định tuyến phía client)</span>
           </div>
         </div>
       </div>
 
-      <!-- 对比表格 -->
+      <!-- Bảng so sánh -->
       <div class="comparison-table">
         <div class="table-title">
-          📊 MPA vs SPA 对比
+          📊 So sánh MPA và SPA
         </div>
         <div class="table-content">
           <div class="comparison-row header">
             <div class="col-feature">
-              特点
+              Đặc điểm
             </div>
             <div class="col-mpa">
-              MPA 多页应用
+              MPA - multi-page app
             </div>
             <div class="col-spa">
-              SPA 单页应用
+              SPA - single-page app
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              比喻
+              Ẩn dụ
             </div>
             <div class="col-mpa">
-              翻书：每翻一页换一本书
+              Lật sách: mỗi lần lật là một quyển mới
             </div>
             <div class="col-spa">
-              换纸：同一本书里换内容
+              Đổi trang: thay nội dung trong cùng quyển sách
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              页面切换
+              Chuyển trang
             </div>
             <div class="col-mpa">
-              每次都重新加载整个页面
+              Mỗi lần đều tải lại toàn bộ trang
             </div>
             <div class="col-spa">
-              只加载一次，后续只切换内容
+              Chỉ tải một lần, sau đó chỉ đổi nội dung
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              速度体验
+              Cảm giác về tốc độ
             </div>
             <div class="col-mpa">
-              每次都有"白屏-加载"的过程
+              Mỗi lần đều có pha "trắng màn hình - tải lại"
             </div>
             <div class="col-spa">
-              页面切换流畅，无白屏
+              Chuyển trang mượt, không trắng màn hình
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              状态保留
+              Giữ state
             </div>
             <div class="col-mpa">
-              切换页面后，输入的内容会丢失
+              Chuyển trang xong, nội dung đã nhập mất hết
             </div>
             <div class="col-spa">
-              切换页面后，输入的内容还在
+              Chuyển trang xong, nội dung đã nhập vẫn còn
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              搜索引擎
+              Công cụ tìm kiếm
             </div>
             <div class="col-mpa">
-              容易被搜索到（SEO 友好）
+              Dễ được index (thân thiện SEO)
             </div>
             <div class="col-spa">
-              需要额外处理才能被搜索到
+              Cần xử lý thêm mới được index
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              首屏加载
+              First screen
             </div>
             <div class="col-mpa">
-              服务器直接给 HTML，首屏快
+              Server trả HTML trực tiếp, first screen nhanh
             </div>
             <div class="col-spa">
-              需要先下载 JS，首屏可能慢
+              Phải tải JS trước, first screen có thể chậm
             </div>
           </div>
           <div class="comparison-row">
             <div class="col-feature">
-              适合场景
+              Tình huống phù hợp
             </div>
             <div class="col-mpa">
-              博客、新闻、企业官网
+              Blog, tin tức, website doanh nghiệp
             </div>
             <div class="col-spa">
-              淘宝、网易云音乐、后台系统
+              Sàn TMĐT, ứng dụng nghe nhạc, hệ thống quản trị
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 核心要点 -->
+      <!-- Điểm cốt lõi -->
       <div class="info-box">
         <span class="icon">💡</span>
-        <strong>核心思想：</strong>
-        <strong>MPA</strong> 每次切换都要"整页刷新"，像翻书，适合内容为主的网站；
-        <strong>SPA</strong> 只加载一次，后续"局部更新"，像换纸，适合交互复杂的应用。
-        关键是：<strong>状态会不会丢</strong>。
+        <strong>Ý chính:</strong>
+        <strong>MPA</strong> mỗi lần chuyển trang đều "refresh cả trang", giống lật sách, hợp với các trang thiên về nội dung;
+        <strong>SPA</strong> chỉ tải một lần rồi "cập nhật cục bộ", giống đổi trang, hợp với các app có tương tác phức tạp.
+        Mấu chốt nằm ở: <strong>state có bị mất hay không</strong>.
       </div>
     </div>
   </div>
@@ -318,52 +318,52 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// 模式选择
+// Chọn chế độ
 const mode = ref('spa')
 const currentPage = ref(1)
 const targetPage = ref(1)
 const isLoading = ref(false)
 const userInput = ref('')
 
-// 页面数据
+// Dữ liệu các trang
 const pages = [
-  { id: 1, emoji: '🏠', title: '首页', content: '欢迎来到首页！这是网站的入口。' },
-  { id: 2, emoji: '🛍️', title: '商品', content: '这里展示所有商品，可以浏览和购买。' },
-  { id: 3, emoji: '🛒', title: '购物车', content: '购物车里有你选中的商品，可以结算。' },
-  { id: 4, emoji: '👤', title: '我的', content: '这里是个人中心，查看订单和信息。' }
+  { id: 1, emoji: '🏠', title: 'Trang chủ', content: 'Chào mừng đến trang chủ! Đây là cổng vào của website.' },
+  { id: 2, emoji: '🛍️', title: 'Sản phẩm', content: 'Khu trưng bày toàn bộ sản phẩm, bạn có thể xem và mua.' },
+  { id: 3, emoji: '🛒', title: 'Giỏ hàng', content: 'Giỏ hàng chứa các món bạn đã chọn, có thể thanh toán.' },
+  { id: 4, emoji: '👤', title: 'Tài khoản', content: 'Trang cá nhân, xem đơn hàng và thông tin của bạn.' }
 ]
 
-// 获取当前页面
+// Lấy trang hiện tại
 const getCurrentPage = computed(() => {
   return pages.find(p => p.id === currentPage.value) || pages[0]
 })
 
-// 切换模式
+// Đổi chế độ
 const switchMode = (newMode) => {
   mode.value = newMode
   currentPage.value = 1
   userInput.value = ''
 }
 
-// 导航到指定页面
+// Điều hướng đến trang chỉ định
 const navigateTo = async (pageId) => {
   if (pageId === currentPage.value || isLoading.value) return
 
   targetPage.value = pageId
 
   if (mode.value === 'mpa') {
-    // MPA 模式：模拟网络请求延迟
+    // Chế độ MPA: mô phỏng độ trễ network
     isLoading.value = true
     await sleep(800)
     currentPage.value = pageId
     isLoading.value = false
   } else {
-    // SPA 模式：即时切换
+    // Chế độ SPA: chuyển ngay lập tức
     currentPage.value = pageId
   }
 }
 
-// 辅助函数
+// Hàm phụ trợ
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 </script>
 
@@ -377,7 +377,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
-/* 故事框 */
+/* Khung câu chuyện */
 .story-box {
   text-align: center;
   margin-bottom: 24px;
@@ -406,7 +406,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   line-height: 1.6;
 }
 
-/* 模式选择 */
+/* Chọn chế độ */
 .mode-selector {
   display: flex;
   align-items: center;
@@ -470,7 +470,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   padding: 0 8px;
 }
 
-/* 演示区域 */
+/* Khu demo */
 .demo-area {
   background: white;
   border-radius: 16px;
@@ -505,7 +505,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   color: #1565c0;
 }
 
-/* 场景模拟 */
+/* Mô phỏng tình huống */
 .scene-container {
   display: flex;
   align-items: center;
@@ -572,7 +572,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   50% { transform: scale(1.15); }
 }
 
-/* 传输区域 */
+/* Khu vận chuyển */
 .transfer-area {
   flex: 0 0 100px;
   display: flex;
@@ -608,7 +608,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   color: #999;
 }
 
-/* 阅读区 */
+/* Khu đọc */
 .reading-paper {
   background: white;
   border: 2px solid var(--vp-c-divider);
@@ -666,7 +666,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   border-color: #667eea;
 }
 
-/* 导航控制 */
+/* Điều khiển điều hướng */
 .navigation-controls {
   display: flex;
   align-items: center;
@@ -714,7 +714,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   cursor: not-allowed;
 }
 
-/* 状态指示 */
+/* Hiển thị trạng thái */
 .status-indicator {
   text-align: center;
   padding: 12px;
@@ -746,7 +746,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   font-size: 18px;
 }
 
-/* 对比表格 */
+/* Bảng so sánh */
 .comparison-table {
   background: white;
   border-radius: 16px;
@@ -806,7 +806,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   color: #333;
 }
 
-/* 核心要点 */
+/* Điểm cốt lõi */
 .key-takeaway {
   display: flex;
   gap: 16px;
@@ -828,7 +828,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   line-height: 1.6;
 }
 
-/* 动画 */
+/* Animation */
 .page-flip-enter-active,
 .page-flip-leave-active {
   transition: all 0.4s ease;
@@ -855,7 +855,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
   transform: translateY(10px);
 }
 
-/* 响应式 */
+/* Responsive */
 @media (max-width: 768px) {
   .mode-selector {
     flex-direction: column;

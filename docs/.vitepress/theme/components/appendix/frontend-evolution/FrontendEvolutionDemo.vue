@@ -182,7 +182,7 @@ const eras = [
   margin-bottom: 0.5rem;
 }
 
-/* 时间线容器 */
+/* Khung timeline */
 .timeline-container {
   position: relative;
 }
@@ -203,7 +203,7 @@ const eras = [
   transform: translateX(8px);
 }
 
-/* 标记点 */
+/* Điểm đánh dấu */
 .era-marker {
   display: flex;
   flex-direction: column;
@@ -238,7 +238,7 @@ const eras = [
   min-height: 20px;
 }
 
-/* 内容区域 */
+/* Khu nội dung */
 .era-content {
   flex: 1;
   background: var(--vp-c-bg);
@@ -285,7 +285,7 @@ const eras = [
   line-height: 1.4;
 }
 
-/* 详情展开 */
+/* Mở rộng chi tiết */
 .era-detail {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
@@ -332,7 +332,7 @@ const eras = [
   line-height: 1.5;
 }
 
-/* 动画 */
+/* Animation */
 .expand-enter-active,
 .expand-leave-active {
   transition: all 0.3s ease;

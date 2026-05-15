@@ -30,7 +30,10 @@ Vì vậy, nhiệm vụ đầu tiên của chúng ta là: **cắt dòng văn b�
 Chia tách từ là cắt một câu hoàn chỉnh thành những "đơn vị từ" (Token).
 
 - **Tiếng Anh**: Có dấu cách tự nhiên, dễ chia tách (ví dụ `I love AI`).
-- **Tiếng Trung**: Không có dấu cách, cần thuật toán để cắt (ví dụ `我爱人工智能` — "tôi yêu trí tuệ nhân tạo").
+- **Tiếng Trung**: Không có dấu cách, cần thuật toán để cắt (ví dụ `我爱人工智能` — _tiếng Trung: "Tôi yêu trí tuệ nhân tạo"_).
+- **Tiếng Việt**: Có dấu cách giữa các âm tiết, nhưng một "từ" có thể gồm nhiều âm tiết (ví dụ `trí tuệ nhân tạo` là một khái niệm gồm 4 âm tiết). Vì vậy tokenizer cũng cần xử lý đặc biệt.
+
+> **Ví dụ tiếng Trung** (để minh họa tokenization khác nhau giữa tiếng Trung và tiếng Latin): các ví dụ chữ Hán dưới đây được giữ nguyên vì chúng minh họa cách tokenizer xử lý ngôn ngữ không có dấu cách. Mỗi ví dụ sẽ kèm chú giải tiếng Việt.
 
 #### Tokenizer (Dịch giả)
 
@@ -42,7 +45,11 @@ LLM hiện đại (như GPT-4) thường sử dụng kỹ thuật **Subword Toke
 
 Dưới đây là một ví dụ thực tế về chia tách BPE (dựa trên Tokenizer GPT-4):
 
-**Input**: `"The quick brown fox jumps over the lazy dog. \n今天天气真不错！"` (câu tiếng Trung nghĩa là "Hôm nay thời tiết thật tốt!")
+**Input**: `"The quick brown fox jumps over the lazy dog. \n今天天气真不错！"`
+
+> _Phần tiếng Anh nghĩa là "Con cáo nâu nhanh nhẹn nhảy qua con chó lười."_
+> _Phần tiếng Trung `今天天气真不错！` nghĩa là "Hôm nay thời tiết thật tuyệt!"_
+> _Ví dụ giữ nguyên cả hai ngôn ngữ để so sánh: tiếng Anh dùng dấu cách, tiếng Trung không có dấu cách — bạn sẽ thấy tokenizer xử lý hai kiểu này khác nhau._
 
 **Token List**:
 
@@ -58,16 +65,18 @@ index=16053, string=' lazy'
 index=3290,  string=' dog' 
 index=13,    string='.' 
 index=198,   string='\n'       <-- Ký tự xuống dòng 
-index=33838, string='今天'      <-- "Hôm nay" - những từ phổ biến được kết hợp trực tiếp 
-index=54580, string='天气'      <-- "Thời tiết"
-index=20265, string='真'        <-- "Thật"
-index=57672, string='不错'      <-- "Tốt"
-index=171,   string='！' 
+index=33838, string='今天'      <-- (tiếng Trung: "Hôm nay") — những từ phổ biến được giữ nguyên thành một token
+index=54580, string='天气'      <-- (tiếng Trung: "Thời tiết") — cụm 2 ký tự ghép thành 1 token
+index=20265, string='真'        <-- (tiếng Trung: "Thật/Quả thật") — 1 ký tự = 1 token
+index=57672, string='不错'      <-- (tiếng Trung: "Tuyệt/Không tệ") — cụm 2 ký tự ghép thành 1 token
+index=171,   string='！'        <-- Dấu chấm than (tiếng Trung dùng dấu rộng `！`)
 ```
 
+> **Lưu ý cho người học tiếng Việt**: Cả câu `今天天气真不错！` đọc theo âm Hán-Việt là _"Kim thiên thiên khí chân bất thác!"_ và nghĩa là _"Hôm nay thời tiết thật tuyệt!"_. Bạn có thể thấy tokenizer GPT-4 đã chia câu này thành 5 token: `今天 / 天气 / 真 / 不错 / ！` — đây là cách tokenizer "đoán" ranh giới từ trong một ngôn ngữ không có dấu cách.
+
 > **Về cách xử lý các ký tự hiếm:**
-> Nếu gặp một ký tự hiếm không có trong bảng từ (giả sử ký tự "今" — "hôm nay" — rất hiếm), mô hình sẽ quay trở lại mã hóa **cấp độ Byte**.
-> 1.  Raw Input: `今`
+> Nếu gặp một ký tự hiếm không có trong bảng từ (giả sử ký tự tiếng Trung `今` — nghĩa là _"hôm nay"_ — rất hiếm trong dữ liệu huấn luyện), mô hình sẽ quay trở lại mã hóa **cấp độ Byte**.
+> 1.  Raw Input: `今` _(tiếng Trung: "hôm nay")_
 > 2.  Bytes: `\xE4 \xBB \x8A`
 > 3.  BPE lookup: Trước tiên tìm `\xE4\xBB\x8A` -> Không tìm thấy -> Tách thành `\xE4\xBB` (ID=1001) + `\x8A` (ID=2002).
 > 4.  Token cuối cùng: `[1001, 2002]`.
