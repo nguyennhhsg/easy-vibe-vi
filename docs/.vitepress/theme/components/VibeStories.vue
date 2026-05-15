@@ -2,10 +2,10 @@
 import { computed, inject, onMounted, onUnmounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import macbookImage from '../../../../assets/macbook.png'
-import story1Cover from '../../../zh-cn/vibe-stories/images/story-1/image5.png'
-import story2Cover from '../../../zh-cn/vibe-stories/images/story-2/image4.png'
-import story3Cover from '../../../zh-cn/vibe-stories/images/story-3/image3.png'
-import story4Cover from '../../../zh-cn/vibe-stories/images/story-4/image7.png'
+import story1Cover from '../../../vi-vn/vibe-stories/images/story-1/image5.png'
+import story2Cover from '../../../vi-vn/vibe-stories/images/story-2/image4.png'
+import story3Cover from '../../../vi-vn/vibe-stories/images/story-3/image3.png'
+import story4Cover from '../../../vi-vn/vibe-stories/images/story-4/image7.png'
 
 // Try to inject translation context from parent or provide a default fallback
 const t = inject('t', {
@@ -35,7 +35,7 @@ const tStories = computed(() => [
     imageStyle: {
       objectPosition: 'center center'
     },
-    link: '/zh-cn/vibe-stories/story-1'
+    link: '/vi-vn/vibe-stories/story-1'
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const tStories = computed(() => [
     imageStyle: {
       objectPosition: 'center center'
     },
-    link: '/zh-cn/vibe-stories/story-2'
+    link: '/vi-vn/vibe-stories/story-2'
   },
   {
     id: 3,
@@ -57,7 +57,7 @@ const tStories = computed(() => [
     imageStyle: {
       objectPosition: '34% center'
     },
-    link: '/zh-cn/vibe-stories/story-3'
+    link: '/vi-vn/vibe-stories/story-3'
   },
   {
     id: 4,
@@ -68,7 +68,7 @@ const tStories = computed(() => [
     imageStyle: {
       objectPosition: 'center center'
     },
-    link: '/zh-cn/vibe-stories/story-4'
+    link: '/vi-vn/vibe-stories/story-4'
   }
 ])
 

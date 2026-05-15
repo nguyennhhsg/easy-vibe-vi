@@ -51,7 +51,7 @@ const topPromo = computed(() => {
     return {
       text: '用 Easy-Vibe 构建你的第一个 AI 应用，最快当天可上线原型。',
       cta: '开始学习 ›',
-      link: '/zh-cn/stage-1/learning-map/'
+      link: '/vi-vn/stage-1/learning-map/'
     }
   }
   return {
@@ -252,7 +252,7 @@ onMounted(() => {
     ? currentPath
     : `${currentPath}/`
   const localeHomeSuffixes = [
-    '/zh-cn/',
+    '/vi-vn/',
     '/en/',
     '/zh-tw/',
     '/ja-jp/',

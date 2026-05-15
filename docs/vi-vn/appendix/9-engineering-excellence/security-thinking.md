@@ -11,7 +11,7 @@ Chương này sẽ giúp bạn xây dựng tư duy bảo mật, hiểu những m
 | Chương | Nội dung | Khái niệm cơ bản |
 |-----|------|---------|
 | **Chương 1** | Mô hình tư duy bảo mật | Suy nghĩ như một kẻ tấn công |
-| **Chương 2** | Các cuộc tấn công Web phổ biến | XSS、SQL 注入、CSRF |
+| **Chương 2** | Các cuộc tấn công Web phổ biến | XSS, SQL Injection, CSRF |
 | **Chương 3** | Chiến lược phòng thủ | Xác thực đầu vào, mã hóa đầu ra, kiểm soát quyền truy cập |
 | **Chương 4** | Danh sách kiểm tra bảo mật | Kiểm tra bảo mật tự thực hiện trước khi dự án trực tuyến |
 
@@ -199,7 +199,7 @@ Kiểm toán bảo mật của AI không thể thay thế việc kiểm tra bả
 ## 5. Tóm tắt
 
 1. **Tư duy bảo mật**: Không bao giờ tin tưởng đầu vào bên ngoài, quyền tối thiểu, phòng thủ theo chiều sâu
-2. **Các cuộc tấn công phổ biến**: XSS、SQL 注入、CSRF là những mối đe dọa bảo mật web tần suất cao nhất
+2. **Các cuộc tấn công phổ biến**: XSS, SQL Injection, CSRF là những mối đe dọa bảo mật web tần suất cao nhất
 3. **Chiến lược phòng thủ**: Xác thực đầu vào, mã hóa đầu ra, truy vấn tham số hóa, tiêu đề bảo mật HTTP
 4. **Thói quen bảo mật**: Thực hiện danh sách kiểm tra bảo mật trước khi trực tuyến, kiểm tra các phụ thuộc thường xuyên
 

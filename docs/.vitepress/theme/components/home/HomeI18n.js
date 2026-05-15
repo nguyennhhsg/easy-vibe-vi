@@ -36,19 +36,19 @@ export const i18n = {
           title: '学习地图',
           desc: '了解从零基础到全栈开发的完整学习路径，明确每个阶段的目标和收获。',
           sub: '全年龄友好',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: '游戏化入门',
           desc: '通过制作贪吃蛇等 AI 原生小游戏，体验 AI 编程的魅力，打破对代码的恐惧。',
           sub: '边玩边学',
-          link: '/zh-cn/stage-1/ai-capabilities-through-games/'
+          link: '/vi-vn/stage-1/ai-capabilities-through-games/'
         },
         {
           title: '产品原型实战',
           desc: '掌握 Vibe Coding 工作流，从想法到可交互原型，独立完成高保真 Web 应用。',
           sub: '核心心法',
-          link: '/zh-cn/stage-1/finding-great-idea/'
+          link: '/vi-vn/stage-1/finding-great-idea/'
         }
       ]
     },
@@ -61,37 +61,37 @@ export const i18n = {
           title: '素材生成 Agent',
           headline: '先把素材生产提速。',
           desc: '从 Lovart 和 Nanobanana 出发，搭建自己的素材生产工作流和绘图 Agent。',
-          link: '/zh-cn/stage-2/frontend/lovart-assets/'
+          link: '/vi-vn/stage-2/frontend/lovart-assets/'
         },
         {
           title: 'Figma 与 MasterGo',
           headline: '先把设计工具用顺。',
           desc: '掌握专业 UI 设计工具的基础操作，理解从设计稿到开发协作的关键链路。',
-          link: '/zh-cn/stage-2/frontend/figma-mastergo/'
+          link: '/vi-vn/stage-2/frontend/figma-mastergo/'
         },
         {
           title: '设计稿转代码',
           headline: '把原型真正变成页面。',
           desc: '学习如何将设计原型转成可以在浏览器里运行的前端代码，减少手工重搭。',
-          link: '/zh-cn/stage-2/frontend/design-to-code/'
+          link: '/vi-vn/stage-2/frontend/design-to-code/'
         },
         {
           title: '真实数据项目',
           headline: '连上真正的数据库。',
           desc: '在 Supabase 上设计数据表和权限，用真实读写操作支撑你的产品数据层。',
-          link: '/zh-cn/stage-2/backend/database-supabase/'
+          link: '/vi-vn/stage-2/backend/database-supabase/'
         },
         {
           title: '部署上线',
           headline: '让世界看到你的作品。',
           desc: '使用 CloudBase、Vercel、Zeabur 等平台，一口气打通从代码到公网访问的完整流程。',
-          link: '/zh-cn/stage-2/backend/zeabur-deployment/'
+          link: '/vi-vn/stage-2/backend/zeabur-deployment/'
         },
         {
           title: 'AI 知识库集成',
           headline: '让应用接上智能问答。',
           desc: '学习用 Dify 构建 AI 应用和知识库，把检索增强能力接进你的真实产品。',
-          link: '/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/'
+          link: '/vi-vn/stage-2/ai-capabilities/dify-knowledge-base/'
         }
       ]
     },
@@ -103,22 +103,22 @@ export const i18n = {
         {
           title: '跨平台桌面应用',
           desc: '用 Electron 做语音转文字桌面程序，一次开发同时跑在 Windows、macOS、Linux。',
-          link: '/zh-cn/stage-3/cross-platform/electron-voice-to-text/'
+          link: '/vi-vn/stage-3/cross-platform/electron-voice-to-text/'
         },
         {
           title: 'AI 智能体团队',
           desc: '用 Claude Agent Teams 组建 AI 开发小队，多代理协作完成大型任务。',
-          link: '/zh-cn/stage-3/core-skills/agent-teams/'
+          link: '/vi-vn/stage-3/core-skills/agent-teams/'
         },
         {
           title: '长效稳定执行',
           desc: '用循环脚本和 Ralph 插件管理长时间任务，让 Claude Code 过夜稳定跑完工作。',
-          link: '/zh-cn/stage-3/core-skills/long-running-tasks/'
+          link: '/vi-vn/stage-3/core-skills/long-running-tasks/'
         },
         {
           title: '个人品牌与输出',
           desc: '搭建个人网站与技术博客，让你的项目和经验长期沉淀并被更多人看到。',
-          link: '/zh-cn/stage-3/personal-brand/personal-website-blog/'
+          link: '/vi-vn/stage-3/personal-brand/personal-website-blog/'
         }
       ]
     },
@@ -130,62 +130,62 @@ export const i18n = {
         {
           title: 'AI 进化史',
           desc: '回顾人工智能发展历程中的关键里程碑。',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: '提示词工程',
           desc: '掌握与 AI 高效对话的技巧，解锁潜力。',
-          link: '/zh-cn/appendix/8-artificial-intelligence/prompt-engineering'
+          link: '/vi-vn/appendix/8-artificial-intelligence/prompt-engineering'
         },
         {
           title: '大语言模型',
           desc: '深入浅出解析 LLM 的工作原理与应用。',
-          link: '/zh-cn/appendix/8-artificial-intelligence/llm-principles'
+          link: '/vi-vn/appendix/8-artificial-intelligence/llm-principles'
         },
         {
           title: 'Agent 智能体',
           desc: '探索具备自主决策与执行能力的 AI 架构。',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-agents'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-agents'
         },
         {
           title: '前端基础',
           desc: 'HTML/CSS/JS 三大基石，入门必修课。',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: '前端进化史',
           desc: '了解前端技术栈演变，把握发展趋势。',
-          link: '/zh-cn/appendix/3-browser-and-frontend/frontend-frameworks'
+          link: '/vi-vn/appendix/3-browser-and-frontend/frontend-frameworks'
         },
         {
           title: '后端架构',
           desc: '从单体到微服务，探索架构演进之路。',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: '后端语言',
           desc: '对比主流后端语言特性，选择最佳技术栈。',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-languages'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-languages'
         },
         {
           title: '数据库原理',
           desc: '理解数据库核心原理，掌握数据存储艺术。',
-          link: '/zh-cn/appendix/5-data/database-fundamentals'
+          link: '/vi-vn/appendix/5-data/database-fundamentals'
         },
         {
           title: 'API 设计',
           desc: 'API 接口设计与开发的基础知识。',
-          link: '/zh-cn/appendix/4-server-and-backend/api-intro'
+          link: '/vi-vn/appendix/4-server-and-backend/api-intro'
         },
         {
           title: 'Git 版本控制',
           desc: '深入理解 Git 原理与高级用法。',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         },
         {
           title: '计算机网络',
           desc: '网络协议与通信原理的基础知识。',
-          link: '/zh-cn/appendix/1-computer-fundamentals/computer-networks'
+          link: '/vi-vn/appendix/1-computer-fundamentals/computer-networks'
         }
       ]
     },
@@ -257,37 +257,37 @@ export const i18n = {
           title: 'Asset Agent',
           headline: 'Speed up content production.',
           desc: 'Build your own design-asset workflow and drawing agent with Lovart and Nanobanana.',
-          link: '/zh-cn/stage-2/frontend/lovart-assets/'
+          link: '/vi-vn/stage-2/frontend/lovart-assets/'
         },
         {
           title: 'Figma & MasterGo',
           headline: 'Get fluent with design tools.',
           desc: 'Learn the basics of modern UI design tools and how design files flow into development.',
-          link: '/zh-cn/stage-2/frontend/figma-mastergo/'
+          link: '/vi-vn/stage-2/frontend/figma-mastergo/'
         },
         {
           title: 'Design to Code',
           headline: 'Turn mockups into pages.',
           desc: 'Convert prototypes into real frontend code that runs in the browser instead of staying as static designs.',
-          link: '/zh-cn/stage-2/frontend/design-to-code/'
+          link: '/vi-vn/stage-2/frontend/design-to-code/'
         },
         {
           title: 'Real Data Project',
           headline: 'Backed by a real DB.',
           desc: 'Design tables and permissions on Supabase and wire them into real read/write flows.',
-          link: '/zh-cn/stage-2/backend/database-supabase/'
+          link: '/vi-vn/stage-2/backend/database-supabase/'
         },
         {
           title: 'Deployment',
           headline: 'Ship it to the world.',
           desc: 'Use CloudBase, Vercel and Zeabur to turn local projects into publicly reachable sites.',
-          link: '/zh-cn/stage-2/backend/zeabur-deployment/'
+          link: '/vi-vn/stage-2/backend/zeabur-deployment/'
         },
         {
           title: 'AI Knowledge Base',
           headline: 'Plug AI into the app.',
           desc: 'Use Dify to build AI workflows and knowledge-base powered product experiences.',
-          link: '/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/'
+          link: '/vi-vn/stage-2/ai-capabilities/dify-knowledge-base/'
         }
       ]
     },
@@ -300,22 +300,22 @@ export const i18n = {
         {
           title: 'Electron Desktop App',
           desc: 'Build a speech-to-text desktop app that runs on Windows, macOS and Linux from one codebase.',
-          link: '/zh-cn/stage-3/cross-platform/electron-voice-to-text/'
+          link: '/vi-vn/stage-3/cross-platform/electron-voice-to-text/'
         },
         {
           title: 'Agent Teams',
           desc: 'Use Claude Agent Teams to orchestrate multiple agents like a real dev team.',
-          link: '/zh-cn/stage-3/core-skills/agent-teams/'
+          link: '/vi-vn/stage-3/core-skills/agent-teams/'
         },
         {
           title: 'Long-running Tasks',
           desc: 'Design loops and task queues so Claude Code can safely run overnight until work is truly done.',
-          link: '/zh-cn/stage-3/core-skills/long-running-tasks/'
+          link: '/vi-vn/stage-3/core-skills/long-running-tasks/'
         },
         {
           title: 'Personal Brand',
           desc: 'Build your own website and tech blog to showcase projects and writing.',
-          link: '/zh-cn/stage-3/personal-brand/personal-website-blog/'
+          link: '/vi-vn/stage-3/personal-brand/personal-website-blog/'
         }
       ]
     },
@@ -328,62 +328,62 @@ export const i18n = {
         {
           title: 'AI History',
           desc: 'Milestones in AI evolution.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Prompt Eng',
           desc: 'Master AI communication skills.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/prompt-engineering'
+          link: '/vi-vn/appendix/8-artificial-intelligence/prompt-engineering'
         },
         {
           title: 'LLM Intro',
           desc: 'Understanding Large Language Models.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/llm-principles'
+          link: '/vi-vn/appendix/8-artificial-intelligence/llm-principles'
         },
         {
           title: 'AI Agents',
           desc: 'Autonomous decision-making AI.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-agents'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-agents'
         },
         {
           title: 'Web Basics',
           desc: 'HTML/CSS/JS fundamentals.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Frontend Evo',
           desc: 'Evolution of frontend tech stack.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/frontend-frameworks'
+          link: '/vi-vn/appendix/3-browser-and-frontend/frontend-frameworks'
         },
         {
           title: 'Backend Arch',
           desc: 'From monolith to microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'Backend Lang',
           desc: 'Choosing the right tech stack.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-languages'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-languages'
         },
         {
           title: 'Database',
           desc: 'Core principles of data storage.',
-          link: '/zh-cn/appendix/5-data/database-fundamentals'
+          link: '/vi-vn/appendix/5-data/database-fundamentals'
         },
         {
           title: 'API Design',
           desc: 'Designing robust interfaces.',
-          link: '/zh-cn/appendix/4-server-and-backend/api-intro'
+          link: '/vi-vn/appendix/4-server-and-backend/api-intro'
         },
         {
           title: 'Git',
           desc: 'Version control mastery.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         },
         {
           title: 'Networks',
           desc: 'Protocols and communication.',
-          link: '/zh-cn/appendix/1-computer-fundamentals/computer-networks'
+          link: '/vi-vn/appendix/1-computer-fundamentals/computer-networks'
         }
       ]
     },
@@ -430,19 +430,19 @@ export const i18n = {
           title: 'AI PM',
           desc: 'アイデアからプロトタイプまで、話すだけ。',
           sub: '非技術者向け',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'ゲーム化入門',
           desc: 'スネークゲームやテトリスを作って、コードへの恐怖を克服。',
           sub: '遊びながら学ぶ',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'AI時代のコーディングの核心：プロンプトエンジニアリングとコンテキスト管理。',
           sub: '核心的な考え方',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -456,19 +456,19 @@ export const i18n = {
           title: 'フルスタック',
           headline: 'フロント＆バックエンド。',
           desc: 'DB設計からAPI、コンポーネントまで、現代的なWebアプリを完全に構築。',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'リアルプロジェクト',
           headline: 'おもちゃのコードは卒業。',
           desc: '認証、ストレージ、ファイルアップロード、コアビジネスロジックを深く掘り下げる。',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'デプロイ',
           headline: '世界に公開。',
           desc: 'サーバー設定、DNS、CI/CD。製品リリースのラストワンマイル。',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -480,22 +480,22 @@ export const i18n = {
         {
           title: 'WeChatミニアプリ',
           desc: 'クロスプラットフォーム開発、数億人のユーザーに到達。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'AIネイティブアプリ',
           desc: 'RAG、Agent。LLMの限界を探る。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: '複雑なアーキテクチャ',
           desc: '高並行性、高可用性のアーキテクチャ設計。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'パーソナルブランド',
           desc: '自分のウェブサイトと学術ブログを構築。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -508,22 +508,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -570,19 +570,19 @@ export const i18n = {
           title: 'AI 產品經理',
           desc: '從想法到高保真原型，你只需要會說話。',
           sub: '適合非技術背景',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: '遊戲化入門',
           desc: '通過製作貪吃蛇、俄羅斯方塊，打破對代碼的恐懼。',
           sub: '邊玩邊學',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: '掌握 AI 時代的編程核心：提示詞工程與上下文管理。',
           sub: '核心心法',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -595,19 +595,19 @@ export const i18n = {
           title: '全棧開發',
           headline: '獨立完成前後端。',
           desc: '從數據庫設計到 API 開發，再到前端組件化，完整構建一個現代化 Web 應用。',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: '真實項目',
           headline: '拒絕玩具代碼。',
           desc: '深入理解用戶鑑權、數據存儲、文件上傳等核心業務邏輯。',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: '部署上線',
           headline: '讓世界看到你的作品。',
           desc: '學習服務器配置、域名解析和自動化部署，打通產品落地的最後一公里。',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -619,22 +619,22 @@ export const i18n = {
         {
           title: '微信小程序',
           desc: '跨平台開發，觸達億級用戶。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'AI 原生應用',
           desc: 'RAG、Agent，探索 LLM 的無限可能。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: '複雜業務架構',
           desc: '應對高並發、高可用場景的架構設計。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: '個人品牌',
           desc: '構建屬於自己的個人網頁與學術博客。',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -646,22 +646,22 @@ export const i18n = {
         {
           title: '人工智能',
           desc: 'LLM、Agent、RAG，深入 AI 底層原理。',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: '前端開發',
           desc: '瀏覽器原理、性能優化、Canvas 圖形學。',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: '後端架構',
           desc: '高並發、分佈式、微服務架構設計。',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: '通用技能',
           desc: 'Git、網絡、IDE 原理，開發者必備素養。',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -708,19 +708,19 @@ export const i18n = {
           title: 'AI 제품 관리자',
           desc: '아이디어에서 프로토타입까지, 말 한마디로.',
           sub: '비전공자 추천',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: '게임으로 입문',
           desc: '스네이크 게임, 테트리스를 만들며 코딩 공포증 극복.',
           sub: '놀면서 배우기',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'AI 시대 코딩의 핵심: 프롬프트 엔지니어링과 컨텍스트 관리.',
           sub: '핵심 마인드셋',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -733,19 +733,19 @@ export const i18n = {
           title: '풀스택 개발',
           headline: '프론트 & 백엔드 독립 완성.',
           desc: 'DB 설계부터 API 개발, 프론트엔드 컴포넌트화까지 현대적인 웹 앱을 완벽하게 구축.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: '실전 프로젝트',
           headline: '장난감 코드는 그만.',
           desc: '사용자 인증, 데이터 저장, 파일 업로드 등 핵심 비즈니스 로직 심층 이해.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: '배포 및 출시',
           headline: '세상에 보여주세요.',
           desc: '서버 설정, 도메인 연결, CI/CD. 제품 출시의 마지막 관문.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -758,22 +758,22 @@ export const i18n = {
         {
           title: '위챗 미니프로그램',
           desc: '크로스 플랫폼 개발, 수억 명의 사용자 도달.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'AI 네이티브 앱',
           desc: 'RAG, Agent. LLM의 한계 탐색.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: '복잡한 아키텍처',
           desc: '고동시성, 고가용성 아키텍처 설계.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: '퍼스널 브랜딩',
           desc: '나만의 웹사이트와 학술 블로그 구축.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -786,22 +786,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -848,19 +848,19 @@ export const i18n = {
           title: 'PM de IA',
           desc: 'De la idea al prototipo, solo hablando.',
           sub: 'Amigable para no técnicos',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Intro Gamificada',
           desc: 'Crea Snake, Tetris y rompe el miedo al código.',
           sub: 'Aprende jugando',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'Domina el núcleo de la programación con IA: Ingeniería de Prompts y Contexto.',
           sub: 'Mentalidad Clave',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -873,19 +873,19 @@ export const i18n = {
           title: 'Mapa de la Etapa',
           headline: 'Primero entiende el recorrido completo.',
           desc: 'Revisa la vista general de Stage 2 para ver cómo encajan frontend, backend, DB y despliegue.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Proyecto con DB real',
           headline: 'Supabase como base de datos de verdad.',
           desc: 'Diseña tablas y permisos en Supabase y conéctalos a flujos reales de lectura/escritura.',
-          link: '/zh-cn/stage-2/backend/database-supabase/'
+          link: '/vi-vn/stage-2/backend/database-supabase/'
         },
         {
           title: 'Despliegue en producción',
           headline: 'Lleva tu app al mundo real.',
           desc: 'Usa CloudBase, Vercel y Zeabur para convertir tu código local en un sitio público.',
-          link: '/zh-cn/stage-2/backend/zeabur-deployment/'
+          link: '/vi-vn/stage-2/backend/zeabur-deployment/'
         }
       ]
     },
@@ -898,22 +898,22 @@ export const i18n = {
         {
           title: 'App de escritorio multiplataforma',
           desc: 'Crea con Electron una app de voz a texto que funciona en Windows, macOS y Linux con una sola base de código.',
-          link: '/zh-cn/stage-3/cross-platform/electron-voice-to-text/'
+          link: '/vi-vn/stage-3/cross-platform/electron-voice-to-text/'
         },
         {
           title: 'Equipos de agentes IA',
           desc: 'Usa Claude Agent Teams para orquestar varios agentes como si fueran un equipo de desarrollo real.',
-          link: '/zh-cn/stage-3/core-skills/agent-teams/'
+          link: '/vi-vn/stage-3/core-skills/agent-teams/'
         },
         {
           title: 'Tareas de larga duración',
           desc: 'Diseña bucles y colas de tareas para que Claude Code pueda trabajar durante horas de forma estable.',
-          link: '/zh-cn/stage-3/core-skills/long-running-tasks/'
+          link: '/vi-vn/stage-3/core-skills/long-running-tasks/'
         },
         {
           title: 'Marca personal',
           desc: 'Construye tu sitio web y blog técnico para dar visibilidad a tus proyectos.',
-          link: '/zh-cn/stage-3/personal-brand/personal-website-blog/'
+          link: '/vi-vn/stage-3/personal-brand/personal-website-blog/'
         }
       ]
     },
@@ -926,22 +926,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -988,19 +988,19 @@ export const i18n = {
           title: 'PM IA',
           desc: "De l'idée au prototype, juste en parlant.",
           sub: 'Accessible aux non-tech',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Intro Gamifiée',
           desc: 'Créez Snake, Tetris et brisez la peur du code.',
           sub: 'Apprendre en jouant',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'Maîtrisez le cœur du codage IA : Prompt Engineering & Contexte.',
           sub: 'Esprit Clé',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -1014,19 +1014,19 @@ export const i18n = {
           title: 'Full Stack',
           headline: 'Frontend & Backend.',
           desc: 'Du design DB aux API et composants, construisez une web app moderne complète.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Projets Réels',
           headline: 'Pas de code jouet.',
           desc: "Plongez dans l'Auth, le Stockage, l'Upload de fichiers et la logique métier.",
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Déploiement',
           headline: 'Montrez au monde.',
           desc: 'Config serveur, DNS, CI/CD. Le dernier kilomètre de la livraison produit.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -1039,22 +1039,22 @@ export const i18n = {
         {
           title: 'WeChat Mini-app',
           desc: "Dév multiplateforme, touchant des millions d'utilisateurs.",
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Apps Natives IA',
           desc: 'RAG, Agent. Explorez les limites des LLM.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Arch. Complexe',
           desc: "Conception d'architecture haute concurrence et haute disponibilité.",
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Marque Perso',
           desc: 'Construisez votre propre site web et blog académique.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -1067,22 +1067,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -1129,19 +1129,19 @@ export const i18n = {
           title: 'KI PM',
           desc: 'Von der Idee zum Prototyp, einfach durch Sprechen.',
           sub: 'Nicht-Tech-freundlich',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Gamifizierte Intro',
           desc: 'Baue Snake, Tetris und überwinde die Angst vor Code.',
           sub: 'Spielend lernen',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'Meistere den Kern des KI-Codings: Prompt Engineering & Kontext.',
           sub: 'Kern-Mindset',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -1154,19 +1154,19 @@ export const i18n = {
           title: 'Full Stack',
           headline: 'Frontend & Backend.',
           desc: 'Vom DB-Design bis zu APIs und Komponenten, baue eine moderne Web-App komplett.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Echte Projekte',
           headline: 'Kein Spielzeug-Code.',
           desc: 'Tauche ein in Auth, Speicher, Datei-Uploads und Kern-Geschäftslogik.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Deployment',
           headline: 'Zeig es der Welt.',
           desc: 'Server-Konfig, DNS, CI/CD. Die letzte Meile der Produktlieferung.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -1179,22 +1179,22 @@ export const i18n = {
         {
           title: 'WeChat Mini-App',
           desc: 'Plattformübergreifende Entwicklung, Millionen von Nutzern erreichen.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'KI-Native Apps',
           desc: 'RAG, Agent. Erkunde die Grenzen von LLMs.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Komplexe Arch',
           desc: 'Architekturdesign für hohe Gleichzeitigkeit und hohe Verfügbarkeit.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Persönliche Marke',
           desc: 'Baue deine eigene Website und deinen akademischen Blog.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -1207,22 +1207,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -1269,19 +1269,19 @@ export const i18n = {
           title: 'مدير منتج AI',
           desc: 'من الفكرة إلى النموذج الأولي، بمجرد التحدث.',
           sub: 'صديق لغير التقنيين',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'مقدمة بالألعاب',
           desc: 'ابنِ Snake و Tetris واكسر حاجز الخوف من الكود.',
           sub: 'تعلم باللعب',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'أتقن جوهر برمجة الذكاء الاصطناعي: هندسة الأوامر والسياق.',
           sub: 'العقلية الأساسية',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -1295,19 +1295,19 @@ export const i18n = {
           title: 'Full Stack',
           headline: 'واجهة أمامية وخلفية.',
           desc: 'من تصميم DB إلى API والمكونات، ابنِ تطبيق ويب حديث بالكامل.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'مشاريع حقيقية',
           headline: 'ليس كود ألعاب.',
           desc: 'تعمق في المصادقة، التخزين، رفع الملفات ومنطق العمل الأساسي.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'النشر',
           headline: 'أظهر للعالم.',
           desc: 'إعداد الخادم، DNS، CI/CD. الميل الأخير لتسليم المنتج.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -1320,22 +1320,22 @@ export const i18n = {
         {
           title: 'برنامج WeChat المصغر',
           desc: 'تطوير متعدد المنصات، الوصول لملايين المستخدمين.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'تطبيقات AI الأصلية',
           desc: 'RAG، Agent. استكشف حدود LLMs.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'هندسة معقدة',
           desc: 'تصميم هندسة التزامن العالي والتوافر العالي.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'العلامة التجارية الشخصية',
           desc: 'ابنِ موقعك الخاص ومدونتك الأكاديمية.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -1348,22 +1348,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },
@@ -1410,19 +1410,19 @@ export const i18n = {
           title: 'AI PM',
           desc: 'Từ ý tưởng đến nguyên mẫu, chỉ bằng lời nói.',
           sub: 'Thân thiện với non-tech',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Nhập môn qua Game',
           desc: 'Xây dựng Snake, Tetris và phá bỏ nỗi sợ code.',
           sub: 'Học mà chơi',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         },
         {
           title: 'Vibe Coding',
           desc: 'Nắm vững cốt lõi lập trình AI: Prompt Engineering & Context.',
           sub: 'Tư duy cốt lõi',
-          link: '/zh-cn/stage-1/learning-map/'
+          link: '/vi-vn/stage-1/learning-map/'
         }
       ]
     },
@@ -1436,19 +1436,19 @@ export const i18n = {
           title: 'Full Stack',
           headline: 'Frontend & Backend.',
           desc: 'Từ thiết kế DB đến API và component, xây dựng trọn vẹn web app hiện đại.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Dự án thực tế',
           headline: 'Không phải code đồ chơi.',
           desc: 'Đi sâu vào Auth, Lưu trữ, Upload file và logic nghiệp vụ cốt lõi.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         },
         {
           title: 'Triển khai',
           headline: 'Show cho thế giới.',
           desc: 'Cấu hình server, DNS, CI/CD. Chặng cuối của việc giao sản phẩm.',
-          link: '/zh-cn/stage-2/'
+          link: '/vi-vn/stage-2/'
         }
       ]
     },
@@ -1461,22 +1461,22 @@ export const i18n = {
         {
           title: 'WeChat Mini-app',
           desc: 'Phát triển đa nền tảng, tiếp cận hàng triệu người dùng.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'App AI Native',
           desc: 'RAG, Agent. Khám phá giới hạn của LLM.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Kiến trúc phức tạp',
           desc: 'Thiết kế kiến trúc chịu tải cao và sẵn sàng cao.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         },
         {
           title: 'Thương hiệu cá nhân',
           desc: 'Xây dựng website và blog học thuật của riêng bạn.',
-          link: '/zh-cn/stage-3/'
+          link: '/vi-vn/stage-3/'
         }
       ]
     },
@@ -1489,22 +1489,22 @@ export const i18n = {
         {
           title: 'AI Fundamentals',
           desc: 'LLM, Agent, RAG. Dive into AI internals.',
-          link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+          link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
         },
         {
           title: 'Frontend',
           desc: 'Browser internals, Performance, Canvas.',
-          link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+          link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
         },
         {
           title: 'Backend',
           desc: 'High concurrency, Distributed systems, Microservices.',
-          link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+          link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
         },
         {
           title: 'General Skills',
           desc: 'Git, Networks, IDE internals.',
-          link: '/zh-cn/appendix/2-development-tools/git-version-control'
+          link: '/vi-vn/appendix/2-development-tools/git-version-control'
         }
       ]
     },

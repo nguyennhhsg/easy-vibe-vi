@@ -100,12 +100,12 @@ const footerPolicyLinkMap = {
 }
 
 const footerColumnLinkMap = {
-  '零基础入门': '/zh-cn/stage-1/',
-  '初中级开发': '/zh-cn/stage-2/',
-  '高级开发': '/zh-cn/stage-3/',
-  '附录': '/zh-cn/appendix/',
-  '学习地图': '/zh-cn/stage-1/learning-map/',
-  '课程总览': '/zh-cn/stage-1/',
+  '零基础入门': '/vi-vn/stage-1/',
+  '初中级开发': '/vi-vn/stage-2/',
+  '高级开发': '/vi-vn/stage-3/',
+  '附录': '/vi-vn/appendix/',
+  '学习地图': '/vi-vn/stage-1/learning-map/',
+  '课程总览': '/vi-vn/stage-1/',
   'GitHub 仓库': 'https://github.com/datawhalechina/easy-vibe',
   'Foundations': '/en/stage-1/',
   'Junior/Mid Dev': '/en/stage-2/',
@@ -140,7 +140,7 @@ const resolveFooterHref = (link) => {
     <p>{{ t.footer.desc }}</p>
     <a
       class="buy-btn large"
-      :href="withBase('/zh-cn/stage-1/learning-map/')"
+      :href="withBase('/vi-vn/stage-1/learning-map/')"
     >{{ t.footer.btn }}</a>
   </div>
 

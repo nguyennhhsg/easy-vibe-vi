@@ -1,7 +1,7 @@
 # Docker Containerization
 
 ::: tip Lời mở đầu
-**"Trên máy tôi thì nó chạy được" là cớ hay nhất của developer, và Docker đã giải quyết nó hoàn toàn.** Công nghệ containerization đóng gói ứng dụng cùng tất cả các phụ thuộc vào một đơn vị tiêu chuẩn, đảm bảo chạy nhất quán trên mọi môi trường. Nó là nền tảng của việc giao付phần mềm hiện đại.
+**"Trên máy tôi thì nó chạy được" là cớ hay nhất của developer, và Docker đã giải quyết nó hoàn toàn.** Công nghệ containerization đóng gói ứng dụng cùng tất cả các phụ thuộc vào một đơn vị tiêu chuẩn, đảm bảo chạy nhất quán trên mọi môi trường. Nó là nền tảng của việc phân phốiphần mềm hiện đại.
 :::
 
 **Bài viết này sẽ dạy bạn những gì?**
@@ -16,7 +16,7 @@ Sau khi học xong chương này, bạn sẽ có được:
 
 | Chương | Nội dung | Khái niệm cốt lõi |
 |-----|------|---------|
-| **Chương 1** | Tại sao cần container | Nhất quán môi trường, hiệu suất tài nguyên, giao付tiêu chuẩn |
+| **Chương 1** | Tại sao cần container | Nhất quán môi trường, hiệu suất tài nguyên, phân phốitiêu chuẩn |
 | **Chương 2** | Khái niệm cốt lõi | Image, container, registry, Dockerfile |
 | **Chương 3** | Vòng đời Docker | Viết, xây dựng, đẩy, chạy, quản lý |
 | **Chương 4** | Docker Compose | Orchestration đa dịch vụ, mạng, data volume |
@@ -203,7 +203,7 @@ CMD ["node", "dist/server.js"]
 
 ## Kết luận
 
-Docker containerization là cơ sở hạ tầng của việc giao付phần mềm hiện đại, hiểu rõ nó là điều quan trọng với bất kỳ developer nào.
+Docker containerization là cơ sở hạ tầng của việc phân phốiphần mềm hiện đại, hiểu rõ nó là điều quan trọng với bất kỳ developer nào.
 
 Nhìn lại các điểm chính của chương này:
 

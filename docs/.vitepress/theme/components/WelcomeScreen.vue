@@ -135,7 +135,7 @@ onUnmounted(() => {
         </svg>
       </div>
       <p class="welcome-tip">
-        Click anywhere to enter home
+        Nhấn vào bất kỳ đâu để vào trang chủ
       </p>
     </div>
   </div>

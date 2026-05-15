@@ -70,7 +70,7 @@ Em học sinh đó, người đã gợi ý tạo phần mềm, trước đây l�
 
 ![Những chiếc mặt hạnh phúc của trẻ em và ảnh chụp cùng lớp học](./images/story-1/image6.jpeg)
 
-Anh ấy cũng坦白nói, tự mình dẫn trẻ em sử dụng điện thoại, chơi AI, chịu không ít chỉ trích, còn nghe rất nhiều lời đồn thổi. Nhiều người nói anh ấy không chuyên tâm, dẫn xấu môi trường. Nhưng thấy trẻ em vì AI trở nên tò mò hơn, tốt bụng hơn, anh ấy cảm thấy tất cả đều xứng đáng.
+Anh ấy cũng thẳng thắn nói, tự mình dẫn trẻ em sử dụng điện thoại, chơi AI, chịu không ít chỉ trích, còn nghe rất nhiều lời đồn thổi. Nhiều người nói anh ấy không chuyên tâm, dẫn xấu môi trường. Nhưng thấy trẻ em vì AI trở nên tò mò hơn, tốt bụng hơn, anh ấy cảm thấy tất cả đều xứng đáng.
 
 ## 06 Viết ở cuối cùng
 

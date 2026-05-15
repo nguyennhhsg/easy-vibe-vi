@@ -1,13 +1,13 @@
-import stage2LovartCover from '../../../../zh-cn/stage-2/frontend/lovart-assets/images/image1.png'
-import stage2FigmaCover from '../../../../zh-cn/stage-2/frontend/figma-mastergo/images/image8.png'
-import stage2DesignToCodeCover from '../../../../zh-cn/stage-2/frontend/design-to-code/images/image42.png'
-import stage2SupabaseCover from '../../../../zh-cn/stage-2/backend/database-supabase/images/image1.png'
-import stage2ZeaburCover from '../../../../zh-cn/stage-2/backend/zeabur-deployment/images/image1.png'
-import stage2DifyCover from '../../../../zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image1.png'
-import stage3ElectronCover from '../../../../zh-cn/stage-3/cross-platform/electron-voice-to-text/images/image3.png'
-import stage3AgentTeamsCover from '../../../../zh-cn/stage-3/core-skills/agent-teams/images/home-cover.svg'
-import stage3LongRunningCover from '../../../../zh-cn/stage-3/core-skills/long-running-tasks/images/home-cover.svg'
-import stage3PersonalBrandCover from '../../../../zh-cn/stage-3/personal-brand/personal-website-blog/images/image1.png'
+import stage2LovartCover from '../../../../vi-vn/stage-2/frontend/lovart-assets/images/image1.png'
+import stage2FigmaCover from '../../../../vi-vn/stage-2/frontend/figma-mastergo/images/image8.png'
+import stage2DesignToCodeCover from '../../../../vi-vn/stage-2/frontend/design-to-code/images/image42.png'
+import stage2SupabaseCover from '../../../../vi-vn/stage-2/backend/database-supabase/images/image1.png'
+import stage2ZeaburCover from '../../../../vi-vn/stage-2/backend/zeabur-deployment/images/image1.png'
+import stage2DifyCover from '../../../../vi-vn/stage-2/ai-capabilities/dify-knowledge-base/images/image1.png'
+import stage3ElectronCover from '../../../../vi-vn/stage-3/cross-platform/electron-voice-to-text/images/image3.png'
+import stage3AgentTeamsCover from '../../../../vi-vn/stage-3/core-skills/agent-teams/images/home-cover.svg'
+import stage3LongRunningCover from '../../../../vi-vn/stage-3/core-skills/long-running-tasks/images/home-cover.svg'
+import stage3PersonalBrandCover from '../../../../vi-vn/stage-3/personal-brand/personal-website-blog/images/image1.png'
 
 export const locales = [
   { code: 'zh-cn', text: '简体中文' },
@@ -29,7 +29,7 @@ export const stage1Cards = [
     sub: '适合非技术背景',
     color: 'linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%)',
     icon: '🎨',
-    link: '/zh-cn/stage-1/learning-map/'
+    link: '/vi-vn/stage-1/learning-map/'
   },
   {
     title: '游戏化入门',
@@ -37,7 +37,7 @@ export const stage1Cards = [
     sub: '边玩边学',
     color: 'linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)',
     icon: '🎮',
-    link: '/zh-cn/stage-1/ai-capabilities-through-games/'
+    link: '/vi-vn/stage-1/ai-capabilities-through-games/'
   },
   {
     title: 'Vibe Coding',
@@ -45,7 +45,7 @@ export const stage1Cards = [
     sub: '核心心法',
     color: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)',
     icon: '💡',
-    link: '/zh-cn/stage-1/introduction-to-ai-ide/'
+    link: '/vi-vn/stage-1/introduction-to-ai-ide/'
   }
 ]
 
@@ -54,37 +54,37 @@ export const stage2Cards = [
     imageColor: '#E0C3FC',
     image: stage2LovartCover,
     imageAlt: 'Lovart 素材生产 Agent 界面截图',
-    link: '/zh-cn/stage-2/frontend/lovart-assets/'
+    link: '/vi-vn/stage-2/frontend/lovart-assets/'
   },
   {
     imageColor: '#D8C4F8',
     image: stage2FigmaCover,
     imageAlt: 'Figma 与 MasterGo 设计工具截图',
-    link: '/zh-cn/stage-2/frontend/figma-mastergo/'
+    link: '/vi-vn/stage-2/frontend/figma-mastergo/'
   },
   {
     imageColor: '#C7DDFB',
     image: stage2DesignToCodeCover,
     imageAlt: '设计稿转代码示意截图',
-    link: '/zh-cn/stage-2/frontend/design-to-code/'
+    link: '/vi-vn/stage-2/frontend/design-to-code/'
   },
   {
     imageColor: '#8EC5FC',
     image: stage2SupabaseCover,
     imageAlt: 'Supabase 数据库控制台截图',
-    link: '/zh-cn/stage-2/backend/database-supabase/'
+    link: '/vi-vn/stage-2/backend/database-supabase/'
   },
   {
     imageColor: '#96E6A1',
     image: stage2ZeaburCover,
     imageAlt: 'Zeabur 部署流程截图',
-    link: '/zh-cn/stage-2/backend/zeabur-deployment/'
+    link: '/vi-vn/stage-2/backend/zeabur-deployment/'
   },
   {
     imageColor: '#A7F3D0',
     image: stage2DifyCover,
     imageAlt: 'Dify 知识库工作台截图',
-    link: '/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/'
+    link: '/vi-vn/stage-2/ai-capabilities/dify-knowledge-base/'
   }
 ]
 
@@ -96,7 +96,7 @@ export const stage3Cards = [
     visualType: 'phone',
     image: stage3ElectronCover,
     imageAlt: 'Electron 语音转文字桌面应用预览图',
-    link: '/zh-cn/stage-3/cross-platform/electron-voice-to-text/'
+    link: '/vi-vn/stage-3/cross-platform/electron-voice-to-text/'
   },
   {
     title: 'AI 智能体团队',
@@ -105,7 +105,7 @@ export const stage3Cards = [
     visualType: 'ai',
     image: stage3AgentTeamsCover,
     imageAlt: 'Claude Agent Teams 协作流程封面图',
-    link: '/zh-cn/stage-3/core-skills/agent-teams/'
+    link: '/vi-vn/stage-3/core-skills/agent-teams/'
   },
   {
     title: '长效稳定执行',
@@ -114,7 +114,7 @@ export const stage3Cards = [
     visualType: 'arch',
     image: stage3LongRunningCover,
     imageAlt: 'Claude Code 长时间执行与循环任务封面图',
-    link: '/zh-cn/stage-3/core-skills/long-running-tasks/'
+    link: '/vi-vn/stage-3/core-skills/long-running-tasks/'
   },
   {
     title: '个人品牌与输出',
@@ -124,7 +124,7 @@ export const stage3Cards = [
     image: stage3PersonalBrandCover,
     imageAlt: '个人网站与学术博客示例截图',
     imageClass: 'prod-image--personal-brand',
-    link: '/zh-cn/stage-3/personal-brand/personal-website-blog/'
+    link: '/vi-vn/stage-3/personal-brand/personal-website-blog/'
   }
 ]
 
@@ -133,72 +133,72 @@ export const appendixCards = [
     title: '人工智能',
     desc: 'LLM、Agent、RAG，深入 AI 底层原理。',
     tag: 'AI',
-    link: '/zh-cn/appendix/8-artificial-intelligence/ai-history'
+    link: '/vi-vn/appendix/8-artificial-intelligence/ai-history'
   },
   {
     title: '提示词工程',
     desc: '掌握与 AI 高效对话的技巧，解锁潜力。',
     tag: 'AI',
-    link: '/zh-cn/appendix/8-artificial-intelligence/prompt-engineering'
+    link: '/vi-vn/appendix/8-artificial-intelligence/prompt-engineering'
   },
   {
     title: '大语言模型',
     desc: '深入浅出解析 LLM 的工作原理与应用。',
     tag: 'AI',
-    link: '/zh-cn/appendix/8-artificial-intelligence/llm-principles'
+    link: '/vi-vn/appendix/8-artificial-intelligence/llm-principles'
   },
   {
     title: 'Agent 智能体',
     desc: '探索具备自主决策与执行能力的 AI 架构。',
     tag: 'AI',
-    link: '/zh-cn/appendix/8-artificial-intelligence/ai-agents'
+    link: '/vi-vn/appendix/8-artificial-intelligence/ai-agents'
   },
   {
     title: '前端基础',
     desc: 'HTML/CSS/JS 三大基石，入门必修课。',
     tag: 'Frontend',
-    link: '/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive'
+    link: '/vi-vn/appendix/3-browser-and-frontend/javascript-deep-dive'
   },
   {
     title: '前端进化史',
     desc: '了解前端技术栈演变，把握发展趋势。',
     tag: 'Frontend',
-    link: '/zh-cn/appendix/3-browser-and-frontend/frontend-frameworks'
+    link: '/vi-vn/appendix/3-browser-and-frontend/frontend-frameworks'
   },
   {
     title: '后端架构',
     desc: '从单体到微服务，探索架构演进之路。',
     tag: 'Backend',
-    link: '/zh-cn/appendix/4-server-and-backend/backend-layered-architecture'
+    link: '/vi-vn/appendix/4-server-and-backend/backend-layered-architecture'
   },
   {
     title: '后端语言',
     desc: '对比主流后端语言特性，选择最佳技术栈。',
     tag: 'Backend',
-    link: '/zh-cn/appendix/4-server-and-backend/backend-languages'
+    link: '/vi-vn/appendix/4-server-and-backend/backend-languages'
   },
   {
     title: '数据库原理',
     desc: '理解数据库核心原理，掌握数据存储艺术。',
     tag: 'Database',
-    link: '/zh-cn/appendix/5-data/database-fundamentals'
+    link: '/vi-vn/appendix/5-data/database-fundamentals'
   },
   {
     title: 'API 设计',
     desc: 'API 接口设计与开发的基础知识。',
     tag: 'API',
-    link: '/zh-cn/appendix/4-server-and-backend/api-intro'
+    link: '/vi-vn/appendix/4-server-and-backend/api-intro'
   },
   {
     title: 'Git 版本控制',
     desc: '深入理解 Git 原理与高级用法。',
     tag: 'General',
-    link: '/zh-cn/appendix/2-development-tools/git-version-control'
+    link: '/vi-vn/appendix/2-development-tools/git-version-control'
   },
   {
     title: '计算机网络',
     desc: '网络协议与通信原理的基础知识。',
     tag: 'General',
-    link: '/zh-cn/appendix/1-computer-fundamentals/computer-networks'
+    link: '/vi-vn/appendix/1-computer-fundamentals/computer-networks'
   }
 ]
