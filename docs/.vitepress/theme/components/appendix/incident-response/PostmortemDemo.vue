@@ -1,12 +1,12 @@
 <!--
   PostmortemDemo.vue
-  事后复盘演示：交互式展示"五个为什么"分析法和复盘报告模板
+  Demo postmortem: tương tác hiển thị phương pháp "5 Whys" và mẫu báo cáo postmortem
 -->
 <template>
   <div class="postmortem-demo">
     <div class="header">
-      <div class="title">事后复盘：五个为什么 (5 Whys Analysis)</div>
-      <div class="subtitle">点击"继续追问"，层层深入挖掘根本原因</div>
+      <div class="title">Postmortem: 5 Whys Analysis</div>
+      <div class="subtitle">Click "Hỏi tiếp" để đào sâu từng tầng tới nguyên nhân gốc</div>
     </div>
 
     <div class="case-select">
@@ -28,14 +28,14 @@
       >
         <div class="why-header">
           <span class="why-badge">
-            {{ index === 0 ? '现象' : '第 ' + index + ' 个为什么' }}
+            {{ index === 0 ? 'Hiện tượng' : 'Why thứ ' + index }}
           </span>
           <span class="why-depth">
-            深度 {{ index }} / {{ currentCase.whys.length - 1 }}
+            Độ sâu {{ index }} / {{ currentCase.whys.length - 1 }}
           </span>
         </div>
         <div class="why-question" v-if="index > 0">
-          为什么{{ currentCase.whys[index - 1].answer }}？
+          Tại sao {{ currentCase.whys[index - 1].answer }}?
         </div>
         <div class="why-answer">
           <span class="answer-icon">{{ index === currentCase.whys.length - 1 && revealedCount >= currentCase.whys.length ? '🎯' : '💡' }}</span>
@@ -45,21 +45,21 @@
           v-if="index < visibleWhys.length - 1"
           class="why-arrow"
         >
-          ↓ 继续追问
+          ↓ Hỏi tiếp
         </div>
       </div>
 
       <div class="why-controls" v-if="revealedCount < currentCase.whys.length">
         <button class="ask-btn" @click="revealNext">
-          继续追问：为什么？
+          Hỏi tiếp: Tại sao?
         </button>
       </div>
 
       <div v-else class="root-cause-box">
-        <div class="root-label">根本原因已找到</div>
+        <div class="root-label">Đã tìm ra nguyên nhân gốc</div>
         <div class="root-content">{{ currentCase.rootCause }}</div>
         <div class="root-actions">
-          <div class="actions-label">改进措施：</div>
+          <div class="actions-label">Biện pháp cải tiến:</div>
           <div
             v-for="(action, i) in currentCase.actions"
             :key="i"
@@ -73,7 +73,7 @@
     </div>
 
     <div class="template-box">
-      <div class="template-title">复盘报告模板</div>
+      <div class="template-title">Mẫu báo cáo postmortem</div>
       <div class="template-sections">
         <div
           v-for="(section, i) in templateSections"
@@ -108,45 +108,45 @@ const expandedSection = ref(-1)
 const casesData = {
   payment: {
     id: 'payment',
-    name: '支付系统宕机',
+    name: 'Hệ thống thanh toán chết',
     whys: [
-      { answer: '支付系统在高峰期完全不可用，持续 18 分钟' },
-      { answer: '数据库连接池被耗尽，所有新请求排队超时' },
-      { answer: '一条慢查询占用连接长达 30 秒不释放' },
-      { answer: '新上线的对账功能执行了全表扫描，没有使用索引' },
-      { answer: '代码审查时没有检查 SQL 执行计划，也没有慢查询测试环节' }
+      { answer: 'hệ thống thanh toán hoàn toàn không khả dụng giờ cao điểm, kéo dài 18 phút' },
+      { answer: 'connection pool database cạn, mọi request mới xếp hàng timeout' },
+      { answer: 'một slow query chiếm connection tới 30 giây không nhả' },
+      { answer: 'tính năng đối soát mới release thực hiện full table scan, không dùng index' },
+      { answer: 'lúc code review không check execution plan SQL, cũng không có khâu test slow query' }
     ],
-    rootCause: '研发流程缺陷：代码审查清单中缺少 SQL 性能审查项，CI/CD 流水线中没有慢查询检测环节。',
+    rootCause: 'Khiếm khuyết quy trình R&D: checklist code review thiếu mục review hiệu năng SQL, CI/CD pipeline không có khâu phát hiện slow query.',
     actions: [
-      '代码审查清单增加"SQL 执行计划检查"必选项',
-      'CI 流水线增加慢查询自动检测（阈值 100ms）',
-      '数据库连接池增加单查询超时限制（5s 强制断开）',
-      '建立大表变更审批流程'
+      'Thêm mục bắt buộc "Kiểm tra execution plan SQL" vào checklist code review',
+      'Thêm phát hiện slow query tự động vào CI pipeline (ngưỡng 100ms)',
+      'Connection pool database thêm giới hạn timeout per-query (cưỡng chế ngắt sau 5s)',
+      'Thiết lập quy trình duyệt thay đổi đối với bảng lớn'
     ]
   },
   deploy: {
     id: 'deploy',
-    name: '部署导致服务中断',
+    name: 'Deploy gây gián đoạn dịch vụ',
     whys: [
-      { answer: '新版本部署后，用户登录功能完全失效，持续 25 分钟' },
-      { answer: '新版本的认证服务无法连接 Redis 缓存集群' },
-      { answer: '部署脚本使用了错误的 Redis 集群地址（指向了测试环境）' },
-      { answer: '环境配置是硬编码在部署脚本中的，没有使用配置中心' },
-      { answer: '团队没有统一的配置管理规范，每个服务自行管理配置' }
+      { answer: 'sau khi deploy bản mới, tính năng đăng nhập user chết hoàn toàn, kéo dài 25 phút' },
+      { answer: 'dịch vụ xác thực bản mới không kết nối được cluster Redis cache' },
+      { answer: 'script deploy dùng sai địa chỉ cluster Redis (trỏ về môi trường test)' },
+      { answer: 'cấu hình môi trường được hard-code trong script deploy, không dùng config center' },
+      { answer: 'team không có quy chuẩn quản lý cấu hình thống nhất, mỗi service tự quản lý cấu hình' }
     ],
-    rootCause: '基础设施缺陷：缺乏统一的配置管理平台和规范，环境配置散落在各处，容易出错且难以审计。',
+    rootCause: 'Khiếm khuyết hạ tầng: thiếu nền tảng và quy chuẩn quản lý cấu hình thống nhất, cấu hình môi trường rải rác, dễ sai, khó audit.',
     actions: [
-      '引入配置中心（如 Consul/Nacos），统一管理所有环境配置',
-      '部署流水线增加配置校验步骤（连通性检查）',
-      '禁止在代码和脚本中硬编码环境地址',
-      '建立部署前 Checklist，包含配置确认环节'
+      'Đưa vào dùng config center (như Consul/Nacos), quản lý thống nhất mọi cấu hình môi trường',
+      'Pipeline deploy thêm bước kiểm tra cấu hình (kiểm tra kết nối)',
+      'Cấm hard-code địa chỉ môi trường trong code và script',
+      'Thiết lập checklist trước deploy, bao gồm khâu xác nhận cấu hình'
     ]
   }
 }
 
 const cases = [
-  { id: 'payment', name: '支付系统宕机' },
-  { id: 'deploy', name: '部署导致服务中断' }
+  { id: 'payment', name: 'Hệ thống thanh toán chết' },
+  { id: 'deploy', name: 'Deploy gây gián đoạn dịch vụ' }
 ]
 
 const currentCase = computed(() => casesData[activeCase.value] || null)
@@ -168,12 +168,12 @@ const revealNext = () => {
 }
 
 const templateSections = [
-  { name: '事故概述', desc: '简要描述事故发生的时间、持续时长、影响范围和严重程度。例如："2024年3月15日 14:02-14:20，支付服务完全不可用，影响约 12 万笔交易。"' },
-  { name: '时间线', desc: '按时间顺序记录从发现到解决的每一个关键事件，精确到分钟。包括：告警触发、人员响应、排查过程、修复操作、服务恢复等。' },
-  { name: '影响评估', desc: '量化事故影响：受影响用户数、失败请求数、经济损失估算、SLA 影响等。用数据说话，避免模糊描述。' },
-  { name: '根因分析', desc: '使用"五个为什么"等方法深入分析根本原因。区分直接原因（触发因素）和根本原因（系统性缺陷）。' },
-  { name: '改进措施', desc: '列出具体的改进行动项，每项必须有负责人和截止日期。分为短期（本周）、中期（本月）、长期（本季度）三个层次。' },
-  { name: '经验教训', desc: '总结哪些做得好（值得保持）、哪些做得不好（需要改进）、哪些是意外发现（新的风险点）。' }
+  { name: 'Tóm tắt sự cố', desc: 'Mô tả ngắn gọn thời gian xảy ra, thời lượng, phạm vi ảnh hưởng và mức nghiêm trọng. Ví dụ: "Ngày 15/3/2024 14:02-14:20, dịch vụ thanh toán không khả dụng hoàn toàn, ảnh hưởng khoảng 120k giao dịch."' },
+  { name: 'Timeline', desc: 'Ghi nhận theo thứ tự thời gian từng sự kiện then chốt từ lúc phát hiện đến khi xử lý xong, chính xác đến phút. Gồm: trigger cảnh báo, phản ứng của người, quá trình điều tra, thao tác fix, dịch vụ phục hồi, v.v.' },
+  { name: 'Đánh giá ảnh hưởng', desc: 'Lượng hoá tác động sự cố: số user bị ảnh hưởng, số request fail, ước tính thiệt hại kinh tế, ảnh hưởng SLA, v.v. Nói bằng số liệu, tránh mô tả mơ hồ.' },
+  { name: 'Phân tích nguyên nhân gốc', desc: 'Dùng "5 Whys" và các phương pháp khác để phân tích sâu nguyên nhân gốc. Phân biệt nguyên nhân trực tiếp (yếu tố trigger) và nguyên nhân gốc (khiếm khuyết hệ thống).' },
+  { name: 'Biện pháp cải tiến', desc: 'Liệt kê các action item cải tiến cụ thể, mỗi mục phải có người chịu trách nhiệm và deadline. Chia thành ngắn hạn (tuần này), trung hạn (tháng này), dài hạn (quý này).' },
+  { name: 'Bài học kinh nghiệm', desc: 'Tổng kết những gì làm tốt (đáng giữ), những gì làm chưa tốt (cần cải tiến), những phát hiện ngoài dự kiến (rủi ro mới).' }
 ]
 </script>
 

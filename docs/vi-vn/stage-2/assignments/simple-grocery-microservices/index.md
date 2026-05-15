@@ -45,7 +45,7 @@ Backend được chia thành các dịch vụ sau theo nghiệp vụ:
 | **Order Service** | Tạo đơn hàng, quản lý trạng thái |
 
 ::: tip Điểm vào PRD
-Tài liệu yêu cầu cho dự án này nằm trên GitHub： [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/simple-grocery-microservices/PRD.md)
+Tài liệu yêu cầu cho dự án này nằm trên GitHub： [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/simple-grocery-microservices/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

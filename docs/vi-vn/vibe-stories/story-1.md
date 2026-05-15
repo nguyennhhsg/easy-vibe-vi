@@ -21,7 +21,7 @@ Khi vừa đến dạy ở làng, trái tim của thầy Tiểu Hào đầy ắc
 
 Ban đầu tiến hành không suôn sẻ. Ý tưởng cho trẻ em mang điện thoại đến trường, tiếp xúc với AI thông qua điện thoại, gặp phải sự phản đối quyết liệt từ lãnh đạo nhà trường: "Bạn đang để trẻ em chép bài! Đây là việc không đúng!" Nhưng anh ấy không bỏ cuộc, ba ngày hai lần cố gắng thuyết phục lãnh đạo nhà trường. Cuối cùng cả hai bên nhượng bộ, có thể học AI, nhưng phải tuân thủ quy định của trường, học sinh không được mang điện thoại riêng vào lớp học.
 
-Vì vậy, thầy Tiểu Hào tự bỏ tiền mua mấy chiếc điện thoại cũ, đăng nhập tài khoản "豆包" của mình vào những chiếc điện thoại đó cho trẻ em sử dụng. Cách này, trẻ em lần đầu tiên tiếp xúc với "công nghệ cao". Chúng rất nhanh học cách sử dụng AI để tìm tài liệu, học nhảy múa, thậm chí chơi tạo hình ảnh từ văn bản. AI lần đầu tiên mở ra cánh cửa của thế giới mới cho những đứa trẻ này.
+Vì vậy, thầy Tiểu Hào tự bỏ tiền mua mấy chiếc điện thoại cũ, đăng nhập tài khoản Doubao (豆包) của mình vào những chiếc điện thoại đó cho trẻ em sử dụng. Cách này, trẻ em lần đầu tiên tiếp xúc với "công nghệ cao". Chúng rất nhanh học cách sử dụng AI để tìm tài liệu, học nhảy múa, thậm chí chơi tạo hình ảnh từ văn bản. AI lần đầu tiên mở ra cánh cửa của thế giới mới cho những đứa trẻ này.
 
 ![Cách trẻ em tiếp xúc với AI trong phòng máy tính](./images/story-1/image3.png)
 
@@ -54,7 +54,7 @@ Mặc dù phần mềm này không phải là sản phẩm thương mại cao c�
 
 ## 04 Từ viết một dòng mã đến gõ một cánh cửa
 
-Cái ghi dấu sâu nhất trong ký ức của thầy Tiểu Hào, là cái sáng Ngày Đầu Năm đó. Anh ấy hỏi 豆包: "Làm cách nào để dẫn trẻ em qua một ngày ý nghĩa?" AI không gợi ý tổ chức tiệc, không gợi ý biểu diễn, mà là nói: "Thay vì ăn mừng trong lớp học, sao không đi thăm những cụ già cô đơn trong làng?"
+Cái ghi dấu sâu nhất trong ký ức của thầy Tiểu Hào, là cái sáng Ngày Đầu Năm đó. Anh ấy hỏi Doubao (豆包): "Làm cách nào để dẫn trẻ em qua một ngày ý nghĩa?" AI không gợi ý tổ chức tiệc, không gợi ý biểu diễn, mà là nói: "Thay vì ăn mừng trong lớp học, sao không đi thăm những cụ già cô đơn trong làng?"
 
 Vì vậy, anh ấy thực sự dẫn trẻ em đi thăm một cụ ông sống độc thân được nhà nước hỗ trợ ở làng. Khi đến, cụ ông đang ngồi trên ghế gỗ cũ ăn cơm trưa, bàn chỉ có một bát mì luộc nước và một đĩa dưa cải. Trái tim của thầy Tiểu Hào như bị thắt lại, hối tiếc không mang thêm thức ăn. Vài em bé thường hay naughty cũng thể hiện tốt hơn bình thường, còn ngồi chuyện trò với cụ.
 

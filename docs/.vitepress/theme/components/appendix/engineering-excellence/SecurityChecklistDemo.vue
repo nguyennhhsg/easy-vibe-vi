@@ -1,12 +1,12 @@
 <template>
   <div class="checklist-demo">
     <div class="header">
-      <div class="title">项目安全检查清单</div>
-      <div class="subtitle">勾选已完成的安全措施，查看项目安全评分</div>
+      <div class="title">Checklist security cho dự án</div>
+      <div class="subtitle">Tick các biện pháp bảo mật đã hoàn thành, xem điểm security của dự án</div>
     </div>
 
     <div class="score-bar">
-      <div class="score-label">安全评分</div>
+      <div class="score-label">Security score</div>
       <div class="score-track">
         <div
           class="score-fill"
@@ -14,7 +14,7 @@
         />
       </div>
       <div class="score-value" :style="{ color: scoreColor }">
-        {{ score }}分
+        {{ score }} điểm
       </div>
       <div class="score-level" :style="{ color: scoreColor }">
         {{ scoreLevel }}
@@ -52,7 +52,7 @@
             class="detail-toggle"
             @click="item.showDetail = !item.showDetail"
           >
-            {{ item.showDetail ? '收起' : '查看最佳实践' }}
+            {{ item.showDetail ? 'Thu gọn' : 'Xem best practice' }}
           </button>
         </div>
       </div>
@@ -66,43 +66,43 @@ import { reactive, computed } from 'vue'
 const categories = reactive([
   {
     icon: '🔍',
-    name: '输入验证',
+    name: 'Input validation',
     open: true,
     items: [
-      { label: '所有用户输入在服务端进行校验', checked: false, showDetail: false, detail: '永远不要仅依赖前端校验。攻击者可以绕过浏览器直接发送请求，服务端必须对长度、类型、格式、范围做二次验证。' },
-      { label: '使用白名单而非黑名单过滤', checked: false, showDetail: false, detail: '黑名单容易遗漏。应明确定义"允许什么"而非"禁止什么"，例如只允许字母数字而非试图过滤所有特殊字符。' },
-      { label: '对文件上传进行类型和大小限制', checked: false, showDetail: false, detail: '校验文件 MIME 类型和扩展名，限制文件大小，将上传文件存储在 Web 根目录之外，使用随机文件名。' }
+      { label: 'Tất cả input từ user được validate phía server', checked: false, showDetail: false, detail: 'Đừng bao giờ chỉ dựa vào validate phía frontend. Attacker có thể bypass browser và gửi request trực tiếp, server phải validate lại độ dài, type, format, range.' },
+      { label: 'Dùng whitelist thay vì blacklist để filter', checked: false, showDetail: false, detail: 'Blacklist dễ bị bỏ sót. Nên định nghĩa rõ "cho phép cái gì" thay vì "cấm cái gì", ví dụ chỉ cho phép alphanumeric thay vì cố filter mọi ký tự đặc biệt.' },
+      { label: 'Giới hạn type và size khi upload file', checked: false, showDetail: false, detail: 'Validate MIME type và extension, giới hạn file size, lưu file upload ngoài web root, dùng tên file random.' }
     ]
   },
   {
     icon: '🔐',
-    name: '认证授权',
+    name: 'Authentication & authorization',
     open: false,
     items: [
-      { label: '密码使用 bcrypt/argon2 哈希存储', checked: false, showDetail: false, detail: '绝不明文存储密码。使用自带盐值的慢哈希算法（bcrypt cost>=10 或 argon2id），抵御彩虹表和暴力破解。' },
-      { label: '实施多因素认证 (MFA)', checked: false, showDetail: false, detail: '在密码之外增加第二因素（TOTP、短信、硬件密钥），即使密码泄露也能阻止未授权登录。' },
-      { label: '接口实施最小权限访问控制', checked: false, showDetail: false, detail: '每个 API 端点都应检查用户角色和权限，确保用户只能访问自己有权操作的资源（RBAC / ABAC）。' },
-      { label: '会话管理安全（超时、轮换）', checked: false, showDetail: false, detail: '登录后重新生成 Session ID，设置合理的过期时间，登出时销毁服务端会话。' }
+      { label: 'Lưu password đã hash bằng bcrypt/argon2', checked: false, showDetail: false, detail: 'Tuyệt đối không lưu password plaintext. Dùng slow hash algorithm có sẵn salt (bcrypt cost >=10 hoặc argon2id) để chống rainbow table và brute force.' },
+      { label: 'Triển khai Multi-Factor Authentication (MFA)', checked: false, showDetail: false, detail: 'Thêm factor thứ 2 ngoài password (TOTP, SMS, hardware key), ngăn đăng nhập trái phép ngay cả khi password bị lộ.' },
+      { label: 'API có access control với least privilege', checked: false, showDetail: false, detail: 'Mỗi API endpoint nên check role và permission của user, đảm bảo user chỉ truy cập được resource mình có quyền (RBAC / ABAC).' },
+      { label: 'Session management an toàn (timeout, rotation)', checked: false, showDetail: false, detail: 'Regen Session ID sau khi login, set thời gian hết hạn hợp lý, destroy session server khi logout.' }
     ]
   },
   {
     icon: '🛡️',
-    name: '数据保护',
+    name: 'Data protection',
     open: false,
     items: [
-      { label: '敏感数据加密存储', checked: false, showDetail: false, detail: '对数据库中的敏感字段（手机号、身份证等）使用 AES-256 等算法加密，密钥与数据分离存储。' },
-      { label: '日志中不记录敏感信息', checked: false, showDetail: false, detail: '日志中不应出现密码、Token、信用卡号等。使用脱敏处理，如只记录手机号后四位。' },
-      { label: '实施 SQL 注入防护（参数化查询）', checked: false, showDetail: false, detail: '所有数据库操作使用参数化查询或 ORM，绝不拼接 SQL 字符串。' }
+      { label: 'Encrypt dữ liệu nhạy cảm khi lưu', checked: false, showDetail: false, detail: 'Encrypt các field nhạy cảm trong database (số điện thoại, CCCD...) bằng AES-256, key lưu tách khỏi data.' },
+      { label: 'Không log thông tin nhạy cảm', checked: false, showDetail: false, detail: 'Log không được chứa password, Token, số thẻ tín dụng... Dùng masking, ví dụ chỉ log 4 số cuối điện thoại.' },
+      { label: 'Phòng chống SQL injection (parameterized query)', checked: false, showDetail: false, detail: 'Mọi thao tác database dùng parameterized query hoặc ORM, tuyệt đối không concat SQL string.' }
     ]
   },
   {
     icon: '🌐',
-    name: '通信安全',
+    name: 'Communication security',
     open: false,
     items: [
-      { label: '全站启用 HTTPS', checked: false, showDetail: false, detail: '使用 TLS 1.2+ 加密所有通信，配置 HSTS 头强制 HTTPS，防止中间人攻击和数据窃听。' },
-      { label: '设置安全响应头（CSP、X-Frame-Options）', checked: false, showDetail: false, detail: '配置 Content-Security-Policy 限制资源加载来源，X-Frame-Options 防止点击劫持，X-Content-Type-Options 防止 MIME 嗅探。' },
-      { label: 'Cookie 设置 HttpOnly / Secure / SameSite', checked: false, showDetail: false, detail: 'HttpOnly 防止 JS 读取，Secure 确保仅 HTTPS 传输，SameSite=Lax 防止 CSRF 攻击。' }
+      { label: 'Bật HTTPS toàn site', checked: false, showDetail: false, detail: 'Dùng TLS 1.2+ encrypt mọi communication, config HSTS header để force HTTPS, ngăn MITM và eavesdropping.' },
+      { label: 'Set security response headers (CSP, X-Frame-Options)', checked: false, showDetail: false, detail: 'Config Content-Security-Policy để giới hạn nguồn resource, X-Frame-Options ngăn clickjacking, X-Content-Type-Options ngăn MIME sniffing.' },
+      { label: 'Cookie set HttpOnly / Secure / SameSite', checked: false, showDetail: false, detail: 'HttpOnly ngăn JS đọc cookie, Secure đảm bảo chỉ truyền qua HTTPS, SameSite=Lax ngăn CSRF.' }
     ]
   }
 ])
@@ -129,9 +129,9 @@ const scoreColor = computed(() => {
 })
 
 const scoreLevel = computed(() => {
-  if (score.value >= 80) return '优秀'
-  if (score.value >= 50) return '及格'
-  return '危险'
+  if (score.value >= 80) return 'Tốt'
+  if (score.value >= 50) return 'Đạt'
+  return 'Nguy hiểm'
 })
 
 const checkedCount = (ci) =>

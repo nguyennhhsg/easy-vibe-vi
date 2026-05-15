@@ -1,6 +1,6 @@
 <template>
   <div class="refactoring-demo">
-    <div class="demo-label">重构手法对比演示 ── 选择一种手法查看前后对比</div>
+    <div class="demo-label">Demo so sánh kỹ thuật refactor ── chọn kỹ thuật để xem so sánh trước/sau</div>
 
     <div class="tabs">
       <button
@@ -18,7 +18,7 @@
     <div class="compare-area">
       <div class="compare-panel before">
         <div class="panel-header">
-          <span class="dot red"></span> 重构前
+          <span class="dot red"></span> Trước refactor
         </div>
         <pre class="code-block"><template
           v-for="(seg, j) in current.before"
@@ -32,7 +32,7 @@
 
       <div class="compare-panel after">
         <div class="panel-header">
-          <span class="dot green"></span> 重构后
+          <span class="dot green"></span> Sau refactor
         </div>
         <pre class="code-block"><template
           v-for="(seg, j) in current.after"
@@ -42,7 +42,7 @@
     </div>
 
     <div class="tip-box">
-      <strong>要点：</strong>{{ current.tip }}
+      <strong>Điểm chính:</strong> {{ current.tip }}
     </div>
   </div>
 </template>
@@ -59,29 +59,29 @@ function selectTab(i) {
   setTimeout(() => { showHighlight.value = true }, 300)
 }
 
-// 初始化高亮
+// Khởi tạo highlight
 setTimeout(() => { showHighlight.value = true }, 500)
 
 const techniques = [
   {
-    name: '提炼函数',
-    description: 'Extract Function：将一段代码从大函数中提取出来，放入一个命名清晰的新函数中。',
+    name: 'Extract Function',
+    description: 'Extract Function: tách một đoạn code khỏi hàm lớn, đưa vào một hàm mới có tên rõ ràng.',
     before: [
-      { text: 'function printReport(invoice) {\n  console.log("=== 账单 ===")\n' },
-      { text: '  // 计算总额\n  let total = 0\n  for (let item of invoice.items) {\n    total += item.price * item.qty\n  }\n', changed: true },
-      { text: '  console.log(`总计: ${total}`)\n}' }
+      { text: 'function printReport(invoice) {\n  console.log("=== Bill ===")\n' },
+      { text: '  // Tính tổng\n  let total = 0\n  for (let item of invoice.items) {\n    total += item.price * item.qty\n  }\n', changed: true },
+      { text: '  console.log(`Total: ${total}`)\n}' }
     ],
     after: [
-      { text: 'function printReport(invoice) {\n  console.log("=== 账单 ===")\n' },
+      { text: 'function printReport(invoice) {\n  console.log("=== Bill ===")\n' },
       { text: '  const total = calcTotal(invoice.items)\n', changed: true },
-      { text: '  console.log(`总计: ${total}`)\n}\n\n' },
+      { text: '  console.log(`Total: ${total}`)\n}\n\n' },
       { text: 'function calcTotal(items) {\n  return items.reduce(\n    (s, i) => s + i.price * i.qty, 0\n  )\n}', changed: true }
     ],
-    tip: '提炼函数是最常用的重构手法。好的函数名就是最好的注释——如果你需要写注释解释一段代码在做什么，那它就该被提炼成函数。'
+    tip: 'Extract Function là kỹ thuật refactor được dùng nhiều nhất. Tên hàm tốt chính là comment tốt nhất - nếu bạn cần comment để giải thích một đoạn code làm gì, thì đoạn đó nên được extract thành function.'
   },
   {
-    name: '重命名变量',
-    description: 'Rename Variable：用清晰、有意义的名称替换含糊的变量名，让代码自解释。',
+    name: 'Rename Variable',
+    description: 'Rename Variable: thay tên biến mơ hồ bằng tên rõ ràng, có ý nghĩa, để code tự giải thích.',
     before: [
       { text: 'function calc(', changed: true },
       { text: 'a, b, c', changed: true },
@@ -94,29 +94,29 @@ const techniques = [
       { text: ') {\n' },
       { text: '  const subtotal = price * quantity\n  const total = subtotal * (1 - discountRate)\n  return total\n}', changed: true }
     ],
-    tip: '变量命名是程序员最重要的基本功之一。好的命名让代码像散文一样可读，差的命名让代码像密码一样难解。'
+    tip: 'Đặt tên biến là một trong những kỹ năng cơ bản quan trọng nhất của programmer. Đặt tên tốt làm code đọc như văn xuôi, đặt tên kém làm code khó hiểu như mật mã.'
   },
   {
-    name: '消除重复',
-    description: 'Remove Duplication：将重复的逻辑抽取为共享函数或模板，遵循 DRY 原则。',
+    name: 'Remove Duplication',
+    description: 'Remove Duplication: extract logic lặp lại thành function/template dùng chung, tuân theo nguyên tắc DRY.',
     before: [
-      { text: '// 员工报表\nfunction empReport(emp) {\n' },
+      { text: '// Employee report\nfunction empReport(emp) {\n' },
       { text: '  return `${emp.name} | ${emp.dept} | ${emp.salary}`', changed: true },
-      { text: '\n}\n\n// 经理报表\nfunction mgrReport(mgr) {\n' },
+      { text: '\n}\n\n// Manager report\nfunction mgrReport(mgr) {\n' },
       { text: '  return `${mgr.name} | ${mgr.dept} | ${mgr.salary}`', changed: true },
       { text: '\n}' }
     ],
     after: [
       { text: '' },
       { text: 'function formatReport(person) {\n  return `${person.name} | ${person.dept} | ${person.salary}`\n}', changed: true },
-      { text: '\n\n// 统一调用\n' },
+      { text: '\n\n// Gọi thống nhất\n' },
       { text: 'formatReport(employee)\nformatReport(manager)', changed: true }
     ],
-    tip: 'DRY（Don\'t Repeat Yourself）是软件工程的基本原则。每一处重复都是未来 bug 的温床——改了一处忘了另一处，就是典型的重复代码事故。'
+    tip: 'DRY (Don\'t Repeat Yourself) là nguyên tắc cơ bản của software engineering. Mỗi chỗ trùng lặp là ổ bug trong tương lai - sửa chỗ này quên chỗ kia là sự cố code lặp điển hình.'
   },
   {
-    name: '简化条件',
-    description: 'Simplify Conditional：用卫语句、策略模式等手法替代深层嵌套的 if-else，降低圈复杂度。',
+    name: 'Simplify Conditional',
+    description: 'Simplify Conditional: dùng guard clause, strategy pattern... thay cho if-else nested sâu, giảm cyclomatic complexity.',
     before: [
       { text: 'function getDiscount(user) {\n' },
       { text: '  if (user.type === "vip") {\n    if (user.years > 5) {\n      return 0.3\n    } else {\n      return 0.2\n    }\n  } else {\n    if (user.years > 3) {\n      return 0.1\n    } else {\n      return 0\n    }\n  }', changed: true },
@@ -127,7 +127,7 @@ const techniques = [
       { text: '  if (user.type === "vip" && user.years > 5) return 0.3\n  if (user.type === "vip") return 0.2\n  if (user.years > 3) return 0.1\n  return 0', changed: true },
       { text: '\n}' }
     ],
-    tip: '卫语句（Guard Clause）通过提前返回来消除嵌套。扁平的代码结构比深层嵌套更容易理解和维护。'
+    tip: 'Guard Clause loại bỏ nested bằng cách return sớm. Cấu trúc code phẳng dễ hiểu và maintain hơn so với nested sâu.'
   }
 ]
 

@@ -1,12 +1,12 @@
 <!--
   IncidentTimelineDemo.vue
-  事故响应时间线演示：展示从发现到复盘的完整事故响应流程
+  Demo timeline phản ứng sự cố: hiển thị toàn bộ luồng phản ứng từ phát hiện tới postmortem
 -->
 <template>
   <div class="incident-timeline-demo">
     <div class="header">
-      <div class="title">事故响应时间线 (Incident Timeline)</div>
-      <div class="subtitle">点击各阶段，了解每个环节的关键动作</div>
+      <div class="title">Timeline phản ứng sự cố (Incident Timeline)</div>
+      <div class="subtitle">Click vào từng giai đoạn để xem các hành động then chốt</div>
     </div>
 
     <div class="timeline">
@@ -48,7 +48,7 @@
       <div class="phase-body">
         <div class="phase-desc">{{ currentPhase.description }}</div>
         <div class="phase-actions">
-          <div class="actions-title">关键动作：</div>
+          <div class="actions-title">Hành động then chốt:</div>
           <div
             v-for="(action, i) in currentPhase.actions"
             :key="i"
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="phase-roles">
-          <span class="roles-label">参与角色：</span>
+          <span class="roles-label">Vai trò tham gia:</span>
           <span
             v-for="role in currentPhase.roles"
             :key="role"
@@ -73,9 +73,9 @@
 
     <div class="auto-controls">
       <button class="play-btn" @click="autoPlay" :disabled="isPlaying">
-        {{ isPlaying ? '播放中...' : '自动演示完整流程' }}
+        {{ isPlaying ? 'Đang chạy...' : 'Tự động demo toàn bộ luồng' }}
       </button>
-      <button class="reset-btn" @click="resetAll">重置</button>
+      <button class="reset-btn" @click="resetAll">Reset</button>
     </div>
   </div>
 </template>
@@ -90,88 +90,88 @@ const isPlaying = ref(false)
 const phases = [
   {
     id: 'detect',
-    name: '发现',
+    name: 'Phát hiện',
     timeHint: 'T+0',
     icon: '🔍',
     color: '#ef4444',
-    duration: '目标 < 5 分钟',
+    duration: 'Mục tiêu < 5 phút',
     description:
-      '通过监控告警、用户反馈或自动化检测发现系统异常。越早发现，损失越小。',
+      'Phát hiện hệ thống bất thường qua cảnh báo monitor, phản hồi của user hoặc tự động hoá. Càng phát hiện sớm, thiệt hại càng nhỏ.',
     actions: [
-      '监控系统触发告警（CPU、延迟、错误率等）',
-      '值班人员收到通知并确认',
-      '初步判断影响范围',
-      '在事故频道发出第一条通报'
+      'Hệ thống monitor trigger cảnh báo (CPU, latency, error rate, v.v.)',
+      'Người trực nhận thông báo và xác nhận',
+      'Đánh giá sơ bộ phạm vi ảnh hưởng',
+      'Phát thông báo đầu tiên trên channel sự cố'
     ],
-    roles: ['值班工程师', '监控系统']
+    roles: ['Engineer trực', 'Hệ thống monitor']
   },
   {
     id: 'triage',
-    name: '分级',
+    name: 'Phân cấp',
     timeHint: 'T+5min',
     icon: '📋',
     color: '#f59e0b',
-    duration: '目标 < 10 分钟',
+    duration: 'Mục tiêu < 10 phút',
     description:
-      '快速评估事故严重程度，确定优先级（P0-P4），决定响应规模和升级路径。',
+      'Đánh giá nhanh mức nghiêm trọng, xác định ưu tiên (P0-P4), quyết định quy mô phản ứng và đường leo thang.',
     actions: [
-      '评估用户影响面（多少用户受影响？）',
-      '确定业务影响（核心功能是否不可用？）',
-      '分配事故等级（P0/P1/P2/P3/P4）',
-      '根据等级启动对应的响应流程'
+      'Đánh giá phạm vi ảnh hưởng user (bao nhiêu user bị ảnh hưởng?)',
+      'Xác định ảnh hưởng nghiệp vụ (tính năng cốt lõi có chết không?)',
+      'Gán mức sự cố (P0/P1/P2/P3/P4)',
+      'Theo mức kích hoạt luồng phản ứng tương ứng'
     ],
-    roles: ['值班工程师', '事故指挥官']
+    roles: ['Engineer trực', 'Incident Commander']
   },
   {
     id: 'mitigate',
-    name: '止血',
+    name: 'Cầm máu',
     timeHint: 'T+15min',
     icon: '🚑',
     color: '#3b82f6',
-    duration: '目标 < 1 小时',
+    duration: 'Mục tiêu < 1 giờ',
     description:
-      '采取紧急措施恢复服务，优先止血而非根治。回滚、降级、限流都是常见手段。',
+      'Thực hiện biện pháp khẩn để phục hồi dịch vụ, ưu tiên "cầm máu" thay vì chữa tận gốc. Rollback, degrade, rate limit là các thủ pháp phổ biến.',
     actions: [
-      '回滚最近的变更（代码、配置、基础设施）',
-      '启用降级方案或备用系统',
-      '实施限流保护核心链路',
-      '持续监控恢复进度并通报状态'
+      'Rollback thay đổi gần đây (code, config, hạ tầng)',
+      'Kích hoạt phương án degrade hoặc hệ thống dự phòng',
+      'Áp rate limit để bảo vệ chuỗi xử lý cốt lõi',
+      'Liên tục giám sát tiến độ phục hồi và báo tình trạng'
     ],
-    roles: ['事故指挥官', '运维工程师', '开发工程师']
+    roles: ['Incident Commander', 'Engineer vận hành', 'Engineer phát triển']
   },
   {
     id: 'resolve',
-    name: '解决',
+    name: 'Giải quyết',
     timeHint: 'T+1h',
     icon: '🔧',
     color: '#22c55e',
-    duration: '视复杂度而定',
+    duration: 'Tuỳ độ phức tạp',
     description:
-      '在服务恢复后，定位根本原因并实施永久修复，确保同类问题不再发生。',
+      'Sau khi dịch vụ phục hồi, định vị nguyên nhân gốc và thực hiện fix vĩnh viễn, đảm bảo lỗi tương tự không tái diễn.',
     actions: [
-      '深入分析日志、监控数据定位根因',
-      '编写并审核修复代码',
-      '在预发布环境验证修复效果',
-      '灰度发布修复，确认问题彻底解决'
+      'Phân tích sâu log, dữ liệu monitor để định vị nguyên nhân gốc',
+      'Viết và review code fix',
+      'Kiểm thử fix ở môi trường staging',
+      'Canary release bản fix, xác nhận vấn đề đã giải quyết triệt để'
     ],
-    roles: ['开发工程师', '架构师', 'QA 工程师']
+    roles: ['Engineer phát triển', 'Kiến trúc sư', 'QA engineer']
   },
   {
     id: 'postmortem',
-    name: '复盘',
+    name: 'Postmortem',
     timeHint: 'T+48h',
     icon: '📝',
     color: '#8b5cf6',
-    duration: '事故后 48 小时内',
+    duration: 'Trong 48 giờ sau sự cố',
     description:
-      '召开无责复盘会议，分析根因，提炼经验教训，制定改进措施防止再次发生。',
+      'Tổ chức họp postmortem blameless, phân tích nguyên nhân gốc, rút kinh nghiệm, đặt biện pháp cải tiến để tránh lặp lại.',
     actions: [
-      '撰写事故复盘报告（时间线、影响、根因）',
-      '召开复盘会议，全员参与讨论',
-      '使用"五个为什么"深挖根本原因',
-      '制定并跟踪改进行动项（Action Items）'
+      'Viết báo cáo postmortem (timeline, ảnh hưởng, nguyên nhân gốc)',
+      'Họp postmortem, mọi người liên quan cùng thảo luận',
+      'Dùng "5 Whys" để đào sâu nguyên nhân gốc',
+      'Đặt và theo dõi action items cải tiến'
     ],
-    roles: ['事故指挥官', '全体相关人员', '管理层']
+    roles: ['Incident Commander', 'Mọi người liên quan', 'Tầng quản lý']
   }
 ]
 

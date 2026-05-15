@@ -1,15 +1,15 @@
 <!--
   AuthMiddlewareDemo.vue
-  认证中间件 - JWT/OAuth/签名验证
+  Middleware xác thực - JWT/OAuth/xác thực chữ ký
 -->
 <template>
   <div class="auth-middleware-demo">
     <div class="header">
       <div class="title">
-        🔐 认证中间件：谁可以进大门？
+        🔐 Middleware xác thực: Ai được vào cổng?
       </div>
       <div class="subtitle">
-        想象成写字楼门禁——检查工牌、验证身份，没权限的人进不来
+        Hãy hình dung như kiểm soát ra vào toà nhà văn phòng — kiểm tra thẻ, xác minh danh tính, không có quyền không vào được
       </div>
     </div>
 
@@ -61,7 +61,7 @@
         class="token-display"
       >
         <div class="token-header">
-          🔑 JWT Token 结构（Base64编码）
+          🔑 Cấu trúc JWT Token (mã hoá Base64)
         </div>
         <div class="token-parts">
           <div class="token-part header">
@@ -109,13 +109,13 @@
 
     <div class="implementation-comparison">
       <div class="section-title">
-        🛠️ 三种方案实现对比
+        🛠️ So sánh ba phương án triển khai
       </div>
 
       <table class="comparison-table">
         <thead>
           <tr>
-            <th>对比维度</th>
+            <th>Tiêu chí so sánh</th>
             <th>Session + Cookie</th>
             <th>JWT</th>
             <th>OAuth2.0</th>
@@ -124,43 +124,43 @@
         <tbody>
           <tr>
             <td class="dim">
-              存储位置
+              Vị trí lưu trữ
             </td>
-            <td>服务端存储 Session，客户端存 Cookie</td>
-            <td>客户端存储 Token，服务端无状态</td>
-            <td>授权服务器存储，客户端存 Access Token</td>
+            <td>Server lưu Session, client lưu Cookie</td>
+            <td>Client lưu Token, server stateless</td>
+            <td>Authorization server lưu, client lưu Access Token</td>
           </tr>
           <tr>
             <td class="dim">
-              扩展性
+              Khả năng mở rộng
             </td>
-            <td>❌ 需要共享 Session，扩展复杂</td>
-            <td>✅ 无状态，易于水平扩展</td>
-            <td>✅ 分布式架构，支持大规模系统</td>
+            <td>❌ Cần share Session, scale phức tạp</td>
+            <td>✅ Stateless, dễ scale ngang</td>
+            <td>✅ Kiến trúc phân tán, hỗ trợ hệ thống lớn</td>
           </tr>
           <tr>
             <td class="dim">
-              安全性
+              Bảo mật
             </td>
-            <td>⚠️ Cookie 可能被窃取，需要 CSRF 防护</td>
-            <td>⚠️ Token 泄露风险，需 HTTPS + 短期有效</td>
-            <td>✅ 行业最佳实践，支持多种安全机制</td>
+            <td>⚠️ Cookie có thể bị trộm, cần phòng CSRF</td>
+            <td>⚠️ Rủi ro lộ Token, cần HTTPS + ngắn hạn</td>
+            <td>✅ Best practice của ngành, hỗ trợ nhiều cơ chế</td>
           </tr>
           <tr>
             <td class="dim">
-              实现复杂度
+              Độ phức tạp khi triển khai
             </td>
-            <td>🟢 简单，开箱即用</td>
-            <td>🟡 中等，需要 Token 管理</td>
-            <td>🔴 复杂，需要授权服务器</td>
+            <td>🟢 Đơn giản, dùng được ngay</td>
+            <td>🟡 Trung bình, cần quản lý Token</td>
+            <td>🔴 Phức tạp, cần authorization server</td>
           </tr>
           <tr>
             <td class="dim">
-              适用场景
+              Tình huống áp dụng
             </td>
-            <td>传统 Web 应用、后台管理系统</td>
-            <td>SPA、移动端 API、微服务</td>
-            <td>第三方登录、开放平台、SSO</td>
+            <td>Web app truyền thống, hệ thống quản trị</td>
+            <td>SPA, API mobile, microservices</td>
+            <td>Login bằng tài khoản bên thứ ba, open platform, SSO</td>
           </tr>
         </tbody>
       </table>
@@ -168,7 +168,7 @@
 
     <div class="security-tips">
       <div class="tips-title">
-        🔒 网关层认证最佳实践
+        🔒 Best practice xác thực tại tầng gateway
       </div>
       <div class="tips-list">
         <div class="tip-item">
@@ -177,10 +177,10 @@
           </div>
           <div class="tip-content">
             <div class="tip-heading">
-              统一在网关层验证
+              Xác thực thống nhất ở tầng gateway
             </div>
             <div class="tip-desc">
-              不要在每个微服务里重复写认证逻辑，统一在网关层校验 JWT 或 Session
+              Đừng viết lại logic xác thực ở mỗi microservice, hãy thống nhất kiểm tra JWT hoặc Session ở tầng gateway
             </div>
           </div>
         </div>
@@ -190,10 +190,10 @@
           </div>
           <div class="tip-content">
             <div class="tip-heading">
-              HTTPS 强制
+              Bắt buộc HTTPS
             </div>
             <div class="tip-desc">
-              网关层强制 HTTPS，防止 Token 在传输过程中被窃取（中间人攻击）
+              Tầng gateway bắt buộc HTTPS, tránh Token bị đánh cắp trên đường truyền (man-in-the-middle)
             </div>
           </div>
         </div>
@@ -203,10 +203,10 @@
           </div>
           <div class="tip-content">
             <div class="tip-heading">
-              Token 过期策略
+              Chiến lược hết hạn Token
             </div>
             <div class="tip-desc">
-              Access Token 短期有效（15分钟），配合 Refresh Token 实现无感知续期
+              Access Token ngắn hạn (15 phút), kết hợp Refresh Token để gia hạn liền mạch không phiền user
             </div>
           </div>
         </div>
@@ -216,10 +216,10 @@
           </div>
           <div class="tip-content">
             <div class="tip-heading">
-              黑名单机制
+              Cơ chế blacklist
             </div>
             <div class="tip-desc">
-              用户登出或 Token 泄露时，将 Token 加入黑名单（Redis 存储）
+              Khi user logout hoặc Token bị lộ, đưa Token vào blacklist (lưu trong Redis)
             </div>
           </div>
         </div>
@@ -247,100 +247,100 @@ const authMethods = [
   {
     id: 'signature',
     icon: '✍️',
-    name: '签名验证'
+    name: 'Xác thực chữ ký'
   }
 ]
 
 const authData = {
   jwt: {
-    title: 'JWT (JSON Web Token) 认证流程',
+    title: 'Luồng xác thực JWT (JSON Web Token)',
     steps: [
-      { actor: '用户', action: '输入用户名密码，点击登录' },
-      { actor: '网关/Nginx', action: '转发登录请求到认证服务' },
-      { actor: '认证服务', action: '验证密码，生成 JWT Token（包含 Header、Payload、Signature）' },
-      { actor: '用户/客户端', action: '保存 Token（LocalStorage 或 Cookie）' },
-      { actor: '后续请求', action: '在 HTTP Header 中携带: Authorization: Bearer <Token>' },
-      { actor: '网关/Nginx', action: '校验 Token 签名和过期时间，通过后转发请求' },
-      { actor: '后端服务', action: '从 Token 中解析用户信息，处理业务逻辑' }
+      { actor: 'User', action: 'Nhập username/password, click đăng nhập' },
+      { actor: 'Gateway/Nginx', action: 'Forward request đăng nhập sang dịch vụ xác thực' },
+      { actor: 'Dịch vụ xác thực', action: 'Xác minh mật khẩu, sinh JWT Token (gồm Header, Payload, Signature)' },
+      { actor: 'User/Client', action: 'Lưu Token (LocalStorage hoặc Cookie)' },
+      { actor: 'Các request sau', action: 'Mang theo trong HTTP Header: Authorization: Bearer <Token>' },
+      { actor: 'Gateway/Nginx', action: 'Xác minh chữ ký Token và hạn dùng, hợp lệ thì forward request' },
+      { actor: 'Backend service', action: 'Đọc thông tin user từ Token, xử lý business logic' }
     ]
   },
   oauth: {
-    title: 'OAuth 2.0 第三方登录流程（以微信登录为例）',
+    title: 'Luồng đăng nhập OAuth 2.0 bên thứ ba (ví dụ login bằng Google)',
     steps: [
-      { actor: '用户', action: '点击"微信登录"按钮' },
-      { actor: '我们的应用', action: '重定向到微信授权页面，携带 client_id 和回调地址' },
-      { actor: '微信/授权服务器', action: '展示授权页面，询问用户是否同意' },
-      { actor: '用户', action: '确认授权（或扫码登录）' },
-      { actor: '微信/授权服务器', action: '重定向回我们的应用，携带授权码 Code' },
-      { actor: '我们的后端', action: '用 Code 换取 Access Token（对客户端不可见）' },
-      { actor: '我们的后端', action: '用 Access Token 请求微信用户信息服务' },
-      { actor: '微信/资源服务器', action: '返回用户基本信息（openid, nickname, avatar）' },
-      { actor: '我们的后端', action: '创建/关联本地用户，生成自己的 Session/JWT' },
-      { actor: '用户', action: '登录成功，进入应用首页' }
+      { actor: 'User', action: 'Click nút "Đăng nhập bằng Google"' },
+      { actor: 'Ứng dụng của chúng ta', action: 'Redirect tới trang authorize của Google, mang theo client_id và callback URL' },
+      { actor: 'Google/Authorization server', action: 'Hiển thị trang authorize, hỏi user có đồng ý không' },
+      { actor: 'User', action: 'Xác nhận uỷ quyền (hoặc quét mã đăng nhập)' },
+      { actor: 'Google/Authorization server', action: 'Redirect về ứng dụng của chúng ta, mang theo authorization code' },
+      { actor: 'Backend của chúng ta', action: 'Dùng code đổi lấy Access Token (client không nhìn thấy)' },
+      { actor: 'Backend của chúng ta', action: 'Dùng Access Token gọi user info service của Google' },
+      { actor: 'Google/Resource server', action: 'Trả về thông tin user cơ bản (openid, nickname, avatar)' },
+      { actor: 'Backend của chúng ta', action: 'Tạo/liên kết user local, sinh Session/JWT của riêng mình' },
+      { actor: 'User', action: 'Đăng nhập thành công, vào trang chủ ứng dụng' }
     ]
   },
   signature: {
-    title: 'API 签名验证流程（常用于开放平台和支付接口）',
+    title: 'Luồng xác thực chữ ký API (dùng nhiều cho open platform và API thanh toán)',
     steps: [
-      { actor: '开发者', action: '在开放平台申请 AppKey 和 AppSecret' },
-      { actor: '发起请求前', action: '将所有参数按字典序排序，拼接成字符串' },
-      { actor: '客户端', action: '用 AppSecret 对字符串进行 HMAC-SHA256 签名' },
-      { actor: '请求参数', action: '携带 AppKey、签名(Sign)、时间戳(Timestamp)、随机数(Nonce)' },
-      { actor: '网关/Nginx', action: '提取 AppKey，查询对应的 AppSecret' },
-      { actor: '网关/Nginx', action: '用同样算法计算签名，对比是否一致' },
-      { actor: '网关/Nginx', action: '检查时间戳（防重放攻击，通常5分钟内有效）' },
-      { actor: '网关/Nginx', action: '检查随机数是否已使用（Redis 存储防重放）' },
-      { actor: '验证通过', action: '转发请求到后端服务' },
-      { actor: '验证失败', action: '返回 401/403，不暴露签名算法细节' }
+      { actor: 'Developer', action: 'Đăng ký AppKey và AppSecret trên open platform' },
+      { actor: 'Trước khi gửi request', action: 'Sắp xếp các tham số theo thứ tự từ điển, nối thành chuỗi' },
+      { actor: 'Client', action: 'Dùng AppSecret để ký HMAC-SHA256 lên chuỗi' },
+      { actor: 'Tham số request', action: 'Mang theo AppKey, chữ ký (Sign), timestamp, nonce' },
+      { actor: 'Gateway/Nginx', action: 'Lấy AppKey, tra ra AppSecret tương ứng' },
+      { actor: 'Gateway/Nginx', action: 'Dùng cùng thuật toán tính chữ ký, so sánh xem có khớp không' },
+      { actor: 'Gateway/Nginx', action: 'Kiểm tra timestamp (chống replay attack, thường có hiệu lực trong 5 phút)' },
+      { actor: 'Gateway/Nginx', action: 'Kiểm tra nonce đã được dùng chưa (Redis lưu để chống replay)' },
+      { actor: 'Xác thực OK', action: 'Forward request sang backend service' },
+      { actor: 'Xác thực fail', action: 'Trả 401/403, không lộ chi tiết thuật toán chữ ký' }
     ]
   }
 }
 
 const currentAuthData = computed(() => authData[currentAuth.value])
 
-// 实现对比数据
+// Dữ liệu so sánh
 const comparisonData = [
   {
-    dimension: '存储位置',
-    session: '服务端存储 Session，客户端存 Cookie',
-    jwt: '客户端存储 Token，服务端无状态',
-    oauth: '授权服务器存储，客户端存 Access Token'
+    dimension: 'Vị trí lưu trữ',
+    session: 'Server lưu Session, client lưu Cookie',
+    jwt: 'Client lưu Token, server stateless',
+    oauth: 'Authorization server lưu, client lưu Access Token'
   },
   {
-    dimension: '扩展性',
-    session: '❌ 需要共享 Session，扩展复杂',
-    jwt: '✅ 无状态，易于水平扩展',
-    oauth: '✅ 分布式架构，支持大规模系统'
+    dimension: 'Khả năng mở rộng',
+    session: '❌ Cần share Session, scale phức tạp',
+    jwt: '✅ Stateless, dễ scale ngang',
+    oauth: '✅ Kiến trúc phân tán, hỗ trợ hệ thống lớn'
   },
   {
-    dimension: '安全性',
-    session: '⚠️ Cookie 可能被窃取，需要 CSRF 防护',
-    jwt: '⚠️ Token 泄露风险，需 HTTPS + 短期有效',
-    oauth: '✅ 行业最佳实践，支持多种安全机制'
+    dimension: 'Bảo mật',
+    session: '⚠️ Cookie có thể bị trộm, cần phòng CSRF',
+    jwt: '⚠️ Rủi ro lộ Token, cần HTTPS + ngắn hạn',
+    oauth: '✅ Best practice của ngành, hỗ trợ nhiều cơ chế'
   },
   {
-    dimension: '实现复杂度',
-    session: '🟢 简单，开箱即用',
-    jwt: '🟡 中等，需要 Token 管理',
-    oauth: '🔴 复杂，需要授权服务器'
+    dimension: 'Độ phức tạp khi triển khai',
+    session: '🟢 Đơn giản, dùng được ngay',
+    jwt: '🟡 Trung bình, cần quản lý Token',
+    oauth: '🔴 Phức tạp, cần authorization server'
   },
   {
-    dimension: '适用场景',
-    session: '传统 Web 应用、后台管理系统',
-    jwt: 'SPA、移动端 API、微服务',
-    oauth: '第三方登录、开放平台、SSO'
+    dimension: 'Tình huống áp dụng',
+    session: 'Web app truyền thống, hệ thống quản trị',
+    jwt: 'SPA, API mobile, microservices',
+    oauth: 'Login bằng tài khoản bên thứ ba, open platform, SSO'
   }
 ]
 
-// Nginx 配置示例
+// Ví dụ cấu hình Nginx
 const nginxConfigs = [
   {
     id: 'basic',
-    name: '基础限流',
-    config: `# 定义限流区域
-# $binary_remote_addr: 按 IP 限流
-# zone=mylimit:10m: 区域名称和大小
-# rate=10r/s: 每秒最多10个请求
+    name: 'Rate limit cơ bản',
+    config: `# Định nghĩa zone rate limit
+# $binary_remote_addr: rate limit theo IP
+# zone=mylimit:10m: tên và kích thước zone
+# rate=10r/s: tối đa 10 request mỗi giây
 limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;
 
 server {
@@ -348,28 +348,28 @@ server {
     server_name api.example.com;
 
     location / {
-        # 应用限流
-        # burst=20: 桶容量，允许突发20个请求
-        # nodelay: 不延迟处理突发请求
+        # Áp rate limit
+        # burst=20: dung lượng bucket, cho phép 20 request burst
+        # nodelay: không delay request burst
         limit_req zone=mylimit burst=20 nodelay;
 
         proxy_pass http://backend;
     }
 }`,
     explanation: [
-      'limit_req_zone: 在 http 块中定义限流区域',
-      '$binary_remote_addr: 使用二进制 IP 地址作为限流键（省内存）',
-      'zone=mylimit:10m: 区域名称 mylimit，分配 10MB 内存',
-      'rate=10r/s: 每秒允许 10 个请求（漏桶算法）',
-      'burst=20: 桶的容量为 20，允许一定程度的突发流量',
-      'nodelay: 不延迟处理突发请求（立即处理或拒绝）'
+      'limit_req_zone: định nghĩa zone rate limit trong khối http',
+      '$binary_remote_addr: dùng IP nhị phân làm key rate limit (tiết kiệm memory)',
+      'zone=mylimit:10m: zone tên mylimit, cấp 10MB memory',
+      'rate=10r/s: cho phép 10 request mỗi giây (thuật toán leaky bucket)',
+      'burst=20: bucket có dung lượng 20, cho phép một mức burst nhất định',
+      'nodelay: không delay request burst (xử lý ngay hoặc từ chối ngay)'
     ]
   },
   {
     id: 'connection',
-    name: '连接数限制',
-    config: `# 限制并发连接数
-# zone=addr:10m: 区域名称为 addr，大小 10MB
+    name: 'Giới hạn số connection',
+    config: `# Giới hạn số connection đồng thời
+# zone=addr:10m: zone tên addr, kích thước 10MB
 limit_conn_zone $binary_remote_addr zone=addr:10m;
 
 server {
@@ -377,33 +377,33 @@ server {
     server_name download.example.com;
 
     location / {
-        # 每个 IP 最多 5 个并发连接
+        # Mỗi IP tối đa 5 connection đồng thời
         limit_conn addr 5;
 
-        # 同时应用限流：每秒 1 个请求
+        # Áp luôn rate limit: 1 request mỗi giây
         limit_req zone=mylimit rate=1r/s;
 
         proxy_pass http://fileserver;
     }
 }`,
     explanation: [
-      'limit_conn_zone: 定义连接数限制区域',
-      'limit_conn addr 5: 每个 IP 最多同时保持 5 个连接',
-      '适用于文件下载、视频流媒体等长连接场景',
-      '可以和 limit_req 同时使用（双重保护）',
-      '超过连接数限制时返回 503 Service Unavailable'
+      'limit_conn_zone: định nghĩa zone giới hạn connection',
+      'limit_conn addr 5: mỗi IP giữ tối đa 5 connection đồng thời',
+      'Phù hợp cho download file, video streaming và các long connection khác',
+      'Có thể dùng cùng limit_req (bảo vệ kép)',
+      'Vượt giới hạn connection sẽ trả 503 Service Unavailable'
     ]
   },
   {
     id: 'whiteblack',
-    name: '黑白名单',
-    config: `# 白名单 + 限流组合
-# 公司内网 IP 不限流
+    name: 'Whitelist & blacklist',
+    config: `# Kết hợp whitelist + rate limit
+# IP nội bộ công ty không bị rate limit
 geo $limit {
     default 1;
-    10.0.0.0/8 0;     # 内网网段
-    172.16.0.0/12 0;  # 内网网段
-    192.168.0.0/16 0; # 内网网段
+    10.0.0.0/8 0;     # Dải IP nội bộ
+    172.16.0.0/12 0;  # Dải IP nội bộ
+    192.168.0.0/16 0; # Dải IP nội bộ
 }
 
 map $limit $limit_key {
@@ -411,7 +411,7 @@ map $limit $limit_key {
     1 $binary_remote_addr;
 }
 
-# 只有外网 IP 会触发限流
+# Chỉ IP bên ngoài mới bị rate limit
 limit_req_zone $limit_key zone=sensitive:10m rate=1r/s;
 
 server {
@@ -419,10 +419,10 @@ server {
     server_name api.example.com;
 
     location /admin {
-        # 管理后台严格限流
+        # Rate limit nghiêm ngặt cho admin panel
         limit_req zone=sensitive burst=5 nodelay;
 
-        # 拒绝特定 IP
+        # Chặn IP cụ thể
         deny 1.2.3.4;
         deny 5.6.7.8;
 
@@ -430,12 +430,12 @@ server {
     }
 }`,
     explanation: [
-      'geo 模块：根据 IP 地址设置变量值',
-      '内网 IP 设置为 0，外网 IP 默认为 1',
-      'map 模块：将 0 映射为空字符串（不限流），1 映射为 IP 地址',
-      '只有外网 IP 会被限流，内网访问畅通无阻',
-      'deny 指令：直接拒绝特定 IP 访问',
-      '适用于管理后台、敏感接口的安全防护'
+      'Module geo: gán giá trị biến theo địa chỉ IP',
+      'IP nội bộ đặt là 0, IP bên ngoài mặc định là 1',
+      'Module map: map 0 thành chuỗi rỗng (không rate limit), 1 thành IP',
+      'Chỉ IP bên ngoài bị rate limit, truy cập nội bộ thông suốt',
+      'Lệnh deny: chặn thẳng IP cụ thể',
+      'Phù hợp bảo vệ admin panel, API nhạy cảm'
     ]
   }
 ]

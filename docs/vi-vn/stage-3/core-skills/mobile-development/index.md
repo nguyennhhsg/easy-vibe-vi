@@ -926,7 +926,7 @@ Bất kể chọn giải pháp nào, hãy chú ý bảo mật: mã nhạy cảm 
 
 ### Hướng Dẫn Tiếng Trung
 
-- [Hướng Dẫn Cấu Hình Termux](https://m.blog.csdn.net/haa_y/article/details/151156494) - Hướng dẫn cấu hình Termux
+- [Hướng Dẫn Cấu Hình Termux (tiếng Trung)](https://m.blog.csdn.net/haa_y/article/details/151156494) - Hướng dẫn cấu hình Termux
 - [Phòng Thí Nghiệm AI Trong Túi Áo: Quy Trình Làm Việc Từ xa Claude Code Không Bao Giờ Ngắt](https://www.cnblogs.com/swizard/p/19308983) - Giải pháp Tmux + Docker
 - [Khi Đi Mua Sắm Cùng Bạn Gái, Tôi Đã Mang Theo Claude Code](https://post.m.smzdm.com/p/a3r7d63d/) - Kết nối từ xa Tailscale
 - [Chỉ Từ Điện Thoại Có Thể Viết App Cấp Độ Sản Xuất](https://m.toutiao.com/article/7611823834756301318/) - Trường Hợp Phát Triển Di Động Thực Tế
@@ -934,7 +934,7 @@ Bất kể chọn giải pháp nào, hãy chú ý bảo mật: mã nhạy cảm 
 ### Tài Nguyên Tiếng Anh
 
 - [Hướng Dẫn Toàn Diện Sử Dụng Claude Code Trên Điện Thoại | Blog Sealos](https://sealos.io/blog/claude-code-on-phone/) - Hướng dẫn phát triển trên điện thoại toàn diện nhất
-- [Hướng Dẫn Hoàn Chỉnh SSH + Tailscale + Termius](https://m.blog.csdn.net/Lvyizhuo/article/details/157692953) - Hướng dẫn chi tiết kết nối từ xa
+- [Hướng Dẫn Hoàn Chỉnh SSH + Tailscale + Termius (tiếng Trung)](https://m.blog.csdn.net/Lvyizhuo/article/details/157692953) - Hướng dẫn chi tiết kết nối từ xa
 
 ### Tải Công Cụ
 

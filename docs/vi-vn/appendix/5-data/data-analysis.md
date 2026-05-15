@@ -35,9 +35,9 @@ Trung bình (trung bình cộng) là chỉ số trực quan nhất.
 - **Hạn Chế**: nó dễ bị ảnh hưởng bởi **các giá trị ngoại lệ cực đoan (Outliers)**.
 - **Ví Dụ**: nếu 9 nhân viên lương hàng tháng 5k, sếp lương 100k, thì lương trung bình lên tới 1.45w. Lúc này trung bình không thể đại diện thực tế cho mức thu nhập của hầu hết nhân viên.
 
-### 1.2 Trung Vị (Median) và众数 (Mode)
+### 1.2 Trung Vị (Median) và Mode (giá trị thường xuất hiện nhất)
 - **Trung Vị**: sắp xếp dữ liệu từ nhỏ đến lớn, lấy giá trị ở vị trí giữa. Nó có thể chủ động chống lại sự nhiễu loạn của giá trị ngoại lệ, phản ánh thực tế mức độ "tầng giữa" điển hình.
-- **众数 (Mode)**: giá trị xuất hiện với tần suất cao nhất trong tập dữ liệu. Khi phân tích "sản phẩm mà người dùng thích nhất", "mã lỗi xảy ra thường xuyên nhất",众数 có thể chỉ ra xu hướng nhóm một cách trực tiếp nhất.
+- **Mode (giá trị thường xuất hiện nhất)**: giá trị xuất hiện với tần suất cao nhất trong tập dữ liệu. Khi phân tích "sản phẩm mà người dùng thích nhất", "mã lỗi xảy ra thường xuyên nhất", mode có thể chỉ ra xu hướng nhóm một cách trực tiếp nhất.
 
 ### 1.3 Độ Lệch Chuẩn (Standard Deviation): "Độ Rộng" của Phân Phối
 Nó mô tả mức độ dao động của các điểm dữ liệu từ trung bình.
@@ -65,11 +65,11 @@ Tổng hợp dữ liệu thường che khuất vấn đề. Ví dụ, tỷ lệ 
 
 ---
 
-## 3. Mô Hình漏斗: Định Vị "Điểm Chảy" của Chuỗi Giá Trị
+## 3. Mô Hình Phễu Chuyển Đổi: Định Vị "Điểm Chảy" của Chuỗi Giá Trị
 
-> Bạn đã đầu tư một lượng lớn tài nguyên để kéo người dùng, kết quả lại ít giao dịch, tiền bạn đã bỏ đi xin nhân dân tệ sao? Mô hình漏斗 có thể cho bạn biết người dùng bị vấp ngã ở cổng nào. Học phần này, bạn có thể biến "tối ưu kinh doanh" từ đoán mò mù quáng thành phát triển chính xác, đầu tư nguồn lực vào khâu có tỷ lệ chuyển đổi cao nhất.
+> Bạn đã đầu tư một lượng lớn tài nguyên để kéo người dùng, kết quả lại ít giao dịch, tiền bạn đã bỏ đi đâu rồi? Mô hình phễu chuyển đổi có thể cho bạn biết người dùng bị vấp ngã ở cổng nào. Học phần này, bạn có thể biến "tối ưu kinh doanh" từ đoán mò mù quáng thành phát triển chính xác, đầu tư nguồn lực vào khâu có tỷ lệ chuyển đổi cao nhất.
 
-Quá trình người dùng từ khi vào đến hoàn thành mục tiêu cuối cùng (chẳng hạn như thanh toán) là một quá trình lọc từng lớp. Mô hình漏斗 (Funnel) không chỉ là nhìn tỷ lệ chuyển đổi cuối cùng, mà là để nhìn **mất người ở đâu**.
+Quá trình người dùng từ khi vào đến hoàn thành mục tiêu cuối cùng (chẳng hạn như thanh toán) là một quá trình lọc từng lớp. Mô hình phễu chuyển đổi (Funnel) không chỉ là nhìn tỷ lệ chuyển đổi cuối cùng, mà là để nhìn **mất người ở đâu**.
 
 <FunnelAnalysisDemo />
 
@@ -82,7 +82,7 @@ Quá trình người dùng từ khi vào đến hoàn thành mục tiêu cuối 
 Nếu tỷ lệ mất ở một khâu nào đó bất thường cao, nói lên rằng ở đó có **ma sát trải nghiệm**. Ví dụ:
 - Mất đi nhiều ở trang đăng ký: nói lên rằng biểu mẫu quá phức tạp hoặc không nhận được mã xác minh.
 - Mất đi ở chỗ chọn phương thức thanh toán: nói lên rằng phương thức thanh toán quá ít hoặc chuyển hướng tải quá chậm.
-Đầu tư sức lực vào chỗ hẹp nhất của漏斗 để tối ưu hóa, lợi nhuận của nó thường là lớn nhất.
+Đầu tư sức lực vào chỗ hẹp nhất của phễu chuyển đổi để tối ưu hóa, lợi nhuận của nó thường là lớn nhất.
 
 ---
 
@@ -111,7 +111,7 @@ Một nhà phân tích giỏi nên sở hữu tư duy phê phán, không bị l�
 1. **Nhìn Phân Phối Chứ Không Chỉ Nhìn Trung Bình**: suy nghĩ về sự khác biệt và giá trị ngoại lệ đằng sau dữ liệu.
 2. **Nhìn Cục Bộ Chứ Không Chỉ Nhìn Tổng Số**: thông qua tổng hợp đa chiều (Group By) khôi phục lại kịch bản thực tế.
 3. **Nhìn Xu Hướng Chứ Không Chỉ Nhìn Thời Điểm**: thông qua đường cong giữ chân quan sát sức khỏe dài hạn của sản phẩm.
-4. **Tìm Kiếm Gián Đoạn Chứ Không Tối Ưu Hóa Mù Quáng**: thông qua漏斗 định vị thực sự các nút thắt kinh doanh.
+4. **Tìm Kiếm Gián Đoạn Chứ Không Tối Ưu Hóa Mù Quáng**: thông qua phễu chuyển đổi định vị thực sự các nút thắt kinh doanh.
 
 Mục tiêu của phân tích dữ liệu không phải tạo ra báo cáo xinh đẹp, mà là giảm thiểu "tính không chắc chắn", đưa ra quyết định sáng suốt dựa trên sự thật.
 test

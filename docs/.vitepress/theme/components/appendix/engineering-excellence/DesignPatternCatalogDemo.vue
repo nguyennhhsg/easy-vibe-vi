@@ -1,6 +1,6 @@
 <template>
   <div class="pattern-catalog-demo">
-    <div class="demo-label">设计模式图鉴 ── 点击分类查看常用模式</div>
+    <div class="demo-label">Atlas design pattern ── click vào category để xem các pattern phổ biến</div>
 
     <div class="categories">
       <div
@@ -12,7 +12,7 @@
       >
         <span class="cat-icon">{{ cat.icon }}</span>
         <span class="cat-name">{{ cat.name }}</span>
-        <span class="cat-count">{{ cat.patterns.length }} 个模式</span>
+        <span class="cat-count">{{ cat.patterns.length }} pattern</span>
       </div>
     </div>
 
@@ -31,9 +31,9 @@
           <div class="pattern-intent">{{ p.intent }}</div>
           <Transition name="fade">
             <div v-if="expanded === p.name" class="pattern-detail">
-              <div class="detail-label">适用场景</div>
+              <div class="detail-label">Tình huống áp dụng</div>
               <div class="detail-text">{{ p.when }}</div>
-              <div class="detail-label">代码示例</div>
+              <div class="detail-label">Code example</div>
               <pre><code>{{ p.code }}</code></pre>
             </div>
           </Transition>
@@ -51,14 +51,14 @@ const expanded = ref('')
 
 const categories = [
   {
-    name: '创建型',
+    name: 'Creational',
     icon: '🏗️',
     cls: 'create',
     patterns: [
       {
-        name: '单例模式 Singleton',
-        intent: '确保一个类只有一个实例，并提供全局访问点。',
-        when: '数据库连接池、全局配置管理、日志记录器。',
+        name: 'Singleton',
+        intent: 'Đảm bảo một class chỉ có một instance, và cung cấp điểm truy cập toàn cục.',
+        when: 'Database connection pool, quản lý config toàn cục, logger.',
         code: `class Database {
   static instance = null
   static getInstance() {
@@ -70,9 +70,9 @@ const categories = [
 }`
       },
       {
-        name: '工厂模式 Factory',
-        intent: '定义创建对象的接口，让子类决定实例化哪个类。',
-        when: '需要根据条件创建不同类型对象时。',
+        name: 'Factory',
+        intent: 'Định nghĩa interface tạo object, để subclass quyết định instantiate class nào.',
+        when: 'Khi cần tạo các loại object khác nhau dựa trên điều kiện.',
         code: `function createNotification(type) {
   switch (type) {
     case 'email': return new EmailNotify()
@@ -84,26 +84,26 @@ const categories = [
     ]
   },
   {
-    name: '结构型',
+    name: 'Structural',
     icon: '🧱',
     cls: 'structure',
     patterns: [
       {
-        name: '装饰器模式 Decorator',
-        intent: '动态地给对象添加额外职责，比继承更灵活。',
-        when: '需要在不修改原有代码的情况下扩展功能。',
+        name: 'Decorator',
+        intent: 'Thêm trách nhiệm động cho object, linh hoạt hơn kế thừa.',
+        when: 'Khi cần mở rộng tính năng mà không sửa code cũ.',
         code: `function withLogging(fn) {
   return function(...args) {
-    console.log('调用:', fn.name)
+    console.log('Gọi:', fn.name)
     return fn.apply(this, args)
   }
 }
 const save = withLogging(saveUser)`
       },
       {
-        name: '适配器模式 Adapter',
-        intent: '将一个接口转换成客户端期望的另一个接口。',
-        when: '对接第三方 API、兼容旧系统接口。',
+        name: 'Adapter',
+        intent: 'Chuyển đổi một interface sang interface khác mà client kỳ vọng.',
+        when: 'Tích hợp API bên thứ ba, tương thích interface hệ thống cũ.',
         code: `class OldApi { getData() { ... } }
 
 class ApiAdapter {
@@ -114,14 +114,14 @@ class ApiAdapter {
     ]
   },
   {
-    name: '行为型',
+    name: 'Behavioral',
     icon: '🎭',
     cls: 'behavior',
     patterns: [
       {
-        name: '观察者模式 Observer',
-        intent: '定义一对多依赖，当状态变化时自动通知所有依赖者。',
-        when: '事件系统、状态管理、消息推送。',
+        name: 'Observer',
+        intent: 'Định nghĩa dependency 1-nhiều, tự động notify các đối tượng phụ thuộc khi state thay đổi.',
+        when: 'Event system, state management, message push.',
         code: `class EventBus {
   listeners = {}
   on(event, fn) {
@@ -133,13 +133,13 @@ class ApiAdapter {
 }`
       },
       {
-        name: '策略模式 Strategy',
-        intent: '定义一系列算法，使它们可以互相替换。',
-        when: '排序策略、支付方式、验证规则的切换。',
+        name: 'Strategy',
+        intent: 'Định nghĩa một họ thuật toán có thể thay thế cho nhau.',
+        when: 'Chiến lược sort, phương thức thanh toán, switch rule validation.',
         code: `const strategies = {
-  bubble: arr => { /* 冒泡排序 */ },
-  quick:  arr => { /* 快速排序 */ },
-  merge:  arr => { /* 归并排序 */ }
+  bubble: arr => { /* bubble sort */ },
+  quick:  arr => { /* quick sort */ },
+  merge:  arr => { /* merge sort */ }
 }
 function sort(arr, type) {
   return strategies[type](arr)

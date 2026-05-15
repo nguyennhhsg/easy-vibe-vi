@@ -1,6 +1,6 @@
 <template>
   <div class="tech-radar-demo">
-    <div class="demo-label">技术雷达 ── 点击技术点查看详情</div>
+    <div class="demo-label">Tech Radar ── Bấm vào một công nghệ để xem chi tiết</div>
 
     <div class="radar-container">
       <div class="radar-rings">
@@ -29,7 +29,7 @@
     <Transition name="fade">
       <div v-if="selectedTech" class="info-card">
         <h4>{{ selectedTech.name }}</h4>
-        <div class="info-ring">环位：{{ selectedTech.ring }}</div>
+        <div class="info-ring">Vòng: {{ selectedTech.ring }}</div>
         <p>{{ selectedTech.desc }}</p>
       </div>
     </Transition>
@@ -42,29 +42,29 @@ const selected = ref('')
 const selectedTech = computed(() => techs.find(t => t.name === selected.value))
 
 const rings = [
-  { name: '采纳', cls: 'adopt' },
-  { name: '试验', cls: 'trial' },
-  { name: '评估', cls: 'assess' },
-  { name: '暂缓', cls: 'hold' }
+  { name: 'Adopt', cls: 'adopt' },
+  { name: 'Trial', cls: 'trial' },
+  { name: 'Assess', cls: 'assess' },
+  { name: 'Hold', cls: 'hold' }
 ]
 
 const cats = [
-  { name: '语言', cls: 'lang' },
-  { name: '框架', cls: 'framework' },
-  { name: '工具', cls: 'tool' },
-  { name: '平台', cls: 'platform' }
+  { name: 'Ngôn ngữ', cls: 'lang' },
+  { name: 'Framework', cls: 'framework' },
+  { name: 'Công cụ', cls: 'tool' },
+  { name: 'Nền tảng', cls: 'platform' }
 ]
 
 const techs = [
-  { name: 'TypeScript', category: 'lang', ring: '采纳', pos: { top: '42%', left: '30%' }, desc: '类型安全的 JavaScript 超集，已成为前端项目标配。' },
-  { name: 'React', category: 'framework', ring: '采纳', pos: { top: '35%', left: '55%' }, desc: '生态最丰富的前端框架，适合大型团队和复杂应用。' },
-  { name: 'Vue', category: 'framework', ring: '采纳', pos: { top: '50%', left: '45%' }, desc: '渐进式框架，学习曲线平缓，中文社区活跃。' },
-  { name: 'Go', category: 'lang', ring: '采纳', pos: { top: '55%', left: '32%' }, desc: '高并发后端首选，编译快、部署简单。' },
-  { name: 'Rust', category: 'lang', ring: '试验', pos: { top: '30%', left: '22%' }, desc: '内存安全无 GC，适合系统编程和高性能场景，学习曲线陡峭。' },
-  { name: 'Svelte', category: 'framework', ring: '试验', pos: { top: '25%', left: '60%' }, desc: '编译时框架，无虚拟 DOM，包体积极小。' },
-  { name: 'Bun', category: 'tool', ring: '评估', pos: { top: '18%', left: '42%' }, desc: '新一代 JS 运行时，速度极快但生态尚在完善。' },
-  { name: 'Deno', category: 'platform', ring: '评估', pos: { top: '15%', left: '55%' }, desc: '安全优先的 JS/TS 运行时，内置工具链。' },
-  { name: 'jQuery', category: 'framework', ring: '暂缓', pos: { top: '8%', left: '38%' }, desc: '历史功臣，但现代框架已全面替代，新项目不建议使用。' }
+  { name: 'TypeScript', category: 'lang', ring: 'Adopt', pos: { top: '42%', left: '30%' }, desc: 'Bản mở rộng có kiểu của JavaScript, đã trở thành tiêu chuẩn cho dự án frontend.' },
+  { name: 'React', category: 'framework', ring: 'Adopt', pos: { top: '35%', left: '55%' }, desc: 'Framework frontend có hệ sinh thái phong phú nhất, phù hợp team lớn và ứng dụng phức tạp.' },
+  { name: 'Vue', category: 'framework', ring: 'Adopt', pos: { top: '50%', left: '45%' }, desc: 'Framework tiệm tiến, đường cong học dễ chịu, cộng đồng năng động.' },
+  { name: 'Go', category: 'lang', ring: 'Adopt', pos: { top: '55%', left: '32%' }, desc: 'Lựa chọn hàng đầu cho backend xử lý đồng thời cao, biên dịch nhanh, triển khai đơn giản.' },
+  { name: 'Rust', category: 'lang', ring: 'Trial', pos: { top: '30%', left: '22%' }, desc: 'An toàn bộ nhớ không cần GC, phù hợp system programming và kịch bản hiệu năng cao, đường cong học dốc.' },
+  { name: 'Svelte', category: 'framework', ring: 'Trial', pos: { top: '25%', left: '60%' }, desc: 'Framework biên dịch, không có virtual DOM, kích thước bundle cực nhỏ.' },
+  { name: 'Bun', category: 'tool', ring: 'Assess', pos: { top: '18%', left: '42%' }, desc: 'Runtime JS thế hệ mới, tốc độ cực nhanh nhưng hệ sinh thái còn đang hoàn thiện.' },
+  { name: 'Deno', category: 'platform', ring: 'Assess', pos: { top: '15%', left: '55%' }, desc: 'Runtime JS/TS ưu tiên bảo mật, tích hợp sẵn toolchain.' },
+  { name: 'jQuery', category: 'framework', ring: 'Hold', pos: { top: '8%', left: '38%' }, desc: 'Công thần lịch sử, nhưng đã bị các framework hiện đại thay thế toàn diện, không khuyến nghị cho dự án mới.' }
 ]
 </script>
 

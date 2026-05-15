@@ -1,22 +1,22 @@
 <!--
   TrackingOverviewDemo.vue
-  埋点系统概览 - 展示埋点在系统中的位置和作用
+  Tổng quan hệ thống tracking - hiển thị vị trí và vai trò của tracking trong hệ thống
 -->
 <template>
   <div class="tracking-overview-demo">
     <div class="header">
       <div class="title">
-        埋点系统概览
+        Tổng quan hệ thống tracking
       </div>
       <div class="subtitle">
-        从用户行为到数据洞察的完整链路
+        Luồng đầy đủ từ hành vi user đến insight dữ liệu
       </div>
     </div>
 
     <div class="system-flow">
       <div class="flow-section user-actions">
         <div class="section-title">
-          用户行为层
+          Tầng hành vi user
         </div>
         <div class="action-grid">
           <div
@@ -42,7 +42,7 @@
 
       <div class="flow-section tracking-layer">
         <div class="section-title">
-          埋点采集层
+          Tầng thu thập tracking
         </div>
         <div class="tracking-box">
           <div class="tracking-icon">
@@ -65,7 +65,7 @@
 
       <div class="flow-section data-pipeline">
         <div class="section-title">
-          数据处理层
+          Tầng xử lý dữ liệu
         </div>
         <div class="pipeline-steps">
           <div
@@ -95,7 +95,7 @@
 
       <div class="flow-section insights">
         <div class="section-title">
-          数据洞察层
+          Tầng insight dữ liệu
         </div>
         <div class="insight-cards">
           <div class="insight-card">
@@ -103,7 +103,7 @@
               {{ formatNumber(metrics.totalUsers) }}
             </div>
             <div class="insight-label">
-              总用户数
+              Tổng user
             </div>
           </div>
           <div class="insight-card">
@@ -111,7 +111,7 @@
               {{ formatNumber(metrics.totalEvents) }}
             </div>
             <div class="insight-label">
-              总事件数
+              Tổng event
             </div>
           </div>
           <div class="insight-card">
@@ -119,7 +119,7 @@
               {{ metrics.conversionRate }}%
             </div>
             <div class="insight-label">
-              转化率
+              Conversion rate
             </div>
           </div>
           <div class="insight-card">
@@ -127,7 +127,7 @@
               {{ metrics.retentionRate }}%
             </div>
             <div class="insight-label">
-              留存率
+              Retention rate
             </div>
           </div>
         </div>
@@ -136,7 +136,7 @@
 
     <div class="benefits">
       <div class="benefit-title">
-        埋点的核心价值
+        Giá trị cốt lõi của tracking
       </div>
       <div class="benefit-grid">
         <div class="benefit-item">
@@ -145,10 +145,10 @@
           </div>
           <div class="benefit-text">
             <div class="benefit-name">
-              精准决策
+              Quyết định chính xác
             </div>
             <div class="benefit-desc">
-              基于数据而非直觉做决策
+              Quyết định dựa trên dữ liệu, không dựa cảm tính
             </div>
           </div>
         </div>
@@ -158,10 +158,10 @@
           </div>
           <div class="benefit-text">
             <div class="benefit-name">
-              用户洞察
+              Hiểu user
             </div>
             <div class="benefit-desc">
-              理解用户行为和需求
+              Hiểu hành vi và nhu cầu của user
             </div>
           </div>
         </div>
@@ -171,10 +171,10 @@
           </div>
           <div class="benefit-text">
             <div class="benefit-name">
-              增长优化
+              Tối ưu tăng trưởng
             </div>
             <div class="benefit-desc">
-              发现增长机会和瓶颈
+              Phát hiện cơ hội tăng trưởng và nút cổ chai
             </div>
           </div>
         </div>
@@ -184,10 +184,10 @@
           </div>
           <div class="benefit-text">
             <div class="benefit-name">
-              快速迭代
+              Iterate nhanh
             </div>
             <div class="benefit-desc">
-              验证假设，快速调整
+              Kiểm chứng giả thuyết, điều chỉnh nhanh
             </div>
           </div>
         </div>
@@ -203,10 +203,10 @@ const selectedAction = ref('click')
 const currentStep = ref(0)
 
 const userActions = [
-  { id: 'click', name: '点击按钮', icon: '👆' },
-  { id: 'view', name: '浏览页面', icon: '👀' },
-  { id: 'search', name: '搜索内容', icon: '🔍' },
-  { id: 'purchase', name: '购买商品', icon: '🛒' }
+  { id: 'click', name: 'Click nút', icon: '👆' },
+  { id: 'view', name: 'Xem trang', icon: '👀' },
+  { id: 'search', name: 'Tìm kiếm', icon: '🔍' },
+  { id: 'purchase', name: 'Mua hàng', icon: '🛒' }
 ]
 
 const selectedEventData = computed(() => {
@@ -214,17 +214,17 @@ const selectedEventData = computed(() => {
     click: {
       event: 'click_button',
       properties: {
-        button_name: '立即购买',
-        page: '商品详情页',
-        position: '顶部'
+        button_name: 'Mua ngay',
+        page: 'Trang chi tiết sản phẩm',
+        position: 'Đầu trang'
       }
     },
     view: {
       event: 'page_view',
       properties: {
-        page_title: '商品详情页',
+        page_title: 'Trang chi tiết sản phẩm',
         page_url: '/product/123',
-        referrer: '首页'
+        referrer: 'Trang chủ'
       }
     },
     search: {
@@ -232,7 +232,7 @@ const selectedEventData = computed(() => {
       properties: {
         query: 'iPhone 15',
         results_count: 42,
-        filter: '价格升序'
+        filter: 'Giá tăng dần'
       }
     },
     purchase: {
@@ -240,7 +240,7 @@ const selectedEventData = computed(() => {
       properties: {
         order_id: 'ORD123456',
         total_amount: 7999.0,
-        payment_method: '支付宝'
+        payment_method: 'Momo'
       }
     }
   }
@@ -248,11 +248,11 @@ const selectedEventData = computed(() => {
 })
 
 const pipelineSteps = [
-  { name: '数据采集', desc: '客户端 SDK 收集用户行为' },
-  { name: '数据传输', desc: '加密上报到服务器' },
-  { name: '数据清洗', desc: '去重、校验、格式化' },
-  { name: '数据存储', desc: '存入数据仓库' },
-  { name: '数据分析', desc: '生成报表和洞察' }
+  { name: 'Thu thập dữ liệu', desc: 'SDK client thu thập hành vi user' },
+  { name: 'Truyền dữ liệu', desc: 'Mã hoá và đẩy lên server' },
+  { name: 'Làm sạch dữ liệu', desc: 'Dedup, validate, format' },
+  { name: 'Lưu trữ dữ liệu', desc: 'Lưu vào data warehouse' },
+  { name: 'Phân tích dữ liệu', desc: 'Sinh báo cáo và insight' }
 ]
 
 const metrics = ref({

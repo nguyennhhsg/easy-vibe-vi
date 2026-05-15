@@ -470,11 +470,11 @@ Trong đó `Foreign keys` thể hiện mối quan hệ liên kết giữa các b
 Ví dụ, khi tạo `bảng học sinh`, chúng ta có thể định nghĩa khóa ngoại như sau: (cột `mã lớp học` là một khóa ngoại. Khóa ngoại này tham chiếu đến cột `mã lớp` trong `bảng lớp học`.)
 
 ```sql
-CREATE TABLE 学生表 (
-    学生学号 INT PRIMARY KEY,
-    学生姓名 VARCHAR(50),
-    所属班级编号 INT,
-    FOREIGN KEY (所属班级编号) REFERENCES 班级表(班级编号)
+CREATE TABLE bang_sinh_vien (
+    ma_so_sv INT PRIMARY KEY,
+    ho_ten VARCHAR(50),
+    ma_lop INT,
+    FOREIGN KEY (ma_lop) REFERENCES bang_lop_hoc(ma_lop)
 );
 ```
 
@@ -721,7 +721,7 @@ Nếu đã cấu hình SSH key, bạn nên dùng địa chỉ SSH để clone (`
 
 ![](images/image36.png)
 
-Sau khi clone xong, bạn cũng có thể nhờ Trae hoặc Claude Code giúp khởi động dự án, ví dụ trực tiếp nói trong giao diện Agent: `帮我直接启动这个项目里面的 project 1`, hoặc sao chép đường dẫn tuyệt đối của project muốn khởi động rồi dán cho LLM để LLM khởi động trực tiếp.
+Sau khi clone xong, bạn cũng có thể nhờ Trae hoặc Claude Code giúp khởi động dự án, ví dụ trực tiếp nói trong giao diện Agent: `Hãy khởi động trực tiếp project 1 bên trong repo này cho tôi`, hoặc sao chép đường dẫn tuyệt đối của project muốn khởi động rồi dán cho LLM để LLM khởi động trực tiếp.
 ## 3.2 Dự án 1 - CRUD Menu Cửa Hàng Burger
 
 Tiếp theo chúng ta bước vào phần thực hành — lấy `project-burger-shop-menu-crud-1` làm ví dụ, bạn sẽ học cách khởi tạo database Supabase chỉ với một câu lệnh SQL script, đồng thời cấu hình kết nối giữa dự án local và database Supabase để frontend có thể đọc/ghi dữ liệu menu bình thường.
@@ -1654,13 +1654,13 @@ Trước khi bắt đầu, bạn có thể tham khảo các nền tảng BaaS t�
 
 | Nền tảng/Dịch vụ | Loại | Gói miễn phí/Định giá | Đặc điểm / Phù hợp với |
 | --- | --- | --- | --- |
-| Firebase（Google） | BaaS toàn托管（Auth + Firestore + Storage + Functions + Hosting） | Spark: miễn phí mức nhẹ; Blaze: tính theo lượng dùng (Firestore/Storage/Functions tính riêng) | Trưởng thành nhất trong ngành, tài liệu tốt, dễ bắt đầu, khả năng realtime mạnh. Phù hợp với sản phẩm vừa và nhỏ, team thiên về mobile/frontend. Nhược điểm: tính phí phức tạp, vendor lock-in cao, hạn chế truy vấn nhiều (đặc biệt Firestore). |
+| Firebase（Google） | BaaS toànmanaged（Auth + Firestore + Storage + Functions + Hosting） | Spark: miễn phí mức nhẹ; Blaze: tính theo lượng dùng (Firestore/Storage/Functions tính riêng) | Trưởng thành nhất trong ngành, tài liệu tốt, dễ bắt đầu, khả năng realtime mạnh. Phù hợp với sản phẩm vừa và nhỏ, team thiên về mobile/frontend. Nhược điểm: tính phí phức tạp, vendor lock-in cao, hạn chế truy vấn nhiều (đặc biệt Firestore). |
 | Supabase | BaaS mã nguồn mở (Postgres + Auth + Storage + Edge Functions + Realtime) | Miễn phí: 500MB DB, 1GB Storage, ít lần gọi serverless function; Pro: tính theo instance | Phiên bản SQL gần giống Firebase nhất; giao diện xuất sắc, trải nghiệm hiện đại, có thể tự host. Phù hợp với ứng dụng cần SQL mạnh, BI, khả năng transaction. Nhược điểm: chi phí cao khi concurrent lớn hoặc function phức tạp. |
 | Appwrite Cloud | BaaS mã nguồn mở all-in-one (DB + Auth + Storage + Functions + Realtime) | Miễn phí: bao gồm DB/Storage/FaaS cơ bản; trả phí theo mức tài nguyên | Trải nghiệm hiện đại, API thống nhất, có thể tự host; phù hợp để iterate nhanh với ứng dụng thân thiện với developer. Nhược điểm: hệ sinh thái chưa chín muồi bằng Firebase/Supabase; hiệu năng với ứng dụng lớn cần kiểm tra. |
 | Nhost | Postgres + GraphQL + Auth + Storage + Functions | Miễn phí: 1GB DB, 1GB Storage, ít lần gọi function | Giống "Supabase + Hasura"; GraphQL tự nhiên; phù hợp với team frontend và dự án React/Next.js. Nhược điểm: hệ sinh thái nhỏ, chi phí tăng theo lượng dùng. |
 | AWS Amplify | Backend all-in-one của AWS (Cognito + AppSync + DynamoDB + Storage + Functions + Hosting) | Miễn phí: quota Hosting + Cognito 10k MAU + một phần quota function | Đầy đủ và toàn diện, phù hợp với team đã có nền tảng AWS; độ tin cậy cấp enterprise. Nhược điểm: khó bắt đầu nhất, dịch vụ phân mảnh; chi phí vận hành cao với team startup. |
 | Xata（tăng trưởng nhanh trong 2 năm gần đây） | Cơ sở dữ liệu đa mô hình + Auth + Edge Functions | Miễn phí: 250k bản ghi, 15GB băng thông | Thiên về "DB + API" hơn, nhưng cung cấp Auth, file, logic, có thể dùng làm backend full-stack nhẹ. Trải nghiệm UI/developer cực tốt. Nhược điểm: tính năng chưa toàn diện bằng Firebase/Supabase. |
-| Convex（trải nghiệm developer cực mạnh） | Cơ sở dữ liệu托管 + Auth + Functions (ưu tiên frontend) | Bản miễn phí cho development; trả phí theo lượng request | Bắt đầu cực đơn giản; không cần schema; frontend viết function là dùng được backend. Phù hợp với MVP/kiểm chứng nhanh. Nhược điểm: gắn chặt với nền tảng, chi phí migration cao; không hẳn là BaaS truyền thống. |
+| Convex（trải nghiệm developer cực mạnh） | Cơ sở dữ liệumanaged + Auth + Functions (ưu tiên frontend) | Bản miễn phí cho development; trả phí theo lượng request | Bắt đầu cực đơn giản; không cần schema; frontend viết function là dùng được backend. Phù hợp với MVP/kiểm chứng nhanh. Nhược điểm: gắn chặt với nền tảng, chi phí migration cao; không hẳn là BaaS truyền thống. |
 ## Xác thực (Auth)
 
 | Công cụ/Nền tảng        | Tính năng                                                                                                               | Miễn phí/Định giá                        | Phù hợp & Ưu nhược điểm                                                                                                                                   |

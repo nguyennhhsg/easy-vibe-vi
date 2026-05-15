@@ -1007,11 +1007,11 @@ description: Rà soát Pull Request về chất lượng code. Kích hoạt khi 
 - [mcp-builder](https://github.com/anthropics/skills/tree/main/skills/mcp-builder) - Kỹ năng để xây dựng máy chủ MCP
 - [slack-gif-creator](https://github.com/anthropics/skills/tree/main/skills/slack-gif-creator) - Kỹ năng để tạo GIF Slack
 
-### Hướng dẫn tiếng Việt
+### Tài liệu tham khảo bên ngoài
 
-- [Hướng dẫn cấu hình và sử dụng nâng cao Claude Code hoàn toàn](https://blog.csdn.net/2601_95335870/article/details/158460599)
-- [Vibe Coding - Hướng dẫn thực hành toàn bộ CLAUDE.md, Skills, Subagents](https://blog.csdn.net/yangshangwei/article/details/158319117)
-- [Hướng dẫn tùy chỉnh Claude Code Skills từng bước](https://m.blog.csdn.net/u010028049/article/details/157979705)
+- [Hướng dẫn cấu hình và sử dụng nâng cao Claude Code hoàn toàn (tiếng Trung)](https://blog.csdn.net/2601_95335870/article/details/158460599)
+- [Vibe Coding - Hướng dẫn thực hành toàn bộ CLAUDE.md, Skills, Subagents (tiếng Trung)](https://blog.csdn.net/yangshangwei/article/details/158319117)
+- [Hướng dẫn tùy chỉnh Claude Code Skills từng bước (tiếng Trung)](https://m.blog.csdn.net/u010028049/article/details/157979705)
 
 ## Đọc sâu: Cơ chế nội bộ của Claude Skills
 

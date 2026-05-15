@@ -1,22 +1,22 @@
 <template>
   <div class="lc-root">
-    <h4 class="lc-title">开源许可证对比工具</h4>
+    <h4 class="lc-title">Tool so sánh open source license</h4>
 
     <!-- Filter -->
     <div class="lc-filter">
-      <span class="lc-filter-label">我的需求：</span>
+      <span class="lc-filter-label">Yêu cầu của tôi:</span>
       <button
         v-for="f in filters"
         :key="f.id"
         :class="['lc-tag', { 'lc-tag--on': activeFilters.includes(f.id) }]"
         @click="toggle(f.id)"
       >{{ f.label }}</button>
-      <button v-if="activeFilters.length" class="lc-tag lc-tag--clear" @click="activeFilters = []">清除筛选</button>
+      <button v-if="activeFilters.length" class="lc-tag lc-tag--clear" @click="activeFilters = []">Xóa filter</button>
     </div>
 
     <!-- Recommendation -->
     <div v-if="recommended" class="lc-recommend">
-      推荐许可证：<strong>{{ recommended.name }}</strong> — {{ recommended.summary }}
+      License đề xuất: <strong>{{ recommended.name }}</strong> — {{ recommended.summary }}
     </div>
 
     <!-- Table -->
@@ -24,7 +24,7 @@
       <table class="lc-table">
         <thead>
           <tr>
-            <th>许可证</th>
+            <th>License</th>
             <th v-for="p in permissions" :key="p.id">{{ p.label }}</th>
           </tr>
         </thead>
@@ -50,9 +50,9 @@
 
     <!-- Legend -->
     <div class="lc-legend">
-      <span><span class="lc-yes">&#10003;</span> 允许</span>
-      <span><span class="lc-no">&#10007;</span> 不允许/限制</span>
-      <span><span class="lc-cond">&#9888;</span> 有条件</span>
+      <span><span class="lc-yes">&#10003;</span> Cho phép</span>
+      <span><span class="lc-no">&#10007;</span> Không cho phép/giới hạn</span>
+      <span><span class="lc-cond">&#9888;</span> Có điều kiện</span>
     </div>
   </div>
 </template>
@@ -61,49 +61,49 @@
 import { ref, computed } from 'vue'
 
 const permissions = [
-  { id: 'commercial', label: '商用' },
-  { id: 'modify', label: '修改' },
-  { id: 'distribute', label: '分发' },
-  { id: 'patent', label: '专利授权' },
-  { id: 'private', label: '私用' },
-  { id: 'copyleft', label: '需开源衍生' },
-  { id: 'liability', label: '免责' }
+  { id: 'commercial', label: 'Commercial use' },
+  { id: 'modify', label: 'Modify' },
+  { id: 'distribute', label: 'Distribute' },
+  { id: 'patent', label: 'Patent grant' },
+  { id: 'private', label: 'Private use' },
+  { id: 'copyleft', label: 'Cần copyleft' },
+  { id: 'liability', label: 'Miễn trừ trách nhiệm' }
 ]
 
 const licenses = [
   {
-    id: 'mit', name: 'MIT', summary: '最宽松，几乎无限制',
+    id: 'mit', name: 'MIT', summary: 'Tự do nhất, gần như không giới hạn',
     perms: { commercial: true, modify: true, distribute: true, patent: false, private: true, copyleft: false, liability: true },
     tags: ['commercial', 'simple', 'private']
   },
   {
-    id: 'apache2', name: 'Apache 2.0', summary: '宽松 + 专利保护',
+    id: 'apache2', name: 'Apache 2.0', summary: 'Tự do + bảo hộ patent',
     perms: { commercial: true, modify: true, distribute: true, patent: true, private: true, copyleft: false, liability: true },
     tags: ['commercial', 'patent', 'private']
   },
   {
-    id: 'gpl3', name: 'GPL 3.0', summary: '强 Copyleft，衍生必须开源',
+    id: 'gpl3', name: 'GPL 3.0', summary: 'Copyleft mạnh, sản phẩm phái sinh phải open source',
     perms: { commercial: true, modify: true, distribute: true, patent: true, private: true, copyleft: true, liability: true },
     tags: ['copyleft', 'patent']
   },
   {
-    id: 'bsd2', name: 'BSD 2-Clause', summary: '类似 MIT，极简宽松',
+    id: 'bsd2', name: 'BSD 2-Clause', summary: 'Giống MIT, tự do tối giản',
     perms: { commercial: true, modify: true, distribute: true, patent: false, private: true, copyleft: false, liability: true },
     tags: ['commercial', 'simple', 'private']
   },
   {
-    id: 'mpl2', name: 'MPL 2.0', summary: '文件级 Copyleft，折中方案',
+    id: 'mpl2', name: 'MPL 2.0', summary: 'Copyleft cấp file, giải pháp trung hòa',
     perms: { commercial: true, modify: true, distribute: true, patent: true, private: true, copyleft: 'cond', liability: true },
     tags: ['commercial', 'patent', 'copyleft']
   }
 ]
 
 const filters = [
-  { id: 'commercial', label: '允许商用' },
-  { id: 'patent', label: '需要专利保护' },
-  { id: 'simple', label: '尽量简单' },
-  { id: 'copyleft', label: '要求衍生开源' },
-  { id: 'private', label: '允许闭源使用' }
+  { id: 'commercial', label: 'Cho phép thương mại' },
+  { id: 'patent', label: 'Cần bảo hộ patent' },
+  { id: 'simple', label: 'Đơn giản' },
+  { id: 'copyleft', label: 'Yêu cầu phái sinh open source' },
+  { id: 'private', label: 'Cho phép closed source' }
 ]
 
 const activeFilters = ref([])

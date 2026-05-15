@@ -1,21 +1,21 @@
 <!--
   LoadBalancingDemo.vue
-  负载均衡 - 轮询/加权/最少连接/IP哈希
+  Cân bằng tải - Round robin/Weighted/Least connection/IP hash
 -->
 <template>
   <div class="load-balancing-demo">
     <div class="header">
       <div class="title">
-        ⚖️ 负载均衡：把"压力"均匀分摊到多台服务器
+        ⚖️ Cân bằng tải: Chia đều "áp lực" sang nhiều server
       </div>
       <div class="subtitle">
-        想象成银行的取号系统——把客户均匀分配到各个窗口，避免某个窗口排长队
+        Hãy hình dung như hệ thống lấy số ở ngân hàng — chia khách đều cho các quầy, tránh một quầy bị xếp hàng dài
       </div>
     </div>
 
     <div class="strategy-selector">
       <div class="selector-title">
-        选择负载均衡策略
+        Chọn chiến lược cân bằng tải
       </div>
       <div class="strategy-tabs">
         <button
@@ -37,7 +37,7 @@
     <div class="simulation-area">
       <div class="sim-header">
         <div class="sim-title">
-          🎮 负载均衡模拟器
+          🎮 Trình mô phỏng cân bằng tải
         </div>
         <div class="sim-controls">
           <button
@@ -45,13 +45,13 @@
             :disabled="isSimulating"
             @click="startSimulation"
           >
-            {{ isSimulating ? '运行中...' : '▶ 开始模拟' }}
+            {{ isSimulating ? 'Đang chạy...' : '▶ Bắt đầu mô phỏng' }}
           </button>
           <button
             class="sim-btn reset"
             @click="resetSimulation"
           >
-            ↺ 重置
+            ↺ Reset
           </button>
         </div>
       </div>
@@ -73,10 +73,10 @@
       <div class="servers-pool">
         <div class="pool-header">
           <div class="pool-title">
-            🏢 后端服务器集群
+            🏢 Cluster server backend
           </div>
           <div class="pool-config">
-            <label>服务器数量:</label>
+            <label>Số lượng server:</label>
             <input
               v-model="serverCount"
               type="range"
@@ -84,7 +84,7 @@
               max="6"
               :disabled="isSimulating"
             >
-            <span>{{ serverCount }} 台</span>
+            <span>{{ serverCount }} máy</span>
           </div>
         </div>
 
@@ -112,11 +112,11 @@
 
             <div class="server-metrics">
               <div class="metric">
-                <span class="metric-label">请求数:</span>
+                <span class="metric-label">Số request:</span>
                 <span class="metric-value">{{ server.requests }}</span>
               </div>
               <div class="metric">
-                <span class="metric-label">权重:</span>
+                <span class="metric-label">Trọng số:</span>
                 <input
                   v-if="currentStrategy === 'weighted'"
                   v-model.number="server.weight"
@@ -139,7 +139,7 @@
 
             <div class="recent-requests">
               <div class="req-label">
-                最近请求:
+                Request gần đây:
               </div>
               <div class="req-list">
                 <span
@@ -159,11 +159,11 @@
       <div class="request-queue">
         <div class="queue-header">
           <div class="queue-title">
-            📨 请求队列
+            📨 Hàng đợi request
           </div>
           <div class="queue-stats">
-            <span>总请求: {{ totalRequests }}</span>
-            <span>待处理: {{ pendingRequests.length }}</span>
+            <span>Tổng request: {{ totalRequests }}</span>
+            <span>Đang chờ: {{ pendingRequests.length }}</span>
           </div>
         </div>
 
@@ -192,7 +192,7 @@
 
       <div class="strategy-stats">
         <div class="stats-title">
-          📊 负载分布统计
+          📊 Thống kê phân bố tải
         </div>
         <div class="stats-grid">
           <div class="stat-card">
@@ -200,7 +200,7 @@
               {{ avgLoad }}%
             </div>
             <div class="stat-label">
-              平均负载
+              Tải trung bình
             </div>
           </div>
           <div class="stat-card">
@@ -208,7 +208,7 @@
               {{ maxLoad }}%
             </div>
             <div class="stat-label">
-              最高负载
+              Tải cao nhất
             </div>
           </div>
           <div class="stat-card">
@@ -216,7 +216,7 @@
               {{ loadStdDev }}
             </div>
             <div class="stat-label">
-              负载标准差
+              Độ lệch chuẩn tải
             </div>
           </div>
           <div class="stat-card">
@@ -224,7 +224,7 @@
               {{ mostBusyServer || '-' }}
             </div>
             <div class="stat-label">
-              最忙服务器
+              Server bận nhất
             </div>
           </div>
         </div>
@@ -236,39 +236,39 @@
 <script setup>
 import { ref, computed, reactive, watch } from 'vue'
 
-// 负载均衡策略
+// Các chiến lược cân bằng tải
 const strategies = [
   {
     id: 'roundrobin',
     icon: '🔄',
-    name: '轮询',
-    badge: '默认',
-    shortDesc: '挨个分发，雨露均沾',
-    fullDesc: '按照服务器列表的顺序，依次将请求分配给每台服务器。就像银行叫号，1号窗口完事了到2号，2号完事了到3号，轮着来。'
+    name: 'Round robin',
+    badge: 'Mặc định',
+    shortDesc: 'Chia tuần tự, đều khắp',
+    fullDesc: 'Theo thứ tự danh sách server, lần lượt giao request cho từng server. Giống như ngân hàng gọi số: quầy 1 xong tới quầy 2, quầy 2 xong tới quầy 3, lần lượt theo vòng.'
   },
   {
     id: 'weighted',
     icon: '⚖️',
-    name: '加权轮询',
+    name: 'Weighted round robin',
     badge: '',
-    shortDesc: '性能好的多干活',
-    fullDesc: '给每台服务器设置一个权重值，性能强的服务器权重高，分配到的请求就多。就像团队里能力强的人多分担点任务。'
+    shortDesc: 'Server mạnh làm nhiều việc hơn',
+    fullDesc: 'Gán trọng số cho mỗi server, server mạnh được trọng số cao hơn nên nhận nhiều request hơn. Giống trong team, người giỏi gánh phần việc nhiều hơn.'
   },
   {
     id: 'leastconn',
     icon: '🔌',
-    name: '最少连接',
+    name: 'Least connection',
     badge: '',
-    shortDesc: '谁闲找谁',
-    fullDesc: '将新请求分配给当前活跃连接数最少的服务器。就像食堂打饭，看哪个窗口排队的人少就去哪个。'
+    shortDesc: 'Ai rảnh thì giao việc',
+    fullDesc: 'Giao request mới cho server hiện đang có ít connection nhất. Giống đi ăn căng tin, thấy quầy nào ít người xếp hàng thì xếp vào đó.'
   },
   {
     id: 'iphash',
     icon: '🔢',
-    name: 'IP 哈希',
+    name: 'IP hash',
     badge: '',
-    shortDesc: '同一用户永远去同一台',
-    fullDesc: '根据客户端 IP 地址计算哈希值，将同一 IP 的请求永远分配到同一台服务器。适用于需要保持会话状态的场景（如购物车）。'
+    shortDesc: 'Cùng user luôn về cùng một server',
+    fullDesc: 'Tính hash từ IP client, request cùng IP luôn về cùng server. Phù hợp khi cần giữ session state (ví dụ giỏ hàng).'
   }
 ]
 
@@ -279,7 +279,7 @@ const currentIndex = ref(0)
 
 const currentStrategyData = computed(() => strategies.find(s => s.id === currentStrategy.value))
 
-// 生成服务器列表
+// Sinh danh sách server
 const generateServers = (count) => {
   const colors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899']
   const names = ['Server-A', 'Server-B', 'Server-C', 'Server-D', 'Server-E', 'Server-F']
@@ -299,13 +299,13 @@ const generateServers = (count) => {
 
 const servers = ref(generateServers(serverCount.value))
 
-// 请求队列
+// Hàng đợi request
 const requestQueue = ref([])
 const totalRequests = ref(0)
 const pendingRequests = computed(() => requestQueue.value.filter(r => r.status === 'pending'))
 const displayedRequests = computed(() => requestQueue.value.slice(0, 10))
 
-// 选择服务器的算法
+// Thuật toán chọn server
 const selectServer = (requestId, clientIP) => {
   let selectedIndex = 0
 
@@ -341,7 +341,7 @@ const selectServer = (requestId, clientIP) => {
   return servers.value[selectedIndex]
 }
 
-// 模拟请求
+// Mô phỏng request
 const simulateRequest = async () => {
   const reqId = totalRequests.value + 1
   const clientIP = `192.168.1.${Math.floor(Math.random() * 255) + 1}`
@@ -350,7 +350,7 @@ const simulateRequest = async () => {
     id: reqId,
     clientIP,
     status: 'pending',
-    statusText: '等待分配...',
+    statusText: 'Đang chờ phân phối...',
     assignedServer: null,
     serverColor: null
   }
@@ -358,16 +358,16 @@ const simulateRequest = async () => {
   requestQueue.value.unshift(request)
   totalRequests.value++
 
-  // 模拟分配延迟
+  // Mô phỏng độ trễ phân phối
   await new Promise(resolve => setTimeout(resolve, 300))
 
   const server = selectServer(reqId, clientIP)
   request.assignedServer = server.name
   request.serverColor = server.color
   request.status = 'assigned'
-  request.statusText = '已分配'
+  request.statusText = 'Đã phân phối'
 
-  // 更新服务器状态
+  // Cập nhật trạng thái server
   server.requests++
   server.connections++
   server.load = Math.min(100, server.load + Math.floor(Math.random() * 10) + 5)
@@ -382,7 +382,7 @@ const simulateRequest = async () => {
   }, 2000)
 }
 
-// 开始模拟
+// Bắt đầu mô phỏng
 const startSimulation = async () => {
   isSimulating.value = true
 
@@ -395,7 +395,7 @@ const startSimulation = async () => {
   isSimulating.value = false
 }
 
-// 重置模拟
+// Reset mô phỏng
 const resetSimulation = () => {
   isSimulating.value = false
   servers.value = generateServers(serverCount.value)
@@ -404,13 +404,13 @@ const resetSimulation = () => {
   currentIndex.value = 0
 }
 
-// 切换策略
+// Đổi chiến lược
 const changeStrategy = (id) => {
   currentStrategy.value = id
   resetSimulation()
 }
 
-// 统计计算
+// Tính thống kê
 const avgLoad = computed(() => {
   if (servers.value.length === 0) return 0
   return Math.round(servers.value.reduce((sum, s) => sum + s.load, 0) / servers.value.length)
@@ -433,7 +433,7 @@ const mostBusyServer = computed(() => {
   return servers.value.reduce((max, s) => s.load > max.load ? s : max, servers.value[0]).name
 })
 
-// 监听服务器数量变化
+// Lắng nghe thay đổi số lượng server
 watch(serverCount, (newVal) => {
   if (!isSimulating.value) {
     servers.value = generateServers(newVal)

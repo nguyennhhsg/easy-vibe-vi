@@ -1,31 +1,31 @@
 <!--
   RoutingRulesDemo.vue
-  路由规则 - 路径匹配/重写/转发
+  Quy tắc routing - Path matching/rewrite/forward
 -->
 <template>
   <div class="routing-rules-demo">
     <div class="header">
       <div class="title">
-        🧭 路由规则：如何把请求送到正确的服务？
+        🧭 Quy tắc routing: làm sao đưa request đến đúng dịch vụ?
       </div>
       <div class="subtitle">
-        想象成快递分拣中心——根据地址把包裹分配到不同的配送站
+        Hãy hình dung như trung tâm phân loại hàng — theo địa chỉ phân gói hàng về các trạm phát khác nhau
       </div>
     </div>
 
     <div class="playground">
       <div class="playground-header">
         <div class="playground-title">
-          🎮 路由规则实验室
+          🎮 Phòng thí nghiệm quy tắc routing
         </div>
         <div class="playground-subtitle">
-          输入一个 URL，看看它会被路由到哪个服务
+          Nhập một URL, xem nó được route về service nào
         </div>
       </div>
 
       <div class="input-section">
         <div class="input-group">
-          <label>HTTP 方法</label>
+          <label>HTTP method</label>
           <select v-model="request.method">
             <option value="GET">
               GET
@@ -42,7 +42,7 @@
           </select>
         </div>
         <div class="input-group flex-2">
-          <label>URL 路径</label>
+          <label>URL path</label>
           <input
             v-model="request.path"
             type="text"
@@ -51,7 +51,7 @@
           >
         </div>
         <div class="input-group">
-          <label>Header (可选)</label>
+          <label>Header (tuỳ chọn)</label>
           <input
             v-model="request.header"
             type="text"
@@ -65,7 +65,7 @@
         :disabled="isMatching"
         @click="matchRoute"
       >
-        {{ isMatching ? '匹配中...' : '🔍 开始匹配' }}
+        {{ isMatching ? 'Đang match...' : '🔍 Bắt đầu match' }}
       </button>
 
       <div
@@ -78,7 +78,7 @@
               {{ matchResult.found ? '✅' : '❌' }}
             </div>
             <div class="result-title">
-              {{ matchResult.found ? '匹配成功' : '未找到匹配规则' }}
+              {{ matchResult.found ? 'Match thành công' : 'Không tìm thấy rule khớp' }}
             </div>
           </div>
           <div
@@ -86,19 +86,19 @@
             class="result-detail"
           >
             <div class="detail-row">
-              <span class="label">目标服务：</span>
+              <span class="label">Dịch vụ đích:</span>
               <span class="value service">{{ matchResult.service }}</span>
             </div>
             <div class="detail-row">
-              <span class="label">匹配规则：</span>
+              <span class="label">Rule khớp:</span>
               <span class="value">{{ matchResult.rule }}</span>
             </div>
             <div class="detail-row">
-              <span class="label">重写后路径：</span>
+              <span class="label">Path sau rewrite:</span>
               <span class="value path">{{ matchResult.rewrittenPath }}</span>
             </div>
             <div class="detail-row">
-              <span class="label">目标地址：</span>
+              <span class="label">Địa chỉ đích:</span>
               <span class="value url">{{ matchResult.targetUrl }}</span>
             </div>
           </div>
@@ -106,11 +106,11 @@
             v-else
             class="result-suggestion"
           >
-            <p>💡 建议检查：</p>
+            <p>💡 Gợi ý kiểm tra:</p>
             <ul>
-              <li>路径是否以 /api 开头？</li>
-              <li>HTTP 方法是否匹配？（GET/POST）</li>
-              <li>Header 条件是否满足？</li>
+              <li>Path có bắt đầu bằng /api không?</li>
+              <li>HTTP method có khớp không? (GET/POST)</li>
+              <li>Điều kiện Header có thoả không?</li>
             </ul>
           </div>
         </div>
@@ -119,15 +119,15 @@
 
     <div class="rules-table">
       <div class="table-title">
-        📋 当前路由规则表
+        📋 Bảng quy tắc routing hiện tại
       </div>
       <table>
         <thead>
           <tr>
-            <th>优先级</th>
-            <th>匹配规则</th>
-            <th>目标服务</th>
-            <th>路径重写</th>
+            <th>Độ ưu tiên</th>
+            <th>Rule match</th>
+            <th>Dịch vụ đích</th>
+            <th>Rewrite path</th>
           </tr>
         </thead>
         <tbody>
@@ -143,7 +143,7 @@
               <code v-if="rule.rewrite">{{ rule.rewrite }}</code><span
                 v-else
                 class="no-rewrite"
-              >无</span>
+              >Không</span>
             </td>
           </tr>
         </tbody>
@@ -152,7 +152,7 @@
 
     <div class="quick-presets">
       <div class="presets-title">
-        🚀 快速测试示例
+        🚀 Ví dụ test nhanh
       </div>
       <div class="preset-buttons">
         <button
@@ -183,37 +183,37 @@ const matchResult = ref(null)
 const routingRules = [
   {
     match: 'Header: X-Version=v2',
-    service: '用户服务V2',
+    service: 'Dịch vụ user V2',
     rewrite: null
   },
   {
     match: 'Path: /api/users/*',
-    service: '用户服务',
+    service: 'Dịch vụ user',
     rewrite: '/users/*'
   },
   {
     match: 'Path: /api/orders/*',
-    service: '订单服务',
+    service: 'Dịch vụ đơn hàng',
     rewrite: '/orders/*'
   },
   {
     match: 'Path: /api/pay/*',
-    service: '支付服务',
+    service: 'Dịch vụ thanh toán',
     rewrite: '/payments/*'
   },
   {
     match: 'Method: GET, Path: /health',
-    service: '健康检查',
+    service: 'Health check',
     rewrite: null
   }
 ]
 
 const presets = [
-  { name: '👤 查询用户', method: 'GET', path: '/api/users/123', header: '' },
-  { name: '📦 创建订单', method: 'POST', path: '/api/orders', header: '' },
-  { name: '💳 发起支付', method: 'POST', path: '/api/pay/checkout', header: '' },
-  { name: '🔍 健康检查', method: 'GET', path: '/health', header: '' },
-  { name: '🆕 V2版本', method: 'GET', path: '/api/users/456', header: 'X-Version: v2' }
+  { name: '👤 Truy vấn user', method: 'GET', path: '/api/users/123', header: '' },
+  { name: '📦 Tạo đơn hàng', method: 'POST', path: '/api/orders', header: '' },
+  { name: '💳 Khởi tạo thanh toán', method: 'POST', path: '/api/pay/checkout', header: '' },
+  { name: '🔍 Health check', method: 'GET', path: '/health', header: '' },
+  { name: '🆕 Bản V2', method: 'GET', path: '/api/users/456', header: 'X-Version: v2' }
 ]
 
 const matchRoute = async () => {
@@ -236,34 +236,34 @@ const matchRoute = async () => {
   if (header.includes('X-Version=v2')) {
     found = true
     matchedIndex = 0
-    service = '用户服务V2 (新版本)'
+    service = 'Dịch vụ user V2 (bản mới)'
     rule = 'Header: X-Version=v2'
     targetUrl = 'http://user-service-v2:8080' + path
   } else if (path.startsWith('/api/users/')) {
     found = true
     matchedIndex = 1
-    service = '用户服务'
+    service = 'Dịch vụ user'
     rule = 'Path: /api/users/*'
     rewrittenPath = path.replace('/api/users/', '/users/')
     targetUrl = 'http://user-service:8080' + rewrittenPath
   } else if (path.startsWith('/api/orders')) {
     found = true
     matchedIndex = 2
-    service = '订单服务'
+    service = 'Dịch vụ đơn hàng'
     rule = 'Path: /api/orders/*'
     rewrittenPath = path.replace('/api/orders/', '/orders/')
     targetUrl = 'http://order-service:8080' + rewrittenPath
   } else if (path.startsWith('/api/pay/')) {
     found = true
     matchedIndex = 3
-    service = '支付服务'
+    service = 'Dịch vụ thanh toán'
     rule = 'Path: /api/pay/*'
     rewrittenPath = path.replace('/api/pay/', '/payments/')
     targetUrl = 'http://payment-service:8080' + rewrittenPath
   } else if (method === 'GET' && path === '/health') {
     found = true
     matchedIndex = 4
-    service = '健康检查'
+    service = 'Health check'
     rule = 'Method: GET, Path: /health'
     targetUrl = 'http://health-check-service:8080/health'
   }

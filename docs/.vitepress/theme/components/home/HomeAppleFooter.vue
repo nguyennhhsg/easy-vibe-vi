@@ -124,7 +124,7 @@ const appleFooterInfo = computed(() => {
   return content[locale] || content.en
 })
 
-const footerRepositoryLink = 'https://github.com/datawhalechina/easy-vibe'
+const footerRepositoryLink = 'https://github.com/nguyennhhsg/easy-vibe-vi'
 
 const footerPolicyLinkMap = {
   '隐私政策': '#',
@@ -139,31 +139,31 @@ const footerPolicyLinkMap = {
 }
 
 const footerColumnLinkMap = {
-  '零基础入门': '/vi-vn/stage-1/',
-  '初中级开发': '/vi-vn/stage-2/',
-  '高级开发': '/vi-vn/stage-3/',
-  '附录': '/vi-vn/appendix/',
-  '学习地图': '/vi-vn/stage-1/learning-map/',
-  '课程总览': '/vi-vn/stage-1/',
-  'GitHub 仓库': 'https://github.com/datawhalechina/easy-vibe',
+  '零基础入门': '/zh-cn/stage-1/',
+  '初中级开发': '/zh-cn/stage-2/',
+  '高级开发': '/zh-cn/stage-3/',
+  '附录': '/zh-cn/appendix/',
+  '学习地图': '/zh-cn/stage-1/learning-map/',
+  '课程总览': '/zh-cn/stage-1/',
+  'GitHub 仓库': 'https://github.com/nguyennhhsg/easy-vibe-vi',
   'Foundations': '/en/stage-1/',
   'Junior/Mid Dev': '/en/stage-2/',
   'Senior Dev': '/en/stage-3/',
   'Appendix': '/en/appendix/',
   'Learning Map': '/en/stage-1/learning-map/',
   'Course Outline': '/en/stage-1/',
-  'GitHub Repository': 'https://github.com/datawhalechina/easy-vibe',
+  'GitHub Repository': 'https://github.com/nguyennhhsg/easy-vibe-vi',
   'Overview': '/en/guide/introduction',
-  'Changelog': 'https://github.com/datawhalechina/easy-vibe/releases',
+  'Changelog': 'https://github.com/nguyennhhsg/easy-vibe-vi/releases',
   'Nhập môn từ số 0': '/vi-vn/stage-1/',
   'Dev Sơ/Trung cấp': '/vi-vn/stage-2/',
   'Dev Cao cấp': '/vi-vn/stage-3/',
   'Phụ lục': '/vi-vn/appendix/',
   'Bản đồ học tập': '/vi-vn/stage-1/learning-map/',
   'Tổng quan giáo trình': '/vi-vn/stage-1/',
-  'Kho GitHub': 'https://github.com/datawhalechina/easy-vibe',
+  'Kho GitHub': 'https://github.com/nguyennhhsg/easy-vibe-vi',
   'Giới thiệu dự án': '/vi-vn/guide/introduction',
-  'Nhật ký cập nhật': 'https://github.com/datawhalechina/easy-vibe/releases'
+  'Nhật ký cập nhật': 'https://github.com/nguyennhhsg/easy-vibe-vi/releases'
 }
 
 const getFooterLink = (label) => {

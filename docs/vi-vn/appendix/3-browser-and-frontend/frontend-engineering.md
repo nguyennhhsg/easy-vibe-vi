@@ -116,7 +116,7 @@ var result =
     : []
 ```
 
-Có thể thấy, một dòng mã ngắn gọn đã được chuyển thành nhiều dòng mã "啰嗦", nhưng mã sau đó có thể chạy bình thường trên bất kỳ trình duyệt nào.
+Có thể thấy, một dòng mã ngắn gọn đã được chuyển thành nhiều dòng mã "rườm rà", nhưng mã sau đó có thể chạy bình thường trên bất kỳ trình duyệt nào.
 :::
 
 **Các công cụ chuyển dịch phổ biến:**

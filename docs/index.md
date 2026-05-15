@@ -1,6 +1,21 @@
 ---
 layout: home
+title: Easy-Vibe VI - Học Vibe Coding với AI từ con số 0
+description: Hướng dẫn Easy-Vibe phiên bản tiếng Việt — Học Vibe Coding với AI từ con số 0, làm chủ Claude Code, Cursor và các công cụ AI IDE.
+lang: vi-VN
+head:
+  - - meta
+    - name: description
+      content: Hướng dẫn Easy-Vibe phiên bản tiếng Việt — Học Vibe Coding với AI từ con số 0, làm chủ Claude Code, Cursor và các công cụ AI IDE.
+  - - meta
+    - property: og:description
+      content: Hướng dẫn Easy-Vibe phiên bản tiếng Việt — Học Vibe Coding với AI từ con số 0, làm chủ Claude Code, Cursor và các công cụ AI IDE.
 ---
+
+<noscript>
+  <meta http-equiv="refresh" content="0; url=/vi-vn/" />
+  <p>Đang chuyển hướng tới <a href="/vi-vn/">/vi-vn/</a>…</p>
+</noscript>
 
 <script setup>
 import { onMounted } from 'vue'

@@ -2,25 +2,25 @@
   <div class="canary-release-demo">
     <div class="header">
       <div class="title">
-        金丝雀发布
+        Canary release
       </div>
       <div class="subtitle">
-        灰度发布策略，小流量先行验证新版本
+        Chiến lược canary release: traffic nhỏ xác thực trước bản mới
       </div>
     </div>
 
-    <!-- 流量分配控制 -->
+    <!-- Điều khiển phân bổ traffic -->
     <div class="traffic-control">
       <div class="control-header">
-        <span class="control-title">流量分配比例</span>
-        <span class="control-hint">拖动滑块调整新旧版本流量占比</span>
+        <span class="control-title">Tỉ lệ phân bổ traffic</span>
+        <span class="control-hint">Kéo slider để chỉnh tỉ lệ traffic giữa bản cũ và bản mới</span>
       </div>
 
       <div class="slider-container">
         <div class="version-labels">
           <span class="version-label stable">
             <span class="dot blue" />
-            稳定版 v{{ stableVersion }}
+            Bản stable v{{ stableVersion }}
           </span>
           <span class="percentage stable">{{ 100 - canaryPercentage }}%</span>
         </div>
@@ -37,13 +37,13 @@
         <div class="version-labels">
           <span class="version-label canary">
             <span class="dot yellow" />
-            金丝雀 v{{ canaryVersion }}
+            Canary v{{ canaryVersion }}
           </span>
           <span class="percentage canary">{{ canaryPercentage }}%</span>
         </div>
       </div>
 
-      <!-- 预设按钮 -->
+      <!-- Preset buttons -->
       <div class="preset-buttons">
         <button
           v-for="preset in trafficPresets"
@@ -57,21 +57,21 @@
       </div>
     </div>
 
-    <!-- 可视化流量 -->
+    <!-- Trực quan hoá traffic -->
     <div class="traffic-visualization">
       <div class="viz-header">
-        <span class="viz-title">实时流量模拟</span>
+        <span class="viz-title">Mô phỏng traffic thời gian thực</span>
         <span class="viz-stats">
-          总请求: {{ totalRequests }} |
-          稳定版: {{ stableRequests }} |
-          金丝雀: {{ canaryRequests }}
+          Tổng request: {{ totalRequests }} |
+          Stable: {{ stableRequests }} |
+          Canary: {{ canaryRequests }}
         </span>
       </div>
 
       <div class="traffic-pipeline">
         <div class="pipeline-stage">
           <div class="stage-label">
-            用户请求
+            Request từ user
           </div>
           <div class="request-bubbles">
             <div
@@ -92,7 +92,7 @@
 
         <div class="pipeline-stage">
           <div class="stage-label">
-            负载均衡器
+            Load balancer
           </div>
           <div class="lb-diagram">
             <div class="lb-icon">
@@ -113,12 +113,12 @@
 
         <div class="pipeline-stage">
           <div class="stage-label">
-            后端服务
+            Backend service
           </div>
           <div class="backend-pods">
             <div class="pod-group stable">
               <div class="pod-label">
-                稳定版 v{{ stableVersion }}
+                Bản stable v{{ stableVersion }}
               </div>
               <div class="pods-row">
                 <div
@@ -134,7 +134,7 @@
             </div>
             <div class="pod-group canary">
               <div class="pod-label">
-                金丝雀 v{{ canaryVersion }}
+                Canary v{{ canaryVersion }}
               </div>
               <div class="pods-row">
                 <div
@@ -153,23 +153,23 @@
       </div>
     </div>
 
-    <!-- 金丝雀发布策略 -->
+    <!-- Chiến lược canary -->
     <div class="canary-strategy">
       <div class="strategy-title">
-        金丝雀发布最佳实践
+        Best practice cho canary release
       </div>
 
       <div class="strategy-grid">
         <div class="strategy-card">
           <div class="card-header">
             <span class="card-icon">📊</span>
-            <span class="card-title">渐进式放量</span>
+            <span class="card-title">Tăng dần tỉ lệ</span>
           </div>
           <div class="card-body">
             <ul class="strategy-list">
               <li>1% → 5% → 10% → 25% → 50% → 100%</li>
-              <li>每个阶段观察至少15-30分钟</li>
-              <li>关键指标：错误率、延迟、吞吐量</li>
+              <li>Mỗi giai đoạn quan sát tối thiểu 15-30 phút</li>
+              <li>Chỉ số then chốt: error rate, latency, throughput</li>
             </ul>
           </div>
         </div>
@@ -177,14 +177,14 @@
         <div class="strategy-card">
           <div class="card-header">
             <span class="card-icon">🎯</span>
-            <span class="card-title">精准用户选择</span>
+            <span class="card-title">Chọn user chính xác</span>
           </div>
           <div class="card-body">
             <ul class="strategy-list">
-              <li>内部员工/测试用户先行</li>
-              <li>按地域：选择特定区域用户</li>
-              <li>按用户属性：VIP用户或普通用户</li>
-              <li>按设备类型：iOS/Android/Web</li>
+              <li>Cho nhân viên nội bộ / tester chạy trước</li>
+              <li>Theo vùng địa lý: chọn user khu vực cụ thể</li>
+              <li>Theo thuộc tính user: VIP hay user thường</li>
+              <li>Theo loại thiết bị: iOS / Android / Web</li>
             </ul>
           </div>
         </div>
@@ -192,14 +192,14 @@
         <div class="strategy-card">
           <div class="card-header">
             <span class="card-icon">🛡️</span>
-            <span class="card-title">自动回滚机制</span>
+            <span class="card-title">Tự động rollback</span>
           </div>
           <div class="card-body">
             <ul class="strategy-list">
-              <li>错误率超过阈值自动回滚</li>
-              <li>P99延迟异常触发告警</li>
-              <li>关键业务指标下降自动回滚</li>
-              <li>一键回滚：30秒内恢复旧版本</li>
+              <li>Error rate vượt ngưỡng thì tự rollback</li>
+              <li>Latency P99 bất thường thì trigger cảnh báo</li>
+              <li>Chỉ số nghiệp vụ chính giảm thì tự rollback</li>
+              <li>Rollback một nút bấm: khôi phục bản cũ trong 30 giây</li>
             </ul>
           </div>
         </div>
@@ -207,14 +207,14 @@
         <div class="strategy-card">
           <div class="card-header">
             <span class="card-icon">📈</span>
-            <span class="card-title">监控与指标</span>
+            <span class="card-title">Monitor & chỉ số</span>
           </div>
           <div class="card-body">
             <ul class="strategy-list">
-              <li>基础设施：CPU、内存、磁盘、网络</li>
-              <li>应用指标：QPS、错误率、延迟分布</li>
-              <li>业务指标：转化率、订单量、收入</li>
-              <li>用户体验：页面加载时间、交互延迟</li>
+              <li>Hạ tầng: CPU, memory, ổ đĩa, mạng</li>
+              <li>Chỉ số ứng dụng: QPS, error rate, phân bố latency</li>
+              <li>Chỉ số nghiệp vụ: conversion rate, số đơn, doanh thu</li>
+              <li>Trải nghiệm user: page load time, độ trễ tương tác</li>
             </ul>
           </div>
         </div>
@@ -245,17 +245,17 @@ const trafficPresets = [
   { label: '100%', value: 100 }
 ]
 
-// 请求队列
+// Hàng đợi request
 const requestQueue = ref([])
 const totalRequests = ref(0)
 const stableRequests = ref(0)
 const canaryRequests = ref(0)
 
-// 计算属性
+// Computed
 const hasTrafficToStable = computed(() => canaryPercentage.value < 100)
 const hasTrafficToCanary = computed(() => canaryPercentage.value > 0)
 
-// 生成请求
+// Sinh request
 const generateRequests = () => {
   const isCanary = Math.random() * 100 < canaryPercentage.value
   const request = {
@@ -267,7 +267,7 @@ const generateRequests = () => {
     requestQueue.value.shift()
   }
 
-  // 更新统计
+  // Cập nhật thống kê
   totalRequests.value++
   if (isCanary) {
     canaryRequests.value++

@@ -1,6 +1,6 @@
 <template>
   <div class="iac-concept-demo">
-    <div class="demo-label">交互演示 ── 手动运维 vs 基础设施即代码</div>
+    <div class="demo-label">Demo tương tác ── Vận hành thủ công vs Infrastructure as Code</div>
 
     <div class="toggle-bar">
       <button
@@ -16,7 +16,7 @@
     <div class="scene-container">
       <Transition name="fade" mode="out-in">
         <div v-if="current === 'manual'" key="manual" class="scene manual-scene">
-          <div class="scene-title">手动运维流程</div>
+          <div class="scene-title">Luồng vận hành thủ công</div>
           <div class="steps">
             <div
               v-for="(step, i) in manualSteps"
@@ -30,15 +30,15 @@
             </div>
           </div>
           <button class="action-btn manual-btn" @click="advanceManual" :disabled="manualProgress >= manualSteps.length">
-            {{ manualProgress >= manualSteps.length ? '全部完成（耗时约 2 小时）' : '点击控制台按钮...' }}
+            {{ manualProgress >= manualSteps.length ? 'Đã xong (mất khoảng 2 giờ)' : 'Click nút console...' }}
           </button>
           <div v-if="manualProgress >= manualSteps.length" class="result-box warning">
-            手动操作完成，但存在风险：步骤不可重复、无法审计、容易遗漏配置。
+            Thao tác thủ công xong, nhưng tiềm ẩn rủi ro: không lặp lại được, không audit được, dễ sót cấu hình.
           </div>
         </div>
 
         <div v-else key="iac" class="scene iac-scene">
-          <div class="scene-title">IaC 代码驱动流程</div>
+          <div class="scene-title">Luồng IaC - dùng code điều khiển</div>
           <div class="code-block">
             <div class="code-header">main.tf</div>
             <pre class="code-content"><code>{{ iacCode }}</code></pre>
@@ -55,10 +55,10 @@
             </div>
           </div>
           <button class="action-btn iac-btn" @click="advanceIac" :disabled="iacProgress >= iacSteps.length">
-            {{ iacProgress >= iacSteps.length ? '全部完成（耗时约 30 秒）' : '执行下一步' }}
+            {{ iacProgress >= iacSteps.length ? 'Đã xong (mất khoảng 30 giây)' : 'Chạy bước tiếp theo' }}
           </button>
           <div v-if="iacProgress >= iacSteps.length" class="result-box success">
-            代码即文档，可重复、可审计、可版本控制，团队协作无忧。
+            Code chính là tài liệu, có thể lặp lại, audit, quản lý version, team phối hợp thoải mái.
           </div>
         </div>
       </Transition>
@@ -68,9 +68,9 @@
       <table>
         <thead>
           <tr>
-            <th>对比维度</th>
-            <th>手动运维</th>
-            <th>基础设施即代码</th>
+            <th>Tiêu chí so sánh</th>
+            <th>Vận hành thủ công</th>
+            <th>Infrastructure as Code</th>
           </tr>
         </thead>
         <tbody>
@@ -93,24 +93,24 @@ const manualProgress = ref(0)
 const iacProgress = ref(0)
 
 const modes = [
-  { key: 'manual', icon: '🖱️', label: '手动运维' },
-  { key: 'iac', icon: '📝', label: '基础设施即代码' }
+  { key: 'manual', icon: '🖱️', label: 'Vận hành thủ công' },
+  { key: 'iac', icon: '📝', label: 'Infrastructure as Code' }
 ]
 
 const manualSteps = [
-  { icon: '🌐', text: '登录云控制台', risk: '需要记住密码' },
-  { icon: '🖥️', text: '手动创建服务器', risk: '配置可能遗漏' },
-  { icon: '🔧', text: '配置安全组规则', risk: '容易开放过多端口' },
-  { icon: '💾', text: '挂载存储卷', risk: '大小可能选错' },
-  { icon: '🔗', text: '配置负载均衡', risk: '路由规则易出错' },
-  { icon: '📋', text: '手动记录到文档', risk: '文档很快过时' }
+  { icon: '🌐', text: 'Đăng nhập cloud console', risk: 'Phải nhớ mật khẩu' },
+  { icon: '🖥️', text: 'Tạo server thủ công', risk: 'Có thể sót cấu hình' },
+  { icon: '🔧', text: 'Cấu hình security group', risk: 'Dễ mở quá nhiều port' },
+  { icon: '💾', text: 'Mount storage volume', risk: 'Có thể chọn sai dung lượng' },
+  { icon: '🔗', text: 'Cấu hình load balancer', risk: 'Routing rule dễ sai' },
+  { icon: '📋', text: 'Ghi tay vào tài liệu', risk: 'Tài liệu nhanh lỗi thời' }
 ]
 
 const iacSteps = [
-  { icon: '📝', text: 'Write（编写代码）' },
-  { icon: '🔍', text: 'Plan（预览变更）' },
-  { icon: '🚀', text: 'Apply（自动执行）' },
-  { icon: '✅', text: 'Done（状态记录）' }
+  { icon: '📝', text: 'Write (viết code)' },
+  { icon: '🔍', text: 'Plan (preview thay đổi)' },
+  { icon: '🚀', text: 'Apply (chạy tự động)' },
+  { icon: '✅', text: 'Done (lưu state)' }
 ]
 
 const iacCode = `resource "aws_instance" "web" {
@@ -133,11 +133,11 @@ resource "aws_security_group" "web_sg" {
 }`
 
 const comparisonRows = [
-  { dim: '可重复性', manual: '每次操作可能不同', iac: '代码保证完全一致' },
-  { dim: '速度', manual: '分钟到小时级', iac: '秒到分钟级' },
-  { dim: '审计追踪', manual: '依赖人工记录', iac: 'Git 历史自动记录' },
-  { dim: '协作', manual: '口头传达、截图', iac: 'Code Review、PR 流程' },
-  { dim: '回滚', manual: '几乎不可能', iac: 'git revert 一键回滚' }
+  { dim: 'Tính lặp lại', manual: 'Mỗi lần làm có thể khác nhau', iac: 'Code đảm bảo y hệt nhau' },
+  { dim: 'Tốc độ', manual: 'Vài phút đến vài giờ', iac: 'Vài giây đến vài phút' },
+  { dim: 'Audit', manual: 'Phụ thuộc ghi tay', iac: 'Lịch sử Git tự ghi' },
+  { dim: 'Phối hợp', manual: 'Truyền miệng, screenshot', iac: 'Code review, PR flow' },
+  { dim: 'Rollback', manual: 'Gần như không thể', iac: 'git revert là rollback ngay' }
 ]
 
 function advanceManual() {

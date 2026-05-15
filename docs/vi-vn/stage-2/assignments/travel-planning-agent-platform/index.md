@@ -36,8 +36,8 @@ Sản phẩm bạn sẽ xây dựng là một Platform Agent Lập kế hoạch 
 | **Quản lý lịch sử** | Người dùng có thể lưu các kế hoạch lịch sử, tạo lại, xuất |
 | **Bảng điều khiển quản trị** | Quản trị viên xem các điểm đến phổ biến, nhiệm vụ thất bại và phản hồi của người dùng |
 
-::: tip PRD 入口
-Tài liệu yêu cầu của dự án này nằm trên GitHub: [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/travel-planning-agent-platform/PRD.md)
+::: tip Truy cập PRD
+Tài liệu yêu cầu của dự án này nằm trên GitHub: [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/travel-planning-agent-platform/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

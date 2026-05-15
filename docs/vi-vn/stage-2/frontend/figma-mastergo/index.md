@@ -86,7 +86,7 @@ Hoặc tham khảo hướng dẫn sau để xây dựng nhanh một trang web da
 
 Bên trái là lối vào quản lý tài nguyên và tạo dự án, vài nút ở góc trên cùng bên phải là các chức năng phổ biến của Figma. Trong đó, Make được sử dụng để AI giúp bạn trước tiên tạo bản nháp giao diện hoặc cấu trúc lớn nhất, Design là không gian làm việc chính thực sự dùng để vẽ giao diện trang web / App, xây dựng thành phần và tạo mẫu nguyên mẫu, FigJam giống như bảng trắng của nhóm, được sử dụng để dán giấy ghi chú, vẽ quy trình và thảo luận sơ kỳ, Buzz là công cụ sản xuất tài sản thương hiệu quy mô, được sử dụng để tạo hàng loạt nội dung để duy trì tính nhất quán của thương hiệu, Site là tổ chức những thiết kế này thành một trang web hoặc tài liệu thực sự có thể truy cập để hiển thị ra bên ngoài.
 
-T乍một cái nhìn, Figma có rất nhiều chức năng, không dễ bắt đầu, nhưng thực ra những công cụ chức năng như thế này về bản chất đều là thành thạo qua thực hành, không cần sợ sai sót khi bắt đầu vận hành, cũng không cần nghĩ về việc làm đúng trong một bước, chỉ cần bắt đầu chơi, chơi nhiều hơn rồi tự nhiên có thể bắt đầu nhanh chóng.
+Thoạt nhìn một cái, Figma có rất nhiều chức năng, không dễ bắt đầu, nhưng thực ra những công cụ chức năng như thế này về bản chất đều là thành thạo qua thực hành, không cần sợ sai sót khi bắt đầu vận hành, cũng không cần nghĩ về việc làm đúng trong một bước, chỉ cần bắt đầu chơi, chơi nhiều hơn rồi tự nhiên có thể bắt đầu nhanh chóng.
 
 Trong hướng dẫn này, để bắt đầu nhanh chóng, chúng tôi sẽ giải thích chức năng Design một cách đơn giản.
 

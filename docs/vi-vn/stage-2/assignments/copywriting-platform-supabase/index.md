@@ -39,7 +39,7 @@ Sản phẩm bạn sẽ xây dựng là một SaaS viết văn bản marketing A
 Backend sử dụng Supabase cung cấp khả năng cơ sở dữ liệu và xác thực, sử dụng Stripe xử lý thanh toán, sử dụng mô hình AI tạo văn bản marketing.
 
 ::: tip Cổng vào PRD
-Tài liệu yêu cầu của dự án này trên GitHub: [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/copywriting-platform-supabase/PRD.md)
+Tài liệu yêu cầu của dự án này trên GitHub: [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/copywriting-platform-supabase/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

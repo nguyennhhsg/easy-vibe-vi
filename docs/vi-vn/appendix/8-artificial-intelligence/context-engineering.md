@@ -57,7 +57,7 @@ Nhóm Manus đã trải qua nhiều lần tái cấu trúc kiến trúc, mới h
 
 ### 2.1 Bốn lần tái cấu trúc dạy chúng ta điều gì?
 
-Người đồng sáng lập Manus, T季逸超 đã chia sẻ "lịch sử sai lầm" của họ:
+Người đồng sáng lập Manus, Yichao "Peak" Ji (季逸超), đã chia sẻ "lịch sử sai lầm" của họ:
 
 | Giai đoạn | Vấn đề gặp phải | Suy nghĩ lúc bấy giờ | Kết quả |
 | :--- | :--- | :--- | :--- |
@@ -273,7 +273,7 @@ Thì chỉ còn cách **viết chữ nhỏ hơn** -- đó là **nén ngữ cản
 
 ### 7.1 Khi nào cần "viết tắt"?
 *   Tài liệu truy vấn được quá dày (>2000 từ).
-*   Lịch sử hội thoại quá啰嗦 (chiếm >80% không gian bảng).
+*   Lịch sử hội thoại quá dài dòng (chiếm >80% không gian bảng).
 *   Cần trả lời nhanh, không muốn để AI đọc những bài viết dài.
 
 ### 7.2 Ba tầng của "viết tắt"

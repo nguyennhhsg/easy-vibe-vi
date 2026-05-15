@@ -81,7 +81,7 @@ Hầu hết thời gian sau đó của những buổi tối, anh đã bỏ ra h�
 
 Ngày ra mắt, Tiểu Minh full vui mừng. Anh bỏ không ít tiền vào quảng cáo, tháng đầu tiên đã có 50 nghìn lượt tải. Trông có vẻ bắt đầu khá tốt, phải không?
 
-Nhưng vấn đề nhanh chóng xuất hiện. Người dùng tải xong rồi dùng lần này thì gỡ, tỷ lệ giữ lại ngày 7 chỉ có 5%. Anh làm một vài tính năng trả tiền, nhưng gần như không ai sẵn sàng bỏ tiền. Còn đau lòng hơn là, Keep,薄荷健康, FitTime những sản phẩm đã có, chức năng toàn, nội dung tốt, người dùng tại sao phải chuyển sang ứng dụng của anh?
+Nhưng vấn đề nhanh chóng xuất hiện. Người dùng tải xong rồi dùng lần này thì gỡ, tỷ lệ giữ lại ngày 7 chỉ có 5%. Anh làm một vài tính năng trả tiền, nhưng gần như không ai sẵn sàng bỏ tiền. Còn đau lòng hơn là, Keep, Boohee (薄荷健康), FitTime những sản phẩm đã có, chức năng toàn, nội dung tốt, người dùng tại sao phải chuyển sang ứng dụng của anh?
 
 Một năm sau, Tiểu Minh lỗ 20 vạn.
 
@@ -421,7 +421,7 @@ Tiểu Minh cảm thấy phương pháp này rất tốt. Anh lại dùng cách 
 
 #### Ví dụ một: Từ "đo lường calo" đến "Ăn yên tâm, bạn bệnh tiểu đường"
 
-Ý tưởng thường là chụp ảnh nhận diện calo thực phẩm, giúp người giảm cân kiểm soát chế độ ăn. Nhưng vấn đề là trên thị trường đã có 薄荷健康, MyFitnessPal những sản phẩm trưởng thành rồi.
+Ý tưởng thường là chụp ảnh nhận diện calo thực phẩm, giúp người giảm cân kiểm soát chế độ ăn. Nhưng vấn đề là trên thị trường đã có Boohee (薄荷健康), MyFitnessPal những sản phẩm trưởng thành rồi.
 
 Tiểu Minh phân nhóm theo chiều ngang, phát hiện nhóm người bệnh tiểu đường rất thú vị: Họ phải kiểm soát carbohydrate rất chặt, nhưng ăn ngoài rất khó ước tính. Đào sâu theo chiều dọc tình huống họ: Trước ăn không biết món ăn này có thể ăn không, sợ đường huyết tăng vọt; khi ăn cần gợi ý thực thời "bạn đã ăn bao nhiêu carbohydrate"; sau ăn cần ghi chép thay đổi đường huyết, nhìn liên hệ với chế độ ăn.
 
@@ -431,7 +431,7 @@ Khái niệm sau tái cấu trúc gọi là "Ăn yên tâm, bạn bệnh tiểu 
 
 #### Ví dụ hai: Từ "trợ lý tin tức" đến "Sỹ quan thông tin đầu tư"
 
-Ý tưởng thường là tập hợp tin tức từ các nền tảng khác, tiết kiệm việc phải mở từng cái. Nhưng 今日头条, 腾讯新闻 đã làm rất tốt rồi.
+Ý tưởng thường là tập hợp tin tức từ các nền tảng khác, tiết kiệm việc phải mở từng cái. Nhưng Toutiao (今日头条), Tencent News (腾讯新闻) đã làm rất tốt rồi.
 
 Tiểu Minh phân nhóm theo chiều ngang, phát hiện nhóm nhà phân tích tài chính có nhu cầu đặc biệt: Họ cần theo dõi động thái ngành cụ thể, nhưng thông tin quá rải rác. Đào sâu theo chiều dọc tình huống họ: Sáng sớm xem động thái cổ phiếu Mỹ qua đêm, thay đổi tỷ giá; buổi sáng theo dõi công bố công ty, tin ngành của công ty đang nắm giữ; buổi chiều nghiên cứu tiềm năng cổ phiếu, cần rất nhiều tin ngành.
 
@@ -441,7 +441,7 @@ Khái niệm sau tái cấu trúc gọi là "Sỹ quan thông tin đầu tư", v
 
 #### Ví dụ ba: Từ "nền tảng hàng cũ trong khuôn viên trường" đến "Trợ lý dọn dẹp khi ra trường"
 
-Ý tưởng thường là nền tảng giao dịch hàng cũ trong khuôn viên. Nhưng 闲鱼, 转转 đã làm rất tốt rồi.
+Ý tưởng thường là nền tảng giao dịch hàng cũ trong khuôn viên. Nhưng Xianyu (闲鱼, chợ đồ cũ), Zhuanzhuan (转转) đã làm rất tốt rồi.
 
 Tiểu Minh phân nhóm theo chiều ngang, phát hiện nhóm sinh viên sắp tốt nghiệp có nhu cầu đặc biệt: Hàng quá nhiều, bán từng cái quá phiền phức. Đào sâu theo chiều dọc tình huống họ: Trước tốt nghiệp một tuần phải rời trường, không có thời gian bán từng cái; không biết ai cần hàng của tôi; thương lượng giá, giao hàng, nhận tiền, quá phức tạp.
 
@@ -520,7 +520,7 @@ AI trả lời: "Đây là mối lo của rất nhiều nhà khởi nghiệp cô
 
 Phương án một là hợp tác với chuyên gia. Tìm 2-3 huấn luyện viên phục hồi sau sinh, hợp tác, bạn phát triển sản phẩm, họ cung cấp nội dung chuyên môn, có thể dùng mô hình chia sẻ doanh thu.
 
-Phương án hai là tích hợp nội dung chất lượng hiện có. Giai đoạn ban đầu có thể dùng video phục hồi sau sinh công khai, ví dụ YouTube, B站. Tự mình rà soát nội dung và sắp xếp, giai đoạn sau sản xuất nội dung gốc.
+Phương án hai là tích hợp nội dung chất lượng hiện có. Giai đoạn ban đầu có thể dùng video phục hồi sau sinh công khai, ví dụ YouTube, Bilibili (B站). Tự mình rà soát nội dung và sắp xếp, giai đoạn sau sản xuất nội dung gốc.
 
 Phương án ba là nội dung do người dùng tạo. Khuyến khích mẹ có kinh nghiệm chia sẻ cách phục hồi của mình, dùng bình chọn cộng đồng lọc nội dung chất lượng, từ từ xây dựng sinh thái nội dung.
 
@@ -711,7 +711,7 @@ Khi bạn có ý tưởng, làm sao nhanh chóng xác định nó có đáng đ�
 
 **Trường hợp:**
 - Bệnh nhân tiểu đường hiện dùng "kinh nghiệm + đoán mò" kiểm soát ăn uống (cách rất vụng về) — cơ hội lớn
-- Người giảm cân thường dùng 薄荷健康 (sản phẩm trưởng thành, hài lòng mức trung) — có cơ hội làm phân nhóm
+- Người giảm cân thường dùng Boohee (薄荷健康) (sản phẩm trưởng thành, hài lòng mức trung) — có cơ hội làm phân nhóm
 - Sinh viên dùng nhóm WeChat để giao dịch hàng cũ (nhiều công cụ lắp ghép) — có cơ hội tích hợp
 
 **Phương pháp hiệu quả nhất: Bán trước hoặc thu tiền cọc**
@@ -856,7 +856,7 @@ Dựa vào tình huống cảm xúc, tái cấu trúc giá trị sản phẩm.
 
 **Ý tưởng thường:** Dùng tự động ghi chép chi tiêu, kết nối thẻ tín dụng, phân loại tiêu dùng
 
-**Vấn đề:** Thị trường đã có 随手记, 挖财, Alipay hoá đơn...
+**Vấn đề:** Thị trường đã có Suishouji (随手记, ghi chú chi tiêu), Wacai (挖财), Alipay hoá đơn...
 
 **Phân nhóm theo chiều ngang:**
 - Cha mẹ sinh viên du học: Muốn biết con ở nước ngoài tiêu bao nhiêu, nhưng con không nói
@@ -902,7 +902,7 @@ Dựa vào tình huống cảm xúc, tái cấu trúc giá trị sản phẩm.
 
 **Ý tưởng thường:** Nền tảng giao dịch sách cũ
 
-**Vấn đề:** 多抓鱼, 闲书, Cổ Phu Tử cũ...
+**Vấn đề:** Duozhuayu (多抓鱼, sách cũ), Xianshu (闲书, sách rảnh), Cổ Phu Tử cũ...
 
 **Phân nhóm theo chiều ngang:**
 - Mẹ con: Sách tranh con cái xem xong rồi rảnh, nhưng mua mới rất đắt

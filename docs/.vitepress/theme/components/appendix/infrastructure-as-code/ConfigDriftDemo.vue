@@ -1,6 +1,6 @@
 <template>
   <div class="config-drift-demo">
-    <div class="demo-label">交互演示 ── 配置漂移：无声的定时炸弹</div>
+    <div class="demo-label">Demo tương tác ── Config drift: quả bom hẹn giờ thầm lặng</div>
 
     <div class="timeline">
       <div class="timeline-track">
@@ -19,7 +19,7 @@
     <div class="scene-area">
       <div class="infra-visual">
         <div class="server-group">
-          <div class="group-title">期望状态（代码定义）</div>
+          <div class="group-title">Trạng thái mong muốn (code định nghĩa)</div>
           <div class="server-cards">
             <div v-for="s in expectedServers" :key="s.name" class="server-card expected">
               <div class="server-icon">🖥️</div>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="server-group">
-          <div class="group-title">实际状态（线上环境）</div>
+          <div class="group-title">Trạng thái thực tế (môi trường production)</div>
           <div class="server-cards">
             <div
               v-for="s in actualServers"
@@ -60,15 +60,15 @@
     </div>
 
     <div class="controls">
-      <button class="ctrl-btn" :disabled="step === 0" @click="goToStep(step - 1)">← 上一步</button>
-      <button class="ctrl-btn reset" @click="goToStep(0)">重置</button>
+      <button class="ctrl-btn" :disabled="step === 0" @click="goToStep(step - 1)">← Bước trước</button>
+      <button class="ctrl-btn reset" @click="goToStep(0)">Reset</button>
       <button class="ctrl-btn primary" :disabled="step >= events.length - 1" @click="goToStep(step + 1)">
-        下一步 →
+        Bước sau →
       </button>
     </div>
 
     <div class="lesson-box">
-      <div class="lesson-title">关键教训</div>
+      <div class="lesson-title">Bài học then chốt</div>
       <div class="lesson-items">
         <div v-for="(lesson, i) in lessons" :key="i" class="lesson-item">
           <span class="lesson-icon">{{ lesson.icon }}</span>
@@ -86,34 +86,34 @@ const step = ref(0)
 
 const events = [
   {
-    label: '初始部署',
+    label: 'Deploy ban đầu',
     type: 'good',
-    title: '第 0 步：通过 IaC 初始部署',
-    detail: '团队使用 Terraform 部署了 3 台 Web 服务器，配置完全一致：Nginx 1.24、端口 443、2GB 内存。代码和实际状态完美匹配。'
+    title: 'Bước 0: Deploy ban đầu bằng IaC',
+    detail: 'Team dùng Terraform deploy 3 web server, cấu hình giống hệt nhau: Nginx 1.24, port 443, 2GB memory. Code và trạng thái thực tế khớp hoàn hảo.'
   },
   {
-    label: '手动修改',
+    label: 'Sửa tay',
     type: 'warn',
-    title: '第 1 步：深夜紧急手动修改',
-    detail: '凌晨 3 点，Server-B 出现性能问题。值班工程师直接 SSH 登录，手动将内存从 2GB 升级到 4GB，并修改了 Nginx 配置。没有更新 IaC 代码。'
+    title: 'Bước 1: Sửa tay khẩn cấp lúc nửa đêm',
+    detail: '3 giờ sáng, Server-B có vấn đề hiệu năng. Engineer trực SSH thẳng vào, nâng memory từ 2GB lên 4GB và sửa cấu hình Nginx. Không cập nhật code IaC.'
   },
   {
-    label: '又一次修改',
+    label: 'Sửa tiếp',
     type: 'warn',
-    title: '第 2 步：另一位同事的"临时"调整',
-    detail: '一周后，另一位工程师为了调试，在 Server-C 上开放了 22 端口（SSH），并安装了调试工具。同样没有更新代码。'
+    title: 'Bước 2: Điều chỉnh "tạm" của đồng nghiệp khác',
+    detail: 'Một tuần sau, engineer khác mở port 22 (SSH) trên Server-C để debug, và cài thêm công cụ debug. Cũng không cập nhật code.'
   },
   {
-    label: '漂移加剧',
+    label: 'Drift nặng',
     type: 'bad',
-    title: '第 3 步：配置漂移已经失控',
-    detail: '此时 3 台"相同"的服务器实际配置已经各不相同。代码描述的状态和线上真实状态严重脱节，没有人能说清楚线上到底是什么配置。'
+    title: 'Bước 3: Config drift đã mất kiểm soát',
+    detail: 'Lúc này 3 server "giống nhau" thực tế đã khác nhau. Trạng thái mô tả trong code và trạng thái thật ngoài production khác nhau nghiêm trọng, không ai chắc chắn cấu hình thật trên production là gì.'
   },
   {
-    label: 'IaC 检测',
+    label: 'IaC phát hiện',
     type: 'fix',
-    title: '第 4 步：terraform plan 发现漂移',
-    detail: '运行 terraform plan 后，Terraform 对比 State 文件和实际资源，清晰列出所有差异。团队决定将手动变更回退，统一通过代码管理。'
+    title: 'Bước 4: terraform plan phát hiện drift',
+    detail: 'Chạy terraform plan, Terraform so sánh file state với tài nguyên thực tế, liệt kê rõ mọi khác biệt. Team quyết định rollback các thay đổi tay, thống nhất quản lý qua code.'
   }
 ]
 
@@ -134,15 +134,15 @@ const actualServers = computed(() => {
   if (step.value === 1) {
     return [
       { name: 'Server-A', config: 'Nginx 1.24 | 443 | 2GB', drifted: false },
-      { name: 'Server-B', config: 'Nginx 1.25 | 443 | 4GB', drifted: true, driftReason: '手动升级内存和 Nginx' },
+      { name: 'Server-B', config: 'Nginx 1.25 | 443 | 4GB', drifted: true, driftReason: 'Nâng memory và Nginx bằng tay' },
       { name: 'Server-C', config: 'Nginx 1.24 | 443 | 2GB', drifted: false }
     ]
   }
   if (step.value === 2 || step.value === 3) {
     return [
       { name: 'Server-A', config: 'Nginx 1.24 | 443 | 2GB', drifted: false },
-      { name: 'Server-B', config: 'Nginx 1.25 | 443 | 4GB', drifted: true, driftReason: '手动升级内存和 Nginx' },
-      { name: 'Server-C', config: 'Nginx 1.24 | 22+443 | 2GB', drifted: true, driftReason: '开放了 SSH 端口' }
+      { name: 'Server-B', config: 'Nginx 1.25 | 443 | 4GB', drifted: true, driftReason: 'Nâng memory và Nginx bằng tay' },
+      { name: 'Server-C', config: 'Nginx 1.24 | 22+443 | 2GB', drifted: true, driftReason: 'Mở port SSH' }
     ]
   }
   // step 4: fix
@@ -166,18 +166,18 @@ const driftIcon = computed(() => {
 })
 
 const driftText = computed(() => {
-  if (step.value === 0) return '状态一致'
-  if (step.value === 4) return '漂移已修复'
-  if (step.value === 1) return '1 台漂移'
-  if (step.value === 2) return '2 台漂移'
-  return '严重漂移！'
+  if (step.value === 0) return 'Trạng thái nhất quán'
+  if (step.value === 4) return 'Đã sửa xong drift'
+  if (step.value === 1) return '1 máy bị drift'
+  if (step.value === 2) return '2 máy bị drift'
+  return 'Drift nghiêm trọng!'
 })
 
 const lessons = [
-  { icon: '🚫', text: '禁止手动修改线上环境，所有变更必须通过代码' },
-  { icon: '🔍', text: '定期运行 terraform plan 检测漂移' },
-  { icon: '🔒', text: '限制生产环境的 SSH 权限，减少人为干预' },
-  { icon: '📋', text: '建立变更审批流程（PR → Review → Merge → Apply）' }
+  { icon: '🚫', text: 'Cấm sửa tay môi trường production, mọi thay đổi phải qua code' },
+  { icon: '🔍', text: 'Chạy terraform plan định kỳ để phát hiện drift' },
+  { icon: '🔒', text: 'Giới hạn quyền SSH ở production, giảm can thiệp thủ công' },
+  { icon: '📋', text: 'Thiết lập quy trình duyệt thay đổi (PR → Review → Merge → Apply)' }
 ]
 
 function goToStep(i) {

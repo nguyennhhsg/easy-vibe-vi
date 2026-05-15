@@ -2,12 +2,12 @@
   <div class="decision-matrix-demo">
     <div class="demo-header">
       <span class="icon">📊</span>
-      <span class="title">决策矩阵</span>
-      <span class="subtitle">量化对比，科学选型</span>
+      <span class="title">Ma trận quyết định</span>
+      <span class="subtitle">So sánh định lượng, lựa chọn khoa học</span>
     </div>
 
     <div class="section">
-      <h6 class="section-title">待比较技术</h6>
+      <h6 class="section-title">Công nghệ cần so sánh</h6>
       <div class="options-row">
         <span
           v-for="opt in options"
@@ -20,7 +20,7 @@
         <div v-if="options.length < 5" class="add-option">
           <input
             v-model="newOption"
-            placeholder="添加技术..."
+            placeholder="Thêm công nghệ..."
             class="add-input"
             @keyup.enter="addOption"
           />
@@ -30,7 +30,7 @@
     </div>
 
     <div class="section">
-      <h6 class="section-title">评估维度与权重</h6>
+      <h6 class="section-title">Tiêu chí đánh giá và trọng số</h6>
       <div class="dimensions-list">
         <div
           v-for="dim in dimensions"
@@ -52,12 +52,12 @@
     </div>
 
     <div class="section">
-      <h6 class="section-title">打分（1-5）</h6>
+      <h6 class="section-title">Chấm điểm (1-5)</h6>
       <div class="score-table-wrapper">
         <table class="score-table">
           <thead>
             <tr>
-              <th>维度</th>
+              <th>Tiêu chí</th>
               <th v-for="opt in options" :key="opt">{{ opt }}</th>
             </tr>
           </thead>
@@ -84,7 +84,7 @@
     </div>
 
     <div v-if="hasAllScores" class="section results">
-      <h6 class="section-title">加权总分排名</h6>
+      <h6 class="section-title">Xếp hạng tổng điểm có trọng số</h6>
       <div class="bar-chart">
         <div
           v-for="(r, i) in ranked"
@@ -110,14 +110,14 @@
     </div>
 
     <div class="actions">
-      <button class="reset-btn" @click="resetAll">重置全部</button>
-      <button class="preset-btn" @click="loadPreset">加载预设</button>
+      <button class="reset-btn" @click="resetAll">Reset tất cả</button>
+      <button class="preset-btn" @click="loadPreset">Load preset</button>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>使用方法：</strong>
-      调整权重反映你的项目优先级，为每个技术在各维度打分，系统自动计算加权总分。权重越高的维度对最终结果影响越大。
+      <strong>Cách dùng:</strong>
+      Điều chỉnh trọng số để phản ánh ưu tiên của dự án bạn, chấm điểm cho từng công nghệ ở mỗi tiêu chí, hệ thống tự động tính tổng điểm có trọng số. Tiêu chí có trọng số càng cao thì ảnh hưởng tới kết quả càng lớn.
     </div>
   </div>
 </template>
@@ -128,11 +128,11 @@ import { ref, reactive, computed } from 'vue'
 const barColors = ['#22c55e', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899']
 
 const dimensions = [
-  { key: 'learning', label: '学习曲线' },
-  { key: 'ecosystem', label: '生态系统' },
-  { key: 'performance', label: '性能' },
-  { key: 'community', label: '社区活跃度' },
-  { key: 'hiring', label: '招聘难度' }
+  { key: 'learning', label: 'Learning curve' },
+  { key: 'ecosystem', label: 'Hệ sinh thái' },
+  { key: 'performance', label: 'Performance' },
+  { key: 'community', label: 'Độ active cộng đồng' },
+  { key: 'hiring', label: 'Độ khó tuyển dụng' }
 ]
 
 const options = ref(['React', 'Vue', 'Svelte'])

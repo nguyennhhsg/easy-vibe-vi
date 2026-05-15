@@ -1,15 +1,15 @@
 <!--
   DataPipelineDemo.vue
-  数据处理管道 - 展示数据从采集到分析的完整流程
+  Pipeline xử lý dữ liệu - thể hiện luồng đầy đủ từ thu thập đến phân tích
 -->
 <template>
   <div class="data-pipeline-demo">
     <div class="header">
       <div class="title">
-        数据处理管道
+        Pipeline xử lý dữ liệu
       </div>
       <div class="subtitle">
-        从用户行为到数据洞察的完整链路
+        Luồng đầy đủ từ hành vi user đến insight dữ liệu
       </div>
     </div>
 
@@ -49,7 +49,7 @@
                 class="technologies"
               >
                 <div class="tech-label">
-                  技术栈：
+                  Tech stack:
                 </div>
                 <div class="tech-list">
                   <span
@@ -101,20 +101,20 @@
         :disabled="isPlaying"
         @click="startAnimation"
       >
-        <span v-if="!isPlaying">▶️ 演示数据流</span>
-        <span v-else>⏸️ 演示中...</span>
+        <span v-if="!isPlaying">▶️ Demo luồng dữ liệu</span>
+        <span v-else>⏸️ Đang demo...</span>
       </button>
       <button
         class="control-btn secondary"
         @click="resetAnimation"
       >
-        🔄 重置
+        🔄 Reset
       </button>
     </div>
 
     <div class="data-flow-visualization">
       <div class="flow-title">
-        实时数据流
+        Luồng dữ liệu realtime
       </div>
       <div class="flow-cards">
         <div
@@ -139,7 +139,7 @@
 
     <div class="best-practices">
       <div class="practices-title">
-        💡 数据管道最佳实践
+        💡 Best practice cho data pipeline
       </div>
       <div class="practices-grid">
         <div class="practice-card">
@@ -148,10 +148,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-name">
-              批量处理
+              Xử lý batch
             </div>
             <div class="practice-desc">
-              将小数据包合并成大数据块处理，减少 I/O 开销，提升吞吐量
+              Gộp các gói nhỏ thành khối lớn để xử lý, giảm chi phí I/O, tăng throughput
             </div>
           </div>
         </div>
@@ -162,10 +162,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-name">
-              异步非阻塞
+              Async non-blocking
             </div>
             <div class="practice-desc">
-              使用消息队列和异步任务，避免阻塞主业务流程
+              Dùng message queue và async task để tránh chặn luồng business chính
             </div>
           </div>
         </div>
@@ -176,10 +176,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-name">
-              容错机制
+              Cơ chế chịu lỗi
             </div>
             <div class="practice-desc">
-              失败重试、死信队列、降级策略，确保数据不丢失
+              Retry, dead letter queue, chiến lược degrade để đảm bảo không mất dữ liệu
             </div>
           </div>
         </div>
@@ -190,10 +190,10 @@
           </div>
           <div class="practice-content">
             <div class="practice-name">
-              监控告警
+              Monitor & cảnh báo
             </div>
             <div class="practice-desc">
-              实时监控数据量、延迟、错误率，异常及时告警
+              Giám sát realtime lượng dữ liệu, độ trễ, error rate; bất thường thì cảnh báo ngay
             </div>
           </div>
         </div>
@@ -211,66 +211,66 @@ const isPlaying = ref(false)
 const pipelineSteps = [
   {
     id: 'collection',
-    name: '数据采集',
+    name: 'Thu thập dữ liệu',
     icon: '📡',
-    description: '客户端 SDK、后端埋点代码、CDN 日志采集用户行为数据',
+    description: 'SDK client, code tracking backend, log CDN thu thập dữ liệu hành vi user',
     technologies: ['JavaScript SDK', 'Python SDK', 'CDN Logs', 'Webhook'],
     metrics: [
-      { label: '采集量', value: '10M+/天' },
-      { label: '成功率', value: '99.9%' }
+      { label: 'Lượng thu thập', value: '10M+/ngày' },
+      { label: 'Tỉ lệ thành công', value: '99.9%' }
     ]
   },
   {
     id: 'transmission',
-    name: '数据传输',
+    name: 'Truyền dữ liệu',
     icon: '🚚',
-    description: '加密上报、批量传输、断点续传，确保数据安全送达',
+    description: 'Mã hoá, truyền batch, resume khi đứt mạng, đảm bảo dữ liệu đến nơi an toàn',
     technologies: ['HTTPS', 'Batch Upload', 'Retry Logic'],
     metrics: [
-      { label: '传输量', value: '5GB/天' },
-      { label: '延迟', value: '<100ms' }
+      { label: 'Lượng truyền', value: '5GB/ngày' },
+      { label: 'Độ trễ', value: '<100ms' }
     ]
   },
   {
     id: 'cleaning',
-    name: '数据清洗',
+    name: 'Làm sạch dữ liệu',
     icon: '🧹',
-    description: '去重、校验、格式化、补全，确保数据质量',
+    description: 'Dedup, validate, format, bổ sung, đảm bảo chất lượng dữ liệu',
     technologies: ['ETL', 'Data Validation', 'Deduplication'],
     metrics: [
-      { label: '清洗率', value: '95%' },
-      { label: '准确率', value: '99.99%' }
+      { label: 'Tỉ lệ làm sạch', value: '95%' },
+      { label: 'Độ chính xác', value: '99.99%' }
     ]
   },
   {
     id: 'storage',
-    name: '数据存储',
+    name: 'Lưu trữ dữ liệu',
     icon: '🗄️',
-    description: '分层存储：热数据、温数据、冷数据，优化成本',
+    description: 'Lưu phân tầng: hot/warm/cold data, tối ưu chi phí',
     technologies: ['ClickHouse', 'S3', 'Redis', 'Hive'],
     metrics: [
-      { label: '存储量', value: '100TB' },
-      { label: '查询', value: '<1s' }
+      { label: 'Dung lượng', value: '100TB' },
+      { label: 'Truy vấn', value: '<1s' }
     ]
   },
   {
     id: 'analysis',
-    name: '数据分析',
+    name: 'Phân tích dữ liệu',
     icon: '📊',
-    description: '可视化报表、用户分群、漏斗分析、归因分析',
+    description: 'Báo cáo trực quan, phân nhóm user, funnel analysis, attribution',
     technologies: ['SQL', 'Python', 'Tableau', 'Metabase'],
     metrics: [
-      { label: '报表数', value: '500+' },
-      { label: '用户', value: '10K+' }
+      { label: 'Số báo cáo', value: '500+' },
+      { label: 'User', value: '10K+' }
     ]
   }
 ]
 
 const dataFlow = ref([
-  { icon: '📱', name: '客户端事件', count: 158420, unit: '次/分' },
-  { icon: '📤', name: '上报请求', count: 15842, unit: '次/分' },
-  { icon: '✅', name: '成功入库', count: 15840, unit: '条/分' },
-  { icon: '❌', name: '处理失败', count: 2, unit: '条/分' }
+  { icon: '📱', name: 'Event client', count: 158420, unit: 'lần/phút' },
+  { icon: '📤', name: 'Request gửi lên', count: 15842, unit: 'lần/phút' },
+  { icon: '✅', name: 'Lưu thành công', count: 15840, unit: 'bản ghi/phút' },
+  { icon: '❌', name: 'Xử lý fail', count: 2, unit: 'bản ghi/phút' }
 ])
 
 let animationInterval = null
@@ -305,7 +305,7 @@ const formatNumber = (num) => {
 }
 
 onMounted(() => {
-  // 模拟实时数据流
+  // Mô phỏng luồng dữ liệu realtime
   dataFlowInterval = setInterval(() => {
     dataFlow.value = dataFlow.value.map((item) => ({
       ...item,

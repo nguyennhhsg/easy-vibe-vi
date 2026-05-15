@@ -23,7 +23,7 @@ const getSiteUrl = () => {
   if (process.env.SITE_URL) {
     return process.env.SITE_URL
   }
-  return 'https://datawhalechina.github.io/easy-vibe'
+  return 'https://easy-vibe-vi.vercel.app'
 }
 
 const siteUrl = getSiteUrl()
@@ -32,64 +32,77 @@ const siteUrl = getSiteUrl()
 const localeMap = {
   'zh-cn': {
     ogLocale: 'zh_CN',
-    twitterSite: '@datawhale',
     lang: 'zh-CN',
     hreflang: 'zh-CN'
   },
   en: {
     ogLocale: 'en_US',
-    twitterSite: '@datawhale',
     lang: 'en-US',
     hreflang: 'en'
   },
   'ja-jp': {
     ogLocale: 'ja_JP',
-    twitterSite: '@datawhale',
     lang: 'ja-JP',
     hreflang: 'ja'
   },
   'zh-tw': {
     ogLocale: 'zh_TW',
-    twitterSite: '@datawhale',
     lang: 'zh-TW',
     hreflang: 'zh-TW'
   },
   'ko-kr': {
     ogLocale: 'ko_KR',
-    twitterSite: '@datawhale',
     lang: 'ko-KR',
     hreflang: 'ko'
   },
   'es-es': {
     ogLocale: 'es_ES',
-    twitterSite: '@datawhale',
     lang: 'es-ES',
     hreflang: 'es'
   },
   'fr-fr': {
     ogLocale: 'fr_FR',
-    twitterSite: '@datawhale',
     lang: 'fr-FR',
     hreflang: 'fr'
   },
   'de-de': {
     ogLocale: 'de_DE',
-    twitterSite: '@datawhale',
     lang: 'de-DE',
     hreflang: 'de'
   },
   'ar-sa': {
     ogLocale: 'ar_SA',
-    twitterSite: '@datawhale',
     lang: 'ar-SA',
     hreflang: 'ar'
   },
   'vi-vn': {
     ogLocale: 'vi_VN',
-    twitterSite: '@datawhale',
     lang: 'vi-VN',
     hreflang: 'vi'
   }
+}
+
+// 各语言对应的 SEO keywords
+const keywordsByLocale = {
+  'zh-cn':
+    'AI编程,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,零基础学编程,AI辅助开发,产品经理,全栈开发,Datawhale,Supabase,React,大模型,LLM,人工智能,微信小程序,Android开发,iOS开发,MCP,RAG,LangGraph,Dify,跨平台开发',
+  'zh-tw':
+    'AI編程,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,零基礎學編程,AI輔助開發,產品經理,全棧開發,Datawhale,Supabase,React,大模型,LLM,人工智慧,微信小程序,Android開發,iOS開發,MCP,RAG,LangGraph,Dify,跨平台開發',
+  en: 'AI programming,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,learn programming from zero,AI-assisted development,Product Manager,full-stack,Supabase,React,LLM,AI,WeChat mini-program,Android,iOS,MCP,RAG,LangGraph,Dify,cross-platform,AI application development',
+  'ja-jp':
+    'AIプログラミング,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,ゼロからプログラミング,AI支援開発,プロダクトマネージャー,フルスタック,Supabase,React,LLM,AI,WeChat小程序,Android開発,iOS開発,MCP,RAG,LangGraph,Dify,クロスプラットフォーム,AIアプリケーション開発',
+  'ko-kr':
+    'AI 프로그래밍,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,제로부터 프로그래밍 학습,AI 지원 개발,프로덕트 매니저,풀스택,Supabase,React,LLM,AI,WeChat 미니프로그램,Android 개발,iOS 개발,MCP,RAG,LangGraph,Dify,크로스 플랫폼,AI 애플리케이션 개발',
+  'es-es':
+    'Programación AI,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,aprender a programar desde cero,desarrollo asistido por IA,Product Manager,full-stack,Supabase,React,LLM,IA,mini-programa WeChat,Android,iOS,MCP,RAG,LangGraph,Dify,multiplataforma,desarrollo de aplicaciones de IA',
+  'fr-fr':
+    'Programmation IA,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,apprendre la programmation depuis zéro,développement assisté par IA,Product Manager,full-stack,Supabase,React,LLM,IA,mini-programme WeChat,Android,iOS,MCP,RAG,LangGraph,Dify,multi-plateforme,développement application IA',
+  'de-de':
+    'KI-Programmierung,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,Programmieren von Grund auf lernen,KI-unterstützte Entwicklung,Product Manager,Full-Stack,Supabase,React,LLM,KI,WeChat Mini-Programm,Android,iOS,MCP,RAG,LangGraph,Dify,plattformübergreifend,KI-Anwendungsentwicklung',
+  'ar-sa':
+    'برمجة الذكاء الاصطناعي,Vibe Coding,Claude Code,Cursor,Trae,AI IDE,تعلم البرمجة من الصفر,التطوير بمساعدة الذكاء الاصطناعي,مدير منتج,تطوير شامل,Supabase,React,LLM,الذكاء الاصطناعي,WeChat,Android,iOS,MCP,RAG,LangGraph,Dify,متعدد المنصات,تطوير تطبيقات الذكاء الاصطناعي',
+  'vi-vn':
+    'Lập trình AI, Vibe Coding, Claude Code, Cursor, Trae, AI IDE, học lập trình từ con số 0, phát triển hỗ trợ AI, Product Manager, full-stack, hướng dẫn lập trình, công cụ lập trình, Supabase, React, LLM, AI, ứng dụng mini-program, Android, iOS, MCP, RAG, LangGraph, Dify, đa nền tảng, phát triển ứng dụng AI'
 }
 
 // SEO 相关配置
@@ -136,8 +149,6 @@ const getSeoHead = (locale, title, description, path = '') => {
     ['meta', { property: 'og:url', content: canonicalUrl }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:site', content: seoConfig.twitterSite }],
-    ['meta', { name: 'twitter:creator', content: seoConfig.twitterSite }],
     ['meta', { name: 'twitter:title', content: title }],
     ['meta', { name: 'twitter:description', content: description }],
     ['meta', { name: 'twitter:image', content: ogImageUrl }],
@@ -147,11 +158,10 @@ const getSeoHead = (locale, title, description, path = '') => {
       'meta',
       {
         name: 'keywords',
-        content:
-          'Lập trình AI, Vibe Coding, Claude Code, Cursor, Trae, AI IDE, học lập trình từ con số 0, phát triển hỗ trợ AI, Product Manager, full-stack, hướng dẫn lập trình, công cụ lập trình, Supabase, React, LLM, AI, ứng dụng mini-program, Android, iOS, MCP, RAG, LangGraph, Dify, đa nền tảng, phát triển ứng dụng AI'
+        content: keywordsByLocale[locale] || keywordsByLocale['vi-vn']
       }
     ],
-    ['meta', { name: 'author', content: 'Datawhale' }],
+    ['meta', { name: 'author', content: 'Nguyễn Nhật Hùng (Vietnamese fork) — based on Datawhale\'s Easy-Vibe' }],
     ['meta', { name: 'robots', content: 'index,follow' }],
     ['meta', { name: 'googlebot', content: 'index,follow' }],
     ['meta', { name: 'baiduspider', content: 'index,follow' }],
@@ -196,22 +206,29 @@ const getSeoHead = (locale, title, description, path = '') => {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Datawhale',
-      url: 'https://datawhalechina.github.io',
+      name: 'Easy-Vibe VI (Vietnamese fork by nguyennhh)',
+      url: 'https://github.com/nguyennhhsg/easy-vibe-vi',
       logo: {
         '@type': 'ImageObject',
         url: ogImageUrl
       },
-      sameAs: ['https://github.com/datawhalechina/easy-vibe']
+      sameAs: [
+        'https://github.com/nguyennhhsg/easy-vibe-vi',
+        'https://github.com/datawhalechina/easy-vibe'
+      ]
     },
     mainEntity: {
       '@type': 'Course',
       name: title,
       description: description,
+      inLanguage: seoConfig.lang,
       provider: {
         '@type': 'Organization',
-        name: 'Datawhale',
-        sameAs: 'https://github.com/datawhalechina/easy-vibe'
+        name: 'Easy-Vibe VI (Vietnamese fork by nguyennhh)',
+        sameAs: [
+          'https://github.com/nguyennhhsg/easy-vibe-vi',
+          'https://github.com/datawhalechina/easy-vibe'
+        ]
       },
       educationalLevel: 'Beginner to Advanced',
       learningResourceType: 'Course'
@@ -225,7 +242,7 @@ const getSeoHead = (locale, title, description, path = '') => {
       {
         '@type': 'ListItem',
         position: 1,
-        name: locale === 'zh-cn' ? '首页' : 'Home',
+        name: locale === 'zh-cn' ? '首页' : locale === 'vi-vn' ? 'Trang chủ' : 'Home',
         item: `${siteUrl}/${locale}/`
       }
     ]
@@ -264,6 +281,29 @@ const getSeoHead = (locale, title, description, path = '') => {
           'cross-platform': 'Cross-platform',
           'personal-brand': 'Personal Brand',
           'ai-advanced': 'AI Advanced'
+        },
+        'vi-vn': {
+          'stage-1': 'Product Manager AI',
+          'stage-2': 'Phát triển sơ-trung cấp',
+          'stage-3': 'Phát triển nâng cao',
+          appendix: 'Phụ lục kiến thức',
+          guide: 'Hướng dẫn',
+          frontend: 'Frontend',
+          backend: 'Backend',
+          'ai-capabilities': 'Năng lực AI',
+          'core-skills': 'Kỹ năng cốt lõi',
+          'cross-platform': 'Đa nền tảng',
+          'personal-brand': 'Thương hiệu cá nhân',
+          'ai-advanced': 'AI nâng cao',
+          'learning-map': 'Bản đồ học tập',
+          'building-prototype': 'Xây dựng prototype',
+          'introduction-to-ai-ide': 'Giới thiệu AI IDE',
+          'finding-great-idea': 'Tìm ý tưởng',
+          'ai-capabilities-through-games': 'Khả năng AI qua game',
+          'integrating-ai-capabilities': 'Tích hợp năng lực AI',
+          'complete-project-practice': 'Thực hành dự án hoàn chỉnh',
+          'vibe-story': 'Câu chuyện Vibe',
+          'foundation': 'Cơ bản từ con số 0'
         }
       }
 
@@ -309,12 +349,13 @@ const commonThemeConfig = {
   search: {
     provider: 'local'
   },
-  // socialLinks: [
-  //   { icon: 'github', link: 'https://github.com/datawhalechina/easy-vibe' }
-  // ],
+  socialLinks: [
+    { icon: 'github', link: 'https://github.com/nguyennhhsg/easy-vibe-vi', ariaLabel: 'Vietnamese fork repository' },
+    { icon: 'github', link: 'https://github.com/datawhalechina/easy-vibe', ariaLabel: 'Upstream Datawhale Easy-Vibe repository' }
+  ],
   editLink: {
-    pattern: 'https://github.com/datawhalechina/easy-vibe/edit/main/docs/:path',
-    text: 'Edit this page on GitHub'
+    pattern: 'https://github.com/nguyennhhsg/easy-vibe-vi/edit/main/docs/:path',
+    text: 'Chỉnh sửa trang này trên GitHub'
   },
   outline: {
     level: [1, 6]
@@ -1338,6 +1379,22 @@ const config = defineConfig({
   },
   base: base,
   ignoreDeadLinks: true,
+
+  // Inject <meta name="description"> + og/twitter description on every page
+  // based on frontmatter `description` (fallback to a default Vietnamese tagline).
+  // Fixes AUDIT-A3: SSR HTML was missing per-page meta description.
+  transformPageData(pageData) {
+    const description =
+      pageData.frontmatter.description ||
+      pageData.description ||
+      'Hướng dẫn Easy-Vibe — Học Vibe Coding với AI từ con số 0'
+    pageData.frontmatter.head ??= []
+    pageData.frontmatter.head.push(
+      ['meta', { name: 'description', content: description }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { name: 'twitter:description', content: description }]
+    )
+  },
 
   // Vite 配置
   vite: {

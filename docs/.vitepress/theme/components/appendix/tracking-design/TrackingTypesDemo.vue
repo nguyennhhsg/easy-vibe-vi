@@ -1,15 +1,15 @@
 <!--
   TrackingTypesDemo.vue
-  埋点类型对比 - 展示前端、后端、全链路埋点的区别
+  So sánh các loại tracking - frontend, backend, full-funnel
 -->
 <template>
   <div class="tracking-types-demo">
     <div class="header">
       <div class="title">
-        埋点类型对比
+        So sánh các loại tracking
       </div>
       <div class="subtitle">
-        三种埋点方式的优缺点与适用场景
+        Ưu nhược điểm và tình huống áp dụng của 3 cách tracking
       </div>
     </div>
 
@@ -47,7 +47,7 @@
 
         <div class="characteristics">
           <div class="characteristics-title">
-            主要特征
+            Đặc điểm chính
           </div>
           <div class="characteristics-list">
             <div
@@ -63,7 +63,7 @@
 
         <div class="use-cases">
           <div class="use-cases-title">
-            典型场景
+            Tình huống điển hình
           </div>
           <div class="use-cases-list">
             <div
@@ -89,12 +89,12 @@
 
       <div class="type-architecture">
         <div class="architecture-title">
-          架构示意
+          Sơ đồ kiến trúc
         </div>
         <div class="architecture-diagram">
           <div class="diagram-layer">
             <div class="layer-label">
-              用户
+              User
             </div>
             <div class="layer-icon">
               👤
@@ -105,35 +105,35 @@
           </div>
           <div class="diagram-layer client">
             <div class="layer-label">
-              客户端
+              Client
             </div>
             <div class="layer-content">
               <div
                 v-if="selectedType === 'frontend'"
                 class="layer-box frontend"
               >
-                <div>前端埋点 SDK</div>
+                <div>Frontend tracking SDK</div>
                 <div class="layer-detail">
-                  采集用户交互
+                  Thu thập tương tác user
                 </div>
               </div>
               <div
                 v-if="selectedType === 'backend'"
                 class="layer-box backend"
               >
-                <div>业务代码</div>
+                <div>Business code</div>
                 <div class="layer-detail">
-                  调用后端埋点
+                  Gọi backend tracking
                 </div>
               </div>
               <div
                 v-if="selectedType === 'full'"
                 class="layer-box full"
               >
-                <div>前端埋点 SDK</div>
-                <div>后端埋点</div>
+                <div>Frontend tracking SDK</div>
+                <div>Backend tracking</div>
                 <div class="layer-detail">
-                  全链路追踪
+                  Full-funnel tracing
                 </div>
               </div>
             </div>
@@ -146,13 +146,13 @@
             class="diagram-layer server"
           >
             <div class="layer-label">
-              服务端
+              Server
             </div>
             <div class="layer-content">
               <div class="layer-box server">
-                <div>埋点服务</div>
+                <div>Tracking service</div>
                 <div class="layer-detail">
-                  处理埋点请求
+                  Xử lý request tracking
                 </div>
               </div>
             </div>
@@ -162,13 +162,14 @@
           </div>
           <div class="diagram-layer data">
             <div class="layer-label">
-              数据平台
+              Data platform
             </div>
             <div class="layer-content">
               <div class="layer-box data">
-                <div>数据仓库</div>
+                <div>Data warehouse
+                </div>
                 <div class="layer-detail">
-                  存储与分析
+                  Lưu trữ và phân tích
                 </div>
               </div>
             </div>
@@ -179,12 +180,12 @@
 
     <div class="comparison-table">
       <div class="comparison-title">
-        详细对比
+        So sánh chi tiết
       </div>
       <table class="comparison">
         <thead>
           <tr>
-            <th>对比维度</th>
+            <th>Tiêu chí so sánh</th>
             <th
               v-for="type in trackingTypes"
               :key="type.id"
@@ -211,7 +212,7 @@
               <span
                 v-if="row.best === type.id"
                 class="best-badge"
-              >最优</span>
+              >Tốt nhất</span>
             </td>
           </tr>
         </tbody>
@@ -228,72 +229,72 @@ const selectedType = ref('frontend')
 const trackingTypes = [
   {
     id: 'frontend',
-    name: '前端埋点',
+    name: 'Frontend tracking',
     subtitle: 'Client-side Tracking',
     icon: '💻',
     description:
-      '在 Web、App、小程序的前端代码中集成埋点 SDK，直接采集用户与界面的交互行为。数据实时性好，可采集设备信息，但可能被篡改。',
+      'Tích hợp tracking SDK vào code frontend của Web, App, mini-program để thu thập trực tiếp tương tác của user với giao diện. Data realtime tốt, lấy được thông tin device, nhưng có thể bị tampered.',
     characteristics: [
-      '实时采集用户行为',
-      '可获取设备信息、网络状态',
-      '可视化数据收集',
-      '离线缓存，联网补传',
-      '支持 A/B 测试和热力图'
+      'Thu thập hành vi user realtime',
+      'Lấy được thông tin device, network',
+      'Thu thập dữ liệu visual',
+      'Cache offline, gửi lại khi có mạng',
+      'Hỗ trợ A/B test và heatmap'
     ],
     useCases: [
-      { icon: '📱', name: '页面浏览', desc: '记录用户访问了哪些页面' },
-      { icon: '👆', name: '按钮点击', desc: '统计用户点击了哪些按钮' },
-      { icon: '📝', name: '表单提交', desc: '追踪表单填写和提交' },
-      { icon: '🎯', name: '转化漏斗', desc: '分析用户转化路径' }
+      { icon: '📱', name: 'Pageview', desc: 'Ghi nhận user đã xem những trang nào' },
+      { icon: '👆', name: 'Button click', desc: 'Thống kê user đã click button nào' },
+      { icon: '📝', name: 'Form submit', desc: 'Theo dõi việc điền và submit form' },
+      { icon: '🎯', name: 'Conversion funnel', desc: 'Phân tích lộ trình conversion' }
     ]
   },
   {
     id: 'backend',
-    name: '后端埋点',
+    name: 'Backend tracking',
     subtitle: 'Server-side Tracking',
     icon: '⚙️',
     description:
-      '在服务器端业务逻辑中添加埋点代码，采集服务端事件。数据准确可靠，不可篡改，但无法获取客户端信息。',
+      'Thêm code tracking vào business logic phía server để thu thập sự kiện server-side. Dữ liệu chính xác, không thể tampered, nhưng không lấy được thông tin client.',
     characteristics: [
-      '数据准确，不可篡改',
-      '采集业务核心事件',
-      '不受客户端网络影响',
-      '可采集服务端特有数据',
-      '隐私合规性更好'
+      'Dữ liệu chính xác, không bị tampered',
+      'Thu thập event nghiệp vụ cốt lõi',
+      'Không bị ảnh hưởng bởi network của client',
+      'Thu thập được data đặc thù của server',
+      'Privacy compliance tốt hơn'
     ],
     useCases: [
-      { icon: '💰', name: '支付成功', desc: '记录订单支付完成' },
-      { icon: '📦', name: '订单创建', desc: '追踪订单生成' },
-      { icon: '🔐', name: '用户注册', desc: '记录账号注册' },
-      { icon: '📊', name: 'API 调用', desc: '统计接口调用次数' }
+      { icon: '💰', name: 'Payment success', desc: 'Ghi nhận thanh toán đơn hàng thành công' },
+      { icon: '📦', name: 'Order creation', desc: 'Theo dõi việc tạo đơn hàng' },
+      { icon: '🔐', name: 'User registration', desc: 'Ghi nhận đăng ký tài khoản' },
+      { icon: '📊', name: 'API calls', desc: 'Thống kê số lần gọi API' }
     ]
   },
   {
     id: 'full',
-    name: '全链路埋点',
+    name: 'Full-funnel tracking',
     subtitle: 'Full-funnel Tracking',
     icon: '🔗',
     description:
-      '前端埋点 + 后端埋点组合，实现从用户行为到业务完成的端到端追踪。数据最完整，但实现成本最高。',
+      'Kết hợp frontend + backend tracking để theo dõi end-to-end từ hành vi user đến hoàn thành nghiệp vụ. Dữ liệu đầy đủ nhất, nhưng chi phí triển khai cao nhất.',
     characteristics: [
-      '端到端完整追踪',
-      '数据交叉验证',
-      '前后端数据打通',
-      '漏斗分析更准确',
-      '异常定位更快速'
+      'Theo dõi end-to-end đầy đủ',
+      'Cross-validation dữ liệu',
+      'Kết nối data frontend-backend',
+      'Funnel analysis chính xác hơn',
+      'Localize lỗi nhanh hơn'
     ],
     useCases: [
-      { icon: '🛒', name: '购物流程', desc: '从浏览到购买的完整链路' },
-      { icon: '📈', name: '用户旅程', desc: '分析用户全生命周期行为' },
-      { icon: '🔍', name: '问题排查', desc: '定位前后端异常' },
-      { icon: '💎', name: '数据治理', desc: '提升数据质量和准确性' }
+      { icon: '🛒', name: 'Shopping flow', desc: 'Toàn bộ chain từ browse đến mua' },
+      { icon: '📈', name: 'User journey', desc: 'Phân tích hành vi full lifecycle của user' },
+      { icon: '🔍', name: 'Troubleshooting', desc: 'Định vị lỗi frontend và backend' },
+      { icon: '💎', name: 'Data governance', desc: 'Nâng cao chất lượng và độ chính xác data' }
     ]
   }
 ]
 
 const comparisonData = [
   {
-    dimension: '数据准确性',
+    dimension: 'Độ chính xác data',
     values: {
       frontend: '★★★☆☆',
       backend: '★★★★★',
@@ -302,7 +303,7 @@ const comparisonData = [
     best: 'backend'
   },
   {
-    dimension: '实时性',
+    dimension: 'Tính realtime',
     values: {
       frontend: '★★★★★',
       backend: '★★★★☆',
@@ -311,7 +312,7 @@ const comparisonData = [
     best: 'frontend'
   },
   {
-    dimension: '开发成本',
+    dimension: 'Chi phí phát triển',
     values: {
       frontend: '★★★☆☆',
       backend: '★★★☆☆',
@@ -320,7 +321,7 @@ const comparisonData = [
     best: 'frontend'
   },
   {
-    dimension: '维护成本',
+    dimension: 'Chi phí maintain',
     values: {
       frontend: '★★★☆☆',
       backend: '★★★☆☆',
@@ -329,7 +330,7 @@ const comparisonData = [
     best: 'frontend'
   },
   {
-    dimension: '数据完整性',
+    dimension: 'Tính đầy đủ data',
     values: {
       frontend: '★★★☆☆',
       backend: '★★★☆☆',
@@ -338,7 +339,7 @@ const comparisonData = [
     best: 'full'
   },
   {
-    dimension: '隐私合规',
+    dimension: 'Privacy compliance',
     values: {
       frontend: '★★☆☆☆',
       backend: '★★★★★',

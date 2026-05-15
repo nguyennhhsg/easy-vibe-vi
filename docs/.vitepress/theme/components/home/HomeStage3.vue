@@ -113,9 +113,15 @@ const t = inject('t')
   margin-bottom: 10px;
   color: #1d1d1f;
   letter-spacing: -0.025em;
+  line-height: 1.15;
   font-family:
     -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC',
     sans-serif;
+}
+
+/* Vietnamese text is longer than Chinese — shrink title to avoid overflow */
+:lang(vi) .prod-card h4 {
+  font-size: 26px;
 }
 
 .prod-card p {

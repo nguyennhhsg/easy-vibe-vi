@@ -4,7 +4,7 @@ description: 'Bài viết nhập môn về ý tưởng sản phẩm dành cho ng
 ---
 
 <script setup>
-const duration = '约 <strong>1.5 小时</strong>'
+const duration = 'khoảng <strong>1.5 giờ</strong>'
 </script>
 
 # Tìm ý tưởng ở đâu: 3 nguồn tham khảo phù hợp nhất cho người mới

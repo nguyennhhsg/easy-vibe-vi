@@ -77,7 +77,7 @@ Chúng ta cần Android Studio để cung cấp SDK và trình giả lập cần
 
 **Lưu ý đặc biệt cho người mới:**
 
-Mặc dù các phiên bản hiện đại của Android Studio đã đơn giản hóa rất nhiều quy trình cấu hình, nhưng nó vẫn phụ thuộc vào môi trường **JDK (Java Development Kit)** ở tầng dưới. Nếu đây là lần đầu tiên bạn tiếp xúc với phát triển, hoặc bạn gặp lỗi liên quan đến "biến môi trường" hoặc "cấu hình SDK" trong quá trình cài đặt, vui lòng đừng lo lắng. Bạn có thể tham khảo hướng dẫn tránh lỗi chi tiết dưới đây, nó sẽ hướng dẫn bạn từng bước hoàn thành các cấu hình cơ bản này: [Cài đặt Android Studio 2024 phiên bản SDK môi trường, cấu hình Gradle](https://blog.csdn.net/keiraee/article/details/142321644?ops_request_misc=elastic_search_misc&request_id=a2b858d1f665095c53afa9114ad8864d&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-142321644-null-null.142^v102^pc_search_result_base4&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&spm=1018.2226.3001.4187)
+Mặc dù các phiên bản hiện đại của Android Studio đã đơn giản hóa rất nhiều quy trình cấu hình, nhưng nó vẫn phụ thuộc vào môi trường **JDK (Java Development Kit)** ở tầng dưới. Nếu đây là lần đầu tiên bạn tiếp xúc với phát triển, hoặc bạn gặp lỗi liên quan đến "biến môi trường" hoặc "cấu hình SDK" trong quá trình cài đặt, vui lòng đừng lo lắng. Bạn có thể tham khảo hướng dẫn tránh lỗi chi tiết dưới đây, nó sẽ hướng dẫn bạn từng bước hoàn thành các cấu hình cơ bản này: [Cài đặt Android Studio 2024 phiên bản SDK môi trường, cấu hình Gradle (tiếng Trung)](https://blog.csdn.net/keiraee/article/details/142321644?ops_request_misc=elastic_search_misc&request_id=a2b858d1f665095c53afa9114ad8864d&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-142321644-null-null.142^v102^pc_search_result_base4&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&spm=1018.2226.3001.4187)
 
 ![](images/image6.png)
 
@@ -576,7 +576,7 @@ Trang web nền tảng mở Xiaomi: https://dev.mi.com
 
 Địa chỉ liên minh nhà phát triển Huawei: http://developer.huawei.com/consumer/cn
 
-Địa chỉ nền tảng nhà phát triển Alibaba: http://open.uc.cn Phân phối ứng dụng Alibaba tích hợp các nền tảng như Wandoujia, Alibaba Jiuyou, Trợ lý PP, UC App Store,神马搜索, và hợp tác với Cửa hàng ứng dụng YunOS, v.v. để thực hiện bố cục ma trận lưu lượng toàn bộ. Ở đây bạn chỉ cần đăng ký một tài khoản nhà phát triển Alibaba.
+Địa chỉ nền tảng nhà phát triển Alibaba: http://open.uc.cn Phân phối ứng dụng Alibaba tích hợp các nền tảng như Wandoujia, Alibaba Jiuyou, Trợ lý PP, UC App Store, Shenma Search (神马搜索 - search engine TQ), và hợp tác với Cửa hàng ứng dụng YunOS, v.v. để thực hiện bố cục ma trận lưu lượng toàn bộ. Ở đây bạn chỉ cần đăng ký một tài khoản nhà phát triển Alibaba.
 
 Địa chỉ nền tảng nhà phát triển Samsung: http://support-cn.samsung.com/App/DeveloperChina/Home/Index
 
@@ -648,7 +648,7 @@ Trong menu Sản xuất (Production), nhấp Tạo bản phát hành mới, tả
 
 ![](images/image64.png)
 
-_Nếu bạn đã hoàn thành đăng ký tài khoản nhà phát triển, hướng dẫn video này có thể hướng dẫn bạn hoàn thành các hoạt động tiếp theo:_ [Hướng dẫn quy trình đầy đủ tải lên ứng dụng Android lên Google Play](https://www.bilibili.com/video/BV16REQzGEnk/?share_source=weixin&vd_source=b42f227a4f2d413fbde18499d83227cf)\*
+_Nếu bạn đã hoàn thành đăng ký tài khoản nhà phát triển, hướng dẫn video này có thể hướng dẫn bạn hoàn thành các hoạt động tiếp theo:_ [Hướng dẫn quy trình đầy đủ tải lên ứng dụng Android lên Google Play (tiếng Trung)](https://www.bilibili.com/video/BV16REQzGEnk/?share_source=weixin&vd_source=b42f227a4f2d413fbde18499d83227cf)\*
 
 # 7 Lời kết
 
@@ -668,6 +668,6 @@ Rất mong đợi tác phẩm tiếp theo của bạn, cố gắng lên!
 
 # Tài liệu tham khảo
 
-CSDN: [(2024.03.04) Cách đóng gói dự án Android Studio?](https://blog.csdn.net/GenuineMonster/article/details/136443130?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%20%E6%89%93%E5%8C%85%20APK%20%E5%B9%B6%E5%88%86%E4%BA%AB&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-136443130.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
+CSDN: [(2024.03.04) Cách đóng gói dự án Android Studio? (tiếng Trung)](https://blog.csdn.net/GenuineMonster/article/details/136443130?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%20%E6%89%93%E5%8C%85%20APK%20%E5%B9%B6%E5%88%86%E4%BA%AB&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-136443130.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
 
-CSDN: [Cài đặt và cấu hình Android Studio](https://blog.csdn.net/Changersh/article/details/149838228?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-149838228.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
+CSDN: [Cài đặt và cấu hình Android Studio (tiếng Trung)](https://blog.csdn.net/Changersh/article/details/149838228?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-149838228.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)

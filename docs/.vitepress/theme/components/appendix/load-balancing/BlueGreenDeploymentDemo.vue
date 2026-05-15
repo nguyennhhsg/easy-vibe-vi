@@ -2,14 +2,14 @@
   <div class="blue-green-deployment-demo">
     <div class="header">
       <div class="title">
-        蓝绿部署
+        Blue-green deployment
       </div>
       <div class="subtitle">
-        零停机发布的经典策略，两套环境瞬间切换
+        Chiến lược release zero-downtime kinh điển: hai môi trường, chuyển đổi tức thì
       </div>
     </div>
 
-    <!-- 部署状态控制 -->
+    <!-- Điều khiển trạng thái deploy -->
     <div class="deployment-control">
       <div class="status-display">
         <div
@@ -20,13 +20,13 @@
             🔵
           </div>
           <div class="status-label">
-            蓝环境
+            Môi trường Blue
           </div>
           <div class="status-version">
             v{{ blueVersion }}
           </div>
           <div class="status-traffic">
-            {{ currentEnv === 'blue' ? '100%' : '0%' }} 流量
+            {{ currentEnv === 'blue' ? '100%' : '0%' }} traffic
           </div>
         </div>
 
@@ -38,14 +38,14 @@
             @click="toggleEnvironment"
           >
             <span v-if="!isSwitching">
-              {{ currentEnv === 'blue' ? '切换到绿环境 →' : '← 切换到蓝环境' }}
+              {{ currentEnv === 'blue' ? 'Chuyển sang Green →' : '← Chuyển sang Blue' }}
             </span>
             <span
               v-else
               class="switching-text"
             >
               <span class="spinner" />
-              切换中...
+              Đang chuyển...
             </span>
           </button>
 
@@ -68,23 +68,23 @@
             🟢
           </div>
           <div class="status-label">
-            绿环境
+            Môi trường Green
           </div>
           <div class="status-version">
             v{{ greenVersion }}
           </div>
           <div class="status-traffic">
-            {{ currentEnv === 'green' ? '100%' : '0%' }} 流量
+            {{ currentEnv === 'green' ? '100%' : '0%' }} traffic
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 架构可视化 -->
+    <!-- Trực quan hoá kiến trúc -->
     <div class="architecture-view">
       <div class="layer users">
         <div class="layer-title">
-          用户流量
+          Traffic user
         </div>
         <div class="users-row">
           <div
@@ -109,15 +109,15 @@
           </div>
           <div class="lb-info">
             <div class="lb-title">
-              负载均衡器
+              Load balancer
             </div>
             <div class="lb-status">
-              当前指向:
+              Hiện đang trỏ về:
               <span
                 class="env-badge"
                 :class="currentEnv"
               >
-                {{ currentEnv === 'blue' ? '🔵 蓝环境' : '🟢 绿环境' }}
+                {{ currentEnv === 'blue' ? '🔵 Blue' : '🟢 Green' }}
               </span>
             </div>
           </div>
@@ -130,14 +130,14 @@
 
       <div class="layer environments">
         <div class="env-row">
-          <!-- 蓝环境 -->
+          <!-- Môi trường Blue -->
           <div
             class="env-box"
             :class="{ active: currentEnv === 'blue', standby: currentEnv === 'green' }"
           >
             <div class="env-header">
               <span class="env-icon">🔵</span>
-              <span class="env-name">蓝环境</span>
+              <span class="env-name">Môi trường Blue</span>
               <span class="env-badge version">v{{ blueVersion }}</span>
             </div>
             <div class="env-content">
@@ -161,7 +161,7 @@
             </div>
             <div class="env-footer">
               <div class="traffic-indicator">
-                <span class="indicator-label">流量:</span>
+                <span class="indicator-label">Traffic:</span>
                 <span
                   class="indicator-value"
                   :class="{ active: currentEnv === 'blue' }"
@@ -173,19 +173,19 @@
                 class="status-badge"
                 :class="currentEnv === 'blue' ? 'active' : 'standby'"
               >
-                {{ currentEnv === 'blue' ? '生产环境' : '待命' }}
+                {{ currentEnv === 'blue' ? 'Production' : 'Standby' }}
               </div>
             </div>
           </div>
 
-          <!-- 绿环境 -->
+          <!-- Môi trường Green -->
           <div
             class="env-box"
             :class="{ active: currentEnv === 'green', standby: currentEnv === 'blue' }"
           >
             <div class="env-header">
               <span class="env-icon">🟢</span>
-              <span class="env-name">绿环境</span>
+              <span class="env-name">Môi trường Green</span>
               <span class="env-badge version">v{{ greenVersion }}</span>
             </div>
             <div class="env-content">
@@ -209,7 +209,7 @@
             </div>
             <div class="env-footer">
               <div class="traffic-indicator">
-                <span class="indicator-label">流量:</span>
+                <span class="indicator-label">Traffic:</span>
                 <span
                   class="indicator-value"
                   :class="{ active: currentEnv === 'green' }"
@@ -221,7 +221,7 @@
                 class="status-badge"
                 :class="currentEnv === 'green' ? 'active' : 'standby'"
               >
-                {{ currentEnv === 'green' ? '生产环境' : '待命' }}
+                {{ currentEnv === 'green' ? 'Production' : 'Standby' }}
               </div>
             </div>
           </div>
@@ -229,10 +229,10 @@
       </div>
     </div>
 
-    <!-- 部署流程说明 -->
+    <!-- Luồng deployment -->
     <div class="deployment-process">
       <div class="process-title">
-        蓝绿部署流程
+        Luồng blue-green deployment
       </div>
       <div class="process-steps">
         <div
@@ -244,10 +244,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              绿环境部署
+              Deploy môi trường Green
             </div>
             <div class="step-desc">
-              在绿环境部署新版本，进行冒烟测试
+              Deploy bản mới vào Green, chạy smoke test
             </div>
           </div>
         </div>
@@ -263,10 +263,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              切换流量
+              Chuyển traffic
             </div>
             <div class="step-desc">
-              将负载均衡器指向绿环境，流量瞬间切换
+              Trỏ load balancer về Green, traffic chuyển tức thì
             </div>
           </div>
         </div>
@@ -282,10 +282,10 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              监控观察
+              Quan sát monitor
             </div>
             <div class="step-desc">
-              观察绿环境运行状态，确认无异常
+              Quan sát trạng thái chạy của Green, xác nhận không có bất thường
             </div>
           </div>
         </div>
@@ -301,44 +301,44 @@
           </div>
           <div class="step-content">
             <div class="step-title">
-              蓝环境升级
+              Nâng cấp Blue
             </div>
             <div class="step-desc">
-              在蓝环境部署新版本，为下次切换做准备
+              Deploy bản mới vào Blue, chuẩn bị cho lần chuyển sau
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 优缺点分析 -->
+    <!-- Ưu điểm và nhược điểm -->
     <div class="pros-cons-analysis">
       <div class="analysis-title">
-        蓝绿部署优缺点
+        Ưu điểm và nhược điểm của blue-green deployment
       </div>
       <div class="analysis-grid">
         <div class="analysis-card pros">
           <div class="card-header">
             <span class="header-icon">✅</span>
-            <span class="header-title">优点</span>
+            <span class="header-title">Ưu điểm</span>
           </div>
           <div class="card-body">
             <ul class="feature-list">
               <li class="feature-item">
-                <span class="item-title">零停机时间：</span>
-                <span class="item-desc">流量切换在毫秒级完成，用户无感知</span>
+                <span class="item-title">Zero downtime:</span>
+                <span class="item-desc">Chuyển traffic chỉ vài millisecond, user không cảm nhận được</span>
               </li>
               <li class="feature-item">
-                <span class="item-title">快速回滚：</span>
-                <span class="item-desc">发现问题可立即切回原环境，风险可控</span>
+                <span class="item-title">Rollback nhanh:</span>
+                <span class="item-desc">Phát hiện vấn đề là switch ngược về môi trường gốc, rủi ro kiểm soát được</span>
               </li>
               <li class="feature-item">
-                <span class="item-title">完整的预发布测试：</span>
-                <span class="item-desc">新环境可完整测试后再接管流量</span>
+                <span class="item-title">Test pre-release đầy đủ:</span>
+                <span class="item-desc">Môi trường mới có thể test đầy đủ trước khi nhận traffic</span>
               </li>
               <li class="feature-item">
-                <span class="item-title">数据一致性：</span>
-                <span class="item-desc">无需处理新旧版本同时运行时的兼容问题</span>
+                <span class="item-title">Nhất quán dữ liệu:</span>
+                <span class="item-desc">Không phải xử lý vấn đề tương thích giữa bản cũ và bản mới chạy song song</span>
               </li>
             </ul>
           </div>
@@ -347,25 +347,25 @@
         <div class="analysis-card cons">
           <div class="card-header">
             <span class="header-icon">❌</span>
-            <span class="header-title">缺点</span>
+            <span class="header-title">Nhược điểm</span>
           </div>
           <div class="card-body">
             <ul class="feature-list">
               <li class="feature-item">
-                <span class="item-title">资源成本高：</span>
-                <span class="item-desc">需要同时维护两套完整环境，服务器成本翻倍</span>
+                <span class="item-title">Chi phí tài nguyên cao:</span>
+                <span class="item-desc">Phải duy trì đồng thời hai môi trường đầy đủ, chi phí server gấp đôi</span>
               </li>
               <li class="feature-item">
-                <span class="item-title">数据库兼容性挑战：</span>
-                <span class="item-desc">如果涉及数据库Schema变更，需要特别处理兼容性</span>
+                <span class="item-title">Thách thức tương thích database:</span>
+                <span class="item-desc">Nếu có thay đổi schema database thì phải xử lý tương thích đặc biệt</span>
               </li>
               <li class="feature-item">
-                <span class="item-title">预热问题：</span>
-                <span class="item-desc">新环境启动后可能需要时间预热缓存、连接池等</span>
+                <span class="item-title">Vấn đề warm-up:</span>
+                <span class="item-desc">Môi trường mới khởi động xong cần thời gian warm-up cache, connection pool, v.v.</span>
               </li>
               <li class="feature-item">
-                <span class="item-title">不适合有状态服务：</span>
-                <span class="item-desc">对于长连接、会话保持要求高的场景处理复杂</span>
+                <span class="item-title">Không phù hợp dịch vụ có state:</span>
+                <span class="item-desc">Phức tạp với các tình huống yêu cầu giữ long connection, session</span>
               </li>
             </ul>
           </div>
@@ -385,11 +385,11 @@ const isSwitching = ref(false)
 const switchProgress = ref(0)
 const deploymentStep = ref(4)
 
-// 加权服务器数据
+// Dữ liệu server có trọng số
 const weightedServers = ref([
-  { id: 1, name: 'Server 1', specs: '16核 64GB NVMe', ip: '10.0.1.10', weight: 5, status: 'healthy' },
-  { id: 2, name: 'Server 2', specs: '8核 32GB SSD', ip: '10.0.1.11', weight: 3, status: 'healthy' },
-  { id: 3, name: 'Server 3', specs: '4核 16GB SSD', ip: '10.0.1.12', weight: 2, status: 'healthy' }
+  { id: 1, name: 'Server 1', specs: '16 core 64GB NVMe', ip: '10.0.1.10', weight: 5, status: 'healthy' },
+  { id: 2, name: 'Server 2', specs: '8 core 32GB SSD', ip: '10.0.1.11', weight: 3, status: 'healthy' },
+  { id: 3, name: 'Server 3', specs: '4 core 16GB SSD', ip: '10.0.1.12', weight: 2, status: 'healthy' }
 ])
 
 const totalTraffic = ref(1000)
@@ -408,7 +408,7 @@ const getWeightColor = (index) => {
   return colors[index % colors.length]
 }
 
-// 流量流动画
+// Animation luồng traffic
 const trafficFlows = ref([])
 
 const generateTrafficFlows = () => {
@@ -437,7 +437,7 @@ const toggleEnvironment = async () => {
   isSwitching.value = true
   switchProgress.value = 0
 
-  // 模拟切换进度
+  // Mô phỏng tiến độ chuyển
   const interval = setInterval(() => {
     switchProgress.value += 10
     if (switchProgress.value >= 100) {

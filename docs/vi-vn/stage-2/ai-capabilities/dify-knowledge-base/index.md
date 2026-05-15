@@ -31,7 +31,7 @@ Công việc hoàn tất, chúng tôi có thể cố gắng chạy hiệu ứng 
 - Đầu vào (chuyện phiếm): "Hôm nay ăn gì thì lành mạnh?"
   - Đường dẫn: `chitchat` → `LLM_Chitchat`
   - Đầu ra reply: "Nếu muốn lành mạnh, bạn có thể thử loạt salad nhẹ của chúng tôi, hoặc ngực gà nướng kết hợp với rau thì tốt. Bạn thích ăn nhẹ một chút hay phong phú hơn một chút?"
-- Đầu vào (nội dung không liên quan): "Giúp tôi nghĩ ra một câu笑话 cho cuộc họp ngày mai."
+- Đầu vào (nội dung không liên quan): "Giúp tôi nghĩ ra một câu đùa cho cuộc họp ngày mai."
   - Đường dẫn: `other` → `LLM_Other`
   - Đầu ra reply: "Điều đó nghe có vẻ là một thách thức thú vị! Tuy nhiên tôi chủ yếu là một trợ lý gợi ý thực phẩm và đặt hàng. Nếu bạn cần gọi những gì đó để thưởng cho công việc chăm chỉ của mình, tôi luôn sẵn sàng giúp!"
 

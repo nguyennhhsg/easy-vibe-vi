@@ -1,15 +1,15 @@
 <!--
   DataCollectionDemo.vue
-  数据采集方案对比 - 客户端、服务端、CDN日志采集
+  So sánh phương án thu thập dữ liệu - Client / Server / log CDN
 -->
 <template>
   <div class="data-collection-demo">
     <div class="header">
       <div class="title">
-        数据采集方案
+        Phương án thu thập dữ liệu
       </div>
       <div class="subtitle">
-        客户端、服务端、CDN三种采集方式对比
+        So sánh 3 cách thu thập: client, server và log CDN
       </div>
     </div>
 
@@ -37,7 +37,7 @@
         >
           <div class="detail-section">
             <div class="section-title">
-              ✅ 优点
+              ✅ Ưu điểm
             </div>
             <ul class="detail-list">
               <li
@@ -51,7 +51,7 @@
 
           <div class="detail-section">
             <div class="section-title">
-              ❌ 缺点
+              ❌ Nhược điểm
             </div>
             <ul class="detail-list">
               <li
@@ -65,7 +65,7 @@
 
           <div class="detail-section">
             <div class="section-title">
-              🎯 适用场景
+              🎯 Tình huống áp dụng
             </div>
             <ul class="detail-list">
               <li
@@ -82,12 +82,12 @@
 
     <div class="comparison-table">
       <div class="table-title">
-        方案对比
+        So sánh các phương án
       </div>
       <table class="comparison">
         <thead>
           <tr>
-            <th>对比维度</th>
+            <th>Tiêu chí</th>
             <th
               v-for="method in methods"
               :key="method.id"
@@ -98,7 +98,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>数据准确性</td>
+            <td>Độ chính xác dữ liệu</td>
             <td
               v-for="method in methods"
               :key="method.id"
@@ -107,7 +107,7 @@
             </td>
           </tr>
           <tr>
-            <td>实时性</td>
+            <td>Tính realtime</td>
             <td
               v-for="method in methods"
               :key="method.id"
@@ -116,7 +116,7 @@
             </td>
           </tr>
           <tr>
-            <td>开发成本</td>
+            <td>Chi phí phát triển</td>
             <td
               v-for="method in methods"
               :key="method.id"
@@ -125,7 +125,7 @@
             </td>
           </tr>
           <tr>
-            <td>维护成本</td>
+            <td>Chi phí bảo trì</td>
             <td
               v-for="method in methods"
               :key="method.id"
@@ -147,12 +147,12 @@ const selectedMethod = ref('client')
 const methods = [
   {
     id: 'client',
-    name: '客户端埋点',
+    name: 'Tracking client',
     icon: '📱',
-    desc: '在 Web、App 前端代码中集成埋点 SDK',
-    pros: ['实时性好', '可采集设备信息', '离线缓存'],
-    cons: ['数据可能被篡改', '耗电流量', 'App 崩溃可能丢失'],
-    useCases: ['页面浏览', '按钮点击', '表单提交'],
+    desc: 'Tích hợp SDK tracking vào code frontend Web, App',
+    pros: ['Realtime tốt', 'Thu được thông tin thiết bị', 'Cache offline'],
+    cons: ['Dữ liệu có thể bị giả mạo', 'Tốn pin/data', 'App crash có thể mất dữ liệu'],
+    useCases: ['Page view', 'Click nút', 'Submit form'],
     accuracy: '★★★☆☆',
     realtime: '★★★★★',
     cost: '★★★☆☆',
@@ -160,12 +160,12 @@ const methods = [
   },
   {
     id: 'server',
-    name: '服务端埋点',
+    name: 'Tracking server',
     icon: '⚙️',
-    desc: '在服务器端业务逻辑中添加埋点代码',
-    pros: ['数据准确', '不可篡改', '采集服务端特有数据'],
-    cons: ['无法获取客户端信息', '需要业务代码侵入'],
-    useCases: ['支付成功', '订单创建', 'API 调用'],
+    desc: 'Thêm code tracking vào business logic phía server',
+    pros: ['Dữ liệu chính xác', 'Không thể giả mạo', 'Thu được dữ liệu riêng của server'],
+    cons: ['Không lấy được thông tin client', 'Phải xen vào code business'],
+    useCases: ['Thanh toán thành công', 'Tạo đơn hàng', 'Gọi API'],
     accuracy: '★★★★★',
     realtime: '★★★★☆',
     cost: '★★★☆☆',
@@ -173,12 +173,12 @@ const methods = [
   },
   {
     id: 'cdn',
-    name: 'CDN 日志采集',
+    name: 'Thu từ log CDN',
     icon: '🌐',
-    desc: '通过 CDN 访问日志分析用户行为',
-    pros: ['零代码侵入', '覆盖所有用户', '成本低'],
-    cons: ['数据维度有限', '无法获取业务数据'],
-    useCases: ['PV/UV 统计', '资源加载性能', '错误监控'],
+    desc: 'Phân tích hành vi user qua access log của CDN',
+    pros: ['Zero xâm nhập code', 'Bao phủ mọi user', 'Chi phí thấp'],
+    cons: ['Số chiều dữ liệu giới hạn', 'Không lấy được dữ liệu business'],
+    useCases: ['Thống kê PV/UV', 'Hiệu năng load tài nguyên', 'Giám sát lỗi'],
     accuracy: '★★★☆☆',
     realtime: '★★★☆☆',
     cost: '★★★★★',

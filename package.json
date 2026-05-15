@@ -2,6 +2,14 @@
   "name": "easy-vibe-vi",
   "version": "1.0.0",
   "description": "Easy-Vibe phiên bản tiếng Việt - Học Vibe Coding với AI từ con số 0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nguyennhhsg/easy-vibe-vi.git"
+  },
+  "homepage": "https://easy-vibe-vi.vercel.app",
+  "bugs": {
+    "url": "https://github.com/nguyennhhsg/easy-vibe-vi/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",

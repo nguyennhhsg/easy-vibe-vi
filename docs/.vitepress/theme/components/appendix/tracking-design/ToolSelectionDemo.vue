@@ -1,21 +1,21 @@
 <!--
   ToolSelectionDemo.vue
-  工具选型建议 - 帮助选择合适的埋点工具
+  Gợi ý lựa chọn tool tracking - giúp chọn công cụ tracking phù hợp
 -->
 <template>
   <div class="tool-selection-demo">
     <div class="header">
       <div class="title">
-        埋点工具选型
+        Lựa chọn tool tracking
       </div>
       <div class="subtitle">
-        根据团队规模和需求选择合适的方案
+        Chọn giải pháp phù hợp dựa trên quy mô team và nhu cầu của bạn
       </div>
     </div>
 
     <div class="selection-criteria">
       <div class="criteria-title">
-        请选择您的场景
+        Vui lòng chọn tình huống của bạn
       </div>
       <div class="criteria-options">
         <div
@@ -44,7 +44,7 @@
         class="recommend-btn"
         @click="getRecommendation"
       >
-        获取推荐方案
+        Nhận giải pháp gợi ý
       </button>
     </div>
 
@@ -57,7 +57,7 @@
           🎯
         </div>
         <div class="result-title">
-          推荐方案
+          Giải pháp được gợi ý
         </div>
       </div>
 
@@ -71,22 +71,22 @@
 
         <div class="result-details">
           <div class="detail-item">
-            <span class="detail-label">适用阶段：</span>
+            <span class="detail-label">Giai đoạn áp dụng:</span>
             <span class="detail-value">{{ recommendation.stage }}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">预估成本：</span>
+            <span class="detail-label">Chi phí ước tính:</span>
             <span class="detail-value">{{ recommendation.cost }}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">实施难度：</span>
+            <span class="detail-label">Độ khó triển khai:</span>
             <span class="detail-value">{{ recommendation.difficulty }}</span>
           </div>
         </div>
 
         <div class="result-pros">
           <div class="pros-title">
-            ✅ 优势
+            ✅ Ưu điểm
           </div>
           <ul class="pros-list">
             <li
@@ -100,7 +100,7 @@
 
         <div class="result-cons">
           <div class="cons-title">
-            ⚠️ 注意事项
+            ⚠️ Lưu ý
           </div>
           <ul class="cons-list">
             <li
@@ -116,16 +116,16 @@
 
     <div class="tools-comparison">
       <div class="comparison-title">
-        工具对比表
+        Bảng so sánh các tool
       </div>
       <table class="comparison-table">
         <thead>
           <tr>
-            <th>工具</th>
-            <th>类型</th>
-            <th>价格</th>
-            <th>适用场景</th>
-            <th>推荐指数</th>
+            <th>Tool</th>
+            <th>Loại</th>
+            <th>Giá</th>
+            <th>Phù hợp với</th>
+            <th>Chỉ số đề xuất</th>
           </tr>
         </thead>
         <tbody>
@@ -163,20 +163,20 @@ const selectedCriteria = ref({
 
 const criteria = {
   teamSize: {
-    label: '团队规模',
-    values: ['1-5人', '5-20人', '20-100人', '100+人']
+    label: 'Quy mô team',
+    values: ['1-5 người', '5-20 người', '20-100 người', '100+ người']
   },
   budget: {
-    label: '预算',
-    values: ['免费优先', '低预算', '中等预算', '预算充足']
+    label: 'Ngân sách',
+    values: ['Ưu tiên miễn phí', 'Ngân sách thấp', 'Ngân sách trung bình', 'Ngân sách dư dả']
   },
   technical: {
-    label: '技术能力',
-    values: ['无技术团队', '有开发人员', '技术团队完善']
+    label: 'Năng lực kỹ thuật',
+    values: ['Không có team kỹ thuật', 'Có developer', 'Team kỹ thuật mạnh']
   },
   dataSecurity: {
-    label: '数据安全要求',
-    values: ['一般', '较高', '极高（需私有化）']
+    label: 'Yêu cầu bảo mật dữ liệu',
+    values: ['Bình thường', 'Cao', 'Cực cao (cần private deployment)']
   }
 }
 
@@ -185,30 +185,30 @@ const recommendation = ref(null)
 const recommendations = {
   small: {
     name: 'Google Analytics',
-    desc: '全球最流行的免费网站分析工具，功能强大，易于上手',
-    stage: '0-1 阶段（初创期）',
-    cost: '免费',
-    difficulty: '低',
-    pros: ['完全免费', '功能全面', '社区资源丰富', '上手简单'],
-    cons: ['数据在海外服务器', '国内访问可能不稳定', '高级功能需要翻墙']
+    desc: 'Tool phân tích website miễn phí phổ biến nhất thế giới, mạnh mẽ và dễ dùng',
+    stage: 'Giai đoạn 0-1 (khởi nghiệp)',
+    cost: 'Miễn phí',
+    difficulty: 'Thấp',
+    pros: ['Hoàn toàn miễn phí', 'Tính năng đầy đủ', 'Tài liệu cộng đồng phong phú', 'Dễ bắt đầu'],
+    cons: ['Dữ liệu trên server nước ngoài', 'Truy cập tại VN có thể không ổn định', 'Tính năng nâng cao cần VPN']
   },
   medium: {
-    name: '神策数据 / GrowingIO',
-    desc: '国内领先的用户行为分析平台，支持私有化部署',
-    stage: '1-10 阶段（成长期）',
-    cost: '$5,000 - $20,000 /年',
-    difficulty: '中',
-    pros: ['专业的事件分析', '支持私有化部署', '国内技术支持', '符合国内法规'],
-    cons: ['价格较高', '需要技术团队维护', '定制化需求成本高']
+    name: 'Sensors Data / GrowingIO',
+    desc: 'Nền tảng phân tích hành vi user hàng đầu trong nước, hỗ trợ private deployment',
+    stage: 'Giai đoạn 1-10 (tăng trưởng)',
+    cost: '$5,000 - $20,000 /năm',
+    difficulty: 'Trung bình',
+    pros: ['Event analytics chuyên nghiệp', 'Hỗ trợ private deployment', 'Hỗ trợ kỹ thuật nội địa', 'Tuân thủ quy định trong nước'],
+    cons: ['Giá khá cao', 'Cần team kỹ thuật để maintain', 'Chi phí customization cao']
   },
   large: {
-    name: '自建埋点系统',
-    desc: '基于开源技术栈（Kafka + ClickHouse）搭建私有化埋点平台',
-    stage: '10-100 阶段（成熟期）',
-    cost: '$50,000+ /年（人力+服务器）',
-    difficulty: '高',
-    pros: ['数据完全自主可控', '灵活定制化', '长期成本更低', '数据安全性最高'],
-    cons: ['初期投入大', '需要专业团队', '维护成本高', '实施周期长']
+    name: 'Self-built tracking system',
+    desc: 'Xây dựng nền tảng tracking private dựa trên open source stack (Kafka + ClickHouse)',
+    stage: 'Giai đoạn 10-100 (trưởng thành)',
+    cost: '$50,000+ /năm (nhân lực + server)',
+    difficulty: 'Cao',
+    pros: ['Hoàn toàn tự chủ về dữ liệu', 'Customization linh hoạt', 'Chi phí dài hạn thấp hơn', 'Bảo mật dữ liệu cao nhất'],
+    cons: ['Đầu tư ban đầu lớn', 'Cần team chuyên nghiệp', 'Chi phí maintain cao', 'Thời gian triển khai dài']
   }
 }
 
@@ -216,36 +216,36 @@ const tools = [
   {
     name: 'Google Analytics',
     type: 'SaaS',
-    price: '免费',
-    scenario: '小型项目、个人网站',
+    price: 'Miễn phí',
+    scenario: 'Dự án nhỏ, website cá nhân',
     rating: 5
   },
   {
     name: 'Umami',
-    type: '开源',
-    price: '服务器成本',
-    scenario: '注重隐私、需要私有化',
+    type: 'Open source',
+    price: 'Chi phí server',
+    scenario: 'Chú trọng privacy, cần private deployment',
     rating: 4
   },
   {
-    name: '神策数据',
-    type: '商业+私有化',
-    price: '$10,000+/年',
-    scenario: '中大型企业',
+    name: 'Sensors Data',
+    type: 'Commercial + private',
+    price: '$10,000+/năm',
+    scenario: 'Doanh nghiệp vừa và lớn',
     rating: 5
   },
   {
     name: 'GrowingIO',
-    type: '商业+SaaS',
-    price: '$5,000+/年',
-    scenario: '增长团队、产品优化',
+    type: 'Commercial + SaaS',
+    price: '$5,000+/năm',
+    scenario: 'Growth team, tối ưu sản phẩm',
     rating: 4
   },
   {
     name: 'Mixpanel',
     type: 'SaaS',
-    price: '$25,000+/年',
-    scenario: '产品数据分析',
+    price: '$25,000+/năm',
+    scenario: 'Phân tích dữ liệu sản phẩm',
     rating: 4
   }
 ]
@@ -253,11 +253,11 @@ const tools = [
 const getRecommendation = () => {
   const { teamSize, budget, technical, dataSecurity } = selectedCriteria.value
 
-  if (dataSecurity === '极高（需私有化）') {
+  if (dataSecurity === 'Cực cao (cần private deployment)') {
     recommendation.value = recommendations.large
-  } else if (teamSize === '1-5人' || budget === '免费优先') {
+  } else if (teamSize === '1-5 người' || budget === 'Ưu tiên miễn phí') {
     recommendation.value = recommendations.small
-  } else if (teamSize === '5-20人' || teamSize === '20-100人') {
+  } else if (teamSize === '5-20 người' || teamSize === '20-100 người') {
     recommendation.value = recommendations.medium
   } else {
     recommendation.value = recommendations.large

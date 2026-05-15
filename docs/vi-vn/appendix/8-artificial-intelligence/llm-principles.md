@@ -30,7 +30,7 @@ Vì vậy, nhiệm vụ đầu tiên của chúng ta là: **cắt dòng văn b�
 Chia tách từ là cắt một câu hoàn chỉnh thành những "đơn vị từ" (Token).
 
 - **Tiếng Anh**: Có dấu cách tự nhiên, dễ chia tách (ví dụ `I love AI`).
-- **Tiếng Trung**: Không có dấu cách, cần thuật toán để cắt (ví dụ `我爱人工智能`).
+- **Tiếng Trung**: Không có dấu cách, cần thuật toán để cắt (ví dụ `我爱人工智能` — "tôi yêu trí tuệ nhân tạo").
 
 #### Tokenizer (Dịch giả)
 
@@ -42,7 +42,7 @@ LLM hiện đại (như GPT-4) thường sử dụng kỹ thuật **Subword Toke
 
 Dưới đây là một ví dụ thực tế về chia tách BPE (dựa trên Tokenizer GPT-4):
 
-**Input**: `"The quick brown fox jumps over the lazy dog. \n今天天气真不错！"`
+**Input**: `"The quick brown fox jumps over the lazy dog. \n今天天气真不错！"` (câu tiếng Trung nghĩa là "Hôm nay thời tiết thật tốt!")
 
 **Token List**:
 
@@ -58,15 +58,15 @@ index=16053, string=' lazy'
 index=3290,  string=' dog' 
 index=13,    string='.' 
 index=198,   string='\n'       <-- Ký tự xuống dòng 
-index=33838, string='今天'      <-- Những từ phổ biến được kết hợp trực tiếp 
-index=54580, string='天气' 
-index=20265, string='真' 
-index=57672, string='不错' 
+index=33838, string='今天'      <-- "Hôm nay" - những từ phổ biến được kết hợp trực tiếp 
+index=54580, string='天气'      <-- "Thời tiết"
+index=20265, string='真'        <-- "Thật"
+index=57672, string='不错'      <-- "Tốt"
 index=171,   string='！' 
 ```
 
 > **Về cách xử lý các ký tự hiếm:**
-> Nếu gặp một ký tự hiếm không có trong bảng từ (giả sử ký tự "今" rất hiếm), mô hình sẽ quay trở lại mã hóa **cấp độ Byte**.
+> Nếu gặp một ký tự hiếm không có trong bảng từ (giả sử ký tự "今" — "hôm nay" — rất hiếm), mô hình sẽ quay trở lại mã hóa **cấp độ Byte**.
 > 1.  Raw Input: `今`
 > 2.  Bytes: `\xE4 \xBB \x8A`
 > 3.  BPE lookup: Trước tiên tìm `\xE4\xBB\x8A` -> Không tìm thấy -> Tách thành `\xE4\xBB` (ID=1001) + `\x8A` (ID=2002).
@@ -278,7 +278,7 @@ Chỉ biết hội thoại là chưa đủ. Mô hình gốc có thể sẽ dạy
       // Ví dụ dữ liệu huấn luyện SFT
       {
         "messages": [
-          { "role": "user", "content": "Vui lòng dịch câu này sang tiếng Anh: \"你好\"。" },
+          { "role": "user", "content": "Vui lòng dịch câu này sang tiếng Anh: \"Xin chao\"." },
           { "role": "assistant", "content": "Hello." }
         ]
       }
@@ -286,8 +286,8 @@ Chỉ biết hội thoại là chưa đủ. Mô hình gốc có thể sẽ dạy
       ```
 
 2.  **RLHF (Học tăng cường từ Phản hồi Con người)**:
-    - **打分**: Cho mô hình sinh ra vài câu trả lời, các giáo viên con người chấm điểm (câu nào an toàn hơn? câu nào lịch sự hơn?).
-    - **奖惩**: Nếu mô hình nói tốt sẽ cho phần thưởng, nói tệ sẽ cho hình phạt. Dần dần, mô hình sẽ học được "sắp xếp" theo giá trị con người (Alignment).
+    - **Chấm điểm**: Cho mô hình sinh ra vài câu trả lời, các giáo viên con người chấm điểm (câu nào an toàn hơn? câu nào lịch sự hơn?).
+    - **Thưởng phạt**: Nếu mô hình nói tốt sẽ cho phần thưởng, nói tệ sẽ cho hình phạt. Dần dần, mô hình sẽ học được "sắp xếp" theo giá trị con người (Alignment).
     - _Ví dụ dữ liệu (định dạng JSON)_:
       ```json
       // Ví dụ dữ liệu ưa thích RLHF (DPO/PPO)

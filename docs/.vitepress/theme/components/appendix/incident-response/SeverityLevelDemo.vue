@@ -1,12 +1,12 @@
 <!--
   SeverityLevelDemo.vue
-  事故严重程度分级演示：交互式展示 P0-P4 各级别的定义、示例和响应要求
+  Demo phân cấp mức nghiêm trọng sự cố: tương tác hiển thị định nghĩa P0-P4, ví dụ và yêu cầu phản ứng
 -->
 <template>
   <div class="severity-level-demo">
     <div class="header">
-      <div class="title">事故严重程度分级 (Severity Levels)</div>
-      <div class="subtitle">点击各级别，了解对应的响应要求和真实案例</div>
+      <div class="title">Phân cấp mức nghiêm trọng sự cố (Severity Levels)</div>
+      <div class="subtitle">Click từng cấp để xem yêu cầu phản ứng và ví dụ thực tế</div>
     </div>
 
     <div class="level-tabs">
@@ -28,17 +28,17 @@
       </div>
       <div class="detail-body">
         <div class="detail-section">
-          <div class="section-label">定义</div>
+          <div class="section-label">Định nghĩa</div>
           <div class="section-content">{{ current.definition }}</div>
         </div>
         <div class="detail-section">
-          <div class="section-label">响应时间</div>
+          <div class="section-label">Thời gian phản ứng</div>
           <div class="section-content response-time">
             {{ current.responseTime }}
           </div>
         </div>
         <div class="detail-section">
-          <div class="section-label">通知方式</div>
+          <div class="section-label">Kênh thông báo</div>
           <div class="channels">
             <span
               v-for="ch in current.channels"
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="detail-section">
-          <div class="section-label">真实案例</div>
+          <div class="section-label">Ví dụ thực tế</div>
           <div class="examples">
             <div
               v-for="(ex, i) in current.examples"
@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="detail-section">
-          <div class="section-label">响应要求</div>
+          <div class="section-label">Yêu cầu phản ứng</div>
           <div class="requirements">
             <div
               v-for="(req, i) in current.requirements"
@@ -78,15 +78,15 @@
     </div>
 
     <div class="comparison-table">
-      <div class="table-title">各级别对比一览</div>
+      <div class="table-title">So sánh nhanh các cấp</div>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>级别</th>
-              <th>用户影响</th>
-              <th>响应时间</th>
-              <th>值班要求</th>
+              <th>Cấp</th>
+              <th>Ảnh hưởng user</th>
+              <th>Thời gian phản ứng</th>
+              <th>Yêu cầu trực</th>
             </tr>
           </thead>
           <tbody>
@@ -120,112 +120,112 @@ const activeLevel = ref('p0')
 const levels = [
   {
     id: 'p0',
-    shortName: '致命',
-    name: '致命事故 (Critical)',
+    shortName: 'Tử',
+    name: 'Sự cố tử (Critical)',
     color: '#ef4444',
-    definition: '核心业务完全不可用，大面积用户受影响，造成严重经济损失或数据丢失风险。',
-    responseTime: '立即响应，5 分钟内到位',
-    userImpact: '全部用户',
-    oncallReq: '全员到位',
-    channels: ['电话', '短信', '即时通讯', '邮件'],
+    definition: 'Business cốt lõi hoàn toàn không khả dụng, lượng lớn user bị ảnh hưởng, gây thiệt hại kinh tế nghiêm trọng hoặc rủi ro mất dữ liệu.',
+    responseTime: 'Phản ứng ngay, có mặt trong 5 phút',
+    userImpact: 'Toàn bộ user',
+    oncallReq: 'Toàn đội có mặt',
+    channels: ['Gọi điện', 'SMS', 'Chat tức thì', 'Email'],
     examples: [
-      '主数据库宕机，所有读写请求失败',
-      '支付系统完全不可用，用户无法下单',
-      '用户数据大规模泄露'
+      'Database chính chết, mọi request đọc/ghi đều fail',
+      'Hệ thống thanh toán hoàn toàn không khả dụng, user không đặt đơn được',
+      'Lộ dữ liệu user quy mô lớn'
     ],
     requirements: [
-      '事故指挥官必须在 5 分钟内就位',
-      '每 15 分钟向管理层通报进展',
-      '所有相关团队取消休假立即支援',
-      '事后 24 小时内完成复盘报告'
+      'Incident commander phải có mặt trong 5 phút',
+      '15 phút một lần báo cáo tiến độ lên quản lý',
+      'Mọi team liên quan huỷ nghỉ phép, hỗ trợ ngay',
+      'Hoàn tất postmortem trong 24 giờ sau sự cố'
     ]
   },
   {
     id: 'p1',
-    shortName: '严重',
-    name: '严重事故 (Major)',
+    shortName: 'Nghiêm trọng',
+    name: 'Sự cố nghiêm trọng (Major)',
     color: '#f59e0b',
-    definition: '核心功能部分受损，大量用户体验降级，但系统未完全不可用。',
-    responseTime: '15 分钟内响应',
-    userImpact: '大量用户',
-    oncallReq: '核心团队',
-    channels: ['即时通讯', '短信', '邮件'],
+    definition: 'Tính năng cốt lõi hư hại một phần, lượng lớn user bị degrade trải nghiệm, nhưng hệ thống chưa chết hẳn.',
+    responseTime: 'Phản ứng trong 15 phút',
+    userImpact: 'Nhiều user',
+    oncallReq: 'Team chính',
+    channels: ['Chat tức thì', 'SMS', 'Email'],
     examples: [
-      '搜索功能返回结果严重延迟（>5s）',
-      '部分地区用户无法登录',
-      '订单处理队列严重积压'
+      'Tính năng tìm kiếm trả kết quả chậm nghiêm trọng (>5s)',
+      'User ở một số khu vực không đăng nhập được',
+      'Queue xử lý đơn hàng tồn đọng nghiêm trọng'
     ],
     requirements: [
-      '值班工程师 15 分钟内开始排查',
-      '每 30 分钟通报一次进展',
-      '必要时升级为 P0',
-      '事后 48 小时内完成复盘'
+      'Engineer trực bắt đầu điều tra trong 15 phút',
+      '30 phút một lần báo cáo tiến độ',
+      'Cần thiết thì leo thang lên P0',
+      'Hoàn tất postmortem trong 48 giờ sau sự cố'
     ]
   },
   {
     id: 'p2',
-    shortName: '中等',
-    name: '中等事故 (Moderate)',
+    shortName: 'Trung bình',
+    name: 'Sự cố trung bình (Moderate)',
     color: '#eab308',
-    definition: '非核心功能异常，部分用户受影响，不影响主要业务流程。',
-    responseTime: '1 小时内响应',
-    userImpact: '部分用户',
-    oncallReq: '值班工程师',
-    channels: ['即时通讯', '邮件'],
+    definition: 'Tính năng phụ bị lỗi, một phần user bị ảnh hưởng, không ảnh hưởng luồng nghiệp vụ chính.',
+    responseTime: 'Phản ứng trong 1 giờ',
+    userImpact: 'Một phần user',
+    oncallReq: 'Engineer trực',
+    channels: ['Chat tức thì', 'Email'],
     examples: [
-      '用户头像加载失败',
-      '报表导出功能超时',
-      '非关键页面 CSS 样式错乱'
+      'Avatar user không tải được',
+      'Tính năng xuất báo cáo bị timeout',
+      'Trang không quan trọng bị lệch CSS'
     ],
     requirements: [
-      '值班工程师在工作时间内处理',
-      '当天给出修复方案',
-      '不需要全员响应',
-      '在周报中记录'
+      'Engineer trực xử lý trong giờ làm việc',
+      'Đưa giải pháp fix trong ngày',
+      'Không cần toàn đội phản ứng',
+      'Ghi nhận vào báo cáo tuần'
     ]
   },
   {
     id: 'p3',
-    shortName: '轻微',
-    name: '轻微问题 (Minor)',
+    shortName: 'Nhẹ',
+    name: 'Vấn đề nhẹ (Minor)',
     color: '#84cc16',
-    definition: '边缘功能小问题，极少数用户受影响，不影响正常使用。',
-    responseTime: '当天确认，本周处理',
-    userImpact: '极少用户',
-    oncallReq: '正常排期',
-    channels: ['邮件', '工单系统'],
+    definition: 'Vấn đề nhỏ ở tính năng ngoài lề, rất ít user bị ảnh hưởng, không ảnh hưởng sử dụng bình thường.',
+    responseTime: 'Xác nhận trong ngày, xử lý trong tuần',
+    userImpact: 'Rất ít user',
+    oncallReq: 'Lên lịch bình thường',
+    channels: ['Email', 'Hệ thống ticket'],
     examples: [
-      '某个按钮在特定浏览器下对齐偏移',
-      '日志中出现非关键性警告',
-      '文案有错别字'
+      'Một nút bị lệch trên browser cụ thể',
+      'Log có cảnh báo không quan trọng',
+      'Văn án có lỗi chính tả'
     ],
     requirements: [
-      '记录到缺陷跟踪系统',
-      '纳入正常迭代排期',
-      '不需要紧急响应',
-      '修复后正常发布'
+      'Ghi vào hệ thống tracking bug',
+      'Đưa vào lịch sprint bình thường',
+      'Không cần phản ứng khẩn',
+      'Sau khi fix thì release bình thường'
     ]
   },
   {
     id: 'p4',
-    shortName: '建议',
-    name: '改进建议 (Suggestion)',
+    shortName: 'Đề xuất',
+    name: 'Đề xuất cải tiến (Suggestion)',
     color: '#64748b',
-    definition: '非故障类问题，属于优化建议或技术债务，不影响任何用户。',
-    responseTime: '按优先级排期',
-    userImpact: '无直接影响',
-    oncallReq: '无需值班',
-    channels: ['工单系统'],
+    definition: 'Không phải lỗi, thuộc loại đề xuất tối ưu hoặc tech debt, không ảnh hưởng tới user nào.',
+    responseTime: 'Sắp lịch theo độ ưu tiên',
+    userImpact: 'Không ảnh hưởng trực tiếp',
+    oncallReq: 'Không cần trực',
+    channels: ['Hệ thống ticket'],
     examples: [
-      '代码中存在可优化的性能瓶颈',
-      '依赖库版本过旧需要升级',
-      '监控覆盖率不足需要补充'
+      'Code có chỗ tối ưu được về hiệu năng',
+      'Thư viện phụ thuộc quá cũ cần nâng cấp',
+      'Độ phủ monitor chưa đủ, cần bổ sung'
     ],
     requirements: [
-      '记录到技术债务清单',
-      '季度规划时评估优先级',
-      '作为团队改进项跟踪',
-      '无时间压力'
+      'Ghi vào danh sách tech debt',
+      'Đánh giá độ ưu tiên khi lên kế hoạch quý',
+      'Theo dõi như mục cải tiến của team',
+      'Không áp lực thời gian'
     ]
   }
 ]

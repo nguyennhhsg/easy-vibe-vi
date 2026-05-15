@@ -39,7 +39,7 @@ Sản phẩm bạn sẽ xây dựng là một nền tảng SaaS tạo ảnh AI h
 Back-end cần hỗ trợ các khả năng cốt lõi sau: xác thực người dùng, tác vụ tạo ảnh, lưu trữ đối tượng OSS, thanh toán tích điểm và gói, tương tác xã hội hình ảnh, giám sát dữ liệu hoạt động.
 
 ::: tip Cổng PRD
-Tài liệu yêu cầu cho dự án này có sẵn trên GitHub: [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/modern-landing-page/PRD.md)
+Tài liệu yêu cầu cho dự án này có sẵn trên GitHub: [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/modern-landing-page/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

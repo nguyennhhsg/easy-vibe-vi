@@ -32,9 +32,9 @@ Mô hình tài liệu lưu trữ dữ liệu dưới dạng **tài liệu JSON/B
 ```json
 {
   "_id": "user_1001",
-  "name": "张三",
-  "tags": ["VIP", "活跃"],
-  "address": { "city": "北京", "district": "朝阳区" },
+  "name": "Nguyen Van A",
+  "tags": ["VIP", "active"],
+  "address": { "city": "Ha Noi", "district": "Cau Giay" },
   "orders": [
     { "id": "o1", "amount": 299 },
     { "id": "o2", "amount": 599 }
@@ -76,9 +76,9 @@ Mô hình tài liệu lưu trữ dữ liệu dưới dạng **tài liệu JSON/B
 Mô hình đồ thị sử dụng **nút (Node)** và **cạnh (Edge)** để biểu thị các thực thể và mối quan hệ của chúng. Mỗi nút là một thực thể, mỗi cạnh là một mối quan hệ, các nút và cạnh đều có thể mang theo các thuộc tính.
 
 ```
-(张三) --[关注]--> (李四) --[关注]--> (王五)
-   |                                    |
-   +--------[购买]----> (iPhone) <--[购买]--+
+(Nguyen Van A) --[follows]--> (Tran Van B) --[follows]--> (Le Van C)
+       |                                                      |
+       +------------[buys]----> (iPhone) <----[buys]----------+
 ```
 
 ### 3.2 Khả Năng Giết Người của Mô Hình Đồ Thị: Truy Vấn Nhiều Bước
@@ -97,7 +97,7 @@ WHERE f1.user_id = 1001;
 Cách Làm Cơ Sở Dữ Liệu Đồ Thị (Ngôn Ngữ Truy Vấn Cypher):
 ```cypher
 MATCH (me)-[:FOLLOWS*1..3]->(target)
-WHERE me.name = '张三'
+WHERE me.name = 'Nguyen Van A'
 RETURN DISTINCT target.name
 ```
 
@@ -150,10 +150,10 @@ timestamp            device      cpu_usage   memory
 Mô hình vectơ chuyển đổi dữ liệu không có cấu trúc như văn bản, hình ảnh, âm thanh thông qua **mô hình Embedding** thành vectơ số chiều cao, sau đó đo độ tương tự ngữ nghĩa bằng cách tính khoảng cách giữa các vectơ.
 
 ```
-"好吃的日料" → Embedding → [0.82, 0.15, 0.91, 0.33, ...]
-                                    ↓ 余弦相似度
-"银座寿司之神"  → [0.80, 0.18, 0.89, ...] → 96% 相似
-"意大利披萨"    → [0.12, 0.85, 0.20, ...] → 31% 相似
+"Món Nhật ngon"          → Embedding → [0.82, 0.15, 0.91, 0.33, ...]
+                                              ↓ cosine similarity
+"Thần sushi Ginza"        → [0.80, 0.18, 0.89, ...] → 96% tương tự
+"Pizza Ý"                 → [0.12, 0.85, 0.20, ...] → 31% tương tự
 ```
 
 ### 5.2 Tìm Kiếm Vectơ vs Tìm Kiếm Từ Khóa

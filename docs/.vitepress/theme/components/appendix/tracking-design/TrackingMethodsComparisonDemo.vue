@@ -1,15 +1,15 @@
 <!--
   TrackingMethodsComparisonDemo.vue
-  埋点方法对比 - 代码埋点、可视化埋点、全埋点
+  So sánh tracking methods - code tracking, visual tracking, auto tracking
 -->
 <template>
   <div class="tracking-methods-comparison-demo">
     <div class="header">
       <div class="title">
-        埋点方法对比
+        So sánh các tracking method
       </div>
       <div class="subtitle">
-        三种主流埋点实现方式的深度对比
+        So sánh chi tiết 3 cách triển khai tracking phổ biến nhất
       </div>
     </div>
 
@@ -37,7 +37,7 @@
             v-if="selectedMethod === method.id"
             class="selected-badge"
           >
-            已选择
+            Đã chọn
           </div>
         </div>
 
@@ -49,7 +49,7 @@
           <div class="method-features">
             <div class="feature-category">
               <div class="category-title">
-                ✅ 优点
+                ✅ Ưu điểm
               </div>
               <ul class="feature-list pros">
                 <li
@@ -63,7 +63,7 @@
 
             <div class="feature-category">
               <div class="category-title">
-                ❌ 缺点
+                ❌ Nhược điểm
               </div>
               <ul class="feature-list cons">
                 <li
@@ -78,7 +78,7 @@
 
           <div class="method-code">
             <div class="code-title">
-              代码示例
+              Code example
             </div>
             <pre class="code-block"><code>{{ method.code }}</code></pre>
           </div>
@@ -88,12 +88,12 @@
 
     <div class="comparison-matrix">
       <div class="matrix-title">
-        综合对比矩阵
+        Ma trận so sánh tổng hợp
       </div>
       <table class="matrix">
         <thead>
           <tr>
-            <th>评估维度</th>
+            <th>Tiêu chí đánh giá</th>
             <th
               v-for="method in methods"
               :key="method.id"
@@ -133,54 +133,54 @@
 
     <div class="recommendation">
       <div class="recommendation-title">
-        💡 选型建议
+        💡 Gợi ý lựa chọn
       </div>
       <div class="recommendation-content">
         <div class="recommendation-item">
           <div class="rec-scenario">
-            核心业务指标
+            Chỉ số kinh doanh cốt lõi
           </div>
           <div class="rec-method">
-            推荐：代码埋点
+            Đề xuất: Code tracking
           </div>
           <div class="rec-reason">
-            原因：数据准确性最高，可自定义属性，适合支付、注册等关键业务
+            Lý do: Độ chính xác cao nhất, có thể custom thuộc tính, phù hợp cho các nghiệp vụ quan trọng như thanh toán, đăng ký
           </div>
         </div>
 
         <div class="recommendation-item">
           <div class="rec-scenario">
-            运营活动埋点
+            Tracking cho campaign vận hành
           </div>
           <div class="rec-method">
-            推荐：可视化埋点
+            Đề xuất: Visual tracking
           </div>
           <div class="rec-reason">
-            原因：快速部署，产品经理可操作，适合快速验证活动效果
+            Lý do: Triển khai nhanh, product manager có thể tự thao tác, phù hợp để verify hiệu quả campaign nhanh
           </div>
         </div>
 
         <div class="recommendation-item">
           <div class="rec-scenario">
-            页面浏览数据
+            Dữ liệu pageview
           </div>
           <div class="rec-method">
-            推荐：全埋点
+            Đề xuất: Auto tracking
           </div>
           <div class="rec-reason">
-            原因：零开发成本，一次性采集，适合 PV/UV 等基础指标
+            Lý do: Không tốn công sức dev, thu thập 1 lần, phù hợp cho các chỉ số cơ bản như PV/UV
           </div>
         </div>
 
         <div class="recommendation-item">
           <div class="rec-scenario">
-            大型企业级应用
+            Ứng dụng enterprise quy mô lớn
           </div>
           <div class="rec-method">
-            推荐：混合方案
+            Đề xuất: Giải pháp lai
           </div>
           <div class="rec-reason">
-            原因：核心业务用代码埋点，运营活动用可视化埋点，基础数据用全埋点
+            Lý do: Nghiệp vụ cốt lõi dùng code tracking, campaign vận hành dùng visual tracking, data cơ bản dùng auto tracking
           </div>
         </div>
       </div>
@@ -196,23 +196,23 @@ const selectedMethod = ref('code')
 const methods = [
   {
     id: 'code',
-    name: '代码埋点',
+    name: 'Code tracking',
     english: 'Code-based Tracking',
     icon: '💻',
-    description: '在代码中显式调用埋点 SDK，由开发人员手动添加采集代码',
+    description: 'Gọi SDK tracking trực tiếp trong code, developer tự thêm code thu thập dữ liệu',
     pros: [
-      '数据准确，时机可控',
-      '灵活度高，可自定义属性',
-      '可采集复杂业务逻辑',
-      '适用于各种场景'
+      'Dữ liệu chính xác, kiểm soát được thời điểm',
+      'Linh hoạt cao, có thể custom thuộc tính',
+      'Có thể thu thập business logic phức tạp',
+      'Phù hợp với mọi tình huống'
     ],
-    cons: ['需要开发资源', '新增埋点需要发版', '维护成本较高', '依赖开发团队'],
-    code: `// 点击"购买"按钮埋点
+    cons: ['Cần nguồn lực dev', 'Thêm tracking phải release version mới', 'Chi phí maintain cao', 'Phụ thuộc team dev'],
+    code: `// Tracking khi click button "Mua"
 function onBuyButtonClick() {
-  // 业务逻辑
+  // Business logic
   addToCart(product)
 
-  // 埋点
+  // Tracking
   track('click_buy_button', {
     product_id: product.id,
     product_name: product.name,
@@ -223,82 +223,82 @@ function onBuyButtonClick() {
   },
   {
     id: 'visual',
-    name: '可视化埋点',
+    name: 'Visual tracking',
     english: 'Visual Tracking',
     icon: '🎨',
-    description: '通过可视化工具圈选页面元素，自动生成埋点代码',
-    pros: ['无需编码', '产品经理可操作', '快速部署', '所见即所得'],
+    description: 'Khoanh chọn các element trên trang bằng tool visual, tự động generate code tracking',
+    pros: ['Không cần code', 'Product manager có thể tự làm', 'Triển khai nhanh', 'WYSIWYG'],
     cons: [
-      '只能采集标准事件',
-      '自定义属性能力弱',
-      '页面改版后易失效',
-      '功能相对单一'
+      'Chỉ thu thập được event chuẩn',
+      'Khả năng custom thuộc tính yếu',
+      'Dễ hỏng khi redesign trang',
+      'Tính năng tương đối đơn điệu'
     ],
-    code: `// 可视化埋点管理后台
-// 1. 打开可视化埋点工具
-// 2. 在页面上圈选"立即购买"按钮
-// 3. 配置事件名称：click_buy_button
-// 4. 配置属性：product_id, price
-// 5. 一键发布
+    code: `// Visual tracking management backend
+// 1. Mở tool visual tracking
+// 2. Khoanh chọn button "Mua ngay" trên trang
+// 3. Cấu hình tên event: click_buy_button
+// 4. Cấu hình thuộc tính: product_id, price
+// 5. Publish bằng 1 click
 
-// SDK 自动生成埋点代码
-// 无需手动编写代码`
+// SDK tự động generate code tracking
+// Không cần viết code thủ công`
   },
   {
     id: 'auto',
-    name: '全埋点',
+    name: 'Auto tracking',
     english: 'Auto Tracking',
     icon: '🤖',
-    description: 'SDK 自动采集所有用户行为，无需手动添加代码',
-    pros: ['零开发成本', '一次性采集所有数据', '支持回溯分析', '部署简单'],
+    description: 'SDK tự động thu thập mọi hành vi user, không cần thêm code thủ công',
+    pros: ['Không tốn công dev', 'Thu thập tất cả dữ liệu trong 1 lần', 'Hỗ trợ phân tích hồi tố', 'Triển khai đơn giản'],
     cons: [
-      '数据量大，噪声多',
-      '无法自定义属性',
-      '隐私合规风险',
-      '数据质量相对较低'
+      'Lượng data lớn, nhiều nhiễu',
+      'Không custom được thuộc tính',
+      'Rủi ro privacy compliance',
+      'Chất lượng data tương đối thấp'
     ],
-    code: `// SDK 初始化（只需一行代码）
+    code: `// Khởi tạo SDK (chỉ cần 1 dòng code)
 const tracker = new AutoTracker({
   serverUrl: 'https://analytics.example.com',
-  autoTrack: true  // 开启全埋点
+  autoTrack: true  // Bật auto tracking
 })
 
-// SDK 自动采集：
-// - 所有页面浏览
-// - 所有元素点击
-// - 所有表单提交
-// - 所有页面滚动`
+// SDK tự động thu thập:
+// - Tất cả pageview
+// - Tất cả click element
+// - Tất cả form submit
+// - Tất cả scroll trang`
   }
 ]
 
 const matrixData = [
   {
-    dimension: '灵活性',
+    dimension: 'Tính linh hoạt',
     scores: { code: 95, visual: 70, auto: 30 },
     best: 'code'
   },
   {
-    dimension: '开发成本',
+    dimension: 'Chi phí phát triển',
     scores: { code: 30, visual: 80, auto: 100 },
     best: 'auto'
   },
   {
-    dimension: '维护成本',
+    dimension: 'Chi phí maintain',
     scores: { code: 40, visual: 60, auto: 90 },
     best: 'auto'
   },
   {
-    dimension: '数据质量',
+    dimension: 'Chất lượng dữ liệu',
     scores: { code: 100, visual: 75, auto: 60 },
     best: 'code'
   },
   {
-    dimension: '部署速度',
+    dimension: 'Tốc độ triển khai',
     scores: { code: 40, visual: 85, auto: 100 },
     best: 'auto'
   },
   {
-    dimension: '自定义能力',
+    dimension: 'Khả năng custom',
     scores: { code: 100, visual: 50, auto: 20 },
     best: 'code'
   }

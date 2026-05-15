@@ -1,6 +1,6 @@
 <template>
   <div class="iac-best-practice-demo">
-    <div class="demo-label">交互演示 ── IaC 最佳实践</div>
+    <div class="demo-label">Demo tương tác ── Best practice cho IaC</div>
 
     <div class="practice-tabs">
       <button
@@ -26,7 +26,7 @@
 
         <div class="do-dont-grid">
           <div class="do-card">
-            <div class="card-label good-label">✅ 推荐做法</div>
+            <div class="card-label good-label">✅ Khuyến nghị nên làm</div>
             <div class="card-items">
               <div v-for="(item, i) in currentPractice.dos" :key="i" class="card-item">
                 {{ item }}
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="dont-card">
-            <div class="card-label bad-label">❌ 反面模式</div>
+            <div class="card-label bad-label">❌ Anti-pattern không nên làm</div>
             <div class="card-items">
               <div v-for="(item, i) in currentPractice.donts" :key="i" class="card-item">
                 {{ item }}
@@ -51,7 +51,7 @@
         </div>
 
         <div class="maturity-bar">
-          <div class="maturity-label">实践成熟度</div>
+          <div class="maturity-label">Mức độ trưởng thành của practice</div>
           <div class="maturity-track">
             <div
               v-for="(level, i) in maturityLevels"
@@ -71,53 +71,53 @@
 import { ref, computed } from 'vue'
 
 const activeTab = ref(0)
-const maturityLevels = ['入门', '基础', '进阶', '成熟', '卓越']
+const maturityLevels = ['Mới bắt đầu', 'Cơ bản', 'Nâng cao', 'Trưởng thành', 'Xuất sắc']
 
 const practices = [
   {
-    key: 'vcs', icon: '📂', name: '版本控制',
-    title: '实践一：基础设施代码纳入版本控制',
-    subtitle: '像管理应用代码一样管理基础设施代码',
+    key: 'vcs', icon: '📂', name: 'Version control',
+    title: 'Practice 1: Đưa code hạ tầng vào version control',
+    subtitle: 'Quản lý code hạ tầng giống như quản lý code ứng dụng',
     dos: [
-      '所有 .tf 文件提交到 Git 仓库',
-      '使用分支策略（main / dev / feature）',
-      '通过 Pull Request 进行代码审查',
-      '在 CI 中自动运行 terraform plan'
+      'Commit mọi file .tf vào Git repo',
+      'Dùng chiến lược branch (main / dev / feature)',
+      'Code review qua Pull Request',
+      'Tự động chạy terraform plan trong CI'
     ],
     donts: [
-      '在本地执行 apply 后不提交代码',
-      '直接在 main 分支上修改',
-      '将 .tfstate 文件提交到 Git',
-      '跳过 Code Review 直接部署'
+      'Chạy apply local rồi không commit code',
+      'Sửa thẳng trên branch main',
+      'Commit file .tfstate lên Git',
+      'Bỏ qua code review rồi deploy thẳng'
     ],
-    codeTitle: '.gitignore 示例',
-    code: `# 忽略本地状态文件
+    codeTitle: 'Ví dụ .gitignore',
+    code: `# Bỏ qua file state local
 *.tfstate
 *.tfstate.backup
 .terraform/
 
-# 忽略敏感变量文件
+# Bỏ qua file biến nhạy cảm
 *.tfvars
 !example.tfvars`,
     maturity: 1
   },
   {
-    key: 'modules', icon: '🧩', name: '模块化',
-    title: '实践二：使用模块实现代码复用',
-    subtitle: '避免复制粘贴，通过模块封装通用基础设施模式',
+    key: 'modules', icon: '🧩', name: 'Module hoá',
+    title: 'Practice 2: Dùng module để tái sử dụng code',
+    subtitle: 'Tránh copy-paste, đóng gói pattern hạ tầng chung thành module',
     dos: [
-      '将通用模式抽取为可复用模块',
-      '模块使用语义化版本号',
-      '为模块编写 README 和使用示例',
-      '通过 variables 暴露可配置参数'
+      'Tách pattern chung thành module tái sử dụng',
+      'Module dùng version number theo semver',
+      'Viết README và ví dụ sử dụng cho module',
+      'Expose tham số cấu hình được qua variables'
     ],
     donts: [
-      '在多个项目中复制粘贴相同代码',
-      '创建过于庞大的"万能"模块',
-      '模块内硬编码环境特定的值',
-      '不写文档直接发布模块'
+      'Copy-paste cùng đoạn code giữa nhiều project',
+      'Tạo module "vạn năng" quá đồ sộ',
+      'Hard-code giá trị riêng cho môi trường trong module',
+      'Phát hành module không có tài liệu'
     ],
-    codeTitle: '模块调用示例',
+    codeTitle: 'Ví dụ gọi module',
     code: `module "web_server" {
   source  = "./modules/ec2-instance"
   version = "2.1.0"
@@ -129,22 +129,22 @@ const practices = [
     maturity: 2
   },
   {
-    key: 'state', icon: '💾', name: '状态管理',
-    title: '实践三：远程状态存储与锁定',
-    subtitle: 'State 文件是 IaC 的核心，必须安全可靠地管理',
+    key: 'state', icon: '💾', name: 'Quản lý state',
+    title: 'Practice 3: Lưu state từ xa và lock',
+    subtitle: 'File state là trái tim của IaC, phải quản lý an toàn và đáng tin cậy',
     dos: [
-      '使用远程后端（S3 + DynamoDB）',
-      '启用状态文件加密',
-      '配置状态锁防止并发冲突',
-      '按环境/项目隔离状态文件'
+      'Dùng remote backend (S3 + DynamoDB)',
+      'Bật mã hoá cho file state',
+      'Cấu hình state lock để tránh xung đột đồng thời',
+      'Tách state theo môi trường / project'
     ],
     donts: [
-      '将 State 存储在本地文件系统',
-      '多人共享同一个 State 无锁机制',
-      '手动编辑 terraform.tfstate',
-      '所有环境共用一个 State 文件'
+      'Lưu state trên filesystem local',
+      'Nhiều người chia sẻ cùng một state mà không có cơ chế lock',
+      'Sửa tay terraform.tfstate',
+      'Mọi môi trường dùng chung một file state'
     ],
-    codeTitle: '远程后端配置',
+    codeTitle: 'Cấu hình remote backend',
     code: `terraform {
   backend "s3" {
     bucket         = "my-tf-state"
@@ -157,26 +157,26 @@ const practices = [
     maturity: 2
   },
   {
-    key: 'env', icon: '🌍', name: '环境管理',
-    title: '实践四：多环境一致性管理',
-    subtitle: '开发、测试、生产环境使用相同代码，仅参数不同',
+    key: 'env', icon: '🌍', name: 'Quản lý môi trường',
+    title: 'Practice 4: Đảm bảo nhất quán giữa các môi trường',
+    subtitle: 'Dev, staging, prod dùng cùng code, chỉ khác tham số',
     dos: [
-      '使用 Workspace 或目录隔离环境',
-      '通过 .tfvars 文件区分环境参数',
-      '保持环境间代码结构完全一致',
-      '先在 dev 验证，再推广到 prod'
+      'Dùng Workspace hoặc thư mục để tách môi trường',
+      'Dùng file .tfvars để phân biệt tham số môi trường',
+      'Giữ cấu trúc code y hệt giữa các môi trường',
+      'Verify ở dev trước rồi mới promote sang prod'
     ],
     donts: [
-      '为每个环境维护独立的代码副本',
-      '在代码中硬编码环境名称',
-      '跳过测试环境直接部署生产',
-      '不同环境使用不同的模块版本'
+      'Duy trì bản code riêng cho mỗi môi trường',
+      'Hard-code tên môi trường trong code',
+      'Bỏ qua môi trường test, deploy thẳng prod',
+      'Các môi trường dùng version module khác nhau'
     ],
-    codeTitle: '多环境目录结构',
+    codeTitle: 'Cấu trúc thư mục đa môi trường',
     code: `environments/
 ├── dev/
-│   ├── main.tf        # 引用相同模块
-│   └── dev.tfvars     # 开发环境参数
+│   ├── main.tf        # Gọi cùng module
+│   └── dev.tfvars     # Tham số môi trường dev
 ├── staging/
 │   ├── main.tf
 │   └── staging.tfvars

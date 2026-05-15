@@ -1,12 +1,12 @@
 <!--
   AlertEscalationDemo.vue
-  告警升级流程演示：展示告警如何根据严重程度和时间逐级升级
+  Demo luồng leo thang cảnh báo: cho thấy cách cảnh báo leo thang theo mức nghiêm trọng và thời gian
 -->
 <template>
   <div class="alert-escalation-demo">
     <div class="header">
-      <div class="title">告警升级流程 (Alert Escalation)</div>
-      <div class="subtitle">选择一个场景，观察告警如何逐级升级</div>
+      <div class="title">Luồng leo thang cảnh báo (Alert Escalation)</div>
+      <div class="subtitle">Chọn một kịch bản, quan sát cảnh báo leo thang từng cấp</div>
     </div>
 
     <div class="scenario-select">
@@ -59,7 +59,7 @@
 
     <div v-if="activeScenario" class="timer-bar">
       <div class="timer-label">
-        升级进度：第 {{ currentStep + 1 }} / {{ escalationSteps.length }} 级
+        Tiến độ leo thang: cấp {{ currentStep + 1 }} / {{ escalationSteps.length }}
       </div>
       <div class="timer-track">
         <div
@@ -75,36 +75,36 @@
           @click="prevStep"
           :disabled="currentStep <= 0"
         >
-          上一级
+          Cấp trước
         </button>
         <button
           class="ctrl-btn"
           @click="nextStep"
           :disabled="currentStep >= escalationSteps.length - 1"
         >
-          下一级升级
+          Leo lên cấp tiếp theo
         </button>
       </div>
     </div>
 
     <div class="rule-box">
-      <div class="rule-title">升级规则说明</div>
+      <div class="rule-title">Quy tắc leo thang</div>
       <div class="rules">
         <div class="rule-item">
           <span class="rule-dot" style="background: #22c55e"></span>
-          <span>P3/P4 告警：仅通知值班工程师，无需升级</span>
+          <span>Cảnh báo P3/P4: chỉ báo engineer trực, không cần leo thang</span>
         </div>
         <div class="rule-item">
           <span class="rule-dot" style="background: #eab308"></span>
-          <span>P2 告警：15 分钟未响应则升级至团队负责人</span>
+          <span>Cảnh báo P2: 15 phút không phản ứng thì leo lên tới team lead</span>
         </div>
         <div class="rule-item">
           <span class="rule-dot" style="background: #f59e0b"></span>
-          <span>P1 告警：5 分钟未响应升级，30 分钟未解决升级至总监</span>
+          <span>Cảnh báo P1: 5 phút không phản ứng thì leo thang, 30 phút chưa giải quyết thì leo lên director</span>
         </div>
         <div class="rule-item">
           <span class="rule-dot" style="background: #ef4444"></span>
-          <span>P0 告警：立即通知全链路，15 分钟未缓解升级至 VP/CTO</span>
+          <span>Cảnh báo P0: báo ngay toàn tuyến, 15 phút chưa giảm thì leo lên VP/CTO</span>
         </div>
       </div>
     </div>
@@ -118,9 +118,9 @@ const activeScenario = ref(null)
 const currentStep = ref(0)
 
 const scenarios = [
-  { id: 'p0', name: 'P0 数据库宕机' },
-  { id: 'p1', name: 'P1 接口超时' },
-  { id: 'p2', name: 'P2 性能下降' }
+  { id: 'p0', name: 'P0 Database chết' },
+  { id: 'p1', name: 'P1 API timeout' },
+  { id: 'p2', name: 'P2 Hiệu năng giảm' }
 ]
 
 const scenarioSteps = {
@@ -129,37 +129,37 @@ const scenarioSteps = {
       id: 1,
       icon: '📡',
       color: '#3b82f6',
-      title: '监控系统检测',
+      title: 'Hệ thống monitor phát hiện',
       time: 'T+0s',
-      desc: 'Prometheus 检测到数据库连接池耗尽，所有查询超时',
-      action: '自动触发 P0 级别告警'
+      desc: 'Prometheus phát hiện connection pool database cạn, mọi query timeout',
+      action: 'Tự động trigger cảnh báo cấp P0'
     },
     {
       id: 2,
       icon: '📱',
       color: '#f59e0b',
-      title: '值班工程师',
+      title: 'Engineer trực',
       time: 'T+30s',
-      desc: '电话 + 短信 + 即时通讯同时通知值班 DBA',
-      action: '值班工程师确认告警，开始排查'
+      desc: 'Gọi điện + SMS + chat đồng thời báo DBA trực',
+      action: 'Engineer trực xác nhận cảnh báo, bắt đầu điều tra'
     },
     {
       id: 3,
       icon: '👥',
       color: '#ef4444',
-      title: '团队负责人',
+      title: 'Team lead',
       time: 'T+5min',
-      desc: '自动升级至数据库团队负责人和后端团队负责人',
-      action: '团队负责人召集紧急会议'
+      desc: 'Tự động leo lên team lead database và team lead backend',
+      action: 'Team lead triệu tập họp khẩn cấp'
     },
     {
       id: 4,
       icon: '🎖️',
       color: '#8b5cf6',
-      title: '技术总监',
+      title: 'Technical director',
       time: 'T+15min',
-      desc: '问题未缓解，自动升级至技术总监',
-      action: '总监协调跨团队资源，启动应急预案'
+      desc: 'Vấn đề chưa giảm, tự động leo lên director kỹ thuật',
+      action: 'Director điều phối nguồn lực liên team, khởi động phương án khẩn'
     },
     {
       id: 5,
@@ -167,8 +167,8 @@ const scenarioSteps = {
       color: '#1e293b',
       title: 'VP / CTO',
       time: 'T+30min',
-      desc: '重大事故升级至高管层，准备对外沟通',
-      action: 'CTO 决策是否启动灾备切换'
+      desc: 'Sự cố lớn leo lên tầng quản lý cấp cao, chuẩn bị truyền thông ra ngoài',
+      action: 'CTO quyết định có bật disaster recovery hay không'
     }
   ],
   p1: [
@@ -176,37 +176,37 @@ const scenarioSteps = {
       id: 1,
       icon: '📡',
       color: '#3b82f6',
-      title: '监控系统检测',
+      title: 'Hệ thống monitor phát hiện',
       time: 'T+0s',
-      desc: 'API 网关检测到 P99 延迟超过 3 秒阈值',
-      action: '触发 P1 级别告警'
+      desc: 'API gateway phát hiện latency P99 vượt ngưỡng 3 giây',
+      action: 'Trigger cảnh báo cấp P1'
     },
     {
       id: 2,
       icon: '📱',
       color: '#f59e0b',
-      title: '值班工程师',
+      title: 'Engineer trực',
       time: 'T+1min',
-      desc: '即时通讯 + 短信通知值班后端工程师',
-      action: '工程师开始查看监控面板和日志'
+      desc: 'Chat + SMS báo engineer backend trực',
+      action: 'Engineer xem dashboard monitor và log'
     },
     {
       id: 3,
       icon: '👥',
       color: '#ef4444',
-      title: '团队负责人',
+      title: 'Team lead',
       time: 'T+15min',
-      desc: '15 分钟未解决，自动升级至团队负责人',
-      action: '负责人评估是否需要更多人力支援'
+      desc: '15 phút chưa giải quyết, tự động leo lên team lead',
+      action: 'Team lead đánh giá có cần thêm người hỗ trợ không'
     },
     {
       id: 4,
       icon: '🎖️',
       color: '#8b5cf6',
-      title: '技术总监',
+      title: 'Technical director',
       time: 'T+30min',
-      desc: '30 分钟未缓解，升级至技术总监',
-      action: '总监决定是否升级为 P0'
+      desc: '30 phút chưa giảm, leo lên director kỹ thuật',
+      action: 'Director quyết định có nâng lên P0 không'
     }
   ],
   p2: [
@@ -214,28 +214,28 @@ const scenarioSteps = {
       id: 1,
       icon: '📡',
       color: '#3b82f6',
-      title: '监控系统检测',
+      title: 'Hệ thống monitor phát hiện',
       time: 'T+0s',
-      desc: '检测到页面加载时间从 1.2s 上升到 2.8s',
-      action: '触发 P2 级别告警'
+      desc: 'Phát hiện thời gian load trang tăng từ 1.2s lên 2.8s',
+      action: 'Trigger cảnh báo cấp P2'
     },
     {
       id: 2,
       icon: '📱',
       color: '#eab308',
-      title: '值班工程师',
+      title: 'Engineer trực',
       time: 'T+5min',
-      desc: '即时通讯通知值班前端工程师',
-      action: '工程师确认问题，记录工单'
+      desc: 'Chat báo engineer frontend trực',
+      action: 'Engineer xác nhận vấn đề, ghi ticket'
     },
     {
       id: 3,
       icon: '👥',
       color: '#f59e0b',
-      title: '团队负责人',
+      title: 'Team lead',
       time: 'T+30min',
-      desc: '30 分钟未响应时升级至团队负责人',
-      action: '负责人安排当天修复'
+      desc: '30 phút chưa phản ứng thì leo lên team lead',
+      action: 'Team lead sắp lịch fix trong ngày'
     }
   ]
 }

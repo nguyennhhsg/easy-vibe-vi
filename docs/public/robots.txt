@@ -1,11 +1,11 @@
-# robots.txt for Easy-Vibe
-# https://datawhalechina.github.io/easy-vibe
+# robots.txt for Easy-Vibe-VI (Vietnamese fork)
+# https://easy-vibe-vi.vercel.app
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://datawhalechina.github.io/easy-vibe/sitemap.xml
+Sitemap: https://easy-vibe-vi.vercel.app/sitemap.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1

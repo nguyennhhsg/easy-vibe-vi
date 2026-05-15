@@ -39,7 +39,7 @@ Khi bạn hiểu rõ "tất cả trong máy tính về cơ bản đều là mã 
 
 ## 0. Mở đầu: Tại sao tệp lại biến thành "sách vô thụ"?
 
-Hãy tưởng tượng bạn nhận được một tệp quan trọng từ đồng nghiệp, nhấp đúp mở xem, bên trong toàn là những ký tự lạ lùng giống như "浣犲ソ" hoặc "ä½ å¥½".
+Hãy tưởng tượng bạn nhận được một tệp quan trọng từ đồng nghiệp, nhấp đúp mở xem, bên trong toàn là những ký tự lạ lùng giống như `浣犲ソ` hoặc `ä½ å¥½` (chữ "Xin chào" bị lỗi mã hóa).
 
 Trực giác, bạn chắc chắn cảm thấy: có phải tệp bị hỏng khi gửi không? Có phải gói tin bị mất không?
 
@@ -93,7 +93,7 @@ Và **UTF-8** mà bạn thường nghe, chính là một bộ "quy tắc lưu tr
 
 👇 **Hãy thử tương tác**:
 
-Gõ vào ô nhập liệu dưới đây một vài ký tự Trung-Anh hoặc Emoji (ví dụ: `你好 Hello 🎉`), xem máy tính tầng dưới "tra bảng" chiếm dung lượng như thế nào.
+Gõ vào ô nhập liệu dưới đây một vài ký tự đa ngôn ngữ hoặc Emoji (ví dụ: `Xin chào Hello 你好 🎉`), xem máy tính tầng dưới "tra bảng" chiếm dung lượng như thế nào.
 
 <CharacterEncodingExplorer />
 

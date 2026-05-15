@@ -1,34 +1,34 @@
 <!--
   SslTerminationDemo.vue
-  SSL终结 - HTTPS卸载/证书管理
+  SSL termination - HTTPS offload / quản lý chứng chỉ
 -->
 <template>
   <div class="ssl-termination-demo">
     <div class="header">
       <div class="title">
-        🔒 SSL 终结：HTTPS 流量的"解密官"
+        🔒 SSL termination: "Người giải mã" luồng HTTPS
       </div>
       <div class="subtitle">
-        想象成公司的前台接待——对外使用正式头衔（HTTPS），对内用内部称呼（HTTP），负责"翻译"身份
+        Hãy hình dung như lễ tân công ty — đối ngoại dùng danh xưng chính thức (HTTPS), đối nội dùng cách gọi nội bộ (HTTP), kiêm nhiệm "dịch" danh tính
       </div>
     </div>
 
     <div class="ssl-flow">
       <div class="flow-title">
-        🔐 HTTPS 流量解密流程
+        🔐 Luồng giải mã traffic HTTPS
       </div>
 
       <div class="flow-diagram">
-        <!-- 客户端 -->
+        <!-- Client -->
         <div class="flow-node client">
           <div class="node-icon">
             👤
           </div>
           <div class="node-label">
-            客户端 (浏览器)
+            Client (browser)
           </div>
           <div class="node-detail">
-            发起 HTTPS 请求
+            Gửi request HTTPS
           </div>
         </div>
 
@@ -36,17 +36,17 @@
           <div class="arrow-line" />
           <div class="arrow-label">
             <span class="lock-icon">🔒</span>
-            <span>TLS 加密连接</span>
+            <span>Kết nối mã hoá TLS</span>
           </div>
           <div class="cert-info">
             <div class="cert-item">
-              <span class="cert-label">证书:</span> *.example.com
+              <span class="cert-label">Cert:</span> *.example.com
             </div>
             <div class="cert-item">
-              <span class="cert-label">算法:</span> TLS 1.3
+              <span class="cert-label">Giao thức:</span> TLS 1.3
             </div>
             <div class="cert-item">
-              <span class="cert-label">加密:</span> AES-256-GCM
+              <span class="cert-label">Mã hoá:</span> AES-256-GCM
             </div>
           </div>
         </div>
@@ -57,17 +57,17 @@
             🚪
           </div>
           <div class="node-label">
-            Nginx (SSL 终结)
+            Nginx (SSL termination)
           </div>
           <div class="node-actions">
             <div class="action">
-              <span class="action-icon">📜</span> 校验证书
+              <span class="action-icon">📜</span> Xác minh chứng chỉ
             </div>
             <div class="action">
-              <span class="action-icon">🔓</span> 解密流量
+              <span class="action-icon">🔓</span> Giải mã traffic
             </div>
             <div class="action">
-              <span class="action-icon">📝</span> 添加 X-Forwarded-*
+              <span class="action-icon">📝</span> Thêm X-Forwarded-*
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
           <div class="arrow-line" />
           <div class="arrow-label">
             <span class="unlock-icon">🔓</span>
-            <span>HTTP 明文</span>
+            <span>HTTP plaintext</span>
           </div>
           <div class="headers-info">
             <div class="header-item">
@@ -91,16 +91,16 @@
           </div>
         </div>
 
-        <!-- 后端服务 -->
+        <!-- Backend service -->
         <div class="flow-node backend">
           <div class="node-icon">
             ⚙️
           </div>
           <div class="node-label">
-            后端服务集群
+            Cluster backend service
           </div>
           <div class="node-detail">
-            专注于业务逻辑，无需处理 TLS
+            Chỉ tập trung business logic, không cần xử lý TLS
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
 
     <div class="cert-management">
       <div class="section-title">
-        📜 SSL 证书管理
+        📜 Quản lý chứng chỉ SSL
       </div>
 
       <div class="cert-tabs">
@@ -123,7 +123,7 @@
       </div>
 
       <div class="cert-content">
-        <!-- 证书申请流程 -->
+        <!-- Luồng xin chứng chỉ -->
         <div
           v-if="currentCertTab === 'apply'"
           class="apply-flow"
@@ -155,7 +155,7 @@
           </div>
         </div>
 
-        <!-- Nginx 配置 -->
+        <!-- Cấu hình Nginx -->
         <div
           v-if="currentCertTab === 'config'"
           class="nginx-config"
@@ -164,16 +164,16 @@
     listen 443 ssl http2;
     server_name api.example.com;
 
-    # SSL 证书配置
+    # Cấu hình chứng chỉ SSL
     ssl_certificate /etc/nginx/ssl/api.example.com.crt;
     ssl_certificate_key /etc/nginx/ssl/api.example.com.key;
 
-    # SSL 协议和密码套件
+    # Giao thức SSL và bộ mã hoá
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
     ssl_prefer_server_ciphers off;
 
-    # SSL 会话缓存
+    # Cache session SSL
     ssl_session_cache shared:SSL:50m;
     ssl_session_timeout 1d;
     ssl_session_tickets off;
@@ -185,7 +185,7 @@
     resolver 8.8.8.8 8.8.4.4 valid=300s;
     resolver_timeout 5s;
 
-    # 安全响应头
+    # Header bảo mật response
     add_header Strict-Transport-Security "max-age=63072000" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
     add_header X-Content-Type-Options "nosniff" always;
@@ -199,7 +199,7 @@
     }
 }
 
-# HTTP 重定向到 HTTPS
+# Redirect HTTP sang HTTPS
 server {
     listen 80;
     server_name api.example.com;
@@ -207,7 +207,7 @@ server {
 }</code></pre>
         </div>
 
-        <!-- 最佳实践 -->
+        <!-- Best practice -->
         <div
           v-if="currentCertTab === 'bestpractice'"
           class="best-practices"
@@ -239,7 +239,7 @@ server {
 
     <div class="benefits-section">
       <div class="section-title">
-        ✨ SSL 终结的核心优势
+        ✨ Ưu điểm cốt lõi của SSL termination
       </div>
 
       <div class="benefits-grid">
@@ -248,10 +248,10 @@ server {
             🚀
           </div>
           <div class="benefit-title">
-            性能提升
+            Tăng hiệu năng
           </div>
           <div class="benefit-desc">
-            TLS 握手和加密解密是 CPU 密集型操作，集中在 Nginx 处理，后端服务专注业务逻辑，整体吞吐量提升 2-5 倍
+            TLS handshake và mã hoá/giải mã đều ngốn CPU, gom về Nginx xử lý, backend chỉ tập trung business logic, throughput tổng thể tăng 2-5 lần
           </div>
         </div>
 
@@ -260,10 +260,10 @@ server {
             🔧
           </div>
           <div class="benefit-title">
-            简化运维
+            Đơn giản vận hành
           </div>
           <div class="benefit-desc">
-            证书统一管理，只需在 Nginx 配置一次，无需在每个后端服务重复配置，证书续期、更换一键完成
+            Chứng chỉ quản lý thống nhất, chỉ cần cấu hình một lần ở Nginx, không phải lặp lại ở mỗi backend service, gia hạn và thay chứng chỉ làm trong một phát
           </div>
         </div>
 
@@ -272,10 +272,10 @@ server {
             🛡️
           </div>
           <div class="benefit-title">
-            集中安全
+            Bảo mật tập trung
           </div>
           <div class="benefit-desc">
-            SSL/TLS 配置统一管控，强制使用最新协议版本和密码套件，统一添加安全响应头（HSTS、CSP 等）
+            Cấu hình SSL/TLS quản lý thống nhất, bắt buộc dùng giao thức và cipher suite mới nhất, thêm header bảo mật (HSTS, CSP, v.v.) thống nhất
           </div>
         </div>
 
@@ -284,10 +284,10 @@ server {
             📊
           </div>
           <div class="benefit-title">
-            统一监控
+            Monitor thống nhất
           </div>
           <div class="benefit-desc">
-            所有 HTTPS 流量经过 Nginx，可以统一记录访问日志、分析 SSL 握手性能、监控证书有效期，便于审计和排障
+            Mọi traffic HTTPS đều qua Nginx, có thể ghi access log, phân tích hiệu năng TLS handshake, giám sát hạn chứng chỉ, dễ audit và troubleshoot
           </div>
         </div>
       </div>
@@ -298,72 +298,72 @@ server {
 <script setup>
 import { ref, computed, watch } from 'vue'
 
-// 证书管理标签
+// Tab quản lý chứng chỉ
 const certTabs = [
-  { id: 'apply', name: '证书申请' },
-  { id: 'config', name: 'Nginx 配置' },
-  { id: 'bestpractice', name: '最佳实践' }
+  { id: 'apply', name: 'Xin chứng chỉ' },
+  { id: 'config', name: 'Cấu hình Nginx' },
+  { id: 'bestpractice', name: 'Best practice' }
 ]
 
 const currentCertTab = ref('apply')
 
-// 证书申请步骤
+// Các bước xin chứng chỉ
 const certSteps = [
   {
-    title: '生成私钥',
-    desc: '使用 OpenSSL 生成 RSA 私钥，这是证书的基础',
+    title: 'Sinh private key',
+    desc: 'Dùng OpenSSL sinh RSA private key, đây là nền tảng của chứng chỉ',
     command: 'openssl genrsa -out private.key 2048'
   },
   {
-    title: '创建 CSR',
-    desc: '生成证书签名请求，包含域名和组织信息',
+    title: 'Tạo CSR',
+    desc: 'Sinh certificate signing request, bao gồm domain và thông tin tổ chức',
     command: 'openssl req -new -key private.key -out csr.pem'
   },
   {
-    title: '域名验证',
-    desc: 'CA 机构验证域名所有权（DNS 记录或 HTTP 文件）',
-    command: '# 添加 DNS TXT 记录 或 上传验证文件到 /.well-known/'
+    title: 'Xác minh domain',
+    desc: 'CA xác minh quyền sở hữu domain (DNS record hoặc file HTTP)',
+    command: '# Thêm DNS TXT record hoặc upload file xác minh tới /.well-known/'
   },
   {
-    title: '签发证书',
-    desc: '验证通过后，CA 签发证书文件',
-    command: '# 下载 certificate.crt 和 chain.crt'
+    title: 'Cấp chứng chỉ',
+    desc: 'Sau khi xác minh OK, CA cấp file chứng chỉ',
+    command: '# Tải certificate.crt và chain.crt'
   },
   {
-    title: '部署配置',
-    desc: '将证书配置到 Nginx 并测试',
+    title: 'Deploy cấu hình',
+    desc: 'Cấu hình chứng chỉ vào Nginx và test',
     command: 'nginx -t && systemctl reload nginx'
   }
 ]
 
-// 最佳实践
+// Best practice
 const bestPractices = [
   {
     id: 'protocol',
     icon: '🔐',
-    title: '使用 TLS 1.2+',
-    content: '禁用 SSLv3、TLS 1.0/1.1 等老旧协议，仅启用 TLS 1.2 和 1.3',
+    title: 'Dùng TLS 1.2+',
+    content: 'Tắt SSLv3, TLS 1.0/1.1 và các giao thức cũ, chỉ bật TLS 1.2 và 1.3',
     code: 'ssl_protocols TLSv1.2 TLSv1.3;'
   },
   {
     id: 'cipher',
     icon: '🛡️',
-    title: '强密码套件',
-    content: '禁用弱加密算法，优先使用 ECDHE 和 AES-GCM',
+    title: 'Cipher suite mạnh',
+    content: 'Tắt thuật toán mã hoá yếu, ưu tiên ECDHE và AES-GCM',
     code: 'ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;'
   },
   {
     id: 'hsts',
     icon: '🔒',
-    title: 'HSTS 头部',
-    content: '强制浏览器始终使用 HTTPS 访问，防止 SSL 剥离攻击',
+    title: 'Header HSTS',
+    content: 'Bắt browser luôn dùng HTTPS, phòng chống SSL stripping',
     code: 'add_header Strict-Transport-Security "max-age=63072000" always;'
   },
   {
     id: 'ocsp',
     icon: '✅',
     title: 'OCSP Stapling',
-    content: '启用 OCSP 装订，加速 SSL 握手并保护用户隐私',
+    content: 'Bật OCSP stapling để tăng tốc SSL handshake và bảo vệ quyền riêng tư user',
     code: 'ssl_stapling on; ssl_stapling_verify on;'
   }
 ]

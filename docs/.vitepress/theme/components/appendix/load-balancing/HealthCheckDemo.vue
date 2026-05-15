@@ -2,14 +2,14 @@
   <div class="health-check-demo">
     <div class="header">
       <div class="title">
-        健康检查机制
+        Cơ chế health check
       </div>
       <div class="subtitle">
-        主动探测、被动感知与智能阈值
+        Probe chủ động, observe bị động và ngưỡng thông minh
       </div>
     </div>
 
-    <!-- 模式选择器 -->
+    <!-- Bộ chọn mode -->
     <div class="mode-selector">
       <button
         v-for="mode in modes"
@@ -23,22 +23,22 @@
       </button>
     </div>
 
-    <!-- 可视化展示区 -->
+    <!-- Khu trực quan hoá -->
     <div class="visualization-area">
-      <!-- 负载均衡器 -->
+      <!-- Load balancer -->
       <div class="lb-node">
         <div class="lb-icon">
           ⚖️
         </div>
         <div class="lb-label">
-          负载均衡器
+          Load balancer
         </div>
         <div class="lb-status">
           {{ currentModeData.label }}
         </div>
       </div>
 
-      <!-- 连接线和健康检查标记 -->
+      <!-- Đường nối và marker health check -->
       <div class="connections-layer">
         <div
           v-for="(server, index) in servers"
@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <!-- 后端服务器 -->
+      <!-- Server backend -->
       <div class="servers-grid">
         <div
           v-for="(server, index) in servers"
@@ -92,14 +92,14 @@
               class="status-badge"
               :class="server.status"
             >
-              {{ server.status === 'healthy' ? '健康' : server.status === 'unhealthy' ? '故障' : '检查中' }}
+              {{ server.status === 'healthy' ? 'Healthy' : server.status === 'unhealthy' ? 'Unhealthy' : 'Đang check' }}
             </div>
           </div>
 
           <div class="server-metrics">
             <div class="metric">
               <div class="metric-label">
-                响应时间
+                Response time
               </div>
               <div
                 class="metric-value"
@@ -110,7 +110,7 @@
             </div>
             <div class="metric">
               <div class="metric-label">
-                失败率
+                Error rate
               </div>
               <div
                 class="metric-value"
@@ -121,7 +121,7 @@
             </div>
             <div class="metric">
               <div class="metric-label">
-                连续成功
+                Success streak
               </div>
               <div class="metric-value">
                 {{ server.consecutiveSuccess }}/3
@@ -132,7 +132,7 @@
       </div>
     </div>
 
-    <!-- 检查机制详情 -->
+    <!-- Chi tiết cơ chế -->
     <div class="mechanism-details">
       <div class="detail-card">
         <div class="card-header">
@@ -146,7 +146,7 @@
 
           <div class="config-section">
             <div class="section-title">
-              关键配置参数
+              Tham số cấu hình then chốt
             </div>
             <div class="config-grid">
               <div
@@ -170,7 +170,7 @@
           <div class="pros-cons">
             <div class="pros">
               <div class="pros-cons-title">
-                ✅ 优点
+                ✅ Ưu điểm
               </div>
               <ul>
                 <li
@@ -183,7 +183,7 @@
             </div>
             <div class="cons">
               <div class="pros-cons-title">
-                ❌ 缺点
+                ❌ Nhược điểm
               </div>
               <ul>
                 <li
@@ -209,19 +209,19 @@ const currentMode = ref('active')
 const modes = [
   {
     key: 'active',
-    name: '主动健康检查',
+    name: 'Health check chủ động',
     icon: '🔍',
     label: 'Probing'
   },
   {
     key: 'passive',
-    name: '被动健康检查',
+    name: 'Health check bị động',
     icon: '👁️',
     label: 'Observing'
   },
   {
     key: 'threshold',
-    name: '阈值判定',
+    name: 'Đánh giá theo ngưỡng',
     icon: '📊',
     label: 'Threshold'
   }
@@ -229,88 +229,88 @@ const modes = [
 
 const modeDetails = {
   active: {
-    name: '主动健康检查',
+    name: 'Health check chủ động',
     icon: '🔍',
-    label: '定期主动探测',
-    description: '负载均衡器主动向后端服务器发送探测请求（如HTTP /health、TCP握手等），根据响应判断服务器健康状态。这是最常用的健康检查方式。',
+    label: 'Probe chủ động định kỳ',
+    description: 'Load balancer chủ động gửi request probe tới backend server (như HTTP /health, TCP handshake, v.v.), dựa vào response để đánh giá tình trạng. Đây là cách health check phổ biến nhất.',
     params: [
-      { name: '检查间隔', value: '5s', desc: '两次检查之间的时间间隔' },
-      { name: '超时时间', value: '3s', desc: '等待响应的最大时间' },
-      { name: '健康阈值', value: '2', desc: '判定为健康所需的连续成功次数' },
-      { name: '不健康阈值', value: '3', desc: '判定为不健康所需的连续失败次数' }
+      { name: 'Interval check', value: '5s', desc: 'Khoảng thời gian giữa hai lần check' },
+      { name: 'Timeout', value: '3s', desc: 'Thời gian tối đa chờ response' },
+      { name: 'Healthy threshold', value: '2', desc: 'Số lần thành công liên tiếp để xác định healthy' },
+      { name: 'Unhealthy threshold', value: '3', desc: 'Số lần fail liên tiếp để xác định unhealthy' }
     ],
     pros: [
-      '检测结果准确可靠，能真实反映服务状态',
-      '可以精确配置检查参数和阈值',
-      '不依赖实际业务流量，无流量时也能检测'
+      'Kết quả chính xác đáng tin cậy, phản ánh thật tình trạng dịch vụ',
+      'Có thể cấu hình tham số và ngưỡng chính xác',
+      'Không phụ thuộc traffic thật, không có traffic vẫn check được'
     ],
     cons: [
-      '产生额外的探测流量和系统开销',
-      '检查间隔期间发生的故障不能立即发现',
-      '需要后端服务提供健康检查端点'
+      'Sinh thêm traffic probe và chi phí hệ thống',
+      'Sự cố trong khoảng giữa hai lần check không phát hiện ngay được',
+      'Yêu cầu backend phải cung cấp endpoint health check'
     ]
   },
   passive: {
-    name: '被动健康检查',
+    name: 'Health check bị động',
     icon: '👁️',
-    label: '观察实际流量',
-    description: '负载均衡器通过监控实际业务流量的响应情况来判断后端健康状态。不发送额外的探测请求，而是分析真实请求的响应时间、状态码等指标。',
+    label: 'Quan sát traffic thật',
+    description: 'Load balancer giám sát tình trạng response của traffic thật để đánh giá tình trạng backend. Không gửi probe request bổ sung, mà phân tích response time, status code của request thật.',
     params: [
-      { name: '采样窗口', value: '60s', desc: '统计响应时间的时间窗口' },
-      { name: '错误阈值', value: '10%', desc: '可接受的最大错误率' },
-      { name: '延迟阈值', value: '500ms', desc: '可接受的最大平均延迟' },
-      { name: '最小样本', value: '100', desc: '判定所需的最小请求数' }
+      { name: 'Cửa sổ sample', value: '60s', desc: 'Cửa sổ thời gian thống kê response time' },
+      { name: 'Ngưỡng lỗi', value: '10%', desc: 'Error rate tối đa chấp nhận được' },
+      { name: 'Ngưỡng latency', value: '500ms', desc: 'Latency trung bình tối đa chấp nhận được' },
+      { name: 'Sample tối thiểu', value: '100', desc: 'Số request tối thiểu để đánh giá' }
     ],
     pros: [
-      '不产生额外的探测流量',
-      '能反映真实业务场景下的服务状态',
-      '对无法提供健康检查端点的服务也有效'
+      'Không sinh thêm traffic probe',
+      'Phản ánh tình trạng dịch vụ trong môi trường nghiệp vụ thật',
+      'Vẫn hiệu quả với dịch vụ không có endpoint health check'
     ],
     cons: [
-      '需要足够的流量样本才能判定',
-      '低流量时可能无法及时发现问题',
-      '检测结果受业务流量特征影响较大'
+      'Cần đủ sample traffic mới đánh giá được',
+      'Khi traffic thấp khó phát hiện vấn đề kịp thời',
+      'Kết quả bị ảnh hưởng nhiều bởi đặc tính traffic nghiệp vụ'
     ]
   },
   threshold: {
-    name: '阈值判定机制',
+    name: 'Cơ chế đánh giá theo ngưỡng',
     icon: '📊',
-    label: '多维度阈值',
-    description: '结合多种指标（响应时间、错误率、连接数、CPU/内存使用率等）设置阈值，进行综合判定。支持动态阈值调整，适应不同负载场景。',
+    label: 'Ngưỡng đa chiều',
+    description: 'Kết hợp nhiều chỉ số (response time, error rate, số connection, CPU/memory, v.v.) đặt ngưỡng và đánh giá tổng hợp. Hỗ trợ điều chỉnh ngưỡng động theo tình huống tải khác nhau.',
     params: [
-      { name: '响应时间P99', value: '200ms', desc: '99%请求的响应时间阈值' },
-      { name: '错误率', value: '1%', desc: '可接受的最大错误比例' },
-      { name: '连接数', value: '1000', desc: '最大并发连接数限制' },
-      { name: 'CPU使用率', value: '80%', desc: '服务器CPU使用率阈值' }
+      { name: 'Response time P99', value: '200ms', desc: 'Ngưỡng response time của 99% request' },
+      { name: 'Error rate', value: '1%', desc: 'Tỉ lệ lỗi tối đa chấp nhận được' },
+      { name: 'Số connection', value: '1000', desc: 'Giới hạn số connection đồng thời' },
+      { name: 'CPU usage', value: '80%', desc: 'Ngưỡng CPU usage của server' }
     ],
     pros: [
-      '多维度综合判定，结果更全面准确',
-      '可根据业务特点灵活配置阈值',
-      '支持动态阈值调整，适应负载变化'
+      'Đánh giá đa chiều tổng hợp, kết quả toàn diện và chính xác hơn',
+      'Có thể cấu hình ngưỡng linh hoạt theo đặc thù nghiệp vụ',
+      'Hỗ trợ điều chỉnh ngưỡng động, thích nghi biến động tải'
     ],
     cons: [
-      '配置复杂，需要深入理解各项指标',
-      '阈值设置不当可能导致误判',
-      '需要持续调优以达到最佳效果'
+      'Cấu hình phức tạp, cần hiểu sâu các chỉ số',
+      'Đặt ngưỡng không hợp lý dễ dẫn tới đánh giá sai',
+      'Cần liên tục tinh chỉnh để đạt hiệu quả tốt nhất'
     ]
   }
 }
 
 const currentModeData = computed(() => modeDetails[currentMode.value])
 
-// 模拟服务器数据
+// Dữ liệu server mô phỏng
 const servers = ref([
   { ip: '10.0.1.10', status: 'healthy', responseTime: 25, errorRate: 0.1, consecutiveSuccess: 5, showPacket: false, packetType: '' },
   { ip: '10.0.1.11', status: 'healthy', responseTime: 30, errorRate: 0.2, consecutiveSuccess: 4, showPacket: false, packetType: '' },
   { ip: '10.0.1.12', status: 'unhealthy', responseTime: 3500, errorRate: 15, consecutiveSuccess: 0, showPacket: false, packetType: '' }
 ])
 
-// 模拟健康检查动画
+// Animation mô phỏng health check
 let healthCheckInterval
 let packetInterval
 
 const simulateHealthCheck = () => {
-  // 随机选择一个服务器发送健康检查包
+  // Chọn ngẫu nhiên một server để gửi probe
   const serverIndex = Math.floor(Math.random() * servers.value.length)
   const server = servers.value[serverIndex]
 
@@ -320,7 +320,7 @@ const simulateHealthCheck = () => {
   setTimeout(() => {
     server.showPacket = false
 
-    // 模拟检查结果
+    // Mô phỏng kết quả check
     if (server.status === 'healthy') {
       server.consecutiveSuccess = Math.min(server.consecutiveSuccess + 1, 5)
       server.responseTime = Math.floor(Math.random() * 50) + 20
@@ -332,12 +332,12 @@ const simulateHealthCheck = () => {
 }
 
 onMounted(() => {
-  // 启动健康检查模拟
+  // Khởi động mô phỏng health check
   healthCheckInterval = setInterval(() => {
     simulateHealthCheck()
   }, 2000)
 
-  // 轮播显示活跃服务器
+  // Luân phiên hiển thị server đang active
   packetInterval = setInterval(() => {
     const healthyServers = servers.value.filter(s => s.status === 'healthy')
     if (healthyServers.length > 0) {

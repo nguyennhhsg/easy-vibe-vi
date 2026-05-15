@@ -1,9 +1,9 @@
 <template>
   <div class="iac-tool-comparison-demo">
-    <div class="demo-label">交互演示 ── 主流 IaC 工具对比</div>
+    <div class="demo-label">Demo tương tác ── So sánh các công cụ IaC phổ biến</div>
 
     <div class="tool-selector">
-      <span class="selector-hint">选择要对比的工具（至少选 2 个）：</span>
+      <span class="selector-hint">Chọn các công cụ để so sánh (chọn ít nhất 2):</span>
       <div class="tool-chips">
         <button
           v-for="tool in tools"
@@ -21,7 +21,7 @@
       <table>
         <thead>
           <tr>
-            <th class="feature-col">特性</th>
+            <th class="feature-col">Đặc tính</th>
             <th v-for="name in selectedTools" :key="name" class="tool-col">
               <span class="tool-header-icon">{{ getToolByName(name).icon }}</span>
               <span>{{ name }}</span>
@@ -42,7 +42,7 @@
     </div>
 
     <div v-else class="empty-hint">
-      请至少选择 2 个工具进行对比
+      Vui lòng chọn ít nhất 2 công cụ để so sánh
     </div>
 
     <Transition name="fade">
@@ -54,14 +54,14 @@
         </div>
         <p class="detail-desc">{{ selectedDetail.desc }}</p>
         <div class="detail-code">
-          <div class="code-label">示例代码片段：</div>
+          <div class="code-label">Đoạn code ví dụ:</div>
           <pre class="code-block"><code>{{ selectedDetail.example }}</code></pre>
         </div>
       </div>
     </Transition>
 
     <div class="detail-hint" v-if="selectedTools.length >= 2 && !detailName">
-      点击下方工具名称查看详细介绍和代码示例
+      Click vào tên công cụ bên dưới để xem giới thiệu chi tiết và code mẫu
     </div>
     <div class="tool-detail-btns" v-if="selectedTools.length >= 2">
       <button
@@ -88,14 +88,14 @@ const selectedDetail = computed(() => {
 })
 
 const features = [
-  { key: 'vendor', label: '厂商' },
-  { key: 'language', label: '配置语言' },
-  { key: 'style', label: '声明式/命令式' },
-  { key: 'multiCloud', label: '多云支持' },
-  { key: 'stateManagement', label: '状态管理' },
-  { key: 'learning', label: '学习曲线' },
-  { key: 'community', label: '社区生态' },
-  { key: 'bestFor', label: '最佳场景' }
+  { key: 'vendor', label: 'Hãng' },
+  { key: 'language', label: 'Ngôn ngữ cấu hình' },
+  { key: 'style', label: 'Khai báo / mệnh lệnh' },
+  { key: 'multiCloud', label: 'Hỗ trợ đa cloud' },
+  { key: 'stateManagement', label: 'Quản lý state' },
+  { key: 'learning', label: 'Đường cong học' },
+  { key: 'community', label: 'Hệ sinh thái' },
+  { key: 'bestFor', label: 'Phù hợp nhất' }
 ]
 
 const tools = [
@@ -106,14 +106,14 @@ const tools = [
     features: {
       vendor: 'HashiCorp',
       language: 'HCL',
-      style: '声明式',
-      multiCloud: '原生多云',
-      stateManagement: 'State 文件',
-      learning: '中等',
-      community: '非常活跃',
-      bestFor: '多云/混合云'
+      style: 'Khai báo',
+      multiCloud: 'Đa cloud nguyên gốc',
+      stateManagement: 'File state',
+      learning: 'Trung bình',
+      community: 'Rất sôi động',
+      bestFor: 'Multi-cloud / hybrid cloud'
     },
-    desc: 'Terraform 是目前最流行的开源 IaC 工具，由 HashiCorp 开发。它使用自研的 HCL 语言，通过 Provider 机制支持几乎所有主流云平台。',
+    desc: 'Terraform là công cụ IaC open source phổ biến nhất hiện nay, do HashiCorp phát triển. Nó dùng ngôn ngữ HCL riêng, hỗ trợ gần như mọi cloud lớn qua cơ chế Provider.',
     example: `resource "aws_s3_bucket" "data" {
   bucket = "my-data-bucket"
   tags   = { Env = "prod" }
@@ -131,14 +131,14 @@ resource "aws_instance" "web" {
     features: {
       vendor: 'AWS',
       language: 'YAML / JSON',
-      style: '声明式',
-      multiCloud: '仅 AWS',
-      stateManagement: 'AWS 托管',
-      learning: '中等偏高',
-      community: 'AWS 生态',
-      bestFor: '纯 AWS 环境'
+      style: 'Khai báo',
+      multiCloud: 'Chỉ AWS',
+      stateManagement: 'AWS managed',
+      learning: 'Trung bình - cao',
+      community: 'Hệ sinh thái AWS',
+      bestFor: 'Môi trường thuần AWS'
     },
-    desc: 'CloudFormation 是 AWS 原生的 IaC 服务，与 AWS 服务深度集成。状态由 AWS 自动管理，无需额外维护 State 文件。',
+    desc: 'CloudFormation là dịch vụ IaC nguyên gốc của AWS, tích hợp sâu với các dịch vụ AWS. State được AWS quản lý tự động, không cần tự duy trì file state.',
     example: `Resources:
   WebServer:
     Type: AWS::EC2::Instance
@@ -156,14 +156,14 @@ resource "aws_instance" "web" {
     features: {
       vendor: 'Pulumi',
       language: 'TypeScript/Python/Go',
-      style: '命令式 + 声明式',
-      multiCloud: '原生多云',
-      stateManagement: 'Pulumi Cloud / 自管',
-      learning: '低（熟悉编程语言）',
-      community: '快速增长',
-      bestFor: '开发者友好场景'
+      style: 'Mệnh lệnh + khai báo',
+      multiCloud: 'Đa cloud nguyên gốc',
+      stateManagement: 'Pulumi Cloud / tự quản',
+      learning: 'Thấp (nếu quen lập trình)',
+      community: 'Tăng trưởng nhanh',
+      bestFor: 'Tình huống thân thiện với developer'
     },
-    desc: 'Pulumi 允许使用真正的编程语言（TypeScript、Python、Go 等）来定义基础设施，对开发者非常友好，支持条件判断、循环等编程特性。',
+    desc: 'Pulumi cho phép dùng các ngôn ngữ lập trình thật (TypeScript, Python, Go, v.v.) để định nghĩa hạ tầng, rất thân thiện developer, hỗ trợ if/else, loop và các tính năng lập trình khác.',
     example: `import * as aws from "@pulumi/aws"
 
 const bucket = new aws.s3.Bucket("data", {
@@ -182,22 +182,22 @@ const server = new aws.ec2.Instance("web", {
     features: {
       vendor: 'Red Hat',
       language: 'YAML (Playbook)',
-      style: '命令式',
-      multiCloud: '通过模块支持',
-      stateManagement: '无状态（幂等）',
-      learning: '低',
-      community: '非常活跃',
-      bestFor: '配置管理 + 编排'
+      style: 'Mệnh lệnh',
+      multiCloud: 'Hỗ trợ qua module',
+      stateManagement: 'Stateless (idempotent)',
+      learning: 'Thấp',
+      community: 'Rất sôi động',
+      bestFor: 'Quản lý cấu hình + orchestration'
     },
-    desc: 'Ansible 是一个无代理的自动化工具，擅长配置管理和应用部署。它通过 SSH 连接目标机器执行任务，无需安装客户端。',
-    example: `- name: 部署 Web 服务器
+    desc: 'Ansible là công cụ tự động hoá agentless, mạnh ở config management và deploy ứng dụng. Nó kết nối qua SSH để chạy task trên máy đích, không cần cài client.',
+    example: `- name: Deploy web server
   hosts: webservers
   tasks:
-    - name: 安装 Nginx
+    - name: Cài Nginx
       apt:
         name: nginx
         state: present
-    - name: 启动服务
+    - name: Khởi động dịch vụ
       service:
         name: nginx
         state: started`
@@ -222,13 +222,13 @@ function toggleTool(name) {
 function getCellClass(toolName, featureKey) {
   const val = getToolByName(toolName).features[featureKey]
   if (featureKey === 'multiCloud') {
-    if (val.includes('原生多云')) return 'cell-good'
-    if (val.includes('仅')) return 'cell-warn'
+    if (val.includes('Đa cloud nguyên gốc')) return 'cell-good'
+    if (val.includes('Chỉ')) return 'cell-warn'
     return ''
   }
   if (featureKey === 'learning') {
-    if (val === '低') return 'cell-good'
-    if (val.includes('高')) return 'cell-warn'
+    if (val.startsWith('Thấp')) return 'cell-good'
+    if (val.includes('cao')) return 'cell-warn'
     return ''
   }
   return ''

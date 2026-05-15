@@ -1,6 +1,6 @@
 <template>
   <div class="tdd-cycle-demo">
-    <div class="demo-label">TDD 红绿重构循环 ── 点击"下一步"推进</div>
+    <div class="demo-label">Vòng lặp Red-Green-Refactor của TDD ── Bấm "Bước tiếp" để tiến</div>
 
     <div class="cycle-visual">
       <div
@@ -16,7 +16,7 @@
 
     <div class="step-card" :class="steps[step].cls">
       <div class="step-header">
-        <span class="step-badge">第 {{ step + 1 }} 步 / {{ steps.length }}</span>
+        <span class="step-badge">Bước {{ step + 1 }} / {{ steps.length }}</span>
         <span class="step-phase">{{ steps[step].phase }}</span>
       </div>
       <div class="step-desc">{{ steps[step].desc }}</div>
@@ -30,9 +30,9 @@
     </div>
 
     <div class="controls">
-      <button class="btn" :disabled="step === 0" @click="step--">上一步</button>
-      <button class="btn primary" :disabled="step === steps.length - 1" @click="step++">下一步</button>
-      <button class="btn" @click="step = 0">重置</button>
+      <button class="btn" :disabled="step === 0" @click="step--">Bước trước</button>
+      <button class="btn primary" :disabled="step === steps.length - 1" @click="step++">Bước tiếp</button>
+      <button class="btn" @click="step = 0">Reset</button>
     </div>
   </div>
 </template>
@@ -54,50 +54,50 @@ const phases = [
 
 const steps = [
   {
-    phase: '🔴 Red — 先写一个失败的测试',
+    phase: 'Red — Viết test fail trước',
     cls: 'red',
-    desc: '需求：实现 add(a, b) 函数。TDD 第一步不是写实现，而是先写测试。',
+    desc: 'Yêu cầu: triển khai hàm add(a, b). Bước đầu của TDD không phải viết implementation, mà viết test trước.',
     fileLabel: 'add.test.js',
-    code: `test('add(1, 2) 应该返回 3', () => {
+    code: `test('add(1, 2) phai tra ve 3', () => {
   expect(add(1, 2)).toBe(3)
 })`,
-    result: '❌ 测试失败 — add is not defined'
+    result: 'Test fail — add is not defined'
   },
   {
-    phase: '🟢 Green — 写最小实现让测试通过',
+    phase: 'Green — Viết implementation tối thiểu để test pass',
     cls: 'green',
-    desc: '不追求完美，只写刚好让测试通过的代码。',
+    desc: 'Không cần hoàn hảo, chỉ cần code đủ để test pass.',
     fileLabel: 'add.js',
     code: `function add(a, b) {
   return a + b
 }`,
-    result: '✅ 测试通过！'
+    result: 'Test pass!'
   },
   {
-    phase: '🔵 Refactor — 重构优化',
+    phase: 'Refactor — Tái cấu trúc tối ưu',
     cls: 'blue',
-    desc: '测试通过后安全地改进代码，测试是你的安全网。',
+    desc: 'Sau khi test pass, cải thiện code một cách an toàn, vì test chính là tấm lưới an toàn của bạn.',
     fileLabel: 'add.js',
     code: `const add = (a, b) => a + b`,
-    result: '✅ 重构完成，测试仍然通过！'
+    result: 'Refactor xong, test vẫn pass!'
   },
   {
-    phase: '🔴 Red — 添加新需求的测试',
+    phase: 'Red — Thêm test cho yêu cầu mới',
     cls: 'red',
-    desc: '新需求：add 应该能处理字符串数字。继续循环！',
+    desc: 'Yêu cầu mới: add cần xử lý được số ở dạng chuỗi. Tiếp tục vòng lặp!',
     fileLabel: 'add.test.js',
-    code: `test('add("1", "2") 应该返回 3', () => {
+    code: `test('add("1", "2") phai tra ve 3', () => {
   expect(add('1', '2')).toBe(3)
 })`,
-    result: '❌ 测试失败 — 返回了 "12" 而不是 3'
+    result: 'Test fail — trả về "12" thay vì 3'
   },
   {
-    phase: '🟢 Green — 修复实现',
+    phase: 'Green — Sửa implementation',
     cls: 'green',
-    desc: '修改实现以处理字符串输入。',
+    desc: 'Sửa implementation để xử lý input dạng chuỗi.',
     fileLabel: 'add.js',
     code: `const add = (a, b) => Number(a) + Number(b)`,
-    result: '✅ 所有测试通过！'
+    result: 'Tất cả test đều pass!'
   }
 ]
 </script>

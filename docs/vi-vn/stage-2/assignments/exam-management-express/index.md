@@ -38,7 +38,7 @@ Sản phẩm bạn sẽ xây dựng là một hệ thống quản lý và thi tr
 Backend sử dụng Express, cần hỗ trợ: xác thực đăng nhập, quyền vai trò, quản lý thi và ngân hàng câu hỏi, quy trình nộp bài và tự động chấm điểm, quản lý điểm và thống kê.
 
 ::: tip Điểm vào PRD
-Tài liệu yêu cầu của dự án nằm trên GitHub: [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/exam-management-express/PRD.md)
+Tài liệu yêu cầu của dự án nằm trên GitHub: [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/exam-management-express/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

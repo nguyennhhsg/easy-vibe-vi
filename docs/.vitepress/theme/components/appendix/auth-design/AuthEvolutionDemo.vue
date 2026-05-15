@@ -1,15 +1,15 @@
 <!--
   AuthEvolutionDemo.vue
-  鉴权方案演进（更可用：给出“什么时候用”）
+  Sự tiến hóa của các phương án phân quyền (kèm gợi ý khi nào nên dùng)
 -->
 <template>
   <div class="auth-evolution-demo">
     <div class="header">
       <div class="title">
-        🧭 鉴权方案演进：从 Basic 到 OAuth2
+        Sự tiến hóa của các phương án phân quyền: từ Basic tới OAuth2
       </div>
       <div class="subtitle">
-        点击卡片，快速建立“场景 → 方案”的直觉。
+        Bấm vào từng card để nhanh chóng có trực giác "ngữ cảnh -> phương án".
       </div>
     </div>
 
@@ -42,7 +42,7 @@
       <div class="grid">
         <div class="box">
           <div class="box-title">
-            ✅ 适合
+            Phù hợp
           </div>
           <ul class="list">
             <li
@@ -55,7 +55,7 @@
         </div>
         <div class="box">
           <div class="box-title">
-            ⚠️ 主要风险
+            Rủi ro chính
           </div>
           <ul class="list">
             <li
@@ -81,10 +81,10 @@ const stages = [
     id: 'basic',
     icon: '🪪',
     name: 'HTTP Basic',
-    when: '内部工具/调试',
-    desc: '最早期的方案：每次请求都带 username/password（或等价凭证）。',
-    pros: ['实现最简单', '不需要额外存储'],
-    cons: ['每次请求都带“高价值凭证”', '不适合公网生产', '很难做细粒度授权'],
+    when: 'Công cụ nội bộ/debug',
+    desc: 'Phương án sớm nhất: mỗi request đều mang username/password (hoặc credential tương đương).',
+    pros: ['Triển khai đơn giản nhất', 'Không cần thêm storage'],
+    cons: ['Mỗi request đều mang "credential giá trị cao"', 'Không phù hợp production công khai', 'Khó cấp quyền chi tiết'],
     example: `GET /api/profile
 Authorization: Basic <base64(username:password)>`
   },
@@ -92,16 +92,16 @@ Authorization: Basic <base64(username:password)>`
     id: 'session',
     icon: '🍪',
     name: 'Session + Cookie',
-    when: '传统 Web / SSR',
-    desc: '服务端存 Session，浏览器存 cookie(session_id)。后续请求自动带 Cookie。',
-    pros: ['服务端可主动注销', '很适合同域 SSR', '工程落地成熟'],
+    when: 'Web truyền thống / SSR',
+    desc: 'Server lưu Session, trình duyệt lưu cookie (session_id). Các request sau tự động đính kèm Cookie.',
+    pros: ['Server có thể chủ động logout', 'Rất phù hợp SSR cùng domain', 'Đã trưởng thành về mặt kỹ thuật'],
     cons: [
-      '服务端有状态，需要共享/扩展',
-      'CSRF 风险更高（必须防）',
-      '跨域更麻烦'
+      'Server có trạng thái, cần chia sẻ/mở rộng',
+      'Rủi ro CSRF cao hơn (bắt buộc phòng chống)',
+      'Cross-domain rắc rối hơn'
     ],
     example: `POST /login
-→ Set-Cookie: session_id=abc; HttpOnly; Secure; SameSite=Lax
+-> Set-Cookie: session_id=abc; HttpOnly; Secure; SameSite=Lax
 
 GET /api/profile
 Cookie: session_id=abc`
@@ -110,13 +110,13 @@ Cookie: session_id=abc`
     id: 'jwt',
     icon: '🎫',
     name: 'JWT Access Token',
-    when: 'API / 移动端 / 多服务',
-    desc: '服务端不存状态，把声明编码为 token；请求携带 Authorization: Bearer。',
-    pros: ['无状态易扩展', '跨域友好', '多服务常用'],
+    when: 'API / Mobile / Đa dịch vụ',
+    desc: 'Server không lưu trạng thái, encode các claim vào token; request mang Authorization: Bearer.',
+    pros: ['Stateless dễ mở rộng', 'Thân thiện cross-domain', 'Hay dùng cho hệ đa dịch vụ'],
     cons: [
-      '难以全局注销（要额外机制）',
-      'token 体积大',
-      'payload 可读（别放敏感信息）'
+      'Khó logout toàn cục (cần cơ chế bổ sung)',
+      'Token có kích thước lớn',
+      'Payload đọc được (đừng để thông tin nhạy cảm)'
     ],
     example: `GET /api/profile
 Authorization: Bearer <access_token>`
@@ -125,17 +125,17 @@ Authorization: Bearer <access_token>`
     id: 'oauth2',
     icon: '🔑',
     name: 'OAuth2 / OIDC',
-    when: '第三方登录/授权',
-    desc: '解决“第三方授权/登录”，让应用无需保存第三方账号密码。',
+    when: 'Đăng nhập/cấp quyền cho bên thứ ba',
+    desc: 'Giải quyết "cấp quyền/đăng nhập qua bên thứ ba", giúp ứng dụng không phải lưu username/password của bên thứ ba.',
     pros: [
-      '用户体验好（扫码/一键登录）',
-      '安全边界更清晰',
-      '可扩展到 OIDC（登录）'
+      'Trải nghiệm tốt (quét mã/đăng nhập một chạm)',
+      'Ranh giới bảo mật rõ ràng hơn',
+      'Có thể mở rộng sang OIDC (đăng nhập)'
     ],
     cons: [
-      '接入复杂度更高',
-      '必须正确处理 redirect_uri/state',
-      'token 生命周期设计很关键'
+      'Độ phức tạp khi tích hợp cao hơn',
+      'Bắt buộc xử lý đúng redirect_uri/state',
+      'Thiết kế vòng đời của token rất quan trọng'
     ],
     example: `GET /authorize?response_type=code&client_id=...&redirect_uri=...&state=...`
   }

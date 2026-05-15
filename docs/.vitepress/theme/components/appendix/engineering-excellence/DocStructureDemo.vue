@@ -1,6 +1,6 @@
 <template>
   <div class="doc-structure-demo">
-    <div class="demo-label">文档结构模板 ── 点击切换文档类型</div>
+    <div class="demo-label">Mẫu cấu trúc tài liệu ── Bấm để chuyển loại tài liệu</div>
 
     <div class="tabs">
       <button
@@ -49,31 +49,31 @@ const docs = [
     name: 'README',
     icon: '📖',
     sections: [
-      { name: '项目名称 + 一句话描述', desc: '让读者在 3 秒内知道这个项目是什么。', example: '# MyApp\n> 一个轻量级的任务管理工具' },
-      { name: '快速开始', desc: '最短路径让用户跑起来，通常是安装 + 运行命令。', example: 'npm install myapp\nnpx myapp init' },
-      { name: '功能特性', desc: '用列表列出核心功能，让用户判断是否满足需求。', example: '- ✅ 任务看板\n- ✅ 团队协作\n- ✅ 数据导出' },
-      { name: '使用示例', desc: '展示典型用法的代码片段，比文字描述更直观。', example: null },
-      { name: '贡献指南 + 许可证', desc: '说明如何参与贡献，以及项目的开源许可证。', example: null }
+      { name: 'Tên dự án + Mô tả một câu', desc: 'Cho người đọc biết dự án này là gì trong 3 giây.', example: '# MyApp\n> Cong cu quan ly task nhe' },
+      { name: 'Bắt đầu nhanh', desc: 'Con đường ngắn nhất để user chạy được, thường là lệnh cài đặt + chạy.', example: 'npm install myapp\nnpx myapp init' },
+      { name: 'Tính năng', desc: 'Liệt kê tính năng cốt lõi bằng list để user đánh giá có đáp ứng nhu cầu không.', example: '- Task board\n- Team collaboration\n- Data export' },
+      { name: 'Ví dụ sử dụng', desc: 'Hiển thị đoạn code minh họa cách dùng điển hình, trực quan hơn mô tả bằng chữ.', example: null },
+      { name: 'Hướng dẫn đóng góp + License', desc: 'Hướng dẫn cách tham gia đóng góp và license open-source của dự án.', example: null }
     ]
   },
   {
-    name: 'API 文档',
+    name: 'Tài liệu API',
     icon: '🔌',
     sections: [
-      { name: '接口概述', desc: '说明 API 的基础 URL、认证方式、通用参数。', example: 'Base URL: https://api.example.com/v1\nAuth: Bearer Token' },
-      { name: '请求参数', desc: '用表格列出每个参数的名称、类型、是否必填、说明。', example: '| 参数   | 类型   | 必填 | 说明     |\n| name   | string | 是   | 用户名   |' },
-      { name: '响应格式', desc: '展示成功和失败的 JSON 响应示例。', example: '{ "code": 200, "data": { ... } }' },
-      { name: '错误码说明', desc: '列出所有可能的错误码及其含义。', example: '401 - 未授权\n404 - 资源不存在\n429 - 请求过于频繁' }
+      { name: 'Tổng quan API', desc: 'Mô tả base URL của API, phương thức xác thực và các tham số chung.', example: 'Base URL: https://api.example.com/v1\nAuth: Bearer Token' },
+      { name: 'Tham số request', desc: 'Liệt kê bằng bảng tên, kiểu, bắt buộc hay không, mô tả của từng tham số.', example: '| Tham so | Kieu   | Bat buoc | Mo ta    |\n| name    | string | Co       | Username |' },
+      { name: 'Định dạng response', desc: 'Hiển thị ví dụ response JSON khi thành công và thất bại.', example: '{ "code": 200, "data": { ... } }' },
+      { name: 'Mã lỗi', desc: 'Liệt kê tất cả mã lỗi có thể có và ý nghĩa của chúng.', example: '401 - Khong duoc cap quyen\n404 - Khong tim thay tai nguyen\n429 - Yeu cau qua thuong xuyen' }
     ]
   },
   {
-    name: '架构文档',
+    name: 'Tài liệu kiến trúc',
     icon: '🏛️',
     sections: [
-      { name: '系统概述', desc: '用一段话说明系统的目标、边界和核心约束。', example: null },
-      { name: '架构图', desc: '展示系统的整体架构，包括各模块和它们之间的关系。', example: '[客户端] → [API 网关] → [微服务集群]\n                    ↓\n              [数据库集群]' },
-      { name: '技术选型', desc: '说明关键技术的选择理由和替代方案的对比。', example: null },
-      { name: '部署架构', desc: '说明生产环境的部署方式、扩容策略。', example: null }
+      { name: 'Tổng quan hệ thống', desc: 'Mô tả ngắn gọn mục tiêu, phạm vi và ràng buộc cốt lõi của hệ thống.', example: null },
+      { name: 'Sơ đồ kiến trúc', desc: 'Hiển thị kiến trúc tổng thể của hệ thống, gồm các module và quan hệ giữa chúng.', example: '[Client] -> [API Gateway] -> [Microservices]\n                              |\n                        [Database cluster]' },
+      { name: 'Lựa chọn công nghệ', desc: 'Giải thích lý do chọn công nghệ chính và so sánh với phương án thay thế.', example: null },
+      { name: 'Kiến trúc triển khai', desc: 'Mô tả cách triển khai môi trường production và chiến lược mở rộng.', example: null }
     ]
   }
 ]

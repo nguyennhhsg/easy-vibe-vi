@@ -51,7 +51,7 @@ Tiếp theo, chúng ta sẽ giới thiệu riêng từng đặc điểm và các
 Tencent Cloud CloudBase (Cloud Development) là dịch vụ backend đám mây toàn bộ được cung cấp bởi Tencent Cloud, đặc biệt phù hợp với các nhà phát triển trong nước. Ưu điểm của nó là:
 
 - **Tốc độ truy cập trong nước nhanh**: Máy chủ đặt ở trong nước, độ trễ truy cập thấp
-- **Tích hợp hệ sinh thái WeChat**: Có thể dễ dàng kết nối với mini-program WeChat, công众 hội
+- **Tích hợp hệ sinh thái WeChat**: Có thể dễ dàng kết nối với mini-program WeChat, tài khoản công chúng
 - **Giải pháp toàn bộ**: Cung cấp bộ dịch vụ hoàn chỉnh bao gồm lưu trữ trang web tĩnh, cloud function, cơ sở dữ liệu, lưu trữ, v.v.
 - **Hạn mức miễn phí đầy đủ**: Các nhà phát triển cá nhân có hạn mức tài nguyên miễn phí đầy đủ
 

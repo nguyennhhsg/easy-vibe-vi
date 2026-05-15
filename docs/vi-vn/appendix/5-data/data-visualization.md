@@ -51,7 +51,7 @@ Bước đầu tiên trong lựa chọn biểu đồ không phải là "tôi th�
 | Mục đích dữ liệu | Biểu đồ được khuyến nghị | Không khuyên | Lý do |
 |---------|---------|--------|------|
 | So sánh kích thước | Biểu đồ cột, biểu đồ thanh | Biểu đồ tròn | Mắt người nhạy cảm với sự khác biệt về độ dài hơn là góc |
-| Hiển thị xu hướng | Biểu đồ đường, biểu đồ diện tích | Biểu đồ cột | Sự liên tục của đường暗示tính liên tục của thời gian |
+| Hiển thị xu hướng | Biểu đồ đường, biểu đồ diện tích | Biểu đồ cột | Sự liên tục của đường gợi ý tính liên tục của thời gian |
 | Hiển thị tỷ lệ | Biểu đồ tròn (≤5 loại), biểu đồ cột xếp chồng | Biểu đồ tròn 3D | Phối cảnh 3D sẽ làm biến dạng tỷ lệ diện tích |
 | Hiển thị phân bố | Biểu đồ tần suất, biểu đồ hộp | Biểu đồ đường | Phân bố cần nhìn tần suất, không phải xu hướng |
 | Hiển thị mối quan hệ | Biểu đồ tán xạ, biểu đồ bong bóng | Biểu đồ cột | Mối quan hệ của hai biến liên tục cần không gian hai chiều |

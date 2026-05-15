@@ -1,22 +1,22 @@
 <!--
   ApiGatewayDemo.vue
-  API网关架构 - 统一入口/协议转换
+  Kiến trúc API Gateway - Cổng vào thống nhất / chuyển đổi protocol
 -->
 <template>
   <div class="api-gateway-demo">
     <div class="header">
       <div class="title">
-        🚪 API 网关：系统的"统一大门"
+        🚪 API Gateway: "Cổng chính thống nhất" của hệ thống
       </div>
       <div class="subtitle">
-        想象成写字楼的「前台」——所有访客都要先经过这里，才能到达不同的办公室
+        Hãy hình dung như "lễ tân" của toà nhà văn phòng — mọi khách đến đều phải qua đây trước khi vào các phòng ban
       </div>
     </div>
 
     <div class="architecture-view">
       <div class="layer client-layer">
         <div class="layer-title">
-          客户端 (来访者)
+          Client (Khách đến)
         </div>
         <div class="clients">
           <div class="client-item">
@@ -26,18 +26,18 @@
             💻 Web
           </div>
           <div class="client-item">
-            🔧 第三方
+            🔧 Bên thứ ba
           </div>
         </div>
       </div>
 
       <div class="arrow-down">
-        ⬇️ 统一入口
+        ⬇️ Cổng vào thống nhất
       </div>
 
       <div class="layer gateway-layer">
         <div class="layer-title">
-          🚪 API 网关 (前台)
+          🚪 API Gateway (Lễ tân)
         </div>
         <div class="gateway-box">
           <div
@@ -46,7 +46,7 @@
             @click="setActive('auth')"
           >
             <span class="func-icon">🔐</span>
-            <span class="func-name">身份认证</span>
+            <span class="func-name">Xác thực</span>
           </div>
           <div
             class="gateway-function"
@@ -54,7 +54,7 @@
             @click="setActive('rate')"
           >
             <span class="func-icon">⚡</span>
-            <span class="func-name">限流熔断</span>
+            <span class="func-name">Rate limit & circuit break</span>
           </div>
           <div
             class="gateway-function"
@@ -62,7 +62,7 @@
             @click="setActive('route')"
           >
             <span class="func-icon">🧭</span>
-            <span class="func-name">路由转发</span>
+            <span class="func-name">Routing & forwarding</span>
           </div>
           <div
             class="gateway-function"
@@ -70,18 +70,18 @@
             @click="setActive('transform')"
           >
             <span class="func-icon">🔄</span>
-            <span class="func-name">协议转换</span>
+            <span class="func-name">Chuyển đổi protocol</span>
           </div>
         </div>
       </div>
 
       <div class="arrow-down">
-        ⬇️ 分发请求
+        ⬇️ Phân phối request
       </div>
 
       <div class="layer backend-layer">
         <div class="layer-title">
-          ⚙️ 后端服务 (各个部门)
+          ⚙️ Backend services (Các phòng ban)
         </div>
         <div class="services">
           <div class="service-card">
@@ -89,7 +89,7 @@
               👤
             </div>
             <div class="service-name">
-              用户服务
+              Dịch vụ user
             </div>
             <div class="service-tech">
               /api/users
@@ -100,7 +100,7 @@
               📦
             </div>
             <div class="service-name">
-              订单服务
+              Dịch vụ đơn hàng
             </div>
             <div class="service-tech">
               /api/orders
@@ -111,7 +111,7 @@
               💳
             </div>
             <div class="service-name">
-              支付服务
+              Dịch vụ thanh toán
             </div>
             <div class="service-tech">
               /api/pay
@@ -134,7 +134,7 @@
       </div>
       <div class="detail-example">
         <div class="example-title">
-          💡 实际场景
+          💡 Tình huống thực tế
         </div>
         <div class="example-content">
           {{ currentFunction.example }}
@@ -144,36 +144,36 @@
 
     <div class="comparison-table">
       <div class="table-title">
-        🤔 没有网关 vs 有网关的区别
+        🤔 Khác biệt khi không có gateway vs có gateway
       </div>
       <table>
         <thead>
           <tr>
-            <th>功能需求</th>
-            <th>没有网关 (直接访问)</th>
-            <th>有 API 网关</th>
+            <th>Nhu cầu</th>
+            <th>Không có gateway (truy cập trực tiếp)</th>
+            <th>Có API Gateway</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>身份认证</td>
-            <td>每个服务都要写一遍登录校验</td>
-            <td>✅ 统一在网关层校验 JWT</td>
+            <td>Xác thực</td>
+            <td>Mỗi service phải tự viết check login</td>
+            <td>✅ Thống nhất kiểm tra JWT ở tầng gateway</td>
           </tr>
           <tr>
-            <td>限流保护</td>
-            <td>每个服务自己实现限流</td>
-            <td>✅ 网关统一限流，保护后端</td>
+            <td>Rate limit</td>
+            <td>Mỗi service tự cài đặt rate limit</td>
+            <td>✅ Gateway rate limit thống nhất, bảo vệ backend</td>
           </tr>
           <tr>
-            <td>协议转换</td>
-            <td>HTTP、gRPC、WebSocket各自处理</td>
-            <td>✅ 网关统一对外暴露 HTTP</td>
+            <td>Chuyển đổi protocol</td>
+            <td>HTTP, gRPC, WebSocket xử lý riêng</td>
+            <td>✅ Gateway expose HTTP ra ngoài thống nhất</td>
           </tr>
           <tr>
-            <td>灰度发布</td>
-            <td>需要改负载均衡器配置</td>
-            <td>✅ 网关层按 Header 路由</td>
+            <td>Canary release</td>
+            <td>Phải sửa cấu hình load balancer</td>
+            <td>✅ Routing ở tầng gateway theo Header</td>
           </tr>
         </tbody>
       </table>
@@ -189,27 +189,27 @@ const activeFunc = ref('auth')
 const functions = {
   auth: {
     icon: '🔐',
-    name: '身份认证',
-    desc: '统一校验用户身份，无需每个后端服务都写登录逻辑。支持 JWT、OAuth2、API Key 等多种认证方式。',
-    example: '用户请求携带 JWT Token，网关校验签名和过期时间，通过后把用户ID添加到请求头转发给后端服务。'
+    name: 'Xác thực',
+    desc: 'Kiểm tra danh tính user thống nhất, không cần mỗi backend service tự viết logic login. Hỗ trợ JWT, OAuth2, API Key và nhiều phương thức khác.',
+    example: 'Request của user mang theo JWT Token, gateway xác minh chữ ký và hạn token, hợp lệ thì thêm user ID vào header rồi forward sang backend service.'
   },
   rate: {
     icon: '⚡',
-    name: '限流熔断',
-    desc: '防止突发流量压垮后端服务。支持令牌桶、漏桶等算法，超过阈值时自动拒绝或排队。',
-    example: '设置每秒钟最多1000个请求，超过的返回 429 Too Many Requests，保护后端数据库不被打崩。'
+    name: 'Rate limit & circuit break',
+    desc: 'Ngăn lưu lượng đột biến đè bẹp backend. Hỗ trợ thuật toán token bucket, leaky bucket, khi vượt ngưỡng sẽ tự động từ chối hoặc xếp hàng.',
+    example: 'Đặt tối đa 1000 request mỗi giây, vượt ngưỡng trả 429 Too Many Requests, bảo vệ database backend không bị đè sập.'
   },
   route: {
     icon: '🧭',
-    name: '路由转发',
-    desc: '根据 URL 路径、请求头、Query 参数等规则，将请求转发到不同的后端服务。',
-    example: '/api/users → 用户服务，/api/orders → 订单服务，/api/admin → 管理服务（需管理员权限）。'
+    name: 'Routing & forwarding',
+    desc: 'Dựa vào URL path, header request, Query param, v.v. để forward request sang các backend service khác nhau.',
+    example: '/api/users → dịch vụ user, /api/orders → dịch vụ đơn hàng, /api/admin → dịch vụ quản trị (cần quyền admin).'
   },
   transform: {
     icon: '🔄',
-    name: '协议转换',
-    desc: '对外统一暴露 HTTP/HTTPS，内部可转换为 gRPC、GraphQL、WebSocket 等协议。',
-    example: '客户端用普通 HTTP POST 请求，网关转换为 gRPC 调用内部微服务，返回结果再转成 JSON。'
+    name: 'Chuyển đổi protocol',
+    desc: 'Expose HTTP/HTTPS thống nhất ra ngoài, bên trong có thể chuyển thành gRPC, GraphQL, WebSocket, v.v.',
+    example: 'Client gửi HTTP POST thông thường, gateway chuyển thành gRPC call đến microservice nội bộ, kết quả trả về lại chuyển thành JSON.'
   }
 }
 

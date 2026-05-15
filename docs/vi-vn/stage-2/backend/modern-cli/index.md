@@ -77,7 +77,7 @@ Trong sử dụng thực tế, bạn có thể thông qua các lệnh hộp tho�
 ![](images/image9.png)![](images/image10.png)
 
 Nếu bạn muốn học hệ thống về Claude Code, bạn có thể tham khảo khóa học do Andrew Ng và Anthropic hợp tác phát hành:  
-https://www.bilibili.com/video/BV176t2zSEpr
+[Khóa học Claude Code trên Bilibili (tiếng Trung)](https://www.bilibili.com/video/BV176t2zSEpr)
 
 Tiếp theo, chúng tôi sẽ tìm hiểu cách sử dụng Claude Code. Vì chi phí sử dụng trực tiếp Claude Code chính thức thường rất cao (như hình dưới đây), chúng tôi sẽ thay vào đó sử dụng các nền tảng API tương thích với giao thức Claude Code, nhưng dựa trên các mô hình lớn khác.
 
@@ -669,7 +669,7 @@ Tài liệu yêu cầu càng chi tiết, hiệu quả cuối cùng càng tốt. 
 
 ### Triển Khai Dự Án Nguồn Mở (Ví Dụ Như Dify)
 
-Đối với những bạn mới tiếp c触các máy tính, việc triển khai một dự án nguồn mở từ GitHub thường rất khó khăn. Nhưng chúng tôi hoàn toàn có thể giao việc này cho Claude Code, giống như chúng tôi đã làm trong hướng dẫn Dify:
+Đối với những bạn mới tiếp cận các máy tính, việc triển khai một dự án nguồn mở từ GitHub thường rất khó khăn. Nhưng chúng tôi hoàn toàn có thể giao việc này cho Claude Code, giống như chúng tôi đã làm trong hướng dẫn Dify:
 
 https://github.com/langgenius/dify
 

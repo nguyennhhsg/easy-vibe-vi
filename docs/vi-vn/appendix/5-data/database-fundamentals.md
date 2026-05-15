@@ -141,8 +141,8 @@ Tại sao lại cần khóa chính? Hãy tưởng tượng một thế giới kh
 **Kịch bản**: bạn muốn thay đổi tuổi của "Trương Tam", nhưng có 3 người tên "Trương Tam" trong bảng, hệ thống nên thay đổi cái nào?
 
 ```sql
--- Không có khóa chính, câu này sẽ thay đổi tất cả người tên "Trương Tam"!
-UPDATE users SET age = 26 WHERE name = '张三';
+-- Không có khóa chính, câu này sẽ thay đổi tất cả người tên "Nguyen Van A"!
+UPDATE users SET age = 26 WHERE name = 'Nguyen Van A';
 
 -- Có khóa chính, thay đổi chính xác
 UPDATE users SET age = 26 WHERE user_id = 1001;
@@ -230,13 +230,13 @@ Truy vấn là chức năng quan trọng nhất của cơ sở dữ liệu, cũn
 **Ví dụ 1**: Tìm tất cả người dùng ở Bắc Kinh
 
 ```sql
-SELECT name, age FROM users WHERE city = '北京';
+SELECT name, age FROM users WHERE city = 'Ha Noi';
 ```
 
 **Hiểu từng từ**:
 - `SELECT name, age`: chọn hai cột name và age
 - `FROM users`: từ bảng users
-- `WHERE city = '北京'`: trong điều kiện city bằng "Bắc Kinh"
+- `WHERE city = 'Ha Noi'`: trong điều kiện city bằng "Hà Nội"
 
 **Kết quả trả về**:
 
@@ -252,20 +252,20 @@ SELECT name, price FROM products
 WHERE price BETWEEN 5000 AND 15000;
 ```
 
-**Ví dụ 3**: Tìm kiếm mờ (tìm người dùng có tên chứa "Trương")
+**Ví dụ 3**: Tìm kiếm mờ (tìm người dùng có tên chứa "Nguyen")
 
 ```sql
-SELECT name FROM users WHERE name LIKE '%张%';
+SELECT name FROM users WHERE name LIKE '%Nguyen%';
 ```
 
 ::: warning ⚠️ Bẫy hiệu năng: sử dụng LIKE
-`LIKE '%张%'` dẫn đến **quét toàn bảng**, khi dữ liệu lớn rất chậm.
+`LIKE '%Nguyen%'` dẫn đến **quét toàn bảng**, khi dữ liệu lớn rất chậm.
 
 **Gợi ý tối ưu**:
-- ❌ Không nên dùng `LIKE '%张%'` (có % ở cả hai đầu)
-- ✅ Có thể dùng `LIKE '张%'` (chỉ có % ở phía sau)
+- ❌ Không nên dùng `LIKE '%Nguyen%'` (có % ở cả hai đầu)
+- ✅ Có thể dùng `LIKE 'Nguyen%'` (chỉ có % ở phía sau)
 
-Vì `LIKE '张%'` có thể sử dụng chỉ mục, nhưng `LIKE '%张%'` không thể.
+Vì `LIKE 'Nguyen%'` có thể sử dụng chỉ mục, nhưng `LIKE '%Nguyen%'` không thể.
 :::
 
 ### 3.3 Chèn dữ liệu (INSERT): thêm bản ghi
@@ -274,21 +274,21 @@ Vì `LIKE '张%'` có thể sử dụng chỉ mục, nhưng `LIKE '%张%'` khôn
 
 ```sql
 INSERT INTO users (user_id, name, age, city, email)
-VALUES (1004, '赵六', 35, '广州', 'zhaoliu@example.com');
+VALUES (1004, 'Pham Van D', 35, 'Da Nang', 'phamvand@example.com');
 ```
 
 **Hiểu từng từ**:
 - `INSERT INTO users`: chèn vào bảng users
 - `(user_id, name, age, city, email)`: chỉ định các cột cần chèn
-- `VALUES (1004, '赵六', ...)`: các giá trị tương ứng
+- `VALUES (1004, 'Pham Van D', ...)`: các giá trị tương ứng
 
 **Chèn nhiều hàng** (hiệu quả hơn):
 
 ```sql
 INSERT INTO users (name, age, city) VALUES
-('小明', 25, '北京'),
-('小红', 28, '上海'),
-('小刚', 30, '广州');
+('Minh', 25, 'Ha Noi'),
+('Hong', 28, 'TP HCM'),
+('Cuong', 30, 'Da Nang');
 ```
 
 ### 3.4 Cập nhật dữ liệu (UPDATE): sửa bản ghi
@@ -296,7 +296,7 @@ INSERT INTO users (name, age, city) VALUES
 **Ví dụ**: Tăng tuổi tất cả người dùng ở Bắc Kinh lên 1
 
 ```sql
-UPDATE users SET age = age + 1 WHERE city = '北京';
+UPDATE users SET age = age + 1 WHERE city = 'Ha Noi';
 ```
 
 ::: danger ❌ Nguy hiểm cực đại: đừng quên WHERE!
@@ -347,7 +347,7 @@ Giả sử chúng ta có ba bảng:
 **Bảng người dùng (users)**:
 | user_id | name |
 |---------|------|
-| 1001 | 张三 |
+| 1001 | Nguyen Van A |
 
 **Bảng sản phẩm (products)**:
 | product_id | name | price |
@@ -368,21 +368,21 @@ SELECT u.name, p.name AS product_name, p.price, o.quantity
 FROM orders o
 JOIN users u ON o.user_id = u.user_id
 JOIN products p ON o.product_id = p.product_id
-WHERE u.name = '张三';
+WHERE u.name = 'Nguyen Van A';
 ```
 
 **Kết quả trả về**:
 
 | name | product_name | price | quantity |
 |------|--------------|-------|----------|
-| Trương Tam | iPhone 15 | 5999 | 1 |
-| Trương Tam | MacBook | 14999 | 2 |
+| Nguyen Van A | iPhone 15 | 5999 | 1 |
+| Nguyen Van A | MacBook | 14999 | 2 |
 
 **Hiểu quy trình JOIN**:
 1. `FROM orders o`: bắt đầu từ bảng đơn hàng
 2. `JOIN users u ON o.user_id = u.user_id`: liên kết với bảng người dùng thông qua user_id
 3. `JOIN products p ON o.product_id = p.product_id`: liên kết với bảng sản phẩm thông qua product_id
-4. `WHERE u.name = '张三'`: lọc các đơn hàng của Trương Tam
+4. `WHERE u.name = 'Nguyen Van A'`: lọc các đơn hàng của Nguyễn Văn A
 
 <SqlPlaygroundDemo />
 
@@ -606,13 +606,13 @@ SELECT * FROM users WHERE user_id = 123;
 
 ```sql
 -- ❌ Sai: bắt đầu bằng %, không thể sử dụng chỉ mục
-SELECT * FROM users WHERE name LIKE '%张三%';
+SELECT * FROM users WHERE name LIKE '%Nguyen Van A%';
 
 -- ✅ Đúng: bắt đầu bằng tiền tố cố định, có thể sử dụng chỉ mục
-SELECT * FROM users WHERE name LIKE '张三%';
+SELECT * FROM users WHERE name LIKE 'Nguyen Van A%';
 
 -- ✅ Hoặc dùng chỉ mục toàn văn (phù hợp với tìm kiếm văn bản)
-SELECT * FROM users WHERE MATCH(name) AGAINST('张三');
+SELECT * FROM users WHERE MATCH(name) AGAINST('Nguyen Van A');
 ```
 
 ### 6.2 Mẫu tối ưu hóa SQL thực chiến
@@ -644,15 +644,15 @@ LIMIT 10;
 
 ```sql
 -- ❌ Kém hiệu quả: chèn từng hàng (nhiều vòng lặp mạng)
-INSERT INTO users (name, age) VALUES ('张三', 25);
-INSERT INTO users (name, age) VALUES ('李四', 30);
-INSERT INTO users (name, age) VALUES ('王五', 28);
+INSERT INTO users (name, age) VALUES ('Nguyen Van A', 25);
+INSERT INTO users (name, age) VALUES ('Tran Van B', 30);
+INSERT INTO users (name, age) VALUES ('Le Van C', 28);
 
 -- ✅ Hiệu quả: chèn nhiều hàng trong một SQL (chỉ một vòng lặp mạng)
 INSERT INTO users (name, age) VALUES
-('张三', 25),
-('李四', 30),
-('王五', 28);
+('Nguyen Van A', 25),
+('Tran Van B', 30),
+('Le Van C', 28);
 ```
 
 **Mẫu 3: Tránh SELECT ***

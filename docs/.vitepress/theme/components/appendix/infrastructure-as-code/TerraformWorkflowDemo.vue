@@ -1,6 +1,6 @@
 <template>
   <div class="terraform-workflow-demo">
-    <div class="demo-label">交互演示 ── Terraform 工作流四阶段</div>
+    <div class="demo-label">Demo tương tác ── 4 giai đoạn của workflow Terraform</div>
 
     <div class="stage-nav">
       <div
@@ -51,11 +51,11 @@
 
     <div class="nav-buttons">
       <button class="nav-btn" :disabled="currentStage === 0" @click="goToStage(currentStage - 1)">
-        ← 上一步
+        ← Bước trước
       </button>
       <span class="stage-indicator">{{ currentStage + 1 }} / {{ stages.length }}</span>
       <button class="nav-btn primary" :disabled="currentStage === stages.length - 1" @click="goToStage(currentStage + 1)">
-        下一步 →
+        Bước sau →
       </button>
     </div>
   </div>
@@ -70,8 +70,8 @@ const isTyping = ref(false)
 
 const stages = [
   {
-    key: 'write', icon: '📝', name: 'Write', title: 'Write ── 编写基础设施代码',
-    desc: '用声明式语言（HCL）描述你期望的基础设施状态。代码就是文档，可以提交到 Git 进行版本管理和 Code Review。',
+    key: 'write', icon: '📝', name: 'Write', title: 'Write ── Viết code hạ tầng',
+    desc: 'Dùng ngôn ngữ khai báo (HCL) mô tả trạng thái hạ tầng bạn mong muốn. Code chính là tài liệu, có thể commit lên Git để quản lý version và code review.',
     lines: [
       { text: '$ vim main.tf', cls: 'cmd' },
       { text: '', cls: '' },
@@ -81,17 +81,17 @@ const stages = [
       { text: '  tags = { Name = "my-app" }', cls: 'code' },
       { text: '}', cls: 'code' },
       { text: '', cls: '' },
-      { text: '# 文件已保存 ✓', cls: 'success' }
+      { text: '# File đã lưu ✓', cls: 'success' }
     ],
     points: [
-      { icon: '📄', text: '使用 .tf 文件描述资源' },
-      { icon: '🔧', text: 'HCL 语法简洁易读' },
-      { icon: '📦', text: '支持模块化复用' }
+      { icon: '📄', text: 'Dùng file .tf để mô tả tài nguyên' },
+      { icon: '🔧', text: 'Cú pháp HCL gọn, dễ đọc' },
+      { icon: '📦', text: 'Hỗ trợ module hoá để tái sử dụng' }
     ]
   },
   {
-    key: 'plan', icon: '🔍', name: 'Plan', title: 'Plan ── 预览变更计划',
-    desc: 'Terraform 会对比当前状态和期望状态，生成一份详细的执行计划。这一步不会做任何实际变更，是安全的"预演"。',
+    key: 'plan', icon: '🔍', name: 'Plan', title: 'Plan ── Preview kế hoạch thay đổi',
+    desc: 'Terraform so sánh trạng thái hiện tại với trạng thái mong muốn, sinh ra kế hoạch thực thi chi tiết. Bước này không tạo thay đổi thực sự, là cuộc "diễn tập" an toàn.',
     lines: [
       { text: '$ terraform plan', cls: 'cmd' },
       { text: '', cls: '' },
@@ -104,14 +104,14 @@ const stages = [
       { text: 'Plan: 1 to add, 0 to change, 0 to destroy.', cls: 'success' }
     ],
     points: [
-      { icon: '🛡️', text: '变更前先预览，避免意外' },
-      { icon: '➕', text: '绿色 + 表示新增资源' },
-      { icon: '🔄', text: '~ 表示修改，- 表示删除' }
+      { icon: '🛡️', text: 'Preview trước khi thay đổi, tránh sự cố ngoài ý muốn' },
+      { icon: '➕', text: 'Dấu + xanh là tài nguyên mới thêm' },
+      { icon: '🔄', text: '~ là sửa đổi, - là xoá' }
     ]
   },
   {
-    key: 'apply', icon: '🚀', name: 'Apply', title: 'Apply ── 执行变更',
-    desc: '确认计划无误后，Terraform 调用云平台 API 创建/修改/删除资源，并将最终状态写入 State 文件。',
+    key: 'apply', icon: '🚀', name: 'Apply', title: 'Apply ── Thực thi thay đổi',
+    desc: 'Sau khi xác nhận kế hoạch OK, Terraform gọi API của cloud để tạo/sửa/xoá tài nguyên, rồi ghi trạng thái cuối cùng vào file state.',
     lines: [
       { text: '$ terraform apply', cls: 'cmd' },
       { text: '', cls: '' },
@@ -125,14 +125,14 @@ const stages = [
       { text: '  public_ip = "54.123.45.67"', cls: 'output' }
     ],
     points: [
-      { icon: '☁️', text: '自动调用云平台 API' },
-      { icon: '💾', text: '状态保存到 terraform.tfstate' },
-      { icon: '📤', text: '输出关键信息（IP、域名等）' }
+      { icon: '☁️', text: 'Tự động gọi API cloud' },
+      { icon: '💾', text: 'Lưu trạng thái vào terraform.tfstate' },
+      { icon: '📤', text: 'Output thông tin then chốt (IP, domain, v.v.)' }
     ]
   },
   {
-    key: 'destroy', icon: '🗑️', name: 'Destroy', title: 'Destroy ── 销毁资源',
-    desc: '不再需要时，一条命令即可安全销毁所有资源。Terraform 会按照依赖关系的逆序逐一清理，避免残留。',
+    key: 'destroy', icon: '🗑️', name: 'Destroy', title: 'Destroy ── Huỷ tài nguyên',
+    desc: 'Khi không cần nữa, một lệnh là huỷ an toàn mọi tài nguyên. Terraform sẽ xoá theo thứ tự ngược với phụ thuộc, tránh sót.',
     lines: [
       { text: '$ terraform destroy', cls: 'cmd' },
       { text: '', cls: '' },
@@ -147,9 +147,9 @@ const stages = [
       { text: 'Destroy complete! Resources: 1 destroyed.', cls: 'success' }
     ],
     points: [
-      { icon: '🧹', text: '按依赖逆序安全清理' },
-      { icon: '💰', text: '避免资源遗忘产生费用' },
-      { icon: '♻️', text: '环境可随时重建' }
+      { icon: '🧹', text: 'Xoá an toàn theo thứ tự ngược của phụ thuộc' },
+      { icon: '💰', text: 'Tránh quên tài nguyên gây tốn chi phí' },
+      { icon: '♻️', text: 'Môi trường có thể tạo lại bất cứ lúc nào' }
     ]
   }
 ]

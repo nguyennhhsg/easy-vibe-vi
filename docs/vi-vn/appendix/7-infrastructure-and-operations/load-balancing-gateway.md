@@ -288,12 +288,12 @@ Trong lúc khuyến mãi lớn, một sàn TMĐT thiết lập CPU > 80% để k
 
 **Bẫy 2: Mở rộng quá tích cực, chi phí bao vây**
 
-Một công ty khởi nghiệp thiết lập chiến lược mở rộng tích cực: CPU > 50% sẽ mở rộng. Kết quả một dao động kinh doanh bình thường đã kích hoạt mở rộng, số máy chủ từ 5 chiếc膨 phồng lên 30 chiếc, cuối tháng đơn hóa đơn đám mây khiến CTO khóc.
+Một công ty khởi nghiệp thiết lập chiến lược mở rộng tích cực: CPU > 50% sẽ mở rộng. Kết quả một dao động kinh doanh bình thường đã kích hoạt mở rộng, số máy chủ từ 5 chiếc phình lên 30 chiếc, cuối tháng đơn hóa đơn đám mây khiến CTO khóc.
 
 **Giải pháp:**
 
 - **Đặt thời gian chờ mở rộng**: Sau mỗi lần mở rộng, phải chờ ít nhất 5 phút mới mở rộng lại
-- **Đặt số phiên bản tối đa**: max = phiên bản hiện tại × 2, ngăn chặn膨 phồng vô hạn
+- **Đặt số phiên bản tối đa**: max = phiên bản hiện tại × 2, ngăn chặn phình to vô hạn
 - **Phân biệt xung và xu hướng**: Chỉ khi liên tục 3 chu kỳ vượt ngưỡng mới mở rộng, tránh xung đơn lần kích hoạt
 
 **Bẫy 3: Thu hẹp quá nhanh, máy vừa mở rộng lập tức thu hẹp**

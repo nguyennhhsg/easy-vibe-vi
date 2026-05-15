@@ -1,6 +1,6 @@
 <template>
   <div class="tech-writing-demo">
-    <div class="demo-label">技术写作对比 ── 点击切换案例</div>
+    <div class="demo-label">So sánh technical writing ── Bấm để chuyển case</div>
 
     <div class="tabs">
       <button
@@ -14,17 +14,17 @@
 
     <div class="compare">
       <div class="col bad">
-        <div class="col-title">❌ 差的写法</div>
+        <div class="col-title">Cách viết tệ</div>
         <pre><code>{{ cases[current].bad }}</code></pre>
       </div>
       <div class="col good">
-        <div class="col-title">✅ 好的写法</div>
+        <div class="col-title">Cách viết tốt</div>
         <pre><code>{{ cases[current].good }}</code></pre>
       </div>
     </div>
 
     <div class="tips">
-      <strong>改进要点：</strong>
+      <strong>Điểm cải thiện:</strong>
       <span v-for="(t, i) in cases[current].tips" :key="i" class="tip-tag">{{ t }}</span>
     </div>
   </div>
@@ -36,59 +36,59 @@ const current = ref(0)
 
 const cases = [
   {
-    name: '函数注释',
+    name: 'Comment cho hàm',
     icon: '💬',
-    bad: `// 处理数据
+    bad: `// xu ly du lieu
 function process(d) {
   // ...
 }`,
     good: `/**
- * 将原始订单数据转换为发票格式
- * @param {Order} order - 原始订单对象
- * @returns {Invoice} 格式化后的发票
- * @throws {ValidationError} 订单数据不完整时
+ * Chuyen du lieu don hang thanh dinh dang hoa don
+ * @param {Order} order - Doi tuong don hang goc
+ * @returns {Invoice} Hoa don da format
+ * @throws {ValidationError} Khi du lieu don hang khong day du
  */
 function toInvoice(order) {
   // ...
 }`,
-    tips: ['说明"为什么"而非"是什么"', '标注参数类型和返回值', '说明异常情况']
+    tips: ['Giải thích "tại sao" thay vì "là gì"', 'Ghi rõ kiểu tham số và giá trị trả về', 'Mô tả trường hợp lỗi']
   },
   {
-    name: 'API 说明',
+    name: 'Mô tả API',
     icon: '🔌',
     bad: `POST /api/users
-发送用户数据创建用户。`,
+Gui du lieu user de tao user.`,
     good: `POST /api/users
-创建新用户账号。
+Tao tai khoan user moi.
 
-请求体：
+Request body:
 {
-  "name": "张三",      // 必填，2-50字符
-  "email": "a@b.com"  // 必填，有效邮箱
+  "name": "Nguyen Van A",  // bat buoc, 2-50 ky tu
+  "email": "a@b.com"        // bat buoc, email hop le
 }
 
-成功响应 201：
-{ "id": "u_123", "name": "张三" }
+Response thanh cong 201:
+{ "id": "u_123", "name": "Nguyen Van A" }
 
-错误响应 400：
-{ "error": "邮箱格式无效" }`,
-    tips: ['提供完整的请求/响应示例', '标注必填/选填', '列出错误场景']
+Response loi 400:
+{ "error": "Email khong hop le" }`,
+    tips: ['Cung cấp ví dụ request/response đầy đủ', 'Đánh dấu bắt buộc/tùy chọn', 'Liệt kê các tình huống lỗi']
   },
   {
-    name: '变更日志',
+    name: 'Changelog',
     icon: '📝',
-    bad: `v2.1 - 修了一些bug，加了新功能`,
+    bad: `v2.1 - sua mot so bug, them tinh nang moi`,
     good: `## v2.1.0 (2025-01-15)
 
-### 新增
-- 支持批量导出 PDF 格式报表
+### Them moi
+- Ho tro xuat hang loat bao cao dinh dang PDF
 
-### 修复
-- 修复登录页在 Safari 下白屏的问题 (#234)
+### Sua loi
+- Sua loi trang login bi trang tren Safari (#234)
 
-### 变更
-- 最低 Node.js 版本要求从 16 升至 18`,
-    tips: ['按类型分类（新增/修复/变更）', '关联 Issue 编号', '标注版本号和日期']
+### Thay doi
+- Yeu cau Node.js toi thieu nang tu 16 len 18`,
+    tips: ['Phân loại theo nhóm (Thêm mới/Sửa lỗi/Thay đổi)', 'Liên kết số Issue', 'Ghi rõ phiên bản và ngày tháng']
   }
 ]
 </script>

@@ -705,7 +705,7 @@ Nội dung dưới đây tham khảo từ tài liệu chính thức của Apple 
   [https://developer.apple.com/app-store/review/guidelines/](https://developer.apple.com/app-store/review/guidelines/?utm_source=chatgpt.com)
 - Hướng dẫn chính thức về gửi App để xét duyệt
   [https://developer.apple.com/cn/help/app-store-connect/manage-submissions-to-app-review/submit-for-review](https://developer.apple.com/cn/help/app-store-connect/manage-submissions-to-app-review/submit-for-review?utm_source=chatgpt.com)
-- Hướng dẫn bằng hình ảnh｜Toàn bộ quy trình đưa iOS App lên Store và những lưu ý tránh bị từ chối (Zhihu)
+- Hướng dẫn bằng hình ảnh｜Toàn bộ quy trình đưa iOS App lên Store và những lưu ý tránh bị từ chối (Zhihu, tiếng Trung)
   [https://zhuanlan.zhihu.com/p/146128612](https://zhuanlan.zhihu.com/p/146128612)
 ## Chương 7: Tổng kết
 

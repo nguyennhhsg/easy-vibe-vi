@@ -10,7 +10,7 @@ Trước khi bạn bắt đầu học, đầu tiên phải tìm được nó. Te
 ** macOS (Mac)**
 
 1.  Nhấn `Command (⌘) + Space` để mở Spotlight.
-2.  Gõ `Terminal` hoặc `終端`.
+2.  Gõ `Terminal` (hoặc `終端` nếu hệ thống ở tiếng Trung).
 3.  Nhấn Enter, bạn sẽ thấy một cửa sổ có chữ đen trên nền trắng (hoặc chữ trắng trên nền đen).
 
 **🪟 Windows**

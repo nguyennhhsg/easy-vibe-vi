@@ -17,7 +17,7 @@ const relatedArticles =
 # Cơ bản 3: Thực hành tạo prototype
 ## Dẫn nhập chương
 
-<ChapterIntroduction :duration="duration" :tags="['Phân tích nghiệp vụ', 'Thiết kế prototype', 'AI 辅助编程', 'Ứng dụng đa trang']" coreOutput="1 prototype workbench tài nguyên thương mại điện tử" expectedOutput="Web prototype có thể tương tác">
+<ChapterIntroduction :duration="duration" :tags="['Phân tích nghiệp vụ', 'Thiết kế prototype', 'Lập trình hỗ trợ AI', 'Ứng dụng đa trang']" coreOutput="1 prototype workbench tài nguyên thương mại điện tử" expectedOutput="Web prototype có thể tương tác">
 
 Ở chương trước, chúng ta đã học cách <strong>tìm ra ý tưởng hay</strong> — xuất phát từ nhu cầu người dùng, tìm ra hướng đi mà có người sẵn sàng trả tiền. Nhưng tìm được hướng đi chỉ là bước đầu tiên, <strong>điều thực sự thử thách một product manager là: làm thế nào biến yêu cầu mơ hồ thành sản phẩm có thể dùng được.</strong>
 

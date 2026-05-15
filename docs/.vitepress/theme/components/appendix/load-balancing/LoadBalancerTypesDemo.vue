@@ -2,14 +2,14 @@
   <div class="load-balancer-types-demo">
     <div class="header">
       <div class="title">
-        负载均衡器类型
+        Các loại load balancer
       </div>
       <div class="subtitle">
-        从四层到七层，从硬件到软件的演进
+        Tiến hoá từ Layer 4 sang Layer 7, từ phần cứng sang phần mềm
       </div>
     </div>
 
-    <!-- 层级选择器 -->
+    <!-- Bộ chọn tầng -->
     <div class="layer-selector">
       <button
         v-for="layer in layers"
@@ -24,12 +24,12 @@
       </button>
     </div>
 
-    <!-- 架构对比图 -->
+    <!-- So sánh kiến trúc -->
     <div class="architecture-comparison">
       <div class="comparison-panel">
         <div class="panel-header">
-          <span class="panel-title">传统架构</span>
-          <span class="panel-badge single">单点</span>
+          <span class="panel-title">Kiến trúc truyền thống</span>
+          <span class="panel-badge single">Single point</span>
         </div>
         <div class="panel-content">
           <div class="single-server">
@@ -46,7 +46,7 @@
               />
             </div>
             <div class="load-text">
-              负载: 95% 🔥
+              Tải: 95% 🔥
             </div>
           </div>
         </div>
@@ -58,8 +58,8 @@
 
       <div class="comparison-panel highlighted">
         <div class="panel-header">
-          <span class="panel-title">负载均衡架构</span>
-          <span class="panel-badge distributed">分布式</span>
+          <span class="panel-title">Kiến trúc có load balancer</span>
+          <span class="panel-badge distributed">Phân tán</span>
         </div>
         <div class="panel-content">
           <div class="lb-layer">
@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    <!-- 详细信息面板 -->
+    <!-- Panel chi tiết -->
     <div class="detail-panel">
       <div class="detail-header">
         <span class="detail-icon">{{ currentLayerData.icon }}</span>
@@ -102,7 +102,7 @@
       <div class="detail-content">
         <div class="detail-section">
           <div class="section-title">
-            工作原理
+            Nguyên lý hoạt động
           </div>
           <p class="section-desc">
             {{ currentLayerData.principle }}
@@ -110,7 +110,7 @@
         </div>
         <div class="detail-section">
           <div class="section-title">
-            典型产品
+            Sản phẩm điển hình
           </div>
           <div class="product-tags">
             <span
@@ -124,7 +124,7 @@
         </div>
         <div class="detail-section">
           <div class="section-title">
-            适用场景
+            Tình huống áp dụng
           </div>
           <ul class="scenario-list">
             <li
@@ -138,27 +138,27 @@
       </div>
     </div>
 
-    <!-- 性能对比 -->
+    <!-- So sánh hiệu năng -->
     <div class="performance-comparison">
       <div class="comparison-title">
-        性能对比一览
+        So sánh hiệu năng tổng quan
       </div>
       <div class="comparison-table">
         <div class="table-header">
           <div class="th">
-            类型
+            Loại
           </div>
           <div class="th">
-            处理层
+            Tầng xử lý
           </div>
           <div class="th">
-            性能
+            Hiệu năng
           </div>
           <div class="th">
-            灵活性
+            Linh hoạt
           </div>
           <div class="th">
-            成本
+            Chi phí
           </div>
         </div>
         <div
@@ -207,62 +207,62 @@ const activeServer = ref(0)
 const layers = [
   {
     key: 'hardware',
-    name: '硬件负载均衡',
+    name: 'Load balancer phần cứng',
     icon: '🏗️',
     tag: 'F5/A10'
   },
   {
     key: 'l4',
-    name: '四层负载均衡',
+    name: 'Load balancer Layer 4',
     icon: '📦',
     tag: 'L4'
   },
   {
     key: 'l7',
-    name: '七层负载均衡',
+    name: 'Load balancer Layer 7',
     icon: '🌐',
     tag: 'L7'
   },
   {
     key: 'software',
-    name: '软件负载均衡',
+    name: 'Load balancer phần mềm',
     icon: '💻',
-    tag: '开源'
+    tag: 'Open source'
   }
 ]
 
 const layerDetails = {
   hardware: {
-    name: '硬件负载均衡器',
+    name: 'Load balancer phần cứng',
     icon: '🏗️',
     label: 'F5 BIG-IP',
-    principle: '专用硬件设备，通过ASIC芯片实现高性能流量转发。独立于服务器部署，具备高可靠性和丰富的企业级功能。',
+    principle: 'Thiết bị phần cứng chuyên dụng, dùng chip ASIC để forward traffic với hiệu năng cao. Deploy độc lập với server, độ tin cậy cao và đầy đủ tính năng cấp doanh nghiệp.',
     products: ['F5 BIG-IP', 'A10 Thunder', 'Citrix ADC', 'Radware'],
-    scenarios: ['金融核心系统', '电信级应用', '需要硬件SSL卸载的场景', '高合规要求环境']
+    scenarios: ['Hệ thống core ngân hàng tài chính', 'Ứng dụng cấp viễn thông', 'Tình huống cần SSL offload phần cứng', 'Môi trường yêu cầu tuân thủ cao']
   },
   l4: {
-    name: '四层负载均衡 (L4)',
+    name: 'Load balancer Layer 4 (L4)',
     icon: '📦',
     label: 'L4 Load Balancer',
-    principle: '基于传输层信息（IP地址+端口）进行流量分发。不关心应用层内容，只做"快递分拣"，因此性能极高。',
-    products: ['LVS (Linux Virtual Server)', 'HAProxy (TCP模式)', 'AWS NLB', 'Azure Load Balancer'],
-    scenarios: ['需要极高吞吐量的场景', 'TCP/UDP流量分发', '不需要内容识别的场景', '微服务间通信']
+    principle: 'Phân phối traffic dựa vào thông tin tầng transport (IP + port). Không quan tâm nội dung application layer, chỉ làm "phân loại bưu phẩm", nên hiệu năng cực cao.',
+    products: ['LVS (Linux Virtual Server)', 'HAProxy (TCP mode)', 'AWS NLB', 'Azure Load Balancer'],
+    scenarios: ['Tình huống cần throughput cực cao', 'Phân phối traffic TCP/UDP', 'Không cần nhận diện nội dung', 'Giao tiếp giữa microservice']
   },
   l7: {
-    name: '七层负载均衡 (L7)',
+    name: 'Load balancer Layer 7 (L7)',
     icon: '🌐',
     label: 'L7 Load Balancer',
-    principle: '基于应用层内容（HTTP头、URL、Cookie等）进行智能路由。可以理解"快递内容"，实现更精细的流量控制。',
-    products: ['Nginx', 'HAProxy (HTTP模式)', 'Envoy', 'AWS ALB', 'Traefik'],
-    scenarios: ['基于URL路径路由', 'A/B测试和灰度发布', '基于Cookie的会话保持', 'HTTPS终结和证书管理']
+    principle: 'Routing thông minh dựa vào nội dung application layer (header HTTP, URL, Cookie, v.v.). Hiểu được "nội dung bưu phẩm", thực hiện kiểm soát traffic tinh tế hơn.',
+    products: ['Nginx', 'HAProxy (HTTP mode)', 'Envoy', 'AWS ALB', 'Traefik'],
+    scenarios: ['Routing theo URL path', 'A/B test và canary release', 'Session persistence theo Cookie', 'SSL termination và quản lý chứng chỉ']
   },
   software: {
-    name: '软件负载均衡方案',
+    name: 'Phương án load balancer phần mềm',
     icon: '💻',
     label: 'Software LB',
-    principle: '运行在通用服务器上的负载均衡软件，灵活可定制。从开源方案到云原生方案，选择丰富。',
+    principle: 'Phần mềm load balancer chạy trên server thông thường, linh hoạt và tuỳ biến cao. Từ giải pháp open source đến cloud-native, lựa chọn phong phú.',
     products: ['Nginx / OpenResty', 'HAProxy', 'Envoy Proxy', 'Kong', 'Spring Cloud Gateway'],
-    scenarios: ['成本敏感场景', '需要深度定制的环境', '云原生/K8s环境', '快速迭代开发']
+    scenarios: ['Tình huống nhạy cảm chi phí', 'Môi trường cần tuỳ biến sâu', 'Môi trường cloud-native / K8s', 'Iterate nhanh khi phát triển']
   }
 }
 
@@ -277,7 +277,7 @@ const servers = ref([
 const comparisonData = [
   {
     key: 'hardware',
-    type: '硬件负载均衡',
+    type: 'LB phần cứng',
     layer: 'L4/L7',
     performance: 95,
     flexibility: 40,
@@ -285,23 +285,23 @@ const comparisonData = [
   },
   {
     key: 'l4',
-    type: '四层负载均衡',
-    layer: 'L4 (传输层)',
+    type: 'LB Layer 4',
+    layer: 'L4 (transport)',
     performance: 90,
     flexibility: 50,
     cost: '$$'
   },
   {
     key: 'l7',
-    type: '七层负载均衡',
-    layer: 'L7 (应用层)',
+    type: 'LB Layer 7',
+    layer: 'L7 (application)',
     performance: 70,
     flexibility: 90,
     cost: '$$$'
   },
   {
     key: 'software',
-    type: '软件负载均衡',
+    type: 'LB phần mềm',
     layer: 'L4/L7',
     performance: 75,
     flexibility: 95,
@@ -309,7 +309,7 @@ const comparisonData = [
   }
 ]
 
-// 自动轮播演示
+// Demo tự động luân phiên
 let demoInterval
 const startDemo = () => {
   demoInterval = setInterval(() => {
@@ -317,12 +317,12 @@ const startDemo = () => {
   }, 2000)
 }
 
-// 组件挂载时启动演示
+// Khởi động demo khi mount
 onMounted(() => {
   startDemo()
 })
 
-// 组件卸载时清理
+// Dọn dẹp khi unmount
 onUnmounted(() => {
   clearInterval(demoInterval)
 })

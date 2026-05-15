@@ -1,4 +1,8 @@
-địa riêng" của bạn trên internet.
+# Xây dựng website cá nhân và blog
+
+## 1.1 Trang Web Cá Nhân Là Gì
+
+Một trang web cá nhân là "địa chỉ riêng" của bạn trên internet.
 
 Khác với WeChat Moments, Zhihu hay LinkedIn, nó không phụ thuộc vào thuật toán gợi ý của bất kỳ nền tảng mạng xã hội nào, và cũng không biến mất khi nền tảng đó sụp đổ. Đây là một **không gian giới thiệu cá nhân** ổn định lâu dài, có thể được Google/Google Scholar lập chỉ mục. Nó thường bao gồm tiểu sử (Bio), các bài báo đã xuất bản (Publications), các dự án tham gia (Projects) và blog kỹ thuật (Blog).
 
@@ -119,7 +123,7 @@ Trae sẽ cho bạn một đoạn code (thường là `winget install --id Git.G
 
 Bạn chỉ cần nhấp vào nút **"Run in Terminal" (Chạy trong terminal)** ở góc trên bên phải của khối code, hoặc sao chép vào terminal phía dưới và nhấn Enter, nó sẽ tự động tải xuống và cài đặt Git cho bạn.
 
-Nếu bạn cho rằng quá trình hỗ trợ AI ở trên vẫn còn chỗ chưa hoàn thiện, bạn có thể tham khảo hướng dẫn này để tải và cài đặt thủ công [Git下载及安装保姆级教程](https://blog.csdn.net/weixin_41293671/article/details/144255269?ops_request_misc=elastic_search_misc&request_id=63236900b52320a7beb177787ba97f07&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-5-144255269-null-null.142^v102^pc_search_result_base4&utm_term=git%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85&spm=1018.2226.3001.4187)
+Nếu bạn cho rằng quá trình hỗ trợ AI ở trên vẫn còn chỗ chưa hoàn thiện, bạn có thể tham khảo hướng dẫn này để tải và cài đặt thủ công [Hướng dẫn tải và cài đặt Git chi tiết (tiếng Trung)](https://blog.csdn.net/weixin_41293671/article/details/144255269?ops_request_misc=elastic_search_misc&request_id=63236900b52320a7beb177787ba97f07&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-5-144255269-null-null.142^v102^pc_search_result_base4&utm_term=git%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85&spm=1018.2226.3001.4187)
 
 ## 2.4 Tải Xuống Môi Trường Ruby
 
@@ -895,8 +899,8 @@ Hãy ghi lên đó kinh nghiệm của dự án đầu tiên bạn học đượ
 
 # Tài Liệu Tham Khảo
 
-CSDN：[【2025最新保姆级教程】手把手教你用github制作个人主页（申学找工作必备）](https://blog.csdn.net/qq_45743991/article/details/145505150?ops_request_misc=&request_id=&biz_id=102&utm_term=github%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-145505150.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
+CSDN: [Hướng dẫn 2025 mới nhất - Tạo trang chủ cá nhân bằng GitHub (tiếng Trung)](https://blog.csdn.net/qq_45743991/article/details/145505150?ops_request_misc=&request_id=&biz_id=102&utm_term=github%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-145505150.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
 
-CSDN：[Git下载及安装保姆级教程](https://blog.csdn.net/weixin_41293671/article/details/144255269?ops_request_misc=elastic_search_misc&request_id=63236900b52320a7beb177787ba97f07&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-5-144255269-null-null.142^v102^pc_search_result_base4&utm_term=git%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85&spm=1018.2226.3001.4187)
+CSDN: [Hướng dẫn tải và cài đặt Git chi tiết (tiếng Trung)](https://blog.csdn.net/weixin_41293671/article/details/144255269?ops_request_misc=elastic_search_misc&request_id=63236900b52320a7beb177787ba97f07&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-5-144255269-null-null.142^v102^pc_search_result_base4&utm_term=git%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85&spm=1018.2226.3001.4187)
 
-CSDN：[Windows环境下安装Ruby教程](https://blog.csdn.net/alive_tree/article/details/103043158?ops_request_misc=elastic_search_misc&request_id=ad7e29ea7f702554d785c2fc82ec6e95&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~ElasticSearch~search_v2-11-103043158-null-null.142^v102^pc_search_result_base4&utm_term=ruby%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B&spm=1018.2226.3001.4187)
+CSDN: [Hướng dẫn cài đặt Ruby trên Windows (tiếng Trung)](https://blog.csdn.net/alive_tree/article/details/103043158?ops_request_misc=elastic_search_misc&request_id=ad7e29ea7f702554d785c2fc82ec6e95&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~ElasticSearch~search_v2-11-103043158-null-null.142^v102^pc_search_result_base4&utm_term=ruby%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B&spm=1018.2226.3001.4187)

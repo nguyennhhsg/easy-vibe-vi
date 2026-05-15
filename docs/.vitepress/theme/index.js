@@ -1899,19 +1899,24 @@ export default {
       await renderMermaidDiagrams(force)
     }
 
-    const getCodeToggleLabels = () => {
-      const isChineseRoute =
-        route.path.startsWith('/zh-cn/') || route.path.startsWith('/zh-tw/')
+    const codeToggleLabels = {
+      'zh-cn': { expand: '展开代码', collapse: '收起代码', line: '行' },
+      'zh-tw': { expand: '展开代码', collapse: '收起代码', line: '行' },
+      'vi-vn': { expand: 'Mở rộng mã', collapse: 'Thu gọn mã', line: 'dòng' },
+      en: { expand: 'Expand code', collapse: 'Collapse code', line: 'lines' }
+    }
 
-      return isChineseRoute
-        ? {
-            expand: '展开代码',
-            collapse: '收起代码'
-          }
-        : {
-            expand: 'Expand code',
-            collapse: 'Collapse code'
-          }
+    const getCodeToggleLocale = () => {
+      const path = route.path
+      if (path.startsWith('/zh-cn/')) return 'zh-cn'
+      if (path.startsWith('/zh-tw/')) return 'zh-tw'
+      if (path.startsWith('/vi-vn/')) return 'vi-vn'
+      return 'en'
+    }
+
+    const getCodeToggleLabels = () => {
+      const key = getCodeToggleLocale()
+      return codeToggleLabels[key] || codeToggleLabels.en
     }
 
     const getCodeLineCount = (source) => {
@@ -1925,7 +1930,7 @@ export default {
       const isCollapsed = block.classList.contains('is-code-collapsed')
       const nextLabel = isCollapsed ? labels.expand : labels.collapse
 
-      button.textContent = `${nextLabel} (${lineCount} 行)`
+      button.textContent = `${nextLabel} (${lineCount} ${labels.line})`
       button.setAttribute('aria-expanded', String(!isCollapsed))
       button.setAttribute('title', nextLabel)
     }

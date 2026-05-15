@@ -1,107 +1,107 @@
 <!--
   SessionVsJWTDemo.vue
-  Session vs JWT（决策辅助，更可用）
+  Session vs JWT (hỗ trợ quyết định)
 -->
 <template>
   <div class="session-vs-jwt-demo">
     <div class="header">
       <div class="title">
-        🧩 Session vs JWT：怎么选？
+        Session vs JWT: chọn cái nào?
       </div>
       <div class="subtitle">
-        选你的约束条件，得到推荐方案（并解释原因）。这比“背结论”更好用。
+        Chọn ràng buộc của bạn, nhận đề xuất phương án (kèm giải thích lý do). Cách này hữu ích hơn việc học thuộc kết luận.
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
         <div class="card-title">
-          你的场景
+          Ngữ cảnh của bạn
         </div>
 
-        <label class="label">主要客户端</label>
+        <label class="label">Client chính</label>
         <div class="row">
           <button
             class="chip"
             :class="{ active: client === 'web' }"
             @click="client = 'web'"
           >
-            浏览器 Web
+            Web trình duyệt
           </button>
           <button
             class="chip"
             :class="{ active: client === 'mobile' }"
             @click="client = 'mobile'"
           >
-            移动端 App
+            Mobile App
           </button>
           <button
             class="chip"
             :class="{ active: client === 'server' }"
             @click="client = 'server'"
           >
-            服务到服务
+            Service-to-service
           </button>
         </div>
 
-        <label class="label">是否强需求“立刻注销/踢下线”</label>
+        <label class="label">Có cần "logout/đá khỏi hệ thống ngay lập tức"?</label>
         <div class="row">
           <button
             class="chip"
             :class="{ active: revoke === 'yes' }"
             @click="revoke = 'yes'"
           >
-            是
+            Có
           </button>
           <button
             class="chip"
             :class="{ active: revoke === 'no' }"
             @click="revoke = 'no'"
           >
-            否
+            Không
           </button>
         </div>
 
-        <label class="label">是否需要跨域（前后端分离，多域名）</label>
+        <label class="label">Có cần cross-domain (frontend/backend tách rời, nhiều domain)?</label>
         <div class="row">
           <button
             class="chip"
             :class="{ active: cors === 'yes' }"
             @click="cors = 'yes'"
           >
-            是
+            Có
           </button>
           <button
             class="chip"
             :class="{ active: cors === 'no' }"
             @click="cors = 'no'"
           >
-            否
+            Không
           </button>
         </div>
 
-        <label class="label">服务是否会水平扩容（多实例）</label>
+        <label class="label">Service có mở rộng ngang (multi-instance)?</label>
         <div class="row">
           <button
             class="chip"
             :class="{ active: scale === 'yes' }"
             @click="scale = 'yes'"
           >
-            是
+            Có
           </button>
           <button
             class="chip"
             :class="{ active: scale === 'no' }"
             @click="scale = 'no'"
           >
-            否
+            Không
           </button>
         </div>
       </div>
 
       <div class="card">
         <div class="card-title">
-          推荐
+          Đề xuất
         </div>
         <div class="recommend">
           <div class="pill primary">
@@ -114,7 +114,7 @@
 
         <div class="box">
           <div class="box-title">
-            为什么
+            Tại sao
           </div>
           <ul class="list">
             <li
@@ -128,7 +128,7 @@
 
         <div class="box">
           <div class="box-title">
-            落地建议
+            Gợi ý triển khai
           </div>
           <ul class="list">
             <li
@@ -144,19 +144,17 @@
 
     <div class="card">
       <div class="card-title">
-        常见误区
+        Những hiểu nhầm phổ biến
       </div>
       <ul class="list">
         <li>
-          <strong>JWT ≠ 更安全：</strong>JWT
-          只是“无状态”。安全取决于密钥、过期策略、存储方式、授权设计。
+          <strong>JWT khác với "an toàn hơn":</strong> JWT chỉ là "stateless". Mức an toàn phụ thuộc vào secret, chính sách hết hạn, cách lưu trữ, thiết kế cấp quyền.
         </li>
         <li>
-          <strong>Cookie ≠ 一定 CSRF：</strong>SameSite + CSRF token
-          可以显著降低风险。
+          <strong>Cookie không đồng nghĩa CSRF:</strong> SameSite + CSRF token có thể giảm rủi ro đáng kể.
         </li>
         <li>
-          <strong>别把第三方 OAuth token 当你系统 token：</strong>用途不同。
+          <strong>Đừng coi OAuth token bên thứ ba là token hệ thống của bạn:</strong> mục đích khác nhau.
         </li>
       </ul>
     </div>
@@ -182,34 +180,34 @@ const recommendation = computed(() => {
   const needsScale = scale.value === 'yes'
 
   if (isWeb && !needsCors && needsRevoke) {
-    reasons.push('同域 Web + 需要“立刻注销/踢下线” → Session 更直观可控。')
-    if (needsScale) reasons.push('多实例时用 Redis 等共享 Session 存储即可。')
-    tips.push('Cookie: HttpOnly + Secure + SameSite=Lax/Strict（视业务）')
-    tips.push('CSRF：SameSite + CSRF Token（双重保险）')
-    tips.push('Session Store：Redis + TTL + 续期策略（滑动过期）')
+    reasons.push('Web cùng domain + cần "logout/đá khỏi hệ thống ngay lập tức" -> Session trực quan và kiểm soát tốt hơn.')
+    if (needsScale) reasons.push('Khi multi-instance, dùng shared Session store như Redis là đủ.')
+    tips.push('Cookie: HttpOnly + Secure + SameSite=Lax/Strict (tùy business)')
+    tips.push('CSRF: SameSite + CSRF Token (bảo hiểm kép)')
+    tips.push('Session Store: Redis + TTL + chiến lược gia hạn (sliding expiration)')
     return {
       title: 'Session + Cookie',
-      desc: '传统 Web 的最稳妥方案',
+      desc: 'Phương án ổn định nhất cho Web truyền thống',
       reasons,
       tips
     }
   }
 
   // Otherwise default to token approach.
-  reasons.push('跨域/移动端/多服务场景更偏向 Token（Authorization Header）。')
+  reasons.push('Cross-domain/Mobile/đa dịch vụ thường thiên về Token (Authorization Header).')
   if (needsRevoke)
     reasons.push(
-      '需要主动注销：用短 access token + refresh token + 黑名单/版本号。'
+      'Cần logout chủ động: dùng access token ngắn + refresh token + blacklist/version.'
     )
-  if (!needsRevoke) reasons.push('不强求“立刻注销”时，JWT 的无状态优势更明显。')
-  tips.push('Access Token：短过期（如 15m），Refresh Token：单独存/可轮换')
+  if (!needsRevoke) reasons.push('Không bắt buộc "logout tức thì" thì ưu thế stateless của JWT rõ rệt hơn.')
+  tips.push('Access Token: hết hạn ngắn (ví dụ 15m); Refresh Token: lưu riêng/có thể xoay')
   tips.push(
-    '存储：Web 尽量避免 localStorage；更推荐 HttpOnly Cookie 或内存 + 刷新机制（看业务）'
+    'Lưu trữ: Web hạn chế localStorage; ưu tiên HttpOnly Cookie hoặc memory + cơ chế refresh (tùy business)'
   )
-  tips.push('授权：服务端做 RBAC/ABAC；不要把 role 全塞 JWT 然后永不变更')
+  tips.push('Cấp quyền: làm RBAC/ABAC ở server; đừng nhồi hết role vào JWT rồi không bao giờ đổi')
   return {
-    title: 'JWT Access Token（配合 Refresh）',
-    desc: '现代 API/移动端常用组合',
+    title: 'JWT Access Token (kèm Refresh)',
+    desc: 'Tổ hợp phổ biến cho API/Mobile hiện đại',
     reasons,
     tips
   }

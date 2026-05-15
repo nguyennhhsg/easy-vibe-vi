@@ -61,16 +61,16 @@ Tương tự, nếu chỉ 100 người kiểm thử, thêm một người click 
 
 Một khi đã đủ lưu lượng, thống kê học sẽ bố trí hai vị thần hộ vệ trên con đường tìm kiếm sự thật của chúng ta:
 
-- **Độ mạnh thống kê (Power, thường yêu cầu 80%)**: Nó thể hiện nếu thay đổi mới của bạn thực sự có hiệu quả, bạn có bao nhiêu把握 có thể phát hiện ra hiệu quả này, thay vì nhầm nó thành nhiễu và bỏ qua. (Ngăn chặn những ca âm tính giả—nói "vô hiệu" nhưng thực tế "có hiệu quả"—trượt qua lưới)
+- **Độ mạnh thống kê (Power, thường yêu cầu 80%)**: Nó thể hiện nếu thay đổi mới của bạn thực sự có hiệu quả, bạn có bao nhiêu cơ hội có thể phát hiện ra hiệu quả này, thay vì nhầm nó thành nhiễu và bỏ qua. (Ngăn chặn những ca âm tính giả—nói "vô hiệu" nhưng thực tế "có hiệu quả"—trượt qua lưới)
 - **Mức ý nghĩa (P-Value, thường yêu cầu nhỏ hơn 0.05)**: Cái gọi là "P<0.05" mà mọi người thường nói. Nó có nghĩa là, nếu hai nhóm xuất hiện sự khác biệt như vậy, xác suất là do may mắn thuần túy gây ra là bao nhiêu? Nếu tỷ lệ may mắn thậm chí dưới 5%, chúng ta sẽ công nhận rằng đây là **có ý nghĩa thống kê** (Significant), thay đổi này thực sự đã phát huy tác dụng phi thường. (Ngăn chặn những ca dương tính giả—nói "có hiệu quả" nhưng thực tế chỉ là may mắn)
 
 ## 3. Cuộc so tài kết quả: Phán quyết sự thật
 
-Sau khi thu thập đủ dữ liệu, chúng ta cần sử dụng mô hình ph漏斗 chuyên nghiệp này để đánh giá chính xác. So sánh kết quả không phải là một phép cộng trừ đơn giản, mà liên quan đến tính toán độ tin cậy, phân bố chuẩn:
+Sau khi thu thập đủ dữ liệu, chúng ta cần sử dụng mô hình phân tích chuyên nghiệp này để đánh giá chính xác. So sánh kết quả không phải là một phép cộng trừ đơn giản, mà liên quan đến tính toán độ tin cậy, phân bố chuẩn:
 
 <ABTestingDemo tab="results" />
 
-Khi bạn thấy trang phản hồi một **"Có ý nghĩa ✅"** rõ ràng, điều đó có nghĩa là chúng ta có thể tự hào thông báo với toàn công ty: hãy bỏ đi những tranh cãi chủ quan幼稚 của chúng ta, ngay lập tức áp dụng toàn bộ phương án B! Tất cả đều được hỗ trợ bởi nguyên lý toán học vững chắc.
+Khi bạn thấy trang phản hồi một **"Có ý nghĩa ✅"** rõ ràng, điều đó có nghĩa là chúng ta có thể tự hào thông báo với toàn công ty: hãy bỏ đi những tranh cãi chủ quan ngây thơ của chúng ta, ngay lập tức áp dụng toàn bộ phương án B! Tất cả đều được hỗ trợ bởi nguyên lý toán học vững chắc.
 
 ---
 

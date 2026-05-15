@@ -1,25 +1,25 @@
 <!--
   AuthNvsAuthZDemo.vue
-  AuthN vs AuthZ（更可用：请求模拟器）
+  AuthN vs AuthZ (trình mô phỏng request)
 -->
 <template>
   <div class="authn-authz-demo">
     <div class="header">
       <div class="title">
-        🪪 AuthN vs 🛂 AuthZ：一个请求到底会经历什么？
+        AuthN vs AuthZ: một request thực sự đi qua những bước gì?
       </div>
       <div class="subtitle">
-        选择“谁在请求”与“要做什么”，看看认证/授权分别在哪一步起作用。
+        Chọn "ai đang request" và "muốn làm gì", xem xác thực/cấp quyền lần lượt phát huy tác dụng ở bước nào.
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
         <div class="card-title">
-          选择请求
+          Chọn request
         </div>
 
-        <label class="label">身份（AuthN：你是谁）</label>
+        <label class="label">Danh tính (AuthN: bạn là ai)</label>
         <div class="row">
           <button
             v-for="u in users"
@@ -32,7 +32,7 @@
           </button>
         </div>
 
-        <label class="label">操作（AuthZ：你能做什么）</label>
+        <label class="label">Hành động (AuthZ: bạn có thể làm gì)</label>
         <div class="row">
           <button
             v-for="a in actions"
@@ -46,33 +46,32 @@
         </div>
 
         <div class="hint">
-          真实系统里：认证先发生（解析
-          cookie/JWT），授权发生在路由/业务逻辑层（RBAC/ABAC）。
+          Trong hệ thống thực: xác thực diễn ra trước (parse cookie/JWT), cấp quyền diễn ra ở tầng route/business logic (RBAC/ABAC).
         </div>
       </div>
 
       <div class="card">
         <div class="card-title">
-          模拟结果
+          Kết quả mô phỏng
         </div>
 
         <div class="result">
           <div class="line">
-            <span class="k">AuthN（认证）</span>
+            <span class="k">AuthN (Xác thực)</span>
             <span
               class="v"
               :class="authn.ok ? 'ok' : 'bad'"
             >
-              {{ authn.ok ? '通过' : '失败' }}
+              {{ authn.ok ? 'Pass' : 'Fail' }}
             </span>
           </div>
           <div class="line">
-            <span class="k">AuthZ（授权）</span>
+            <span class="k">AuthZ (Cấp quyền)</span>
             <span
               class="v"
               :class="authz.ok ? 'ok' : 'bad'"
             >
-              {{ authz.ok ? '允许' : '拒绝' }}
+              {{ authz.ok ? 'Allow' : 'Deny' }}
             </span>
           </div>
           <div class="line">
@@ -87,16 +86,15 @@
 
     <div class="card">
       <div class="card-title">
-        关键点
+        Điểm cốt lõi
       </div>
       <ul class="list">
-        <li><strong>认证失败：</strong>你是谁都不确定 → 通常返回 401。</li>
+        <li><strong>Xác thực fail:</strong> chưa rõ bạn là ai -> thường trả về 401.</li>
         <li>
-          <strong>认证通过但没权限：</strong>你是谁确定了，但不能做 → 通常返回
-          403。
+          <strong>Xác thực pass nhưng không có quyền:</strong> đã rõ bạn là ai, nhưng không được phép làm -> thường trả về 403.
         </li>
         <li>
-          <strong>授权规则要在服务端：</strong>别相信前端的“是否显示按钮”，那只是 UX。
+          <strong>Quy tắc cấp quyền phải ở server:</strong> đừng tin "có hiển thị button hay không" ở frontend, đó chỉ là UX.
         </li>
       </ul>
     </div>
@@ -107,15 +105,15 @@
 import { computed, ref } from 'vue'
 
 const users = [
-  { id: 'anon', name: '匿名用户' },
-  { id: 'user', name: '普通用户' },
-  { id: 'admin', name: '管理员' }
+  { id: 'anon', name: 'User ẩn danh' },
+  { id: 'user', name: 'User thường' },
+  { id: 'admin', name: 'Admin' }
 ]
 
 const actions = [
-  { id: 'view_profile', name: '查看个人资料（/api/me）' },
-  { id: 'create_post', name: '发帖（POST /posts）' },
-  { id: 'delete_user', name: '删除用户（DELETE /users/:id）' }
+  { id: 'view_profile', name: 'Xem hồ sơ cá nhân (/api/me)' },
+  { id: 'create_post', name: 'Đăng bài (POST /posts)' },
+  { id: 'delete_user', name: 'Xóa user (DELETE /users/:id)' }
 ]
 
 const userId = ref('anon')
@@ -123,19 +121,19 @@ const actionId = ref('view_profile')
 
 const authn = computed(() => {
   if (userId.value === 'anon')
-    return { ok: false, reason: '缺少有效凭证（cookie/JWT）' }
-  return { ok: true, reason: `识别为 ${userId.value}` }
+    return { ok: false, reason: 'Thiếu credential hợp lệ (cookie/JWT)' }
+  return { ok: true, reason: `Nhận diện là ${userId.value}` }
 })
 
 const authz = computed(() => {
   if (!authn.value.ok)
-    return { ok: false, reason: '认证未通过，无法做授权判断' }
+    return { ok: false, reason: 'Xác thực chưa pass, không thể quyết định cấp quyền' }
   if (actionId.value === 'delete_user') {
     return userId.value === 'admin'
-      ? { ok: true, reason: 'admin 允许删除用户' }
-      : { ok: false, reason: '只有 admin 才能删除用户' }
+      ? { ok: true, reason: 'admin được phép xóa user' }
+      : { ok: false, reason: 'Chỉ admin mới được xóa user' }
   }
-  return { ok: true, reason: '此操作对已登录用户开放' }
+  return { ok: true, reason: 'Thao tác này mở cho user đã đăng nhập' }
 })
 
 const finalStatus = computed(() => {

@@ -2,17 +2,17 @@
   <div class="session-persistence-demo">
     <div class="header">
       <div class="title">
-        会话保持机制
+        Cơ chế session persistence
       </div>
       <div class="subtitle">
-        Cookie、IP哈希与粘性会话的技术对比
+        So sánh kỹ thuật giữa Cookie, IP hash và sticky session
       </div>
     </div>
 
-    <!-- 场景选择 -->
+    <!-- Chọn kịch bản -->
     <div class="scenario-selector">
       <div class="scenario-label">
-        应用场景：
+        Tình huống ứng dụng:
       </div>
       <div class="scenario-buttons">
         <button
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <!-- 机制选择器 -->
+    <!-- Bộ chọn cơ chế -->
     <div class="mechanism-selector">
       <button
         v-for="mech in mechanisms"
@@ -42,9 +42,9 @@
       </button>
     </div>
 
-    <!-- 可视化演示区 -->
+    <!-- Khu demo trực quan -->
     <div class="demo-stage">
-      <!-- 用户层 -->
+      <!-- Tầng user -->
       <div class="user-layer">
         <div class="user-avatars">
           <div
@@ -70,22 +70,22 @@
         </div>
       </div>
 
-      <!-- 请求流程 -->
+      <!-- Luồng request -->
       <div class="request-flow">
         <div class="flow-step">
           <div class="step-label">
-            请求
+            Request
           </div>
           <div class="step-arrow">
             ↓
           </div>
         </div>
 
-        <!-- 负载均衡器 -->
+        <!-- Load balancer -->
         <div class="lb-box">
           <div class="lb-header">
             <span class="lb-icon">⚖️</span>
-            <span class="lb-title">负载均衡器</span>
+            <span class="lb-title">Load balancer</span>
           </div>
           <div class="lb-mechanism">
             <div class="mechanism-display">
@@ -100,13 +100,13 @@
               </div>
             </div>
           </div>
-          <!-- 会话表 -->
+          <!-- Bảng session -->
           <div
             v-if="currentMechanism === 'cookie' || currentMechanism === 'sticky'"
             class="session-table"
           >
             <div class="table-title">
-              会话映射表
+              Bảng ánh xạ session
             </div>
             <div class="table-rows">
               <div
@@ -120,13 +120,13 @@
               </div>
             </div>
           </div>
-          <!-- IP哈希环 -->
+          <!-- Vòng IP hash -->
           <div
             v-if="currentMechanism === 'iphash'"
             class="hash-ring"
           >
             <div class="ring-title">
-              IP哈希环
+              Vòng IP hash
             </div>
             <div class="ring-visual">
               <div
@@ -151,7 +151,7 @@
           </div>
         </div>
 
-        <!-- 后端服务器 -->
+        <!-- Backend server -->
         <div class="backend-servers">
           <div
             v-for="server in backendServers"
@@ -180,13 +180,13 @@
               v-if="isTargetServer(server.id)"
               class="selected-indicator"
             >
-              选中
+              Đã chọn
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 响应流程 -->
+      <!-- Luồng response -->
       <div
         v-if="currentMechanism === 'cookie'"
         class="response-flow"
@@ -199,7 +199,7 @@
         <div class="set-cookie-box">
           <div class="cookie-header">
             <span class="cookie-icon">🍪</span>
-            <span class="cookie-title">Set-Cookie 响应头</span>
+            <span class="cookie-title">Header Set-Cookie</span>
           </div>
           <div class="cookie-content">
             <code>SERVERID=srv001; Path=/; HttpOnly</code>
@@ -208,34 +208,34 @@
       </div>
     </div>
 
-    <!-- 机制对比表 -->
+    <!-- Bảng so sánh -->
     <div class="mechanism-comparison">
       <div class="comparison-title">
-        三种会话保持机制对比
+        So sánh ba cơ chế session persistence
       </div>
       <div class="comparison-grid">
         <div class="comparison-card">
           <div class="card-header">
             <span class="card-icon">🍪</span>
-            <span class="card-title">Cookie 插入</span>
+            <span class="card-title">Cookie insertion</span>
           </div>
           <div class="card-body">
             <div class="feature-list">
               <div class="feature-item">
                 <span class="feature-icon good">✓</span>
-                <span>不受客户端IP变化影响</span>
+                <span>Không bị ảnh hưởng khi IP client đổi</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon good">✓</span>
-                <span>首次请求即可保持会话</span>
+                <span>Giữ session ngay từ request đầu tiên</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon bad">✗</span>
-                <span>客户端需支持Cookie</span>
+                <span>Client phải hỗ trợ Cookie</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon bad">✗</span>
-                <span>存在Cookie被禁用的风险</span>
+                <span>Có rủi ro Cookie bị tắt</span>
               </div>
             </div>
           </div>
@@ -250,19 +250,19 @@
             <div class="feature-list">
               <div class="feature-item">
                 <span class="feature-icon good">✓</span>
-                <span>无需客户端支持任何机制</span>
+                <span>Không cần client hỗ trợ cơ chế gì</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon good">✓</span>
-                <span>无状态，LB重启不影响会话</span>
+                <span>Stateless, LB restart không ảnh hưởng session</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon bad">✗</span>
-                <span>客户端IP变化会丢失会话</span>
+                <span>IP client đổi sẽ mất session</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon bad">✗</span>
-                <span>难以做到真正的负载均衡</span>
+                <span>Khó cân bằng tải thật sự</span>
               </div>
             </div>
           </div>
@@ -271,25 +271,25 @@
         <div class="comparison-card">
           <div class="card-header">
             <span class="card-icon">📝</span>
-            <span class="card-title">粘性会话</span>
+            <span class="card-title">Sticky session</span>
           </div>
           <div class="card-body">
             <div class="feature-list">
               <div class="feature-item">
                 <span class="feature-icon good">✓</span>
-                <span>结合Cookie和IP两种方式优势</span>
+                <span>Kết hợp ưu điểm của Cookie và IP</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon good">✓</span>
-                <span>支持会话复制和故障转移</span>
+                <span>Hỗ trợ session replication và failover</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon bad">✗</span>
-                <span>实现复杂，需要应用支持</span>
+                <span>Triển khai phức tạp, cần ứng dụng hỗ trợ</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon bad">✗</span>
-                <span>会话复制带来性能开销</span>
+                <span>Session replication tốn hiệu năng</span>
               </div>
             </div>
           </div>
@@ -308,54 +308,54 @@ const currentMechanism = ref('cookie')
 const activeUser = ref(1)
 
 const modes = [
-  { key: 'active', name: '主动检查', icon: '🔍' },
-  { key: 'passive', name: '被动感知', icon: '👁️' },
-  { key: 'threshold', name: '阈值判定', icon: '📊' }
+  { key: 'active', name: 'Check chủ động', icon: '🔍' },
+  { key: 'passive', name: 'Quan sát bị động', icon: '👁️' },
+  { key: 'threshold', name: 'Đánh giá ngưỡng', icon: '📊' }
 ]
 
 const scenarios = [
-  { key: 'shopping', name: '购物车' },
-  { key: 'login', name: '登录状态' },
-  { key: 'websocket', name: '实时通信' }
+  { key: 'shopping', name: 'Giỏ hàng' },
+  { key: 'login', name: 'Trạng thái login' },
+  { key: 'websocket', name: 'Truyền tin real-time' }
 ]
 
 const mechanisms = [
-  { key: 'cookie', name: 'Cookie插入', icon: '🍪', tag: '应用层' },
-  { key: 'iphash', name: 'IP哈希', icon: '#️⃣', tag: '传输层' },
-  { key: 'sticky', name: '粘性会话', icon: '📝', tag: '会话层' }
+  { key: 'cookie', name: 'Cookie insertion', icon: '🍪', tag: 'Application' },
+  { key: 'iphash', name: 'IP hash', icon: '#️⃣', tag: 'Transport' },
+  { key: 'sticky', name: 'Sticky session', icon: '📝', tag: 'Session' }
 ]
 
 const currentMechanismData = computed(() => {
   const data = {
     cookie: {
-      name: 'Cookie 插入',
+      name: 'Cookie insertion',
       icon: '🍪',
       label: 'Set-Cookie',
-      shortDesc: '通过HTTP Cookie保持会话',
-      description: '负载均衡器在第一次响应时向客户端设置Cookie（如SERVERID=srv001），后续请求携带此Cookie，LB根据Cookie值将请求路由到对应后端服务器。'
+      shortDesc: 'Giữ session qua HTTP Cookie',
+      description: 'Load balancer đặt Cookie cho client ở response đầu tiên (ví dụ SERVERID=srv001), các request sau mang theo Cookie này, LB dựa vào giá trị Cookie để route request về đúng backend server.'
     },
     iphash: {
-      name: 'IP 哈希',
+      name: 'IP hash',
       icon: '#️⃣',
       label: 'IP Hash',
-      shortDesc: '基于客户端IP计算哈希',
-      description: '通过对客户端IP地址进行哈希计算（如hash(client_ip) % server_count），确定请求应该路由到哪台后端服务器。同一IP的请求总是落到同一台服务器。'
+      shortDesc: 'Hash dựa vào IP client',
+      description: 'Tính hash từ địa chỉ IP client (ví dụ hash(client_ip) % server_count), xác định request sẽ về backend nào. Request cùng IP luôn về cùng server.'
     },
     sticky: {
-      name: '粘性会话',
+      name: 'Sticky session',
       icon: '📝',
       label: 'Sticky Session',
-      shortDesc: '服务端维护会话映射表',
-      description: '负载均衡器在内存中维护会话映射表（session_id -> server），首次请求建立映射关系，后续相同会话ID的请求都路由到同一服务器。支持会话复制实现高可用。'
+      shortDesc: 'Server giữ bảng map session',
+      description: 'Load balancer giữ bảng map session trong memory (session_id -> server), request đầu thiết lập map, các request sau cùng session ID đều route về cùng server. Hỗ trợ session replication để có high availability.'
     }
   }
   return data[currentMechanism.value]
 })
 
 const users = [
-  { id: 1, name: '用户A', avatar: '👤', ip: '192.168.1.100' },
-  { id: 2, name: '用户B', avatar: '👥', ip: '192.168.1.101' },
-  { id: 3, name: '用户C', avatar: '👨‍💼', ip: '192.168.1.102' }
+  { id: 1, name: 'User A', avatar: '👤', ip: '192.168.1.100' },
+  { id: 2, name: 'User B', avatar: '👥', ip: '192.168.1.101' },
+  { id: 3, name: 'User C', avatar: '👨‍💼', ip: '192.168.1.102' }
 ]
 
 const sessionMappings = [
@@ -377,7 +377,7 @@ const hasSessionCookie = computed(() => {
 })
 
 const isTargetServer = (serverId) => {
-  // 模拟根据机制选择目标服务器
+  // Mô phỏng chọn server đích theo cơ chế
   if (currentMechanism.value === 'iphash') {
     return serverId === ((activeUser.value + serverId) % 3) + 1
   }
@@ -393,7 +393,7 @@ const getSegmentStyle = (index) => {
   }
 }
 
-// 轮播演示
+// Demo luân phiên
 let demoInterval
 onMounted(() => {
   demoInterval = setInterval(() => {

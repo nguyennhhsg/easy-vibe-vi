@@ -338,7 +338,7 @@ Chiến lược khuyến nghị phiên bản đầu tiên:
 
 - Sở thích dựa trên tags
 - Kết hợp với trọng số đánh giá người dùng
--叠加 phim phổ biến trong cold start
+- Bổ sung phim phổ biến trong cold start
 - Lọc phim đã đánh giá/đã yêu thích
 
 Kết quả khuyến nghị nên hiển thị:

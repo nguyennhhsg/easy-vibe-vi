@@ -37,7 +37,7 @@ Sản phẩm bạn cần xây dựng là một nền tảng phân tích dữ li�
 | **Hiển thị bảng điều khiển** | Hiển thị biểu đồ xu hướng, bảng xếp hạng và danh sách cảnh báo trên frontend |
 
 ::: tip PRD entrypoint
-Tài liệu yêu cầu của dự án này trên GitHub: [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/traffic-data-visualization-go/PRD.md)
+Tài liệu yêu cầu của dự án này trên GitHub: [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/traffic-data-visualization-go/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

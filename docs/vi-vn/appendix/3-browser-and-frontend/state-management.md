@@ -133,13 +133,13 @@ import { ref } from 'vue'
 import Child from './Child.vue'
 
 const currentUser = ref({
-  name: '张三',
+  name: 'Nguyen Van A',
   isAdmin: true
 })
 
 const handleDelete = (userId) => {
-  console.log('删除用户:', userId)
-  // 处理删除逻辑
+  console.log('Xoa nguoi dung:', userId)
+  // Xu ly logic xoa
 }
 </script>
 ```
@@ -149,8 +149,8 @@ const handleDelete = (userId) => {
 <template>
   <div class="user-card">
     <h3>{{ userName }}</h3>
-    <span v-if="isAdmin" class="badge">管理员</span>
-    <button @click="requestDelete">删除用户</button>
+    <span v-if="isAdmin" class="badge">Quản trị viên</span>
+    <button @click="requestDelete">Xóa người dùng</button>
   </div>
 </template>
 
@@ -328,7 +328,7 @@ Sự hỗn loạn của truyền tự do làm cho nhóm nhận ra: **chúng ta c
 import { ref } from 'vue'
 import Layout from './Layout.vue'
 
-const userName = ref('张三')
+const userName = ref('Nguyen Van A')
 </script>
 ```
 
@@ -985,10 +985,10 @@ Trong thực chiến quản lý trạng thái, có những lỗi khá phổ bi�
 
 ```javascript
 // ❌ Sửa đổi trực tiếp props
-props.user.name = '李四'
+props.user.name = 'Tran Van B'
 
 // ❌ Sửa đổi trực tiếp state của Vuex
-store.state.user.name = '李四'
+store.state.user.name = 'Tran Van B'
 
 // ❌ Sửa đổi trực tiếp phần tử mảng
 state.items[0].name = 'Tên mới'
@@ -1002,7 +1002,7 @@ Framework frontend (Vue/React) cần "theo dõi" sự thay đổi dữ liệu, m
 
 ```javascript
 // ✅ Vue 3 / Pinia: Sửa đổi trực tiếp thuộc tính cấp cao nhất
-store.user.name = '李四'  // Pinia sẽ xử lý phản ứng tự động
+store.user.name = 'Tran Van B'  // Pinia sẽ xử lý phản ứng tự động
 
 // ✅ Vue 2 / Vuex: Thông qua mutation
 mutations: {

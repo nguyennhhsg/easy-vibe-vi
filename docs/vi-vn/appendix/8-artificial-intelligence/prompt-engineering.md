@@ -42,7 +42,7 @@ Trong giai đoạn tiền huấn luyện, mô hình đã đọc vô số cuốn 
 
 <TrainingProcessDemo />
 
-> 📺 **Video Mở Rộng**: [Mô Hình Ngôn Ngữ Lớn (LLM) - Giải Thích Ngắn Gọn](https://www.bilibili.com/video/BV1xmA2eMEFF/)
+> 📺 **Video Mở Rộng**: [Mô Hình Ngôn Ngữ Lớn (LLM) - Giải Thích Ngắn Gọn (tiếng Trung)](https://www.bilibili.com/video/BV1xmA2eMEFF/)
 
 #### 1. Giai Đoạn Tiền Huấn Luyện (Pre-training): Đọc Thêm Sách
 

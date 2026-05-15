@@ -523,21 +523,21 @@ Dùng cho kiểm tra E2E.
 
 ### Bài viết hướng dẫn
 
-- [Giải thích chi tiết nguyên lý và thực hành MCP](https://view.inews.qq.com/a/20250414A023WV00)
+- [Giải thích chi tiết nguyên lý và thực hành MCP (tiếng Trung)](https://view.inews.qq.com/a/20250414A023WV00)
 - [Kiến trúc MCP (Model Context Protocol) và nguyên lý hoạt động](https://m.toutiao.com/w/1826385835060307/)
-- [Hướng dẫn mới nhất 2025 mô hình lớn: MCP từ bắt đầu đến thành thạo](https://m.blog.csdn.net/weixin_45653328/article/details/150916706)
-- [Bắt đầu từ đầu học MCP (Tám) - Xây dựng MCP server](https://juejin.cn/post/7582510291667419187)
+- [Hướng dẫn mới nhất 2025 mô hình lớn: MCP từ bắt đầu đến thành thạo (tiếng Trung)](https://m.blog.csdn.net/weixin_45653328/article/details/150916706)
+- [Bắt đầu từ đầu học MCP (Tám) - Xây dựng MCP server (tiếng Trung)](https://juejin.cn/post/7582510291667419187)
 
 ### Hướng dẫn cấu hình
 
 - [Thực hành tốt nhất Claude Code](https://www.anthropic.com/engineering/claude-code-best-practices)
-- [Hướng dẫn cấu hình hoàn chỉnh Claude Code](https://juejin.cn/post/7576838552472043563)
+- [Hướng dẫn cấu hình hoàn chỉnh Claude Code (tiếng Trung)](https://juejin.cn/post/7576838552472043563)
 
 ### Hướng dẫn phát triển
 
-- [Hướng dẫn thực hành toàn diện xây dựng máy chủ MCP từ đầu TypeScript/Python](https://m.blog.csdn.net/ztt123654/article/details/150844207)
-- [Hướng dẫn xây dựng máy chủ MCP cuối cùng: Hướng dẫn hoàn chỉnh hai phiên bản TypeScript và Python](https://m.blog.csdn.net/gitblog_00703/article/details/154862128)
-- [Xây dựng máy chủ MCP đơn giản nhất bằng TypeScript](https://m.blog.csdn.net/weixin_45653525/article/details/148433757)
+- [Hướng dẫn thực hành toàn diện xây dựng máy chủ MCP từ đầu TypeScript/Python (tiếng Trung)](https://m.blog.csdn.net/ztt123654/article/details/150844207)
+- [Hướng dẫn xây dựng máy chủ MCP cuối cùng: Hướng dẫn hoàn chỉnh hai phiên bản TypeScript và Python (tiếng Trung)](https://m.blog.csdn.net/gitblog_00703/article/details/154862128)
+- [Xây dựng máy chủ MCP đơn giản nhất bằng TypeScript (tiếng Trung)](https://m.blog.csdn.net/weixin_45653525/article/details/148433757)
 - [Sử dụng Azure Container Apps tạo máy chủ MCP TypeScript](https://learn.microsoft.com/vi-vn/azure/developer/ai/build-mcp-server-ts)
 
 ### Tài nguyên máy chủ MCP
@@ -553,7 +553,7 @@ Dùng cho kiểm tra E2E.
 ### Dịch vụ bản đồ và thời tiết
 
 - [High-Def Maps MCP Server](https://lobehub.com/zh/mcp/luozengchang-mcp-amap)
-- [Tài liệu dịch vụ vị trí Tencent MCP](https://lbs.qq.com/service/MCPServer/MCPServerGuide/overview)
+- [Tài liệu dịch vụ vị trí Tencent MCP (tiếng Trung)](https://lbs.qq.com/service/MCPServer/MCPServerGuide/overview)
 - [Colorful Cloud Weather MCP Server](https://github.com/caiyunapp/mcp-caiyun-weather)
 - [OpenWeatherMap MCP Server](https://github.com/CodeByWaqas/weather-mcp-server)
 

@@ -61,13 +61,13 @@ Cơ sở dữ liệu truyền thống sử dụng **chỉ mục thuận**: tìm 
 
 ## 2. Phân từ và Phân tích Văn bản
 
-Phân từ là bước đầu tiên của công cụ tìm kiếm và cũng là thách thức lớn nhất của tìm kiếm tiếng Trung. Tiếng Anh tự nhiên phân từ bằng khoảng trắng, nhưng tiếng Trung không có dấu phân cách — "乒乓球拍卖了" có thể chia thành "乒乓球/拍卖/了" hoặc "乒乓/球拍/卖/了".
+Phân từ là bước đầu tiên của công cụ tìm kiếm và cũng là thách thức lớn nhất của tìm kiếm tiếng Trung. Tiếng Anh tự nhiên phân từ bằng khoảng trắng, nhưng tiếng Trung không có dấu phân cách — ví dụ chuỗi `乒乓球拍卖了` có thể chia thành `乒乓球 / 拍卖 / 了` ("bóng bàn / bán đấu giá / rồi") hoặc `乒乓 / 球拍 / 卖 / 了` ("bóng bàn / vợt bóng / bán / rồi") — hai cách cắt cho ra nghĩa hoàn toàn khác nhau.
 
 | Cách phân từ | Giải thích | Ví dụ |
 |-------------|-----------|-------|
 | Phân từ tiêu chuẩn | Chia theo khoảng trắng và dấu câu (Tiếng Anh) | "hello world" → ["hello", "world"] |
-| Phân từ tiếng Trung | Chia dựa trên từ điển hoặc mô hình | "搜索引擎" → ["搜索", "引擎"] |
-| N-gram | Chia theo cửa sổ trượt có độ dài cố định | "搜索" → ["搜索", "索引"] |
+| Phân từ tiếng Trung | Chia dựa trên từ điển hoặc mô hình | `搜索引擎` ("công cụ tìm kiếm") → [`搜索`, `引擎`] |
+| N-gram | Chia theo cửa sổ trượt có độ dài cố định | `搜索引擎` → [`搜索`, `索引`, `引擎`] |
 | Từ điển tùy chỉnh | Thêm từ vựng chuyên dụng kinh doanh | "iPhone16ProMax" làm một từ |
 
 ::: tip Quy trình Phân tích Văn bản
@@ -75,8 +75,8 @@ Phân từ là bước đầu tiên của công cụ tìm kiếm và cũng là t
 Phân từ chỉ là một bước của phân tích văn bản, quy trình hoàn chỉnh bao gồm:
 1. **Lọc ký tự**: Loại bỏ thẻ HTML, ký tự đặc biệt
 2. **Phân từ**: Chia văn bản thành từng từ (Token)
-3. **Lọc từ dừng**: Loại bỏ các từ tần suất cao vô nghĩa như "的", "了", "是"
-4. **Mở rộng từ đồng nghĩa**: Mở rộng "手机" thành "手机, 电话, 移动电话"
+3. **Lọc từ dừng**: Loại bỏ các từ tần suất cao vô nghĩa như "the", "a", "is" (hoặc trong tiếng Trung là `的`, `了`, `是`)
+4. **Mở rộng từ đồng nghĩa**: Mở rộng "điện thoại" thành "điện thoại, mobile, smartphone"
 5. **Trích rút từ gốc**: Khôi phục "running" thành "run" (Tiếng Anh)
 :::
 
@@ -95,7 +95,7 @@ Tìm thấy các tài liệu phù hợp chỉ là bước đầu tiên, điều 
 ::: tip Hiểu TF-IDF theo trực giác
 - **TF (Tần suất từ)**: Một từ xuất hiện càng nhiều lần trong tài liệu, tài liệu đó càng có khả năng liên quan đến từ đó
 - **IDF (Tần suất tài liệu nghịch đảo)**: Một từ xuất hiện càng ít trong các tài liệu, tính phân biệt của nó càng cao
-- "的" xuất hiện trong tất cả các tài liệu (IDF thấp), vì vậy tìm kiếm "的" không có ý nghĩa
+- Những từ phổ thông như "the" hay "của" xuất hiện trong tất cả các tài liệu (IDF thấp), vì vậy tìm kiếm chúng không có ý nghĩa
 - "Elasticsearch" chỉ xuất hiện trong một số tài liệu (IDF cao), tìm kiếm nó có thể xác định vị trí chính xác
 :::
 
@@ -125,9 +125,9 @@ Elasticsearch không được sử dụng để thay thế cơ sở dữ liệu,
 
 | Phương pháp tối ưu hóa | Giải thích | Hiệu quả |
 |----------------------|-----------|---------|
-| Từ đồng nghĩa | "手机" cũng có thể tìm thấy "电话" | Tăng tỷ lệ recall |
+| Từ đồng nghĩa | Tìm "điện thoại" cũng ra "mobile", "smartphone" | Tăng tỷ lệ recall |
 | Sửa lỗi chính tả | "iphoen" được tự động sửa thành "iphone" | Khả năng chịu lỗi |
-| Tự động hoàn thành | Nhập "苹" gợi ý "苹果手机" | Nâng cao trải nghiệm |
+| Tự động hoàn thành | Nhập "iph" gợi ý "iphone 15 pro" | Nâng cao trải nghiệm |
 | Làm nổi bật | Tô đỏ các từ phù hợp trong kết quả tìm kiếm | Trình bày trực quan |
 | Điều chỉnh trọng số | Trọng số khớp tiêu đề > Khớp nội dung | Tăng độ chính xác |
 | Lọc và Tổng hợp | Lọc theo khoảng giá, thương hiệu | Thu hẹp phạm vi |

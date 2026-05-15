@@ -1,6 +1,6 @@
 <template>
   <div class="code-smell-demo">
-    <div class="demo-label">代码坏味道识别器 ── 点击切换不同示例</div>
+    <div class="demo-label">Bộ nhận diện code smell ── Bấm để chuyển ví dụ</div>
 
     <div class="tabs">
       <button
@@ -16,14 +16,14 @@
 
     <div class="content">
       <div class="code-panel">
-        <div class="panel-title">问题代码</div>
+        <div class="panel-title">Code có vấn đề</div>
         <pre><code>{{ smells[current].bad }}</code></pre>
       </div>
       <div class="info-panel" :class="smells[current].cls">
         <h4>{{ smells[current].icon }} {{ smells[current].name }}</h4>
         <p class="desc">{{ smells[current].desc }}</p>
         <div class="suggestion">
-          <strong>改进建议：</strong>{{ smells[current].fix }}
+          <strong>Đề xuất cải thiện:</strong> {{ smells[current].fix }}
         </div>
       </div>
     </div>
@@ -37,61 +37,61 @@ const current = ref(0)
 
 const smells = [
   {
-    name: '过长函数',
+    name: 'Hàm quá dài',
     icon: '📏',
     cls: 'red',
-    desc: '一个函数超过 50 行，做了太多事情，难以理解和测试。',
+    desc: 'Một hàm vượt quá 50 dòng, làm quá nhiều việc, khó hiểu và khó test.',
     bad: `function processOrder(order) {
-  // 验证订单... (20行)
-  // 计算价格... (15行)
-  // 检查库存... (10行)
-  // 发送通知... (15行)
-  // 更新数据库... (10行)
-  // 生成报表... (10行)
-  // 总计 80+ 行！
+  // Validate don hang... (20 dong)
+  // Tinh gia... (15 dong)
+  // Kiem tra ton kho... (10 dong)
+  // Gui thong bao... (15 dong)
+  // Update database... (10 dong)
+  // Sinh bao cao... (10 dong)
+  // Tong cong 80+ dong!
 }`,
-    fix: '将大函数拆分为多个职责单一的小函数：validateOrder()、calculatePrice()、checkInventory() 等。'
+    fix: 'Tách hàm lớn thành các hàm nhỏ với trách nhiệm đơn nhất: validateOrder(), calculatePrice(), checkInventory()...'
   },
   {
-    name: '魔法数字',
+    name: 'Magic Number',
     icon: '🔢',
     cls: 'orange',
-    desc: '代码中直接使用含义不明的数字字面量，阅读者无法理解其含义。',
+    desc: 'Dùng các số literal không rõ ý nghĩa trực tiếp trong code, người đọc không hiểu chúng nghĩa là gì.',
     bad: `if (user.age >= 18) { ... }
 if (password.length < 8) { ... }
 if (retryCount > 3) { ... }
 setTimeout(fn, 86400000)`,
-    fix: '用命名常量替代：const ADULT_AGE = 18、const MIN_PASSWORD_LENGTH = 8、const ONE_DAY_MS = 86400000。'
+    fix: 'Thay bằng hằng số có tên: const ADULT_AGE = 18, const MIN_PASSWORD_LENGTH = 8, const ONE_DAY_MS = 86400000.'
   },
   {
-    name: '重复代码',
+    name: 'Code lặp lại',
     icon: '📋',
     cls: 'yellow',
-    desc: '相同或相似的代码出现在多处，修改时容易遗漏。',
-    bad: `// 文件 A
+    desc: 'Code giống nhau hoặc tương tự xuất hiện ở nhiều nơi, khi sửa dễ bỏ sót.',
+    bad: `// File A
 const tax = price * 0.13
 const total = price + tax
 
-// 文件 B（几乎一样）
+// File B (gan nhu giong y)
 const tax = amount * 0.13
 const sum = amount + tax`,
-    fix: '提取公共函数 calculateTax(amount)，在多处复用，修改只需改一处。'
+    fix: 'Trích xuất hàm dùng chung calculateTax(amount), tái sử dụng nhiều nơi, khi sửa chỉ cần sửa một chỗ.'
   },
   {
-    name: '过深嵌套',
+    name: 'Nested quá sâu',
     icon: '🪆',
     cls: 'purple',
-    desc: '多层 if/for 嵌套导致代码难以阅读，逻辑像迷宫。',
+    desc: 'Lồng nhau nhiều tầng if/for khiến code khó đọc, logic như mê cung.',
     bad: `if (user) {
   if (user.isActive) {
     if (user.hasPermission) {
       if (order.isValid) {
-        // 终于到了真正的逻辑...
+        // Cuoi cung moi den logic that...
       }
     }
   }
 }`,
-    fix: '使用卫语句（Guard Clause）提前返回：if (!user) return; if (!user.isActive) return; ...'
+    fix: 'Dùng Guard Clause để return sớm: if (!user) return; if (!user.isActive) return; ...'
   }
 ]
 </script>

@@ -167,7 +167,7 @@ Xem lại các điểm chính của chương này:
 ## Đọc thêm
 
 - [How DNS Works](https://howdns.works/) - Giải thích nguyên lý hoạt động của DNS dưới dạng truyện tranh
-- [Let's Encrypt 文档](https://letsencrypt.org/docs/) - Hướng dẫn yêu cầu chứng chỉ SSL miễn phí
+- [Let's Encrypt Docs](https://letsencrypt.org/docs/) - Hướng dẫn yêu cầu chứng chỉ SSL miễn phí
 - [Cloudflare Learning Center](https://www.cloudflare.com/learning/dns/what-is-dns/) - Hướng dẫn về DNS và hệ thống bảo mật mạng
 - [TLS 1.3 RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446) - Thông số kỹ thuật giao thức TLS 1.3
 - [SSL Labs](https://www.ssllabs.com/ssltest/) - Kiểm tra chất lượng cấu hình HTTPS của trang web trực tuyến

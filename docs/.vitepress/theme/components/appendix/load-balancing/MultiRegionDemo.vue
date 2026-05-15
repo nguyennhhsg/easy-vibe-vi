@@ -2,33 +2,33 @@
   <div class="multi-region-demo">
     <div class="header">
       <div class="title">
-        多区域部署
+        Multi-region deployment
       </div>
       <div class="subtitle">
-        异地多活架构，就近服务与容灾备份
+        Kiến trúc active-active đa địa điểm, dịch vụ gần nhất + dự phòng disaster recovery
       </div>
     </div>
 
-    <!-- 全球地图 -->
+    <!-- Bản đồ toàn cầu -->
     <div class="world-map">
       <div class="map-header">
-        <span class="map-title">全球部署视图</span>
+        <span class="map-title">Hiển thị deployment toàn cầu</span>
         <span class="map-legend">
           <span class="legend-item">
             <span class="legend-dot active" />
-            主节点
+            Primary node
           </span>
           <span class="legend-item">
             <span class="legend-dot standby" />
-            备节点
+            Standby node
           </span>
         </span>
       </div>
 
       <div class="map-container">
-        <!-- 简化的世界地图 -->
+        <!-- Bản đồ thế giới đơn giản -->
         <div class="map-bg">
-          <!-- 亚洲 -->
+          <!-- Châu Á -->
           <div class="continent asia">
             <div
               v-for="region in asiaRegions"
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <!-- 欧洲 -->
+          <!-- Châu Âu -->
           <div class="continent europe">
             <div
               v-for="region in europeRegions"
@@ -80,7 +80,7 @@
             </div>
           </div>
 
-          <!-- 北美 -->
+          <!-- Bắc Mỹ -->
           <div class="continent north-america">
             <div
               v-for="region in northAmericaRegions"
@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <!-- 连接线路 -->
+        <!-- Đường nối -->
         <svg
           class="connection-lines"
           viewBox="0 0 100 100"
@@ -144,7 +144,7 @@
       </div>
     </div>
 
-    <!-- 区域详情 -->
+    <!-- Chi tiết vùng -->
     <div
       v-if="selectedRegionData"
       class="region-details"
@@ -157,7 +157,7 @@
             class="region-badge"
             :class="{ primary: selectedRegionData.isPrimary, standby: !selectedRegionData.isPrimary }"
           >
-            {{ selectedRegionData.isPrimary ? '主节点' : '备节点' }}
+            {{ selectedRegionData.isPrimary ? 'Primary' : 'Standby' }}
           </span>
         </div>
         <button
@@ -171,7 +171,7 @@
       <div class="details-grid">
         <div class="detail-item">
           <div class="detail-label">
-            延迟
+            Độ trễ
           </div>
           <div class="detail-value">
             {{ selectedRegionData.delay }}ms
@@ -179,15 +179,15 @@
         </div>
         <div class="detail-item">
           <div class="detail-label">
-            在线实例
+            Instance đang chạy
           </div>
           <div class="detail-value">
-            {{ selectedRegionData.instances }}个
+            {{ selectedRegionData.instances }} instance
           </div>
         </div>
         <div class="detail-item">
           <div class="detail-label">
-            当前QPS
+            QPS hiện tại
           </div>
           <div class="detail-value">
             {{ selectedRegionData.qps }}/s
@@ -195,7 +195,7 @@
         </div>
         <div class="detail-item">
           <div class="detail-label">
-            数据同步延迟
+            Độ trễ đồng bộ dữ liệu
           </div>
           <div class="detail-value">
             {{ selectedRegionData.syncDelay }}ms
@@ -208,24 +208,24 @@
           v-if="!selectedRegionData.isPrimary"
           class="action-btn primary"
         >
-          提升为主节点
+          Promote thành primary
         </button>
         <button
           v-if="selectedRegionData.isPrimary"
           class="action-btn danger"
         >
-          切换流量
+          Chuyển traffic
         </button>
         <button class="action-btn">
-          查看日志
+          Xem log
         </button>
       </div>
     </div>
 
-    <!-- 架构优势 -->
+    <!-- Ưu điểm kiến trúc -->
     <div class="architecture-benefits">
       <div class="benefits-title">
-        多区域部署优势
+        Ưu điểm của multi-region deployment
       </div>
       <div class="benefits-grid">
         <div class="benefit-card">
@@ -233,10 +233,10 @@
             ⚡
           </div>
           <div class="benefit-title">
-            就近服务
+            Dịch vụ gần nhất
           </div>
           <div class="benefit-desc">
-            用户请求自动路由到最近的区域，降低网络延迟，提升访问速度
+            Request user tự động route về vùng gần nhất, giảm độ trễ mạng, tăng tốc truy cập
           </div>
         </div>
         <div class="benefit-card">
@@ -244,10 +244,10 @@
             🛡️
           </div>
           <div class="benefit-title">
-            容灾备份
+            Disaster recovery
           </div>
           <div class="benefit-desc">
-            单区域故障时自动切换流量，确保服务高可用，数据多副本保存
+            Một vùng sự cố thì tự chuyển traffic sang vùng khác, đảm bảo high availability, dữ liệu nhân bản nhiều bản
           </div>
         </div>
         <div class="benefit-card">
@@ -255,10 +255,10 @@
             🌍
           </div>
           <div class="benefit-title">
-            全球覆盖
+            Phủ toàn cầu
           </div>
           <div class="benefit-desc">
-            支持跨区域部署，满足不同地区的合规要求和数据主权法规
+            Hỗ trợ deploy đa vùng, đáp ứng yêu cầu compliance và chủ quyền dữ liệu của từng khu vực
           </div>
         </div>
         <div class="benefit-card">
@@ -266,10 +266,10 @@
             📈
           </div>
           <div class="benefit-title">
-            负载均衡
+            Cân bằng tải
           </div>
           <div class="benefit-desc">
-            跨区域流量调度，避免单点过载，实现全局资源优化配置
+            Điều phối traffic liên vùng, tránh quá tải một điểm, tối ưu tài nguyên toàn cục
           </div>
         </div>
       </div>
@@ -280,45 +280,45 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-// 当前选中的指标
+// Metric đang chọn
 const currentMetric = ref('cpu')
 const selectedRegion = ref(null)
 
-// 亚洲区域数据
+// Dữ liệu vùng châu Á
 const asiaRegions = ref([
-  { id: 'bj', name: '北京', x: 75, y: 35, isPrimary: true, delay: 20, instances: 5, qps: 2500, syncDelay: 10 },
-  { id: 'sh', name: '上海', x: 80, y: 45, isPrimary: false, delay: 25, instances: 3, qps: 1500, syncDelay: 15 },
-  { id: 'sg', name: '新加坡', x: 72, y: 65, isPrimary: false, delay: 45, instances: 2, qps: 800, syncDelay: 25 }
+  { id: 'bj', name: 'Bắc Kinh', x: 75, y: 35, isPrimary: true, delay: 20, instances: 5, qps: 2500, syncDelay: 10 },
+  { id: 'sh', name: 'Thượng Hải', x: 80, y: 45, isPrimary: false, delay: 25, instances: 3, qps: 1500, syncDelay: 15 },
+  { id: 'sg', name: 'Singapore', x: 72, y: 65, isPrimary: false, delay: 45, instances: 2, qps: 800, syncDelay: 25 }
 ])
 
-// 欧洲区域数据
+// Dữ liệu vùng châu Âu
 const europeRegions = ref([
-  { id: 'fr', name: '法兰克福', x: 48, y: 30, isPrimary: true, delay: 120, instances: 4, qps: 1800, syncDelay: 20 },
-  { id: 'uk', name: '伦敦', x: 45, y: 25, isPrimary: false, delay: 130, instances: 2, qps: 900, syncDelay: 30 }
+  { id: 'fr', name: 'Frankfurt', x: 48, y: 30, isPrimary: true, delay: 120, instances: 4, qps: 1800, syncDelay: 20 },
+  { id: 'uk', name: 'London', x: 45, y: 25, isPrimary: false, delay: 130, instances: 2, qps: 900, syncDelay: 30 }
 ])
 
-// 北美区域数据
+// Dữ liệu vùng Bắc Mỹ
 const northAmericaRegions = ref([
-  { id: 'usw', name: '硅谷', x: 15, y: 38, isPrimary: true, delay: 150, instances: 6, qps: 3200, syncDelay: 25 },
-  { id: 'use', name: '弗吉尼亚', x: 28, y: 35, isPrimary: false, delay: 160, instances: 3, qps: 1400, syncDelay: 35 }
+  { id: 'usw', name: 'Silicon Valley', x: 15, y: 38, isPrimary: true, delay: 150, instances: 6, qps: 3200, syncDelay: 25 },
+  { id: 'use', name: 'Virginia', x: 28, y: 35, isPrimary: false, delay: 160, instances: 3, qps: 1400, syncDelay: 35 }
 ])
 
-// 连接线数据
+// Dữ liệu đường nối
 const connectionLines = ref([
-  // 北京-上海
+  // Bắc Kinh - Thượng Hải
   { x1: 75, y1: 35, x2: 80, y2: 45 },
-  // 北京-新加坡
+  // Bắc Kinh - Singapore
   { x1: 75, y1: 35, x2: 72, y2: 65 },
-  // 法兰克福-伦敦
+  // Frankfurt - London
   { x1: 48, y1: 30, x2: 45, y2: 25 },
-  // 硅谷-弗吉尼亚
+  // Silicon Valley - Virginia
   { x1: 15, y1: 38, x2: 28, y2: 35 },
-  // 跨洲连接
+  // Kết nối liên châu lục
   { x1: 75, y1: 35, x2: 48, y2: 30 },
   { x1: 48, y1: 30, x2: 15, y2: 38 }
 ])
 
-// 选中区域详情
+// Chi tiết vùng đang chọn
 const selectedRegionData = computed(() => {
   if (!selectedRegion.value) return null
   const allRegions = [
@@ -329,7 +329,7 @@ const selectedRegionData = computed(() => {
   return allRegions.find(r => r.id === selectedRegion.value)
 })
 
-// 获取使用率颜色
+// Lấy màu theo mức sử dụng
 const getUsageColor = (usage) => {
   if (usage > 90) return '#ef4444'
   if (usage > 70) return '#f59e0b'

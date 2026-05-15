@@ -2,17 +2,17 @@
   <div class="weighted-routing-demo">
     <div class="header">
       <div class="title">
-        加权路由策略
+        Chiến lược routing có trọng số
       </div>
       <div class="subtitle">
-        按性能、成本、地理位置智能分配流量
+        Phân phối traffic thông minh theo hiệu năng, chi phí, vị trí địa lý
       </div>
     </div>
 
-    <!-- 策略选择器 -->
+    <!-- Bộ chọn chiến lược -->
     <div class="strategy-selector">
       <div class="strategy-label">
-        加权策略：
+        Chiến lược trọng số:
       </div>
       <div class="strategy-buttons">
         <button
@@ -28,12 +28,12 @@
       </div>
     </div>
 
-    <!-- 可视化区域 -->
+    <!-- Khu trực quan hoá -->
     <div class="visualization">
-      <!-- 流量进入 -->
+      <!-- Traffic vào -->
       <div class="traffic-incoming">
         <div class="traffic-label">
-          总流量
+          Tổng traffic
         </div>
         <div class="traffic-value">
           {{ totalTraffic }} req/s
@@ -54,10 +54,10 @@
         </div>
       </div>
 
-      <!-- 权重分配可视化 -->
+      <!-- Trực quan hoá phân bổ trọng số -->
       <div class="weight-allocation">
         <div class="allocation-title">
-          权重分配
+          Phân bổ trọng số
         </div>
         <div class="allocation-bars">
           <div
@@ -101,16 +101,16 @@
                 step="1"
                 class="weight-slider"
               >
-              <span class="weight-label">权重: {{ server.weight }}</span>
+              <span class="weight-label">Trọng số: {{ server.weight }}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 实时流量动画 -->
+      <!-- Animation traffic thời gian thực -->
       <div class="traffic-animation">
         <div class="animation-title">
-          实时流量
+          Traffic thời gian thực
         </div>
         <div class="traffic-flows">
           <div
@@ -138,10 +138,10 @@
       </div>
     </div>
 
-    <!-- 策略详情对比 -->
+    <!-- So sánh chi tiết các chiến lược -->
     <div class="strategy-comparison">
       <div class="comparison-title">
-        加权策略对比
+        So sánh các chiến lược trọng số
       </div>
       <div class="comparison-grid">
         <div
@@ -160,7 +160,7 @@
             </p>
             <div class="use-cases">
               <div class="use-case-title">
-                适用场景：
+                Tình huống áp dụng:
               </div>
               <ul>
                 <li
@@ -187,35 +187,35 @@ const totalTraffic = ref(1000)
 const strategies = [
   {
     key: 'performance',
-    name: '按性能加权',
+    name: 'Theo hiệu năng',
     icon: '⚡',
-    description: '根据后端服务器的处理能力（CPU、内存、I/O性能）分配权重，高性能服务器承担更多流量。',
+    description: 'Gán trọng số theo năng lực xử lý của backend (CPU, memory, I/O), server mạnh gánh nhiều traffic hơn.',
     useCases: [
-      '混合部署环境（新老服务器混用）',
-      '异构硬件环境',
-      '需要最大化整体吞吐量的场景'
+      'Môi trường deploy hỗn hợp (server cũ và mới chạy chung)',
+      'Môi trường phần cứng không đồng nhất',
+      'Tình huống cần tối đa hoá throughput tổng thể'
     ]
   },
   {
     key: 'cost',
-    name: '按成本加权',
+    name: 'Theo chi phí',
     icon: '💰',
-    description: '根据服务器成本（按需实例vs预留实例、不同地域成本）分配权重，优先使用低成本资源。',
+    description: 'Gán trọng số theo chi phí server (on-demand vs reserved instance, chi phí khác giữa các vùng), ưu tiên tài nguyên chi phí thấp.',
     useCases: [
-      '云环境中的成本优化',
-      '跨地域部署的流量调度',
-      '预留实例与按需实例混合使用'
+      'Tối ưu chi phí trong cloud',
+      'Điều phối traffic giữa các vùng',
+      'Dùng kết hợp reserved instance và on-demand'
     ]
   },
   {
     key: 'geo',
-    name: '按地理位置',
+    name: 'Theo vị trí địa lý',
     icon: '🌍',
-    description: '根据用户的地理位置，将请求路由到最近的数据中心，减少网络延迟。',
+    description: 'Dựa vào vị trí địa lý của user, route request về data center gần nhất để giảm độ trễ mạng.',
     useCases: [
-      '全球化的应用服务',
-      '对延迟敏感的应用（游戏、金融交易）',
-      'CDN与源站之间的智能路由'
+      'Dịch vụ ứng dụng toàn cầu',
+      'Ứng dụng nhạy cảm với độ trễ (game, giao dịch tài chính)',
+      'Routing thông minh giữa CDN và origin'
     ]
   }
 ]
@@ -224,7 +224,7 @@ const weightedServers = ref([
   {
     id: 1,
     name: 'Server 1',
-    specs: '8核 32GB SSD',
+    specs: '8 core 32GB SSD',
     ip: '10.0.1.10',
     weight: 5,
     status: 'healthy'
@@ -232,7 +232,7 @@ const weightedServers = ref([
   {
     id: 2,
     name: 'Server 2',
-    specs: '4核 16GB SSD',
+    specs: '4 core 16GB SSD',
     ip: '10.0.1.11',
     weight: 3,
     status: 'healthy'
@@ -240,7 +240,7 @@ const weightedServers = ref([
   {
     id: 3,
     name: 'Server 3',
-    specs: '2核 8GB HDD',
+    specs: '2 core 8GB HDD',
     ip: '10.0.1.12',
     weight: 2,
     status: 'healthy'
@@ -261,7 +261,7 @@ const getWeightColor = (index) => {
   return colors[index % colors.length]
 }
 
-// 流量流动画
+// Animation luồng traffic
 const trafficFlows = ref([])
 
 const generateTrafficFlows = () => {
@@ -272,40 +272,40 @@ const generateTrafficFlows = () => {
   }))
 }
 
-// 目标服务器计算
+// Tính server đích
 const isTargetServer = (serverId) => {
-  // 模拟根据权重选择
+  // Mô phỏng chọn server theo trọng số
   const server = weightedServers.value.find(s => s.id === serverId)
   if (!server) return false
   return server.weight >= 4
 }
 
-// 根据策略调整服务器规格和权重
+// Cập nhật cấu hình và trọng số theo chiến lược
 const updateServersByStrategy = () => {
   if (currentStrategy.value === 'performance') {
     weightedServers.value = [
-      { id: 1, name: 'Server 1', specs: '16核 64GB NVMe', ip: '10.0.1.10', weight: 8, status: 'healthy' },
-      { id: 2, name: 'Server 2', specs: '8核 32GB SSD', ip: '10.0.1.11', weight: 4, status: 'healthy' },
-      { id: 3, name: 'Server 3', specs: '4核 16GB SSD', ip: '10.0.1.12', weight: 2, status: 'healthy' }
+      { id: 1, name: 'Server 1', specs: '16 core 64GB NVMe', ip: '10.0.1.10', weight: 8, status: 'healthy' },
+      { id: 2, name: 'Server 2', specs: '8 core 32GB SSD', ip: '10.0.1.11', weight: 4, status: 'healthy' },
+      { id: 3, name: 'Server 3', specs: '4 core 16GB SSD', ip: '10.0.1.12', weight: 2, status: 'healthy' }
     ]
   } else if (currentStrategy.value === 'cost') {
     weightedServers.value = [
-      { id: 1, name: 'Server 1', specs: '预留实例 (低成本)', ip: '10.0.1.10', weight: 7, status: 'healthy' },
-      { id: 2, name: 'Server 2', specs: '预留实例 (低成本)', ip: '10.0.1.11', weight: 7, status: 'healthy' },
-      { id: 3, name: 'Server 3', specs: '按需实例 (高成本)', ip: '10.0.1.12', weight: 2, status: 'healthy' }
+      { id: 1, name: 'Server 1', specs: 'Reserved instance (chi phí thấp)', ip: '10.0.1.10', weight: 7, status: 'healthy' },
+      { id: 2, name: 'Server 2', specs: 'Reserved instance (chi phí thấp)', ip: '10.0.1.11', weight: 7, status: 'healthy' },
+      { id: 3, name: 'Server 3', specs: 'On-demand instance (chi phí cao)', ip: '10.0.1.12', weight: 2, status: 'healthy' }
     ]
   } else if (currentStrategy.value === 'geo') {
     weightedServers.value = [
-      { id: 1, name: '北京节点', specs: '服务华北用户', ip: '10.0.1.10', weight: 5, status: 'healthy' },
-      { id: 2, name: '上海节点', specs: '服务华东用户', ip: '10.0.1.11', weight: 5, status: 'healthy' },
-      { id: 3, name: '广州节点', specs: '服务华南用户', ip: '10.0.1.12', weight: 5, status: 'healthy' }
+      { id: 1, name: 'Node Hà Nội', specs: 'Phục vụ user miền Bắc', ip: '10.0.1.10', weight: 5, status: 'healthy' },
+      { id: 2, name: 'Node Đà Nẵng', specs: 'Phục vụ user miền Trung', ip: '10.0.1.11', weight: 5, status: 'healthy' },
+      { id: 3, name: 'Node TP HCM', specs: 'Phục vụ user miền Nam', ip: '10.0.1.12', weight: 5, status: 'healthy' }
     ]
   }
 }
 
 onMounted(() => {
   generateTrafficFlows()
-  // 监听策略变化更新服务器
+  // Lắng nghe thay đổi chiến lược để cập nhật server
   watch(currentStrategy, () => {
     updateServersByStrategy()
   }, { immediate: true })

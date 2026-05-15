@@ -1,21 +1,21 @@
 <!--
   RateLimitingDemo.vue
-  限流算法 - 令牌桶/漏桶/滑动窗口
+  Thuật toán rate limit - Token bucket/Leaky bucket/Sliding window
 -->
 <template>
   <div class="rate-limiting-demo">
     <div class="header">
       <div class="title">
-        ⚡ 限流算法：系统不会被"流量洪水"冲垮的秘诀
+        ⚡ Thuật toán rate limit: bí quyết để hệ thống không bị "lũ traffic" cuốn trôi
       </div>
       <div class="subtitle">
-        想象成水坝的闸门——控制水流速度，防止下游被淹没
+        Hãy hình dung như cửa xả của đập nước — điều tiết tốc độ dòng chảy, tránh hạ lưu bị ngập
       </div>
     </div>
 
     <div class="algorithm-selector">
       <div class="selector-title">
-        选择限流算法
+        Chọn thuật toán rate limit
       </div>
       <div class="algorithm-tabs">
         <button
@@ -41,18 +41,18 @@
             :disabled="isSimulating"
             @click="toggleSimulation"
           >
-            {{ isSimulating ? '模拟中...' : '▶ 开始模拟' }}
+            {{ isSimulating ? 'Đang mô phỏng...' : '▶ Bắt đầu mô phỏng' }}
           </button>
           <button
             class="control-btn reset"
             @click="resetSimulation"
           >
-            ↺ 重置
+            ↺ Reset
           </button>
         </div>
       </div>
 
-      <!-- 令牌桶可视化 -->
+      <!-- Trực quan hoá token bucket -->
       <div
         v-if="currentAlgo === 'token'"
         class="token-bucket-vis"
@@ -60,7 +60,7 @@
         <div class="bucket-container">
           <div class="bucket">
             <div class="bucket-label">
-              令牌桶
+              Token bucket
             </div>
             <div class="tokens-area">
               <div
@@ -73,12 +73,12 @@
               </div>
             </div>
             <div class="bucket-capacity">
-              {{ bucketState.tokens }} / {{ bucketState.capacity }} 令牌
+              {{ bucketState.tokens }} / {{ bucketState.capacity }} token
             </div>
           </div>
           <div class="token-producer">
             <div class="producer-label">
-              ⏰ 令牌产生器 ({{ bucketState.rate }}/秒)
+              ⏰ Bộ sinh token ({{ bucketState.rate }}/giây)
             </div>
             <div class="producer-stream">
               <div
@@ -94,7 +94,7 @@
         </div>
         <div class="requests-queue">
           <div class="queue-title">
-            📥 请求队列
+            📥 Hàng đợi request
           </div>
           <div class="requests">
             <div
@@ -111,7 +111,7 @@
         </div>
       </div>
 
-      <!-- 漏桶可视化 -->
+      <!-- Trực quan hoá leaky bucket -->
       <div
         v-if="currentAlgo === 'leaky'"
         class="leaky-bucket-vis"
@@ -119,7 +119,7 @@
         <div class="leaky-container">
           <div class="leaky-bucket">
             <div class="bucket-label">
-              漏桶
+              Leaky bucket
             </div>
             <div class="bucket-content">
               <div
@@ -128,7 +128,7 @@
               />
             </div>
             <div class="bucket-stats">
-              {{ leakyState.current }} / {{ leakyState.capacity }} 请求
+              {{ leakyState.current }} / {{ leakyState.capacity }} request
             </div>
           </div>
           <div class="leak-hole">
@@ -136,34 +136,34 @@
               🔘
             </div>
             <div class="leak-rate">
-              ⏱️ 流出速率: {{ leakyState.rate }}/秒
+              ⏱️ Tốc độ chảy ra: {{ leakyState.rate }}/giây
             </div>
           </div>
         </div>
         <div class="leaky-legend">
           <div class="legend-item">
             <span class="legend-color water" />
-            <span>桶内请求（排队中）</span>
+            <span>Request trong bucket (đang chờ)</span>
           </div>
           <div class="legend-item">
             <span class="legend-color hole" />
-            <span>匀速流出（处理中）</span>
+            <span>Chảy ra đều (đang xử lý)</span>
           </div>
           <div class="legend-item">
             <span class="legend-color overflow" />
-            <span>桶满溢出（被拒绝）</span>
+            <span>Bucket đầy, tràn ra (bị từ chối)</span>
           </div>
         </div>
       </div>
 
-      <!-- 滑动窗口可视化 -->
+      <!-- Trực quan hoá sliding window -->
       <div
         v-if="currentAlgo === 'sliding'"
         class="sliding-window-vis"
       >
         <div class="window-container">
           <div class="window-label">
-            ⏰ 时间窗口（过去1分钟）
+            ⏰ Khung thời gian (1 phút trước)
           </div>
           <div class="window-timeline">
             <div class="time-marks">
@@ -189,15 +189,15 @@
           </div>
           <div class="window-stats">
             <div class="stat">
-              <span class="stat-label">当前窗口请求数:</span>
+              <span class="stat-label">Số request trong khung hiện tại:</span>
               <span class="stat-value">{{ slidingWindow.totalRequests }}</span>
             </div>
             <div class="stat">
-              <span class="stat-label">限流阈值:</span>
-              <span class="stat-value">{{ slidingWindow.limit }}/分钟</span>
+              <span class="stat-label">Ngưỡng rate limit:</span>
+              <span class="stat-value">{{ slidingWindow.limit }}/phút</span>
             </div>
             <div class="stat">
-              <span class="stat-label">剩余额度:</span>
+              <span class="stat-label">Quota còn lại:</span>
               <span
                 class="stat-value"
                 :class="{ warning: slidingWindow.remaining < 20 }"
@@ -210,57 +210,57 @@
 
     <div class="comparison-section">
       <div class="section-title">
-        📊 三种算法对比
+        📊 So sánh ba thuật toán
       </div>
       <table class="comparison-table">
         <thead>
           <tr>
-            <th>维度</th>
-            <th>令牌桶 (Token Bucket)</th>
-            <th>漏桶 (Leaky Bucket)</th>
-            <th>滑动窗口 (Sliding Window)</th>
+            <th>Tiêu chí</th>
+            <th>Token Bucket</th>
+            <th>Leaky Bucket</th>
+            <th>Sliding Window</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="dim">
-              核心思想
+              Ý tưởng cốt lõi
             </td>
-            <td>桶里装令牌，有令牌才能通过</td>
-            <td>请求进桶，匀速流出处理</td>
-            <td>统计时间窗口内的请求数</td>
+            <td>Bucket chứa token, có token mới được đi qua</td>
+            <td>Request vào bucket, chảy ra đều để xử lý</td>
+            <td>Thống kê số request trong khung thời gian</td>
           </tr>
           <tr>
             <td class="dim">
-              突发流量
+              Lưu lượng burst
             </td>
-            <td>✅ 允许一定程度的突发（桶里有令牌）</td>
-            <td>❌ 强制平滑，突发会被缓存或拒绝</td>
-            <td>❌ 严格按窗口计数，超出一律拒绝</td>
+            <td>✅ Cho phép burst ở mức nhất định (khi bucket có token)</td>
+            <td>❌ Bắt buộc mượt, burst sẽ bị buffer hoặc từ chối</td>
+            <td>❌ Đếm chặt theo khung, vượt là từ chối hết</td>
           </tr>
           <tr>
             <td class="dim">
-              适用场景
+              Tình huống áp dụng
             </td>
-            <td>API 限流、带宽控制（允许突发）</td>
-            <td>需要严格匀速处理的场景（如消息队列）</td>
-            <td>精确统计（如"1分钟内最多100次"）</td>
+            <td>Rate limit API, kiểm soát băng thông (cho phép burst)</td>
+            <td>Cần xử lý đều tuyệt đối (như message queue)</td>
+            <td>Thống kê chính xác (ví dụ "tối đa 100 lần trong 1 phút")</td>
           </tr>
           <tr>
             <td class="dim">
-              实现复杂度
+              Độ phức tạp triển khai
             </td>
-            <td>中等</td>
-            <td>中等</td>
-            <td>较高（需要记录每个时间窗口的请求）</td>
+            <td>Trung bình</td>
+            <td>Trung bình</td>
+            <td>Khá cao (cần ghi lại request từng khung thời gian)</td>
           </tr>
           <tr>
             <td class="dim">
-              Nginx 配置
+              Cấu hình Nginx
             </td>
-            <td>limit_req_zone (漏桶)</td>
-            <td>limit_req_zone (漏桶)</td>
-            <td>需第三方模块或 Lua</td>
+            <td>limit_req_zone (leaky bucket)</td>
+            <td>limit_req_zone (leaky bucket)</td>
+            <td>Cần module bên thứ ba hoặc Lua</td>
           </tr>
         </tbody>
       </table>
@@ -268,7 +268,7 @@
 
     <div class="nginx-config">
       <div class="config-title">
-        📝 Nginx 限流配置示例
+        📝 Ví dụ cấu hình rate limit Nginx
       </div>
       <div class="config-tabs">
         <button
@@ -283,7 +283,7 @@
       <pre class="config-code"><code>{{ currentNginxConfig.code }}</code></pre>
       <div class="config-explanation">
         <div class="exp-title">
-          💡 配置说明
+          💡 Giải thích cấu hình
         </div>
         <ul>
           <li
@@ -309,26 +309,26 @@ const algorithms = [
   {
     id: 'token',
     icon: '🪙',
-    name: '令牌桶',
-    visualTitle: '🪙 令牌桶算法可视化'
+    name: 'Token bucket',
+    visualTitle: '🪙 Trực quan hoá thuật toán Token bucket'
   },
   {
     id: 'leaky',
     icon: '🚿',
-    name: '漏桶',
-    visualTitle: '🚿 漏桶算法可视化'
+    name: 'Leaky bucket',
+    visualTitle: '🚿 Trực quan hoá thuật toán Leaky bucket'
   },
   {
     id: 'sliding',
     icon: '📊',
-    name: '滑动窗口',
-    visualTitle: '📊 滑动窗口算法可视化'
+    name: 'Sliding window',
+    visualTitle: '📊 Trực quan hoá thuật toán Sliding window'
   }
 ]
 
 const currentAlgoData = computed(() => algorithms.find(a => a.id === currentAlgo.value))
 
-// 令牌桶状态
+// Trạng thái token bucket
 const bucketState = reactive({
   tokens: 5,
   capacity: 10,
@@ -336,17 +336,17 @@ const bucketState = reactive({
   totalRequests: 0
 })
 
-// 请求队列
+// Hàng đợi request
 const requestQueue = ref([])
 
-// 漏桶状态
+// Trạng thái leaky bucket
 const leakyState = reactive({
   current: 3,
   capacity: 8,
   rate: 1
 })
 
-// 滑动窗口状态
+// Trạng thái sliding window
 const slidingWindow = reactive({
   slots: Array(12).fill(0).map(() => ({ count: Math.floor(Math.random() * 10) })),
   currentSlot: 11,
@@ -360,11 +360,11 @@ const currentConfig = ref('basic')
 const nginxConfigs = [
   {
     id: 'basic',
-    name: '基础限流',
-    code: `# 定义限流区域
-# $binary_remote_addr: 按 IP 限流
-# zone=mylimit:10m: 区域名称和大小
-# rate=10r/s: 每秒最多10个请求
+    name: 'Rate limit cơ bản',
+    code: `# Định nghĩa zone rate limit
+# $binary_remote_addr: rate limit theo IP
+# zone=mylimit:10m: tên và kích thước zone
+# rate=10r/s: tối đa 10 request mỗi giây
 limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;
 
 server {
@@ -372,28 +372,28 @@ server {
     server_name api.example.com;
 
     location / {
-        # 应用限流
-        # burst=20: 桶容量，允许突发20个请求
-        # nodelay: 不延迟处理突发请求
+        # Áp rate limit
+        # burst=20: dung lượng bucket, cho phép 20 request burst
+        # nodelay: không delay request burst
         limit_req zone=mylimit burst=20 nodelay;
 
         proxy_pass http://backend;
     }
 }`,
     explanation: [
-      'limit_req_zone: 在 http 块中定义限流区域',
-      '$binary_remote_addr: 使用二进制 IP 地址作为限流键（省内存）',
-      'zone=mylimit:10m: 区域名称 mylimit，分配 10MB 内存',
-      'rate=10r/s: 每秒允许 10 个请求（漏桶算法）',
-      'burst=20: 桶的容量为 20，允许一定程度的突发流量',
-      'nodelay: 不延迟处理突发请求（立即处理或拒绝）'
+      'limit_req_zone: định nghĩa zone rate limit trong khối http',
+      '$binary_remote_addr: dùng IP nhị phân làm key rate limit (tiết kiệm memory)',
+      'zone=mylimit:10m: zone tên mylimit, cấp 10MB memory',
+      'rate=10r/s: cho phép 10 request mỗi giây (thuật toán leaky bucket)',
+      'burst=20: bucket có dung lượng 20, cho phép một mức burst nhất định',
+      'nodelay: không delay request burst (xử lý ngay hoặc từ chối ngay)'
     ]
   },
   {
     id: 'connection',
-    name: '连接数限制',
-    code: `# 限制并发连接数
-# zone=addr:10m: 区域名称为 addr，大小 10MB
+    name: 'Giới hạn số connection',
+    code: `# Giới hạn số connection đồng thời
+# zone=addr:10m: zone tên addr, kích thước 10MB
 limit_conn_zone $binary_remote_addr zone=addr:10m;
 
 server {
@@ -401,33 +401,33 @@ server {
     server_name download.example.com;
 
     location / {
-        # 每个 IP 最多 5 个并发连接
+        # Mỗi IP tối đa 5 connection đồng thời
         limit_conn addr 5;
 
-        # 同时应用限流：每秒 1 个请求
+        # Áp luôn rate limit: 1 request mỗi giây
         limit_req zone=mylimit rate=1r/s;
 
         proxy_pass http://fileserver;
     }
 }`,
     explanation: [
-      'limit_conn_zone: 定义连接数限制区域',
-      'limit_conn addr 5: 每个 IP 最多同时保持 5 个连接',
-      '适用于文件下载、视频流媒体等长连接场景',
-      '可以和 limit_req 同时使用（双重保护）',
-      '超过连接数限制时返回 503 Service Unavailable'
+      'limit_conn_zone: định nghĩa zone giới hạn connection',
+      'limit_conn addr 5: mỗi IP giữ tối đa 5 connection đồng thời',
+      'Phù hợp cho download file, video streaming và các long connection khác',
+      'Có thể dùng cùng limit_req (bảo vệ kép)',
+      'Vượt giới hạn connection sẽ trả 503 Service Unavailable'
     ]
   },
   {
     id: 'whiteblack',
-    name: '黑白名单',
-    code: `# 白名单 + 限流组合
-# 公司内网 IP 不限流
+    name: 'Whitelist & blacklist',
+    code: `# Kết hợp whitelist + rate limit
+# IP nội bộ công ty không bị rate limit
 geo $limit {
     default 1;
-    10.0.0.0/8 0;     # 内网网段
-    172.16.0.0/12 0;  # 内网网段
-    192.168.0.0/16 0; # 内网网段
+    10.0.0.0/8 0;     # Dải IP nội bộ
+    172.16.0.0/12 0;  # Dải IP nội bộ
+    192.168.0.0/16 0; # Dải IP nội bộ
 }
 
 map $limit $limit_key {
@@ -435,7 +435,7 @@ map $limit $limit_key {
     1 $binary_remote_addr;
 }
 
-# 只有外网 IP 会触发限流
+# Chỉ IP bên ngoài mới bị rate limit
 limit_req_zone $limit_key zone=sensitive:10m rate=1r/s;
 
 server {
@@ -443,10 +443,10 @@ server {
     server_name api.example.com;
 
     location /admin {
-        # 管理后台严格限流
+        # Rate limit nghiêm ngặt cho admin panel
         limit_req zone=sensitive burst=5 nodelay;
 
-        # 拒绝特定 IP
+        # Chặn IP cụ thể
         deny 1.2.3.4;
         deny 5.6.7.8;
 
@@ -454,12 +454,12 @@ server {
     }
 }`,
     explanation: [
-      'geo 模块：根据 IP 地址设置变量值',
-      '内网 IP 设置为 0，外网 IP 默认为 1',
-      'map 模块：将 0 映射为空字符串（不限流），1 映射为 IP 地址',
-      '只有外网 IP 会被限流，内网访问畅通无阻',
-      'deny 指令：直接拒绝特定 IP 访问',
-      '适用于管理后台、敏感接口的安全防护'
+      'Module geo: gán giá trị biến theo địa chỉ IP',
+      'IP nội bộ đặt là 0, IP bên ngoài mặc định là 1',
+      'Module map: map 0 thành chuỗi rỗng (không rate limit), 1 thành IP',
+      'Chỉ IP bên ngoài bị rate limit, truy cập nội bộ thông suốt',
+      'Lệnh deny: chặn thẳng IP cụ thể',
+      'Phù hợp bảo vệ admin panel, API nhạy cảm'
     ]
   }
 ]
@@ -469,7 +469,7 @@ const currentNginxConfig = computed(() => nginxConfigs.find(c => c.id === curren
 const toggleSimulation = async () => {
   isSimulating.value = true
 
-  // 模拟产生请求
+  // Mô phỏng sinh request
   for (let i = 0; i < 5; i++) {
     await new Promise(resolve => setTimeout(resolve, 800))
 
@@ -485,12 +485,12 @@ const toggleSimulation = async () => {
 
     requestQueue.value.unshift(newRequest)
 
-    // 模拟处理
+    // Mô phỏng xử lý
     setTimeout(() => {
       const req = requestQueue.value.find(r => r.id === newRequest.id)
       if (req) {
         if (currentAlgo.value === 'token') {
-          // 令牌桶逻辑
+          // Logic token bucket
           if (bucketState.tokens > 0) {
             bucketState.tokens--
             req.status = 'allowed'
@@ -695,7 +695,7 @@ onUnmounted(() => {
   border: 1px solid var(--vp-c-divider);
 }
 
-/* 令牌桶可视化 */
+/* Token bucket visualization */
 .token-bucket-vis {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -849,7 +849,7 @@ onUnmounted(() => {
   font-size: 1.1rem;
 }
 
-/* 漏桶可视化 */
+/* Leaky bucket visualization */
 .leaky-bucket-vis {
   display: flex;
   flex-direction: column;
@@ -942,7 +942,7 @@ onUnmounted(() => {
   background: #ef4444;
 }
 
-/* 滑动窗口可视化 */
+/* Sliding window visualization */
 .sliding-window-vis {
   padding: 0.75rem;
 }

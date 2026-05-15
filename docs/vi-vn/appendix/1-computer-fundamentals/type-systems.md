@@ -108,7 +108,7 @@ Chiều phân loại thứ hai là **mức độ nghiêm ngặt của chuyển �
 
 ## 4. Suy diễn kiểu: Giải pháp kết hợp tốt nhất của thời đại hiện đại
 
-Các ngôn ngữ kiểu tĩnh sơ khai (như Java) yêu cầu bạn tường minh khai báo kiểu của mỗi biến, viết rất啰嗦. Ngôn ngữ hiện đại giải quyết vấn đề này thông qua **suy diễn kiểu**—trình biên dịch tự động suy ra kiểu, bạn không cần viết, nhưng nó giúp bạn kiểm tra chặt chẽ.
+Các ngôn ngữ kiểu tĩnh sơ khai (như Java) yêu cầu bạn tường minh khai báo kiểu của mỗi biến, viết rất rườm rà. Ngôn ngữ hiện đại giải quyết vấn đề này thông qua **suy diễn kiểu**—trình biên dịch tự động suy ra kiểu, bạn không cần viết, nhưng nó giúp bạn kiểm tra chặt chẽ.
 
 <TypeInferenceFlowDemo />
 

@@ -590,7 +590,7 @@ Có thể! Superpowers là mã nguồn mở, bạn có thể:
 
 - [obra/superpowers GitHub](https://github.com/obra/superpowers) - Kho chính thức (50,000+ ⭐)
 - [Hướng Dẫn Chi Tiết Sử Dụng Superpowers](https://www.cnblogs.com/gyc567/p/19510203) - Hướng dẫn chi tiết tiếng Trung
-- [Hướng Dẫn Cấu Hình Môi Trường Superpowers](https://m.blog.csdn.net/gitblog_00683/article/details/144768992) - Hướng dẫn cấu hình
+- [Hướng Dẫn Cấu Hình Môi Trường Superpowers (tiếng Trung)](https://m.blog.csdn.net/gitblog_00683/article/details/144768992) - Hướng dẫn cấu hình
 
 ### Tài Nguyên Cộng Đồng
 
@@ -601,9 +601,9 @@ Có thể! Superpowers là mã nguồn mở, bạn có thể:
 
 ### Bài Viết Liên Quan
 
-- [Tạm Biệt Vibe Coding! Dùng Superpowers Để Claude Code Viết Mã Mức Công Nghiệp](https://juejin.cn/post/7593573617648123956)
-- [Cách Tôi Dùng Superpowers MCP Để Buộc Claude Code Lập Kế Hoạch Trước Khi Viết Mã](https://juejin.cn/post/7570341520551673871)
-- [Hướng Dẫn Nhập Môn Claude Code + Superpowers Cơ Bản Nhất](https://juejin.cn/post/7594832320030638123)
+- [Tạm Biệt Vibe Coding! Dùng Superpowers Để Claude Code Viết Mã Mức Công Nghiệp (tiếng Trung)](https://juejin.cn/post/7593573617648123956)
+- [Cách Tôi Dùng Superpowers MCP Để Buộc Claude Code Lập Kế Hoạch Trước Khi Viết Mã (tiếng Trung)](https://juejin.cn/post/7570341520551673871)
+- [Hướng Dẫn Nhập Môn Claude Code + Superpowers Cơ Bản Nhất (tiếng Trung)](https://juejin.cn/post/7594832320030638123)
 
 ---
 

@@ -37,7 +37,7 @@ Sản phẩm mà bạn sẽ xây dựng là một nền tảng agent kiểu Dify
 Backend cần hỗ trợ các khả năng cốt lõi sau: quản lý agent, quản lý phiên, lưu trữ tin nhắn, gọi mô hình, ghi nhật ký gọi, tiếp cận thư viện kiến thức.
 
 ::: tip Lối vào PRD
-Tài liệu yêu cầu của dự án này có trên GitHub：[Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/custom-dify-agent-platform/PRD.md)
+Tài liệu yêu cầu của dự án này có trên GitHub：[Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/custom-dify-agent-platform/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

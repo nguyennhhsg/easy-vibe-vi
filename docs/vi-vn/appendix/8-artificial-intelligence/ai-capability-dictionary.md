@@ -48,7 +48,7 @@ Xét từ góc độ **độ chính xác và chi phí** tối ưu tuyệt đối
 > - Dòng OpenAI: GPT-4, GPT-4.1, GPT-4o, GPT-5.1, v.v.
 > - Dòng Google: Gemini 1.5 Pro, Gemini 1.5 Flash, v.v.
 > - Dòng Anthropic: Claude 3.5 Sonnet, Claude 3.5 Haiku, v.v.
-> - Các mô hình trong nước (Trung Quốc): Qwen series, ERNIE Bot series, GLM/智谱清言, Tencent Hunyuan, 讯飞星火, mô hình lớn đằng sau Kimi của 月之暗面, MiniMax MiniMax-M2.7 series, v.v.
+> - Các mô hình trong nước (Trung Quốc): Qwen series, ERNIE Bot series, GLM / Zhipu Qingyan (智谱清言), iFlytek Spark (讯飞星火), mô hình lớn đằng sau Kimi của Moonshot AI (月之暗面), MiniMax MiniMax-M2.7 series, v.v.
 >
 > Các mô hình lớn và dịch vụ thiên về hình ảnh và video, bao gồm:
 >
@@ -58,7 +58,7 @@ Xét từ góc độ **độ chính xác và chi phí** tối ưu tuyệt đối
 >
 > Các mô hình lớn về giọng nói và âm thanh, bao gồm:
 >
-> - Nhận dạng giọng nói ASR: Whisper series (Whisper, Whisper-large-v3, v.v.), Deepgram, các mô hình lớn ASR end-to-end của các nhà cung cấp cloud (như 讯飞, Baidu, 火山, Alibaba, v.v.)
+> - Nhận dạng giọng nói ASR: Whisper series (Whisper, Whisper-large-v3, v.v.), Deepgram, các mô hình lớn ASR end-to-end của các nhà cung cấp cloud (như iFlytek (讯飞), Baidu, Volcano Engine (火山), Alibaba, v.v.)
 > - Đa phương thức giọng nói và hội thoại giọng nói: GPT-4o (hội thoại giọng nói end-to-end), OpenAI Realtime, khả năng hiểu âm thanh của Gemini 1.5, v.v.
 > - TTS / Tạo âm thanh và âm nhạc: OpenAI TTS, ElevenLabs, Suno, Udio, MusicGen, v.v.
 >
@@ -2377,7 +2377,7 @@ Dự đoán cấu trúc protein là một trong những đột phá tiêu biểu
 
 Trong **dự đoán cấu trúc monomer**, quy trình điển hình bao gồm:
 
-1. **Mã hóa trình tự / MSA**: trích xuất đặc trưng trình tự và khai thác tín hiệu đồng tiến hóa qua đa trình tự đối齐.
+1. **Mã hóa trình tự / MSA**: trích xuất đặc trưng trình tự và khai thác tín hiệu đồng tiến hóa qua đa trình tự đối sánh (multiple sequence alignment).
 2. **Suy luận ràng buộc hình học**: dự đoán phân phối khoảng cách, xác suất tiếp xúc và hướng tương đối giữa các cặp dư lượng, tạo thành trường hình học dạng "đo giả".
 3. **Xây dựng cấu trúc và tinh chỉnh lặp**: dưới ràng buộc hình học, dùng module cấu trúc (như khối bất biến quay-tịnh tiến, cập nhật tọa độ nội) để xây dựng cấu trúc 3D, lặp nhiều vòng refinement để giảm vi phạm hình học.
 4. **Đánh giá độ không chắc chắn và chất lượng**: xuất độ tin cậy từng dư lượng (pLDDT), ước lượng sai số từng cặp dư lượng (PAE) và các chỉ số khác, cung cấp tham chiếu cho mô hình hóa và sàng lọc tiếp theo.

@@ -442,5 +442,5 @@ Nếu phải cho bạn một **SOP phổ quát**, thực chất chỉ có năm b
 
 # Tài Liệu Tham Khảo:
 
-- https://zhuanlan.zhihu.com/p/1889401120939567074
-- https://blog.csdn.net/2401_87407347/article/details/155193007
+- [Bài viết tham khảo trên Zhihu (tiếng Trung)](https://zhuanlan.zhihu.com/p/1889401120939567074)
+- [Bài viết tham khảo trên CSDN (tiếng Trung)](https://blog.csdn.net/2401_87407347/article/details/155193007)

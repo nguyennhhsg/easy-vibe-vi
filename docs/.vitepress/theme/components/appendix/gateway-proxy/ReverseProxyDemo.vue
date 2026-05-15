@@ -1,15 +1,15 @@
 <!--
   ReverseProxyDemo.vue
-  反向代理原理 - 正向代理 vs 反向代理
+  Nguyên lý reverse proxy - Forward proxy vs Reverse proxy
 -->
 <template>
   <div class="reverse-proxy-demo">
     <div class="header">
       <div class="title">
-        🔄 反向代理 vs 正向代理
+        🔄 Reverse proxy vs Forward proxy
       </div>
       <div class="subtitle">
-        一句话区分：正向代理是"客户端的代理"，反向代理是"服务器的代理"
+        Phân biệt một câu: forward proxy là "proxy của client", reverse proxy là "proxy của server"
       </div>
     </div>
 
@@ -18,13 +18,13 @@
         :class="['mode-btn', { active: mode === 'forward' }]"
         @click="mode = 'forward'"
       >
-        🔓 正向代理 (翻墙/隐藏身份)
+        🔓 Forward proxy (vượt tường lửa / ẩn danh)
       </button>
       <button
         :class="['mode-btn', { active: mode === 'reverse' }]"
         @click="mode = 'reverse'"
       >
-        🛡️ 反向代理 (负载均衡/安全防护)
+        🛡️ Reverse proxy (cân bằng tải / bảo mật)
       </button>
     </div>
 
@@ -38,7 +38,7 @@
             👤
           </div>
           <div class="label">
-            用户 (想翻墙)
+            User (muốn vượt tường lửa)
           </div>
         </div>
         <div class="arrow-box">
@@ -46,7 +46,7 @@
             →
           </div>
           <div class="note">
-            发给代理
+            Gửi tới proxy
           </div>
         </div>
         <div class="flow-card proxy forward">
@@ -54,10 +54,10 @@
             🔓
           </div>
           <div class="label">
-            正向代理 (VPN/SS)
+            Forward proxy (VPN/SS)
           </div>
           <div class="tag">
-            代理客户端
+            Proxy của client
           </div>
         </div>
         <div class="arrow-box">
@@ -65,7 +65,7 @@
             →
           </div>
           <div class="note">
-            转发请求
+            Forward request
           </div>
         </div>
         <div class="flow-card target">
@@ -73,7 +73,7 @@
             🌐
           </div>
           <div class="label">
-            目标网站 (Google)
+            Website đích (Google)
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@
             👤
           </div>
           <div class="label">
-            用户 (浏览器)
+            User (browser)
           </div>
         </div>
         <div class="arrow-box">
@@ -95,7 +95,7 @@
             →
           </div>
           <div class="note">
-            访问域名
+            Truy cập domain
           </div>
         </div>
         <div class="flow-card proxy reverse">
@@ -103,10 +103,10 @@
             🛡️
           </div>
           <div class="label">
-            反向代理 (Nginx)
+            Reverse proxy (Nginx)
           </div>
           <div class="tag">
-            代理服务器
+            Proxy của server
           </div>
         </div>
         <div class="arrow-box">
@@ -114,7 +114,7 @@
             →
           </div>
           <div class="note">
-            负载均衡
+            Cân bằng tải
           </div>
         </div>
         <div class="flow-card server">
@@ -122,7 +122,7 @@
             ⚙️
           </div>
           <div class="label">
-            后端服务器集群
+            Cluster server backend
           </div>
           <div class="sub-label">
             Web1 | Web2 | Web3
@@ -134,7 +134,7 @@
     <div class="detail-section">
       <div class="detail-card">
         <div class="detail-title">
-          {{ mode === 'forward' ? '🔓 正向代理特点' : '🛡️ 反向代理特点' }}
+          {{ mode === 'forward' ? '🔓 Đặc điểm forward proxy' : '🛡️ Đặc điểm reverse proxy' }}
         </div>
         <ul class="detail-list">
           <li
@@ -147,7 +147,7 @@
       </div>
       <div class="detail-card">
         <div class="detail-title">
-          💡 典型使用场景
+          💡 Tình huống sử dụng điển hình
         </div>
         <ul class="detail-list">
           <li
@@ -162,14 +162,14 @@
 
     <div class="memory-trick">
       <div class="trick-title">
-        🧠 记忆口诀
+        🧠 Mẹo nhớ
       </div>
       <div class="trick-content">
         <p v-if="mode === 'forward'">
-          <strong>"正向代理 = 代理客户端"</strong> —— 客户端知情，服务器只知道代理IP
+          <strong>"Forward proxy = proxy của client"</strong> — client biết về proxy, server chỉ biết IP của proxy
         </p>
         <p v-else>
-          <strong>"反向代理 = 代理服务器"</strong> —— 客户端不知道真实服务器，只知道域名
+          <strong>"Reverse proxy = proxy của server"</strong> — client không biết server thật, chỉ biết domain
         </p>
       </div>
     </div>
@@ -182,31 +182,31 @@ import { ref, computed } from 'vue'
 const mode = ref('reverse')
 
 const forwardFeatures = [
-  '客户端需要主动配置代理服务器地址',
-  '服务端只知道代理IP，不知道真实客户端IP',
-  '主要用于翻墙、隐藏身份、突破网络限制',
-  '典型代表：VPN、Shadowsocks、V2Ray'
+  'Client phải chủ động cấu hình địa chỉ proxy',
+  'Server chỉ thấy IP proxy, không biết IP client thật',
+  'Chủ yếu dùng để vượt tường lửa, ẩn danh, vượt rào mạng',
+  'Đại diện điển hình: VPN, Shadowsocks, V2Ray'
 ]
 
 const reverseFeatures = [
-  '客户端无感知，只需要访问域名',
-  '隐藏真实服务器架构，统一对外接口',
-  '提供负载均衡、安全防护、SSL卸载等功能',
-  '典型代表：Nginx、HAProxy、AWS ELB'
+  'Client không cần biết gì, chỉ cần truy cập domain',
+  'Ẩn kiến trúc server thật, thống nhất interface ra ngoài',
+  'Cung cấp cân bằng tải, bảo mật, SSL termination, v.v.',
+  'Đại diện điển hình: Nginx, HAProxy, AWS ELB'
 ]
 
 const forwardScenarios = [
-  '访问被屏蔽的网站（Google、YouTube）',
-  '隐藏真实IP地址，保护个人隐私',
-  '公司内部网络访问外部资源',
-  '爬虫程序使用代理池防止被封IP'
+  'Truy cập website bị chặn (Google, YouTube)',
+  'Ẩn IP thật, bảo vệ quyền riêng tư',
+  'Mạng nội bộ công ty truy cập tài nguyên bên ngoài',
+  'Chương trình crawler dùng proxy pool để tránh bị ban IP'
 ]
 
 const reverseScenarios = [
-  '网站需要承载高并发流量（负载均衡）',
-  '统一HTTPS证书管理（SSL卸载）',
-  '防护DDoS攻击和SQL注入',
-  '灰度发布、A/B测试、蓝绿部署'
+  'Website cần gánh lưu lượng đồng thời cao (cân bằng tải)',
+  'Quản lý chứng chỉ HTTPS thống nhất (SSL termination)',
+  'Phòng vệ tấn công DDoS và SQL injection',
+  'Canary release, A/B test, blue-green deployment'
 ]
 
 const currentFeatures = computed(() => mode.value === 'forward' ? forwardFeatures : reverseFeatures)

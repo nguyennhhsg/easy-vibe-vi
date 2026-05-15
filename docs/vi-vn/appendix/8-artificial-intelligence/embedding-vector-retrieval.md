@@ -181,8 +181,8 @@ Xem lại các điểm chính của chương này:
 
 ## Đọc thêm
 
-- [OpenAI Embeddings 文档](https://platform.openai.com/docs/guides/embeddings) - Hướng dẫn sử dụng mô hình nhúng chính thức
+- [OpenAI Embeddings Docs](https://platform.openai.com/docs/guides/embeddings) - Hướng dẫn sử dụng mô hình nhúng chính thức
 - [Pinecone Learning Center](https://www.pinecone.io/learn/) - Hướng dẫn hệ thống về cơ sở dữ liệu vector và tìm kiếm
 - [FAISS Wiki](https://github.com/facebookresearch/faiss/wiki) - Tài liệu thư viện tìm kiếm vector nguồn mở của Facebook
-- [Word2Vec 原始论文](https://arxiv.org/abs/1301.3781) - Công trình khai sáng kỷ nguyên Embedding
-- [MTEB 排行榜](https://huggingface.co/spaces/mteb/leaderboard) - Bảng xếp hạng so sánh hiệu suất mô hình nhúng
+- [Word2Vec Paper gốc](https://arxiv.org/abs/1301.3781) - Công trình khai sáng kỷ nguyên Embedding
+- [MTEB Leaderboard](https://huggingface.co/spaces/mteb/leaderboard) - Bảng xếp hạng so sánh hiệu suất mô hình nhúng

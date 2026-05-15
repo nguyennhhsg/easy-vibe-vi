@@ -1,15 +1,15 @@
 <!--
   AuthBasicsDemo.vue
-  鉴权基础：你到底在“传什么”来证明身份？
+  Cơ bản về phân quyền: bạn đang "truyền cái gì" để chứng minh danh tính?
 -->
 <template>
   <div class="auth-basics-demo">
     <div class="header">
       <div class="title">
-        🧰 鉴权的 4 种常见“凭证”
+        4 loại "credential" thường gặp trong phân quyền
       </div>
       <div class="subtitle">
-        选一个方案，看看请求长什么样、优缺点是什么、最常见坑是什么。
+        Chọn một phương án để xem request trông như thế nào, ưu/nhược điểm và những "bẫy" hay gặp.
       </div>
     </div>
 
@@ -29,7 +29,7 @@
     <div class="grid">
       <div class="card">
         <div class="card-title">
-          请求长什么样
+          Request trông như thế nào
         </div>
         <pre class="code"><code>{{ active.example }}</code></pre>
         <div class="hint">
@@ -39,12 +39,12 @@
 
       <div class="card">
         <div class="card-title">
-          什么时候用 / 不用
+          Khi nào nên dùng / không nên dùng
         </div>
         <div class="two">
           <div class="box">
             <div class="box-title">
-              ✅ 适合
+              Phù hợp
             </div>
             <ul class="list">
               <li
@@ -57,7 +57,7 @@
           </div>
           <div class="box">
             <div class="box-title">
-              ⚠️ 不适合 / 风险
+              Không phù hợp / Rủi ro
             </div>
             <ul class="list">
               <li
@@ -74,10 +74,10 @@
 
     <div class="card">
       <div class="card-title">
-        一句话口诀
+        Câu thần chú một dòng
       </div>
       <div class="desc">
-        <strong>先认证（你是谁）</strong>，再授权（你能做什么）。凭证只是“证明身份的方式”，授权永远要在服务端执行。
+        <strong>Xác thực trước (bạn là ai)</strong>, rồi cấp quyền (bạn có thể làm gì). Credential chỉ là "cách chứng minh danh tính", còn việc cấp quyền luôn phải thực hiện ở server.
       </div>
     </div>
   </div>
@@ -90,57 +90,57 @@ const methods = [
   {
     id: 'basic',
     name: 'HTTP Basic',
-    bestFor: '内部工具',
+    bestFor: 'Công cụ nội bộ',
     example: `GET /api/profile
 Authorization: Basic <base64(username:password)>`,
-    note: 'Base64 不是加密；必须配合 HTTPS，且不建议用于公网生产。',
-    pros: ['最简单，所有客户端都支持', '适合内部/临时调试工具'],
+    note: 'Base64 không phải mã hóa; bắt buộc dùng cùng HTTPS, và không khuyến nghị cho production công khai.',
+    pros: ['Đơn giản nhất, mọi client đều hỗ trợ', 'Phù hợp công cụ debug nội bộ/tạm thời'],
     cons: [
-      '每次请求都带密码（风险大）',
-      '无法“注销”（除非服务端改密码）',
-      '不适合现代业务'
+      'Mỗi request đều đính kèm password (rủi ro lớn)',
+      'Không thể "logout" (trừ khi server đổi mật khẩu)',
+      'Không phù hợp business hiện đại'
     ]
   },
   {
     id: 'cookie',
     name: 'Session + Cookie',
-    bestFor: '传统 Web',
+    bestFor: 'Web truyền thống',
     example: `POST /login
-→ 200 OK
+-> 200 OK
 Set-Cookie: session_id=abc; HttpOnly; Secure; SameSite=Lax
 
 GET /api/profile
 Cookie: session_id=abc`,
-    note: '浏览器会自动带 Cookie；因此一定要做 CSRF 防护（SameSite / CSRF Token）。',
-    pros: ['服务端可控（可主动注销）', '适合 SSR/同域 Web', '实现直观'],
-    cons: ['服务端有状态（需要共享 session）', '跨域复杂', '容易被 CSRF 影响']
+    note: 'Trình duyệt tự động đính kèm Cookie; do đó bắt buộc phải phòng chống CSRF (SameSite / CSRF Token).',
+    pros: ['Server kiểm soát được (có thể chủ động logout)', 'Phù hợp SSR/Web cùng domain', 'Triển khai trực quan'],
+    cons: ['Server có trạng thái (cần chia sẻ session)', 'Cross-domain phức tạp', 'Dễ bị ảnh hưởng bởi CSRF']
   },
   {
     id: 'jwt',
     name: 'JWT Bearer',
-    bestFor: 'API/移动端',
+    bestFor: 'API/Mobile',
     example: `POST /login
-→ { "access_token": "..." }
+-> { "access_token": "..." }
 
 GET /api/profile
 Authorization: Bearer <access_token>`,
-    note: 'JWT payload 可解码；不要放敏感信息。建议短 access token + refresh token。',
-    pros: ['无状态，易扩展', '跨域友好', '移动端/多服务常用'],
+    note: 'Payload của JWT có thể decode; đừng đặt thông tin nhạy cảm. Khuyến nghị access token ngắn + refresh token.',
+    pros: ['Stateless, dễ mở rộng', 'Thân thiện cross-domain', 'Hay dùng cho mobile/đa dịch vụ'],
     cons: [
-      '难以全局注销（需要额外机制）',
-      'token 变大，每次都要带',
-      '设计不好会导致权限失控'
+      'Khó logout toàn cục (cần cơ chế bổ sung)',
+      'Token to lên, mỗi request đều phải gửi',
+      'Thiết kế không tốt sẽ mất kiểm soát quyền hạn'
     ]
   },
   {
     id: 'apikey',
     name: 'API Key',
-    bestFor: '服务到服务',
+    bestFor: 'Service-to-service',
     example: `GET /api/metrics
 X-API-Key: <your_api_key>`,
-    note: 'API Key 更像“门禁卡”，要配合限流、IP 白名单、轮换、最小权限。',
-    pros: ['实现简单', '适合服务间/脚本访问', '易于轮换（如果设计得当）'],
-    cons: ['通常缺少用户上下文', '泄露后影响大', '需要做权限/轮换/审计']
+    note: 'API Key giống "thẻ ra vào", cần kết hợp rate limit, IP whitelist, xoay vòng, quyền tối thiểu.',
+    pros: ['Triển khai đơn giản', 'Phù hợp truy cập giữa service/script', 'Dễ xoay vòng (nếu thiết kế tốt)'],
+    cons: ['Thường thiếu user context', 'Lộ ra ảnh hưởng lớn', 'Cần quản lý quyền/xoay vòng/audit']
   }
 ]
 

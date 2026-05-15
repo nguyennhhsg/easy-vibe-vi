@@ -2,17 +2,17 @@
   <div class="auto-scaling-demo">
     <div class="header">
       <div class="title">
-        自动扩缩容
+        Auto scaling
       </div>
       <div class="subtitle">
-        基于CPU、内存、QPS的智能弹性伸缩
+        Co giãn linh hoạt thông minh dựa trên CPU, memory, QPS
       </div>
     </div>
 
-    <!-- 指标选择器 -->
+    <!-- Bộ chọn metric -->
     <div class="metric-selector">
       <div class="selector-label">
-        扩容指标：
+        Metric scale:
       </div>
       <div class="selector-buttons">
         <button
@@ -28,25 +28,25 @@
       </div>
     </div>
 
-    <!-- 监控仪表盘 -->
+    <!-- Dashboard giám sát -->
     <div class="monitoring-dashboard">
       <div class="dashboard-header">
-        <span class="dashboard-title">实时监控</span>
+        <span class="dashboard-title">Giám sát thời gian thực</span>
         <span class="refresh-indicator">
           <span class="live-dot" />
-          实时
+          Live
         </span>
       </div>
 
       <div class="metrics-grid">
-        <!-- CPU使用率 -->
+        <!-- CPU usage -->
         <div
           class="metric-card"
           :class="{ warning: cpuUsage > 70, danger: cpuUsage > 90 }"
         >
           <div class="metric-header">
             <span class="metric-icon">💻</span>
-            <span class="metric-name">CPU使用率</span>
+            <span class="metric-name">CPU usage</span>
           </div>
           <div class="metric-value">
             <span class="value-number">{{ cpuUsage }}</span>
@@ -59,19 +59,19 @@
             />
           </div>
           <div class="metric-threshold">
-            <span>扩容阈值: 70%</span>
-            <span>缩容阈值: 30%</span>
+            <span>Ngưỡng scale up: 70%</span>
+            <span>Ngưỡng scale down: 30%</span>
           </div>
         </div>
 
-        <!-- 内存使用率 -->
+        <!-- Memory usage -->
         <div
           class="metric-card"
           :class="{ warning: memoryUsage > 75, danger: memoryUsage > 90 }"
         >
           <div class="metric-header">
             <span class="metric-icon">🧠</span>
-            <span class="metric-name">内存使用率</span>
+            <span class="metric-name">Memory usage</span>
           </div>
           <div class="metric-value">
             <span class="value-number">{{ memoryUsage }}</span>
@@ -84,8 +84,8 @@
             />
           </div>
           <div class="metric-threshold">
-            <span>扩容阈值: 75%</span>
-            <span>缩容阈值: 40%</span>
+            <span>Ngưỡng scale up: 75%</span>
+            <span>Ngưỡng scale down: 40%</span>
           </div>
         </div>
 
@@ -113,25 +113,25 @@
             </svg>
           </div>
           <div class="metric-threshold">
-            <span>扩容阈值: 1000/s</span>
-            <span>目标: 800/s</span>
+            <span>Ngưỡng scale up: 1000/s</span>
+            <span>Mục tiêu: 800/s</span>
           </div>
         </div>
 
-        <!-- 实例数量 -->
+        <!-- Số instance -->
         <div class="metric-card instances">
           <div class="metric-header">
             <span class="metric-icon">🖥️</span>
-            <span class="metric-name">运行实例</span>
+            <span class="metric-name">Instance đang chạy</span>
           </div>
           <div class="instances-display">
             <div class="instance-count">
               <span class="count-number">{{ currentInstances }}</span>
-              <span class="count-label">个实例</span>
+              <span class="count-label">instance</span>
             </div>
             <div class="instance-range">
-              <span>最小: {{ minInstances }}</span>
-              <span>最大: {{ maxInstances }}</span>
+              <span>Min: {{ minInstances }}</span>
+              <span>Max: {{ maxInstances }}</span>
             </div>
           </div>
           <div class="instance-visual">
@@ -148,32 +148,32 @@
             v-if="scaleReason"
             class="scale-reason"
           >
-            <span class="reason-icon">{{ scaleReason.includes('扩容') ? '📈' : '📉' }}</span>
+            <span class="reason-icon">{{ scaleReason.includes('Scale up') ? '📈' : '📉' }}</span>
             <span class="reason-text">{{ scaleReason }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 扩缩容历史 -->
+    <!-- Lịch sử scale -->
     <div class="scaling-history">
       <div class="history-header">
-        <span class="history-title">扩缩容历史</span>
-        <span class="history-count">最近 5 次操作</span>
+        <span class="history-title">Lịch sử scale</span>
+        <span class="history-count">5 thao tác gần nhất</span>
       </div>
       <div class="history-list">
         <div
           v-for="(record, index) in scalingHistory"
           :key="index"
           class="history-item"
-          :class="{ scaleOut: record.type === '缩容' }"
+          :class="{ scaleOut: record.type === 'Scale down' }"
         >
           <div class="item-icon">
-            {{ record.type === '扩容' ? '📈' : '📉' }}
+            {{ record.type === 'Scale up' ? '📈' : '📉' }}
           </div>
           <div class="item-details">
             <div class="item-action">
-              {{ record.type }}: {{ record.from }} → {{ record.to }} 实例
+              {{ record.type }}: {{ record.from }} → {{ record.to }} instance
             </div>
             <div class="item-reason">
               {{ record.reason }}
@@ -186,10 +186,10 @@
       </div>
     </div>
 
-    <!-- 最佳实践 -->
+    <!-- Best practice -->
     <div class="best-practices">
       <div class="practices-title">
-        自动扩缩容最佳实践
+        Best practice cho auto scaling
       </div>
       <div class="practices-grid">
         <div class="practice-card">
@@ -197,10 +197,10 @@
             ⏱️
           </div>
           <div class="practice-title">
-            冷却时间
+            Cooldown
           </div>
           <div class="practice-desc">
-            设置适当的冷却时间（通常3-5分钟），避免扩缩容操作过于频繁导致的震荡
+            Đặt cooldown hợp lý (thường 3-5 phút) để tránh thao tác scale quá thường xuyên gây dao động
           </div>
         </div>
         <div class="practice-card">
@@ -208,10 +208,10 @@
             📊
           </div>
           <div class="practice-title">
-            多指标综合
+            Đa chỉ số tổng hợp
           </div>
           <div class="practice-desc">
-            不要依赖单一指标，结合CPU、内存、QPS、连接数等多维度进行综合判断
+            Đừng phụ thuộc một chỉ số đơn, hãy kết hợp CPU, memory, QPS, số connection và nhiều chiều khác để đánh giá tổng hợp
           </div>
         </div>
         <div class="practice-card">
@@ -219,10 +219,10 @@
             🎯
           </div>
           <div class="practice-title">
-            目标利用率
+            Mức sử dụng mục tiêu
           </div>
           <div class="practice-desc">
-            设置合理的资源目标利用率（如70%），预留足够的缓冲应对突发流量
+            Đặt mức sử dụng tài nguyên mục tiêu hợp lý (ví dụ 70%), chừa đủ buffer để đỡ traffic đột biến
           </div>
         </div>
         <div class="practice-card">
@@ -230,10 +230,10 @@
             ⚡
           </div>
           <div class="practice-title">
-            快速扩容
+            Scale up nhanh
           </div>
           <div class="practice-desc">
-            扩容操作应该比缩容更激进，确保系统能快速应对流量增长
+            Thao tác scale up nên quyết liệt hơn scale down, đảm bảo hệ thống đáp ứng nhanh khi traffic tăng
           </div>
         </div>
       </div>
@@ -255,15 +255,15 @@ const isScaling = ref(false)
 const scaleReason = ref('')
 
 const metrics = [
-  { key: 'cpu', name: 'CPU 使用率', icon: '💻' },
-  { key: 'memory', name: '内存使用率', icon: '🧠' },
+  { key: 'cpu', name: 'CPU usage', icon: '💻' },
+  { key: 'memory', name: 'Memory usage', icon: '🧠' },
   { key: 'qps', name: 'QPS', icon: '⚡' }
 ]
 
-// QPS 历史数据
+// Lịch sử QPS
 const qpsHistory = ref(Array(20).fill(650))
 
-// 计算 QPS 折线图的点
+// Tính điểm sparkline QPS
 const qpsSparklinePoints = computed(() => {
   const max = Math.max(...qpsHistory.value)
   const min = Math.min(...qpsHistory.value)
@@ -275,46 +275,46 @@ const qpsSparklinePoints = computed(() => {
   }).join(' ')
 })
 
-// 获取颜色
+// Lấy màu
 const getUsageColor = (usage) => {
   if (usage > 90) return '#ef4444'
   if (usage > 70) return '#f59e0b'
   return '#22c55e'
 }
 
-// 扩缩容历史
+// Lịch sử scale
 const scalingHistory = ref([
-  { type: '扩容', from: 2, to: 3, reason: 'CPU使用率超过70%', time: '10:23' },
-  { type: '缩容', from: 4, to: 3, reason: 'CPU使用率低于30%', time: '09:15' },
-  { type: '扩容', from: 3, to: 4, reason: 'QPS达到1000/s', time: '08:42' },
-  { type: '扩容', from: 2, to: 3, reason: '内存使用率超过75%', time: '07:30' },
-  { type: '缩容', from: 5, to: 4, reason: '流量下降', time: '06:20' }
+  { type: 'Scale up', from: 2, to: 3, reason: 'CPU vượt 70%', time: '10:23' },
+  { type: 'Scale down', from: 4, to: 3, reason: 'CPU dưới 30%', time: '09:15' },
+  { type: 'Scale up', from: 3, to: 4, reason: 'QPS đạt 1000/s', time: '08:42' },
+  { type: 'Scale up', from: 2, to: 3, reason: 'Memory vượt 75%', time: '07:30' },
+  { type: 'Scale down', from: 5, to: 4, reason: 'Lưu lượng giảm', time: '06:20' }
 ])
 
-// 模拟指标变化
+// Mô phỏng biến động chỉ số
 let simulationInterval
 const startSimulation = () => {
   simulationInterval = setInterval(() => {
-    // 模拟 CPU 波动
+    // Mô phỏng dao động CPU
     const cpuChange = (Math.random() - 0.5) * 10
     cpuUsage.value = Math.max(20, Math.min(95, cpuUsage.value + cpuChange))
 
-    // 模拟内存波动
+    // Mô phỏng dao động memory
     const memChange = (Math.random() - 0.5) * 8
     memoryUsage.value = Math.max(30, Math.min(90, memoryUsage.value + memChange))
 
-    // 模拟 QPS 波动
+    // Mô phỏng dao động QPS
     const qpsChange = Math.floor((Math.random() - 0.5) * 50)
     currentQPS.value = Math.max(200, Math.min(1200, currentQPS.value + qpsChange))
     qpsHistory.value.shift()
     qpsHistory.value.push(currentQPS.value)
 
-    // 根据指标触发扩缩容逻辑
+    // Trigger logic scale theo chỉ số
     checkScalingLogic()
   }, 2000)
 }
 
-// 检查扩缩容逻辑
+// Kiểm tra logic scale
 const checkScalingLogic = () => {
   if (isScaling.value) return
 
@@ -322,22 +322,22 @@ const checkScalingLogic = () => {
   let newCount = currentInstances.value
   let reason = ''
 
-  // 扩容检查
+  // Kiểm tra scale up
   if (cpuUsage.value > 75 || memoryUsage.value > 75 || currentQPS.value > 900) {
     if (currentInstances.value < maxInstances.value) {
       shouldScale = true
       newCount = currentInstances.value + 1
-      if (cpuUsage.value > 75) reason = 'CPU使用率超过75%'
-      else if (memoryUsage.value > 75) reason = '内存使用率超过75%'
-      else reason = 'QPS超过900/s'
+      if (cpuUsage.value > 75) reason = 'CPU vượt 75%'
+      else if (memoryUsage.value > 75) reason = 'Memory vượt 75%'
+      else reason = 'QPS vượt 900/s'
     }
   }
-  // 缩容检查
+  // Kiểm tra scale down
   else if (cpuUsage.value < 35 && memoryUsage.value < 40 && currentQPS.value < 400) {
     if (currentInstances.value > minInstances.value) {
       shouldScale = true
       newCount = currentInstances.value - 1
-      reason = '资源使用率低于阈值'
+      reason = 'Mức sử dụng tài nguyên dưới ngưỡng'
     }
   }
 
@@ -346,23 +346,23 @@ const checkScalingLogic = () => {
   }
 }
 
-// 触发扩缩容
+// Trigger scale
 const triggerScaling = (newCount, reason) => {
   isScaling.value = true
-  scaleReason.value = `${newCount > currentInstances.value ? '扩容' : '缩容'}中: ${reason}`
+  scaleReason.value = `${newCount > currentInstances.value ? 'Scale up' : 'Scale down'}: ${reason}`
 
   setTimeout(() => {
     currentInstances.value = newCount
     isScaling.value = false
     scaleReason.value = ''
 
-    // 添加到历史
+    // Thêm vào lịch sử
     scalingHistory.value.unshift({
-      type: newCount > currentInstances.value ? '扩容' : '缩容',
+      type: newCount > currentInstances.value ? 'Scale up' : 'Scale down',
       from: newCount > currentInstances.value ? newCount - 1 : newCount + 1,
       to: newCount,
       reason,
-      time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+      time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
     })
     scalingHistory.value = scalingHistory.value.slice(0, 5)
   }, 3000)

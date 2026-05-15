@@ -28,7 +28,7 @@ const topicPool = {
     { title: 'Giải thích thông minh nhật ký cảm xúc', desc: 'Phân tích nhật ký cảm xúc, phát hiện quy luật cảm xúc, đưa ra cái nhìn sâu sắc ấm áp và lời khuyên' }
   ],
   'entertainment': [
-    { title: 'DM kịch본 sát nhân bí ẩn đắm chìm', desc: 'Đóng vai quản lý kịch本 sát nhân bí ẩn, tạo tâm trạng bí ẩn, thúc đẩy phát triển cốt truyện' },
+    { title: 'DM kịch본 sát nhân bí ẩn đắm chìm', desc: 'Đóng vai quản lý kịch bản sát nhân bí ẩn, tạo tâm trạng bí ẩn, thúc đẩy phát triển cốt truyện' },
     { title: 'Linh hồn NPC trong trò chơi thế giới mở', desc: 'NPC có máu có thịt, ghi nhớ câu chuyện người chơi, tạo dựa liên kết cảm xúc thực tế' },
     { title: 'Tạo nội dung podcast cá nhân hóa', desc: 'Tạo podcast riêng biệt dựa trên sở thích, tự nhiên như chuyện trò với bạn' },
     { title: 'Nhóm tâm trạng cho buổi hòa nhạc ảo', desc: 'Tạo cảm giác sân khấu cho buổi hòa nhạc trực tuyến, tương tác real-time, ứng viên, tạo tâm trạng' },
@@ -516,10 +516,10 @@ Phân tích nhật ký cảm xúc, phát hiện quy luật cảm xúc, đưa ra 
 
 > 💡 **Ý tưởng cốt lõi**: Tạo trải nghiệm đắm chìm, để giải trí trở thành nơi tâm linh lưu lạc
 
-### 3.1 DM kịch本 sát nhân bí ẩn đắm chìm
+### 3.1 DM kịch bản sát nhân bí ẩn đắm chìm
 
 **Mô tả kịch bản**:
-Đóng vai quản lý kịch本 sát nhân bí ẩn, tạo tâm trạng bí ẩn, thúc đẩy phát triển cốt truyện. Theo phản ứng của người chơi điều chỉnh nhịp độ thực tế, tạo trải nghiệm trò chơi khó quên.
+Đóng vai quản lý kịch bản sát nhân bí ẩn, tạo tâm trạng bí ẩn, thúc đẩy phát triển cốt truyện. Theo phản ứng của người chơi điều chỉnh nhịp độ thực tế, tạo trải nghiệm trò chơi khó quên.
 
 **Điểm tâm trạng**:
 - Mở đầu hấp dẫn

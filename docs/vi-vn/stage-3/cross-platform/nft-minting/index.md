@@ -1,8 +1,8 @@
-# Cách nhanh chóng phát triển và铸造 NFT——Phiên bản Bắt tay trong 10 phút
+# Cách nhanh chóng phát triển và mint (đúc) NFT——Phiên bản Bắt tay trong 10 phút
 
 # Chương 1: NFT và Smart Contract là gì
 
-Trong hướng dẫn này, chúng ta sẽ hoàn thành một vòng kín: từ zero viết một smart contract NFT, triển khai nó lên Sepolia testnet,铸造NFT của riêng bạn, và xem nó trên OpenSea. Toàn bộ quá trình sử dụng công cụ trực tuyến trong trình duyệt, không cần cài đặt bất kỳ môi trường local nào, có thể hoàn thành trong 10 phút.
+Trong hướng dẫn này, chúng ta sẽ hoàn thành một vòng kín: từ zero viết một smart contract NFT, triển khai nó lên Sepolia testnet, mint NFT của riêng bạn, và xem nó trên OpenSea. Toàn bộ quá trình sử dụng công cụ trực tuyến trong trình duyệt, không cần cài đặt bất kỳ môi trường local nào, có thể hoàn thành trong 10 phút.
 
 Để tham gia hướng dẫn này, bạn cần ít nhất:
 
@@ -10,7 +10,7 @@ Trong hướng dẫn này, chúng ta sẽ hoàn thành một vòng kín: từ ze
 - Một tài khoản ví MetaMask
 - Một chút ETH Sepolia testnet (lấy miễn phí, hướng dẫn dưới đây)
 
-> **Zero chi phí, zero cấu hình**: Toàn bộ sử dụng công cụ trực tuyến trong trình duyệt (Remix IDE), không cần cài đặt Node.js / Hardhat; mã code sử dụng template an toàn chính thức từ OpenZeppelin; sau khi铸造có thể xem NFT của bạn trên OpenSea testnet.
+> **Zero chi phí, zero cấu hình**: Toàn bộ sử dụng công cụ trực tuyến trong trình duyệt (Remix IDE), không cần cài đặt Node.js / Hardhat; mã code sử dụng template an toàn chính thức từ OpenZeppelin; sau khi mint có thể xem NFT của bạn trên OpenSea testnet.
 
 ## 1.1 NFT là gì?
 
@@ -30,13 +30,13 @@ Giá trị cơ bản của NFT là: **Nó sử dụng công nghệ blockchain đ
 
 Smart contract (Hợp đồng thông minh) là một đoạn mã chương trình chạy trên blockchain. Bạn có thể hiểu nó là **"hợp đồng tự động thực thi"**——một khi được triển khai lên blockchain, nó sẽ tự động chạy theo logic mã, không ai có thể sửa đổi.
 
-NFT được tạo và quản lý thông qua smart contract. Khi bạn "铸造" (Mint) một NFT, thực tế là gọi một hàm trong smart contract, để nó ghi lại trên blockchain: "NFT số #0 thuộc về địa chỉ ví của bạn".
+NFT được tạo và quản lý thông qua smart contract. Khi bạn "mint" (đúc) một NFT, thực tế là gọi một hàm trong smart contract, để nó ghi lại trên blockchain: "NFT số #0 thuộc về địa chỉ ví của bạn".
 
 Chúng ta sẽ sử dụng ngôn ngữ **Solidity** để viết smart contract. Đừng lo, với template có sẵn từ OpenZeppelin, bạn chỉ cần viết khoảng 15 dòng code.
 
-## 1.3 Chúng ta sẽ铸造NFT gì?
+## 1.3 Chúng ta sẽ mint NFT gì?
 
-Chúng ta sẽ铸造một NFT **"Vibe Coder Learning Certificate"**——chứng minh bạn đã hoàn thành hướng dẫn này, nắm vững kỹ năng cơ bản về phát triển blockchain. NFT này sẽ:
+Chúng ta sẽ mint một NFT **"Vibe Coder Learning Certificate"**——chứng minh bạn đã hoàn thành hướng dẫn này, nắm vững kỹ năng cơ bản về phát triển blockchain. NFT này sẽ:
 
 * Sở hữu một số hiệu độc nhất (Token ID)
 * Được ghi lại trên Sepolia testnet của Ethereum
@@ -64,7 +64,7 @@ Chúng ta sẽ hoàn thành toàn bộ quy trình theo các bước sau:
 
 1. **Chuẩn bị ví và token kiểm tra** (2 phút): Cài đặt MetaMask, lấy ETH kiểm tra miễn phí
 2. **Viết và triển khai smart contract** (4 phút): Viết NFT contract trong Remix IDE và triển khai lên Sepolia
-3. **铸造NFT và xem kết quả** (4 phút): Gọi contract để铸造NFT, xác minh trên OpenSea và Etherscan
+3. **Mint NFT và xem kết quả** (4 phút): Gọi contract để mint NFT, xác minh trên OpenSea và Etherscan
 4. **Nâng cao: Thêm hình ảnh vào NFT** (tùy chọn): Sử dụng IPFS để lưu trữ hình ảnh, làm cho NFT hoàn chỉnh hơn
 
 # Chương 2: Chuẩn bị Ví và Token Kiểm tra (2 phút)
@@ -99,7 +99,7 @@ Nếu không thấy tùy chọn Sepolia, nhấp vào **"Add network"**, thêm th
 
 ## 2.3 Lấy ETH kiểm tra miễn phí
 
-Triển khai hợp đồng và铸造NFT đều cần chi trả phí Gas (phí giao dịch). Trên testnet, phí Gas được thanh toán bằng ETH kiểm tra, hoàn toàn miễn phí.
+Triển khai hợp đồng và mint NFT đều cần chi trả phí Gas (phí giao dịch). Trên testnet, phí Gas được thanh toán bằng ETH kiểm tra, hoàn toàn miễn phí.
 
 Truy cập bất kỳ trang web vòi tiền (Faucet) nào dưới đây, nhập địa chỉ ví của bạn, bạn có thể lấy ETH Sepolia miễn phí:
 
@@ -109,7 +109,7 @@ Truy cập bất kỳ trang web vòi tiền (Faucet) nào dưới đây, nhập 
 | Alchemy | `https://www.alchemy.com/faucets/ethereum-sepolia` | 0.1 ETH | Có |
 | Google Cloud | `https://cloud.google.com/application/web3/faucet/ethereum/sepolia` | 0.05 ETH | Cần tài khoản Google |
 
-> **Gợi ý**: 0.1 ETH kiểm tra đủ để bạn triển khai hợp đồng +铸造hàng chục NFT. Nếu một vòi không lấy được, hãy thử cái khác.
+> **Gợi ý**: 0.1 ETH kiểm tra đủ để bạn triển khai hợp đồng + mint hàng chục NFT. Nếu một vòi không lấy được, hãy thử cái khác.
 
 Sau khi lấy thành công, quay lại MetaMask, bạn sẽ thấy số dư thay đổi từ 0 thành 0.1 ETH (có thể cần đợi vài giây).
 
@@ -137,14 +137,14 @@ pragma solidity ^0.8.20;
 // Nhập template ERC721 an toàn chính thức từ OpenZeppelin
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-// NFT contract tối giản: chỉ có tên, ký hiệu, chức năng铸造
+// NFT contract tối giản: chỉ có tên, ký hiệu, chức năng mint
 contract MySimpleNFT is ERC721 {
     uint256 private _tokenId;
 
     // Khởi tạo tên và ký hiệu của bộ sưu tập NFT
     constructor() ERC721("VibeCoder", "VIBE") {}
 
-    // 铸造NFT: gọi để phát hành một cái cho địa chỉ hiện tại
+    // Mint NFT: gọi để phát hành một cái cho địa chỉ hiện tại
     function mint() public {
         _safeMint(msg.sender, _tokenId);
         _tokenId++;
@@ -160,8 +160,8 @@ contract MySimpleNFT is ERC721 {
 | `import "@openzeppelin/..."` | Nhập triển khai ERC721 tiêu chuẩn từ OpenZeppelin (template đã được kiểm toán bảo mật) |
 | `contract MySimpleNFT is ERC721` | Tạo một hợp đồng kế thừa tiêu chuẩn ERC721 |
 | `ERC721("VibeCoder", "VIBE")` | Tên bộ sưu tập NFT là "VibeCoder", ký hiệu là "VIBE" |
-| `_safeMint(msg.sender, _tokenId)` | 铸造một NFT mới cho người gọi |
-| `_tokenId++` | Mỗi lần铸造, số hiệu tự động +1 |
+| `_safeMint(msg.sender, _tokenId)` | Mint một NFT mới cho người gọi |
+| `_tokenId++` | Mỗi lần mint, số hiệu tự động +1 |
 
 > **ERC721 là gì?** Đó là tiêu chuẩn giao thức NFT trên Ethereum, định nghĩa các chức năng cơ bản mà NFT nên có (chuyển nhượng, truy vấn chủ sở hữu, v.v.). OpenZeppelin cung cấp triển khai đã được kiểm toán bảo mật, chúng ta chỉ cần kế thừa, không cần tự viết từ zero.
 
@@ -187,9 +187,9 @@ contract MySimpleNFT is ERC721 {
 
 Đợi vài giây, sau khi triển khai thành công, phần **"Deployed Contracts"** ở phía dưới sẽ hiển thị địa chỉ hợp đồng của bạn. **Sao chép và lưu lại địa chỉ này**, cần dùng sau này để xem NFT.
 
-# Chương 4:铸造NFT và Xem Kết Quả (4 phút)
+# Chương 4: Mint NFT và Xem Kết Quả (4 phút)
 
-## 4.1铸造NFT đầu tiên của bạn
+## 4.1 Mint NFT đầu tiên của bạn
 
 Sau khi triển khai thành công, trong vùng **"Deployed Contracts"** ở phía dưới Remix, bạn sẽ thấy bảng điều khiển tương tác của hợp đồng.
 
@@ -198,15 +198,15 @@ Sau khi triển khai thành công, trong vùng **"Deployed Contracts"** ở phí
 3. MetaMask popup xác nhận giao dịch, nhấp vào **"Confirm"** (Xác nhận)
 4. Đợi vài giây, giao dịch hoàn thành
 
-Chúc mừng! Bạn vừa铸造NFT số #0, nó hiện thuộc về địa chỉ ví của bạn.
+Chúc mừng! Bạn vừa mint NFT số #0, nó hiện thuộc về địa chỉ ví của bạn.
 
-Bạn có thể tiếp tục nhấp vào "mint" để铸造thêm——mỗi lần铸造, số hiệu NFT sẽ tự động tăng (#1, #2, #3……).
+Bạn có thể tiếp tục nhấp vào "mint" để mint thêm——mỗi lần mint, số hiệu NFT sẽ tự động tăng (#1, #2, #3……).
 
-## 4.2 Xác minh kết quả铸造
+## 4.2 Xác minh kết quả mint
 
 **Cách 1: Xác minh trong Remix**
 
-Trong bảng điều khiển hợp đồng, tìm hàm **"balanceOf"** (nút xanh), nhập địa chỉ ví của bạn, nhấp để gọi. Nếu trả về `1` (hoặc số lượng bạn đã铸造), có nghĩa là铸造thành công.
+Trong bảng điều khiển hợp đồng, tìm hàm **"balanceOf"** (nút xanh), nhập địa chỉ ví của bạn, nhấp để gọi. Nếu trả về `1` (hoặc số lượng bạn đã mint), có nghĩa là mint thành công.
 
 Bạn cũng có thể gọi hàm **"ownerOf"**, nhập `0` (Token ID), nó sẽ trả về địa chỉ ví của bạn——chứng minh rằng NFT số #0 thuộc về bạn.
 
@@ -215,13 +215,13 @@ Bạn cũng có thể gọi hàm **"ownerOf"**, nhập `0` (Token ID), nó sẽ 
 1. Mở [Sepolia Etherscan](https://sepolia.etherscan.io/)
 2. Dán **địa chỉ hợp đồng** của bạn vào ô tìm kiếm
 3. Bạn sẽ thấy trang chi tiết hợp đồng, bao gồm tất cả các bản ghi giao dịch
-4. Nhấp vào liên kết **"Token Tracker"**, có thể xem tất cả NFT bạn đã铸造
+4. Nhấp vào liên kết **"Token Tracker"**, có thể xem tất cả NFT bạn đã mint
 
-Trên Etherscan, mỗi giao dịch铸造đều có bản ghi hoàn chỉnh: ai đã铸造, khi nào铸造, Token ID là bao nhiêu——đây chính là sức hấp dẫn của blockchain "công khai, minh bạch, không thể sửa đổi".
+Trên Etherscan, mỗi giao dịch mint đều có bản ghi hoàn chỉnh: ai đã mint, khi nào mint, Token ID là bao nhiêu——đây chính là sức hấp dẫn của blockchain "công khai, minh bạch, không thể sửa đổi".
 
 # Chương 5: Nâng cao——Thêm Hình ảnh vào NFT (Tùy chọn)
 
-Hiện tại NFT chúng ta铸造chỉ có số hiệu, không có hình ảnh và mô tả. Để làm cho NFT hoàn chỉnh hơn, chúng ta cần sử dụng **IPFS** (InterPlanetary File System) để lưu trữ hình ảnh và metadata.
+Hiện tại NFT chúng ta mint chỉ có số hiệu, không có hình ảnh và mô tả. Để làm cho NFT hoàn chỉnh hơn, chúng ta cần sử dụng **IPFS** (InterPlanetary File System) để lưu trữ hình ảnh và metadata.
 
 ## 5.1 IPFS là gì?
 
@@ -277,7 +277,7 @@ contract MyNFTWithImage is ERC721, ERC721URIStorage {
 
     constructor() ERC721("VibeCoder", "VIBE") {}
 
-    // 铸造khi truyền vào địa chỉ metadata
+    // Mint khi truyền vào địa chỉ metadata
     function mint(string memory uri) public {
         _safeMint(msg.sender, _tokenId);
         _setTokenURI(_tokenId, uri);
@@ -301,7 +301,7 @@ contract MyNFTWithImage is ERC721, ERC721URIStorage {
 }
 ```
 
-Sau khi triển khai, khi gọi `mint` hãy truyền vào địa chỉ metadata của bạn (ví dụ: `ipfs://QmAbc.../metadata.json`), NFT被铸造sẽ mang theo hình ảnh và mô tả.
+Sau khi triển khai, khi gọi `mint` hãy truyền vào địa chỉ metadata của bạn (ví dụ: `ipfs://QmAbc.../metadata.json`), NFT được mint sẽ mang theo hình ảnh và mô tả.
 
 # Chương 6: Lời kết
 
@@ -311,7 +311,7 @@ Chúc mừng bạn! Bạn đã hoàn thành một vòng kín phát triển NFT t
 2. Cài đặt ví MetaMask và chuyển sang Sepolia testnet
 3. Viết smart contract NFT dưới 15 dòng trong Remix IDE
 4. Triển khai hợp đồng lên Sepolia testnet của Ethereum
-5. 铸造NFT của riêng bạn và xác minh trên Etherscan
+5. Mint NFT của riêng bạn và xác minh trên Etherscan
 6. (Tùy chọn) Học cách dùng IPFS thêm hình ảnh và metadata vào NFT
 
 Toàn bộ quá trình không cài đặt bất kỳ môi trường local nào, không chi một xu, hoàn toàn trong trình duyệt. Đây chính là sức hấp dẫn của phát triển blockchain——ngưỡng cửa vào thấp hơn bạn tưởng tượng nhiều.
@@ -319,8 +319,8 @@ Toàn bộ quá trình không cài đặt bất kỳ môi trường local nào, 
 **Hướng phát triển nâng cao:**
 
 * **Sử dụng Hardhat / Foundry phát triển local**: Khi logic hợp đồng của bạn trở nên phức tạp, Remix sẽ không đủ. Hardhat và Foundry là các framework phát triển local chuyên nghiệp, hỗ trợ kiểm tra tự động, triển khai kịch bản, tối ưu hóa Gas, v.v.
-* **Thêm danh sách trắng và giới hạn铸造**: Giới hạn ai có thể铸造, mỗi người tối đa有thể铸造bao nhiêu, đặt giá铸造, v.v.
-* **Xây dựng trang frontend Mint**: Sử dụng React + ethers.js / viem để xây dựng một trang铸造đẹp, cho phép người dùng铸造NFT một cách dễ dàng từ một trang web
+* **Thêm danh sách trắng và giới hạn mint**: Giới hạn ai có thể mint, mỗi người tối đa có thể mint bao nhiêu, đặt giá mint, v.v.
+* **Xây dựng trang frontend Mint**: Sử dụng React + ethers.js / viem để xây dựng một trang mint đẹp, cho phép người dùng mint NFT một cách dễ dàng từ một trang web
 * **Khám phá ERC1155 NFT nhiều phiên bản**: ERC1155 cho phép cùng một Token ID có nhiều bản sao, phù hợp cho vật phẩm trò chơi, vé, v.v.
 * **Triển khai lên mainnet**: Khi bạn đã sẵn sàng, triển khai hợp đồng lên Ethereum mainnet (hoặc Polygon, Base và các chuỗi L2 khác, phí Gas thấp hơn)
 

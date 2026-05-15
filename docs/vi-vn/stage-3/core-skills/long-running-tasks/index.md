@@ -757,17 +757,17 @@ Hy vọng nội dung chương này có thể giúp bạn tốt hơn sử dụng 
 **Tài Nguyên Tiếng Anh**
 
 - [Geoffrey Huntley - Ralph Technique](https://ghuntley.com/ralph/) - Người sáng tạo kỹ thuật Ralph
-- [Thực Hành Khung Hiệu Quả Để Xây Dựng Agent AI Chạy Lâu Dài](https://m.blog.csdn.net/weixin_48708052/article/details/158044721) - Phân tích chi tiết blog kỹ thuật Anthropic
+- [Thực Hành Khung Hiệu Quả Để Xây Dựng Agent AI Chạy Lâu Dài (tiếng Trung)](https://m.blog.csdn.net/weixin_48708052/article/details/158044721) - Phân tích chi tiết blog kỹ thuật Anthropic
 - [Hướng Dẫn Toàn Diện Claude Code](https://developer.aliyun.com/article/1705912) - Hướng dẫn sử dụng hoàn chỉnh
 
 **Hướng Dẫn Tiếng Trung**
 
-- [Hướng Dẫn Từng Bước - CSDN](https://m.blog.csdn.net/zsr154278963/article/details/156637281) - Hướng dẫn cài đặt và sử dụng chi tiết
+- [Hướng Dẫn Từng Bước - CSDN (tiếng Trung)](https://m.blog.csdn.net/zsr154278963/article/details/156637281) - Hướng dẫn cài đặt và sử dụng chi tiết
 - [Phân Tích Sâu - Toutiao](https://m.toutiao.com/a7585579989207188006/) - Cơ chế làm việc và nguyên tắc cốt lõi
 - [Hướng Dẫn Toàn Chỉnh Trắng](https://www.jdon.com/90167-ralph-wigum-loop-explained-for-teens.html) - Giải thích hoàn chỉnh từ nguyên lý đến thực chiến
 - [Hướng Dẫn Nhập Môn Và Thực Chiến - Blog Garden](https://www.cnblogs.com/buwai/p/19625356) - Kiến thức cơ bản và các trường hợp thực hành
-- [Phân Tích Sâu Ralph Loop - CSDN](https://m.blog.csdn.net/roamingcode/article/details/156732443) - Chi tiết cơ chế Stop Hook
-- [Máy Vĩnh Động Claude Code - CSDN](https://m.blog.csdn.net/qq_44866828/article/details/156736656) - Chi tiết plugin vòng lặp vô hạn
+- [Phân Tích Sâu Ralph Loop - CSDN (tiếng Trung)](https://m.blog.csdn.net/roamingcode/article/details/156732443) - Chi tiết cơ chế Stop Hook
+- [Máy Vĩnh Động Claude Code - CSDN (tiếng Trung)](https://m.blog.csdn.net/qq_44866828/article/details/156736656) - Chi tiết plugin vòng lặp vô hạn
 - [Hướng Dẫn Người Mới Bắt Đầu Ralph Loop - CNblogs](https://www.cnblogs.com/gyc567/p/19495639) - Tóm tắt thực tiễn tốt nhất và mẫu câu lệnh
 
 ### Trường Hợp Thực Chiến

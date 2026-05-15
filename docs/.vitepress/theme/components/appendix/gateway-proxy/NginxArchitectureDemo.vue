@@ -1,21 +1,21 @@
 <!--
   NginxArchitectureDemo.vue
-  Nginx架构 - Master-Worker/事件驱动
+  Kiến trúc Nginx - Master-Worker / event-driven
 -->
 <template>
   <div class="nginx-architecture-demo">
     <div class="header">
       <div class="title">
-        ⚡ Nginx 架构揭秘：为什么它能扛住百万并发？
+        ⚡ Mổ xẻ kiến trúc Nginx: vì sao gánh được triệu connection đồng thời?
       </div>
       <div class="subtitle">
-        Master-Worker 进程模型 + 事件驱动 = 高性能的秘诀
+        Mô hình process Master-Worker + event-driven = bí quyết hiệu năng cao
       </div>
     </div>
 
     <div class="architecture-diagram">
       <div class="diagram-title">
-        Nginx 进程架构图
+        Sơ đồ kiến trúc process Nginx
       </div>
 
       <div class="process-layer master-layer">
@@ -25,10 +25,10 @@
           </div>
           <div class="process-info">
             <div class="process-name">
-              Master 进程
+              Process Master
             </div>
             <div class="process-desc">
-              管理所有 Worker，负责配置加载、平滑升级
+              Quản lý mọi Worker, phụ trách load config, upgrade mượt
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
           >
             -
           </button>
-          <span class="worker-count">{{ workerCount }} 个 Worker</span>
+          <span class="worker-count">{{ workerCount }} Worker</span>
           <button
             class="control-btn"
             :disabled="workerCount >= 8"
@@ -77,7 +77,7 @@
                 Worker {{ n }}
               </div>
               <div class="process-desc">
-                处理 {{ requestCounts[n] || 0 }} 请求
+                Xử lý {{ requestCounts[n] || 0 }} request
               </div>
             </div>
             <div class="status-indicator" />
@@ -91,18 +91,18 @@
             📡 epoll (Linux) / kqueue (macOS)
           </div>
           <div class="epoll-desc">
-            事件驱动：一个 Worker 同时处理数万个连接
+            Event-driven: một Worker xử lý đồng thời hàng chục nghìn connection
           </div>
           <div class="epoll-comparison">
             <div class="compare-item old">
               <div class="compare-title">
-                传统 Apache
+                Apache truyền thống
               </div>
               <div class="compare-detail">
-                一个连接 = 一个进程/线程
+                Một connection = một process/thread
               </div>
               <div class="compare-result">
-                ❌ C10K 问题
+                ❌ Vấn đề C10K
               </div>
             </div>
             <div class="vs">
@@ -113,10 +113,10 @@
                 Nginx
               </div>
               <div class="compare-detail">
-                事件驱动 + 异步非阻塞
+                Event-driven + async non-blocking
               </div>
               <div class="compare-result">
-                ✅ 百万并发
+                ✅ Triệu connection đồng thời
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@
 
     <div class="simulation-panel">
       <div class="panel-title">
-        🎮 模拟请求处理
+        🎮 Mô phỏng xử lý request
       </div>
       <div class="sim-controls">
         <button
@@ -134,13 +134,13 @@
           :disabled="isSimulating"
           @click="simulateRequests"
         >
-          {{ isSimulating ? '处理中...' : '发送 20 个并发请求' }}
+          {{ isSimulating ? 'Đang xử lý...' : 'Gửi 20 request đồng thời' }}
         </button>
         <button
           class="sim-btn secondary"
           @click="resetSimulation"
         >
-          重置
+          Reset
         </button>
       </div>
       <div
@@ -152,7 +152,7 @@
             {{ totalRequests }}
           </div>
           <div class="stat-label">
-            总请求数
+            Tổng số request
           </div>
         </div>
         <div class="stat-item">
@@ -160,7 +160,7 @@
             {{ mostActiveWorker }}
           </div>
           <div class="stat-label">
-            最忙 Worker
+            Worker bận nhất
           </div>
         </div>
         <div class="stat-item">
@@ -168,7 +168,7 @@
             {{ avgRequests.toFixed(1) }}
           </div>
           <div class="stat-label">
-            平均/Worker
+            Trung bình/Worker
           </div>
         </div>
       </div>
@@ -176,12 +176,12 @@
 
     <div class="config-tip">
       <div class="tip-title">
-        💡 生产环境建议
+        💡 Khuyến nghị cho môi trường production
       </div>
       <div class="tip-content">
-        <strong>Worker 数量 = CPU 核心数</strong>（通常设置为 auto，让 Nginx 自动检测）
+        <strong>Số Worker = số core CPU</strong> (thường để auto để Nginx tự nhận)
         <br>
-        太多了上下文切换开销大，太少了无法利用多核性能。
+        Quá nhiều thì chi phí context switch lớn, quá ít thì không tận dụng được đa nhân.
       </div>
     </div>
   </div>

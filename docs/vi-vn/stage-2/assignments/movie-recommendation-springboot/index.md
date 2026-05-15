@@ -37,7 +37,7 @@ Sản phẩm bạn cần xây dựng là một trang web phim có khả năng g�
 | **Quản lý backend** | Quản trị viên duy trì dữ liệu phim, xem kết quả gợi ý |
 
 ::: tip Lối vào PRD
-Tài liệu yêu cầu của dự án này trên GitHub: [Xem PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/vi-vn/stage-2/assignments/movie-recommendation-springboot/PRD.md)
+Tài liệu yêu cầu của dự án này trên GitHub: [Xem PRD](https://github.com/nguyennhhsg/easy-vibe-vi/blob/main/docs/vi-vn/stage-2/assignments/movie-recommendation-springboot/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

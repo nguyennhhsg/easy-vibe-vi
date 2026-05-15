@@ -40,7 +40,7 @@ const getBaseUrl = () => {
   if (process.env.SITE_URL) {
     return process.env.SITE_URL
   }
-  return 'https://datawhalechina.github.io/easy-vibe'
+  return 'https://easy-vibe-vi.vercel.app'
 }
 
 const siteUrl = getBaseUrl()
@@ -76,8 +76,11 @@ function scanMarkdownFiles(dir, basePath = '') {
 
 // 将 markdown 路径转换为 URL 路径
 function mdPathToUrl(mdPath, locale) {
+  // 规范化路径分隔符为正斜杠 (Windows 兼容)
+  let urlPath = mdPath.split(path.sep).join('/')
+
   // 移除 .md 扩展名
-  let urlPath = mdPath.replace(/\.md$/, '')
+  urlPath = urlPath.replace(/\.md$/, '')
 
   // 如果是 index.md，只保留目录
   if (urlPath.endsWith('/index')) {
@@ -160,15 +163,15 @@ function main() {
   const allUrls = []
   const localePaths = new Map()
 
-  // 首先扫描中文内容作为基准
-  const zhCnDir = path.join(docsDir, 'zh-cn')
+  // 首先扫描越南语内容作为基准 (Vietnamese fork)
+  const viVnDir = path.join(docsDir, 'vi-vn')
   let baseFiles = []
 
-  if (fs.existsSync(zhCnDir)) {
-    baseFiles = scanMarkdownFiles(zhCnDir)
+  if (fs.existsSync(viVnDir)) {
+    baseFiles = scanMarkdownFiles(viVnDir)
   } else {
-    // 如果没有 zh-cn 目录，扫描 docs 根目录
-    baseFiles = scanMarkdownFiles(docsDir).filter((f) => !f.includes('/'))
+    // 如果没有 vi-vn 目录，扫描 docs 根目录
+    baseFiles = scanMarkdownFiles(docsDir).filter((f) => !f.includes('/') && !f.includes(path.sep))
   }
 
   console.log(`📄 Found ${baseFiles} base pages`)
@@ -186,6 +189,7 @@ function main() {
     }
 
     // 为每个语言版本生成 alternate
+    let viVnUrl = ''
     for (const locale of locales) {
       const localeDir = path.join(docsDir, locale)
       const localeFile = path.join(localeDir, baseFile)
@@ -199,19 +203,26 @@ function main() {
         })
         urlInfo.sourceFiles.push({ locale, relativePath: baseFile })
 
-        // 设置主要语言版本为 zh-cn
-        if (locale === 'zh-cn') {
+        // 设置主要语言版本为 vi-vn (Vietnamese fork)
+        if (locale === 'vi-vn') {
           urlInfo.loc = url
+          viVnUrl = url
         }
       }
     }
 
     // 如果有至少一个语言版本存在
     if (urlInfo.alternates.length > 0) {
-      // 如果没有 zh-cn 版本，使用第一个可用的
+      // 如果没有 vi-vn 版本，使用第一个可用的
       if (!urlInfo.loc) {
         urlInfo.loc = urlInfo.alternates[0].href
+        viVnUrl = urlInfo.alternates[0].href
       }
+      // 添加 x-default 指向 vi-vn URL
+      urlInfo.alternates.push({
+        hreflang: 'x-default',
+        href: viVnUrl
+      })
       urlInfo.lastmod = getLatestModTime(urlInfo.sourceFiles)
       allUrls.push(urlInfo)
     }
@@ -230,8 +241,13 @@ function main() {
       homeSourceFiles.push({ locale, relativePath: 'index.md' })
     }
   }
+  // 添加 x-default 指向 vi-vn 首页
+  homeAlternates.push({
+    hreflang: 'x-default',
+    href: `${siteUrl}/vi-vn/`
+  })
   allUrls.unshift({
-    loc: `${siteUrl}/zh-cn/`,
+    loc: `${siteUrl}/vi-vn/`,
     priority: 1.0,
     alternates: homeAlternates,
     sourceFiles: homeSourceFiles,

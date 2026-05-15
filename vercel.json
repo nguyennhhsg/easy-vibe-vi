@@ -7,9 +7,14 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "destination": "/vi-vn/",
+      "permanent": true
+    },
+    {
       "source": "/zh-cn/:path*",
       "destination": "/vi-vn/:path*",
-      "permanent": false
+      "permanent": true
     }
   ],
   "headers": [

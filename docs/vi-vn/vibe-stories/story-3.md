@@ -23,7 +23,7 @@ Nhiều lúc, cái mà giáo viên giảng dạy và cái mà học sinh hiểu 
 
 ![Bài toán BMI trong tiết thực hành Python đó](./images/story-3/image1.png)
 
-Mặc dù không dừng lại một lúc nào, nhưng những học sinh giơ tay hỏi dường như không giảm chút nào. Có em chờ vài phút vẫn không chờ được tôi, bèn tự tùy tiện với máy tính; còn có em thì buông xuôi ngủ luôn. Khi chuông tan học vang lên, tôi đứng trong phòng máy tính, nhìn toàn bộ lộn xộn, đột nhiên cảm thấy vô cùng b无力.
+Mặc dù không dừng lại một lúc nào, nhưng những học sinh giơ tay hỏi dường như không giảm chút nào. Có em chờ vài phút vẫn không chờ được tôi, bèn tự tùy tiện với máy tính; còn có em thì buông xuôi ngủ luôn. Khi chuông tan học vang lên, tôi đứng trong phòng máy tính, nhìn toàn bộ lộn xộn, đột nhiên cảm thấy vô cùng bất lực.
 
 Không phải lỗi của học sinh, họ đã rất cố gắng rồi. Cũng không phải tôi dạy không tốt, mà chính mô hình này đã có vấn đề. Lập trình không phải bài toán toán học, không thể để tất cả các câu hỏi của mọi người giảng một lần cho cả lớp, chỉ có thể hướng dẫn từng cá nhân.
 
