@@ -1,8 +1,8 @@
 <template>
   <div class="demo-card">
     <div class="attention-demo">
-      <div class="demo-title">自注意力示例：「他」关注「小明」</div>
-      <div class="sentence">小明 把 苹果 给了 <span class="focus">他</span> 的 母亲</div>
+      <div class="demo-title">Ví dụ self-attention: "anh ấy" chú ý đến "Minh"</div>
+      <div class="sentence">Minh đưa quả táo cho <span class="focus">anh ấy</span> của mẹ</div>
       <div class="attention-bar">
         <div class="bar-item" v-for="item in weights" :key="item.word">
           <span class="word">{{ item.word }}</span>
@@ -10,20 +10,20 @@
           <span class="pct">{{ Math.round(item.w * 100) }}%</span>
         </div>
       </div>
-      <div class="caption">「他」把 65% 注意力投向「小明」，识别代词指代关系</div>
+      <div class="caption">"anh ấy" dồn 65% attention vào "Minh", nhờ đó nhận diện được đại từ chỉ đến ai</div>
     </div>
   </div>
 </template>
 
 <script setup>
 const weights = [
-  { word: '小明', w: 0.65 },
-  { word: '把', w: 0.05 },
-  { word: '苹果', w: 0.10 },
-  { word: '给了', w: 0.10 },
-  { word: '他', w: 0.05 },
-  { word: '的', w: 0.03 },
-  { word: '母亲', w: 0.02 },
+  { word: 'Minh', w: 0.65 },
+  { word: 'đưa', w: 0.05 },
+  { word: 'quả táo', w: 0.10 },
+  { word: 'cho', w: 0.10 },
+  { word: 'anh ấy', w: 0.05 },
+  { word: 'của', w: 0.03 },
+  { word: 'mẹ', w: 0.02 },
 ]
 
 const getColor = (v) => v > 0.5 ? '#dc2626' : v > 0.15 ? '#d97706' : '#059669'

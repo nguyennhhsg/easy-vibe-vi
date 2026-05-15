@@ -5,7 +5,7 @@
         <div class="ar-terminal">
           <div class="term-bar">
             <span class="dot r" /><span class="dot y" /><span class="dot g" />
-            <span class="term-title">API 请求演示</span>
+            <span class="term-title">Demo API request</span>
           </div>
           <div ref="termEl" class="term-body">
             <div v-for="(l, i) in lines" :key="i" class="t-line">
@@ -36,7 +36,7 @@
             :disabled="running"
             @click="reset"
           >
-            重置
+            Đặt lại
           </button>
         </div>
       </div>
@@ -49,8 +49,8 @@
           >
             <div class="flow-header">
               <span class="flow-icon">💻</span>
-              <span class="flow-title">客户端</span>
-              <span class="flow-desc">发起请求</span>
+              <span class="flow-title">Client</span>
+              <span class="flow-desc">Gửi request</span>
             </div>
             <div class="flow-body">
               <div v-if="requestData" class="req-preview">
@@ -64,7 +64,7 @@
                   <pre>{{ requestData.body }}</pre>
                 </div>
               </div>
-              <div v-else class="flow-empty">等待请求...</div>
+              <div v-else class="flow-empty">Đang chờ request...</div>
             </div>
           </div>
 
@@ -82,15 +82,15 @@
           >
             <div class="flow-header">
               <span class="flow-icon">🖥️</span>
-              <span class="flow-title">服务器</span>
-              <span class="flow-desc">处理请求</span>
+              <span class="flow-title">Server</span>
+              <span class="flow-desc">Xử lý request</span>
             </div>
             <div class="flow-body">
               <div v-if="serverStatus" class="server-status">
                 <span class="status-icon">{{ serverStatus.icon }}</span>
                 <span class="status-text">{{ serverStatus.text }}</span>
               </div>
-              <div v-else class="flow-empty">等待中...</div>
+              <div v-else class="flow-empty">Đang chờ...</div>
             </div>
           </div>
 
@@ -108,8 +108,8 @@
           >
             <div class="flow-header">
               <span class="flow-icon">📦</span>
-              <span class="flow-title">响应</span>
-              <span class="flow-desc">返回结果</span>
+              <span class="flow-title">Response</span>
+              <span class="flow-desc">Trả kết quả</span>
             </div>
             <div class="flow-body">
               <div v-if="responseData" class="res-preview">
@@ -120,7 +120,7 @@
                   <pre>{{ responseData.body }}</pre>
                 </div>
               </div>
-              <div v-else class="flow-empty">等待响应...</div>
+              <div v-else class="flow-empty">Đang chờ response...</div>
             </div>
           </div>
         </div>
@@ -136,12 +136,12 @@ import { ref, nextTick } from 'vue'
 
 const termEl = ref(null)
 const lines = ref([
-  { kind: 'dim', text: '// 点击下方按钮，模拟不同的 API 请求' }
+  { kind: 'dim', text: '// Nhấn nút bên dưới để mô phỏng các loại API request' }
 ])
 const typing = ref('')
 const running = ref(false)
 const active = ref(null)
-const hint = ref('点击命令按钮，观察一次完整的 API 请求-响应流程。')
+const hint = ref('Nhấn nút lệnh để quan sát toàn bộ luồng request-response của API.')
 const pulseArea = ref(null)
 
 const requestData = ref(null)
@@ -156,29 +156,29 @@ const ops = [
     cmd: 'GET /api/users',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '// 获取用户列表' },
+      { kind: 'dim', text: '// Lấy danh sách user' },
       { kind: 'grn', text: 'HTTP/1.1 200 OK' },
       { kind: 'dim', text: 'Content-Type: application/json' },
       { kind: 'dim', text: '' },
       { kind: 'grn', text: '{ "code": 0, "data": { "items": [...] } }' }
     ],
-    hint: 'GET 请求成功！状态码 200 表示请求正常。服务器返回了用户列表数据。',
+    hint: 'GET request thành công! Status code 200 nghĩa là request hợp lệ. Server đã trả về danh sách user.',
     do: async () => {
       requestData.value = { method: 'GET', url: '/api/users' }
       pulseArea.value = 'client'
       await sleep(300)
       pulseArea.value = 'request'
       await sleep(300)
-      serverStatus.value = { icon: '⚡', text: '查询数据库...' }
+      serverStatus.value = { icon: '⚡', text: 'Đang query database...' }
       pulseArea.value = 'server'
       await sleep(500)
-      serverStatus.value = { icon: '✓', text: '处理完成' }
+      serverStatus.value = { icon: '✓', text: 'Đã xử lý xong' }
       pulseArea.value = 'response'
       await sleep(300)
       responseData.value = {
         status: '200 OK',
         statusClass: 'success',
-        body: '{\n  "code": 0,\n  "data": {\n    "items": [\n      {"id": 1, "name": "张三"},\n      {"id": 2, "name": "李四"}\n    ]\n  }\n}'
+        body: '{\n  "code": 0,\n  "data": {\n    "items": [\n      {"id": 1, "name": "Nguyễn Văn A"},\n      {"id": 2, "name": "Trần Thị B"}\n    ]\n  }\n}'
       }
     }
   },
@@ -187,38 +187,38 @@ const ops = [
     cmd: 'POST /api/users',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '// 创建新用户' },
+      { kind: 'dim', text: '// Tạo user mới' },
       { kind: 'grn', text: 'HTTP/1.1 201 Created' },
       { kind: 'dim', text: 'Location: /api/users/3' },
       { kind: 'dim', text: '' },
       {
         kind: 'grn',
-        text: '{ "code": 0, "data": { "id": 3, "name": "王五" } }'
+        text: '{ "code": 0, "data": { "id": 3, "name": "Lê Văn C" } }'
       }
     ],
-    hint: 'POST 创建成功！状态码 201 表示资源已创建，响应头 Location 指向新资源地址。',
+    hint: 'POST tạo thành công! Status 201 cho biết resource đã được tạo, header Location trỏ đến địa chỉ resource mới.',
     do: async () => {
       requestData.value = {
         method: 'POST',
         url: '/api/users',
-        body: '{\n  "name": "王五",\n  "email": "wangwu@example.com"\n}'
+        body: '{\n  "name": "Lê Văn C",\n  "email": "levanc@example.com"\n}'
       }
       pulseArea.value = 'client'
       await sleep(300)
       pulseArea.value = 'request'
       await sleep(300)
-      serverStatus.value = { icon: '⚡', text: '验证数据...' }
+      serverStatus.value = { icon: '⚡', text: 'Đang validate dữ liệu...' }
       pulseArea.value = 'server'
       await sleep(400)
-      serverStatus.value = { icon: '⚡', text: '写入数据库...' }
+      serverStatus.value = { icon: '⚡', text: 'Đang ghi vào database...' }
       await sleep(400)
-      serverStatus.value = { icon: '✓', text: '创建成功' }
+      serverStatus.value = { icon: '✓', text: 'Đã tạo xong' }
       pulseArea.value = 'response'
       await sleep(300)
       responseData.value = {
         status: '201 Created',
         statusClass: 'success',
-        body: '{\n  "code": 0,\n  "data": {\n    "id": 3,\n    "name": "王五",\n    "email": "wangwu@example.com"\n  }\n}'
+        body: '{\n  "code": 0,\n  "data": {\n    "id": 3,\n    "name": "Lê Văn C",\n    "email": "levanc@example.com"\n  }\n}'
       }
     }
   },
@@ -227,43 +227,43 @@ const ops = [
     cmd: 'GET /api/users/999',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '// 获取不存在的用户' },
+      { kind: 'dim', text: '// Lấy user không tồn tại' },
       { kind: 'red', text: 'HTTP/1.1 404 Not Found' },
       { kind: 'dim', text: '' },
-      { kind: 'red', text: '{ "code": 10002, "message": "用户不存在" }' }
+      { kind: 'red', text: '{ "code": 10002, "message": "Người dùng không tồn tại" }' }
     ],
-    hint: '404 错误！请求的资源不存在。客户端应该检查请求的 ID 是否正确。',
+    hint: 'Lỗi 404! Resource yêu cầu không tồn tại. Client nên kiểm tra lại ID gửi đi.',
     do: async () => {
       requestData.value = { method: 'GET', url: '/api/users/999' }
       pulseArea.value = 'client'
       await sleep(300)
       pulseArea.value = 'request'
       await sleep(300)
-      serverStatus.value = { icon: '🔍', text: '查找用户...' }
+      serverStatus.value = { icon: '🔍', text: 'Đang tìm user...' }
       pulseArea.value = 'server'
       await sleep(500)
-      serverStatus.value = { icon: '✗', text: '未找到' }
+      serverStatus.value = { icon: '✗', text: 'Không tìm thấy' }
       pulseArea.value = 'response'
       await sleep(300)
       responseData.value = {
         status: '404 Not Found',
         statusClass: 'error',
-        body: '{\n  "code": 10002,\n  "message": "用户不存在"\n}'
+        body: '{\n  "code": 10002,\n  "message": "Người dùng không tồn tại"\n}'
       }
     }
   },
   {
     id: 'post-401',
-    cmd: 'POST /api/orders (无Token)',
+    cmd: 'POST /api/orders (không Token)',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '// 未登录尝试下单' },
+      { kind: 'dim', text: '// Chưa đăng nhập mà đặt hàng' },
       { kind: 'red', text: 'HTTP/1.1 401 Unauthorized' },
       { kind: 'dim', text: 'WWW-Authenticate: Bearer' },
       { kind: 'dim', text: '' },
-      { kind: 'red', text: '{ "code": 10018, "message": "请先登录" }' }
+      { kind: 'red', text: '{ "code": 10018, "message": "Vui lòng đăng nhập" }' }
     ],
-    hint: '401 错误！需要身份认证。客户端应该引导用户登录后再重试。',
+    hint: 'Lỗi 401! Cần xác thực. Client nên hướng dẫn người dùng đăng nhập rồi thử lại.',
     do: async () => {
       requestData.value = {
         method: 'POST',
@@ -274,16 +274,16 @@ const ops = [
       await sleep(300)
       pulseArea.value = 'request'
       await sleep(300)
-      serverStatus.value = { icon: '🔐', text: '验证身份...' }
+      serverStatus.value = { icon: '🔐', text: 'Đang xác thực...' }
       pulseArea.value = 'server'
       await sleep(400)
-      serverStatus.value = { icon: '✗', text: '未授权' }
+      serverStatus.value = { icon: '✗', text: 'Chưa xác thực' }
       pulseArea.value = 'response'
       await sleep(300)
       responseData.value = {
         status: '401 Unauthorized',
         statusClass: 'error',
-        body: '{\n  "code": 10018,\n  "message": "请先登录"\n}'
+        body: '{\n  "code": 10018,\n  "message": "Vui lòng đăng nhập"\n}'
       }
     }
   }
@@ -332,10 +332,10 @@ function scroll() {
 }
 
 function reset() {
-  lines.value = [{ kind: 'dim', text: '// 点击下方按钮，模拟不同的 API 请求' }]
+  lines.value = [{ kind: 'dim', text: '// Nhấn nút bên dưới để mô phỏng các loại API request' }]
   active.value = null
   pulseArea.value = null
-  hint.value = '点击命令按钮，观察一次完整的 API 请求-响应流程。'
+  hint.value = 'Nhấn nút lệnh để quan sát toàn bộ luồng request-response của API.'
   typing.value = ''
   running.value = false
   requestData.value = null
@@ -507,7 +507,7 @@ function reset() {
   display: none;
 }
 .ar-btn--reset::after {
-  content: '重置';
+  content: 'Đặt lại';
   font-size: 0.7rem;
   color: #585b70;
 }

@@ -1,18 +1,18 @@
 <!--
-  RequestResponseFlow.vue - 简化版
-  目标：用简单的动画展示请求-响应流程
+  RequestResponseFlow.vue - bản đơn giản
+  Mục tiêu: dùng animation đơn giản minh họa luồng request-response
 -->
 <template>
   <div class="demo">
-    <div class="title">🔄 一次 API 调用的流程</div>
-    <p class="subtitle">点一下按钮，看请求怎么飞过去再飞回来</p>
+    <div class="title">🔄 Luồng một lần gọi API</div>
+    <p class="subtitle">Nhấn nút và xem request bay đi rồi bay về</p>
 
     <div class="flow-container">
       <div class="side you">
         <div class="window">
-          <div class="window-header">👤 你这边</div>
+          <div class="window-header">👤 Phía bạn</div>
           <div class="window-body">
-            <div class="message">我想调用 API</div>
+            <div class="message">Mình muốn gọi API</div>
           </div>
         </div>
       </div>
@@ -20,13 +20,13 @@
       <div class="middle">
         <div class="arrow" :class="{ animating: isAnimating }">➔</div>
         <button class="send-btn" :disabled="isAnimating" @click="send">
-          {{ isAnimating ? '发送中...' : '🚀 发送请求' }}
+          {{ isAnimating ? 'Đang gửi...' : '🚀 Gửi request' }}
         </button>
       </div>
 
       <div class="side server">
         <div class="window">
-          <div class="window-header">🖥️ 对方服务器</div>
+          <div class="window-header">🖥️ Server đối phương</div>
           <div class="window-body">
             <div class="message">
               {{ serverMessage }}
@@ -48,20 +48,20 @@
 import { ref } from 'vue'
 
 const isAnimating = ref(false)
-const serverMessage = ref('等待请求...')
+const serverMessage = ref('Đang chờ request...')
 const result = ref(null)
 
 function send() {
   isAnimating.value = true
-  serverMessage.value = '收到请求，处理中...'
+  serverMessage.value = 'Đã nhận request, đang xử lý...'
   result.value = null
 
-  // 模拟请求流程
+  // Giả lập luồng request
   setTimeout(() => {
-    serverMessage.value = '处理完成！'
+    serverMessage.value = 'Xử lý xong!'
     result.value = {
       type: 'success',
-      text: '✅ 请求成功！服务器返回了数据'
+      text: '✅ Request thành công! Server đã trả về dữ liệu'
     }
     isAnimating.value = false
   }, 1500)

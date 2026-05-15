@@ -2,10 +2,10 @@
   <div class="llm-quick-start">
     <div class="header">
       <div class="title">
-        🤖 LLM 初体验：从闲聊到业务实战
+        🤖 Trải nghiệm LLM lần đầu: từ tán gẫu đến tác nghiệp
       </div>
       <div class="subtitle">
-        大模型不仅能聊天，更是生产力工具。试试看它如何处理这些业务需求：
+        LLM không chỉ để chat, mà còn là công cụ năng suất. Thử xem nó xử lý những nhu cầu công việc dưới đây như thế nào:
       </div>
     </div>
 
@@ -17,7 +17,7 @@
         <div class="emoji">
           💼
         </div>
-        <p>请选择一个业务场景开始体验</p>
+        <p>Chọn một kịch bản nghiệp vụ để bắt đầu trải nghiệm</p>
       </div>
 
       <div
@@ -83,7 +83,7 @@
         v-else
         class="status-text"
       >
-        正在思考业务逻辑并生成 Token...
+        Đang suy nghĩ logic nghiệp vụ và sinh token...
       </div>
     </div>
   </div>
@@ -93,19 +93,19 @@
 import { ref, nextTick } from 'vue'
 
 const questions = [
-  { icon: '🤔', text: '给我想一个请假的理由', type: 'casual' },
-  { icon: '🐍', text: '帮我写一个 Python 爬虫', type: 'code' },
-  { icon: '🎩', text: '用鲁迅的语气夸我', type: 'casual' },
-  { icon: '📊', text: '分析这份销售数据的趋势', type: 'analysis' },
-  { icon: '📝', text: '为这款咖啡杯写一段小红书文案', type: 'marketing' }
+  { icon: '🤔', text: 'Nghĩ giúp tôi một lý do xin nghỉ', type: 'casual' },
+  { icon: '🐍', text: 'Viết giúp tôi một crawler Python', type: 'code' },
+  { icon: '🎩', text: 'Khen tôi theo phong cách Lỗ Tấn', type: 'casual' },
+  { icon: '📊', text: 'Phân tích xu hướng dữ liệu bán hàng này', type: 'analysis' },
+  { icon: '📝', text: 'Viết bài quảng cáo ngắn cho chiếc cốc cà phê này', type: 'marketing' }
 ]
 
 const answers = {
-  给我想一个请假的理由: {
+  'Nghĩ giúp tôi một lý do xin nghỉ': {
     isCode: false,
-    text: '老板，我感觉身体不适，可能是昨天写代码太投入，CPU（大脑）过热导致系统（身体）宕机了，申请重启（休息）一天。'
+    text: 'Sếp ơi, em thấy người hơi mệt, chắc hôm qua code hăng quá, CPU (não) bị quá nhiệt khiến hệ thống (cơ thể) bị treo. Em xin nghỉ một ngày để reboot (nghỉ ngơi) ạ.'
   },
-  '帮我写一个 Python 爬虫': {
+  'Viết giúp tôi một crawler Python': {
     isCode: true,
     text: `import requests
 from bs4 import BeautifulSoup
@@ -113,28 +113,28 @@ from bs4 import BeautifulSoup
 def fetch_titles(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    
-    # 提取所有 h1 标签
+
+    # Lấy toàn bộ thẻ h1
     titles = [tag.text.strip() for tag in soup.find_all('h1')]
     return titles
 
-# 使用示例
+# Ví dụ sử dụng
 url = "https://example.com"
-print(f"正在爬取 {url} 的标题...")
+print(f"Đang crawl tiêu đề của {url}...")
 # titles = fetch_titles(url)
 # print(titles)`
   },
-  用鲁迅的语气夸我: {
+  'Khen tôi theo phong cách Lỗ Tấn': {
     isCode: false,
-    text: '我向来是不惮以最坏的恶意来推测中国人的，然而我还不料，也不信竟会遇见这样优秀的人。你的代码，很有几分风骨。'
+    text: 'Tôi vốn chẳng ngại đoán định bằng ác ý lớn nhất, nhưng quả thật không ngờ, cũng chẳng tin rằng mình gặp được một người ưu tú đến thế. Code của bạn, có chút phong cốt.'
   },
-  分析这份销售数据的趋势: {
+  'Phân tích xu hướng dữ liệu bán hàng này': {
     isCode: false,
-    text: '基于您提供的数据，我发现以下几个关键趋势：\n\n1. 📈 **总体增长**：Q3 销售额同比增长了 25%，主要得益于线上渠道的爆发。\n2. ⚠️ **库存预警**：热销品类 A 的周转天数已降至 5 天，建议立即补货。\n3. 💡 **潜力市场**：华南地区的转化率（3.2%）显著高于平均水平，建议加大该区域的广告投放。'
+    text: 'Dựa trên dữ liệu bạn cung cấp, mình thấy các xu hướng chính sau:\n\n1. 📈 **Tăng trưởng tổng thể**: Doanh số Q3 tăng 25% so với cùng kỳ, chủ yếu nhờ kênh online bùng nổ.\n2. ⚠️ **Cảnh báo tồn kho**: Số ngày tồn kho của ngành hàng A đã giảm còn 5 ngày, nên nhập thêm hàng ngay.\n3. 💡 **Thị trường tiềm năng**: Tỷ lệ chuyển đổi ở khu vực Hoa Nam (3.2%) cao hơn đáng kể mức trung bình, nên tăng ngân sách quảng cáo cho khu vực này.'
   },
-  为这款咖啡杯写一段小红书文案: {
+  'Viết bài quảng cáo ngắn cho chiếc cốc cà phê này': {
     isCode: false,
-    text: '☕️ **早八人的续命神器！这款咖啡杯真的太懂我了**\n\n家人们谁懂啊！😭 作为一个每天靠咖啡续命的打工人，终于挖到了这款宝藏杯子！\n\n✨ **颜值绝绝子**：奶油白配色，拿在手里就是妥妥的 ins 风，摆在工位上心情都变好了！\n🌡️ **保温超长待机**：早上泡的冰美式，下午还是冰冰凉，这也太适合夏天了吧！\n🔒 **密封不漏水**：直接塞包里也不怕洒，挤地铁必备！\n\n👇 评论区蹲一个链接，带你一起实现咖啡自由！ #好物分享 #高颜值水杯 #打工人日常'
+    text: '☕️ **Vũ khí cứu sinh cho hội đi làm sớm! Chiếc cốc cà phê này quá hiểu mình**\n\nCả nhà ơi! 😭 Là một người dân văn phòng sống nhờ cà phê mỗi ngày, cuối cùng mình cũng tìm ra chiếc cốc bảo vật này!\n\n✨ **Xinh hết nấc**: Tông trắng kem, cầm trên tay là thần thái Instagram, đặt lên bàn làm việc tự nhiên thấy vui.\n🌡️ **Giữ nhiệt cực lâu**: Sáng pha iced americano, chiều vẫn lạnh, quá hợp mùa hè.\n🔒 **Kín, không rò rỉ**: Nhét vào balo cũng không sợ đổ, đi xe buýt cực tiện.\n\n👇 Để link dưới phần bình luận nhé, cùng nhau "tự do cà phê"! #goodthings #cocxinhdep #vanphong'
   }
 }
 
@@ -149,7 +149,7 @@ const ask = async (qObj) => {
   await wait(600)
 
   const answerData = answers[qObj.text]
-  const fullAnswer = answerData ? answerData.text : '正在思考...'
+  const fullAnswer = answerData ? answerData.text : 'Đang suy nghĩ...'
 
   messages.value.push({
     role: 'assistant',

@@ -2,7 +2,7 @@
   <div class="demo">
     <div class="header">
       <span class="icon">⚠️</span>
-      <span class="title">错误响应设计进阶</span>
+      <span class="title">Thiết kế response lỗi nâng cao</span>
     </div>
 
     <div class="tabs">
@@ -18,21 +18,21 @@
 
     <div class="content">
       <div v-if="active === 'validate'" class="section">
-        <h4>参数校验错误</h4>
+        <h4>Lỗi kiểm tra tham số</h4>
         <pre class="code-block">
 {
   "code": 10001,
-  "message": "参数校验失败",
+  "message": "Kiểm tra tham số thất bại",
   "data": {
     "errors": [
       {
         "field": "email",
-        "message": "邮箱格式不正确",
+        "message": "Sai định dạng email",
         "value": "invalid-email"
       },
       {
         "field": "password",
-        "message": "密码长度至少 8 位",
+        "message": "Mật khẩu tối thiểu 8 ký tự",
         "value": "123"
       }
     ]
@@ -41,102 +41,102 @@
         <div class="field-tips">
           <div class="tip-row">
             <code>field</code>
-            <span>出错字段名，前端可定位表单</span>
+            <span>Tên field bị lỗi, frontend có thể định vị tới form</span>
           </div>
           <div class="tip-row">
             <code>message</code>
-            <span>用户友好的错误描述</span>
+            <span>Mô tả lỗi thân thiện với người dùng</span>
           </div>
           <div class="tip-row">
             <code>value</code>
-            <span>客户端提交的值（可选）</span>
+            <span>Giá trị client đã gửi (tùy chọn)</span>
           </div>
         </div>
       </div>
 
       <div v-if="active === 'business'" class="section">
-        <h4>业务错误</h4>
+        <h4>Lỗi nghiệp vụ</h4>
         <pre class="code-block">
 {
   "code": 20001,
-  "message": "余额不足",
+  "message": "Số dư không đủ",
   "data": {
     "current_balance": 50.00,
     "required_amount": 99.00,
     "shortfall": 49.00,
-    "suggestion": "请充值后重试"
+    "suggestion": "Vui lòng nạp thêm rồi thử lại"
   }
 }</pre>
         <div class="business-tips">
-          <div class="b-tip">✓ 返回当前状态数据，便于前端展示</div>
-          <div class="b-tip">✓ 提供 suggestion 给出解决建议</div>
-          <div class="b-tip">✓ 数据结构化，前端可灵活展示</div>
+          <div class="b-tip">✓ Trả về dữ liệu trạng thái hiện tại, tiện hiển thị</div>
+          <div class="b-tip">✓ Có suggestion gợi ý cách giải quyết</div>
+          <div class="b-tip">✓ Dữ liệu có cấu trúc, frontend hiển thị linh hoạt</div>
         </div>
       </div>
 
       <div v-if="active === 'layers'" class="section">
-        <h4>错误码分层设计</h4>
+        <h4>Thiết kế phân lớp mã lỗi</h4>
         <div class="layer-list">
           <div v-for="layer in layers" :key="layer.range" class="layer-item">
             <div class="layer-range">{{ layer.range }}</div>
             <div class="layer-info">
               <div class="layer-name">{{ layer.name }}</div>
-              <div class="layer-example">示例：{{ layer.example }}</div>
+              <div class="layer-example">Ví dụ: {{ layer.example }}</div>
             </div>
             <div class="layer-desc">{{ layer.desc }}</div>
           </div>
         </div>
         <div class="layer-note">
-          错误码从外到内：系统 → 服务 → 业务 → 认证 → 参数
+          Mã lỗi từ ngoài vào trong: hệ thống → service → nghiệp vụ → xác thực → tham số
         </div>
       </div>
 
       <div v-if="active === 'http'" class="section">
-        <h4>HTTP 状态码 vs 业务状态码</h4>
+        <h4>HTTP status code vs mã trạng thái nghiệp vụ</h4>
         <div class="http-compare">
           <div class="http-col">
-            <div class="http-title">HTTP 状态码</div>
-            <div class="http-desc">传输层状态</div>
+            <div class="http-title">HTTP status code</div>
+            <div class="http-desc">Trạng thái tầng truyền tải</div>
             <div class="http-codes">
               <div class="http-code">
                 <span class="code-num">2xx</span>
-                <span>请求成功</span>
+                <span>Request thành công</span>
               </div>
               <div class="http-code">
                 <span class="code-num">4xx</span>
-                <span>客户端错误</span>
+                <span>Lỗi từ client</span>
               </div>
               <div class="http-code">
                 <span class="code-num">5xx</span>
-                <span>服务端错误</span>
+                <span>Lỗi từ server</span>
               </div>
             </div>
           </div>
           <div class="http-arrow">→</div>
           <div class="http-col">
-            <div class="http-title">业务状态码</div>
-            <div class="http-desc">业务层状态</div>
+            <div class="http-title">Mã trạng thái nghiệp vụ</div>
+            <div class="http-desc">Trạng thái tầng nghiệp vụ</div>
             <div class="http-codes">
               <div class="http-code">
                 <span class="code-num">0</span>
-                <span>业务成功</span>
+                <span>Nghiệp vụ thành công</span>
               </div>
               <div class="http-code">
                 <span class="code-num">1xxxx</span>
-                <span>参数错误</span>
+                <span>Lỗi tham số</span>
               </div>
               <div class="http-code">
                 <span class="code-num">2xxxx</span>
-                <span>业务错误</span>
+                <span>Lỗi nghiệp vụ</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="http-note">HTTP 200 + 业务错误码 是业界主流做法</div>
+        <div class="http-note">HTTP 200 + mã lỗi nghiệp vụ là cách phổ biến trong ngành</div>
       </div>
 
       <div v-if="active === 'examples'" class="section">
-        <h4>常见错误码示例</h4>
+        <h4>Ví dụ các mã lỗi thường gặp</h4>
         <div class="ex-tabs">
           <button
             v-for="ex in examples"
@@ -164,7 +164,7 @@
 
     <div class="tips">
       <span class="tips-icon">💡</span>
-      <span class="tips-text">错误信息要"机器可读 + 人类友好"，便于前端统一处理</span>
+      <span class="tips-text">Thông tin lỗi cần "máy đọc được + thân thiện với người dùng" để frontend xử lý đồng nhất</span>
     </div>
   </div>
 </template>
@@ -176,84 +176,84 @@ const active = ref('validate')
 const exId = ref('param')
 
 const tabs = [
-  { id: 'validate', icon: '🔍', name: '参数校验' },
-  { id: 'business', icon: '💼', name: '业务错误' },
-  { id: 'layers', icon: '📊', name: '分层设计' },
-  { id: 'http', icon: '🌐', name: 'HTTP对比' },
-  { id: 'examples', icon: '📋', name: '常见示例' }
+  { id: 'validate', icon: '🔍', name: 'Kiểm tra tham số' },
+  { id: 'business', icon: '💼', name: 'Lỗi nghiệp vụ' },
+  { id: 'layers', icon: '📊', name: 'Phân lớp' },
+  { id: 'http', icon: '🌐', name: 'So sánh HTTP' },
+  { id: 'examples', icon: '📋', name: 'Ví dụ thường gặp' }
 ]
 
 const layers = [
   {
     range: '50001-59999',
-    name: '系统层',
-    example: '50001 数据库异常',
-    desc: '基础设施问题'
+    name: 'Lớp hệ thống',
+    example: '50001 Lỗi database',
+    desc: 'Vấn đề về hạ tầng'
   },
   {
     range: '40001-49999',
-    name: '服务层',
-    example: '40001 第三方服务超时',
-    desc: '外部依赖问题'
+    name: 'Lớp service',
+    example: '40001 Service bên thứ ba timeout',
+    desc: 'Vấn đề về dependency bên ngoài'
   },
   {
     range: '30001-39999',
-    name: '认证层',
-    example: '30001 未登录',
-    desc: '身份权限问题'
+    name: 'Lớp xác thực',
+    example: '30001 Chưa đăng nhập',
+    desc: 'Vấn đề định danh, phân quyền'
   },
   {
     range: '20001-29999',
-    name: '业务层',
-    example: '20001 余额不足',
-    desc: '业务规则校验'
+    name: 'Lớp nghiệp vụ',
+    example: '20001 Số dư không đủ',
+    desc: 'Kiểm tra quy tắc nghiệp vụ'
   },
   {
     range: '10001-19999',
-    name: '参数层',
-    example: '10001 参数缺失',
-    desc: '客户端输入问题'
+    name: 'Lớp tham số',
+    example: '10001 Thiếu tham số',
+    desc: 'Vấn đề đầu vào của client'
   }
 ]
 
 const examples = [
   {
     id: 'param',
-    name: '参数层',
+    name: 'Lớp tham số',
     items: [
-      { code: 10001, message: '缺少必填参数' },
-      { code: 10002, message: '参数格式错误' },
-      { code: 10003, message: '参数长度超限' },
-      { code: 10004, message: '参数值非法' }
+      { code: 10001, message: 'Thiếu tham số bắt buộc' },
+      { code: 10002, message: 'Sai định dạng tham số' },
+      { code: 10003, message: 'Tham số vượt giới hạn độ dài' },
+      { code: 10004, message: 'Giá trị tham số không hợp lệ' }
     ]
   },
   {
     id: 'auth',
-    name: '认证层',
+    name: 'Lớp xác thực',
     items: [
-      { code: 30001, message: '未登录' },
-      { code: 30002, message: '登录已过期' },
-      { code: 30003, message: '无权限访问' },
-      { code: 30004, message: '账号已被禁用' }
+      { code: 30001, message: 'Chưa đăng nhập' },
+      { code: 30002, message: 'Phiên đăng nhập đã hết hạn' },
+      { code: 30003, message: 'Không có quyền truy cập' },
+      { code: 30004, message: 'Tài khoản đã bị khóa' }
     ]
   },
   {
     id: 'biz',
-    name: '业务层',
+    name: 'Lớp nghiệp vụ',
     items: [
-      { code: 20001, message: '余额不足' },
-      { code: 20002, message: '商品已下架' },
-      { code: 20003, message: '订单已取消' },
-      { code: 20004, message: '库存不足' }
+      { code: 20001, message: 'Số dư không đủ' },
+      { code: 20002, message: 'Sản phẩm đã ngừng bán' },
+      { code: 20003, message: 'Đơn hàng đã bị hủy' },
+      { code: 20004, message: 'Tồn kho không đủ' }
     ]
   },
   {
     id: 'sys',
-    name: '系统层',
+    name: 'Lớp hệ thống',
     items: [
-      { code: 50001, message: '数据库异常' },
-      { code: 50002, message: '缓存服务异常' },
-      { code: 50003, message: '系统繁忙，请稍后重试' }
+      { code: 50001, message: 'Lỗi database' },
+      { code: 50002, message: 'Lỗi dịch vụ cache' },
+      { code: 50003, message: 'Hệ thống bận, vui lòng thử lại sau' }
     ]
   }
 ]

@@ -4,17 +4,17 @@
       <div class="qkv-item query">
         <div class="icon">🔍</div>
         <div class="name">Query</div>
-        <div class="desc">我想找什么</div>
+        <div class="desc">Tôi đang muốn tìm gì</div>
       </div>
       <div class="qkv-item key">
         <div class="icon">🔑</div>
         <div class="name">Key</div>
-        <div class="desc">我是什么</div>
+        <div class="desc">Tôi là gì</div>
       </div>
       <div class="qkv-item value">
         <div class="icon">💎</div>
         <div class="name">Value</div>
-        <div class="desc">我的内容</div>
+        <div class="desc">Nội dung của tôi</div>
       </div>
     </div>
     <div class="formula">

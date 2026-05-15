@@ -27,13 +27,13 @@
         :disabled="currentStep >= steps.length"
         @click="nextStep"
       >
-        {{ currentStep >= steps.length ? '已完成' : '下一步' }}
+        {{ currentStep >= steps.length ? 'Đã hoàn thành' : 'Tiếp theo' }}
       </button>
       <button
         class="action-btn outline"
         @click="reset"
       >
-        重置
+        Đặt lại
       </button>
     </div>
     
@@ -56,17 +56,17 @@ const currentStep = ref(0)
 
 const steps = [
   {
-    title: '获取 AccessKey',
-    desc: '在控制台创建 AccessKey ID 和 Secret',
-    codeTitle: '配置凭证',
-    code: `// 环境变量设置
+    title: 'Lấy AccessKey',
+    desc: 'Tạo AccessKey ID và Secret trong console',
+    codeTitle: 'Cấu hình credentials',
+    code: `// Thiết lập biến môi trường
 export ALIYUN_ACCESS_KEY_ID=your_key_id
 export ALIYUN_ACCESS_KEY_SECRET=your_secret`
   },
   {
-    title: '安装 SDK',
-    desc: '安装对应语言的云服务 SDK',
-    codeTitle: '安装依赖',
+    title: 'Cài đặt SDK',
+    desc: 'Cài SDK cloud service cho ngôn ngữ tương ứng',
+    codeTitle: 'Cài đặt dependencies',
     code: `# Python
 pip install alibabacloud-ecs20140526
 
@@ -74,15 +74,15 @@ pip install alibabacloud-ecs20140526
 npm install @alicloud/ecs20140526`
   },
   {
-    title: '编写调用代码',
-    desc: '使用 SDK 调用云服务 API',
-    codeTitle: '调用示例',
+    title: 'Viết code gọi API',
+    desc: 'Dùng SDK để gọi cloud service API',
+    codeTitle: 'Ví dụ gọi API',
     code: `from alibabacloud_ecs20140526 import models as ecs_models
 
-# 创建客户端
+# Tạo client
 client = create_client()
 
-# 调用 API
+# Gọi API
 response = client.describe_instances(
   ecs_models.DescribeInstancesRequest()
 )
@@ -90,15 +90,15 @@ response = client.describe_instances(
 print(response.body)`
   },
   {
-    title: '处理响应',
-    desc: '解析 API 返回的数据',
-    codeTitle: '处理结果',
-    code: `// 解析响应
+    title: 'Xử lý response',
+    desc: 'Parse dữ liệu API trả về',
+    codeTitle: 'Xử lý kết quả',
+    code: `// Parse response
 instances = response.body.instances.instance
 
 for inst in instances:
     print(f"ID: {inst.instance_id}")
-    print(f"状态: {inst.status}")
+    print(f"Trạng thái: {inst.status}")
     print(f"IP: {inst.public_ip_address}")`
   }
 ]

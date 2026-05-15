@@ -1,12 +1,12 @@
 <!--
-  ApiConceptDemo.vue - 紧凑版
-  目标：直观演示 API 的基本要素：地址 + 参数
+  ApiConceptDemo.vue - bản gọn
+  Mục tiêu: minh họa trực quan các thành phần cơ bản của API: địa chỉ + tham số
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">🔧</span>
-      <span class="title">调用 API 需要什么？</span>
+      <span class="title">Gọi API cần những gì?</span>
     </div>
 
     <div class="demo-layout">
@@ -14,7 +14,7 @@
         <div class="step">
           <div class="step-header">
             <span class="step-num">1</span>
-            <span class="step-title">地址 (Endpoint)</span>
+            <span class="step-title">Địa chỉ (Endpoint)</span>
           </div>
           <div class="url-bar">
             <span class="url-base">https://api.example.com</span>
@@ -30,17 +30,17 @@
         <div class="step">
           <div class="step-header">
             <span class="step-num">2</span>
-            <span class="step-title">参数 (Params)</span>
+            <span class="step-title">Tham số (Params)</span>
           </div>
           <div class="params-row">
-            <label>页码:</label>
+            <label>Trang:</label>
             <input
               v-model.number="page"
               type="number"
               class="param-input"
               min="1"
             />
-            <label>每页:</label>
+            <label>Mỗi trang:</label>
             <input
               v-model.number="limit"
               type="number"
@@ -52,7 +52,7 @@
         </div>
 
         <button class="send-btn" :disabled="loading" @click="sendRequest">
-          {{ loading ? '发送中...' : '🚀 发送请求' }}
+          {{ loading ? 'Đang gửi...' : '🚀 Gửi request' }}
         </button>
       </div>
 
@@ -69,19 +69,19 @@
           >
             {{ response.status }} {{ response.statusText }}
           </span>
-          <span v-else class="status-badge pending">等待请求</span>
+          <span v-else class="status-badge pending">Đang chờ request</span>
         </div>
         <div v-if="response" class="response-body">
           <pre>{{ JSON.stringify(response.data, null, 2) }}</pre>
         </div>
-        <div v-else class="response-empty">点击发送按钮查看结果</div>
+        <div v-else class="response-empty">Nhấn nút gửi để xem kết quả</div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>无论哪种 API，结构都一样：地址（找谁）+ 参数（要什么）=
-        响应（得到什么）。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Dù là API kiểu nào, cấu trúc cũng giống nhau: địa chỉ (tìm ai) + tham số (cần gì) =
+        response (nhận về cái gì).</span>
     </div>
   </div>
 </template>
@@ -106,7 +106,7 @@ function sendRequest() {
       for (let i = 1; i <= actualLimit; i++) {
         users.push({
           id: i,
-          name: `用户${(page.value - 1) * limit.value + i}`
+          name: `Người dùng ${(page.value - 1) * limit.value + i}`
         })
       }
       response.value = {
@@ -118,7 +118,7 @@ function sendRequest() {
       response.value = {
         status: 404,
         statusText: 'Not Found',
-        data: { error: '找不到这个接口' }
+        data: { error: 'Không tìm thấy endpoint này' }
       }
     }
     loading.value = false

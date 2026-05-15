@@ -12,10 +12,10 @@
 
 <script setup>
 const items = [
-  { icon: '🔄', title: 'RNN 的困境', desc: '顺序处理，长距离依赖衰减' },
-  { icon: '⚡', title: 'Transformer 突破', desc: '并行计算，全局注意力' },
-  { icon: '🎯', title: '注意力机制', desc: '动态关注重要信息' },
-  { icon: '🚀', title: '大模型基石', desc: 'GPT、BERT 的核心架构' },
+  { icon: '🔄', title: 'Khó khăn của RNN', desc: 'Xử lý tuần tự, phụ thuộc xa bị suy giảm' },
+  { icon: '⚡', title: 'Đột phá Transformer', desc: 'Tính toán song song, attention toàn cục' },
+  { icon: '🎯', title: 'Cơ chế attention', desc: 'Chú ý động vào thông tin quan trọng' },
+  { icon: '🚀', title: 'Nền tảng mô hình lớn', desc: 'Kiến trúc cốt lõi của GPT, BERT' },
 ]
 </script>
 

@@ -1,15 +1,15 @@
 <template>
   <div class="compute-services-demo">
     <div class="demo-header">
-      <h4>计算服务选型指南</h4>
+      <h4>Hướng dẫn chọn dịch vụ Compute</h4>
       <p class="demo-desc">
-        拖动滑块调整场景参数，获取最佳计算方案
+        Kéo slider để điều chỉnh tham số use case, nhận giải pháp compute tốt nhất
       </p>
     </div>
 
     <div class="scenario-sliders">
       <div class="slider-group">
-        <label>负载稳定性</label>
+        <label>Mức ổn định của workload</label>
         <input
           v-model.number="scenario.stability"
           type="range"
@@ -17,13 +17,13 @@
           max="100"
         >
         <div class="slider-labels">
-          <span>波动大</span>
-          <span>非常稳定</span>
+          <span>Biến động lớn</span>
+          <span>Rất ổn định</span>
         </div>
       </div>
 
       <div class="slider-group">
-        <label>平均负载率</label>
+        <label>Tỉ lệ utilization trung bình</label>
         <input
           v-model.number="scenario.utilization"
           type="range"
@@ -31,13 +31,13 @@
           max="100"
         >
         <div class="slider-labels">
-          <span>很低</span>
-          <span>接近100%</span>
+          <span>Rất thấp</span>
+          <span>Gần 100%</span>
         </div>
       </div>
 
       <div class="slider-group">
-        <label>任务持续时间</label>
+        <label>Thời gian task kéo dài</label>
         <input
           v-model.number="scenario.duration"
           type="range"
@@ -45,13 +45,13 @@
           max="100"
         >
         <div class="slider-labels">
-          <span>几分钟</span>
-          <span>持续运行</span>
+          <span>Vài phút</span>
+          <span>Chạy liên tục</span>
         </div>
       </div>
 
       <div class="slider-group">
-        <label>流量突发程度</label>
+        <label>Mức độ traffic burst</label>
         <input
           v-model.number="scenario.burstiness"
           type="range"
@@ -59,8 +59,8 @@
           max="100"
         >
         <div class="slider-labels">
-          <span>平稳</span>
-          <span>大起大落</span>
+          <span>Ổn định</span>
+          <span>Tăng giảm mạnh</span>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="recommendation-panel">
       <div class="recommendation-title">
         <span class="icon">🎯</span>
-        推荐方案
+        Giải pháp đề xuất
       </div>
 
       <div class="solution-cards">
@@ -100,7 +100,7 @@
               v-if="solution.savings"
               class="solution-savings"
             >
-              💰 预计节省: {{ solution.savings }}
+              💰 Ước tính tiết kiệm: {{ solution.savings }}
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="scenario-presets">
-      <span class="preset-label">快速场景:</span>
+      <span class="preset-label">Use case nhanh:</span>
       <button
         v-for="preset in presets"
         :key="preset.name"
@@ -133,23 +133,23 @@ const scenario = ref({
 
 const presets = [
   {
-    name: '电商大促',
+    name: 'E-commerce flash sale',
     values: { stability: 20, utilization: 40, duration: 90, burstiness: 90 }
   },
   {
-    name: '企业内部系统',
+    name: 'Hệ thống nội bộ doanh nghiệp',
     values: { stability: 90, utilization: 70, duration: 95, burstiness: 10 }
   },
   {
-    name: '初创公司官网',
+    name: 'Website startup',
     values: { stability: 40, utilization: 20, duration: 80, burstiness: 30 }
   },
   {
-    name: '数据处理任务',
+    name: 'Data processing job',
     values: { stability: 30, utilization: 95, duration: 10, burstiness: 80 }
   },
   {
-    name: 'SaaS 平台',
+    name: 'Nền tảng SaaS',
     values: { stability: 60, utilization: 50, duration: 95, burstiness: 60 }
   }
 ]
@@ -162,7 +162,7 @@ const recommendations = computed(() => {
   const s = scenario.value
   const solutions = []
 
-  // 计算各方案得分
+  // Tính điểm cho từng giải pháp
   let serverlessScore = 0
   let ec2Score = 0
   let spotScore = 0
@@ -174,22 +174,22 @@ const recommendations = computed(() => {
   if (s.utilization < 30) serverlessScore += 20
   if (s.stability < 30) serverlessScore += 15
 
-  // Spot 实例
+  // Spot instance
   if (s.burstiness > 60) spotScore += 25
   if (s.stability < 40) spotScore += 30
   if (s.duration < 40) spotScore += 20
   if (s.utilization < 50) spotScore += 15
 
-  // 预留实例
+  // Reserved instance
   if (s.stability > 70) reservedScore += 35
   if (s.duration > 80) reservedScore += 25
   if (s.utilization > 60) reservedScore += 20
   if (s.burstiness < 30) reservedScore += 10
 
-  // 按需实例 (兜底)
+  // On-demand (fallback)
   ec2Score = 40
 
-  // 排序并生成推荐
+  // Sắp xếp và sinh đề xuất
   const scores = [
     { type: 'serverless', score: serverlessScore, savings: '40-70%' },
     { type: 'spot', score: spotScore, savings: '60-90%' },
@@ -199,28 +199,28 @@ const recommendations = computed(() => {
 
   const solutionMap = {
     serverless: {
-      name: '无服务器架构',
+      name: 'Serverless Architecture',
       aws: 'AWS Lambda',
-      aliyun: '函数计算 FC',
-      reason: '流量波动大、任务短时，按调用计费最划算，自动扩缩容免运维'
+      aliyun: 'Function Compute FC',
+      reason: 'Traffic biến động lớn, task ngắn, tính phí theo lượt gọi tiết kiệm nhất, auto-scaling không cần quản lý'
     },
     spot: {
-      name: '竞价实例',
+      name: 'Spot Instance',
       aws: 'EC2 Spot',
-      aliyun: '抢占式实例',
-      reason: '可容忍中断的计算任务，价格极低，适合批处理、渲染等场景'
+      aliyun: 'Preemptible Instance',
+      reason: 'Task có thể chịu bị ngắt, giá cực thấp, phù hợp batch processing, rendering'
     },
     reserved: {
-      name: '预留实例',
+      name: 'Reserved Instance',
       aws: 'Reserved Instances',
-      aliyun: '包年包月',
-      reason: '长期稳定负载，提前承诺使用时长换取大幅折扣，成本最优'
+      aliyun: 'Subscription (yearly/monthly)',
+      reason: 'Workload ổn định dài hạn, cam kết thời gian dùng trước để được giảm giá mạnh, chi phí tối ưu nhất'
     },
     ondemand: {
-      name: '按需实例',
+      name: 'On-Demand Instance',
       aws: 'EC2 On-Demand',
-      aliyun: '按量付费 ECS',
-      reason: '灵活性最高，按小时计费，适合测试环境或 unpredictable 负载'
+      aliyun: 'Pay-as-you-go ECS',
+      reason: 'Linh hoạt nhất, tính phí theo giờ, phù hợp môi trường test hoặc workload unpredictable'
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="ast-visualizer-demo">
-    <h4>🌳 AST 可视化：看见代码的"骨架"</h4>
-    <p class="desc">选择一个表达式，观察它的抽象语法树结构</p>
+    <h4>🌳 Trực quan hóa AST: nhìn thấy "bộ khung" của code</h4>
+    <p class="desc">Chọn một biểu thức, quan sát cấu trúc cây cú pháp trừu tượng của nó</p>
 
     <div class="expr-selector">
       <button
@@ -16,7 +16,7 @@
 
     <div class="ast-container">
       <div class="tree-view">
-        <div class="tree-title">语法树</div>
+        <div class="tree-title">Cây cú pháp</div>
         <div class="tree-nodes">
           <ASTNode
             :node="expressions[selected].tree"
@@ -26,7 +26,7 @@
       </div>
 
       <div class="explain-view">
-        <div class="explain-title">解析说明</div>
+        <div class="explain-title">Giải thích phân tích</div>
         <div class="explain-list">
           <div v-for="(step, j) in expressions[selected].explains" :key="j" class="explain-item">
             <span class="explain-num">{{ j + 1 }}</span>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="tool-tip">
-          💡 试试 <a href="https://astexplorer.net/" target="_blank">AST Explorer</a> — 在线查看任意代码的 AST
+          💡 Hãy thử <a href="https://astexplorer.net/" target="_blank">AST Explorer</a> — xem AST của bất kỳ đoạn code nào ngay trên trình duyệt
         </div>
       </div>
     </div>
@@ -89,10 +89,10 @@ const expressions = [
       ]
     },
     explains: [
-      '* 优先级高于 +，所以 2 * 3 先结合',
-      '2 * 3 形成一个 BinaryExpression 子树',
-      '1 和这个子树作为 + 的左右操作数',
-      '最终 + 是根节点，体现了运算顺序'
+      'Phép * có độ ưu tiên cao hơn +, nên 2 * 3 được kết hợp trước',
+      '2 * 3 tạo thành một cây con BinaryExpression',
+      '1 và cây con này là toán hạng trái/phải của phép +',
+      'Cuối cùng + là nút gốc, thể hiện thứ tự phép toán'
     ]
   },
   {
@@ -110,10 +110,10 @@ const expressions = [
       ]
     },
     explains: [
-      'let 声明创建 VariableDeclaration 节点',
-      '内部包含一个 VariableDeclarator（声明器）',
-      '声明器左侧是标识符 x，右侧是初始值 10',
-      '树结构清晰表达了"把 10 赋给 x"的语义'
+      'Khai báo let tạo ra nút VariableDeclaration',
+      'Bên trong chứa một VariableDeclarator (bộ khai báo)',
+      'Bên trái bộ khai báo là định danh x, bên phải là giá trị khởi tạo 10',
+      'Cấu trúc cây diễn đạt rõ ngữ nghĩa "gán 10 cho x"'
     ]
   },
   {
@@ -132,10 +132,10 @@ const expressions = [
       ]
     },
     explains: [
-      '函数调用创建 CallExpression 节点',
-      '被调用的函数名 add 是 Identifier',
-      '参数列表 (a, b) 形成 Arguments 节点',
-      '每个参数都是独立的 Identifier 子节点'
+      'Lời gọi hàm tạo ra nút CallExpression',
+      'Tên hàm được gọi add là một Identifier',
+      'Danh sách tham số (a, b) tạo thành nút Arguments',
+      'Mỗi tham số là một nút con Identifier độc lập'
     ]
   }
 ]

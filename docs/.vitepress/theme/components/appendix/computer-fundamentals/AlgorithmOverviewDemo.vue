@@ -1,24 +1,24 @@
 <template>
   <div class="algorithm-overview-demo">
     <div class="demo-header">
-      <span class="title">算法思维入门</span>
-      <span class="subtitle">解决问题的一套步骤和方法</span>
+      <span class="title">Nhập môn tư duy thuật toán</span>
+      <span class="subtitle">Bộ các bước và phương pháp để giải quyết vấn đề</span>
     </div>
 
     <div class="analogy-box">
       <div class="analogy-content">
         <div class="analogy-icon">📖</div>
         <div class="analogy-text">
-          <strong>算法就像菜谱：</strong><br />
-          食材 = 数据<br />
-          烹饪步骤 = 算法<br />
-          美味菜肴 = 结果
+          <strong>Thuật toán giống như công thức nấu ăn:</strong><br />
+          Nguyên liệu = Dữ liệu<br />
+          Các bước nấu = Thuật toán<br />
+          Món ngon = Kết quả
         </div>
       </div>
     </div>
 
     <div class="algorithm-categories">
-      <div class="category-title">常见算法类型</div>
+      <div class="category-title">Các loại thuật toán thường gặp</div>
       <div class="category-grid">
         <div
           v-for="category in categories"
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <!-- 算法详解 -->
+    <!-- Giải thích chi tiết thuật toán -->
     <div v-if="activeCategory" class="algorithm-detail">
       <div class="detail-header">
         <span class="detail-icon">{{ currentCategory.icon }}</span>
@@ -42,12 +42,12 @@
 
       <div class="detail-content">
         <div class="detail-section">
-          <div class="section-title">核心思想</div>
+          <div class="section-title">Ý tưởng cốt lõi</div>
           <div class="section-text">{{ currentCategory.idea }}</div>
         </div>
 
         <div class="detail-section">
-          <div class="section-title">生活类比</div>
+          <div class="section-title">Ví dụ đời thường</div>
           <div class="analogy-card">
             <div class="analogy-scenario">
               {{ currentCategory.analogy.scenario }}
@@ -59,7 +59,7 @@
         </div>
 
         <div class="detail-section">
-          <div class="section-title">时间复杂度</div>
+          <div class="section-title">Độ phức tạp thời gian</div>
           <div class="complexity-display">
             <div class="complexity-bigO">{{ currentCategory.complexity }}</div>
             <div class="complexity-desc">
@@ -69,7 +69,7 @@
         </div>
 
         <div class="detail-section">
-          <div class="section-title">典型应用</div>
+          <div class="section-title">Ứng dụng tiêu biểu</div>
           <div class="app-list">
             <div
               v-for="(app, index) in currentCategory.applications"
@@ -83,9 +83,9 @@
       </div>
     </div>
 
-    <!-- 复杂度对比 -->
+    <!-- So sánh độ phức tạp -->
     <div class="complexity-comparison">
-      <div class="comparison-title">常见算法复杂度对比</div>
+      <div class="comparison-title">So sánh độ phức tạp các thuật toán thường gặp</div>
       <div class="comparison-chart">
         <div
           v-for="(item, index) in complexityChart"
@@ -104,28 +104,28 @@
       </div>
     </div>
 
-    <!-- 学习建议 -->
+    <!-- Gợi ý học tập -->
     <div class="learning-tips">
-      <div class="tips-title">算法学习建议</div>
+      <div class="tips-title">Gợi ý học thuật toán</div>
       <div class="tips-grid">
         <div class="tip-card">
           <div class="tip-icon">📚</div>
-          <div class="tip-title">理解优先</div>
-          <div class="tip-desc">先理解算法思想，再关注代码实现</div>
+          <div class="tip-title">Hiểu trước</div>
+          <div class="tip-desc">Hiểu tư tưởng thuật toán trước, rồi mới quan tâm cách viết code</div>
         </div>
         <div class="tip-card">
           <div class="tip-icon">✏️</div>
-          <div class="tip-title">动手实践</div>
-          <div class="tip-desc">自己实现一遍，加深理解</div>
+          <div class="tip-title">Thực hành</div>
+          <div class="tip-desc">Tự cài đặt một lần để hiểu sâu hơn</div>
         </div>
         <div class="tip-card">
           <div class="tip-icon">🔄</div>
-          <div class="tip-title">多次练习</div>
-          <div class="tip-desc">不同场景反复应用同一算法</div>
+          <div class="tip-title">Luyện tập nhiều lần</div>
+          <div class="tip-desc">Áp dụng cùng một thuật toán cho nhiều tình huống khác nhau</div>
         </div>
         <div class="tip-card">
-          <div class="tip-title">分析优化</div>
-          <div class="tip-desc">思考时间和空间复杂度，寻找优化方案</div>
+          <div class="tip-title">Phân tích và tối ưu</div>
+          <div class="tip-desc">Suy nghĩ về độ phức tạp thời gian, không gian và tìm cách tối ưu</div>
         </div>
       </div>
     </div>
@@ -140,91 +140,91 @@ const activeCategory = ref('search')
 const categories = [
   {
     id: 'search',
-    name: '查找算法',
+    name: 'Thuật toán tìm kiếm',
     icon: '🔍',
-    desc: '在一堆数据中找到目标',
-    idea: '从数据集合中找到特定元素的过程',
+    desc: 'Tìm mục tiêu trong một tập dữ liệu',
+    idea: 'Quá trình tìm phần tử cụ thể trong một tập dữ liệu',
     analogy: {
-      scenario: '在字典里查单词',
+      scenario: 'Tra từ trong từ điển',
       explanation:
-        '顺序查找 = 从第一页翻到最后一页；二分查找 = 直接翻到中间，判断在前半还是后半'
+        'Tìm tuần tự = lật từ trang đầu đến trang cuối; tìm nhị phân = mở thẳng vào giữa rồi xét nửa trước hay nửa sau'
     },
     complexity: 'O(log n)',
-    complexityDesc: '二分查找非常快，每次排除一半数据',
-    applications: ['搜索引擎', '数据库查询', '自动补全']
+    complexityDesc: 'Tìm nhị phân rất nhanh, mỗi bước loại bỏ một nửa dữ liệu',
+    applications: ['Công cụ tìm kiếm', 'Truy vấn cơ sở dữ liệu', 'Tự động hoàn thành']
   },
   {
     id: 'sort',
-    name: '排序算法',
+    name: 'Thuật toán sắp xếp',
     icon: '📊',
-    desc: '把数据按顺序排列',
-    idea: '将无序数据重新排列成有序序列',
+    desc: 'Sắp xếp dữ liệu theo thứ tự',
+    idea: 'Sắp xếp lại dữ liệu hỗn loạn thành dãy có thứ tự',
     analogy: {
-      scenario: '整理扑克牌',
+      scenario: 'Sắp xếp bộ bài',
       explanation:
-        '插入排序 = 每次拿一张牌插到正确的位置；快速排序 = 把牌分成大小两堆，递归整理'
+        'Sắp xếp chèn = mỗi lần lấy một lá bài chèn vào đúng vị trí; quicksort = chia bài thành hai đống lớn/nhỏ rồi sắp xếp đệ quy'
     },
     complexity: 'O(n log n)',
-    complexityDesc: '快速排序、归并排序是最高效的通用排序算法',
-    applications: ['排行榜', '文件排序', '数据可视化']
+    complexityDesc: 'Quicksort, merge sort là các thuật toán sắp xếp tổng quát hiệu quả nhất',
+    applications: ['Bảng xếp hạng', 'Sắp xếp file', 'Trực quan hóa dữ liệu']
   },
   {
     id: 'recursive',
-    name: '递归算法',
+    name: 'Thuật toán đệ quy',
     icon: '🔄',
-    desc: '自己调用自己',
-    idea: '将大问题分解为相同类型的小问题',
+    desc: 'Hàm tự gọi chính nó',
+    idea: 'Chia bài toán lớn thành những bài toán nhỏ cùng dạng',
     analogy: {
-      scenario: '俄罗斯套娃',
+      scenario: 'Búp bê matryoshka',
       explanation:
-        '打开一个大娃娃，里面有个小一点的娃娃，再打开还有更小的...直到最小的一个'
+        'Mở con búp bê lớn ra, bên trong là một con nhỏ hơn, mở tiếp lại có con nhỏ hơn nữa... cho đến con nhỏ nhất'
     },
-    complexity: 'O(log n) 到 O(2ⁿ)',
-    complexityDesc: '取决于问题类型，二分查找递归很快，斐波那契递归较慢',
-    applications: ['树遍历', '分治算法', '动态规划']
+    complexity: 'O(log n) đến O(2ⁿ)',
+    complexityDesc: 'Tùy bài toán: đệ quy tìm nhị phân rất nhanh, đệ quy Fibonacci khá chậm',
+    applications: ['Duyệt cây', 'Chia để trị', 'Quy hoạch động']
   },
   {
     id: 'greedy',
-    name: '贪心算法',
+    name: 'Thuật toán tham lam',
     icon: '🎯',
-    desc: '每步都选当前最优',
-    idea: '在每一步选择中都采取当前状态下最优的选择',
+    desc: 'Mỗi bước chọn phương án tối ưu hiện tại',
+    idea: 'Tại mỗi bước, chọn phương án tốt nhất theo trạng thái hiện tại',
     analogy: {
-      scenario: '找零钱',
+      scenario: 'Trả tiền thừa',
       explanation:
-        '找 37 元零钱：先拿一张 20（最大可能），再拿 10、5、1、1，每次都选最大的面值'
+        'Trả 37 đồng tiền thừa: lấy trước một tờ 20 (lớn nhất có thể), rồi 10, 5, 1, 1, mỗi lần chọn mệnh giá lớn nhất'
     },
-    complexity: 'O(n) 或 O(n log n)',
-    complexityDesc: '通常很快，但可能得不到全局最优解',
-    applications: ['最短路径', '背包问题', '任务调度']
+    complexity: 'O(n) hoặc O(n log n)',
+    complexityDesc: 'Thường rất nhanh nhưng có thể không cho lời giải tối ưu toàn cục',
+    applications: ['Đường đi ngắn nhất', 'Bài toán cái túi', 'Lập lịch tác vụ']
   },
   {
     id: 'dynamic',
-    name: '动态规划',
+    name: 'Quy hoạch động',
     icon: '📈',
-    desc: '保存中间结果避免重复',
-    idea: '将复杂问题分解为子问题，保存子问题的解',
+    desc: 'Lưu kết quả trung gian để tránh tính lại',
+    idea: 'Chia bài toán phức tạp thành các bài toán con, lưu lời giải của chúng',
     analogy: {
-      scenario: '爬楼梯',
+      scenario: 'Leo cầu thang',
       explanation:
-        '要爬到第 n 级，可以从 n-1 级跨 1 步，或从 n-2 级跨 2 步，记住之前的结果避免重复计算'
+        'Để lên bậc thứ n, có thể từ bậc n-1 bước 1 hoặc từ bậc n-2 bước 2; ghi nhớ kết quả trước đó để khỏi tính lại'
     },
-    complexity: 'O(n²) 或 O(n³)',
-    complexityDesc: '用空间换时间，比递归快很多',
-    applications: ['最短路径', '背包问题', '字符串匹配']
+    complexity: 'O(n²) hoặc O(n³)',
+    complexityDesc: 'Đánh đổi không gian lấy thời gian, nhanh hơn đệ quy nhiều',
+    applications: ['Đường đi ngắn nhất', 'Bài toán cái túi', 'So khớp chuỗi']
   }
 ]
 
 const complexityChart = [
-  { name: '二分查找', complexity: 'O(log n)', width: '10%', color: '#10b981' },
+  { name: 'Tìm nhị phân', complexity: 'O(log n)', width: '10%', color: '#10b981' },
   {
-    name: '快速排序',
+    name: 'Quicksort',
     complexity: 'O(n log n)',
     width: '25%',
     color: '#3b82f6'
   },
-  { name: '插入排序', complexity: 'O(n²)', width: '50%', color: '#f59e0b' },
-  { name: '暴力递归', complexity: 'O(2ⁿ)', width: '100%', color: '#ef4444' }
+  { name: 'Sắp xếp chèn', complexity: 'O(n²)', width: '50%', color: '#f59e0b' },
+  { name: 'Đệ quy thô', complexity: 'O(2ⁿ)', width: '100%', color: '#ef4444' }
 ]
 
 const currentCategory = computed(() =>

@@ -3,18 +3,18 @@
     <div class="comparison-grid">
       <div class="model-col">
         <div class="model-name">RNN / LSTM</div>
-        <div class="model-desc">顺序处理：词1 → 词2 → 词3</div>
+        <div class="model-desc">Xử lý tuần tự: từ 1 → từ 2 → từ 3</div>
         <div class="issues">
-          <div class="issue">❌ 长距离依赖衰减</div>
-          <div class="issue">❌ 无法并行训练</div>
+          <div class="issue">❌ Phụ thuộc xa bị suy giảm</div>
+          <div class="issue">❌ Không thể train song song</div>
         </div>
       </div>
       <div class="model-col highlight">
         <div class="model-name">Transformer</div>
-        <div class="model-desc">并行处理：所有词同时计算</div>
+        <div class="model-desc">Xử lý song song: tính tất cả từ cùng lúc</div>
         <div class="benefits">
-          <div class="benefit">✅ 全局注意力</div>
-          <div class="benefit">✅ 高效并行</div>
+          <div class="benefit">✅ Attention toàn cục</div>
+          <div class="benefit">✅ Song song hiệu quả</div>
         </div>
       </div>
     </div>

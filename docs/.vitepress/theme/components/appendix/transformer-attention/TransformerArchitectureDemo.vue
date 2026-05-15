@@ -1,55 +1,55 @@
 <template>
   <div class="demo-card">
     <div class="arch-layout">
-      <!-- Encoder 侧 -->
+      <!-- Phía Encoder -->
       <div class="side-col">
-        <div class="side-header encoder-header">Encoder（编码器）</div>
+        <div class="side-header encoder-header">Encoder</div>
         <div class="layer-block">
-          <div class="block-label">× N 层</div>
+          <div class="block-label">× N lớp</div>
           <div class="component-box">
             <div class="comp-name">Multi-Head Self-Attention</div>
-            <div class="comp-desc">捕获输入序列内部依赖</div>
+            <div class="comp-desc">Bắt phụ thuộc trong chuỗi đầu vào</div>
           </div>
           <div class="norm-box">Add & Norm</div>
           <div class="component-box">
             <div class="comp-name">Feed Forward Network</div>
-            <div class="comp-desc">位置独立的非线性变换</div>
+            <div class="comp-desc">Biến đổi phi tuyến theo từng vị trí</div>
           </div>
           <div class="norm-box">Add & Norm</div>
         </div>
         <div class="input-box">
-          <div class="input-label">输入</div>
+          <div class="input-label">Input</div>
           <div class="input-desc">Token Embedding + Positional Encoding</div>
         </div>
       </div>
 
-      <!-- Decoder 侧 -->
+      <!-- Phía Decoder -->
       <div class="side-col">
-        <div class="side-header decoder-header">Decoder（解码器）</div>
+        <div class="side-header decoder-header">Decoder</div>
         <div class="output-box">
-          <div class="output-label">输出</div>
-          <div class="output-desc">Linear + Softmax → 概率分布</div>
+          <div class="output-label">Output</div>
+          <div class="output-desc">Linear + Softmax → phân phối xác suất</div>
         </div>
         <div class="layer-block">
-          <div class="block-label">× N 层</div>
+          <div class="block-label">× N lớp</div>
           <div class="component-box">
             <div class="comp-name">Masked Self-Attention</div>
-            <div class="comp-desc">只看当前位置之前的词</div>
+            <div class="comp-desc">Chỉ thấy các vị trí trước vị trí hiện tại</div>
           </div>
           <div class="norm-box">Add & Norm</div>
           <div class="component-box cross">
             <div class="comp-name">Cross-Attention</div>
-            <div class="comp-desc">关注 Encoder 的输出</div>
+            <div class="comp-desc">Chú ý vào output của Encoder</div>
           </div>
           <div class="norm-box">Add & Norm</div>
           <div class="component-box">
             <div class="comp-name">Feed Forward Network</div>
-            <div class="comp-desc">位置独立的非线性变换</div>
+            <div class="comp-desc">Biến đổi phi tuyến theo từng vị trí</div>
           </div>
           <div class="norm-box">Add & Norm</div>
         </div>
         <div class="input-box">
-          <div class="input-label">输出（移位）</div>
+          <div class="input-label">Output (đã dịch chỗ)</div>
           <div class="input-desc">Token Embedding + Positional Encoding</div>
         </div>
       </div>

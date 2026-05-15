@@ -1,15 +1,15 @@
 <!--
   EmbeddingDemo.vue
-  词向量空间可视化演示
-  
-  用途：
-  直观展示“词向量”的概念：将词映射到坐标空间中，距离代表相似度。
-  展示经典的向量算术：King - Man + Woman ≈ Queen
-  
-  交互功能：
-  - 2D 坐标系展示：预置几组词向量（动物、国家、职业）。
-  - 算术演示：用户点击“King - Man + Woman”按钮，动画展示向量移动过程。
-  - 缩放/平移：简单的视图控制。
+  Trực quan hoá không gian word vector
+
+  Mục đích:
+  Minh hoạ trực quan khái niệm "word vector": ánh xạ từ vào không gian toạ độ, khoảng cách thể hiện độ tương tự.
+  Trình bày phép số học vector kinh điển: King - Man + Woman ≈ Queen
+
+  Tính năng tương tác:
+  - Hệ toạ độ 2D: hiển thị sẵn vài nhóm word vector (động vật, quốc gia, nghề nghiệp).
+  - Minh hoạ phép toán: bạn bấm nút "King - Man + Woman", animation cho thấy quá trình dịch chuyển vector.
+  - Zoom/pan: điều khiển khung nhìn cơ bản.
 -->
 <template>
   <div class="embedding-demo">
@@ -33,7 +33,7 @@
       ref="canvasContainer"
       class="canvas-container"
     >
-      <!-- 简单的 SVG 坐标系 -->
+      <!-- Hệ toạ độ SVG đơn giản -->
       <svg
         viewBox="0 0 400 300"
         class="vector-canvas"
@@ -155,11 +155,11 @@ import { ref, computed } from 'vue'
 const currentMode = ref('cluster')
 
 const modes = [
-  { id: 'cluster', label: '语义聚类', desc: '语义相近的词在空间中距离更近。' },
+  { id: 'cluster', label: 'Phân cụm ngữ nghĩa', desc: 'Các từ gần nhau về nghĩa thì ở gần nhau trong không gian.' },
   {
     id: 'analogy',
-    label: '向量算术',
-    desc: 'King - Man + Woman ≈ Queen (方向平行)'
+    label: 'Phép toán vector',
+    desc: 'King - Man + Woman ≈ Queen (hướng vector song song)'
   }
 ]
 

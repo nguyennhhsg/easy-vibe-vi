@@ -2,8 +2,8 @@
   <div class="bios-demo">
     <div class="demo-header">
       <span class="demo-icon">📟</span>
-      <span class="demo-title">BIOS/UEFI 工作流程</span>
-      <span class="demo-hint">点击每一步查看详情</span>
+      <span class="demo-title">Quy trình làm việc của BIOS/UEFI</span>
+      <span class="demo-hint">Nhấp từng bước để xem chi tiết</span>
     </div>
 
     <div class="timeline">
@@ -62,8 +62,8 @@
     <div class="beep-note">
       <span class="beep-icon">🔔</span>
       <div class="beep-content">
-        <div class="beep-title">蜂鸣声错误码</div>
-        <div class="beep-desc">如果 POST 发现问题，主板会发出蜂鸣声。不同次数代表不同错误：</div>
+        <div class="beep-title">Mã lỗi qua tiếng bíp</div>
+        <div class="beep-desc">Nếu POST phát hiện sự cố, bo mạch chủ sẽ phát ra tiếng bíp. Số lần bíp tương ứng với từng loại lỗi:</div>
         <div class="beep-codes">
           <div v-for="code in beepCodes" :key="code.beeps" class="beep-code">
             <span class="beep-count">{{ code.beeps }}</span>
@@ -83,52 +83,52 @@ const active = ref(-1)
 const steps = [
   {
     icon: '🔍',
-    name: '硬件自检（POST）',
-    brief: '检查内存、显卡、键盘等部件是否正常',
-    detail: 'Power-On Self-Test 是开机后执行的第一段程序。BIOS/UEFI 固件逐一检测关键硬件，确保它们能正常工作，任何故障都会在这一步被发现。',
+    name: 'Tự kiểm tra phần cứng (POST)',
+    brief: 'Kiểm tra RAM, card đồ họa, bàn phím và các thành phần khác',
+    detail: 'Power-On Self-Test là đoạn chương trình đầu tiên chạy sau khi bật máy. Firmware BIOS/UEFI lần lượt kiểm tra các thành phần phần cứng quan trọng, đảm bảo chúng hoạt động bình thường; mọi sự cố đều được phát hiện ở bước này.',
     items: [
-      { icon: '🧠', label: '内存检测', desc: '向内存写入测试数据并读回验证，确认每个内存条工作正常' },
-      { icon: '🎮', label: '显卡检测', desc: '初始化显卡，尝试输出画面；如果失败，屏幕会保持黑屏' },
-      { icon: '⌨️', label: '键盘/鼠标检测', desc: '扫描 PS/2 或 USB 端口，检测输入设备是否连接并响应' },
-      { icon: '💾', label: '存储设备检测', desc: '识别硬盘、SSD、光驱等存储设备，读取设备信息' },
-      { icon: '❌', label: '错误报告', desc: '检测失败时通过蜂鸣声或屏幕错误码告知用户具体问题', error: true }
+      { icon: '🧠', label: 'Kiểm tra RAM', desc: 'Ghi dữ liệu thử nghiệm vào RAM rồi đọc lại để xác nhận từng thanh hoạt động đúng' },
+      { icon: '🎮', label: 'Kiểm tra card đồ họa', desc: 'Khởi tạo card và thử xuất hình; nếu thất bại, màn hình sẽ tối đen' },
+      { icon: '⌨️', label: 'Kiểm tra bàn phím/chuột', desc: 'Quét cổng PS/2 hoặc USB, kiểm tra thiết bị nhập đã kết nối và phản hồi' },
+      { icon: '💾', label: 'Kiểm tra thiết bị lưu trữ', desc: 'Nhận diện ổ cứng, SSD, ổ đĩa quang và đọc thông tin thiết bị' },
+      { icon: '❌', label: 'Báo lỗi', desc: 'Khi kiểm tra thất bại, dùng tiếng bíp hoặc mã lỗi trên màn hình để báo người dùng', error: true }
     ],
-    analogy: '就像飞机起飞前的安全检查——机长逐项确认引擎、仪表、燃油都正常，有任何问题就不能起飞。'
+    analogy: 'Giống như kiểm tra an toàn trước khi máy bay cất cánh — cơ trưởng phải xác nhận động cơ, thiết bị, nhiên liệu đều ổn; có bất kỳ vấn đề gì cũng không thể cất cánh.'
   },
   {
     icon: '⚙️',
-    name: '初始化硬件',
-    brief: '设置硬件工作模式，配置中断向量表',
-    detail: '自检通过后，BIOS/UEFI 开始配置各硬件的工作参数：设置 CPU 频率、内存时序、配置中断控制器，建立硬件与软件之间的通信桥梁。',
+    name: 'Khởi tạo phần cứng',
+    brief: 'Cài chế độ làm việc cho phần cứng, cấu hình bảng vector ngắt',
+    detail: 'Sau khi POST đạt, BIOS/UEFI bắt đầu cấu hình các tham số làm việc của phần cứng: đặt xung CPU, timing RAM, cấu hình bộ điều khiển ngắt, dựng cầu nối giao tiếp giữa phần cứng và phần mềm.',
     items: [
-      { icon: '🔧', label: '设置工作模式', desc: '配置 CPU 运行频率、内存时序（CAS Latency）等参数' },
-      { icon: '📋', label: '中断向量表', desc: '建立中断号与处理程序的映射表，让硬件事件能被正确响应' },
-      { icon: '🔌', label: 'PCI 设备枚举', desc: '扫描 PCI/PCIe 总线，为显卡、网卡、声卡分配资源' },
-      { icon: '🕐', label: '时钟初始化', desc: '读取 CMOS 中的实时时钟（RTC），同步系统时间' }
+      { icon: '🔧', label: 'Thiết lập chế độ làm việc', desc: 'Cấu hình xung CPU, timing RAM (CAS Latency) và các tham số khác' },
+      { icon: '📋', label: 'Bảng vector ngắt', desc: 'Lập bảng ánh xạ số ngắt với trình xử lý để các sự kiện phần cứng được phản hồi đúng' },
+      { icon: '🔌', label: 'Liệt kê thiết bị PCI', desc: 'Quét bus PCI/PCIe, cấp phát tài nguyên cho card đồ họa, card mạng, card âm thanh' },
+      { icon: '🕐', label: 'Khởi tạo đồng hồ', desc: 'Đọc đồng hồ thời gian thực (RTC) trong CMOS, đồng bộ thời gian hệ thống' }
     ],
-    analogy: '好比乐队演出前的调音——每件乐器（硬件）都要调到正确的音高（工作模式），指挥（中断控制器）要能指挥每个声部。'
+    analogy: 'Giống như chỉnh nhạc cụ trước buổi hòa nhạc — mỗi nhạc cụ (phần cứng) phải được chỉnh đúng cao độ (chế độ làm việc), nhạc trưởng (bộ điều khiển ngắt) phải điều khiển được mọi bè.'
   },
   {
     icon: '🔎',
-    name: '寻找启动设备',
-    brief: '按启动顺序查找可启动设备，读取启动扇区',
-    detail: 'BIOS/UEFI 按照用户设定的启动顺序（Boot Order），依次检查硬盘、U 盘、网络等设备，找到第一个包含有效引导记录的设备，读取其启动扇区并将控制权交出。',
+    name: 'Tìm thiết bị khởi động',
+    brief: 'Tìm thiết bị có thể boot theo thứ tự, đọc boot sector',
+    detail: 'BIOS/UEFI dựa theo thứ tự khởi động (Boot Order) do người dùng cấu hình, lần lượt kiểm tra ổ cứng, USB, mạng... và tìm thiết bị đầu tiên chứa boot record hợp lệ, đọc boot sector của nó rồi giao quyền điều khiển.',
     items: [
-      { icon: '📑', label: '读取启动顺序', desc: '从 CMOS/NVRAM 中读取用户设定的设备优先级列表' },
-      { icon: '💿', label: '检查启动扇区', desc: '读取设备第一个扇区，验证末尾的 0x55AA 魔数签名' },
-      { icon: '🔀', label: '多设备尝试', desc: '第一个设备无法启动时，自动尝试下一个（硬盘→U盘→网络）' },
-      { icon: '🚀', label: '跳转执行', desc: '将启动扇区代码加载到内存 0x7C00，CPU 跳转到该地址执行' }
+      { icon: '📑', label: 'Đọc thứ tự khởi động', desc: 'Đọc danh sách ưu tiên thiết bị do người dùng cấu hình từ CMOS/NVRAM' },
+      { icon: '💿', label: 'Kiểm tra boot sector', desc: 'Đọc sector đầu tiên của thiết bị, xác minh chữ ký 0x55AA ở cuối' },
+      { icon: '🔀', label: 'Thử nhiều thiết bị', desc: 'Nếu thiết bị đầu không boot được, tự động thử thiết bị kế tiếp (ổ cứng → USB → mạng)' },
+      { icon: '🚀', label: 'Nhảy đến code thực thi', desc: 'Nạp code boot sector vào RAM ở 0x7C00, CPU nhảy đến địa chỉ này để thực thi' }
     ],
-    analogy: '就像你早上出门找交通工具——先看车库有没有车（硬盘），没有就看门口有没有共享单车（U盘），再不行就叫网约车（网络启动）。'
+    analogy: 'Giống như buổi sáng tìm phương tiện đi lại — kiểm tra trong gara có xe không (ổ cứng), không có thì tìm xe đạp chung trước cửa (USB), nếu vẫn không thì gọi xe công nghệ (boot mạng).'
   }
 ]
 
 const beepCodes = [
-  { beeps: '1 短', meaning: '正常启动，一切 OK' },
-  { beeps: '1 长 2 短', meaning: '显卡错误或未插好' },
-  { beeps: '1 长 3 短', meaning: '内存错误或未插好' },
-  { beeps: '持续长鸣', meaning: '内存未检测到' },
-  { beeps: '持续短鸣', meaning: '电源供电异常' }
+  { beeps: '1 bíp ngắn', meaning: 'Khởi động bình thường, mọi thứ OK' },
+  { beeps: '1 dài 2 ngắn', meaning: 'Lỗi card đồ họa hoặc chưa gắn chắc' },
+  { beeps: '1 dài 3 ngắn', meaning: 'Lỗi RAM hoặc chưa gắn chắc' },
+  { beeps: 'Bíp dài liên tục', meaning: 'Không phát hiện được RAM' },
+  { beeps: 'Bíp ngắn liên tục', meaning: 'Nguồn cấp điện bất thường' }
 ]
 </script>
 

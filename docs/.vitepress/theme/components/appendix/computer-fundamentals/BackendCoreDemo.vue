@@ -1,8 +1,8 @@
 <template>
   <div class="backend-demo">
     <div class="demo-header">
-      <span class="title">后端核心概念</span>
-      <span class="subtitle">服务器端的核心职责</span>
+      <span class="title">Khái niệm cốt lõi của backend</span>
+      <span class="subtitle">Trách nhiệm chính của phía máy chủ</span>
     </div>
 
     <div class="core-grid">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="flow-section">
-      <div class="flow-title">请求处理流程</div>
+      <div class="flow-title">Luồng xử lý yêu cầu</div>
       <div class="flow-steps">
         <span v-for="(step, i) in flowSteps" :key="step">
           <span class="flow-step">{{ step }}</span>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="info-box">
-      <strong>后端的核心价值：</strong>不是写代码，而是设计系统。如何让系统稳定、安全、高效、可扩展，才是后端工程师的真正能力。
+      <strong>Giá trị cốt lõi của backend:</strong> không phải là viết code, mà là thiết kế hệ thống. Làm cho hệ thống ổn định, an toàn, hiệu quả và có thể mở rộng mới chính là năng lực thật sự của một kỹ sư backend.
     </div>
   </div>
 </template>
@@ -35,15 +35,15 @@
 import { ref } from 'vue'
 
 const coreConcepts = ref([
-  { name: 'API 设计', desc: '定义客户端如何与服务端交互', examples: ['RESTful', 'GraphQL'] },
-  { name: '业务逻辑', desc: '处理核心业务规则和流程', examples: ['订单处理', '支付流程'] },
-  { name: '数据存储', desc: '数据的持久化和查询', examples: ['MySQL', 'Redis'] },
-  { name: '认证授权', desc: '用户身份验证和权限控制', examples: ['JWT', 'OAuth'] },
-  { name: '性能优化', desc: '缓存、异步、并发处理', examples: ['缓存', '消息队列'] },
-  { name: '安全防护', desc: '防止攻击和数据泄露', examples: ['SQL注入防护', 'HTTPS'] }
+  { name: 'Thiết kế API', desc: 'Định nghĩa cách client tương tác với server', examples: ['RESTful', 'GraphQL'] },
+  { name: 'Logic nghiệp vụ', desc: 'Xử lý các quy tắc và quy trình kinh doanh cốt lõi', examples: ['Xử lý đơn hàng', 'Quy trình thanh toán'] },
+  { name: 'Lưu trữ dữ liệu', desc: 'Lưu trữ và truy vấn dữ liệu lâu dài', examples: ['MySQL', 'Redis'] },
+  { name: 'Xác thực và phân quyền', desc: 'Xác thực danh tính người dùng và kiểm soát quyền hạn', examples: ['JWT', 'OAuth'] },
+  { name: 'Tối ưu hiệu năng', desc: 'Cache, bất đồng bộ, xử lý song song', examples: ['Cache', 'Hàng đợi tin nhắn'] },
+  { name: 'Bảo mật', desc: 'Phòng chống tấn công và rò rỉ dữ liệu', examples: ['Chống SQL injection', 'HTTPS'] }
 ])
 
-const flowSteps = ref(['接收请求', '路由解析', '业务处理', '数据操作', '返回响应'])
+const flowSteps = ref(['Nhận yêu cầu', 'Phân tích route', 'Xử lý nghiệp vụ', 'Thao tác dữ liệu', 'Trả phản hồi'])
 </script>
 
 <style scoped>

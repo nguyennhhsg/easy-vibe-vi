@@ -2,12 +2,12 @@
   <div class="hash-vs-history-demo">
     <div class="demo-header">
       <span class="icon">⚖️</span>
-      <span class="title">路由模式对比</span>
+      <span class="title">So sánh các chế độ routing</span>
       <span class="subtitle">Hash vs History</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">邮寄包裹</span>：Hash模式像是把地址写在<span class="highlight">便签条</span>上（#后面），History模式则是直接写在<span class="highlight">信封</span>上。前者简单但不够正式，后者美观但需要服务端配合。
+      Hãy tưởng tượng bạn đang <span class="highlight">gửi bưu kiện</span>: chế độ Hash giống như ghi địa chỉ lên <span class="highlight">tờ giấy nhớ</span> dán kèm (phần sau dấu #), còn chế độ History thì ghi thẳng lên <span class="highlight">phong bì</span>. Cách đầu đơn giản nhưng không chính thức, cách sau đẹp hơn nhưng cần phối hợp từ server.
     </div>
 
     <div class="comparison-container">
@@ -15,7 +15,7 @@
       <div class="mode-column">
         <div class="mode-header hash">
           <span class="mode-icon">#</span>
-          <span class="mode-title">Hash 模式</span>
+          <span class="mode-title">Chế độ Hash</span>
         </div>
 
         <div class="browser-mockup">
@@ -52,16 +52,16 @@
 
         <div class="characteristics">
           <div class="char-item">
-            <span class="char-label">兼容性</span>
+            <span class="char-label">Tương thích</span>
             <span class="badge good">IE8+</span>
           </div>
           <div class="char-item">
-            <span class="char-label">服务端配置</span>
-            <span class="badge good">无需配置</span>
+            <span class="char-label">Cấu hình server</span>
+            <span class="badge good">Không cần</span>
           </div>
           <div class="char-item">
-            <span class="char-label">SEO友好度</span>
-            <span class="badge bad">较差</span>
+            <span class="char-label">Mức độ SEO-friendly</span>
+            <span class="badge bad">Kém</span>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
       <div class="mode-column">
         <div class="mode-header history">
           <span class="mode-icon">/</span>
-          <span class="mode-title">History 模式</span>
+          <span class="mode-title">Chế độ History</span>
         </div>
 
         <div class="browser-mockup">
@@ -107,16 +107,16 @@
 
         <div class="characteristics">
           <div class="char-item">
-            <span class="char-label">兼容性</span>
+            <span class="char-label">Tương thích</span>
             <span class="badge medium">IE10+</span>
           </div>
           <div class="char-item">
-            <span class="char-label">服务端配置</span>
-            <span class="badge warn">需要配置</span>
+            <span class="char-label">Cấu hình server</span>
+            <span class="badge warn">Cần cấu hình</span>
           </div>
           <div class="char-item">
-            <span class="char-label">SEO友好度</span>
-            <span class="badge good">良好</span>
+            <span class="char-label">Mức độ SEO-friendly</span>
+            <span class="badge good">Tốt</span>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选择建议：</strong>现代项目优先选History模式（URL美观、SEO友好），如果需要兼容老浏览器或无法修改服务端配置，再用Hash模式。
+      <strong>Gợi ý lựa chọn:</strong> Dự án hiện đại nên ưu tiên chế độ History (URL đẹp, thân thiện SEO); nếu cần tương thích trình duyệt cũ hoặc không sửa được cấu hình server thì mới dùng chế độ Hash.
     </div>
   </div>
 </template>
@@ -136,25 +136,25 @@ const hashPath = ref('home')
 const historyPath = ref('home')
 
 const navItems = [
-  { name: '首页', path: 'home' },
-  { name: '产品', path: 'products' },
-  { name: '关于', path: 'about' }
+  { name: 'Trang chủ', path: 'home' },
+  { name: 'Sản phẩm', path: 'products' },
+  { name: 'Giới thiệu', path: 'about' }
 ]
 
 const getPageTitle = (path) => {
   const titles = {
-    home: '首页',
-    products: '产品中心',
-    about: '关于我们'
+    home: 'Trang chủ',
+    products: 'Trung tâm sản phẩm',
+    about: 'Giới thiệu'
   }
-  return titles[path] || '首页'
+  return titles[path] || 'Trang chủ'
 }
 
 const getPageContent = (path) => {
   const contents = {
-    home: '欢迎来到我们的网站！这是SPA的首页，所有页面切换都在前端完成，无需刷新。',
-    products: '这里展示了我们的核心产品系列。SPA让浏览体验更流畅，切换更快。',
-    about: '了解更多关于我们的故事。SPA模式下，页面间跳转几乎没有延迟。'
+    home: 'Chào mừng bạn đến với website! Đây là trang chủ của SPA, mọi chuyển trang đều được xử lý ở frontend, không cần reload.',
+    products: 'Đây là dòng sản phẩm chủ lực của chúng tôi. SPA giúp trải nghiệm lướt mượt và chuyển trang nhanh hơn.',
+    about: 'Tìm hiểu thêm về câu chuyện của chúng tôi. Trong SPA, chuyển giữa các trang gần như không có độ trễ.'
   }
   return contents[path] || contents.home
 }

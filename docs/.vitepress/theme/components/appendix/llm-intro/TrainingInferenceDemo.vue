@@ -1,6 +1,6 @@
 <!--
   TrainingInferenceDemo.vue
-  LLM 原理进阶演示：续写 -> 对话 -> 训练 -> 对齐
+  Demo nguyên lý LLM nâng cao: completion -> chat -> training -> alignment
 -->
 <template>
   <div class="ti-demo">
@@ -18,20 +18,20 @@
     </div>
 
     <div class="demo-content">
-      <!-- Tab 1: 基础能力 - 文本续写 -->
+      <!-- Tab 1: Năng lực cơ bản - viết tiếp văn bản -->
       <div
         v-if="currentTab === 'completion'"
         class="mode-view"
       >
         <div class="desc-box">
           <p>
-            <strong>LLM 的本能是“续写”</strong>：它并不懂对话，只是根据上文猜下一个词。
+            <strong>Bản năng của LLM là "viết tiếp"</strong>: nó không hiểu khái niệm hội thoại, chỉ đoán từ kế tiếp dựa trên ngữ cảnh phía trước.
           </p>
         </div>
 
         <div class="interactive-area">
           <div class="input-row">
-            <span class="prompt-label">Prompt (提示词):</span>
+            <span class="prompt-label">Prompt:</span>
             <input
               v-model="completionInput"
               type="text"
@@ -60,31 +60,31 @@
             v-if="completionOutput"
             class="explanation"
           >
-            💡 模型在计算概率：<code>P(blue | The sky is) = 90%</code>
+            💡 Mô hình đang tính xác suất: <code>P(blue | The sky is) = 90%</code>
           </div>
         </div>
       </div>
 
-      <!-- Tab 2: 技巧 - 对话原理 (Template) -->
+      <!-- Tab 2: Kỹ thuật - nguyên lý hội thoại (Template) -->
       <div
         v-if="currentTab === 'chat'"
         class="mode-view"
       >
         <div class="desc-box">
           <p>
-            <strong>如何让它对话？</strong>
-            我们用“剧本”包装输入，让模型以为自己在续写一段对话。
+            <strong>Làm sao để nó trò chuyện?</strong>
+            Ta đóng gói input bằng một "kịch bản" để mô hình tưởng rằng mình đang viết tiếp một đoạn hội thoại.
           </p>
         </div>
 
         <div class="chat-container">
           <div class="chat-ui-half">
             <div class="half-label">
-              用户看到的 (Chat UI)
+              Cái bạn thấy (Chat UI)
             </div>
             <div class="chat-messages">
               <div class="msg bot">
-                我是 AI 助手，你好！
+                Mình là AI assistant, xin chào bạn!
               </div>
               <div class="msg user">
                 {{ chatInput || '...' }}
@@ -112,18 +112,18 @@
           </div>
 
           <div class="arrow-divider">
-            ➡️ 转换 ➡️
+            ➡️ Chuyển đổi ➡️
           </div>
 
           <div class="model-view-half">
             <div class="half-label">
-              模型看到的 (Raw Prompt)
+              Cái mô hình nhìn thấy (Raw Prompt)
             </div>
             <div class="raw-prompt">
               <span class="sys-tag">&lt;|system|&gt;</span><br>
               You are a helpful assistant.<br>
               <span class="bot-tag">&lt;|assistant|&gt;</span><br>
-              我是 AI 助手，你好！<br>
+              Mình là AI assistant, xin chào bạn!<br>
               <span class="user-tag">&lt;|user|&gt;</span><br>
               {{ chatInput || '...' }}<br>
               <span class="bot-tag">&lt;|assistant|&gt;</span><br>
@@ -133,21 +133,21 @@
         </div>
       </div>
 
-      <!-- Tab 3: 原理 - 训练 (Training) -->
+      <!-- Tab 3: Nguyên lý - Training -->
       <div
         v-if="currentTab === 'train'"
         class="mode-view"
       >
         <div class="desc-box">
           <p>
-            <strong>Training (训练原理)</strong>:
-            模型通过大量数据的“填空题”训练。计算预测结果与真实结果的差异（Loss），并不断调整参数以降低
-            Loss。
+            <strong>Training (nguyên lý huấn luyện)</strong>:
+            Mô hình được train qua hàng loạt "bài điền chỗ trống". Ta tính khoảng cách giữa kết quả dự đoán và đáp án thật (Loss), rồi liên tục điều chỉnh tham số để giảm
+            Loss.
           </p>
         </div>
 
         <div class="training-dashboard">
-          <!-- 左侧：训练过程可视化 -->
+          <!-- Bên trái: trực quan hoá quá trình training -->
           <div class="train-process-panel card-panel">
             <div class="panel-header">
               <span class="step-badge">Step {{ currentStep }}/{{ totalSteps }}</span>
@@ -158,13 +158,13 @@
               <!-- Input Section -->
               <div class="flow-stage input-stage">
                 <div class="stage-label">
-                  1. Input (输入)
+                  1. Input (đầu vào)
                 </div>
                 <div
                   v-if="currentStep === 0"
                   class="content-box input placeholder"
                 >
-                  <span class="text-content">点击下方按钮开始训练</span>
+                  <span class="text-content">Bấm nút bên dưới để bắt đầu train</span>
                 </div>
                 <div
                   v-else
@@ -296,7 +296,7 @@
             </div>
           </div>
 
-          <!-- 右侧：Loss 曲线 -->
+          <!-- Bên phải: đường loss -->
           <div class="train-metrics-panel card-panel">
             <div class="panel-header">
               <span class="panel-title">Training Metrics</span>
@@ -451,22 +451,22 @@
         </div>
       </div>
 
-      <!-- Tab 4: 进阶 - 微调与对齐 (RLHF) -->
+      <!-- Tab 4: Nâng cao - fine-tuning và alignment (RLHF) -->
       <div
         v-if="currentTab === 'rlhf'"
         class="mode-view"
       >
         <div class="desc-box">
           <p>
-            <strong>从“胡说”到“好助手”</strong>：通过 RLHF (人类反馈)
-            让模型学会礼貌和安全。
+            <strong>Từ "nói nhảm" đến "trợ lý tốt"</strong>: thông qua RLHF (human feedback),
+            ta dạy mô hình biết lịch sự và an toàn.
           </p>
         </div>
 
         <div class="alignment-demo">
           <div class="controls">
             <div class="radio-group">
-              <span class="group-label">模型状态：</span>
+              <span class="group-label">Trạng thái mô hình:</span>
               <label
                 class="radio-option"
                 :class="{ active: alignmentState === 'base' }"
@@ -476,7 +476,7 @@
                   type="radio"
                   value="base"
                 >
-                Base Model (未对齐)
+                Base Model (chưa aligned)
               </label>
               <label
                 class="radio-option"
@@ -487,14 +487,14 @@
                   type="radio"
                   value="aligned"
                 >
-                Aligned Model (已对齐)
+                Aligned Model (đã aligned)
               </label>
             </div>
           </div>
 
           <div class="scenario">
             <div class="user-query">
-              User: "如何制造混乱？"
+              User: "Làm sao để gây rối loạn?"
             </div>
 
             <div
@@ -506,10 +506,10 @@
               </div>
               <div class="bubble">
                 <div v-if="alignmentState === 'base'">
-                  哈哈！制造混乱很简单！你可以去大街上大喊大叫，或者...（此处省略1000字胡言乱语）...这太好玩了！
+                  Hehe! Gây rối loạn dễ lắm! Bạn có thể ra đường la lớn, hoặc... (lược bỏ 1000 chữ lảm nhảm)... vui cực!
                 </div>
                 <div v-else>
-                  对不起，我不能回答这个问题。作为一个人工智能助手，我必须遵守安全准则，不能提供有害建议。
+                  Xin lỗi, mình không thể trả lời câu hỏi này. Là một trợ lý AI, mình phải tuân thủ nguyên tắc an toàn và không thể cung cấp lời khuyên có hại.
                 </div>
               </div>
             </div>
@@ -536,10 +536,10 @@ import { computed, ref } from 'vue'
 
 const currentTab = ref('completion')
 const tabs = [
-  { id: 'completion', label: '1. 本能：续写', icon: '✍️' },
-  { id: 'chat', label: '2. 技巧：对话', icon: '🎭' },
-  { id: 'train', label: '3. 原理：训练', icon: '🧠' },
-  { id: 'rlhf', label: '4. 进阶：对齐', icon: '🛡️' }
+  { id: 'completion', label: '1. Bản năng: viết tiếp', icon: '✍️' },
+  { id: 'chat', label: '2. Kỹ thuật: hội thoại', icon: '🎭' },
+  { id: 'train', label: '3. Nguyên lý: training', icon: '🧠' },
+  { id: 'rlhf', label: '4. Nâng cao: alignment', icon: '🛡️' }
 ]
 
 // Tab 1 Logic
@@ -711,9 +711,9 @@ const handleTrainClick = () => {
 }
 
 const trainButtonText = computed(() => {
-  if (currentStep.value === 0) return 'Start Training (开始训练)'
-  if (currentStep.value >= totalSteps) return 'Restart (重新开始)'
-  return 'Next Step (下一步)'
+  if (currentStep.value === 0) return 'Start Training (bắt đầu train)'
+  if (currentStep.value >= totalSteps) return 'Restart (chạy lại)'
+  return 'Next Step (bước tiếp)'
 })
 
 const getRandomWord = () => {
@@ -725,9 +725,9 @@ const getRandomWord = () => {
     'table',
     'what',
     'bad',
-    '未知',
-    '乱码',
-    '错误'
+    'unknown',
+    'gibberish',
+    'error'
   ]
   return words[Math.floor(Math.random() * words.length)]
 }

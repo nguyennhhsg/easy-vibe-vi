@@ -21,10 +21,10 @@ defineProps({
   items: {
     type: Array,
     default: () => [
-      { title: '困境与机会', description: '普通人的编程新可能' },
-      { title: '能力初探', description: '60秒极速开发体验' },
-      { title: '原生实战', description: '打造AI原生贪吃蛇' },
-      { title: '拓展创造', description: '举一反三做游戏' }
+      { title: 'Thách thức và cơ hội', description: 'Khả năng lập trình mới cho mọi người' },
+      { title: 'Khám phá năng lực', description: 'Trải nghiệm phát triển siêu tốc trong 60 giây' },
+      { title: 'Thực chiến AI-native', description: 'Tạo game rắn săn mồi kiểu AI-native' },
+      { title: 'Mở rộng và sáng tạo', description: 'Học một biết mười để làm game' }
     ]
   }
 })

@@ -5,20 +5,20 @@
         :class="{ active: mode === 'fast' }"
         @click="switchMode('fast')"
       >
-        ⚡️ 传统快思考 (System 1)
+        ⚡️ Suy nghĩ nhanh truyền thống (System 1)
       </button>
       <button
         :class="{ active: mode === 'slow' }"
         @click="switchMode('slow')"
       >
-        🧠 深度慢思考 (System 2)
+        🧠 Suy nghĩ chậm sâu (System 2)
       </button>
     </div>
 
     <div class="demo-display">
       <div class="question-box">
-        <strong>用户提问:</strong>
-        <p>9.11 和 9.9 哪个大？</p>
+        <strong>Câu hỏi của bạn:</strong>
+        <p>9.11 và 9.9, số nào lớn hơn?</p>
       </div>
 
       <div class="process-area">
@@ -67,7 +67,7 @@
                 class="bubble-header"
                 @click="toggleThoughts"
               >
-                💭 思考过程 (Chain of Thought)
+                💭 Quá trình suy nghĩ (Chain of Thought)
                 <span class="toggle-icon">{{ thoughtsOpen ? '▼' : '▶' }}</span>
               </div>
               <div
@@ -112,7 +112,7 @@
         :disabled="isRunning"
         @click="runSimulation"
       >
-        {{ isRunning ? '生成中...' : '开始生成' }}
+        {{ isRunning ? 'Đang sinh...' : 'Bắt đầu sinh' }}
       </button>
     </div>
 
@@ -121,20 +121,20 @@
       class="metrics"
     >
       <div class="metric-item">
-        <span class="label">Token 消耗:</span>
+        <span class="label">Token tiêu thụ:</span>
         <span class="value">{{ mode === 'fast' ? '5' : '150' }} tokens</span>
       </div>
       <div class="metric-item">
-        <span class="label">耗时:</span>
+        <span class="label">Thời gian:</span>
         <span class="value">{{ mode === 'fast' ? '0.2s' : '5.0s' }}</span>
       </div>
       <div class="metric-item">
-        <span class="label">准确率:</span>
+        <span class="label">Độ chính xác:</span>
         <span
           class="value"
           :class="mode === 'fast' ? 'bad' : 'good'"
         >
-          {{ mode === 'fast' ? '❌ 错误' : '✅ 正确' }}
+          {{ mode === 'fast' ? '❌ Sai' : '✅ Đúng' }}
         </span>
       </div>
     </div>
@@ -149,18 +149,18 @@ const isRunning = ref(false)
 const completed = ref(false)
 
 // Fast Mode Data
-const fastOutput = '9.11 比 9.9 大。'
+const fastOutput = '9.11 lớn hơn 9.9.'
 const displayedOutput = ref('')
 
 // Slow Mode Data
-const slowThoughts = `首先比较整数部分，都是9，相等。
-接下来比较小数部分。
-9.11 的小数部分是 0.11。
-9.9 的小数部分是 0.9。
-比较第一位小数：1 < 9。
-所以 0.11 小于 0.9。
-结论：9.11 小于 9.9。`
-const slowOutput = '9.11 比 9.9 小。'
+const slowThoughts = `Trước tiên so sánh phần nguyên: cả hai đều là 9, bằng nhau.
+Tiếp theo so sánh phần thập phân.
+Phần thập phân của 9.11 là 0.11.
+Phần thập phân của 9.9 là 0.9.
+So sánh chữ số đầu tiên sau dấu thập phân: 1 < 9.
+Vậy 0.11 nhỏ hơn 0.9.
+Kết luận: 9.11 nhỏ hơn 9.9.`
+const slowOutput = '9.11 nhỏ hơn 9.9.'
 
 const displayedThoughts = ref('')
 const generating = ref(false)

@@ -34,7 +34,7 @@
         {{ selectedEventData.description }}
       </div>
       <div class="detail-impact">
-        <span class="impact-label">影响:</span>
+        <span class="impact-label">Tác động:</span>
         <span class="impact-text">{{ selectedEventData.impact }}</span>
       </div>
     </div>
@@ -49,39 +49,39 @@ const selectedEvent = ref(3)
 const events = [
   {
     year: '1960s',
-    title: '概念萌芽',
-    description: 'J.C.R. Licklider 提出"星际计算机网络"设想，是云计算概念的最早雏形。',
-    impact: '奠定了分布式计算的理论基础'
+    title: 'Khởi nguồn ý tưởng',
+    description: 'J.C.R. Licklider đề xuất ý tưởng "mạng máy tính liên thiên hà", là tiền thân sớm nhất của khái niệm cloud computing.',
+    impact: 'Đặt nền móng lý thuyết cho distributed computing'
   },
   {
     year: '1990s',
-    title: '虚拟化技术',
-    description: 'VMware 推出 x86 虚拟化技术，允许在一台物理机上运行多个虚拟机。',
-    impact: '为云计算的资源池化提供了技术基础'
+    title: 'Công nghệ ảo hóa',
+    description: 'VMware ra mắt công nghệ ảo hóa x86, cho phép chạy nhiều máy ảo trên một máy vật lý.',
+    impact: 'Tạo nền tảng kỹ thuật cho việc pool tài nguyên trong cloud'
   },
   {
     year: '2006',
-    title: 'AWS 诞生',
-    description: 'Amazon 推出 EC2 和 S3，标志着现代云计算服务的正式诞生。',
-    impact: '开创了公有云服务的商业模式'
+    title: 'AWS ra đời',
+    description: 'Amazon ra mắt EC2 và S3, đánh dấu sự khởi đầu chính thức của dịch vụ cloud computing hiện đại.',
+    impact: 'Khai sinh mô hình kinh doanh public cloud'
   },
   {
     year: '2009',
-    title: '阿里云成立',
-    description: '阿里巴巴成立阿里云，成为中国最早的云计算服务商。',
-    impact: '推动了中国云计算市场的发展'
+    title: 'Alibaba Cloud thành lập',
+    description: 'Alibaba thành lập Alibaba Cloud, trở thành nhà cung cấp cloud computing sớm nhất Trung Quốc.',
+    impact: 'Thúc đẩy sự phát triển của thị trường cloud Trung Quốc'
   },
   {
     year: '2010s',
-    title: '云原生时代',
-    description: 'Docker、Kubernetes 等技术兴起，微服务架构成为主流。',
-    impact: '改变了应用开发和部署的方式'
+    title: 'Kỷ nguyên cloud-native',
+    description: 'Docker, Kubernetes và các công nghệ khác nổi lên, microservices trở thành kiến trúc chủ đạo.',
+    impact: 'Thay đổi cách phát triển và deployment ứng dụng'
   },
   {
     year: '2020s',
-    title: 'AI 云时代',
-    description: '大模型和 AI 服务成为云厂商的核心竞争力，Serverless 普及。',
-    impact: '云计算进入智能化新阶段'
+    title: 'Kỷ nguyên AI Cloud',
+    description: 'LLM và dịch vụ AI trở thành lợi thế cạnh tranh cốt lõi của các nhà cung cấp cloud, Serverless phổ biến.',
+    impact: 'Cloud computing bước vào giai đoạn thông minh hóa mới'
   }
 ]
 

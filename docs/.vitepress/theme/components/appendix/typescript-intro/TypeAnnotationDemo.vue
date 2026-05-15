@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const name = ref('张三')
+const name = ref('An')
 const age = ref(25)
 const isActive = ref(true)
 const showError = ref(false)
@@ -17,16 +17,16 @@ const setMessage = (msg, isError = false) => {
 }
 
 const modifyName = () => {
-  // TypeScript 会在编译时检查类型错误
-  // name.value = 123 // 这行会在 TypeScript 中报错
-  name.value = '李四'
-  setMessage('✅ 修改成功！类型检查通过', false)
+  // TypeScript sẽ kiểm tra lỗi kiểu lúc compile
+  // name.value = 123 // Dòng này sẽ báo lỗi khi dùng TypeScript
+  name.value = 'Bình'
+  setMessage('✅ Sửa thành công! Type check thông qua', false)
 }
 
 const modifyAgeError = () => {
-  // 演示类型错误
+  // Mô phỏng lỗi kiểu
   showError.value = true
-  errorMessage.value = '❌ TypeScript 错误：不能将类型 "string" 分配给类型 "number"'
+  errorMessage.value = '❌ TypeScript error: không thể gán giá trị kiểu "string" cho biến kiểu "number"'
   setTimeout(() => {
     showError.value = false
     errorMessage.value = ''
@@ -35,11 +35,11 @@ const modifyAgeError = () => {
 
 const toggleActive = () => {
   isActive.value = !isActive.value
-  setMessage(`✅ 状态切换为 ${isActive.value}`, false)
+  setMessage(`✅ Trạng thái đổi thành ${isActive.value}`, false)
 }
 
 const reset = () => {
-  name.value = '张三'
+  name.value = 'An'
   age.value = 25
   isActive.value = true
   errorMessage.value = ''
@@ -49,11 +49,11 @@ const reset = () => {
 
 <template>
   <div class="type-annotation-demo">
-    <h3>📝 TypeScript 类型注解演示</h3>
+    <h3>📝 Demo type annotation trong TypeScript</h3>
 
     <div class="demo-container">
       <div class="variables-grid">
-        <!-- String 类型 -->
+        <!-- Kiểu String -->
         <div class="variable-card string-card">
           <div class="card-header">
             <span class="type-badge string">string</span>
@@ -67,7 +67,7 @@ const reset = () => {
           </div>
         </div>
 
-        <!-- Number 类型 -->
+        <!-- Kiểu Number -->
         <div class="variable-card number-card">
           <div class="card-header">
             <span class="type-badge number">number</span>
@@ -81,7 +81,7 @@ const reset = () => {
           </div>
         </div>
 
-        <!-- Boolean 类型 -->
+        <!-- Kiểu Boolean -->
         <div class="variable-card boolean-card">
           <div class="card-header">
             <span class="type-badge boolean">boolean</span>
@@ -97,7 +97,7 @@ const reset = () => {
         </div>
       </div>
 
-      <!-- 错误消息显示 -->
+      <!-- Hiển thị thông báo lỗi -->
       <div
         v-if="errorMessage"
         :class="['message-box', showError ? 'error' : 'success']"
@@ -105,49 +105,49 @@ const reset = () => {
         {{ errorMessage }}
       </div>
 
-      <!-- 操作按钮 -->
+      <!-- Nút thao tác -->
       <div class="controls">
         <button
           class="btn-primary"
           @click="modifyName"
         >
-          修改 name (正确)
+          Sửa name (đúng)
         </button>
         <button
           class="btn-danger"
           @click="modifyAgeError"
         >
-          赋值错误类型
+          Gán kiểu sai
         </button>
         <button
           class="btn-secondary"
           @click="toggleActive"
         >
-          切换 isActive
+          Đảo isActive
         </button>
         <button
           class="btn-ghost"
           @click="reset"
         >
-          重置
+          Reset
         </button>
       </div>
 
-      <!-- 代码对比 -->
+      <!-- So sánh code -->
       <div class="code-comparison">
         <div class="code-panel javascript">
           <div class="panel-header">
-            JavaScript (无类型检查)
+            JavaScript (không kiểm tra kiểu)
           </div>
-          <pre><code>let name = "张三"
-name = 123  // ✅ 运行时才会报错（可能很晚才发现）</code></pre>
+          <pre><code>let name = "An"
+name = 123  // ✅ Tới runtime mới báo lỗi (có thể phát hiện rất muộn)</code></pre>
         </div>
         <div class="code-panel typescript">
           <div class="panel-header">
-            TypeScript (编译时检查)
+            TypeScript (kiểm tra lúc compile)
           </div>
-          <pre><code>let name: string = "张三"
-name = 123  // ❌ 编译时立即报错（写代码时就发现）</code></pre>
+          <pre><code>let name: string = "An"
+name = 123  // ❌ Báo lỗi ngay lúc compile (phát hiện khi đang code)</code></pre>
         </div>
       </div>
     </div>

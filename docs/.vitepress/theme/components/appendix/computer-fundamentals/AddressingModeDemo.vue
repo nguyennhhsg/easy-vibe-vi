@@ -1,8 +1,8 @@
 <template>
   <div class="addressing-mode-demo">
     <div class="demo-header">
-      <span class="title">寻址方式</span>
-      <span class="subtitle">如何找到操作数的位置</span>
+      <span class="title">Phương thức định địa chỉ</span>
+      <span class="subtitle">Cách tìm vị trí của toán hạng</span>
     </div>
 
     <div class="mode-selector">
@@ -24,19 +24,19 @@
       
       <div class="detail-content">
         <div class="detail-section">
-          <div class="section-title">定义</div>
+          <div class="section-title">Định nghĩa</div>
           <div class="section-content">{{ selectedModeData.definition }}</div>
         </div>
 
         <div class="detail-section">
-          <div class="section-title">指令格式</div>
+          <div class="section-title">Định dạng lệnh</div>
           <div class="instruction-example">
             <code>{{ selectedModeData.format }}</code>
           </div>
         </div>
 
         <div class="detail-section">
-          <div class="section-title">示例</div>
+          <div class="section-title">Ví dụ</div>
           <div class="example-code">
             <div class="code-line">{{ selectedModeData.example.assembly }}</div>
             <div class="code-desc">{{ selectedModeData.example.description }}</div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="detail-section">
-          <div class="section-title">执行过程</div>
+          <div class="section-title">Quá trình thực thi</div>
           <div class="execution-flow">
             <div v-for="(step, i) in selectedModeData.steps" :key="i" class="flow-step">
               <span class="step-num">{{ i + 1 }}</span>
@@ -54,14 +54,14 @@
         </div>
 
         <div class="detail-section">
-          <div class="section-title">特点</div>
+          <div class="section-title">Đặc điểm</div>
           <div class="characteristics">
             <div class="char-item" :class="selectedModeData.fast ? 'fast' : 'slow'">
-              <span class="char-label">速度</span>
-              <span class="char-value">{{ selectedModeData.fast ? '快' : '慢' }}</span>
+              <span class="char-label">Tốc độ</span>
+              <span class="char-value">{{ selectedModeData.fast ? 'Nhanh' : 'Chậm' }}</span>
             </div>
             <div class="char-item">
-              <span class="char-label">灵活性</span>
+              <span class="char-label">Tính linh hoạt</span>
               <span class="char-value">{{ selectedModeData.flexibility }}</span>
             </div>
           </div>
@@ -70,21 +70,21 @@
     </div>
 
     <div class="comparison-table">
-      <div class="table-title">寻址方式对比</div>
+      <div class="table-title">So sánh các phương thức định địa chỉ</div>
       <table>
         <thead>
           <tr>
-            <th>寻址方式</th>
-            <th>格式</th>
-            <th>速度</th>
-            <th>用途</th>
+            <th>Phương thức</th>
+            <th>Định dạng</th>
+            <th>Tốc độ</th>
+            <th>Mục đích sử dụng</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="mode in addressingModes" :key="mode.name">
             <td>{{ mode.name }}</td>
             <td><code>{{ mode.format }}</code></td>
-            <td :class="mode.fast ? 'fast' : 'slow'">{{ mode.fast ? '最快' : '较快' }}</td>
+            <td :class="mode.fast ? 'fast' : 'slow'">{{ mode.fast ? 'Nhanh nhất' : 'Khá nhanh' }}</td>
             <td>{{ mode.usage }}</td>
           </tr>
         </tbody>
@@ -96,140 +96,140 @@
 <script setup>
 import { ref } from 'vue'
 
-const selectedMode = ref('立即数寻址')
+const selectedMode = ref('Định địa chỉ tức thời')
 const selectedModeData = ref(null)
 
 const addressingModes = ref([
   {
-    name: '立即数寻址',
+    name: 'Định địa chỉ tức thời',
     english: 'Immediate Addressing',
-    definition: '操作数直接包含在指令中，作为指令的一部分立即可用',
+    definition: 'Toán hạng được nhúng trực tiếp trong lệnh, có thể dùng ngay như một phần của lệnh',
     format: 'MOV R1, #100',
-    usage: '常数赋值、初始化',
+    usage: 'Gán hằng số, khởi tạo',
     fast: true,
-    flexibility: '低',
+    flexibility: 'Thấp',
     example: {
       assembly: 'MOV R1, #100  ; R1 = 100',
-      description: '立即数 100 直接存在于指令中，无需访问任何寄存器或内存'
+      description: 'Số tức thời 100 nằm thẳng trong lệnh, không cần truy cập thanh ghi hay bộ nhớ'
     },
     steps: [
-      'CPU 从指令中直接读取立即数 100',
-      '将立即数写入目标寄存器 R1',
-      '执行完成，无需额外内存访问'
+      'CPU đọc trực tiếp số tức thời 100 từ lệnh',
+      'Ghi số tức thời vào thanh ghi đích R1',
+      'Thực thi xong, không cần truy cập bộ nhớ thêm'
     ]
   },
   {
-    name: '寄存器寻址',
+    name: 'Định địa chỉ thanh ghi',
     english: 'Register Addressing',
-    definition: '操作数位于 CPU 内部的寄存器中',
+    definition: 'Toán hạng nằm trong thanh ghi bên trong CPU',
     format: 'MOV R1, R2',
-    usage: '寄存器间数据传送',
+    usage: 'Truyền dữ liệu giữa các thanh ghi',
     fast: true,
-    flexibility: '中',
+    flexibility: 'Trung bình',
     example: {
       assembly: 'MOV R1, R2  ; R1 = R2',
-      description: '从源寄存器 R2 读取数据，存入目标寄存器 R1'
+      description: 'Đọc dữ liệu từ thanh ghi nguồn R2, ghi vào thanh ghi đích R1'
     },
     steps: [
-      'CPU 从寄存器组中读取 R2 的值',
-      '将值写入目标寄存器 R1',
-      '执行完成，无需访问内存'
+      'CPU đọc giá trị của R2 từ tập thanh ghi',
+      'Ghi giá trị vào thanh ghi đích R1',
+      'Thực thi xong, không cần truy cập bộ nhớ'
     ]
   },
   {
-    name: '直接寻址',
+    name: 'Định địa chỉ trực tiếp',
     english: 'Direct Addressing',
-    definition: '指令中直接给出操作数的内存地址',
+    definition: 'Lệnh chứa trực tiếp địa chỉ bộ nhớ của toán hạng',
     format: 'MOV R1, [100]',
-    usage: '访问全局变量',
+    usage: 'Truy cập biến toàn cục',
     fast: false,
-    flexibility: '高',
+    flexibility: 'Cao',
     example: {
       assembly: 'MOV R1, [0x1000]  ; R1 = M[0x1000]',
-      description: '指令中包含内存地址 0x1000，从该地址读取数据'
+      description: 'Lệnh chứa địa chỉ bộ nhớ 0x1000, đọc dữ liệu từ địa chỉ này'
     },
     steps: [
-      'CPU 从指令中解析出地址 0x1000',
-      '将地址送入 MAR（内存地址寄存器）',
-      '访问内存，从地址 0x1000 读取数据到 MDR',
-      '将数据从 MDR 写入目标寄存器 R1'
+      'CPU giải mã địa chỉ 0x1000 từ lệnh',
+      'Đưa địa chỉ vào MAR (thanh ghi địa chỉ bộ nhớ)',
+      'Truy cập bộ nhớ, đọc dữ liệu từ 0x1000 vào MDR',
+      'Ghi dữ liệu từ MDR vào thanh ghi đích R1'
     ]
   },
   {
-    name: '间接寻址',
+    name: 'Định địa chỉ gián tiếp',
     english: 'Indirect Addressing',
-    definition: '指令中给出寄存器，寄存器中存放操作数的地址',
+    definition: 'Lệnh chỉ ra một thanh ghi, thanh ghi này lưu địa chỉ của toán hạng',
     format: 'MOV R1, [R2]',
-    usage: '指针操作、数组遍历',
+    usage: 'Thao tác con trỏ, duyệt mảng',
     fast: false,
-    flexibility: '高',
+    flexibility: 'Cao',
     example: {
       assembly: 'MOV R1, [R2]  ; R1 = M[R2]',
-      description: 'R2 中存放地址，从该地址读取数据'
+      description: 'R2 chứa địa chỉ, đọc dữ liệu từ địa chỉ đó'
     },
     steps: [
-      'CPU 从寄存器 R2 中读取地址',
-      '将地址送入 MAR',
-      '访问内存，读取数据到 MDR',
-      '将数据写入目标寄存器 R1'
+      'CPU đọc địa chỉ từ thanh ghi R2',
+      'Đưa địa chỉ vào MAR',
+      'Truy cập bộ nhớ, đọc dữ liệu vào MDR',
+      'Ghi dữ liệu vào thanh ghi đích R1'
     ]
   },
   {
-    name: '变址寻址',
+    name: 'Định địa chỉ chỉ số',
     english: 'Indexed Addressing',
-    definition: '指令中给出基地址加上变址寄存器的值作为操作数地址',
+    definition: 'Lệnh cho địa chỉ cơ sở cộng với giá trị thanh ghi chỉ số để tạo địa chỉ toán hạng',
     format: 'MOV R1, [R2 + R3]',
-    usage: '数组访问、循环',
+    usage: 'Truy cập mảng, vòng lặp',
     fast: false,
-    flexibility: '高',
+    flexibility: 'Cao',
     example: {
       assembly: 'MOV R1, [R2 + R3]  ; R1 = M[R2+R3]',
-      description: '有效地址 = R2 + R3，用于数组元素访问'
+      description: 'Địa chỉ hiệu dụng = R2 + R3, dùng để truy cập phần tử mảng'
     },
     steps: [
-      'CPU 读取基地址寄存器 R2 的值',
-      'CPU 读取变址寄存器 R3 的值',
-      'ALU 计算有效地址 = R2 + R3',
-      '将有效地址送入 MAR',
-      '访问内存，读取数据到 MDR',
-      '将数据写入目标寄存器 R1'
+      'CPU đọc giá trị thanh ghi địa chỉ cơ sở R2',
+      'CPU đọc giá trị thanh ghi chỉ số R3',
+      'ALU tính địa chỉ hiệu dụng = R2 + R3',
+      'Đưa địa chỉ hiệu dụng vào MAR',
+      'Truy cập bộ nhớ, đọc dữ liệu vào MDR',
+      'Ghi dữ liệu vào thanh ghi đích R1'
     ]
   },
   {
-    name: '基址寻址',
+    name: 'Định địa chỉ cơ sở',
     english: 'Based Addressing',
-    definition: '指令中给出基址寄存器加上偏移量作为操作数地址',
+    definition: 'Lệnh cho thanh ghi cơ sở cộng với độ lệch để tạo địa chỉ toán hạng',
     format: 'MOV R1, [R2 + 100]',
-    usage: '结构体访问、函数参数',
+    usage: 'Truy cập struct, tham số hàm',
     fast: false,
-    flexibility: '高',
+    flexibility: 'Cao',
     example: {
-      assembly: 'MOV R1, [RBP - 8]  ; 访问栈帧中的局部变量',
-      description: '有效地址 = RBP - 8，用于访问函数栈帧中的变量'
+      assembly: 'MOV R1, [RBP - 8]  ; Truy cập biến cục bộ trong khung stack',
+      description: 'Địa chỉ hiệu dụng = RBP - 8, dùng để truy cập biến trong stack frame của hàm'
     },
     steps: [
-      'CPU 读取基址寄存器 RBP 的值',
-      '计算有效地址 = RBP - 8',
-      '将有效地址送入 MAR',
-      '访问内存，读取数据'
+      'CPU đọc giá trị thanh ghi cơ sở RBP',
+      'Tính địa chỉ hiệu dụng = RBP - 8',
+      'Đưa địa chỉ hiệu dụng vào MAR',
+      'Truy cập bộ nhớ, đọc dữ liệu'
     ]
   },
   {
-    name: '相对寻址',
+    name: 'Định địa chỉ tương đối',
     english: 'Relative Addressing',
-    definition: '操作数地址是当前指令地址加上一个偏移量',
+    definition: 'Địa chỉ toán hạng bằng địa chỉ lệnh hiện hành cộng một độ lệch',
     format: 'JMP LABEL',
-    usage: '循环、条件跳转',
+    usage: 'Vòng lặp, nhảy có điều kiện',
     fast: true,
-    flexibility: '高',
+    flexibility: 'Cao',
     example: {
-      assembly: 'JMP LOOP  ; 跳转到 LOOP 标签处',
-      description: '跳转目标地址 = PC + 偏移量，用于循环和分支'
+      assembly: 'JMP LOOP  ; Nhảy đến nhãn LOOP',
+      description: 'Địa chỉ đích nhảy = PC + độ lệch, dùng cho vòng lặp và rẽ nhánh'
     },
     steps: [
-      'CPU 计算跳转目标地址 = 当前 PC + 偏移量',
-      '将目标地址写入 PC',
-      '下一条指令从新地址开始执行'
+      'CPU tính địa chỉ đích = PC hiện tại + độ lệch',
+      'Ghi địa chỉ đích vào PC',
+      'Lệnh kế tiếp được thực thi từ địa chỉ mới'
     ]
   }
 ])

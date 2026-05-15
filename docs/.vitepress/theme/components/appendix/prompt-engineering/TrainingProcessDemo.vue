@@ -6,7 +6,7 @@
     <template #header>
       <div class="card-header">
         <h3 class="title">
-          从训练数据看模型行为
+          Nhìn dữ liệu training để hiểu hành vi mô hình
         </h3>
         <div class="mode-switch-container">
           <el-radio-group
@@ -14,10 +14,10 @@
             size="large"
           >
             <el-radio-button label="pretrain">
-              1. 预训练 (Pre-training)
+              1. Pre-training
             </el-radio-button>
             <el-radio-button label="finetune">
-              2. 微调 (Fine-tuning)
+              2. Fine-tuning
             </el-radio-button>
           </el-radio-group>
         </div>
@@ -38,10 +38,10 @@
             📚
           </div>
           <div class="info">
-            <h4>博览群书 (Reading the Web)</h4>
-            <p>核心目标：<strong>预测下一个 Token</strong></p>
+            <h4>Đọc khắp thế gian (Reading the Web)</h4>
+            <p>Mục tiêu cốt lõi: <strong>dự đoán token kế tiếp</strong></p>
             <p class="sub">
-              模型阅读了海量文本，它的本能是"把句子接下去"。
+              Mô hình đã đọc lượng văn bản khổng lồ, bản năng của nó là "viết tiếp câu".
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@
             :loading="isPredicting"
             @click="predictNext"
           >
-            {{ isPredicting ? '计算概率中...' : '预测下一个词 (Predict)' }}
+            {{ isPredicting ? 'Đang tính xác suất...' : 'Dự đoán từ kế (Predict)' }}
           </el-button>
         </div>
 
@@ -79,7 +79,7 @@
             v-if="predictions.length > 0"
             class="predictions-panel"
           >
-            <h5>概率分布 (Top 3 Candidates)</h5>
+            <h5>Phân phối xác suất (Top 3 Candidates)</h5>
             <div class="chart-container">
               <div
                 v-for="(item, index) in predictions"
@@ -101,7 +101,7 @@
               </div>
             </div>
             <p class="hint">
-              👆 点击预测词填入（模型只是在根据统计学规律"瞎蒙"）
+              👆 Bấm vào một từ dự đoán để điền vào (mô hình chỉ đang "đoán" theo quy luật thống kê)
             </p>
           </div>
         </el-collapse-transition>
@@ -122,10 +122,10 @@
             🎓
           </div>
           <div class="info">
-            <h4>学习规矩 (Instruction Tuning)</h4>
-            <p>核心目标：<strong>听懂指令 (Follow Instructions)</strong></p>
+            <h4>Học quy tắc (Instruction Tuning)</h4>
+            <p>Mục tiêu cốt lõi: <strong>nghe theo chỉ thị (Follow Instructions)</strong></p>
             <p class="sub">
-              通过 (问题 → 标准答案) 数据对，教会模型"像个助手一样说话"。
+              Thông qua cặp dữ liệu (câu hỏi → đáp án chuẩn), ta dạy mô hình "nói chuyện như một trợ lý".
             </p>
           </div>
         </div>
@@ -138,7 +138,7 @@
               👤
             </div>
             <div class="bubble">
-              我如何退货？
+              Tôi đổi/trả hàng kiểu gì?
             </div>
           </div>
           
@@ -156,12 +156,12 @@
                   size="small"
                   class="badge"
                 >
-                  预训练模型 (Base Model)
+                  Mô hình pre-train (Base Model)
                 </el-tag>
                 <div class="bubble-text">
-                  退货是指消费者将购买的商品退回给卖家的过程。在电子商务中，退货率通常在 20% 左右。根据《消费者权益保护法》...
+                  Trả hàng là quá trình người tiêu dùng trả lại sản phẩm đã mua cho người bán. Trong thương mại điện tử, tỷ lệ trả hàng thường khoảng 20%. Theo "Luật bảo vệ người tiêu dùng"...
                   <br><br>
-                  <small>❌ (它在背书，不是在回答你)</small>
+                  <small>❌ (Nó đang đọc thuộc lòng chứ không trả lời bạn)</small>
                 </div>
               </div>
             </div>
@@ -181,16 +181,16 @@
                   size="small"
                   class="badge"
                 >
-                  微调模型 (Instruct Model)
+                  Mô hình fine-tuned (Instruct Model)
                 </el-tag>
                 <div class="bubble-text">
-                  办理退货很简单，请按以下步骤操作：
+                  Đổi/trả hàng rất đơn giản, bạn làm theo các bước sau:
                   <ol>
-                    <li>登录您的账户</li>
-                    <li>点击"我的订单"</li>
-                    <li>选择要退的商品，点击"申请售后"</li>
+                    <li>Đăng nhập tài khoản</li>
+                    <li>Bấm "Đơn hàng của tôi"</li>
+                    <li>Chọn sản phẩm muốn trả, bấm "Yêu cầu hậu mãi"</li>
                   </ol>
-                  <small>✅ (它学会了"回复指令"的格式)</small>
+                  <small>✅ (Nó đã học được format "phản hồi chỉ thị")</small>
                 </div>
               </div>
             </div>
@@ -203,14 +203,14 @@
             size="large"
           >
             <el-radio-button label="base">
-              原始模型 (Base)
+              Mô hình gốc (Base)
             </el-radio-button>
             <el-radio-button label="tuned">
-              微调后 (Instruct)
+              Đã fine-tune (Instruct)
             </el-radio-button>
           </el-radio-group>
           <p class="hint">
-            切换开关，观察模型行为的巨大差异
+            Chuyển công tắc để quan sát hành vi mô hình khác biệt rõ rệt
           </p>
         </div>
       </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="flex-demo">
     <div class="demo-header">
-      <span class="title">Flexbox 布局</span>
-      <span class="subtitle">通过调整参数观察元素排列方式的变化</span>
+      <span class="title">Layout Flexbox</span>
+      <span class="subtitle">Chỉnh tham số để quan sát cách element sắp xếp thay đổi</span>
     </div>
 
     <div class="axis-concept">
@@ -10,23 +10,23 @@
         <div class="concept-item">
           <div class="concept-visual main">
             <span class="arrow">→</span>
-            <span class="label">主轴</span>
+            <span class="label">Main</span>
             <span class="arrow">→</span>
           </div>
           <div class="concept-desc">
-            <strong>主轴 (Main Axis)</strong>
-            <span>元素排列的方向，由 flex-direction 决定</span>
+            <strong>Main Axis (trục chính)</strong>
+            <span>Hướng các element xếp thành hàng, do flex-direction quyết định</span>
           </div>
         </div>
         <div class="concept-item">
           <div class="concept-visual cross">
             <span class="arrow">↓</span>
-            <span class="label">交叉轴</span>
+            <span class="label">Cross</span>
             <span class="arrow">↓</span>
           </div>
           <div class="concept-desc">
-            <strong>交叉轴 (Cross Axis)</strong>
-            <span>垂直于主轴，用于对齐元素</span>
+            <strong>Cross Axis (trục vuông góc)</strong>
+            <span>Vuông góc với trục chính, dùng để căn chỉnh element</span>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="control-group">
-          <label>justify-content（主轴对齐）</label>
+          <label>justify-content (căn theo main axis)</label>
           <div class="chips">
             <button
               v-for="j in justifies"
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="control-group">
-          <label>align-items（交叉轴对齐）</label>
+          <label>align-items (căn theo cross axis)</label>
           <div class="chips">
             <button
               v-for="a in aligns"
@@ -102,8 +102,8 @@
           </div>
         </div>
         <div class="axis-hint">
-          <span class="axis-tag main">主轴方向: {{ dir === 'row' ? '水平 →' : '垂直 ↓' }}</span>
-          <span class="axis-tag cross">交叉轴方向: {{ dir === 'row' ? '垂直 ↓' : '水平 →' }}</span>
+          <span class="axis-tag main">Hướng main axis: {{ dir === 'row' ? 'ngang →' : 'dọc ↓' }}</span>
+          <span class="axis-tag cross">Hướng cross axis: {{ dir === 'row' ? 'dọc ↓' : 'ngang →' }}</span>
         </div>
       </div>
     </div>
@@ -116,9 +116,9 @@
     </div>
 
     <div class="info-box">
-      <strong>记忆方法：</strong>
-      <code>justify-content</code> 控制主轴方向的对齐（水平时左右，垂直时上下）；
-      <code>align-items</code> 控制交叉轴方向的对齐。
+      <strong>Mẹo ghi nhớ:</strong>
+      <code>justify-content</code> điều khiển căn chỉnh theo main axis (khi nằm ngang là trái/phải, khi dọc là trên/dưới);
+      <code>align-items</code> điều khiển căn chỉnh theo cross axis.
     </div>
   </div>
 </template>
@@ -127,8 +127,8 @@
 import { computed, ref } from 'vue'
 
 const directions = [
-  { id: 'row', label: 'row（水平）' },
-  { id: 'column', label: 'column（垂直）' }
+  { id: 'row', label: 'row (ngang)' },
+  { id: 'column', label: 'column (dọc)' }
 ]
 const justifies = [
   { id: 'flex-start', label: 'flex-start' },

@@ -6,24 +6,24 @@
     <template #header>
       <div class="controls-header">
         <div class="control-group">
-          <span class="label">任务场景：</span>
+          <span class="label">Kịch bản tác vụ:</span>
           <el-select
             v-model="currentTask"
             style="width: 200px"
           >
             <el-option
-              label="代码审查 (Code Review)"
+              label="Code Review"
               value="debug"
             />
             <el-option
-              label="行程规划 (Travel Plan)"
+              label="Lập lịch trình (Travel Plan)"
               value="travel"
             />
           </el-select>
         </div>
         
         <div class="control-group">
-          <span class="label">思考模式：</span>
+          <span class="label">Chế độ suy nghĩ:</span>
           <el-radio-group v-model="currentMode">
             <el-radio-button 
               v-for="m in modes" 
@@ -51,7 +51,7 @@
             <template #header>
               <div class="panel-header">
                 <el-icon><EditPen /></el-icon>
-                <span>输入提示词 (Prompt)</span>
+                <span>Nhập Prompt</span>
               </div>
             </template>
             <div class="prompt-text">
@@ -65,7 +65,7 @@
                 size="large"
                 @click="runSimulation"
               >
-                {{ isPlaying ? '生成中...' : '开始生成' }}
+                {{ isPlaying ? 'Đang sinh...' : 'Bắt đầu sinh' }}
               </el-button>
             </div>
           </el-card>
@@ -84,7 +84,7 @@
               <div class="panel-header">
                 <div class="left">
                   <el-icon><Cpu /></el-icon>
-                  <span>AI 思考与输出</span>
+                  <span>AI suy nghĩ và output</span>
                 </div>
                 <el-tag
                   :type="statusType"
@@ -102,7 +102,7 @@
             >
               <el-empty 
                 v-if="!hasRun && !isPlaying" 
-                description="点击“开始生成”观察 AI 如何处理任务..." 
+                description="Bấm 'Bắt đầu sinh' để xem AI xử lý tác vụ..."
                 :image-size="80"
               />
               
@@ -146,14 +146,14 @@
         show-icon
       >
         <template #title>
-          <span class="insight-title">模式分析</span>
+          <span class="insight-title">Phân tích chế độ</span>
         </template>
         <template #default>
           <div v-if="currentMode === 'direct'">
-            <strong>直接输出模式：</strong> 模型急于给出结果，容易忽略边界情况或细节，导致内容泛泛而谈。
+            <strong>Chế độ output trực tiếp:</strong> mô hình vội đưa ra kết quả nên dễ bỏ sót edge case hoặc chi tiết, dẫn tới nội dung chung chung.
           </div>
           <div v-else>
-            <strong>CoT (思维链) 模式：</strong> 强迫模型先“思考”再“行动”。通过列出清单/计划，它相当于给自己建立了“检查点”，大大降低了遗漏和跑偏的概率。
+            <strong>Chế độ CoT (Chain of Thought):</strong> buộc mô hình "suy nghĩ" trước khi "hành động". Bằng việc liệt kê checklist/kế hoạch, nó tự dựng các "checkpoint", giúp giảm đáng kể nguy cơ bỏ sót hay lệch hướng.
           </div>
         </template>
       </el-alert>
@@ -179,32 +179,32 @@ function add(a, b) {
   return a - b;
 }`,
     direct: [
-      { title: '直接输出', content: 'The function `add` incorrectly uses the subtraction operator `-` instead of `+`. It should be `return a + b;`.' }
+      { title: 'Output trực tiếp', content: 'The function `add` incorrectly uses the subtraction operator `-` instead of `+`. It should be `return a + b;`.' }
     ],
     cot: [
-      { title: '1. 理解意图', content: 'User wants to add two numbers.' },
-      { title: '2. 检查实现', content: 'Line 2 uses `-` operator.' },
-      { title: '3. 发现矛盾', content: 'Function name is `add` but logic is subtraction.' },
-      { title: '4. 最终输出', content: 'The function has a bug: it subtracts instead of adds. Fix: change `-` to `+`.' }
+      { title: '1. Hiểu ý đồ', content: 'User wants to add two numbers.' },
+      { title: '2. Kiểm tra cài đặt', content: 'Line 2 uses `-` operator.' },
+      { title: '3. Phát hiện mâu thuẫn', content: 'Function name is `add` but logic is subtraction.' },
+      { title: '4. Output cuối', content: 'The function has a bug: it subtracts instead of adds. Fix: change `-` to `+`.' }
     ]
   },
   travel: {
     prompt: 'Plan a 2-day trip to Paris for an art lover.',
     direct: [
-      { title: '直接输出', content: 'Day 1: Eiffel Tower, Louvre. Day 2: Montmartre, Orsay Museum. Enjoy!' }
+      { title: 'Output trực tiếp', content: 'Day 1: Eiffel Tower, Louvre. Day 2: Montmartre, Orsay Museum. Enjoy!' }
     ],
     cot: [
-      { title: '1. 分析需求', content: 'Destination: Paris. Duration: 2 days. Interest: Art.' },
-      { title: '2. 筛选景点', content: 'Must-sees: Louvre (Mona Lisa), Musee d\'Orsay (Impressionism), Pompidou (Modern).' },
-      { title: '3. 规划路线', content: 'Cluster locations to save travel time.' },
-      { title: '4. 最终行程', content: 'Day 1: Louvre (morning) -> Tuileries -> Orangerie. Day 2: Orsay (morning) -> Montmartre -> Sacré-Cœur.' }
+      { title: '1. Phân tích yêu cầu', content: 'Destination: Paris. Duration: 2 days. Interest: Art.' },
+      { title: '2. Chọn lọc điểm đến', content: 'Must-sees: Louvre (Mona Lisa), Musee d\'Orsay (Impressionism), Pompidou (Modern).' },
+      { title: '3. Lên lộ trình', content: 'Cluster locations to save travel time.' },
+      { title: '4. Lịch trình cuối', content: 'Day 1: Louvre (morning) -> Tuileries -> Orangerie. Day 2: Orsay (morning) -> Montmartre -> Sacré-Cœur.' }
     ]
   }
 }
 
 const modes = [
-  { id: 'direct', label: '直接回答 (Zero-Shot)' },
-  { id: 'plan-first', label: '思维链 (Chain-of-Thought)' }
+  { id: 'direct', label: 'Trả lời trực tiếp (Zero-Shot)' },
+  { id: 'plan-first', label: 'Chain-of-Thought' }
 ]
 
 const currentScenario = computed(() => scenarios[currentTask.value])

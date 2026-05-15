@@ -2,7 +2,7 @@
   <div class="demo">
     <div class="header">
       <span class="icon">🎨</span>
-      <span class="title">四种 API 风格对比</span>
+      <span class="title">So sánh bốn phong cách API</span>
     </div>
 
     <div class="tabs">
@@ -25,12 +25,12 @@
       <p class="desc">{{ currentStyle.desc }}</p>
 
       <div class="example-section">
-        <div class="example-label">示例：获取用户信息</div>
+        <div class="example-label">Ví dụ: lấy thông tin người dùng</div>
         <pre class="code-block"><code>{{ currentStyle.example }}</code></pre>
       </div>
 
       <div class="features">
-        <div class="features-title">核心特点</div>
+        <div class="features-title">Đặc điểm cốt lõi</div>
         <div class="features-grid">
           <div
             v-for="(f, i) in currentStyle.features"
@@ -45,11 +45,11 @@
 
       <div class="meta">
         <div class="meta-row">
-          <span class="meta-label">适用场景</span>
+          <span class="meta-label">Tình huống áp dụng</span>
           <span class="meta-value">{{ currentStyle.scenarios }}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-label">官方地址</span>
+          <span class="meta-label">Trang chính thức</span>
           <a :href="currentStyle.official" target="_blank" class="meta-link">{{
             currentStyle.official
           }}</a>
@@ -58,45 +58,45 @@
     </div>
 
     <div class="compare-section">
-      <div class="compare-title">📊 风格速览对比</div>
+      <div class="compare-title">📊 So sánh nhanh các phong cách</div>
       <div class="compare-table">
         <div class="compare-row head">
-          <div class="cell">特性</div>
+          <div class="cell">Tiêu chí</div>
           <div class="cell">RPC</div>
           <div class="cell highlight">REST</div>
           <div class="cell">GraphQL</div>
           <div class="cell">gRPC</div>
         </div>
         <div class="compare-row">
-          <div class="cell">核心理念</div>
-          <div class="cell">面向过程</div>
-          <div class="cell highlight">面向资源</div>
-          <div class="cell">面向数据</div>
-          <div class="cell">面向方法</div>
+          <div class="cell">Triết lý cốt lõi</div>
+          <div class="cell">Hướng quá trình</div>
+          <div class="cell highlight">Hướng resource</div>
+          <div class="cell">Hướng dữ liệu</div>
+          <div class="cell">Hướng method</div>
         </div>
         <div class="compare-row">
-          <div class="cell">URL 风格</div>
-          <div class="cell">动词为主</div>
-          <div class="cell highlight">名词为主</div>
-          <div class="cell">单一端点</div>
-          <div class="cell">不依赖URL</div>
+          <div class="cell">Phong cách URL</div>
+          <div class="cell">Chủ yếu là động từ</div>
+          <div class="cell highlight">Chủ yếu là danh từ</div>
+          <div class="cell">Một endpoint duy nhất</div>
+          <div class="cell">Không phụ thuộc URL</div>
         </div>
         <div class="compare-row">
-          <div class="cell">学习曲线</div>
-          <div class="cell low">低</div>
-          <div class="cell">中</div>
-          <div class="cell">中</div>
-          <div class="cell high">高</div>
+          <div class="cell">Đường cong học</div>
+          <div class="cell low">Thấp</div>
+          <div class="cell">Trung bình</div>
+          <div class="cell">Trung bình</div>
+          <div class="cell high">Cao</div>
         </div>
         <div class="compare-row">
-          <div class="cell">性能</div>
-          <div class="cell">一般</div>
-          <div class="cell">一般</div>
-          <div class="cell">较好</div>
-          <div class="cell best">优秀</div>
+          <div class="cell">Hiệu năng</div>
+          <div class="cell">Bình thường</div>
+          <div class="cell">Bình thường</div>
+          <div class="cell">Khá tốt</div>
+          <div class="cell best">Xuất sắc</div>
         </div>
         <div class="compare-row">
-          <div class="cell">使用占比</div>
+          <div class="cell">Tỷ lệ sử dụng</div>
           <div class="cell">~30%</div>
           <div class="cell highlight">~50%</div>
           <div class="cell">~15%</div>
@@ -117,48 +117,48 @@ const styles = [
     id: 'rpc',
     icon: '📞',
     name: 'RPC',
-    badge: '最传统',
-    desc: 'Remote Procedure Call，远程过程调用。像调用本地方法一样调用远程服务，面向过程，简单直接。超过 50% 的内部 API 采用这种风格。',
+    badge: 'Truyền thống nhất',
+    desc: 'Remote Procedure Call - gọi thủ tục từ xa. Gọi service từ xa như gọi hàm local, hướng quá trình, đơn giản và trực tiếp. Hơn 50% API nội bộ dùng phong cách này.',
     example: `GET /getUserInfo?id=123
 POST /createUser
 POST /deleteOrder
 GET /queryUserList`,
     features: [
-      'URL 命名往往是动词',
-      'HTTP 方法基本只用 GET/POST',
-      '设计简单，几乎无约束',
-      '需要详细文档说明'
+      'URL thường được đặt theo động từ',
+      'HTTP method gần như chỉ dùng GET/POST',
+      'Thiết kế đơn giản, gần như không ràng buộc',
+      'Cần tài liệu mô tả chi tiết'
     ],
-    scenarios: '内部 API、性能敏感场景、难以抽象为资源的业务',
-    official: '无官方规范（概念性风格）'
+    scenarios: 'API nội bộ, các nghiệp vụ nhạy cảm về hiệu năng hoặc khó trừu tượng thành resource',
+    official: 'Không có chuẩn chính thức (chỉ là khái niệm)'
   },
   {
     id: 'rest',
     icon: '🌐',
     name: 'REST',
-    badge: '最常用',
-    desc: 'Representational State Transfer，表述性状态转移。由 Roy Fielding 于 2000 年在其博士论文中提出。面向资源，用 URL 标识资源，用 HTTP 方法操作资源。',
-    example: `GET    /users           # 获取用户列表
-GET    /users/123       # 获取单个用户
-POST   /users           # 创建用户
-PUT    /users/123       # 全量更新
-PATCH  /users/123       # 部分更新
-DELETE /users/123       # 删除用户`,
+    badge: 'Phổ biến nhất',
+    desc: 'Representational State Transfer. Do Roy Fielding đề xuất trong luận án tiến sĩ năm 2000. Hướng resource, dùng URL để định danh resource, dùng HTTP method để thao tác.',
+    example: `GET    /users           # Lấy danh sách user
+GET    /users/123       # Lấy một user
+POST   /users           # Tạo user
+PUT    /users/123       # Cập nhật toàn bộ
+PATCH  /users/123       # Cập nhật một phần
+DELETE /users/123       # Xóa user`,
     features: [
-      'URL 是名词，不是动词',
-      '使用 HTTP 方法表达操作',
-      '无状态，请求包含所有信息',
-      '可缓存，支持分层系统'
+      'URL là danh từ, không phải động từ',
+      'Dùng HTTP method để diễn đạt hành động',
+      'Stateless, request chứa đủ thông tin',
+      'Cache được, hỗ trợ kiến trúc phân lớp'
     ],
-    scenarios: '公开 API、CRUD 操作、资源边界清晰的业务',
+    scenarios: 'API công khai, thao tác CRUD, nghiệp vụ có ranh giới resource rõ ràng',
     official: 'https://restfulapi.net/'
   },
   {
     id: 'graphql',
     icon: '📊',
     name: 'GraphQL',
-    badge: '最灵活',
-    desc: '由 Facebook 于 2015 年开源。一种查询语言，客户端可以精确指定需要的数据字段，避免过度获取或获取不足。',
+    badge: 'Linh hoạt nhất',
+    desc: 'Được Facebook open-source năm 2015. Một ngôn ngữ query cho phép client chỉ định chính xác các field cần lấy, tránh over-fetching hoặc under-fetching.',
     example: `query {
   user(id: "123") {
     name
@@ -170,20 +170,20 @@ DELETE /users/123       # 删除用户`,
   }
 }`,
     features: [
-      '单一端点（/graphql）',
-      '客户端决定返回字段',
-      'Schema 即文档',
-      '一次请求获取多资源'
+      'Một endpoint duy nhất (/graphql)',
+      'Client quyết định field trả về',
+      'Schema chính là tài liệu',
+      'Một request lấy nhiều resource'
     ],
-    scenarios: '客户端需求多变、数据关系复杂、移动端 App',
+    scenarios: 'Nhu cầu client thay đổi nhiều, dữ liệu liên kết phức tạp, app mobile',
     official: 'https://graphql.org/'
   },
   {
     id: 'grpc',
     icon: '⚡',
     name: 'gRPC',
-    badge: '最高效',
-    desc: '由 Google 于 2016 年开源。高性能 RPC 框架，使用 Protocol Buffers 序列化，基于 HTTP/2，支持双向流通信。',
+    badge: 'Hiệu năng cao nhất',
+    desc: 'Được Google open-source năm 2016. Framework RPC hiệu năng cao, dùng Protocol Buffers để serialize, chạy trên HTTP/2, hỗ trợ stream hai chiều.',
     example: `service UserService {
   rpc GetUser(GetUserRequest) returns (User);
   rpc CreateUser(CreateUserRequest) returns (User);
@@ -194,12 +194,12 @@ message User {
   string name = 2;
 }`,
     features: [
-      '二进制传输，性能极高',
-      '强类型，代码自动生成',
-      '基于 HTTP/2，双向流',
-      '浏览器支持差'
+      'Truyền dạng nhị phân, hiệu năng rất cao',
+      'Strong type, code được sinh tự động',
+      'Dựa trên HTTP/2, stream hai chiều',
+      'Hỗ trợ trên browser còn hạn chế'
     ],
-    scenarios: '微服务内部通信、高性能场景、强类型需求',
+    scenarios: 'Giao tiếp nội bộ microservice, tình huống cần hiệu năng cao, yêu cầu strong type',
     official: 'https://grpc.io/'
   }
 ]

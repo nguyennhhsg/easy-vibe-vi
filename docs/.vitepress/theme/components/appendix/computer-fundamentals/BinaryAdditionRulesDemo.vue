@@ -1,17 +1,17 @@
 <template>
   <div class="addition-rules">
     <div class="demo-header">
-      <span class="title">从手算加法到逻辑门</span>
-      <span class="subtitle">计算机如何只用 0 和 1 做数学题？看看这个规律</span>
+      <span class="title">Từ phép cộng thủ công đến cổng logic</span>
+      <span class="subtitle">Máy tính làm toán bằng cách nào với chỉ 0 và 1? Hãy xem quy luật sau</span>
     </div>
 
-    <!-- 1. 十进制类比 -->
+    <!-- 1. So sánh với hệ thập phân -->
     <div class="section">
-      <div class="section-title">第一步：回顾十进制的"进位"</div>
+      <div class="section-title">Bước 1: ôn lại khái niệm "nhớ" trong hệ thập phân</div>
       <div class="decimal-analogy">
         <div class="math-column">
           <div class="math-row">
-            <span class="digit carry-mark">1</span> <!-- 进位标记 -->
+            <span class="digit carry-mark">1</span> <!-- ký hiệu nhớ -->
           </div>
           <div class="math-row">
             <span class="digit"></span>
@@ -30,24 +30,24 @@
 
         <div class="analogy-text">
           <p>
-            因为 7 + 5 = 12，这个结果超出了个位能装下的最大数字 (9)。
-            我们把 12 拆成"一个完整的 10"和"剩下的 2"：
+            Vì 7 + 5 = 12, vượt quá chữ số lớn nhất ở hàng đơn vị (9).
+            Ta tách 12 thành "một số 10 đầy đủ" và "phần dư 2":
           </p>
           <ul>
             <li>
-              留在当前位置的那个 <span class="badge s-badge">2</span> 被<strong>写在个位</strong>上，这叫 <strong class="s-color">本位 (Sum)</strong>。
+              Phần <span class="badge s-badge">2</span> ở lại được <strong>viết tại hàng đơn vị</strong>, gọi là <strong class="s-color">tổng tại bit (Sum)</strong>.
             </li>
             <li>
-              "完整的 10"向十位<strong>进了一个 1</strong>，叫 <strong class="c-color">进位 (Carry)</strong>。
+              "Số 10 đầy đủ" được <strong>nhớ 1</strong> lên hàng chục, gọi là <strong class="c-color">nhớ (Carry)</strong>.
             </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- 2. 二进制四种情况交互 -->
+    <!-- 2. 4 trường hợp của phép cộng nhị phân -->
     <div class="section">
-      <div class="section-title">第二步：二进制加法的 4 种情况（点点看）</div>
+      <div class="section-title">Bước 2: 4 trường hợp của phép cộng nhị phân (hãy thử nhấp xem)</div>
       <div class="binary-demo">
         <div class="binary-calc">
           <button class="bit-btn" :class="{ on: inputA }" @click="inputA = !inputA">{{ inputA ? '1' : '0' }}</button>
@@ -62,28 +62,28 @@
 
         <div class="binary-explain">
           <p v-if="!inputA && !inputB">
-            0 + 0 = 0。<br>本位写 <strong>0</strong>，不进位。
+            0 + 0 = 0. <br>Tổng tại bit là <strong>0</strong>, không nhớ.
           </p>
           <p v-if="(!inputA && inputB) || (inputA && !inputB)">
-            {{ inputA ? '1' : '0' }} + {{ inputB ? '1' : '0' }} = 1。<br>本位写 <strong>1</strong>，不进位。
+            {{ inputA ? '1' : '0' }} + {{ inputB ? '1' : '0' }} = 1. <br>Tổng tại bit là <strong>1</strong>, không nhớ.
           </p>
           <p v-if="inputA && inputB">
-            1 + 1 = 10。<br>
-            二进制"满 2 就进 1"。所以本位写 <strong class="s-color">0</strong>，向左进位 <strong class="c-color">1</strong>。
+            1 + 1 = 10. <br>
+            Nhị phân tuân theo quy tắc "đủ 2 thì nhớ 1". Vì vậy tổng tại bit là <strong class="s-color">0</strong>, nhớ <strong class="c-color">1</strong> sang trái.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- 3. 找出规律并对应到逻辑门 -->
+    <!-- 3. Đặt tên cho quy luật và ánh xạ sang cổng logic -->
     <div class="section mb-0">
-      <div class="section-title">第三步：给规律起个名字（电路化）</div>
+      <div class="section-title">Bước 3: đặt tên cho quy luật (chuyển thành mạch điện)</div>
       
       <div class="rules-container">
-        <!-- 所有的 4 种情况一览表 -->
+        <!-- Bảng tổng hợp 4 trường hợp -->
         <div class="rules-table">
           <div class="rt-head">
-            <span>A</span><span>B</span><span class="c-color">进位</span><span class="s-color">本位</span>
+            <span>A</span><span>B</span><span class="c-color">Nhớ</span><span class="s-color">Tổng</span>
           </div>
           <div class="rt-row" :class="{ active: !inputA && !inputB }"><span>0</span><span>0</span><span>0</span><span>0</span></div>
           <div class="rt-row" :class="{ active: !inputA && inputB }"> <span>0</span><span>1</span><span>0</span><span>1</span></div>
@@ -93,20 +93,20 @@
 
         <div class="rules-text">
           <div class="rule-card sum-rule" :class="{ active: sum }">
-            <div class="rc-title"><span class="badge s-badge">本位</span> 规律：</div>
+            <div class="rc-title"><span class="badge s-badge">Tổng</span> quy luật:</div>
             <div class="rc-desc">
-              只有当输入是 (0,1) 或 (1,0) 时，本位才是 1。<br>
-              <strong>总结：</strong>只有两个输入<strong>不同</strong>时才为 1。<br>
-              <div class="rc-gate">这个规律在电路中叫 <strong>XOR (异或门)</strong></div>
+              Chỉ khi đầu vào là (0,1) hoặc (1,0) thì tổng tại bit mới là 1.<br>
+              <strong>Tóm lại:</strong> tổng là 1 chỉ khi hai đầu vào <strong>khác nhau</strong>.<br>
+              <div class="rc-gate">Quy luật này trong mạch điện gọi là <strong>XOR (cổng đảo dấu, exclusive OR)</strong></div>
             </div>
           </div>
 
           <div class="rule-card carry-rule" :class="{ active: carry }">
-            <div class="rc-title"><span class="badge c-badge">进位</span> 规律：</div>
+            <div class="rc-title"><span class="badge c-badge">Nhớ</span> quy luật:</div>
             <div class="rc-desc">
-              只有当输入是 (1,1) 时，进位才是 1。<br>
-              <strong>总结：</strong>只有两个输入<strong>都是 1</strong> 时才为 1。<br>
-              <div class="rc-gate">这个规律在电路中叫 <strong>AND (与门)</strong></div>
+              Chỉ khi đầu vào là (1,1) thì mới có nhớ bằng 1.<br>
+              <strong>Tóm lại:</strong> nhớ là 1 chỉ khi cả hai đầu vào <strong>cùng bằng 1</strong>.<br>
+              <div class="rc-gate">Quy luật này trong mạch điện gọi là <strong>AND (cổng AND)</strong></div>
             </div>
           </div>
         </div>
@@ -166,14 +166,14 @@ const carry = computed(() => inputA.value && inputB.value)
   border-bottom: 1px dashed var(--vp-c-divider);
 }
 
-/* 颜色常量 */
+/* Các màu hằng số */
 .s-color { color: #16a34a; font-weight: bold; }
 .c-color { color: #d97706; font-weight: bold; }
 .badge { padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
 .s-badge { background: #dcfce7; color: #166534; }
 .c-badge { background: #fef3c7; color: #92400e; }
 
-/* 1. 十进制类比 */
+/* 1. So sánh với hệ thập phân */
 .decimal-analogy {
   display: flex;
   gap: 2rem;
@@ -218,7 +218,7 @@ const carry = computed(() => inputA.value && inputB.value)
 }
 .analogy-text ul { padding-left: 1.2rem; margin-top: 0.5rem; }
 
-/* 2. 二进制四种情况 */
+/* 2. 4 trường hợp của phép cộng nhị phân */
 .binary-demo {
   display: flex;
   gap: 2rem;
@@ -263,7 +263,7 @@ const carry = computed(() => inputA.value && inputB.value)
 }
 .binary-explain p { margin: 0; }
 
-/* 3. 找出规律 */
+/* 3. Tìm ra quy luật */
 .rules-container {
   display: flex;
   gap: 1.5rem;

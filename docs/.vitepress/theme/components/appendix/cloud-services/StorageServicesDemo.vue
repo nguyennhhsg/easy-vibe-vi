@@ -1,15 +1,15 @@
 <template>
   <div class="storage-services-demo">
     <div class="demo-header">
-      <h4>存储服务选型助手</h4>
+      <h4>Trợ lý chọn dịch vụ Storage</h4>
       <p class="demo-desc">
-        根据您的使用场景，推荐最适合的存储方案
+        Đề xuất giải pháp storage phù hợp nhất theo use case của bạn
       </p>
     </div>
 
     <div class="scenario-selector">
       <div class="selector-title">
-        选择您的主要使用场景：
+        Chọn use case chính của bạn:
       </div>
       <div class="scenario-grid">
         <button
@@ -38,7 +38,7 @@
     >
       <div class="result-header">
         <span class="result-icon">🎯</span>
-        <span class="result-title">推荐方案</span>
+        <span class="result-title">Giải pháp đề xuất</span>
       </div>
 
       <div class="storage-comparison">
@@ -63,7 +63,7 @@
           </div>
           <div class="provider-pricing">
             <div class="price-label">
-              定价模式
+              Mô hình giá
             </div>
             <div class="price-value">
               {{ currentScenario.awsPricing }}
@@ -82,7 +82,7 @@
         <div class="provider-card aliyun">
           <div class="provider-header">
             <div class="provider-logo aliyun-logo">
-              阿里云
+              Alibaba Cloud
             </div>
             <div class="provider-service">
               {{ currentScenario.aliyunService }}
@@ -100,7 +100,7 @@
           </div>
           <div class="provider-pricing">
             <div class="price-label">
-              定价模式
+              Mô hình giá
             </div>
             <div class="price-value">
               {{ currentScenario.aliyunPricing }}
@@ -111,12 +111,12 @@
 
       <div class="decision-guide">
         <div class="guide-title">
-          🤔 如何选择？
+          🤔 Chọn thế nào?
         </div>
         <div class="guide-content">
           <div class="guide-item">
             <div class="guide-condition">
-              选择 AWS 如果：
+              Chọn AWS nếu:
             </div>
             <div class="guide-reason">
               {{ currentScenario.chooseAwsWhen }}
@@ -124,7 +124,7 @@
           </div>
           <div class="guide-item">
             <div class="guide-condition">
-              选择阿里云如果：
+              Chọn Alibaba Cloud nếu:
             </div>
             <div class="guide-reason">
               {{ currentScenario.chooseAliyunWhen }}
@@ -144,99 +144,99 @@ const selectedScenario = ref(null)
 const scenarios = [
   {
     id: 'website',
-    name: '静态网站托管',
+    name: 'Static Website Hosting',
     icon: '🌐',
-    shortDesc: '托管 HTML/CSS/JS 等静态资源',
+    shortDesc: 'Host các tài nguyên tĩnh HTML/CSS/JS',
     awsService: 'Amazon S3 + CloudFront',
     aliyunService: 'OSS + CDN',
     awsFeatures: [
-      '全球 400+ 边缘节点加速',
-      '自动压缩和 HTTP/2 支持',
-      '与 Route 53 无缝集成',
-      '支持静态网站托管配置'
+      'Tăng tốc qua 400+ edge node toàn cầu',
+      'Tự động nén và hỗ trợ HTTP/2',
+      'Tích hợp liền mạch với Route 53',
+      'Hỗ trợ cấu hình static website hosting'
     ],
     aliyunFeatures: [
-      '国内 2800+ 节点覆盖',
-      '智能压缩和 QUIC 协议支持',
-      '与万网域名一键绑定',
-      '实时日志分析和监控'
+      'Phủ sóng 2800+ node tại Trung Quốc',
+      'Nén thông minh và hỗ trợ QUIC protocol',
+      'Bind domain Wanwang một-click',
+      'Phân tích log và monitoring real-time'
     ],
-    awsPricing: '存储 $0.023/GB/月 + 流量 $0.085-0.12/GB',
-    aliyunPricing: '存储 ¥0.12/GB/月 + 流量 ¥0.24-0.80/GB',
-    chooseAwsWhen: '用户主要在海外，需要全球加速，或已使用 AWS 其他服务',
-    chooseAliyunWhen: '用户主要在中国大陆，需要备案支持，追求国内访问速度'
+    awsPricing: 'Storage $0.023/GB/tháng + Traffic $0.085-0.12/GB',
+    aliyunPricing: 'Storage ¥0.12/GB/tháng + Traffic ¥0.24-0.80/GB',
+    chooseAwsWhen: 'User chủ yếu ở nước ngoài, cần tăng tốc toàn cầu, hoặc đã dùng dịch vụ AWS khác',
+    chooseAliyunWhen: 'User chủ yếu ở Trung Quốc đại lục, cần hỗ trợ ICP, ưu tiên tốc độ truy cập trong nước'
   },
   {
     id: 'database',
-    name: '数据库存储',
+    name: 'Database Storage',
     icon: '🗄️',
-    shortDesc: '关系型和非关系型数据库',
+    shortDesc: 'Relational và non-relational database',
     awsService: 'Amazon RDS/Aurora',
     aliyunService: 'RDS/PolarDB',
     awsFeatures: [
-      'Aurora 性能是 MySQL 的 5 倍',
-      '自动故障转移和读副本',
-      '支持 6 种数据库引擎',
-      'Serverless 自动扩缩容'
+      'Aurora hiệu năng gấp 5 lần MySQL',
+      'Tự động failover và read replica',
+      'Hỗ trợ 6 database engine',
+      'Serverless tự động co giãn'
     ],
     aliyunFeatures: [
-      'PolarDB 计算存储分离架构',
-      '一写多读，读写分离',
-      '秒级备份和恢复',
-      'Oracle 语法兼容模式'
+      'PolarDB kiến trúc tách compute-storage',
+      'One-write multi-read, read-write splitting',
+      'Backup và restore trong vài giây',
+      'Tương thích cú pháp Oracle'
     ],
-    awsPricing: '按需 $0.017-0.68/小时，预留可省 40-60%',
-    aliyunPricing: '按量 ¥0.12-4.8/小时，包年包月更优惠',
-    chooseAwsWhen: '需要 Aurora 的高性能，或有多种数据库引擎需求',
-    chooseAliyunWhen: '需要 Oracle 兼容，或追求性价比和本地化支持'
+    awsPricing: 'On-demand $0.017-0.68/giờ, Reserved tiết kiệm 40-60%',
+    aliyunPricing: 'Pay-as-you-go ¥0.12-4.8/giờ, trả theo năm/tháng ưu đãi hơn',
+    chooseAwsWhen: 'Cần hiệu năng Aurora, hoặc cần nhiều database engine khác nhau',
+    chooseAliyunWhen: 'Cần tương thích Oracle, hoặc ưu tiên chi phí và hỗ trợ bản địa'
   },
   {
     id: 'backup',
-    name: '备份与归档',
+    name: 'Backup và Archive',
     icon: '💾',
-    shortDesc: '冷数据和长期归档存储',
+    shortDesc: 'Cold data và archive storage dài hạn',
     awsService: 'Amazon S3 Glacier',
-    aliyunService: 'OSS 归档存储',
+    aliyunService: 'OSS Archive Storage',
     awsFeatures: [
-      'Glacier Deep Archive  cheapest',
-      '检索时间从分钟到小时可选',
-      'S3 生命周期策略自动迁移',
-      'WORM 合规保留策略'
+      'Glacier Deep Archive rẻ nhất',
+      'Thời gian retrieve từ phút đến giờ',
+      'S3 Lifecycle policy tự động migrate',
+      'Chính sách lưu trữ WORM tuân thủ'
     ],
     aliyunFeatures: [
-      '归档存储单价行业最低',
-      '解冻时间可配置',
-      '跨地域冗余存储',
-      '符合国内合规要求'
+      'Archive storage giá thấp nhất ngành',
+      'Thời gian thaw có thể cấu hình',
+      'Cross-region redundancy storage',
+      'Tuân thủ yêu cầu trong nước'
     ],
-    awsPricing: 'Glacier $0.004/GB/月，Deep Archive $0.00099/GB/月',
-    aliyunPricing: '归档存储 ¥0.033/GB/月，冷归档更低',
-    chooseAwsWhen: '需要 Deep Archive 超低成本，或有复杂生命周期策略',
-    chooseAliyunWhen: '数据需在国内归档，或追求极致性价比'
+    awsPricing: 'Glacier $0.004/GB/tháng, Deep Archive $0.00099/GB/tháng',
+    aliyunPricing: 'Archive Storage ¥0.033/GB/tháng, Cold Archive còn rẻ hơn',
+    chooseAwsWhen: 'Cần chi phí siêu thấp Deep Archive, hoặc cần lifecycle policy phức tạp',
+    chooseAliyunWhen: 'Dữ liệu cần archive trong nước, hoặc ưu tiên chi phí tối ưu'
   },
   {
     id: 'media',
-    name: '媒体处理',
+    name: 'Media Processing',
     icon: '🎬',
-    shortDesc: '音视频存储和分发',
+    shortDesc: 'Lưu trữ và phân phối audio/video',
     awsService: 'S3 + Elemental',
-    aliyunService: 'OSS + 媒体处理',
+    aliyunService: 'OSS + Media Processing',
     awsFeatures: [
-      'Elemental 专业级视频处理',
-      'MediaConvert 格式转码',
-      'MediaLive 直播流处理',
-      'CloudFront 低延迟分发'
+      'Elemental xử lý video chuyên nghiệp',
+      'MediaConvert transcode format',
+      'MediaLive xử lý live stream',
+      'CloudFront phân phối độ trễ thấp'
     ],
     aliyunFeatures: [
-      '视频截帧、转码、水印',
-      '智能封面和内容审核',
-      '直播录制和时移回看',
-      'CDN 全球加速分发'
+      'Video screenshot, transcode, watermark',
+      'Thumbnail thông minh và content moderation',
+      'Live recording và time-shift playback',
+      'Phân phối tăng tốc CDN toàn cầu'
     ],
-    awsPricing: '按使用量计费，转码 $0.007-0.1/分钟',
-    aliyunPricing: '按量计费，转码 ¥0.03-0.5/分钟',
-    chooseAwsWhen: '需要广播级专业处理，或全球直播分发',
-    chooseAliyunWhen: '需要智能内容审核，或国内视频处理'
+    awsPricing: 'Tính theo usage, transcode $0.007-0.1/phút',
+    aliyunPricing: 'Pay-as-you-go, transcode ¥0.03-0.5/phút',
+    chooseAwsWhen: 'Cần xử lý cấp broadcast, hoặc phân phối live toàn cầu',
+    chooseAliyunWhen: 'Cần content moderation thông minh, hoặc xử lý video trong nước'
   }
 ]
 

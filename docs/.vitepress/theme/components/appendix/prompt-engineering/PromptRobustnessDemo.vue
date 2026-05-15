@@ -1,7 +1,7 @@
 <!--
   PromptRobustnessDemo.vue
-  演示如何通过“允许提问”和“自我修正”让 AI 输出更稳定。
-  场景：策划团建活动
+  Minh hoạ cách dùng "cho phép hỏi lại" và "tự kiểm tra" để output AI ổn định hơn.
+  Kịch bản: lên kế hoạch hoạt động team building
 -->
 <template>
   <el-card
@@ -12,10 +12,10 @@
       <div class="card-header">
         <div>
           <h3 class="title">
-            让 AI 更“稳”：拒绝瞎猜，学会反问与自查
+            Để AI "ổn định" hơn: từ chối đoán mò, học cách hỏi lại và tự kiểm tra
           </h3>
           <p class="subtitle">
-            面对模糊指令，AI 应该“不懂就问”而不是“一本正经胡说”。
+            Trước chỉ thị mơ hồ, AI nên "không hiểu thì hỏi" thay vì "nghiêm túc nói nhảm".
           </p>
         </div>
       </div>
@@ -31,13 +31,13 @@
           :xs="24"
         >
           <div class="input-display">
-            <span class="label">你的指令：</span>
+            <span class="label">Chỉ thị của bạn:</span>
             <el-tag
               type="info"
               size="large"
               effect="plain"
             >
-              “帮我策划一个团建活动。”
+              "Lên kế hoạch giúp tôi một buổi team building."
             </el-tag>
           </div>
         </el-col>
@@ -51,13 +51,13 @@
               @change="resetState"
             >
               <el-radio-button label="raw">
-                直接生成
+                Sinh trực tiếp
               </el-radio-button>
               <el-radio-button label="clarify">
-                允许提问
+                Cho phép hỏi lại
               </el-radio-button>
               <el-radio-button label="verify">
-                要求自检
+                Yêu cầu tự kiểm tra
               </el-radio-button>
             </el-radio-group>
           </div>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="simulation-area">
-      <!-- 模式 1: 直接生成 -->
+      <!-- Chế độ 1: sinh trực tiếp -->
       <div
         v-if="mode === 'raw'"
         class="scenario raw"
@@ -84,26 +84,26 @@
             shadow="never"
             class="bubble-content"
           >
-            <p>好的！为您推荐以下活动：</p>
+            <p>Vâng! Tôi đề xuất các hoạt động sau:</p>
             <ol>
-              <li>豪华游艇出海派对（人均 5000）</li>
-              <li>也就是去楼下吃个火锅（人均 100）</li>
-              <li>徒步穿越无人区（高风险）</li>
+              <li>Tiệc du thuyền hạng sang (5 triệu/người)</li>
+              <li>Ăn lẩu ở quán dưới văn phòng (100k/người)</li>
+              <li>Trekking khu vực hoang vu (rủi ro cao)</li>
             </ol>
             <div class="note">
-              （AI 内心：你不说预算和人数，我就随便猜了...）
+              (AI tự nhủ: bạn không nói ngân sách và số người, mình đoán bừa thôi...)
             </div>
           </el-card>
         </div>
         <el-alert
-          title="结果不可控：AI 只能盲猜，方案可能完全不靠谱"
+          title="Kết quả không kiểm soát được: AI chỉ đoán mò, kế hoạch có thể hoàn toàn không thực tế"
           type="error"
           show-icon
           :closable="false"
         />
       </div>
 
-      <!-- 模式 2: 澄清问题 -->
+      <!-- Chế độ 2: hỏi lại để làm rõ -->
       <div
         v-if="mode === 'clarify'"
         class="scenario clarify"
@@ -121,7 +121,7 @@
             shadow="never"
             class="bubble-content"
           >
-            <p>收到。为了给出精准建议，我需要确认 3 点：</p>
+            <p>Đã nhận. Để đưa ra đề xuất chính xác, mình cần xác nhận 3 điểm:</p>
             <el-form
               label-position="top"
               size="small"
@@ -132,14 +132,14 @@
                   :span="8"
                   :xs="24"
                 >
-                  <el-form-item label="1. 人数规模？">
+                  <el-form-item label="1. Quy mô số người?">
                     <el-select v-model="answers.count">
                       <el-option
-                        label="10人小团队"
+                        label="Team nhỏ 10 người"
                         value="10"
                       />
                       <el-option
-                        label="100人大大公司"
+                        label="Công ty lớn 100 người"
                         value="100"
                       />
                     </el-select>
@@ -149,14 +149,14 @@
                   :span="8"
                   :xs="24"
                 >
-                  <el-form-item label="2. 人均预算？">
+                  <el-form-item label="2. Ngân sách / người?">
                     <el-select v-model="answers.budget">
                       <el-option
-                        label="低（<200元）"
+                        label="Thấp (<200k)"
                         value="low"
                       />
                       <el-option
-                        label="高（>1000元）"
+                        label="Cao (>1tr)"
                         value="high"
                       />
                     </el-select>
@@ -166,14 +166,14 @@
                   :span="8"
                   :xs="24"
                 >
-                  <el-form-item label="3. 偏好？">
+                  <el-form-item label="3. Sở thích?">
                     <el-select v-model="answers.type">
                       <el-option
-                        label="轻松吃喝"
+                        label="Ăn uống nhẹ nhàng"
                         value="relax"
                       />
                       <el-option
-                        label="户外运动"
+                        label="Vận động ngoài trời"
                         value="active"
                       />
                     </el-select>
@@ -185,7 +185,7 @@
                 style="margin-top: 8px"
                 @click="generatePlan"
               >
-                生成方案
+                Sinh kế hoạch
               </el-button>
             </el-form>
           </el-card>
@@ -207,7 +207,7 @@
             shadow="never"
             class="bubble-content plan-result"
           >
-            <p>基于您的要求（{{ answerSummary }}），推荐方案：</p>
+            <p>Dựa trên yêu cầu của bạn ({{ answerSummary }}), mình đề xuất phương án:</p>
             <div class="plan-card">
               <h3>{{ planResult.title }}</h3>
               <p>{{ planResult.desc }}</p>
@@ -216,7 +216,7 @@
         </div>
       </div>
 
-      <!-- 模式 3: 自我修正 -->
+      <!-- Chế độ 3: tự kiểm tra và sửa -->
       <div
         v-if="mode === 'verify'"
         class="scenario verify"
@@ -228,7 +228,7 @@
           style="margin-bottom: 20px"
         >
           <template #title>
-            指令升级：策划一个活动，<strong>必须包含素食选项</strong>，且<strong>总预算不超过 2000 元</strong>。
+            Chỉ thị nâng cấp: lên kế hoạch một hoạt động, <strong>phải có lựa chọn món chay</strong>, và <strong>tổng ngân sách không quá 2tr</strong>.
           </template>
         </el-alert>
         
@@ -239,15 +239,15 @@
           style="margin-bottom: 24px"
         >
           <el-step
-            title="初次生成"
+            title="Sinh nháp"
             :icon="Edit"
           />
           <el-step
-            title="自我检查"
+            title="Tự kiểm tra"
             :icon="View"
           />
           <el-step
-            title="修正输出"
+            title="Sửa và xuất"
             :icon="CircleCheck"
           />
         </el-steps>
@@ -262,9 +262,9 @@
                 size="small"
                 type="info"
               >
-                生成草稿
+                Bản nháp
               </el-tag>
-              <span class="log-text">“全牛宴烧烤，预计花费 3000 元...”</span>
+              <span class="log-text">"Tiệc nướng toàn bò, ước tính chi phí 3tr..."</span>
             </div>
           </el-collapse-transition>
           <el-collapse-transition>
@@ -276,18 +276,18 @@
                 size="small"
                 type="danger"
               >
-                自检发现
+                Tự kiểm tra phát hiện
               </el-tag>
               <div class="check-list">
                 <div class="fail-item">
                   <el-icon color="#f56c6c">
                     <Close />
-                  </el-icon> 包含素食？否（全是肉）
+                  </el-icon> Có món chay? Không (toàn thịt)
                 </div>
                 <div class="fail-item">
                   <el-icon color="#f56c6c">
                     <Close />
-                  </el-icon> 预算&lt;2000？否（3000超标）
+                  </el-icon> Ngân sách &lt;2tr? Không (3tr vượt mức)
                 </div>
               </div>
             </div>
@@ -301,9 +301,9 @@
                 size="small"
                 type="success"
               >
-                修正后
+                Sau khi sửa
               </el-tag>
-              <span class="log-text">“田园蔬菜自助 + 少量烤肉，预计花费 1800 元。” ✅</span>
+              <span class="log-text">"Buffet rau củ kiểu vườn quê + một ít đồ nướng, ước tính 1.8tr." ✅</span>
             </div>
           </el-collapse-transition>
         </div>
@@ -318,20 +318,20 @@
             size="large"
             @click="runVerify"
           >
-            开始运行
+            Bắt đầu chạy
           </el-button>
           <el-button
             v-else-if="verifyStep === 3"
             @click="verifyStep = 0"
           >
-            重置演示
+            Reset demo
           </el-button>
           <el-button
             v-else
             loading
             disabled
           >
-            处理中...
+            Đang xử lý...
           </el-button>
         </div>
       </div>
@@ -359,9 +359,9 @@ const resetState = () => {
 
 const answerSummary = computed(() => {
   const m = {
-    '10': '10人', '100': '100人',
-    'low': '低预算', 'high': '高预算',
-    'relax': '轻松', 'active': '运动'
+    '10': '10 người', '100': '100 người',
+    'low': 'ngân sách thấp', 'high': 'ngân sách cao',
+    'relax': 'thư giãn', 'active': 'vận động'
   }
   return `${m[answers.value.count]} + ${m[answers.value.budget]} + ${m[answers.value.type]}`
 })
@@ -372,12 +372,12 @@ const generatePlan = () => {
   let desc = ''
   
   if (budget === 'high') {
-    title = type === 'relax' ? '五星级酒店 SPA & 自助晚宴' : '高端高尔夫球体验'
+    title = type === 'relax' ? 'Khách sạn 5 sao SPA & buffet tối' : 'Trải nghiệm golf hạng sang'
   } else {
-    title = type === 'relax' ? '桌游轰趴馆 & 披萨外卖' : '城市公园定向越野'
+    title = type === 'relax' ? 'Phòng board game & pizza giao tận nơi' : 'Chạy định hướng trong công viên'
   }
-  
-  desc = `适合 ${count} 人团队，${budget === 'high' ? '尽享奢华' : '性价比极高'}。`
+
+  desc = `Phù hợp đội ${count} người, ${budget === 'high' ? 'sang trọng đỉnh cao' : 'cực kỳ tối ưu chi phí'}.`
   planResult.value = { title, desc }
 }
 

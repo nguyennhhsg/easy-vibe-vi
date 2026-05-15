@@ -1,17 +1,17 @@
 <!--
-  FrontendEvolutionDemo.vue - 前端演进总览
-  用时间线的方式展示前端开发从静态页面到现代框架的演进
+  FrontendEvolutionDemo.vue - Tổng quan tiến hoá frontend
+  Trình bày theo dòng thời gian sự phát triển từ trang tĩnh tới các framework hiện đại
 -->
 <template>
   <div class="evolution-timeline">
     <div class="demo-header">
       <span class="icon">🚀</span>
-      <span class="title">前端演进时间线</span>
-      <span class="subtitle">从"贴海报"到"搭乐高"的20年变迁</span>
+      <span class="title">Dòng thời gian tiến hoá frontend</span>
+      <span class="subtitle">20 năm chuyển mình từ "dán poster" đến "lắp Lego"</span>
     </div>
 
     <div class="demo-content">
-      <!-- 时间线 -->
+      <!-- Dòng thời gian -->
       <div class="timeline-container">
         <div
           v-for="(era, index) in eras"
@@ -47,7 +47,7 @@
               >
                 <div class="detail-section">
                   <div class="section-title">
-                    🔑 关键技术
+                    🔑 Công nghệ then chốt
                   </div>
                   <div class="tech-tags">
                     <span
@@ -63,7 +63,7 @@
                   class="detail-section"
                 >
                   <div class="section-title">
-                    💡 生活比喻
+                    💡 Ẩn dụ đời thường
                   </div>
                   <div class="metaphor-box">
                     {{ era.metaphor }}
@@ -78,7 +78,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>前端技术的演进，本质是为了解决两个问题：提升开发效率（从手动到自动化）和支撑更复杂的应用（从简单页面到桌面级应用）。
+      <strong>Tư tưởng cốt lõi:</strong> Sự tiến hoá của công nghệ frontend về bản chất là để giải hai bài toán: nâng hiệu suất phát triển (từ thủ công sang tự động) và đỡ được các ứng dụng phức tạp hơn (từ trang đơn giản tới ứng dụng cỡ desktop).
     </div>
   </div>
 </template>
@@ -92,57 +92,57 @@ const eras = [
   {
     id: 1,
     year: '2000s',
-    name: '静态网页时代',
+    name: 'Thời đại trang tĩnh',
     emoji: '🖼️',
-    brief: '网页像海报，只能看不能动',
-    technologies: ['HTML', 'CSS', 'JavaScript', '切图', 'jQuery'],
-    pros: ['简单直接', '写完就能跑', '学习成本低'],
-    cons: ['加载慢（请求多）', '难以维护', '无法动态更新'],
-    metaphor: '就像贴海报：你画好一张图，贴到墙上就完事了。内容固定，用户只能看，不能互动。'
+    brief: 'Trang web giống tấm poster, chỉ xem chứ không tương tác',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Cắt ảnh', 'jQuery'],
+    pros: ['Đơn giản, trực diện', 'Viết xong chạy luôn', 'Học vào nhanh'],
+    cons: ['Tải chậm (nhiều request)', 'Khó bảo trì', 'Không thể cập nhật động'],
+    metaphor: 'Giống như dán poster: bạn vẽ xong rồi dán lên tường là xong. Nội dung cố định, người xem chỉ nhìn, không tương tác được.'
   },
   {
     id: 2,
-    year: '2010s 初',
-    name: '响应式布局时代',
+    year: 'Đầu 2010s',
+    name: 'Thời đại responsive layout',
     emoji: '📱',
-    brief: '一套代码适配手机和电脑',
-    technologies: ['Media Query', '响应式设计', 'Bootstrap', 'Flexbox'],
-    pros: ['跨设备适配', '维护成本低', '用户体验好'],
-    cons: ['设计复杂度高', '调试麻烦', '性能开销大'],
-    metaphor: '就像魔法相框：照片会自动根据房间大小调整展示方式。大房间摆大开，小房间缩小。'
+    brief: 'Một bộ code thích nghi cả điện thoại và máy tính',
+    technologies: ['Media Query', 'Responsive Design', 'Bootstrap', 'Flexbox'],
+    pros: ['Đa thiết bị', 'Chi phí bảo trì thấp', 'Trải nghiệm tốt'],
+    cons: ['Thiết kế phức tạp', 'Debug phiền', 'Chi phí performance cao'],
+    metaphor: 'Giống khung ảnh ma thuật: ảnh tự điều chỉnh cách trưng bày theo kích thước phòng. Phòng to trải rộng, phòng nhỏ thu lại.'
   },
   {
     id: 3,
-    year: '2010s 中',
-    name: 'jQuery 时代',
+    year: 'Giữa 2010s',
+    name: 'Thời đại jQuery',
     emoji: '🔧',
-    brief: '简化 DOM 操作，但还是手动搬砖',
-    technologies: ['jQuery', 'DOM 操作', 'AJAX', '动画效果'],
-    pros: ['上手简单', '兼容性好', '生态丰富'],
-    cons: ['代码一多就乱', '容易出 bug', '状态管理难'],
-    metaphor: '就像手工装修：你需要亲自告诉工人每一步做什么。工人多了，指令杂了，容易出错。'
+    brief: 'Đơn giản hoá thao tác DOM, nhưng vẫn phải làm thủ công',
+    technologies: ['jQuery', 'Thao tác DOM', 'AJAX', 'Hiệu ứng động'],
+    pros: ['Dễ học', 'Tương thích tốt', 'Hệ sinh thái phong phú'],
+    cons: ['Code đông là rối', 'Dễ phát sinh bug', 'Khó quản lý state'],
+    metaphor: 'Giống thi công thủ công: bạn phải tự bảo thợ làm từng bước. Càng nhiều thợ, lệnh càng rối, càng dễ sai.'
   },
   {
     id: 4,
-    year: '2010s 末',
-    name: '现代框架时代',
+    year: 'Cuối 2010s',
+    name: 'Thời đại framework hiện đại',
     emoji: '⚛️',
-    brief: '数据驱动，组件化开发',
-    technologies: ['Vue.js', 'React', 'Angular', '组件化', '状态管理'],
-    pros: ['代码可维护', '开发效率高', '适合复杂应用'],
-    cons: ['学习成本高', '构建复杂', '小项目过重'],
-    metaphor: '就像搭乐高：你先设计好房子长什么样，然后乐高积木会自动按设计图组装好。'
+    brief: 'Data-driven, phát triển theo component',
+    technologies: ['Vue.js', 'React', 'Angular', 'Component-based', 'State management'],
+    pros: ['Code dễ bảo trì', 'Hiệu suất dev cao', 'Hợp ứng dụng phức tạp'],
+    cons: ['Học hơi nặng', 'Build phức tạp', 'Hơi cồng kềnh với dự án nhỏ'],
+    metaphor: 'Giống lắp Lego: bạn thiết kế trước hình dáng ngôi nhà, rồi các viên Lego sẽ tự được ráp theo bản vẽ.'
   },
   {
     id: 5,
     year: '2020s',
-    name: '工程化时代',
+    name: 'Thời đại engineering',
     emoji: '🏭',
-    brief: '自动化、规范化、规模化',
-    technologies: ['Webpack', 'Vite', 'TypeScript', 'CI/CD', '测试'],
-    pros: ['团队协作友好', '代码质量高', '性能优化好'],
-    cons: ['配置复杂', '学习曲线陡', '维护成本高'],
-    metaphor: '就像现代化工厂：从原材料到成品，整个生产流程自动化、标准化、可控化。'
+    brief: 'Tự động hoá, chuẩn hoá, mở rộng quy mô',
+    technologies: ['Webpack', 'Vite', 'TypeScript', 'CI/CD', 'Testing'],
+    pros: ['Hợp tác nhóm thuận lợi', 'Chất lượng code cao', 'Tối ưu performance tốt'],
+    cons: ['Cấu hình phức tạp', 'Học khá dốc', 'Chi phí bảo trì cao'],
+    metaphor: 'Giống một nhà máy hiện đại: từ nguyên liệu đến thành phẩm, toàn bộ dây chuyền sản xuất tự động, chuẩn hoá, kiểm soát được.'
   }
 ]
 </script>

@@ -1,15 +1,15 @@
 <!--
   TokenizerToMatrix.vue
-  从分词到矩阵的转换过程演示
-  
-  用途：
-  详细展示 LLM 处理文本的第一步：
-  Text (文本) -> Tokens (分词) -> IDs (数字索引) -> One-hot (独热编码) / Embedding Lookup (查表) -> Matrix (输入矩阵)
-  
-  交互功能：
-  - 步骤导航：分步演示每个转换阶段。
-  - 动态输入：允许用户输入短语，实时看到转换结果。
-  - 矩阵可视化：直观展示最终生成的数字矩阵。
+  Minh hoạ quá trình chuyển từ tokenizer sang ma trận đầu vào
+
+  Mục đích:
+  Trình bày chi tiết bước đầu tiên LLM xử lý văn bản:
+  Text (văn bản) -> Tokens (sau khi tokenize) -> IDs (chỉ số số) -> One-hot encoding / Embedding Lookup (tra bảng) -> Matrix (ma trận đầu vào)
+
+  Tính năng tương tác:
+  - Điều hướng theo bước: trình bày từng giai đoạn biến đổi.
+  - Nhập động: bạn có thể nhập cụm từ và xem kết quả ngay.
+  - Trực quan ma trận: hiển thị ma trận số cuối cùng được tạo ra.
 -->
 <template>
   <div class="matrix-demo">
@@ -17,7 +17,7 @@
       <input
         v-model="inputText"
         type="text"
-        placeholder="输入一段文本..."
+        placeholder="Nhập một đoạn văn bản..."
         class="text-input"
         :disabled="currentStep > 0"
       >
@@ -27,7 +27,7 @@
           :disabled="currentStep === 0"
           @click="currentStep--"
         >
-          ← 上一步
+          ← Bước trước
         </button>
         <div class="step-indicator">
           Step {{ currentStep + 1 }} / 4
@@ -37,7 +37,7 @@
           :disabled="currentStep === 3"
           @click="currentStep++"
         >
-          下一步 →
+          Bước tiếp →
         </button>
       </div>
     </div>
@@ -49,10 +49,10 @@
         class="stage-content"
       >
         <h3 class="stage-title">
-          Step 1: Tokenization (分词)
+          Step 1: Tokenization (cắt token)
         </h3>
         <p class="stage-desc">
-          计算机首先将文本切分为最小的语义单位（Token）。
+          Máy tính trước tiên cắt văn bản thành các đơn vị ngữ nghĩa nhỏ nhất (token).
           <span
             style="
               font-size: 0.85em;
@@ -61,8 +61,8 @@
               margin-top: 4px;
             "
           >
-            (注：此处演示简化为按字切分，真实模型通常使用 BPE
-            算法，如“人工智能”可能合并为一个 Token)
+            (Lưu ý: demo này đơn giản hoá bằng cách cắt theo ký tự; mô hình thực tế thường dùng BPE,
+            ví dụ "人工智能" có thể được gộp thành một token)
           </span>
         </p>
         <div class="token-container">
@@ -83,10 +83,10 @@
         class="stage-content"
       >
         <h3 class="stage-title">
-          Step 2: ID Mapping (索引映射)
+          Step 2: ID Mapping (ánh xạ chỉ số)
         </h3>
         <p class="stage-desc">
-          在词表（Vocabulary）中查找每个 Token 对应的唯一数字 ID。
+          Tra cứu trong vocabulary để tìm số ID duy nhất tương ứng với mỗi token.
         </p>
         <div class="mapping-container">
           <div
@@ -122,10 +122,10 @@
         class="stage-content"
       >
         <h3 class="stage-title">
-          Step 3: Embedding Lookup (向量查表)
+          Step 3: Embedding Lookup (tra bảng vector)
         </h3>
         <p class="stage-desc">
-          每个 ID 对应一个预训练好的高维向量（这里简化为 4 维）。
+          Mỗi ID tương ứng với một vector cao chiều đã được train trước (ở đây rút gọn còn 4 chiều).
         </p>
         <div class="lookup-container">
           <div
@@ -160,11 +160,11 @@
         class="stage-content"
       >
         <h3 class="stage-title">
-          Step 4: Matrix Construction (构建矩阵)
+          Step 4: Matrix Construction (dựng ma trận)
         </h3>
         <p class="stage-desc">
-          所有向量堆叠在一起，形成了输入矩阵（Shape: [Batch, Seq_Len,
-          Dim]）。这就是 LLM 真正“看见”的东西。
+          Toàn bộ vector được xếp chồng lại, tạo thành ma trận đầu vào (Shape: [Batch, Seq_Len,
+          Dim]). Đây mới chính là thứ LLM thực sự "nhìn thấy".
         </p>
         <div class="matrix-container">
           <div class="matrix-bracket left" />
@@ -203,23 +203,23 @@ const currentStep = ref(0)
 
 const colors = ['#f87171', '#60a5fa', '#fbbf24', '#34d399', '#a78bfa']
 
-// 模拟 Tokenizer 和 Embedding
+// Mô phỏng tokenizer và embedding
 const tokens = computed(() => {
   const text = inputText.value || ''
-  // 简单按字/词切分模拟
+  // Cắt đơn giản theo ký tự/từ để mô phỏng
   const rawTokens = text.match(/[\u4e00-\u9fa5]|[a-zA-Z]+|\s+|./g) || []
 
   return rawTokens.map((t, i) => {
-    // 确定性伪随机生成 ID 和 Vector
+    // Sinh ID và vector kiểu pseudo-random nhưng deterministic
     let hash = 0
     for (let j = 0; j < t.length; j++)
       hash = t.charCodeAt(j) + ((hash << 5) - hash)
     const id = Math.abs(hash) % 10000
 
-    // 生成 4 维向量
+    // Sinh vector 4 chiều
     const vector = []
     for (let k = 0; k < 4; k++) {
-      const val = Math.sin(id * (k + 1)) // 伪随机值 -1 ~ 1
+      const val = Math.sin(id * (k + 1)) // giá trị giả ngẫu nhiên trong khoảng -1 ~ 1
       vector.push(val)
     }
 

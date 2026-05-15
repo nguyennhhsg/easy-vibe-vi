@@ -19,11 +19,11 @@
     <div class="memory-tip">
       <span class="tip-icon">💡</span>
       <span class="tip-text">
-        <strong>记忆技巧:</strong>
-        <span class="tip-2">2️⃣ 成功</span> •
-        <span class="tip-3">3️⃣ 重定向</span> •
-        <span class="tip-4">4️⃣ 客户端错</span> •
-        <span class="tip-5">5️⃣ 服务器错</span>
+        <strong>Mẹo nhớ:</strong>
+        <span class="tip-2">2️⃣ Thành công</span> •
+        <span class="tip-3">3️⃣ Redirect</span> •
+        <span class="tip-4">4️⃣ Lỗi client</span> •
+        <span class="tip-5">5️⃣ Lỗi server</span>
       </span>
     </div>
   </div>
@@ -34,30 +34,30 @@ const categories = [
   {
     id: 'success',
     code: '2',
-    name: '成功',
-    desc: '请求被成功接收、理解并处理',
+    name: 'Thành công',
+    desc: 'Request đã được nhận, hiểu và xử lý thành công',
     examples: ['200 OK', '201 Created', '204 No Content']
   },
   {
     id: 'redirect',
     code: '3',
-    name: '重定向',
-    desc: '需要进一步操作才能完成请求',
-    examples: ['301 永久移动', '304 未修改', '307 临时重定向']
+    name: 'Redirect',
+    desc: 'Cần thêm hành động để hoàn tất request',
+    examples: ['301 Moved Permanently', '304 Not Modified', '307 Temporary Redirect']
   },
   {
     id: 'client-error',
     code: '4',
-    name: '客户端错误',
-    desc: '请求包含错误或无法完成',
-    examples: ['400 参数错误', '401 未认证', '403 无权限', '404 不存在']
+    name: 'Lỗi từ client',
+    desc: 'Request có lỗi hoặc không thể thực hiện',
+    examples: ['400 Sai tham số', '401 Chưa xác thực', '403 Không có quyền', '404 Không tồn tại']
   },
   {
     id: 'server-error',
     code: '5',
-    name: '服务器错误',
-    desc: '服务器无法处理有效请求',
-    examples: ['500 内部错误', '502 网关错误', '503 服务不可用']
+    name: 'Lỗi từ server',
+    desc: 'Server không thể xử lý request hợp lệ',
+    examples: ['500 Lỗi nội bộ', '502 Lỗi gateway', '503 Dịch vụ không khả dụng']
   }
 ]
 </script>

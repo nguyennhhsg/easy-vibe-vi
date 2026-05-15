@@ -1,12 +1,12 @@
 <!--
-  RealWorldApiDemo.vue - 紧凑版
-  目标：对比 HTTP 调用和 SDK 调用
+  RealWorldApiDemo.vue - bản gọn
+  Mục tiêu: so sánh gọi HTTP và gọi qua SDK
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">⚡</span>
-      <span class="title">HTTP vs SDK：自己跑腿还是让管家代办？</span>
+      <span class="title">HTTP vs SDK: tự chạy việc hay nhờ "quản gia" lo?</span>
     </div>
 
     <div class="demo-layout">
@@ -28,7 +28,7 @@
       <div class="code-area">
         <div class="code-header">
           <span>{{
-            mode === 'http' ? '自己处理所有细节' : '管家帮你处理'
+            mode === 'http' ? 'Tự lo mọi chi tiết' : '"Quản gia" lo giúp bạn'
           }}</span>
         </div>
         <pre
@@ -37,35 +37,35 @@
       </div>
 
       <div class="compare-panel">
-        <div class="compare-title">对比</div>
+        <div class="compare-title">So sánh</div>
         <div class="compare-list">
           <div class="compare-item">
-            <span class="ci-label">代码量</span>
-            <span class="ci-val">{{ mode === 'http' ? '多' : '少' }}</span>
+            <span class="ci-label">Khối lượng code</span>
+            <span class="ci-val">{{ mode === 'http' ? 'Nhiều' : 'Ít' }}</span>
           </div>
           <div class="compare-item">
-            <span class="ci-label">错误处理</span>
+            <span class="ci-label">Xử lý lỗi</span>
             <span class="ci-val">{{
-              mode === 'http' ? '自己写' : '自动处理'
+              mode === 'http' ? 'Tự viết' : 'Tự động'
             }}</span>
           </div>
           <div class="compare-item">
-            <span class="ci-label">重试逻辑</span>
+            <span class="ci-label">Logic retry</span>
             <span class="ci-val">{{
-              mode === 'http' ? '自己写' : '内置'
+              mode === 'http' ? 'Tự viết' : 'Có sẵn'
             }}</span>
           </div>
           <div class="compare-item">
-            <span class="ci-label">类型提示</span>
-            <span class="ci-val">{{ mode === 'http' ? '无' : '有' }}</span>
+            <span class="ci-label">Gợi ý kiểu</span>
+            <span class="ci-val">{{ mode === 'http' ? 'Không' : 'Có' }}</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>能用 SDK 就用 SDK，把麻烦事留给库，把时间留给自己。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Có SDK thì dùng SDK, giao việc khó cho thư viện, giữ thời gian cho mình.</span>
     </div>
   </div>
 </template>
@@ -85,7 +85,7 @@ response = requests.post(
     },
     json={
         "model": "deepseek-chat",
-        "messages": [{"role": "user", "content": "你好"}]
+        "messages": [{"role": "user", "content": "Xin chào"}]
     }
 )
 
@@ -93,7 +93,7 @@ if response.status_code == 200:
     result = response.json()
     content = result["choices"][0]["message"]["content"]
 else:
-    # 处理错误...
+    # Xử lý lỗi...
     pass`
 
 const sdkCode = `from openai import OpenAI
@@ -105,7 +105,7 @@ client = OpenAI(
 
 response = client.chat.completions.create(
     model="deepseek-chat",
-    messages=[{"role": "user", "content": "你好"}]
+    messages=[{"role": "user", "content": "Xin chào"}]
 )
 
 content = response.choices[0].message.content`

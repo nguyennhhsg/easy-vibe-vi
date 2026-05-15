@@ -2,12 +2,12 @@
   <div class="component-hierarchy-demo">
     <div class="demo-header">
       <span class="icon">🌳</span>
-      <span class="title">组件层级结构</span>
-      <span class="subtitle">像家谱树一样的组件关系</span>
+      <span class="title">Cấu trúc phân cấp component</span>
+      <span class="subtitle">Quan hệ component giống như cây gia phả</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">公司组织架构</span>工作：CEO（根组件）在顶层，下面是各个部门（父组件），每个部门里还有员工（子组件）。这就是组件树！
+      Hãy tưởng tượng bạn đang làm việc trong <span class="highlight">sơ đồ tổ chức công ty</span>: CEO (root component) ở trên cùng, bên dưới là các phòng ban (parent component), trong mỗi phòng còn có nhân viên (child component). Đó chính là cây component!
     </div>
 
     <div class="demo-content">
@@ -22,10 +22,10 @@
           </div>
           <div class="node-info">
             <div class="node-label">
-              App (根组件)
+              App (root component)
             </div>
             <div class="node-desc">
-              CEO - 管理全局
+              CEO - quản lý toàn cục
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
                   Header
                 </div>
                 <div class="node-desc">
-                  导航栏部门
+                  Phòng nav bar
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@
                   Main Content
                 </div>
                 <div class="node-desc">
-                  主内容部门
+                  Phòng nội dung chính
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@
                       Sidebar
                     </div>
                     <div class="node-desc">
-                      侧边栏小组
+                      Nhóm sidebar
                     </div>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                       ProductList
                     </div>
                     <div class="node-desc">
-                      商品列表组
+                      Nhóm danh sách sản phẩm
                     </div>
                   </div>
                 </div>
@@ -130,7 +130,7 @@
                           ProductCard
                         </div>
                         <div class="node-desc">
-                          商品卡片员工
+                          Nhân viên product card
                         </div>
                       </div>
                     </div>
@@ -155,7 +155,7 @@
                   Footer
                 </div>
                 <div class="node-desc">
-                  页脚部门
+                  Phòng footer
                 </div>
               </div>
             </div>
@@ -183,14 +183,14 @@
               v-if="selectedNodeInfo.props"
               class="info-section"
             >
-              <strong>📥 接收:</strong>
+              <strong>📥 Nhận:</strong>
               <span class="prop-tags">{{ selectedNodeInfo.props.join(', ') }}</span>
             </div>
             <div
               v-if="selectedNodeInfo.events"
               class="info-section"
             >
-              <strong>📤 触发:</strong>
+              <strong>📤 Phát ra:</strong>
               <span class="prop-tags">{{ selectedNodeInfo.events.join(', ') }}</span>
             </div>
           </div>
@@ -201,13 +201,13 @@
         v-if="!selectedNode"
         class="hint-text"
       >
-        👆 点击上方任意节点，查看职责说明
+        👆 Bấm vào bất kỳ node nào ở trên để xem mô tả trách nhiệm
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>组件像组织架构，父组件管理整体，子组件负责具体功能。数据从上往下传，事件从下往上报。
+      <strong>Tư tưởng cốt lõi:</strong> Component giống như sơ đồ tổ chức — parent component quản lý tổng thể, child component đảm nhận chức năng cụ thể. Dữ liệu chảy từ trên xuống, sự kiện đẩy từ dưới lên.
     </div>
   </div>
 </template>
@@ -220,50 +220,50 @@ const selectedNode = ref(null)
 const nodeInfoMap = {
   app: {
     icon: '👑',
-    title: 'App 根组件',
-    description: '就像公司的CEO，负责整个应用的初始化和全局管理。包含路由、全局状态、主题配置等大方向决策。',
+    title: 'App - root component',
+    description: 'Giống CEO của công ty, lo việc khởi tạo và quản lý toàn cục cho cả ứng dụng. Bao gồm routing, global state, cấu hình theme và các quyết định lớn.',
     props: [],
     events: []
   },
   header: {
     icon: '📌',
-    title: 'Header 导航栏',
-    description: '公司的前台部门，负责展示Logo、导航菜单、用户信息和购物车等。大部分页面都会用到它。',
+    title: 'Header - thanh điều hướng',
+    description: 'Phòng tiếp tân: hiển thị logo, menu, thông tin user, giỏ hàng v.v. Hầu hết các trang đều dùng tới.',
     props: ['user', 'cartCount'],
     events: ['logout', 'search']
   },
   main: {
     icon: '📄',
-    title: 'Main Content 主内容',
-    description: '公司的核心业务部门，管理页面的主要内容区域。用flex或grid布局组织侧边栏和内容。',
+    title: 'Main Content - nội dung chính',
+    description: 'Phòng kinh doanh cốt lõi, quản lý khu vực nội dung chính của trang. Dùng flex hoặc grid để bố trí sidebar và nội dung.',
     props: [],
     events: []
   },
   sidebar: {
     icon: '📑',
-    title: 'Sidebar 侧边栏',
-    description: '公司的导航小组，提供可折叠的菜单。常见于后台管理系统或分类浏览页面。',
+    title: 'Sidebar - thanh bên',
+    description: 'Nhóm điều hướng nội bộ, cung cấp menu có thể thu/gọn. Hay gặp trong hệ thống admin hoặc trang duyệt theo danh mục.',
     props: ['menuItems', 'collapsed'],
     events: ['select', 'toggle']
   },
   productlist: {
     icon: '🛍️',
-    title: 'ProductList 商品列表',
-    description: '商品展示团队，负责数据获取、分页、排序和筛选。包含多个ProductCard成员。',
+    title: 'ProductList - danh sách sản phẩm',
+    description: 'Đội trình bày sản phẩm, lo lấy data, phân trang, sắp xếp và lọc. Bên trong gồm nhiều ProductCard.',
     props: ['products', 'loading', 'total'],
     events: ['loadMore', 'sort', 'filter']
   },
   productcard: {
     icon: '🏷️',
-    title: 'ProductCard 商品卡片',
-    description: '最基层的员工，负责展示单个商品的信息（图片、名称、价格、评分）。专注于UI展示。',
+    title: 'ProductCard - thẻ sản phẩm',
+    description: 'Nhân viên cấp cơ sở, hiển thị thông tin của một sản phẩm (ảnh, tên, giá, đánh giá). Tập trung vào hiển thị UI.',
     props: ['product', 'showAddToCart'],
     events: ['addToCart', 'click']
   },
   footer: {
     icon: '🔻',
-    title: 'Footer 页脚',
-    description: '公司的后勤部门，展示版权信息、友情链接、联系方式、社交媒体链接等辅助信息。',
+    title: 'Footer - chân trang',
+    description: 'Phòng hậu cần, hiển thị thông tin bản quyền, link liên kết, liên hệ, mạng xã hội và các thông tin hỗ trợ khác.',
     props: [],
     events: []
   }

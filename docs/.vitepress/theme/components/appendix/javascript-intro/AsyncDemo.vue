@@ -2,15 +2,15 @@
   <div class="async-demo">
     <div class="demo-header">
       <span class="icon">⏳</span>
-      <span class="title">异步编程</span>
-      <span class="subtitle">Promise、async/await 与事件循环</span>
+      <span class="title">Lập trình bất đồng bộ</span>
+      <span class="subtitle">Promise, async/await và event loop</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">餐厅点餐</span>：
-      <span class="highlight">同步</span>是点完菜后一直等，什么都不能做；
-      <span class="highlight">异步</span>是点完菜拿到个<span class="highlight">取餐器</span>，
-      可以先玩手机，取餐器响了再去取——这就是 JavaScript 异步编程的核心思想
+      Hãy tưởng tượng bạn đang <span class="highlight">gọi món ở nhà hàng</span>:
+      <span class="highlight">đồng bộ</span> là gọi xong cứ đứng đợi, không làm gì khác được;
+      <span class="highlight">bất đồng bộ</span> là gọi xong được phát một <span class="highlight">máy báo gọi món</span>,
+      bạn có thể lướt điện thoại trước, đến khi máy kêu thì ra lấy — đó chính là tư tưởng cốt lõi của lập trình bất đồng bộ trong JavaScript
     </div>
 
     <div class="demo-tabs">
@@ -25,7 +25,7 @@
       </button>
     </div>
 
-    <!-- 回调函数 -->
+    <!-- Callback -->
     <div
       v-if="activeTab === 'callback'"
       class="tab-content"
@@ -36,20 +36,20 @@
             🔄
           </div>
           <div class="concept-title">
-            回调函数 (Callback)
+            Hàm callback (Callback)
           </div>
           <div class="concept-desc">
-            把函数作为参数传给另一个函数，等操作完成后再调用它。这是最早的异步处理方式。
+            Truyền một function làm tham số cho function khác, sau khi thao tác hoàn tất thì gọi lại nó. Đây là cách xử lý bất đồng bộ sớm nhất.
           </div>
         </div>
 
         <div class="code-example">
           <div class="code-title">
-            回调函数示例
+            Ví dụ callback
           </div>
           <div class="code-block">
             <div class="code-line comment">
-              // 模拟异步操作（如网络请求）
+              // Mô phỏng thao tác async (như network request)
             </div>
             <div class="code-line">
               function fetchData(callback) {
@@ -58,7 +58,7 @@
               setTimeout(() => {
             </div>
             <div class="code-line indent indent">
-              const data = { id: 1, name: "数据" }
+              const data = { id: 1, name: "data" }
             </div>
             <div class="code-line indent indent">
               callback(data)
@@ -71,13 +71,13 @@
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 使用回调
+              // Sử dụng callback
             </div>
             <div class="code-line">
               fetchData(function(data) {
             </div>
             <div class="code-line indent">
-              console.log("收到数据:", data)
+              console.log("Nhận được data:", data)
             </div>
             <div class="code-line">
               })
@@ -87,7 +87,7 @@
 
         <div class="callback-problem">
           <div class="problem-title">
-            ⚠️ 回调地狱问题
+            ⚠️ Vấn đề callback hell
           </div>
           <div class="code-block bad">
             <div class="code-line">
@@ -103,7 +103,7 @@
               getMoreData(c, function(d) {
             </div>
             <div class="code-line indent indent indent indent">
-              // 无限嵌套...
+              // Lồng nhau vô tận...
             </div>
             <div class="code-line indent indent indent">
               })
@@ -119,7 +119,7 @@
             </div>
           </div>
           <div class="problem-desc">
-            多个异步操作嵌套会导致代码难以维护，被称为"回调地狱"。
+            Nhiều thao tác async lồng vào nhau sẽ khiến code khó bảo trì, gọi là "callback hell".
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@
       <div class="promise-demo">
         <div class="promise-states">
           <div class="state-title">
-            Promise 的三种状态
+            Ba trạng thái của Promise
           </div>
           <div class="states-diagram">
             <div
@@ -144,7 +144,7 @@
                 Pending
               </div>
               <div class="state-desc">
-                进行中
+                Đang thực hiện
               </div>
             </div>
             <div
@@ -164,7 +164,7 @@
                     Fulfilled
                   </div>
                   <div class="state-desc">
-                    已成功
+                    Đã thành công
                   </div>
                 </div>
                 <div
@@ -184,7 +184,7 @@
                     Rejected
                   </div>
                   <div class="state-desc">
-                    已失败
+                    Đã thất bại
                   </div>
                 </div>
                 <div
@@ -202,24 +202,24 @@
               class="action-btn success"
               @click="simulatePromise('fulfilled')"
             >
-              模拟成功
+              Mô phỏng thành công
             </button>
             <button
               class="action-btn error"
               @click="simulatePromise('rejected')"
             >
-              模拟失败
+              Mô phỏng thất bại
             </button>
           </div>
         </div>
 
         <div class="promise-usage">
           <div class="code-title">
-            Promise 使用示例
+            Ví dụ sử dụng Promise
           </div>
           <div class="code-block">
             <div class="code-line comment">
-              // 创建 Promise
+              // Tạo Promise
             </div>
             <div class="code-line">
               const promise = new Promise((resolve, reject) => {
@@ -231,13 +231,13 @@
               if (success) {
             </div>
             <div class="code-line indent indent">
-              resolve("操作成功！")
+              resolve("Thao tác thành công!")
             </div>
             <div class="code-line indent">
               } else {
             </div>
             <div class="code-line indent indent">
-              reject("操作失败！")
+              reject("Thao tác thất bại!")
             </div>
             <div class="code-line indent">
               }
@@ -247,7 +247,7 @@
             </div>
             <div class="code-line" />
             <div class="code-line comment">
-              // 使用 then/catch
+              // Sử dụng then/catch
             </div>
             <div class="code-line">
               promise
@@ -262,7 +262,7 @@
 
           <div class="promise-chain">
             <div class="chain-title">
-              链式调用
+              Gọi chuỗi (chaining)
             </div>
             <div class="chain-visual">
               <div class="chain-step">
@@ -309,7 +309,7 @@
         <div class="comparison-view">
           <div class="compare-panel promise">
             <div class="panel-title">
-              Promise 链式调用
+              Promise chaining
             </div>
             <div class="code-block">
               <div class="code-line">
@@ -350,7 +350,7 @@
 
           <div class="compare-panel async">
             <div class="panel-title">
-              async/await 语法
+              Cú pháp async/await
             </div>
             <div class="code-block">
               <div class="code-line">
@@ -392,7 +392,7 @@
 
         <div class="async-playground">
           <div class="playground-title">
-            async/await 特点
+            Đặc điểm async/await
           </div>
           <div class="feature-grid">
             <div class="feature-item">
@@ -400,10 +400,10 @@
                 📖
               </div>
               <div class="feature-name">
-                更像同步代码
+                Giống code đồng bộ hơn
               </div>
               <div class="feature-desc">
-                用同步的方式写异步代码，更易读
+                Viết code async theo kiểu đồng bộ, dễ đọc hơn
               </div>
             </div>
             <div class="feature-item">
@@ -411,10 +411,10 @@
                 🎯
               </div>
               <div class="feature-name">
-                错误处理简单
+                Xử lý lỗi đơn giản
               </div>
               <div class="feature-desc">
-                用 try/catch 处理错误，而非 .catch()
+                Dùng try/catch để xử lý lỗi thay cho .catch()
               </div>
             </div>
             <div class="feature-item">
@@ -422,27 +422,27 @@
                 ⚡
               </div>
               <div class="feature-name">
-                调试友好
+                Thân thiện khi debug
               </div>
               <div class="feature-desc">
-                可以在 debugger 中设置断点
+                Có thể đặt breakpoint trong debugger
               </div>
             </div>
           </div>
 
           <div class="code-note">
-            <strong>💡 记住：</strong>
+            <strong>💡 Ghi nhớ:</strong>
             <ul>
-              <li>async 函数总是返回 Promise</li>
-              <li>await 只能在 async 函数内使用</li>
-              <li>await 会暂停函数执行，直到 Promise 返回结果</li>
+              <li>Hàm async luôn trả về Promise</li>
+              <li>await chỉ dùng được bên trong hàm async</li>
+              <li>await sẽ tạm dừng hàm cho tới khi Promise trả về kết quả</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 事件循环 -->
+    <!-- Event loop -->
     <div
       v-else
       class="tab-content"
@@ -450,12 +450,12 @@
       <div class="event-loop-demo">
         <div class="loop-visual">
           <div class="loop-title">
-            事件循环 (Event Loop)
+            Event Loop
           </div>
           <div class="loop-diagram">
             <div class="diagram-section">
               <div class="section-title">
-                调用栈 (Call Stack)
+                Call Stack
               </div>
               <div class="stack-box">
                 <div
@@ -469,28 +469,28 @@
                   v-if="callStack.length === 0"
                   class="stack-empty"
                 >
-                  空
+                  Trống
                 </div>
               </div>
             </div>
 
             <div class="diagram-arrows">
               <div class="arrow-right">
-                入栈 →
+                Push →
               </div>
               <div class="arrow-left">
-                ← 出栈
+                ← Pop
               </div>
             </div>
 
             <div class="diagram-section">
               <div class="section-title">
-                任务队列
+                Task Queue
               </div>
               <div class="task-queues">
                 <div class="queue-box">
                   <div class="queue-title">
-                    宏任务 (Macro Tasks)
+                    Macro Tasks
                   </div>
                   <div class="queue-items">
                     <div
@@ -504,7 +504,7 @@
                 </div>
                 <div class="queue-box">
                   <div class="queue-title">
-                    微任务 (Micro Tasks)
+                    Micro Tasks
                   </div>
                   <div class="queue-items">
                     <div
@@ -522,20 +522,20 @@
 
           <div class="loop-rules">
             <div class="rule-title">
-              执行规则
+              Quy tắc thực thi
             </div>
             <ol class="rule-list">
-              <li>执行同步代码（调用栈中的代码）</li>
-              <li>调用栈为空时，先执行所有微任务</li>
-              <li>微任务清空后，执行一个宏任务</li>
-              <li>重复步骤 2-3</li>
+              <li>Thực thi code đồng bộ (code trong call stack)</li>
+              <li>Khi call stack rỗng, thực thi toàn bộ micro tasks trước</li>
+              <li>Sau khi micro tasks hết, thực thi một macro task</li>
+              <li>Lặp lại bước 2-3</li>
             </ol>
           </div>
         </div>
 
         <div class="code-challenge">
           <div class="challenge-title">
-            🤔 猜猜输出顺序
+            🤔 Đoán xem thứ tự output là gì?
           </div>
           <div class="code-block">
             <div class="code-line">
@@ -543,11 +543,11 @@
             </div>
             <div class="code-line" />
             <div class="code-line">
-              setTimeout(() => console.log("2"), 0) <span class="comment">// 宏任务</span>
+              setTimeout(() => console.log("2"), 0) <span class="comment">// Macro task</span>
             </div>
             <div class="code-line" />
             <div class="code-line">
-              Promise.resolve().then(() => console.log("3")) <span class="comment">// 微任务</span>
+              Promise.resolve().then(() => console.log("3")) <span class="comment">// Micro task</span>
             </div>
             <div class="code-line" />
             <div class="code-line">
@@ -559,7 +559,7 @@
             class="answer-btn"
             @click="showEventLoopAnswer"
           >
-            {{ showAnswer ? '隐藏答案' : '查看答案' }}
+            {{ showAnswer ? 'Ẩn đáp án' : 'Xem đáp án' }}
           </button>
 
           <div
@@ -570,22 +570,22 @@
               <div class="order-item">
                 <span class="order-num">1</span>
                 <span class="order-output">"1"</span>
-                <span class="order-reason">同步代码</span>
+                <span class="order-reason">Code đồng bộ</span>
               </div>
               <div class="order-item">
                 <span class="order-num">2</span>
                 <span class="order-output">"4"</span>
-                <span class="order-reason">同步代码</span>
+                <span class="order-reason">Code đồng bộ</span>
               </div>
               <div class="order-item">
                 <span class="order-num">3</span>
                 <span class="order-output">"3"</span>
-                <span class="order-reason">微任务（Promise.then）</span>
+                <span class="order-reason">Micro task (Promise.then)</span>
               </div>
               <div class="order-item">
                 <span class="order-num">4</span>
                 <span class="order-output">"2"</span>
-                <span class="order-reason">宏任务（setTimeout）</span>
+                <span class="order-reason">Macro task (setTimeout)</span>
               </div>
             </div>
           </div>
@@ -595,11 +595,11 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>
-      <span v-if="activeTab === 'callback'">回调函数是最基础的异步处理方式，但容易陷入"回调地狱"。现代 JavaScript 提供了 Promise 和 async/await 来更优雅地处理异步操作。</span>
-      <span v-else-if="activeTab === 'promise'">Promise 是异步操作的容器，有三种状态：Pending（进行中）、Fulfilled（已成功）、Rejected（已失败）。一旦状态改变就不会再变。Promise 支持链式调用，避免了回调地狱。</span>
-      <span v-else-if="activeTab === 'async'">async/await 是 Promise 的语法糖，让异步代码看起来像同步代码。async 函数返回 Promise，await 会暂停函数执行直到 Promise 返回结果。这是目前最推荐的异步编程方式。</span>
-      <span v-else>事件循环是 JavaScript 的执行机制。JavaScript 是单线程的，通过事件循环实现异步。执行顺序：同步代码 → 所有微任务 → 一个宏任务 → 所有微任务 → 循环。理解这个顺序对于调试异步代码至关重要。</span>
+      <strong>Tư tưởng cốt lõi:</strong>
+      <span v-if="activeTab === 'callback'">Callback là cách xử lý bất đồng bộ cơ bản nhất, nhưng rất dễ rơi vào "callback hell". JavaScript hiện đại cung cấp Promise và async/await để xử lý async một cách thanh lịch hơn.</span>
+      <span v-else-if="activeTab === 'promise'">Promise là container cho thao tác async, có ba trạng thái: Pending (đang xử lý), Fulfilled (đã thành công), Rejected (đã thất bại). Một khi trạng thái đổi thì không đổi lại nữa. Promise hỗ trợ chaining, tránh được callback hell.</span>
+      <span v-else-if="activeTab === 'async'">async/await là "syntactic sugar" của Promise, giúp code async trông như code đồng bộ. Hàm async trả về Promise, await sẽ tạm dừng hàm cho đến khi Promise trả kết quả. Đây hiện là cách viết async được khuyên dùng nhất.</span>
+      <span v-else>Event loop là cơ chế thực thi của JavaScript. JavaScript chạy single-thread, dùng event loop để xử lý bất đồng bộ. Thứ tự thực thi: code đồng bộ → toàn bộ micro tasks → một macro task → toàn bộ micro tasks → lặp lại. Hiểu thứ tự này cực kỳ quan trọng khi debug code async.</span>
     </div>
   </div>
 </template>
@@ -616,10 +616,10 @@ const macroTasks = ref(['setTimeout callback'])
 const microTasks = ref(['Promise.then callback'])
 
 const tabs = [
-  { id: 'callback', label: '回调函数' },
+  { id: 'callback', label: 'Callback' },
   { id: 'promise', label: 'Promise' },
   { id: 'async', label: 'async/await' },
-  { id: 'eventloop', label: '事件循环' }
+  { id: 'eventloop', label: 'Event Loop' }
 ]
 
 const simulatePromise = (state) => {

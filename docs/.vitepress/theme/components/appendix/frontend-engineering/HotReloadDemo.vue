@@ -1,24 +1,24 @@
 <!--
   HotReloadDemo.vue
-  热更新机制演示
+  Demo cơ chế hot reload
 
-  用途：
-  展示HMR（热模块替换）的工作原理。
+  Mục đích:
+  Cho thấy cách hoạt động của HMR (Hot Module Replacement).
 -->
 <template>
   <div class="hot-reload-demo">
     <div class="demo-header">
-      <h3>🔥 热更新 (HMR) 演示</h3>
-      <p>修改代码无需刷新页面，即时生效</p>
+      <h3>🔥 Demo Hot Module Replacement (HMR)</h3>
+      <p>Sửa code không cần refresh trang, hiệu lực ngay</p>
     </div>
 
     <div class="demo-content">
-      <!-- 对比图 -->
+      <!-- So sánh -->
       <div class="comparison">
         <div class="method-card no-hmr">
           <div class="card-header">
             <span class="icon">🔄</span>
-            <span class="title">传统刷新</span>
+            <span class="title">Refresh truyền thống</span>
           </div>
           <div class="card-body">
             <div
@@ -31,8 +31,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <span class="time">⏱️ 5-10秒</span>
-            <span class="state">页面闪烁、状态丢失</span>
+            <span class="time">⏱️ 5-10 giây</span>
+            <span class="state">Trang nhấp nháy, mất trạng thái</span>
           </div>
         </div>
 
@@ -43,7 +43,7 @@
         <div class="method-card hmr">
           <div class="card-header">
             <span class="icon">⚡</span>
-            <span class="title">HMR 热更新</span>
+            <span class="title">HMR (hot reload)</span>
           </div>
           <div class="card-body">
             <div
@@ -57,14 +57,14 @@
           </div>
           <div class="card-footer">
             <span class="time">⏱️ 50-200ms</span>
-            <span class="state">无刷新、状态保持</span>
+            <span class="state">Không refresh, giữ nguyên trạng thái</span>
           </div>
         </div>
       </div>
 
-      <!-- 流程图 -->
+      <!-- Sơ đồ luồng -->
       <div class="flow-diagram">
-        <h4>HMR 工作流程</h4>
+        <h4>Quy trình hoạt động của HMR</h4>
         <div class="flow-steps">
           <div
             v-for="(step, i) in flowSteps"
@@ -85,16 +85,16 @@
         </div>
       </div>
 
-      <!-- 支持情况 -->
+      <!-- Mức độ hỗ trợ -->
       <div class="support-table">
-        <h4>各构建工具 HMR 支持</h4>
+        <h4>Mức hỗ trợ HMR của các build tool</h4>
         <table>
           <thead>
             <tr>
-              <th>构建工具</th>
-              <th>HMR 支持</th>
-              <th>更新速度</th>
-              <th>特点</th>
+              <th>Build tool</th>
+              <th>Hỗ trợ HMR</th>
+              <th>Tốc độ cập nhật</th>
+              <th>Đặc điểm</th>
             </tr>
           </thead>
           <tbody>
@@ -120,10 +120,10 @@
     <div class="info-box">
       <p>
         <span class="icon">💡</span>
-        <strong>HMR 的核心原理：</strong>
-        构建工具通过 WebSocket 与浏览器保持连接。当文件修改后，工具编译变更模块，通过 WebSocket 通知浏览器。
-        浏览器中的 HMR Runtime 接收更新，替换旧模块，同时保持应用状态不变。
-        这就像是给飞行中的飞机换引擎——不停机就能完成更新。
+        <strong>Nguyên lý cốt lõi của HMR:</strong>
+        Build tool duy trì kết nối với trình duyệt qua WebSocket. Khi file thay đổi, tool compile module bị thay đổi rồi báo cho trình duyệt qua WebSocket.
+        HMR Runtime trong trình duyệt nhận bản cập nhật, thay thế module cũ, đồng thời giữ nguyên trạng thái ứng dụng.
+        Giống như thay động cơ cho máy bay đang bay — không cần dừng vẫn cập nhật được.
       </p>
     </div>
   </div>
@@ -133,55 +133,55 @@
 import { ref } from 'vue'
 
 const noHmrSteps = [
-  '修改代码并保存',
-  '手动刷新浏览器',
-  '页面重新加载所有资源',
-  '应用状态重置（登录丢失）'
+  'Sửa code rồi save',
+  'Refresh trình duyệt thủ công',
+  'Trang tải lại toàn bộ resource',
+  'Trạng thái ứng dụng reset (mất login)'
 ]
 
 const hmrSteps = [
-  '修改代码并保存',
-  '构建工具检测变更并编译',
-  'WebSocket 推送更新到浏览器',
-  '局部替换模块，状态保持'
+  'Sửa code rồi save',
+  'Build tool phát hiện thay đổi và compile',
+  'WebSocket đẩy bản cập nhật xuống trình duyệt',
+  'Thay thế module cục bộ, giữ nguyên state'
 ]
 
 const flowSteps = [
-  { icon: '👨‍💻', label: '开发者修改代码' },
-  { icon: '🛠️', label: '构建工具编译' },
-  { icon: '📡', label: 'WebSocket推送' },
-  { icon: '🔄', label: '浏览器替换模块' },
-  { icon: '✨', label: '页面即时更新' }
+  { icon: '👨‍💻', label: 'Dev sửa code' },
+  { icon: '🛠️', label: 'Build tool compile' },
+  { icon: '📡', label: 'WebSocket đẩy update' },
+  { icon: '🔄', label: 'Trình duyệt thay module' },
+  { icon: '✨', label: 'Trang cập nhật tức thì' }
 ]
 
 const hmrTools = [
   {
     name: 'Vite',
-    support: '原生支持',
+    support: 'Hỗ trợ native',
     supportClass: 'excellent',
-    speed: '极快 (<100ms)',
-    feature: '基于 ESM，HMR 速度最快'
+    speed: 'Cực nhanh (<100ms)',
+    feature: 'Dựa trên ESM, HMR nhanh nhất'
   },
   {
     name: 'Webpack',
-    support: '完全支持',
+    support: 'Hỗ trợ đầy đủ',
     supportClass: 'good',
-    speed: '较快 (1-3s)',
-    feature: '最成熟的 HMR 实现'
+    speed: 'Khá nhanh (1-3s)',
+    feature: 'Triển khai HMR trưởng thành nhất'
   },
   {
     name: 'Parcel',
-    support: '自动支持',
+    support: 'Tự động hỗ trợ',
     supportClass: 'good',
-    speed: '快 (500ms-1s)',
-    feature: '零配置，自动 HMR'
+    speed: 'Nhanh (500ms-1s)',
+    feature: 'Zero config, tự bật HMR'
   },
   {
     name: 'Rollup',
-    support: '插件支持',
+    support: 'Qua plugin',
     supportClass: 'fair',
-    speed: '开发时较慢',
-    feature: '主要用于生产构建'
+    speed: 'Chậm hơn khi dev',
+    feature: 'Chủ yếu dùng cho build production'
   }
 ]
 </script>

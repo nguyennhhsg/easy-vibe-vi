@@ -1,12 +1,12 @@
 <!--
-  ApiQuickStartDemo.vue - 紧凑版
-  目标：展示最简单的 API 调用流程，一眼看懂
+  ApiQuickStartDemo.vue - bản gọn
+  Mục tiêu: minh họa luồng gọi API đơn giản nhất, nhìn là hiểu
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">🌐</span>
-      <span class="title">试试看：获取当前时间</span>
+      <span class="title">Thử ngay: lấy thời gian hiện tại</span>
     </div>
 
     <div class="demo-layout">
@@ -14,7 +14,7 @@
         <div class="terminal">
           <div class="term-bar">
             <span class="dot r" /><span class="dot y" /><span class="dot g" />
-            <span class="term-title">API 请求</span>
+            <span class="term-title">API request</span>
           </div>
           <div class="term-body">
             <div class="t-line">
@@ -22,7 +22,7 @@
               <span class="t-cmd">GET /api/time</span>
             </div>
             <div v-if="calling" class="t-line">
-              <span class="t-dim">请求中...</span>
+              <span class="t-dim">Đang gửi request...</span>
               <span class="t-loading">▋</span>
             </div>
             <div v-if="result" class="t-line">
@@ -34,7 +34,7 @@
           </div>
         </div>
         <button class="call-btn" :disabled="calling" @click="callApi">
-          {{ calling ? '请求中...' : '📡 发起请求' }}
+          {{ calling ? 'Đang gửi...' : '📡 Gửi request' }}
         </button>
       </div>
 
@@ -42,10 +42,10 @@
         <div class="flow-col" :class="{ 'flow-highlight': stage === 'client' }">
           <div class="flow-header">
             <span class="flow-icon">💻</span>
-            <span class="flow-title">客户端</span>
+            <span class="flow-title">Client</span>
           </div>
           <div class="flow-body">
-            {{ stage === 'client' ? '准备请求...' : '等待中' }}
+            {{ stage === 'client' ? 'Đang chuẩn bị...' : 'Đang chờ' }}
           </div>
         </div>
 
@@ -57,10 +57,10 @@
         <div class="flow-col" :class="{ 'flow-highlight': stage === 'server' }">
           <div class="flow-header">
             <span class="flow-icon">🖥️</span>
-            <span class="flow-title">服务器</span>
+            <span class="flow-title">Server</span>
           </div>
           <div class="flow-body">
-            {{ stage === 'server' ? '处理中...' : '等待中' }}
+            {{ stage === 'server' ? 'Đang xử lý...' : 'Đang chờ' }}
           </div>
         </div>
 
@@ -75,22 +75,22 @@
         >
           <div class="flow-header">
             <span class="flow-icon">📦</span>
-            <span class="flow-title">响应</span>
+            <span class="flow-title">Response</span>
           </div>
           <div class="flow-body">
             <span v-if="result" class="result-time">{{
               result.timeString
             }}</span>
-            <span v-else>等待响应</span>
+            <span v-else>Đang chờ phản hồi</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>点击按钮 → 发送请求 → 服务器处理 → 返回数据。这就是 API
-        调用的完整流程。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Nhấn nút → gửi request → server xử lý → trả về dữ liệu. Đó là toàn bộ luồng
+        gọi API.</span>
     </div>
   </div>
 </template>
@@ -119,7 +119,7 @@ function callApi() {
   setTimeout(() => {
     const now = new Date()
     result.value = {
-      timeString: now.toLocaleString('zh-CN', {
+      timeString: now.toLocaleString('vi-VN', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit'

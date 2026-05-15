@@ -1,12 +1,12 @@
 <!--
-  ApiMethodDemo.vue - 紧凑版
-  目标：展示 HTTP 方法的语义
+  ApiMethodDemo.vue - bản gọn
+  Mục tiêu: minh họa ý nghĩa của các HTTP method
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">📋</span>
-      <span class="title">HTTP 方法：告诉服务器你想做什么</span>
+      <span class="title">HTTP method: nói với server bạn muốn làm gì</span>
     </div>
 
     <div class="demo-layout">
@@ -31,26 +31,26 @@
       </div>
 
       <div class="right-panel">
-        <div class="compare-header">对比：幂等性</div>
+        <div class="compare-header">So sánh: tính idempotent</div>
         <div class="compare-row">
           <span class="c-label">GET</span>
-          <span class="c-val">查询10次 = 查询1次 ✓</span>
+          <span class="c-val">Query 10 lần = query 1 lần ✓</span>
         </div>
         <div class="compare-row">
           <span class="c-label">DELETE</span>
-          <span class="c-val">删除10次 = 删除1次 ✓</span>
+          <span class="c-val">Xóa 10 lần = xóa 1 lần ✓</span>
         </div>
         <div class="compare-row warn">
           <span class="c-label">POST</span>
-          <span class="c-val">下单10次 = 10个订单 ✗</span>
+          <span class="c-val">Đặt hàng 10 lần = 10 đơn ✗</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>HTTP 方法就是动词——GET 是"问"，POST 是"做"，PUT/PATCH 是"改"，DELETE
-        是"删"。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>HTTP method chính là động từ: GET là "hỏi", POST là "làm", PUT/PATCH là "sửa", DELETE
+        là "xóa".</span>
     </div>
   </div>
 </template>
@@ -61,16 +61,16 @@ import { ref } from 'vue'
 const selected = ref('GET')
 
 const methods = [
-  { name: 'GET', desc: '获取数据', example: 'GET /users', color: 'green' },
-  { name: 'POST', desc: '创建数据', example: 'POST /users', color: 'blue' },
-  { name: 'PUT', desc: '替换数据', example: 'PUT /users/1', color: 'orange' },
+  { name: 'GET', desc: 'Lấy dữ liệu', example: 'GET /users', color: 'green' },
+  { name: 'POST', desc: 'Tạo dữ liệu', example: 'POST /users', color: 'blue' },
+  { name: 'PUT', desc: 'Thay thế dữ liệu', example: 'PUT /users/1', color: 'orange' },
   {
     name: 'PATCH',
-    desc: '部分修改',
+    desc: 'Sửa một phần',
     example: 'PATCH /users/1',
     color: 'yellow'
   },
-  { name: 'DELETE', desc: '删除数据', example: 'DELETE /users/1', color: 'red' }
+  { name: 'DELETE', desc: 'Xóa dữ liệu', example: 'DELETE /users/1', color: 'red' }
 ]
 </script>
 

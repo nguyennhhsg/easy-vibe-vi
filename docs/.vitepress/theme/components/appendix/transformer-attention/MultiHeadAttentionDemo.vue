@@ -6,20 +6,20 @@
         <div class="head-desc">{{ head.desc }}</div>
       </div>
     </div>
-    <div class="summary">8 个头从不同角度理解语义，最后拼接融合</div>
+    <div class="summary">8 head hiểu ngữ nghĩa từ nhiều góc nhìn khác nhau, cuối cùng concat lại để hợp nhất</div>
   </div>
 </template>
 
 <script setup>
 const heads = [
-  { id: 1, name: '语法头', desc: '主谓宾关系' },
-  { id: 2, name: '语义头', desc: '词义关联' },
-  { id: 3, name: '位置头', desc: '距离关系' },
-  { id: 4, name: '指代头', desc: '代词消解' },
-  { id: 5, name: '情感头', desc: '情绪倾向' },
-  { id: 6, name: '实体头', desc: '命名实体' },
-  { id: 7, name: '修饰头', desc: '定状补' },
-  { id: 8, name: '全局头', desc: '整体语境' },
+  { id: 1, name: 'Head ngữ pháp', desc: 'Quan hệ chủ-vị-tân' },
+  { id: 2, name: 'Head ngữ nghĩa', desc: 'Liên kết nghĩa từ' },
+  { id: 3, name: 'Head vị trí', desc: 'Quan hệ khoảng cách' },
+  { id: 4, name: 'Head chỉ định', desc: 'Giải mã đại từ' },
+  { id: 5, name: 'Head cảm xúc', desc: 'Khuynh hướng cảm xúc' },
+  { id: 6, name: 'Head thực thể', desc: 'Named Entity' },
+  { id: 7, name: 'Head bổ ngữ', desc: 'Định ngữ / trạng ngữ / bổ ngữ' },
+  { id: 8, name: 'Head toàn cục', desc: 'Bối cảnh tổng thể' },
 ]
 </script>
 

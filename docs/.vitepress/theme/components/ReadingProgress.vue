@@ -33,8 +33,8 @@
         {{ bookmarkLabel }}
       </div>
       
-      <!-- 拖拽时的提示 -->
-      <div v-if="isDragging" class="drag-hint">拖动调整</div>
+      <!-- Gợi ý khi đang kéo -->
+      <div v-if="isDragging" class="drag-hint">Kéo để điều chỉnh</div>
     </div>
   </Transition>
 </template>
@@ -62,7 +62,7 @@ let saveTimer = null
 let restoreTimer = null
 let clickSaveTimer = null
 
-// 拖拽相关状态
+// Trạng thái liên quan đến thao tác kéo
 const isDragging = ref(false)
 const startY = ref(0)
 const startProgress = ref(0)
@@ -114,15 +114,15 @@ const bookmarkLabel = computed(() => {
 
 const bookmarkTitle = computed(() => {
   const title =
-    articleTitle.value || restoredBookmark.value?.title || '当前文章'
+    articleTitle.value || restoredBookmark.value?.title || 'Bài hiện tại'
   const section = activeSection.value || restoredBookmark.value?.section || ''
   return section ? `${title} - ${section}` : title
 })
 
 const progressTitle = computed(() =>
   isDragging.value
-    ? '拖动调整位置'
-    : `${bookmarkTitle.value} · 阅读进度 ${progress.value}%`
+    ? 'Kéo để điều chỉnh vị trí'
+    : `${bookmarkTitle.value} · Tiến độ đọc ${progress.value}%`
 )
 
 const clearBookmarkSaveTimer = () => {
@@ -162,7 +162,7 @@ const scheduleBookmarkSave = () => {
 }
 
 const updateProgress = () => {
-  // 拖拽时不更新进度，避免冲突
+  // Không cập nhật tiến độ khi đang kéo để tránh xung đột
   if (isDragging.value) return
 
   articleTitle.value = getArticleTitle()
@@ -173,18 +173,18 @@ const updateProgress = () => {
   const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
   
   progress.value = Math.min(Math.round(scrollPercent), 100)
-  showProgress.value = scrollTop > 0 // 开始滚动就显示
+  showProgress.value = scrollTop > 0 // Hiển thị ngay khi bắt đầu cuộn
   restoredBookmark.value = null
-  
-  // 滚动时显示百分比
+
+  // Hiển thị phần trăm khi đang cuộn
   showArrow.value = false
-  
-  // 清除之前的定时器
+
+  // Xoá timer cũ
   if (scrollTimer) {
     clearTimeout(scrollTimer)
   }
-  
-  // 停止滚动1.5秒后显示箭头
+
+  // Hiển thị mũi tên sau 1.5s ngừng cuộn
   scrollTimer = window.setTimeout(() => {
     if (window.scrollY > 0) {
       showArrow.value = true
@@ -241,77 +241,77 @@ const resetRouteState = () => {
   activeSection.value = ''
 }
 
-// 开始拖拽
+// Bắt đầu kéo
 const startDrag = (e) => {
   e.preventDefault()
-  
+
   isDragging.value = true
   startY.value = 'touches' in e ? e.touches[0].clientY : e.clientY
   startProgress.value = progress.value
   movedDuringDrag.value = false
-  
-  // 添加全局事件监听
+
+  // Đăng ký lắng nghe sự kiện toàn cục
   document.addEventListener('mousemove', onDrag, { passive: false })
   document.addEventListener('mouseup', endDrag)
   document.addEventListener('touchmove', onDrag, { passive: false })
   document.addEventListener('touchend', endDrag)
 }
 
-// 拖拽中
+// Trong khi kéo
 const onDrag = (e) => {
   if (!isDragging.value) return
   e.preventDefault()
-  
+
   const currentY = 'touches' in e ? e.touches[0].clientY : e.clientY
-  const deltaY = startY.value - currentY // 向上拖动为正值
+  const deltaY = startY.value - currentY // Kéo lên là giá trị dương
   if (Math.abs(deltaY) > 4) {
     movedDuringDrag.value = true
   }
-  
-  // 每拖动 3 像素调整 1% 进度
+
+  // Mỗi 3px kéo điều chỉnh 1% tiến độ
   const sensitivity = 3
   const progressDelta = deltaY / sensitivity
-  
-  // 计算新的进度值
+
+  // Tính giá trị tiến độ mới
   let newProgress = startProgress.value + progressDelta
   newProgress = Math.max(0, Math.min(100, newProgress))
-  
-  // 使用 requestAnimationFrame 优化性能
+
+  // Dùng requestAnimationFrame để tối ưu hiệu năng
   if (dragRafId) {
     cancelAnimationFrame(dragRafId)
   }
-  
+
   dragRafId = requestAnimationFrame(() => {
     progress.value = Math.round(newProgress)
-    
-    // 实时滚动页面
+
+    // Cuộn trang theo thời gian thực
     const docHeight = document.documentElement.scrollHeight - window.innerHeight
     if (docHeight > 0) {
       window.scrollTo({
         top: (progress.value / 100) * docHeight,
-        behavior: 'auto' // 拖拽时使用 auto 避免延迟
+        behavior: 'auto' // Dùng auto khi kéo để tránh trễ
       })
     }
   })
 }
 
-// 结束拖拽
+// Kết thúc kéo
 const endDrag = () => {
   const shouldSkipClick = movedDuringDrag.value
   isDragging.value = false
-  
-  // 清除事件监听
+
+  // Gỡ bỏ lắng nghe sự kiện
   document.removeEventListener('mousemove', onDrag)
   document.removeEventListener('mouseup', endDrag)
   document.removeEventListener('touchmove', onDrag)
   document.removeEventListener('touchend', endDrag)
-  
+
   if (dragRafId) {
     cancelAnimationFrame(dragRafId)
     dragRafId = null
   }
-  
-  // 恢复箭头显示
+
+  // Khôi phục hiển thị mũi tên
   if (window.scrollY > 0) {
     showArrow.value = true
   }
@@ -328,9 +328,9 @@ const endDrag = () => {
   }
 }
 
-// 点击回到顶部
+// Nhấp để về đầu trang
 const handleClick = () => {
-  // 如果是拖拽结束后的点击，不触发回到顶部
+  // Nếu là cú nhấp ngay sau khi kéo thì không cuộn về đầu trang
   if (isDragging.value || skipNextClick) {
     skipNextClick = false
     return
@@ -365,7 +365,7 @@ onUnmounted(() => {
     clearTimeout(restoreTimer)
   }
   clearClickSaveTimer()
-  // 清理拖拽事件
+  // Dọn dẹp sự kiện kéo
   document.removeEventListener('mousemove', onDrag)
   document.removeEventListener('mouseup', endDrag)
   document.removeEventListener('touchmove', onDrag)
@@ -455,7 +455,7 @@ watch(
 }
 
 .reading-progress.is-dragging .progress-ring-circle {
-  transition: none; /* 拖拽时移除过渡动画，更跟手 */
+  transition: none; /* Bỏ hiệu ứng chuyển động khi kéo để phản hồi tức thì */
 }
 
 .progress-text {
@@ -521,7 +521,7 @@ watch(
   }
 }
 
-/* 拖拽提示 */
+/* Gợi ý kéo */
 .drag-hint {
   position: absolute;
   bottom: 100%;
@@ -546,7 +546,7 @@ watch(
   }
 }
 
-/* 内容切换动画 */
+/* Hoạt ảnh chuyển nội dung */
 .content-switch-enter-active {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
@@ -565,7 +565,7 @@ watch(
   transform: translate(-50%, -60%) scale(0.8);
 }
 
-/* 渐入渐出动画 */
+/* Hoạt ảnh mờ dần */
 .progress-fade-enter-active,
 .progress-fade-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -577,7 +577,7 @@ watch(
   transform: scale(0.8) translateY(10px);
 }
 
-/* 移动端适配 */
+/* Tối ưu cho thiết bị di động */
 @media (max-width: 768px) {
   .reading-progress {
     bottom: 20px;

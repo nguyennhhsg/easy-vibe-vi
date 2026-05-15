@@ -2,14 +2,14 @@
   <div class="cross-account-access-demo">
     <div class="demo-header">
       <span class="icon">🔗</span>
-      <span class="title">跨账号访问</span>
-      <span class="subtitle">AssumeRole 机制</span>
+      <span class="title">Truy cập cross-account</span>
+      <span class="subtitle">Cơ chế AssumeRole</span>
     </div>
 
     <div class="flow-diagram">
       <div class="account-box source">
         <div class="account-header">
-          账号 A（源）
+          Account A (nguồn)
         </div>
         <div class="entity">
           IAM User
@@ -21,44 +21,44 @@
       <span class="arrow">→</span>
       <div class="account-box sts">
         <div class="account-header">
-          STS 服务
+          STS Service
         </div>
         <div class="step">
-          验证身份
+          Xác thực danh tính
         </div>
         <div class="step">
-          生成临时凭证
+          Sinh temporary credentials
         </div>
       </div>
       <span class="arrow">→</span>
       <div class="account-box target">
         <div class="account-header">
-          账号 B（目标）
+          Account B (đích)
         </div>
         <div class="entity">
           CrossAccountRole
         </div>
         <div class="resource">
-          访问 S3/EC2
+          Truy cập S3/EC2
         </div>
       </div>
     </div>
 
     <div class="code-block">
       <div class="code-title">
-        Python 示例
+        Ví dụ Python
       </div>
       <pre><code>sts = boto3.client('sts')
 assumed = sts.assume_role(
     RoleArn='arn:aws:iam::123456789012:role/CrossAccountRole',
     RoleSessionName='MySession'
 )
-# 使用临时凭证访问目标账号资源</code></pre>
+# Dùng temporary credentials để truy cập tài nguyên ở account đích</code></pre>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>通过角色扮演实现跨账号访问，临时凭证自动过期，更安全更易管理。
+      <strong>Ý tưởng cốt lõi:</strong> Thực hiện truy cập cross-account thông qua role assumption, temporary credentials tự động hết hạn, an toàn và dễ quản lý hơn.
     </div>
   </div>
 </template>

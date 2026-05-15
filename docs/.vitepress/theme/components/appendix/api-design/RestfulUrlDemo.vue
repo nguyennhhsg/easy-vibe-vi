@@ -3,7 +3,7 @@
     <div class="ru-terminal">
       <div class="term-bar">
         <span class="dot r" /><span class="dot y" /><span class="dot g" />
-        <span class="term-title">RESTful URL 设计规则</span>
+        <span class="term-title">Quy tắc thiết kế URL RESTful</span>
       </div>
       <div ref="termEl" class="term-body">
         <div v-for="(l, i) in lines" :key="i" class="t-line">
@@ -31,7 +31,7 @@
         <code>{{ op.cmd }}</code>
       </button>
       <button class="ru-btn ru-btn--reset" :disabled="running" @click="reset">
-        重置
+        Đặt lại
       </button>
     </div>
 
@@ -39,7 +39,7 @@
       <div class="compare-col compare-bad">
         <div class="compare-header">
           <span class="compare-icon">❌</span>
-          <span class="compare-title">错误示例</span>
+          <span class="compare-title">Ví dụ sai</span>
         </div>
         <div class="compare-body">
           <div
@@ -57,7 +57,7 @@
       <div class="compare-col compare-good">
         <div class="compare-header">
           <span class="compare-icon">✅</span>
-          <span class="compare-title">正确示例</span>
+          <span class="compare-title">Ví dụ đúng</span>
         </div>
         <div class="compare-body">
           <div
@@ -82,39 +82,39 @@ import { ref, nextTick } from 'vue'
 
 const termEl = ref(null)
 const lines = ref([
-  { kind: 'dim', text: '# 对比 RESTful URL 的正确与错误写法' }
+  { kind: 'dim', text: '# So sánh cách viết URL RESTful đúng và sai' }
 ])
 const typing = ref('')
 const running = ref(false)
 const active = ref(null)
-const hint = ref('点击命令按钮，查看不同场景下的 URL 设计对比。')
+const hint = ref('Nhấn nút lệnh để xem so sánh thiết kế URL trong các tình huống.')
 
 const badExamples = ref([
-  { url: 'GET /getUsers', reason: 'URL 含动词', active: false },
-  { url: 'GET /user', reason: '单数形式', active: false },
-  { url: 'GET /UserProfiles', reason: '大写字母', active: false },
-  { url: 'GET /user_profiles', reason: '下划线连接', active: false },
+  { url: 'GET /getUsers', reason: 'URL chứa động từ', active: false },
+  { url: 'GET /user', reason: 'Dạng số ít', active: false },
+  { url: 'GET /UserProfiles', reason: 'Có chữ in hoa', active: false },
+  { url: 'GET /user_profiles', reason: 'Dùng gạch dưới', active: false },
   {
     url: 'GET /users/123/orders/456/items/789',
-    reason: '层级过深',
+    reason: 'Lồng quá sâu',
     active: false
   },
   {
     url: 'GET /products/category/phone/price/5000',
-    reason: '过滤条件放路径',
+    reason: 'Bộ lọc trong path',
     active: false
   }
 ])
 
 const goodExamples = ref([
-  { url: 'GET /users', reason: '名词 + 复数', active: false },
-  { url: 'GET /users', reason: '复数形式', active: false },
-  { url: 'GET /user-profiles', reason: '小写 + 连字符', active: false },
-  { url: 'GET /user-profiles', reason: '连字符连接', active: false },
-  { url: 'GET /users/123/orders', reason: '最多 3 层', active: false },
+  { url: 'GET /users', reason: 'Danh từ + số nhiều', active: false },
+  { url: 'GET /users', reason: 'Dạng số nhiều', active: false },
+  { url: 'GET /user-profiles', reason: 'Chữ thường + gạch nối', active: false },
+  { url: 'GET /user-profiles', reason: 'Nối bằng gạch nối', active: false },
+  { url: 'GET /users/123/orders', reason: 'Tối đa 3 cấp', active: false },
   {
     url: 'GET /products?category=phone&price_max=5000',
-    reason: '过滤用查询参数',
+    reason: 'Bộ lọc dùng query param',
     active: false
   }
 ])
@@ -124,10 +124,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const ops = [
   {
     id: 'rule1',
-    cmd: '规则1: 用名词不用动词',
+    cmd: 'Quy tắc 1: dùng danh từ, không dùng động từ',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# URL 表示资源地址，不是操作' },
+      { kind: 'dim', text: '# URL là địa chỉ của resource, không phải hành động' },
       { kind: 'red', text: '❌ GET /getUsers' },
       { kind: 'red', text: '❌ GET /fetchUserInfo' },
       { kind: 'red', text: '❌ POST /createOrder' },
@@ -135,7 +135,7 @@ const ops = [
       { kind: 'grn', text: '✅ GET /users/123' },
       { kind: 'grn', text: '✅ POST /orders' }
     ],
-    hint: 'URL 是资源的"地址"，HTTP 方法已经表达了"操作"。不要在 URL 里重复说"做什么"。',
+    hint: 'URL là "địa chỉ" của resource, HTTP method đã thể hiện "hành động". Đừng lặp lại "làm gì" trong URL.',
     do: () => {
       badExamples.value[0].active = true
       goodExamples.value[0].active = true
@@ -143,17 +143,17 @@ const ops = [
   },
   {
     id: 'rule2',
-    cmd: '规则2: 用复数形式',
+    cmd: 'Quy tắc 2: dùng dạng số nhiều',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 复数形式表示集合，风格统一' },
+      { kind: 'dim', text: '# Số nhiều thể hiện collection, thống nhất phong cách' },
       { kind: 'red', text: '❌ GET /user' },
       { kind: 'red', text: '❌ GET /order' },
       { kind: 'grn', text: '✅ GET /users' },
       { kind: 'grn', text: '✅ GET /orders' },
-      { kind: 'grn', text: '✅ GET /users/123  (获取单个)' }
+      { kind: 'grn', text: '✅ GET /users/123  (lấy một item)' }
     ],
-    hint: '统一用复数，避免 /user 和 /users 混用。获取单个资源时用 /users/123。',
+    hint: 'Thống nhất dùng số nhiều, tránh lẫn lộn /user và /users. Khi lấy một resource thì dùng /users/123.',
     do: () => {
       badExamples.value[1].active = true
       goodExamples.value[1].active = true
@@ -161,16 +161,16 @@ const ops = [
   },
   {
     id: 'rule3',
-    cmd: '规则3: 小写+连字符',
+    cmd: 'Quy tắc 3: chữ thường + gạch nối',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# URL 大小写敏感，统一小写避免混乱' },
+      { kind: 'dim', text: '# URL phân biệt hoa thường, thống nhất chữ thường tránh nhầm lẫn' },
       { kind: 'red', text: '❌ GET /UserProfiles' },
       { kind: 'red', text: '❌ GET /user_profiles' },
       { kind: 'grn', text: '✅ GET /user-profiles' },
       { kind: 'grn', text: '✅ GET /order-items' }
     ],
-    hint: 'URL 大小写敏感，统一用小写 + 连字符（-）是最安全的做法。',
+    hint: 'URL phân biệt hoa thường, dùng chữ thường + gạch nối (-) là cách an toàn nhất.',
     do: () => {
       badExamples.value[2].active = true
       badExamples.value[3].active = true
@@ -180,16 +180,16 @@ const ops = [
   },
   {
     id: 'rule4',
-    cmd: '规则4: 避免层级过深',
+    cmd: 'Quy tắc 4: tránh lồng quá sâu',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 层级太深 = 耦合度高，难以维护' },
+      { kind: 'dim', text: '# Lồng quá sâu = coupling cao, khó bảo trì' },
       { kind: 'red', text: '❌ /users/123/orders/456/items/789/status' },
-      { kind: 'grn', text: '✅ /users/123/orders  (用户订单)' },
-      { kind: 'grn', text: '✅ /orders/456/items  (订单商品)' },
-      { kind: 'grn', text: '✅ /order-items/789  (直接访问)' }
+      { kind: 'grn', text: '✅ /users/123/orders  (đơn của user)' },
+      { kind: 'grn', text: '✅ /orders/456/items  (sản phẩm trong đơn)' },
+      { kind: 'grn', text: '✅ /order-items/789  (truy cập trực tiếp)' }
     ],
-    hint: '超过 3 层考虑重构。可以用扁平化路径或查询参数替代深层嵌套。',
+    hint: 'Quá 3 cấp thì cân nhắc refactor. Có thể dùng path phẳng hoặc query parameter thay vì lồng sâu.',
     do: () => {
       badExamples.value[4].active = true
       goodExamples.value[4].active = true
@@ -197,16 +197,16 @@ const ops = [
   },
   {
     id: 'rule5',
-    cmd: '规则5: 过滤用查询参数',
+    cmd: 'Quy tắc 5: filter dùng query param',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 过滤条件多变，不适合放路径' },
+      { kind: 'dim', text: '# Điều kiện filter hay đổi, không hợp đặt trong path' },
       { kind: 'red', text: '❌ /products/category/phone/price/5000' },
       { kind: 'grn', text: '✅ /products?category=phone&price_max=5000' },
       { kind: 'grn', text: '✅ /products?status=active&sort=created_desc' },
       { kind: 'grn', text: '✅ /products?category=phone,electronics' }
     ],
-    hint: '查询参数可以灵活组合，路径则固定不变。过滤、排序、分页都用查询参数。',
+    hint: 'Query parameter có thể kết hợp linh hoạt, còn path thì cố định. Filter, sort, paging đều nên dùng query parameter.',
     do: () => {
       badExamples.value[5].active = true
       goodExamples.value[5].active = true
@@ -253,11 +253,11 @@ function scroll() {
 }
 
 function reset() {
-  lines.value = [{ kind: 'dim', text: '# 对比 RESTful URL 的正确与错误写法' }]
+  lines.value = [{ kind: 'dim', text: '# So sánh cách viết URL RESTful đúng và sai' }]
   badExamples.value.forEach((e) => (e.active = false))
   goodExamples.value.forEach((e) => (e.active = false))
   active.value = null
-  hint.value = '点击命令按钮，查看不同场景下的 URL 设计对比。'
+  hint.value = 'Nhấn nút lệnh để xem so sánh thiết kế URL trong các tình huống.'
   typing.value = ''
   running.value = false
 }
@@ -395,7 +395,7 @@ function reset() {
   display: none;
 }
 .ru-btn--reset::after {
-  content: '重置';
+  content: 'Đặt lại';
   font-size: 0.7rem;
   color: #585b70;
 }

@@ -5,20 +5,20 @@
         :class="{ active: mode === 'standard' }"
         @click="mode = 'standard'"
       >
-        标准 Attention (网状连接)
+        Attention chuẩn (kết nối lưới)
       </button>
       <button
         :class="{ active: mode === 'linear' }"
         @click="mode = 'linear'"
       >
-        线性 Attention (接力传递)
+        Linear Attention (chuyền tiếp)
       </button>
     </div>
 
     <div class="visual-area">
       <div class="control-panel">
         <div class="label">
-          参与者数量 (N): {{ nValue }}
+          Số node tham gia (N): {{ nValue }}
         </div>
         <input
           v-model="nValue"
@@ -196,7 +196,7 @@
       <div class="stats-panel">
         <div class="stat-item">
           <div class="stat-label">
-            连接/操作次数
+            Số kết nối/thao tác
           </div>
           <div
             class="stat-value"
@@ -207,12 +207,12 @@
         </div>
         <div class="stat-desc">
           <span v-if="mode === 'standard'">
-            每个人都要找其他人。<br>N={{ nValue }} 时，连接数高达
-            {{ nValue * nValue }}！
+            Mỗi node phải nối tới tất cả node khác.<br>Khi N={{ nValue }}, số kết nối lên tới
+            {{ nValue * nValue }}!
           </span>
           <span v-else>
-            每个人只传给下一个人。<br>N={{ nValue }} 时，操作数仅为
-            {{ nValue }}。
+            Mỗi node chỉ chuyền cho node kế tiếp.<br>Khi N={{ nValue }}, số thao tác chỉ là
+            {{ nValue }}.
           </span>
         </div>
       </div>
@@ -220,17 +220,17 @@
 
     <div class="analogy-box">
       <div class="analogy-title">
-        💡 核心区别：要不要回头看？
+        💡 Khác biệt cốt lõi: có cần ngoảnh lại nhìn hay không?
       </div>
       <div v-if="mode === 'standard'">
-        <b>回看模式 (Retrospective)</b>：
-        <br>想象你在考试。每做一道新题，你都要<b>把之前做过的所有题目再检查一遍</b>，确认有没有关联。
-        <br>题目越多，你需要检查的次数就越多，最后累死在检查上。
+        <b>Chế độ ngoảnh lại (Retrospective)</b>:
+        <br>Hãy hình dung bạn đang làm bài thi. Mỗi khi gặp câu mới, bạn phải <b>kiểm tra lại toàn bộ các câu đã làm</b> để xem có liên quan không.
+        <br>Càng nhiều câu hỏi, càng phải kiểm tra nhiều lần, cuối cùng kiệt sức vì rà soát.
       </div>
       <div v-else>
-        <b>状态模式 (Recurrent)</b>： <br>想象你在跑步。你不需要记得前 100
-        步每一步踩在哪，你只需要知道<b>现在的速度和位置</b>（State）。
-        <br>跑第 1000 步和跑第 1 步一样轻松，因为你不需要回头。
+        <b>Chế độ trạng thái (Recurrent)</b>: <br>Hãy hình dung bạn đang chạy bộ. Bạn không cần nhớ 100
+        bước trước đó đã đặt chân ở đâu, chỉ cần biết <b>tốc độ và vị trí hiện tại</b> (State).
+        <br>Chạy bước thứ 1000 cũng nhẹ nhàng như bước đầu vì bạn không phải nhìn lại.
       </div>
     </div>
   </div>

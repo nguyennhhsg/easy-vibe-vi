@@ -1,6 +1,6 @@
 <template>
   <div class="bios-post-demo">
-    <div class="demo-label">BIOS POST 硬件自检 ── 点击查看检测项目</div>
+    <div class="demo-label">BIOS POST tự kiểm tra phần cứng ── nhấp để xem các mục kiểm tra</div>
 
     <div class="post-items">
       <div
@@ -19,11 +19,11 @@
     </div>
 
     <div class="post-result">
-      <span v-if="allPassed" class="result-pass">✅ 自检通过，准备启动</span>
-      <span v-else class="result-pending">⏳ 点击项目模拟检测状态</span>
+      <span v-if="allPassed" class="result-pass">✅ Tự kiểm tra thành công, sẵn sàng khởi động</span>
+      <span v-else class="result-pending">⏳ Nhấp vào từng mục để mô phỏng trạng thái kiểm tra</span>
     </div>
 
-    <div class="tap-hint">👆 点击模拟检测结果</div>
+    <div class="tap-hint">👆 Nhấp để mô phỏng kết quả kiểm tra</div>
   </div>
 </template>
 
@@ -31,12 +31,12 @@
 import { ref, computed } from 'vue'
 
 const postItems = ref([
-  { name: 'CPU', desc: '处理器完整性检测', passed: false, error: false },
-  { name: '内存', desc: 'RAM 容量和可用性检测', passed: false, error: false },
-  { name: '显卡', desc: '显示适配器初始化', passed: false, error: false },
-  { name: '硬盘', desc: '存储设备识别', passed: false, error: false },
-  { name: '键盘', desc: '键盘接口检测', passed: false, error: false },
-  { name: '鼠标', desc: '鼠标接口检测', passed: false, error: false }
+  { name: 'CPU', desc: 'Kiểm tra tính toàn vẹn của bộ xử lý', passed: false, error: false },
+  { name: 'Bộ nhớ', desc: 'Kiểm tra dung lượng và khả dụng của RAM', passed: false, error: false },
+  { name: 'Card đồ họa', desc: 'Khởi tạo bộ điều hợp hiển thị', passed: false, error: false },
+  { name: 'Ổ cứng', desc: 'Nhận diện thiết bị lưu trữ', passed: false, error: false },
+  { name: 'Bàn phím', desc: 'Kiểm tra giao tiếp bàn phím', passed: false, error: false },
+  { name: 'Chuột', desc: 'Kiểm tra giao tiếp chuột', passed: false, error: false }
 ])
 
 const allPassed = computed(() => postItems.value.every(item => item.passed))

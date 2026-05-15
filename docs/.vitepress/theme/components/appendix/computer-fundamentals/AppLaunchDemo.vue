@@ -2,8 +2,8 @@
   <div class="launch-demo">
     <div class="demo-header">
       <span class="demo-icon">🌐</span>
-      <span class="demo-title">浏览器启动过程</span>
-      <span class="demo-hint">点击每一步查看详情</span>
+      <span class="demo-title">Quá trình khởi động trình duyệt</span>
+      <span class="demo-hint">Nhấn từng bước để xem chi tiết</span>
     </div>
 
     <div class="timeline">
@@ -68,79 +68,79 @@ const active = ref(-1)
 const steps = [
   {
     icon: '👆',
-    name: '双击图标',
-    brief: '用户触发启动请求，操作系统开始响应',
-    detail: '你双击桌面上的浏览器图标时，操作系统的窗口管理器捕获这个鼠标事件，通过文件关联表查找该图标对应的可执行文件路径。',
+    name: 'Nhấp đúp vào biểu tượng',
+    brief: 'Người dùng kích hoạt yêu cầu khởi động, hệ điều hành bắt đầu phản hồi',
+    detail: 'Khi bạn nhấp đúp vào biểu tượng trình duyệt trên desktop, trình quản lý cửa sổ của OS bắt được sự kiện chuột này, rồi tra bảng liên kết file để tìm đường dẫn tới file thực thi tương ứng.',
     items: [
-      { icon: '🖱️', label: '鼠标事件捕获', desc: '窗口管理器检测到双击动作，识别点击目标' },
-      { icon: '🔗', label: '快捷方式解析', desc: '读取 .lnk（Windows）或 .desktop（Linux）文件中的目标路径' },
-      { icon: '📂', label: '文件关联查找', desc: '在注册表或 MIME 数据库中找到对应的可执行文件' }
+      { icon: '🖱️', label: 'Bắt sự kiện chuột', desc: 'Trình quản lý cửa sổ phát hiện thao tác nhấp đúp và xác định mục tiêu' },
+      { icon: '🔗', label: 'Phân giải shortcut', desc: 'Đọc đường dẫn đích trong file .lnk (Windows) hoặc .desktop (Linux)' },
+      { icon: '📂', label: 'Tra liên kết file', desc: 'Tìm file thực thi tương ứng trong registry hoặc cơ sở dữ liệu MIME' }
     ],
-    analogy: '就像你按下遥控器的开机键，电视先要识别你按的是哪个按钮，再决定执行什么操作。'
+    analogy: 'Giống như khi bạn bấm nút nguồn trên điều khiển TV, TV phải nhận diện bạn vừa bấm nút nào rồi mới quyết định hành động.'
   },
   {
     icon: '🔍',
-    name: '查找可执行文件',
-    brief: '根据文件关联，找到浏览器的 .exe 或可执行文件',
-    detail: '操作系统根据路径在硬盘上定位浏览器的可执行文件（如 chrome.exe），验证文件完整性和权限，准备加载。',
+    name: 'Tìm file thực thi',
+    brief: 'Dựa vào liên kết file, định vị file .exe hoặc file thực thi của trình duyệt',
+    detail: 'Hệ điều hành dùng đường dẫn để định vị file thực thi của trình duyệt trên ổ cứng (ví dụ chrome.exe), kiểm tra toàn vẹn và quyền truy cập, chuẩn bị nạp.',
     items: [
-      { icon: '📋', label: '路径解析', desc: '将快捷方式中的路径转换为硬盘上的实际文件位置' },
-      { icon: '🔒', label: '权限检查', desc: '验证当前用户是否有执行该文件的权限' },
-      { icon: '✅', label: '签名验证', desc: '检查数字签名确认文件未被篡改（Windows UAC）' }
+      { icon: '📋', label: 'Phân giải đường dẫn', desc: 'Chuyển đường dẫn trong shortcut thành vị trí thực tế trên ổ cứng' },
+      { icon: '🔒', label: 'Kiểm tra quyền', desc: 'Xác nhận người dùng hiện tại có quyền chạy file này' },
+      { icon: '✅', label: 'Xác thực chữ ký', desc: 'Kiểm tra chữ ký số để chắc file chưa bị sửa đổi (UAC trên Windows)' }
     ],
-    analogy: '好比你要找一本书，先查图书馆目录（路径），确认你有借阅权限（权限检查），再确认书没有被损坏（签名验证）。'
+    analogy: 'Giống như khi bạn tìm một quyển sách: tra mục lục thư viện trước (đường dẫn), kiểm tra bạn có quyền mượn (quyền), rồi xác nhận sách không bị hỏng (chữ ký).'
   },
   {
     icon: '📋',
-    name: '创建浏览器进程',
-    brief: '为浏览器创建一个新的进程，分配进程 ID',
-    detail: '操作系统内核调用 fork()+exec()（Linux）或 CreateProcess()（Windows），在进程表中创建新条目，分配唯一的 PID，建立进程控制块（PCB）。',
+    name: 'Tạo tiến trình trình duyệt',
+    brief: 'Tạo một tiến trình mới cho trình duyệt và cấp phát process ID',
+    detail: 'Kernel OS gọi fork()+exec() (Linux) hoặc CreateProcess() (Windows), tạo mục mới trong bảng tiến trình, cấp một PID duy nhất và lập khối điều khiển tiến trình (PCB).',
     items: [
-      { icon: '🆔', label: '分配 PID', desc: '为新进程分配唯一的进程标识符' },
-      { icon: '📊', label: '创建 PCB', desc: '记录进程状态、优先级、寄存器上下文等元信息' },
-      { icon: '🧠', label: '分配虚拟地址空间', desc: '为进程创建独立的 4GB（32位）虚拟内存空间' },
-      { icon: '📑', label: '初始化文件描述符', desc: '打开 stdin/stdout/stderr 三个标准 I/O 通道' }
+      { icon: '🆔', label: 'Cấp PID', desc: 'Cấp định danh tiến trình duy nhất cho tiến trình mới' },
+      { icon: '📊', label: 'Tạo PCB', desc: 'Ghi nhận trạng thái, độ ưu tiên, ngữ cảnh thanh ghi cùng các metadata' },
+      { icon: '🧠', label: 'Cấp không gian địa chỉ ảo', desc: 'Tạo không gian bộ nhớ ảo 4GB (32 bit) độc lập cho tiến trình' },
+      { icon: '📑', label: 'Khởi tạo file descriptor', desc: 'Mở ba kênh I/O chuẩn stdin/stdout/stderr' }
     ],
-    analogy: '就像新生儿出生要办户口——分配身份证号（PID）、建立档案（PCB）、分配住房（内存空间）。'
+    analogy: 'Giống như em bé mới sinh đi làm giấy khai sinh — cấp số chứng minh (PID), lập hồ sơ (PCB), cấp chỗ ở (bộ nhớ).'
   },
   {
     icon: '💾',
-    name: '加载代码到内存',
-    brief: '把浏览器的程序代码从硬盘读取到内存中',
-    detail: '操作系统的加载器（Loader）解析可执行文件格式（PE/ELF），将代码段、数据段映射到虚拟内存，并加载所需的动态链接库（DLL/SO）。',
+    name: 'Nạp code vào bộ nhớ',
+    brief: 'Đọc mã chương trình trình duyệt từ ổ cứng vào bộ nhớ',
+    detail: 'Bộ nạp (Loader) của OS phân tích định dạng file thực thi (PE/ELF), ánh xạ các đoạn code, data vào bộ nhớ ảo và nạp các thư viện liên kết động cần thiết (DLL/SO).',
     items: [
-      { icon: '📦', label: '解析文件格式', desc: '读取 PE（Windows）或 ELF（Linux）文件头，确定各段位置' },
-      { icon: '🗺️', label: '内存映射', desc: '将 .text（代码）、.data（数据）、.bss 段映射到虚拟地址' },
-      { icon: '🔗', label: '动态链接', desc: '加载 DLL/SO 共享库，解析函数符号引用' },
-      { icon: '📍', label: '重定位', desc: '修正代码中的绝对地址引用，适配实际加载位置' }
+      { icon: '📦', label: 'Phân tích định dạng file', desc: 'Đọc header PE (Windows) hoặc ELF (Linux) để xác định vị trí các đoạn' },
+      { icon: '🗺️', label: 'Ánh xạ bộ nhớ', desc: 'Ánh xạ các đoạn .text (code), .data (dữ liệu), .bss vào địa chỉ ảo' },
+      { icon: '🔗', label: 'Liên kết động', desc: 'Nạp các thư viện chia sẻ DLL/SO, phân giải tham chiếu hàm' },
+      { icon: '📍', label: 'Định vị lại', desc: 'Sửa các tham chiếu địa chỉ tuyệt đối trong code cho phù hợp vị trí nạp thực tế' }
     ],
-    analogy: '好比搬家——把家具（代码）从仓库（硬盘）搬到新房（内存），还要接通水电（链接库）。'
+    analogy: 'Giống chuyển nhà — bê đồ đạc (code) từ kho (ổ cứng) sang nhà mới (RAM), rồi đấu nối điện nước (thư viện liên kết).'
   },
   {
     icon: '🚀',
-    name: '初始化各模块',
-    brief: '启动主线程、渲染引擎、网络引擎、JS 引擎等',
-    detail: '浏览器的 main() 函数开始执行，依次初始化多进程架构中的各个核心模块：Browser 主进程、GPU 进程、网络进程等。',
+    name: 'Khởi tạo các module',
+    brief: 'Khởi động main thread, engine render, engine mạng, JS engine...',
+    detail: 'Hàm main() của trình duyệt bắt đầu chạy, lần lượt khởi tạo các module cốt lõi của kiến trúc đa tiến trình: tiến trình Browser chính, tiến trình GPU, tiến trình mạng...',
     items: [
-      { icon: '🧵', label: '主线程启动', desc: '初始化消息循环（Event Loop），处理 UI 事件和任务调度' },
-      { icon: '🎨', label: '渲染引擎', desc: '初始化 Blink/Gecko 引擎，准备解析 HTML/CSS' },
-      { icon: '🌐', label: '网络模块', desc: '启动网络栈，初始化 DNS 缓存、连接池、Cookie 管理' },
-      { icon: '⚡', label: 'JS 引擎', desc: '初始化 V8/SpiderMonkey，编译内置 JavaScript 代码' }
+      { icon: '🧵', label: 'Khởi động main thread', desc: 'Khởi tạo vòng lặp sự kiện (Event Loop), xử lý sự kiện UI và lập lịch tác vụ' },
+      { icon: '🎨', label: 'Engine render', desc: 'Khởi tạo Blink/Gecko, sẵn sàng phân tích HTML/CSS' },
+      { icon: '🌐', label: 'Module mạng', desc: 'Khởi động network stack, khởi tạo DNS cache, connection pool, quản lý cookie' },
+      { icon: '⚡', label: 'JS engine', desc: 'Khởi tạo V8/SpiderMonkey, biên dịch mã JavaScript tích hợp sẵn' }
     ],
-    analogy: '就像一家餐厅开业前——厨房（渲染）、前台（UI）、外卖（网络）、收银（JS）各部门同时准备就绪。'
+    analogy: 'Giống như một nhà hàng trước giờ khai trương — bếp (render), tiếp tân (UI), giao hàng (mạng), thu ngân (JS) cùng lúc sẵn sàng.'
   },
   {
     icon: '🖼️',
-    name: '显示浏览器窗口',
-    brief: '所有模块就绪，浏览器界面呈现在屏幕上',
-    detail: '浏览器向操作系统请求创建窗口，GPU 进程完成界面的合成与光栅化，最终将像素数据提交给显卡，浏览器窗口出现在屏幕上。',
+    name: 'Hiển thị cửa sổ trình duyệt',
+    brief: 'Tất cả module sẵn sàng, giao diện trình duyệt xuất hiện trên màn hình',
+    detail: 'Trình duyệt yêu cầu OS tạo cửa sổ, tiến trình GPU hợp thành và rasterize giao diện, cuối cùng đẩy pixel xuống card đồ họa và cửa sổ trình duyệt hiện ra trên màn hình.',
     items: [
-      { icon: '🪟', label: '创建窗口', desc: '调用系统 API 创建原生窗口，设置大小和位置' },
-      { icon: '🎨', label: 'UI 绘制', desc: '渲染地址栏、标签页、工具栏等浏览器 Chrome 界面' },
-      { icon: '🖥️', label: 'GPU 合成', desc: '将各图层合成为最终画面，提交给显卡输出' },
-      { icon: '✨', label: '加载首页', desc: '打开新标签页或恢复上次会话，浏览器进入可用状态' }
+      { icon: '🪟', label: 'Tạo cửa sổ', desc: 'Gọi API hệ thống để tạo cửa sổ native, đặt kích thước và vị trí' },
+      { icon: '🎨', label: 'Vẽ UI', desc: 'Render thanh địa chỉ, tab, toolbar và các phần Chrome khác của trình duyệt' },
+      { icon: '🖥️', label: 'GPU hợp thành', desc: 'Hợp thành các layer thành ảnh cuối, gửi xuống card đồ họa xuất ra' },
+      { icon: '✨', label: 'Tải trang chủ', desc: 'Mở tab mới hoặc khôi phục phiên trước, trình duyệt sẵn sàng sử dụng' }
     ],
-    analogy: '幕布拉开，灯光亮起——舞台（窗口）搭好了，演员（界面元素）就位，等待观众（你）的第一次操作。'
+    analogy: 'Rèm sân khấu kéo lên, đèn bật sáng — sân khấu (cửa sổ) đã dựng xong, diễn viên (thành phần UI) đã vào vị trí, chờ khán giả (bạn) tương tác lần đầu.'
   }
 ]
 </script>

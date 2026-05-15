@@ -1,12 +1,12 @@
 <!--
-  ApiDocumentDemo.vue - 紧凑版
-  目标：演示如何阅读 API 文档
+  ApiDocumentDemo.vue - bản gọn
+  Mục tiêu: minh họa cách đọc tài liệu API
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">📖</span>
-      <span class="title">API 文档翻译机</span>
+      <span class="title">Máy "dịch" tài liệu API</span>
     </div>
 
     <div class="demo-layout">
@@ -29,29 +29,29 @@ Content-Type: application/json</pre>
         </div>
 
         <div class="doc-section">
-          <div class="doc-title">Body 参数</div>
+          <div class="doc-title">Tham số Body</div>
           <div class="params-list">
             <div class="param-item">
               <span class="p-name">model</span>
-              <span class="p-req">必填</span>
-              <span class="p-desc">模型名称</span>
+              <span class="p-req">Bắt buộc</span>
+              <span class="p-desc">Tên model</span>
             </div>
             <div class="param-item">
               <span class="p-name">messages</span>
-              <span class="p-req">必填</span>
-              <span class="p-desc">对话消息</span>
+              <span class="p-req">Bắt buộc</span>
+              <span class="p-desc">Tin nhắn hội thoại</span>
             </div>
             <div class="param-item">
               <span class="p-name">temperature</span>
-              <span class="p-opt">可选</span>
-              <span class="p-desc">0-2，默认1</span>
+              <span class="p-opt">Tùy chọn</span>
+              <span class="p-desc">0-2, mặc định 1</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="right-panel">
-        <div class="result-title">翻译成代码</div>
+        <div class="result-title">Chuyển thành code</div>
         <pre class="result-code"><code>from openai import OpenAI
 
 client = OpenAI(
@@ -61,15 +61,15 @@ client = OpenAI(
 
 response = client.chat.completions.create(
     model="deepseek-chat",
-    messages=[{"role": "user", "content": "你好"}]
+    messages=[{"role": "user", "content": "Xin chào"}]
 )</code></pre>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>看文档找三样：地址（Base
-        URL）、鉴权（Authorization）、参数（Parameters）。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Khi đọc tài liệu hãy tìm ba thứ: địa chỉ (Base
+        URL), xác thực (Authorization) và tham số (Parameters).</span>
     </div>
   </div>
 </template>

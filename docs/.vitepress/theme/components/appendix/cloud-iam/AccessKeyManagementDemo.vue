@@ -2,8 +2,8 @@
   <div class="access-key-management-demo">
     <div class="demo-header">
       <span class="icon">🔑</span>
-      <span class="title">访问密钥管理</span>
-      <span class="subtitle">AK/SK 生命周期</span>
+      <span class="title">Access Key Management</span>
+      <span class="subtitle">Lifecycle của AK/SK</span>
     </div>
 
     <div class="main-area">
@@ -13,7 +13,7 @@
             class="status-badge"
             :class="akStatus"
           >{{ statusText }}</span>
-          <span class="age">已创建 {{ akAge }} 天</span>
+          <span class="age">Đã tạo {{ akAge }} ngày</span>
         </div>
         <div class="credentials">
           <div class="cred-row">
@@ -39,10 +39,10 @@
         </div>
         <div class="stats">
           <div class="stat">
-            <span class="v">{{ apiCalls }}</span><span class="l">API调用</span>
+            <span class="v">{{ apiCalls }}</span><span class="l">API call</span>
           </div>
           <div class="stat">
-            <span class="v">{{ lastUsed }}</span><span class="l">最后使用</span>
+            <span class="v">{{ lastUsed }}</span><span class="l">Lần dùng cuối</span>
           </div>
         </div>
       </div>
@@ -53,20 +53,20 @@
           :disabled="isRotating"
           @click="rotateKey"
         >
-          🔄 轮换
+          🔄 Xoay vòng
         </button>
         <button
           class="btn warning"
           :disabled="akStatus === 'inactive'"
           @click="deactivateKey"
         >
-          ⏸️ 禁用
+          ⏸️ Vô hiệu hóa
         </button>
         <button
           class="btn danger"
           @click="deleteKey"
         >
-          🗑️ 删除
+          🗑️ Xóa
         </button>
       </div>
     </div>
@@ -86,7 +86,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>访问密钥泄露是云安全事件主因之一。建议优先使用 IAM 角色，必须使用时请定期轮换。
+      <strong>Ý tưởng cốt lõi:</strong> Rò rỉ access key là một trong các nguyên nhân chính của sự cố bảo mật cloud. Nên ưu tiên dùng IAM role, nếu bắt buộc dùng access key thì phải xoay vòng định kỳ.
     </div>
   </div>
 </template>
@@ -99,7 +99,7 @@ const skId = ref('wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY')
 const akStatus = ref('active')
 const akAge = ref(45)
 const apiCalls = ref(123456)
-const lastUsed = ref('2小时前')
+const lastUsed = ref('2 giờ trước')
 const showAK = ref(false)
 const showSK = ref(false)
 const isRotating = ref(false)
@@ -108,19 +108,19 @@ const rotationStatus = ref('')
 
 const maskedAK = computed(() => showAK.value ? akId.value : akId.value.substring(0, 8) + '...')
 const maskedSK = computed(() => showSK.value ? skId.value : '************************************')
-const statusText = computed(() => ({ active: '活跃', inactive: '已禁用' }[akStatus.value] || akStatus.value))
+const statusText = computed(() => ({ active: 'Active', inactive: 'Đã vô hiệu hóa' }[akStatus.value] || akStatus.value))
 
 async function rotateKey() {
   isRotating.value = true
   rotationProgress.value = 0
-  rotationStatus.value = '生成新密钥...'
-  await simulateProgress(30, '创建新 Key...')
-  await simulateProgress(60, '更新配置...')
-  await simulateProgress(100, '验证完成')
+  rotationStatus.value = 'Đang sinh key mới...'
+  await simulateProgress(30, 'Đang tạo Key mới...')
+  await simulateProgress(60, 'Đang update config...')
+  await simulateProgress(100, 'Xác thực hoàn tất')
   akId.value = 'AKIA' + Math.random().toString(36).substring(2, 14).toUpperCase()
   akAge.value = 0
   apiCalls.value = 0
-  lastUsed.value = '刚刚'
+  lastUsed.value = 'Vừa xong'
   isRotating.value = false
 }
 
@@ -135,11 +135,11 @@ function simulateProgress(target, status) {
 }
 
 function deactivateKey() {
-  if (confirm('确定要禁用这个访问密钥吗？')) akStatus.value = 'inactive'
+  if (confirm('Bạn có chắc muốn vô hiệu hóa access key này không?')) akStatus.value = 'inactive'
 }
 
 function deleteKey() {
-  if (confirm('警告：删除是不可逆的操作！')) alert('密钥已删除（演示）')
+  if (confirm('Cảnh báo: Xóa là thao tác không thể hoàn tác!')) alert('Đã xóa key (demo)')
 }
 </script>
 

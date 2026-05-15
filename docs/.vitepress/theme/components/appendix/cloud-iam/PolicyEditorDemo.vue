@@ -2,14 +2,14 @@
   <div class="policy-editor-demo">
     <div class="demo-header">
       <span class="icon">📋</span>
-      <span class="title">策略编辑器</span>
-      <span class="subtitle">理解 IAM 策略的 JSON 结构</span>
+      <span class="title">Policy Editor</span>
+      <span class="subtitle">Hiểu cấu trúc JSON của IAM policy</span>
     </div>
 
     <div class="editor-layout">
       <div class="editor-panel">
         <div class="panel-title">
-          策略编辑器
+          Policy Editor
         </div>
         <div class="action-list">
           <div 
@@ -32,7 +32,7 @@
       
       <div class="preview-panel">
         <div class="panel-title">
-          生成的策略
+          Policy được sinh ra
         </div>
         <pre><code>{{ generatedPolicy }}</code></pre>
       </div>
@@ -40,7 +40,7 @@
     
     <div class="effect-preview">
       <div class="effect-title">
-        权限效果预览
+        Xem trước quyền hiệu lực
       </div>
       <div class="effect-list">
         <div 
@@ -57,7 +57,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>策略由 Effect、Action、Resource、Condition 四个核心元素组成，理解这四个元素的作用是编写 IAM 策略的基础。
+      <strong>Ý tưởng cốt lõi:</strong> Policy gồm 4 element cốt lõi: Effect, Action, Resource, Condition. Hiểu vai trò của 4 element này là nền tảng để viết IAM policy.
     </div>
   </div>
 </template>
@@ -68,12 +68,12 @@ import { ref, computed } from 'vue'
 const selectedActions = ref(['describe', 'start'])
 
 const actions = [
-  { id: 'describe', name: '查看实例', desc: 'DescribeInstances', resource: 'ecs:Describe*' },
-  { id: 'start', name: '启动实例', desc: 'StartInstance', resource: 'ecs:StartInstance' },
-  { id: 'stop', name: '停止实例', desc: 'StopInstance', resource: 'ecs:StopInstance' },
-  { id: 'reboot', name: '重启实例', desc: 'RebootInstance', resource: 'ecs:RebootInstance' },
-  { id: 'create', name: '创建实例', desc: 'CreateInstance', resource: 'ecs:CreateInstance' },
-  { id: 'delete', name: '删除实例', desc: 'DeleteInstance', resource: 'ecs:DeleteInstance' }
+  { id: 'describe', name: 'Xem instance', desc: 'DescribeInstances', resource: 'ecs:Describe*' },
+  { id: 'start', name: 'Khởi động instance', desc: 'StartInstance', resource: 'ecs:StartInstance' },
+  { id: 'stop', name: 'Dừng instance', desc: 'StopInstance', resource: 'ecs:StopInstance' },
+  { id: 'reboot', name: 'Khởi động lại instance', desc: 'RebootInstance', resource: 'ecs:RebootInstance' },
+  { id: 'create', name: 'Tạo instance', desc: 'CreateInstance', resource: 'ecs:CreateInstance' },
+  { id: 'delete', name: 'Xóa instance', desc: 'DeleteInstance', resource: 'ecs:DeleteInstance' }
 ]
 
 const generatedPolicy = computed(() => {

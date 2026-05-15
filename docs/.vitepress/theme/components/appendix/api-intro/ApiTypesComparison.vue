@@ -14,25 +14,25 @@
     <div class="display-area">
       <div class="info-grid">
         <div class="info-item">
-          <span class="label">调用对象</span>
+          <span class="label">Đối tượng gọi</span>
           <span class="value">{{ currentType.target }}</span>
         </div>
         <div class="info-item">
-          <span class="label">通信方式</span>
+          <span class="label">Cách giao tiếp</span>
           <span class="value">{{ currentType.comm }}</span>
         </div>
         <div class="info-item">
-          <span class="label">延迟</span>
+          <span class="label">Độ trễ</span>
           <span class="value">{{ currentType.latency }}</span>
         </div>
         <div class="info-item">
-          <span class="label">典型场景</span>
+          <span class="label">Tình huống điển hình</span>
           <span class="value">{{ currentType.scenarios }}</span>
         </div>
       </div>
 
       <div class="code-preview">
-        <div class="code-header">{{ currentType.name }} 示例</div>
+        <div class="code-header">Ví dụ {{ currentType.name }}</div>
         <pre><code>{{ currentType.example }}</code></pre>
       </div>
     </div>
@@ -48,23 +48,23 @@ const types = [
   {
     id: 'function',
     icon: '📦',
-    name: '函数 API',
-    target: '本地代码库',
-    comm: '函数调用',
-    latency: '纳秒级',
-    scenarios: '数据处理、文件操作',
-    example: `len("hello")           # 返回 5
-max([1, 5, 3])         # 返回 5
-open("file.txt").read() # 读取文件`
+    name: 'Function API',
+    target: 'Thư viện code cục bộ',
+    comm: 'Gọi hàm',
+    latency: 'Cấp nano giây',
+    scenarios: 'Xử lý dữ liệu, thao tác file',
+    example: `len("hello")           # trả về 5
+max([1, 5, 3])         # trả về 5
+open("file.txt").read() # đọc file`
   },
   {
     id: 'system',
     icon: '⚙️',
-    name: '操作系统 API',
-    target: '操作系统内核',
-    comm: '系统调用',
-    latency: '微秒级',
-    scenarios: '文件操作、进程管理',
+    name: 'API hệ điều hành',
+    target: 'Kernel hệ điều hành',
+    comm: 'System call',
+    latency: 'Cấp micro giây',
+    scenarios: 'Thao tác file, quản lý tiến trình',
     example: `with open("file.txt", "r") as f:
     content = f.read()
 
@@ -74,10 +74,10 @@ subprocess.run(["ls", "-l"])`
     id: 'web',
     icon: '🌐',
     name: 'Web API',
-    target: '远程服务器',
-    comm: 'HTTP 请求',
-    latency: '毫秒级',
-    scenarios: 'AI 调用、数据获取',
+    target: 'Server từ xa',
+    comm: 'HTTP request',
+    latency: 'Cấp mili giây',
+    scenarios: 'Gọi AI, lấy dữ liệu',
     example: `requests.post(
     "https://api.deepseek.com/v1/chat/completions",
     json={"model": "deepseek-chat", "messages": [...]}

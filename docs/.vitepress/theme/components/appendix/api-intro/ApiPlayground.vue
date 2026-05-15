@@ -1,13 +1,13 @@
 <!--
-  ApiPlayground.vue - 紧凑版
-  目标：让用户动手尝试 API 调用
+  ApiPlayground.vue - bản gọn
+  Mục tiêu: cho bạn tự tay thử gọi API
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">🧪</span>
-      <span class="title">API 练手场</span>
-      <span class="subtitle">随便玩，坏了算我的</span>
+      <span class="title">Sân chơi API</span>
+      <span class="subtitle">Cứ thử thoải mái, hỏng cũng không sao</span>
     </div>
 
     <div class="demo-layout">
@@ -22,7 +22,7 @@
           />
         </div>
         <div class="input-row">
-          <label>方法</label>
+          <label>Method</label>
           <div class="method-btns">
             <button
               v-for="m in methods"
@@ -44,12 +44,12 @@
           />
         </div>
         <button class="send-btn" :disabled="loading" @click="sendRequest">
-          {{ loading ? '发送中...' : '🚀 发送' }}
+          {{ loading ? 'Đang gửi...' : '🚀 Gửi' }}
         </button>
       </div>
 
       <div class="right-panel">
-        <div v-if="!response" class="empty">点击发送查看结果</div>
+        <div v-if="!response" class="empty">Nhấn gửi để xem kết quả</div>
         <div v-else class="response">
           <div class="status-bar" :class="getStatusClass(response.status)">
             <span class="code">{{ response.status }}</span>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="quick-actions">
-      <span class="label">快速尝试：</span>
+      <span class="label">Thử nhanh:</span>
       <button @click="tryEndpoint('/users')">✅ GET /users</button>
       <button @click="tryError401">❌ 401</button>
       <button @click="tryError404">❌ 404</button>
@@ -101,8 +101,8 @@ function sendRequest() {
       response.value = {
         status: 401,
         statusText: 'Unauthorized',
-        data: { error: '缺少 API Key' },
-        explanation: '服务器不认识你，需要提供有效的身份证明'
+        data: { error: 'Thiếu API Key' },
+        explanation: 'Server không nhận ra bạn, cần cung cấp thông tin xác thực hợp lệ'
       }
     } else if (endpoint.value === '/users') {
       response.value = {
@@ -110,19 +110,19 @@ function sendRequest() {
         statusText: 'OK',
         data: {
           users: [
-            { id: 1, name: '张三' },
-            { id: 2, name: '李四' }
+            { id: 1, name: 'Nguyễn Văn A' },
+            { id: 2, name: 'Trần Thị B' }
           ],
           total: 2
         },
-        explanation: '成功！服务器返回了用户列表'
+        explanation: 'Thành công! Server đã trả về danh sách người dùng'
       }
     } else {
       response.value = {
         status: 404,
         statusText: 'Not Found',
-        data: { error: '接口不存在' },
-        explanation: '这个地址没有对应的 API，检查一下路径'
+        data: { error: 'Endpoint không tồn tại' },
+        explanation: 'Địa chỉ này không có API tương ứng, hãy kiểm tra lại đường dẫn'
       }
     }
     loading.value = false
@@ -152,8 +152,8 @@ function tryError429() {
     response.value = {
       status: 429,
       statusText: 'Too Many Requests',
-      data: { error: '请求太频繁' },
-      explanation: '你请求太快了，服务器让你歇会儿'
+      data: { error: 'Gửi request quá nhiều' },
+      explanation: 'Bạn gửi quá nhanh, server đang yêu cầu bạn nghỉ một chút'
     }
     loading.value = false
   }, 300)

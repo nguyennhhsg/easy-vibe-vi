@@ -1,17 +1,17 @@
 <!--
   RNNvsTransformer.vue
-  RNN vs Transformer 架构对比演示
-  
-  用途：
-  对比两种处理序列数据的核心架构：
-  - RNN: 串行处理，记忆随距离衰减。
-  - Transformer: 并行处理，Self-Attention 机制捕捉长距离依赖。
-  
-  交互功能：
-  - 架构切换：RNN / Transformer (Self-Attention)。
-  - 动态演示：
-    - RNN: 逐步输入单词，观察 Hidden State 的变化。
-    - Transformer: 鼠标悬停在单词上，显示其关注（Attend to）的其他单词（Attention Map）。
+  So sánh kiến trúc RNN vs Transformer
+
+  Mục đích:
+  So sánh hai kiến trúc xử lý dữ liệu chuỗi cốt lõi:
+  - RNN: xử lý tuần tự, ký ức suy giảm theo khoảng cách.
+  - Transformer: xử lý song song, cơ chế self-attention bắt được phụ thuộc xa.
+
+  Tính năng tương tác:
+  - Đổi kiến trúc: RNN / Transformer (Self-Attention).
+  - Demo động:
+    - RNN: nhập từng từ, quan sát Hidden State thay đổi.
+    - Transformer: di chuột vào một từ để xem các từ khác mà nó "attend" tới (Attention Map).
 -->
 <template>
   <div class="arch-demo">
@@ -78,8 +78,7 @@
           </div>
         </div>
         <p class="desc-text">
-          RNN 从左到右逐个读取。注意看
-          Memory（记忆），随着句子变长，最早的信息（"The"）可能会被后面的信息冲淡，这就是“长距离依赖”问题。
+          RNN đọc tuần tự từ trái sang phải. Hãy chú ý Memory (bộ nhớ): câu càng dài, thông tin xuất hiện sớm (như "The") càng dễ bị các thông tin sau làm phai nhạt — đây chính là vấn đề "phụ thuộc xa".
         </p>
       </div>
 
@@ -133,14 +132,14 @@
           v-else
           class="attention-info"
         >
-          <p>👆 鼠标悬停在任意单词上，查看它在“关注”谁。</p>
+          <p>👆 Di chuột vào một từ bất kỳ để xem nó đang "attend" tới những từ nào.</p>
         </div>
 
         <p class="desc-text">
-          Transformer 一眼看完整个句子（并行）。Self-Attention
-          机制让每个词都能直接“看见”其他词，无论距离多远。
-          <br>例如：悬停在 <strong>"it"</strong> 上，你会发现它强烈关注
-          <strong>"animal"</strong>，因为它指代的就是 animal。
+          Transformer "nhìn" cả câu cùng lúc (song song). Cơ chế self-attention
+          cho phép mỗi từ trực tiếp "thấy" mọi từ khác bất kể khoảng cách.
+          <br>Ví dụ: di chuột vào <strong>"it"</strong>, bạn sẽ thấy nó chú ý mạnh tới
+          <strong>"animal"</strong>, vì "it" thực ra đang chỉ tới animal.
         </p>
       </div>
     </div>

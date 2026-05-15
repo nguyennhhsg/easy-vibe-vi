@@ -4,10 +4,10 @@
       <span class="part protocol">https://</span><span class="part host">www.google.com</span><span class="part path">/search</span><span class="part query">?q=hello</span>
     </div>
     <div class="labels">
-      <span class="label protocol">协议</span>
-      <span class="label host">域名</span>
-      <span class="label path">路径</span>
-      <span class="label query">参数</span>
+      <span class="label protocol">Protocol</span>
+      <span class="label host">Domain</span>
+      <span class="label path">Path</span>
+      <span class="label query">Query</span>
     </div>
   </div>
 </template>

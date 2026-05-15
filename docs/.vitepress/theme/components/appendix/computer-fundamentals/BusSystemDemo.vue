@@ -1,39 +1,39 @@
 <template>
   <div class="bus-demo">
     <div class="demo-header">
-      <span class="title">计算机总线系统</span>
-      <span class="subtitle">地址总线、数据总线、控制总线</span>
+      <span class="title">Hệ thống bus của máy tính</span>
+      <span class="subtitle">Bus địa chỉ, bus dữ liệu, bus điều khiển</span>
     </div>
 
     <div class="bus-architecture">
       <div class="cpu-box">
         <div class="component-label">CPU</div>
         <div class="cpu-internal">
-          <div class="cu">控制单元</div>
-          <div class="alu">运算单元</div>
+          <div class="cu">Khối điều khiển</div>
+          <div class="alu">Khối tính toán</div>
         </div>
       </div>
 
       <div class="bus-section">
         <div class="bus-line address-bus" :class="{ active: activeBus === 'address' }">
-          <span class="bus-name">地址总线</span>
-          <span class="bus-width">32位</span>
+          <span class="bus-name">Bus địa chỉ</span>
+          <span class="bus-width">32 bit</span>
           <div class="bus-data" v-if="activeBus === 'address'">{{ addressValue }}</div>
         </div>
         <div class="bus-line data-bus" :class="{ active: activeBus === 'data' }">
-          <span class="bus-name">数据总线</span>
-          <span class="bus-width">64位</span>
+          <span class="bus-name">Bus dữ liệu</span>
+          <span class="bus-width">64 bit</span>
           <div class="bus-data" v-if="activeBus === 'data'">{{ dataValue }}</div>
         </div>
         <div class="bus-line ctrl-bus" :class="{ active: activeBus === 'control' }">
-          <span class="bus-name">控制总线</span>
-          <span class="bus-width">控制信号</span>
+          <span class="bus-name">Bus điều khiển</span>
+          <span class="bus-width">Tín hiệu điều khiển</span>
           <div class="bus-data" v-if="activeBus === 'control'">{{ ctrlSignal }}</div>
         </div>
       </div>
 
       <div class="memory-box">
-        <div class="component-label">主存</div>
+        <div class="component-label">Bộ nhớ chính</div>
         <div class="mem-cells">
           <div v-for="i in 8" :key="i" class="mem-cell" :class="{ active: activeMem === i-1 }">
             {{ fmtAddr(i-1) }}
@@ -44,17 +44,17 @@
 
     <div class="control-panel">
       <div class="operation-group">
-        <button class="btn" @click="simulateRead">读取内存</button>
-        <button class="btn" @click="simulateWrite">写入内存</button>
+        <button class="btn" @click="simulateRead">Đọc bộ nhớ</button>
+        <button class="btn" @click="simulateWrite">Ghi bộ nhớ</button>
       </div>
       <div class="input-group">
-        <input v-model.number="addressInput" type="number" placeholder="地址(0-7)" min="0" max="7" class="addr-input" />
-        <input v-model.number="dataInput" type="number" placeholder="数据" class="data-input" />
+        <input v-model.number="addressInput" type="number" placeholder="Địa chỉ (0-7)" min="0" max="7" class="addr-input" />
+        <input v-model.number="dataInput" type="number" placeholder="Dữ liệu" class="data-input" />
       </div>
     </div>
 
     <div class="operation-log">
-      <div class="log-title">操作流程</div>
+      <div class="log-title">Trình tự thao tác</div>
       <div class="log-steps">
         <div v-for="(step, i) in logSteps" :key="i" :class="['log-step', step.active ? 'active' : '']">
           <span class="step-num">{{ i + 1 }}</span>
@@ -64,19 +64,19 @@
     </div>
 
     <div class="bus-explanation">
-      <div class="exp-title">总线知识点</div>
+      <div class="exp-title">Kiến thức về bus</div>
       <div class="exp-grid">
         <div class="exp-item">
-          <div class="exp-label">地址总线</div>
-          <div class="exp-desc">CPU 发送内存地址，单向传输</div>
+          <div class="exp-label">Bus địa chỉ</div>
+          <div class="exp-desc">CPU gửi địa chỉ bộ nhớ, truyền một chiều</div>
         </div>
         <div class="exp-item">
-          <div class="exp-label">数据总线</div>
-          <div class="exp-desc">传输实际数据，双向传输</div>
+          <div class="exp-label">Bus dữ liệu</div>
+          <div class="exp-desc">Truyền dữ liệu thực tế, hai chiều</div>
         </div>
         <div class="exp-item">
-          <div class="exp-label">控制总线</div>
-          <div class="exp-desc">传输读/写等控制信号</div>
+          <div class="exp-label">Bus điều khiển</div>
+          <div class="exp-desc">Truyền tín hiệu đọc/ghi và các tín hiệu điều khiển khác</div>
         </div>
       </div>
     </div>
@@ -102,21 +102,21 @@ const simulateRead = async () => {
   addressValue.value = addressInput.value.toString(2).padStart(32, '0').slice(-8)
   
   activeBus.value = 'address'
-  logSteps.value.push({ text: `CPU 通过地址总线发送地址 ${addressInput.value}`, active: true })
+  logSteps.value.push({ text: `CPU gửi địa chỉ ${addressInput.value} qua bus địa chỉ`, active: true })
   await wait(1000)
-  
+
   activeBus.value = 'control'
   ctrlSignal.value = 'READ'
-  logSteps.value.push({ text: '控制总线发送 READ 信号', active: true })
+  logSteps.value.push({ text: 'Bus điều khiển gửi tín hiệu READ', active: true })
   await wait(1000)
-  
+
   activeBus.value = 'data'
   activeMem.value = addressInput.value
   dataValue.value = Math.floor(Math.random() * 256)
-  logSteps.value.push({ text: `主存通过数据总线返回数据 ${dataValue.value}`, active: true })
+  logSteps.value.push({ text: `Bộ nhớ chính trả dữ liệu ${dataValue.value} qua bus dữ liệu`, active: true })
   await wait(1000)
-  
-  logSteps.value.push({ text: 'CPU 接收数据到寄存器', active: true })
+
+  logSteps.value.push({ text: 'CPU nhận dữ liệu vào thanh ghi', active: true })
 }
 
 const simulateWrite = async () => {
@@ -125,20 +125,20 @@ const simulateWrite = async () => {
   dataValue.value = dataInput.value.toString(2).padStart(64, '0').slice(-8)
   
   activeBus.value = 'address'
-  logSteps.value.push({ text: `CPU 通过地址总线发送地址 ${addressInput.value}`, active: true })
+  logSteps.value.push({ text: `CPU gửi địa chỉ ${addressInput.value} qua bus địa chỉ`, active: true })
   await wait(1000)
-  
+
   activeBus.value = 'data'
-  logSteps.value.push({ text: `CPU 通过数据总线发送数据 ${dataInput.value}`, active: true })
+  logSteps.value.push({ text: `CPU gửi dữ liệu ${dataInput.value} qua bus dữ liệu`, active: true })
   await wait(1000)
-  
+
   activeBus.value = 'control'
   ctrlSignal.value = 'WRITE'
-  logSteps.value.push({ text: '控制总线发送 WRITE 信号', active: true })
+  logSteps.value.push({ text: 'Bus điều khiển gửi tín hiệu WRITE', active: true })
   await wait(1000)
-  
+
   activeMem.value = addressInput.value
-  logSteps.value.push({ text: `数据写入主存地址 ${addressInput.value}`, active: true })
+  logSteps.value.push({ text: `Ghi dữ liệu vào địa chỉ ${addressInput.value} của bộ nhớ chính`, active: true })
 }
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))

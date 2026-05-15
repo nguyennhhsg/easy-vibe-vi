@@ -96,7 +96,7 @@ const runShortcut = (cmd) => {
   >
     <template #header>
       <div class="header">
-        <span class="title">Console (控制台)</span>
+        <span class="title">Console</span>
         <el-button
           size="small"
           icon="Delete"
@@ -140,7 +140,7 @@ const runShortcut = (cmd) => {
     <div class="input-area">
       <el-input
         v-model="inputCommand"
-        placeholder="输入 JS 代码，按回车执行..."
+        placeholder="Nhập code JS, nhấn Enter để chạy..."
         @keyup.enter="executeCommand"
       >
         <template #prepend>
@@ -150,7 +150,7 @@ const runShortcut = (cmd) => {
     </div>
     
     <div class="shortcuts">
-      <span class="label">快速尝试：</span>
+      <span class="label">Thử nhanh:</span>
       <el-button-group>
         <el-button 
           v-for="s in shortcuts" 

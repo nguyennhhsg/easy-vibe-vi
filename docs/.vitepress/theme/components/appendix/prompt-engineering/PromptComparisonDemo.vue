@@ -1,6 +1,6 @@
 <!--
   PromptComparisonDemo.vue
-  “清晰 vs 模糊”对比：把一个提示词拆成四块（任务/上下文/要求/输出），并展示哪些块缺失会导致输出跑偏。
+  So sánh "rõ ràng vs mơ hồ": tách một prompt thành bốn phần (task / context / yêu cầu / format output), và cho thấy thiếu phần nào sẽ khiến output lệch hướng.
 -->
 <template>
   <el-card
@@ -11,24 +11,24 @@
       <div class="card-header">
         <div>
           <h3 class="title">
-            清晰 vs 模糊：差的不是“废话”，而是“缺项”
+            Rõ ràng vs mơ hồ: vấn đề không phải "rườm rà" mà là "thiếu chi tiết"
           </h3>
           <p class="subtitle">
-            勾选你想补充的信息，看看输出会怎么变。
+            Tích vào những thông tin bạn muốn bổ sung và xem output thay đổi ra sao.
           </p>
         </div>
         <div class="task-select">
           <el-select
             v-model="task"
-            placeholder="选择任务"
+            placeholder="Chọn tác vụ"
             style="width: 200px"
           >
             <el-option
-              label="写一段技术博客开头"
+              label="Viết mở đầu blog kỹ thuật"
               value="blog"
             />
             <el-option
-              label="把内容输出成 JSON"
+              label="Xuất nội dung dạng JSON"
               value="json"
             />
           </el-select>
@@ -39,22 +39,22 @@
     <div class="options-container">
       <el-checkbox
         v-model="useRole"
-        label="角色（你是谁）"
+        label="Vai trò (bạn là ai)"
         border
       />
       <el-checkbox
         v-model="useAudience"
-        label="受众（写给谁）"
+        label="Đối tượng (viết cho ai)"
         border
       />
       <el-checkbox
         v-model="useConstraints"
-        label="约束（长度/要点数）"
+        label="Ràng buộc (độ dài / số ý chính)"
         border
       />
       <el-checkbox
         v-model="useFormat"
-        label="输出格式（JSON/列表）"
+        label="Định dạng output (JSON / danh sách)"
         border
       />
     </div>
@@ -66,7 +66,7 @@
       >
         <template #header>
           <div class="panel-header">
-            你给 AI 的提示词
+            Prompt bạn gửi cho AI
           </div>
         </template>
         <div class="code-block">
@@ -97,7 +97,7 @@
       >
         <template #header>
           <div class="panel-header">
-            AI 输出（示意）
+            Output AI (minh hoạ)
           </div>
         </template>
         <div class="output-content">
@@ -120,7 +120,7 @@
         </div>
         <el-empty
           v-else
-          description="完美！没有明显问题。"
+          description="Tuyệt! Không có vấn đề rõ ràng nào."
           :image-size="60"
         />
       </el-card>
@@ -140,69 +140,69 @@ const useFormat = ref(false)
 const prompt = computed(() => {
   if (task.value === 'blog') {
     const lines = []
-    if (useRole.value) lines.push('你是资深前端工程师。')
-    lines.push('请写一段技术博客的开头，主题：提示词工程。')
-    if (useAudience.value) lines.push('目标读者：零基础新手。')
+    if (useRole.value) lines.push('Bạn là kỹ sư frontend kỳ cựu.')
+    lines.push('Hãy viết một đoạn mở đầu blog kỹ thuật, chủ đề: prompt engineering.')
+    if (useAudience.value) lines.push('Đối tượng đọc: người mới bắt đầu, chưa có nền tảng.')
     if (useConstraints.value)
-      lines.push('要求：80-120 字，口语化，带一个生活类比。')
-    if (useFormat.value) lines.push('输出：只输出一段文字，不要标题。')
+      lines.push('Yêu cầu: 80-120 chữ, văn phong khẩu ngữ, kèm một phép so sánh đời thường.')
+    if (useFormat.value) lines.push('Output: chỉ xuất một đoạn văn, không tiêu đề.')
     return lines.join('\n')
   }
 
   // json task
   const lines = []
-  if (useRole.value) lines.push('你是信息抽取助手。')
-  lines.push('从下面这段文字中提取关键信息。')
-  if (useAudience.value) lines.push('用途：给产品经理快速阅读。')
-  if (useConstraints.value) lines.push('要求：提取 3-5 个关键词 + 1 句摘要。')
+  if (useRole.value) lines.push('Bạn là trợ lý trích xuất thông tin.')
+  lines.push('Hãy trích xuất thông tin then chốt từ đoạn văn bên dưới.')
+  if (useAudience.value) lines.push('Mục đích: cho product manager đọc nhanh.')
+  if (useConstraints.value) lines.push('Yêu cầu: lấy 3-5 từ khoá + 1 câu tóm tắt.')
   if (useFormat.value) {
-    lines.push('输出格式（JSON）：')
+    lines.push('Định dạng output (JSON):')
     lines.push('{')
     lines.push('  "summary": "...",')
     lines.push('  "keywords": ["..."]')
     lines.push('}')
   }
-  lines.push('输入：')
-  lines.push('“提示词工程能显著提升模型输出质量，但需要清晰任务、约束和格式。”')
+  lines.push('Input:')
+  lines.push('"Prompt engineering giúp cải thiện đáng kể chất lượng đầu ra của mô hình, nhưng cần tác vụ rõ ràng, ràng buộc và định dạng."')
   return lines.join('\n')
 })
 
 const checklist = computed(() => [
-  { text: '任务清晰（要做什么）', ok: true },
-  { text: '角色定义（你是谁）', ok: useRole.value },
-  { text: '上下文/受众（给谁看）', ok: useAudience.value },
-  { text: '具体约束（怎么做）', ok: useConstraints.value },
-  { text: '格式要求（输出长啥样）', ok: useFormat.value }
+  { text: 'Task rõ ràng (làm gì)', ok: true },
+  { text: 'Định nghĩa vai trò (bạn là ai)', ok: useRole.value },
+  { text: 'Context / đối tượng (viết cho ai)', ok: useAudience.value },
+  { text: 'Ràng buộc cụ thể (làm thế nào)', ok: useConstraints.value },
+  { text: 'Yêu cầu định dạng (output trông ra sao)', ok: useFormat.value }
 ])
 
 const output = computed(() => {
   if (task.value === 'blog') {
     if (!useConstraints.value && !useAudience.value) {
-      return '提示词工程（Prompt Engineering）是指通过优化输入给大语言模型的文本提示，来引导模型生成更准确、高质量输出的技术。它涉及到理解模型的工作原理、设计有效的指令结构以及不断迭代测试。'
+      return 'Prompt Engineering là kỹ thuật tối ưu phần văn bản đầu vào cho mô hình ngôn ngữ lớn để dẫn dắt mô hình sinh ra output chính xác và chất lượng hơn. Nó đòi hỏi bạn hiểu cách mô hình vận hành, thiết kế cấu trúc chỉ thị hiệu quả và liên tục lặp lại để kiểm thử.'
     }
     if (useAudience.value && !useConstraints.value) {
-      return '嘿，大家好！今天咱们来聊聊“提示词工程”。简单说，它就像是教你怎么跟超级聪明的机器人说话。只要你说得对，它就能帮你干大事！'
+      return 'Chào các bạn! Hôm nay chúng ta cùng nói về "prompt engineering". Đơn giản là, nó dạy bạn cách trò chuyện với một con robot siêu thông minh. Chỉ cần nói đúng, nó sẽ giúp bạn làm chuyện lớn!'
     }
-    return '嘿，朋友们！听说过“提示词工程”吗？其实它就像是在点外卖——你得告诉厨师（AI）你要微辣还是特辣（约束），是给小孩吃还是大人吃（受众）。说得越清楚，送来的饭（回答）才越合你胃口！今天咱们就来学学怎么“点菜”。'
+    return 'Chào các bạn! Đã nghe tới "prompt engineering" chưa? Nó giống như đặt món ăn vậy — bạn phải nói với đầu bếp (AI) mình muốn cay vừa hay cay khủng (ràng buộc), món cho trẻ con hay người lớn (đối tượng). Nói càng rõ thì món được mang ra (câu trả lời) càng đúng khẩu vị! Hôm nay cùng học cách "gọi món" nhé.'
   }
 
   // json
   if (!useFormat.value) {
-    return '这段文字主要讲了提示词工程的作用，以及它需要的三个要素：清晰任务、约束和格式。关键词包括提示词工程、模型输出质量等。'
+    return 'Đoạn này chủ yếu nói về vai trò của prompt engineering, cùng ba yếu tố cần có: task rõ ràng, ràng buộc và định dạng. Từ khoá bao gồm prompt engineering, chất lượng output...'
   }
   return `{
-  "summary": "提示词工程通过明确任务、约束及格式提升模型输出。",
-  "keywords": ["提示词工程", "输出质量", "清晰任务", "约束", "格式"]
+  "summary": "Prompt engineering nâng cao output của mô hình thông qua task, ràng buộc và định dạng rõ ràng.",
+  "keywords": ["prompt engineering", "chất lượng output", "task rõ ràng", "ràng buộc", "định dạng"]
 }`
 })
 
 const warnings = computed(() => {
   const w = []
-  if (!useRole.value) w.push('缺少角色设定，AI 语气可能不够专业或统一。')
+  if (!useRole.value) w.push('Thiếu vai trò: giọng văn của AI có thể thiếu chuyên nghiệp hoặc thiếu nhất quán.')
   if (!useAudience.value)
-    w.push('未指定受众，AI 可能不知道该用深奥术语还是大白话。')
-  if (!useConstraints.value) w.push('没给约束，AI 容易啰嗦或者写太短。')
-  if (!useFormat.value) w.push('没规定格式，后续程序很难自动解析结果。')
+    w.push('Không nêu đối tượng: AI có thể không biết nên dùng thuật ngữ chuyên sâu hay ngôn ngữ phổ thông.')
+  if (!useConstraints.value) w.push('Thiếu ràng buộc: AI dễ viết lan man hoặc quá ngắn.')
+  if (!useFormat.value) w.push('Chưa định dạng: chương trình phía sau khó parse kết quả tự động.')
   return w
 })
 </script>

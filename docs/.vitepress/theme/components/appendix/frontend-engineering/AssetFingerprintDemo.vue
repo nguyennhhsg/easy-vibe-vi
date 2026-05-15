@@ -1,22 +1,22 @@
 <!--
   AssetFingerprintDemo.vue
-  资源指纹(hash)演示
+  Demo asset fingerprint (hash)
 
-  用途：
-  展示前端构建中如何通过 hash 实现长期缓存策略。
+  Mục đích:
+  Cho thấy cách dùng hash trong build frontend để áp dụng chiến lược long-term cache.
 
-  交互功能：
-  - 构建对比：对比无 hash 和带 hash 的文件名
-  - 缓存演示：模拟浏览器缓存行为
-  - 版本对比：展示文件变更对缓存的影响
+  Tính năng tương tác:
+  - So sánh build: đối chiếu tên file có hash và không hash
+  - Demo cache: mô phỏng hành vi cache của trình duyệt
+  - So sánh phiên bản: cho thấy thay đổi file ảnh hưởng tới cache như thế nào
 -->
 <template>
   <div class="asset-fingerprint-demo">
     <div class="control-panel">
       <div class="title-section">
         <span class="icon">🔖</span>
-        <span class="title">资源指纹 (Hash)</span>
-        <span class="subtitle">长期缓存与版本控制</span>
+        <span class="title">Asset Fingerprint (Hash)</span>
+        <span class="subtitle">Long-term cache và version control</span>
       </div>
 
       <div class="controls">
@@ -24,7 +24,7 @@
           class="control-btn"
           @click="simulateBuild"
         >
-          🔄 重新构建
+          🔄 Build lại
         </button>
 
         <div class="toggle-group">
@@ -34,18 +34,18 @@
               type="checkbox"
               @change="updateFileNames"
             >
-            <span class="toggle-text">启用 Hash</span>
+            <span class="toggle-text">Bật Hash</span>
           </label>
         </div>
       </div>
     </div>
 
     <div class="main-content">
-      <!-- 文件列表 -->
+      <!-- Danh sách file -->
       <div class="files-panel">
         <div class="panel-header">
-          <span class="panel-title">📁 构建产物</span>
-          <span class="panel-stats">{{ files.length }} 个文件</span>
+          <span class="panel-title">📁 Build output</span>
+          <span class="panel-stats">{{ files.length }} file</span>
         </div>
 
         <div class="files-list">
@@ -78,7 +78,7 @@
                 <span
                   v-if="file.changed"
                   class="changed-badge"
-                >更新</span>
+                >cập nhật</span>
               </div>
               <div class="file-meta">
                 <span class="file-size">{{ formatSize(file.size) }}</span>
@@ -90,12 +90,12 @@
         </div>
       </div>
 
-      <!-- 浏览器缓存模拟 -->
+      <!-- Mô phỏng cache trình duyệt -->
       <div class="cache-panel">
         <div class="panel-header">
-          <span class="panel-title">🌐 浏览器缓存</span>
+          <span class="panel-title">🌐 Cache trình duyệt</span>
           <span class="cache-stats">
-            命中: {{ cacheHits }} | 未命中: {{ cacheMisses }}
+            Hit: {{ cacheHits }} | Miss: {{ cacheMisses }}
           </span>
         </div>
 
@@ -103,15 +103,15 @@
           <div class="cache-legend">
             <div class="legend-item">
               <span class="legend-color hit" />
-              <span>缓存命中 (Hash 匹配)</span>
+              <span>Cache hit (Hash khớp)</span>
             </div>
             <div class="legend-item">
               <span class="legend-color miss" />
-              <span>缓存未命中 (Hash 变化)</span>
+              <span>Cache miss (Hash đổi)</span>
             </div>
             <div class="legend-item">
               <span class="legend-color new" />
-              <span>新文件 (无缓存)</span>
+              <span>File mới (chưa có cache)</span>
             </div>
           </div>
 
@@ -140,14 +140,14 @@
         </div>
 
         <div class="cache-summary">
-          <h4>📊 缓存策略效果</h4>
+          <h4>📊 Hiệu quả chiến lược cache</h4>
           <div class="stats-grid">
             <div class="stat-item">
               <div class="stat-value">
                 {{ cacheHitRate }}%
               </div>
               <div class="stat-label">
-                缓存命中率
+                Tỉ lệ cache hit
               </div>
             </div>
             <div class="stat-item">
@@ -155,7 +155,7 @@
                 {{ bandwidthSaved }}
               </div>
               <div class="stat-label">
-                节省带宽
+                Bandwidth tiết kiệm
               </div>
             </div>
             <div class="stat-item">
@@ -163,7 +163,7 @@
                 {{ loadTime }}
               </div>
               <div class="stat-label">
-                平均加载时间
+                Thời gian tải trung bình
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@
       </div>
     </div>
 
-    <!-- 文件详情 -->
+    <!-- Chi tiết file -->
     <div
       v-if="selectedFile"
       class="file-details"
@@ -197,18 +197,18 @@
 
       <div class="detail-content">
         <div class="detail-section">
-          <h4>📋 文件信息</h4>
+          <h4>📋 Thông tin file</h4>
           <div class="info-grid">
             <div class="info-item">
-              <span class="info-label">大小:</span>
+              <span class="info-label">Kích thước:</span>
               <span class="info-value">{{ formatSize(selectedFile.size) }}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">类型:</span>
+              <span class="info-label">Loại:</span>
               <span class="info-value">{{ selectedFile.type.toUpperCase() }}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">修改时间:</span>
+              <span class="info-label">Thời gian sửa:</span>
               <span class="info-value">{{ formatTime(selectedFile.mtime) }}</span>
             </div>
             <div class="info-item">
@@ -222,7 +222,7 @@
           v-if="selectedFile.dependencies?.length"
           class="detail-section"
         >
-          <h4>🔗 依赖的模块 ({{ selectedFile.dependencies.length }})</h4>
+          <h4>🔗 Module phụ thuộc ({{ selectedFile.dependencies.length }})</h4>
           <div class="deps-tags">
             <span
               v-for="depId in selectedFile.dependencies"
@@ -237,17 +237,17 @@
         </div>
 
         <div class="detail-section">
-          <h4>💡 缓存策略</h4>
+          <h4>💡 Chiến lược cache</h4>
           <div class="cache-strategy">
             <p v-if="showHash">
-              ✅ <strong>启用 Hash</strong>：文件名包含内容哈希 ({{ selectedFile.hash }})。
-              文件内容变化时，URL 会改变，浏览器会重新请求。
-              适合配置 <code>Cache-Control: immutable</code> 长期缓存。
+              ✅ <strong>Bật Hash</strong>: tên file chứa content hash ({{ selectedFile.hash }}).
+              Khi nội dung file thay đổi, URL sẽ đổi, trình duyệt sẽ request lại.
+              Phù hợp với cấu hình <code>Cache-Control: immutable</code> để cache dài hạn.
             </p>
             <p v-else>
-              ⚠️ <strong>无 Hash</strong>：文件名固定为 <code>{{ selectedFile.baseName }}.{{ selectedFile.ext }}</code>。
-              更新文件后，需要手动刷新缓存或使用版本号查询参数。
-              容易遇到"缓存不更新"的问题。
+              ⚠️ <strong>Không Hash</strong>: tên file cố định là <code>{{ selectedFile.baseName }}.{{ selectedFile.ext }}</code>.
+              Sau khi cập nhật file, bạn phải refresh cache thủ công hoặc thêm query string version.
+              Dễ gặp vấn đề "cache không cập nhật".
             </p>
           </div>
         </div>
@@ -257,11 +257,11 @@
     <div class="info-box">
       <p>
         <span class="icon">💡</span>
-        <strong>资源指纹的作用：</strong>
-        通过给文件名添加内容哈希（如 main.a3f7b2c.js），可以实现
-        <strong>永久缓存</strong>策略。
-        只有文件内容变化时哈希才会改变，浏览器才会重新下载。
-        这样用户每次访问都能享受极速加载，同时又能及时获取最新代码。
+        <strong>Tác dụng của asset fingerprint:</strong>
+        Bằng cách thêm content hash vào tên file (ví dụ main.a3f7b2c.js), bạn có thể áp dụng chiến lược
+        <strong>cache vĩnh viễn</strong>.
+        Chỉ khi nội dung file thay đổi thì hash mới đổi và trình duyệt mới tải lại.
+        Nhờ vậy, người dùng được hưởng tốc độ tải cực nhanh mỗi lần truy cập, đồng thời vẫn nhận được code mới nhất kịp thời.
       </p>
     </div>
   </div>
@@ -276,7 +276,7 @@ const selectedFile = computed(() => selectedNode.value)
 const cacheHits = ref(42)
 const cacheMisses = ref(8)
 
-// 模拟文件数据
+// Dữ liệu file mô phỏng
 const generateFiles = () => {
   const files = [
     { id: 'main', name: 'main.a3f7b2c.js', baseName: 'main', ext: 'js', type: 'js', size: 125, hash: 'a3f7b2c', mtime: Date.now() - 86400000, dependencies: ['vendor', 'utils'] },
@@ -342,14 +342,14 @@ const formatTime = (timestamp) => {
 
 const simulateBuild = () => {
   files.value = generateFiles()
-  // 随机标记一些文件为已更改
+  // Đánh dấu ngẫu nhiên một số file là đã thay đổi
   files.value.forEach(f => {
     f.changed = Math.random() > 0.7
   })
 }
 
 const updateFileNames = () => {
-  // 更新文件名显示
+  // Cập nhật hiển thị tên file
 }
 
 const getNode = (id) => files.value.find(f => f.id === id)

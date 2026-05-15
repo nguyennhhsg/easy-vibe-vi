@@ -1,15 +1,15 @@
 <!--
   BundlerSizeDemo.vue
-  打包体积与构建时间演示
+  Demo kích thước bundle và thời gian build
 -->
 <template>
   <div class="bundler-demo">
     <div class="header">
       <div class="title">
-        工程化：打包体积与构建时间
+        Engineering: Kích thước bundle và thời gian build
       </div>
       <div class="subtitle">
-        勾选功能，观察体积变化
+        Tick các tính năng để xem kích thước thay đổi
       </div>
     </div>
 
@@ -32,7 +32,7 @@
         v-model="treeShaking"
         type="checkbox"
       >
-      开启 Tree Shaking (移除未使用代码)
+      Bật Tree Shaking (loại bỏ code không dùng đến)
     </label>
 
     <div class="stats">
@@ -67,10 +67,10 @@
 import { ref, computed } from 'vue'
 
 const features = ref([
-  { key: 'chart', label: '图表库', size: 180, enabled: true },
-  { key: 'editor', label: '富文本编辑器', size: 220, enabled: false },
-  { key: 'i18n', label: '国际化', size: 60, enabled: true },
-  { key: 'analytics', label: '埋点分析', size: 80, enabled: false }
+  { key: 'chart', label: 'Thư viện chart', size: 180, enabled: true },
+  { key: 'editor', label: 'Rich text editor', size: 220, enabled: false },
+  { key: 'i18n', label: 'Đa ngôn ngữ (i18n)', size: 60, enabled: true },
+  { key: 'analytics', label: 'Tracking/analytics', size: 80, enabled: false }
 ])
 
 const treeShaking = ref(true)

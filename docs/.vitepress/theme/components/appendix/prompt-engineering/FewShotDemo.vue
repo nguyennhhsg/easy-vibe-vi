@@ -1,11 +1,11 @@
 <!--
   FewShotDemo.vue
-  Few-shot 速懂：不给示例 vs 给示例，AI 的“风格”会不会稳定？
+  Hiểu nhanh Few-shot: không có ví dụ vs có ví dụ, "phong cách" của AI có ổn định không?
 
-  交互：
-  - 选择目标风格（随意/正式）
-  - 选择是否提供示例
-  - 看提示词和输出如何变化
+  Tương tác:
+  - Chọn phong cách mong muốn (đời thường / trang trọng)
+  - Bật/tắt việc cung cấp ví dụ
+  - Quan sát prompt và output thay đổi thế nào
 -->
 <template>
   <el-card
@@ -16,10 +16,10 @@
       <div class="card-header">
         <div>
           <h3 class="title">
-            示例的力量：让风格“跟你走”
+            Sức mạnh của ví dụ: để phong cách "đi theo bạn"
           </h3>
           <p class="subtitle">
-            你不是让 AI 更聪明，而是让它更像你要的样子。
+            Bạn không làm AI thông minh hơn, mà làm cho nó giống mẫu bạn muốn hơn.
           </p>
         </div>
         <div class="controls">
@@ -28,18 +28,18 @@
             style="width: 140px"
           >
             <el-option
-              label="随意口语"
+              label="Đời thường, khẩu ngữ"
               value="casual"
             />
             <el-option
-              label="正式书面"
+              label="Trang trọng, văn viết"
               value="formal"
             />
           </el-select>
           <el-switch
             v-model="withExamples"
-            active-text="提供示例"
-            inactive-text="无示例"
+            active-text="Có ví dụ"
+            inactive-text="Không ví dụ"
             inline-prompt
             style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
           />
@@ -54,7 +54,7 @@
       >
         <template #header>
           <div class="panel-header">
-            提示词 / Prompt
+            Prompt
           </div>
         </template>
         <div class="code-block">
@@ -68,7 +68,7 @@
       >
         <template #header>
           <div class="panel-header">
-            AI 输出（示意）
+            Output AI (minh hoạ)
           </div>
         </template>
         <div class="output-content">
@@ -89,7 +89,7 @@
       class="examples-section"
     >
       <el-divider content-position="left">
-        示例（AI 会“照着学”）
+        Ví dụ (AI sẽ "học theo")
       </el-divider>
       <el-row :gutter="12">
         <el-col
@@ -103,10 +103,10 @@
             :body-style="{ padding: '12px' }"
           >
             <div class="ex-in">
-              输入：{{ e.in }}
+              Input: {{ e.in }}
             </div>
             <div class="ex-out">
-              输出：{{ e.out }}
+              Output: {{ e.out }}
             </div>
           </el-card>
         </el-col>
@@ -124,23 +124,23 @@ const withExamples = ref(true)
 const examples = computed(() => {
   if (tone.value === 'casual') {
     return [
-      { in: '你好', out: 'Hi～' },
-      { in: '谢谢', out: '谢啦！' },
-      { in: '再见', out: '拜拜～' }
+      { in: 'Xin chào', out: 'Hi~' },
+      { in: 'Cảm ơn', out: 'Cảm ơn nhé!' },
+      { in: 'Tạm biệt', out: 'Bye bye~' }
     ]
   }
   return [
-    { in: '你好', out: '您好。' },
-    { in: '谢谢', out: '非常感谢。' },
-    { in: '再见', out: '再见，祝您一切顺利。' }
+    { in: 'Xin chào', out: 'Kính chào quý khách.' },
+    { in: 'Cảm ơn', out: 'Xin chân thành cảm ơn.' },
+    { in: 'Tạm biệt', out: 'Tạm biệt, chúc bạn mọi điều tốt lành.' }
   ]
 })
 
 const prompt = computed(() => {
-  const base = '将中文翻译成英文。'
-  const task = '输入：我很好'
+  const base = 'Dịch tiếng Việt sang tiếng Anh.'
+  const task = 'Input: Tôi khoẻ'
   if (!withExamples.value) return `${base}\n${task}`
-  const lines = [base, '示例：']
+  const lines = [base, 'Ví dụ:']
   for (const e of examples.value) {
     lines.push(`- ${e.in} -> ${e.out}`)
   }
@@ -156,8 +156,8 @@ const output = computed(() => {
 })
 
 const hint = computed(() => {
-  if (!withExamples.value) return '没有示例：AI 可能随便选一种语气。'
-  return '有示例：AI 更容易“保持同一种语气”。'
+  if (!withExamples.value) return 'Không có ví dụ: AI có thể chọn bừa một giọng văn.'
+  return 'Có ví dụ: AI dễ "giữ cùng một giọng văn" hơn.'
 })
 </script>
 

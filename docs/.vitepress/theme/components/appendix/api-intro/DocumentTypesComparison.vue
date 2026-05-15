@@ -1,8 +1,8 @@
 <template>
   <div class="doc-types-root">
     <div class="demo-header">
-      <span class="title">📋 不同文档类型怎么看</span>
-      <span class="subtitle">函数文档、REST API 文档、SDK 文档，各有侧重点</span>
+      <span class="title">📋 Đọc các loại tài liệu khác nhau như thế nào</span>
+      <span class="subtitle">Tài liệu hàm, REST API và SDK đều có trọng tâm riêng</span>
     </div>
 
     <div class="control-panel">
@@ -19,28 +19,28 @@
 
     <div class="visualization-area">
       <div class="doc-display">
-        <!-- 文档头部信息 -->
+        <!-- Thông tin tài liệu -->
         <div class="doc-info-bar">
           <div class="info-item">
-            <span class="info-label">文档类型</span>
+            <span class="info-label">Loại tài liệu</span>
             <span class="info-value">{{ currentDoc.name }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">适用场景</span>
+            <span class="info-label">Tình huống áp dụng</span>
             <span class="info-value">{{ currentDoc.scenario }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">阅读难度</span>
+            <span class="info-label">Độ khó đọc</span>
             <span class="info-value">
               <span class="difficulty-stars">{{ currentDoc.difficulty }}</span>
             </span>
           </div>
         </div>
 
-        <!-- 关键信息区 -->
+        <!-- Khu thông tin then chốt -->
         <div class="key-points">
           <div class="point-section">
-            <div class="point-title">🔍 看文档时重点关注</div>
+            <div class="point-title">🔍 Khi đọc cần chú ý</div>
             <div class="point-tags">
               <span v-for="(point, idx) in currentDoc.keyPoints" :key="idx" class="point-tag">
                 {{ point }}
@@ -49,22 +49,22 @@
           </div>
         </div>
 
-        <!-- 文档示例区 -->
+        <!-- Khu ví dụ tài liệu -->
         <div class="doc-example-area">
           <div class="example-header">
             <span class="example-icon">📝</span>
-            <span class="example-title">文档示例</span>
+            <span class="example-title">Ví dụ tài liệu</span>
           </div>
           <div class="example-content">
             <pre><code>{{ currentDoc.example }}</code></pre>
           </div>
         </div>
 
-        <!-- 阅读技巧 -->
+        <!-- Mẹo đọc -->
         <div class="reading-tips">
           <div class="tips-header">
             <span class="tips-icon">💡</span>
-            <span class="tips-title">阅读技巧</span>
+            <span class="tips-title">Mẹo đọc</span>
           </div>
           <ul class="tips-list">
             <li v-for="(tip, idx) in currentDoc.tips" :key="idx">{{ tip }}</li>
@@ -73,40 +73,40 @@
       </div>
     </div>
 
-    <!-- 对比总结 -->
+    <!-- Tổng kết so sánh -->
     <div class="comparison-summary">
       <div class="summary-header">
         <span class="summary-icon">📊</span>
-        <span class="summary-title">三种文档快速对比</span>
+        <span class="summary-title">So sánh nhanh ba loại tài liệu</span>
       </div>
       <div class="summary-table">
         <div class="summary-row header">
-          <div class="summary-cell">对比项</div>
-          <div class="summary-cell">函数文档</div>
-          <div class="summary-cell">REST API 文档</div>
-          <div class="summary-cell">SDK 文档</div>
+          <div class="summary-cell">Tiêu chí</div>
+          <div class="summary-cell">Tài liệu hàm</div>
+          <div class="summary-cell">Tài liệu REST API</div>
+          <div class="summary-cell">Tài liệu SDK</div>
         </div>
         <div class="summary-row">
-          <div class="summary-cell label">核心关注</div>
-          <div class="summary-cell">参数、返回值</div>
-          <div class="summary-cell">Endpoint、请求体</div>
-          <div class="summary-cell">初始化、方法链</div>
+          <div class="summary-cell label">Trọng tâm</div>
+          <div class="summary-cell">Tham số, giá trị trả về</div>
+          <div class="summary-cell">Endpoint, request body</div>
+          <div class="summary-cell">Khởi tạo, chain method</div>
         </div>
         <div class="summary-row">
-          <div class="summary-cell label">代码示例</div>
-          <div class="summary-cell">函数调用</div>
-          <div class="summary-cell">HTTP 请求</div>
-          <div class="summary-cell">对象方法</div>
+          <div class="summary-cell label">Ví dụ code</div>
+          <div class="summary-cell">Gọi hàm</div>
+          <div class="summary-cell">HTTP request</div>
+          <div class="summary-cell">Method object</div>
         </div>
         <div class="summary-row">
-          <div class="summary-cell label">错误处理</div>
-          <div class="summary-cell">异常/返回值</div>
-          <div class="summary-cell">状态码</div>
-          <div class="summary-cell">异常对象</div>
+          <div class="summary-cell label">Xử lý lỗi</div>
+          <div class="summary-cell">Exception/giá trị trả về</div>
+          <div class="summary-cell">Status code</div>
+          <div class="summary-cell">Object exception</div>
         </div>
         <div class="summary-row">
-          <div class="summary-cell label">先看什么</div>
-          <div class="summary-cell">函数签名</div>
+          <div class="summary-cell label">Đọc cái gì trước</div>
+          <div class="summary-cell">Chữ ký hàm</div>
           <div class="summary-cell">Base URL + Auth</div>
           <div class="summary-cell">Quick Start</div>
         </div>
@@ -114,7 +114,7 @@
     </div>
 
     <div class="info-box">
-      <strong>阅读建议：</strong>函数文档看签名，API 文档看请求格式，SDK 文档看示例。遇到不会的，先找「Quick Start」或「Getting Started」章节。
+      <strong>Gợi ý đọc:</strong>Tài liệu hàm xem chữ ký, tài liệu API xem định dạng request, tài liệu SDK xem ví dụ. Khi không biết bắt đầu từ đâu, hãy tìm phần "Quick Start" hoặc "Getting Started".
     </div>
   </div>
 </template>
@@ -128,58 +128,58 @@ const docTypes = [
   {
     id: 'function',
     icon: '📦',
-    name: '函数文档',
-    scenario: '使用标准库/第三方库函数',
+    name: 'Tài liệu hàm',
+    scenario: 'Sử dụng hàm của thư viện chuẩn/thư viện bên thứ ba',
     difficulty: '⭐⭐',
-    keyPoints: ['函数签名', '参数类型', '返回值', '异常说明', '示例代码'],
+    keyPoints: ['Chữ ký hàm', 'Kiểu tham số', 'Giá trị trả về', 'Mô tả exception', 'Ví dụ code'],
     example: `### json.loads(s, *, cls=None, object_hook=None...)
 
-将 JSON 字符串解析为 Python 对象
+Parse chuỗi JSON thành object Python
 
-**参数：**
-- s (str): 要解析的 JSON 字符串
-- cls (JSONDecoder): 自定义解码器类
-- object_hook (callable): 可选的转换函数
+**Tham số:**
+- s (str): chuỗi JSON cần parse
+- cls (JSONDecoder): class decoder tùy chỉnh
+- object_hook (callable): hàm chuyển đổi tùy chọn
 
-**返回值：**
-- dict | list: 解析后的 Python 对象
+**Giá trị trả về:**
+- dict | list: object Python sau khi parse
 
-**异常：**
-- JSONDecodeError: 字符串格式非法
+**Exception:**
+- JSONDecodeError: chuỗi không đúng định dạng
 
-**示例：**
+**Ví dụ:**
 >>> import json
 >>> json.loads('{"name": "Alice"}')
 {'name': 'Alice'}`,
     tips: [
-      '先看函数签名，了解需要什么参数',
-      '注意参数的类型和是否必填',
-      '查看返回值类型，方便后续处理',
-      '关注可能抛出的异常，做好错误处理'
+      'Đọc chữ ký hàm trước, xem cần truyền tham số gì',
+      'Chú ý kiểu của tham số và có bắt buộc hay không',
+      'Xem kiểu giá trị trả về để xử lý tiếp',
+      'Để ý các exception có thể bị ném ra để xử lý lỗi tốt'
     ]
   },
   {
     id: 'rest',
     icon: '🌐',
-    name: 'REST API 文档',
-    scenario: '调用远程 HTTP 接口',
+    name: 'Tài liệu REST API',
+    scenario: 'Gọi interface HTTP từ xa',
     difficulty: '⭐⭐⭐',
-    keyPoints: ['Base URL', '认证方式', 'Endpoint', '请求参数', '响应格式', '错误码'],
+    keyPoints: ['Base URL', 'Cách xác thực', 'Endpoint', 'Tham số request', 'Định dạng response', 'Mã lỗi'],
     example: `## POST /v1/chat/completions
 
-创建聊天完成请求
+Tạo request chat completion
 
-### 认证
+### Xác thực
 Authorization: Bearer {api_key}
 
-### 请求参数
-| 参数 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| model | string | 是 | 模型名称 |
-| messages | array | 是 | 消息列表 |
-| temperature | float | 否 | 采样温度 (0-2) |
+### Tham số request
+| Tham số | Kiểu | Bắt buộc | Mô tả |
+|---------|------|----------|-------|
+| model | string | Có | Tên model |
+| messages | array | Có | Danh sách message |
+| temperature | float | Không | Nhiệt độ sampling (0-2) |
 
-### 请求示例
+### Ví dụ request
 {
   "model": "deepseek-chat",
   "messages": [
@@ -188,7 +188,7 @@ Authorization: Bearer {api_key}
   "temperature": 0.7
 }
 
-### 响应示例
+### Ví dụ response
 {
   "choices": [{
     "message": {
@@ -198,26 +198,26 @@ Authorization: Bearer {api_key}
   }]
 }`,
     tips: [
-      '先找到 Base URL 和认证方式（通常是 API Key）',
-      '确认 HTTP 方法（GET/POST/PUT/DELETE）',
-      '看清参数是放在 URL、Header 还是 Body 里',
-      '注意必填参数和可选参数的区别',
-      '查看错误码列表，了解各种异常情况'
+      'Tìm Base URL và cách xác thực trước (thường là API Key)',
+      'Xác nhận HTTP method (GET/POST/PUT/DELETE)',
+      'Xem rõ tham số nằm ở URL, Header hay Body',
+      'Để ý sự khác biệt giữa tham số bắt buộc và tùy chọn',
+      'Xem danh sách mã lỗi để biết các tình huống bất thường'
     ]
   },
   {
     id: 'sdk',
     icon: '📚',
-    name: 'SDK 文档',
-    scenario: '使用官方封装好的开发工具包',
+    name: 'Tài liệu SDK',
+    scenario: 'Dùng bộ công cụ phát triển đã được đóng gói chính thức',
     difficulty: '⭐⭐',
-    keyPoints: ['安装方式', '初始化', '核心类/方法', '配置选项', '最佳实践'],
+    keyPoints: ['Cách cài đặt', 'Khởi tạo', 'Class/method cốt lõi', 'Tùy chọn cấu hình', 'Best practice'],
     example: `## OpenAI Python SDK
 
-### 安装
+### Cài đặt
 pip install openai
 
-### 初始化客户端
+### Khởi tạo client
 from openai import OpenAI
 
 client = OpenAI(
@@ -225,7 +225,7 @@ client = OpenAI(
     base_url="https://api.deepseek.com/v1"
 )
 
-### 创建聊天完成
+### Tạo chat completion
 response = client.chat.completions.create(
     model="deepseek-chat",
     messages=[
@@ -237,7 +237,7 @@ response = client.chat.completions.create(
 
 print(response.choices[0].message.content)
 
-### 流式响应
+### Response dạng stream
 stream = client.chat.completions.create(
     model="deepseek-chat",
     messages=[...],
@@ -247,39 +247,39 @@ stream = client.chat.completions.create(
 for chunk in stream:
     print(chunk.choices[0].delta.content, end="")`,
     tips: [
-      '先看 Quick Start / Getting Started 章节',
-      '了解如何初始化和配置客户端',
-      '关注核心类和方法的使用方式',
-      '查看高级配置选项（如超时、重试）',
-      '参考官方示例代码，理解最佳实践'
+      'Đọc phần Quick Start / Getting Started trước',
+      'Hiểu cách khởi tạo và cấu hình client',
+      'Chú ý cách dùng các class và method cốt lõi',
+      'Xem các tùy chọn cấu hình nâng cao (timeout, retry...)',
+      'Tham khảo ví dụ chính thức để hiểu best practice'
     ]
   },
   {
     id: 'websocket',
     icon: '🔌',
-    name: 'WebSocket 文档',
-    scenario: '实时双向通信',
+    name: 'Tài liệu WebSocket',
+    scenario: 'Giao tiếp hai chiều thời gian thực',
     difficulty: '⭐⭐⭐⭐',
-    keyPoints: ['连接地址', '连接建立', '消息格式', '事件处理', '心跳机制', '断开重连'],
+    keyPoints: ['Địa chỉ kết nối', 'Thiết lập kết nối', 'Định dạng message', 'Xử lý event', 'Cơ chế heartbeat', 'Reconnect'],
     example: `## WebSocket API
 
-### 连接地址
+### Địa chỉ kết nối
 wss://api.example.com/v1/stream
 
-### 连接流程
+### Luồng kết nối
 
-1. **建立连接**
-   - 发送握手请求
-   - 服务端返回连接确认
+1. **Thiết lập kết nối**
+   - Gửi yêu cầu handshake
+   - Server trả về xác nhận kết nối
 
-2. **发送消息**
+2. **Gửi message**
    {
      "type": "subscribe",
      "channel": "price_updates",
      "symbol": "BTC-USD"
    }
 
-3. **接收推送**
+3. **Nhận dữ liệu đẩy về**
    {
      "type": "update",
      "data": {
@@ -289,19 +289,19 @@ wss://api.example.com/v1/stream
      }
    }
 
-### 心跳机制
-客户端每 30 秒发送 ping：
+### Cơ chế heartbeat
+Client gửi ping mỗi 30 giây:
 {"type": "ping"}
 
-服务端返回 pong：
+Server trả về pong:
 {"type": "pong"}`,
     tips: [
-      '注意 ws:// 和 wss:// 的区别（是否加密）',
-      '了解连接建立和关闭的时机',
-      '明确消息的数据格式和类型',
-      '实现心跳检测，保持连接活跃',
-      '处理好断线重连逻辑',
-      '关注并发连接数限制'
+      'Chú ý sự khác biệt giữa ws:// và wss:// (có mã hóa hay không)',
+      'Hiểu khi nào kết nối được thiết lập và đóng',
+      'Nắm rõ định dạng và kiểu của message',
+      'Cài đặt heartbeat để giữ kết nối sống',
+      'Xử lý tốt logic reconnect khi mất kết nối',
+      'Chú ý giới hạn số kết nối đồng thời'
     ]
   }
 ]

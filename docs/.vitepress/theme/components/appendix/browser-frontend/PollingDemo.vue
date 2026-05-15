@@ -1,30 +1,30 @@
 <template>
   <div class="demo-wrapper">
-    <div class="demo-header">Polling / 短轮询交互演示</div>
-    
+    <div class="demo-header">Polling / Demo tương tác short-polling</div>
+
     <div class="network-stage">
-      <!-- 客户端 -->
+      <!-- Client -->
       <div class="node client">
         <div class="node-icon">💻</div>
         <div class="node-label">Client</div>
       </div>
 
-      <!-- 通信链路 -->
+      <!-- Kênh truyền -->
       <div class="channel">
         <div class="message req" :class="{ 'moving-right': isRequesting }">
-          <span v-if="isRequesting">"有新消息吗？" →</span>
+          <span v-if="isRequesting">"Có tin mới không?" →</span>
         </div>
         <div class="message res" :class="{ 'moving-left': isResponding }">
           <span v-if="isResponding">← "{{ serverResponse }}"</span>
         </div>
       </div>
 
-      <!-- 服务端 -->
+      <!-- Server -->
       <div class="node server">
         <div class="node-icon">🖧</div>
-        <div class="node-label">Server (无状态)</div>
+        <div class="node-label">Server (stateless)</div>
         <button class="action-btn" @click="triggerNewMessage" :disabled="hasNewMessage">
-          制造新消息
+          Tạo tin mới
         </button>
       </div>
     </div>
@@ -36,7 +36,7 @@
           :class="{ active: isPolling }" 
           @click="togglePolling"
         >
-          {{ isPolling ? '⏹ 停止轮询' : '▶ 开始定时轮询 (1s)' }}
+          {{ isPolling ? '⏹ Dừng polling' : '▶ Bắt đầu polling định kỳ (1s)' }}
         </button>
       </div>
       <div class="log-box">
@@ -66,28 +66,28 @@ const addLog = (msg) => {
 
 const triggerNewMessage = () => {
   hasNewMessage.value = true
-  addLog('服务端：偷偷准备了一条新消息 🤫')
+  addLog('Server: lén chuẩn bị một tin mới 🤫')
 }
 
 const performPoll = () => {
   if (isRequesting.value || isResponding.value) return
-  
-  // 发起请求
+
+  // Gửi request
   isRequesting.value = true
-  addLog('客户端：发起 HTTP GET 请求...')
-  
+  addLog('Client: gửi HTTP GET request...')
+
   setTimeout(() => {
     isRequesting.value = false
-    // 服务端处理并响应
+    // Server xử lý và trả về
     if (hasNewMessage.value) {
-      serverResponse.value = '有啦！这是刚收到的弹幕'
+      serverResponse.value = 'Có rồi! Đây là bình luận mới nhận được'
       hasNewMessage.value = false
     } else {
-      serverResponse.value = '没有'
+      serverResponse.value = 'Chưa có'
     }
     isResponding.value = true
-    addLog(`服务端：响应 "${serverResponse.value}"，然后关闭连接。`)
-    
+    addLog(`Server: trả về "${serverResponse.value}", rồi đóng connection.`)
+
     setTimeout(() => {
       isResponding.value = false
     }, 600)
@@ -98,12 +98,12 @@ const togglePolling = () => {
   if (isPolling.value) {
     clearInterval(timer)
     isPolling.value = false
-    addLog('停止定时器。')
+    addLog('Dừng timer.')
   } else {
     isPolling.value = true
-    addLog('启动 setInterval() 狂轰乱炸模式。')
+    addLog('Bật setInterval() ở chế độ "dội bom" liên tục.')
     performPoll()
-    timer = setInterval(performPoll, 2500) // 放慢演示速度
+    timer = setInterval(performPoll, 2500) // Giảm tốc cho dễ quan sát
   }
 }
 

@@ -1,8 +1,8 @@
 <template>
   <div class="algorithm-demo">
     <div class="demo-header">
-      <span class="title">算法思维：解决问题的方法</span>
-      <span class="subtitle">不同策略解决不同类型的问题</span>
+      <span class="title">Tư duy thuật toán: phương pháp giải quyết vấn đề</span>
+      <span class="subtitle">Chiến lược khác nhau cho từng loại bài toán</span>
     </div>
 
     <div class="demo-content">
@@ -24,16 +24,16 @@
         </div>
 
         <div class="visual-content">
-          <div v-if="activeAlgo === '二分查找'" class="binary-search">
+          <div v-if="activeAlgo === 'Tìm kiếm nhị phân'" class="binary-search">
             <div class="search-input">
-              <span>在有序数组中查找：</span>
+              <span>Tìm trong mảng đã sắp xếp:</span>
               <input
                 v-model.number="searchTarget"
                 type="number"
                 class="num-input"
-                placeholder="输入数字"
+                placeholder="Nhập số"
               />
-              <button class="search-btn" @click="runBinarySearch">查找</button>
+              <button class="search-btn" @click="runBinarySearch">Tìm</button>
             </div>
             <div class="array-display">
               <div
@@ -56,10 +56,10 @@
             </div>
           </div>
 
-          <div v-else-if="activeAlgo === '排序'" class="sorting">
+          <div v-else-if="activeAlgo === 'Sắp xếp'" class="sorting">
             <div class="sort-controls">
-              <button class="sort-btn" @click="resetArray">重置数组</button>
-              <button class="sort-btn" @click="runSort">开始排序</button>
+              <button class="sort-btn" @click="resetArray">Đặt lại mảng</button>
+              <button class="sort-btn" @click="runSort">Bắt đầu sắp xếp</button>
             </div>
             <div class="array-display">
               <div
@@ -79,9 +79,9 @@
             </div>
           </div>
 
-          <div v-else-if="activeAlgo === '递归'" class="recursion">
+          <div v-else-if="activeAlgo === 'Đệ quy'" class="recursion">
             <div class="recursion-input">
-              <span>计算斐波那契数列第</span>
+              <span>Tính số Fibonacci thứ</span>
               <input
                 v-model.number="fibN"
                 type="number"
@@ -89,14 +89,14 @@
                 max="15"
                 class="num-input"
               />
-              <span>项</span>
-              <button class="calc-btn" @click="calcFib">计算</button>
+              <span></span>
+              <button class="calc-btn" @click="calcFib">Tính</button>
             </div>
             <div v-if="fibResult !== null" class="fib-result">
               <span class="result-value">F({{ fibN }}) = {{ fibResult }}</span>
             </div>
             <div v-if="fibSteps.length" class="recursion-tree">
-              <div class="tree-title">递归调用过程</div>
+              <div class="tree-title">Quá trình gọi đệ quy</div>
               <div class="tree-content">
                 <div
                   v-for="(step, i) in fibSteps.slice(0, 8)"
@@ -106,36 +106,36 @@
                   {{ step }}
                 </div>
                 <div v-if="fibSteps.length > 8" class="tree-more">
-                  ... 共 {{ fibSteps.length }} 次调用
+                  ... tổng {{ fibSteps.length }} lần gọi
                 </div>
               </div>
             </div>
           </div>
 
-          <div v-else-if="activeAlgo === '贪心'" class="greedy">
+          <div v-else-if="activeAlgo === 'Tham lam'" class="greedy">
             <div class="greedy-desc">
-              硬币找零问题：用最少的硬币凑出指定金额
+              Bài toán đổi tiền xu: dùng ít đồng xu nhất để đạt được số tiền cho trước
             </div>
             <div class="greedy-input">
-              <span>目标金额：</span>
+              <span>Số tiền cần đạt:</span>
               <input
                 v-model.number="coinTarget"
                 type="number"
                 min="1"
                 class="num-input"
               />
-              <button class="calc-btn" @click="calcCoins">计算</button>
+              <button class="calc-btn" @click="calcCoins">Tính</button>
             </div>
             <div class="coins-available">
-              可用硬币：{{ coins.join(', ') }} 元
+              Mệnh giá có sẵn: {{ coins.join(', ') }} đồng
             </div>
             <div v-if="coinResult.length" class="coin-result">
-              <div class="result-title">找零方案：</div>
+              <div class="result-title">Phương án trả lại:</div>
               <div class="coin-list">
-                <span v-for="(c, i) in coinResult" :key="i" class="coin">{{ c }}元</span>
+                <span v-for="(c, i) in coinResult" :key="i" class="coin">{{ c }} đồng</span>
               </div>
               <div class="result-summary">
-                共 {{ coinResult.length }} 枚硬币
+                Tổng cộng {{ coinResult.length }} đồng xu
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@
       </div>
 
       <div class="complexity-info">
-        <div class="info-title">时间复杂度速查</div>
+        <div class="info-title">Tra nhanh độ phức tạp thời gian</div>
         <div class="complexity-list">
           <div v-for="c in complexities" :key="c.name" class="complexity-item">
             <span class="c-name">{{ c.name }}</span>
@@ -155,7 +155,7 @@
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>算法是解决问题的方法。好的算法能让程序效率提升几个数量级。理解算法思维，比记住具体算法更重要。
+      <strong>Ý tưởng cốt lõi:</strong> Thuật toán là phương pháp giải quyết vấn đề. Thuật toán tốt có thể nâng hiệu năng chương trình lên vài bậc. Hiểu tư duy thuật toán quan trọng hơn việc thuộc lòng từng thuật toán cụ thể.
     </div>
   </div>
 </template>
@@ -163,13 +163,13 @@
 <script setup>
 import { ref, computed, reactive } from 'vue'
 
-const activeAlgo = ref('二分查找')
+const activeAlgo = ref('Tìm kiếm nhị phân')
 
 const algorithms = [
-  { name: '二分查找', desc: '每次排除一半，O(log n)' },
-  { name: '排序', desc: '将无序变有序' },
-  { name: '递归', desc: '自己调用自己' },
-  { name: '贪心', desc: '每步选最优' }
+  { name: 'Tìm kiếm nhị phân', desc: 'Loại bỏ một nửa mỗi bước, O(log n)' },
+  { name: 'Sắp xếp', desc: 'Đưa dữ liệu hỗn loạn về thứ tự' },
+  { name: 'Đệ quy', desc: 'Hàm tự gọi chính nó' },
+  { name: 'Tham lam', desc: 'Mỗi bước chọn phương án tối ưu' }
 ]
 
 const currentAlgo = computed(() => {
@@ -197,38 +197,38 @@ const runBinarySearch = () => {
     searchRange.right = right
 
     searchSteps.value.push(
-      `查找范围 [${left}, ${right}]，中间位置 ${mid}，值 ${sortedArray.value[mid]}`
+      `Phạm vi tìm kiếm [${left}, ${right}], vị trí giữa ${mid}, giá trị ${sortedArray.value[mid]}`
     )
 
     if (sortedArray.value[mid] === searchTarget.value) {
       foundIndex.value = mid
-      searchSteps.value.push(`找到目标 ${searchTarget.value} 在位置 ${mid}`)
+      searchSteps.value.push(`Đã tìm thấy ${searchTarget.value} ở vị trí ${mid}`)
       return
     } else if (sortedArray.value[mid] < searchTarget.value) {
       left = mid + 1
       searchSteps.value.push(
-        `${sortedArray.value[mid]} < ${searchTarget.value}，在右半部分继续查找`
+        `${sortedArray.value[mid]} < ${searchTarget.value}, tiếp tục tìm ở nửa phải`
       )
     } else {
       right = mid - 1
       searchSteps.value.push(
-        `${sortedArray.value[mid]} > ${searchTarget.value}，在左半部分继续查找`
+        `${sortedArray.value[mid]} > ${searchTarget.value}, tiếp tục tìm ở nửa trái`
       )
     }
   }
-  searchSteps.value.push(`未找到目标 ${searchTarget.value}`)
+  searchSteps.value.push(`Không tìm thấy ${searchTarget.value}`)
 }
 
 const sortArray = ref([64, 34, 25, 12, 22, 11, 90, 45])
 const comparingIndices = ref([])
 const sortedIndices = ref([])
-const sortStatus = ref('点击"开始排序"观察冒泡排序过程')
+const sortStatus = ref('Nhấn "Bắt đầu sắp xếp" để xem quá trình sắp xếp nổi bọt')
 
 const resetArray = () => {
   sortArray.value = [64, 34, 25, 12, 22, 11, 90, 45]
   comparingIndices.value = []
   sortedIndices.value = []
-  sortStatus.value = '数组已重置'
+  sortStatus.value = 'Mảng đã được đặt lại'
 }
 
 const runSort = async () => {
@@ -239,13 +239,13 @@ const runSort = async () => {
   for (let i = 0; i < n - 1; i++) {
     for (let j = 0; j < n - i - 1; j++) {
       comparingIndices.value = [j, j + 1]
-      sortStatus.value = `比较 ${arr[j]} 和 ${arr[j + 1]}`
+      sortStatus.value = `So sánh ${arr[j]} và ${arr[j + 1]}`
       await new Promise((r) => setTimeout(r, 300))
 
       if (arr[j] > arr[j + 1]) {
         ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
         sortArray.value = [...arr]
-        sortStatus.value = `交换 ${arr[j + 1]} 和 ${arr[j]}`
+        sortStatus.value = `Hoán đổi ${arr[j + 1]} và ${arr[j]}`
         await new Promise((r) => setTimeout(r, 200))
       }
     }
@@ -253,7 +253,7 @@ const runSort = async () => {
   }
   sortedIndices.value.push(0)
   comparingIndices.value = []
-  sortStatus.value = '排序完成！'
+  sortStatus.value = 'Sắp xếp hoàn tất!'
 }
 
 const fibN = ref(8)
@@ -286,17 +286,17 @@ const calcCoins = () => {
 }
 
 const complexities = [
-  { name: 'O(1)', value: '常数', desc: '最优，如数组访问', class: 'good' },
-  { name: 'O(log n)', value: '对数', desc: '很好，如二分查找', class: 'good' },
-  { name: 'O(n)', value: '线性', desc: '一般，如遍历', class: 'mid' },
+  { name: 'O(1)', value: 'Hằng số', desc: 'Tối ưu, ví dụ truy cập mảng', class: 'good' },
+  { name: 'O(log n)', value: 'Logarit', desc: 'Rất tốt, ví dụ tìm kiếm nhị phân', class: 'good' },
+  { name: 'O(n)', value: 'Tuyến tính', desc: 'Trung bình, ví dụ duyệt mảng', class: 'mid' },
   {
     name: 'O(n log n)',
-    value: '线性对数',
-    desc: '可接受，如快速排序',
+    value: 'Tuyến tính logarit',
+    desc: 'Chấp nhận được, ví dụ quicksort',
     class: 'mid'
   },
-  { name: 'O(n²)', value: '平方', desc: '较慢，如冒泡排序', class: 'bad' },
-  { name: 'O(2ⁿ)', value: '指数', desc: '很慢，如暴力递归', class: 'bad' }
+  { name: 'O(n²)', value: 'Bình phương', desc: 'Khá chậm, ví dụ sắp xếp nổi bọt', class: 'bad' },
+  { name: 'O(2ⁿ)', value: 'Hàm mũ', desc: 'Rất chậm, ví dụ đệ quy thô', class: 'bad' }
 ]
 </script>
 

@@ -2,12 +2,12 @@
   <div class="composite-demo">
     <div class="demo-header">
       <span class="icon">🎬</span>
-      <span class="title">合成层演示</span>
-      <span class="subtitle">浏览器渲染的最后阶段 - 图层合成</span>
+      <span class="title">Demo composite layer</span>
+      <span class="subtitle">Giai đoạn cuối của browser rendering — ghép lớp</span>
     </div>
 
     <div class="intro-text">
-      合成是浏览器渲染的最后一步。想象你在<span class="highlight">制作PPT动画</span>：你已经准备好了所有图层，现在只需要调整它们的位置、透明度，然后把它们叠在一起显示出来。这就是合成要做的事情。
+      Composite là bước cuối trong quá trình render của trình duyệt. Hãy tưởng tượng bạn đang <span class="highlight">làm animation cho PowerPoint</span>: bạn đã chuẩn bị xong các layer, giờ chỉ cần chỉnh vị trí, độ trong suốt, rồi xếp chồng chúng lên nhau để hiển thị. Đó chính là việc của composite.
     </div>
 
     <div class="demo-content">
@@ -29,7 +29,7 @@
       <div class="composite-result">
         <div class="result-box">
           <div class="result-title">
-            合成结果
+            Kết quả composite
           </div>
           <div class="result-display">
             <div
@@ -50,14 +50,14 @@
           class="action-btn"
           @click="toggleAnimation"
         >
-          {{ isAnimating ? '⏸ 暂停动画' : '▶️ 开始动画' }}
+          {{ isAnimating ? '⏸ Tạm dừng animation' : '▶️ Chạy animation' }}
         </button>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心要点：</strong>合成阶段在 GPU 上执行，只调整位置、透明度等，不重新绘制像素。因此 transform 和 opacity 动画性能最好，不会触发重排和重绘。
+      <strong>Điểm cốt lõi:</strong> Giai đoạn composite chạy trên GPU, chỉ chỉnh vị trí, độ trong suốt v.v., không vẽ lại pixel. Vì vậy animation bằng transform và opacity cho performance tốt nhất, không gây reflow và repaint.
     </div>
   </div>
 </template>
@@ -70,7 +70,7 @@ const isAnimating = ref(false)
 const layers = ref([
   {
     id: 'bg',
-    name: '背景层',
+    name: 'Layer nền',
     emoji: '🖼️',
     x: 50,
     y: 20,
@@ -79,7 +79,7 @@ const layers = ref([
   },
   {
     id: 'content',
-    name: '内容层',
+    name: 'Layer nội dung',
     emoji: '📄',
     x: 50,
     y: 50,
@@ -88,7 +88,7 @@ const layers = ref([
   },
   {
     id: 'overlay',
-    name: '浮层',
+    name: 'Layer nổi',
     emoji: '✨',
     x: 50,
     y: 80,

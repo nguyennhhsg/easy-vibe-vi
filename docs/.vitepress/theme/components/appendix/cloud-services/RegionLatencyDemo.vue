@@ -1,7 +1,7 @@
 <template>
   <div class="region-latency-demo">
     <div class="user-location">
-      <label>你的位置:</label>
+      <label>Vị trí của bạn:</label>
       <div class="location-options">
         <button
           v-for="loc in locations"
@@ -17,13 +17,13 @@
     <div class="latency-table">
       <div class="table-header">
         <div class="col region">
-          云厂商地域
+          Region
         </div>
         <div class="col latency">
-          延迟
+          Độ trễ
         </div>
         <div class="col rating">
-          推荐度
+          Đề xuất
         </div>
       </div>
       <div
@@ -63,36 +63,36 @@ import { ref, computed } from 'vue'
 const userLocation = ref('beijing')
 
 const locations = [
-  { id: 'beijing', name: '北京' },
-  { id: 'shanghai', name: '上海' },
-  { id: 'guangzhou', name: '广州' },
-  { id: 'chengdu', name: '成都' }
+  { id: 'beijing', name: 'Beijing' },
+  { id: 'shanghai', name: 'Shanghai' },
+  { id: 'guangzhou', name: 'Guangzhou' },
+  { id: 'chengdu', name: 'Chengdu' }
 ]
 
 const latencyMap = {
   beijing: [
-    { region: '华北-北京', latency: 15, rating: '⭐⭐⭐' },
-    { region: '华东-上海', latency: 35, rating: '⭐⭐' },
-    { region: '华南-广州', latency: 55, rating: '⭐' },
-    { region: '亚太-新加坡', latency: 85, rating: '⭐' }
+    { region: 'North China - Beijing', latency: 15, rating: '⭐⭐⭐' },
+    { region: 'East China - Shanghai', latency: 35, rating: '⭐⭐' },
+    { region: 'South China - Guangzhou', latency: 55, rating: '⭐' },
+    { region: 'APAC - Singapore', latency: 85, rating: '⭐' }
   ],
   shanghai: [
-    { region: '华东-上海', latency: 12, rating: '⭐⭐⭐' },
-    { region: '华北-北京', latency: 38, rating: '⭐⭐' },
-    { region: '华南-广州', latency: 45, rating: '⭐⭐' },
-    { region: '亚太-新加坡', latency: 75, rating: '⭐' }
+    { region: 'East China - Shanghai', latency: 12, rating: '⭐⭐⭐' },
+    { region: 'North China - Beijing', latency: 38, rating: '⭐⭐' },
+    { region: 'South China - Guangzhou', latency: 45, rating: '⭐⭐' },
+    { region: 'APAC - Singapore', latency: 75, rating: '⭐' }
   ],
   guangzhou: [
-    { region: '华南-广州', latency: 10, rating: '⭐⭐⭐' },
-    { region: '华东-上海', latency: 42, rating: '⭐⭐' },
-    { region: '华北-北京', latency: 58, rating: '⭐' },
-    { region: '亚太-新加坡', latency: 45, rating: '⭐⭐' }
+    { region: 'South China - Guangzhou', latency: 10, rating: '⭐⭐⭐' },
+    { region: 'East China - Shanghai', latency: 42, rating: '⭐⭐' },
+    { region: 'North China - Beijing', latency: 58, rating: '⭐' },
+    { region: 'APAC - Singapore', latency: 45, rating: '⭐⭐' }
   ],
   chengdu: [
-    { region: '华东-上海', latency: 40, rating: '⭐⭐' },
-    { region: '华北-北京', latency: 48, rating: '⭐⭐' },
-    { region: '华南-广州', latency: 52, rating: '⭐' },
-    { region: '西南-成都', latency: 8, rating: '⭐⭐⭐' }
+    { region: 'East China - Shanghai', latency: 40, rating: '⭐⭐' },
+    { region: 'North China - Beijing', latency: 48, rating: '⭐⭐' },
+    { region: 'South China - Guangzhou', latency: 52, rating: '⭐' },
+    { region: 'Southwest - Chengdu', latency: 8, rating: '⭐⭐⭐' }
   ]
 }
 
@@ -107,7 +107,7 @@ const latencyData = computed(() => {
 
 const recommendation = computed(() => {
   const best = latencyData.value.find(d => d.rating === '⭐⭐⭐')
-  return `建议选择 ${best?.region}，延迟最低 (${best?.latency}ms)`
+  return `Khuyến nghị chọn ${best?.region}, độ trễ thấp nhất (${best?.latency}ms)`
 })
 </script>
 

@@ -2,71 +2,71 @@
   <div class="pricing-calculator">
     <div class="config-section">
       <div class="config-row">
-        <span class="label">实例规格</span>
+        <span class="label">Instance spec</span>
         <select v-model="config.spec">
           <option value="small">
-            1核2G (入门)
+            1 core 2G (entry)
           </option>
           <option value="medium">
-            2核4G (标准)
+            2 core 4G (standard)
           </option>
           <option value="large">
-            4核8G (高性能)
+            4 core 8G (high-performance)
           </option>
         </select>
       </div>
       <div class="config-row">
-        <span class="label">运行时长</span>
+        <span class="label">Thời gian chạy</span>
         <input
           v-model.number="config.hours"
           type="range"
           min="1"
           max="24"
         >
-        <span class="value">{{ config.hours }} 小时/天</span>
+        <span class="value">{{ config.hours }} giờ/ngày</span>
       </div>
       <div class="config-row">
-        <span class="label">运行天数</span>
+        <span class="label">Số ngày chạy</span>
         <input
           v-model.number="config.days"
           type="range"
           min="1"
           max="31"
         >
-        <span class="value">{{ config.days }} 天/月</span>
+        <span class="value">{{ config.days }} ngày/tháng</span>
       </div>
     </div>
 
     <div class="result-section">
       <div class="result-header">
-        月度成本对比
+        So sánh chi phí hàng tháng
       </div>
       <div class="result-cards">
         <div class="result-card">
           <div class="model">
-            按需付费
+            On-demand
           </div>
           <div class="price">
-            ${{ costs.ondemand }}/月
+            ${{ costs.ondemand }}/tháng
           </div>
         </div>
         <div class="result-card recommended">
           <div class="model">
-            预留实例
+            Reserved Instance
           </div>
           <div class="price">
-            ${{ costs.reserved }}/月
+            ${{ costs.reserved }}/tháng
           </div>
           <div class="saving">
-            省 {{ savings }}%
+            Tiết kiệm {{ savings }}%
           </div>
         </div>
         <div class="result-card">
           <div class="model">
-            抢占式
+            Spot
           </div>
           <div class="price">
-            ${{ costs.spot }}/月
+            ${{ costs.spot }}/tháng
           </div>
         </div>
       </div>
@@ -112,11 +112,11 @@ const savings = computed(() => {
 
 const recommendation = computed(() => {
   if (config.value.days < 15) {
-    return '当前使用频率较低，建议选择按需付费'
+    return 'Tần suất sử dụng thấp, nên chọn on-demand'
   } else if (savings.value > 30) {
-    return `当前使用负载稳定，切换预留实例可省 ${savings.value}%`
+    return `Workload ổn định, chuyển sang Reserved Instance tiết kiệm ${savings.value}%`
   } else {
-    return '根据当前配置，预留实例更具成本优势'
+    return 'Theo cấu hình hiện tại, Reserved Instance có lợi thế chi phí hơn'
   }
 })
 </script>

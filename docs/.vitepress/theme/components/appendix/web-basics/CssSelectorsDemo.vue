@@ -1,14 +1,14 @@
 <template>
   <div class="selectors-demo">
     <div class="hint">
-      👇 鼠标悬停在左侧 CSS 代码上，看看右侧 HTML 谁会被选中
+      👇 Di chuột vào code CSS bên trái để xem ai trong HTML bên phải sẽ được chọn
     </div>
 
     <div class="comparison">
       <!-- Left: CSS Rules -->
       <div class="column css-col">
         <div class="col-title">
-          CSS (样式表)
+          CSS (stylesheet)
         </div>
         <div class="rules-list">
           <div
@@ -24,8 +24,8 @@
               { color: #333; }
             </div>
             <div class="explanation">
-              <span class="badge tag">标签选择器</span>
-              直接写标签名，选中所有 <code>&lt;p&gt;</code>
+              <span class="badge tag">Tag selector</span>
+              Viết trực tiếp tên thẻ, chọn tất cả <code>&lt;p&gt;</code>
             </div>
           </div>
 
@@ -42,8 +42,8 @@
               { background: white; }
             </div>
             <div class="explanation">
-              <span class="badge class">类选择器</span>
-              以 <code>.</code> 开头，选中所有 <code>class="card"</code>
+              <span class="badge class">Class selector</span>
+              Bắt đầu bằng <code>.</code>, chọn tất cả phần tử có <code>class="card"</code>
             </div>
           </div>
 
@@ -60,8 +60,8 @@
               { font-weight: bold; }
             </div>
             <div class="explanation">
-              <span class="badge id">ID 选择器</span>
-              以 <code>#</code> 开头，选中唯一 <code>id="submit-btn"</code>
+              <span class="badge id">ID selector</span>
+              Bắt đầu bằng <code>#</code>, chọn duy nhất phần tử có <code>id="submit-btn"</code>
             </div>
           </div>
         </div>
@@ -81,14 +81,14 @@
       <!-- Right: HTML Structure -->
       <div class="column html-col">
         <div class="col-title">
-          HTML (结构)
+          HTML (cấu trúc)
         </div>
         <div class="code-view">
           <div
             class="html-line"
             :class="{ highlight: activeType === 'tag' }"
           >
-            &lt;p&gt;我是普通段落&lt;/p&gt;
+            &lt;p&gt;Tôi là đoạn văn thường&lt;/p&gt;
           </div>
 
           <div
@@ -104,7 +104,7 @@
               highlight: activeType === 'tag' || activeType === 'class'
             }"
           >
-            &lt;p&gt;我是卡片里的段落&lt;/p&gt;
+            &lt;p&gt;Tôi là đoạn văn trong card&lt;/p&gt;
           </div>
 
           <div
@@ -119,7 +119,7 @@
             :class="{ highlight: activeType === 'id' }"
           >
             &lt;button
-            <span class="attr">id="submit-btn"</span>&gt;提交&lt;/button&gt;
+            <span class="attr">id="submit-btn"</span>&gt;Submit&lt;/button&gt;
           </div>
         </div>
       </div>

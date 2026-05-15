@@ -1,8 +1,8 @@
 <template>
   <div class="dom-demo">
     <div class="demo-header">
-      <span class="title">DOM 操作演示</span>
-      <span class="subtitle">通过 JavaScript 动态修改页面内容、样式和结构</span>
+      <span class="title">Demo thao tác DOM</span>
+      <span class="subtitle">Dùng JavaScript để thay đổi nội dung, style và cấu trúc trang một cách động</span>
     </div>
 
     <div class="main-area">
@@ -10,26 +10,26 @@
         <div class="operations">
           <div class="op-group">
             <div class="op-label">
-              修改内容
+              Sửa nội dung
             </div>
             <div class="op-row">
               <input
                 v-model="titleText"
-                placeholder="输入标题"
+                placeholder="Nhập tiêu đề"
                 class="input"
               >
               <button
                 class="btn"
                 @click="updateTitle"
               >
-                更新标题
+                Cập nhật tiêu đề
               </button>
             </div>
           </div>
 
           <div class="op-group">
             <div class="op-label">
-              修改样式
+              Sửa style
             </div>
             <div class="op-row">
               <button 
@@ -45,20 +45,20 @@
 
           <div class="op-group">
             <div class="op-label">
-              添加/删除元素
+              Thêm/xoá element
             </div>
             <div class="op-row">
               <button
                 class="btn"
                 @click="addItem"
               >
-                添加项目
+                Thêm mục
               </button>
               <button
                 class="btn btn-danger"
                 @click="removeLastItem"
               >
-                删除最后
+                Xoá mục cuối
               </button>
             </div>
           </div>
@@ -69,10 +69,10 @@
           :class="currentStyle"
         >
           <h2 class="card-title">
-            {{ titleText || '点击按钮更新标题' }}
+            {{ titleText || 'Bấm nút để cập nhật tiêu đề' }}
           </h2>
           <p class="card-desc">
-            这是一个演示 DOM 操作的卡片区域。
+            Đây là khu vực card để demo thao tác DOM.
           </p>
           <ul class="card-list">
             <li
@@ -85,7 +85,7 @@
               v-if="items.length === 0"
               class="empty"
             >
-              （列表为空）
+              (Danh sách đang trống)
             </li>
           </ul>
         </div>
@@ -94,12 +94,12 @@
       <div class="right-panel">
         <div class="code-block">
           <div class="code-title">
-            对应的 JavaScript 代码
+            Code JavaScript tương ứng
           </div>
           <div class="code-content">
             <template v-if="lastOp === 'title'">
               <div class="line comment">
-                // 修改文本内容
+                // Sửa nội dung text
               </div>
               <div class="line">
                 const el = document.querySelector('.card-title')
@@ -110,7 +110,7 @@
             </template>
             <template v-else-if="lastOp === 'style'">
               <div class="line comment">
-                // 切换 CSS 类
+                // Đổi CSS class
               </div>
               <div class="line">
                 const card = document.querySelector('.preview-card')
@@ -121,7 +121,7 @@
             </template>
             <template v-else-if="lastOp === 'add'">
               <div class="line comment">
-                // 创建并添加新元素
+                // Tạo và thêm element mới
               </div>
               <div class="line">
                 const list = document.querySelector('.card-list')
@@ -130,7 +130,7 @@
                 const li = document.createElement('li')
               </div>
               <div class="line">
-                li.textContent = '新项目 {{ items.length }}'
+                li.textContent = 'Mục mới {{ items.length }}'
               </div>
               <div class="line">
                 list.appendChild(li)
@@ -138,7 +138,7 @@
             </template>
             <template v-else-if="lastOp === 'remove'">
               <div class="line comment">
-                // 删除最后一个元素
+                // Xoá element cuối cùng
               </div>
               <div class="line">
                 const list = document.querySelector('.card-list')
@@ -152,7 +152,7 @@
             </template>
             <template v-else>
               <div class="line comment">
-                // 点击左侧按钮查看对应代码
+                // Bấm các nút bên trái để xem code tương ứng
               </div>
             </template>
           </div>
@@ -160,32 +160,32 @@
 
         <div class="methods-card">
           <div class="methods-title">
-            常用 DOM 方法
+            Các phương thức DOM thường dùng
           </div>
           <div class="methods-list">
             <div class="method">
               <code>querySelector()</code>
-              <span>按选择器查找元素</span>
+              <span>Tìm element theo selector</span>
             </div>
             <div class="method">
               <code>textContent</code>
-              <span>获取/设置文本内容</span>
+              <span>Lấy/đặt nội dung text</span>
             </div>
             <div class="method">
               <code>classList</code>
-              <span>操作元素的 CSS 类</span>
+              <span>Thao tác CSS class của element</span>
             </div>
             <div class="method">
               <code>createElement()</code>
-              <span>创建新元素</span>
+              <span>Tạo element mới</span>
             </div>
             <div class="method">
               <code>appendChild()</code>
-              <span>添加子元素</span>
+              <span>Thêm element con</span>
             </div>
             <div class="method">
               <code>remove()</code>
-              <span>删除元素</span>
+              <span>Xoá element</span>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@
     </div>
 
     <div class="info-box">
-      <strong>注意：</strong>频繁操作 DOM 会影响性能。现代框架（Vue/React）使用虚拟 DOM 来优化这个过程——先在内存中计算差异，再批量更新真实 DOM。
+      <strong>Lưu ý:</strong> Thao tác DOM dày đặc sẽ ảnh hưởng performance. Framework hiện đại (Vue/React) dùng virtual DOM để tối ưu — tính diff trong bộ nhớ trước rồi mới batch update DOM thật.
     </div>
   </div>
 </template>
@@ -201,15 +201,15 @@
 <script setup>
 import { ref } from 'vue'
 
-const titleText = ref('欢迎学习 DOM')
+const titleText = ref('Chào mừng học DOM')
 const currentStyle = ref('')
-const items = ref(['项目 1', '项目 2'])
+const items = ref(['Mục 1', 'Mục 2'])
 const lastOp = ref('')
 
 const styles = [
-  { id: '', label: '默认' },
-  { id: 'highlight', label: '高亮' },
-  { id: 'dark', label: '深色' }
+  { id: '', label: 'Mặc định' },
+  { id: 'highlight', label: 'Highlight' },
+  { id: 'dark', label: 'Tối' }
 ]
 
 const updateTitle = () => {
@@ -217,7 +217,7 @@ const updateTitle = () => {
 }
 
 const addItem = () => {
-  items.value.push(`新项目 ${items.value.length + 1}`)
+  items.value.push(`Mục mới ${items.value.length + 1}`)
   lastOp.value = 'add'
 }
 

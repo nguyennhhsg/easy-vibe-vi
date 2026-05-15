@@ -8,9 +8,9 @@ const isRunning = ref(false)
 const functionType = ref('arrow') // 'declaration', 'expression', 'arrow'
 
 const functionTypes = [
-  { value: 'declaration', label: 'function 声明' },
-  { value: 'expression', label: '函数表达式' },
-  { value: 'arrow', label: '箭头函数' }
+  { value: 'declaration', label: 'Khai báo function' },
+  { value: 'expression', label: 'Function expression' },
+  { value: 'arrow', label: 'Arrow function' }
 ]
 
 const execute = async () => {
@@ -18,7 +18,7 @@ const execute = async () => {
   isRunning.value = true
   result.value = null
 
-  // 模拟处理动画
+  // Mô phỏng hiệu ứng đang xử lý
   await new Promise(resolve => setTimeout(resolve, 500))
 
   result.value = price.value * discount.value
@@ -32,15 +32,15 @@ const currentCode = ref(`const calculatePrice = (price, discount) => {
 
 <template>
   <div class="function-machine-demo">
-    <h3>函数就像一台机器</h3>
+    <h3>Function giống như một cỗ máy</h3>
 
     <div class="pipeline">
-      <!-- 输入区 -->
+      <!-- Khu input -->
       <div class="pipeline-section input-section">
-        <h4>参数（输入）</h4>
+        <h4>Tham số (input)</h4>
         <div class="input-group">
           <label>
-            价格:
+            Giá:
             <input
               v-model.number="price"
               type="number"
@@ -49,22 +49,22 @@ const currentCode = ref(`const calculatePrice = (price, discount) => {
             >
           </label>
           <label>
-            折扣:
+            Discount:
             <select
               v-model.number="discount"
               :disabled="isRunning"
             >
-              <option :value="0.8">8 折 (0.8)</option>
-              <option :value="0.5">5 折 (0.5)</option>
-              <option :value="0.7">7 折 (0.7)</option>
+              <option :value="0.8">Giảm 20% (0.8)</option>
+              <option :value="0.5">Giảm 50% (0.5)</option>
+              <option :value="0.7">Giảm 30% (0.7)</option>
             </select>
           </label>
         </div>
       </div>
 
-      <!-- 机器区 -->
+      <!-- Khu cỗ máy -->
       <div class="pipeline-section machine-section">
-        <h4>函数</h4>
+        <h4>Function</h4>
         <div class="machine">
           <div class="machine-label">
             calculatePrice
@@ -91,13 +91,13 @@ const currentCode = ref(`const calculatePrice = (price, discount) => {
           v-if="functionType !== 'arrow'"
           class="tip"
         >
-          ✏️ 写法不同，但做的事一模一样
+          ✏️ Cách viết khác nhau, nhưng việc làm hoàn toàn giống nhau
         </div>
       </div>
 
-      <!-- 输出区 -->
+      <!-- Khu output -->
       <div class="pipeline-section output-section">
-        <h4>返回值（输出）</h4>
+        <h4>Giá trị trả về (output)</h4>
         <div
           class="output-display"
           :class="{ 'processing': isRunning }"
@@ -112,7 +112,7 @@ const currentCode = ref(`const calculatePrice = (price, discount) => {
             v-else
             class="result"
           >
-            ¥{{ result.toFixed(2) }}
+            {{ result.toFixed(2) }} đ
           </div>
         </div>
       </div>
@@ -124,12 +124,12 @@ const currentCode = ref(`const calculatePrice = (price, discount) => {
         class="btn-execute"
         @click="execute"
       >
-        {{ isRunning ? '处理中...' : '执行 ▶' }}
+        {{ isRunning ? 'Đang xử lý...' : 'Chạy ▶' }}
       </button>
     </div>
 
     <div class="code-display">
-      <h4>当前函数定义</h4>
+      <h4>Định nghĩa function hiện tại</h4>
       <pre><code v-if="functionType === 'declaration'">function calculatePrice(price, discount) {
   return price * discount
 }</code>
@@ -140,7 +140,7 @@ const currentCode = ref(`const calculatePrice = (price, discount) => {
   return price * discount
 }
 
-// 或者更简洁：
+// Hoặc gọn hơn:
 const calculatePrice = (price, discount) => price * discount</code></pre>
     </div>
   </div>

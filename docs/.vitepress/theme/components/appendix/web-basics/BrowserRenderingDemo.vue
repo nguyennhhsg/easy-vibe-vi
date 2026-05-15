@@ -1,6 +1,6 @@
 <template>
   <div class="browser-rendering-demo custom-demo-base">
-    <div class="demo-label">浏览器渲染 ── 干瘪文字拆解组装变成精美画面</div>
+    <div class="demo-label">Browser rendering ── biến code khô khan thành giao diện đẹp mắt</div>
     <div class="demo-panel">
       
       <div class="stepper">
@@ -15,15 +15,15 @@
       </div>
 
       <div class="stage-window">
-        <!-- 侧边说明 -->
+        <!-- Phần mô tả bên cạnh -->
         <div class="explanations">
           <div class="exp-title">{{ steps[currentStep].title }}</div>
           <div class="exp-desc">{{ steps[currentStep].desc }}</div>
         </div>
 
-        <!-- 当前结果呈现区域 -->
+        <!-- Khu vực hiển thị kết quả hiện tại -->
         <div class="render-canvas">
-          <!-- Step 0: 代码 -->
+          <!-- Step 0: Code -->
           <div v-if="currentStep === 0" class="canvas-item code-raw fade-in">
             <pre><code><b>&lt;html&gt;</b>
   <b>&lt;style&gt;</b>
@@ -38,28 +38,28 @@
 <b>&lt;/html&gt;</b></code></pre>
           </div>
 
-          <!-- Step 1: DOM树 -->
+          <!-- Step 1: Cây DOM -->
           <div v-if="currentStep === 1" class="canvas-item dom-tree fade-in">
             <div class="tree-node">html
               <div class="tree-children">
                 <div class="tree-node">body
                   <div class="tree-children">
                     <div class="tree-node leaf">h1 (Google)</div>
-                    <div class="tree-node leaf">input (搜索框)</div>
+                    <div class="tree-node leaf">input (ô tìm kiếm)</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Step 2: 结合 CSS -->
+          <!-- Step 2: Kết hợp CSS -->
           <div v-if="currentStep === 2" class="canvas-item css-merge fade-in">
              <div class="merge-box">
                 <div class="box-left">h1 (Google)</div>
                 <div class="box-plus">+</div>
                 <div class="box-right">.title { color: #f00 }</div>
                 <div class="box-arrow">↓</div>
-                <div class="box-result">h1 (红色文字规则)</div>
+                <div class="box-result">h1 (rule chữ màu đỏ)</div>
              </div>
           </div>
 
@@ -83,7 +83,7 @@
         </div>
       </div>
     </div>
-    <div class="demo-status">点击上方各步骤图标，查看每一阶段的工厂作业产出</div>
+    <div class="demo-status">Bấm vào các icon bước ở trên để xem kết quả của từng giai đoạn trong dây chuyền</div>
   </div>
 </template>
 
@@ -92,11 +92,11 @@ import { ref } from 'vue'
 
 const currentStep = ref(0)
 const steps = [
-  { icon: '📄', name: '源码', title: '拿到纯文本源代码', desc: '刚传回来的只是一堆干瘪的 HTML, CSS 等代码字符。这只是建造网页的说明书，不是真正的画面。' },
-  { icon: '🦴', name: 'DOM解析', title: '1. 搭骨架 (DOM 解析)', desc: '第一步通读 HTML 标签，构建树状骨架图（DOM 树），了解结构关系，例如"标题框在身体(body)里"。' },
-  { icon: '🎨', name: 'CSS解析', title: '2. 样式附加 (CSS 解析)', desc: '第二步读 CSS，把对应的样式规则（如"标题为红色"）关联并绑定到我们刚才搭建好的特定骨架节点上。' },
-  { icon: '📏', name: 'Layout排版', title: '3. 几何排版 (Layout)', desc: '第三步拿尺子量每个骨架的大小。结合你的屏幕尺寸，精确计算出每个元素所在的绝对坐标 x, y 和明确的长宽高尺寸。' },
-  { icon: '🖼️', name: 'Paint绘制', title: '4. 像素涂色 (Paint)', desc: '最后，有了骨架、颜色规则、和精准坐标尺寸，浏览器控制像素画笔，在一瞬间完成上色和填充！' }
+  { icon: '📄', name: 'Source', title: 'Nhận source code dạng text thuần', desc: 'Cái vừa tải về chỉ là một đống ký tự HTML, CSS khô khan. Đây mới là bản hướng dẫn xây trang web, chưa phải giao diện thật.' },
+  { icon: '🦴', name: 'Parse DOM', title: '1. Dựng khung xương (Parse DOM)', desc: 'Bước đầu đọc qua các thẻ HTML để dựng nên sơ đồ khung xương dạng cây (DOM tree), hiểu quan hệ cấu trúc, ví dụ "ô tiêu đề nằm trong body".' },
+  { icon: '🎨', name: 'Parse CSS', title: '2. Gắn style (Parse CSS)', desc: 'Bước hai đọc CSS, liên kết và gắn các rule style tương ứng (ví dụ "tiêu đề màu đỏ") vào các node khung xương cụ thể mà bạn vừa dựng.' },
+  { icon: '📏', name: 'Layout', title: '3. Sắp xếp hình học (Layout)', desc: 'Bước ba lấy thước đo kích thước từng node. Kết hợp với kích thước màn hình của bạn, tính chính xác toạ độ tuyệt đối x, y và chiều dài, rộng, cao của từng element.' },
+  { icon: '🖼️', name: 'Paint', title: '4. Tô pixel (Paint)', desc: 'Cuối cùng, có khung xương, rule màu, và toạ độ kích thước chuẩn xác, trình duyệt điều khiển cọ pixel để tô màu và lấp đầy chỉ trong nháy mắt!' }
 ]
 </script>
 

@@ -2,7 +2,7 @@
 const props = defineProps({
   title: {
     type: String,
-    default: '本幕小结'
+    default: 'Tóm tắt phần này'
   },
   sections: {
     type: Array,
@@ -66,7 +66,7 @@ const props = defineProps({
       >
         <div class="outputs-header">
           <span class="outputs-icon">📦</span>
-          <span class="outputs-title">本幕输出：</span>
+          <span class="outputs-title">Sản phẩm phần này:</span>
         </div>
         <ul class="outputs-list">
           <li

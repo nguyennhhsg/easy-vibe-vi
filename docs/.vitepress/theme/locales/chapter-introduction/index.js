@@ -10,5 +10,11 @@ export default {
     duration: 'Estimated Time',
     output: 'Expected Output',
     assignment: 'Assignment'
+  },
+  'vi-vn': {
+    title: 'Mục tiêu chương này',
+    duration: 'Thời gian dự kiến',
+    output: 'Sản phẩm dự kiến',
+    assignment: 'Bài tập sau buổi học'
   }
 }

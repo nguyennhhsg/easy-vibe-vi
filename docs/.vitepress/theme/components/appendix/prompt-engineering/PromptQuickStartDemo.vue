@@ -8,14 +8,14 @@
         <div class="header-content">
           <div class="title-group">
             <div class="title">
-              🕹️ 互动体验：提示词进化论
+              🕹️ Trải nghiệm tương tác: tiến hoá prompt
             </div>
             <div class="subtitle">
-              不要一次性写好，试着像搭积木一样优化你的指令。
+              Đừng cố viết hoàn hảo ngay, hãy thử tối ưu prompt từng khối như xếp lego.
             </div>
           </div>
           <div class="controls">
-            <span class="label">选择任务：</span>
+            <span class="label">Chọn tác vụ:</span>
             <el-select
               v-model="taskId"
               style="width: 160px"
@@ -33,16 +33,16 @@
         </div>
       </template>
 
-      <!-- 游戏区 -->
+      <!-- Khu chơi -->
       <div class="game-area">
-        <!-- 左侧：提示词构建 -->
+        <!-- Bên trái: dựng prompt -->
         <div class="prompt-builder">
           <div class="section-title">
-            你的指令 (Prompt)
+            Chỉ thị của bạn (Prompt)
           </div>
           
           <div class="prompt-box">
-            <!-- 基础层 -->
+            <!-- Lớp cơ bản -->
             <div
               class="block base"
               :class="{ active: true }"
@@ -51,7 +51,7 @@
               <span class="text">{{ basePrompt }}</span>
             </div>
 
-            <!-- 进阶层：清晰指令 -->
+            <!-- Lớp nâng cao: chỉ thị rõ ràng -->
             <div
               v-if="level >= 1"
               class="block clear animate-in"
@@ -60,7 +60,7 @@
               <span class="text">{{ clearPromptAddon }}</span>
             </div>
 
-            <!-- 专家层：结构化 -->
+            <!-- Lớp chuyên gia: có cấu trúc -->
             <div
               v-if="level >= 2"
               class="block pro animate-in"
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <!-- 升级按钮 -->
+          <!-- Nút nâng cấp -->
           <div class="upgrade-controls">
             <div class="level-info">
               <el-tag
@@ -94,15 +94,15 @@
                   icon="Minus"
                   @click="downgrade"
                 >
-                  ➖ 降级
+                  ➖ Hạ cấp
                 </el-button>
-                <el-button 
-                  type="primary" 
+                <el-button
+                  type="primary"
                   :disabled="level === 2"
                   icon="Plus"
                   @click="upgrade"
                 >
-                  升级 ➕
+                  Nâng cấp ➕
                 </el-button>
               </el-button-group>
             </div>
@@ -115,15 +115,15 @@
             style="width: 100%; font-weight: bold; font-size: 1.1rem;"
             @click="run"
           >
-            {{ isRunning ? '生成中...' : '🚀 发送给 AI' }}
+            {{ isRunning ? 'Đang sinh...' : '🚀 Gửi cho AI' }}
           </el-button>
         </div>
 
-        <!-- 右侧：AI 模拟输出 -->
+        <!-- Bên phải: output AI mô phỏng -->
         <div class="chat-preview">
           <div class="section-title">
-            <span>AI 回复 (Output)</span>
-            <!-- 历史记录切换 -->
+            <span>Phản hồi AI (Output)</span>
+            <!-- Chuyển đổi lịch sử -->
             <div
               v-if="hasAnyHistory"
               class="history-tabs"
@@ -144,20 +144,20 @@
           </div>
 
           <div class="chat-window">
-            <!-- 空状态 -->
+            <!-- Trạng thái rỗng -->
             <div
               v-if="!hasRun && !hasAnyHistory"
               class="empty-state"
             >
               <el-empty
-                description="点击左侧“发送”按钮，看看 AI 会怎么回。"
+                description="Bấm nút 'Gửi' bên trái để xem AI trả lời."
                 :image-size="100"
               />
             </div>
 
-            <!-- 内容区域 -->
+            <!-- Vùng nội dung -->
             <div v-else>
-              <!-- 比较模式提示 -->
+              <!-- Gợi ý chế độ so sánh -->
               <el-alert
                 v-if="viewLevel !== level"
                 type="info"
@@ -166,14 +166,14 @@
                 style="margin-bottom: 12px;"
               >
                 <template #title>
-                  正在查看 Level {{ viewLevel }} 的历史记录 (当前是 L{{ level }})
+                  Đang xem lịch sử Level {{ viewLevel }} (hiện tại là L{{ level }})
                   <el-button
                     link
                     type="primary"
                     style="padding: 0; vertical-align: baseline;"
                     @click="viewLevel = level"
                   >
-                    回到当前
+                    Quay lại level hiện tại
                   </el-button>
                 </template>
               </el-alert>
@@ -200,7 +200,7 @@
                 </div>
               </div>
               
-              <!-- 点评气泡 -->
+              <!-- Bong bóng nhận xét -->
               <div
                 v-if="(!isRunning || viewLevel !== level) && getOutputForLevel(viewLevel)"
                 class="feedback-bubble animate-pop"
@@ -224,9 +224,9 @@
 import { computed, ref } from 'vue'
 
 const tasks = [
-  { id: 'copy', label: '写小红书文案' },
-  { id: 'summary', label: '总结会议纪要' },
-  { id: 'code', label: '写代码函数' }
+  { id: 'copy', label: 'Viết caption mạng xã hội' },
+  { id: 'summary', label: 'Tóm tắt biên bản họp' },
+  { id: 'code', label: 'Viết hàm code' }
 ]
 
 const taskId = ref('copy')
@@ -235,9 +235,9 @@ const isRunning = ref(false)
 const hasRun = ref(false)
 const displayedOutput = ref('')
 
-// 存储历史输出：{ 0: "...", 1: "..." }
+// Lưu lịch sử output: { 0: "...", 1: "..." }
 const outputs = ref({})
-const viewLevel = ref(0) // 当前查阅的 Level
+const viewLevel = ref(0) // Level đang được xem
 
 const hasAnyHistory = computed(() => Object.keys(outputs.value).length > 0)
 const availableLevels = computed(() => Object.keys(outputs.value).map(Number).sort())
@@ -252,8 +252,8 @@ const reset = () => {
 
 const upgrade = () => {
   if (level.value < 2) level.value++
-  hasRun.value = false 
-  viewLevel.value = level.value // 切换到新等级时，视角跟随
+  hasRun.value = false
+  viewLevel.value = level.value // khi đổi level, viewpoint cũng theo
 }
 
 const downgrade = () => {
@@ -262,26 +262,26 @@ const downgrade = () => {
   viewLevel.value = level.value
 }
 
-const levelLabel = computed(() => ['随口一说', '清晰指令', '结构化 Prompt'][level.value])
+const levelLabel = computed(() => ['Nói bừa', 'Chỉ thị rõ ràng', 'Prompt có cấu trúc'][level.value])
 const levelColor = computed(() => ['info', 'warning', 'success'][level.value])
 const levelColorCode = computed(() => ['#909399', '#e6a23c', '#67c23a'][level.value])
 
-// Prompt 内容配置
+// Cấu hình nội dung prompt
 const promptConfig = {
   copy: {
-    base: '写个咖啡杯文案',
-    clear: '+ 风格：小红书，轻松活泼。长度：100字左右。卖点：颜值高、保温好。',
-    pro: '+ 角色：资深种草博主\n+ 结构：痛点 -> 卖点 -> 场景 -> 结尾互动\n+ 格式：多用 Emoji，分段清晰'
+    base: 'Viết caption cho cốc cà phê',
+    clear: '+ Phong cách: mạng xã hội, nhẹ nhàng tươi vui. Độ dài: khoảng 100 chữ. Điểm bán: ngoại hình đẹp, giữ nhiệt tốt.',
+    pro: '+ Vai trò: blogger review hàng kỳ cựu\n+ Cấu trúc: nỗi đau -> điểm bán -> bối cảnh -> tương tác cuối\n+ Định dạng: dùng nhiều emoji, chia đoạn rõ ràng'
   },
   summary: {
-    base: '帮我总结一下这段文字',
-    clear: '+ 要求：提炼 3 个核心要点，每点不超过 20 字。',
-    pro: '+ 角色：专业秘书\n+ 格式：Markdown 无序列表\n+ 排除：不要客套话，只要干货'
+    base: 'Tóm tắt đoạn văn này giúp tôi',
+    clear: '+ Yêu cầu: rút ra 3 ý chính, mỗi ý không quá 20 chữ.',
+    pro: '+ Vai trò: thư ký chuyên nghiệp\n+ Định dạng: danh sách bullet Markdown\n+ Loại trừ: không khách sáo, chỉ lấy nội dung cốt lõi'
   },
   code: {
-    base: '写个排序函数',
-    clear: '+ 语言：JavaScript (ES6)。要求：快速排序，带注释。',
-    pro: '+ 角色：资深前端架构师\n+ 健壮性：处理边界情况（空数组、非数组）\n+ 示例：附带一个测试用例'
+    base: 'Viết một hàm sort',
+    clear: '+ Ngôn ngữ: JavaScript (ES6). Yêu cầu: quick sort, có comment.',
+    pro: '+ Vai trò: kiến trúc sư frontend kỳ cựu\n+ Robustness: xử lý edge case (mảng rỗng, không phải mảng)\n+ Ví dụ: kèm một test case'
   }
 }
 
@@ -289,46 +289,46 @@ const basePrompt = computed(() => promptConfig[taskId.value].base)
 const clearPromptAddon = computed(() => promptConfig[taskId.value].clear)
 const proPromptAddon = computed(() => promptConfig[taskId.value].pro)
 
-// 模拟输出内容
+// Nội dung output mô phỏng
 const outputConfig = {
   copy: [
-    '这个咖啡杯真的很好用，推荐给大家。它颜色很好看，而且保温效果也不错。快去买吧。',
-    '✨ 早八人必备！这个保温杯颜值真的绝绝子！💖 拿在手里超有质感，而且保温效果超级好，早上装的咖啡下午还是热的！☕️ 放在包里也不漏水，集美们冲鸭！',
-    '👋 还在为冷咖啡烦恼？\n\n😫 **痛点**：早起冲的咖啡，还没到公司就凉了？\n\n🌟 **安利**：这款“拿铁杯”必须拥有！\n1️⃣ **颜值主义**：奶油白配色，随手一拍就是大片 📸\n2️⃣ **硬核保温**：实测 6 小时依然烫嘴 🔥\n3️⃣ **办公绝配**：密封圈设计，随便塞包里不漏洒 🎒\n\n👇 评论区告诉我，你最喜欢哪个颜色？'
+    'Chiếc cốc cà phê này thực sự dễ dùng, mình giới thiệu cho mọi người. Màu đẹp, giữ nhiệt cũng tốt. Mua thôi.',
+    '✨ Vật bất ly thân của hội đi làm sớm! Chiếc cốc giữ nhiệt này xinh hết nấc! 💖 Cầm trên tay là thấy chất, giữ nhiệt cực tốt, sáng pha cà phê chiều vẫn còn nóng! ☕️ Bỏ vào balo cũng không rò, hội chị em vào lụm thôi!',
+    '👋 Vẫn đang khổ sở vì cà phê nguội?\n\n😫 **Nỗi đau**: pha cà phê sáng, chưa đến công ty đã nguội?\n\n🌟 **Gợi ý**: chiếc "cốc latte" này nhất định phải có!\n1️⃣ **Đẹp là chính**: tông trắng kem, chụp đại cũng ra ảnh chill 📸\n2️⃣ **Giữ nhiệt khủng**: test thực tế 6 tiếng vẫn còn nóng 🔥\n3️⃣ **Bạn đồng hành văn phòng**: thiết kế gioăng kín, ném vào balo không lo rò rỉ 🎒\n\n👇 Bình luận cho mình biết bạn thích màu nào nhất nhé!'
   ],
   summary: [
-    '这段文字主要讲了关于...（此处省略500字流水账）...总之就是这些内容。',
-    '- 核心观点：用户增长放缓\n- 主要原因：市场竞争加剧\n- 建议：加大投放力度',
-    '### 📝 会议核心摘要\n\n* **📉 现状**：Q3 用户增长率下降 15%\n* **🔍 原因**：竞品推出低价策略，分流明显\n* **🚀 行动**：下周启动“老用户回馈”专项活动'
+    'Đoạn này chủ yếu nói về... (lược bỏ 500 chữ lan man)... tóm lại là vậy.',
+    '- Quan điểm chính: tăng trưởng người dùng chậm lại\n- Nguyên nhân chính: cạnh tranh thị trường gay gắt hơn\n- Khuyến nghị: tăng ngân sách marketing',
+    '### 📝 Tóm tắt cốt lõi cuộc họp\n\n* **📉 Hiện trạng**: tăng trưởng người dùng Q3 giảm 15%\n* **🔍 Nguyên nhân**: đối thủ tung chiến lược giá rẻ, hút mạnh người dùng\n* **🚀 Hành động**: tuần tới khởi động chương trình "tri ân khách hàng cũ"'
   ],
   code: [
-    'function sort(arr) { return arr.sort() } // 没写快排，或者写了但没注释',
-    '// 快速排序\nconst quickSort = (arr) => {\n  if (arr.length <= 1) return arr;\n  const p = arr[0];\n  const left = arr.slice(1).filter(x => x < p);\n  const right = arr.slice(1).filter(x => x >= p);\n  return [...quickSort(left), p, ...quickSort(right)];\n}',
-    '/**\n * 快速排序 (ES6+)\n * @param {Array} arr - 输入数组\n * @returns {Array} - 排序后的新数组\n */\nconst quickSort = (arr) => {\n  // 🛡️ 边界检查\n  if (!Array.isArray(arr)) throw new Error("Input must be an array");\n  if (arr.length <= 1) return arr;\n\n  const pivot = arr[0];\n  const left = [];\n  const right = [];\n\n  // 分区\n  for (let i = 1; i < arr.length; i++) {\n    arr[i] < pivot ? left.push(arr[i]) : right.push(arr[i]);\n  }\n\n  return [...quickSort(left), pivot, ...quickSort(right)];\n};\n\n// ✅ 测试用例\nconsole.log(quickSort([3, 1, 4, 1, 5, 9])); // [1, 1, 3, 4, 5, 9]'
+    'function sort(arr) { return arr.sort() } // chưa viết quick sort, hoặc có viết nhưng không comment',
+    '// Quick sort\nconst quickSort = (arr) => {\n  if (arr.length <= 1) return arr;\n  const p = arr[0];\n  const left = arr.slice(1).filter(x => x < p);\n  const right = arr.slice(1).filter(x => x >= p);\n  return [...quickSort(left), p, ...quickSort(right)];\n}',
+    '/**\n * Quick Sort (ES6+)\n * @param {Array} arr - mảng đầu vào\n * @returns {Array} - mảng mới đã sort\n */\nconst quickSort = (arr) => {\n  // 🛡️ Kiểm tra biên\n  if (!Array.isArray(arr)) throw new Error("Input must be an array");\n  if (arr.length <= 1) return arr;\n\n  const pivot = arr[0];\n  const left = [];\n  const right = [];\n\n  // Phân vùng\n  for (let i = 1; i < arr.length; i++) {\n    arr[i] < pivot ? left.push(arr[i]) : right.push(arr[i]);\n  }\n\n  return [...quickSort(left), pivot, ...quickSort(right)];\n};\n\n// ✅ Test case\nconsole.log(quickSort([3, 1, 4, 1, 5, 9])); // [1, 1, 3, 4, 5, 9]'
   ]
 }
 
 const feedbackConfig = {
   copy: [
-    { title: '太泛了', text: 'AI 不知道你要什么风格，只能给你“说明书”式的文案。' },
-    { title: '好多了', text: '有了风格和卖点，AI 知道怎么“说话”了，但结构还不够抓人。' },
-    { title: '专业级', text: '指定了角色和结构（痛点-卖点），输出逻辑清晰，转化率更高。' }
+    { title: 'Quá chung chung', text: 'AI không biết bạn muốn phong cách nào, chỉ ra được caption kiểu "hướng dẫn sử dụng".' },
+    { title: 'Khá hơn nhiều', text: 'Đã có phong cách và điểm bán, AI biết cách "nói chuyện" rồi, nhưng cấu trúc chưa đủ hút.' },
+    { title: 'Cấp chuyên nghiệp', text: 'Đã chỉ định vai trò và cấu trúc (nỗi đau - điểm bán), output logic rõ ràng, tỉ lệ chuyển đổi cao hơn.' }
   ],
   summary: [
-    { title: '抓不住重点', text: '没有字数和格式限制，AI 可能会罗嗦一大堆。' },
-    { title: '清晰明了', text: '限制了字数和要点数量，可读性大幅提升。' },
-    { title: '结构化交付', text: '指定 Markdown 格式和角色，直接可用，无需二次编辑。' }
+    { title: 'Không bắt được trọng tâm', text: 'Không giới hạn số chữ và định dạng, AI dễ viết dài dòng.' },
+    { title: 'Rõ ràng dễ hiểu', text: 'Giới hạn số chữ và số ý chính, dễ đọc hơn hẳn.' },
+    { title: 'Bàn giao có cấu trúc', text: 'Chỉ định format Markdown và vai trò, dùng được ngay, không phải edit lại.' }
   ],
   code: [
-    { title: '不可用', text: '可能偷懒用内置函数，或者缺少注释，难以维护。' },
-    { title: '可用', text: '代码正确，有基本注释，但缺乏健壮性考虑。' },
-    { title: '生产级', text: '考虑了边界情况和类型检查，直接复制就能进项目。' }
+    { title: 'Không dùng được', text: 'Có thể lười dùng hàm built-in hoặc thiếu comment, khó maintain.' },
+    { title: 'Dùng được', text: 'Code chạy đúng, có comment cơ bản, nhưng chưa nghĩ đến tính robust.' },
+    { title: 'Cấp production', text: 'Đã nghĩ đến edge case và type check, copy thẳng vào project được.' }
   ]
 }
 
 const getFeedbackForLevel = (l) => feedbackConfig[taskId.value][l]
 
-// 获取某等级的输出（如果是当前等级正在运行，显示实时打字内容；否则显示历史记录）
+// Lấy output cho một level (nếu là level hiện tại đang chạy thì hiển thị typing realtime; ngược lại hiển thị lịch sử)
 const getOutputForLevel = (l) => {
   if (l === level.value && isRunning.value) return displayedOutput.value
   return outputs.value[l] || ''
@@ -353,9 +353,9 @@ const renderMarkdown = (text) => {
 
 const run = () => {
   if (isRunning.value) return
-  // 直接显示结果，不进行模拟等待
+  // Hiển thị kết quả trực tiếp, không mô phỏng chờ
   hasRun.value = true
-  viewLevel.value = level.value // 强制看当前
+  viewLevel.value = level.value // ép xem level hiện tại
   
   const fullText = outputConfig[taskId.value][level.value]
   displayedOutput.value = fullText
@@ -420,7 +420,7 @@ const run = () => {
   }
 }
 
-/* 左侧构建区 */
+/* Khu vực builder bên trái */
 .prompt-builder {
   display: flex;
   flex-direction: column;
@@ -516,7 +516,7 @@ const run = () => {
   font-weight: 700;
 }
 
-/* 右侧预览区 */
+/* Khu vực preview bên phải */
 .chat-preview {
   display: flex;
   flex-direction: column;

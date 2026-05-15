@@ -1,16 +1,16 @@
 <template>
   <div class="k8s-services-demo">
     <div class="demo-header">
-      <h4>Kubernetes 服务生态全景</h4>
+      <h4>Toàn cảnh hệ sinh thái Kubernetes services</h4>
       <p class="demo-desc">
-        探索 AWS 和阿里云上的 K8s 服务及配套生态
+        Khám phá K8s service và hệ sinh thái đi kèm trên AWS và Alibaba Cloud
       </p>
     </div>
 
     <div class="k8s-architecture">
       <div class="arch-layer control-plane">
         <div class="layer-title">
-          控制平面
+          Control plane
         </div>
         <div class="layer-content">
           <div class="service-box">
@@ -18,7 +18,7 @@
               EKS / ACK
             </div>
             <div class="service-desc">
-              托管 Kubernetes 控制平面
+              Managed Kubernetes control plane
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
 
       <div class="arch-layer worker-nodes">
         <div class="layer-title">
-          工作节点
+          Worker node
         </div>
         <div class="layer-content">
           <div class="node-types">
@@ -38,7 +38,7 @@
                 EC2/ECS
               </div>
               <div class="node-desc">
-                标准计算节点
+                Compute node tiêu chuẩn
               </div>
             </div>
             <div class="node-box">
@@ -49,7 +49,7 @@
                 Fargate/ECI
               </div>
               <div class="node-desc">
-                Serverless 节点
+                Serverless node
               </div>
             </div>
             <div class="node-box">
@@ -57,10 +57,10 @@
                 🎯
               </div>
               <div class="node-name">
-                Spot/抢占式
+                Spot/Preemptible
               </div>
               <div class="node-desc">
-                低成本竞价节点
+                Node bid giá thấp
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
 
       <div class="arch-layer addons">
         <div class="layer-title">
-          插件生态
+          Hệ sinh thái plugin
         </div>
         <div class="layer-content">
           <div class="addon-grid">
@@ -92,7 +92,7 @@
                 EBS/EFS CSI
               </div>
               <div class="addon-aliyun">
-                云盘/NAS CSI
+                Cloud Disk/NAS CSI
               </div>
             </div>
             <div class="addon-card">

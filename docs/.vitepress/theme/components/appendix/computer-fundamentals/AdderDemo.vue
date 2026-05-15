@@ -1,7 +1,7 @@
 <template>
   <div class="adder-demo">
     <div class="demo-label">
-      二进制加法器 ── 输入 0–15 的两个数，观察逐位计算过程
+      Bộ cộng nhị phân ── nhập hai số trong khoảng 0–15, quan sát quá trình tính từng bit
     </div>
 
     <div class="control-row">
@@ -56,7 +56,7 @@
         <span class="binary-dec">= {{ clampedB }}</span>
       </div>
       <div class="binary-row sum-row">
-        <span class="binary-label">结果</span>
+        <span class="binary-label">Kết quả</span>
         <span class="binary-bits">
           <span
             v-for="(b, i) in bitsSum"
@@ -68,7 +68,7 @@
         <span class="binary-dec">= {{ fourBitResult }}</span>
       </div>
       <div class="bit-labels">
-        <span v-for="i in 4" :key="i" class="bit-label">第{{ 4 - i }}位</span>
+        <span v-for="i in 4" :key="i" class="bit-label">Bit {{ 4 - i }}</span>
       </div>
     </div>
 
@@ -82,12 +82,12 @@
         @mouseleave="activeBit = null"
       >
         <div class="stage-head">
-          <span class="stage-pos">第{{ stage.bitPos }}位</span>
+          <span class="stage-pos">Bit {{ stage.bitPos }}</span>
           <span
             class="stage-type"
             :class="stage.carryIn !== null ? 'full' : 'half'"
           >
-            {{ stage.carryIn !== null ? '全加器' : '半加器' }}
+            {{ stage.carryIn !== null ? 'Cộng đầy đủ' : 'Nửa cộng' }}
           </span>
         </div>
         <div class="stage-io">
@@ -104,7 +104,7 @@
     </div>
 
     <div class="demo-caption">
-      鼠标悬停某一位，查看该位加法器的输入 / 输出 · 就像手算竖式"逢二进一"
+      Di chuột vào một bit để xem đầu vào / đầu ra của bộ cộng tại bit đó · giống như đặt phép tính tay theo quy tắc "gặp 2 nhớ 1"
     </div>
   </div>
 </template>
@@ -173,7 +173,7 @@ const fourBitResult = computed(() =>
 const overflow = computed(() => clampedA.value + clampedB.value > 15)
 const resultDec = computed(() =>
   overflow.value
-    ? `${fourBitResult.value}（溢出）`
+    ? `${fourBitResult.value} (tràn)`
     : String(fourBitResult.value)
 )
 </script>

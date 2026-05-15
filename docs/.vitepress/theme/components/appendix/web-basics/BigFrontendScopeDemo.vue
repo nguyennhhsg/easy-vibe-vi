@@ -2,8 +2,8 @@
   <div class="bigfe-demo">
     <div class="demo-header">
       <span class="icon">🌐</span>
-      <span class="title">前端 vs 大前端</span>
-      <span class="subtitle">了解不同平台的运行环境和技术栈</span>
+      <span class="title">Frontend vs Big Frontend</span>
+      <span class="subtitle">Tìm hiểu môi trường chạy và technology stack của các nền tảng khác nhau</span>
     </div>
 
     <div class="demo-content">
@@ -23,7 +23,7 @@
       <div class="cards">
         <div class="card">
           <div class="label">
-            运行环境
+            Môi trường chạy
           </div>
           <div class="value">
             {{ currentData.runtime }}
@@ -31,7 +31,7 @@
         </div>
         <div class="card">
           <div class="label">
-            主要技术
+            Công nghệ chính
           </div>
           <div class="value">
             {{ currentData.stack }}
@@ -39,7 +39,7 @@
         </div>
         <div class="card">
           <div class="label">
-            发布方式
+            Cách phát hành
           </div>
           <div class="value">
             {{ currentData.release }}
@@ -49,7 +49,7 @@
 
       <div class="skills">
         <div class="skills-title">
-          哪些能力是"共通的"？
+          Những năng lực nào là "dùng chung"?
         </div>
         <div class="tags">
           <span
@@ -63,7 +63,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>大前端不是"会更多框架"，而是用同一套工程能力，把体验交付到不同平台。
+      <strong>Tư tưởng cốt lõi:</strong> Big Frontend không phải là "biết nhiều framework hơn", mà là dùng cùng một bộ năng lực kỹ thuật để mang trải nghiệm tới các nền tảng khác nhau.
     </div>
   </div>
 </template>
@@ -72,59 +72,59 @@
 import { ref, computed } from 'vue'
 
 const platforms = [
-  { key: 'web', label: 'Web网站', icon: '🌐' },
-  { key: 'h5', label: 'H5活动页', icon: '📱' },
-  { key: 'miniapp', label: '小程序', icon: '🧩' },
-  { key: 'native', label: '原生App', icon: '📲' },
-  { key: 'cross', label: '跨端App', icon: '🧱' },
-  { key: 'desktop', label: '桌面应用', icon: '🖥️' }
+  { key: 'web', label: 'Website Web', icon: '🌐' },
+  { key: 'h5', label: 'Trang H5 sự kiện', icon: '📱' },
+  { key: 'miniapp', label: 'Mini-program', icon: '🧩' },
+  { key: 'native', label: 'App native', icon: '📲' },
+  { key: 'cross', label: 'App cross-platform', icon: '🧱' },
+  { key: 'desktop', label: 'Ứng dụng desktop', icon: '🖥️' }
 ]
 
 const current = ref('web')
 
 const data = {
   web: {
-    runtime: '浏览器 (Chrome/Safari/Edge)',
+    runtime: 'Trình duyệt (Chrome/Safari/Edge)',
     stack: 'HTML + CSS + JavaScript / Vue / React',
-    release: '部署到服务器/静态托管，用户刷新即可更新'
+    release: 'Deploy lên server/static hosting, người dùng refresh là cập nhật'
   },
   h5: {
-    runtime: '手机浏览器 / App 内的 WebView',
-    stack: '同 Web，但更关注性能与兼容',
-    release: '发链接/扫码即用，迭代很快'
+    runtime: 'Trình duyệt di động / WebView trong App',
+    stack: 'Giống Web, nhưng chú trọng performance và tương thích hơn',
+    release: 'Gửi link/quét mã là dùng ngay, lặp lại rất nhanh'
   },
   miniapp: {
-    runtime: '小程序运行时（微信/支付宝等）',
-    stack: '小程序框架 + JS/TS + 组件',
-    release: '需要审核/发布（比网页慢一些）'
+    runtime: 'Runtime mini-program (WeChat/Alipay v.v.)',
+    stack: 'Framework mini-program + JS/TS + component',
+    release: 'Cần kiểm duyệt/phát hành (chậm hơn web một chút)'
   },
   native: {
-    runtime: 'iOS/Android 原生系统',
+    runtime: 'Hệ thống native iOS/Android',
     stack: 'Swift/Objective-C / Kotlin/Java',
-    release: '应用商店上架（流程最慢，但能力最强）'
+    release: 'Lên app store (quy trình chậm nhất, nhưng năng lực mạnh nhất)'
   },
   cross: {
-    runtime: '原生壳 + 跨端引擎',
-    stack: 'React Native / Flutter（用一套代码做多端）',
-    release: '仍走商店流程，但研发复用更高'
+    runtime: 'Vỏ native + engine cross-platform',
+    stack: 'React Native / Flutter (một bộ code chạy nhiều nền tảng)',
+    release: 'Vẫn theo quy trình store, nhưng tái sử dụng code cao hơn'
   },
   desktop: {
     runtime: 'Windows/macOS/Linux',
-    stack: 'Electron / Tauri（用 Web 技术做桌面）',
-    release: '打包成安装包/自动更新'
+    stack: 'Electron / Tauri (dùng Web để làm desktop)',
+    release: 'Đóng gói thành installer/tự động cập nhật'
   }
 }
 
 const currentData = computed(() => data[current.value] || data.web)
 
 const commonSkills = [
-  'HTTP/网络',
-  '性能优化',
-  '工程化与构建',
-  '组件化',
-  '状态管理',
-  '调试与排错',
-  '用户体验'
+  'HTTP/Mạng',
+  'Tối ưu hiệu năng',
+  'Kỹ thuật và build',
+  'Component hoá',
+  'Quản lý state',
+  'Debug và xử lý lỗi',
+  'Trải nghiệm người dùng'
 ]
 </script>
 

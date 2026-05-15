@@ -3,7 +3,7 @@
     <div class="av-terminal">
       <div class="term-bar">
         <span class="dot r" /><span class="dot y" /><span class="dot g" />
-        <span class="term-title">API 版本控制演示</span>
+        <span class="term-title">Demo quản lý version API</span>
       </div>
       <div ref="termEl" class="term-body">
         <div v-for="(l, i) in lines" :key="i" class="t-line">
@@ -31,50 +31,50 @@
         <code>{{ op.cmd }}</code>
       </button>
       <button class="av-btn av-btn--reset" :disabled="running" @click="reset">
-        重置
+        Đặt lại
       </button>
     </div>
 
     <div class="av-versions">
       <div class="version-col" :class="{ active: activeVersion === 'v1' }">
         <div class="version-header v1">
-          <span class="version-name">v1 (旧版)</span>
-          <span class="version-status">兼容旧客户端</span>
+          <span class="version-name">v1 (bản cũ)</span>
+          <span class="version-status">Tương thích client cũ</span>
         </div>
         <div class="version-body">
           <div class="api-item">
             <code>GET /v1/users</code>
-            <span class="api-desc">返回 name, email</span>
+            <span class="api-desc">Trả về name, email</span>
           </div>
           <div class="api-item">
             <code>POST /v1/orders</code>
-            <span class="api-desc">接收 items 数组</span>
+            <span class="api-desc">Nhận mảng items</span>
           </div>
         </div>
       </div>
 
       <div class="version-arrow">
-        <span class="arrow-text">升级</span>
+        <span class="arrow-text">Nâng cấp</span>
         <span class="arrow-symbol">→</span>
       </div>
 
       <div class="version-col" :class="{ active: activeVersion === 'v2' }">
         <div class="version-header v2">
-          <span class="version-name">v2 (新版)</span>
-          <span class="version-status">新功能在这里</span>
+          <span class="version-name">v2 (bản mới)</span>
+          <span class="version-status">Tính năng mới ở đây</span>
         </div>
         <div class="version-body">
           <div class="api-item">
             <code>GET /v2/users</code>
-            <span class="api-desc">返回 name, email, avatar, phone</span>
+            <span class="api-desc">Trả về name, email, avatar, phone</span>
           </div>
           <div class="api-item">
             <code>POST /v2/orders</code>
-            <span class="api-desc">接收 items + coupons</span>
+            <span class="api-desc">Nhận items + coupons</span>
           </div>
           <div class="api-item new">
             <code>POST /v2/orders/batch</code>
-            <span class="api-desc">🆕 批量下单</span>
+            <span class="api-desc">🆕 Đặt hàng hàng loạt</span>
           </div>
         </div>
       </div>
@@ -88,111 +88,111 @@
 import { ref, nextTick } from 'vue'
 
 const termEl = ref(null)
-const lines = ref([{ kind: 'dim', text: '# API 版本控制：让新旧接口和平共处' }])
+const lines = ref([{ kind: 'dim', text: '# Quản lý version API: giúp interface cũ và mới cùng tồn tại' }])
 const typing = ref('')
 const running = ref(false)
 const active = ref(null)
 const activeVersion = ref('')
-const hint = ref('点击按钮，了解 API 版本控制的策略和最佳实践。')
+const hint = ref('Nhấn nút để tìm hiểu chiến lược và best practice cho việc quản lý version API.')
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 const ops = [
   {
     id: 'why',
-    cmd: '为什么需要版本控制?',
+    cmd: 'Vì sao cần version?',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 场景：你的 App 有 100 万用户' },
+      { kind: 'dim', text: '# Tình huống: App của bạn có 1 triệu người dùng' },
       { kind: 'dim', text: '' },
-      { kind: 'yel', text: '问题：需要修改订单接口，添加新字段、废弃旧字段' },
+      { kind: 'yel', text: 'Vấn đề: cần đổi interface đơn hàng, thêm field mới, bỏ field cũ' },
       { kind: 'dim', text: '' },
-      { kind: 'red', text: '❌ 如果不做版本控制：' },
-      { kind: 'red', text: '   新 App 调用新接口 → 正常' },
-      { kind: 'red', text: '   旧 App 调用新接口 → 字段缺失，崩溃!' },
+      { kind: 'red', text: '❌ Nếu không quản lý version:' },
+      { kind: 'red', text: '   App mới gọi interface mới → bình thường' },
+      { kind: 'red', text: '   App cũ gọi interface mới → thiếu field, crash!' },
       { kind: 'dim', text: '' },
-      { kind: 'grn', text: '✅ 正确做法：' },
-      { kind: 'grn', text: '   /v1/orders - 旧接口，继续服务旧 App' },
-      { kind: 'grn', text: '   /v2/orders - 新接口，新功能在这里' }
+      { kind: 'grn', text: '✅ Cách làm đúng:' },
+      { kind: 'grn', text: '   /v1/orders - interface cũ, tiếp tục phục vụ app cũ' },
+      { kind: 'grn', text: '   /v2/orders - interface mới, tính năng mới ở đây' }
     ],
-    hint: '版本控制让新旧客户端都能正常工作。旧 App 用户可以慢慢升级，不会突然崩溃。',
+    hint: 'Versioning giúp client cũ và mới đều chạy ổn. Người dùng app cũ có thời gian từ từ nâng cấp mà không bị crash đột ngột.',
     do: () => {
       activeVersion.value = ''
     }
   },
   {
     id: 'url',
-    cmd: '方式1: URL 路径版本',
+    cmd: 'Cách 1: version trong URL path',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 最常用的方式' },
+      { kind: 'dim', text: '# Cách phổ biến nhất' },
       { kind: 'dim', text: '' },
       { kind: 'grn', text: 'GET /v1/users' },
       { kind: 'grn', text: 'GET /v2/users' },
       { kind: 'grn', text: 'GET /v3/users' },
       { kind: 'dim', text: '' },
-      { kind: 'dim', text: '优点：直观、易缓存、浏览器友好' },
-      { kind: 'dim', text: '缺点：URL 变长' }
+      { kind: 'dim', text: 'Ưu điểm: trực quan, dễ cache, thân thiện với browser' },
+      { kind: 'dim', text: 'Nhược điểm: URL dài hơn' }
     ],
-    hint: 'URL 路径版本是最常用的方式。GitHub、Twitter、Stripe 都用这种方式。',
+    hint: 'Version trong URL path là cách phổ biến nhất. GitHub, Twitter, Stripe đều dùng cách này.',
     do: () => {
       activeVersion.value = 'v1'
     }
   },
   {
     id: 'header',
-    cmd: '方式2: Header 版本',
+    cmd: 'Cách 2: version qua Header',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 通过请求头指定版本' },
+      { kind: 'dim', text: '# Chỉ định version qua request header' },
       { kind: 'dim', text: '' },
       { kind: 'grn', text: 'GET /users' },
       { kind: 'grn', text: 'Accept: application/vnd.myapi.v2+json' },
       { kind: 'dim', text: '' },
-      { kind: 'dim', text: '或者：' },
+      { kind: 'dim', text: 'Hoặc:' },
       { kind: 'grn', text: 'GET /users' },
       { kind: 'grn', text: 'X-API-Version: 2' },
       { kind: 'dim', text: '' },
-      { kind: 'dim', text: '优点：URL 干净' },
-      { kind: 'dim', text: '缺点：不便调试、缓存复杂' }
+      { kind: 'dim', text: 'Ưu điểm: URL gọn' },
+      { kind: 'dim', text: 'Nhược điểm: khó debug, cache phức tạp' }
     ],
-    hint: 'Header 版本让 URL 更干净，但调试时需要额外设置 Header，不如 URL 版本直观。',
+    hint: 'Version qua Header giúp URL gọn nhưng khi debug phải set thêm Header, không trực quan bằng URL.',
     do: () => {
       activeVersion.value = 'v2'
     }
   },
   {
     id: 'query',
-    cmd: '方式3: 查询参数版本',
+    cmd: 'Cách 3: version qua query param',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 通过查询参数指定版本' },
+      { kind: 'dim', text: '# Chỉ định version qua query parameter' },
       { kind: 'dim', text: '' },
       { kind: 'grn', text: 'GET /users?version=1' },
       { kind: 'grn', text: 'GET /users?version=2' },
       { kind: 'dim', text: '' },
-      { kind: 'dim', text: '优点：简单、向后兼容' },
-      { kind: 'dim', text: '缺点：容易被忽略、不是 RESTful 标准' }
+      { kind: 'dim', text: 'Ưu điểm: đơn giản, dễ tương thích ngược' },
+      { kind: 'dim', text: 'Nhược điểm: dễ bị bỏ quên, không chuẩn RESTful' }
     ],
-    hint: '查询参数版本简单但不够"正规"。适合内部 API 或快速迭代的项目。',
+    hint: 'Version qua query parameter đơn giản nhưng không "chuẩn" lắm. Hợp với API nội bộ hoặc dự án iterate nhanh.',
     do: () => {
       activeVersion.value = ''
     }
   },
   {
     id: 'best',
-    cmd: '最佳实践',
+    cmd: 'Best practice',
     ok: () => true,
     output: [
-      { kind: 'dim', text: '# 版本控制的最佳实践' },
+      { kind: 'dim', text: '# Best practice cho versioning' },
       { kind: 'dim', text: '' },
-      { kind: 'grn', text: '1. 从一开始就加版本号 /v1/' },
-      { kind: 'grn', text: '2. 新功能放新版本，旧版本保持稳定' },
-      { kind: 'grn', text: '3. 设置废弃时间线（如 v1 将在 2025-06 废弃）' },
-      { kind: 'grn', text: '4. 响应头标注当前版本和废弃信息' },
-      { kind: 'grn', text: '5. 文档明确标注每个版本的变更' }
+      { kind: 'grn', text: '1. Thêm version /v1/ ngay từ đầu' },
+      { kind: 'grn', text: '2. Tính năng mới ở version mới, version cũ giữ ổn định' },
+      { kind: 'grn', text: '3. Đặt timeline ngừng hỗ trợ (vd v1 sẽ ngừng 2025-06)' },
+      { kind: 'grn', text: '4. Response header báo version hiện tại và thông tin deprecated' },
+      { kind: 'grn', text: '5. Tài liệu ghi rõ các thay đổi giữa các version' }
     ],
-    hint: '版本控制不是"以后再说"的事，从第一天就应该规划好。废弃旧版本要给用户足够的迁移时间。',
+    hint: 'Versioning không phải việc "để sau", cần lên kế hoạch ngay từ ngày đầu. Khi deprecate version cũ phải cho người dùng đủ thời gian di chuyển.',
     do: () => {
       activeVersion.value = 'v2'
     }
@@ -235,10 +235,10 @@ function scroll() {
 }
 
 function reset() {
-  lines.value = [{ kind: 'dim', text: '# API 版本控制：让新旧接口和平共处' }]
+  lines.value = [{ kind: 'dim', text: '# Quản lý version API: giúp interface cũ và mới cùng tồn tại' }]
   active.value = null
   activeVersion.value = ''
-  hint.value = '点击按钮，了解 API 版本控制的策略和最佳实践。'
+  hint.value = 'Nhấn nút để tìm hiểu chiến lược và best practice cho việc quản lý version API.'
   typing.value = ''
   running.value = false
 }
@@ -379,7 +379,7 @@ function reset() {
   display: none;
 }
 .av-btn--reset::after {
-  content: '重置';
+  content: 'Đặt lại';
   font-size: 0.7rem;
   color: #585b70;
 }

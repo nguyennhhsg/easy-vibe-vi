@@ -2,7 +2,7 @@
   <div class="demo">
     <div class="header">
       <span class="icon">📦</span>
-      <span class="title">data 字段设计规范</span>
+      <span class="title">Quy chuẩn thiết kế field data</span>
     </div>
 
     <div class="tabs">
@@ -18,21 +18,21 @@
 
     <div class="content">
       <div v-if="active === 'structure'" class="section">
-        <h4>单对象 vs 列表</h4>
+        <h4>Object đơn vs Danh sách</h4>
         <div class="compare-row">
           <div class="compare-col">
-            <div class="compare-title">单对象</div>
+            <div class="compare-title">Object đơn</div>
             <pre class="code-sm">
 {
   "code": 0,
   "data": {
     "id": 123,
-    "name": "张三"
+    "name": "Nguyễn Văn A"
   }
 }</pre>
           </div>
           <div class="compare-col">
-            <div class="compare-title">列表</div>
+            <div class="compare-title">Danh sách</div>
             <pre class="code-sm">
 {
   "code": 0,
@@ -47,12 +47,12 @@
           </div>
         </div>
         <div class="note">
-          列表数据包裹在 items 数组中，分页信息放在 pagination 对象
+          Dữ liệu danh sách bọc trong mảng items, thông tin phân trang đặt trong object pagination
         </div>
       </div>
 
       <div v-if="active === 'naming'" class="section">
-        <h4>字段命名规范</h4>
+        <h4>Quy ước đặt tên field</h4>
         <div class="rule-list">
           <div v-for="rule in namingRules" :key="rule.name" class="rule-item">
             <div class="rule-header">
@@ -70,7 +70,7 @@
       </div>
 
       <div v-if="active === 'datetime'" class="section">
-        <h4>时间格式设计</h4>
+        <h4>Thiết kế định dạng thời gian</h4>
         <div class="time-example">
           <pre class="code-block">
 {
@@ -81,55 +81,55 @@
         </div>
         <div class="time-rules">
           <div class="time-rule">
-            <span class="rule-label">格式</span>
+            <span class="rule-label">Định dạng</span>
             <span class="rule-value">ISO 8601</span>
           </div>
           <div class="time-rule">
-            <span class="rule-label">时区</span>
-            <span class="rule-value">UTC（Z 后缀）或明确偏移量</span>
+            <span class="rule-label">Múi giờ</span>
+            <span class="rule-value">UTC (hậu tố Z) hoặc offset rõ ràng</span>
           </div>
           <div class="time-rule">
-            <span class="rule-label">精度</span>
-            <span class="rule-value">毫秒 .000Z</span>
+            <span class="rule-label">Độ chính xác</span>
+            <span class="rule-value">Mili giây .000Z</span>
           </div>
           <div class="time-rule">
-            <span class="rule-label">命名</span>
-            <span class="rule-value">xxx_at 表示时间点，xxx_duration 表示时长</span>
+            <span class="rule-label">Cách đặt tên</span>
+            <span class="rule-value">xxx_at là mốc thời gian, xxx_duration là khoảng thời gian</span>
           </div>
         </div>
       </div>
 
       <div v-if="active === 'null'" class="section">
-        <h4>空值处理</h4>
+        <h4>Xử lý giá trị rỗng</h4>
         <div class="compare-row">
           <div class="compare-col good-col">
-            <div class="compare-title">✅ 推荐</div>
+            <div class="compare-title">✅ Khuyến nghị</div>
             <pre class="code-sm">
 {
-  "name": "张三",
+  "name": "Nguyễn Văn A",
   "nickname": null,
   "avatar": null
 }</pre>
-            <div class="compare-desc">字段存在但无值时返回 null</div>
+            <div class="compare-desc">Field tồn tại nhưng không có giá trị thì trả về null</div>
           </div>
           <div class="compare-col bad-col">
-            <div class="compare-title">❌ 不推荐</div>
+            <div class="compare-title">❌ Không khuyến nghị</div>
             <pre class="code-sm">
 {
-  "name": "张三"
+  "name": "Nguyễn Văn A"
 }</pre>
-            <div class="compare-desc">省略字段，前端需判断是否存在</div>
+            <div class="compare-desc">Bỏ field đi, frontend phải kiểm tra tồn tại</div>
           </div>
         </div>
         <div class="null-tips">
-          <div class="tip-item">空数组返回 <code>[]</code></div>
-          <div class="tip-item">空对象返回 <code>{}</code></div>
-          <div class="tip-item">前端可统一处理，无需判断字段是否存在</div>
+          <div class="tip-item">Mảng rỗng trả về <code>[]</code></div>
+          <div class="tip-item">Object rỗng trả về <code>{}</code></div>
+          <div class="tip-item">Frontend xử lý đồng nhất, không cần kiểm tra field có tồn tại không</div>
         </div>
       </div>
 
       <div v-if="active === 'relation'" class="section">
-        <h4>关联数据设计</h4>
+        <h4>Thiết kế dữ liệu liên kết</h4>
         <div class="relation-tabs">
           <button
             v-for="r in relations"
@@ -149,7 +149,7 @@
 
     <div class="tips">
       <span class="tips-icon">💡</span>
-      <span class="tips-text">参考 ISO 8601 时间标准，字段命名保持 snake_case 风格</span>
+      <span class="tips-text">Tham khảo chuẩn thời gian ISO 8601, đặt tên field theo phong cách snake_case</span>
     </div>
   </div>
 </template>
@@ -161,86 +161,86 @@ const active = ref('structure')
 const rId = ref('embed')
 
 const tabs = [
-  { id: 'structure', icon: '📐', name: '结构设计' },
-  { id: 'naming', icon: '📝', name: '命名规范' },
-  { id: 'datetime', icon: '🕐', name: '时间格式' },
-  { id: 'null', icon: '∅', name: '空值处理' },
-  { id: 'relation', icon: '🔗', name: '关联数据' }
+  { id: 'structure', icon: '📐', name: 'Thiết kế cấu trúc' },
+  { id: 'naming', icon: '📝', name: 'Quy ước tên' },
+  { id: 'datetime', icon: '🕐', name: 'Định dạng thời gian' },
+  { id: 'null', icon: '∅', name: 'Xử lý giá trị rỗng' },
+  { id: 'relation', icon: '🔗', name: 'Dữ liệu liên kết' }
 ]
 
 const namingRules = [
   {
     icon: '🔡',
-    name: '使用 snake_case',
+    name: 'Dùng snake_case',
     good: 'created_at',
     bad: 'createdAt',
-    desc: 'JSON 字段名统一用下划线'
+    desc: 'Tên field JSON thống nhất dùng dấu gạch dưới'
   },
   {
     icon: '📖',
-    name: '避免缩写',
+    name: 'Tránh viết tắt',
     good: 'user_id',
     bad: 'uid',
-    desc: '保持可读性'
+    desc: 'Giữ khả năng dễ đọc'
   },
   {
     icon: '✅',
-    name: '布尔值加前缀',
+    name: 'Boolean có prefix',
     good: 'is_active, has_permission',
     bad: 'active, permission',
-    desc: '一眼识别布尔类型'
+    desc: 'Nhìn là biết kiểu boolean'
   },
   {
     icon: '📅',
-    name: '时间带后缀',
+    name: 'Thời gian có hậu tố',
     good: 'created_at, expired_at',
     bad: 'created, expired',
-    desc: '明确是时间字段'
+    desc: 'Cho biết rõ là field thời gian'
   },
   {
     icon: '🔢',
-    name: '数量带后缀',
+    name: 'Số lượng có hậu tố',
     good: 'total_count, page_size',
     bad: 'total, size',
-    desc: '明确是数值类型'
+    desc: 'Cho biết rõ là kiểu số'
   }
 ]
 
 const relations = [
   {
     id: 'embed',
-    name: '内嵌',
-    desc: '适合数据量小、频繁访问的关联数据',
+    name: 'Nhúng (embed)',
+    desc: 'Phù hợp với dữ liệu liên kết nhỏ, hay truy cập',
     code: `{
   "id": 123,
-  "name": "张三",
+  "name": "Nguyễn Văn A",
   "department": {
     "id": 1,
-    "name": "技术部"
+    "name": "Phòng kỹ thuật"
   }
 }`
   },
   {
     id: 'foreign',
-    name: '外键',
-    desc: '适合数据量大、按需加载的关联数据',
+    name: 'Khóa ngoại',
+    desc: 'Phù hợp với dữ liệu lớn, tải theo nhu cầu',
     code: `{
   "id": 123,
-  "name": "张三",
+  "name": "Nguyễn Văn A",
   "department_id": 1
 }`
   },
   {
     id: 'expand',
-    name: 'expand 参数',
-    desc: 'Stripe 风格，客户端按需展开',
+    name: 'Tham số expand',
+    desc: 'Phong cách Stripe, client mở rộng theo nhu cầu',
     code: `// GET /users/123?expand=department
 {
   "id": 123,
-  "name": "张三",
+  "name": "Nguyễn Văn A",
   "department": {
     "id": 1,
-    "name": "技术部"
+    "name": "Phòng kỹ thuật"
   }
 }`
   }

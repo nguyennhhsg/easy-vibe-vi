@@ -1,8 +1,8 @@
 <template>
   <div class="api-compare-root">
     <div class="demo-header">
-      <span class="title">📚 函数 API vs HTTP API</span>
-      <span class="subtitle">本地调用 vs 网络请求，文档怎么看？</span>
+      <span class="title">📚 Function API vs HTTP API</span>
+      <span class="subtitle">Gọi cục bộ vs request mạng, đọc tài liệu thế nào?</span>
     </div>
 
     <div class="control-panel">
@@ -17,46 +17,46 @@
     </div>
 
     <div class="visualization-area">
-      <!-- 对比视图 -->
+      <!-- View so sánh -->
       <div v-if="activeTab === 'compare'" class="compare-view">
         <div class="compare-cards">
           <div class="compare-card">
             <div class="card-header function">
               <span class="card-icon">📦</span>
-              <span class="card-title">函数 API</span>
+              <span class="card-title">Function API</span>
             </div>
             <div class="card-body">
               <div class="feature-list">
                 <div class="feature-item">
-                  <span class="feature-label">调用方式</span>
-                  <span class="feature-value">直接函数调用</span>
+                  <span class="feature-label">Cách gọi</span>
+                  <span class="feature-value">Gọi hàm trực tiếp</span>
                 </div>
                 <div class="feature-item">
-                  <span class="feature-label">参数传递</span>
-                  <span class="feature-value">括号内传参</span>
+                  <span class="feature-label">Truyền tham số</span>
+                  <span class="feature-value">Truyền trong ngoặc</span>
                 </div>
                 <div class="feature-item">
-                  <span class="feature-label">返回值</span>
-                  <span class="feature-value">直接获得结果</span>
+                  <span class="feature-label">Giá trị trả về</span>
+                  <span class="feature-value">Nhận kết quả trực tiếp</span>
                 </div>
                 <div class="feature-item">
-                  <span class="feature-label">错误处理</span>
-                  <span class="feature-value">异常/返回值</span>
+                  <span class="feature-label">Xử lý lỗi</span>
+                  <span class="feature-value">Exception/giá trị trả về</span>
                 </div>
               </div>
               <div class="code-block">
-                <div class="code-label">Python 示例</div>
-                <pre><code># 调用内置函数
-length = len("hello")      # 返回 5
+                <div class="code-label">Ví dụ Python</div>
+                <pre><code># Gọi hàm built-in
+length = len("hello")      # trả về 5
 
-# 调用库函数
+# Gọi hàm thư viện
 import math
-result = math.sqrt(16)     # 返回 4.0
+result = math.sqrt(16)     # trả về 4.0
 
-# 调用自定义函数
+# Gọi hàm tự định nghĩa
 def add(a, b):
     return a + b
-sum = add(3, 5)            # 返回 8</code></pre>
+sum = add(3, 5)            # trả về 8</code></pre>
               </div>
             </div>
           </div>
@@ -73,24 +73,24 @@ sum = add(3, 5)            # 返回 8</code></pre>
             <div class="card-body">
               <div class="feature-list">
                 <div class="feature-item">
-                  <span class="feature-label">调用方式</span>
-                  <span class="feature-value">网络请求</span>
+                  <span class="feature-label">Cách gọi</span>
+                  <span class="feature-value">Request qua mạng</span>
                 </div>
                 <div class="feature-item">
-                  <span class="feature-label">参数传递</span>
+                  <span class="feature-label">Truyền tham số</span>
                   <span class="feature-value">URL/Body/Header</span>
                 </div>
                 <div class="feature-item">
-                  <span class="feature-label">返回值</span>
-                  <span class="feature-value">JSON/XML 响应</span>
+                  <span class="feature-label">Giá trị trả về</span>
+                  <span class="feature-value">Response JSON/XML</span>
                 </div>
                 <div class="feature-item">
-                  <span class="feature-label">错误处理</span>
-                  <span class="feature-value">状态码判断</span>
+                  <span class="feature-label">Xử lý lỗi</span>
+                  <span class="feature-value">Kiểm tra status code</span>
                 </div>
               </div>
               <div class="code-block">
-                <div class="code-label">HTTP 请求示例</div>
+                <div class="code-label">Ví dụ HTTP request</div>
                 <pre><code>POST /v1/chat/completions HTTP/1.1
 Host: api.deepseek.com
 Authorization: Bearer sk-xxx
@@ -99,7 +99,7 @@ Content-Type: application/json
 {
   "model": "deepseek-chat",
   "messages": [
-    {"role": "user", "content": "你好"}
+    {"role": "user", "content": "Xin chào"}
   ]
 }</code></pre>
               </div>
@@ -108,39 +108,39 @@ Content-Type: application/json
         </div>
       </div>
 
-      <!-- 文档对比视图 -->
+      <!-- View so sánh tài liệu -->
       <div v-if="activeTab === 'docs'" class="docs-view">
         <div class="docs-cards">
           <div class="doc-card">
             <div class="doc-header">
               <span class="doc-icon">📖</span>
-              <span class="doc-title">函数文档怎么看</span>
+              <span class="doc-title">Đọc tài liệu hàm thế nào</span>
             </div>
             <div class="doc-content">
               <div class="doc-section">
-                <div class="doc-section-title">🔍 关注重点</div>
+                <div class="doc-section-title">🔍 Điểm cần chú ý</div>
                 <ul class="doc-list">
-                  <li><strong>函数签名</strong>：函数名和参数列表</li>
-                  <li><strong>参数类型</strong>：每个参数要什么类型</li>
-                  <li><strong>返回值</strong>：函数返回什么</li>
-                  <li><strong>异常说明</strong>：可能抛出什么错误</li>
+                  <li><strong>Chữ ký hàm</strong>: tên hàm và danh sách tham số</li>
+                  <li><strong>Kiểu tham số</strong>: mỗi tham số cần kiểu gì</li>
+                  <li><strong>Giá trị trả về</strong>: hàm trả về cái gì</li>
+                  <li><strong>Mô tả exception</strong>: có thể ném ra lỗi nào</li>
                 </ul>
               </div>
               <div class="doc-example">
-                <div class="doc-example-label">Python 文档示例</div>
+                <div class="doc-example-label">Ví dụ tài liệu Python</div>
                 <pre><code>def open(file: str, mode: str = 'r') -> TextIO:
     """
-    打开文件并返回文件对象
-    
+    Mở file và trả về file object
+
     Args:
-        file: 文件路径
-        mode: 打开模式 ('r', 'w', 'a')
-    
+        file: đường dẫn file
+        mode: chế độ mở ('r', 'w', 'a')
+
     Returns:
-        文件对象
-    
+        file object
+
     Raises:
-        FileNotFoundError: 文件不存在
+        FileNotFoundError: file không tồn tại
     """</code></pre>
               </div>
             </div>
@@ -149,20 +149,20 @@ Content-Type: application/json
           <div class="doc-card">
             <div class="doc-header">
               <span class="doc-icon">📡</span>
-              <span class="doc-title">HTTP API 文档怎么看</span>
+              <span class="doc-title">Đọc tài liệu HTTP API thế nào</span>
             </div>
             <div class="doc-content">
               <div class="doc-section">
-                <div class="doc-section-title">🔍 关注重点</div>
+                <div class="doc-section-title">🔍 Điểm cần chú ý</div>
                 <ul class="doc-list">
-                  <li><strong>Endpoint</strong>：URL 路径和 HTTP 方法</li>
-                  <li><strong>认证方式</strong>：API Key / Token 怎么传</li>
-                  <li><strong>请求参数</strong>：Body / Query / Header</li>
-                  <li><strong>响应格式</strong>：成功和错误返回什么</li>
+                  <li><strong>Endpoint</strong>: URL path và HTTP method</li>
+                  <li><strong>Cách xác thực</strong>: API Key / Token truyền thế nào</li>
+                  <li><strong>Tham số request</strong>: Body / Query / Header</li>
+                  <li><strong>Định dạng response</strong>: thành công và lỗi trả về gì</li>
                 </ul>
               </div>
               <div class="doc-example">
-                <div class="doc-example-label">API 文档示例</div>
+                <div class="doc-example-label">Ví dụ tài liệu API</div>
                 <pre><code>POST /v1/chat/completions
 
 Headers:
@@ -188,32 +188,32 @@ Response:
         </div>
       </div>
 
-      <!-- 快速判断视图 -->
+      <!-- View nhận diện nhanh -->
       <div v-if="activeTab === 'quick'" class="quick-view">
         <div class="quick-cards">
           <div class="quick-card">
             <div class="quick-header">
               <span class="quick-icon">⚡</span>
-              <span class="quick-title">快速判断指南</span>
+              <span class="quick-title">Hướng dẫn nhận diện nhanh</span>
             </div>
             <div class="quick-content">
               <div class="decision-tree">
                 <div class="decision-item">
-                  <div class="decision-question">看到代码里有 <code>()</code> 调用？</div>
-                  <div class="decision-answer">→ 这是 <strong>函数 API</strong></div>
-                  <div class="decision-example">如：len(), print(), requests.get()</div>
+                  <div class="decision-question">Thấy trong code có gọi <code>()</code>?</div>
+                  <div class="decision-answer">→ Đây là <strong>Function API</strong></div>
+                  <div class="decision-example">VD: len(), print(), requests.get()</div>
                 </div>
                 <div class="decision-arrow">↓</div>
                 <div class="decision-item">
-                  <div class="decision-question">看到 URL 和 HTTP 方法？</div>
-                  <div class="decision-answer">→ 这是 <strong>HTTP API</strong></div>
-                  <div class="decision-example">如：POST /api/users, GET https://...</div>
+                  <div class="decision-question">Thấy URL và HTTP method?</div>
+                  <div class="decision-answer">→ Đây là <strong>HTTP API</strong></div>
+                  <div class="decision-example">VD: POST /api/users, GET https://...</div>
                 </div>
                 <div class="decision-arrow">↓</div>
                 <div class="decision-item">
-                  <div class="decision-question">看到 SDK/Client 对象？</div>
-                  <div class="decision-answer">→ 这是 <strong>封装后的 HTTP API</strong></div>
-                  <div class="decision-example">如：client.chat.completions.create()</div>
+                  <div class="decision-question">Thấy object SDK/Client?</div>
+                  <div class="decision-answer">→ Đây là <strong>HTTP API đã được đóng gói</strong></div>
+                  <div class="decision-example">VD: client.chat.completions.create()</div>
                 </div>
               </div>
             </div>
@@ -222,34 +222,34 @@ Response:
           <div class="quick-card">
             <div class="quick-header">
               <span class="quick-icon">🎯</span>
-              <span class="quick-title">使用场景对比</span>
+              <span class="quick-title">So sánh tình huống sử dụng</span>
             </div>
             <div class="quick-content">
               <div class="scenario-table">
                 <div class="scenario-row header">
-                  <div class="scenario-cell">场景</div>
-                  <div class="scenario-cell">推荐方式</div>
-                  <div class="scenario-cell">原因</div>
+                  <div class="scenario-cell">Tình huống</div>
+                  <div class="scenario-cell">Đề xuất</div>
+                  <div class="scenario-cell">Lý do</div>
                 </div>
                 <div class="scenario-row">
-                  <div class="scenario-cell">本地数据处理</div>
-                  <div class="scenario-cell"><span class="badge function">函数 API</span></div>
-                  <div class="scenario-cell">快速、无需网络</div>
+                  <div class="scenario-cell">Xử lý dữ liệu cục bộ</div>
+                  <div class="scenario-cell"><span class="badge function">Function API</span></div>
+                  <div class="scenario-cell">Nhanh, không cần mạng</div>
                 </div>
                 <div class="scenario-row">
-                  <div class="scenario-cell">调用 AI 模型</div>
+                  <div class="scenario-cell">Gọi model AI</div>
                   <div class="scenario-cell"><span class="badge http">HTTP API</span></div>
-                  <div class="scenario-cell">模型在远程服务器</div>
+                  <div class="scenario-cell">Model ở server từ xa</div>
                 </div>
                 <div class="scenario-row">
-                  <div class="scenario-cell">获取天气数据</div>
+                  <div class="scenario-cell">Lấy dữ liệu thời tiết</div>
                   <div class="scenario-cell"><span class="badge http">HTTP API</span></div>
-                  <div class="scenario-cell">数据在服务商那里</div>
+                  <div class="scenario-cell">Dữ liệu ở nhà cung cấp</div>
                 </div>
                 <div class="scenario-row">
-                  <div class="scenario-cell">文件读写操作</div>
-                  <div class="scenario-cell"><span class="badge function">函数 API</span></div>
-                  <div class="scenario-cell">直接操作本地文件</div>
+                  <div class="scenario-cell">Đọc/ghi file</div>
+                  <div class="scenario-cell"><span class="badge function">Function API</span></div>
+                  <div class="scenario-cell">Thao tác trực tiếp file cục bộ</div>
                 </div>
               </div>
             </div>
@@ -259,7 +259,7 @@ Response:
     </div>
 
     <div class="info-box">
-      <strong>核心要点：</strong>函数 API 是"本地办事"，HTTP API 是"远程通信"。看文档时，函数关注参数和返回值，HTTP API 关注 Endpoint、认证和请求/响应格式。
+      <strong>Ý tưởng cốt lõi:</strong>Function API là "làm việc tại chỗ", HTTP API là "giao tiếp từ xa". Khi đọc tài liệu, với function thì chú ý tham số và giá trị trả về; với HTTP API thì chú ý Endpoint, cách xác thực và định dạng request/response.
     </div>
   </div>
 </template>
@@ -270,9 +270,9 @@ import { ref } from 'vue'
 const activeTab = ref('compare')
 
 const tabs = [
-  { id: 'compare', name: '核心区别', icon: '🔍' },
-  { id: 'docs', name: '文档对比', icon: '📚' },
-  { id: 'quick', name: '快速判断', icon: '⚡' }
+  { id: 'compare', name: 'Khác biệt cốt lõi', icon: '🔍' },
+  { id: 'docs', name: 'So sánh tài liệu', icon: '📚' },
+  { id: 'quick', name: 'Nhận diện nhanh', icon: '⚡' }
 ]
 </script>
 
@@ -342,7 +342,7 @@ const tabs = [
   background: var(--vp-c-bg);
 }
 
-/* 对比视图 */
+/* View so sánh */
 .compare-view {
   width: 100%;
 }
@@ -481,7 +481,7 @@ const tabs = [
   color: var(--vp-c-text-2);
 }
 
-/* 文档视图 */
+/* View tài liệu */
 .docs-view {
   width: 100%;
 }
@@ -586,7 +586,7 @@ const tabs = [
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
 }
 
-/* 快速判断视图 */
+/* View nhận diện nhanh */
 .quick-view {
   width: 100%;
 }

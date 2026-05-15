@@ -5,13 +5,13 @@
         :class="{ active: mode === 'cli' }"
         @click="mode = 'cli'"
       >
-        🖥️ CLI (命令行界面)
+        🖥️ CLI (giao diện dòng lệnh)
       </button>
       <button
         :class="{ active: mode === 'gui' }"
         @click="mode = 'gui'"
       >
-        🖱️ GUI (图形用户界面)
+        🖱️ GUI (giao diện đồ hoạ)
       </button>
     </div>
 
@@ -58,7 +58,7 @@
             Input (Keyboard)
           </div>
           <div class="sub-label">
-            发送指令 (字符信号)
+            Gửi lệnh (tín hiệu ký tự)
           </div>
         </div>
 
@@ -66,7 +66,7 @@
         <div class="stream-path">
           <div class="stream-line" />
           <div class="stream-label">
-            Character Stream / 字符流
+            Character Stream / Luồng ký tự
           </div>
           <div
             v-for="char in activeChars"
@@ -90,7 +90,7 @@
             Output (Text Grid)
           </div>
           <div class="sub-label">
-            文本网格反馈
+            Phản hồi qua lưới văn bản
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@
       <div class="desc-box">
         <p>
           <strong>CLI (Command Line Interface)</strong>:
-          这种模式下，计算机只认识字符。你的每一次按键都会被转换成编码发送给系统，系统处理后返回文字结果。它不关心你在哪里点击，只关心你输入了什么。
+          Ở chế độ này máy tính chỉ hiểu các ký tự. Mỗi phím bạn nhấn sẽ được chuyển thành mã rồi gửi cho hệ thống, hệ thống xử lý xong trả về kết quả dạng text. Nó không quan tâm bạn click ở đâu, chỉ quan tâm bạn gõ cái gì.
         </p>
       </div>
 
@@ -107,8 +107,8 @@
           :disabled="isAnimating"
           @click="startSimulation"
         >
-          <span v-if="!isAnimating">▶ Play Simulation / 演示输入流</span>
-          <span v-else>Simulating... / 演示中...</span>
+          <span v-if="!isAnimating">▶ Play Simulation / Mô phỏng input stream</span>
+          <span v-else>Simulating... / Đang mô phỏng...</span>
         </button>
       </div>
     </div>
@@ -144,7 +144,7 @@
             Input (Mouse)
           </div>
           <div class="sub-label">
-            发送事件 (坐标/点击)
+            Gửi event (toạ độ/click)
           </div>
         </div>
 
@@ -152,7 +152,7 @@
         <div class="stream-path">
           <div class="stream-line dashed" />
           <div class="stream-label">
-            Event Loop / 事件循环
+            Event Loop / Vòng lặp sự kiện
           </div>
           <div
             v-for="ev in guiEvents"
@@ -203,7 +203,7 @@
             Output (Graphics)
           </div>
           <div class="sub-label">
-            像素图形渲染
+            Render đồ hoạ bằng pixel
           </div>
         </div>
       </div>
@@ -211,8 +211,7 @@
       <div class="desc-box">
         <p>
           <strong>GUI (Graphical User Interface)</strong>:
-          这种模式下，计算机实时追踪鼠标坐标和点击事件，并每秒刷新 60
-          次屏幕像素。它更直观，但需要消耗大量资源来处理图形渲染。
+          Ở chế độ này máy tính theo dõi toạ độ chuột và sự kiện click theo thời gian thực, đồng thời refresh pixel màn hình 60 lần/giây. Trực quan hơn nhiều, nhưng cần nhiều tài nguyên để xử lý render đồ hoạ.
         </p>
       </div>
 
@@ -221,8 +220,8 @@
           :disabled="isGuiAnimating"
           @click="startGuiSimulation"
         >
-          <span v-if="!isGuiAnimating">▶ Play Interaction / 演示交互</span>
-          <span v-else>Simulating... / 演示中...</span>
+          <span v-if="!isGuiAnimating">▶ Play Interaction / Mô phỏng tương tác</span>
+          <span v-else>Simulating... / Đang mô phỏng...</span>
         </button>
       </div>
     </div>

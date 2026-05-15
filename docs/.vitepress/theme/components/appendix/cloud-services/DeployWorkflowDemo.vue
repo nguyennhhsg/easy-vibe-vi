@@ -27,7 +27,7 @@
       class="step-detail"
     >
       <div class="detail-header">
-        <span class="detail-step">步骤 {{ currentStep + 1 }}</span>
+        <span class="detail-step">Bước {{ currentStep + 1 }}</span>
         <span class="detail-name">{{ currentStepData.name }}</span>
       </div>
       <div class="detail-content">
@@ -36,7 +36,7 @@
         </div>
         <div class="detail-tasks">
           <div class="tasks-title">
-            具体操作：
+            Thao tác cụ thể:
           </div>
           <ul>
             <li
@@ -56,14 +56,14 @@
         :disabled="currentStep === 0"
         @click="prevStep"
       >
-        上一步
+        Bước trước
       </button>
       <button
         class="action-btn primary"
         :disabled="currentStep >= steps.length - 1"
         @click="nextStep"
       >
-        {{ currentStep >= steps.length - 1 ? '完成' : '下一步' }}
+        {{ currentStep >= steps.length - 1 ? 'Hoàn thành' : 'Tiếp theo' }}
       </button>
     </div>
   </div>
@@ -76,57 +76,57 @@ const currentStep = ref(0)
 
 const steps = [
   {
-    name: '准备代码',
-    time: '5分钟',
-    description: '将网站代码打包成可部署的格式',
+    name: 'Chuẩn bị code',
+    time: '5 phút',
+    description: 'Đóng gói code website thành format deployable',
     tasks: [
-      '整理 HTML/CSS/JS 文件',
-      '压缩图片和静态资源',
-      '检查文件路径是否正确'
+      'Sắp xếp file HTML/CSS/JS',
+      'Nén ảnh và static asset',
+      'Kiểm tra đường dẫn file có đúng không'
     ]
   },
   {
-    name: '创建存储桶',
-    time: '2分钟',
-    description: '在对象存储服务中创建存储空间',
+    name: 'Tạo bucket storage',
+    time: '2 phút',
+    description: 'Tạo storage space trong object storage service',
     tasks: [
-      '登录云控制台',
-      '进入对象存储 OSS/S3',
-      '点击"创建 Bucket"',
-      '设置 Bucket 名称和地域'
+      'Đăng nhập console cloud',
+      'Vào Object Storage OSS/S3',
+      'Click "Tạo Bucket"',
+      'Đặt tên Bucket và chọn region'
     ]
   },
   {
-    name: '上传文件',
-    time: '3分钟',
-    description: '将网站文件上传到存储桶',
+    name: 'Upload file',
+    time: '3 phút',
+    description: 'Upload file website lên bucket storage',
     tasks: [
-      '进入 Bucket 管理页面',
-      '点击"上传文件"',
-      '选择本地网站文件',
-      '等待上传完成'
+      'Vào trang quản lý Bucket',
+      'Click "Upload file"',
+      'Chọn file website local',
+      'Đợi upload hoàn tất'
     ]
   },
   {
-    name: '配置 CDN',
-    time: '5分钟',
-    description: '配置内容分发网络加速访问',
+    name: 'Cấu hình CDN',
+    time: '5 phút',
+    description: 'Cấu hình CDN để tăng tốc truy cập',
     tasks: [
-      '进入 CDN 控制台',
-      '添加加速域名',
-      '配置源站为存储桶',
-      '等待 CDN 部署完成'
+      'Vào CDN console',
+      'Thêm domain tăng tốc',
+      'Cấu hình origin là bucket storage',
+      'Đợi CDN deploy xong'
     ]
   },
   {
-    name: '域名绑定',
-    time: '10分钟',
-    description: '将自定义域名绑定到 CDN',
+    name: 'Bind domain',
+    time: '10 phút',
+    description: 'Bind custom domain với CDN',
     tasks: [
-      '添加域名解析记录',
-      '配置 CNAME 到 CDN',
-      '申请 SSL 证书',
-      '测试 HTTPS 访问'
+      'Thêm record DNS cho domain',
+      'Cấu hình CNAME tới CDN',
+      'Đăng ký SSL certificate',
+      'Test truy cập HTTPS'
     ]
   }
 ]

@@ -1,15 +1,15 @@
 <!--
   CachingStrategyDemo.vue
-  缓存策略演示
+  Demo các chiến lược cache
 -->
 <template>
   <div class="caching-demo">
     <div class="header">
       <div class="title">
-        缓存策略：速度与更新的平衡
+        Chiến lược cache: cân bằng giữa tốc độ và cập nhật
       </div>
       <div class="subtitle">
-        对比不同缓存策略的效果
+        So sánh hiệu quả của các chiến lược cache khác nhau
       </div>
     </div>
 
@@ -48,7 +48,7 @@
           >
             <div class="spinner" />
             <div class="loading-text">
-              加载中... ({{ loadingProgress }}%)
+              Đang tải... ({{ loadingProgress }}%)
             </div>
           </div>
 
@@ -76,7 +76,7 @@
                     class="resource-status"
                     :class="resource.cached ? 'cached' : 'network'"
                   >
-                    {{ resource.cached ? '✓ 来自缓存' : '↓ 从服务器下载' }}
+                    {{ resource.cached ? '✓ Từ cache' : '↓ Tải từ server' }}
                   </div>
                 </div>
                 <div class="resource-size">
@@ -95,7 +95,7 @@
         <div class="metric-card">
           <div class="metric-header">
             <span class="metric-icon">⚡</span>
-            <span class="metric-title">加载时间</span>
+            <span class="metric-title">Thời gian tải</span>
           </div>
           <div
             class="metric-value"
@@ -114,7 +114,7 @@
         <div class="metric-card">
           <div class="metric-header">
             <span class="metric-icon">💾</span>
-            <span class="metric-title">缓存命中</span>
+            <span class="metric-title">Cache hit</span>
           </div>
           <div class="metric-value">
             {{ selectedStrategy.cacheHit }}%
@@ -130,7 +130,7 @@
         <div class="metric-card">
           <div class="metric-header">
             <span class="metric-icon">🌐</span>
-            <span class="metric-title">网络请求</span>
+            <span class="metric-title">Network request</span>
           </div>
           <div class="metric-value">
             {{ selectedStrategy.requests }}
@@ -143,25 +143,25 @@
     </div>
 
     <div class="strategy-info">
-      <h3>{{ selectedStrategy.name }} 说明</h3>
+      <h3>Giải thích {{ selectedStrategy.name }}</h3>
       <p>{{ selectedStrategy.description }}</p>
       <div class="code-example">
         <div class="code-header">
-          配置示例
+          Ví dụ cấu hình
         </div>
         <pre><code>{{ selectedStrategy.code }}</code></pre>
       </div>
     </div>
 
     <div class="comparison-table">
-      <h4>策略对比</h4>
+      <h4>So sánh các chiến lược</h4>
       <table>
         <thead>
           <tr>
-            <th>策略</th>
-            <th>速度</th>
-            <th>更新难度</th>
-            <th>适用场景</th>
+            <th>Chiến lược</th>
+            <th>Tốc độ</th>
+            <th>Độ khó khi cập nhật</th>
+            <th>Tình huống phù hợp</th>
           </tr>
         </thead>
         <tbody>
@@ -192,10 +192,10 @@ const loadingProgress = ref(0)
 
 const strategies = [
   {
-    name: '无缓存',
+    name: 'Không cache',
     icon: '🚫',
     url: 'https://example.com/',
-    pageTitle: '页面加载缓慢',
+    pageTitle: 'Trang tải chậm',
     resources: [
       {
         icon: '📄',
@@ -229,22 +229,22 @@ const strategies = [
     loadTime: '1.8s',
     performanceClass: 'poor',
     isFast: false,
-    compared: '基准',
+    compared: 'Mốc tham chiếu',
     cacheHit: 0,
     requests: 4,
-    requestDesc: '所有资源都从网络下载',
+    requestDesc: 'Mọi resource đều tải từ network',
     description:
-      '不使用任何缓存，每次访问都要重新下载所有资源。速度最慢，但内容总是最新的。',
-    code: '# 禁用缓存\nCache-Control: no-cache',
-    speed: '慢',
-    updateDifficulty: '容易',
-    useCase: '频繁更新的内容'
+      'Không dùng cache, mỗi lần truy cập đều tải lại toàn bộ resource. Chậm nhất, nhưng nội dung luôn mới.',
+    code: '# Disable cache\nCache-Control: no-cache',
+    speed: 'Chậm',
+    updateDifficulty: 'Dễ',
+    useCase: 'Nội dung cập nhật thường xuyên'
   },
   {
-    name: '传统缓存',
+    name: 'Cache truyền thống',
     icon: '💾',
     url: 'https://example.com/',
-    pageTitle: '页面加载较快',
+    pageTitle: 'Trang tải khá nhanh',
     resources: [
       {
         icon: '📄',
@@ -278,22 +278,22 @@ const strategies = [
     loadTime: '125ms',
     performanceClass: 'good',
     isFast: true,
-    compared: '快 93%',
+    compared: 'Nhanh hơn 93%',
     cacheHit: 100,
     requests: 0,
-    requestDesc: '所有资源都来自缓存',
+    requestDesc: 'Mọi resource đều lấy từ cache',
     description:
-      '设置固定的过期时间（如 1 年）。速度极快，但更新内容需要用户清除缓存或强制刷新。',
-    code: '# Nginx 配置\nlocation ~* \\.(js|css|jpg|png)$ {\n  expires: 1y;\n  add_header: Cache-Control: public;\n}',
-    speed: '极快',
-    updateDifficulty: '困难',
-    useCase: '文件名带哈希的静态资源'
+      'Đặt thời gian hết hạn cố định (ví dụ 1 năm). Tốc độ cực nhanh, nhưng muốn cập nhật phải xoá cache hoặc force-refresh.',
+    code: '# Nginx config\nlocation ~* \\.(js|css|jpg|png)$ {\n  expires: 1y;\n  add_header: Cache-Control: public;\n}',
+    speed: 'Cực nhanh',
+    updateDifficulty: 'Khó',
+    useCase: 'Resource tĩnh có hash trong tên file'
   },
   {
-    name: '协商缓存',
+    name: 'Cache thương lượng',
     icon: '🤝',
     url: 'https://example.com/',
-    pageTitle: '页面加载快',
+    pageTitle: 'Trang tải nhanh',
     resources: [
       {
         icon: '📄',
@@ -327,22 +327,22 @@ const strategies = [
     loadTime: '455ms',
     performanceClass: 'medium',
     isFast: true,
-    compared: '快 75%',
+    compared: 'Nhanh hơn 75%',
     cacheHit: 75,
     requests: 1,
-    requestDesc: '仅下载已更新的资源',
+    requestDesc: 'Chỉ tải resource đã cập nhật',
     description:
-      '使用 ETag 或 Last-Modified 进行验证。资源未改变时返回 304，资源改变时下载新内容。',
-    code: '# Nginx 配置\nlocation / {\n  etag on;\n  add_header Cache-Control: must-revalidate;\n}',
-    speed: '快',
-    updateDifficulty: '容易',
-    useCase: 'HTML 文件和 API 响应'
+      'Dùng ETag hoặc Last-Modified để xác thực. Resource chưa đổi thì trả 304, đổi rồi thì tải nội dung mới.',
+    code: '# Nginx config\nlocation / {\n  etag on;\n  add_header Cache-Control: must-revalidate;\n}',
+    speed: 'Nhanh',
+    updateDifficulty: 'Dễ',
+    useCase: 'File HTML và API response'
   },
   {
     name: 'Service Worker',
     icon: '🔧',
     url: 'https://example.com/',
-    pageTitle: '页面极速加载',
+    pageTitle: 'Trang tải cực nhanh',
     resources: [
       {
         icon: '📄',
@@ -370,16 +370,16 @@ const strategies = [
     loadTime: '25ms',
     performanceClass: 'excellent',
     isFast: true,
-    compared: '快 98%',
+    compared: 'Nhanh hơn 98%',
     cacheHit: 100,
     requests: 0,
-    requestDesc: '完全离线可用',
+    requestDesc: 'Có thể dùng hoàn toàn offline',
     description:
-      'Service Worker 拦截网络请求，从缓存中返回资源。可实现离线访问和即时加载。',
-    code: "// 注册 Service Worker\nif ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js');\n}\n\n// sw.js\ncaches.open('v1').then(cache => {\n  cache.addAll(['/', '/style.css', '/app.js']);\n});",
-    speed: '极快',
-    updateDifficulty: '中等',
-    useCase: 'PWA 应用和关键资源'
+      'Service Worker chặn các network request, trả resource từ cache. Cho phép truy cập offline và tải tức thì.',
+    code: "// Đăng ký Service Worker\nif ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js');\n}\n\n// sw.js\ncaches.open('v1').then(cache => {\n  cache.addAll(['/', '/style.css', '/app.js']);\n});",
+    speed: 'Cực nhanh',
+    updateDifficulty: 'Trung bình',
+    useCase: 'Ứng dụng PWA và resource quan trọng'
   }
 ]
 
@@ -404,7 +404,7 @@ function simulateLoading() {
 }
 
 onMounted(() => {
-  selectStrategy(strategies[1]) // 默认选中传统缓存
+  selectStrategy(strategies[1]) // Mặc định chọn "Cache truyền thống"
 })
 </script>
 

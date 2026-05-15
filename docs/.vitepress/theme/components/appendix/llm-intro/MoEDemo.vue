@@ -9,14 +9,14 @@
           :class="['mode-tab', { active: architecture === mode }]"
           @click="setArchitecture(mode)"
         >
-          {{ mode === 'dense' ? 'Dense (传统模型)' : 'MoE (混合专家)' }}
+          {{ mode === 'dense' ? 'Dense (mô hình truyền thống)' : 'MoE (Mixture of Experts)' }}
         </button>
       </div>
       <div class="mode-desc">
         {{
           architecture === 'dense'
-            ? '全能天才：每个 Token 都激活所有神经元 (100% 激活)'
-            : '专家团队：每个 Token 路由给特定专家 (Token-Level Routing)'
+            ? 'Thiên tài toàn năng: mỗi token kích hoạt toàn bộ neuron (100% active)'
+            : 'Đội ngũ chuyên gia: mỗi token được route tới expert cụ thể (Token-Level Routing)'
         }}
       </div>
     </div>
@@ -26,7 +26,7 @@
       <!-- Step 1: Input Selection -->
       <div class="stage-section input-section">
         <div class="section-label">
-          1. 选择输入 (Select Input)
+          1. Chọn input (Select Input)
         </div>
         <div class="task-selector">
           <button
@@ -64,11 +64,11 @@
         <!-- Step 2: Processing Unit (Dense or MoE) -->
         <div class="stage-section process-section">
           <div class="section-label">
-            2. 模型处理 (Processing)
+            2. Mô hình xử lý (Processing)
             <span
               v-if="processing"
               class="status-badge"
-            >生成中...</span>
+            >Đang sinh...</span>
           </div>
 
           <!-- Dense Visualization -->
@@ -94,7 +94,7 @@
                 v-if="processing"
                 class="activation-info"
               >
-                🔥 激活率: 100% (All Parameters)
+                🔥 Tỷ lệ kích hoạt: 100% (All Parameters)
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@
               :class="{ active: processing && currentStep === 'router' }"
             >
               <div class="router-label">
-                Router (Token 分发)
+                Router (điều phối token)
               </div>
               <div
                 v-if="processing && currentToken"
@@ -172,7 +172,7 @@
       <!-- Step 3: Output -->
       <div class="stage-section output-section">
         <div class="section-label">
-          3. 逐步生成 (Output Stream)
+          3. Sinh từng bước (Output Stream)
         </div>
         <div class="output-box">
           <span class="output-content">
@@ -192,7 +192,7 @@
             v-if="generatedTokens.length === 0 && !processing"
             class="placeholder"
           >
-            点击运行查看生成过程...
+            Bấm Run để xem quá trình sinh token...
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@
         :disabled="processing"
         @click="runDemo"
       >
-        {{ processing ? '正在生成 (Generating)...' : '▶️ 开始生成 (Run Generation)' }}
+        {{ processing ? 'Đang sinh (Generating)...' : '▶️ Bắt đầu sinh (Run Generation)' }}
       </button>
     </div>
   </div>
@@ -229,7 +229,7 @@ const experts = [
 
 const tasks = [
   {
-    label: 'Python 代码示例',
+    label: 'Ví dụ code Python',
     icon: '🐍',
     tokens: [
       { text: 'def', expert: 0 },
@@ -248,7 +248,7 @@ const tasks = [
     ]
   },
   {
-    label: '科幻小说片段',
+    label: 'Đoạn truyện khoa học viễn tưởng',
     icon: '🚀',
     tokens: [
       { text: 'The', expert: 3 },

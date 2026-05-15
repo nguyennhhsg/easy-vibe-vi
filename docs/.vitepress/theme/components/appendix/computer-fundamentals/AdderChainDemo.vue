@@ -1,28 +1,28 @@
 <template>
   <div class="adder-chain-demo">
     <div class="demo-header">
-      <span class="title">行波进位加法器 (Ripple Carry Adder)</span>
-      <span class="subtitle">多个全加器级联，实现多位二进制加法</span>
+      <span class="title">Bộ cộng truyền lan (Ripple Carry Adder)</span>
+      <span class="subtitle">Nhiều bộ cộng đầy đủ ghép tầng, thực hiện phép cộng nhị phân nhiều bit</span>
     </div>
 
     <div class="terms-box">
       <div class="term-item">
-        <span class="term-name">级联</span>
-        <span class="term-desc">低位 Cout 连接高位 Cin</span>
+        <span class="term-name">Ghép tầng</span>
+        <span class="term-desc">Cout của bit thấp nối vào Cin của bit cao</span>
       </div>
       <div class="term-item">
-        <span class="term-name">行波</span>
-        <span class="term-desc">进位像波浪一样逐位传递</span>
+        <span class="term-name">Truyền lan</span>
+        <span class="term-desc">Carry lan truyền theo từng bit như sóng</span>
       </div>
       <div class="term-item">
-        <span class="term-name">溢出</span>
-        <span class="term-desc">最高位产生进位，结果超出范围</span>
+        <span class="term-name">Tràn số</span>
+        <span class="term-desc">Bit cao nhất sinh carry, kết quả vượt phạm vi</span>
       </div>
     </div>
 
     <div class="control-panel">
       <div class="bit-selector">
-        <span class="selector-label">位数：</span>
+        <span class="selector-label">Số bit:</span>
         <button
           v-for="b in [2, 4, 8]"
           :key="b"
@@ -30,7 +30,7 @@
           :class="{ active: bitCount === b }"
           @click="bitCount = b"
         >
-          {{ b }} 位
+          {{ b }} bit
         </button>
       </div>
       <div class="input-group">
@@ -57,7 +57,7 @@
         </label>
         <span class="op">=</span>
         <span class="result">{{ resultDec }}</span>
-        <span v-if="overflow" class="overflow-badge">溢出</span>
+        <span v-if="overflow" class="overflow-badge">Tràn</span>
       </div>
     </div>
 
@@ -96,14 +96,14 @@
             :class="{ hl: activeBit === (bitCount - 1 - i) }"
             >{{ b }}</span>
         </span>
-        <span class="binary-dec">({{ resultDec }}{{ overflow ? ' 溢出' : '' }})</span>
+        <span class="binary-dec">({{ resultDec }}{{ overflow ? ' tràn' : '' }})</span>
       </div>
     </div>
 
     <div class="chain-visualization">
       <div class="chain-header">
-        <span class="chain-title">加法器级联</span>
-        <span class="chain-hint">悬停查看每位计算详情</span>
+        <span class="chain-title">Ghép tầng bộ cộng</span>
+        <span class="chain-hint">Di chuột để xem chi tiết tính toán từng bit</span>
       </div>
       <div class="chain-row">
         <div
@@ -115,9 +115,9 @@
           @mouseleave="activeBit = null"
         >
           <div class="stage-header">
-            <span class="stage-bit">第{{ idx }}位</span>
+            <span class="stage-bit">Bit {{ idx }}</span>
             <span class="stage-type">{{
-              idx === 0 ? '半加器' : '全加器'
+              idx === 0 ? 'Nửa cộng' : 'Cộng đầy đủ'
             }}</span>
           </div>
           <div class="stage-io">
@@ -156,55 +156,55 @@
     </div>
 
     <div v-if="activeBit !== null" class="calculation-box">
-      <div class="calc-title">第 {{ activeBit }} 位计算过程</div>
+      <div class="calc-title">Quá trình tính bit {{ activeBit }}</div>
       <div class="calc-content">
         <div class="calc-row">
-          <span class="calc-label">输入：</span>
-          <span class="calc-value">A = {{ stages[activeBit]?.a }}，B = {{ stages[activeBit]?.b
-            }}<span v-if="stages[activeBit]?.cin !== null">，Cin = {{ stages[activeBit]?.cin }}</span></span>
+          <span class="calc-label">Đầu vào:</span>
+          <span class="calc-value">A = {{ stages[activeBit]?.a }}, B = {{ stages[activeBit]?.b
+            }}<span v-if="stages[activeBit]?.cin !== null">, Cin = {{ stages[activeBit]?.cin }}</span></span>
         </div>
         <div class="calc-row">
-          <span class="calc-label">本位：</span>
+          <span class="calc-label">Bit này:</span>
           <span class="calc-formula">
             {{ stages[activeBit]?.a }} XOR {{ stages[activeBit]?.b }}
             <span v-if="stages[activeBit]?.cin !== null">
               XOR {{ stages[activeBit]?.cin }}</span>
             = <strong>{{ stages[activeBit]?.sum }}</strong>
           </span>
-          <span class="calc-reason">（{{ getSumReason(stages[activeBit]) }}）</span>
+          <span class="calc-reason">({{ getSumReason(stages[activeBit]) }})</span>
         </div>
         <div class="calc-row">
-          <span class="calc-label">进位：</span>
+          <span class="calc-label">Carry:</span>
           <span class="calc-formula">
-            {{ stages[activeBit]?.cout ? '产生进位 → 传递给高位' : '无进位' }}
+            {{ stages[activeBit]?.cout ? 'Sinh carry → chuyển sang bit cao' : 'Không có carry' }}
           </span>
         </div>
       </div>
     </div>
 
     <div v-else class="calculation-box">
-      <div class="calc-title">整体计算过程</div>
+      <div class="calc-title">Quá trình tính toán tổng thể</div>
       <div class="calc-content">
         <div class="calc-row">
-          <span class="calc-label">输入：</span>
-          <span class="calc-value">A = {{ clampedA }} ({{ bitsA.join('') }})，B = {{ clampedB }} ({{
+          <span class="calc-label">Đầu vào:</span>
+          <span class="calc-value">A = {{ clampedA }} ({{ bitsA.join('') }}), B = {{ clampedB }} ({{
               bitsB.join('')
             }})</span>
         </div>
         <div class="calc-row">
-          <span class="calc-label">过程：</span>
-          <span class="calc-formula">从第 0 位开始，逐位计算本位和进位，进位向高位传递</span>
+          <span class="calc-label">Quá trình:</span>
+          <span class="calc-formula">Bắt đầu từ bit 0, tính từng bit cùng carry, carry truyền lên bit cao hơn</span>
         </div>
         <div class="calc-row">
-          <span class="calc-label">结果：</span>
-          <span class="calc-formula">{{ bitsSum.join('') }} = <strong>{{ resultDec }}</strong>{{ overflow ? ' (溢出)' : '' }}</span>
+          <span class="calc-label">Kết quả:</span>
+          <span class="calc-formula">{{ bitsSum.join('') }} = <strong>{{ resultDec }}</strong>{{ overflow ? ' (tràn)' : '' }}</span>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      进位像波浪一样从最低位逐级传递到最高位，所以叫"行波进位"。位数越多，延迟越大，但电路简单。
+      <strong>Ý tưởng cốt lõi:</strong>
+      Carry truyền dần từ bit thấp nhất đến bit cao nhất như sóng, nên gọi là "truyền lan". Càng nhiều bit thì độ trễ càng lớn, nhưng mạch đơn giản.
     </div>
   </div>
 </template>
@@ -291,9 +291,9 @@ function getSumReason(stage) {
   if (stage.cin !== null) inputs.push(stage.cin)
   const ones = inputs.filter((x) => x === 1).length
   if (stage.sum === 1) {
-    return ones % 2 === 1 ? '奇数个 1' : '偶数个 1'
+    return ones % 2 === 1 ? 'số lẻ bit 1' : 'số chẵn bit 1'
   } else {
-    return ones % 2 === 0 ? '偶数个 1' : '奇数个 1'
+    return ones % 2 === 0 ? 'số chẵn bit 1' : 'số lẻ bit 1'
   }
 }
 </script>

@@ -2,12 +2,12 @@
   <div class="routing-modes-demo">
     <div class="demo-header">
       <span class="icon">🔀</span>
-      <span class="title">路由模式</span>
-      <span class="subtitle">不同的URL管理方式</span>
+      <span class="title">Các chế độ routing</span>
+      <span class="subtitle">Những cách quản lý URL khác nhau</span>
     </div>
 
     <div class="intro-text">
-      想象你在<span class="highlight">寄快递</span>：可以选择平邮（Hash，简单但慢）、快递（History，快速但需要配合）、或者专人送达（Memory，特殊场景）。不同模式适合不同需求。
+      Hãy tưởng tượng bạn đang <span class="highlight">gửi hàng</span>: có thể chọn gửi thường (Hash, đơn giản nhưng chậm), gửi nhanh (History, nhanh nhưng cần phối hợp), hoặc giao tận tay (Memory, dùng cho tình huống đặc biệt). Mỗi chế độ phù hợp với nhu cầu khác nhau.
     </div>
 
     <div class="mode-selector">
@@ -32,7 +32,7 @@
 
       <div class="mode-features">
         <div class="feature-section">
-          <h6>✅ 优点</h6>
+          <h6>✅ Ưu điểm</h6>
           <ul>
             <li
               v-for="pro in getCurrentMode().pros"
@@ -43,7 +43,7 @@
           </ul>
         </div>
         <div class="feature-section">
-          <h6>❌ 缺点</h6>
+          <h6>❌ Nhược điểm</h6>
           <ul>
             <li
               v-for="con in getCurrentMode().cons"
@@ -56,7 +56,7 @@
       </div>
 
       <div class="url-example">
-        <h6>🌐 URL 示例</h6>
+        <h6>🌐 Ví dụ URL</h6>
         <div class="url-bar">
           <span class="url-prefix">https://example.com</span>
           <span class="url-suffix">{{ getUrlSuffix() }}</span>
@@ -66,7 +66,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>选择建议：</strong>现代Web应用优先选History模式，老项目或特殊场景用Hash，移动端App或测试环境可用Memory模式。
+      <strong>Gợi ý lựa chọn:</strong> Ứng dụng web hiện đại ưu tiên History; dự án cũ hoặc tình huống đặc biệt dùng Hash; mobile app embed hoặc môi trường test có thể dùng Memory.
     </div>
   </div>
 </template>
@@ -79,27 +79,27 @@ const currentMode = ref('history')
 const modes = [
   {
     key: 'hash',
-    name: 'Hash 模式',
+    name: 'Chế độ Hash',
     icon: '#',
-    description: '使用URL的hash部分（#）来模拟路由，兼容性最好',
-    pros: ['兼容IE8+', '无需服务端配置', '部署简单'],
-    cons: ['URL带有#号', 'SEO不友好', '分享可能丢失hash']
+    description: 'Dùng phần hash (#) của URL để mô phỏng route, tương thích tốt nhất',
+    pros: ['Tương thích IE8+', 'Không cần cấu hình server', 'Deploy đơn giản'],
+    cons: ['URL có dấu #', 'Không thân thiện SEO', 'Có thể mất hash khi chia sẻ']
   },
   {
     key: 'history',
-    name: 'History 模式',
+    name: 'Chế độ History',
     icon: '/',
-    description: '使用HTML5 History API实现URL管理，最常用的模式',
-    pros: ['URL美观', 'SEO友好', '符合用户习惯'],
-    cons: ['需要服务端配置', '兼容性IE10+', '刷新返回404']
+    description: 'Dùng HTML5 History API để quản lý URL, chế độ phổ biến nhất',
+    pros: ['URL đẹp', 'Thân thiện SEO', 'Phù hợp thói quen người dùng'],
+    cons: ['Cần cấu hình server', 'Tương thích IE10+', 'Refresh có thể trả 404']
   },
   {
     key: 'memory',
-    name: 'Memory 模式',
+    name: 'Chế độ Memory',
     icon: 'M',
-    description: '将路由信息保存在内存中，不修改浏览器URL',
-    pros: ['无需浏览器环境', '适用于测试', '移动端App内嵌'],
-    cons: ['不支持刷新', 'URL不变化', '仅限特定场景']
+    description: 'Lưu thông tin route trong bộ nhớ, không thay đổi URL của trình duyệt',
+    pros: ['Không cần môi trường trình duyệt', 'Hợp cho test', 'Embed trong mobile App'],
+    cons: ['Không hỗ trợ refresh', 'URL không đổi', 'Chỉ phù hợp tình huống đặc biệt']
   }
 ]
 

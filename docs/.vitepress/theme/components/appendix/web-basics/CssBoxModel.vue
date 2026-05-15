@@ -1,12 +1,12 @@
 <template>
   <div class="box-demo">
     <div class="demo-header">
-      <span class="title">CSS 盒模型</span>
-      <span class="subtitle">理解元素实际占用空间的构成</span>
+      <span class="title">CSS Box Model</span>
+      <span class="subtitle">Hiểu cấu tạo không gian thực sự mà element chiếm dụng</span>
     </div>
 
     <div class="scenario">
-      <strong>场景：</strong>你要做三个并排卡片，容器宽度 900px，每个卡片设 width: 200px。结果第三个掉下去了——为什么？
+      <strong>Tình huống:</strong> bạn muốn xếp ba card ngang nhau, container rộng 900px, mỗi card đặt width: 200px. Kết quả là card thứ ba bị rớt xuống — tại sao vậy?
     </div>
 
     <div class="main-area">
@@ -110,7 +110,7 @@
       <div class="right-panel">
         <div class="result-card">
           <div class="result-header">
-            <span class="result-title">实际占用宽度</span>
+            <span class="result-title">Chiều rộng thực tế chiếm dụng</span>
             <span class="result-value">{{ total }}px</span>
           </div>
           <div class="formula">
@@ -118,7 +118,7 @@
               {{ contentW }} + {{ padding }}×2 + {{ border }}×2 + {{ margin }}×2 = {{ total }}px
             </template>
             <template v-else>
-              {{ contentW }}px（已包含 padding 和 border） + {{ margin }}×2 = {{ total }}px
+              {{ contentW }}px (đã bao gồm padding và border) + {{ margin }}×2 = {{ total }}px
             </template>
           </div>
           <div
@@ -126,10 +126,10 @@
             :class="{ warning: total * 3 > 900 }"
           >
             <template v-if="total * 3 > 900">
-              三个卡片需要 {{ total * 3 }}px，超出容器 900px，第三个会掉下去
+              Ba card cần {{ total * 3 }}px, vượt quá container 900px, card thứ ba sẽ bị rớt xuống
             </template>
             <template v-else>
-              三个卡片共 {{ total * 3 }}px，可以放下
+              Ba card tổng {{ total * 3 }}px, có thể xếp vừa
             </template>
           </div>
         </div>
@@ -166,9 +166,9 @@
     </div>
 
     <div class="info-box">
-      <strong>关键区别：</strong>
-      <code>content-box</code>（默认）的 width 只是内容宽度；
-      <code>border-box</code> 的 width 包含 content + padding + border。推荐全局设置 <code>box-sizing: border-box</code>。
+      <strong>Khác biệt then chốt:</strong>
+      <code>content-box</code> (mặc định) — width chỉ là chiều rộng content;
+      <code>border-box</code> — width bao gồm content + padding + border. Khuyến nghị đặt toàn cục <code>box-sizing: border-box</code>.
     </div>
   </div>
 </template>

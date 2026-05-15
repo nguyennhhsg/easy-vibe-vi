@@ -1,7 +1,7 @@
 <template>
   <div class="boot-demo">
     <div class="demo-header">
-      <span class="demo-title">从开机到桌面</span>
+      <span class="demo-title">Từ lúc bật nguồn đến khi hiện desktop</span>
     </div>
 
     <div class="main-layout">
@@ -10,19 +10,19 @@
         <div class="monitor">
           <div class="monitor-bezel">
             <div class="screen" :class="'stage-' + stage">
-              <!-- Stage 0: 关机 -->
+              <!-- Stage 0: tắt máy -->
               <div v-if="stage === 0" class="screen-off">
                 <div class="power-icon">⏻</div>
-                <div class="off-text">按下电源键开始</div>
+                <div class="off-text">Nhấn nút nguồn để bắt đầu</div>
               </div>
 
-              <!-- Stage 1: BIOS 自检 -->
+              <!-- Stage 1: BIOS tự kiểm tra -->
               <div v-if="stage === 1" class="screen-bios">
                 <div class="bios-line" v-for="(line, i) in biosLines" :key="i">{{ line }}</div>
                 <div class="bios-cursor">_</div>
               </div>
 
-              <!-- Stage 2: 内核加载 -->
+              <!-- Stage 2: nạp kernel -->
               <div v-if="stage === 2" class="screen-kernel">
                 <div class="kernel-logo">🐧</div>
                 <div class="kernel-text">Loading kernel...</div>
@@ -34,7 +34,7 @@
                 </div>
               </div>
 
-              <!-- Stage 3: 服务启动 -->
+              <!-- Stage 3: khởi động các dịch vụ -->
               <div v-if="stage === 3" class="screen-services">
                 <div class="svc-header">Starting system services...</div>
                 <div class="svc-list">
@@ -45,7 +45,7 @@
                 </div>
               </div>
 
-              <!-- Stage 4: 桌面 -->
+              <!-- Stage 4: desktop -->
               <div v-if="stage === 4" class="screen-desktop">
                 <div class="desktop-icons">
                   <div class="desktop-icon" v-for="ic in desktopIcons" :key="ic.label">
@@ -62,7 +62,7 @@
           </div>
         </div>
 
-        <!-- 进度指示 -->
+        <!-- Chỉ báo tiến độ -->
         <div class="stage-dots">
           <div
             v-for="(s, i) in stages"
@@ -74,16 +74,16 @@
           </div>
         </div>
 
-        <!-- 控制按钮 -->
+        <!-- Nút điều khiển -->
         <div class="controls">
-          <button class="ctrl-btn" :disabled="stage <= 0" @click="prev">← 上一步</button>
-          <button class="ctrl-btn primary" v-if="stage === 0" @click="next">⏻ 开机</button>
-          <button class="ctrl-btn primary" v-else-if="stage < 4" @click="next">下一步 →</button>
-          <button class="ctrl-btn" v-else @click="reset">↺ 重新开始</button>
+          <button class="ctrl-btn" :disabled="stage <= 0" @click="prev">← Quay lại</button>
+          <button class="ctrl-btn primary" v-if="stage === 0" @click="next">⏻ Bật máy</button>
+          <button class="ctrl-btn primary" v-else-if="stage < 4" @click="next">Tiếp →</button>
+          <button class="ctrl-btn" v-else @click="reset">↺ Khởi động lại</button>
         </div>
       </div>
 
-      <!-- 右侧：详细信息 -->
+      <!-- Bên phải: thông tin chi tiết -->
       <div class="info-panel">
         <div class="info-stage-header">
           <span class="info-stage-icon">{{ currentStage.icon }}</span>
@@ -164,147 +164,147 @@ const services = [
 ]
 
 const desktopIcons = [
-  { icon: '📁', label: '文件' },
-  { icon: '🌐', label: '浏览器' },
-  { icon: '⚙️', label: '设置' },
-  { icon: '🗑️', label: '回收站' }
+  { icon: '📁', label: 'Tệp' },
+  { icon: '🌐', label: 'Trình duyệt' },
+  { icon: '⚙️', label: 'Cài đặt' },
+  { icon: '🗑️', label: 'Thùng rác' }
 ]
 
 const stages = [
   {
-    short: '关机',
+    short: 'Tắt máy',
     icon: '⏻',
-    name: '准备就绪',
-    desc: '电脑处于关机状态，按下电源键即可开始启动流程',
+    name: 'Sẵn sàng',
+    desc: 'Máy tính đang ở trạng thái tắt, nhấn nút nguồn để bắt đầu quy trình khởi động',
     operations: [
       {
-        icon: '🔌', name: '电源供电',
-        what: '按下电源键后，电源（PSU）将交流电转换为直流电，为主板、CPU、内存等供电。',
-        details: ['220V 交流电 → 12V/5V/3.3V 直流电', '主板收到 Power Good 信号后开始工作']
+        icon: '🔌', name: 'Cấp nguồn',
+        what: 'Khi nhấn nút nguồn, bộ nguồn (PSU) chuyển điện xoay chiều thành điện một chiều, cấp điện cho bo mạch chủ, CPU, RAM...',
+        details: ['Điện xoay chiều 220V → điện một chiều 12V/5V/3.3V', 'Bo mạch chủ nhận tín hiệu Power Good rồi mới bắt đầu hoạt động']
       },
       {
-        icon: '⚡', name: 'CPU 复位',
-        what: 'CPU 收到复位信号，清空所有寄存器，跳转到固定地址（0xFFFFFFF0）执行第一条指令。',
-        details: ['所有寄存器归零', '指令指针指向 BIOS/UEFI 固件入口']
+        icon: '⚡', name: 'Reset CPU',
+        what: 'CPU nhận tín hiệu reset, xóa toàn bộ thanh ghi, nhảy đến địa chỉ cố định (0xFFFFFFF0) để thực thi lệnh đầu tiên.',
+        details: ['Toàn bộ thanh ghi về 0', 'Con trỏ lệnh trỏ vào điểm vào của firmware BIOS/UEFI']
       }
     ],
-    analogy: '就像你按下汽车的启动按钮——电池通电，发动机准备点火。'
+    analogy: 'Giống như bạn bấm nút khởi động xe hơi — ắc-quy cấp điện, động cơ sẵn sàng đánh lửa.'
   },
   {
-    short: 'BIOS 自检',
+    short: 'BIOS POST',
     icon: '📟',
-    name: 'BIOS/UEFI 自检',
-    desc: '固件程序逐一检测硬件，确保一切正常后寻找启动设备',
+    name: 'BIOS/UEFI tự kiểm tra',
+    desc: 'Firmware lần lượt kiểm tra phần cứng, sau khi đảm bảo mọi thứ ổn thì tìm thiết bị khởi động',
     operations: [
       {
-        icon: '🧠', name: '内存检测（POST）',
-        what: '向内存写入测试数据并读回验证，确认每根内存条都能正常工作。',
-        details: ['逐字节写入/读取测试', '检测内存容量和速度', '失败会发出蜂鸣声（1长3短 = 内存错误）']
+        icon: '🧠', name: 'Kiểm tra RAM (POST)',
+        what: 'Ghi dữ liệu test vào RAM rồi đọc lại để xác nhận từng thanh RAM hoạt động đúng.',
+        details: ['Test ghi/đọc theo từng byte', 'Phát hiện dung lượng và tốc độ RAM', 'Lỗi sẽ phát tiếng bíp (1 dài 3 ngắn = lỗi RAM)']
       },
       {
-        icon: '🎮', name: '显卡检测',
-        what: '初始化显卡，尝试输出画面。如果显卡故障，屏幕会保持黑屏。',
-        details: ['加载显卡 BIOS', '设置基本显示模式', '失败蜂鸣：1长2短']
+        icon: '🎮', name: 'Kiểm tra card đồ họa',
+        what: 'Khởi tạo card đồ họa, thử xuất hình. Nếu card lỗi, màn hình sẽ tối đen.',
+        details: ['Nạp BIOS của card đồ họa', 'Đặt chế độ hiển thị cơ bản', 'Tiếng bíp lỗi: 1 dài 2 ngắn']
       },
       {
-        icon: '⌨️', name: '外设检测',
-        what: '扫描 USB/PS2 端口，检测键盘、鼠标等输入设备。',
-        details: ['枚举 USB 设备', '检测键盘响应', '非关键设备，缺失不影响启动']
+        icon: '⌨️', name: 'Kiểm tra thiết bị ngoại vi',
+        what: 'Quét cổng USB/PS2, phát hiện bàn phím, chuột và các thiết bị nhập khác.',
+        details: ['Liệt kê thiết bị USB', 'Kiểm tra phản hồi bàn phím', 'Không thiết yếu, thiếu cũng không cản trở khởi động']
       },
       {
-        icon: '💾', name: '寻找启动设备',
-        what: '按照启动顺序（Boot Order）依次检查硬盘、U盘、网络，找到可启动设备。',
-        details: ['读取 CMOS 中的启动顺序设置', '检查设备第一扇区的 0x55AA 签名', '找到后将引导代码加载到内存 0x7C00']
+        icon: '💾', name: 'Tìm thiết bị khởi động',
+        what: 'Dựa theo thứ tự khởi động (Boot Order), lần lượt kiểm tra ổ cứng, USB, mạng để tìm thiết bị có thể boot.',
+        details: ['Đọc cấu hình thứ tự khởi động trong CMOS', 'Kiểm tra chữ ký 0x55AA ở sector đầu của thiết bị', 'Khi tìm thấy thì nạp code boot vào RAM tại 0x7C00']
       }
     ],
-    analogy: '好比飞机起飞前的安全检查——机长逐项确认引擎、仪表、燃油，有问题就不能起飞。'
+    analogy: 'Giống kiểm tra an toàn trước khi máy bay cất cánh — cơ trưởng phải xác nhận động cơ, đồng hồ, nhiên liệu đều ổn; có vấn đề là không cất cánh.'
   },
   {
-    short: '内核加载',
+    short: 'Nạp kernel',
     icon: '⚙️',
-    name: '操作系统内核加载',
-    desc: '引导程序找到内核文件，将其加载到内存，内核接管整台计算机',
+    name: 'Nạp nhân hệ điều hành',
+    desc: 'Bootloader tìm file kernel, nạp vào RAM, kernel tiếp quản toàn bộ máy tính',
     operations: [
       {
-        icon: '📀', name: '引导程序（Bootloader）',
-        what: '硬盘第一扇区的引导程序（如 GRUB、bootmgr）读取分区表，找到内核文件位置。',
-        details: ['Windows: bootmgr → 读取 BCD 配置', 'Linux: GRUB → 显示系统选择菜单', 'macOS: boot.efi → 直接加载 XNU 内核']
+        icon: '📀', name: 'Bootloader',
+        what: 'Bootloader trong sector đầu của ổ cứng (như GRUB, bootmgr) đọc bảng phân vùng và tìm vị trí file kernel.',
+        details: ['Windows: bootmgr → đọc cấu hình BCD', 'Linux: GRUB → hiển thị menu chọn hệ điều hành', 'macOS: boot.efi → nạp thẳng kernel XNU']
       },
       {
-        icon: '📦', name: '内核解压与加载',
-        what: '内核通常是压缩存储的，引导程序将其解压并复制到内存的指定位置。',
-        details: ['解压 vmlinuz（Linux）或加载 ntoskrnl.exe（Windows）', '内核大小通常 5-15 MB']
+        icon: '📦', name: 'Giải nén và nạp kernel',
+        what: 'Kernel thường được lưu ở dạng nén, bootloader giải nén và copy vào vị trí xác định trong RAM.',
+        details: ['Giải nén vmlinuz (Linux) hoặc nạp ntoskrnl.exe (Windows)', 'Kích thước kernel thường 5-15 MB']
       },
       {
-        icon: '🧠', name: '初始化内存管理',
-        what: '建立虚拟内存页表，划分内核空间和用户空间，让每个程序以为自己独占内存。',
-        details: ['建立页表映射', '内核空间：高地址区域', '用户空间：低地址区域，程序运行在这里']
+        icon: '🧠', name: 'Khởi tạo quản lý bộ nhớ',
+        what: 'Lập bảng trang bộ nhớ ảo, chia không gian kernel và không gian người dùng, để mỗi chương trình tưởng mình độc chiếm RAM.',
+        details: ['Lập ánh xạ bảng trang', 'Không gian kernel: vùng địa chỉ cao', 'Không gian người dùng: vùng địa chỉ thấp, nơi chương trình chạy']
       },
       {
-        icon: '📁', name: '挂载根文件系统',
-        what: '将硬盘分区挂载为根目录（/），从此系统可以读写文件。',
-        details: ['识别文件系统类型（NTFS/ext4/APFS）', '挂载为 /（Linux）或 C:\\（Windows）', '加载设备驱动程序']
+        icon: '📁', name: 'Mount root filesystem',
+        what: 'Mount phân vùng ổ cứng làm thư mục gốc (/), từ đó hệ thống có thể đọc/ghi file.',
+        details: ['Nhận diện loại filesystem (NTFS/ext4/APFS)', 'Mount thành / (Linux) hoặc C:\\ (Windows)', 'Nạp driver thiết bị']
       }
     ],
-    analogy: '内核就像公司的 CEO 上任——接管所有部门（硬件），安排人事（进程）、财务（内存）、后勤（设备）各就各位。'
+    analogy: 'Kernel giống như CEO mới nhậm chức — tiếp quản mọi phòng ban (phần cứng), bố trí nhân sự (tiến trình), tài chính (bộ nhớ), hậu cần (thiết bị) vào đúng vị trí.'
   },
   {
-    short: '服务启动',
+    short: 'Khởi động dịch vụ',
     icon: '🔧',
-    name: '系统服务启动',
-    desc: '内核拉起第一个用户进程，按依赖顺序启动各种后台服务',
+    name: 'Khởi động dịch vụ hệ thống',
+    desc: 'Kernel khởi động tiến trình người dùng đầu tiên, lần lượt khởi chạy các dịch vụ nền theo thứ tự phụ thuộc',
     operations: [
       {
-        icon: '🚀', name: '初始化进程启动',
-        what: '内核启动第一个用户态进程（PID=1），它是所有其他进程的"祖先"。',
-        details: ['Linux: systemd 或 init', 'Windows: smss.exe → csrss.exe → wininit.exe', '负责按配置文件拉起后续服务']
+        icon: '🚀', name: 'Khởi động tiến trình init',
+        what: 'Kernel khởi động tiến trình user-mode đầu tiên (PID=1), đây là "tổ tiên" của mọi tiến trình khác.',
+        details: ['Linux: systemd hoặc init', 'Windows: smss.exe → csrss.exe → wininit.exe', 'Chịu trách nhiệm khởi chạy các dịch vụ theo cấu hình']
       },
       {
-        icon: '🌐', name: '网络服务',
-        what: '初始化网卡驱动，通过 DHCP 获取 IP 地址，启动 DNS 解析。',
-        details: ['加载网卡驱动', '发送 DHCP 请求获取 IP', '配置 DNS 服务器地址']
+        icon: '🌐', name: 'Dịch vụ mạng',
+        what: 'Khởi tạo driver card mạng, lấy địa chỉ IP qua DHCP, khởi động dịch vụ phân giải DNS.',
+        details: ['Nạp driver card mạng', 'Gửi yêu cầu DHCP để lấy IP', 'Cấu hình địa chỉ máy chủ DNS']
       },
       {
-        icon: '🔒', name: '安全服务',
-        what: '启动防火墙、用户认证系统，确保系统安全。',
-        details: ['Linux: iptables/nftables 防火墙', 'Windows: Windows Defender、安全中心', '加载登录管理器，准备用户认证']
+        icon: '🔒', name: 'Dịch vụ bảo mật',
+        what: 'Khởi động tường lửa, hệ thống xác thực người dùng để đảm bảo hệ thống an toàn.',
+        details: ['Linux: tường lửa iptables/nftables', 'Windows: Windows Defender, Trung tâm bảo mật', 'Nạp trình quản lý đăng nhập, sẵn sàng xác thực người dùng']
       },
       {
-        icon: '🔊', name: '多媒体与其他服务',
-        what: '启动音频服务、打印服务、日志服务等，让系统功能完整。',
-        details: ['音频混合器（PulseAudio/PipeWire）', '系统日志（journald/Event Log）', '定时任务（cron/Task Scheduler）']
+        icon: '🔊', name: 'Đa phương tiện và dịch vụ khác',
+        what: 'Khởi động dịch vụ âm thanh, in ấn, ghi log... để hệ thống có đầy đủ chức năng.',
+        details: ['Bộ trộn âm thanh (PulseAudio/PipeWire)', 'Log hệ thống (journald/Event Log)', 'Tác vụ định kỳ (cron/Task Scheduler)']
       }
     ],
-    analogy: '就像商场开门营业前——保安到岗（安全）、空调开启（后台服务）、收银上线（网络），一切就绪迎接顾客。'
+    analogy: 'Giống trung tâm thương mại trước giờ mở cửa — bảo vệ vào ca (bảo mật), điều hòa được bật (dịch vụ nền), quầy thu ngân online (mạng), tất cả sẵn sàng đón khách.'
   },
   {
-    short: '桌面就绪',
+    short: 'Sẵn sàng',
     icon: '🖥️',
-    name: '桌面环境显示',
-    desc: '图形界面启动完成，你熟悉的桌面出现了',
+    name: 'Hiển thị môi trường desktop',
+    desc: 'Giao diện đồ họa khởi động xong, desktop quen thuộc của bạn xuất hiện',
     operations: [
       {
-        icon: '🎮', name: '显卡驱动加载',
-        what: '初始化 GPU，设置屏幕分辨率、刷新率和色彩深度。',
-        details: ['加载 NVIDIA/AMD/Intel 驱动', '设置分辨率（如 1920×1080）', '启用硬件加速']
+        icon: '🎮', name: 'Nạp driver card đồ họa',
+        what: 'Khởi tạo GPU, thiết lập độ phân giải, tần số quét và độ sâu màu.',
+        details: ['Nạp driver NVIDIA/AMD/Intel', 'Đặt độ phân giải (ví dụ 1920×1080)', 'Bật tăng tốc phần cứng']
       },
       {
-        icon: '🪟', name: '显示服务器启动',
-        what: '窗口管理系统启动，负责管理所有窗口的绘制、层叠和交互。',
-        details: ['Windows: Desktop Window Manager (DWM)', 'Linux: X Server 或 Wayland', 'macOS: WindowServer']
+        icon: '🪟', name: 'Khởi động display server',
+        what: 'Hệ thống quản lý cửa sổ khởi động, chịu trách nhiệm vẽ, xếp lớp và tương tác cho mọi cửa sổ.',
+        details: ['Windows: Desktop Window Manager (DWM)', 'Linux: X Server hoặc Wayland', 'macOS: WindowServer']
       },
       {
-        icon: '🎨', name: '桌面环境渲染',
-        what: '绘制壁纸、桌面图标、任务栏、系统托盘等界面元素。',
-        details: ['Windows: explorer.exe 渲染桌面', 'Linux: GNOME/KDE/XFCE 桌面环境', 'macOS: Finder + Dock']
+        icon: '🎨', name: 'Render môi trường desktop',
+        what: 'Vẽ hình nền, biểu tượng desktop, thanh tác vụ, khay hệ thống và các thành phần giao diện khác.',
+        details: ['Windows: explorer.exe vẽ desktop', 'Linux: môi trường GNOME/KDE/XFCE', 'macOS: Finder + Dock']
       },
       {
-        icon: '👆', name: '等待用户操作',
-        what: '鼠标光标出现，键盘就绪，系统进入完全可交互状态。',
-        details: ['加载用户配置和偏好设置', '恢复上次会话（如果设置了）', '自启动程序开始运行']
+        icon: '👆', name: 'Chờ thao tác người dùng',
+        what: 'Con trỏ chuột xuất hiện, bàn phím sẵn sàng, hệ thống đã vào trạng thái tương tác hoàn toàn.',
+        details: ['Nạp cấu hình và tùy chọn của người dùng', 'Khôi phục phiên trước (nếu được thiết lập)', 'Các chương trình tự khởi động bắt đầu chạy']
       }
     ],
-    analogy: '幕布拉开，灯光亮起——舞台（窗口）搭好，演员（图标）就位，等待观众（你）的第一次操作。'
+    analogy: 'Rèm sân khấu kéo lên, đèn bật sáng — sân khấu (cửa sổ) đã dựng xong, diễn viên (biểu tượng) đã vào vị trí, chờ khán giả (bạn) tương tác lần đầu.'
   }
 ]
 

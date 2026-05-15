@@ -1,16 +1,16 @@
 <template>
   <div class="network-services-demo">
     <div class="demo-header">
-      <h4>网络架构可视化配置</h4>
+      <h4>Cấu hình kiến trúc network trực quan</h4>
       <p class="demo-desc">
-        拖拽组件构建您的云上网络架构
+        Kéo thả các component để xây dựng kiến trúc network trên cloud
       </p>
     </div>
 
     <div class="network-builder">
       <div class="components-panel">
         <div class="panel-title">
-          可用组件
+          Component khả dụng
         </div>
         <div class="component-list">
           <div
@@ -40,10 +40,10 @@
               🏗️
             </div>
             <div class="empty-text">
-              拖拽左侧组件到此处
+              Kéo component bên trái vào đây
             </div>
             <div class="empty-subtext">
-              开始构建您的网络架构
+              Bắt đầu xây dựng kiến trúc network của bạn
             </div>
           </div>
 
@@ -78,7 +78,7 @@
     >
       <div class="config-header">
         <span class="config-icon">{{ selectedItem.icon }}</span>
-        <span class="config-title">{{ selectedItem.name }} 配置</span>
+        <span class="config-title">Cấu hình {{ selectedItem.name }}</span>
         <button
           class="close-config"
           @click="selectedItem = null"
@@ -90,7 +90,7 @@
       <div class="config-content">
         <div class="config-section">
           <div class="section-title">
-            AWS 配置
+            Cấu hình AWS
           </div>
           <div class="service-name">
             {{ selectedItem.awsService }}
@@ -111,7 +111,7 @@
 
         <div class="config-section">
           <div class="section-title aliyun-title">
-            阿里云配置
+            Cấu hình Alibaba Cloud
           </div>
           <div class="service-name aliyun-service">
             {{ selectedItem.aliyunService }}
@@ -136,7 +136,7 @@
             <span class="price-value">{{ selectedItem.awsPrice }}</span>
           </div>
           <div class="price-item">
-            <span class="price-label">阿里云:</span>
+            <span class="price-label">Alibaba Cloud:</span>
             <span class="price-value aliyun-price">{{ selectedItem.aliyunPrice }}</span>
           </div>
         </div>
@@ -155,113 +155,113 @@ let draggedItem = null
 const networkComponents = [
   {
     id: 'vpc',
-    name: '专有网络',
+    name: 'VPC',
     icon: '🏠',
     type: 'network',
     awsService: 'Amazon VPC',
-    aliyunService: '专有网络 VPC',
+    aliyunService: 'VPC',
     awsOptions: [
-      '自定义 IP 地址范围',
-      '多可用区子网划分',
-      '网络 ACL 和安全组',
-      'VPC 对等连接和 Transit Gateway'
+      'Tự định nghĩa dải địa chỉ IP',
+      'Phân chia subnet đa AZ',
+      'Network ACL và Security Group',
+      'VPC peering và Transit Gateway'
     ],
     aliyunOptions: [
-      '自定义私网网段',
-      '交换机跨可用区部署',
-      '安全组和网络 ACL',
-      'VPC 互通和云企业网'
+      'Tự định nghĩa CIDR mạng private',
+      'Triển khai switch xuyên AZ',
+      'Security Group và Network ACL',
+      'VPC interconnect và Cloud Enterprise Network'
     ],
-    awsPrice: '免费（子网内流量）',
-    aliyunPrice: '免费（同 VPC 内流量）'
+    awsPrice: 'Miễn phí (lưu lượng trong subnet)',
+    aliyunPrice: 'Miễn phí (lưu lượng cùng VPC)'
   },
   {
     id: 'cdn',
-    name: '内容分发',
+    name: 'CDN',
     icon: '🚀',
     type: 'network',
     awsService: 'Amazon CloudFront',
-    aliyunService: 'CDN 内容分发',
+    aliyunService: 'CDN',
     awsOptions: [
-      '全球 400+ 边缘节点',
-      '支持静态和动态内容加速',
-      'Lambda@Edge 边缘计算',
-      '与 AWS Shield 集成防护'
+      '400+ edge node toàn cầu',
+      'Hỗ trợ tăng tốc static và dynamic content',
+      'Lambda@Edge edge computing',
+      'Tích hợp bảo vệ với AWS Shield'
     ],
     aliyunOptions: [
-      '国内 2800+ 节点覆盖',
-      '全站加速和下载分发',
-      '边缘脚本和缓存优化',
-      '与 WAF 联动安全防护'
+      'Phủ sóng 2800+ node trong nước',
+      'Tăng tốc full-site và download',
+      'Edge script và tối ưu cache',
+      'Liên kết với WAF để bảo vệ'
     ],
-    awsPrice: 'HTTP: $0.085/GB 起',
-    aliyunPrice: 'HTTP: ¥0.15/GB 起'
+    awsPrice: 'HTTP: từ $0.085/GB',
+    aliyunPrice: 'HTTP: từ ¥0.15/GB'
   },
   {
     id: 'lb',
-    name: '负载均衡',
+    name: 'Load Balancer',
     icon: '⚖️',
     type: 'network',
     awsService: 'Elastic Load Balancing',
-    aliyunService: 'SLB 负载均衡',
+    aliyunService: 'SLB Load Balancer',
     awsOptions: [
-      'ALB/NLB/CLB 多种类型',
-      '自动健康检查和故障转移',
-      'SSL/TLS 终止和证书管理',
-      '与 Auto Scaling 集成'
+      'Nhiều loại ALB/NLB/CLB',
+      'Tự động health check và failover',
+      'SSL/TLS termination và quản lý certificate',
+      'Tích hợp với Auto Scaling'
     ],
     aliyunOptions: [
-      'ALB/NLB/CLB 全类型支持',
-      '主备和集群高可用模式',
-      'HTTPS 证书一键部署',
-      '与 ESS 弹性伸缩联动'
+      'Hỗ trợ đầy đủ ALB/NLB/CLB',
+      'Chế độ HA active-standby và cluster',
+      'Triển khai HTTPS certificate một-click',
+      'Liên kết với ESS auto-scaling'
     ],
-    awsPrice: 'ALB: $0.0225/小时 + LCU',
-    aliyunPrice: 'ALB: ¥0.15/小时 + LCU'
+    awsPrice: 'ALB: $0.0225/giờ + LCU',
+    aliyunPrice: 'ALB: ¥0.15/giờ + LCU'
   },
   {
     id: 'waf',
-    name: 'WAF 防火墙',
+    name: 'WAF Firewall',
     icon: '🛡️',
     type: 'security',
     awsService: 'AWS WAF',
-    aliyunService: 'Web 应用防火墙',
+    aliyunService: 'Web Application Firewall',
     awsOptions: [
-      '托管规则和自定义规则',
-      '速率限制和 IP 黑名单',
-      '与 CloudFront/ALB 集成',
-      'Bot Control 机器人管理'
+      'Managed rule và custom rule',
+      'Rate limit và IP blacklist',
+      'Tích hợp với CloudFront/ALB',
+      'Bot Control quản lý bot'
     ],
     aliyunOptions: [
-      '内置防护策略和自定义规则',
-      'CC 攻击防护和 IP 封禁',
-      '与 CDN/SLB 无缝集成',
-      '数据风控和爬虫管理'
+      'Chính sách bảo vệ sẵn và custom rule',
+      'Chống CC attack và chặn IP',
+      'Tích hợp liền mạch với CDN/SLB',
+      'Risk control dữ liệu và quản lý crawler'
     ],
-    awsPrice: '$5/月 + $0.6/百万请求',
-    aliyunPrice: '¥980/月起 + 流量费'
+    awsPrice: '$5/tháng + $0.6/triệu request',
+    aliyunPrice: 'Từ ¥980/tháng + phí lưu lượng'
   },
   {
     id: 'nat',
-    name: 'NAT 网关',
+    name: 'NAT Gateway',
     icon: '🚪',
     type: 'network',
     awsService: 'NAT Gateway',
-    aliyunService: 'NAT 网关',
+    aliyunService: 'NAT Gateway',
     awsOptions: [
-      '自动高可用，无需管理',
-      '每个 AZ 独立部署',
-      '支持 SNAT 出网',
-      '流量监控和告警'
+      'Tự động HA, không cần quản lý',
+      'Triển khai độc lập theo AZ',
+      'Hỗ trợ SNAT outbound',
+      'Monitoring lưu lượng và alert'
     ],
     aliyunOptions: [
-      '多可用区容灾',
-      '按规格选择带宽',
-      'SNAT/DNAT 支持',
-      '流量和连接数监控'
+      'Disaster recovery đa AZ',
+      'Chọn bandwidth theo spec',
+      'Hỗ trợ SNAT/DNAT',
+      'Monitoring lưu lượng và số kết nối'
     ],
-    awsPrice: '$0.045/小时 + $0.045/GB',
-    aliyunPrice: '¥0.35/小时 + 流量费'
+    awsPrice: '$0.045/giờ + $0.045/GB',
+    aliyunPrice: '¥0.35/giờ + phí lưu lượng'
   }
 ]
 

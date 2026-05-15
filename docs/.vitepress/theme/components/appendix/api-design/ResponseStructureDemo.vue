@@ -2,7 +2,7 @@
   <div class="demo">
     <div class="header">
       <span class="icon">📋</span>
-      <span class="title">API 响应结构设计</span>
+      <span class="title">Thiết kế cấu trúc API response</span>
     </div>
 
     <div class="tabs">
@@ -18,24 +18,24 @@
 
     <div class="content">
       <div v-if="active === 'why'" class="section">
-        <h4>为什么要统一响应格式？</h4>
+        <h4>Vì sao cần thống nhất định dạng response?</h4>
         <div class="problem-box">
-          <div class="problem-title">❌ 问题：不同接口返回格式不一致</div>
+          <div class="problem-title">❌ Vấn đề: các API trả về định dạng khác nhau</div>
           <pre class="code-sm">
-// 接口 A
+// API A
 { "data": { "user": {...} } }
 
-// 接口 B
+// API B
 { "result": { "user": {...} } }
 
-// 接口 C
+// API C
 { "user": {...} }</pre>
           <div class="problem-desc">
-            前端需要针对每个接口单独处理，代码冗余，容易出错
+            Frontend phải xử lý riêng cho từng API, code dư thừa và dễ bug
           </div>
         </div>
         <div class="solution-box">
-          <div class="solution-title">✅ 解决：统一响应格式</div>
+          <div class="solution-title">✅ Giải pháp: thống nhất định dạng response</div>
           <pre class="code-sm">
 {
   "code": 0,
@@ -47,13 +47,13 @@
       </div>
 
       <div v-if="active === 'fields'" class="section">
-        <h4>响应字段说明</h4>
+        <h4>Mô tả các field response</h4>
         <div class="field-list">
           <div v-for="field in fields" :key="field.name" class="field-item">
             <div class="field-header">
               <code class="field-name">{{ field.name }}</code>
               <span class="field-type">{{ field.type }}</span>
-              <span v-if="field.required" class="field-required">必填</span>
+              <span v-if="field.required" class="field-required">Bắt buộc</span>
             </div>
             <div class="field-desc">{{ field.desc }}</div>
           </div>
@@ -61,27 +61,27 @@
       </div>
 
       <div v-if="active === 'codes'" class="section">
-        <h4>业务状态码设计</h4>
+        <h4>Thiết kế mã trạng thái nghiệp vụ</h4>
         <div class="code-ranges">
           <div class="range-item">
             <span class="range-num">0</span>
-            <span class="range-label">成功</span>
+            <span class="range-label">Thành công</span>
           </div>
           <div class="range-item">
             <span class="range-num">1xxxx</span>
-            <span class="range-label">客户端错误</span>
+            <span class="range-label">Lỗi client</span>
           </div>
           <div class="range-item">
             <span class="range-num">2xxxx</span>
-            <span class="range-label">业务错误</span>
+            <span class="range-label">Lỗi nghiệp vụ</span>
           </div>
           <div class="range-item">
             <span class="range-num">3xxxx</span>
-            <span class="range-label">认证/权限错误</span>
+            <span class="range-label">Lỗi xác thực/quyền</span>
           </div>
           <div class="range-item">
             <span class="range-num">5xxxx</span>
-            <span class="range-label">系统错误</span>
+            <span class="range-label">Lỗi hệ thống</span>
           </div>
         </div>
         <div class="code-examples">
@@ -93,7 +93,7 @@
       </div>
 
       <div v-if="active === 'examples'" class="section">
-        <h4>不同场景响应示例</h4>
+        <h4>Ví dụ response trong các tình huống</h4>
         <div class="example-tabs">
           <button
             v-for="ex in examples"
@@ -111,27 +111,27 @@
       </div>
 
       <div v-if="active === 'pagination'" class="section">
-        <h4>分页参数设计</h4>
+        <h4>Thiết kế tham số phân trang</h4>
         <div class="pg-row">
           <div class="pg-col">
-            <div class="pg-title">请求参数</div>
+            <div class="pg-title">Tham số request</div>
             <div class="pg-params">
               <div class="pg-item">
                 <code>page</code>
-                <span>页码，从 1 开始</span>
+                <span>Số trang, bắt đầu từ 1</span>
               </div>
               <div class="pg-item">
                 <code>page_size</code>
-                <span>每页数量，默认 20</span>
+                <span>Số bản ghi mỗi trang, mặc định 20</span>
               </div>
               <div class="pg-item">
                 <code>sort</code>
-                <span>排序，如 created_desc</span>
+                <span>Sắp xếp, ví dụ created_desc</span>
               </div>
             </div>
           </div>
           <div class="pg-col">
-            <div class="pg-title">响应格式</div>
+            <div class="pg-title">Định dạng response</div>
             <pre class="code-sm">
 "pagination": {
   "page": 1,
@@ -147,7 +147,7 @@
 
     <div class="tips">
       <span class="tips-icon">💡</span>
-      <span class="tips-text">request_id 用于问题追踪，建议使用 UUID v4 或雪花算法生成</span>
+      <span class="tips-text">request_id dùng để truy vết, nên sinh bằng UUID v4 hoặc thuật toán snowflake</span>
     </div>
   </div>
 </template>
@@ -159,11 +159,11 @@ const active = ref('why')
 const exId = ref('success')
 
 const tabs = [
-  { id: 'why', icon: '❓', name: '为什么统一' },
-  { id: 'fields', icon: '📝', name: '字段说明' },
-  { id: 'codes', icon: '🔢', name: '状态码' },
-  { id: 'examples', icon: '📄', name: '示例' },
-  { id: 'pagination', icon: '📑', name: '分页' }
+  { id: 'why', icon: '❓', name: 'Vì sao cần thống nhất' },
+  { id: 'fields', icon: '📝', name: 'Mô tả field' },
+  { id: 'codes', icon: '🔢', name: 'Mã trạng thái' },
+  { id: 'examples', icon: '📄', name: 'Ví dụ' },
+  { id: 'pagination', icon: '📑', name: 'Phân trang' }
 ]
 
 const fields = [
@@ -171,64 +171,64 @@ const fields = [
     name: 'code',
     type: 'number',
     required: true,
-    desc: '业务状态码，0 表示成功'
+    desc: 'Mã trạng thái nghiệp vụ, 0 nghĩa là thành công'
   },
-  { name: 'message', type: 'string', required: true, desc: '状态描述信息' },
+  { name: 'message', type: 'string', required: true, desc: 'Mô tả trạng thái' },
   {
     name: 'data',
     type: 'any',
     required: false,
-    desc: '业务数据，失败时可为 null'
+    desc: 'Dữ liệu nghiệp vụ, có thể là null khi thất bại'
   },
   {
     name: 'request_id',
     type: 'string',
     required: true,
-    desc: '请求唯一标识，用于追踪'
+    desc: 'Định danh duy nhất của request, dùng để truy vết'
   },
   {
     name: 'timestamp',
     type: 'string',
     required: false,
-    desc: '响应时间戳，ISO 8601 格式'
+    desc: 'Thời điểm response, định dạng ISO 8601'
   }
 ]
 
 const codeExamples = [
-  { code: 0, message: 'success - 成功' },
-  { code: 10001, message: '参数错误：缺少必填字段' },
-  { code: 10002, message: '资源不存在' },
-  { code: 20001, message: '余额不足' },
-  { code: 30001, message: '未登录' },
-  { code: 50001, message: '系统繁忙，请稍后重试' }
+  { code: 0, message: 'success - thành công' },
+  { code: 10001, message: 'Sai tham số: thiếu field bắt buộc' },
+  { code: 10002, message: 'Resource không tồn tại' },
+  { code: 20001, message: 'Số dư không đủ' },
+  { code: 30001, message: 'Chưa đăng nhập' },
+  { code: 50001, message: 'Hệ thống bận, vui lòng thử lại sau' }
 ]
 
 const examples = [
   {
     id: 'success',
-    name: '成功-单对象',
+    name: 'Thành công - object đơn',
     code: `{
   "code": 0,
   "message": "success",
   "data": {
     "id": 123,
-    "name": "张三",
-    "email": "zhangsan@example.com"
+    "name": "Nguyễn Văn A",
+    "email": "nguyenvana@example.com"
   },
   "request_id": "req-abc123"
 }`,
-    note: '成功响应：data 包含具体业务数据'
+    note: 'Response thành công: data chứa dữ liệu nghiệp vụ'
   },
   {
     id: 'list',
-    name: '成功-列表',
+    name: 'Thành công - danh sách',
     code: `{
   "code": 0,
   "message": "success",
   "data": {
     "items": [
-      { "id": 1, "name": "商品A" },
-      { "id": 2, "name": "商品B" }
+      { "id": 1, "name": "Sản phẩm A" },
+      { "id": 2, "name": "Sản phẩm B" }
     ],
     "pagination": {
       "page": 1,
@@ -238,34 +238,34 @@ const examples = [
   },
   "request_id": "req-def456"
 }`,
-    note: '列表响应：items 数组 + pagination 分页信息'
+    note: 'Response dạng list: mảng items + thông tin pagination'
   },
   {
     id: 'error',
-    name: '业务错误',
+    name: 'Lỗi nghiệp vụ',
     code: `{
   "code": 20001,
-  "message": "余额不足，当前余额 50.00 元",
+  "message": "Số dư không đủ, hiện còn 50.000 đ",
   "data": null,
   "request_id": "req-ghi789"
 }`,
-    note: '业务错误：code 非 0，message 说明原因'
+    note: 'Lỗi nghiệp vụ: code khác 0, message giải thích lý do'
   },
   {
     id: 'validate',
-    name: '参数校验',
+    name: 'Kiểm tra tham số',
     code: `{
   "code": 10001,
-  "message": "参数校验失败",
+  "message": "Kiểm tra tham số thất bại",
   "data": {
     "errors": [
-      { "field": "email", "message": "邮箱格式不正确" },
-      { "field": "password", "message": "密码长度至少 8 位" }
+      { "field": "email", "message": "Sai định dạng email" },
+      { "field": "password", "message": "Mật khẩu tối thiểu 8 ký tự" }
     ]
   },
   "request_id": "req-jkl012"
 }`,
-    note: '参数错误：data.errors 列出所有错误字段'
+    note: 'Lỗi tham số: data.errors liệt kê tất cả field lỗi'
   }
 ]
 

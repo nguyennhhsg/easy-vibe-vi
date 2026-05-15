@@ -1,14 +1,14 @@
 <template>
   <div class="cloud-services-map-demo">
     <div class="demo-header">
-      <h4>云计算服务版图全景图</h4>
+      <h4>Bản đồ tổng quan dịch vụ Cloud Computing</h4>
       <p class="demo-desc">
-        点击各个板块查看 AWS 与阿里云的对应服务
+        Click vào từng nhóm để xem dịch vụ tương ứng của AWS và Alibaba Cloud
       </p>
     </div>
 
     <div class="map-container">
-      <!-- 计算层 -->
+      <!-- Compute layer -->
       <div
         class="service-layer compute-layer"
         :class="{ active: activeLayer === 'compute' }"
@@ -18,15 +18,15 @@
           ⚙️
         </div>
         <div class="layer-title">
-          计算服务
+          Compute Services
         </div>
         <div class="layer-services">
           <span class="service-tag">EC2/ECS</span>
-          <span class="service-tag">Lambda/函数计算</span>
+          <span class="service-tag">Lambda/Function Compute</span>
         </div>
       </div>
 
-      <!-- 存储层 -->
+      <!-- Storage layer -->
       <div
         class="service-layer storage-layer"
         :class="{ active: activeLayer === 'storage' }"
@@ -36,15 +36,15 @@
           💾
         </div>
         <div class="layer-title">
-          存储服务
+          Storage Services
         </div>
         <div class="layer-services">
           <span class="service-tag">S3/OSS</span>
-          <span class="service-tag">EBS/云盘</span>
+          <span class="service-tag">EBS/Cloud Disk</span>
         </div>
       </div>
 
-      <!-- 网络层 -->
+      <!-- Network layer -->
       <div
         class="service-layer network-layer"
         :class="{ active: activeLayer === 'network' }"
@@ -54,15 +54,15 @@
           🌐
         </div>
         <div class="layer-title">
-          网络服务
+          Network Services
         </div>
         <div class="layer-services">
-          <span class="service-tag">VPC/专有网络</span>
+          <span class="service-tag">VPC</span>
           <span class="service-tag">ELB/SLB</span>
         </div>
       </div>
 
-      <!-- 安全层 -->
+      <!-- Security layer -->
       <div
         class="service-layer security-layer"
         :class="{ active: activeLayer === 'security' }"
@@ -72,15 +72,15 @@
           🔒
         </div>
         <div class="layer-title">
-          安全服务
+          Dịch vụ bảo mật
         </div>
         <div class="layer-services">
           <span class="service-tag">IAM/RAM</span>
-          <span class="service-tag">KMS/密钥管理</span>
+          <span class="service-tag">KMS/Key Management</span>
         </div>
       </div>
 
-      <!-- 数据库层 -->
+      <!-- Database layer -->
       <div
         class="service-layer database-layer"
         :class="{ active: activeLayer === 'database' }"
@@ -90,7 +90,7 @@
           🗄️
         </div>
         <div class="layer-title">
-          数据库服务
+          Dịch vụ Database
         </div>
         <div class="layer-services">
           <span class="service-tag">RDS/PolarDB</span>
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <!-- 中间件层 -->
+      <!-- Middleware layer -->
       <div
         class="service-layer middleware-layer"
         :class="{ active: activeLayer === 'middleware' }"
@@ -108,7 +108,7 @@
           🔧
         </div>
         <div class="layer-title">
-          中间件服务
+          Dịch vụ Middleware
         </div>
         <div class="layer-services">
           <span class="service-tag">MQ/RocketMQ</span>
@@ -117,7 +117,7 @@
       </div>
     </div>
 
-    <!-- 详情面板 -->
+    <!-- Detail panel -->
     <div
       v-if="activeLayer"
       class="detail-panel"
@@ -138,10 +138,10 @@
               AWS
             </div>
             <div class="col aliyun">
-              阿里云
+              Alibaba Cloud
             </div>
             <div class="col desc">
-              功能描述
+              Mô tả chức năng
             </div>
           </div>
           <div
@@ -176,247 +176,247 @@ const setActiveLayer = (layer) => {
 
 const layerDetails = {
   compute: {
-    title: '计算服务对比',
+    title: 'So sánh dịch vụ Compute',
     services: [
       {
         aws: 'Amazon EC2',
-        aliyun: 'ECS 云服务器',
-        desc: '虚拟服务器，可完全控制计算资源'
+        aliyun: 'ECS Cloud Server',
+        desc: 'Virtual server, kiểm soát hoàn toàn tài nguyên compute'
       },
       {
         aws: 'AWS Lambda',
-        aliyun: '函数计算 FC',
-        desc: '无服务器计算，按需运行代码'
+        aliyun: 'Function Compute FC',
+        desc: 'Serverless compute, chạy code theo yêu cầu'
       },
       {
         aws: 'Amazon ECS/EKS',
-        aliyun: 'ACK 容器服务',
-        desc: '容器编排和管理服务'
+        aliyun: 'ACK Container Service',
+        desc: 'Dịch vụ orchestration và quản lý container'
       },
       {
         aws: 'AWS Fargate',
         aliyun: 'Serverless Kubernetes',
-        desc: '无服务器容器计算引擎'
+        desc: 'Serverless container compute engine'
       },
       {
         aws: 'AWS Batch',
-        aliyun: '批量计算',
-        desc: '批量作业调度服务'
+        aliyun: 'Batch Compute',
+        desc: 'Dịch vụ scheduling batch job'
       },
       {
         aws: 'AWS Elastic Beanstalk',
         aliyun: 'EDAS',
-        desc: '应用部署和托管平台'
+        desc: 'Nền tảng deployment và hosting ứng dụng'
       }
     ]
   },
   storage: {
-    title: '存储服务对比',
+    title: 'So sánh dịch vụ Storage',
     services: [
       {
         aws: 'Amazon S3',
-        aliyun: 'OSS 对象存储',
-        desc: '海量、安全、低成本的对象存储'
+        aliyun: 'OSS Object Storage',
+        desc: 'Object storage dung lượng lớn, bảo mật, chi phí thấp'
       },
       {
         aws: 'Amazon EBS',
-        aliyun: '云盘 ESSD',
-        desc: '块存储服务，为EC2/ECS提供持久存储'
+        aliyun: 'Cloud Disk ESSD',
+        desc: 'Block storage, cung cấp lưu trữ bền vững cho EC2/ECS'
       },
       {
         aws: 'Amazon EFS',
-        aliyun: 'NAS 文件存储',
-        desc: '托管的弹性文件存储'
+        aliyun: 'NAS File Storage',
+        desc: 'Elastic file storage được quản lý'
       },
       {
         aws: 'Amazon Glacier',
-        aliyun: 'OSS 归档存储',
-        desc: '低成本长期归档存储'
+        aliyun: 'OSS Archive Storage',
+        desc: 'Archive storage chi phí thấp cho lưu trữ dài hạn'
       },
       {
         aws: 'AWS Storage Gateway',
-        aliyun: '混合云存储阵列',
-        desc: '混合云存储服务'
+        aliyun: 'Hybrid Cloud Storage Array',
+        desc: 'Dịch vụ hybrid cloud storage'
       },
       {
         aws: 'AWS Backup',
-        aliyun: '云备份服务',
-        desc: '集中式备份管理'
+        aliyun: 'Cloud Backup Service',
+        desc: 'Quản lý backup tập trung'
       }
     ]
   },
   network: {
-    title: '网络服务对比',
+    title: 'So sánh dịch vụ Network',
     services: [
       {
         aws: 'Amazon VPC',
-        aliyun: '专有网络 VPC',
-        desc: '虚拟私有云网络环境'
+        aliyun: 'VPC',
+        desc: 'Môi trường mạng virtual private cloud'
       },
       {
         aws: 'Elastic Load Balancing',
-        aliyun: 'SLB 负载均衡',
-        desc: '流量分发服务'
+        aliyun: 'SLB Load Balancer',
+        desc: 'Dịch vụ phân phối lưu lượng'
       },
       {
         aws: 'Amazon CloudFront',
-        aliyun: 'CDN 内容分发',
-        desc: '全球内容分发网络'
+        aliyun: 'CDN',
+        desc: 'CDN toàn cầu'
       },
       {
         aws: 'AWS Transit Gateway',
-        aliyun: '云企业网 CEN',
-        desc: '网络传输网关'
+        aliyun: 'Cloud Enterprise Network CEN',
+        desc: 'Network transit gateway'
       },
       {
         aws: 'AWS Direct Connect',
-        aliyun: '高速通道',
-        desc: '专线连接服务'
+        aliyun: 'Express Connect',
+        desc: 'Dịch vụ kết nối đường truyền riêng'
       },
       {
         aws: 'AWS App Mesh',
-        aliyun: '服务网格 ASM',
-        desc: '微服务网格管理'
+        aliyun: 'Service Mesh ASM',
+        desc: 'Quản lý microservices mesh'
       },
       {
         aws: 'AWS Global Accelerator',
-        aliyun: '全球加速 GA',
-        desc: '网络加速服务'
+        aliyun: 'Global Accelerator GA',
+        desc: 'Dịch vụ tăng tốc network'
       }
     ]
   },
   security: {
-    title: '安全服务对比',
+    title: 'So sánh dịch vụ bảo mật',
     services: [
       {
         aws: 'AWS IAM',
-        aliyun: 'RAM 访问控制',
-        desc: '身份和访问管理服务'
+        aliyun: 'RAM Access Control',
+        desc: 'Dịch vụ IAM (quản lý danh tính và truy cập)'
       },
       {
         aws: 'AWS KMS',
-        aliyun: 'KMS 密钥管理',
-        desc: '密钥管理服务'
+        aliyun: 'KMS Key Management',
+        desc: 'Dịch vụ quản lý khóa mã hóa'
       },
       {
         aws: 'AWS WAF',
-        aliyun: 'WAF 防火墙',
-        desc: 'Web应用防火墙'
+        aliyun: 'WAF Firewall',
+        desc: 'Web application firewall'
       },
       {
         aws: 'AWS Shield',
-        aliyun: 'DDoS 防护',
-        desc: 'DDoS攻击防护'
+        aliyun: 'DDoS Protection',
+        desc: 'Bảo vệ chống tấn công DDoS'
       },
       {
         aws: 'Amazon GuardDuty',
-        aliyun: '云安全中心',
-        desc: '智能威胁检测'
+        aliyun: 'Cloud Security Center',
+        desc: 'Phát hiện mối đe dọa thông minh'
       },
       {
         aws: 'AWS Certificate Manager',
-        aliyun: 'SSL 证书服务',
-        desc: 'SSL/TLS证书管理'
+        aliyun: 'SSL Certificate Service',
+        desc: 'Quản lý SSL/TLS certificate'
       },
       {
         aws: 'AWS Secrets Manager',
-        aliyun: '凭据管家',
-        desc: '机密信息托管'
+        aliyun: 'Credentials Manager',
+        desc: 'Lưu trữ thông tin bí mật'
       },
       {
         aws: 'Amazon Macie',
-        aliyun: '敏感数据保护',
-        desc: '敏感数据发现与保护'
+        aliyun: 'Sensitive Data Protection',
+        desc: 'Phát hiện và bảo vệ dữ liệu nhạy cảm'
       }
     ]
   },
   database: {
-    title: '数据库服务对比',
+    title: 'So sánh dịch vụ Database',
     services: [
       {
         aws: 'Amazon RDS',
-        aliyun: 'RDS 关系型数据库',
-        desc: '托管的关系型数据库服务'
+        aliyun: 'RDS Relational Database',
+        desc: 'Dịch vụ relational database được quản lý'
       },
       {
         aws: 'Amazon Aurora',
         aliyun: 'PolarDB',
-        desc: '云原生关系型数据库'
+        desc: 'Relational database cloud-native'
       },
       {
         aws: 'Amazon DynamoDB',
         aliyun: 'Tablestore',
-        desc: 'NoSQL键值和文档数据库'
+        desc: 'NoSQL key-value và document database'
       },
       {
         aws: 'Amazon ElastiCache',
-        aliyun: '云数据库 Redis',
-        desc: '托管的内存缓存服务'
+        aliyun: 'Cloud Database Redis',
+        desc: 'Dịch vụ in-memory cache được quản lý'
       },
       {
         aws: 'Amazon DocumentDB',
-        aliyun: 'MongoDB 副本集',
-        desc: '兼容MongoDB的文档数据库'
+        aliyun: 'MongoDB Replica Set',
+        desc: 'Document database tương thích MongoDB'
       },
       {
         aws: 'Amazon Keyspaces',
-        aliyun: 'Cassandra 服务',
-        desc: '托管的Cassandra兼容服务'
+        aliyun: 'Cassandra Service',
+        desc: 'Dịch vụ tương thích Cassandra được quản lý'
       },
       {
         aws: 'Amazon Neptune',
-        aliyun: '图数据库 GDB',
-        desc: '全托管图数据库'
+        aliyun: 'Graph Database GDB',
+        desc: 'Graph database fully managed'
       },
       {
         aws: 'Amazon QLDB',
-        aliyun: '区块链 BaaS',
-        desc: '全托管分类账数据库'
+        aliyun: 'Blockchain BaaS',
+        desc: 'Ledger database fully managed'
       },
       {
         aws: 'Amazon Timestream',
-        aliyun: '时序数据库 TSDB',
-        desc: '全托管时序数据库'
+        aliyun: 'Time Series Database TSDB',
+        desc: 'Time series database fully managed'
       }
     ]
   },
   middleware: {
-    title: '中间件服务对比',
+    title: 'So sánh dịch vụ Middleware',
     services: [
       {
         aws: 'Amazon MQ',
-        aliyun: '消息队列 MQ',
-        desc: '托管的消息代理服务'
+        aliyun: 'Message Queue MQ',
+        desc: 'Dịch vụ message broker được quản lý'
       },
       {
         aws: 'Amazon SQS',
-        aliyun: '消息服务 MNS',
-        desc: '全托管消息队列服务'
+        aliyun: 'Message Service MNS',
+        desc: 'Dịch vụ message queue fully managed'
       },
       {
         aws: 'Amazon SNS',
-        aliyun: '事件总线 EventBridge',
-        desc: '全托管发布/订阅服务'
+        aliyun: 'EventBridge',
+        desc: 'Dịch vụ pub/sub fully managed'
       },
       {
         aws: 'Amazon Kinesis',
-        aliyun: '实时计算 Flink',
-        desc: '实时数据流处理'
+        aliyun: 'Realtime Compute Flink',
+        desc: 'Xử lý real-time data stream'
       },
       {
         aws: 'AWS Step Functions',
-        aliyun: 'Serverless 工作流',
-        desc: '工作流编排服务'
+        aliyun: 'Serverless Workflow',
+        desc: 'Dịch vụ orchestration workflow'
       },
       {
         aws: 'AWS AppSync',
-        aliyun: 'API 网关',
-        desc: '托管GraphQL服务'
+        aliyun: 'API Gateway',
+        desc: 'Dịch vụ GraphQL được quản lý'
       },
       {
         aws: 'Amazon EventBridge',
-        aliyun: '事件总线',
-        desc: '无服务器事件总线'
+        aliyun: 'Event Bus',
+        desc: 'Serverless event bus'
       }
     ]
   }

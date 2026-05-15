@@ -1,48 +1,48 @@
 <!--
-  FunctionApiDemo.vue - 紧凑版
-  目标：展示函数就是最基础的 API
+  FunctionApiDemo.vue - bản gọn
+  Mục tiêu: cho thấy hàm chính là dạng API cơ bản nhất
 -->
 <template>
   <div class="demo-root">
     <div class="demo-header">
       <span class="icon">🔧</span>
-      <span class="title">函数就是最基础的 API</span>
+      <span class="title">Hàm chính là API cơ bản nhất</span>
     </div>
 
     <div class="demo-layout">
       <div class="code-panel">
-        <div class="code-title">📝 Python 代码</div>
-        <pre><code><span class="keyword">def</span> <span class="func">greet</span>(name, greeting=<span class="str">"你好"</span>):
-    <span class="keyword">return</span> <span class="str">f"{greeting}，{name}！"</span>
+        <div class="code-title">📝 Code Python</div>
+        <pre><code><span class="keyword">def</span> <span class="func">greet</span>(name, greeting=<span class="str">"Xin chào"</span>):
+    <span class="keyword">return</span> <span class="str">f"{greeting}, {name}!"</span>
 
-result = <span class="func">greet</span>(<span class="str">"张三"</span>)</code></pre>
+result = <span class="func">greet</span>(<span class="str">"An"</span>)</code></pre>
       </div>
 
       <div class="right-panel">
         <div class="api-structure">
           <div class="structure-item">
-            <span class="label">📦 输入（参数）</span>
-            <code class="value">name="张三"</code>
+            <span class="label">📦 Đầu vào (tham số)</span>
+            <code class="value">name="An"</code>
           </div>
           <div class="structure-item">
-            <span class="label">⚙️ 处理</span>
-            <span class="value">函数内部拼接字符串</span>
+            <span class="label">⚙️ Xử lý</span>
+            <span class="value">Hàm ghép chuỗi bên trong</span>
           </div>
           <div class="structure-item">
-            <span class="label">📤 输出（返回）</span>
-            <code class="value highlight">"你好，张三！"</code>
+            <span class="label">📤 Đầu ra (trả về)</span>
+            <code class="value highlight">"Xin chào, An!"</code>
           </div>
         </div>
 
         <div class="try-area">
           <div class="try-row">
-            <input v-model="name" placeholder="名字" class="input" />
+            <input v-model="name" placeholder="Tên" class="input" />
             <select v-model="greeting" class="select">
-              <option value="你好">你好</option>
+              <option value="Xin chào">Xin chào</option>
               <option value="Hello">Hello</option>
-              <option value="早上好">早上好</option>
+              <option value="Chào buổi sáng">Chào buổi sáng</option>
             </select>
-            <button class="btn" @click="callFunction">调用</button>
+            <button class="btn" @click="callFunction">Gọi</button>
           </div>
           <div v-if="result" class="result">
             → <code>{{ result }}</code>
@@ -52,9 +52,9 @@ result = <span class="func">greet</span>(<span class="str">"张三"</span>)</cod
     </div>
 
     <div class="info-box">
-      <strong>核心思想：</strong>
-      <span>你不需要知道函数内部怎么实现，只需要知道怎么调用它。这就是 API
-        的本质。</span>
+      <strong>Ý tưởng cốt lõi:</strong>
+      <span>Bạn không cần biết bên trong hàm cài đặt thế nào, chỉ cần biết cách gọi nó. Đó là bản chất của
+        API.</span>
     </div>
   </div>
 </template>
@@ -62,12 +62,12 @@ result = <span class="func">greet</span>(<span class="str">"张三"</span>)</cod
 <script setup>
 import { ref } from 'vue'
 
-const name = ref('张三')
-const greeting = ref('你好')
+const name = ref('An')
+const greeting = ref('Xin chào')
 const result = ref('')
 
 function callFunction() {
-  result.value = `${greeting.value}，${name.value}！`
+  result.value = `${greeting.value}, ${name.value}!`
 }
 </script>
 

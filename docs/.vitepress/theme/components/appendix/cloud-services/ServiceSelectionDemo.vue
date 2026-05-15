@@ -1,9 +1,9 @@
 <template>
   <div class="service-selection-demo">
     <div class="demo-header">
-      <h4>云服务选型决策树</h4>
+      <h4>Cây quyết định chọn cloud service</h4>
       <p class="demo-desc">
-        回答几个简单问题，获取最适合您的云服务方案
+        Trả lời vài câu hỏi đơn giản để có giải pháp cloud service phù hợp nhất với bạn
       </p>
     </div>
 
@@ -20,7 +20,7 @@
 
       <div class="question-card">
         <div class="question-number">
-          问题 {{ currentStep + 1 }}/{{ questions.length }}
+          Câu hỏi {{ currentStep + 1 }}/{{ questions.length }}
         </div>
         <h5 class="question-text">
           {{ currentQuestion.text }}
@@ -47,13 +47,13 @@
     >
       <div class="result-header">
         <span class="result-icon">🎯</span>
-        <h5>推荐方案</h5>
+        <h5>Giải pháp đề xuất</h5>
       </div>
 
       <div class="recommendation-cards">
         <div class="rec-card primary">
           <div class="rec-badge">
-            最佳匹配
+            Phù hợp nhất
           </div>
           <div class="rec-icon">
             {{ result.primary.icon }}
@@ -73,7 +73,7 @@
 
         <div class="rec-card secondary">
           <div class="rec-badge alt">
-            备选
+            Tùy chọn khác
           </div>
           <div class="rec-icon">
             {{ result.secondary.icon }}
@@ -97,7 +97,7 @@
           class="restart-btn"
           @click="restart"
         >
-          <span>↺</span> 重新测试
+          <span>↺</span> Làm lại
         </button>
       </div>
     </div>
@@ -112,39 +112,39 @@ const answers = ref([])
 
 const questions = [
   {
-    text: '您的应用主要面向哪个地区？',
+    text: 'Ứng dụng của bạn chủ yếu phục vụ khu vực nào?',
     options: [
-      { value: 'global', icon: '🌍', text: '全球用户', desc: '需要覆盖多个国家和地区' },
-      { value: 'china', icon: '🇨🇳', text: '中国大陆', desc: '主要服务国内用户' },
-      { value: 'asia', icon: '🌏', text: '亚太区域', desc: '覆盖亚洲及太平洋地区' },
-      { value: 'us', icon: '🇺🇸', text: '北美/欧洲', desc: '主要服务欧美用户' }
+      { value: 'global', icon: '🌍', text: 'User toàn cầu', desc: 'Cần phủ sóng nhiều quốc gia/khu vực' },
+      { value: 'china', icon: '🇨🇳', text: 'Trung Quốc đại lục', desc: 'Chủ yếu phục vụ user trong nước' },
+      { value: 'asia', icon: '🌏', text: 'Khu vực châu Á - Thái Bình Dương', desc: 'Phủ sóng châu Á và Thái Bình Dương' },
+      { value: 'us', icon: '🇺🇸', text: 'Bắc Mỹ/châu Âu', desc: 'Chủ yếu phục vụ user Âu - Mỹ' }
     ]
   },
   {
-    text: '您的应用对计算资源的需求如何？',
+    text: 'Yêu cầu về tài nguyên compute của ứng dụng bạn ra sao?',
     options: [
-      { value: 'serverless', icon: '⚡', text: '事件驱动/无服务器', desc: '按需运行，流量波动大' },
-      { value: 'webapp', icon: '🌐', text: 'Web 应用服务', desc: '需要 24/7 在线运行' },
-      { value: 'batch', icon: '📊', text: '批处理/计算任务', desc: '定时或按需批量执行' },
-      { value: 'hpc', icon: '🔬', text: '高性能计算', desc: '需要 GPU 或大规模集群' }
+      { value: 'serverless', icon: '⚡', text: 'Event-driven/Serverless', desc: 'Chạy theo nhu cầu, traffic biến động lớn' },
+      { value: 'webapp', icon: '🌐', text: 'Web Application', desc: 'Cần online 24/7' },
+      { value: 'batch', icon: '📊', text: 'Batch processing/compute job', desc: 'Chạy định kỳ hoặc theo lô' },
+      { value: 'hpc', icon: '🔬', text: 'High-performance computing', desc: 'Cần GPU hoặc cluster lớn' }
     ]
   },
   {
-    text: '您对成本优化的优先级是？',
+    text: 'Mức độ ưu tiên tối ưu chi phí của bạn?',
     options: [
-      { value: 'lowest', icon: '💰', text: '极致成本优化', desc: '可以接受复杂配置换取最低价' },
-      { value: 'balanced', icon: '⚖️', text: '平衡型', desc: '在成本和易用性间找平衡' },
-      { value: 'stable', icon: '📈', text: '成本可预测', desc: '偏好固定成本，方便预算' },
-      { value: 'premium', icon: '💎', text: '性能优先', desc: '成本次之，追求最佳性能' }
+      { value: 'lowest', icon: '💰', text: 'Tối ưu chi phí tối đa', desc: 'Chấp nhận cấu hình phức tạp để có giá thấp nhất' },
+      { value: 'balanced', icon: '⚖️', text: 'Cân bằng', desc: 'Cân bằng giữa chi phí và dễ dùng' },
+      { value: 'stable', icon: '📈', text: 'Chi phí dự đoán được', desc: 'Ưu tiên chi phí cố định, dễ lập ngân sách' },
+      { value: 'premium', icon: '💎', text: 'Ưu tiên hiệu năng', desc: 'Chi phí thứ yếu, theo đuổi hiệu năng tốt nhất' }
     ]
   },
   {
-    text: '您的数据存储需求主要是？',
+    text: 'Nhu cầu lưu trữ dữ liệu chính của bạn là?',
     options: [
-      { value: 'object', icon: '📦', text: '对象存储（文件/图片/视频）', desc: '海量非结构化数据' },
-      { value: 'database', icon: '🗄️', text: '数据库存储', desc: '结构化数据和事务处理' },
-      { value: 'cache', icon: '⚡', text: '缓存/会话存储', desc: '高性能临时数据存储' },
-      { value: 'mixed', icon: '🔀', text: '混合存储', desc: '多种存储类型组合' }
+      { value: 'object', icon: '📦', text: 'Object storage (file/ảnh/video)', desc: 'Dữ liệu phi cấu trúc dung lượng lớn' },
+      { value: 'database', icon: '🗄️', text: 'Database storage', desc: 'Dữ liệu có cấu trúc và xử lý transaction' },
+      { value: 'cache', icon: '⚡', text: 'Cache/Session storage', desc: 'Lưu trữ dữ liệu tạm thời hiệu năng cao' },
+      { value: 'mixed', icon: '🔀', text: 'Storage kết hợp', desc: 'Kết hợp nhiều loại storage' }
     ]
   }
 ]
@@ -169,68 +169,68 @@ const result = computed(() => {
 
   const [region, compute, cost, storage] = answers.value
 
-  // 计算推荐
+  // Tính toán đề xuất
   let primary, secondary
 
   if (compute === 'serverless') {
     primary = {
       icon: '⚡',
-      name: '无服务器架构',
+      name: 'Kiến trúc Serverless',
       aws: 'AWS Lambda + API Gateway',
-      aliyun: '函数计算 + API 网关',
-      reason: '事件驱动场景下，按调用计费，无需预置服务器资源'
+      aliyun: 'Function Compute + API Gateway',
+      reason: 'Trong kịch bản event-driven, tính phí theo lượt gọi, không cần provision server'
     }
     secondary = {
       icon: '🔲',
-      name: '容器服务',
+      name: 'Container Service',
       aws: 'AWS Fargate',
       aliyun: 'Serverless Kubernetes',
-      reason: '需要长时间运行但需要灵活扩缩容的场景'
+      reason: 'Phù hợp khi cần chạy lâu dài nhưng vẫn cần co giãn linh hoạt'
     }
   } else if (compute === 'hpc') {
     primary = {
       icon: '🔬',
-      name: '高性能计算集群',
+      name: 'High-performance computing cluster',
       aws: 'AWS ParallelCluster',
-      aliyun: 'E-HPC + 超级计算集群',
-      reason: 'GPU 实例和高速互联网络，满足科学计算和 AI 训练需求'
+      aliyun: 'E-HPC + Super Computing Cluster',
+      reason: 'GPU instance và mạng high-speed, đáp ứng nhu cầu scientific compute và AI training'
     }
     secondary = {
       icon: '⚡',
-      name: '弹性裸金属',
+      name: 'Elastic Bare Metal',
       aws: 'EC2 Bare Metal',
-      aliyun: '弹性裸金属服务器',
-      reason: '需要物理机性能但希望云化管理的场景'
+      aliyun: 'Elastic Bare Metal Server',
+      reason: 'Phù hợp khi cần hiệu năng máy vật lý nhưng vẫn muốn quản lý kiểu cloud'
     }
   } else if (cost === 'lowest') {
     primary = {
       icon: '💰',
-      name: '抢占式实例',
+      name: 'Spot Instances',
       aws: 'EC2 Spot Instances',
-      aliyun: '抢占式实例',
-      reason: '价格最低至按需实例的 10%，适合容错性高的批处理任务'
+      aliyun: 'Preemptible Instances',
+      reason: 'Giá thấp tới 10% so với on-demand, phù hợp batch job có khả năng chịu lỗi cao'
     }
     secondary = {
       icon: '📅',
-      name: '预留实例',
+      name: 'Reserved Instances',
       aws: 'Reserved Instances',
-      aliyun: '包年包月',
-      reason: '长期稳定负载选择预留实例，可节省 30-60% 成本'
+      aliyun: 'Subscription (yearly/monthly)',
+      reason: 'Workload ổn định lâu dài chọn Reserved Instance, tiết kiệm 30-60% chi phí'
     }
   } else {
     primary = {
       icon: '☁️',
-      name: '云服务器 ECS',
+      name: 'Cloud Server ECS',
       aws: 'Amazon EC2',
-      aliyun: 'ECS 云服务器',
-      reason: '最通用的计算服务，支持多种计费模式和实例规格，生态完善'
+      aliyun: 'ECS Cloud Server',
+      reason: 'Dịch vụ compute đa năng nhất, hỗ trợ nhiều mô hình giá và spec, hệ sinh thái hoàn thiện'
     }
     secondary = {
       icon: '📦',
-      name: '容器实例',
+      name: 'Container Instance',
       aws: 'AWS Fargate',
-      aliyun: 'ECI 容器实例',
-      reason: '无需管理服务器，直接运行容器，适合微服务架构'
+      aliyun: 'ECI Container Instance',
+      reason: 'Không cần quản lý server, chạy container trực tiếp, phù hợp microservices'
     }
   }
 

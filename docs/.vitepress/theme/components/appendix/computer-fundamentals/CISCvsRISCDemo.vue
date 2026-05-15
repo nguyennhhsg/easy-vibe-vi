@@ -1,7 +1,7 @@
 <template>
   <div class="cisc-risc-demo">
-    <h4>⚔️ 两种设计哲学：CISC vs RISC</h4>
-    <p class="desc">点击对比维度，看两种指令集架构的核心差异</p>
+    <h4>⚔️ Hai triết lý thiết kế: CISC vs RISC</h4>
+    <p class="desc">Nhấp vào chế độ so sánh để thấy điểm khác biệt cốt lõi của hai kiến trúc tập lệnh</p>
 
     <div class="arch-toggle">
       <button
@@ -14,7 +14,7 @@
         :class="['toggle-btn', { active: view === 'both' }]"
         @click="view = 'both'"
       >
-        对比
+        So sánh
       </button>
       <button
         :class="['toggle-btn', { active: view === 'risc' }]"
@@ -39,11 +39,11 @@
           <span class="card-full">{{ archData[view].full }}</span>
         </div>
         <div class="card-philosophy">
-          <span class="phi-label">设计哲学：</span>
+          <span class="phi-label">Triết lý thiết kế:</span>
           <span>{{ archData[view].philosophy }}</span>
         </div>
         <div class="card-analogy">
-          <span class="ana-label">类比：</span>
+          <span class="ana-label">Phép so sánh:</span>
           <span>{{ archData[view].analogy }}</span>
         </div>
         <div class="card-example">
@@ -52,34 +52,34 @@
           <div class="example-note">{{ archData[view].exampleNote }}</div>
         </div>
         <div class="card-products">
-          <span class="prod-label">代表产品：</span>
+          <span class="prod-label">Sản phẩm tiêu biểu:</span>
           <span v-for="p in archData[view].products" :key="p" class="prod-tag">{{ p }}</span>
         </div>
       </div>
     </div>
 
     <div class="real-world">
-      <div class="rw-title">🌍 现实中的选择</div>
+      <div class="rw-title">🌍 Lựa chọn trong thực tế</div>
       <div class="rw-items">
         <div class="rw-item">
-          <span class="rw-device">💻 你的电脑</span>
+          <span class="rw-device">💻 Máy tính của bạn</span>
           <span class="rw-arch">x86 (CISC)</span>
-          <span class="rw-why">兼容几十年的软件生态</span>
+          <span class="rw-why">Tương thích với hệ sinh thái phần mềm hàng chục năm</span>
         </div>
         <div class="rw-item">
-          <span class="rw-device">📱 你的手机</span>
+          <span class="rw-device">📱 Điện thoại của bạn</span>
           <span class="rw-arch">ARM (RISC)</span>
-          <span class="rw-why">低功耗，电池续航更久</span>
+          <span class="rw-why">Tiêu thụ ít điện, thời lượng pin lâu hơn</span>
         </div>
         <div class="rw-item">
           <span class="rw-device">🍎 Apple Silicon</span>
           <span class="rw-arch">ARM (RISC)</span>
-          <span class="rw-why">高性能低功耗，颠覆了笔记本市场</span>
+          <span class="rw-why">Hiệu năng cao tiêu thụ điện thấp, làm thay đổi cả thị trường laptop</span>
         </div>
         <div class="rw-item">
-          <span class="rw-device">🔬 RISC-V 开发板</span>
+          <span class="rw-device">🔬 Board RISC-V</span>
           <span class="rw-arch">RISC-V (RISC)</span>
-          <span class="rw-why">开源免费，IoT 和教育领域崛起</span>
+          <span class="rw-why">Mã nguồn mở miễn phí, đang lên trong lĩnh vực IoT và giáo dục</span>
         </div>
       </div>
     </div>
@@ -92,35 +92,35 @@ import { ref } from 'vue'
 const view = ref('both')
 
 const dimensions = [
-  { label: '指令数量', cisc: '上千条复杂指令', risc: '几十到几百条精简指令' },
-  { label: '单条指令', cisc: '一条能做很多事', risc: '一条只做一件事' },
-  { label: '指令长度', cisc: '变长（1-15字节）', risc: '定长（通常4字节）' },
-  { label: '执行速度', cisc: '复杂指令多周期', risc: '大多数单周期完成' },
-  { label: '功耗', cisc: '较高', risc: '较低' },
-  { label: '流水线', cisc: '难优化（指令长度不一）', risc: '易优化（指令整齐）' },
-  { label: '编译器负担', cisc: '轻（硬件做更多）', risc: '重（软件做更多优化）' }
+  { label: 'Số lượng lệnh', cisc: 'Hàng nghìn lệnh phức tạp', risc: 'Vài chục đến vài trăm lệnh tối giản' },
+  { label: 'Từng lệnh đơn', cisc: 'Một lệnh làm được nhiều việc', risc: 'Một lệnh chỉ làm một việc' },
+  { label: 'Độ dài lệnh', cisc: 'Thay đổi (1-15 byte)', risc: 'Cố định (thường 4 byte)' },
+  { label: 'Tốc độ thực thi', cisc: 'Lệnh phức tạp nhiều chu kỳ', risc: 'Đa số thực thi trong một chu kỳ' },
+  { label: 'Mức tiêu thụ điện', cisc: 'Khá cao', risc: 'Khá thấp' },
+  { label: 'Pipeline', cisc: 'Khó tối ưu (độ dài lệnh không đều)', risc: 'Dễ tối ưu (lệnh đồng đều)' },
+  { label: 'Gánh nặng cho trình biên dịch', cisc: 'Nhẹ (phần cứng làm nhiều hơn)', risc: 'Nặng (phần mềm phải tối ưu nhiều hơn)' }
 ]
 
 const archData = {
   cisc: {
     name: 'CISC',
     full: 'Complex Instruction Set Computer',
-    philosophy: '让硬件尽可能强大，一条指令完成复杂操作，减轻编译器负担',
-    analogy: '像一把瑞士军刀——功能多，但每个功能不一定最好用',
-    exampleTitle: '用一条指令完成「内存加法」',
-    example: 'ADD [0x1000], R1\n; 一条指令完成：读内存 → 加法 → 写回内存\n; CPU 内部拆成多个微操作执行',
-    exampleNote: 'CISC 允许指令直接操作内存，一条指令背后可能是 5-6 个微操作',
-    products: ['Intel Core', 'AMD Ryzen', 'x86 服务器']
+    philosophy: 'Làm phần cứng mạnh nhất có thể, một lệnh hoàn thành thao tác phức tạp, giảm gánh nặng cho trình biên dịch',
+    analogy: 'Giống như dao đa năng Thụy Sĩ — có nhiều chức năng nhưng từng chức năng chưa chắc tốt nhất',
+    exampleTitle: 'Dùng một lệnh để làm "phép cộng tại bộ nhớ"',
+    example: 'ADD [0x1000], R1\n; Một lệnh hoàn thành: đọc bộ nhớ → cộng → ghi lại bộ nhớ\n; Bên trong CPU được chia thành nhiều vi thao tác',
+    exampleNote: 'CISC cho phép lệnh tác động trực tiếp lên bộ nhớ, một lệnh có thể tương ứng 5-6 vi thao tác',
+    products: ['Intel Core', 'AMD Ryzen', 'Máy chủ x86']
   },
   risc: {
     name: 'RISC',
     full: 'Reduced Instruction Set Computer',
-    philosophy: '让每条指令尽可能简单快速，复杂操作由多条简单指令组合完成',
-    analogy: '像一套专业工具——每个工具只做一件事，但做得又快又好',
-    exampleTitle: '用三条指令完成同样的「内存加法」',
-    example: 'LOAD  R2, [0x1000]  ; 第1步：从内存读数据到寄存器\nADD   R2, R2, R1    ; 第2步：寄存器之间做加法\nSTORE R2, [0x1000]  ; 第3步：把结果写回内存',
-    exampleNote: 'RISC 要求数据先加载到寄存器，运算只在寄存器间进行，结果再存回内存',
-    products: ['Apple M 系列', '高通骁龙', 'AWS Graviton', 'RISC-V']
+    philosophy: 'Mỗi lệnh đơn giản và nhanh nhất có thể, thao tác phức tạp được tạo thành từ nhiều lệnh đơn giản',
+    analogy: 'Giống một bộ dụng cụ chuyên dụng — mỗi dụng cụ chỉ làm một việc nhưng làm rất nhanh và tốt',
+    exampleTitle: 'Dùng ba lệnh để làm cùng "phép cộng tại bộ nhớ"',
+    example: 'LOAD  R2, [0x1000]  ; Bước 1: đọc dữ liệu từ bộ nhớ vào thanh ghi\nADD   R2, R2, R1    ; Bước 2: cộng giữa các thanh ghi\nSTORE R2, [0x1000]  ; Bước 3: ghi kết quả về bộ nhớ',
+    exampleNote: 'RISC yêu cầu dữ liệu phải được nạp vào thanh ghi trước, phép toán chỉ thực hiện giữa các thanh ghi, kết quả sau đó được ghi lại bộ nhớ',
+    products: ['Apple chip M', 'Qualcomm Snapdragon', 'AWS Graviton', 'RISC-V']
   }
 }
 </script>

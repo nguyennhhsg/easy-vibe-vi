@@ -36,7 +36,7 @@
           <span class="value">{{ selectedServiceData.aws }}</span>
         </div>
         <div class="compare-item">
-          <span class="label">阿里云:</span>
+          <span class="label">Alibaba Cloud:</span>
           <span class="value">{{ selectedServiceData.aliyun }}</span>
         </div>
       </div>
@@ -50,57 +50,57 @@ import { ref, computed } from 'vue'
 const selectedService = ref(null)
 
 const services = [
-  { 
-    id: 'compute', 
-    icon: '⚙️', 
-    name: '计算', 
+  {
+    id: 'compute',
+    icon: '⚙️',
+    name: 'Compute',
     examples: 'EC2 / ECS',
-    description: '提供虚拟服务器和计算能力，是云服务的基础',
+    description: 'Cung cấp virtual server và năng lực compute, là nền tảng của cloud service',
     aws: 'Amazon EC2',
-    aliyun: 'ECS 云服务器'
+    aliyun: 'ECS Cloud Server'
   },
-  { 
-    id: 'storage', 
-    icon: '💾', 
-    name: '存储', 
+  {
+    id: 'storage',
+    icon: '💾',
+    name: 'Storage',
     examples: 'S3 / OSS',
-    description: '对象存储服务，用于存放图片、文档等文件',
+    description: 'Dịch vụ object storage, dùng để lưu trữ ảnh, tài liệu và các loại file khác',
     aws: 'Amazon S3',
-    aliyun: 'OSS 对象存储'
+    aliyun: 'OSS Object Storage'
   },
-  { 
-    id: 'network', 
-    icon: '🌐', 
-    name: '网络', 
-    examples: 'VPC / 专有网络',
-    description: '构建隔离的虚拟网络环境',
+  {
+    id: 'network',
+    icon: '🌐',
+    name: 'Network',
+    examples: 'VPC',
+    description: 'Xây dựng môi trường mạng ảo cô lập',
     aws: 'Amazon VPC',
-    aliyun: '专有网络 VPC'
+    aliyun: 'VPC'
   },
-  { 
-    id: 'database', 
-    icon: '🗄️', 
-    name: '数据库', 
+  {
+    id: 'database',
+    icon: '🗄️',
+    name: 'Database',
     examples: 'RDS / PolarDB',
-    description: '托管的关系型数据库服务',
+    description: 'Dịch vụ relational database được quản lý',
     aws: 'Amazon RDS',
-    aliyun: 'RDS 关系型数据库'
+    aliyun: 'RDS Relational Database'
   },
-  { 
-    id: 'security', 
-    icon: '🔒', 
-    name: '安全', 
+  {
+    id: 'security',
+    icon: '🔒',
+    name: 'Bảo mật',
     examples: 'IAM / RAM',
-    description: '身份认证和访问控制服务',
+    description: 'Dịch vụ IAM (xác thực danh tính và kiểm soát truy cập)',
     aws: 'AWS IAM',
-    aliyun: 'RAM 访问控制'
+    aliyun: 'RAM Access Control'
   },
-  { 
-    id: 'middleware', 
-    icon: '🔧', 
-    name: '中间件', 
+  {
+    id: 'middleware',
+    icon: '🔧',
+    name: 'Middleware',
     examples: 'MQ / RocketMQ',
-    description: '消息队列和缓存服务',
+    description: 'Dịch vụ message queue và cache',
     aws: 'Amazon MQ',
     aliyun: 'RocketMQ'
   }

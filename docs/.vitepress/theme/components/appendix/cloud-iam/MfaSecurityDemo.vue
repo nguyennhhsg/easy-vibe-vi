@@ -2,8 +2,8 @@
   <div class="mfa-security-demo">
     <div class="demo-header">
       <span class="icon">🔐</span>
-      <span class="title">多因素认证</span>
-      <span class="subtitle">MFA 双因素认证流程</span>
+      <span class="title">Multi-Factor Authentication</span>
+      <span class="subtitle">Flow xác thực MFA hai yếu tố</span>
     </div>
 
     <div class="main-area">
@@ -13,7 +13,7 @@
           :class="{ active: step >= 1, completed: step > 1 }"
         >
           <span class="step-icon">🔐</span>
-          <span class="step-label">密码</span>
+          <span class="step-label">Password</span>
         </div>
         <span class="step-arrow">→</span>
         <div
@@ -29,7 +29,7 @@
           :class="{ active: step >= 3 }"
         >
           <span class="step-icon">✅</span>
-          <span class="step-label">成功</span>
+          <span class="step-label">Thành công</span>
         </div>
       </div>
 
@@ -38,19 +38,19 @@
         class="auth-panel"
       >
         <div class="panel-title">
-          请输入密码
+          Vui lòng nhập password
         </div>
         <input
           v-model="password"
           type="password"
-          placeholder="输入任意密码"
+          placeholder="Nhập password bất kỳ"
           @keyup.enter="verifyPassword"
         >
         <button
           :disabled="!password"
           @click="verifyPassword"
         >
-          验证密码
+          Xác thực password
         </button>
       </div>
 
@@ -59,18 +59,18 @@
         class="auth-panel"
       >
         <div class="panel-title">
-          MFA 验证码
+          Mã MFA
         </div>
         <div class="totp-display">
           <span class="totp-code">{{ totpCode }}</span>
           <div class="totp-hint">
-            模拟验证码
+            Mã giả lập
           </div>
         </div>
         <input
           v-model="userCode"
           type="text"
-          placeholder="输入上方验证码"
+          placeholder="Nhập mã ở trên"
           maxlength="6"
           @keyup.enter="verifyMFA"
         >
@@ -78,7 +78,7 @@
           :disabled="userCode.length !== 6"
           @click="verifyMFA"
         >
-          验证
+          Xác thực
         </button>
       </div>
 
@@ -88,20 +88,20 @@
       >
         <span class="success-icon">🎉</span>
         <div class="success-title">
-          登录成功！
+          Đăng nhập thành công!
         </div>
         <div class="success-desc">
-          已通过 MFA 双因素认证
+          Đã xác thực MFA hai yếu tố
         </div>
         <button @click="reset">
-          重新演示
+          Demo lại
         </button>
       </div>
     </div>
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>启用 MFA 可降低 99.9% 的账号被盗风险。即使密码泄露，攻击者没有你的 MFA 设备也无法登录。
+      <strong>Ý tưởng cốt lõi:</strong> Bật MFA giảm 99.9% rủi ro account bị chiếm. Ngay cả khi password bị lộ, attacker không có thiết bị MFA của bạn cũng không thể đăng nhập.
     </div>
   </div>
 </template>

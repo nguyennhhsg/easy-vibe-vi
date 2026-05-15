@@ -18,7 +18,7 @@ const langMap = {
  * Lightweight i18n composable for VitePress Vue components.
  *
  * @param {Record<string, Record<string, any>>} messages
- *   Locale map, e.g. { 'zh-cn': { title: '标题' }, en: { title: 'Title' } }
+ *   Locale map, e.g. { 'zh-cn': { title: 'Tieu de' }, en: { title: 'Title' } }
  * @returns {{ t: (key: string) => any, locale: import('vue').ComputedRef<string> }}
  */
 export function useI18n(messages) {

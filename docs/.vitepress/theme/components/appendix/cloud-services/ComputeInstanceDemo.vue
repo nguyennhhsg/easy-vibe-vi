@@ -2,7 +2,7 @@
   <div class="compute-instance-demo">
     <div class="config-panel">
       <div class="config-row">
-        <label>地域</label>
+        <label>Region</label>
         <div class="options">
           <button 
             v-for="region in regions" 
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="config-row">
-        <label>规格</label>
+        <label>Specs</label>
         <div class="options">
           <button 
             v-for="spec in specs" 
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="config-row">
-        <label>镜像</label>
+        <label>Image</label>
         <div class="options">
           <button 
             v-for="image in images" 
@@ -44,19 +44,19 @@
     
     <div class="result-panel">
       <div class="result-title">
-        配置结果
+        Kết quả cấu hình
       </div>
       <div class="result-grid">
         <div class="result-item">
-          <span class="label">配置</span>
+          <span class="label">Cấu hình</span>
           <span class="value">{{ selectedSpec?.name }} / {{ selectedImage?.name }}</span>
         </div>
         <div class="result-item">
-          <span class="label">预估价格</span>
-          <span class="value price">¥{{ price }}/月</span>
+          <span class="label">Giá ước tính</span>
+          <span class="value price">¥{{ price }}/tháng</span>
         </div>
         <div class="result-item">
-          <span class="label">适用场景</span>
+          <span class="label">Use case</span>
           <span class="value">{{ selectedSpec?.scene }}</span>
         </div>
       </div>
@@ -74,17 +74,17 @@ const config = ref({
 })
 
 const regions = [
-  { id: 'hangzhou', name: '华东-杭州' },
-  { id: 'beijing', name: '华北-北京' },
-  { id: 'shenzhen', name: '华南-深圳' },
-  { id: 'singapore', name: '亚太-新加坡' }
+  { id: 'hangzhou', name: 'East China - Hangzhou' },
+  { id: 'beijing', name: 'North China - Beijing' },
+  { id: 'shenzhen', name: 'South China - Shenzhen' },
+  { id: 'singapore', name: 'APAC - Singapore' }
 ]
 
 const specs = [
-  { id: 'small', name: '1核2G', scene: '测试环境、个人博客', price: 89 },
-  { id: 'medium', name: '2核4G', scene: '中小型应用、开发环境', price: 199 },
-  { id: 'large', name: '4核8G', scene: '生产环境、中型网站', price: 399 },
-  { id: 'xlarge', name: '8核16G', scene: '大型应用、数据库', price: 799 }
+  { id: 'small', name: '1 core 2G', scene: 'Môi trường test, blog cá nhân', price: 89 },
+  { id: 'medium', name: '2 core 4G', scene: 'Ứng dụng nhỏ/vừa, môi trường dev', price: 199 },
+  { id: 'large', name: '4 core 8G', scene: 'Production, website cỡ vừa', price: 399 },
+  { id: 'xlarge', name: '8 core 16G', scene: 'Ứng dụng lớn, database', price: 799 }
 ]
 
 const images = [

@@ -2,8 +2,8 @@
   <div class="role-policy-demo">
     <div class="demo-header">
       <span class="icon">🎭</span>
-      <span class="title">角色与策略</span>
-      <span class="subtitle">策略叠加原理</span>
+      <span class="title">Role và Policy</span>
+      <span class="subtitle">Nguyên lý policy stacking</span>
     </div>
 
     <div class="main-area">
@@ -15,7 +15,7 @@
           <span class="role-icon">🎭</span>
           <div class="role-info">
             <span class="role-name">CrossAccountS3AccessRole</span>
-            <span class="role-type">跨账号访问角色</span>
+            <span class="role-type">Role truy cập cross-account</span>
           </div>
           <span class="expand-icon">{{ showTrust ? '▼' : '▶' }}</span>
         </div>
@@ -24,7 +24,7 @@
           class="trust-policy"
         >
           <div class="trust-title">
-            🔐 信任策略
+            🔐 Trust policy
           </div>
           <div
             v-for="(t, i) in trustPolicy"
@@ -71,7 +71,7 @@
 
     <div class="info-box">
       <span class="icon">💡</span>
-      <strong>核心思想：</strong>策略叠加——一个角色可附加多个策略，最终权限是所有策略的叠加结果。Deny 优先级高于 Allow。
+      <strong>Ý tưởng cốt lõi:</strong> Policy stacking — một role có thể attach nhiều policy, quyền cuối cùng là kết quả tổng hợp của tất cả các policy. Deny có ưu tiên cao hơn Allow.
     </div>
   </div>
 </template>
@@ -83,8 +83,8 @@ const showTrust = ref(false)
 const selectedPolicy = ref(0)
 
 const trustPolicy = [
-  { principal: '账号 A (123456789012)', action: 'sts:AssumeRole' },
-  { principal: '特定 IAM 用户', action: 'sts:AssumeRole' }
+  { principal: 'Account A (123456789012)', action: 'sts:AssumeRole' },
+  { principal: 'IAM user cụ thể', action: 'sts:AssumeRole' }
 ]
 
 const attachedPolicies = [

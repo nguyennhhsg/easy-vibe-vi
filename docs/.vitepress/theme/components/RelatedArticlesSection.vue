@@ -4,7 +4,7 @@ import NavCard from './NavCard.vue'
 defineProps({
   title: {
     type: String,
-    default: '继续阅读'
+    default: 'Đọc tiếp'
   },
   description: {
     type: String,

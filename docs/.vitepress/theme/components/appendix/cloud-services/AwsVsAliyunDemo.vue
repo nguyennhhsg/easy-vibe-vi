@@ -1,9 +1,9 @@
 <template>
   <div class="aws-vs-aliyun-demo">
     <div class="demo-header">
-      <h4>AWS vs 阿里云 核心差异</h4>
+      <h4>AWS vs Alibaba Cloud - Khác biệt cốt lõi</h4>
       <p class="demo-desc">
-        点击切换查看不同维度的对比
+        Click để xem so sánh theo từng khía cạnh
       </p>
     </div>
 
@@ -59,7 +59,7 @@
             <div class="vs-card aliyun-card">
               <div class="card-header">
                 <div class="logo aliyun-logo">
-                  阿里云
+                  Alibaba Cloud
                 </div>
                 <div class="subtitle">
                   Alibaba Cloud
@@ -80,7 +80,7 @@
 
           <div class="verdict-box">
             <div class="verdict-title">
-              💡 选型建议
+              💡 Gợi ý lựa chọn
             </div>
             <div class="verdict-text">
               {{ currentComparison.verdict }}
@@ -98,78 +98,78 @@ import { ref, computed } from 'vue'
 const activeTab = ref('global')
 
 const tabs = [
-  { key: 'global', label: '全球布局' },
-  { key: 'ecosystem', label: '生态体系' },
-  { key: 'pricing', label: '价格策略' },
-  { key: 'enterprise', label: '企业服务' },
-  { key: 'developer', label: '开发者体验' }
+  { key: 'global', label: 'Phủ sóng toàn cầu' },
+  { key: 'ecosystem', label: 'Hệ sinh thái' },
+  { key: 'pricing', label: 'Chiến lược giá' },
+  { key: 'enterprise', label: 'Dịch vụ doanh nghiệp' },
+  { key: 'developer', label: 'Trải nghiệm developer' }
 ]
 
 const comparisons = {
   global: {
     aws: [
-      '全球 30+ 区域，覆盖率最广',
-      '发达国家基础设施成熟',
-      '跨境数据合规经验丰富'
+      'Hơn 30 region toàn cầu, phủ sóng rộng nhất',
+      'Hạ tầng tại các nước phát triển ổn định',
+      'Kinh nghiệm tuân thủ dữ liệu xuyên biên giới phong phú'
     ],
     aliyun: [
-      '亚太地区覆盖密度最高',
-      '中国大陆节点数量领先',
-      '一带一路区域布局积极'
+      'Mật độ phủ sóng tại châu Á - Thái Bình Dương cao nhất',
+      'Số node tại Trung Quốc đại lục dẫn đầu',
+      'Triển khai tích cực tại khu vực Vành đai và Con đường'
     ],
-    verdict: '出海欧美选 AWS，深耕亚太选阿里云。跨国企业可考虑双云或多云架构。'
+    verdict: 'Vươn ra Âu - Mỹ thì chọn AWS, tập trung châu Á - Thái Bình Dương thì chọn Alibaba Cloud. Doanh nghiệp đa quốc gia có thể cân nhắc kiến trúc đa cloud.'
   },
   ecosystem: {
     aws: [
-      '服务种类最丰富（200+ 服务）',
-      '第三方 SaaS 集成度极高',
-      '开源生态支持最全面'
+      'Đa dạng dịch vụ nhất (200+ service)',
+      'Tích hợp với SaaS bên thứ ba cực mạnh',
+      'Hỗ trợ open source toàn diện nhất'
     ],
     aliyun: [
-      '阿里系产品无缝集成',
-      '电商/零售场景方案成熟',
-      '国产化替代支持完善'
+      'Tích hợp liền mạch với sản phẩm hệ Alibaba',
+      'Giải pháp cho e-commerce/bán lẻ hoàn thiện',
+      'Hỗ trợ thay thế công nghệ nội địa tốt'
     ],
-    verdict: '技术栈复杂、需丰富组件选 AWS；阿里系业务、电商零售场景选阿里云。'
+    verdict: 'Stack phức tạp, cần nhiều component thì chọn AWS; business hệ Alibaba, e-commerce/bán lẻ thì chọn Alibaba Cloud.'
   },
   pricing: {
     aws: [
-      '预留实例折扣力度大',
-      'Spot 竞价实例价格极低',
-      '免费额度相对保守'
+      'Reserved instance giảm giá mạnh',
+      'Spot instance giá cực rẻ',
+      'Free tier tương đối hạn chế'
     ],
     aliyun: [
-      '新用户优惠力度大',
-      '包年包月性价比高',
-      '学生/开发者福利多'
+      'Ưu đãi cho user mới rất hấp dẫn',
+      'Trả theo năm/tháng tỉ lệ chi phí tốt',
+      'Nhiều ưu đãi cho sinh viên/developer'
     ],
-    verdict: '长期稳定负载选 AWS 预留实例；初创公司、预算敏感选阿里云新客优惠。'
+    verdict: 'Workload ổn định lâu dài thì chọn AWS Reserved Instance; startup, ngân sách hạn chế thì chọn ưu đãi user mới của Alibaba Cloud.'
   },
   enterprise: {
     aws: [
-      '企业级支持体系成熟',
-      '合规认证最全面',
-      '混合云方案（Outposts）'
+      'Hệ thống hỗ trợ doanh nghiệp hoàn thiện',
+      'Chứng nhận tuân thủ toàn diện nhất',
+      'Giải pháp hybrid cloud (Outposts)'
     ],
     aliyun: [
-      '本地化服务响应快',
-      '政府/央企合作深度高',
-      '专有云/混合云方案完善'
+      'Hỗ trợ bản địa hóa nhanh',
+      'Hợp tác sâu với chính phủ/doanh nghiệp nhà nước',
+      'Giải pháp private cloud/hybrid cloud hoàn thiện'
     ],
-    verdict: '外企、强合规要求选 AWS；政企客户、需本地化支持选阿里云。'
+    verdict: 'Doanh nghiệp nước ngoài, yêu cầu tuân thủ nghiêm ngặt thì chọn AWS; khách hàng chính phủ, cần hỗ trợ bản địa hóa thì chọn Alibaba Cloud.'
   },
   developer: {
     aws: [
-      '文档质量业界标杆',
-      '认证体系完善',
-      '社区活跃度最高'
+      'Chất lượng tài liệu là chuẩn mực của ngành',
+      'Hệ thống chứng chỉ hoàn thiện',
+      'Cộng đồng năng động nhất'
     ],
     aliyun: [
-      '中文文档详尽',
-      '学习路径清晰',
-      '技术社区活跃度高'
+      'Tài liệu tiếng Trung chi tiết',
+      'Lộ trình học rõ ràng',
+      'Cộng đồng kỹ thuật năng động'
     ],
-    verdict: '英文好、追求国际认证选 AWS；中文开发者、喜欢中文资料选阿里云。'
+    verdict: 'Tiếng Anh tốt, muốn chứng chỉ quốc tế thì chọn AWS; developer dùng tiếng Trung, thích tài liệu tiếng Trung thì chọn Alibaba Cloud.'
   }
 }
 

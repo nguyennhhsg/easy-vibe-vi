@@ -1,72 +1,72 @@
 <template>
   <div class="demo-card">
-    <div class="decomp-title">注意力机制的层层拆解</div>
-    
-    <!-- 第一层：Multi-Head Attention -->
+    <div class="decomp-title">Bóc tách từng lớp cơ chế attention</div>
+
+    <!-- Lớp 1: Multi-Head Attention -->
     <div class="level-section">
-      <div class="level-label">层级 1：Multi-Head Attention</div>
+      <div class="level-label">Lớp 1: Multi-Head Attention</div>
       <div class="level-content">
         <div class="multi-head-box">
           <div class="head-row">
             <div v-for="i in 8" :key="i" class="head-item">Head {{ i }}</div>
           </div>
-          <div class="arrow-down">↓ 拆解</div>
+          <div class="arrow-down">↓ Bóc tách</div>
         </div>
       </div>
     </div>
 
-    <!-- 第二层：Single Head -->
+    <!-- Lớp 2: Single Head -->
     <div class="level-section">
-      <div class="level-label">层级 2：单个 Attention Head</div>
+      <div class="level-label">Lớp 2: một Attention Head</div>
       <div class="level-content">
         <div class="single-head-box">
           <div class="step-flow">
-            <div class="step">输入 X</div>
+            <div class="step">Input X</div>
             <div class="arrow">→</div>
-            <div class="step">线性变换</div>
+            <div class="step">Phép biến đổi tuyến tính</div>
             <div class="arrow">→</div>
             <div class="step">Q, K, V</div>
             <div class="arrow">→</div>
             <div class="step">Scaled Dot-Product</div>
             <div class="arrow">→</div>
-            <div class="step">输出</div>
+            <div class="step">Output</div>
           </div>
-          <div class="arrow-down">↓ 拆解</div>
+          <div class="arrow-down">↓ Bóc tách</div>
         </div>
       </div>
     </div>
 
-    <!-- 第三层：Scaled Dot-Product Attention -->
+    <!-- Lớp 3: Scaled Dot-Product Attention -->
     <div class="level-section">
-      <div class="level-label">层级 3：Scaled Dot-Product Attention（核心）</div>
+      <div class="level-label">Lớp 3: Scaled Dot-Product Attention (cốt lõi)</div>
       <div class="level-content">
         <div class="dot-product-box">
           <div class="formula-steps">
             <div class="formula-step">
               <div class="step-num">1</div>
               <div class="step-content">
-                <div class="step-name">计算相似度</div>
+                <div class="step-name">Tính độ tương tự</div>
                 <div class="step-formula">Score = Q · K<sup>T</sup></div>
               </div>
             </div>
             <div class="formula-step">
               <div class="step-num">2</div>
               <div class="step-content">
-                <div class="step-name">缩放</div>
+                <div class="step-name">Scale</div>
                 <div class="step-formula">Score / √d<sub>k</sub></div>
               </div>
             </div>
             <div class="formula-step">
               <div class="step-num">3</div>
               <div class="step-content">
-                <div class="step-name">归一化</div>
+                <div class="step-name">Chuẩn hoá (Normalize)</div>
                 <div class="step-formula">Attention Weights = Softmax(Score)</div>
               </div>
             </div>
             <div class="formula-step">
               <div class="step-num">4</div>
               <div class="step-content">
-                <div class="step-name">加权求和</div>
+                <div class="step-name">Tổng có trọng số</div>
                 <div class="step-formula">Output = Weights · V</div>
               </div>
             </div>
@@ -75,15 +75,15 @@
       </div>
     </div>
 
-    <!-- 组装说明 -->
+    <!-- Hướng dẫn ráp -->
     <div class="assembly-note">
-      <div class="note-title">🔧 组装过程</div>
+      <div class="note-title">🔧 Quá trình ráp lại</div>
       <div class="note-content">
         <span class="note-item">Scaled Dot-Product</span>
         <span class="note-arrow">→</span>
-        <span class="note-item">单个 Head</span>
+        <span class="note-item">Một Head</span>
         <span class="note-arrow">→</span>
-        <span class="note-item">Multi-Head（8个并行）</span>
+        <span class="note-item">Multi-Head (8 head song song)</span>
         <span class="note-arrow">→</span>
         <span class="note-item">Concat + Linear</span>
       </div>

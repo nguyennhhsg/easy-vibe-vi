@@ -14,7 +14,7 @@
         </div>
         <div class="method-flags">
           <span :class="['flag', method.idempotent ? 'yes' : 'no']">
-            {{ method.idempotent ? '幂等' : '不幂等' }}
+            {{ method.idempotent ? 'Idempotent' : 'Không idempotent' }}
           </span>
         </div>
       </div>
@@ -29,7 +29,7 @@
       </div>
       <div class="detail-desc">{{ currentMethod.desc }}</div>
       <div class="detail-analogy">
-        <span class="analogy-label">餐厅类比:</span>
+        <span class="analogy-label">Liên tưởng kiểu nhà hàng:</span>
         <span class="analogy-text">{{ currentMethod.analogy }}</span>
       </div>
       <div class="detail-code">
@@ -47,59 +47,59 @@ const active = ref('get')
 const methods = [
   {
     id: 'get',
-    name: '获取',
-    use: '查询数据',
+    name: 'Lấy',
+    use: 'Query dữ liệu',
     idempotent: true,
-    desc: '从服务器获取资源,不会修改任何数据',
-    analogy: '"服务员,菜单给我看看"',
-    example: `GET /api/users           # 获取用户列表
-GET /api/users/123       # 获取单个用户
-GET /api/products?cat=phone  # 查询手机商品`
+    desc: 'Lấy resource từ server, không thay đổi dữ liệu nào',
+    analogy: '"Bạn nhân viên ơi, cho mình xem thực đơn"',
+    example: `GET /api/users           # Lấy danh sách user
+GET /api/users/123       # Lấy một user
+GET /api/products?cat=phone  # Query sản phẩm điện thoại`
   },
   {
     id: 'post',
-    name: '创建',
-    use: '新增数据',
+    name: 'Tạo',
+    use: 'Thêm dữ liệu',
     idempotent: false,
-    desc: '向服务器提交数据,创建新资源',
-    analogy: '"给我来份宫保鸡丁"',
+    desc: 'Gửi dữ liệu lên server để tạo resource mới',
+    analogy: '"Cho mình một phần gà xào hạt điều"',
     example: `POST /api/users
-Body: {"name": "张三", "email": "zhang@example.com"}
+Body: {"name": "Nguyễn Văn A", "email": "a@example.com"}
 
 POST /api/orders
 Body: {"items": [{"id": 1, "qty": 2}]}`
   },
   {
     id: 'put',
-    name: '全量更新',
-    use: '替换资源',
+    name: 'Cập nhật toàn bộ',
+    use: 'Thay thế resource',
     idempotent: true,
-    desc: '用新数据完整替换旧资源',
-    analogy: '"把宫保鸡丁改成糖醋里脊"',
+    desc: 'Thay thế toàn bộ resource cũ bằng dữ liệu mới',
+    analogy: '"Đổi món gà xào thành sườn xào chua ngọt"',
     example: `PUT /api/users/123
-Body: {"name": "李四", "email": "li@example.com", "age": 25}
-# 注意:必须提供所有字段`
+Body: {"name": "Trần B", "email": "b@example.com", "age": 25}
+# Lưu ý: phải cung cấp tất cả các field`
   },
   {
     id: 'patch',
-    name: '部分更新',
-    use: '修改字段',
+    name: 'Cập nhật một phần',
+    use: 'Sửa field',
     idempotent: false,
-    desc: '只修改资源的部分字段',
-    analogy: '"宫保鸡丁不要放花生"',
+    desc: 'Chỉ sửa một số field của resource',
+    analogy: '"Phần gà xào đừng cho hạt điều"',
     example: `PATCH /api/users/123
-Body: {"name": "王五"}
-# 只修改 name,其他字段保持不变`
+Body: {"name": "Lê C"}
+# Chỉ sửa name, các field khác giữ nguyên`
   },
   {
     id: 'delete',
-    name: '删除',
-    use: '删除资源',
+    name: 'Xóa',
+    use: 'Xóa resource',
     idempotent: true,
-    desc: '从服务器删除资源',
-    analogy: '"算了,那道菜不要了"',
-    example: `DELETE /api/users/123       # 删除指定用户
-DELETE /api/orders/456      # 取消订单`
+    desc: 'Xóa resource khỏi server',
+    analogy: '"Thôi không cần món đó nữa"',
+    example: `DELETE /api/users/123       # Xóa user theo id
+DELETE /api/orders/456      # Hủy đơn hàng`
   }
 ]
 

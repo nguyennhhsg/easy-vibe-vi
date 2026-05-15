@@ -1,409 +1,405 @@
-# Cách xây dựng chương trình iOS - Phát triển SwiftUI gốc
+# Cách xây dựng ứng dụng iOS - Phát triển native SwiftUI
+## Chương 1: iOS App là gì và iOS App Development là gì
 
-## Chương 1: iOS App là gì và phát triển iOS App
+Trong bài hướng dẫn này, chúng ta sẽ đi qua một vòng khép kín hoàn chỉnh: **từ một ý tưởng trong đầu, đến một ứng dụng iOS thực sự có thể cài đặt và chạy được trên iPhone.**
 
-Trong hướng dẫn này, chúng ta sẽ hoàn thành một vòng kín toàn bộ: **từ một ý tưởng trong đầu bạn, đến ứng dụng iOS thực tế có thể được cài đặt và chạy thành công trên iPhone.**
+Để theo dõi bài hướng dẫn này, bạn cần có ít nhất:
 
-Để theo dõi hướng dẫn này, bạn cần có ít nhất:
-
-1. Một chiếc Mac chạy phiên bản macOS khá mới
-2. Một chiếc iPhone chạy iOS khá mới và đã bật chế độ nhà phát triển
+1. Một chiếc Mac chạy macOS phiên bản tương đối mới
+2. Một chiếc iPhone chạy iOS phiên bản tương đối mới và đã bật chế độ developer
 3. Đã cài đặt thành công Xcode
 4. Đã cài đặt và mở Trae
-5. Một Apple ID hợp lệ
+5. Một Apple ID có thể sử dụng được
 
 ![](images/image1.png)
 
 ### 1.1 iOS App
 
-iOS App là ứng dụng gốc chạy trên hệ điều hành iPhone, nó khởi động nhanh, tương tác mượt mà, và có thể sử dụng sâu các tính năng hệ thống như thông báo, camera, lưu trữ cục bộ, v.v.
+iOS App là ứng dụng native chạy trên hệ điều hành iPhone, khởi động nhanh, tương tác mượt mà và có thể sử dụng sâu các tính năng hệ thống như thông báo, camera, bộ nhớ cục bộ.
 
 ![](images/image2.png)
 
-### 1.2 Phát triển iOS App
+### 1.2 iOS App Development
 
-Phát triển một iOS App, cốt lõi chỉ bao gồm một số điều:
+Để phát triển một iOS App, về cốt lõi chỉ bao gồm một vài việc:
 
-1. Làm rõ vấn đề mà ứng dụng sẽ giải quyết
+1. Xác định rõ vấn đề mà ứng dụng cần giải quyết
 2. Thiết kế giao diện mà người dùng có thể nhìn thấy và thao tác
-3. Xác định hành vi của ứng dụng trong các hoạt động khác nhau
-4. Xây dựng ứng dụng chính xác và cài đặt nó vào iPhone
+3. Định nghĩa hành vi của ứng dụng trong các thao tác khác nhau
+4. Build ứng dụng đúng cách và cài đặt lên iPhone
 
-### 1.3 Một số cách phát triển iOS App phổ biến
+### 1.3 Các cách phát triển iOS App phổ biến
 
-Trong phát triển thực tế, iOS App không chỉ có một cách triển khai. Ở đây không đi sâu, chỉ cung cấp nhận thức tổng thể.
+Trong thực tế, iOS App không chỉ có một cách triển khai duy nhất. Ở đây chúng ta không đi sâu, chỉ đưa ra một cái nhìn tổng quan.
 
-Cách thứ nhất là sử dụng giải pháp phát triển gốc được Apple khuyến nghị, tạo dự án thông qua Xcode, viết giao diện và logic bằng Swift và SwiftUI.
+Cách thứ nhất là sử dụng phương án native chính thức được Apple khuyến nghị: tạo dự án bằng Xcode, viết giao diện và logic bằng Swift và SwiftUI.
 
 ![](images/image3.png)
 
-Cách thứ hai là sử dụng framework đa nền tảng, chẳng hạn như React Native, Flutter, v.v., thích ứng nhiều nền tảng thông qua một bộ mã.
+Cách thứ hai là sử dụng các framework đa nền tảng như React Native, Flutter, v.v., dùng một bộ code để thích nghi với nhiều nền tảng.
 
 ![](images/image4.png)
 
-Dựa trên các cách trên, hướng dẫn này chọn: **phát triển gốc SwiftUI làm cơ sở, kết hợp với công cụ AI hoàn thành công việc viết mã chính** .
+Dựa trên các cách trên, bài hướng dẫn này chọn: **lấy SwiftUI native development làm nền tảng, kết hợp với AI tools để hoàn thành phần lớn công việc lập trình**.
 
 ![](images/image5.png)
 
-### 1.4 Các bước phát triển iOS App được giới thiệu trong bài viết này (xem trước sơ lược)
+### 1.4 Các bước phát triển iOS App được giới thiệu trong bài này (xem trước tổng quan)
 
-Ứng dụng mẫu được sử dụng trong hướng dẫn này là "FridgeChef (Đầu bếp Tủ lạnh)".
+Ứng dụng mẫu được sử dụng trong bài hướng dẫn này là "Bếp Tủ Lạnh (FridgeChef)".
 
-Người dùng nhập các nguyên liệu còn sót lại trong tủ lạnh, ứng dụng sẽ gọi giao diện AI thực tế để tạo một công thức nấu ăn khả thi, và lưu kết quả cục bộ để xem sau. Ví dụ này bao gồm đầy đủ các phần cốt lõi mà một ứng dụng iOS thực tế cần, bao gồm nhập và hiển thị giao diện, yêu cầu mạng, phân tích dữ liệu, lưu trữ cục bộ, cũng như cài đặt và chạy cuối cùng trên thiết bị thực.
+Bạn nhập các nguyên liệu hiện có trong tủ lạnh, ứng dụng sẽ gọi API AI thực để tạo ra một công thức nấu ăn khả thi và lưu kết quả xuống bộ nhớ cục bộ để tiện xem lại sau. Ví dụ này bao quát đầy đủ các thành phần cốt lõi của một ứng dụng iOS thực sự, bao gồm nhập liệu và hiển thị giao diện, network request, phân tích dữ liệu, lưu trữ cục bộ, cũng như việc cài đặt và chạy trên thiết bị thật.
 
 ![](images/image6.png)
 
-- Từ nguyên mẫu đến tư duy tổng thể gốc
+- Tư duy tổng thể từ prototype đến native
 
-Trong triển khai cụ thể, hướng dẫn này sử dụng phương pháp tiến hành từng giai đoạn. Trước tiên chúng ta sẽ sử dụng AI để nhanh chóng tạo nguyên mẫu giao diện bằng HTML và CSS, xác nhận cấu trúc bố cục và thứ bậc thông tin trong trình duyệt.
+Về mặt triển khai cụ thể, bài hướng dẫn này áp dụng cách tiếp cận theo từng giai đoạn. Chúng ta sẽ dùng AI để nhanh chóng tạo prototype giao diện bằng HTML và CSS, xác nhận cấu trúc layout và phân cấp thông tin trong trình duyệt.
 
 - Xem trước quy trình phát triển tổng thể
 
-Nhìn chung, các chương tiếp theo sẽ lần lượt trải qua các giai đoạn sau:
+Tổng quan, các chương tiếp theo sẽ lần lượt trải qua các giai đoạn sau:
 
-1. Thiết lập nhận thức cơ bản
-   Làm rõ hình thức iOS App, các cách phát triển phổ biến, và vấn đề mà ứng dụng mẫu này giải quyết.
+1. Xây dựng nhận thức nền tảng
+   Hiểu rõ hình thức của iOS App, các cách phát triển phổ biến, và vấn đề mà ứng dụng mẫu lần này giải quyết.
 2. Hoàn thành chuẩn bị môi trường
-   Chuẩn bị một Mac và một iPhone, nâng cấp phiên bản hệ thống, cài đặt Xcode và Trae, và tạo dự án iOS cơ bản có thể chạy thành công trong trình mô phỏng.
-3. Vào phát triển chính thức
-   Mở dự án trong Trae, thông qua cuộc trò chuyện với AI, từng bước tạo bố cục giao diện và tương tác cơ bản, biến ứng dụng từ vỏ trống thành có thể sử dụng.
-4. Gỡ lỗi và sắp xếp
-   Khi xảy ra lỗi biên dịch hoặc hành vi không phù hợp với kỳ vọng, hãy để AI hỗ trợ xử lý sự cố; khi cấu trúc bắt đầu lộn xộn, hãy sử dụng AI để tái cấu trúc và đơn giản hóa.
-5. Chạy trên thiết bị thực
-   Cấu hình chữ ký, cài đặt ứng dụng vào iPhone thực tế, hoàn thành xác thực toàn bộ từ mã đến thiết bị.
+   Chuẩn bị một chiếc Mac và một chiếc iPhone, nâng cấp phiên bản hệ thống, cài đặt Xcode và Trae, và tạo một dự án iOS cơ bản có thể chạy thành công trong simulator.
+3. Bước vào phát triển chính thức
+   Mở dự án trong Trae, thông qua đối thoại với AI, dần dần tạo ra layout giao diện và tương tác cơ bản, biến ứng dụng từ vỏ rỗng thành có thể sử dụng được.
+4. Debug và dọn dẹp
+   Khi xuất hiện lỗi compile hoặc hành vi không như mong đợi, nhờ AI hỗ trợ tìm nguyên nhân; khi cấu trúc bắt đầu lộn xộn, dùng AI để refactor và đơn giản hóa.
+5. Chạy trên thiết bị thật
+   Cấu hình signing, cài đặt ứng dụng lên iPhone thực, hoàn thành một lần kiểm chứng toàn vẹn từ code đến thiết bị.
+## Chương 2: Chuẩn Bị Môi Trường Phát Triển
 
-## Chương 2: Chuẩn bị môi trường phát triển
+### 2.1 Thiết Bị và Hệ Thống Bắt Buộc
 
-### 2.1 Thiết bị và hệ thống cần chuẩn bị
+Trong thực hành này, có hai thiết bị phần cứng không thể thay thế: một chiếc Mac và một chiếc iPhone.
+Đồng thời, cả hai thiết bị đều cần chạy **phiên bản hệ thống chính thức tương đối mới**.
 
-Trong thực hành này, có hai loại phần cứng là không thể thay thế được: một chiếc máy tính Mac và một chiếc iPhone.
-Đồng thời, cả hai thiết bị này đều cần chạy **phiên bản hệ thống chính thức khá mới** .
+#### 2.1.1 Máy Mac
 
-#### 2.1.1 Máy tính Mac
+Ứng dụng iOS chỉ có thể được phát triển và biên dịch trên hệ điều hành macOS — đây là quy định bắt buộc của nền tảng Apple.
 
-Ứng dụng iOS chỉ có thể được phát triển và biên dịch trên hệ thống macOS, đây là yêu cầu bắt buộc của nền tảng Apple.
-
-Để đảm bảo Xcode có thể cài đặt và sử dụng bình thường, bạn nên nâng cấp macOS lên phiên bản chính thức khá mới trước khi bắt đầu. Bạn có thể kiểm tra và hoàn thành nâng cấp trong "Cài đặt Hệ thống → Chung → Cập nhật Phần mềm".
+Để đảm bảo Xcode có thể cài đặt và sử dụng bình thường, bạn nên nâng cấp macOS lên phiên bản chính thức mới nhất trước khi bắt đầu. Bạn có thể kiểm tra và thực hiện nâng cấp tại「System Settings → General → Software Update」.
 
 ![](images/image7.png)
 
-#### 2.1.2 iPhone thiết bị thực
+#### 2.1.2 iPhone Thực Tế
 
-Ngoài Mac, hướng dẫn này còn cần một chiếc iPhone thiết bị thực để xác minh xem ứng dụng có thể được hệ thống cài đặt và khởi động bình thường hay không.
+Ngoài Mac, hướng dẫn này còn yêu cầu một chiếc iPhone thực tế để xác minh xem ứng dụng có được hệ thống cài đặt và khởi chạy bình thường hay không.
 
-Để đảm bảo quá trình gỡ lỗi diễn ra suôn sẻ, iPhone cần chạy phiên bản iOS khá mới. Bạn có thể kiểm tra và hoàn thành nâng cấp trong "Cài đặt → Chung → Cập nhật Phần mềm".
+Để đảm bảo quá trình debug diễn ra suôn sẻ, iPhone cần chạy phiên bản iOS tương đối mới. Bạn có thể kiểm tra và thực hiện nâng cấp tại「Settings → General → Software Update」.
 
 ![](images/image8.png)
 
-Sau này trong quá trình phát triển, chiếc iPhone này sẽ được kết nối với Mac thông qua cáp dữ liệu để gỡ lỗi trên thiết bị thực.
+Trong quá trình phát triển tiếp theo, chiếc iPhone này sẽ được kết nối với Mac qua cáp dữ liệu để thực hiện debug trên thiết bị thực.
 
-#### 2.1.3 Bật chế độ nhà phát triển trên iPhone
+#### 2.1.3 Bật Chế Độ Nhà Phát Triển Trên iPhone
 
-Để có thể cài đặt và chạy ứng dụng gỡ lỗi từ Xcode trên thiết bị thực, cần phải bật chế độ nhà phát triển trên iPhone.
+Để có thể cài đặt và chạy ứng dụng debug từ Xcode trên thiết bị thực, bạn cần bật chế độ nhà phát triển trên iPhone.
 
-Các bước kích hoạt như sau:
+Các bước thực hiện như sau:
 
-1. Mở "Cài đặt"
-2. Vào "Quyền riêng tư và Bảo mật"
-3. Cuộn xuống cuối trang, tìm "Chế độ Nhà phát triển"
+1. Mở「Settings」
+2. Vào「Privacy & Security」
+3. Cuộn xuống cuối trang, tìm「Developer Mode」
 4. Bật công tắc và khởi động lại thiết bị theo hướng dẫn
-5. Sau khi khởi động lại, mở khóa thiết bị và xác nhận bật chế độ Nhà phát triển
+5. Sau khi khởi động lại, mở khóa thiết bị và xác nhận kích hoạt chế độ nhà phát triển
 
 ![](images/image9.png)
 
-Nếu iPhone của bạn trước đây chưa bao giờ kết nối với Xcode hoặc các công cụ phát triển khác, bạn có thể gặp trường hợp "không thể tìm thấy Chế độ Nhà phát triển trong 'Quyền riêng tư và Bảo mật'". Đây không phải là vấn đề hệ thống, mà là vì chế độ nhà phát triển chưa được hệ thống kích hoạt.
+Nếu iPhone của bạn chưa từng kết nối với Xcode hoặc các công cụ phát triển khác, có thể xảy ra tình huống「không tìm thấy Developer Mode trong Privacy & Security」. Đây không phải là lỗi hệ thống, mà là do chế độ nhà phát triển chưa được hệ thống kích hoạt.
 
-Khi đó, bạn có thể kích hoạt hiển thị Chế độ Nhà phát triển bằng cách sau:
+Lúc này bạn có thể kích hoạt hiển thị chế độ nhà phát triển bằng cách sau:
 
-1. Mở "Cài đặt" → "Quyền riêng tư và Bảo mật" → "Phân tích và Cải thiện"
-2. Bật "Chia sẻ với Nhà phát triển"
-3. Quay lại trang cài đặt trước, vào lại "Quyền riêng tư và Bảo mật", cuộn xuống cuối trang
-4. Lúc này bạn sẽ thấy tùy chọn "Chế độ Nhà phát triển", bật theo hướng dẫn và khởi động lại thiết bị
+1. Mở「Settings」→「Privacy & Security」→「Analytics & Improvements」
+2. Bật「Share with App Developers」
+3. Quay lại trang cài đặt trước, vào lại「Privacy & Security」, cuộn xuống cuối trang
+4. Lúc này bạn sẽ thấy tùy chọn「Developer Mode」, bật theo hướng dẫn và khởi động lại thiết bị
 
-Sau khi hoàn thành các hoạt động trên, chế độ nhà phát triển chỉ cần bật một lần, không cần cấu hình lại khi sử dụng Xcode để gỡ lỗi trên thiết bị thực sau này.
+Sau khi hoàn thành các bước trên, chế độ nhà phát triển chỉ cần bật một lần, không cần cấu hình lại khi sử dụng Xcode để debug trên thiết bị thực về sau.
 
 ![](images/image10.png)
 
-### 2.2 Phần mềm cần cài đặt
+### 2.2 Phần Mềm Bắt Buộc Phải Cài Đặt
 
-Sau khi hoàn thành chuẩn bị thiết bị và hệ thống, bạn vẫn cần cài đặt phần mềm liên quan để phát triển. Hướng dẫn này chỉ sẽ sử dụng hai loại công cụ: công cụ phát triển iOS chính thức và công cụ phát triển hỗ trợ AI.
+Sau khi thiết bị và hệ thống đã sẵn sàng, bạn cần cài đặt các phần mềm phát triển liên quan. Hướng dẫn này chỉ sử dụng hai loại công cụ: công cụ phát triển iOS chính thức và công cụ hỗ trợ phát triển bằng AI.
 
 #### 2.2.1 Xcode
 
-Xcode là công cụ phát triển iOS chính thức được Apple cung cấp. Trong hướng dẫn này, nó được sử dụng chủ yếu để tạo dự án iOS, biên dịch mã Swift / SwiftUI và chạy ứng dụng vào trình mô phỏng hoặc thiết bị thực.
+Xcode là công cụ phát triển iOS chính thức do Apple cung cấp. Trong hướng dẫn này, nó chủ yếu được dùng để tạo dự án iOS, biên dịch code Swift / SwiftUI, và chạy ứng dụng trên simulator hoặc thiết bị thực.
 
 ![](images/image11.png)
 
-Xcode có thể được tìm kiếm và cài đặt trực tiếp trong App Store. Sau khi cài đặt xong, lần đầu tiên mở sẽ thấy giao diện chào mừng, việc tạo dự án sẽ bắt đầu từ đây.
+Bạn có thể tìm kiếm và cài đặt Xcode trực tiếp từ App Store. Sau khi cài đặt xong, lần đầu mở lên sẽ thấy màn hình chào mừng — đây là nơi bạn sẽ bắt đầu tạo dự án.
 
 ![](images/image12.png)
 
 #### 2.2.2 Trae
 
-Trae là môi trường thực hiện công việc phát triển chính trong hướng dẫn này. Bạn sẽ đặt toàn bộ dự án iOS vào Trae, và thông qua các cuộc trò chuyện, cộng tác với AI để hoàn thành phát triển.
+Trae là môi trường để thực hiện công việc phát triển chính trong hướng dẫn này. Bạn sẽ đặt toàn bộ dự án iOS vào Trae và cộng tác với AI thông qua hội thoại để hoàn thành việc phát triển.
 
 ![](images/image13.png)
 
-### 2.3 Apple ID và Ghi chú Gỡ lỗi Phát triển
+### 2.3 Apple ID và Hướng Dẫn Debug
 
-Trên nền tảng iOS, để cài đặt ứng dụng vào thiết bị thực, bắt buộc phải qua ký hiệu nhà phát triển. Hướng dẫn này không yêu cầu tham gia trả phí Apple Developer Program, chỉ cần chuẩn bị Apple ID cá nhân.
+Trên nền tảng iOS, để cài đặt ứng dụng lên thiết bị thực, bắt buộc phải có chữ ký nhà phát triển. Hướng dẫn này không yêu cầu bạn trả phí tham gia Apple Developer Program — chỉ cần chuẩn bị một Apple ID cá nhân là đủ.
 
-### 2.4 Xác nhận trạng thái trước khi chuyển sang bước tiếp theo
+### 2.4 Xác Nhận Trạng Thái Trước Khi Tiếp Tục
 
-Trước khi chuyển sang chương tiếp theo, bạn có thể đối chiếu danh sách dưới đây để xác nhận rằng môi trường đã được chuẩn bị xong.
+Trước khi chuyển sang chương tiếp theo, bạn có thể đối chiếu với danh sách dưới đây để xác nhận môi trường đã được chuẩn bị đầy đủ.
 
-Hiện tại bạn nên đã có:
+Lúc này bạn nên đã có:
 
-1. Một chiếc Mac chạy phiên bản macOS khá mới
-2. Một chiếc iPhone chạy iOS khá mới và đã bật chế độ nhà phát triển
+1. Một chiếc Mac chạy macOS tương đối mới
+2. Một chiếc iPhone chạy iOS tương đối mới và đã bật chế độ nhà phát triển
 3. Đã cài đặt thành công Xcode
 4. Đã cài đặt và mở Trae
-5. Một Apple ID hợp lệ
+5. Một Apple ID có thể sử dụng
 
-Nếu tất cả các điều kiện trên đều được đáp ứng, bạn có thể tiếp tục tạo và chạy iOS App đầu tiên của mình.
-
+Nếu tất cả các điều kiện trên đều được đáp ứng, bạn có thể tiếp tục tạo và chạy ứng dụng iOS đầu tiên của mình.
 ## Chương 3: Tạo dự án iOS đầu tiên
 
 ### 3.1 Tạo dự án mới bằng Xcode
 
-Mở Xcode. Trong giao diện chào mừng, chọn tạo dự án mới.
+Mở Xcode. Trong màn hình chào mừng, chọn tạo một dự án mới.
 
 ![](images/image14.png)
 
-Nhấp vào **Create new project** , vào giao diện chọn mẫu dự án.
+Nhấp vào **Create new project**, vào giao diện chọn template dự án.
 
-### 3.2 Chọn mẫu ứng dụng và ngôn ngữ lập trình
+### 3.2 Chọn template ứng dụng và tech stack
 
-Trong giao diện chọn mẫu, chọn theo cấu hình sau:
+Trong giao diện chọn template, hãy cấu hình theo các lựa chọn sau:
 
 1. Platform: iOS
 2. Loại Application: App
 
 ![](images/image15.png)
 
-Nhấp vào **Next** , vào cấu hình thông tin dự án.
+Nhấp vào **Next**, vào phần cấu hình thông tin dự án.
 
 ### 3.3 Cấu hình thông tin dự án
 
-Trong giao diện thông tin dự án, chỉ cần điền cấu hình cơ bản của dự án:
+Trong giao diện thông tin dự án, bạn chỉ cần điền các cấu hình cơ bản:
 
 1. Product Name: Tên ứng dụng (ví dụ: FridgeChef)
 2. Team: Chọn Apple ID cá nhân của bạn
-3. Organization Identifier: Dạng tên miền đảo ngược (ví dụ: com.example)
-4. Bundle Identifier: Được tạo tự động, giữ mặc định
+3. Organization Identifier: Dạng tên miền ngược (ví dụ: com.example)
+4. Bundle Identifier: Tự động tạo, giữ mặc định
 5. Testing System: Swift Testing with XCTest UI Tests
-6. Storage: Chọn Core Data (để lưu dữ liệu lịch sử sau)
+6. Storage: Chọn Core Data (dùng để lưu dữ liệu lịch sử về sau)
 7. Các tùy chọn khác giữ mặc định
 
 ![](images/image16.png)
 
-Nhấp vào **Next** , chọn vị trí lưu dự án.
+Nhấp vào **Next**, chọn vị trí lưu dự án.
 
 ![](images/image17.png)
 
-### 3.4 Nhận biết cấu trúc sau khi dự án được tạo
+### 3.4 Làm quen với cấu trúc sau khi tạo dự án
 
-Sau khi dự án được tạo, Xcode sẽ tự động mở dự án. Lúc này không cần hiểu tất cả các tệp, chỉ cần nhận biết một vài điểm chính.
+Sau khi tạo xong, Xcode sẽ tự động mở project. Lúc này bạn không cần hiểu tất cả các file, chỉ cần nhận biết một vài điểm then chốt.
 
 ![](images/image18.png)
 
-Trong dự án mặc định, bạn sẽ thấy:
+Trong project mặc định, bạn sẽ thấy:
 
 - Một thư mục được đặt tên theo tên dự án
-- Một tệp Swift kết thúc bằng `App` (điểm vào ứng dụng)
-- Một tệp `ContentView.swift` (trang mặc định)
+- Một file Swift kết thúc bằng `App` (điểm khởi đầu ứng dụng)
+- Một file `ContentView.swift` (trang mặc định)
 
-Đây chính là một iOS App có thể chạy tối thiểu.
+Đây chính là một iOS App tối giản có thể chạy được.
 
 ### 3.5 Chạy iOS App đầu tiên
 
-Trước khi sửa bất kỳ mã nào, trước tiên hãy chạy trực tiếp dự án nguyên bản này.
+Trước khi chỉnh sửa bất kỳ dòng code nào, hãy chạy thử project nguyên bản này trước.
 
-Trong thanh công cụ trên cùng của Xcode, hãy giữ tùy chọn trình mô phỏng iPhone mặc định, nhấp vào nút ▶︎ **Run** ở góc trên cùng bên trái.
+Trong thanh công cụ phía trên của Xcode, giữ nguyên tùy chọn iPhone simulator mặc định, nhấp vào nút ▶︎ **Run** ở góc trên bên trái.
 
 ![](images/image19.png)
 
 ![](images/image20.png)
 
-Nếu mọi thứ bình thường, trình mô phỏng sẽ hiển thị một App trống có thể khởi động bình thường. Lần đầu biên dịch có thể mất thời gian lâu, trong các chương tiếp theo chúng ta sẽ giảm thời gian chờ biên dịch bằng cách sử dụng nguyên mẫu HTML.
+Nếu mọi thứ bình thường, simulator sẽ hiển thị một App trống có thể khởi động được. Lần biên dịch đầu tiên có thể mất khá lâu; ở các chương sau chúng ta sẽ dùng phương pháp prototype HTML để giảm thời gian chờ biên dịch.
 
 ![](images/image21.png)
 
-Nếu cần dừng, nhấp vào **Stop** bên cạnh nút ▶︎.
+Khi muốn dừng, nhấp vào **Stop** bên cạnh nút ▶︎ là xong.
 
-### 3.6 Điều bạn thực sự đã hoàn thành ở giai đoạn này
+### 3.6 Bạn thực sự đã hoàn thành điều gì ở giai đoạn này
 
-Mặc dù giao diện vẫn rất đơn giản, nhưng giai đoạn này đã hoàn thành một số xác nhận chính:
+Dù giao diện còn rất đơn giản, giai đoạn này đã xác nhận được một số điều then chốt:
 
 1. Dự án có thể biên dịch thành công
-2. Trình mô phỏng có thể chạy App bình thường
-3. Quy trình phát triển đã chạy thông suốt
+2. Simulator có thể chạy App bình thường
+3. Quy trình phát triển đã được thông suốt
 
-Điều này có nghĩa là các vấn đề gặp phải sau sẽ tập trung vào **mã và logic chính nó** , không phải là vấn đề môi trường.
+Điều này có nghĩa là các vấn đề gặp phải về sau sẽ tập trung vào **bản thân code và logic**, chứ không còn là vấn đề môi trường nữa.
 
 ### 3.7 Giao dự án cho Trae quản lý
 
-Từ phần tiếp theo, công việc phát triển chính sẽ dần chuyển sang hoàn thành trong Trae.
+Bắt đầu từ phần tiếp theo, công việc phát triển chính sẽ dần được chuyển sang thực hiện trong Trae.
 
-Tất cả những gì bạn cần làm là: **mở thư mục dự án iOS vừa tạo bằng Trae.**
+Bạn chỉ cần làm một việc: **Dùng Trae mở thư mục dự án iOS vừa tạo.**
 
 ![](images/image22.png)
+## Chương 4: Thực chiến phát triển với AI hỗ trợ — Xây dựng「FridgeChef (Đầu Bếp Tủ Lạnh)」từ đầu
 
-## Chương 4: Phát triển hỗ trợ AI thực tế —— Tạo "FridgeChef (Đầu bếp Tủ lạnh)" từ đầu
+Đây là phần cốt lõi của toàn bộ khóa học.
 
-Chương này là phần cốt lõi của toàn bộ hướng dẫn.
+Thay vì theo cách truyền thống "viết SwiftUI trước, biên dịch liên tục, chỉnh sửa preview mãi", khóa học này sử dụng một quy trình hiệu quả hơn:
+**Dùng \*\***HTML\***\* để xác thực nhanh cấu trúc giao diện, sau đó chuyển kết quả sang SwiftUI, rồi dần bổ sung logic nghiệp vụ, dữ liệu local và các chi tiết trải nghiệm.**
 
-Hướng dẫn này sẽ không sử dụng cách truyền thống "viết SwiftUI trước, biên dịch liên tục, điều chỉnh liên tục phía trước", mà sử dụng một quy trình hiệu quả hơn:
-**Trước tiên sử dụng HTML để xác minh nhanh cấu trúc giao diện, sau đó di chuyển kết quả sang SwiftUI, cuối cùng dần bổ sung logic kinh doanh, dữ liệu cục bộ và chi tiết trải nghiệm.**
+### 4.1 Giai đoạn 1: Làm rõ yêu cầu
 
-### 4.1 Giai đoạn thứ nhất: Làm rõ yêu cầu
+Trước khi bắt đầu viết code, bước đầu tiên không phải là dựng trang, mà là xác định rõ cần làm gì. **Hãy để AI đóng vai\*\***product manager\***\*, sắp xếp yêu cầu thành một tài liệu mô tả rõ ràng và có cấu trúc.**
 
-Trước khi bắt đầu viết mã, bước đầu tiên không phải là xây dựng trang, mà là làm rõ những gì cần làm. **Trước tiên hãy để AI hoạt động như một nhà sản xuất sản phẩm, sắp xếp yêu cầu thành một tài liệu giải thích rõ ràng, có cấu trúc.**
+Nhập đoạn lệnh dưới đây vào cửa sổ hội thoại của Trae. Trae sẽ tạo ra một file `REQUIREMENTS.md` trong thư mục gốc của dự án, mô tả toàn bộ chức năng và cấu trúc của App.
 
-Trong cửa sổ trò chuyện của Trae, nhập đoạn chỉ dẫn dưới đây. Trae sẽ tạo một tệp `REQUIREMENTS.md` trong thư mục gốc dự án để mô tả chức năng và cấu trúc của toàn bộ App.
-
-📋 **Sao chép Hướng dẫn (Prompt)** ：
+📋 **Sao chép** **lệnh** **（Prompt）**：
 
 ```
-我们现在要开发一个名为「冰箱大厨（FridgeChef）」的 iOS App。
+Chúng ta sẽ phát triển một iOS App tên là「FridgeChef (Đầu Bếp Tủ Lạnh)」.
 
-1. 核心理念
-这是一个解决"冰箱剩菜不知道怎么做"的 AI 助手。
-用户输入冰箱里剩余的食材，App 调用大模型生成可执行的食谱。
+1. Ý tưởng cốt lõi
+Đây là một AI assistant giải quyết vấn đề "không biết nấu gì với đồ ăn thừa trong tủ lạnh".
+Người dùng nhập nguyên liệu còn trong tủ lạnh, App gọi LLM để tạo ra công thức nấu ăn có thể thực hiện được.
 
-2. 核心功能
-- 首页（Home）：
-  显示一个明显的「开始烹饪」入口，下方以卡片或列表形式展示历史生成过的食谱记录。
-- 输入页（Input）：
-  用户输入食材，支持文本输入或简单的快捷标签。
-- 结果页（Result）：
-  展示 AI 生成的食谱，包括菜名、食材列表和制作步骤。
+2. Chức năng cốt lõi
+- Trang chủ (Home):
+  Hiển thị một nút「Bắt đầu nấu」nổi bật, bên dưới hiển thị lịch sử các công thức đã tạo dưới dạng thẻ hoặc danh sách.
+- Trang nhập liệu (Input):
+  Người dùng nhập nguyên liệu, hỗ trợ nhập văn bản hoặc các tag nhanh đơn giản.
+- Trang kết quả (Result):
+  Hiển thị công thức do AI tạo ra, bao gồm tên món, danh sách nguyên liệu và các bước thực hiện.
 
-3. 技术要求
-- 使用 SwiftUI
-- 数据保存在本地（Core Data）
-- 支持基础的页面跳转与状态更新
+3. Yêu cầu kỹ thuật
+- Sử dụng SwiftUI
+- Lưu dữ liệu local (Core Data)
+- Hỗ trợ điều hướng trang cơ bản và cập nhật trạng thái
 
-请你以产品经理的视角，帮我整理一份清晰、结构化的 REQUIREMENTS.md 文档，并保存在项目根目录。
+Hãy đóng vai product manager, giúp tôi tổ chức một tài liệu REQUIREMENTS.md rõ ràng, có cấu trúc, và lưu vào thư mục gốc của dự án.
 ```
 
-Sau khi tạo xong, chỉ cần duyệt qua tài liệu một lần nhanh, xác nhận rằng các điểm chức năng có phù hợp với kỳ vọng của bạn hay không.
+Sau khi tạo xong, bạn chỉ cần lướt qua tài liệu để xác nhận các điểm chức năng có đúng như kỳ vọng không.
 
 ![](images/image23.png)
 
-### 4.2 Giai đoạn thứ hai: Nguyên mẫu hình ảnh
+### 4.2 Giai đoạn 2: Prototype giao diện
 
-Để AI sử dụng **HTML + CSS** để nhanh chóng vẽ một nguyên mẫu giao diện độ trung thực cao, để xác nhận bố cục tổng thể và phong cách. Tiếp tục nhập hướng dẫn trong Trae:
+Để AI dùng **HTML\*\*** + \***\*CSS** vẽ nhanh một bản prototype giao diện high-fidelity, dùng để xác nhận bố cục tổng thể và phong cách. Tiếp tục nhập lệnh trong Trae:
 
-📋 **Sao chép Hướng dẫn (Prompt)** ：
+📋 **Sao chép** **lệnh** **（Prompt）**：
 
 ```
-需求已经确认。
-请使用 HTML + Tailwind CSS，为我生成一个高保真的界面原型。
+Yêu cầu đã được xác nhận.
+Hãy dùng HTML + Tailwind CSS để tạo cho tôi một bản prototype giao diện high-fidelity.
 
-设计风格：Neo-Pop（新波普风格）
-配色：
-- 背景：淡奶油色 #FFFDF5
-- 强调色：酸性绿 #CCFF00、热粉色
+Phong cách thiết kế：Neo-Pop (Tân Pop Art)
+Bảng màu：
+- Nền：Màu kem nhạt #FFFDF5
+- Màu nhấn：Xanh acid #CCFF00, hồng nóng
 
-视觉特征：
-- 3px 粗黑色描边
-- 不带模糊的硬阴影（偏移 4px）
-- 大圆角卡片，整体偏贴纸 / 漫画感
+Đặc trưng hình ảnh：
+- Viền đen đậm 3px
+- Bóng đổ cứng không mờ (offset 4px)
+- Thẻ bo góc lớn, tổng thể gợi cảm giác sticker / truyện tranh
 
-布局要求：
-- 首页使用类似 Bento Grid 的布局
-- 包含首页和输入页两个界面
+Yêu cầu bố cục：
+- Trang chủ dùng bố cục kiểu Bento Grid
+- Bao gồm hai giao diện: trang chủ và trang nhập liệu
 
-请生成一个单文件 index.html，并模拟 iPhone 屏幕比例包裹内容。
+Hãy tạo một file index.html đơn lẻ, bọc nội dung theo tỷ lệ màn hình iPhone.
 ```
 
-Sau khi tạo xong, tìm `index.html` trong danh sách tệp và mở trực tiếp trong trình duyệt.
+Sau khi tạo xong, tìm file `index.html` trong danh sách file và mở trực tiếp bằng trình duyệt.
 
 ![](images/image24.png)
 
-Trọng tâm hiện tại không phải là chi tiết có hoàn hảo hay không, mà là phán đoán: **cấu trúc trang có hợp lý hay không, các phần tử chính có đầy đủ hay không, hướng tổng thể có đúng hay không.**
+Điểm mấu chốt lúc này không phải là chi tiết có hoàn hảo không, mà là đánh giá: **cấu trúc trang có hợp lý không, các thành phần chính có đủ không, hướng đi tổng thể có đúng không.**
 
-### 4.3 Giai đoạn thứ ba: Sao chép gốc
+### 4.3 Giai đoạn 3: Tái hiện native
 
-Khi nguyên mẫu HTML đã được xác định, **chuyển giao diện đã được xác nhận thành SwiftUI.**
+Khi prototype HTML đã được xác nhận, **hãy dịch giao diện đã xác nhận sang SwiftUI.**
 
-Các bước hoạt động như sau:
+Các bước thực hiện:
 
-1. Tải tệp `index.html` (hoặc ảnh chụp màn hình trình duyệt) lên Trae
-2. Cho AI biết tham khảo tệp đó, tạo mã SwiftUI
+1. Upload file `index.html` (hoặc ảnh chụp màn hình trình duyệt) lên Trae
+2. Nói với AI tham chiếu file đó để tạo code SwiftUI
 
-📋 **Sao chép Hướng dẫn (Prompt)** ：
+📋 **Sao chép lệnh（Prompt）**：
 
 ```
-【已上传 index.html】
+【Đã upload index.html】
 
-请阅读这个 HTML 文件的布局和样式。
+Hãy đọc bố cục và style của file HTML này.
 
-任务：使用 SwiftUI 在当前项目中复刻这个界面。
+Nhiệm vụ：Dùng SwiftUI để tái hiện giao diện này trong dự án hiện tại.
 
-要求：
-1. 封装一个 NeoPopStyle 修饰符，包含背景色、粗描边和硬阴影
-2. 创建 HomeView.swift，对应首页布局
-3. 创建 InputView.swift，对应输入页面
-4. 目前使用 Mock Data 填充内容，确保在 Xcode 预览和模拟器中可以正常显示
+Yêu cầu：
+1. Đóng gói một modifier NeoPopStyle, bao gồm màu nền, viền đậm và bóng đổ cứng
+2. Tạo HomeView.swift, tương ứng với bố cục trang chủ
+3. Tạo InputView.swift, tương ứng với trang nhập liệu
+4. Hiện tại dùng Mock Data để điền nội dung, đảm bảo hiển thị bình thường trong Xcode preview và simulator
 ```
 
-Sau khi hoàn thành, mở Xcode và chạy trình mô phỏng, bạn sẽ thấy một App đã có cấu trúc hình ảnh hoàn chỉnh.
+Sau khi hoàn thành, mở Xcode chạy simulator, bạn sẽ thấy một native App đã có đầy đủ cấu trúc giao diện.
 
 ![](images/image25.png)
 
-### 4.4 Giai đoạn thứ tư: Kết nối API AI
+### 4.4 Giai đoạn 4: Tích hợp AI API
 
-Sau khi giao diện hoàn thành, App vẫn chỉ là một lớp trình bày. Tiếp theo cần kết nối khả năng AI thực tế, hướng dẫn này sử dụng dịch vụ mô hình lớn do **SiliconFlow (Lưu lượng Silic)** cung cấp:
+Sau khi giao diện hoàn thành, App vẫn chỉ là một lớp hiển thị. Tiếp theo cần tích hợp khả năng AI thực sự. Khóa học này sử dụng dịch vụ LLM do **SiliconFlow（硅基流动）** cung cấp:
 [https://cloud.siliconflow.cn](https://cloud.siliconflow.cn/)
 
 ![](images/image26.png)
 
-SiliconFlow cung cấp một giao diện tương thích với thông số kỹ thuật OpenAI API, có thể rất tiện lợi để gọi thông qua các yêu cầu mạng tiêu chuẩn trong dự án iOS.
+SiliconFlow cung cấp interface tương thích chuẩn OpenAI API, có thể gọi rất thuận tiện trong dự án iOS thông qua network request tiêu chuẩn.
 
 ![](images/image27.png)
 
-Trước khi bắt đầu, bạn cần đăng ký tài khoản trên trang web chính thức và tạo một API Key.
+Trước khi bắt đầu, bạn cần đăng ký tài khoản trên trang chủ và tạo một API Key.
 
 ![](images/image28.png)
 
-Key này sẽ được sử dụng để gọi mô hình sau này.
+Key này sẽ được dùng cho các lần gọi model sau.
 
-📋 **Sao chép Hướng dẫn (Prompt)** ：
+📋 **Sao chép lệnh（Prompt）**：
 
 ```
-现在我们要接入 AI 能力。
+Bây giờ chúng ta sẽ tích hợp khả năng AI.
 
-请创建 APIService.swift。
+Hãy tạo APIService.swift.
 
-配置：
+Cấu hình：
 - Base URL: https://api.siliconflow.cn/v1
 - Model: Qwen/Qwen2.5-7B-Instruct
-- API Key：定义为变量，稍后由我填写
+- API Key：định nghĩa là biến, tôi sẽ điền sau
 
-功能：
-- 编写 generateRecipe(ingredients: [String]) 方法
-- System Prompt 严格要求模型只返回纯 JSON
-- JSON 字段包括：dishName, ingredients, steps
+Chức năng：
+- Viết phương thức generateRecipe(ingredients: [String])
+- System Prompt yêu cầu nghiêm ngặt model chỉ trả về JSON thuần túy
+- Các trường JSON bao gồm：dishName, ingredients, steps
 
-请同时定义 RecipeModel 结构体，用于解析返回数据。
+Đồng thời hãy định nghĩa struct RecipeModel để parse dữ liệu trả về.
 ```
 
-Sau khi tạo mã, điền API Key của riêng bạn vào `APIService.swift`.
+Sau khi tạo code, điền API Key của bạn vào `APIService.swift`.
 
-### 4.5 Giai đoạn thứ năm: Lưu trữ cục bộ Core Data
+### 4.5 Giai đoạn 5: Lưu trữ local với Core Data
 
-Để App có thể nhớ các công thức đã tạo, cần giới thiệu lưu trữ dữ liệu cục bộ. Giai đoạn này được chia thành hai bước.
+Để App có thể ghi nhớ các công thức đã tạo, cần tích hợp lưu trữ dữ liệu local. Giai đoạn này gồm hai bước.
 
-**Bước thứ nhất: Cấu hình Core Data thủ công (hoàn thành trong Xcode)**
+**Bước 1: Cấu hình Core Data thủ công (thực hiện trong Xcode)**
 
 1. Mở `FridgeChef.xcdatamodeld`
 2. Tạo Entity mới, đặt tên là `RecipeEntity`
 
 ![](images/image29.png)
 
-3. Thêm thuộc tính:
+3. Thêm các thuộc tính:
    1. `id`: **UUID**
    2. `name`: **String**
    3. `cookTime`: **String**
@@ -413,29 +409,29 @@ Sau khi tạo mã, điền API Key của riêng bạn vào `APIService.swift`.
    7. `colorIndex`: **Integer 16**
       ![](images/image30.png)
 
-**Bước thứ hai: Để AI viết mã logic**
+**Bước 2: Để AI viết code logic**
 
-📋 **Sao chép Hướng dẫn (Prompt)** ：
+📋 **Sao chép lệnh（Prompt）**：
 
 ```
-我已经完成了 Core Data 的 Entity 配置。
+Tôi đã hoàn thành cấu hình Entity cho Core Data.
 
 Entity：RecipeEntity
-属性：id, name, difficulty, timestamp,colorindex,cookTime,desc
+Thuộc tính：id, name, difficulty, timestamp, colorindex, cookTime, desc
 
-请完成以下任务：
-1. 在生成食谱成功后，将数据保存到 Core Data
-2. 首页使用 FetchRequest 读取历史记录并按时间倒序展示
-3. 当数据库为空时，显示一个友好的空状态提示
+Hãy hoàn thành các nhiệm vụ sau：
+1. Sau khi tạo công thức thành công, lưu dữ liệu vào Core Data
+2. Trang chủ dùng FetchRequest để đọc lịch sử và hiển thị theo thứ tự thời gian giảm dần
+3. Khi database trống, hiển thị một thông báo trạng thái rỗng thân thiện
 ```
 
-### 4.6 Giai đoạn thứ sáu: Tạo biểu tượng ứng dụng
+### 4.6 Giai đoạn 6: Tạo icon App
 
-Bước cuối cùng là chuẩn bị một biểu tượng chính thức cho App. Ở đây sử dụng **Lovart** để tạo tài liệu biểu tượng: [https://www.lovart.ai/zh](https://www.lovart.ai/zh)
+Bước cuối cùng là chuẩn bị icon chính thức cho App. Ở đây sử dụng **Lovart** để tạo tài nguyên icon: [https://www.lovart.ai/zh](https://www.lovart.ai/zh)
 
 ![](images/image31.png)![](images/image32.png)
 
-📋 **Sao chép vào Lovart Prompt** ：
+📋 **Sao chép Prompt để dùng trong Lovart**：
 
 ```
 Subject: A cute anthropomorphic fridge character with a happy face
@@ -445,7 +441,7 @@ Background: Solid cream color
 Negative Prompt: Text, realistic details, 3D render, complex background
 ```
 
-Sau khi tạo, cắt hình ảnh thành 1024×1024, kéo vào `Assets.xcassets` của Xcode → `AppIcon`.
+Sau khi tạo xong, cắt ảnh thành 1024×1024 rồi kéo vào `Assets.xcassets` → `AppIcon` trong Xcode.
 
 ![](images/image33.png)
 
@@ -453,121 +449,120 @@ Sau khi tạo, cắt hình ảnh thành 1024×1024, kéo vào `Assets.xcassets` 
 
 ![](images/image35.png)
 
-Chạy lại App, bạn sẽ thấy một ứng dụng iOS thực tế hoàn chỉnh, có thể nhận biết được.
+Chạy lại App, bạn sẽ thấy một iOS App thực sự hoàn chỉnh và dễ nhận diện.
 
 ![](images/image36.png)
 
-### 4.7 Giai đoạn thứ bảy: Trải nghiệm nâng cao
+### 4.7 Giai đoạn 7: Nâng cao trải nghiệm
 
-Với điều kiện chức năng đã ổn định, nếu bạn muốn tối ưu hóa thêm phong cách hình ảnh, chỉ cần mô tả cho AI hiệu ứng bạn muốn, để nó tạo ra phương án giao diện mới, và chuyển kết quả đã được xác nhận sang SwiftUI.
+Khi chức năng đã ổn định, nếu bạn muốn tối ưu thêm phong cách giao diện, chỉ cần mô tả với AI hiệu ứng bạn muốn, để nó tạo phương án giao diện mới, rồi chuyển kết quả đã xác nhận sang SwiftUI.
 
-📋 Tham khảo Prompt:
+📋 Prompt tham khảo：
 
 ```
-目前 App 的功能已经完成，但我想尝试一种更有视觉冲击力的 UI 风格。
-请先使用 HTML + Tailwind CSS 为我生成一个新的设计稿，文件名为 design_v2.html。
-设计风格：Neo-Pop（新波普 / 多巴胺风格）
-配色要求：
-全屏背景使用 Deep Royal Blue（深皇室蓝）
-强调色使用 Acid Green（酸性绿 #CCFF00）
-视觉质感：
-所有卡片使用 3px 黑色粗描边
-使用不带模糊的硬阴影（向右下偏移）
-布局要求：
-首页结构保持不变
-按钮和输入框使用胶囊形状
-请生成完整代码，并方便我在浏览器中预览效果。
+Chức năng của App hiện đã hoàn chỉnh, nhưng tôi muốn thử một phong cách UI có tính thị giác mạnh hơn.
+Trước tiên hãy dùng HTML + Tailwind CSS để tạo cho tôi một bản thiết kế mới, tên file là design_v2.html.
+Phong cách thiết kế：Neo-Pop (Tân Pop Art / Dopamine Style)
+Yêu cầu bảng màu：
+Nền toàn màn hình dùng Deep Royal Blue (xanh hoàng gia đậm)
+Màu nhấn dùng Acid Green (xanh acid #CCFF00)
+Chất cảm hình ảnh：
+Tất cả thẻ dùng viền đen đậm 3px
+Dùng bóng đổ cứng không mờ (lệch sang phải dưới)
+Yêu cầu bố cục：
+Cấu trúc trang chủ giữ nguyên
+Nút và ô nhập dùng hình viên nang
+Hãy tạo code hoàn chỉnh để tôi có thể xem trước trong trình duyệt.
 ```
 
-Sau khi tạo xong, mở tệp HTML này trong trình duyệt.
+Sau khi tạo xong, mở file HTML này trong trình duyệt.
 
 ![](images/image37.png)
 
-Khi phiên bản HTML đã được xác định, bạn có thể bắt đầu sửa đổi dự án iOS.
+Khi phiên bản HTML đã được xác nhận, bạn có thể bắt đầu chỉnh sửa dự án iOS.
 
-📋 Tham khảo Prompt:
+📋 Prompt tham khảo：
 
 ```
-【已上传 design_v2.html】
-请分析这个 HTML 的视觉风格，并将它移植到当前 iOS 项目中。
-任务要求：
-新建一个 NeoPopStyle.swift 文件
-封装一个 neoPopBlue() 风格修饰符
-修饰符需要包含：
-圆角
-粗黑描边
-不透明硬阴影
-重构 HomeView：
-背景改为 Deep Royal Blue
-主按钮使用 Acid Green
-历史记录卡片使用白色背景
-确保文字颜色在深色背景下依然清晰可读
-请给出完整修改代码。
+【Đã upload design_v2.html】
+Hãy phân tích phong cách hình ảnh của HTML này và chuyển nó vào dự án iOS hiện tại.
+Yêu cầu nhiệm vụ：
+Tạo file NeoPopStyle.swift mới
+Đóng gói một modifier phong cách neoPopBlue()
+Modifier cần bao gồm：
+Bo góc
+Viền đen đậm
+Bóng đổ cứng không trong suốt
+Tái cấu trúc HomeView：
+Đổi nền thành Deep Royal Blue
+Nút chính dùng Acid Green
+Thẻ lịch sử dùng nền trắng
+Đảm bảo màu chữ vẫn đọc được rõ ràng trên nền tối
+Hãy cung cấp code chỉnh sửa hoàn chỉnh.
 ```
 
-Nhấp lại nút Run của Xcode. Nếu mọi thứ bình thường, bạn sẽ thấy:
+Nhấn lại nút Run trong Xcode. Nếu mọi thứ bình thường, bạn sẽ thấy:
 
 - Chức năng hoàn toàn giống như trước
-- Phong cách hình ảnh đã thay đổi rõ rệt
-- Chất lượng tổng thể ứng dụng được cải thiện đáng kể
+- Phong cách giao diện thay đổi rõ rệt
+- Chất lượng tổng thể của ứng dụng được nâng lên đáng kể
 
 ![](images/image38.png)
+## Chương 5: Chạy, Debug và Xử Lý Lỗi
 
-## Chương 5: Chạy, Gỡ lỗi và Xử lý lỗi
-
-Trong chương trước, bạn đã hoàn thành phát triển chức năng và chạy thành công App trong trình mô phỏng.
-Nhưng đối với một ứng dụng iOS, sự hoàn thành thực sự không chỉ là "có thể biên dịch thông qua", mà là **có thể chạy ổn định và biết cách xử lý khi xảy ra vấn đề** .
+Ở chương trước, bạn đã hoàn thành việc phát triển tính năng và chạy thành công App trong simulator.
+Nhưng với một ứng dụng iOS, hoàn thành thực sự không chỉ là "biên dịch được", mà là **có thể chạy ổn định và biết cách xử lý khi có vấn đề xảy ra**.
 
 ### 5.1 Chạy App trong Xcode
 
-Trước tiên, hãy đảm bảo dự án có thể chạy bình thường trong Xcode.
+Trước tiên, hãy đảm bảo project có thể chạy bình thường trong Xcode.
 
-Chọn thiết bị chạy ở góc trên cùng bên trái của Xcode, giữ trình mô phỏng iPhone mặc định, nhấp vào nút ▶︎ Run để biên dịch và chạy. Nếu mọi thứ bình thường, App sẽ khởi động trong trình mô phỏng và hiển thị giao diện đã hoàn thành trong chương thứ tư.
+Ở góc trên bên trái của Xcode, chọn thiết bị chạy, giữ nguyên iPhone simulator mặc định, sau đó nhấn nút ▶︎ Run để biên dịch và chạy. Nếu mọi thứ bình thường, App sẽ khởi động trong simulator và hiển thị giao diện đã hoàn thành ở chương bốn.
 
-### 5.2 Chạy App trên thiết bị thực
+### 5.2 Chạy App trên Thiết Bị Thật
 
-Kết nối iPhone với Mac thông qua cáp dữ liệu.
+Kết nối iPhone với Mac bằng cáp dữ liệu.
 
 ![](images/image39.png)
 
-Lần đầu kết nối, điện thoại sẽ hiện lên "Bạn có tin tưởng máy tính này không?", chọn tin tưởng và nhập mật khẩu mở khóa.
+Lần đầu kết nối, điện thoại sẽ hiện hộp thoại "Có tin tưởng máy tính này không", chọn tin tưởng và nhập mật khẩu mở khóa.
 
 ![](images/image40.png)
 
-Trong danh sách thiết bị của Xcode, chọn iPhone của bạn, sau đó nhấp vào ▶️ Run lần nữa.
+Trong danh sách thiết bị của Xcode, chọn iPhone của bạn, sau đó nhấn ▶️ Run một lần nữa.
 
-Lúc này, bạn sẽ thấy biểu tượng "FridgeChef" trên màn hình chính điện thoại và có thể mở và sử dụng bình thường.
+Lúc này, bạn sẽ thấy icon "Bếp Trưởng Tủ Lạnh" xuất hiện trên màn hình chính của điện thoại và có thể mở, sử dụng bình thường.
 
 ![](images/image41.png)
 
-Bước này đánh dấu rằng một vòng phát triển iOS hoàn chỉnh đã được hoàn thành.
+Bước này đánh dấu một vòng phát triển iOS hoàn chỉnh đã được hoàn thành.
 
-### 5.3 Lỗi trong phát triển iOS đến từ đâu
+### 5.3 Lỗi trong Phát Triển iOS Đến Từ Đâu
 
-Trong quá trình phát triển thực tế, **gặp lỗi là bình thường** , không phải ngoại lệ.
+Trong quá trình phát triển thực tế, **gặp lỗi là chuyện bình thường**, không phải ngoại lệ.
 
-Các vấn đề phổ biến thường xuất phát từ các loại sau:
+Các vấn đề thường gặp thường đến từ các loại sau:
 
 1. **Lỗi biên dịch**
-   Cú pháp Swift, không khớp kiểu, thiếu tham số, v.v., Xcode sẽ báo đỏ trực tiếp.
-2. **Lỗi thời gian chạy**
-   Ứng dụng có thể biên dịch, nhưng bị lỗi khi chạy, chẳng hạn như vượt quá giới hạn mảng, giải nén giá trị null.
+   Cú pháp Swift, kiểu dữ liệu không khớp, thiếu tham số,... Xcode sẽ báo đỏ trực tiếp.
+2. **Lỗi runtime**
+   Ứng dụng biên dịch được nhưng crash khi chạy, ví dụ truy cập mảng ngoài phạm vi, unwrap giá trị nil.
 3. **Lỗi quyền hoặc cấu hình**
-   Yêu cầu mạng bị hệ thống chặn, Info.plist chưa được cấu hình, vấn đề ký hiệu, v.v.
+   Request mạng bị hệ thống chặn, chưa cấu hình Info.plist, vấn đề signing,...
 4. **Lỗi logic**
-   Chương trình không lỗi, nhưng hành vi không phù hợp với kỳ vọng, chẳng hạn như nút không phản hồi, dữ liệu không được làm mới.
+   Chương trình không crash nhưng hành vi không như mong đợi, ví dụ nút không phản hồi, dữ liệu không refresh.
 
 ![](images/image42.png)
 
-Khi xảy ra bất kỳ lỗi nào, chỉ cần **sao chép thông báo lỗi hoàn chỉnh vào cửa sổ trò chuyện của Trae.** Trae sẽ, dựa trên sự hiểu biết về bối cảnh dự án, giúp bạn hoàn thành công việc gỡ lỗi.
+Khi có bất kỳ lỗi nào, bạn chỉ cần **sao chép nguyên vẹn toàn bộ thông báo lỗi vào hộp chat của Trae.** Trae sẽ hiểu context của project và giúp bạn hoàn thành công việc debug.
 
-### 5.4 Phương pháp giải quyết lỗi phổ biến khi gỡ lỗi thiết bị thực
+### 5.4 Cách Xử Lý Các Lỗi Thường Gặp Khi Debug Trên Thiết Bị Thật
 
-Xảy ra lỗi trong giai đoạn gỡ lỗi trên thiết bị thực là rất phổ biến. Những vấn đề này thường không phải là lỗi mã, mà liên quan đến thiết bị, chính sách bảo mật hoặc cấu hình ký hiệu. Nếu App không thể chạy trơn tru trên iPhone, bạn có thể ưu tiên kiểm tra theo phần này.
+Gặp lỗi trong giai đoạn debug trên thiết bị thật là tình huống rất phổ biến. Những vấn đề này thường không phải lỗi code, mà liên quan đến thiết bị, chính sách bảo mật hoặc cấu hình signing. Nếu App không thể chạy được trên iPhone, hãy ưu tiên đối chiếu với phần này để kiểm tra.
 
-#### Một: Vấn đề liên quan đến ký hiệu và đăng ký
+#### I. Vấn Đề Liên Quan Đến Signing và Đăng Ký
 
-**Hiện tượng phổ biến:**
+**Hiện tượng thường gặp:**
 
 - Xcode báo đỏ, thông báo
   `"Communication with Apple failed"`
@@ -576,150 +571,148 @@ Xảy ra lỗi trong giai đoạn gỡ lỗi trên thiết bị thực là rất
 - Thông báo
   `"Your team has no devices which are compatible"`
 
-**Giải thích nguyên nhân:**
+**Nguyên nhân:**
 
-- Bundle Identifier không độc nhất hoặc không hợp lệ
-- iPhone hiện tại chưa được đăng ký với Apple ID của bạn để gỡ lỗi phát triển
+- Bundle Identifier không duy nhất hoặc không hợp lệ
+- iPhone hiện tại chưa được đăng ký vào Apple ID của bạn để debug
 
-**Phương pháp giải quyết:**
+**Cách xử lý:**
 
-1. **Sửa đổi Bundle Identifier**
-   Trong cài đặt dự án Xcode, thay đổi Bundle Identifier thành một giá trị độc nhất hơn, ví dụ:
+1. **Thay đổi Bundle Identifier**
+   Trong cài đặt project Xcode, đổi Bundle Identifier thành giá trị độc đáo hơn, ví dụ:
    `com.yourname.FridgeChef`
 2. **Để Xcode tự động đăng ký thiết bị**
-   Trong thông báo lỗi, nhấp vào `Try Again` hoặc `Register Device`, để Xcode tự động hoàn thành đăng ký thiết bị và cấu hình chứng chỉ.
+   Trong thông báo lỗi, nhấn `Try Again` hoặc `Register Device`, để Xcode tự động hoàn thành đăng ký thiết bị và cấu hình certificate.
 
-#### Hai: Vấn đề ghép nối và kết nối thiết bị
+#### II. Vấn Đề Ghép Nối và Kết Nối Thiết Bị
 
-**Hiện tượng phổ biến:**
+**Hiện tượng thường gặp:**
 
-- Xcode hiển thị
+- Xcode hiển thị ở trên cùng
   `"Device is not available because pairing is in progress"`
 - Thông báo
   `"Device Locked"`
-- Đã nhấp "Tin tưởng", nhưng Xcode vẫn bị treo
+- Đã nhấn "Tin tưởng" nhưng Xcode vẫn bị kẹt
 
 ![](images/image43.png)
 
-**Giải thích nguyên nhân:**
+**Nguyên nhân:**
 
-- iPhone ở chế độ khóa màn hình
-- Quy trình ghép nối chưa hoàn thành hoàn toàn
-- Trạng thái kết nối Xcode chưa được làm mới
+- iPhone đang ở trạng thái khóa màn hình
+- Quá trình ghép nối chưa hoàn thành hoàn toàn
+- Trạng thái kết nối Xcode chưa được refresh
 
-**Phương pháp giải quyết:**
+**Cách xử lý:**
 
 1. Mở khóa điện thoại
-   Hãy chắc chắn rằng iPhone đã được mở khóa và dừng lại giao diện desktop.
+   Đảm bảo iPhone đã được mở khóa và đang hiển thị màn hình chính.
 2. Hoàn thành quy trình tin tưởng
-   Khi điện thoại hiện "Bạn có tin tưởng máy tính này không?", nhấp **Tin tưởng** và **nhập mật khẩu khóa màn hình.**
-3. Làm mới trạng thái kết nối
-   Nếu vẫn treo, bạn có thể rút cáp dữ liệu, chờ 2–3 giây rồi cắm lại; nếu cần, khởi động lại Xcode và thử lại.
+   Khi điện thoại hiện "Có tin tưởng máy tính này không", nhấn **Tin tưởng** và **nhập mật khẩu màn hình khóa.**
+3. Refresh trạng thái kết nối
+   Nếu vẫn bị kẹt, rút cáp chờ 2–3 giây rồi cắm lại; nếu cần thiết hãy khởi động lại Xcode và thử lại.
 
-#### Ba: Không thể mở App sau khi cài đặt
+#### III. Không Thể Mở App Sau Khi Cài Đặt
 
-**Hiện tượng phổ biến:**
+**Hiện tượng thường gặp:**
 
-- App đã được cài đặt thành công vào màn hình chính iPhone
+- App đã cài đặt thành công lên màn hình chính iPhone
 - Hệ thống thông báo
-  "Nhà phát triển không đáng tin cậy (Untrusted Developer)"
+  "Untrusted Developer (Nhà phát triển không được tin tưởng)"
 
 ![](images/image44.png)
 
-**Giải thích nguyên nhân:**
+**Nguyên nhân:**
 
-Đây là cơ chế bảo mật của iOS. App gỡ lỗi được cài đặt thông qua Apple ID cá nhân cần được cấp quyền thủ công.
+Đây là cơ chế bảo mật của iOS. App debug được cài qua Apple ID cá nhân cần được cấp quyền thủ công.
 
-**Phương pháp giải quyết:**
+**Cách xử lý:**
 
-1. Mở iPhone "Cài đặt"
-2. Vào "Chung"
-3. Nhấp vào "VPN và Quản lý Thiết bị"
-4. Trong "App Nhà phát triển", tìm Apple ID của bạn
-5. Nhấp vào **Tin tưởng** và xác nhận lại
+1. Mở "Cài đặt" trên iPhone
+2. Vào "Cài đặt chung"
+3. Nhấn "VPN và Quản lý thiết bị"
+4. Tìm Apple ID của bạn trong "Developer App"
+5. Nhấn **Tin tưởng** và xác nhận lại
 
 ![](images/image45.png)
 
-Sau khi hoàn thành, quay lại màn hình chính và nhấp lại App, bạn có thể chạy bình thường.
+Sau khi hoàn thành, quay lại màn hình chính và nhấn lại vào App, App sẽ chạy bình thường.
+## Chương 6: Nếu bạn muốn đưa App lên App Store
 
-## Chương 6: Nếu bạn muốn phát hành App lên App Store
+Trong hướng dẫn này, chúng ta đã hoàn thành **vòng khép kín hoàn chỉnh của một App phiên bản debug cá nhân**: từ tạo dự án, phát triển tính năng, chạy debug, cho đến cài đặt và sử dụng thành công trên thiết bị thật.
 
-Trong hướng dẫn này, chúng ta chủ yếu hoàn thành **vòng kín hoàn chỉnh của phiên bản gỡ lỗi phát triển cá nhân App** : từ tạo dự án, phát triển chức năng, chạy gỡ lỗi, đến cuối cùng có thể cài đặt và sử dụng thành công trên thiết bị thực.
-
-Nếu bạn muốn tiếp tục phát hành App chính thức lên **Apple App Store** , cho phép tất cả người dùng tải xuống và sử dụng, thì bạn cần vào một quy trình phát hành chính thức hơn. Vì quy trình này liên quan đến tài khoản trả phí, quy chuẩn phê duyệt và yêu cầu tuân thủ, và không phải là trọng tâm thực hành của hướng dẫn này, nội dung sau đây chỉ dùng làm **tham khảo tổng thể và hướng dẫn đường đi** .
+Nếu bạn muốn tiến xa hơn và chính thức phát hành App lên **Apple App Store** để tất cả người dùng có thể tải về sử dụng, bạn sẽ cần thực hiện một quy trình phát hành chính thức hơn. Do quy trình này liên quan đến tài khoản trả phí, tiêu chuẩn xét duyệt và yêu cầu tuân thủ, và không phải trọng tâm thực hành của hướng dẫn này, nội dung dưới đây chỉ mang tính **tham khảo tổng quan và định hướng lộ trình**.
 
 ![](images/image46.png)
 
-> Nội dung sau đây tham khảo yêu cầu phê duyệt chính thức của Apple cũng như các cuộc thảo luận công khai (bao gồm cả chia sẻ kinh nghiệm gốc Zhihu). Liên kết xem phần phụ lục. ※Nếu liên kết hết hạn, bạn có thể tìm kiếm tiêu đề hoặc từ khóa liên quan để xem nội dung gốc.
+> Nội dung dưới đây tham khảo từ yêu cầu xét duyệt chính thức của Apple và các thảo luận công khai (bao gồm chia sẻ kinh nghiệm gốc trên Zhihu). Xem liên kết ở phần phụ lục. ※ Nếu liên kết không còn hoạt động, bạn có thể tìm kiếm tiêu đề hoặc từ khóa liên quan để tra cứu nội dung gốc.
 
 ### 6.1 Apple Developer Program
 
-Để phát hành App lên App Store, bạn phải tham gia kế hoạch nhà phát triển trả phí của Apple:
+Để phát hành App lên App Store, bạn bắt buộc phải tham gia chương trình developer trả phí của Apple:
 
-- **Apple Developer Program** ($ 99 mỗi năm)
+- **Apple Developer Program** (99 USD mỗi năm)
 - Trang web chính thức: [https://developer.apple.com/](https://developer.apple.com/)
 
 Sau khi tham gia, bạn mới có thể sử dụng **App Store Connect** để tạo App, quản lý phiên bản và phát hành chính thức.
 
 ### 6.2 App Store Connect: Tạo mục App
 
-Trong App Store Connect, bạn cần tạo một mục hoàn chỉnh cho App, bao gồm nhưng không giới hạn:
+Trong App Store Connect, bạn cần tạo một mục đầy đủ cho App, bao gồm nhưng không giới hạn:
 
 1. Tên App và Bundle ID
 2. Mô tả, từ khóa, liên kết chính sách quyền riêng tư
-3. Biểu tượng App, ảnh chụp màn hình và tài liệu xem trước
-4. Cài đặt định giá và phân phối theo khu vực
+3. Icon App, ảnh chụp màn hình và tài liệu xem trước
+4. Cài đặt giá và khu vực phân phối
 
-Những thông tin này phải được điền đầy đủ, nếu không sẽ không thể gửi để phê duyệt.
+Những thông tin này phải được điền đầy đủ, nếu không sẽ không thể gửi xét duyệt.
 
-### 6.3 Xây dựng và gửi phê duyệt
+### 6.3 Build và gửi xét duyệt
 
-Sau khi hoàn thành cấu hình thông tin, bạn cần:
+Sau khi hoàn tất cấu hình thông tin, bạn cần:
 
-1. Sử dụng tài khoản trả phí để ký hiệu Release trong Xcode
-2. Xây dựng và tải lên phiên bản chính thức
-3. Gửi để phê duyệt trong App Store Connect
+1. Sử dụng tài khoản trả phí để ký Release trong Xcode
+2. Build và tải lên phiên bản chính thức
+3. Gửi xét duyệt trong App Store Connect
 
-Sau khi gửi, App sẽ vào hàng đợi phê duyệt của Apple, thời gian phê duyệt thường là 1–3 ngày, tùy từng trường hợp.
+Sau khi gửi, App sẽ vào hàng đợi xét duyệt của Apple, thời gian xét duyệt thường là 1–3 ngày, tùy từng trường hợp cụ thể.
 
-### 6.4 Quy chuẩn phê duyệt và nguyên nhân phổ biến
+### 6.4 Tiêu chuẩn xét duyệt và các lý do thường gặp
 
-Apple sẽ phê duyệt App từ các khía cạnh sau:
+Apple sẽ xét duyệt App theo các khía cạnh sau:
 
-- Chức năng và tính ổn định
+- Chức năng và độ ổn định
 - Quyền riêng tư và tuân thủ dữ liệu
-- Tính nhất quán giữa siêu dữ liệu và chức năng thực tế
-- Liệu có liên quan đến vi phạm bản quyền hoặc hành vi lừa dối hay không
+- Tính nhất quán giữa metadata và chức năng thực tế
+- Có vi phạm bản quyền hoặc gây hiểu lầm hay không
 
-Nếu không phù hợp với yêu cầu, phê duyệt sẽ bị từ chối và sẽ cung cấp lý do cụ thể, các nhà phát triển cần sửa đổi theo phản hồi rồi gửi lại.
+Nếu không đáp ứng yêu cầu, xét duyệt sẽ bị từ chối kèm theo lý do cụ thể, bạn cần chỉnh sửa theo phản hồi rồi gửi lại.
 
-### 6.5 Xử lý và giao tiếp sau khi phê duyệt bị từ chối
+### 6.5 Xử lý và giao tiếp sau khi bị từ chối xét duyệt
 
-Khi phê duyệt bị từ chối, bạn có thể:
+Khi bị từ chối xét duyệt, bạn có thể:
 
-- Sửa đổi mã hoặc mô tả dựa trên phản hồi
+- Chỉnh sửa code hoặc mô tả theo phản hồi
 - Gửi lại phiên bản
-- Giao tiếp và giải thích với nhóm phê duyệt thông qua App Store Connect
+- Giải thích và trao đổi với đội ngũ xét duyệt qua App Store Connect
 
-Đây là một bước rất phổ biến trong quá trình phát hành App, và không có nghĩa là dự án thất bại.
+Đây là bước rất phổ biến trong quá trình đưa App lên Store, không có nghĩa là dự án thất bại.
 
-### Tài liệu tham khảo và Nguồn trích dẫn
+### Tài liệu tham khảo và nguồn trích dẫn
 
-Nội dung sau tham khảo tài liệu chính thức của Apple cũng như chia sẻ kinh nghiệm công khai:
+Nội dung dưới đây tham khảo từ tài liệu chính thức của Apple và các chia sẻ kinh nghiệm công khai:
 
-- App Store Review Guidelines (Apple chính thức)
+- App Store Review Guidelines (chính thức từ Apple)
   [https://developer.apple.com/app-store/review/guidelines/](https://developer.apple.com/app-store/review/guidelines/?utm_source=chatgpt.com)
-- Hướng dẫn phê duyệt gửi App chính thức
+- Hướng dẫn chính thức về gửi App để xét duyệt
   [https://developer.apple.com/cn/help/app-store-connect/manage-submissions-to-app-review/submit-for-review](https://developer.apple.com/cn/help/app-store-connect/manage-submissions-to-app-review/submit-for-review?utm_source=chatgpt.com)
-- Giải thích chi tiết | Quy trình phát hành iOS App toàn bộ và hướng dẫn tránh các lỗ hổng phê duyệt (Zhihu)
+- Hướng dẫn bằng hình ảnh｜Toàn bộ quy trình đưa iOS App lên Store và những lưu ý tránh bị từ chối (Zhihu)
   [https://zhuanlan.zhihu.com/p/146128612](https://zhuanlan.zhihu.com/p/146128612)
-
-## Chương 7: Tóm tắt
+## Chương 7: Tổng kết
 
 ![](images/image47.png)
 
-Chúc mừng! Đến đây bạn đã hoàn thành toàn bộ quy trình phát triển iOS App từ 0 đến 1 bằng tay của mình. Từ việc thiết lập môi trường, chạy dự án, sau đó giao diện, chức năng, dữ liệu, chạy trên thiết bị thực, mỗi bước đều được hoàn thành thành công, thực tuyệt vời! Điều quan trọng hơn là bạn không phải ghi nhớ các cú pháp Swift để đạt được điều này, mà bạn đã giao mọi thứ cho AI~ Không quan trọng bạn là chuyên ngành gì, mỗi lần cố gắng sẽ chỉ khiến bạn nhanh hơn và suôn sẻ hơn, bạn nhận thấy phát triển iOS cũng không khó như vậy, ngay cả khi không biết viết một dòng mã, bạn vẫn có thể triển khai ứng dụng của riêng mình.
+Congrats! Đến đây bạn đã tự tay đi qua toàn bộ quy trình phát triển iOS App từ 0 đến 1. Từ việc dựng môi trường, chạy project, rồi từng bước hiện thực hóa giao diện, tính năng, dữ liệu, chạy trên thiết bị thật — tất cả các bước đều hoàn thành suôn sẻ, thật tuyệt! Quan trọng hơn, bạn không đến được bước này nhờ học thuộc cú pháp Swift, mà là giao hết cho AI~ Dù bạn học chuyên ngành gì, mỗi lần thử sức đều chỉ giúp bạn nhanh hơn và thuần thục hơn. Bạn sẽ nhận ra iOS không hề khó như nghĩ, dù không biết viết một dòng code nào cũng có thể hiện thực hóa ứng dụng của riêng mình.
 
-Nhìn lại, toàn bộ quy trình thực sự không phức tạp: suy nghĩ rõ ràng về những gì cần làm, sử dụng HTML để kiểm tra nhanh giao diện, chuyển đổi sang mã SwiftUI, kết nối API và dữ liệu cục bộ, cuối cùng chạy một lần gỡ lỗi là xong. Dựa trên cơ sở này, trong tương lai bạn vẫn có thể tạo nhanh một ứng dụng đồng hồ báo thức chỉ cho bản thân, một danh sách việc cần làm cực kỳ đơn giản, hoặc tạo một máy trò chuyện giọng nói của ngôi sao yêu thích của bạn.
+Nhìn lại, toàn bộ quy trình thực ra không hề phức tạp: nghĩ rõ mình muốn làm gì, dùng HTML thử nhanh giao diện, chuyển đổi sang code SwiftUI, kết nối API và dữ liệu local, cuối cùng chạy debug một lượt là xong. Từ đây, trong tương lai bạn có thể tùy hứng làm một chiếc đồng hồ báo thức chỉ dùng cho bản thân, một Todo List tối giản, hoặc thậm chí tạo một chatbot với giọng điệu của idol yêu thích.
 
-Đây chính là phần cốt lõi nhất của bộ hướng dẫn này, cũng là điều mà easy-vibe muốn dạy bạn! Mong đợi những tác phẩm mới nhất của các bạn những vibe coding master! Mong được bị "đẹp mê hoặc" bởi tác phẩm của bạn!
+Đó chính là điểm cốt lõi nhất của bộ tutorial này, cũng là điều easy-vibe muốn dạy bạn nhất! Mong chờ những tác phẩm mới nhất từ các vibe coding master! Mong đến ngày được choáng ngợp bởi tác phẩm của bạn!

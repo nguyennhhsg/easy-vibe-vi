@@ -1,22 +1,22 @@
 <!--
   NextTokenPrediction.vue
-  下一个 Token 预测演示组件
-  
-  用途：
-  展示 LLM 生成文本的核心机制——Next Token Prediction（下一个词预测）。
-  让用户体验模型是如何基于概率分布来选择下一个词的。
-  
-  交互功能：
-  - 上下文展示：显示当前生成的文本序列。
-  - 概率可视化：动态展示 Top-K 候选词及其概率条。
-  - 交互式生成：用户点击候选词来决定生成的走向（模拟 Sampling 过程）。
-  - 场景切换：提供几个经典预设场景（英文句子、中文句子、代码片段）。
+  Component minh hoạ Next Token Prediction
+
+  Mục đích:
+  Trình bày cơ chế cốt lõi giúp LLM sinh văn bản: Next Token Prediction (dự đoán token kế tiếp).
+  Cho phép bạn trải nghiệm cách mô hình chọn từ tiếp theo dựa trên phân phối xác suất.
+
+  Tính năng tương tác:
+  - Hiển thị context: chuỗi văn bản đang được sinh ra.
+  - Trực quan xác suất: hiển thị các token Top-K kèm thanh xác suất.
+  - Sinh tương tác: bạn bấm vào ứng viên để chọn hướng đi (mô phỏng quá trình Sampling).
+  - Đổi kịch bản: vài kịch bản mẫu (câu tiếng Anh, câu tiếng Trung, đoạn code).
 -->
 <template>
   <div class="prediction-demo">
     <div class="header">
       <div class="scene-selector">
-        <label>Scenario / 场景:</label>
+        <label>Scenario / Kịch bản:</label>
         <select
           v-model="currentSceneKey"
           @change="resetScene"
@@ -25,7 +25,7 @@
             English: The quick brown...
           </option>
           <option value="zh-ai">
-            中文: 人工智能...
+            Tiếng Trung: 人工智能...
           </option>
           <option value="code">
             Code: if (x > 0)...
@@ -82,9 +82,8 @@
 
     <div class="explanation">
       <p>
-        <strong>原理：</strong> LLM
-        并不是一次性写出整段话，而是像上面这样，基于前面的内容（Context），计算下一个最可能出现的
-        Token 的概率，然后选择一个（Sampling）填上去，再重复这个过程。
+        <strong>Nguyên lý:</strong> LLM
+        không sinh nguyên đoạn cùng lúc, mà như ví dụ trên: dựa vào nội dung phía trước (Context), tính xác suất token kế tiếp có khả năng cao nhất, chọn một token (Sampling) rồi điền vào, sau đó lặp lại quá trình.
       </p>
     </div>
   </div>
@@ -208,8 +207,8 @@ const currentSceneKey = ref('en-fox')
 const context = ref('')
 
 const tokenizedContext = computed(() => {
-  // 简单分词用于展示：按空格或特定字符切分
-  // 这里仅做视觉效果，不影响逻辑
+  // Tách từ đơn giản phục vụ hiển thị: theo khoảng trắng hoặc ký tự
+  // Chỉ phục vụ visual, không ảnh hưởng logic
   return context.value.match(/(\s+|\S+)/g) || []
 })
 

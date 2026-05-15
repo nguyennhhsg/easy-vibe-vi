@@ -1,28 +1,28 @@
 <!--
   CanvasBasicsDemo.vue
-  Canvas 基础演示组件
+  Component demo Canvas cơ bản
 
-  用途：
-  展示 Canvas 2D 的基本绘图能力，包括矩形、圆形、线条和文字的绘制
+  Mục đích:
+  Trình bày khả năng vẽ cơ bản của Canvas 2D: rectangle, circle, line, text
 
-  交互功能：
-  - 形状选择：选择不同的基本形状
-  - 颜色调整：自定义填充和描边颜色
-  - 参数调整：控制大小、位置等参数
-  - 实时绘制：即时在 Canvas 上显示效果
+  Tính năng tương tác:
+  - Chọn hình dạng: chọn các hình cơ bản khác nhau
+  - Chỉnh màu: tự đặt màu fill và stroke
+  - Chỉnh tham số: kích thước, vị trí v.v.
+  - Vẽ realtime: hiển thị ngay trên Canvas
 -->
 <template>
   <div class="canvas-basics-demo">
     <div class="demo-header">
       <span class="icon">🎨</span>
-      <span class="title">Canvas 基础</span>
-      <span class="subtitle">用代码画图（通俗说：编程画板）</span>
+      <span class="title">Canvas cơ bản</span>
+      <span class="subtitle">Vẽ bằng code (nói nôm na: tấm bảng vẽ lập trình)</span>
     </div>
 
     <div class="demo-content">
       <div class="controls">
         <div class="shape-selector">
-          <label>Shape / 形状</label>
+          <label>Shape / Hình dạng</label>
           <div class="button-group">
             <button
               v-for="shape in shapes"
@@ -37,7 +37,7 @@
 
         <div class="parameters">
           <div class="param-row">
-            <label>Fill Color / 填充颜色</label>
+            <label>Fill Color / Màu fill</label>
             <input
               v-model="fillColor"
               type="color"
@@ -45,7 +45,7 @@
           </div>
 
           <div class="param-row">
-            <label>Stroke Color / 描边颜色</label>
+            <label>Stroke Color / Màu viền</label>
             <input
               v-model="strokeColor"
               type="color"
@@ -53,7 +53,7 @@
           </div>
 
           <div class="param-row">
-            <label>Stroke Width / 描边宽度: {{ strokeWidth }}px</label>
+            <label>Stroke Width / Độ dày viền: {{ strokeWidth }}px</label>
             <input
               v-model.number="strokeWidth"
               type="range"
@@ -66,7 +66,7 @@
             v-if="currentShape === 'rect'"
             class="param-row"
           >
-            <label>Size / 大小: {{ rectSize }}px</label>
+            <label>Size / Kích thước: {{ rectSize }}px</label>
             <input
               v-model.number="rectSize"
               type="range"
@@ -79,7 +79,7 @@
             v-if="currentShape === 'circle'"
             class="param-row"
           >
-            <label>Radius / 半径: {{ circleRadius }}px</label>
+            <label>Radius / Bán kính: {{ circleRadius }}px</label>
             <input
               v-model.number="circleRadius"
               type="range"
@@ -92,7 +92,7 @@
             v-if="currentShape === 'line'"
             class="param-row"
           >
-            <label>Line Length / 线条长度: {{ lineLength }}px</label>
+            <label>Line Length / Độ dài đường: {{ lineLength }}px</label>
             <input
               v-model.number="lineLength"
               type="range"
@@ -107,7 +107,7 @@
           @click="draw"
         >
           <span class="icon">🎨</span>
-          Draw / 绘制
+          Draw / Vẽ
         </button>
 
         <button
@@ -115,7 +115,7 @@
           @click="clearCanvas"
         >
           <span class="icon">🗑️</span>
-          Clear / 清除
+          Clear / Xoá
         </button>
       </div>
 
@@ -147,9 +147,9 @@ const circleRadius = ref(50)
 const lineLength = ref(150)
 
 const shapes = [
-  { value: 'rect', label: 'Rectangle / 矩形' },
-  { value: 'circle', label: 'Circle / 圆形' },
-  { value: 'line', label: 'Line / 线条' }
+  { value: 'rect', label: 'Rectangle / Hình chữ nhật' },
+  { value: 'circle', label: 'Circle / Hình tròn' },
+  { value: 'line', label: 'Line / Đường thẳng' }
 ]
 
 const currentCode = computed(() => {
@@ -161,10 +161,10 @@ ctx.fillStyle = '${fillColor.value}'
 ctx.strokeStyle = '${strokeColor.value}'
 ctx.lineWidth = ${strokeWidth.value}
 
-// 绘制填充矩形
+// Vẽ rectangle fill
 ctx.fillRect(${300 - rectSize.value / 2}, ${200 - rectSize.value / 2}, ${rectSize.value}, ${rectSize.value})
 
-// 绘制描边矩形
+// Vẽ rectangle stroke
 ctx.strokeRect(${300 - rectSize.value / 2}, ${200 - rectSize.value / 2}, ${rectSize.value}, ${rectSize.value})`,
 
     circle: `const canvas = document.getElementById('myCanvas')
@@ -206,10 +206,10 @@ const draw = () => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')
 
-  // 清除画布
+  // Xoá canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  // 设置样式
+  // Cài style
   ctx.fillStyle = fillColor.value
   ctx.strokeStyle = strokeColor.value
   ctx.lineWidth = strokeWidth.value
@@ -217,7 +217,7 @@ const draw = () => {
   const centerX = canvas.width / 2
   const centerY = canvas.height / 2
 
-  // 根据选择的形状绘制
+  // Vẽ theo hình dạng đã chọn
   switch (currentShape.value) {
     case 'rect':
       ctx.fillRect(
@@ -250,7 +250,7 @@ const draw = () => {
   }
 }
 
-// 监听参数变化，自动重绘
+// Theo dõi tham số thay đổi để vẽ lại tự động
 watch(
   [fillColor, strokeColor, strokeWidth, rectSize, circleRadius, lineLength],
   () => {

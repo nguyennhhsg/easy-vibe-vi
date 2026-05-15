@@ -3,16 +3,16 @@
     <div class="compare-table">
       <div class="table-header">
         <div class="col feature">
-          对比项
+          Tiêu chí
         </div>
         <div class="col provider">
           AWS
         </div>
         <div class="col provider">
-          阿里云
+          Alibaba Cloud
         </div>
         <div class="col provider">
-          腾讯云
+          Tencent Cloud
         </div>
       </div>
       <div 
@@ -46,20 +46,20 @@
     
     <div class="selection-guide">
       <div class="guide-title">
-        💡 选择建议
+        💡 Gợi ý chọn
       </div>
       <div class="guide-items">
         <div class="guide-item">
-          <span class="scenario">出海业务</span>
+          <span class="scenario">Business vươn ra quốc tế</span>
           <span class="recommend">→ AWS</span>
         </div>
         <div class="guide-item">
-          <span class="scenario">国内电商</span>
-          <span class="recommend">→ 阿里云</span>
+          <span class="scenario">E-commerce nội địa</span>
+          <span class="recommend">→ Alibaba Cloud</span>
         </div>
         <div class="guide-item">
-          <span class="scenario">游戏/社交</span>
-          <span class="recommend">→ 腾讯云</span>
+          <span class="scenario">Game/Mạng xã hội</span>
+          <span class="recommend">→ Tencent Cloud</span>
         </div>
       </div>
     </div>
@@ -69,14 +69,14 @@
 <script setup>
 const compareData = [
   {
-    feature: '全球覆盖',
+    feature: 'Phủ sóng toàn cầu',
     aws: '⭐⭐⭐⭐⭐',
     aliyun: '⭐⭐⭐',
     tencent: '⭐⭐⭐',
     awsHighlight: true
   },
   {
-    feature: '国内速度',
+    feature: 'Tốc độ nội địa',
     aws: '⭐⭐⭐',
     aliyun: '⭐⭐⭐⭐⭐',
     tencent: '⭐⭐⭐⭐⭐',
@@ -84,7 +84,7 @@ const compareData = [
     tencentHighlight: true
   },
   {
-    feature: '文档中文',
+    feature: 'Tài liệu tiếng Trung',
     aws: '⭐⭐⭐',
     aliyun: '⭐⭐⭐⭐⭐',
     tencent: '⭐⭐⭐⭐⭐',
@@ -92,14 +92,14 @@ const compareData = [
     tencentHighlight: true
   },
   {
-    feature: '价格优势',
+    feature: 'Ưu thế về giá',
     aws: '⭐⭐⭐',
     aliyun: '⭐⭐⭐⭐',
     tencent: '⭐⭐⭐⭐⭐',
     tencentHighlight: true
   },
   {
-    feature: '生态丰富',
+    feature: 'Hệ sinh thái',
     aws: '⭐⭐⭐⭐⭐',
     aliyun: '⭐⭐⭐⭐',
     tencent: '⭐⭐⭐⭐',

@@ -1,22 +1,22 @@
 <!--
   TokenizationDemo.vue
-  分词原理演示组件
-  
-  用途：
-  展示大语言模型如何“看”文本。通过将文本拆解为 Token，让用户理解 Token 是 LLM 处理的最小单位。
-  
-  交互功能：
-  - 文本输入：用户可输入任意文本。
-  - 实时分词：模拟 Tokenizer 将文本切分为 Token。
-  - 映射展示：显示 Token 文本与其对应的（模拟）数字 ID。
-  - 颜色编码：使用不同颜色区分相邻 Token，直观展示切分边界。
+  Component minh hoạ nguyên lý tokenization
+
+  Mục đích:
+  Trình bày cách LLM "nhìn" văn bản: tách văn bản thành token để bạn hiểu rằng token là đơn vị nhỏ nhất mà LLM xử lý.
+
+  Tính năng tương tác:
+  - Nhập văn bản: bạn có thể nhập bất kỳ chuỗi nào.
+  - Tokenize realtime: mô phỏng tokenizer cắt chuỗi thành token.
+  - Hiển thị mapping: cho thấy text của token cùng ID số tương ứng (mô phỏng).
+  - Mã màu: dùng màu khác nhau cho token liền kề để thấy biên cắt rõ ràng.
 -->
 <template>
   <div class="token-demo">
     <div class="control-panel">
       <div class="main-controls">
         <div class="input-group">
-          <label>Input Text / 输入文本</label>
+          <label>Input Text / Văn bản đầu vào</label>
           <textarea
             v-model="inputText"
             rows="3"
@@ -25,7 +25,7 @@
         </div>
 
         <div class="settings-group">
-          <label>Algorithm / 算法</label>
+          <label>Algorithm / Thuật toán</label>
           <div class="radio-group">
             <label
               class="radio-option"
@@ -71,7 +71,7 @@
         </div>
         <div class="stat-item">
           <span class="value">{{ inputText.length }}</span>
-          <span class="label">Characters / 字符</span>
+          <span class="label">Characters / Ký tự</span>
         </div>
       </div>
     </div>
@@ -108,9 +108,9 @@
       <p>
         <span class="icon">💡</span>
         <strong>Note:</strong>
-        LLM 不直接理解单词，它们处理的是数字（Token IDs）。 对于英文，一个 Token
-        通常是一个单词或单词的一部分（如 "ing"）； 对于中文，一个 Token
-        通常是一个汉字或词组。
+        LLM không hiểu trực tiếp các từ, chúng xử lý số (Token IDs). Với tiếng Anh, một token
+        thường là một từ hoặc một phần của từ (như "ing"); với tiếng Trung, một token
+        thường là một ký tự Hán hoặc cụm từ.
       </p>
     </div>
   </div>
@@ -125,7 +125,7 @@ const inputText = ref(
 const hoverIndex = ref(-1)
 const algorithm = ref('bpe')
 
-// 模拟不同分词算法
+// Mô phỏng các thuật toán tokenization khác nhau
 const tokens = computed(() => {
   const text = inputText.value
   const result = []
@@ -142,7 +142,7 @@ const tokens = computed(() => {
 
   if (algorithm.value === 'bpe') {
     // 1. BPE (Subword) Simulation
-    // 模拟：保留常用词，拆分生僻词/后缀，中文字符独立
+    // Mô phỏng: giữ nguyên từ phổ biến, tách từ hiếm/hậu tố, ký tự Trung tách riêng
     const regex = /([a-zA-Z]+)|([\u4e00-\u9fa5])|(\s+)|(.+?)/g
     let match
     while ((match = regex.exec(text)) !== null) {
@@ -158,7 +158,7 @@ const tokens = computed(() => {
     }
   } else if (algorithm.value === 'word') {
     // 2. Word-based Simulation
-    // 简单按空格拆分，标点符号也可能粘连
+    // Đơn giản tách theo khoảng trắng, dấu câu có thể dính vào từ
     const words = text.split(/(\s+)/)
     words.forEach((w) => {
       if (w) {
@@ -168,7 +168,7 @@ const tokens = computed(() => {
     })
   } else if (algorithm.value === 'char') {
     // 3. Character-based Simulation
-    // 每个字符都是一个 Token
+    // Mỗi ký tự là một token
     for (let char of text) {
       let type = 'char'
       if (/\s/.test(char)) type = 'whitespace'

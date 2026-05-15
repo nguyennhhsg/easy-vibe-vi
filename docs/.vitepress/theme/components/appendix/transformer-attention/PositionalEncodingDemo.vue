@@ -2,20 +2,20 @@
   <div class="demo-card">
     <div class="pe-content">
       <div class="problem">
-        <div class="title">问题：词序很重要</div>
+        <div class="title">Vấn đề: thứ tự từ rất quan trọng</div>
         <div class="examples">
-          <span class="ex">我爱你</span>
+          <span class="ex">Tôi yêu bạn</span>
           <span class="vs">≠</span>
-          <span class="ex">你爱我</span>
+          <span class="ex">Bạn yêu tôi</span>
         </div>
       </div>
       <div class="solution">
-        <div class="title">解决：位置编码</div>
+        <div class="title">Giải pháp: positional encoding</div>
         <div class="formula">Token Embedding + Positional Encoding</div>
         <div class="methods">
-          <div class="method">正弦余弦（Transformer 原始）</div>
-          <div class="method">可学习（BERT、GPT）</div>
-          <div class="method">旋转编码 RoPE（LLaMA）</div>
+          <div class="method">Sinusoidal (Transformer gốc)</div>
+          <div class="method">Learnable (BERT, GPT)</div>
+          <div class="method">RoPE (LLaMA)</div>
         </div>
       </div>
     </div>
