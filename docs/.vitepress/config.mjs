@@ -12,14 +12,10 @@ const isEdgeOne = !!process.env.EDGEONE || process.env.EDGEONE === '1'
 // 3. 否则（如 GitHub Pages），使用 '/easy-vibe/'
 const base = process.env.BASE || (isVercel || isEdgeOne ? '/' : '/easy-vibe/')
 
-// 站点 URL 配置 - 根据部署环境动态确定
+// URL trang web — luôn dùng alias ổn định.
+// Bỏ qua VERCEL_URL/EDGEONE_URL (deployment-specific, đổi mỗi lần deploy)
+// để canonical/sitemap/og:url không churn URL Google đã index.
 const getSiteUrl = () => {
-  if (isVercel && process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
-  }
-  if (isEdgeOne && process.env.EDGEONE_URL) {
-    return `https://${process.env.EDGEONE_URL}`
-  }
   if (process.env.SITE_URL) {
     return process.env.SITE_URL
   }
